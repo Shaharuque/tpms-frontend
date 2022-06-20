@@ -27,7 +27,7 @@ import { TbWebhook } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
-import Navbar from "../Pages/Shared/Navbar";
+import NavigationBar from "../Pages/Shared/NavigationBar";
 
 const Sidebar = ({ children }) => {
   const [isHovering, setIsHovering] = useState(false);
@@ -160,10 +160,10 @@ const Sidebar = ({ children }) => {
   return (
     <div className="relative">
       <div className="ml-16">
-        <div className="">
-          <Navbar></Navbar>
+        <div className="md:ml-10 ml-2">
+          <NavigationBar></NavigationBar>
         </div>
-        <main className="font-medium text-2xl text-center p-40">
+        <main className="font-medium w-[20rem] md:w-[1600px] bg-gray-200 text-2xl text-center ml-2 md:ml-10 rounded-3xl py-24 my-24">
           {children}
         </main>
       </div>
@@ -171,7 +171,7 @@ const Sidebar = ({ children }) => {
       <div
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
-        className="Side_container absolute bg-secondary left-0 top-0"
+        className="Side_container fixed bg-secondary left-0 top-0"
       >
         <div
           style={{ width: isHovering ? "220px" : "70px" }}

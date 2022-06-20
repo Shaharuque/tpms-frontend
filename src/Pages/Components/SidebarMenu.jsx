@@ -10,6 +10,7 @@ const SidebarMenu = ({ items, isHovering }) => {
   };
   return (
     <div className="pl-4 py-3 hover:bg-primary text-white">
+      {/* {setIsMenuOpen(false)} */}
       <div onClick={toggleMenu} className="flex items-center justify-between">
         <div className="flex items-center">
           <div className=" text-xl px-2">{items.icon}</div>

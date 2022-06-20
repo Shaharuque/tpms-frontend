@@ -1,0 +1,170 @@
+import React, { useState } from "react";
+import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
+import {
+  AiOutlinePlus,
+  AiOutlineNotification,
+  AiOutlineClose,
+} from "react-icons/ai";
+import { HiOutlineSpeakerphone } from "react-icons/hi";
+import { FaBars } from "react-icons/fa";
+
+const NavigationBar = () => {
+  let Links = [
+    { name: "HOME", link: "/" },
+    { name: "SERVICE", link: "/" },
+    { name: "ABOUT", link: "/" },
+    { name: "BLOG'S", link: "/" },
+    { name: "CONTACT", link: "/" },
+  ];
+  let [open, setOpen] = useState(false);
+  return (
+    <div className="shadow-md w-[20rem] md:w-[1600px] mt-2 rounded-lg fixed top-0">
+      <div className="md:flex items-center justify-between bg-white py-2 rounded-3xl md:px-10 px-7">
+        <div
+          className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
+      text-gray-800"
+        >
+          <div className="flex-1">
+            <label tabindex="0" className="flex gap-0 md:gap-2 items-center">
+              <div className="w-10 mr-1 rounded-full">
+                <img
+                  className="avatar rounded-full"
+                  src="https://api.lorem.space/image/face?hash=33791"
+                  alt="pic"
+                />
+              </div>
+              <div>
+                <p className="   md:text-xl text-sm">
+                  ABC Behavioral Therapy Center
+                </p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div
+          onClick={() => setOpen(!open)}
+          className="text-3xl absolute right-3 top-4 cursor-pointer md:hidden"
+        >
+          <p className="">{open ? <AiOutlineClose /> : <FaBars />}</p>
+        </div>
+
+        <div
+          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            open ? "top-18 " : "top-[-490px]"
+          }`}
+        >
+          <div>
+            <h1 className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
+              <BsArrowsFullscreen />
+            </h1>
+          </div>
+          {/* adding  */}
+          <div className=" md:mt-1 mt-6">
+            <div class="dropdown md:dropdown-end">
+              <label tabindex="0" class="">
+                <h1 className="mx-4 text-xl font-bold text-secondary">
+                  <AiOutlinePlus />
+                </h1>
+              </label>
+              <ul
+                tabindex="0"
+                class="dropdown-content w-60 md:w-[25rem] menu mt-1 shadow bg-base-100 text-sm "
+              >
+                <li>
+                  <a>Item 1</a>
+                </li>
+                <li>
+                  <a>Item 2</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* notify  */}
+          <div className="md:my-0 my-2 p-1">
+            <div className="dropdown md:dropdown-end">
+              <div className="mx-2">
+                <label tabindex="0" className="">
+                  <div className="relative">
+                    <div>
+                      <h1 className=" text-2xl text-secondary">
+                        <AiOutlineNotification />
+                      </h1>
+                      <span className=" absolute top-0 right-[-8px] bg-red-700 text-white badge-xs rounded-full">
+                        8
+                      </span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div
+                tabindex="0"
+                className="mt-1 dropdown-content w-60 md:w-[25rem] bg-base-100 shadow"
+              >
+                <div className="card-body">
+                  <h4 className=" text-center">Latest Changes</h4>
+                  <hr />
+                  <span className="text-info">
+                    <span class="badge badge-primary">new</span>
+                    Subtotal: $999 Subtotal: $99 Subtotal: $99 Subtotal: $99
+                  </span>
+                  <div className="card-actions">
+                    <button className="btn btn-primary btn-block">
+                      View cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* download  */}
+          <div>
+            <h1 className="mx-5 text-lg font-bold text-secondary">
+              <BsDownload />
+            </h1>
+          </div>
+          {/* admin part  */}
+          <div className="my-5 md:my-0">
+            <div className="dropdown md:dropdown-end">
+              <label tabindex="0" className="flex gap-2 items-center">
+                <div className="w-10 mr-1 rounded-full">
+                  <img
+                    className="avatar rounded-full"
+                    src="https://api.lorem.space/image/face?hash=33791"
+                    alt="pic"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-medium text-lg">Admin</h4>
+                  <h5 className="text-secondary font-medium text-xs">
+                    admin@admin.com
+                  </h5>
+                </div>
+              </label>
+              <ul
+                tabindex="0"
+                className="menu menu-compact dropdown-content w-60 md:w-[25rem] mt-3 p-2 shadow bg-base-100 "
+              >
+                <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <a>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NavigationBar;
