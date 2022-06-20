@@ -1,4 +1,5 @@
 import React from "react";
+import "../Style/slide.css";
 import {
   FaUserPlus,
   FaFunnelDollar,
@@ -158,12 +159,12 @@ const Sidebar = ({ children }) => {
 
   // console.log(menuItem[1].others.name);
   return (
-    <div className="relative">
-      <div className="ml-16">
+    <div className="relative ">
+      <div className="ml-16 slide">
         <div className="md:ml-10 ml-2">
           <NavigationBar></NavigationBar>
         </div>
-        <main className="font-medium w-[20rem] md:w-[1600px] bg-gray-200 text-2xl text-center ml-2 md:ml-10 rounded-3xl py-24 my-24">
+        <main className="font-medium w-[20rem] md:w-[1600px] bg-white shadow-md  ml-2 md:ml-10 rounded-3xl mt-20">
           {children}
         </main>
       </div>
@@ -189,7 +190,7 @@ const Sidebar = ({ children }) => {
             )}
           </div>
           {menuItem.map((items, index) => (
-            <>
+            <div key={index}>
               {items.subRoute ? (
                 <NavLink
                   to={"#"}
@@ -214,14 +215,14 @@ const Sidebar = ({ children }) => {
 
                     <div
                       style={{ display: isHovering ? "block" : "none" }}
-                      className="link_text"
+                      className="link_text text-sm"
                     >
                       {items.name}
                     </div>
                   </div>
                 </NavLink>
               )}
-            </>
+            </div>
           ))}
         </div>
       </div>

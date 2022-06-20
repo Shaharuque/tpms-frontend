@@ -17,7 +17,7 @@ const SidebarMenu = ({ items, isHovering }) => {
 
           <div
             style={{ display: isHovering ? "block" : "none" }}
-            className="link_text text-lg"
+            className="link_text text-sm"
           >
             {items.name}
           </div>
@@ -48,7 +48,7 @@ const SidebarMenu = ({ items, isHovering }) => {
                     display: isHovering ? "block" : "none",
                     // padding: isHovering ? "8px" : "3px",
                   }}
-                  className="link_text"
+                  className="link_text text-sm"
                 >
                   {s.name}
                 </div>

@@ -9,26 +9,19 @@ import { HiOutlineSpeakerphone } from "react-icons/hi";
 import { FaBars } from "react-icons/fa";
 
 const NavigationBar = () => {
-  let Links = [
-    { name: "HOME", link: "/" },
-    { name: "SERVICE", link: "/" },
-    { name: "ABOUT", link: "/" },
-    { name: "BLOG'S", link: "/" },
-    { name: "CONTACT", link: "/" },
-  ];
   let [open, setOpen] = useState(false);
   return (
-    <div className="shadow-md w-[20rem] md:w-[1600px] mt-2 rounded-lg fixed top-0">
+    <div className="shadow-md w-[20rem] md:w-[1600px] mt-0 rounded-lg fixed top-0">
       <div className="md:flex items-center justify-between bg-white py-2 rounded-3xl md:px-10 px-7">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
         >
           <div className="flex-1">
-            <label tabindex="0" className="flex gap-0 md:gap-2 items-center">
+            <label tabIndex="0" className="flex gap-0 md:gap-2 items-center">
               <div className="w-10 mr-1 rounded-full">
                 <img
-                  className="avatar rounded-full"
+                  className=" rounded-full"
                   src="https://api.lorem.space/image/face?hash=33791"
                   alt="pic"
                 />
@@ -61,15 +54,15 @@ const NavigationBar = () => {
           </div>
           {/* adding  */}
           <div className=" md:mt-1 mt-6">
-            <div class="dropdown md:dropdown-end">
-              <label tabindex="0" class="">
+            <div className="dropdown md:dropdown-end">
+              <label tabIndex="0" className="">
                 <h1 className="mx-4 text-xl font-bold text-secondary">
                   <AiOutlinePlus />
                 </h1>
               </label>
               <ul
-                tabindex="0"
-                class="dropdown-content w-60 md:w-[25rem] menu mt-1 shadow bg-base-100 text-sm "
+                tabIndex="0"
+                className="dropdown-content w-60 md:w-[25rem] menu mt-1 shadow bg-base-100 text-sm "
               >
                 <li>
                   <a>Item 1</a>
@@ -85,7 +78,7 @@ const NavigationBar = () => {
           <div className="md:my-0 my-2 p-1">
             <div className="dropdown md:dropdown-end">
               <div className="mx-2">
-                <label tabindex="0" className="">
+                <label tabIndex="0" className="">
                   <div className="relative">
                     <div>
                       <h1 className=" text-2xl text-secondary">
@@ -99,14 +92,14 @@ const NavigationBar = () => {
                 </label>
               </div>
               <div
-                tabindex="0"
+                tabIndex="0"
                 className="mt-1 dropdown-content w-60 md:w-[25rem] bg-base-100 shadow"
               >
                 <div className="card-body">
                   <h4 className=" text-center">Latest Changes</h4>
                   <hr />
                   <span className="text-info">
-                    <span class="badge badge-primary">new</span>
+                    <span className="badge badge-primary">new</span>
                     Subtotal: $999 Subtotal: $99 Subtotal: $99 Subtotal: $99
                   </span>
                   <div className="card-actions">
@@ -127,7 +120,7 @@ const NavigationBar = () => {
           {/* admin part  */}
           <div className="my-5 md:my-0">
             <div className="dropdown md:dropdown-end">
-              <label tabindex="0" className="flex gap-2 items-center">
+              <label tabIndex="0" className="flex gap-2 items-center">
                 <div className="w-10 mr-1 rounded-full">
                   <img
                     className="avatar rounded-full"
@@ -143,7 +136,7 @@ const NavigationBar = () => {
                 </div>
               </label>
               <ul
-                tabindex="0"
+                tabIndex="0"
                 className="menu menu-compact dropdown-content w-60 md:w-[25rem] mt-3 p-2 shadow bg-base-100 "
               >
                 <li>

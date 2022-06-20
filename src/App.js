@@ -26,7 +26,7 @@ import Timesheet from "./Pages/Pages/Timesheet";
 
 function App() {
   return (
-    <div>
+    <div className="app-body">
       <Sidebar>
         <Routes>
           <Route path="/" element={<Dashboard></Dashboard>}></Route>
