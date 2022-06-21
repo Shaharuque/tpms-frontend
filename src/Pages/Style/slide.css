@@ -1,4 +1,17 @@
 .chart {
-    border: 1px solid rgba(103, 103, 103, 0.849);
+    border: 1px solid #808080;
     border-radius: 0 0 10px 10px;
+}
+
+.thead {
+    border: 1px solid #808080;
+    border-radius: 5px 5px 0 0;
+}
+
+.td {
+    border: 1px solid #808080;
+}
+
+.thd {
+    border-right: 1px solid #cacccd;
 }

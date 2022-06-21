@@ -2,8 +2,10 @@ import React from "react";
 import BarChart from "./Dashboard/BarChart";
 import DashboardNumbers from "./Dashboard/DashboardNumbers";
 import LineChart from "./Dashboard/LineChart";
+import Tables from "./Dashboard/Tables";
 import TreatmentBarChart from "./Dashboard/TreatmentBarChart";
 import { dashboardCount } from "./Data/Data";
+import { task } from "./Data/Data";
 
 const Dashboard = () => {
   return (
@@ -18,6 +20,11 @@ const Dashboard = () => {
         <TreatmentBarChart></TreatmentBarChart>
         <LineChart></LineChart>
         <BarChart></BarChart>
+      </div>
+      <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 gap-5">
+        <Tables tableType={task} tableName={"gdhgdh"}></Tables>
+        <Tables></Tables>
+        <Tables></Tables>
       </div>
     </div>
   );
