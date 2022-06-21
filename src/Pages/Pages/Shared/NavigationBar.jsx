@@ -11,7 +11,7 @@ import { FaBars } from "react-icons/fa";
 const NavigationBar = () => {
   let [open, setOpen] = useState(false);
   return (
-    <div className="shadow-md w-[20rem] md:w-[1600px] mt-2 rounded-lg fixed top-0">
+    <div className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] navi mt-2 rounded-lg fixed top-0">
       <div className="md:flex items-center justify-between bg-white py-2 rounded-3xl md:px-10 px-7">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 

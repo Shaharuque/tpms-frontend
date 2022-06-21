@@ -11,10 +11,10 @@ const Tables = ({ tableType, tableName }) => {
         <div className="td">
           {" "}
           <tr>
-            <th className="bg-gray-200 border thd text-xs py-1 px-2 text-center w-96 ">
+            <th className="bg-gray-200 border thd text-xs py-1 px-2 text-center w-[30rem] ">
               Report
             </th>
-            <th className="bg-gray-200 border  text-xs py-1 px-2 text-center w-44">
+            <th className="bg-gray-200 border  text-xs py-1 px-2 text-center w-[15rem]">
               Count
             </th>
           </tr>

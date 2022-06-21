@@ -160,11 +160,11 @@ const Sidebar = ({ children }) => {
   // console.log(menuItem[1].others.name);
   return (
     <div className="relative ">
-      <div className="ml-16 slide">
-        <div className="md:ml-10 ml-2">
+      <div className=" slide">
+        <div className="">
           <NavigationBar></NavigationBar>
         </div>
-        <main className="font-medium w-[20rem] md:w-[1600px] bg-white shadow-md  ml-2 md:ml-10 rounded-3xl mt-20">
+        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-20 ">
           {children}
         </main>
       </div>

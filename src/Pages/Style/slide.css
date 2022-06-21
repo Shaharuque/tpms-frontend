@@ -15,3 +15,78 @@
 .thd {
     border-right: 1px solid #cacccd;
 }
+
+
+@media (min-width:320px) {
+
+    /* smartphones, iPhone, portrait 480x320 phones */
+    /* For mobile  */
+    .resp {
+        width: 80%;
+        margin-left: 18%;
+    }
+
+    .navi {
+        padding: 0 10px;
+    }
+}
+
+@media (min-width:481px) {
+
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    /* For mobile  */
+    .resp {
+        width: 80%;
+        margin-left: 18%;
+    }
+
+    .navi {
+        padding: 0 10px;
+    }
+}
+
+@media (min-width:641px) {
+
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    .resp {
+        width: 88%;
+        margin-left: 10%;
+    }
+
+    .navi {
+        padding: 0 8px;
+    }
+}
+
+@media (min-width:961px) {
+
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+    /* For tablets: */
+    .resp {
+        width: 87%;
+        margin-left: 10%;
+    }
+
+    .navi {
+        padding: 0 8px;
+    }
+}
+
+@media (min-width:1025px) {
+
+    /* big landscape tablets, laptops, and desktops */
+    /* For desktop: */
+    .resp {
+        width: 94%;
+        margin-left: 5%;
+    }
+}
+
+@media (min-width:1281px) {
+
+    /* hi-res laptops and desktops */
+    .resp {
+        width: 94%;
+        margin-left: 5%;
+    }
+}

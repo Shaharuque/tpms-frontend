@@ -16,7 +16,7 @@ import {
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="">
       <h1 className=" text-orange-500 text-sm">Dashboard</h1>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-3 gap-5">
         {dashboardCount.map((data, i) => (
