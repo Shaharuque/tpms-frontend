@@ -65,3 +65,138 @@ export const task = [
     link: "#",
   },
 ];
+export const patient = [
+  {
+    report: "Expiring Authorization",
+    count: "2",
+    link: "#",
+  },
+  {
+    report: "Patient/Guarantor",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "No Authorization",
+    count: "10",
+    link: "#",
+  },
+  {
+    report: "Co-Pay For Today",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Auth Place Holders",
+    count: "0",
+    link: "#",
+  },
+];
+export const staffs = [
+  {
+    report: "Vacation(s) Pending Approval",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Missing Credentials",
+    count: "11",
+    link: "#",
+  },
+  {
+    report: "Credentials To Expire",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Signature Not Loaded",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: " ",
+    count: " ",
+    link: "#",
+  },
+];
+export const billing = [
+  {
+    report: "Sessions Rendered - Not Billed",
+    count: "321",
+    link: "#",
+  },
+  {
+    report: "Last Weeks Deposits",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Last Month Statements",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Last Month Billed Dates",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Pending Secondary Claims",
+    count: "0",
+    link: "#",
+  },
+];
+export const scheduler = [
+  {
+    report: "Scheduled Not Rendered",
+    count: "71",
+    link: "#",
+  },
+  {
+    report: "Sessions Not Attended Last Week",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Provider Signature Missing In Session",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Session Note Missing",
+    count: "779",
+    link: "#",
+  },
+  {
+    report: "Cancelled Session This Month",
+    count: "23",
+    link: "#",
+  },
+];
+export const reports = [
+  {
+    report: "Schedule Billable",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "Payment Deposits",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "KPI Report by Month",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "KPI Report by Patient",
+    count: "0",
+    link: "#",
+  },
+  {
+    report: "KPI Report by Insurance",
+    count: "0",
+    link: "#",
+  },
+];

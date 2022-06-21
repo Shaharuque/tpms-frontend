@@ -5,7 +5,14 @@ import LineChart from "./Dashboard/LineChart";
 import Tables from "./Dashboard/Tables";
 import TreatmentBarChart from "./Dashboard/TreatmentBarChart";
 import { dashboardCount } from "./Data/Data";
-import { task } from "./Data/Data";
+import {
+  task,
+  patient,
+  staffs,
+  billing,
+  scheduler,
+  reports,
+} from "./Data/Data";
 
 const Dashboard = () => {
   return (
@@ -22,9 +29,30 @@ const Dashboard = () => {
         <BarChart></BarChart>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 gap-5">
-        <Tables tableType={task} tableName={"gdhgdh"}></Tables>
-        <Tables></Tables>
-        <Tables></Tables>
+        <Tables
+          tableType={task}
+          tableName={<span className=" text-sm px-2">Today's Task</span>}
+        ></Tables>
+        <Tables
+          tableType={patient}
+          tableName={<span className=" text-sm px-2">Patient</span>}
+        ></Tables>
+        <Tables
+          tableType={staffs}
+          tableName={<span className=" text-sm px-2">Staffs</span>}
+        ></Tables>
+        <Tables
+          tableType={billing}
+          tableName={<span className=" text-sm px-2">Billing</span>}
+        ></Tables>
+        <Tables
+          tableType={scheduler}
+          tableName={<span className=" text-sm px-2">Scheduler</span>}
+        ></Tables>
+        <Tables
+          tableType={reports}
+          tableName={<span className=" text-sm px-2">Trending Reports</span>}
+        ></Tables>
       </div>
     </div>
   );
