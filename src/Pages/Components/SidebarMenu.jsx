@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 import { NavLink } from "react-router-dom";
+// import StateUse from "../Hooks/StateUse";
+// import StateOpen from "../Hooks/StateUse";
+import { motion } from "framer-motion";
 
-const SidebarMenu = ({ items, isHovering }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    //   setIsOpen(true);
-  };
+const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
   return (
     <div className="pl-4 py-3 hover:bg-primary text-white">
-      {/* {setIsMenuOpen(false)} */}
-      <div onClick={toggleMenu} className="flex items-center justify-between">
+      <div
+        // onBlur={() => setOpen(false)}
+        // onClick={() => setOpen(!open)}
+        onClick={(_) => handleDropState(items.name)}
+        className="flex items-center justify-between"
+      >
         <div className="flex items-center">
           <div className=" text-xl px-2">{items.icon}</div>
 
@@ -27,11 +29,24 @@ const SidebarMenu = ({ items, isHovering }) => {
           style={{ display: isHovering ? "block" : "none" }}
           className="text-xl mr-2 transition-all"
         >
-          {!isMenuOpen ? <IoIosArrowDown /> : <IoIosArrowUp />}
+          <IoIosArrowUp
+            style={{
+              transition: "all .3s ease-out",
+              transform: `rotate(${!dropState ? "180" : "0"}deg)`,
+            }}
+          />
         </div>
       </div>
-      {isMenuOpen && (
-        <div className=" mr-4">
+      {dropState && (
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mr-4"
+          style={{
+            transition: "all .3s ease-out",
+          }}
+        >
           {items.subRoute.map((s, i) => (
             <NavLink
               to={s.path}
@@ -55,7 +70,7 @@ const SidebarMenu = ({ items, isHovering }) => {
               </div>
             </NavLink>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );

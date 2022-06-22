@@ -1,5 +1,7 @@
 import React from "react";
 import "../Style/slide.css";
+import logo1 from "../Assets/favicon.png";
+import logo2 from "../Assets/logo-new.png";
 import {
   FaUserPlus,
   FaFunnelDollar,
@@ -29,9 +31,146 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
 import NavigationBar from "../Pages/Shared/NavigationBar";
+// import StateUse from "../Hooks/StateUse";
+
+const menuItem = [
+  {
+    path: "/",
+    name: "Dashboard",
+    icon: <FaHouseUser />,
+  },
+  {
+    path: "/appointment",
+    name: "Appointment",
+    icon: <FaRegCalendarAlt />,
+    subRoute: [
+      {
+        path: "/session-manage",
+        name: "List View",
+        icon: <FaListAlt />,
+      },
+      {
+        path: "/calender-view",
+        name: "calender view",
+        icon: <FaCalendarAlt />,
+      },
+      {
+        path: "/recurring-session",
+        name: "recurring session",
+        icon: <VscDebugDisconnect />,
+      },
+    ],
+  },
+  {
+    path: "/patients",
+    name: "Patients",
+    icon: <FaUserPlus />,
+  },
+  {
+    path: "/staffs",
+    name: "Staffs",
+    icon: <FaUserMd />,
+  },
+  {
+    path: "/billing",
+    name: "Billing",
+    icon: <FaFunnelDollar />,
+    subRoute: [
+      {
+        path: "/submit-billing",
+        name: "Billing Manager",
+        icon: <FaHornbill />,
+      },
+      {
+        path: "/ar-leader",
+        name: "AR-Leader",
+        icon: <TbWebhook />,
+      },
+      {
+        path: "/contract-rate",
+        name: "Contract Rate",
+        icon: <BsBookmarkStar />,
+      },
+      {
+        path: "/patient-statement",
+        name: "Patient Statement",
+        icon: <BsFileEarmarkRuled />,
+      },
+    ],
+  },
+  {
+    path: "/payment",
+    name: "Payment",
+    icon: <FaMoneyCheckAlt />,
+    subRoute: [
+      {
+        path: "/era-remittance",
+        name: "ER-Remittance",
+        icon: <FaFileAlt />,
+      },
+      {
+        path: "/m-posting",
+        name: "M Posting",
+        icon: <MdOutlineMonetizationOn />,
+      },
+      {
+        path: "/era-manager",
+        name: "ER Manager",
+        icon: <AiOutlineFileDone />,
+      },
+    ],
+  },
+  {
+    path: "/payroll",
+    name: "Payroll",
+    icon: <FaMoneyBillAlt />,
+    subRoute: [
+      {
+        path: "/processing-payroll",
+        name: "Processing Payroll",
+        icon: <RiFundsBoxLine />,
+      },
+      {
+        path: "/timesheet",
+        name: "TimeSheet",
+        icon: <BsFileText />,
+      },
+    ],
+  },
+  {
+    path: "/report",
+    name: "Report",
+    icon: <GoGraph />,
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    icon: <FiSettings />,
+  },
+];
+
+const initialDropState = {};
+menuItem.map((item) => {
+  if (item.subRoute) initialDropState[item.name] = false;
+});
+
+console.log(initialDropState);
 
 const Sidebar = ({ children }) => {
   const [isHovering, setIsHovering] = useState(false);
+
+  const [dropState, setDropState] = useState(initialDropState);
+
+  const handleDropState = (dropName) => {
+    if (dropName === "other") setDropState(initialDropState);
+    else
+      setDropState((prevState) => ({
+        ...initialDropState,
+        [dropName]: !prevState[dropName],
+      }));
+  };
+
+  // const { open, setOpen } = StateUse();
 
   const handleMouseOver = () => {
     setIsHovering(true);
@@ -40,122 +179,6 @@ const Sidebar = ({ children }) => {
   const handleMouseOut = () => {
     setIsHovering(false);
   };
-
-  const menuItem = [
-    {
-      path: "/",
-      name: "Dashboard",
-      icon: <FaHouseUser />,
-    },
-    {
-      path: "/appointment",
-      name: "Appointment",
-      icon: <FaRegCalendarAlt />,
-      subRoute: [
-        {
-          path: "/session-manage",
-          name: "List View",
-          icon: <FaListAlt />,
-        },
-        {
-          path: "/calender-view",
-          name: "calender view",
-          icon: <FaCalendarAlt />,
-        },
-        {
-          path: "/recurring-session",
-          name: "recurring session",
-          icon: <VscDebugDisconnect />,
-        },
-      ],
-    },
-    {
-      path: "/patients",
-      name: "Patients",
-      icon: <FaUserPlus />,
-    },
-    {
-      path: "/staffs",
-      name: "Staffs",
-      icon: <FaUserMd />,
-    },
-    {
-      path: "/billing",
-      name: "Billing",
-      icon: <FaFunnelDollar />,
-      subRoute: [
-        {
-          path: "/submit-billing",
-          name: "Billing Manager",
-          icon: <FaHornbill />,
-        },
-        {
-          path: "/ar-leader",
-          name: "AR-Leader",
-          icon: <TbWebhook />,
-        },
-        {
-          path: "/contract-rate",
-          name: "Contract Rate",
-          icon: <BsBookmarkStar />,
-        },
-        {
-          path: "/patient-statement",
-          name: "Patient Statement",
-          icon: <BsFileEarmarkRuled />,
-        },
-      ],
-    },
-    {
-      path: "/payment",
-      name: "Payment",
-      icon: <FaMoneyCheckAlt />,
-      subRoute: [
-        {
-          path: "/era-remittance",
-          name: "ER-Remittance",
-          icon: <FaFileAlt />,
-        },
-        {
-          path: "/m-posting",
-          name: "M Posting",
-          icon: <MdOutlineMonetizationOn />,
-        },
-        {
-          path: "/era-manager",
-          name: "ER Manager",
-          icon: <AiOutlineFileDone />,
-        },
-      ],
-    },
-    {
-      path: "/payroll",
-      name: "Payroll",
-      icon: <FaMoneyBillAlt />,
-      subRoute: [
-        {
-          path: "/processing-payroll",
-          name: "Processing Payroll",
-          icon: <RiFundsBoxLine />,
-        },
-        {
-          path: "/timesheet",
-          name: "TimeSheet",
-          icon: <BsFileText />,
-        },
-      ],
-    },
-    {
-      path: "/report",
-      name: "Report",
-      icon: <GoGraph />,
-    },
-    {
-      path: "/settings",
-      name: "Settings",
-      icon: <FiSettings />,
-    },
-  ];
 
   // console.log(menuItem[1].others.name);
   return (
@@ -181,11 +204,14 @@ const Sidebar = ({ children }) => {
           <div className="top-section">
             {isHovering ? (
               <>
-                <div className="logo">Logo</div>
+                <div className="logo">
+                  {" "}
+                  <img src={logo2} alt="" />{" "}
+                </div>
               </>
             ) : (
               <>
-                <div className="logo px-2 font-bold">L</div>
+                <img className="h-10 w-10" src={logo1} alt="" />{" "}
               </>
             )}
           </div>
@@ -201,6 +227,8 @@ const Sidebar = ({ children }) => {
                   <SidebarMenu
                     items={items}
                     isHovering={isHovering}
+                    dropState={dropState[items.name]}
+                    handleDropState={handleDropState}
                   ></SidebarMenu>
                 </NavLink>
               ) : (
@@ -209,11 +237,13 @@ const Sidebar = ({ children }) => {
                   key={index}
                   className="link flex"
                   activeclassname="active"
+                  onClick={(_) => handleDropState("other")}
                 >
                   <div className="flex items-center">
                     <div className=" text-xl px-2 py-1">{items.icon}</div>
 
                     <div
+                      // onClick={() => setOpen(!open)}
                       style={{ display: isHovering ? "block" : "none" }}
                       className="link_text text-sm"
                     >

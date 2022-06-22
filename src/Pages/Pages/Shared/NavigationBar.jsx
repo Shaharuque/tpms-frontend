@@ -5,13 +5,20 @@ import {
   AiOutlineNotification,
   AiOutlineClose,
 } from "react-icons/ai";
-import { HiOutlineSpeakerphone } from "react-icons/hi";
 import { FaBars } from "react-icons/fa";
+import admin from "../../Assets/user.png";
+import company from "../../Assets/company.jpg";
+import { motion } from "framer-motion";
 
 const NavigationBar = () => {
   let [open, setOpen] = useState(false);
   return (
-    <div className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] navi mt-2 rounded-lg fixed top-0">
+    <motion.div
+      initial={{ opacity: 0, y: -15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.4 }}
+      className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] navi mt-2 rounded-lg fixed top-0"
+    >
       <div className="md:flex items-center justify-between bg-white py-2 rounded-3xl md:px-10 px-7">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
@@ -20,11 +27,7 @@ const NavigationBar = () => {
           <div className="flex-1">
             <label tabIndex="0" className="flex gap-0 md:gap-2 items-center">
               <div className="w-10 mr-1 rounded-full">
-                <img
-                  className=" rounded-full"
-                  src="https://api.lorem.space/image/face?hash=33791"
-                  alt="pic"
-                />
+                <img className=" rounded-full" src={company} alt="pic" />
               </div>
               <div>
                 <p className="   md:text-xl text-sm">
@@ -122,11 +125,7 @@ const NavigationBar = () => {
             <div className="dropdown md:dropdown-end">
               <label tabIndex="0" className="flex gap-2 items-center">
                 <div className="w-10 mr-1 rounded-full">
-                  <img
-                    className="avatar rounded-full"
-                    src="https://api.lorem.space/image/face?hash=33791"
-                    alt="pic"
-                  />
+                  <img className="avatar rounded-full" src={admin} alt="pic" />
                 </div>
                 <div>
                   <h4 className="font-medium text-lg">Admin</h4>
@@ -140,7 +139,7 @@ const NavigationBar = () => {
                 className="menu menu-compact dropdown-content w-60 md:w-[25rem] mt-3 p-2 shadow bg-base-100 "
               >
                 <li>
-                  <a className="justify-between">
+                  <a href="google.com" className="justify-between">
                     Profile
                     <span className="badge">New</span>
                   </a>
@@ -156,7 +155,7 @@ const NavigationBar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

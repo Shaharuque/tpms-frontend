@@ -1,11 +1,8 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Appointment = () => {
-  return (
-    <div>
-      <h1>This is Appointment part</h1>
-    </div>
-  );
+  return <motion.div animate="hidden"></motion.div>;
 };
 
 export default Appointment;
