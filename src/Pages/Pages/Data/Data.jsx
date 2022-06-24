@@ -1,6 +1,21 @@
-import { FaUser, FaUserFriends } from "react-icons/fa";
+import { FaUser, FaUserFriends, FaBoxOpen } from "react-icons/fa";
 import { TbBuildingHospital } from "react-icons/tb";
+import { BiRename, BiLinkAlt, BiFolderOpen } from "react-icons/bi";
+import {
+  BsHouseDoor,
+  BsFileEarmarkMedical,
+  BsFileEarmark,
+} from "react-icons/bs";
+import { MdOutlinePayment } from "react-icons/md";
 import { ImUsers } from "react-icons/im";
+import { TbArrowsRightLeft } from "react-icons/tb";
+import { AiOutlineUserAdd, AiOutlineUser, AiOutlineFile } from "react-icons/ai";
+import {
+  RiSettingsFill,
+  RiHospitalLine,
+  RiSendPlaneLine,
+} from "react-icons/ri";
+import { FiLayers, FiAnchor } from "react-icons/fi";
 
 // ***********************************************************************
 // ******************************DashBoard Data***************************
@@ -198,5 +213,117 @@ export const reports = [
     report: "KPI Report by Insurance",
     count: "0",
     link: "#",
+  },
+];
+
+// ***********************************************************************
+// ******************************Settings Data***************************
+// ***********************************************************************
+
+export const setting = [
+  {
+    link: "/settings",
+    name: "Name & Location",
+    icon: <BiRename />,
+  },
+  {
+    link: "add-insurance",
+    name: "Add Insurance",
+    icon: <AiOutlineUserAdd />,
+  },
+  {
+    link: "insurance-setup",
+    name: "Insurance Setup",
+    icon: <RiSettingsFill />,
+  },
+  {
+    link: "add-treatment",
+    name: "Add Treatment",
+    icon: <RiHospitalLine />,
+  },
+  {
+    link: "services",
+    name: "Add Services",
+    icon: <FiLayers />,
+  },
+  {
+    link: "cpt-code",
+    name: "Add Cpt Code",
+    icon: <FiLayers />,
+  },
+  {
+    link: "sub-activity-setup",
+    name: "Add Service Sub-Type",
+    icon: <RiSendPlaneLine />,
+  },
+  {
+    link: "add-staff-type",
+    name: "Add Staff Type",
+    icon: <AiOutlineUserAdd />,
+  },
+  {
+    link: "rendering-provider",
+    name: "Referring Provider",
+    icon: <AiOutlineUser />,
+  },
+  {
+    link: "pos",
+    name: "Place of Service",
+    icon: <BsHouseDoor />,
+  },
+  {
+    link: "vendor-number",
+    name: "Vendor Number Setup",
+    icon: <FaBoxOpen />,
+  },
+  {
+    link: "holiday-setup",
+    name: "Holiday Setup",
+    icon: <FiAnchor />,
+  },
+  {
+    link: "pay-period",
+    name: "Pay Period",
+    icon: <MdOutlinePayment />,
+  },
+  {
+    link: "logo",
+    name: "Logo",
+    icon: <BiLinkAlt />,
+  },
+  {
+    link: "unbillable-activity",
+    name: "Unbillable Activity",
+    icon: <BiFolderOpen />,
+  },
+  {
+    link: "session-rule",
+    name: "Create Service Rules",
+    icon: <AiOutlineFile />,
+  },
+  {
+    link: "froms-builder",
+    name: "Forms Builder",
+    icon: <BsFileEarmarkMedical />,
+  },
+  {
+    link: "notes-forms",
+    name: "Forms & Library",
+    icon: <BsFileEarmarkMedical />,
+  },
+  {
+    link: "business-documents",
+    name: "Business Files",
+    icon: <BsFileEarmark />,
+  },
+  {
+    link: "data-export",
+    name: "Data Import",
+    icon: <TbArrowsRightLeft />,
+  },
+  {
+    link: "meet-lists",
+    name: "TPMS Meet",
+    icon: <TbArrowsRightLeft />,
   },
 ];

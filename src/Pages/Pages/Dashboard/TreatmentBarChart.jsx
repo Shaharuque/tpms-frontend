@@ -5,7 +5,8 @@ Chart.register(...registerables);
 
 const TreatmentBarChart = () => {
   return (
-    <div>
+    <div className="">
+      {/* <div className="lg:w-4/12 md:w-5/12"> */}
       <h1 className=" bg-primary py-1 text-center text-white">
         Total Billed vs Total Paid
       </h1>

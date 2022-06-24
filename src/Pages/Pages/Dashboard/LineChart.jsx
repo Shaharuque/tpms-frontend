@@ -4,7 +4,8 @@ import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 const LineChart = () => {
   return (
-    <div>
+    // <div div className="lg:w-4/12 md:w-6/12">
+    <div div className="">
       <h1 className=" bg-primary py-1 text-center text-white">
         Charge Analysis by Service Date
       </h1>

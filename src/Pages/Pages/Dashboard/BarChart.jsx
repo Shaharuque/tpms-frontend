@@ -4,7 +4,8 @@ import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 const BarChart = () => {
   return (
-    <div>
+    <div div className="bar">
+      {/* <div div className="lg:w-4/12 md:w-6/12"> */}
       <h1 className=" bg-primary py-1 text-center text-white">
         Total Billed vs Total Paid
       </h1>

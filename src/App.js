@@ -2,13 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./Pages/Components/Sidebar.jsx";
 import Dashboard from "./Pages/Pages/Dashboard.jsx";
-import Appointment from "./Pages/Pages/Appointment.jsx";
 import Patients from "./Pages/Pages/Patients.jsx";
 import Staffs from "./Pages/Pages/Staffs.jsx";
-import Billing from "./Pages/Pages/Billing.jsx";
-import Payment from "./Pages/Pages/Payment.jsx";
 import Report from "./Pages/Pages/Report.jsx";
-import Payroll from "./Pages/Pages/Payroll.jsx";
 import Settings from "./Pages/Pages/Settings.jsx";
 import Test from "./Pages/Components/Test.jsx";
 import ListView from "./Pages/Pages/ListView";
@@ -23,6 +19,27 @@ import MPosting from "./Pages/Pages/MPosting";
 import EraManager from "./Pages/Pages/EraManager";
 import ProcessingPayroll from "./Pages/Pages/ProcessingPayroll";
 import Timesheet from "./Pages/Pages/Timesheet";
+import NameLocation from "./Pages/Pages/Settings/NameLocation";
+import AddInsurance from "./Pages/Pages/Settings/AddInsurance";
+import AddTreatments from "./Pages/Pages/Settings/AddTreatments";
+import AddServices from "./Pages/Pages/Settings/AddServices";
+import AddCptCode from "./Pages/Pages/Settings/AddCptCode";
+import AddServiceSubType from "./Pages/Pages/Settings/AddServiceSubType";
+import AddStaffType from "./Pages/Pages/Settings/AddStaffType";
+import ReferringProvider from "./Pages/Pages/Settings/ReferringProvider";
+import PlaceOfServices from "./Pages/Pages/Settings/PlaceOfServices";
+import VendorNumberSetup from "./Pages/Pages/Settings/VendorNumberSetup";
+import HolidaySetup from "./Pages/Pages/Settings/HolidaySetup";
+import PayPeriod from "./Pages/Pages/Settings/PayPeriod";
+import Logo from "./Pages/Pages/Settings/Logo";
+import UnbillableActivity from "./Pages/Pages/Settings/UnbillableActivity";
+import CreateServiceRules from "./Pages/Pages/Settings/CreateServiceRules";
+import FormsBuilder from "./Pages/Pages/Settings/FormsBuilder";
+import FormAndLibrary from "./Pages/Pages/Settings/FormAndLibrary";
+import BusinessFiles from "./Pages/Pages/Settings/BusinessFiles";
+import DataImport from "./Pages/Pages/Settings/DataImport";
+import TpmsMeet from "./Pages/Pages/Settings/TpmsMeet";
+import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
 
 function App() {
   return (
@@ -34,6 +51,15 @@ function App() {
             path="/appointment"
             element={<Appointment></Appointment>}
           ></Route> */}
+          <Route path="/session-manage" element={<ListView></ListView>}></Route>
+          <Route
+            path="/calender-view"
+            element={<CalendarView></CalendarView>}
+          ></Route>
+          <Route
+            path="/recurring-session"
+            element={<RecurringSession></RecurringSession>}
+          ></Route>
           <Route path="/patients" element={<Patients></Patients>}></Route>
           <Route path="/staffs" element={<Staffs></Staffs>}></Route>
           {/* <Route path="/billing" element={<Billing></Billing>}></Route> */}
@@ -67,16 +93,78 @@ function App() {
             element={<ProcessingPayroll></ProcessingPayroll>}
           ></Route>
           <Route path="/timesheet" element={<Timesheet></Timesheet>}></Route>
-          <Route path="/settings" element={<Settings></Settings>}></Route>
-          <Route path="/session-manage" element={<ListView></ListView>}></Route>
-          <Route
-            path="/calender-view"
-            element={<CalendarView></CalendarView>}
-          ></Route>
-          <Route
-            path="/recurring-session"
-            element={<RecurringSession></RecurringSession>}
-          ></Route>
+          {/* settings routes  */}
+          <Route path="/settings" element={<Settings></Settings>}>
+            <Route index element={<NameLocation></NameLocation>}></Route>
+            <Route
+              path="add-insurance"
+              element={<AddInsurance></AddInsurance>}
+            ></Route>
+            <Route
+              path="insurance-setup"
+              element={<InsuranceSetup></InsuranceSetup>}
+            ></Route>
+            <Route
+              path="add-treatment"
+              element={<AddTreatments></AddTreatments>}
+            ></Route>
+            <Route
+              path="services"
+              element={<AddServices></AddServices>}
+            ></Route>
+            <Route path="cpt-code" element={<AddCptCode></AddCptCode>}></Route>
+            <Route
+              path="sub-activity-setup"
+              element={<AddServiceSubType></AddServiceSubType>}
+            ></Route>
+            <Route
+              path="add-staff-type"
+              element={<AddStaffType></AddStaffType>}
+            ></Route>
+            <Route
+              path="rendering-provider"
+              element={<ReferringProvider></ReferringProvider>}
+            ></Route>
+            <Route
+              path="pos"
+              element={<PlaceOfServices></PlaceOfServices>}
+            ></Route>
+            <Route
+              path="vendor-number"
+              element={<VendorNumberSetup></VendorNumberSetup>}
+            ></Route>
+            <Route
+              path="holiday-setup"
+              element={<HolidaySetup></HolidaySetup>}
+            ></Route>
+            <Route path="pay-period" element={<PayPeriod></PayPeriod>}></Route>
+            <Route path="logo" element={<Logo></Logo>}></Route>
+            <Route
+              path="unbillable-activity"
+              element={<UnbillableActivity></UnbillableActivity>}
+            ></Route>
+            <Route
+              path="session-rule"
+              element={<CreateServiceRules></CreateServiceRules>}
+            ></Route>
+            <Route
+              path="froms-builder"
+              element={<FormsBuilder></FormsBuilder>}
+            ></Route>
+            <Route
+              path="notes-forms"
+              element={<FormAndLibrary></FormAndLibrary>}
+            ></Route>
+            <Route
+              path="business-documents"
+              element={<BusinessFiles></BusinessFiles>}
+            ></Route>
+            <Route
+              path="data-export"
+              element={<DataImport></DataImport>}
+            ></Route>
+            <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
+          </Route>
         </Routes>
       </Sidebar>
     </div>

@@ -1,33 +1,30 @@
-.chart {
-    border: 1px solid #808080;
-    border-radius: 0 0 10px 10px;
+.setting-nav-child {
+    border: 1px solid #09A2B3;
+    border-left-width: 4px;
+    border-right-width: 4px;
+    transition: all 0.3s;
 }
 
-.thead {
-    border: 1px solid #808080;
-    border-radius: 5px 5px 0 0;
+.setting-nav-child:hover {
+    background-color: #02818F;
+    color: #fff;
 }
 
-.td {
-    border: 1px solid #808080;
+.setting-body {
+    border: 0.1px solid #adadad;
 }
-
-.thd {
-    border-right: 1px solid #cacccd;
-}
-
 
 @media (min-width:320px) {
 
     /* smartphones, iPhone, portrait 480x320 phones */
     /* For mobile  */
-    .resp {
-        width: 80%;
-        margin-left: 18%;
+
+    .setting-nav {
+        width: 100%;
     }
 
-    .navi {
-        padding: 0 10px;
+    .setting-body {
+        width: 100%;
     }
 
 }
@@ -45,6 +42,14 @@
         padding: 0 10px;
     }
 
+    .setting-nav {
+        width: 100%;
+    }
+
+    .setting-body {
+        width: 100%;
+    }
+
 }
 
 @media (min-width:641px) {
@@ -59,6 +64,9 @@
         padding: 0 8px;
     }
 
+    .setting-body {
+        width: 100%;
+    }
 
 }
 
@@ -75,6 +83,10 @@
         padding: 0 8px;
     }
 
+    .setting-body {
+        width: 100%;
+    }
+
 }
 
 @media (min-width:1025px) {
@@ -86,7 +98,13 @@
         margin-left: 5%;
     }
 
+    .setting-nav {
+        width: 15%;
+    }
 
+    .setting-body {
+        width: 85%;
+    }
 
     /* .bar {
         margin: 0 auto;
@@ -101,6 +119,12 @@
         margin-left: 5%;
     }
 
+    .setting-nav {
+        width: 15%;
+    }
 
+    .setting-body {
+        width: 85%;
+    }
 
 }

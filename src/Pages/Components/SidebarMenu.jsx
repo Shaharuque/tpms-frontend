@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 // import StateUse from "../Hooks/StateUse";
@@ -16,7 +16,6 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
       >
         <div className="flex items-center">
           <div className=" text-xl px-2">{items.icon}</div>
-
           <div
             style={{ display: isHovering ? "block" : "none" }}
             className="link_text text-sm"
