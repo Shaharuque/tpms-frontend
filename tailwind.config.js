@@ -23,5 +23,5 @@ module.exports = {
       "cupcake",
     ],
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("tw-elements/dist/plugin")],
 };

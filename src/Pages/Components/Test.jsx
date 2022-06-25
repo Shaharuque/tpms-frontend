@@ -1,29 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Test = () => {
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseOver = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-  };
+  // const openMessageBox = (el) => {
+  //   var name = el.textContent;
+  //   // alert(name);
+  //   console.log(name);
+  // };
   return (
-    <div className="ml-96">
-      <div>
-        <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-          Hover over me
-        </div>
-
-        {isHovering && (
-          <div>
-            <h2>Only visible when hovering div</h2>
-          </div>
-        )}
-      </div>
-    </div>
+    <ul>
+      {/* <li onclick={openMessageBox(this)}>Alice</li>
+      <li onclick={openMessageBox(this)}>Bob</li> */}
+    </ul>
   );
 };
 
