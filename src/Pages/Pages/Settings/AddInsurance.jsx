@@ -103,6 +103,9 @@ const AddInsurance = () => {
                   type="submit"
                   value={"ADD"}
                 />
+                <button className="mx-1 px-10 py-1 bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white ">
+                  View Details
+                </button>
               </div>
             </form>
             <div className="show-box mx-1  w-full">
