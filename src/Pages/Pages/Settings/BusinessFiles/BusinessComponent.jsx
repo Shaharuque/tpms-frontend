@@ -73,6 +73,12 @@ const BusinessComponent = ({ row }) => {
                       value={"SAVE"}
                       className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                     />
+                    <label
+                      for="edit-modal"
+                      className="px-5  py-2 border rounded-md"
+                    >
+                      Close
+                    </label>
                   </div>
                 </form>
               </div>
