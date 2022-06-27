@@ -20,7 +20,7 @@ module.exports = {
         },
       },
       "light",
-      "cupcake",
+      "black",
     ],
   },
   plugins: [require("daisyui"), require("tw-elements/dist/plugin")],

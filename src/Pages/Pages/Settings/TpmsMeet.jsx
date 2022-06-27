@@ -69,7 +69,7 @@ const TpmsMeet = () => {
                       style={{
                         border: "solid 1px gray",
                       }}
-                      className="text-sm w-10 md:w-24 text-center text-gray-500 py-1"
+                      className="text-xs w-10 md:w-24 text-center text-gray-600 py-[6px]"
                     >
                       {cell.render("Cell")}
                     </td>

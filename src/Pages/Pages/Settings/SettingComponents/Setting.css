@@ -20,6 +20,12 @@
 
 }
 
+.box {
+
+    border-top: 10px solid #02818F;
+    border-bottom: 10px solid #02818F;
+}
+
 @media (min-width:320px) {
 
     /* smartphones, iPhone, portrait 480x320 phones */
