@@ -57,7 +57,7 @@ const BusinessFiles = () => {
   };
   return (
     <div className="p-2">
-      <h1 className="text-sm my-2">Recent Exports</h1>
+      <h1 className="text-lg my-2 text-orange-400">Business Documents</h1>
       <CssBaseline />
       <div className="">
         <table className="border w-24 sm:w-full " {...getTableProps()}>

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import { TextField } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
-import { DatePicker } from "@mui/x-date-pickers";
 
 const NameLocationTable = () => {
   const [tableOpen, setTableOpen] = useState(false);
