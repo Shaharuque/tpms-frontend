@@ -117,8 +117,11 @@ const UnbillableActivity = () => {
   return (
     <div>
       <h1 className="text-lg my-2 text-orange-400">Non-Billable Service(s)</h1>
-      <div className="">
-        <table className="border w-24 sm:w-full " {...getTableProps()}>
+      <div className="pb-3 overflow-y-hidden">
+        <table
+          className="border overflow-scroll  sm:w-full "
+          {...getTableProps()}
+        >
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>

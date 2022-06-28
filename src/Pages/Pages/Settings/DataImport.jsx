@@ -45,8 +45,11 @@ const DataImport = () => {
     <div className="p-2">
       <h1 className="text-sm my-2">Recent Exports</h1>
       <CssBaseline />
-      <div className="">
-        <table className="border w-24 sm:w-full " {...getTableProps()}>
+      <div className="pb-3 overflow-y-hidden">
+        <table
+          className="border overflow-scroll  sm:w-full "
+          {...getTableProps()}
+        >
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>

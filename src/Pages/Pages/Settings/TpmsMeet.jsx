@@ -27,14 +27,17 @@ const TpmsMeet = () => {
     useTable({ columns, data }, useSortBy);
 
   return (
-    <div className="p-2">
-      <div className="flex mb-2 items-center justify-between">
+    <div className="p-2 overflow-y-hidden">
+      <div className="md:flex mb-2 flex-wrap  items-center justify-between">
         <h1 className="text-sm">Meet Lists</h1>
         <button className="px-10 py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
           Add New Data
         </button>
       </div>
-      <table className="border w-24 sm:w-full" {...getTableProps()}>
+      <table
+        className="border overflow-scroll  sm:w-full "
+        {...getTableProps()}
+      >
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>

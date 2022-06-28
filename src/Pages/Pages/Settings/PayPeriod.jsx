@@ -64,19 +64,19 @@ const PayPeriod = () => {
 
         <div>
           {/* <!-- The button to open modal --> */}
-          <label for="pay-box" class="">
+          <label for="pay-box" className="">
             <h1 className="px-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
               Create Pay Period
             </h1>
           </label>
 
           {/* <!-- Put this part before </body> tag --> */}
-          <input type="checkbox" id="pay-box" class="modal-toggle" />
-          <div class="modal modal-bottom sm:modal-middle">
-            <div class="modal-box box">
+          <input type="checkbox" id="pay-box" className="modal-toggle" />
+          <div className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box box">
               <label
                 for="pay-box"
-                class="btn btn-sm btn-circle hover:bg-primary hover:text-white absolute right-2 top-2"
+                className="btn btn-sm btn-circle hover:bg-primary hover:text-white absolute right-2 top-2"
               >
                 ✕
               </label>
@@ -190,7 +190,7 @@ const PayPeriod = () => {
 
                   {/* <input type="submit" /> */}
 
-                  <div class="modal-action">
+                  <div className="modal-action">
                     <input
                       type="submit"
                       value={"SAVE"}
@@ -211,14 +211,17 @@ const PayPeriod = () => {
       </div>
 
       <CssBaseline />
-      <div className="">
-        <table className="border w-24 sm:w-full " {...getTableProps()}>
+      <div className="pb-3 overflow-y-hidden">
+        <table
+          className="border w-24  overflow-scroll  sm:w-full "
+          {...getTableProps()}
+        >
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th
-                    className="bg-secondary border   py-1 text-sm text-white"
+                    className="bg-secondary border  px-2 py-1 text-sm text-white"
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render("Header")}

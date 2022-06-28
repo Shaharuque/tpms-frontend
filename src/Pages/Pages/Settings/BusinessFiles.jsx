@@ -2,40 +2,19 @@ import { CssBaseline } from "@mui/material";
 import React, { useMemo, useState } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
 import BusinessComponent from "./BusinessFiles/BusinessComponent";
-import { BusinessColumns } from "./BusinessFiles/BusinessFileColumns";
+import {
+  BusinessColumns,
+  BusinessColumnsData,
+} from "./BusinessFiles/BusinessFileColumns";
 import { HiPlus } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 
 const BusinessFiles = () => {
   const [open, setOpen] = useState(false);
-  const data = useMemo(() => BusinessColumns, []);
+  const data = useMemo(() => BusinessColumnsData, []);
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Description",
-        accessor: "description", // accessor is the "key" in the data
-      },
-      {
-        Header: "Uploaded On",
-        accessor: "date",
-      },
-      {
-        Header: "Created By",
-        accessor: "creator",
-      },
-      {
-        Header: "Action",
-        Cell: ({ row }) => {
-          // the value is 'this is a test'
-          // console.log(row);
-          return <BusinessComponent row={row}></BusinessComponent>;
-        },
-      },
-    ],
-    []
-  );
+  const columns = useMemo(() => [...BusinessColumns], []);
   const {
     getTableProps,
     getTableBodyProps,
@@ -56,11 +35,14 @@ const BusinessFiles = () => {
     reset();
   };
   return (
-    <div className="p-2">
+    <div className="p-2 ">
       <h1 className="text-lg my-2 text-orange-400">Business Documents</h1>
       <CssBaseline />
-      <div className="">
-        <table className="border w-24 sm:w-full " {...getTableProps()}>
+      <div className="pb-3 overflow-y-hidden">
+        <table
+          className="border overflow-scroll  sm:w-full "
+          {...getTableProps()}
+        >
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
@@ -148,7 +130,7 @@ const BusinessFiles = () => {
                     {...register("fileName")}
                   />
                 </div>
-                <div class="modal-action">
+                <div className="modal-action">
                   {/* <input type="submit" /> */}
                   <input
                     type="submit"

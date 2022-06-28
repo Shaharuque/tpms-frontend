@@ -26,7 +26,7 @@ const Logo = () => {
               {...register("fileName")}
             />
           </div>
-          <div class="modal-action">
+          <div className="modal-action">
             {/* <input type="submit" /> */}
             <input
               type="submit"
