@@ -67,7 +67,7 @@ const MultiSelectionDiv = ({ selectBox, addBox }) => {
   };
   return (
     <div>
-      <div className="flex flex-wrap gap-5 p-0 sm:p-5 items-center">
+      <div className="flex flex-wrap gap-5 p-0 sm:p-2 items-center">
         <div>
           <h1 className="text-sm text-gray-700 my-2">{selectBox}</h1>
           <FormControl className="sm:w-[550px] md:w-[350] w-[260px] m-0 sm:m-2 bg-white ">
@@ -77,7 +77,6 @@ const MultiSelectionDiv = ({ selectBox, addBox }) => {
             <Select
               multiple
               native
-              className=""
               value={selectedNames}
               onChange={handleChangeMultiple}
               label="Native"
