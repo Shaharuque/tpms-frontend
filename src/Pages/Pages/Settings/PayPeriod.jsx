@@ -64,7 +64,7 @@ const PayPeriod = () => {
 
         <div>
           {/* <!-- The button to open modal --> */}
-          <label for="pay-box" className="">
+          <label htmlFor="pay-box" className="">
             <h1 className="px-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
               Create Pay Period
             </h1>
@@ -75,7 +75,7 @@ const PayPeriod = () => {
           <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box box">
               <label
-                for="pay-box"
+                htmlFor="pay-box"
                 className="btn btn-sm btn-circle hover:bg-primary hover:text-white absolute right-2 top-2"
               >
                 ✕
@@ -197,7 +197,7 @@ const PayPeriod = () => {
                       className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                     ></input>
                     <label
-                      for="pay-box"
+                      htmlFor="pay-box"
                       className="px-5  py-2 border rounded-md"
                     >
                       Close

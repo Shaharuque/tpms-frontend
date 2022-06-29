@@ -1,7 +1,6 @@
 import { CssBaseline } from "@mui/material";
 import React, { useMemo, useState } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
-import BusinessComponent from "./BusinessFiles/BusinessComponent";
 import {
   BusinessColumns,
   BusinessColumnsData,
