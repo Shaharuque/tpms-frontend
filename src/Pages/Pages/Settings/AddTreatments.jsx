@@ -1,9 +1,13 @@
 import React from "react";
+import MultiSelectionDiv from "./SettingComponents/MultiSelectionDiv";
 
 const AddTreatments = () => {
   return (
     <div>
-      <h1>Add Treatment</h1>
+      <MultiSelectionDiv
+        selectBox={"All Treatments"}
+        addBox={"Facility Selected Treatments"}
+      ></MultiSelectionDiv>
     </div>
   );
 };

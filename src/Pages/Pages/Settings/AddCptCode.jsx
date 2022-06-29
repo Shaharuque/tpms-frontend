@@ -31,8 +31,6 @@ const AddCptCode = () => {
     canPreviousPage,
     pageOptions,
     state,
-    gotoPage,
-    pageCount,
     setPageSize,
     // page,
     prepareRow,
