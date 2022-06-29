@@ -2,6 +2,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import React, { useMemo } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "./SettingComponents/CheckBox";
+import SettingTableBox from "./SettingComponents/SettingTableBox";
 import { UnbillableColumns } from "./UnbillableActivity/UnbillableActivityColumns";
 
 const options = ["Select Any", "Retract"];
@@ -117,68 +118,13 @@ const UnbillableActivity = () => {
   return (
     <div>
       <h1 className="text-lg my-2 text-orange-400">Non-Billable Service(s)</h1>
-      <div className="pb-3 overflow-y-hidden">
-        <table
-          className="border overflow-scroll  sm:w-full "
-          {...getTableProps()}
-        >
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    className="bg-secondary border  text-sm text-white"
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                  >
-                    {column.render("Header")}
-                    {/* Add a sort direction indicator */}
-                    <span className=" ml-4 ">
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " ⇓ "
-                          : " ⇑ "
-                        : ""}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        style={{
-                          border: "solid 1px gray",
-                        }}
-                        className="text-xs py-[6px] w-10 md:w-24 text-center text-gray-600 "
-                      >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-          {/* <pre>
-            <code>
-              {JSON.stringify(
-                {
-                  selectedFlatRows: selectedFlatRows.map((d) => d.original),
-                },
-                null,
-                2
-              )}
-            </code>
-          </pre> */}
-        </table>
-      </div>
+      <SettingTableBox
+        getTableProps={getTableProps}
+        headerGroups={headerGroups}
+        getTableBodyProps={getTableBodyProps}
+        rows={rows}
+        prepareRow={prepareRow}
+      ></SettingTableBox>
       <div className="my-5">
         <Autocomplete
           value={value}

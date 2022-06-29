@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
 import { PayColumns } from "./PayPeriod/PayPeriodColumns";
 import { useForm } from "react-hook-form";
+import SettingTableBox from "./SettingComponents/SettingTableBox";
 
 const PayPeriod = () => {
   const data = useMemo(() => PayColumns, []);
@@ -211,57 +212,13 @@ const PayPeriod = () => {
       </div>
 
       <CssBaseline />
-      <div className="pb-3 overflow-y-hidden">
-        <table
-          className="border w-24  overflow-scroll  sm:w-full "
-          {...getTableProps()}
-        >
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    className="bg-secondary border  px-2 py-1 text-sm text-white"
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                  >
-                    {column.render("Header")}
-                    {/* Add a sort direction indicator */}
-                    <span className=" ml-4 ">
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " ⇓ "
-                          : " ⇑ "
-                        : ""}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        style={{
-                          border: "solid 1px gray",
-                        }}
-                        className="text-xs py-[6px] w-10 md:w-24 text-center text-gray-600 "
-                      >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <SettingTableBox
+        getTableProps={getTableProps}
+        headerGroups={headerGroups}
+        getTableBodyProps={getTableBodyProps}
+        rows={rows}
+        prepareRow={prepareRow}
+      ></SettingTableBox>
     </div>
   );
 };
