@@ -1,9 +1,15 @@
 import React from "react";
+import MultiSelectionDiv from "./SettingComponents/MultiSelectionDiv";
 
 const AddStaffType = () => {
   return (
     <div>
-      <h1>AddStaffType</h1>
+      <div>
+        <MultiSelectionDiv
+          selectBox={"All Staff Types"}
+          addBox={"Facility Selected Staff Types"}
+        ></MultiSelectionDiv>
+      </div>
     </div>
   );
 };

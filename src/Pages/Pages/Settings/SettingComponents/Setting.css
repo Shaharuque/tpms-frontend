@@ -26,6 +26,10 @@
     border-bottom: 10px solid #02818F;
 }
 
+.page {
+    border: 1px solid #09A2B3;
+}
+
 @media (min-width:320px) {
 
     /* smartphones, iPhone, portrait 480x320 phones */
