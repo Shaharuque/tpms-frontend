@@ -150,32 +150,31 @@ export const AddServicesData = [
 export const AddServiceColumn = [
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Tx Type</div>;
+      return <span className="">Tx Type</span>;
     },
     accessor: "tx_type", // accessor is the "key" in the data
-    service_type: "Billable",
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Service Type</div>;
+      return <span className="">Service Type</span>;
     },
     accessor: "service_type",
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Service</div>;
+      return <span className="">Service</span>;
     },
     accessor: "service",
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Duration</div>;
+      return <span className="">Duration</span>;
     },
     accessor: "duration",
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Mileage</div>;
+      return <span className="">Mileage</span>;
     },
     accessor: "milage",
   },

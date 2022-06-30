@@ -47,7 +47,7 @@ const BusinessFiles = () => {
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th
-                    className="bg-secondary border   py-1 text-sm text-white"
+                    className="bg-secondary border min-w-[120px]  py-1 text-sm text-white"
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render("Header")}
@@ -76,7 +76,7 @@ const BusinessFiles = () => {
                         style={{
                           border: "solid 1px gray",
                         }}
-                        className="text-xs py-[6px] w-10 md:w-24 text-center text-gray-600 "
+                        className="text-xs py-[6px] w-10 md:w-24 text-center max-w-[120px] text-gray-600 "
                       >
                         {cell.render("Cell")}
                       </td>

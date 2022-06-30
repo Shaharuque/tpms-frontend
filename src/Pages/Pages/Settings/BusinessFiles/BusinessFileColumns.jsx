@@ -21,19 +21,19 @@ export const BusinessColumnsData = [
 export const BusinessColumns = [
   {
     Header: () => {
-      return <div className="  min-w-[120px]">Description</div>;
+      return <span className="">Description</span>;
     },
     accessor: "description", // accessor is the "key" in the data
   },
   {
     Header: () => {
-      return <div className="  min-w-[120px]">Uploaded On</div>;
+      return <span className="">Uploaded On</span>;
     },
     accessor: "date",
   },
   {
     Header: () => {
-      return <div className="  min-w-[150px]">Creator</div>;
+      return <span className="">Creator</span>;
     },
     accessor: "creator",
   },
@@ -42,15 +42,7 @@ export const BusinessColumns = [
     Cell: ({ row }) => {
       // the value is 'this is a test'
       // console.log(row);
-      return (
-        <BusinessComponent
-          // style={{
-          //   color: "red",
-          // }}
-          className="bg-red-300"
-          row={row}
-        ></BusinessComponent>
-      );
+      return <BusinessComponent row={row}></BusinessComponent>;
     },
   },
 ];

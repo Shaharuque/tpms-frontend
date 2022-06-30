@@ -42,13 +42,13 @@ export const ServiceColumnData = [
 export const ServiceColumn = [
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Place Of Services</div>;
+      return <span className=" mt-5 min-w-[120px]">Place Of Services</span>;
     },
     accessor: "place_of_Service", // accessor is the "key" in the data
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Place of Service Code</div>;
+      return <span className=" mt-5 min-w-[120px]">Place of Service Code</span>;
     },
     accessor: "service_code",
   },

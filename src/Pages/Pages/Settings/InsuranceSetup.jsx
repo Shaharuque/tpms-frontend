@@ -1,74 +1,110 @@
-import React, { useMemo } from "react";
-import { useSortBy, useTable } from "react-table";
-import { MeetColumns } from "./InsuranceSetup/Columns";
+import React, { useMemo, useState } from "react";
+import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import {
+  InsuranceSetupColumn,
+  InsuranceSetupData,
+} from "./InsuranceSetup/InsuranceSetupColumns";
+import SettingTableBox from "./SettingComponents/SettingTableBox";
+import { CheckBox } from "./SettingComponents/CheckBox";
+import InsuranceEdit from "./InsuranceSetup/InsuranceEdit";
 
 const InsuranceSetup = () => {
-  const data = useMemo(() => MeetColumns, []);
-
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Meet Link",
-        accessor: "col1", // accessor is the "key" in the data
-      },
-      {
-        Header: "Created Date",
-        accessor: "col2",
-      },
-      {
-        Header: "Video Url",
-        accessor: "col3",
-      },
-    ],
-    []
+  const data = useMemo(() => InsuranceSetupData, []);
+  const columns = useMemo(() => [...InsuranceSetupColumn], []);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+    selectedFlatRows,
+    setPageSize,
+    // page,
+    prepareRow,
+  } = useTable(
+    { columns, data },
+    useSortBy,
+    usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => {
+        return [
+          {
+            id: "selection",
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <div>
+                <CheckBox {...getToggleAllRowsSelectedProps()} />
+              </div>
+            ),
+            Cell: ({ row }) => (
+              <div>
+                <CheckBox {...row.getToggleRowSelectedProps()} />
+              </div>
+            ),
+          },
+          ...columns,
+        ];
+      });
+    }
   );
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
-
+  console.log(selectedFlatRows);
+  const { pageIndex, pageSize } = state;
   return (
-    <table className="border" {...getTableProps()} style={{ width: "100%" }}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th
-                className="bg-secondary text-white"
-                {...column.getHeaderProps(column.getSortByToggleProps())}
-              >
-                {column.render("Header")}
-                {/* Add a sort direction indicator */}
-                <span>
-                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
-                </span>
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return (
-                  <td
-                    {...cell.getCellProps()}
-                    style={{
-                      padding: "10px",
-                      border: "solid 1px gray",
-                    }}
-                  >
-                    {cell.render("Cell")}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div>
+      <SettingTableBox
+        getTableProps={getTableProps}
+        headerGroups={headerGroups}
+        getTableBodyProps={getTableBodyProps}
+        rows={page}
+        prepareRow={prepareRow}
+      ></SettingTableBox>
+
+      <div className="flex gap-2 items-center my-5 justify-center">
+        <button
+          className="hover:bg-secondary page text-lg text-secondary hover:text-white py-1 px-3"
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+        >
+          <BiLeftArrow />
+        </button>
+        <div className="text-sm font-normal">
+          Page{" "}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{" "}
+        </div>
+        <button
+          className="hover:bg-secondary text-lg page text-secondary  hover:text-white py-1 px-3"
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+        >
+          <BiRightArrow />
+        </button>
+        <select
+          className="bg-secondary text-sm p-[3px] text-white "
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[10, 15, 20, 50].map((p) => (
+            <option key={p} value={p}>
+              <span className="bg-primary">{p}</span>
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* {openEditModal && (
+        <AddServicesActionModal
+          handleClose={handleClose}
+          open={openEditModal}
+        ></AddServicesActionModal>
+      )} */}
+    </div>
   );
 };
 

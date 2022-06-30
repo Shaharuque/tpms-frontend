@@ -48,25 +48,25 @@ export const ReferringProviderData = [
 export const ReferringProviderColumn = [
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Provider First Name</div>;
+      return <span className=" mt-5 min-w-[120px]">Provider First Name</span>;
     },
     accessor: "provider_first_name", // accessor is the "key" in the data
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Provider Last Name</div>;
+      return <span className=" mt-5 min-w-[120px]">Provider Last Name</span>;
     },
     accessor: "provider_last_name",
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">NPI</div>;
+      return <span className=" mt-5 min-w-[120px]">NPI</span>;
     },
     accessor: "npi",
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">UPIN</div>;
+      return <span className=" mt-5 min-w-[120px]">UPIN</span>;
     },
     accessor: "upin",
   },
