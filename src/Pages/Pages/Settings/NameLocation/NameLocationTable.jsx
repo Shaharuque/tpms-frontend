@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { TextField } from "@mui/material";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
+import { Switch } from "@mui/material";
+import CustomTimePicker from "./CustomTimePicker";
 
 const NameLocationTable = () => {
   const [tableOpen, setTableOpen] = useState(false);
   const [combo, setCombo] = useState(false);
   // const [value, onChange] = useState("");
-  const [value, setValue] = useState(null);
-  const handleChange = (newValue) => {
-    setValue(newValue);
-    console.log(newValue);
-  };
+  const [mondayFrom, setMondayFrom] = useState(null);
+  const [mondayTo, setMondayTo] = useState(null);
+  const [tueFrom, setTueFrom] = useState(null);
+  const [tueTo, setTueTo] = useState(null);
+  const [wedFrom, setWedFrom] = useState(null);
+  const [wedTo, setWedTo] = useState(null);
+  const [thuFrom, setThuFrom] = useState(null);
+  const [thuto, setThuto] = useState(null);
+  const [friFrom, setFriFrom] = useState(null);
+  const [friTo, setFriTo] = useState(null);
+  const [satFrom, setSatFrom] = useState(null);
+  const [satTo, setSatTo] = useState(null);
+  const [sunFrom, setSunFrom] = useState(null);
+  const [sunTo, setSunTo] = useState(null);
 
+  // timeChange
   const handleTable = () => {
     setTableOpen(!tableOpen);
   };
@@ -22,10 +31,11 @@ const NameLocationTable = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    console.log(combo);
+    reset();
   };
   console.log(errors);
   return (
@@ -62,21 +72,8 @@ const NameLocationTable = () => {
                     placeholder="ABC Behavioral Therapy Center"
                     name="name"
                     className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                    {...register("name", {
-                      required: {
-                        value: true,
-                        message: "Name is required",
-                      },
-                    })}
+                    {...register("name")}
                   />
-                  <label className="label">
-                    <span className="label-text-alt">
-                      {" "}
-                      {errors.name?.type === "required" && (
-                        <p className=" text-red-500">{errors.name.message}</p>
-                      )}
-                    </span>
-                  </label>
                 </div>
                 {/* address 1 */}
                 <div>
@@ -91,23 +88,8 @@ const NameLocationTable = () => {
                     placeholder="ABC Behavioral Therapy Center"
                     name="address"
                     className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                    {...register("address", {
-                      required: {
-                        value: true,
-                        message: "Address is required",
-                      },
-                    })}
+                    {...register("address")}
                   />
-                  <label className="label">
-                    <span className="label-text-alt">
-                      {" "}
-                      {errors.address?.type === "required" && (
-                        <p className=" text-red-500">
-                          {errors.address.message}
-                        </p>
-                      )}
-                    </span>
-                  </label>
                 </div>
                 <div>
                   {" "}
@@ -121,23 +103,8 @@ const NameLocationTable = () => {
                     placeholder="ABC Behavioral Therapy Center"
                     name="addressTwo"
                     className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                    {...register("addressTwo", {
-                      required: {
-                        value: true,
-                        message: "Address is required",
-                      },
-                    })}
+                    {...register("addressTwo")}
                   />
-                  <label className="label">
-                    <span className="label-text-alt">
-                      {" "}
-                      {errors.addressTwo?.type === "required" && (
-                        <p className=" text-red-500">
-                          {errors.addressTwo.message}
-                        </p>
-                      )}
-                    </span>
-                  </label>
                 </div>
                 {/* city  */}
                 <div>
@@ -152,21 +119,8 @@ const NameLocationTable = () => {
                     placeholder="ABC Behavioral Therapy Center"
                     name="city"
                     className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                    {...register("city", {
-                      required: {
-                        value: true,
-                        message: "City is required",
-                      },
-                    })}
+                    {...register("city")}
                   />
-                  <label className="label">
-                    <span className="label-text-alt">
-                      {" "}
-                      {errors.city?.type === "required" && (
-                        <p className=" text-red-500">{errors.city.message}</p>
-                      )}
-                    </span>
-                  </label>
                 </div>
                 {/* state  */}
                 <div>
@@ -246,28 +200,8 @@ const NameLocationTable = () => {
                     placeholder="ABC Behavioral Therapy Center"
                     name="shortCode"
                     className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                    {...register("email", {
-                      required: {
-                        value: true,
-                        message: "Email is required",
-                      },
-                      pattern: {
-                        value: /@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-                        message: "Provide a valid Email", // JS only: <p>error message</p> TS only support string
-                      },
-                    })}
+                    {...register("email")}
                   />
-                  <label className="label">
-                    <span className="label-text-alt">
-                      {" "}
-                      {errors.email?.type === "required" && (
-                        <p className=" text-red-500">{errors.email.message}</p>
-                      )}
-                      {errors.email?.type === "pattern" && (
-                        <p className=" text-red-500">{errors.email.message}</p>
-                      )}
-                    </span>
-                  </label>
                 </div>
                 {/* EIN */}
                 <div>
@@ -330,23 +264,8 @@ const NameLocationTable = () => {
                     placeholder="ABC Behavioral Therapy Center"
                     name="contactPerson"
                     className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                    {...register("contactPerson", {
-                      required: {
-                        value: true,
-                        message: "contact person name is required",
-                      },
-                    })}
+                    {...register("contactPerson")}
                   />
-                  <label className="label">
-                    <span className="label-text-alt">
-                      {" "}
-                      {errors.contactPerson?.type === "required" && (
-                        <p className=" text-red-500">
-                          {errors.contactPerson.message}
-                        </p>
-                      )}
-                    </span>
-                  </label>
                 </div>
                 {/* Service Area Miles */}
                 <div>
@@ -393,23 +312,8 @@ const NameLocationTable = () => {
                     placeholder="ABC Behavioral Therapy Center"
                     name="SFTP_Password"
                     className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                    {...register("SFTP_Password", {
-                      required: {
-                        value: true,
-                        message: "SFTP_Password is required",
-                      },
-                    })}
+                    {...register("SFTP_Password")}
                   />
-                  <label className="label">
-                    <span className="label-text-alt">
-                      {" "}
-                      {errors.SFTP_Password?.type === "required" && (
-                        <p className=" text-red-500">
-                          {errors.password.message}
-                        </p>
-                      )}
-                    </span>
-                  </label>
                 </div>
                 {/* Default POS  */}
                 <div>
@@ -447,17 +351,11 @@ const NameLocationTable = () => {
                 </div>
 
                 <div className="mx-auto mt-10 items-start">
-                  <div className="form-check form-switch ">
-                    <input
-                      className="form-check-input appearance-none w-9  rounded-full float-left h-5 align-center bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm"
-                      type="checkbox"
-                      role="switch"
-                      id="flexSwitchCheckDefault"
-                      onClick={() => setCombo(!combo)}
-                    />
+                  <div>
+                    <Switch size="small" onClick={() => setCombo(!combo)} />
                     <label
                       className="form-check-label inline-block ml-2 text-sm text-gray-500"
-                      for="flexSwitchCheckDefault"
+                      htmlFor="flexSwitchCheckDefault"
                     >
                       Combo codes
                     </label>
@@ -469,15 +367,102 @@ const NameLocationTable = () => {
               <div>
                 <h1 className="">Select Working Hours</h1>
                 <div className=" my-5 mr-2 gap-5">
-                  <div className="flex items-center">
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <TimePicker
-                        label="Time"
-                        value={value}
-                        onChange={handleChange}
-                        renderInput={(params) => <TextField {...params} />}
-                      />
-                    </LocalizationProvider>
+                  <div className="flex flex-wrap items-center my-1 gap-5">
+                    <h5 className="text-sm text-gray-600 w-16">Monday</h5>
+                    <CustomTimePicker
+                      value={mondayFrom}
+                      setValue={setMondayFrom}
+                    ></CustomTimePicker>
+
+                    <span className="text-sm text-gray-600">to</span>
+                    <CustomTimePicker
+                      value={mondayTo}
+                      setValue={setMondayTo}
+                    ></CustomTimePicker>
+                  </div>
+                  {/* ------------------------  */}
+                  <div className="flex flex-wrap items-center my-1 gap-5">
+                    <h5 className="text-sm text-gray-600 w-16">Tuesday</h5>
+                    <CustomTimePicker
+                      value={tueFrom}
+                      setValue={setTueFrom}
+                    ></CustomTimePicker>
+
+                    <span className="text-sm text-gray-600">to</span>
+                    <CustomTimePicker
+                      value={tueTo}
+                      setValue={setTueTo}
+                    ></CustomTimePicker>
+                  </div>
+                  {/* ------------------------  */}
+                  <div className="flex my-1 flex-wrap items-center gap-5">
+                    <h5 className="text-sm text-gray-600 w-16">Wednesday</h5>
+                    <CustomTimePicker
+                      value={wedFrom}
+                      setValue={setWedFrom}
+                    ></CustomTimePicker>
+
+                    <span className="text-sm text-gray-600">to</span>
+                    <CustomTimePicker
+                      value={wedTo}
+                      setValue={setWedTo}
+                    ></CustomTimePicker>
+                  </div>
+                  {/* ------------------------  */}
+                  <div className="flex my-1 flex-wrap items-center gap-5">
+                    <h5 className="text-sm text-gray-600 w-16">Thursday</h5>
+                    <CustomTimePicker
+                      value={thuFrom}
+                      setValue={setThuFrom}
+                    ></CustomTimePicker>
+
+                    <span className="text-sm text-gray-600">to</span>
+                    <CustomTimePicker
+                      value={thuto}
+                      setValue={setThuto}
+                    ></CustomTimePicker>
+                  </div>
+                  {/* ------------------------  */}
+                  <div className="flex my-1 flex-wrap items-center gap-5">
+                    <h5 className="text-sm text-gray-600 w-16">Friday</h5>
+                    <CustomTimePicker
+                      value={friFrom}
+                      setValue={setFriFrom}
+                    ></CustomTimePicker>
+
+                    <span className="text-sm text-gray-600 ">to</span>
+                    <CustomTimePicker
+                      value={friTo}
+                      setValue={setFriTo}
+                    ></CustomTimePicker>
+                  </div>
+                  {/* ------------------------  */}
+                  <div className="flex my-1 flex-wrap items-center gap-5">
+                    <h5 className="text-sm text-gray-600 w-16">Saturday</h5>
+                    <CustomTimePicker
+                      value={satFrom}
+                      setValue={setSatFrom}
+                    ></CustomTimePicker>
+
+                    <span className="text-sm text-gray-600">To</span>
+                    <CustomTimePicker
+                      value={satTo}
+                      setValue={setSatTo}
+                    ></CustomTimePicker>
+                  </div>
+                  {/* ------------------------  */}
+                  <div className="flex my-1 flex-wrap items-center gap-5">
+                    <h5 className="text-sm text-gray-600 w-16">Sunday</h5>
+                    <CustomTimePicker
+                      value={sunFrom}
+                      setValue={setSunFrom}
+                    ></CustomTimePicker>
+
+                    <span className="text-sm text-gray-600 ">to</span>
+                    <CustomTimePicker
+                      value={sunTo}
+                      setValue={setSunTo}
+                    ></CustomTimePicker>
                   </div>
                 </div>
               </div>
@@ -486,7 +471,7 @@ const NameLocationTable = () => {
               <input
                 className="btn btn-primary bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
                 type="submit"
-                value={"Create Account"}
+                value={"Save"}
               />
             </form>
           </motion.div>
@@ -496,4 +481,4 @@ const NameLocationTable = () => {
   );
 };
 
-export default NameLocationTable;
+export default memo(NameLocationTable);
