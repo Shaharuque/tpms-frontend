@@ -5,19 +5,19 @@ export const VendorNumberSetupData = [];
 export const VendorNumberSetupColumns = [
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Services</div>;
+      return <span className="">Services</span>;
     },
     accessor: "service", // accessor is the "key" in the data
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Vendor No</div>;
+      return <span className="">Vendor No</span>;
     },
     accessor: "vendor_no",
   },
   {
     Header: () => {
-      return <div className=" mt-5  min-w-[150px]">Service Code</div>;
+      return <span className="">Service Code</span>;
     },
     accessor: "service_code",
   },

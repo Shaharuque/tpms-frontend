@@ -96,8 +96,8 @@ const AddCptCode = () => {
           onChange={(e) => setPageSize(Number(e.target.value))}
         >
           {[10, 15, 20, 50].map((p) => (
-            <option key={p} value={p}>
-              <span className="bg-primary">{p}</span>
+            <option className="bg-primary" key={p} value={p}>
+              {p}
             </option>
           ))}
         </select>

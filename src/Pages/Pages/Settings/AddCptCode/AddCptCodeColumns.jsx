@@ -106,13 +106,13 @@ export const AddCptCodeData = [
 export const AddCptCodeColumn = [
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Tx Type</div>;
+      return <span className=" ">Tx Type</span>;
     },
     accessor: "tx_type", // accessor is the "key" in the data
   },
   {
     Header: () => {
-      return <div className=" mt-5 min-w-[120px]">Cpt Code</div>;
+      return <span className=" ">Cpt Code</span>;
     },
     accessor: "cpt_code",
   },

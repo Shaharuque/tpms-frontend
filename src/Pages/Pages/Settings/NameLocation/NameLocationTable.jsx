@@ -5,7 +5,7 @@ import { Switch } from "@mui/material";
 import CustomTimePicker from "./CustomTimePicker";
 
 const NameLocationTable = () => {
-  const [tableOpen, setTableOpen] = useState(false);
+  const [tableOpen, setTableOpen] = useState(true);
   const [combo, setCombo] = useState(false);
   // const [value, onChange] = useState("");
   const [mondayFrom, setMondayFrom] = useState(null);

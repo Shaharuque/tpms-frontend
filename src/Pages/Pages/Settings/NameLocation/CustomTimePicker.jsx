@@ -6,7 +6,6 @@ import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 const CustomTimePicker = ({ value, setValue }) => {
   const handleChange = (newValue) => {
     setValue(newValue);
-    // console.log("time test", newValue);
   };
   return (
     <div>

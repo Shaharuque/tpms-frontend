@@ -20,16 +20,8 @@ const VendorNumberSetup = () => {
     // page,
     prepareRow,
   } = useTable({ columns, data }, useSortBy, usePagination);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
-  };
+  // console.log("tableOpen,", tableOpen);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -37,68 +29,60 @@ const VendorNumberSetup = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleOnchange = (e) => {
+    console.log(e);
+    setTableOpen(!tableOpen);
+  };
   return (
     <div>
       <h1 className="text-lg my-2 text-orange-400">Vendor Number Setup</h1>
       <div className="flex flex-wrap items-center">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="w-full text-sm">
-            <div className=" flex flex-wrap my-5 mr-2 gap-5">
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
-                    Tx Type
-                  </span>
-                </label>
-                <select
-                  onClick={() => setTableOpen(!tableOpen)}
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("Length")}
-                >
-                  <option value="Select Tx type">Select Tx type</option>
-                  <option value="Behavior Therapy">Behavior Therapy</option>
-                  <option value="Mental Health">Mental Health</option>
-                  <option value="Physical Therapy">Physical Therapy</option>
-                </select>
-              </div>
+        <div className="w-full text-sm">
+          <div className=" flex items-center flex-wrap my-5 mr-2 gap-5">
+            <div>
+              <label className="label">
+                <span className="label-text text-xs text-gray-500 text-left">
+                  Tx Type
+                </span>
+              </label>
+              <select
+                name="tx_type"
+                onChange={(e) => handleOnchange(e)}
+                className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+              >
+                <option value="Select Tx type">Select Tx type</option>
+                <option value="Behavior Therapy">Behavior Therapy</option>
+                <option value="Mental Health">Mental Health</option>
+                <option value="Physical Therapy">Physical Therapy</option>
+              </select>
+            </div>
 
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
-                    Regional Center
-                  </span>
-                </label>
-                <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("week_day")}
-                >
-                  <option value="select regional center">
-                    select regional center
-                  </option>
-                </select>
-              </div>
-              {/* <div className="modal-action">
+            <div>
+              <label className="label">
+                <span className="label-text text-xs text-gray-500 text-left">
+                  Regional Center
+                </span>
+              </label>
+              <select className="border rounded-sm px-2 py-2 mx-1 text-xs w-full">
+                <option value="select regional center">
+                  select regional center
+                </option>
+              </select>
+            </div>
+            <div>
+              {" "}
+              <button
+                variant="outlined"
+                onClick={handleClickOpen}
+                className="px-5 mt-7 mx-2 py-1 bg-gradient-to-r from-secondary
+            to-primary hover:to-secondary text-white rounded-md"
+              >
                 {" "}
-                <input
-                  type="submit"
-                  value={"Create New"}
-                  className="px-5  py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                ></input>
-              </div> */}
+                Create New
+              </button>
             </div>
           </div>
-        </form>
-        <div>
-          {" "}
-          <button
-            variant="outlined"
-            onClick={handleClickOpen}
-            className="px-5 mt-7 mx-2 py-1 bg-gradient-to-r from-secondary
-            to-primary hover:to-secondary text-white rounded-md"
-          >
-            {" "}
-            Create New
-          </button>
         </div>
       </div>
       {tableOpen && (

@@ -30,6 +30,19 @@
     border: 1px solid #09A2B3;
 }
 
+.tab-box {
+    border: 1px solid #adadad;
+    background-color: #f9f9f9;
+}
+
+.active-tab {
+    border-top: 4px solid #09A2B3;
+    border-right: 2px solid #adadad;
+    border-left: 2px solid #adadad;
+    border-bottom: 2px solid #fff;
+
+}
+
 @media (min-width:320px) {
 
     /* smartphones, iPhone, portrait 480x320 phones */
