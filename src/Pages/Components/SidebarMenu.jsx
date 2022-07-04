@@ -51,7 +51,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
               to={s.path}
               key={i}
               style={{ display: "block" }}
-              className="hover:bg-white rounded-md py-1 my-2 hover:text-primary transition ease-in-out"
+              className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white transition ease-in-out"
               activeclassname="active"
             >
               <div className="flex items-center">

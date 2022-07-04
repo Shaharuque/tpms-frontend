@@ -1,87 +1,26 @@
-import React from "react";
-import { useTable } from "react-table";
-
-const Test = () => {
-  const data = React.useMemo(
-    () => [
-      {
-        col1: "Hello",
-        col2: "World",
-      },
-      {
-        col1: "react-table",
-        col2: "rocks",
-      },
-      {
-        col1: "whatever",
-        col2: "you want",
-      },
-    ],
-    []
-  );
-
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "Column 1",
-        accessor: "col1", // accessor is the "key" in the data
-      },
-      {
-        Header: "Column 2",
-        accessor: "col2",
-      },
-    ],
-    []
-  );
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
-  return (
-    <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <th
-                {...column.getHeaderProps()}
-                style={{
-                  borderBottom: "solid 3px red",
-                  background: "aliceblue",
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                {column.render("Header")}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return (
-                  <td
-                    {...cell.getCellProps()}
-                    style={{
-                      padding: "10px",
-                      border: "solid 1px gray",
-                      background: "papayawhip",
-                    }}
-                  >
-                    {cell.render("Cell")}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
-};
-
-export default Test;
+{
+  /* <div className="flex flex-wrap gap-2">
+  
+  <div>
+    <h1 className="text-xs mb-3 ml-1 ">Type</h1>
+    <select
+      onChange={(e) => handleType(e)}
+      className="border rounded-sm px-2 py-2 mx-1 text-xs "
+    >
+      <option value="Select Tx type">Specific Date</option>
+      <option value="Behavior Therapy">Date Range</option>
+    </select>
+  </div>
+  {type && (
+    <div>
+      {" "}
+      <h1 className="text-xs mb-3 ml-1 ">Date Range</h1>
+      <input
+        onChange={(e) => handleDate(e)}
+        className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+        type="date"
+      />
+    </div>
+  )}
+</div>; */
+}

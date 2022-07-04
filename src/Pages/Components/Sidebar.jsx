@@ -62,7 +62,7 @@ const menuItem = [
     ],
   },
   {
-    path: "/patients",
+    path: "/patient-List",
     name: "Patients",
     icon: <FaUserPlus />,
   },
@@ -187,7 +187,7 @@ const Sidebar = ({ children }) => {
         <div className="">
           <NavigationBar></NavigationBar>
         </div>
-        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-20 ">
+        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-6 sm:h-[100vh]">
           {children}
         </main>
       </div>

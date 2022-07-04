@@ -17,9 +17,9 @@ const NavigationBar = () => {
       initial={{ opacity: 0, y: -15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] navi mt-[-1px] fixed top-0"
+      className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] navi  sticky top-0"
     >
-      <div className="md:flex items-center justify-between bg-white py-2 rounded-3xl md:px-10 px-7">
+      <div className="md:flex items-center justify-between bg-white  rounded-3xl md:px-10 px-7">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
@@ -30,7 +30,7 @@ const NavigationBar = () => {
                 <img className=" rounded-full" src={company} alt="pic" />
               </div>
               <div>
-                <p className="   md:text-xl text-sm">
+                <p className="md:text-xl text-sm mt-5">
                   ABC Behavioral Therapy Center
                 </p>
               </div>
@@ -59,7 +59,7 @@ const NavigationBar = () => {
           <div className=" md:mt-1 mt-6">
             <div className="dropdown md:dropdown-end">
               <label tabIndex="0" className="">
-                <h1 className="mx-4 text-xl font-bold text-secondary">
+                <h1 className="mx-4 mt-3 text-xl font-bold text-secondary">
                   <AiOutlinePlus />
                 </h1>
               </label>
@@ -78,13 +78,13 @@ const NavigationBar = () => {
           </div>
 
           {/* notify  */}
-          <div className="md:my-0 my-2 p-1">
+          <div className="md:my-0 my-5 p-1">
             <div className="dropdown md:dropdown-end">
               <div className="mx-2">
                 <label tabIndex="0" className="">
                   <div className="relative">
                     <div>
-                      <h1 className=" text-2xl text-secondary">
+                      <h1 className=" mt-5 text-2xl text-secondary">
                         <AiOutlineNotification />
                       </h1>
                       <span className=" absolute top-0 right-[-8px] bg-red-700 text-white badge-xs rounded-full">
@@ -116,7 +116,7 @@ const NavigationBar = () => {
           </div>
           {/* download  */}
           <div>
-            <h1 className="mx-5 text-lg font-bold text-secondary">
+            <h1 className="mx-5 mt-3 text-lg font-bold text-secondary">
               <BsDownload />
             </h1>
           </div>

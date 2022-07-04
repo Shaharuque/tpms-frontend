@@ -16,7 +16,7 @@ const Settings = () => {
         className=" p-2 setting-nav rounded-md"
       >
         <div className="">
-          <h1 className=" text-sm bg-secondary p-2 px-3 text-white">
+          <h1 className=" text-sm bg-secondary p-2 px-3 text-white mb-0">
             Facility Setup
           </h1>
         </div>
@@ -28,7 +28,7 @@ const Settings = () => {
         initial={{ opacity: 0, x: 25 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.6 }}
-        className=" m-2 p-2 setting-body rounded-lg "
+        className=" m-2 p-2 setting-body shadow-md rounded-lg "
       >
         <Outlet />
       </motion.div>

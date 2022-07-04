@@ -1,15 +1,7 @@
-import React, { useState } from "react";
-import TimePicker from "react-time-picker";
-import Test from "../Components/Test";
+import React from "react";
 
 const Patients = () => {
-  const [value, onChange] = useState("");
-  console.log(value);
-  return (
-    <div>
-      <Test></Test>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Patients;

@@ -60,7 +60,7 @@ function App() {
             path="/recurring-session"
             element={<RecurringSession></RecurringSession>}
           ></Route>
-          <Route path="/patients" element={<Patients></Patients>}></Route>
+          <Route path="/patient-List" element={<Patients></Patients>}></Route>
           <Route path="/staffs" element={<Staffs></Staffs>}></Route>
           {/* <Route path="/billing" element={<Billing></Billing>}></Route> */}
           <Route
