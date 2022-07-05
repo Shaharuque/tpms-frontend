@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
 import { Link } from "react-router-dom";
-import DataImportFileAction from "./DataImportFileAction";
+// import DataImportFileAction from "./DataImportFileAction";
 
 const DataImportComponent = ({ row }) => {
   const [action, setAction] = useState(false);

@@ -40,6 +40,7 @@ import BusinessFiles from "./Pages/Pages/Settings/BusinessFiles";
 import DataImport from "./Pages/Pages/Settings/DataImport";
 import TpmsMeet from "./Pages/Pages/Settings/TpmsMeet";
 import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
+import RecurringSessionEdit from "./Pages/Pages/RecurringSession/RecurringSessionEdit";
 
 function App() {
   return (
@@ -59,6 +60,10 @@ function App() {
           <Route
             path="/recurring-session"
             element={<RecurringSession></RecurringSession>}
+          ></Route>
+          <Route
+            path="/recurring-session-edit"
+            element={<RecurringSessionEdit></RecurringSessionEdit>}
           ></Route>
           <Route path="/patient-List" element={<Patients></Patients>}></Route>
           <Route path="/staffs" element={<Staffs></Staffs>}></Route>

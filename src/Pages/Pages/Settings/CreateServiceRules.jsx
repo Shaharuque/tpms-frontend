@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
 import { ServiceColumns } from "./CreateServiceRules/CreateServiceColumns";
 import CreateServiceComponent from "./CreateServiceRules/CreateServiceComponent";
+import SettingTableBox from "./SettingComponents/SettingTableBox";
 
 const CreateServiceRules = () => {
   const data = useMemo(() => ServiceColumns, []);
@@ -49,52 +50,13 @@ const CreateServiceRules = () => {
       <h1 className="text-lg my-2 text-orange-400">Service Rules</h1>
       <CssBaseline />
       <div className="">
-        <table className="border w-24 sm:w-full " {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    className="bg-secondary border   py-1 text-sm text-white"
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                  >
-                    {column.render("Header")}
-                    {/* Add a sort direction indicator */}
-                    <span className=" ml-4 ">
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " ⇓ "
-                          : " ⇑ "
-                        : ""}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        style={{
-                          border: "solid 1px gray",
-                        }}
-                        className="text-xs py-[6px] w-10 md:w-24 text-center text-gray-600 "
-                      >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <SettingTableBox
+          getTableProps={getTableProps}
+          headerGroups={headerGroups}
+          getTableBodyProps={getTableBodyProps}
+          rows={rows}
+          prepareRow={prepareRow}
+        ></SettingTableBox>
       </div>
       <button className="px-5 my-5 mb-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md ">
         Save

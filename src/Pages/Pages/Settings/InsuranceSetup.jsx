@@ -7,11 +7,22 @@ import {
 } from "./InsuranceSetup/InsuranceSetupColumns";
 import SettingTableBox from "./SettingComponents/SettingTableBox";
 import { CheckBox } from "./SettingComponents/CheckBox";
-import InsuranceEdit from "./InsuranceSetup/InsuranceEdit";
+import InsuranceEditModal from "./InsuranceSetup/InsuranceEditModal";
+import { RiPencilLine } from "react-icons/ri";
 
 const InsuranceSetup = () => {
   const data = useMemo(() => InsuranceSetupData, []);
   const columns = useMemo(() => [...InsuranceSetupColumn], []);
+  const [openEditModal, setOpenEditModal] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -55,6 +66,7 @@ const InsuranceSetup = () => {
   );
   console.log(selectedFlatRows);
   const { pageIndex, pageSize } = state;
+
   return (
     <div>
       <SettingTableBox
@@ -98,12 +110,15 @@ const InsuranceSetup = () => {
           ))}
         </select>
       </div>
-      {/* {openEditModal && (
-        <AddServicesActionModal
-          handleClose={handleClose}
-          open={openEditModal}
-        ></AddServicesActionModal>
-      )} */}
+
+      <button onClick={handleClickOpen} className="text-secondary">
+        <RiPencilLine />
+      </button>
+      {openEditModal && (
+        <div>
+          <h1>Editable Part :</h1>
+        </div>
+      )}
     </div>
   );
 };

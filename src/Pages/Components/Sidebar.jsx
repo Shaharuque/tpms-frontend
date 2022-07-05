@@ -187,7 +187,7 @@ const Sidebar = ({ children }) => {
         <div className="">
           <NavigationBar></NavigationBar>
         </div>
-        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-6 sm:h-[100vh]">
+        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-6 ">
           {children}
         </main>
       </div>

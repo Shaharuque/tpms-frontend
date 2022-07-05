@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import InsuranceEditModal from "./InsuranceEditModal";
 import { RiPencilLine } from "react-icons/ri";
 const InsuranceEdit = ({ row }) => {
@@ -18,15 +18,15 @@ const InsuranceEdit = ({ row }) => {
           <RiPencilLine />
         </button>
       </div>
-      {openEditModal && (
+      {/* {openEditModal && (
         <InsuranceEditModal
           handleClose={handleClose}
           open={openEditModal}
           row={row}
         ></InsuranceEditModal>
-      )}
+      )} */}
     </div>
   );
 };
 
-export default InsuranceEdit;
+export default memo(InsuranceEdit);

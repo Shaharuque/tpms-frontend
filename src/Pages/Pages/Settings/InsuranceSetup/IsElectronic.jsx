@@ -1,5 +1,5 @@
 import { Switch } from "@mui/material";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 const IsElectronic = ({ row }) => {
   const [value, setValue] = useState(false);
@@ -18,4 +18,4 @@ const IsElectronic = ({ row }) => {
   );
 };
 
-export default IsElectronic;
+export default memo(IsElectronic);
