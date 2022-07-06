@@ -6,7 +6,7 @@ import Patients from "./Pages/Pages/Patients.jsx";
 import Staffs from "./Pages/Pages/Staffs.jsx";
 import Report from "./Pages/Pages/Report.jsx";
 import Settings from "./Pages/Pages/Settings.jsx";
-import Test from "./Pages/Components/Test.jsx";
+// import Test from "./Pages/Components/Test.jsx";
 import ListView from "./Pages/Pages/ListView";
 import CalendarView from "./Pages/Pages/CalendarView";
 import RecurringSession from "./Pages/Pages/RecurringSession";
@@ -89,7 +89,7 @@ function App() {
           ></Route>
           <Route path="/m-posting" element={<MPosting></MPosting>}></Route>
           <Route
-            path="billing/deposit-add"
+            path="billing/deposit-add/:id"
             element={<MPostingEditAdd></MPostingEditAdd>}
           ></Route>
           <Route

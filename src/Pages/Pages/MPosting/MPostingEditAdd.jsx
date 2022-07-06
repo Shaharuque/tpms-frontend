@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { TextField } from "@mui/material";
+import { Link, useParams } from "react-router-dom";
 
 const MPostingEditAdd = () => {
+  const { id } = useParams();
+  console.log("param ", id);
   const {
     register,
     handleSubmit,
@@ -12,6 +15,10 @@ const MPostingEditAdd = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    reset();
+  };
+
+  const onCancel = (data) => {
     reset();
   };
   console.log(errors);
@@ -159,8 +166,8 @@ const MPostingEditAdd = () => {
                 </div>
                 <div className="pt-5">
                   <TextField
-                    label="text"
-                    className="w-full "
+                    label="Notes"
+                    className="w-full p-0"
                     {...register("muiInput")}
                     placeholder="mui/textfield"
                   />
@@ -175,6 +182,15 @@ const MPostingEditAdd = () => {
                 type="submit"
                 value={"Save"}
               />
+              <Link to={"/m-posting"}>
+                {" "}
+                <button
+                  className="px-5  bg-gradient-to-r from-red-700 to-red-400 py-3 ml-3 hover:to-red-700 text-white rounded-md"
+                  onClick={onCancel}
+                >
+                  Cancel
+                </button>
+              </Link>
             </form>
           </motion.div>
         </div>
