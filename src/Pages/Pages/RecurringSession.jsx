@@ -1,4 +1,3 @@
-import { Select } from "antd";
 import React, { useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import {
@@ -9,34 +8,35 @@ import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { Link } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
 
 const RecurringSession = () => {
   const data = useMemo(() => RecurringSessionColumnsData, []);
   const columns = useMemo(() => [...RecurringSessionColumnsColumn], []);
 
-  const { Option } = Select;
-  const patient = [];
-  const provider = [];
-  const [providers, setProviders] = useState([]);
-  const [service, setService] = useState("");
-  const [patients, setPatients] = useState([]);
-  const patientData = ["m", "v", "c"];
-  const providerData = ["m", "v", "c", "p"];
   const [table, setTable] = useState(false);
+  const [select, setSelect] = useState("");
 
-  patientData.map((e) => patient.push(<Option key={e}>{e}</Option>));
-  providerData.map((e) => provider.push(<Option key={e}>{e}</Option>));
-  console.log(service);
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+  const provider = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vip", label: "VIP" },
+  ];
 
-  const submitHandle = () => {
-    // const data = {
-    //   Patients: patients,
-    //   Providers: providers,
-    //   Services: service,
-    //   Status: status,
-    //   Date: date,
-    // };
-    // console.log(data);
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      filters: [],
+    },
+  });
+  const onSubmit = (data) => {
+    // setSubmitted(data);
+    console.log(data);
     setTable(true);
   };
 
@@ -87,59 +87,76 @@ const RecurringSession = () => {
   return (
     <div className="h-[100vh]">
       <h1 className="text-lg my-2 text-orange-500">Recurring Session</h1>
-      <div className="flex flex-wrap items-center gap-2">
-        <div>
-          <h1 className="text-xs mb-3 ml-1 ">Select Any</h1>
-          <select
-            onChange={(e) => setService(e.target.value)}
-            name="type"
-            className="border rounded-sm px-2 w-36 py-[6px] text-xs "
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex items-center gap-2 flex-wrap">
+          <div>
+            <h1 className="text-xs mb-2 ml-1 ">Select Any</h1>
+            <select
+              onChange={(e) => setSelect(e.target.value)}
+              name="type"
+              className="border rounded-sm px-2 w-36 py-2 text-xs "
+            >
+              <option value="all">All</option>
+              <option value="patient">Patient</option>
+              <option value="provider">Provider</option>
+            </select>
+          </div>
+
+          {select === "patient" ? (
+            <div className="w-[100%] md:w-[20%]">
+              <h1 className="text-xs mb-2 ml-1 ">Patient</h1>
+
+              <Controller
+                name="filters"
+                control={control}
+                render={({ field }) => {
+                  return (
+                    <Select
+                      className="reactSelect text-xs"
+                      name="filters"
+                      options={options}
+                      isMulti
+                      {...field}
+                      register={"filters"}
+                    />
+                  );
+                }}
+              />
+            </div>
+          ) : select === "provider" ? (
+            <div className="w-[100%] md:w-[20%]">
+              <h1 className="text-xs mb-2 ml-1 ">Provider</h1>
+
+              <Controller
+                name="filters"
+                control={control}
+                render={({ field }) => {
+                  return (
+                    <Select
+                      className="reactSelect text-xs"
+                      name="filters"
+                      options={provider}
+                      isMulti
+                      {...field}
+                      register={"filters"}
+                    />
+                  );
+                }}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          <button
+            className="px-5 mt-6 text-sm py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            type="submit"
           >
-            <option value="all">All</option>
-            <option value="patient">Patient</option>
-            <option value="provider">Provider</option>
-          </select>
+            Go
+          </button>
         </div>
-        {service === "patient" ? (
-          <div className="w-[50%]">
-            <h1 className="text-xs mb-3 ml-1 ">Patient</h1>
-            <Select
-              mode="multiple"
-              allowClear
-              style={{
-                width: "100%",
-              }}
-              placeholder="Please select"
-              onChange={(e) => setPatients(e)}
-            >
-              {patient}
-            </Select>
-          </div>
-        ) : service === "provider" ? (
-          <div className=" w-[50%]">
-            <h1 className="text-xs mb-3 ml-1 ">Provider</h1>
-            <Select
-              mode="multiple"
-              allowClear
-              style={{
-                width: "100%",
-              }}
-              placeholder="Please select"
-              onChange={(e) => setProviders(e)}
-            >
-              {provider}
-            </Select>
-          </div>
-        ) : (
-          <></>
-        )}
-        <button
-          onClick={submitHandle}
-          className="px-5 mt-6 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-        >
-          Go
-        </button>
-      </div>
+      </form>
       {/* table  */}
       {table && (
         <div className="my-5">

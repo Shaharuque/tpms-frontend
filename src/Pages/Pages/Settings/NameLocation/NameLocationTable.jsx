@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Switch } from "@mui/material";
@@ -37,6 +37,16 @@ const NameLocationTable = () => {
     console.log(data);
     reset();
   };
+
+  // Editable value
+  useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        name: `ABC Behavioral Therapy Center`,
+      });
+    }, 2000);
+  }, [reset]);
   console.log(errors);
   return (
     <div>

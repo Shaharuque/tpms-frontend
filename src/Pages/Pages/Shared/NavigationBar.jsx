@@ -30,7 +30,7 @@ const NavigationBar = () => {
                 <img className=" rounded-full" src={company} alt="pic" />
               </div>
               <div>
-                <p className="md:text-xl text-sm mt-5">
+                <p className="md:text-lg text-sm ">
                   ABC Behavioral Therapy Center
                 </p>
               </div>
@@ -40,7 +40,7 @@ const NavigationBar = () => {
 
         <div
           onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-3 top-4 cursor-pointer md:hidden"
+          className="text-3xl absolute right-3 top-1 cursor-pointer md:hidden"
         >
           <p className="">{open ? <AiOutlineClose /> : <FaBars />}</p>
         </div>

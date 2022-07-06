@@ -7,7 +7,7 @@ const Tables = ({ tableType, tableName }) => {
   return (
     <div>
       <table className="shadow-lg w-full bg-white">
-        <h1 className="thead py-1  bg-secondary text-white">{tableName}</h1>
+        <h1 className="thead py-1 mb-0 bg-secondary text-white">{tableName}</h1>
         <div className="td">
           {" "}
           <tr>

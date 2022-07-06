@@ -17,6 +17,21 @@ export default function PlaceOfServicesActionAddModal({
     console.log(data);
     reset();
   };
+
+  console.log(row);
+
+  // Editable value
+  React.useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        place_of_service: `${row.original.place_of_Service}`,
+        place_service_code: `${row.original.service_code}`,
+      });
+    }, 500);
+  }, [reset, row.original.place_of_Service, row.original.service_code]);
+  console.log(errors);
+
   return (
     <div>
       <Dialog
@@ -37,7 +52,6 @@ export default function PlaceOfServicesActionAddModal({
                 </label>
                 <input
                   type="text"
-                  placeholder="Place of Service"
                   name="place_of_service"
                   className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
                   {...register("place_of_service")}
@@ -49,7 +63,6 @@ export default function PlaceOfServicesActionAddModal({
                 </label>
                 <input
                   type="text"
-                  placeholder="Place of Service Code"
                   name="place_service_code"
                   className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
                   {...register("place_service_code")}

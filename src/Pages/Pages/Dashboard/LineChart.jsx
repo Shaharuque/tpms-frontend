@@ -6,7 +6,7 @@ const LineChart = () => {
   return (
     // <div div className="lg:w-4/12 md:w-6/12">
     <div div className="">
-      <h1 className=" bg-primary py-1 text-center text-white">
+      <h1 className=" bg-primary py-1 mb-0 text-center text-white">
         Charge Analysis by Service Date
       </h1>
       <Line

@@ -41,6 +41,7 @@ import DataImport from "./Pages/Pages/Settings/DataImport";
 import TpmsMeet from "./Pages/Pages/Settings/TpmsMeet";
 import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
 import RecurringSessionEdit from "./Pages/Pages/RecurringSession/RecurringSessionEdit";
+import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
 
 function App() {
   return (
@@ -87,6 +88,10 @@ function App() {
             element={<ERemittance></ERemittance>}
           ></Route>
           <Route path="/m-posting" element={<MPosting></MPosting>}></Route>
+          <Route
+            path="billing/deposit-add"
+            element={<MPostingEditAdd></MPostingEditAdd>}
+          ></Route>
           <Route
             path="/era-manager"
             element={<EraManager></EraManager>}
