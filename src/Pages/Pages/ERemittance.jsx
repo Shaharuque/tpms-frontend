@@ -1,9 +1,15 @@
 import React from "react";
+import { FaUpload } from "react-icons/fa";
 
 const ERemittance = () => {
   return (
     <div>
-      <h1>ERemittance</h1>
+      <div className="upload">
+        <button>
+          <FaUpload />
+          <input type="file" />
+        </button>
+      </div>
     </div>
   );
 };
