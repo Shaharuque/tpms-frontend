@@ -81,11 +81,4 @@ export const InsuranceSetupColumn = [
       return <IsElectronic row={row}></IsElectronic>;
     },
   },
-  {
-    Header: "Edit",
-    Cell: ({ row }) => {
-      // console.log(row);
-      return <InsuranceEdit row={row}></InsuranceEdit>;
-    },
-  },
 ];

@@ -9,6 +9,7 @@ import SettingTableBox from "./SettingComponents/SettingTableBox";
 import { CheckBox } from "./SettingComponents/CheckBox";
 import InsuranceEditModal from "./InsuranceSetup/InsuranceEditModal";
 import { RiPencilLine } from "react-icons/ri";
+import InsuranceEditComponent from "./InsuranceSetup/InsuranceEditComponent";
 
 const InsuranceSetup = () => {
   const data = useMemo(() => InsuranceSetupData, []);
@@ -22,6 +23,9 @@ const InsuranceSetup = () => {
   const handleClose = () => {
     setOpenEditModal(false);
   };
+
+  const [editableRowIndex, setEditableRowIndex] = React.useState(null);
+  console.log(editableRowIndex);
 
   const {
     getTableProps,
@@ -62,6 +66,32 @@ const InsuranceSetup = () => {
           ...columns,
         ];
       });
+    },
+    (hooks) => {
+      hooks.allColumns.push((columns) => [
+        // other hooks such as selection hook
+        ...columns,
+        // edit hook
+        {
+          accessor: "action",
+          id: "action",
+          Header: "Action",
+          Cell: ({ row, setEditableRow, editableRow }) => (
+            <>
+              <div>
+                <div className="flex justify-center gap-1 text-primary">
+                  <RiPencilLine
+                    onClick={() => {
+                      // row requested for edit access
+                      setEditableRowIndex(row);
+                    }}
+                  />
+                </div>
+              </div>
+            </>
+          ),
+        },
+      ]);
     }
   );
   console.log(selectedFlatRows);
@@ -111,13 +141,8 @@ const InsuranceSetup = () => {
         </select>
       </div>
 
-      <button onClick={handleClickOpen} className="text-secondary">
-        <RiPencilLine />
-      </button>
-      {openEditModal && (
-        <div>
-          <h1>Editable Part :</h1>
-        </div>
+      {editableRowIndex && (
+        <InsuranceEditComponent row={editableRowIndex}></InsuranceEditComponent>
       )}
     </div>
   );

@@ -15,6 +15,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { FiEdit3 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsFileEarmark, BsPrinter } from "react-icons/bs";
+// import MDepositDetailsTable from "./MPosting/MDepositDetailsTable";
 
 const MPosting = () => {
   // date range
@@ -42,7 +43,7 @@ const MPosting = () => {
   const columns = useMemo(() => [...MPostingColumnsColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
 
-  // console.log("editableRow", editableRow);
+  console.log("editableRow", editableRow);
   const {
     getTableProps,
     getTableBodyProps,
@@ -74,22 +75,38 @@ const MPosting = () => {
             <>
               <div>
                 <div className="flex justify-center gap-1 text-primary">
-                  <Link to={"/"}>
-                    <MdOutlineDashboard />
+                  <Link to={`/billing/deposit-apply/${row.original.id}`}>
+                    <MdOutlineDashboard title="Deposit" />
                   </Link>
 
                   <Link to={`/billing/deposit-add/${row.original.id}`}>
-                    <FiEdit3 />
+                    <FiEdit3 title="Edit" />
                   </Link>
 
                   <Link to={"/"}>
-                    <AiOutlineDelete />
+                    <AiOutlineDelete title="Delete" />
                   </Link>
+
+                  <BsFileEarmark
+                    title="Details"
+                    onClick={() => {
+                      const currentIndex = row.index;
+                      if (editableRow !== currentIndex) {
+                        // row requested for edit access
+                        setEditableRow(row);
+                      } else {
+                        // request for saving the updated row
+                        setEditableRow(null); // keep the row closed for edit after we finish updating it
+                        const updatedRow = row.values;
+                        console.log("updated row values:");
+                        console.log(updatedRow);
+                        // call your updateRow API
+                      }
+                    }}
+                  />
+
                   <Link to={"/"}>
-                    <BsFileEarmark />
-                  </Link>
-                  <Link to={"/"}>
-                    <BsPrinter />
+                    <BsPrinter title="Print" />
                   </Link>
                 </div>
               </div>
@@ -260,13 +277,9 @@ const MPosting = () => {
         </div>
       </div>
 
-      <div>
-        {editableRow && (
-          <div>
-            <span></span>
-          </div>
-        )}
-      </div>
+      {/* <div>
+        <MDepositDetailsTable></MDepositDetailsTable>
+      </div> */}
     </div>
   );
 };
