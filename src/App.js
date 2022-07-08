@@ -43,6 +43,7 @@ import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
 import RecurringSessionEdit from "./Pages/Pages/RecurringSession/RecurringSessionEdit";
 import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
 import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
+import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
 
 function App() {
   return (
@@ -80,6 +81,14 @@ function App() {
             element={<ContractRate></ContractRate>}
           ></Route>
           <Route
+            path="billing/rate-list-add-edit/:id"
+            element={<ContractRateEditAdd></ContractRateEditAdd>}
+          ></Route>
+          <Route
+            path="billing/rate-list-add-edit"
+            element={<ContractRateEditAdd></ContractRateEditAdd>}
+          ></Route>
+          <Route
             path="/patient-statement"
             element={<PatientStatement></PatientStatement>}
           ></Route>
@@ -91,6 +100,10 @@ function App() {
           <Route path="/m-posting" element={<MPosting></MPosting>}></Route>
           <Route
             path="billing/deposit-add/:id"
+            element={<MPostingEditAdd></MPostingEditAdd>}
+          ></Route>
+          <Route
+            path="billing/deposit-add"
             element={<MPostingEditAdd></MPostingEditAdd>}
           ></Route>
           <Route

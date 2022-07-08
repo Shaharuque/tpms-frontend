@@ -136,7 +136,7 @@ const MPosting = () => {
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Deposit Date Range</h1>
               <div className="flex  items-center">
-                <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[6px] text-3xl" />
+                <BsCalendar3WeekFill className=" text-gray-600 ml-1 bg-gray-200 p-[6px] text-3xl" />
                 <DatePicker
                   style={{
                     color: "#5c5c5c",
@@ -158,7 +158,7 @@ const MPosting = () => {
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Check Date Range</h1>
               <div className="flex  items-center">
-                <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[6px] text-3xl" />
+                <BsCalendar3WeekFill className="ml-1 text-gray-600 bg-gray-200 p-[6px] text-3xl" />
                 <DatePicker
                   style={{
                     color: "#5c5c5c",

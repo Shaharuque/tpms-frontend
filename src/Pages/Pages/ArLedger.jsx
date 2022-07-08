@@ -1,11 +1,7 @@
 import React from "react";
 
 const ArLedger = () => {
-  return (
-    <div>
-      <h1>ArLedger.jsx</h1>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default ArLedger;
