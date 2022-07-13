@@ -31,6 +31,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
 import NavigationBar from "../Pages/Shared/NavigationBar";
+import Footer from "./Footer";
 // import StateUse from "../Hooks/StateUse";
 
 const menuItem = [
@@ -182,14 +183,15 @@ const Sidebar = ({ children }) => {
 
   // console.log(menuItem[1].others.name);
   return (
-    <div className="relative ">
+    <div className="relative bg-neutral py-3">
       <div className=" slide">
         <div className="">
           <NavigationBar></NavigationBar>
         </div>
-        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-6 ">
+        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-3 ">
           {children}
         </main>
+        <Footer></Footer>
       </div>
 
       <div
@@ -198,20 +200,23 @@ const Sidebar = ({ children }) => {
         className="Side_container fixed bg-secondary left-0 top-0"
       >
         <div
-          style={{ width: isHovering ? "220px" : "70px" }}
+          style={{
+            width: isHovering ? "220px" : "70px",
+            transition: isHovering ? "ease-in 0.4s" : "ease-out 0.5s",
+          }}
           className="sidebar"
         >
           <div className="top-section">
             {isHovering ? (
               <>
-                <div className="logo">
+                <div className="logo transition-all">
                   {" "}
                   <img src={logo2} alt="" />{" "}
                 </div>
               </>
             ) : (
               <>
-                <img className="h-10 w-10" src={logo1} alt="" />{" "}
+                <img className="h-10 w-10 transition-all" src={logo1} alt="" />{" "}
               </>
             )}
           </div>

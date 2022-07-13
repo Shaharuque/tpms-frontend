@@ -35,11 +35,13 @@ const ArLedger = () => {
     new DateObject().set({ day: 20, format }),
   ]);
 
+  console.log(dates);
+
   const data = useMemo(() => ARLedgerColumnsData, []);
   const columns = useMemo(() => [...ARLedgerColumnsColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
 
-  console.log("editableRow", editableRow);
+  // console.log("editableRow", editableRow);
   const {
     getTableProps,
     getTableBodyProps,

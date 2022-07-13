@@ -8,8 +8,8 @@ import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { Switch } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
-import Select from "react-select";
+import { useForm } from "react-hook-form";
+import { MultiSelect } from "react-multi-select-component";
 
 const ListView = () => {
   const [billable, setBillable] = useState(true);
@@ -17,6 +17,18 @@ const ListView = () => {
 
   const data = useMemo(() => ManageTableColumnsData, []);
   const columns = useMemo(() => [...ManageTableColumnsColumn], []);
+
+  const options = [
+    { label: "Grapes 🍇", value: "grapes" },
+    { label: "Mango 🥭", value: "mango" },
+    { label: "Strawberry 🍓", value: "strawberry" },
+    { label: "maru 🍓", value: "maru" },
+    { label: "mariu 🍓", value: "mariu" },
+    { label: "maruy 🍓", value: "maruy" },
+  ];
+
+  const [patientsSelected, setPatientsSelected] = useState([]);
+  const [providerSelected, setProviderSelected] = useState([]);
 
   const {
     getTableProps,
@@ -62,18 +74,7 @@ const ListView = () => {
   console.log(selectedFlatRows);
   const { pageIndex, pageSize } = state;
 
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-  const provider = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
-  const { handleSubmit, register, control, reset } = useForm({
+  const { handleSubmit, register, reset } = useForm({
     defaultValues: {
       filters: [],
     },
@@ -106,45 +107,25 @@ const ListView = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-8 my-5 mr-2 gap-5">
           {billable && (
-            <div className="w-full">
-              <h1 className="text-xs mb-2 ml-1 ">Patient</h1>
-
-              <Controller
-                name="patients"
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <Select
-                      className="reactSelect text-xs"
-                      name="patients"
-                      options={options}
-                      isMulti
-                      {...field}
-                      register={"patients"}
-                    />
-                  );
-                }}
+            <div>
+              <h1 className="text-xs mb-2 ml-1 ">Patients</h1>
+              <MultiSelect
+                options={options}
+                value={patientsSelected}
+                onChange={setPatientsSelected}
+                labelledBy="Select"
+                className="text-xs"
               />
             </div>
           )}
           <div className="w-full">
             <h1 className="text-xs mb-2 ml-1 ">Provider</h1>
-
-            <Controller
-              name="provider"
-              control={control}
-              render={({ field }) => {
-                return (
-                  <Select
-                    className="reactSelect text-xs"
-                    name="provider"
-                    options={provider}
-                    isMulti
-                    {...field}
-                    register={"provider"}
-                  />
-                );
-              }}
+            <MultiSelect
+              options={options}
+              value={providerSelected}
+              onChange={setProviderSelected}
+              labelledBy="Select"
+              className="text-xs"
             />
           </div>
 

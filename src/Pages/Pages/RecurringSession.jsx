@@ -9,7 +9,6 @@ import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { Link } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
-import Select from "react-select";
 
 const RecurringSession = () => {
   const data = useMemo(() => RecurringSessionColumnsData, []);
@@ -107,7 +106,7 @@ const RecurringSession = () => {
             <div className="w-[100%] md:w-[20%]">
               <h1 className="text-xs mb-2 ml-1 ">Patient</h1>
 
-              <Controller
+              {/* <Controller
                 name="filters"
                 control={control}
                 render={({ field }) => {
@@ -122,13 +121,13 @@ const RecurringSession = () => {
                     />
                   );
                 }}
-              />
+              /> */}
             </div>
           ) : select === "provider" ? (
             <div className="w-[100%] md:w-[20%]">
               <h1 className="text-xs mb-2 ml-1 ">Provider</h1>
 
-              <Controller
+              {/* <Controller
                 name="filters"
                 control={control}
                 render={({ field }) => {
@@ -143,7 +142,7 @@ const RecurringSession = () => {
                     />
                   );
                 }}
-              />
+              /> */}
             </div>
           ) : (
             <></>

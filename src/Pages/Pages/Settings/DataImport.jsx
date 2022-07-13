@@ -55,12 +55,12 @@ const DataImport = () => {
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th
-                    className="bg-secondary border   py-1 text-sm text-white"
+                    className="bg-secondary border  min-w-[120px]  py-1 text-sm text-white"
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render("Header")}
                     {/* Add a sort direction indicator */}
-                    <span className=" ml-4 ">
+                    <span className="  ">
                       {column.isSorted
                         ? column.isSortedDesc
                           ? " ⇓ "
