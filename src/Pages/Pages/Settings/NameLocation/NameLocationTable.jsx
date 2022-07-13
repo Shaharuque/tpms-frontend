@@ -68,7 +68,7 @@ const NameLocationTable = () => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-5">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-2">
                 {/* name  */}
                 <div>
                   {" "}
@@ -81,7 +81,7 @@ const NameLocationTable = () => {
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="name"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("name")}
                   />
                 </div>
@@ -97,7 +97,7 @@ const NameLocationTable = () => {
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="address"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("address")}
                   />
                 </div>
@@ -112,7 +112,7 @@ const NameLocationTable = () => {
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="addressTwo"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("addressTwo")}
                   />
                 </div>
@@ -128,7 +128,7 @@ const NameLocationTable = () => {
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="city"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("city")}
                   />
                 </div>
@@ -140,7 +140,7 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("state")}
                   >
                     <option value="Mr">Mr</option>
@@ -161,7 +161,7 @@ const NameLocationTable = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="zip"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("zip")}
                   />
                 </div>
@@ -177,7 +177,7 @@ const NameLocationTable = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="phone"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("phone")}
                   />
                 </div>
@@ -193,7 +193,7 @@ const NameLocationTable = () => {
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="shortCode"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("shortCode")}
                   />
                 </div>
@@ -209,7 +209,7 @@ const NameLocationTable = () => {
                     type="email"
                     placeholder="ABC Behavioral Therapy Center"
                     name="shortCode"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("email")}
                   />
                 </div>
@@ -225,7 +225,7 @@ const NameLocationTable = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="EIN"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("EIN")}
                   />
                 </div>
@@ -241,7 +241,7 @@ const NameLocationTable = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="NPI"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("NPI")}
                   />
                 </div>
@@ -257,7 +257,7 @@ const NameLocationTable = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="taxonomy"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("taxonomy")}
                   />
                 </div>
@@ -273,7 +273,7 @@ const NameLocationTable = () => {
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="contactPerson"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("contactPerson")}
                   />
                 </div>
@@ -289,7 +289,7 @@ const NameLocationTable = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="ServiceArea"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("serviceArea")}
                   />
                 </div>
@@ -305,7 +305,7 @@ const NameLocationTable = () => {
                     type="text"
                     placeholder="demo"
                     name="SFTP"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("SFTP")}
                   />
                 </div>
@@ -321,7 +321,7 @@ const NameLocationTable = () => {
                     type="password"
                     placeholder="ABC Behavioral Therapy Center"
                     name="SFTP_Password"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("SFTP_Password")}
                   />
                 </div>
@@ -333,7 +333,7 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("DefaultPOS")}
                   >
                     <option value="Mr">Mr</option>
@@ -350,7 +350,7 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("DefaultTime")}
                   >
                     <option value="Mr">Mr</option>
@@ -377,109 +377,131 @@ const NameLocationTable = () => {
               <div>
                 <h1 className="">Select Working Hours</h1>
                 <div className=" my-5 mr-2 gap-5">
-                  <div className="flex flex-wrap items-center my-1 gap-5">
-                    <h5 className="text-sm text-gray-600 w-16">Monday</h5>
-                    <CustomTimePicker
-                      value={mondayFrom}
-                      setValue={setMondayFrom}
-                    ></CustomTimePicker>
+                  <div className="flex flex-wrap items-center my-1 gap-2">
+                    <h5 className="text-sm text-gray-600 w-20">Monday</h5>
+                    <input
+                      type="time"
+                      name="MondayTo"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("MondayTo")}
+                    />
 
                     <span className="text-sm text-gray-600">to</span>
-                    <CustomTimePicker
-                      value={mondayTo}
-                      setValue={setMondayTo}
-                    ></CustomTimePicker>
+                    <input
+                      type="time"
+                      name="MondayFrom"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("MondayFrom")}
+                    />
                   </div>
-                  {/* ------------------------  */}
-                  <div className="flex flex-wrap items-center my-1 gap-5">
-                    <h5 className="text-sm text-gray-600 w-16">Tuesday</h5>
-                    <CustomTimePicker
-                      value={tueFrom}
-                      setValue={setTueFrom}
-                    ></CustomTimePicker>
+                  <div className="flex flex-wrap items-center my-1 gap-2">
+                    <h5 className="text-sm text-gray-600 w-20">Tuesday</h5>
+                    <input
+                      type="time"
+                      name="TuesdayTo"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("TuesdayTo")}
+                    />
 
                     <span className="text-sm text-gray-600">to</span>
-                    <CustomTimePicker
-                      value={tueTo}
-                      setValue={setTueTo}
-                    ></CustomTimePicker>
+                    <input
+                      type="time"
+                      name="TuesdayFrom"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("TuesdayFrom")}
+                    />
                   </div>
-                  {/* ------------------------  */}
-                  <div className="flex my-1 flex-wrap items-center gap-5">
-                    <h5 className="text-sm text-gray-600 w-16">Wednesday</h5>
-                    <CustomTimePicker
-                      value={wedFrom}
-                      setValue={setWedFrom}
-                    ></CustomTimePicker>
+                  <div className="flex flex-wrap items-center my-1 gap-2">
+                    <h5 className="text-sm text-gray-600 w-20">Wednesday</h5>
+                    <input
+                      type="time"
+                      name="WednesdayTo"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("WednesdayTo")}
+                    />
 
                     <span className="text-sm text-gray-600">to</span>
-                    <CustomTimePicker
-                      value={wedTo}
-                      setValue={setWedTo}
-                    ></CustomTimePicker>
+                    <input
+                      type="time"
+                      name="WednesdayFrom"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("WednesdayFrom")}
+                    />
                   </div>
-                  {/* ------------------------  */}
-                  <div className="flex my-1 flex-wrap items-center gap-5">
-                    <h5 className="text-sm text-gray-600 w-16">Thursday</h5>
-                    <CustomTimePicker
-                      value={thuFrom}
-                      setValue={setThuFrom}
-                    ></CustomTimePicker>
+                  <div className="flex flex-wrap items-center my-1 gap-2">
+                    <h5 className="text-sm text-gray-600 w-20">Thursday</h5>
+                    <input
+                      type="time"
+                      name="ThursdayTo"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("ThursdayTo")}
+                    />
 
                     <span className="text-sm text-gray-600">to</span>
-                    <CustomTimePicker
-                      value={thuto}
-                      setValue={setThuto}
-                    ></CustomTimePicker>
+                    <input
+                      type="time"
+                      name="ThursdayFrom"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("ThursdayFrom")}
+                    />
                   </div>
-                  {/* ------------------------  */}
-                  <div className="flex my-1 flex-wrap items-center gap-5">
-                    <h5 className="text-sm text-gray-600 w-16">Friday</h5>
-                    <CustomTimePicker
-                      value={friFrom}
-                      setValue={setFriFrom}
-                    ></CustomTimePicker>
+                  <div className="flex flex-wrap items-center my-1 gap-2">
+                    <h5 className="text-sm text-gray-600 w-20">Friday</h5>
+                    <input
+                      type="time"
+                      name="FridayTo"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("FridayTo")}
+                    />
 
-                    <span className="text-sm text-gray-600 ">to</span>
-                    <CustomTimePicker
-                      value={friTo}
-                      setValue={setFriTo}
-                    ></CustomTimePicker>
+                    <span className="text-sm text-gray-600">to</span>
+                    <input
+                      type="time"
+                      name="FridayFrom"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("FridayFrom")}
+                    />
                   </div>
-                  {/* ------------------------  */}
-                  <div className="flex my-1 flex-wrap items-center gap-5">
-                    <h5 className="text-sm text-gray-600 w-16">Saturday</h5>
-                    <CustomTimePicker
-                      value={satFrom}
-                      setValue={setSatFrom}
-                    ></CustomTimePicker>
+                  <div className="flex flex-wrap items-center my-1 gap-2">
+                    <h5 className="text-sm text-gray-600 w-20">Saturday</h5>
+                    <input
+                      type="time"
+                      name="SaturdayTo"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("SaturdayTo")}
+                    />
 
-                    <span className="text-sm text-gray-600">To</span>
-                    <CustomTimePicker
-                      value={satTo}
-                      setValue={setSatTo}
-                    ></CustomTimePicker>
+                    <span className="text-sm text-gray-600">to</span>
+                    <input
+                      type="time"
+                      name="SaturdayFrom"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("SaturdayFrom")}
+                    />
                   </div>
-                  {/* ------------------------  */}
-                  <div className="flex my-1 flex-wrap items-center gap-5">
-                    <h5 className="text-sm text-gray-600 w-16">Sunday</h5>
-                    <CustomTimePicker
-                      value={sunFrom}
-                      setValue={setSunFrom}
-                    ></CustomTimePicker>
+                  <div className="flex flex-wrap items-center my-1 gap-2">
+                    <h5 className="text-sm text-gray-600 w-20">Sunday</h5>
+                    <input
+                      type="time"
+                      name="SundayTo"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("SundayTo")}
+                    />
 
-                    <span className="text-sm text-gray-600 ">to</span>
-                    <CustomTimePicker
-                      value={sunTo}
-                      setValue={setSunTo}
-                    ></CustomTimePicker>
+                    <span className="text-sm text-gray-600">to</span>
+                    <input
+                      type="time"
+                      name="SundayFrom"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                      {...register("SundayFrom")}
+                    />
                   </div>
                 </div>
               </div>
 
               {/* submit  */}
               <input
-                className="btn btn-primary bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
+                className=" px-3 py-1 rounded-md text-sm font-normal bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
                 type="submit"
                 value={"Save"}
               />

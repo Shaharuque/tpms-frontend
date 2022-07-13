@@ -183,7 +183,7 @@ const Sidebar = ({ children }) => {
 
   // console.log(menuItem[1].others.name);
   return (
-    <div className="relative bg-neutral py-3">
+    <div className="relative bg-neutral pt-3 pb-16">
       <div className=" slide">
         <div className="">
           <NavigationBar></NavigationBar>

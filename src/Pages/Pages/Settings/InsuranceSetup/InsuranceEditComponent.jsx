@@ -13,7 +13,7 @@ const InsuranceEditComponent = ({ row }) => {
   };
   return (
     <div>
-      <div className=" box">
+      <div className=" my-5 box">
         {/* <h1>{row.original.place_of_Service}</h1> */}
         <div className="border p-5">
           <motion.div
@@ -26,7 +26,7 @@ const InsuranceEditComponent = ({ row }) => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 1D-2 gap-5">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 1D-2 gap-2">
                 {/* name  */}
                 <div>
                   {" "}
@@ -38,7 +38,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="co_pay_number"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("co_pay_number")}
                   />
                   {/* <label className="label">
@@ -57,7 +57,7 @@ const InsuranceEditComponent = ({ row }) => {
                       setValue(!value);
                     }}
                   />
-                  <span>Is Electronic</span>
+                  <span className="text-sm font-normal">Is Electronic</span>
                 </div>
                 <div>
                   {" "}
@@ -69,7 +69,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="cms_1500_31"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_31")}
                   />
                 </div>
@@ -83,7 +83,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="cms_1500_32a"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_32a")}
                   />
                 </div>
@@ -97,7 +97,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="cms_1500_32b"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_32b")}
                   />
                 </div>
@@ -111,7 +111,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="cms_1500_33a"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_33a")}
                   />
                 </div>
@@ -125,7 +125,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="cms_1500_33b"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_33b")}
                   />
                 </div>
@@ -139,7 +139,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="provider_npi"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("provider_npi")}
                   />
                 </div>
@@ -153,7 +153,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="tax_id"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("tax_id")}
                   />
                 </div>
@@ -167,7 +167,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="number"
                     name="main_taxonomy"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("main_taxonomy")}
                   />
                 </div>
@@ -179,7 +179,7 @@ const InsuranceEditComponent = ({ row }) => {
                         setValue(!value);
                       }}
                     />
-                    <span>Active</span>
+                    <span className="text-sm font-normal">Active</span>
                   </div>
                   <div className="flex items-center mt-7">
                     <Switch
@@ -188,7 +188,7 @@ const InsuranceEditComponent = ({ row }) => {
                         setValue(!value);
                       }}
                     />
-                    <span>Is Fill Box-17</span>
+                    <span className="text-sm font-normal">Is Fill Box-17</span>
                   </div>
                 </div>
                 <div>
@@ -199,7 +199,9 @@ const InsuranceEditComponent = ({ row }) => {
                         setValue(!value);
                       }}
                     />
-                    <span>is time required Code</span>
+                    <span className="text-sm font-normal">
+                      is time required Code
+                    </span>
                   </div>
                 </div>
                 <div>
@@ -212,7 +214,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="text"
                     name="cms_1500_32_address"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_32_address")}
                   />
                 </div>
@@ -226,7 +228,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="text"
                     name="cms_1500_32_city"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_32_city")}
                   />
                 </div>
@@ -240,7 +242,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="text"
                     name="cms_1500_32_state"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_32_state")}
                   />
                 </div>
@@ -254,7 +256,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="text"
                     name="cms_1500_32_zip"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_32_zip")}
                   />
                 </div>
@@ -268,7 +270,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="text"
                     name="cms_1500_33_address"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_33_address")}
                   />
                 </div>
@@ -282,7 +284,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="text"
                     name="cms_1500_33_city"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_33_city")}
                   />
                 </div>
@@ -296,7 +298,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="text"
                     name="cms_1500_33_state"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_33_state")}
                   />
                 </div>
@@ -310,7 +312,7 @@ const InsuranceEditComponent = ({ row }) => {
                   <input
                     type="text"
                     name="cms_1500_33_zip"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("cms_1500_33_zip")}
                   />
                 </div>
@@ -338,14 +340,14 @@ const InsuranceEditComponent = ({ row }) => {
                         type="text"
                         placeholder="Box 24J"
                         name="behavioral_box_24J"
-                        className="border rounded-sm px-2 py-2 mx-1 text-xs w-36"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-36"
                         {...register("behavioral_box_24J")}
                       />
                     </td>
                     <td>
                       <div className="ml-5 w-36">
                         <select
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                           {...register("behavior_ID_Qualifier")}
                         >
                           <option value="1D">1D</option>
@@ -372,14 +374,14 @@ const InsuranceEditComponent = ({ row }) => {
                         type="text"
                         placeholder="Box 24J"
                         name="behavioral_box_24J"
-                        className="border rounded-sm px-2 py-2 mx-1 text-xs w-36"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-36"
                         {...register("behavioral_box_24J")}
                       />
                     </td>
                     <td>
                       <div className="ml-5 w-36">
                         <select
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                           {...register("behavior_ID_Qualifier")}
                         >
                           <option value="1D">1D</option>
@@ -406,14 +408,14 @@ const InsuranceEditComponent = ({ row }) => {
                         type="text"
                         placeholder="Box 24J"
                         name="behavioral_box_24J"
-                        className="border rounded-sm px-2 py-2 mx-1 text-xs w-36"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-36"
                         {...register("behavioral_box_24J")}
                       />
                     </td>
                     <td>
                       <div className="ml-5 w-36">
                         <select
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                           {...register("behavior_ID_Qualifier")}
                         >
                           <option value="1D">1D</option>

@@ -38,7 +38,7 @@ const NameLocationTable32 = () => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-5">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-2">
                 {/* name  */}
                 <div>
                   {" "}
@@ -51,7 +51,7 @@ const NameLocationTable32 = () => {
                     type="text"
                     placeholder="Main Zone"
                     name="region_name"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("region_name")}
                   />
                 </div>
@@ -67,7 +67,7 @@ const NameLocationTable32 = () => {
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="facility_name"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("facility_name")}
                   />
                 </div>
@@ -82,7 +82,7 @@ const NameLocationTable32 = () => {
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="address"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("address")}
                   />
                 </div>
@@ -98,7 +98,7 @@ const NameLocationTable32 = () => {
                     type="text"
                     placeholder="New Jersy"
                     name="city"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("city")}
                   />
                 </div>
@@ -110,7 +110,7 @@ const NameLocationTable32 = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("state")}
                   >
                     <option value="Mr">Mr</option>
@@ -131,7 +131,7 @@ const NameLocationTable32 = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="zip"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("zip")}
                   />
                 </div>
@@ -147,7 +147,7 @@ const NameLocationTable32 = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="phone"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("phone")}
                   />
                 </div>
@@ -164,7 +164,7 @@ const NameLocationTable32 = () => {
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
                     name="NPI"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("NPI")}
                   />
                 </div>
@@ -173,7 +173,7 @@ const NameLocationTable32 = () => {
 
               {/* submit  */}
               <input
-                className="btn btn-primary bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
+                className=" px-3 py-1 rounded-md text-sm font-normal bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
                 type="submit"
                 value={"Save"}
               />
