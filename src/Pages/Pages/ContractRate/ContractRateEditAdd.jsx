@@ -30,7 +30,7 @@ const ContractRateEditAdd = () => {
     reset();
   };
   return (
-    <div>
+    <div className="h-[100vh]">
       <div>
         <div className="border">
           <motion.div
@@ -43,7 +43,7 @@ const ContractRateEditAdd = () => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex flex-wrap items-center gap-5 my-5">
+              <div className="flex flex-wrap items-center gap-2 my-5">
                 <div className="w-[30%]">
                   <label className="label">
                     <span className="label-text text-xs text-gray-500 text-left">
@@ -51,7 +51,7 @@ const ContractRateEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("insurance")}
                   >
                     <option value="name"> Payor </option>
@@ -74,7 +74,7 @@ const ContractRateEditAdd = () => {
               </div>
               <div className="divider"></div>
               <h1 className="text-lg my-2 text-orange-500">Add/Edit Rate:</h1>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-5">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  mr-2 gap-2">
                 {/* name  */}
                 <div>
                   <label className="label">
@@ -83,7 +83,7 @@ const ContractRateEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("tx_type")}
                   >
                     <option value="name"> abcd </option>
@@ -96,7 +96,7 @@ const ContractRateEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("service")}
                   >
                     <option value="name"> abcd </option>
@@ -110,7 +110,7 @@ const ContractRateEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("service_sub_type")}
                   >
                     <option value="name">EFT</option>
@@ -124,7 +124,7 @@ const ContractRateEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("CPT_Code")}
                   >
                     <option value="name">EFT</option>
@@ -142,7 +142,7 @@ const ContractRateEditAdd = () => {
                     <input
                       type="number"
                       name="m1"
-                      className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("m1")}
                     />
                   </div>
@@ -157,7 +157,7 @@ const ContractRateEditAdd = () => {
                     <input
                       type="number"
                       name="m2"
-                      className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("21")}
                     />
                   </div>
@@ -174,7 +174,7 @@ const ContractRateEditAdd = () => {
                     <input
                       type="number"
                       name="m3"
-                      className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("m3")}
                     />
                   </div>
@@ -189,7 +189,7 @@ const ContractRateEditAdd = () => {
                     <input
                       type="number"
                       name="m4"
-                      className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("m4")}
                     />
                   </div>
@@ -202,7 +202,7 @@ const ContractRateEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("rate_type")}
                   >
                     <option value="name">EFT</option>
@@ -216,7 +216,7 @@ const ContractRateEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("rate_Per")}
                   >
                     <option value="name">EFT</option>
@@ -233,7 +233,7 @@ const ContractRateEditAdd = () => {
                   <input
                     type="number"
                     name="contract_rate"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("contract_rate")}
                   />
                 </div>
@@ -248,7 +248,7 @@ const ContractRateEditAdd = () => {
                   <input
                     type="number"
                     name="billing_rate"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("billing_rate")}
                   />
                 </div>
@@ -263,7 +263,7 @@ const ContractRateEditAdd = () => {
                   <input
                     type="number"
                     name="increase"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("increase")}
                   />
                 </div>
@@ -276,7 +276,7 @@ const ContractRateEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("degree_level")}
                   >
                     <option value="name">EFT</option>
@@ -286,7 +286,7 @@ const ContractRateEditAdd = () => {
                   <div>
                     <FormGroup>
                       <FormControlLabel
-                        className="form-check-label inline-block ml-2 text-sm text-gray-500"
+                        className="form-check-label inline-block ml-2 text-xs text-gray-500"
                         control={<Checkbox />}
                         label="Active"
                       />
@@ -295,7 +295,7 @@ const ContractRateEditAdd = () => {
                   <div>
                     <FormGroup>
                       <FormControlLabel
-                        className="form-check-label inline-block ml-2 text-sm text-gray-500"
+                        className="form-check-label inline-block ml-2 text-xs text-gray-500"
                         control={<Checkbox />}
                         label="Add to auth"
                       />
@@ -304,21 +304,24 @@ const ContractRateEditAdd = () => {
                 </div>
               </div>
 
-              {/* submit  */}
-              <input
-                className="btn btn-primary bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
-                type="submit"
-                value={"Save"}
-              />
-              <Link to={"/contract-rate"}>
+              <div className="mb-3">
                 {" "}
-                <button
-                  className="px-5  bg-gradient-to-r from-red-700 to-red-400 py-3 ml-3 hover:to-red-700 text-white rounded-md"
-                  onClick={onCancel}
-                >
-                  Cancel
-                </button>
-              </Link>
+                {/* submit  */}
+                <input
+                  className=" py-2   px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                  type="submit"
+                  value={"Save"}
+                />
+                <Link to={"/contract-rate"}>
+                  {" "}
+                  <button
+                    className="font-normal  py-2 mt-8 px-3 text-xs bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md"
+                    onClick={onCancel}
+                  >
+                    Cancel
+                  </button>
+                </Link>
+              </div>
             </form>
           </motion.div>
         </div>

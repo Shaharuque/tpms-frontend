@@ -202,14 +202,14 @@ const Sidebar = ({ children }) => {
         <div
           style={{
             width: isHovering ? "220px" : "70px",
-            transition: isHovering ? "ease-in 0.4s" : "ease-out 0.5s",
+            transition: isHovering ? "ease-in 0.3s" : "ease-out 0.5s",
           }}
           className="sidebar"
         >
           <div className="top-section">
             {isHovering ? (
               <>
-                <div className="logo transition-all">
+                <div className=" transition-all">
                   {" "}
                   <img src={logo2} alt="" />{" "}
                 </div>
@@ -249,7 +249,9 @@ const Sidebar = ({ children }) => {
 
                     <div
                       // onClick={() => setOpen(!open)}
-                      style={{ display: isHovering ? "block" : "none" }}
+                      style={{
+                        display: isHovering ? "block" : "none",
+                      }}
                       className="link_text text-sm"
                     >
                       {items.name}

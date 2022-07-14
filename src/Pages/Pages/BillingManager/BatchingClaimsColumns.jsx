@@ -92,3 +92,67 @@ export const BatchingClaimsColumnsColumn = [
     accessor: "status",
   },
 ];
+export const ManageClaimsColumnsData = [];
+
+export const ManageClaimsColumnsColumn = [
+  {
+    Header: () => {
+      return <span className="">Claim</span>;
+    },
+    accessor: "claim",
+  },
+  {
+    Header: () => {
+      return <span className="">Payor</span>;
+    },
+    accessor: "payor",
+  },
+  {
+    Header: () => {
+      return <span className="">Patient</span>;
+    },
+    accessor: "patient",
+  },
+  {
+    Header: () => {
+      return <span className="">Date Range</span>;
+    },
+    accessor: "date_range",
+  },
+  {
+    Header: () => {
+      return <span className="">Total</span>;
+    },
+    accessor: "total",
+  },
+  {
+    Header: () => {
+      return <span className="">F. Billed Dt.</span>;
+    },
+    accessor: "F_billed",
+  },
+  {
+    Header: () => {
+      return <span className="">L. Billed Dt.</span>;
+    },
+    accessor: "L_billed",
+  },
+  {
+    Header: () => {
+      return <span className="">Add'I. claim info. box 19</span>;
+    },
+    accessor: "claim_info",
+  },
+  {
+    Header: () => {
+      return <span className="">Resubmission Code</span>;
+    },
+    accessor: "ReSubmission_code",
+  },
+  {
+    Header: () => {
+      return <span className="">Original Ref. No.</span>;
+    },
+    accessor: "original_ref",
+  },
+];

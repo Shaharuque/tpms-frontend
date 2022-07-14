@@ -13,6 +13,7 @@ import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 
 const PatientStatement = () => {
   const [select, setSelect] = useState("");
+  const [tactive, setTactive] = useState(false);
   const format = "MM/DD/YYYY";
   const [dates, setDates] = React.useState([
     new DateObject().set({ day: 25, format }),
@@ -112,53 +113,22 @@ const PatientStatement = () => {
         <button
           className="px-5 mt-6 w-24 text-sm py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
           type="submit"
+          onClick={() => setTactive(true)}
         >
           Show
         </button>
       </div>
-      <div className="my-5">
-        <SettingTableBox
-          getTableProps={getTableProps}
-          headerGroups={headerGroups}
-          getTableBodyProps={getTableBodyProps}
-          rows={page}
-          prepareRow={prepareRow}
-        ></SettingTableBox>
-
-        <div className="flex gap-2 items-center my-5 justify-center">
-          <button
-            className="hover:bg-secondary page text-lg text-secondary hover:text-white py-1 px-3"
-            onClick={() => previousPage()}
-            disabled={!canPreviousPage}
-          >
-            <BiLeftArrow />
-          </button>
-          <div className="text-sm font-normal">
-            Page{" "}
-            <strong>
-              {pageIndex + 1} of {pageOptions.length}
-            </strong>{" "}
-          </div>
-          <button
-            className="hover:bg-secondary text-lg page text-secondary  hover:text-white py-1 px-3"
-            onClick={() => nextPage()}
-            disabled={!canNextPage}
-          >
-            <BiRightArrow />
-          </button>
-          <select
-            className="bg-secondary text-sm p-[3px] text-white "
-            value={pageSize}
-            onChange={(e) => setPageSize(Number(e.target.value))}
-          >
-            {[10, 15, 20, 50].map((p) => (
-              <option key={p} value={p}>
-                <span className="bg-primary">{p}</span>
-              </option>
-            ))}
-          </select>
+      {tactive && (
+        <div className="my-5">
+          <SettingTableBox
+            getTableProps={getTableProps}
+            headerGroups={headerGroups}
+            getTableBodyProps={getTableBodyProps}
+            rows={page}
+            prepareRow={prepareRow}
+          ></SettingTableBox>
         </div>
-      </div>
+      )}
     </div>
   );
 };

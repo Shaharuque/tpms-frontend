@@ -14,7 +14,7 @@ const BillingManager = () => {
             onClick={() => setToggle(1)}
             className={
               toggle === 1
-                ? "py-2 px-6 active-tab  text-xs text-primary font-normal  shadow-md"
+                ? "py-2 px-6   text-xs text-primary font-normal  shadow-md"
                 : "py-2 px-6 text-xs tab-box font-normal "
             }
           >
@@ -28,7 +28,7 @@ const BillingManager = () => {
             onClick={() => setToggle(2)}
             className={
               toggle === 2
-                ? "py-2 px-6 active-tab  text-xs text-primary font-normal  shadow-md"
+                ? "py-2 px-6  text-xs text-primary font-normal  shadow-md"
                 : "py-2 px-6 font-normal  text-xs tab-box"
             }
           >
@@ -41,7 +41,7 @@ const BillingManager = () => {
             onClick={() => setToggle(3)}
             className={
               toggle === 3
-                ? "py-2 px-6 active-tab  text-xs text-primary font-normal  shadow-md"
+                ? "py-2 px-6   text-xs text-primary font-normal  shadow-md"
                 : "py-2 px-6 font-normal  text-xs tab-box"
             }
           >

@@ -23,10 +23,10 @@ const Report = () => {
         onSubmit={handlePlaceOrder}
       >
         <div>
-          <h1 className="text-xs mb-3 ml-1">Tx Type</h1>
+          <h1 className="text-xs mb-2 ml-1">Tx Type</h1>
           <select
             name="tx_type"
-            className="border rounded-sm px-2 py-2 mx-1 text-xs "
+            className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
           >
             <option value="0"></option>
             <option value="Insurance Collection">Insurance Collection</option>
@@ -70,11 +70,11 @@ const Report = () => {
           </select>
         </div>
         <div>
-          <h1 className="text-xs mb-3 ml-1 ">Type</h1>
+          <h1 className="text-xs mb-2 ml-1 ">Type</h1>
           <select
             onChange={(e) => handleType(e)}
             name="type"
-            className="border rounded-sm px-2 py-2 mx-1 text-xs "
+            className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
           >
             <option value="Select Tx type">Specific Date</option>
             <option value="Behavior Therapy">Date Range</option>
@@ -83,17 +83,17 @@ const Report = () => {
         {type && (
           <div>
             {" "}
-            <h1 className="text-xs mb-3 ml-1 ">Date Range</h1>
+            <h1 className="text-xs mb-2 ml-1 ">Date Range</h1>
             <input
               name="date"
-              className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               type="date"
             />
           </div>
         )}
         <div>
           <input
-            className="hover:shadow-lg rounded-sm bg-secondary text-white py-1 px-3 mt-7 mx-2"
+            className="hover:shadow-lg rounded-md bg-secondary text-white py-2 text-xs px-3 mt-6 mx-2"
             type="submit"
             value="Export"
           />

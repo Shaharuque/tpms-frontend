@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { TextField } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 
 const MPostingEditAdd = () => {
@@ -23,7 +22,7 @@ const MPostingEditAdd = () => {
   };
   console.log(errors);
   return (
-    <div>
+    <div className="h-[100vh]">
       <div>
         <h1 className="text-lg my-2 text-orange-500">Recurring Session Edit</h1>
         <div className="border">
@@ -37,7 +36,7 @@ const MPostingEditAdd = () => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-5">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-2">
                 {/* name  */}
                 <div>
                   <label className="label">
@@ -46,7 +45,7 @@ const MPostingEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("payee_type")}
                   >
                     <option value="name"> Payor </option>
@@ -60,7 +59,7 @@ const MPostingEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("payee")}
                   >
                     <option value="name"> abcd </option>
@@ -75,7 +74,7 @@ const MPostingEditAdd = () => {
                     </span>
                   </label>
                   <input
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     type="date"
                     {...register("deposit_Date")}
                   />
@@ -88,7 +87,7 @@ const MPostingEditAdd = () => {
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("payment_method")}
                   >
                     <option value="name">EFT</option>
@@ -105,7 +104,7 @@ const MPostingEditAdd = () => {
                   <input
                     type="number"
                     name="check"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("check")}
                   />
                 </div>
@@ -118,7 +117,7 @@ const MPostingEditAdd = () => {
                     </span>
                   </label>
                   <input
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     type="date"
                     {...register("check_Date")}
                   />
@@ -134,14 +133,14 @@ const MPostingEditAdd = () => {
                   <input
                     type="number"
                     name="amount"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("amount")}
                   />
                 </div>
                 {/* File  */}
                 <div className=" ">
                   <label className="label">
-                    <span className="text-sm ml-2 mb-2 mt-[-2px]">File</span>
+                    <span className="text-sm ml-2  mt-[-2px]">File</span>
                   </label>
                   <input
                     type="file"
@@ -160,37 +159,36 @@ const MPostingEditAdd = () => {
                   <input
                     type="number"
                     name="unallocated_amount"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("unallocated_amount")}
                   />
                 </div>
-                <div className="pt-5">
-                  <TextField
-                    label="Notes"
-                    className="w-full p-0"
-                    {...register("muiInput")}
-                    placeholder="mui/textfield"
-                  />
-                </div>
+
+                <textarea
+                  name="comment"
+                  className="border text-sm p-1 mt-3 ml-1 w-full"
+                >
+                  Notes
+                </textarea>
 
                 <div>{/* <textarea ref={register} /> */}</div>
               </div>
 
-              {/* submit  */}
-              <input
-                className="btn btn-primary bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
-                type="submit"
-                value={"Save"}
-              />
-              <Link to={"/m-posting"}>
+              <div className="mb-5">
                 {" "}
+                {/* submit  */}
                 <button
-                  className="px-5  bg-gradient-to-r from-red-700 to-red-400 py-3 ml-3 hover:to-red-700 text-white rounded-md"
-                  onClick={onCancel}
+                  className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                  type="submit"
                 >
-                  Cancel
+                  Save
                 </button>
-              </Link>
+                <Link to={"/m-posting"}>
+                  <button className="font-normal  py-[5px] mt-7 px-3 text-xs ml-3 bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
+                    Cancel
+                  </button>
+                </Link>
+              </div>
             </form>
           </motion.div>
         </div>

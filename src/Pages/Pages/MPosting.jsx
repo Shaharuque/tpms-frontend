@@ -49,13 +49,8 @@ const MPosting = () => {
     getTableBodyProps,
     headerGroups,
     page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
+
     state,
-    setPageSize,
     // page,
     prepareRow,
   } = useTable(
@@ -125,14 +120,14 @@ const MPosting = () => {
       <div className="md:flex mb-2 flex-wrap  items-center justify-between">
         <h1 className="text-lg text-orange-400">M-Posting</h1>
         <Link to={"/billing/deposit-add"}>
-          <button className="px-10 py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
+          <button className="px-10 py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md">
             Add New Data
           </button>
         </Link>
       </div>
       <div>
         <form className="my-10" onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-8  mr-2 gap-5">
+          <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-8  mr-2 gap-2">
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Deposit Date Range</h1>
               <div className="flex  items-center">
@@ -181,7 +176,7 @@ const MPosting = () => {
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Payee type</h1>
               <select
-                className="border rounded-sm px-2 py-[6px] mx-1 text-xs w-full"
+                className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                 {...register("Pay_type")}
               >
                 <option value="Mr">Mr</option>
@@ -193,7 +188,7 @@ const MPosting = () => {
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Payee Name</h1>
               <select
-                className=" border rounded-sm px-2 py-[6px] mx-1 text-xs w-full"
+                className=" border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                 {...register("payee_name")}
               >
                 <option value="Mr">Mr</option>
@@ -203,27 +198,23 @@ const MPosting = () => {
               </select>
             </div>
             <div>
-              {" "}
-              <label className="label">
-                <span className="label-text text-xs text-gray-500 text-left">
-                  Check No.
-                </span>
-              </label>
+              <h1 className="text-xs mb-2 ml-1 ">Check No.</h1>
+
               <input
                 type="number"
                 name="check_no"
-                className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("check_no")}
               />
             </div>
-            <div className="flex mt-2">
+            <div className="flex ">
               <button
-                className="px-5 mt-6 w-24 text-sm py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className=" py-2 mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
               >
                 Go
               </button>
-              <button className="px-5 mt-6 w-24 text-sm py-2 bg-gradient-to-r from-red-700 to-red-400  ml-3 hover:to-red-700 text-white rounded-md">
+              <button className="font-normal  py-2 mt-7 px-3 text-xs ml-3 bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
                 Cancel
               </button>
             </div>
@@ -231,7 +222,7 @@ const MPosting = () => {
         </form>
       </div>
       <div>
-        <h1>Deposit List</h1>
+        <h1 className="mb-3">Deposit List</h1>
         <div>
           <SettingTableBox
             getTableProps={getTableProps}
@@ -240,40 +231,6 @@ const MPosting = () => {
             rows={page}
             prepareRow={prepareRow}
           ></SettingTableBox>
-
-          <div className="flex gap-2 items-center my-5 justify-center">
-            <button
-              className="hover:bg-secondary page text-lg text-secondary hover:text-white py-1 px-3"
-              onClick={() => previousPage()}
-              disabled={!canPreviousPage}
-            >
-              <BiLeftArrow />
-            </button>
-            <div className="text-sm font-normal">
-              Page{" "}
-              <strong>
-                {pageIndex + 1} of {pageOptions.length}
-              </strong>{" "}
-            </div>
-            <button
-              className="hover:bg-secondary text-lg page text-secondary  hover:text-white py-1 px-3"
-              onClick={() => nextPage()}
-              disabled={!canNextPage}
-            >
-              <BiRightArrow />
-            </button>
-            <select
-              className="bg-secondary text-sm p-[3px] text-white "
-              value={pageSize}
-              onChange={(e) => setPageSize(Number(e.target.value))}
-            >
-              {[10, 15, 20, 50].map((p) => (
-                <option key={p} value={p}>
-                  <span className="bg-primary">{p}</span>
-                </option>
-              ))}
-            </select>
-          </div>
         </div>
       </div>
 

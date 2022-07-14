@@ -9,7 +9,7 @@ const ProcessingPAyroll = () => {
     setType(!type);
   };
   return (
-    <>
+    <div className="h-[100vh]">
       <h1 className="text-xs mb-3 ml-1 ">Choose Payroll Submission Period</h1>
       <div className="flex items-center gap-5">
         <div>
@@ -32,7 +32,7 @@ const ProcessingPAyroll = () => {
           </label>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
