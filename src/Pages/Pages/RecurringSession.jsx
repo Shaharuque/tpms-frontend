@@ -9,6 +9,7 @@ import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { Link } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
+import { MultiSelect } from "react-multi-select-component";
 
 const RecurringSession = () => {
   const data = useMemo(() => RecurringSessionColumnsData, []);
@@ -17,16 +18,20 @@ const RecurringSession = () => {
   const [table, setTable] = useState(false);
   const [select, setSelect] = useState("");
 
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
   const provider = [
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
     { value: "vip", label: "VIP" },
   ];
+
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
+  const [patientsSelected, setPatientsSelected] = useState([]);
+  const [providerSelected, setProviderSelected] = useState([]);
 
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -104,45 +109,27 @@ const RecurringSession = () => {
 
           {select === "patient" ? (
             <div className="w-[100%] md:w-[20%]">
-              <h1 className="text-xs mb-2 ml-1 ">Patient</h1>
-
-              {/* <Controller
-                name="filters"
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <Select
-                      className="reactSelect text-xs"
-                      name="filters"
-                      options={options}
-                      isMulti
-                      {...field}
-                      register={"filters"}
-                    />
-                  );
-                }}
-              /> */}
+              <div>
+                <h1 className="text-xs mb-2 ml-1 ">Patients</h1>
+                <MultiSelect
+                  options={options}
+                  value={patientsSelected}
+                  onChange={setPatientsSelected}
+                  labelledBy="Select"
+                  className="text-xs"
+                />
+              </div>
             </div>
           ) : select === "provider" ? (
             <div className="w-[100%] md:w-[20%]">
               <h1 className="text-xs mb-2 ml-1 ">Provider</h1>
-
-              {/* <Controller
-                name="filters"
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <Select
-                      className="reactSelect text-xs"
-                      name="filters"
-                      options={provider}
-                      isMulti
-                      {...field}
-                      register={"filters"}
-                    />
-                  );
-                }}
-              /> */}
+              <MultiSelect
+                options={options}
+                value={providerSelected}
+                onChange={setProviderSelected}
+                labelledBy="Select"
+                className="text-xs"
+              />
             </div>
           ) : (
             <></>
