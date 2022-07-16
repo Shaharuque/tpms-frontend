@@ -327,3 +327,26 @@ export const setting = [
     icon: <TbArrowsRightLeft />,
   },
 ];
+
+export const patient_info = [
+  {
+    link: "/patient-info",
+    name: "Patient Info",
+  },
+  {
+    link: "patient-authorization",
+    name: "Authorization",
+  },
+  {
+    link: "patient-document",
+    name: "Documents",
+  },
+  {
+    link: "patient-portal",
+    name: "Patient Portal",
+  },
+  {
+    link: "patient-ledger",
+    name: "patient Ledger",
+  },
+];

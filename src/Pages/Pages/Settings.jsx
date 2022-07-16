@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const Settings = () => {
   // console.log(setting);
   return (
-    <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between">
+    <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap  justify-between">
       <motion.div
         initial={{ opacity: 0, x: -25 }}
         animate={{ opacity: 1, x: 0 }}
@@ -28,7 +28,7 @@ const Settings = () => {
         initial={{ opacity: 0, x: 25 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.6 }}
-        className=" m-2 p-2 setting-body shadow-md rounded-lg "
+        className=" m-2 p-2 h-[100vh] setting-body shadow-md rounded-lg "
       >
         <Outlet />
       </motion.div>

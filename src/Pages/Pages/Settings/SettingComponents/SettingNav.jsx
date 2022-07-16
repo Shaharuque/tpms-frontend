@@ -5,9 +5,9 @@ import CustomLink from "../../Shared/CustomLink";
 const SettingNav = ({ s }) => {
   const { name, link, icon } = s;
   return (
-    <div className=" p-1 font-medium  text-xs setting-nav-child hover:text-white">
+    <div className="  font-medium  text-xs setting-nav-child hover:text-white">
       <CustomLink
-        className="flex gap-1 hover:text-white  items-center"
+        className="flex gap-1 py-1 hover:text-white  items-center"
         to={link}
       >
         <span className="text-xs ml-2 ">{icon}</span>

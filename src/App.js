@@ -44,6 +44,12 @@ import RecurringSessionEdit from "./Pages/Pages/RecurringSession/RecurringSessio
 import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
 import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
 import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
+import PatientsInfo from "./Pages/Pages/Patients/PatientsInfo";
+import Authorization from "./Pages/Pages/Patients/Authorization";
+import Documents from "./Pages/Pages/Patients/Documents";
+import PatientPortal from "./Pages/Pages/Patients/PatientPortal";
+import PatientLedger from "./Pages/Pages/Patients/PatientLedger";
+import PatientInformation from "./Pages/Pages/Patients/PatientInformation";
 
 function App() {
   return (
@@ -121,6 +127,32 @@ function App() {
             element={<ProcessingPayroll></ProcessingPayroll>}
           ></Route>
           <Route path="/timesheet" element={<Timesheet></Timesheet>}></Route>
+
+          {/* patient  */}
+          <Route path="/patient-info" element={<PatientsInfo></PatientsInfo>}>
+            {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
+            <Route
+              index
+              element={<PatientInformation></PatientInformation>}
+            ></Route>
+            <Route
+              path="patient-authorization"
+              element={<Authorization></Authorization>}
+            ></Route>
+            <Route
+              path="patient-document"
+              element={<Documents></Documents>}
+            ></Route>
+            <Route
+              path="patient-portal"
+              element={<PatientPortal></PatientPortal>}
+            ></Route>
+            <Route
+              path="patient-ledger"
+              element={<PatientLedger></PatientLedger>}
+            ></Route>
+          </Route>
+
           {/* settings routes  */}
           <Route path="/settings" element={<Settings></Settings>}>
             <Route index element={<NameLocation></NameLocation>}></Route>
