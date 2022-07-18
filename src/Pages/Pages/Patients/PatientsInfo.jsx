@@ -5,14 +5,15 @@ import PatientNav from "./PatientNav";
 import { patient_info } from "../Data/Data";
 import doctor from "../../Assets/doctor.png";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const PatientsInfo = () => {
   return (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-2">
-        <span className="text-primary text-lg">
+        <Link to={"/patient-List"} className="text-primary text-lg">
           <IoCaretBackCircleOutline />
-        </span>
+        </Link>
         <div className="text-xs font-normal">
           <span className="text-sm font-semibold text-primary">
             {" "}
@@ -46,7 +47,7 @@ const PatientsInfo = () => {
           initial={{ opacity: 0, x: 25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
-          className=" m-2 p-2 h-[100vh] setting-body shadow-md rounded-lg "
+          className=" m-2 p-2  setting-body shadow-md rounded-lg "
         >
           <Outlet />
         </motion.div>

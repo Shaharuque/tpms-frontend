@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Patients = () => {
   return (
-    <div>
+    <div className="h-[100vh]">
       <Link to={"/patient-info"}> Click Here </Link>
     </div>
   );
