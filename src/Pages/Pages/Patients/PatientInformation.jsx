@@ -1,10 +1,10 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SimpleFileUpload from "react-simple-file-upload";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { motion } from "framer-motion";
 
 const PatientInformation = () => {
   const [value, setValue] = useState(false);
@@ -191,7 +191,11 @@ const PatientInformation = () => {
                 </div>
 
                 {open && (
-                  <>
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
                     <label className="label">
                       <span className="label-text items-center flex text-xs text-gray-600 text-left">
                         Address
@@ -240,7 +244,7 @@ const PatientInformation = () => {
                         />
                       </div>
                     </div>
-                  </>
+                  </motion.div>
                 )}
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   {" "}
@@ -354,7 +358,11 @@ const PatientInformation = () => {
                 </div>
               </>
               {phoneOpen && (
-                <>
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
                   <label className="label">
                     <span className="label-text text-xs text-gray-600 text-left">
                       Phone
@@ -426,7 +434,7 @@ const PatientInformation = () => {
                       Send text/voice appointment reminders
                     </span>
                   </div>
-                </>
+                </motion.div>
               )}
             </div>
             {/* Email  */}
@@ -492,7 +500,11 @@ const PatientInformation = () => {
                 </div>
               </>
               {emailOpen && (
-                <>
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
                   <label className="label">
                     <span className="label-text text-xs text-gray-600 text-left">
                       Email
@@ -551,7 +563,7 @@ const PatientInformation = () => {
                       Send email appointment reminders
                     </span>
                   </div>
-                </>
+                </motion.div>
               )}
             </div>
           </div>

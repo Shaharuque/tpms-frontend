@@ -110,8 +110,8 @@ const ArLedger = () => {
           }}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className="text-lg my-2 text-orange-500">Add/Edit Rate:</h1>
-            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-8 my-5 mr-2 gap-2">
+            <h1 className="text-lg my-2 text-orange-500">AR Ledger</h1>
+            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-8  my-5 mr-2 gap-2">
               {/* name  */}
               <div className="mt-2 ">
                 <h1 className="text-xs text-gray-500 mb-2 ml-1 ">Post By</h1>

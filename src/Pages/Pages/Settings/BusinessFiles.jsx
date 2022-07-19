@@ -23,12 +23,7 @@ const BusinessFiles = () => {
     prepareRow,
   } = useTable({ columns, data }, useSortBy, usePagination);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -52,7 +47,7 @@ const BusinessFiles = () => {
                   >
                     {column.render("Header")}
                     {/* Add a sort direction indicator */}
-                    <span className=" ml-4 ">
+                    <span className=" ">
                       {column.isSorted
                         ? column.isSortedDesc
                           ? " ⇓ "
