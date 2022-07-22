@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const PatientPortal = () => {
+  const { id } = useParams();
+  console.log("patient Portal", id);
   const [secure, setSecure] = useState(false);
   const [billing, setBilling] = useState(false);
   const [pay, setPay] = useState(false);

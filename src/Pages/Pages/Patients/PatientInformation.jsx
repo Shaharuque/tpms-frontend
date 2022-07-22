@@ -5,8 +5,11 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
 
 const PatientInformation = () => {
+  const { id } = useParams();
+  console.log("patient Info", id);
   const [value, setValue] = useState(false);
   const [voiceMsg, setVoiceMsg] = useState(false);
   const [textMsg, setTextMsg] = useState(false);

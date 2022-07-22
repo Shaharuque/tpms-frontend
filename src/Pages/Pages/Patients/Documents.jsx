@@ -5,8 +5,11 @@ import { DocumentsColumnColumns, DocumentsColumnData } from "./DocumentsColumn";
 import { HiPlus } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
 
 const Documents = () => {
+  const { id } = useParams();
+  console.log("patient Documents", id);
   const data = useMemo(() => DocumentsColumnData, []);
   const columns = useMemo(() => [...DocumentsColumnColumns], []);
   const [open, setOpen] = useState(false);

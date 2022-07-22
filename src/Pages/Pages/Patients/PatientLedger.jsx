@@ -11,7 +11,10 @@ import {
 import { CheckBox } from "../Settings/SettingComponents/CheckBox";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
+import { useParams } from "react-router-dom";
 const PatientLedger = () => {
+  const { id } = useParams();
+  console.log("patient Ledger", id);
   const [select, setSelect] = useState("");
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);

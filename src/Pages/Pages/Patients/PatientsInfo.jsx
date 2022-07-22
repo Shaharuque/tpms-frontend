@@ -1,13 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import PatientNav from "./PatientNav";
-import { patient_info } from "../Data/Data";
+// import { patient_info } from "../Data/Data";
 import doctor from "../../Assets/doctor.png";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import CustomLink from "../Shared/CustomLink";
 
 const PatientsInfo = () => {
+  const { id } = useParams();
+
   return (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -39,9 +42,49 @@ const PatientsInfo = () => {
               <img src={doctor} className="h-24 w-24 m-auto" alt="" />
             </div>
           </div>
-          {patient_info.map((s, i) => (
-            <PatientNav key={i} s={s}></PatientNav>
-          ))}
+          {/* {patient_info.map((s, i) => (
+            <PatientNav id={id} key={i} s={s}></PatientNav>
+          ))} */}
+
+          <CustomLink
+            className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
+            to={`patient-info/${id}`}
+          >
+            <h1 className="ml-1 mt-1">Patient Info</h1>
+          </CustomLink>
+
+          <div className="text-xs text-secondary font-normal patient-nav mb-2">
+            <CustomLink
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+              to={`patient-authorization/${id}`}
+            >
+              <h1 className="ml-1 mt-1">Authorization</h1>
+            </CustomLink>
+          </div>
+          <div className="text-xs text-secondary font-normal patient-nav mb-2">
+            <CustomLink
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+              to={`patient-document/${id}`}
+            >
+              <h1 className="ml-1 mt-1">Documents</h1>
+            </CustomLink>
+          </div>
+          <div className="text-xs text-secondary font-normal patient-nav mb-2">
+            <CustomLink
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+              to={`patient-portal/${id}`}
+            >
+              <h1 className="ml-1 mt-1">Patient Portal</h1>
+            </CustomLink>
+          </div>
+          <div className="text-xs text-secondary font-normal patient-nav mb-2">
+            <CustomLink
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+              to={`patient-ledger/${id}`}
+            >
+              <h1 className="ml-1 mt-1">patient Ledger</h1>
+            </CustomLink>
+          </div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 25 }}

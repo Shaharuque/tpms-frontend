@@ -50,6 +50,7 @@ import Documents from "./Pages/Pages/Patients/Documents";
 import PatientPortal from "./Pages/Pages/Patients/PatientPortal";
 import PatientLedger from "./Pages/Pages/Patients/PatientLedger";
 import PatientInformation from "./Pages/Pages/Patients/PatientInformation";
+import AuthorizationEdit from "./Pages/Pages/Patients/AuthorizationEdit";
 
 function App() {
   return (
@@ -129,29 +130,42 @@ function App() {
           <Route path="/timesheet" element={<Timesheet></Timesheet>}></Route>
 
           {/* patient  */}
-          <Route path="/patient-info" element={<PatientsInfo></PatientsInfo>}>
+          <Route path="/patient/:id" element={<PatientsInfo></PatientsInfo>}>
             {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
             <Route
-              index
+              path="patient-info/:id"
               element={<PatientInformation></PatientInformation>}
+            ></Route>
+            <Route
+              path="patient-authorization/:id"
+              element={<Authorization></Authorization>}
             ></Route>
             <Route
               path="patient-authorization"
               element={<Authorization></Authorization>}
             ></Route>
             <Route
-              path="patient-document"
+              path="patient-document/:id"
               element={<Documents></Documents>}
             ></Route>
             <Route
-              path="patient-portal"
+              path="patient-portal/:id"
               element={<PatientPortal></PatientPortal>}
             ></Route>
             <Route
-              path="patient-ledger"
+              path="patient-ledger/:id"
               element={<PatientLedger></PatientLedger>}
             ></Route>
           </Route>
+
+          <Route
+            path="/authorization-Edit"
+            element={<AuthorizationEdit></AuthorizationEdit>}
+          ></Route>
+          <Route
+            path="/authorization-Edit/:id"
+            element={<AuthorizationEdit></AuthorizationEdit>}
+          ></Route>
 
           {/* settings routes  */}
           <Route path="/settings" element={<Settings></Settings>}>

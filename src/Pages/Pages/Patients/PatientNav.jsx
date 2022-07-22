@@ -2,7 +2,7 @@ import React from "react";
 import CustomLink from "../Shared/CustomLink";
 import "./Patient.css";
 
-const PatientNav = ({ s }) => {
+const PatientNav = ({ s, id }) => {
   const { name, link } = s;
   return (
     <div className="text-xs text-secondary font-normal patient-nav mb-2">
