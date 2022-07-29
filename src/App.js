@@ -51,6 +51,18 @@ import PatientPortal from "./Pages/Pages/Patients/PatientPortal";
 import PatientLedger from "./Pages/Pages/Patients/PatientLedger";
 import PatientInformation from "./Pages/Pages/Patients/PatientInformation";
 import AuthorizationEdit from "./Pages/Pages/Patients/AuthorizationEdit";
+import StaffInformation from "./Pages/Pages/Staffs/StaffInformation";
+import Bio from "./Pages/Pages/Staffs/Bio";
+import ContactDetails from "./Pages/Pages/Staffs/ContactDetails";
+import Credentials from "./Pages/Pages/Staffs/Credentials";
+import DepartmentSupervisor from "./Pages/Pages/Staffs/DepartmentSupervisor";
+import PayrollSetup from "./Pages/Pages/Staffs/PayrollSetup";
+import OtherSetup from "./Pages/Pages/Staffs/OtherSetup";
+import LeaveTracking from "./Pages/Pages/Staffs/LeaveTracking";
+import InsuranceExclusion from "./Pages/Pages/Staffs/InsuranceExclusion";
+import ServiceSubTypeExclusions from "./Pages/Pages/Staffs/ServiceSubTypeExclusions";
+import PatientExclusion from "./Pages/Pages/Staffs/PatientExclusion";
+import StaffPortal from "./Pages/Pages/Staffs/StaffPortal";
 
 function App() {
   return (
@@ -157,7 +169,6 @@ function App() {
               element={<PatientLedger></PatientLedger>}
             ></Route>
           </Route>
-
           <Route
             path="/authorization-Edit"
             element={<AuthorizationEdit></AuthorizationEdit>}
@@ -166,6 +177,51 @@ function App() {
             path="/authorization-Edit/:id"
             element={<AuthorizationEdit></AuthorizationEdit>}
           ></Route>
+
+          {/* Staffs  */}
+          <Route path="/staff" element={<StaffInformation></StaffInformation>}>
+            <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
+            <Route
+              path="staffs-contact-details"
+              element={<ContactDetails></ContactDetails>}
+            ></Route>
+            <Route
+              path="staffs-credentials"
+              element={<Credentials></Credentials>}
+            ></Route>
+            <Route
+              path="staffs-department"
+              element={<DepartmentSupervisor></DepartmentSupervisor>}
+            ></Route>
+            <Route
+              path="staffs-payroll"
+              element={<PayrollSetup></PayrollSetup>}
+            ></Route>
+            <Route
+              path="staffs-other-setup"
+              element={<OtherSetup></OtherSetup>}
+            ></Route>
+            <Route
+              path="staffs-leave-tracking"
+              element={<LeaveTracking></LeaveTracking>}
+            ></Route>
+            <Route
+              path="staffs-payor-exclusion"
+              element={<InsuranceExclusion></InsuranceExclusion>}
+            ></Route>
+            <Route
+              path="staffs-sub-activity-exclusion"
+              element={<ServiceSubTypeExclusions></ServiceSubTypeExclusions>}
+            ></Route>
+            <Route
+              path="staffs-client-exclusion"
+              element={<PatientExclusion></PatientExclusion>}
+            ></Route>
+            <Route
+              path="staffs-portal"
+              element={<StaffPortal></StaffPortal>}
+            ></Route>
+          </Route>
 
           {/* settings routes  */}
           <Route path="/settings" element={<Settings></Settings>}>

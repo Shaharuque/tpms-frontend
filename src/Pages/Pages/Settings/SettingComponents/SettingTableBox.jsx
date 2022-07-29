@@ -18,7 +18,7 @@ const SettingTableBox = ({
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th
-                  className="bg-secondary border  min-w-[120px]  py-1 text-sm text-white"
+                  className="bg-secondary border  min-w-[120px]  py-1 text-xs font-normal text-white"
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render("Header")}
@@ -45,7 +45,7 @@ const SettingTableBox = ({
                     <td
                       {...cell.getCellProps()}
                       style={{
-                        border: "solid 1px gray",
+                        border: "solid 1px #aeaeae55",
                       }}
                       className="text-xs py-[6px] w-10 md:w-24 text-center text-gray-600 "
                     >

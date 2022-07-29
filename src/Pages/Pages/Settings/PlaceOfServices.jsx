@@ -14,6 +14,7 @@ const PlaceOfServices = () => {
 
   const handleClickOpen = () => {
     setOpenEditModal(true);
+    console.log(openEditModal);
   };
 
   const handleClose = () => {
@@ -54,8 +55,8 @@ const PlaceOfServices = () => {
 
       {openEditModal && (
         <PlaceOfServicesActionAddModal
-          handleClose={handleClose}
-          open={openEditModal}
+        //   handleClose={handleClose}
+        //   open={openEditModal}
         ></PlaceOfServicesActionAddModal>
       )}
     </div>

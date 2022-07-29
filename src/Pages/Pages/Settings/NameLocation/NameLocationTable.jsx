@@ -8,20 +8,6 @@ const NameLocationTable = () => {
   const [tableOpen, setTableOpen] = useState(true);
   const [combo, setCombo] = useState(false);
   // const [value, onChange] = useState("");
-  const [mondayFrom, setMondayFrom] = useState(null);
-  const [mondayTo, setMondayTo] = useState(null);
-  const [tueFrom, setTueFrom] = useState(null);
-  const [tueTo, setTueTo] = useState(null);
-  const [wedFrom, setWedFrom] = useState(null);
-  const [wedTo, setWedTo] = useState(null);
-  const [thuFrom, setThuFrom] = useState(null);
-  const [thuto, setThuto] = useState(null);
-  const [friFrom, setFriFrom] = useState(null);
-  const [friTo, setFriTo] = useState(null);
-  const [satFrom, setSatFrom] = useState(null);
-  const [satTo, setSatTo] = useState(null);
-  const [sunFrom, setSunFrom] = useState(null);
-  const [sunTo, setSunTo] = useState(null);
 
   // timeChange
   const handleTable = () => {

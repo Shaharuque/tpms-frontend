@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaRegAddressCard } from "react-icons/fa";
+import PatientAuthorizationsTableModal from "./PatientAuthorizationsTableModal";
 
 const PatientAuthAction = ({ row }) => {
+  const [openEditModal, setOpenEditModal] = useState(false);
   console.log(row);
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
   return (
-    <Link
-      to={`/patient/${row.original.id}/patient-authorization/${row.original.id}`}
-      className="text-secondary text-sm "
-    >
-      <FaRegAddressCard className="mx-auto" />
-    </Link>
+    <>
+      {" "}
+      <button
+        onClick={() => {
+          setOpenEditModal(true);
+        }}
+      >
+        <FaRegAddressCard className="text-xs mx-auto text-secondary" />
+      </button>
+      {openEditModal && (
+        <PatientAuthorizationsTableModal
+          handleClose={handleClose}
+          open={openEditModal}
+        ></PatientAuthorizationsTableModal>
+      )}
+    </>
   );
 };
 

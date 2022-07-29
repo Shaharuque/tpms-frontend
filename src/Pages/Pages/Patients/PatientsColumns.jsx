@@ -1,5 +1,6 @@
 import { ColumnFilter } from "../Settings/SettingComponents/FilterBox";
 import PatientAuthAction from "./PatientAuthAction";
+import PatientAuthorizationsTableActionModal from "./PatientAuthorizationsTableActionModal";
 import PatientName from "./PatientName";
 import PatientStatusAction from "./PatientStatusAction";
 
@@ -87,5 +88,74 @@ export const PatientsColumnsColumn = [
       return <PatientStatusAction row={row}></PatientStatusAction>;
     },
     Filter: ColumnFilter,
+  },
+];
+export const PatientsAuthorizationsTableData = [
+  {
+    id: "12",
+    description: "April TestP",
+    contact_info: "(987)-654-3210",
+    treatment_type: "ana",
+  },
+  {
+    id: "13",
+    description: "Hello goodbye",
+    contact_info: "(987)-654-3210",
+    treatment_type: "jhiuyuy",
+  },
+  {
+    id: "14",
+    description: "Mickey Mouse",
+    contact_info: "(987)-654-3210",
+    treatment_type: "ZZxxzcsaase",
+  },
+];
+
+export const PatientsAuthorizationsTableColumn = [
+  {
+    Header: () => {
+      return <span className="">Description</span>;
+    },
+    accessor: "description",
+  },
+  {
+    Header: () => {
+      return <span className="">Onset Date</span>;
+    },
+    accessor: "onset_date",
+  },
+  {
+    Header: () => {
+      return <span className="">End Date</span>;
+    },
+    accessor: "end_date",
+  },
+  {
+    Header: () => {
+      return <span className="">Primary Insurance</span>;
+    },
+    accessor: "primary_insurance",
+  },
+  {
+    Header: () => {
+      return <span className="">Treatment Type</span>;
+    },
+    accessor: "treatment_type",
+  },
+  {
+    Header: () => {
+      return <span className="">UCI</span>;
+    },
+    accessor: "uci",
+  },
+  {
+    Header: "Action",
+    Cell: ({ row }) => {
+      return (
+        <PatientAuthorizationsTableActionModal
+          row={row}
+        ></PatientAuthorizationsTableActionModal>
+      );
+    },
   },
 ];
