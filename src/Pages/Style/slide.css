@@ -35,6 +35,12 @@
         padding: 0 10px;
     }
 
+    .login-form {
+        width: 98%;
+        top: 10em;
+
+    }
+
 }
 
 @media (min-width:481px) {
@@ -64,6 +70,11 @@
         padding: 0 8px;
     }
 
+    .login-form {
+        width: 65%;
+        top: 18em;
+        right: 7em;
+    }
 
 }
 
@@ -80,6 +91,11 @@
         padding: 0 8px;
     }
 
+    .login-form {
+        width: 65%;
+        top: 18em;
+        right: 7em;
+    }
 }
 
 @media (min-width:1025px) {
@@ -94,6 +110,12 @@
     /* .bar {
         margin: 0 auto;
     } */
+
+    .login-form {
+        width: 29%;
+        top: 15em;
+        right: 13em;
+    }
 }
 
 @media (min-width:1281px) {
@@ -102,6 +124,12 @@
     .resp {
         width: 94%;
         margin-left: 5%;
+    }
+
+    .login-form {
+        width: 29%;
+        top: 15em;
+        right: 13em;
     }
 
 }

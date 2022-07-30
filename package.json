@@ -33,8 +33,10 @@
     "react-table": "^7.8.0",
     "react-tabs": "^5.1.0",
     "react-time-picker": "^4.5.0",
+    "react-tsparticles": "^2.1.4",
     "react-window": "^1.8.7",
     "styled-components": "^5.3.5",
+    "tsparticles": "^2.1.4",
     "tw-elements": "^1.0.0-alpha12",
     "web-vitals": "^2.1.4"
   },

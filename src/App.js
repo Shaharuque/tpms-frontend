@@ -63,10 +63,17 @@ import InsuranceExclusion from "./Pages/Pages/Staffs/InsuranceExclusion";
 import ServiceSubTypeExclusions from "./Pages/Pages/Staffs/ServiceSubTypeExclusions";
 import PatientExclusion from "./Pages/Pages/Staffs/PatientExclusion";
 import StaffPortal from "./Pages/Pages/Staffs/StaffPortal";
+import LogInForm from "./Pages/LoginPage/LogInForm";
+import LogIn from "./Pages/LoginPage/LogIn";
 
 function App() {
   return (
     <div className="app-body">
+      {/* <LogIn></LogIn> */}
+      {/* <Routes>
+        <Route path="/log-in" element={<LogIn></LogIn>}></Route>
+      </Routes> */}
+
       <Sidebar>
         <Routes>
           <Route path="/" element={<Dashboard></Dashboard>}></Route>

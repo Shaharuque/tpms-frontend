@@ -11,23 +11,33 @@ const StaffInformation = () => {
     <div>
       {" "}
       <>
-        <div className="flex flex-wrap items-center gap-2 mb-2">
-          <Link to={"/staffs"} className="text-primary text-lg">
-            <IoCaretBackCircleOutline />
-          </Link>
-          <div className="text-xs font-normal">
-            <span className="text-sm font-semibold text-primary">
-              {" "}
-              Amro LLC |
-            </span>{" "}
-            <span className="text-orange-400 font-semibold">DOB :</span>{" "}
-            09/28/2021 |{" "}
-            <span className="text-orange-400 font-semibold">NPI : </span>
-            3245678913 |{" "}
-            <span className="text-orange-400 font-semibold">Phone : </span>
-            787878787878
+        <div className="flex flex-wrap justify-between">
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <Link to={"/staffs"} className="text-primary text-lg">
+              <IoCaretBackCircleOutline />
+            </Link>
+            <div className="text-xs font-normal">
+              <span className="text-sm font-semibold text-primary">
+                {" "}
+                Amro LLC |
+              </span>{" "}
+              <span className="text-orange-400 font-semibold">DOB :</span>{" "}
+              09/28/2021 |{" "}
+              <span className="text-orange-400 font-semibold">NPI : </span>
+              3245678913 |{" "}
+              <span className="text-orange-400 font-semibold">Phone : </span>
+              787878787878
+            </div>
+          </div>
+          <div className="mr-3">
+            <Link to={`/staffs`}>
+              <button className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
+                <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
+              </button>
+            </Link>
           </div>
         </div>
+
         <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between">
           <motion.div
             initial={{ opacity: 0, x: -25 }}
