@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import bg from "../Assets/bg.png";
+import logo from "../Assets/logo.png";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
@@ -24,24 +25,22 @@ const LogInForm = () => {
         backgroundPosition: "fixed",
       }}
     >
-      <div className="p-7 sm:p-14 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-3xl absolute login-form">
+      <div className="px-7 sm:px-16 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute login-form">
         <div className="">
           <div div className="">
-            <h1 className="font-semibold text-3xl text-secondary text-center ">
-              LOGO
-            </h1>
+            <img src={logo} alt="TPMS-logo" className="mx-auto mb-3" />
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
-                    First Name
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">
+                    Email Address
                   </span>
                 </label>
                 <input
                   type="email"
-                  placeholder="Your Email"
+                  placeholder="Enter Email"
                   name="email"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border rounded-md px-3 py-[5px] mx-1 text-xs w-full"
                   {...register("email", {
                     required: {
                       value: true,
@@ -63,7 +62,6 @@ const LogInForm = () => {
               )}
               <label className="label">
                 <span className="label-text-alt">
-                  {" "}
                   {errors.email?.type === "required" && (
                     <p className=" text-xs text-red-500">
                       {errors.email.message}
@@ -80,7 +78,7 @@ const LogInForm = () => {
               {/* Password */}
               <div>
                 <label className="label flex justify-between items-end">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs font-medium text-gray-600 text-left">
                     Password
                   </span>
                   <span className="label-text text-xs text-secondary font-medium">
@@ -90,9 +88,9 @@ const LogInForm = () => {
 
                 <input
                   type="password"
-                  placeholder="Your Password"
+                  placeholder="Password"
                   name="password"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border rounded-md px-3 py-[5px] mx-1 text-xs w-full"
                   {...register("password", {
                     required: {
                       value: true,
@@ -108,7 +106,6 @@ const LogInForm = () => {
 
               <label className="label">
                 <span className="label-text-alt">
-                  {" "}
                   {errors.password?.type === "required" && (
                     <p className=" text-xs text-red-500">
                       {errors.password.message}
@@ -132,24 +129,24 @@ const LogInForm = () => {
                       setValue(!value);
                     }}
                   />
-                  <span className="text-xs ml-1 text-gray-600 font-normal">
-                    Active Patient
+                  <span className="text-xs ml-1 font-medium text-gray-600 ">
+                    Remember Me
                   </span>
                 </div>
                 <button
-                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                  className=" py-2 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                   type="submit"
                 >
-                  Log In
+                  Sign In
                 </button>
               </div>
             </form>
-            <p className="text-xs my-2">
+            <p className="text-xs my-2 font-normal text-gray-400">
               Therapy PMS respects the privacy of our users and values their
-              trust. Please read our privacy policy carefully. If you do not
-              agree with the terms of our{" "}
-              <span className=" text-primary">privacy policy</span>, then please
-              do not access the site.
+              trust. Please read our{" "}
+              <span className=" text-primary">privacy policy</span> carefully.
+              If you do not agree with the terms of our privacy policy, then
+              please do not access the site.
             </p>
           </div>
         </div>

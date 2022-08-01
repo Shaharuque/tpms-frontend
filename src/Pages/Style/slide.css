@@ -36,9 +36,8 @@
     }
 
     .login-form {
-        width: 98%;
+        width: 95%;
         top: 10em;
-
     }
 
 }
@@ -54,6 +53,11 @@
 
     .navi {
         padding: 0 10px;
+    }
+
+    .login-form {
+        width: 95%;
+        top: 10em;
     }
 
 }
@@ -114,7 +118,7 @@
     .login-form {
         width: 29%;
         top: 15em;
-        right: 13em;
+        right: 24em;
     }
 }
 
@@ -129,7 +133,7 @@
     .login-form {
         width: 29%;
         top: 15em;
-        right: 13em;
+        right: 24em;
     }
 
 }

@@ -312,7 +312,7 @@ const ContractRateEditAdd = () => {
                   type="submit"
                   value={"Save"}
                 />
-                <Link to={"/contract-rate"}>
+                <Link to={"/admin/contract-rate"}>
                   {" "}
                   <button
                     className="font-normal  py-2 mt-8 px-3 text-xs bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md"

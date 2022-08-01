@@ -5,7 +5,7 @@ const PatientAuthorizationsTableActionModal = ({ row }) => {
   return (
     <div>
       <Link
-        to={`/patient/${row.original.id}/patient-authorization/${row.original.id}`}
+        to={`/admin/patient/${row.original.id}/patient-authorization/${row.original.id}`}
         className="text-secondary text-xs font-normal "
       >
         Go To Auth

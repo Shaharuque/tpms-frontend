@@ -36,115 +36,115 @@ import Footer from "./Footer";
 
 const menuItem = [
   {
-    path: "/",
+    path: "/admin",
     name: "Dashboard",
     icon: <FaHouseUser />,
   },
   {
-    path: "/appointment",
+    path: "/admin/appointment",
     name: "Appointment",
     icon: <FaRegCalendarAlt />,
     subRoute: [
       {
-        path: "/session-manage",
+        path: "/admin/session-manage",
         name: "List View",
         icon: <FaListAlt />,
       },
       {
-        path: "/calender-view",
+        path: "/admin/calender-view",
         name: "calender view",
         icon: <FaCalendarAlt />,
       },
       {
-        path: "/recurring-session",
+        path: "/admin/recurring-session",
         name: "recurring session",
         icon: <VscDebugDisconnect />,
       },
     ],
   },
   {
-    path: "/patient-List",
+    path: "/admin/patient-List",
     name: "Patients",
     icon: <FaUserPlus />,
   },
   {
-    path: "/staffs",
+    path: "/admin/staffs",
     name: "Staffs",
     icon: <FaUserMd />,
   },
   {
-    path: "/billing",
+    path: "/admin/billing",
     name: "Billing",
     icon: <FaFunnelDollar />,
     subRoute: [
       {
-        path: "/submit-billing",
+        path: "/admin/submit-billing",
         name: "Billing Manager",
         icon: <FaHornbill />,
       },
       {
-        path: "/ar-leader",
+        path: "/admin/ar-leader",
         name: "AR-Leader",
         icon: <TbWebhook />,
       },
       {
-        path: "/contract-rate",
+        path: "/admin/contract-rate",
         name: "Contract Rate",
         icon: <BsBookmarkStar />,
       },
       {
-        path: "/patient-statement",
+        path: "/admin/patient-statement",
         name: "Patient Statement",
         icon: <BsFileEarmarkRuled />,
       },
     ],
   },
   {
-    path: "/payment",
+    path: "/admin/payment",
     name: "Payment",
     icon: <FaMoneyCheckAlt />,
     subRoute: [
       {
-        path: "/era-remittance",
+        path: "/admin/era-remittance",
         name: "ER-Remittance",
         icon: <FaFileAlt />,
       },
       {
-        path: "/m-posting",
+        path: "/admin/m-posting",
         name: "M Posting",
         icon: <MdOutlineMonetizationOn />,
       },
       {
-        path: "/era-manager",
+        path: "/admin/era-manager",
         name: "ER Manager",
         icon: <AiOutlineFileDone />,
       },
     ],
   },
   {
-    path: "/payroll",
+    path: "/admin/payroll",
     name: "Payroll",
     icon: <FaMoneyBillAlt />,
     subRoute: [
       {
-        path: "/processing-payroll",
+        path: "/admin/processing-payroll",
         name: "Processing Payroll",
         icon: <RiFundsBoxLine />,
       },
       {
-        path: "/timesheet",
+        path: "/admin/timesheet",
         name: "TimeSheet",
         icon: <BsFileText />,
       },
     ],
   },
   {
-    path: "/report",
+    path: "/admin/report",
     name: "Report",
     icon: <GoGraph />,
   },
   {
-    path: "/settings",
+    path: "/admin/settings",
     name: "Settings",
     icon: <FiSettings />,
   },

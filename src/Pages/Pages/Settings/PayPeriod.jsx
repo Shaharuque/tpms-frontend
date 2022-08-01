@@ -96,7 +96,7 @@ const PayPeriod = () => {
                           </span>
                         </label>
                         <select
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
                           {...register("Length")}
                         >
                           <option value="Mr">Bi Weekly</option>
@@ -112,7 +112,7 @@ const PayPeriod = () => {
                           </span>
                         </label>
                         <select
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
                           {...register("week_day")}
                         >
                           <option value="Mr">Sunday</option>
@@ -128,7 +128,7 @@ const PayPeriod = () => {
                           </span>
                         </label>
                         <select
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
                           {...register("year")}
                         >
                           <option value="Mr">2019</option>
@@ -147,7 +147,7 @@ const PayPeriod = () => {
                           </span>
                         </label>
                         <input
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
                           type="date"
                           {...register("date")}
                         />
@@ -163,7 +163,7 @@ const PayPeriod = () => {
                         <input
                           type="number"
                           name="staff_number"
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
                           {...register("staff_number")}
                         />
                       </div>
@@ -174,7 +174,7 @@ const PayPeriod = () => {
                           </span>
                         </label>
                         <select
-                          className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
                           {...register("week_day")}
                         >
                           <option value="Mr">Sunday</option>
@@ -195,11 +195,11 @@ const PayPeriod = () => {
                     <input
                       type="submit"
                       value={"SAVE"}
-                      className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                      className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                     ></input>
                     <label
                       htmlFor="pay-box"
-                      className="px-5  py-2 border rounded-md"
+                      className="py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
                     >
                       Close
                     </label>

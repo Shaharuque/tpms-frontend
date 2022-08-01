@@ -21,7 +21,7 @@ const PayrollSetupModal = ({ handleClose, open }) => {
           <div className="p-5 box">
             <h1 className="text-lg  text-left text-orange-400">Add Payroll</h1>
             <div className="mt-3">
-              <span className="text-sm font-medium  ">Payroll</span>
+              <span className="text-sm font-medium">Payroll</span>
               <p className="text-xs text-gray-600 mt-1">
                 The staff rates need to be setup before they can be scheduled
                 for plan of care.

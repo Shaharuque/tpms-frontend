@@ -99,39 +99,40 @@ const BusinessFiles = () => {
             transition={{ delay: 0.2 }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="sm:flex items-center text-sm">
-                <div className="sm:w-96 w-full">
+              <div className="sm:flex items-center gap-2 text-sm">
+                <div>
                   <label className="label">
-                    <span className="text-sm">Description</span>
+                    <span className="label-text text-xs text-gray-600 text-left">
+                      Description
+                    </span>
                   </label>
                   <input
                     type="text"
                     placeholder="Description"
                     name="description"
-                    className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
                     {...register("description")}
                   />
                 </div>
-                <div className=" ">
+
+                <div>
                   <label className="label">
-                    <span className="text-sm ml-2 mb-2 mt-[-2px]">
+                    <span className="label-text text-xs text-gray-600 text-left">
                       Upload File
                     </span>
                   </label>
                   <input
                     type="file"
-                    className=" border bg-white rounded-sm  mx-3 text-xs"
+                    className=" py-[5px] mx-1 text-xs w-full"
                     {...register("fileName")}
                   />
                 </div>
-                <div className="modal-action">
-                  {/* <input type="submit" /> */}
-                  <input
-                    type="submit"
-                    value={"SAVE"}
-                    className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                  />
-                </div>
+                <button
+                  className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                  type="submit"
+                >
+                  Save
+                </button>
               </div>
               <div className="divider"></div>
             </form>

@@ -85,7 +85,7 @@ const MultiSelectionDiv = ({ selectBox, addBox }) => {
               }}
             >
               {optionNames.map((name) => (
-                <option key={name} value={name}>
+                <option key={name} value={name} className="text-sm font-normal">
                   {name}
                 </option>
               ))}
@@ -129,7 +129,7 @@ const MultiSelectionDiv = ({ selectBox, addBox }) => {
               }}
             >
               {newAdded.map((name) => (
-                <option key={name} value={name}>
+                <option key={name} value={name} className="text-sm font-normal">
                   {name}
                 </option>
               ))}

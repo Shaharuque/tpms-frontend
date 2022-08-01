@@ -222,7 +222,7 @@ export const reports = [
 
 export const setting = [
   {
-    link: "/settings",
+    link: "/admin/settings",
     name: "Name & Location",
     icon: <BiRename />,
   },

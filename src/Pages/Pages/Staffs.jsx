@@ -5,7 +5,7 @@ const Staffs = () => {
   return (
     <div>
       <h1>Staffs part</h1>
-      <Link to={"/staff"}> click here</Link>
+      <Link to={"/admin/staff"}> click here</Link>
     </div>
   );
 };

@@ -13,7 +13,7 @@ const StaffInformation = () => {
       <>
         <div className="flex flex-wrap justify-between">
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <Link to={"/staffs"} className="text-primary text-lg">
+            <Link to={"/admin/staffs"} className="text-primary text-lg">
               <IoCaretBackCircleOutline />
             </Link>
             <div className="text-xs font-normal">
@@ -30,7 +30,7 @@ const StaffInformation = () => {
             </div>
           </div>
           <div className="mr-3">
-            <Link to={`/staffs`}>
+            <Link to={`/admin/staffs`}>
               <button className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
                 <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
               </button>

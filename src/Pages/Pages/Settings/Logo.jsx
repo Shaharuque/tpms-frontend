@@ -15,29 +15,32 @@ const Logo = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="sm:flex  text-sm">
-          <div className=" ">
+        <div className="sm:flex text-sm">
+          <div>
             <label className="label">
-              <span className="text-sm ml-2 mb-2 mt-[-2px]">Upload File</span>
+              <span className="label-text text-xs text-gray-600 text-left">
+                Upload File
+              </span>
             </label>
             <input
               type="file"
-              className=" border bg-white rounded-sm  mx-3 text-xs"
+              className=" py-[5px] mx-1 text-xs w-full"
               {...register("fileName")}
             />
           </div>
-          <div className="modal-action">
+          <div className="mt-1">
             {/* <input type="submit" /> */}
             <input
               type="submit"
               value={"SAVE"}
-              className="px-5  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            />
-            <input
-              type="submit"
-              value={"DELETE"}
-              className="px-5  bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-            />
+              className=" py-[5px] mt-7 px-3  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            ></input>
+            <label
+              htmlFor="pay-box"
+              className="py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+            >
+              Delete
+            </label>
           </div>
         </div>
         <div className="divider"></div>

@@ -82,7 +82,7 @@ const Authorization = () => {
                   </button>
 
                   <span>|</span>
-                  <Link to={`/authorization-Edit/${row.original.id}`}>
+                  <Link to={`/admin/authorization-Edit/${row.original.id}`}>
                     <FiEdit
                       className="text-xs mx-2  text-lime-700"
                       title="Edit"
@@ -142,7 +142,7 @@ const Authorization = () => {
     <div className="h-[100vh]">
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
         <h1 className="text-sm font-semibold">Authorization</h1>
-        <Link to={"/authorization-Edit"}>
+        <Link to={"/admin/authorization-Edit"}>
           <button className="px-10 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md">
             + Add Authorization
           </button>

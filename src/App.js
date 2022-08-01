@@ -70,40 +70,49 @@ function App() {
   return (
     <div className="app-body">
       {/* <LogIn></LogIn> */}
-      {/* <Routes>
-        <Route path="/log-in" element={<LogIn></LogIn>}></Route>
-      </Routes> */}
+      <Routes>
+        <Route path="/" element={<LogIn></LogIn>}></Route>
+      </Routes>
 
       <Sidebar>
         <Routes>
-          <Route path="/" element={<Dashboard></Dashboard>}></Route>
+          <Route path="/admin" element={<Dashboard></Dashboard>}></Route>
           {/* <Route
             path="/appointment"
             element={<Appointment></Appointment>}
           ></Route> */}
-          <Route path="/session-manage" element={<ListView></ListView>}></Route>
           <Route
-            path="/calender-view"
+            path="/admin/session-manage"
+            element={<ListView></ListView>}
+          ></Route>
+          <Route
+            path="/admin/calender-view"
             element={<CalendarView></CalendarView>}
           ></Route>
           <Route
-            path="/recurring-session"
+            path="/admin/recurring-session"
             element={<RecurringSession></RecurringSession>}
           ></Route>
           <Route
             path="/recurring-session-edit"
             element={<RecurringSessionEdit></RecurringSessionEdit>}
           ></Route>
-          <Route path="/patient-List" element={<Patients></Patients>}></Route>
-          <Route path="/staffs" element={<Staffs></Staffs>}></Route>
+          <Route
+            path="/admin/patient-List"
+            element={<Patients></Patients>}
+          ></Route>
+          <Route path="/admin/staffs" element={<Staffs></Staffs>}></Route>
           {/* <Route path="/billing" element={<Billing></Billing>}></Route> */}
           <Route
-            path="/submit-billing"
+            path="/admin/submit-billing"
             element={<BillingManager></BillingManager>}
           ></Route>
-          <Route path="/ar-leader" element={<ArLedger></ArLedger>}></Route>
           <Route
-            path="/contract-rate"
+            path="/admin/ar-leader"
+            element={<ArLedger></ArLedger>}
+          ></Route>
+          <Route
+            path="/admin/contract-rate"
             element={<ContractRate></ContractRate>}
           ></Route>
           <Route
@@ -115,15 +124,18 @@ function App() {
             element={<ContractRateEditAdd></ContractRateEditAdd>}
           ></Route>
           <Route
-            path="/patient-statement"
+            path="/admin/patient-statement"
             element={<PatientStatement></PatientStatement>}
           ></Route>
           {/* <Route path="/payment" element={<Payment></Payment>}></Route> */}
           <Route
-            path="/era-remittance"
+            path="/admin/era-remittance"
             element={<ERemittance></ERemittance>}
           ></Route>
-          <Route path="/m-posting" element={<MPosting></MPosting>}></Route>
+          <Route
+            path="/admin/m-posting"
+            element={<MPosting></MPosting>}
+          ></Route>
           <Route
             path="billing/deposit-add/:id"
             element={<MPostingEditAdd></MPostingEditAdd>}
@@ -137,19 +149,25 @@ function App() {
             element={<MDepositApply></MDepositApply>}
           ></Route>
           <Route
-            path="/era-manager"
+            path="/admin/era-manager"
             element={<EraManager></EraManager>}
           ></Route>
-          <Route path="/report" element={<Report></Report>}></Route>
+          <Route path="/admin/report" element={<Report></Report>}></Route>
           {/* <Route path="/payroll" element={<Payroll></Payroll>}></Route> */}
           <Route
-            path="/processing-payroll"
+            path="/admin/processing-payroll"
             element={<ProcessingPayroll></ProcessingPayroll>}
           ></Route>
-          <Route path="/timesheet" element={<Timesheet></Timesheet>}></Route>
+          <Route
+            path="/admin/timesheet"
+            element={<Timesheet></Timesheet>}
+          ></Route>
 
           {/* patient  */}
-          <Route path="/patient/:id" element={<PatientsInfo></PatientsInfo>}>
+          <Route
+            path="/admin/patient/:id"
+            element={<PatientsInfo></PatientsInfo>}
+          >
             {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
             <Route
               path="patient-info/:id"
@@ -177,16 +195,19 @@ function App() {
             ></Route>
           </Route>
           <Route
-            path="/authorization-Edit"
+            path="/admin/authorization-Edit"
             element={<AuthorizationEdit></AuthorizationEdit>}
           ></Route>
           <Route
-            path="/authorization-Edit/:id"
+            path="/admin/authorization-Edit/:id"
             element={<AuthorizationEdit></AuthorizationEdit>}
           ></Route>
 
           {/* Staffs  */}
-          <Route path="/staff" element={<StaffInformation></StaffInformation>}>
+          <Route
+            path="/admin/staff"
+            element={<StaffInformation></StaffInformation>}
+          >
             <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
             <Route
               path="staffs-contact-details"
@@ -231,7 +252,7 @@ function App() {
           </Route>
 
           {/* settings routes  */}
-          <Route path="/settings" element={<Settings></Settings>}>
+          <Route path="/admin/settings" element={<Settings></Settings>}>
             <Route index element={<NameLocation></NameLocation>}></Route>
             <Route
               path="add-insurance"

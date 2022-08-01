@@ -152,6 +152,7 @@ const ArLedger = () => {
                           border: "1px solid #a9a9a9",
                           borderRadius: "0px",
                         }}
+                        className=" green"
                         value={dates}
                         onChange={setDates}
                         range

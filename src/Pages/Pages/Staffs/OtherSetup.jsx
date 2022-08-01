@@ -294,18 +294,103 @@ const OtherSetup = () => {
             </span>
           </div>
         </div>
-        <div className="">
+        <div className="other-box my-5">
           {/* <div className="">
-            <h1 className="text-sm font-medium">Tax Type</h1>
+            <h1 className="text-sm font-medium"></h1>
 
-            <h3 className="text-xs font-normal">Mental Health</h3>
-            <h3 className="text-xs font-normal">Behavioral therapy 1</h3>
-            <h3 className="text-xs font-normal">MT</h3>
-            <h3 className="text-xs font-normal">Speech Therapy</h3>
-            <h3 className="text-xs font-normal">Physical Therapy</h3>
+           
+            <h3 className="text-xs font-normal"></h3>
+            <h3 className="text-xs font-normal"></h3>
+            <h3 className="text-xs font-normal"></h3>
+            <h3 className="text-xs font-normal"></h3>
           </div> */}
-          <div className="flex items-center gap-2 ">
-            <h3 className="text-xs font-normal">IF</h3>
+          <div className="flex items-center justify-around gap-2 mb-2 ">
+            <h3 className="text-xs font-normal w-80">Tax Type</h3>
+            <h3 className="text-xs font-normal w-80">Tax Type</h3>
+            <h3 className="text-xs font-normal w-80">Tax Type</h3>
+          </div>
+          <div className="flex items-center gap-2 mb-2 ">
+            <h3 className="text-xs font-normal w-80">IF</h3>
+            <input
+              type="text"
+              name="max_day"
+              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              {...register("max_day")}
+            />
+            <select
+              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              {...register("degree_level")}
+            >
+              <option value="Speech Therapist">Speech Therapist</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-xs font-normal w-80">Mental Health</h3>
+            <input
+              type="text"
+              name="max_day"
+              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              {...register("max_day")}
+            />
+            <select
+              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              {...register("degree_level")}
+            >
+              <option value="Speech Therapist">Speech Therapist</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-xs font-normal w-80">Behavioral therapy</h3>
+            <input
+              type="text"
+              name="max_day"
+              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              {...register("max_day")}
+            />
+            <select
+              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              {...register("degree_level")}
+            >
+              <option value="Speech Therapist">Speech Therapist</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-xs font-normal w-80">MT</h3>
+            <input
+              type="text"
+              name="max_day"
+              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              {...register("max_day")}
+            />
+            <select
+              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              {...register("degree_level")}
+            >
+              <option value="Speech Therapist">Speech Therapy</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-xs font-normal w-80">MT</h3>
+            <input
+              type="text"
+              name="max_day"
+              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              {...register("max_day")}
+            />
+            <select
+              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              {...register("degree_level")}
+            >
+              <option value="Speech Therapist">Speech Therapist</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-xs font-normal w-80">Physical Therapy</h3>
             <input
               type="text"
               name="max_day"

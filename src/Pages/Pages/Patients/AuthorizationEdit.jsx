@@ -114,7 +114,7 @@ const AuthorizationEdit = () => {
     <div className="md:h-[100vh]">
       <div className="flex flex-wrap items-center gap-2 mb-2">
         <Link
-          to={`/patient/${id}/patient-authorization/${id}`}
+          to={`/admin/patient/${id}/patient-authorization/${id}`}
           className="text-primary text-lg"
         >
           <IoCaretBackCircleOutline />
@@ -131,7 +131,7 @@ const AuthorizationEdit = () => {
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-sm">Add Auth</h1>
-        <Link to={`/patient/${id}/patient-authorization/${id}`}>
+        <Link to={`/admin/patient/${id}/patient-authorization/${id}`}>
           <button className="px-10 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md">
             <IoCaretBackCircleOutline className="mr-1 text-sm" />
             Back

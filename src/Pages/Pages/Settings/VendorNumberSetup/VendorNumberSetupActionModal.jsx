@@ -39,7 +39,7 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                         </span>
                       </label>
                       <select
-                        className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                         {...register("Length")}
                       >
                         <option value="Mr">Bi Weekly</option>
@@ -55,7 +55,7 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                         </span>
                       </label>
                       <select
-                        className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                         {...register("week_day")}
                       >
                         <option value="Mr">Sunday</option>
@@ -71,7 +71,7 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                         </span>
                       </label>
                       <select
-                        className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                         {...register("year")}
                       >
                         <option value="Mr">2019</option>
@@ -92,7 +92,7 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                       <input
                         type="number"
                         name="staff_number"
-                        className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                         {...register("staff_number")}
                       />
                     </div>
@@ -103,7 +103,7 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                         </span>
                       </label>
                       <select
-                        className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                         {...register("week_day")}
                       >
                         <option value="Mr">Sunday</option>
@@ -122,13 +122,15 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
 
                 <div className="modal-action">
                   {/* <input type="submit" /> */}
-                  <input
-                    type="submit"
-                    value={"SAVE"}
-                    className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                  />
                   <button
-                    className="px-5  bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                    className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                    type="submit"
+                  >
+                    Save
+                  </button>
+
+                  <button
+                    className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
                     autoFocus
                     onClick={handleClose}
                   >
