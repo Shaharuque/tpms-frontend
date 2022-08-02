@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import bg from "../Assets/bg.png";
 import logo from "../Assets/logo.png";
+import { Link } from "react-router-dom";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
@@ -133,12 +134,15 @@ const LogInForm = () => {
                     Remember Me
                   </span>
                 </div>
-                <button
-                  className=" py-2 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                  type="submit"
-                >
-                  Sign In
-                </button>
+                <Link to={"/admin"}>
+                  {" "}
+                  <button
+                    className=" py-2 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                    type="submit"
+                  >
+                    Sign In
+                  </button>
+                </Link>
               </div>
             </form>
             <p className="text-xs my-2 font-normal text-gray-400">

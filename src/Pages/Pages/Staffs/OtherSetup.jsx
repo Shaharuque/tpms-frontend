@@ -305,9 +305,9 @@ const OtherSetup = () => {
             <h3 className="text-xs font-normal"></h3>
           </div> */}
           <div className="flex items-center justify-around gap-2 mb-2 ">
-            <h3 className="text-xs font-normal w-80">Tax Type</h3>
-            <h3 className="text-xs font-normal w-80">Tax Type</h3>
-            <h3 className="text-xs font-normal w-80">Tax Type</h3>
+            <h3 className="text-xs font-medium w-80">Tax Type</h3>
+            <h3 className="text-xs font-medium w-80">Box 24J</h3>
+            <h3 className="text-xs font-medium w-80">ID Qualifier</h3>
           </div>
           <div className="flex items-center gap-2 mb-2 ">
             <h3 className="text-xs font-normal w-80">IF</h3>
@@ -422,13 +422,6 @@ const OtherSetup = () => {
             type="submit"
           >
             Save
-          </button>
-          <button
-            className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-            autoFocus
-            onClick={() => reset()}
-          >
-            CANCEL
           </button>
         </div>
       </form>
