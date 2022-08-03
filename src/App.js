@@ -63,111 +63,33 @@ import InsuranceExclusion from "./Pages/Pages/Staffs/InsuranceExclusion";
 import ServiceSubTypeExclusions from "./Pages/Pages/Staffs/ServiceSubTypeExclusions";
 import PatientExclusion from "./Pages/Pages/Staffs/PatientExclusion";
 import StaffPortal from "./Pages/Pages/Staffs/StaffPortal";
-import LogInForm from "./Pages/LoginPage/LogInForm";
 import LogIn from "./Pages/LoginPage/LogIn";
 
 function App() {
   return (
     <div className="app-body">
-      {/* <LogIn></LogIn> */}
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
-      </Routes>
+        <Route path="/admin" element={<Sidebar></Sidebar>}>
+          <Route index element={<Dashboard></Dashboard>}></Route>
+          {/* DASHBOARD ROUTES  */}
 
-      <Sidebar>
-        <Routes>
-          <Route path="/admin" element={<Dashboard></Dashboard>}></Route>
-          {/* <Route
-            path="/appointment"
-            element={<Appointment></Appointment>}
-          ></Route> */}
+          {/* APPOINTMENT ROUTES */}
+          <Route path="session-manage" element={<ListView></ListView>}></Route>
           <Route
-            path="/admin/session-manage"
-            element={<ListView></ListView>}
-          ></Route>
-          <Route
-            path="/admin/calender-view"
+            path="calender-view"
             element={<CalendarView></CalendarView>}
           ></Route>
           <Route
-            path="/admin/recurring-session"
+            path="recurring-session"
             element={<RecurringSession></RecurringSession>}
           ></Route>
           <Route
-            path="/recurring-session-edit"
+            path="recurring-session-edit"
             element={<RecurringSessionEdit></RecurringSessionEdit>}
           ></Route>
-          <Route
-            path="/admin/patient-List"
-            element={<Patients></Patients>}
-          ></Route>
-          <Route path="/admin/staffs" element={<Staffs></Staffs>}></Route>
-          {/* <Route path="/billing" element={<Billing></Billing>}></Route> */}
-          <Route
-            path="/admin/submit-billing"
-            element={<BillingManager></BillingManager>}
-          ></Route>
-          <Route
-            path="/admin/ar-leader"
-            element={<ArLedger></ArLedger>}
-          ></Route>
-          <Route
-            path="/admin/contract-rate"
-            element={<ContractRate></ContractRate>}
-          ></Route>
-          <Route
-            path="billing/rate-list-add-edit/:id"
-            element={<ContractRateEditAdd></ContractRateEditAdd>}
-          ></Route>
-          <Route
-            path="billing/rate-list-add-edit"
-            element={<ContractRateEditAdd></ContractRateEditAdd>}
-          ></Route>
-          <Route
-            path="/admin/patient-statement"
-            element={<PatientStatement></PatientStatement>}
-          ></Route>
-          {/* <Route path="/payment" element={<Payment></Payment>}></Route> */}
-          <Route
-            path="/admin/era-remittance"
-            element={<ERemittance></ERemittance>}
-          ></Route>
-          <Route
-            path="/admin/m-posting"
-            element={<MPosting></MPosting>}
-          ></Route>
-          <Route
-            path="billing/deposit-add/:id"
-            element={<MPostingEditAdd></MPostingEditAdd>}
-          ></Route>
-          <Route
-            path="billing/deposit-add"
-            element={<MPostingEditAdd></MPostingEditAdd>}
-          ></Route>
-          <Route
-            path="billing/deposit-apply/:id"
-            element={<MDepositApply></MDepositApply>}
-          ></Route>
-          <Route
-            path="/admin/era-manager"
-            element={<EraManager></EraManager>}
-          ></Route>
-          <Route path="/admin/report" element={<Report></Report>}></Route>
-          {/* <Route path="/payroll" element={<Payroll></Payroll>}></Route> */}
-          <Route
-            path="/admin/processing-payroll"
-            element={<ProcessingPayroll></ProcessingPayroll>}
-          ></Route>
-          <Route
-            path="/admin/timesheet"
-            element={<Timesheet></Timesheet>}
-          ></Route>
-
-          {/* patient  */}
-          <Route
-            path="/admin/patient/:id"
-            element={<PatientsInfo></PatientsInfo>}
-          >
+          {/* PATIENT  */}
+          <Route path="patient/:id" element={<PatientsInfo></PatientsInfo>}>
             {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
             <Route
               path="patient-info/:id"
@@ -195,19 +117,15 @@ function App() {
             ></Route>
           </Route>
           <Route
-            path="/admin/authorization-Edit"
+            path="authorization-Edit"
             element={<AuthorizationEdit></AuthorizationEdit>}
           ></Route>
           <Route
-            path="/admin/authorization-Edit/:id"
+            path="authorization-Edit/:id"
             element={<AuthorizationEdit></AuthorizationEdit>}
           ></Route>
-
-          {/* Staffs  */}
-          <Route
-            path="/admin/staff"
-            element={<StaffInformation></StaffInformation>}
-          >
+          {/* STAFF  */}
+          <Route path="staff" element={<StaffInformation></StaffInformation>}>
             <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
             <Route
               path="staffs-contact-details"
@@ -250,9 +168,58 @@ function App() {
               element={<StaffPortal></StaffPortal>}
             ></Route>
           </Route>
-
+          {/* BILLING  */}
+          <Route
+            path="submit-billing"
+            element={<BillingManager></BillingManager>}
+          ></Route>
+          <Route path="patient-List" element={<Patients></Patients>}></Route>
+          <Route path="staffs" element={<Staffs></Staffs>}></Route>
+          <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>
+          <Route
+            path="contract-rate"
+            element={<ContractRate></ContractRate>}
+          ></Route>
+          <Route
+            path="billing/rate-list-add-edit"
+            element={<ContractRateEditAdd></ContractRateEditAdd>}
+          ></Route>
+          <Route
+            path="billing/rate-list-add-edit/:id"
+            element={<ContractRateEditAdd></ContractRateEditAdd>}
+          ></Route>
+          <Route
+            path="patient-statement"
+            element={<PatientStatement></PatientStatement>}
+          ></Route>
+          {/* PAYMENT */}
+          <Route
+            path="era-remittance"
+            element={<ERemittance></ERemittance>}
+          ></Route>
+          <Route path="m-posting" element={<MPosting></MPosting>}></Route>
+          <Route
+            path="billing/deposit-apply/:id"
+            element={<MDepositApply></MDepositApply>}
+          ></Route>
+          <Route
+            path="billing/deposit-add/:id"
+            element={<MPostingEditAdd></MPostingEditAdd>}
+          ></Route>
+          <Route
+            path="billing/deposit-add"
+            element={<MPostingEditAdd></MPostingEditAdd>}
+          ></Route>
+          <Route path="era-manager" element={<EraManager></EraManager>}></Route>
+          {/* PAYROLL  */}
+          <Route
+            path="processing-payroll"
+            element={<ProcessingPayroll></ProcessingPayroll>}
+          ></Route>
+          <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
+          <Route path="report" element={<Report></Report>}></Route>
           {/* settings routes  */}
-          <Route path="/admin/settings" element={<Settings></Settings>}>
+          <Route path="settings" element={<Settings></Settings>}>
             <Route index element={<NameLocation></NameLocation>}></Route>
             <Route
               path="add-insurance"
@@ -323,8 +290,8 @@ function App() {
             ></Route>
             <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
           </Route>
-        </Routes>
-      </Sidebar>
+        </Route>
+      </Routes>
     </div>
   );
 }

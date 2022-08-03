@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import "../Style/slide.css";
 import logo1 from "../Assets/favicon.png";
 import logo2 from "../Assets/logo-new.png";
@@ -157,7 +158,7 @@ menuItem.map((item) => {
 
 console.log(initialDropState);
 
-const Sidebar = ({ children }) => {
+const Sidebar = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const [dropState, setDropState] = useState(initialDropState);
@@ -189,7 +190,7 @@ const Sidebar = ({ children }) => {
           <NavigationBar></NavigationBar>
         </div>
         <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-3 ">
-          {children}
+          <Outlet />
         </main>
         <Footer></Footer>
       </div>

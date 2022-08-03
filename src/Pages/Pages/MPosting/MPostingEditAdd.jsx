@@ -183,7 +183,7 @@ const MPostingEditAdd = () => {
                 >
                   Save
                 </button>
-                <Link to={"/m-posting"}>
+                <Link to={"/admin/m-posting"}>
                   <button className="font-normal  py-[5px] mt-7 px-3 text-xs ml-3 bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
                     Cancel
                   </button>

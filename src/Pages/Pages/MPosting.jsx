@@ -70,11 +70,11 @@ const MPosting = () => {
             <>
               <div>
                 <div className="flex justify-center gap-1 text-primary">
-                  <Link to={`/billing/deposit-apply/${row.original.id}`}>
+                  <Link to={`/admin/billing/deposit-apply/${row.original.id}`}>
                     <MdOutlineDashboard title="Deposit" />
                   </Link>
 
-                  <Link to={`/billing/deposit-add/${row.original.id}`}>
+                  <Link to={`/admin/billing/deposit-add/${row.original.id}`}>
                     <FiEdit3 title="Edit" />
                   </Link>
 
@@ -119,7 +119,7 @@ const MPosting = () => {
     <div className="h-[100vh]">
       <div className="md:flex mb-2 flex-wrap  items-center justify-between">
         <h1 className="text-lg text-orange-400">M-Posting</h1>
-        <Link to={"/billing/deposit-add"}>
+        <Link to={"/admin/billing/deposit-add"}>
           <button className="px-10 py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md">
             Add New Data
           </button>

@@ -1,13 +1,10 @@
 import React from "react";
-import StaffMultiSelection from "./StaffMultiSelection";
+import InsuranceExclusionMultiSelection from "./InsuranceExclusion/InsuranceExclusionMultiSelection";
 
 const InsuranceExclusion = () => {
   return (
     <div>
-      <StaffMultiSelection
-        selectBox={"All Insurance"}
-        addBox={"Facility Selected Insurance"}
-      ></StaffMultiSelection>
+      <InsuranceExclusionMultiSelection></InsuranceExclusionMultiSelection>
     </div>
   );
 };

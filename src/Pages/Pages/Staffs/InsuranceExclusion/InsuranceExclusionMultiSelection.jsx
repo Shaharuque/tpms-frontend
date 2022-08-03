@@ -29,10 +29,15 @@ const names = [
   "ife Insurance Corporation of India  ",
 ];
 
-const StaffMultiSelection = ({ selectBox, addBox }) => {
+const InsuranceExclusionMultiSelection = () => {
   const [selectedNames, setSelectedNames] = useState([]);
   const [optionNames, setOptionNames] = useState(names);
   const [newAdded, setNewAdded] = useState([]);
+
+  // console.log("selectedNames", selectedNames);
+
+  console.log("newAdded", newAdded);
+
   const handleChangeMultiple = (event) => {
     const { options } = event.target;
     const value = [];
@@ -53,8 +58,8 @@ const StaffMultiSelection = ({ selectBox, addBox }) => {
     setNewAdded([...newAdded, ...value]);
   };
   return (
-    <div>
-      <FormControl className="sm:w-[550px] md:w-[350] w-[260px] m-0 sm:m-2 bg-white ">
+    <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
+      <FormControl className=" m-0 sm:m-2 bg-white ">
         <InputLabel shrink htmlFor="select-multiple-native">
           -----------
         </InputLabel>
@@ -75,14 +80,17 @@ const StaffMultiSelection = ({ selectBox, addBox }) => {
           ))}
         </Select>
       </FormControl>
-      <button
-        onClick={handleAddItems}
-        className="px-5 mx-3 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-      >
-        Add
-      </button>
+      <div className=" mx-auto my-auto">
+        <button
+          onClick={handleAddItems}
+          className="px-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+        >
+          Add
+        </button>
+      </div>
+      <div></div>
     </div>
   );
 };
 
-export default StaffMultiSelection;
+export default InsuranceExclusionMultiSelection;

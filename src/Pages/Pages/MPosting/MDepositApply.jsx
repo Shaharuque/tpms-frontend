@@ -122,7 +122,7 @@ const MDepositApply = () => {
             >
               Show
             </button>
-            <Link to={"/m-posting"}>
+            <Link to={"/admin/m-posting"}>
               <button className="px-5 mt-6 w-24 text-sm py-2 bg-gradient-to-r from-red-700 to-red-400  ml-3 hover:to-red-700 text-white rounded-md">
                 Cancel
               </button>

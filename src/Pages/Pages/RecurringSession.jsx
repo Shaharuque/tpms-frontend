@@ -189,7 +189,7 @@ const RecurringSession = () => {
           </div>
         </div>
       )}
-      <Link to={"/recurring-session-edit"}> Click Here</Link>
+      <Link to={"/admin/recurring-session-edit"}> Click Here</Link>
     </div>
   );
 };

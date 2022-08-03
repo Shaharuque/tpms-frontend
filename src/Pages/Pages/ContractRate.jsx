@@ -49,7 +49,9 @@ const ContractRate = () => {
             <>
               <div>
                 <div className="flex justify-center gap-1 text-primary">
-                  <Link to={`/billing/rate-list-add-edit/${row.original.id}`}>
+                  <Link
+                    to={`/admin/billing/rate-list-add-edit/${row.original.id}`}
+                  >
                     <FiEdit3 title="Edit" />
                   </Link>
 
@@ -85,7 +87,7 @@ const ContractRate = () => {
             </option>
           </select>
         </div>
-        <Link to={"/billing/rate-list-add-edit"}>
+        <Link to={"/admin/billing/rate-list-add-edit"}>
           <button className="px-10 py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md">
             + Add Rate
           </button>
