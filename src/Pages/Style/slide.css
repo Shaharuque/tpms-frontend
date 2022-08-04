@@ -22,7 +22,7 @@
     border-bottom-right-radius: 20px; */
 }
 
-@media (min-width:320px) {
+@media only screen and (min-width:320px) {
 
     /* smartphones, iPhone, portrait 480x320 phones */
     /* For mobile  */
@@ -38,11 +38,12 @@
     .login-form {
         width: 95%;
         top: 10em;
+        right: -6px;
     }
 
 }
 
-@media (min-width:481px) {
+@media only screen and (min-width:481px) {
 
     /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
     /* For mobile  */
@@ -58,11 +59,12 @@
     .login-form {
         width: 95%;
         top: 10em;
+        right: -6px;
     }
 
 }
 
-@media (min-width:641px) {
+@media only screen and (min-width:641px) {
 
     /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
     .resp {
@@ -82,7 +84,7 @@
 
 }
 
-@media (min-width:961px) {
+@media only screen and (min-width:961px) and (max-width:1024px) {
 
     /* tablet, landscape iPad, lo-res laptops ands desktops */
     /* For tablets: */
@@ -102,7 +104,7 @@
     }
 }
 
-@media (min-width:1025px) {
+@media only screen and (min-width:1025px) {
 
     /* big landscape tablets, laptops, and desktops */
     /* For desktop: */
@@ -122,7 +124,7 @@
     }
 }
 
-@media (min-width:1281px) {
+@media only screen and (min-width:1281px) {
 
     /* hi-res laptops and desktops */
     .resp {
