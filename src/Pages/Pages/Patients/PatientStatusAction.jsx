@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const PatientStatusAction = ({ row }) => {
   const [value, setValue] = useState(false);
-  console.log(value);
+  //console.log(value);
   return (
     <div>
       <Switch

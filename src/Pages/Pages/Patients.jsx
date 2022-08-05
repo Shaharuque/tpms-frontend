@@ -6,6 +6,12 @@ import {
   PatientsColumnsData,
 } from "./Patients/PatientsColumns";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
+//redux-code
+import {  useSelector } from "react-redux";
+import { getpatients } from "../../features/Patient_redux/patientSlice";
+import { useEffect } from "react";
+import usePatient from "../../CustomHooks/usePatient";
+
 
 const Patients = () => {
   const data = useMemo(() => PatientsColumnsData, []);
@@ -20,6 +26,24 @@ const Patients = () => {
     // page,
     prepareRow,
   } = useTable({ columns, data }, useFilters, useSortBy, usePagination);
+
+  //redux
+  //const dispatch = useDispatch()
+
+  //useSelector use korey [adminData reducer] extract kora hocchey to get admins data from api
+  //const result_patients = useSelector((state) => state.patientData);
+  //console.log(result_patients)
+
+  //dispatchasync action  
+  // useEffect(() => {
+  //   dispatch(getpatients())
+  // }, []);
+
+  /////Patients data get
+  const [patients,setPatients]=usePatient()
+  console.log(patients?.clients?.data)
+
+
   return (
     <div className="h-[100vh]">
       <h1 className="text-lg mb-2 text-orange-400">All Patients</h1>

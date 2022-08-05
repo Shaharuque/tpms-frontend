@@ -83,12 +83,14 @@ import LastMonthsStatements from "./Pages/Pages/Dashboard/Billing/LastMonthsStat
 import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits";
 import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
+import Testing from "./Testing/Testing";
 
 function App() {
   return (
     <div className="app-body">
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
+        <Route path='/testing' element={<Testing></Testing>}></Route>
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
           {/* DASHBOARD ROUTES  */}
