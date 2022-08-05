@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import bg from "../Assets/bg.png";
 import logo from "../Assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
+  const navigate=useNavigate()
   const {
     register,
     handleSubmit,
@@ -13,7 +14,30 @@ const LogInForm = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    fetch("https://ovh.therapypms.com/api/v1/admin/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),    //object k stringify korey server side a send kore lagey tai JSON.stringify korey
+                })
+                    .then((res) => {
+                        console.log(res)
+                        if (res.status === 201) {
+                          console.log("logged in")
+                        }
+                        else {
+                          console.log("Cann't perform the action")
+                        }
+                        return res.json()
+                    })
+                    .then(result=>{
+                      console.log(result)
+                      if(result.status=='success'){
+                        localStorage.setItem('token',result.access_token)
+                        navigate('/admin')
+                      }
+                    })
     reset();
   };
   return (
@@ -134,15 +158,12 @@ const LogInForm = () => {
                     Remember Me
                   </span>
                 </div>
-                <Link to={"/admin"}>
-                  {" "}
-                  <button
-                    className=" py-2 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                    type="submit"
-                  >
-                    Sign In
-                  </button>
-                </Link>
+                <button
+                  className=" py-2 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                  type="submit"
+                >
+                  Sign In
+                </button>
               </div>
             </form>
             <p className="text-xs my-2 font-normal text-gray-400">
