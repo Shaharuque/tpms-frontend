@@ -87,7 +87,6 @@ import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 function App() {
   return (
     <div className="app-body">
-      <h1>HI ALIEND this is new changes</h1>
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
         <Route path="/admin" element={<Sidebar></Sidebar>}>

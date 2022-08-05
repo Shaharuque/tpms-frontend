@@ -39,7 +39,7 @@ const NameLocationTable = () => {
         onClick={handleTable}
         className=" mt-4 text-xs p-2 text-white bg-secondary"
       >
-        Box No 33 table
+        Box No 33
       </h2>
       {tableOpen && (
         <div className="border">
