@@ -20,11 +20,12 @@ const NameLocationTable32 = () => {
   console.log(errors);
   return (
     <div>
+      {/* Child 32  */}
       <h2
         onClick={handleTable}
         className=" mt-4 text-xs p-2 text-white bg-secondary"
       >
-        Box No 33
+        Box No 32
       </h2>
       {tableOpen && (
         <div className="border">

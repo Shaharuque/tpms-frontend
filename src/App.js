@@ -64,6 +64,25 @@ import ServiceSubTypeExclusions from "./Pages/Pages/Staffs/ServiceSubTypeExclusi
 import PatientExclusion from "./Pages/Pages/Staffs/PatientExclusion";
 import StaffPortal from "./Pages/Pages/Staffs/StaffPortal";
 import LogIn from "./Pages/LoginPage/LogIn";
+import ArFollowupBucket from "./Pages/Pages/Dashboard/TodaysTask/ArFollowupBucket";
+import ProvideEscalation from "./Pages/Pages/Dashboard/TodaysTask/ProvideEscalation";
+import PayorEscalation from "./Pages/Pages/Dashboard/TodaysTask/PayorEscalation";
+import MGEscalation from "./Pages/Pages/Dashboard/TodaysTask/MGEscalation";
+import MedicalRecords from "./Pages/Pages/Dashboard/TodaysTask/MedicalRecords";
+import AuthorizationNotRequired from "./Pages/Pages/Dashboard/Patient/AuthorizationNotRequired";
+import SelfPayClients from "./Pages/Pages/Dashboard/Patient/SelfPayClients";
+import AuthPlaceHolders from "./Pages/Pages/Dashboard/Patient/AuthPlaceHolders";
+import ExpiringAuthorization from "./Pages/Pages/Dashboard/Patient/ExpiringAuthorization";
+import CoPayForToday from "./Pages/Pages/Dashboard/Patient/CoPayForToday";
+import SignatureNotLoaded from "./Pages/Pages/Dashboard/Staffs/SignatureNotLoaded";
+import CredentialsToExpire from "./Pages/Pages/Dashboard/Staffs/CredentialsToExpire";
+import MissingCredentials from "./Pages/Pages/Dashboard/Staffs/MissingCredentials";
+import VacationPendingApproval from "./Pages/Pages/Dashboard/Staffs/VacationPendingApproval";
+import LastMonthBilledDates from "./Pages/Pages/Dashboard/Billing/LastMonthBilledDates";
+import LastMonthsStatements from "./Pages/Pages/Dashboard/Billing/LastMonthsStatements";
+import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits";
+import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
+import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 
 function App() {
   return (
@@ -73,6 +92,89 @@ function App() {
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
           {/* DASHBOARD ROUTES  */}
+          {/* todays task  */}
+          <Route
+            path="billing/ar-followup-bucket"
+            element={<ArFollowupBucket></ArFollowupBucket>}
+          ></Route>
+          <Route
+            path="billing/ar-followup-bucket-filter-types/1"
+            element={<ProvideEscalation></ProvideEscalation>}
+          ></Route>
+          <Route
+            path="billing/ar-followup-bucket-filter-types/2"
+            element={<PayorEscalation></PayorEscalation>}
+          ></Route>
+          <Route
+            path="billing/ar-followup-bucket-filter-types/3"
+            element={<MGEscalation></MGEscalation>}
+          ></Route>
+          <Route
+            path="billing/ar-followup-bucket-filter-types/4"
+            element={<MedicalRecords></MedicalRecords>}
+          ></Route>
+          {/* Patients  */}
+          <Route
+            path="auth-to-expire"
+            element={<ExpiringAuthorization></ExpiringAuthorization>}
+          ></Route>
+          <Route
+            path="non-payor-tag"
+            element={<SelfPayClients></SelfPayClients>}
+          ></Route>
+          <Route
+            path="no-authorization"
+            element={<AuthorizationNotRequired></AuthorizationNotRequired>}
+          ></Route>
+          <Route
+            path="todays-copay"
+            element={<CoPayForToday></CoPayForToday>}
+          ></Route>
+          <Route
+            path="auth-place-holder"
+            element={<AuthPlaceHolders></AuthPlaceHolders>}
+          ></Route>
+
+          {/* Staffs  */}
+          <Route
+            path="vacation-pending"
+            element={<VacationPendingApproval></VacationPendingApproval>}
+          ></Route>
+          <Route
+            path="missing-credentials"
+            element={<MissingCredentials></MissingCredentials>}
+          ></Route>
+          <Route
+            path="credentials-expire"
+            element={<CredentialsToExpire></CredentialsToExpire>}
+          ></Route>
+
+          <Route
+            path="signature-not-update"
+            element={<SignatureNotLoaded></SignatureNotLoaded>}
+          ></Route>
+
+          {/* Billing  */}
+          <Route
+            path="signature-not-update"
+            element={<SessionRendered></SessionRendered>}
+          ></Route>
+          <Route
+            path="signature-not-update"
+            element={<LastWeeksDeposits></LastWeeksDeposits>}
+          ></Route>
+          <Route
+            path="signature-not-update"
+            element={<LastMonthsStatements></LastMonthsStatements>}
+          ></Route>
+          <Route
+            path="signature-not-update"
+            element={<LastMonthBilledDates></LastMonthBilledDates>}
+          ></Route>
+          <Route
+            path="signature-not-update"
+            element={<PendingSecondaryClaims></PendingSecondaryClaims>}
+          ></Route>
 
           {/* APPOINTMENT ROUTES */}
           <Route path="session-manage" element={<ListView></ListView>}></Route>

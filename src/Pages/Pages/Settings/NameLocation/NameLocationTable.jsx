@@ -2,12 +2,10 @@ import React, { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Switch } from "@mui/material";
-import CustomTimePicker from "./CustomTimePicker";
 
 const NameLocationTable = () => {
   const [tableOpen, setTableOpen] = useState(true);
   const [combo, setCombo] = useState(false);
-  // const [value, onChange] = useState("");
 
   // timeChange
   const handleTable = () => {
@@ -29,13 +27,14 @@ const NameLocationTable = () => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        name: `ABC Behavioral Therapy Center`,
+        facility_name: `ABC Behavioral Therapy Center`,
       });
     }, 2000);
   }, [reset]);
   console.log(errors);
   return (
     <div>
+      {/* Child 33  */}
       <h2
         onClick={handleTable}
         className=" mt-4 text-xs p-2 text-white bg-secondary"
@@ -66,9 +65,9 @@ const NameLocationTable = () => {
                   <input
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="name"
+                    name="facility_name"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("name")}
+                    {...register("facility_name")}
                   />
                 </div>
                 {/* address 1 */}
@@ -97,9 +96,9 @@ const NameLocationTable = () => {
                   <input
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="addressTwo"
+                    name="address_two"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("addressTwo")}
+                    {...register("address_two")}
                   />
                 </div>
                 {/* city  */}
@@ -162,9 +161,9 @@ const NameLocationTable = () => {
                   <input
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="phone"
+                    name="phone_one"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("phone")}
+                    {...register("phone_one")}
                   />
                 </div>
                 {/* short code  */}
@@ -178,9 +177,9 @@ const NameLocationTable = () => {
                   <input
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="shortCode"
+                    name="short_code"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("shortCode")}
+                    {...register("short_code")}
                   />
                 </div>
                 {/* email  */}
@@ -210,9 +209,9 @@ const NameLocationTable = () => {
                   <input
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="EIN"
+                    name="ein"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("EIN")}
+                    {...register("ein")}
                   />
                 </div>
                 {/* NPI */}
@@ -226,9 +225,9 @@ const NameLocationTable = () => {
                   <input
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="NPI"
+                    name="npi"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("NPI")}
+                    {...register("npi")}
                   />
                 </div>
                 {/* taxonomy */}
@@ -258,9 +257,9 @@ const NameLocationTable = () => {
                   <input
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="contactPerson"
+                    name="taxonomy_code"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("contactPerson")}
+                    {...register("taxonomy_code")}
                   />
                 </div>
                 {/* Service Area Miles */}
@@ -274,9 +273,9 @@ const NameLocationTable = () => {
                   <input
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="ServiceArea"
+                    name="contact_person"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("serviceArea")}
+                    {...register("contact_person")}
                   />
                 </div>
                 {/* SFTP Username */}
@@ -290,9 +289,9 @@ const NameLocationTable = () => {
                   <input
                     type="text"
                     placeholder="demo"
-                    name="SFTP"
+                    name="is_deafilt_facility"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("SFTP")}
+                    {...register("is_deafilt_facility")}
                   />
                 </div>
                 {/* password  */}

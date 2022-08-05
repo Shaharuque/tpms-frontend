@@ -151,7 +151,7 @@ export const billing = [
     link: "#",
   },
   {
-    report: "Last Month Billed Dates",
+    report: "Last Month Billed Dates ",
     count: "0",
     link: "#",
   },
