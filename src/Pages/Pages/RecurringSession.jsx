@@ -40,7 +40,7 @@ const RecurringSession = () => {
   });
   const onSubmit = (data) => {
     // setSubmitted(data);
-    console.log(data);
+    // console.log(data);
     setTable(true);
   };
 
@@ -85,7 +85,7 @@ const RecurringSession = () => {
       });
     }
   );
-  console.log(selectedFlatRows);
+  // console.log(selectedFlatRows);
   const { pageIndex, pageSize } = state;
 
   return (

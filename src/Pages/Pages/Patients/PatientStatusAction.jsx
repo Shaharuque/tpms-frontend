@@ -1,20 +1,23 @@
 import { Switch } from "@mui/material";
 import React, { useState } from "react";
+import { memo } from "react";
 
 const PatientStatusAction = ({ row }) => {
-  const [value, setValue] = useState(false);
-  //console.log(value);
+  const status = row?.original?.is_active_client;
+  const [value, setValue] = useState(status);
+
   return (
     <div>
       <Switch
+        checked={value ? true : false}
         size="small"
         onClick={() => {
           setValue(!value);
         }}
-      />{" "}
-      {!value ? "In-Active" : "Active"}
+      />
+      {value ? "Active" : "In-active"}
     </div>
   );
 };
 
-export default PatientStatusAction;
+export default memo(PatientStatusAction);

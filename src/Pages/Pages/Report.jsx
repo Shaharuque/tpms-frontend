@@ -12,9 +12,9 @@ const Report = () => {
 
   const handlePlaceOrder = (event) => {
     event.preventDefault();
-    console.log(event.target.date.value);
-    console.log(event.target.tx_type.value);
-    console.log(event.target.type.value);
+    // console.log(event.target.date.value);
+    // console.log(event.target.tx_type.value);
+    // console.log(event.target.type.value);
   };
   return (
     <div className="h-[100vh]">

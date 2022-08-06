@@ -35,7 +35,7 @@ const ArLedger = () => {
     new DateObject().set({ day: 20, format }),
   ]);
 
-  console.log(dates);
+  // console.log(dates);
 
   const data = useMemo(() => ARLedgerColumnsData, []);
   const columns = useMemo(() => [...ARLedgerColumnsColumn], []);

@@ -17,7 +17,7 @@ const ContractRate = () => {
   const columns = useMemo(() => [...ContractRateColumnsColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
 
-  console.log("editableRow", editableRow);
+  // console.log("editableRow", editableRow);
   const {
     getTableProps,
     getTableBodyProps,

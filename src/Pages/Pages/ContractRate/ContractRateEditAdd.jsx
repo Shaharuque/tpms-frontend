@@ -12,7 +12,7 @@ import { Link, useParams } from "react-router-dom";
 
 const ContractRateEditAdd = () => {
   const { id } = useParams();
-  console.log("param ", id);
+  // console.log("param ", id);
   const [combo, setCombo] = useState(false);
 
   const {
@@ -22,7 +22,7 @@ const ContractRateEditAdd = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     reset();
   };
 
