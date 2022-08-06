@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useFilters, usePagination, useSortBy, useTable } from "react-table";
 import {
@@ -7,13 +7,17 @@ import {
 } from "./Patients/PatientsColumns";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 //redux-code
-import {  useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getpatients } from "../../features/Patient_redux/patientSlice";
-import { useEffect } from "react";
 import usePatient from "../../CustomHooks/usePatient";
+//react query
+import { useQuery } from '@tanstack/react-query'
+import Loading from "../../Loading/Loading";
+import axios from "axios";
 
 
 const Patients = () => {
+
   const data = useMemo(() => PatientsColumnsData, []);
   const columns = useMemo(() => [...PatientsColumnsColumn], []);
   const {
@@ -27,27 +31,10 @@ const Patients = () => {
     prepareRow,
   } = useTable({ columns, data }, useFilters, useSortBy, usePagination);
 
-  //redux
-  //const dispatch = useDispatch()
-
-  //useSelector use korey [adminData reducer] extract kora hocchey to get admins data from api
-  //const result_patients = useSelector((state) => state.patientData);
-  //console.log(result_patients)
-
-  //dispatchasync action  
-  // useEffect(() => {
-  //   dispatch(getpatients())
-  // }, []);
-
-  /////Patients data get
-  const [patients,setPatients]=usePatient()
-  console.log(patients?.clients?.data)
-
-
   return (
     <div className="h-[100vh]">
       <h1 className="text-lg mb-2 text-orange-400">All Patients</h1>
-      <div>
+        <div>
         <div className="pb-3 overflow-y-hidden">
           <table
             className="border overflow-scroll  sm:w-full "

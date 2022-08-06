@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 
 
 const usePatient=()=>{
+    const [loading,setLoading]=useState(false)
     const [patients,setPatients]=useState([])
 
     useEffect(()=>{
+        setLoading(true)
         fetch('https://ovh.therapypms.com/api/v1/admin/ac/patient', {
             method: 'GET',
             headers: {
@@ -14,10 +16,12 @@ const usePatient=()=>{
         }).then(res =>
             res.json()
         )
-        .then(data=>setPatients(data))
+        .then(data=>{
+            setLoading(false)
+            setPatients(data)})
     },[])
 
-    return [patients,setPatients]
+    return [patients,setPatients,loading]
 }
 
 export default usePatient;

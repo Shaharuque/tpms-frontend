@@ -1,8 +1,12 @@
+import usePatient from "../../../CustomHooks/usePatient";
 import { ColumnFilter } from "../Settings/SettingComponents/FilterBox";
 import PatientAuthAction from "./PatientAuthAction";
 import PatientAuthorizationsTableActionModal from "./PatientAuthorizationsTableActionModal";
 import PatientName from "./PatientName";
 import PatientStatusAction from "./PatientStatusAction";
+
+
+
 
 export const PatientsColumnsData = [
   {
@@ -44,7 +48,7 @@ export const PatientsColumnsColumn = [
     Header: () => {
       return <span className="">DOB</span>;
     },
-    accessor: "dob",
+    accessor: "client_dob",
     Filter: ColumnFilter,
   },
   {
