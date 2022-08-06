@@ -6,7 +6,7 @@ const ERemittance = () => {
   const [file, setFile] = useState();
   const [file2, setFile2] = useState();
 
-  console.log(file);
+  // console.log(file);
 
   return (
     <div className="h-[100vh]">

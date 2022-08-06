@@ -7,13 +7,17 @@ import NameLocationTableAddButton from "./NameLocationTableAddButton";
 
 const NameLocationTable32 = () => {
   const [tableOpen, setTableOpen] = useState(false);
-  const [add, setAdd] = useState(false);
+  const [add, setAdd] = useState(0);
 
   const handleTable = () => {
     setTableOpen(!tableOpen);
   };
 
-  const handleAdd = () => {};
+  const handleAdd = () => {
+    setAdd(add + 1);
+  };
+
+  console.log(add);
   const {
     register,
     handleSubmit,
@@ -170,7 +174,7 @@ const NameLocationTable32 = () => {
                       {...register("npi")}
                     />
                     <div
-                      onClick={() => setAdd(true)}
+                      onClick={handleAdd}
                       className="bg-secondary text-white p-[6px]"
                     >
                       <FaPlus />
@@ -186,7 +190,9 @@ const NameLocationTable32 = () => {
                   transition={{ delay: 0.2 }}
                 >
                   <div className="divider"></div>
-                  <NameLocationTableAddButton></NameLocationTableAddButton>
+                  {add === 1 && (
+                    <NameLocationTableAddButton></NameLocationTableAddButton>
+                  )}
                 </motion.div>
               )}
 

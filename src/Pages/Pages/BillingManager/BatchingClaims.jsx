@@ -19,7 +19,7 @@ const BatchingClaims = () => {
   const columns = useMemo(() => [...BatchingClaimsColumnsColumn], []);
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     data.date && setTableActive(true);
     reset();
   };

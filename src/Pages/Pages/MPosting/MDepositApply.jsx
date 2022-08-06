@@ -9,7 +9,7 @@ import { Switch } from "@mui/material";
 const MDepositApply = () => {
   const [select, setSelect] = useState("claim_no");
   const { id } = useParams();
-  console.log("param ", id);
+  // console.log("param ", id);
   const [value, setValue] = React.useState(false);
 
   const format = "MM/DD/YYYY";
@@ -20,7 +20,7 @@ const MDepositApply = () => {
 
   const onSubmit = (data) => {
     // setSubmitted(data);
-    console.log(data);
+    // console.log(data);
     reset();
   };
 
