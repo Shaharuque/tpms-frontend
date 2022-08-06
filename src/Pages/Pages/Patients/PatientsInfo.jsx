@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import CustomLink from "../Shared/CustomLink";
 
 const PatientsInfo = () => {
+  // Great parent component
   const { id } = useParams();
 
   return (
@@ -42,9 +43,6 @@ const PatientsInfo = () => {
               <img src={doctor} className="h-24 w-24 m-auto" alt="" />
             </div>
           </div>
-          {/* {patient_info.map((s, i) => (
-            <PatientNav id={id} key={i} s={s}></PatientNav>
-          ))} */}
 
           <CustomLink
             className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"

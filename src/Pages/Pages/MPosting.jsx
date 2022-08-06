@@ -34,7 +34,7 @@ const MPosting = () => {
   const { handleSubmit, register, reset } = useForm();
   const onSubmit = (data) => {
     // setSubmitted(data);
-    console.log(data);
+    // console.log(data);
     setSdate(dates[1].format());
     reset();
   };
@@ -43,7 +43,7 @@ const MPosting = () => {
   const columns = useMemo(() => [...MPostingColumnsColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
 
-  console.log("editableRow", editableRow);
+  // console.log("editableRow", editableRow);
   const {
     getTableProps,
     getTableBodyProps,
@@ -93,8 +93,8 @@ const MPosting = () => {
                         // request for saving the updated row
                         setEditableRow(null); // keep the row closed for edit after we finish updating it
                         const updatedRow = row.values;
-                        console.log("updated row values:");
-                        console.log(updatedRow);
+                        // console.log("updated row values:");
+                        // console.log(updatedRow);
                         // call your updateRow API
                       }
                     }}
@@ -114,7 +114,7 @@ const MPosting = () => {
 
   const { pageIndex, pageSize } = state;
 
-  console.log(sdate);
+  // console.log(sdate);
   return (
     <div className="h-[100vh]">
       <div className="md:flex mb-2 flex-wrap  items-center justify-between">

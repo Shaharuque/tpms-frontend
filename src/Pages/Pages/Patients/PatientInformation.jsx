@@ -21,8 +21,8 @@ const PatientInformation = () => {
   const [open, setOpen] = useState(false);
   const [phoneOpen, setPhoneOpen] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
-
   const { register, handleSubmit, reset } = useForm();
+
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {

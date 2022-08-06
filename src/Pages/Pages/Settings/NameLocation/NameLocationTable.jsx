@@ -5,7 +5,7 @@ import { Switch } from "@mui/material";
 
 const NameLocationTable = () => {
   const [tableOpen, setTableOpen] = useState(true);
-  const [combo, setCombo] = useState(false);
+  const [combo, setCombo] = useState(0);
 
   // timeChange
   const handleTable = () => {
@@ -39,7 +39,7 @@ const NameLocationTable = () => {
         onClick={handleTable}
         className=" mt-4 text-xs p-2 text-white bg-secondary"
       >
-        Box No 33 table
+        Box No 33
       </h2>
       {tableOpen && (
         <div className="border">
@@ -257,9 +257,9 @@ const NameLocationTable = () => {
                   <input
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="taxonomy_code"
+                    name="contact_person"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("taxonomy_code")}
+                    {...register("contact_person")}
                   />
                 </div>
                 {/* Service Area Miles */}
@@ -273,9 +273,9 @@ const NameLocationTable = () => {
                   <input
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="contact_person"
+                    name="service_area_miles"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("contact_person")}
+                    {...register("service_area_miles")}
                   />
                 </div>
                 {/* SFTP Username */}
@@ -289,9 +289,9 @@ const NameLocationTable = () => {
                   <input
                     type="text"
                     placeholder="demo"
-                    name="is_deafilt_facility"
+                    name="ftp_username"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("is_deafilt_facility")}
+                    {...register("ftp_username")}
                   />
                 </div>
                 {/* password  */}
@@ -305,9 +305,9 @@ const NameLocationTable = () => {
                   <input
                     type="password"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="SFTP_Password"
+                    name="ftp_password"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("SFTP_Password")}
+                    {...register("ftp_password")}
                   />
                 </div>
                 {/* Default POS  */}
@@ -345,7 +345,7 @@ const NameLocationTable = () => {
                   </select>
                 </div>
 
-                <div className="mx-auto mt-10 items-start">
+                <div className="md:mx-auto mt-10 items-start">
                   <div>
                     <Switch size="small" onClick={() => setCombo(!combo)} />
                     <label

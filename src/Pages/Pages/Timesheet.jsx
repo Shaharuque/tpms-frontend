@@ -2,7 +2,7 @@ import React from "react";
 
 const Timesheet = () => {
   const handlePeriod = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
   return (
     <div className="h-[100vh]">

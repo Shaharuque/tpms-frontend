@@ -71,7 +71,7 @@ const ListView = () => {
       });
     }
   );
-  console.log(selectedFlatRows);
+  // console.log(selectedFlatRows);
   const { pageIndex, pageSize } = state;
 
   const { handleSubmit, register, reset } = useForm({
@@ -81,7 +81,7 @@ const ListView = () => {
   });
   const onSubmit = (data) => {
     // setSubmitted(data);
-    console.log(data);
+    // console.log(data);
     setTable(true);
     reset();
   };

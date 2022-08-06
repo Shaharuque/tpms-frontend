@@ -3,7 +3,7 @@ import Table from "./Table";
 import { task } from "../Data/Data";
 
 const Tables = ({ tableType, tableName }) => {
-  console.log(tableType);
+  // console.log(tableType);
   return (
     <div>
       <table className="shadow-lg w-full bg-white">

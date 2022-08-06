@@ -156,7 +156,7 @@ menuItem.map((item) => {
   if (item.subRoute) initialDropState[item.name] = false;
 });
 
-console.log(initialDropState);
+// console.log(initialDropState);
 
 const Sidebar = () => {
   const [isHovering, setIsHovering] = useState(false);

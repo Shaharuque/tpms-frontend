@@ -4,8 +4,7 @@ import PatientAuthAction from "./PatientAuthAction";
 import PatientAuthorizationsTableActionModal from "./PatientAuthorizationsTableActionModal";
 import PatientName from "./PatientName";
 import PatientStatusAction from "./PatientStatusAction";
-
-
+import { useQuery } from "@tanstack/react-query";
 
 
 export const PatientsColumnsData = [
@@ -41,7 +40,7 @@ export const PatientsColumnsColumn = [
     Header: () => {
       return <span className="">Contact Info</span>;
     },
-    accessor: "contact_info",
+    accessor: "client_full_name",
     Filter: ColumnFilter,
   },
   {
@@ -55,21 +54,21 @@ export const PatientsColumnsColumn = [
     Header: () => {
       return <span className="">Gender</span>;
     },
-    accessor: "Gender",
+    accessor: "client_gender",
     Filter: ColumnFilter,
   },
   {
     Header: () => {
       return <span className="">SUPV. Provider</span>;
     },
-    accessor: "provider",
+    accessor: "supervisor_name",
     Filter: ColumnFilter,
   },
   {
     Header: () => {
       return <span className="">POS</span>;
     },
-    accessor: "pos",
+    accessor: "location",
     Filter: ColumnFilter,
   },
   {

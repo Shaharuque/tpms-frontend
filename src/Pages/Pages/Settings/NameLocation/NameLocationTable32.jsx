@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import { FaPlus } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import NameLocationTableAddButton from "./NameLocationTableAddButton";
 
 const NameLocationTable32 = () => {
   const [tableOpen, setTableOpen] = useState(false);
+  const [add, setAdd] = useState(0);
+
   const handleTable = () => {
     setTableOpen(!tableOpen);
   };
+
+  const handleAdd = () => {
+    setAdd(add + 1);
+  };
+
+  console.log(add);
   const {
     register,
     handleSubmit,
@@ -42,7 +53,6 @@ const NameLocationTable32 = () => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-2">
                 {/* name  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-xs text-gray-500 text-left">
                       Region Name
@@ -58,7 +68,6 @@ const NameLocationTable32 = () => {
                 </div>
                 {/* address 1 */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-xs text-gray-500 text-left">
                       Facility Name
@@ -67,13 +76,12 @@ const NameLocationTable32 = () => {
                   <input
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="facility_name"
+                    name="facility_name_two"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("facility_name")}
+                    {...register("facility_name_two")}
                   />
                 </div>
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-xs text-gray-500 text-left">
                       Address
@@ -89,7 +97,6 @@ const NameLocationTable32 = () => {
                 </div>
                 {/* city  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-xs text-gray-500 text-left">
                       City
@@ -122,7 +129,6 @@ const NameLocationTable32 = () => {
                 </div>
                 {/* Zip  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-xs text-gray-500 text-left">
                       Zip
@@ -138,7 +144,6 @@ const NameLocationTable32 = () => {
                 </div>
                 {/* phone  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-xs text-gray-500 text-left">
                       Phone
@@ -147,34 +152,53 @@ const NameLocationTable32 = () => {
                   <input
                     type="number"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="phone"
+                    name="phone_one"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("phone")}
+                    {...register("phone_one")}
                   />
                 </div>
 
                 {/* NPI */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-xs text-gray-500 text-left">
                       NPI
                     </span>
                   </label>
-                  <input
-                    type="number"
-                    placeholder="ABC Behavioral Therapy Center"
-                    name="NPI"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("NPI")}
-                  />
+                  <div className="mb-2 flex items-center gap-2">
+                    <input
+                      type="number"
+                      placeholder="ABC Behavioral Therapy Center"
+                      name="npi"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      {...register("npi")}
+                    />
+                    <div
+                      onClick={handleAdd}
+                      className="bg-secondary text-white p-[6px]"
+                    >
+                      <FaPlus />
+                    </div>
+                  </div>
                 </div>
                 {/* done  */}
               </div>
+              {add && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <div className="divider"></div>
+                  {add === 1 && (
+                    <NameLocationTableAddButton></NameLocationTableAddButton>
+                  )}
+                </motion.div>
+              )}
 
               {/* submit  */}
               <input
-                className=" px-3 py-1 rounded-md text-sm font-normal bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
+                className=" mt-20 px-3 py-1 rounded-md text-sm font-normal bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
                 type="submit"
                 value={"Save"}
               />

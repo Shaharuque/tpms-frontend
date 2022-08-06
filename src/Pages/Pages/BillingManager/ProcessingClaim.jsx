@@ -17,7 +17,7 @@ const ProcessingClaim = () => {
   };
   const { handleSubmit, register, reset } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
 
     reset();
   };

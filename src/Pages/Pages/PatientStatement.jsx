@@ -64,7 +64,7 @@ const PatientStatement = () => {
       });
     }
   );
-  console.log(selectedFlatRows);
+  // console.log(selectedFlatRows);
   const { pageIndex, pageSize } = state;
 
   return (
