@@ -88,7 +88,6 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="first_name"
-                // value={patient_details?.client_first_name}
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("first_name")}
               />
