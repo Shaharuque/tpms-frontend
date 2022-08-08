@@ -47,6 +47,7 @@ const Testing = () => {
     return (
         <div>
             <TableInstance tableData={tableData}></TableInstance>
+            <h1>Testing</h1>
         </div>
     );
 };
