@@ -6,10 +6,11 @@ import { FaPlus } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getpatientsDetails } from "../../../features/Patient_redux/patientSlice";
+import Loading from "../../../Loading/Loading";
 
 const PatientInformation = () => {
-  const { id } = useParams();
-  console.log("patient Info", id);
   const [value, setValue] = useState(false);
   const [voiceMsg, setVoiceMsg] = useState(false);
   const [textMsg, setTextMsg] = useState(false);
@@ -23,6 +24,23 @@ const PatientInformation = () => {
   const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
+
+  //Patient Information 
+  const { id } = useParams();
+  //console.log("patient Info", id);
+  const dispatch = useDispatch();
+
+  const data=useSelector((state) => state.patientInfo)
+  const patient_details=data?.patientDetails?.clients
+  const loading=data?.loading
+  console.log(patient_details)
+
+  useEffect(()=>{
+    //action dispatched
+    dispatch(getpatientsDetails(id))
+  },[])
+
+  
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
@@ -36,6 +54,11 @@ const PatientInformation = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  if(loading){
+    return <Loading></Loading>
+  }
+
   return (
     <div className="">
       <div>
