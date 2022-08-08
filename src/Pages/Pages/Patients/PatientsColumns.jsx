@@ -4,29 +4,6 @@ import PatientAuthorizationsTableActionModal from "./PatientAuthorizationsTableA
 import PatientName from "./PatientName";
 import PatientStatusAction from "./PatientStatusAction";
 
-
-
-export const PatientsColumnsData = [
-  {
-    id: "12",
-    Patient: "April TestP",
-    contact_info: "(987)-654-3210",
-    provider: "ana",
-  },
-  {
-    id: "13",
-    Patient: "Hello goodbye",
-    contact_info: "(987)-654-3210",
-    provider: "jhiuyuy",
-  },
-  {
-    id: "14",
-    Patient: "Mickey Mouse",
-    contact_info: "(987)-654-3210",
-    provider: "ZZxxzcsaase",
-  },
-];
-
 export const PatientsColumnsColumn = [
   {
     Header: "Patient",
@@ -92,6 +69,8 @@ export const PatientsColumnsColumn = [
     Filter: ColumnFilter,
   },
 ];
+
+// patient authorization
 export const PatientsAuthorizationsTableData = [
   {
     id: "12",
