@@ -7,6 +7,8 @@ import doctor from "../../Assets/doctor.png";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import CustomLink from "../Shared/CustomLink";
+import { useEffect } from "react";
+import { getpatientsDetails } from "../../../features/Patient_redux/patientSlice";
 
 const PatientsInfo = () => {
   // Great parent component

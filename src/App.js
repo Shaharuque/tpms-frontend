@@ -84,13 +84,17 @@ import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits
 import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 import Testing from "./Testing/Testing";
+import ReduxTesting from "./Testing/ReduxTesting";
 
 function App() {
   return (
     <div className="app-body">
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
+        {/*Testing */}
         <Route path='/testing' element={<Testing></Testing>}></Route>
+        <Route path='/testing/redux' element={<ReduxTesting></ReduxTesting>}></Route>
+
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
           {/* DASHBOARD ROUTES  */}
@@ -192,6 +196,7 @@ function App() {
             path="recurring-session-edit"
             element={<RecurringSessionEdit></RecurringSessionEdit>}
           ></Route>
+
           {/* PATIENT  */}
           <Route path="patient/:id" element={<PatientsInfo></PatientsInfo>}>
             {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}

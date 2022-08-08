@@ -4,6 +4,8 @@ import PatientAuthorizationsTableActionModal from "./PatientAuthorizationsTableA
 import PatientName from "./PatientName";
 import PatientStatusAction from "./PatientStatusAction";
 
+
+
 export const PatientsColumnsData = [
   {
     id: "12",
