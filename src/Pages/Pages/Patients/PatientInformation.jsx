@@ -47,7 +47,7 @@ const PatientInformation = () => {
           ? patient_details?.client_middle_name
           : null,
         last_name: patient_details?.client_last_name,
-        dob: patient_details?.client_dob && patient_details?.client_dob,
+        dob: patient_details?.client_dob,
       });
     }, 0);
   }, [patient_details?.client_first_name]);
@@ -129,7 +129,7 @@ const PatientInformation = () => {
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 name="dob"
                 type="date"
-                {...register("check_Date")}
+                {...register("dob")}
               />
             </div>
             {/* gender */}
