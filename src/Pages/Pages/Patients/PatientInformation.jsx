@@ -42,12 +42,15 @@ const PatientInformation = () => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        first_name: `bill`,
-        middle_name: "luo",
+        first_name: patient_details?.client_first_name,
+        middle_name: patient_details?.client_middle_name
+          ? patient_details?.client_middle_name
+          : null,
+        last_name: patient_details?.client_last_name,
+        dob: patient_details?.client_dob && patient_details?.client_dob,
       });
-    }, 600);
-  }, [reset]);
-
+    }, 0);
+  }, [patient_details?.client_first_name]);
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -63,11 +66,11 @@ const PatientInformation = () => {
           <div className="flex ml-1 mt-1 items-center">
             <input
               type="checkbox"
-              checked={value ? true : false}
+              // checked={value ? true : false}
               name="patient"
-              onClick={() => {
-                setValue(!value);
-              }}
+              // onClick={() => {
+              //   setValue(!value);
+              // }}
             />
             <span className="text-xs ml-1 text-gray-600 font-normal">
               Active Patient
@@ -82,11 +85,8 @@ const PatientInformation = () => {
                 </span>
               </label>
               <input
-                // value={`${patient_details.client_first_name}`}
-                value="maria"
                 type="text"
                 name="first_name"
-                // value={patient_details?.client_first_name}
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("first_name")}
               />
@@ -98,7 +98,6 @@ const PatientInformation = () => {
                 </span>
               </label>
               <input
-                // value={`${patient_details.client_middle}`}
                 type="text"
                 name="middle_name"
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
