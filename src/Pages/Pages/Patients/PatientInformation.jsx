@@ -42,13 +42,11 @@ const PatientInformation = () => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        first_name: `${patient_details.client_first_name}`,
-        middle_name: `${patient_details.client_middle}`,
+        first_name: `bill`,
+        middle_name: "luo",
       });
-    }, 100);
+    }, 600);
   }, [reset]);
-
-  const [value, setValue] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -88,6 +86,7 @@ const PatientInformation = () => {
                 value="maria"
                 type="text"
                 name="first_name"
+                // value={patient_details?.client_first_name}
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("first_name")}
               />
@@ -129,6 +128,7 @@ const PatientInformation = () => {
               </label>
               <input
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                name="dob"
                 type="date"
                 {...register("check_Date")}
               />
