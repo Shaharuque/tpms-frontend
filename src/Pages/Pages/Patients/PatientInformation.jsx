@@ -11,7 +11,6 @@ import { getpatientsDetails } from "../../../features/Patient_redux/patientSlice
 import Loading from "../../../Loading/Loading";
 
 const PatientInformation = () => {
-  const [value, setValue] = useState(false);
   const [voiceMsg, setVoiceMsg] = useState(false);
   const [textMsg, setTextMsg] = useState(false);
   const [appointment, setAppointment] = useState(false);
@@ -24,39 +23,39 @@ const PatientInformation = () => {
   const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
-
-  //Patient Information 
+  //Patient Information
   const { id } = useParams();
   //console.log("patient Info", id);
   const dispatch = useDispatch();
 
-  const data=useSelector((state) => state.patientInfo)
-  const patient_details=data?.patientDetails?.clients
-  const loading=data?.loading
-  console.log(patient_details)
+  const data = useSelector((state) => state.patientInfo);
+  const patient_details = data?.patientDetails?.clients;
+  const loading = data?.loading;
+  console.log("patient details", patient_details);
 
-  useEffect(()=>{
+  useEffect(() => {
     //action dispatched
-    dispatch(getpatientsDetails(id))
-  },[])
+    dispatch(getpatientsDetails(id));
+  }, []);
 
-  
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        first_name: `bill`,
-        middle_name: "luo",
+        first_name: `${patient_details.client_first_name}`,
+        middle_name: `${patient_details.client_middle}`,
       });
-    }, 600);
+    }, 100);
   }, [reset]);
+
+  const [value, setValue] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
   };
 
-  if(loading){
-    return <Loading></Loading>
+  if (loading) {
+    return <Loading></Loading>;
   }
 
   return (
@@ -66,6 +65,7 @@ const PatientInformation = () => {
           <div className="flex ml-1 mt-1 items-center">
             <input
               type="checkbox"
+              checked={value ? true : false}
               name="patient"
               onClick={() => {
                 setValue(!value);
@@ -84,6 +84,8 @@ const PatientInformation = () => {
                 </span>
               </label>
               <input
+                // value={`${patient_details.client_first_name}`}
+                value="maria"
                 type="text"
                 name="first_name"
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
@@ -97,6 +99,7 @@ const PatientInformation = () => {
                 </span>
               </label>
               <input
+                // value={`${patient_details.client_middle}`}
                 type="text"
                 name="middle_name"
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
