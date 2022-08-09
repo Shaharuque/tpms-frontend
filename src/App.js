@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import "./modification.css";
 import Sidebar from "./Pages/Components/Sidebar.jsx";
 import Dashboard from "./Pages/Pages/Dashboard.jsx";
 import Patients from "./Pages/Pages/Patients.jsx";

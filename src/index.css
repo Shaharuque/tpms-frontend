@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+h1 {
+  font-size: 15px !important;
+  line-height: 18px !important;
+}
 
+.zfixed{
+  z-index: 999;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
