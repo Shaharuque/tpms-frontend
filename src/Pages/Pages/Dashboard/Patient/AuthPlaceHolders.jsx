@@ -1,8 +1,6 @@
 import React, { useMemo } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import {
-  AuthorizationNotRequiredColumn,
-  AuthorizationNotRequiredData,
   AuthPlaceHoldersColumn,
   AuthPlaceHoldersData,
 } from "./PatientTableData";
