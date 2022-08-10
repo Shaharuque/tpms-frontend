@@ -92,8 +92,11 @@ function App() {
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
         {/*Testing */}
-        <Route path='/testing' element={<Testing></Testing>}></Route>
-        <Route path='/testing/redux' element={<ReduxTesting></ReduxTesting>}></Route>
+        <Route path="/testing" element={<Testing></Testing>}></Route>
+        <Route
+          path="/testing/redux"
+          element={<ReduxTesting></ReduxTesting>}
+        ></Route>
 
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>

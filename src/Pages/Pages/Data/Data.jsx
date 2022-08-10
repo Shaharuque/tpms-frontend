@@ -57,162 +57,162 @@ export const task = [
   {
     report: "AR Follow Up Bucket",
     count: "57",
-    link: "#",
+    link: "/admin/billing/ar-followup-bucket",
   },
   {
     report: "Provider Escalation",
     count: "0",
-    link: "#",
+    link: "/admin/billing/ar-followup-bucket-filter-types/1",
   },
   {
     report: "Payor Escalation",
     count: "0",
-    link: "#",
+    link: "/admin/billing/ar-followup-bucket-filter-types/2",
   },
   {
     report: "MG Escalation",
     count: "0",
-    link: "#",
+    link: "/admin/billing/ar-followup-bucket-filter-types/3",
   },
   {
     report: "Medical Records",
     count: "0",
-    link: "#",
+    link: "/admin/billing/ar-followup-bucket-filter-types/4",
   },
 ];
 export const patient = [
   {
     report: "Expiring Authorization",
     count: "2",
-    link: "#",
+    link: "/admin/auth-to-expire",
   },
   {
     report: "Patient/Guarantor",
     count: "0",
-    link: "#",
+    link: "/admin/non-payor-tag",
   },
   {
     report: "No Authorization",
     count: "10",
-    link: "#",
+    link: "/admin/no-authorization",
   },
   {
     report: "Co-Pay For Today",
     count: "0",
-    link: "#",
+    link: "/admin/todays-copay",
   },
   {
     report: "Auth Place Holders",
     count: "0",
-    link: "#",
+    link: "/admin/auth-place-holder",
   },
 ];
 export const staffs = [
   {
     report: "Vacation(s) Pending Approval",
     count: "0",
-    link: "#",
+    link: "/admin/vacation-pending",
   },
   {
     report: "Missing Credentials",
     count: "11",
-    link: "#",
+    link: "/admin/missing-credentials",
   },
   {
     report: "Credentials To Expire",
     count: "0",
-    link: "#",
+    link: "/admin/credentials-expire",
   },
   {
     report: "Signature Not Loaded",
     count: "0",
-    link: "#",
+    link: "/admin/signature-not-update",
   },
   {
     report: " ",
     count: " ",
-    link: "#",
+    link: "/admin/",
   },
 ];
 export const billing = [
   {
     report: "Sessions Rendered - Not Billed",
     count: "321",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Last Weeks Deposits",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Last Month Statements",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Last Month Billed Dates ",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Pending Secondary Claims",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
 ];
 export const scheduler = [
   {
     report: "Scheduled Not Rendered",
     count: "71",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Sessions Not Attended Last Week",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Provider Signature Missing In Session",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Session Note Missing",
     count: "779",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Cancelled Session This Month",
     count: "23",
-    link: "#",
+    link: "/admin/",
   },
 ];
 export const reports = [
   {
     report: "Schedule Billable",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "Payment Deposits",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "KPI Report by Month",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "KPI Report by Patient",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
   {
     report: "KPI Report by Insurance",
     count: "0",
-    link: "#",
+    link: "/admin/",
   },
 ];
 
