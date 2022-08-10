@@ -108,19 +108,23 @@ function App() {
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/1"
-            element={<ProvideEscalation></ProvideEscalation>}
+            // element={<ProvideEscalation></ProvideEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/2"
-            element={<PayorEscalation></PayorEscalation>}
+            // element={<PayorEscalation></PayorEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/3"
-            element={<MGEscalation></MGEscalation>}
+            // element={<MGEscalation></MGEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/4"
-            element={<MedicalRecords></MedicalRecords>}
+            // element={<MedicalRecords></MedicalRecords>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           {/* Patients  */}
           <Route
