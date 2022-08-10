@@ -28,12 +28,6 @@ svg.rs-picker-toggle-caret.rs-icon {
     border-top: 2px solid #f2edff !important;
     der-top: 1px solid var(--rs-navs-tab-border);
 }
-/* .rs-btn-primary:hover, .rs-btn-primary:focus {
-    color: rgba(0, 0, 0, 0.808);
-    color: var(--rs-btn-primary-text);
-    background-color: "#f52525";
-    background-color: "#f52525";
-} */
 
 .rs-picker-default .rs-picker-toggle.rs-btn {
     padding-top: 7px;
@@ -101,16 +95,19 @@ svg.rs-picker-toggle-caret.rs-icon {
 .rs-nav-tabs.rs-nav-horizontal .rs-nav-item.rs-nav-item-active {
     border-bottom-width: 0;
     border-top-color: rgb(8 155 171) !important;
-    border-top-width: 2px !important;
+    border-top-width: 4px !important;
+    border-bottom-width: 0;
+    border-top-color: rgb(8 155 171) !important;
+    border-top-width: 4px !important;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    border-top: 1px solid;
+   
+    
 }
-
 
 .badge {
-    padding: 0.3em 0.6em;
-    line-height: 1.3;
-    text-transform: capitalize;
-    border: none;
+  
+    text-transform: capitalize;    
+
 }
-
-
-/* inner shadow */

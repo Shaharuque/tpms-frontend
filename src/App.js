@@ -284,9 +284,9 @@ function App() {
           <Route
             path="submit-billing"
             element={<BillingManager></BillingManager>}>
-              <Route path="processClims" element={<ProcessingClaim></ProcessingClaim>} ></Route>
-              <Route path="Batchingclimbs" element={<BatchingClaims></BatchingClaims>} ></Route>
-              <Route path="Manageclaims" element={<ManageClaims></ManageClaims>} ></Route>
+              <Route path="proces-Clims" element={<ProcessingClaim></ProcessingClaim>} ></Route>
+              <Route path="Batching-climbs" element={<BatchingClaims></BatchingClaims>} ></Route>
+              <Route path="Manage-claims" element={<ManageClaims></ManageClaims>} ></Route>
             </Route>
 
           <Route path="patient-List" element={<Patients></Patients>}></Route>

@@ -2,12 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-h1 {
-  font-size: 15px !important;
-  line-height: 18px !important;
+
+.rs-nav-justified {
+  display: -ms-flexbox;
+  display: flex;
+}
+.rs-nav-horizontal {
+  white-space: nowrap;
+}
+.rs-nav {
+  position: relative;
+  outline: 0;
 }
 
-.zfixed{
+
+
+.rs-nav-tabs.rs-nav-horizontal .rs-nav-item.rs-nav-item-active {
+  border-bottom-width: 0;
+}
+
+.rs-nav-tabs.rs-nav-horizontal > .rs-nav-item, .rs-nav-tabs.rs-nav-horizontal > .rs-dropdown .rs-dropdown-toggle {
+  border-radius: 6px 6px 0 0;
+}
+.rs-nav-tabs .rs-nav-item.rs-nav-item-active {
+  border: 1px solid #d9d9d9;
+  border: 1px solid var(--rs-navs-tab-border);
+  background-color: #fff;
+  background-color: var(--rs-bg-card);
+  z-index: 1;
+}
+.rs-nav-justified > .rs-nav-item, .rs-nav-justified > .rs-dropdown {
+  -ms-flex: 1 1 1%;
+  flex: 1 1 1%;
+}
+.rs-nav-horizontal > .rs-nav-item, .rs-nav-horizontal > .rs-dropdown {
+  display: inline-block;
+  vertical-align: top;
+}
+/* active color chnage */
+.rs-nav-item.rs-nav-item-active {
+  position: relative;
+  color: #089bab;
+  z-index: 1;
+}
+
+/* responsive */
+.rs-nav-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #8e8e93;
+  color: var(--rs-navs-text);
+  -webkit-transition: color 0.3s linear, background-color 0.3s linear;
+  transition: color 0.3s linear, background-color 0.3s linear;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  outline: none;
+  text-decoration: none;
+}
+
+.rs-nav :hover{
+  border-right: 1px solid;
+    border-left: 1px solid;
+    border-top: 1px solid;
+  color: 2px solid #089bab;
+  
+}
+
+.zfixed {
   z-index: 999;
 }
 
