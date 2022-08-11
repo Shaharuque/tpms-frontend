@@ -87,6 +87,10 @@ import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 import ReduxTesting from "./Testing/ReduxTesting";
 import MainBase from "./Testing/Table_React/MainBase";
 
+import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
+import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
+import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
+
 
 function App() {
   return (
@@ -107,19 +111,23 @@ function App() {
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/1"
-            element={<ProvideEscalation></ProvideEscalation>}
+            // element={<ProvideEscalation></ProvideEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/2"
-            element={<PayorEscalation></PayorEscalation>}
+            // element={<PayorEscalation></PayorEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/3"
-            element={<MGEscalation></MGEscalation>}
+            // element={<MGEscalation></MGEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/4"
-            element={<MedicalRecords></MedicalRecords>}
+            // element={<MedicalRecords></MedicalRecords>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           {/* Patients  */}
           <Route
@@ -164,23 +172,23 @@ function App() {
 
           {/* Billing  */}
           <Route
-            path="signature-not-update"
+            path="session-not-bulled"
             element={<SessionRendered></SessionRendered>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-week-deposit"
             element={<LastWeeksDeposits></LastWeeksDeposits>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-five-statement"
             element={<LastMonthsStatements></LastMonthsStatements>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-month-billed-dated"
             element={<LastMonthBilledDates></LastMonthBilledDates>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="pending-secondary"
             element={<PendingSecondaryClaims></PendingSecondaryClaims>}
           ></Route>
 
@@ -282,8 +290,12 @@ function App() {
           {/* BILLING  */}
           <Route
             path="submit-billing"
-            element={<BillingManager></BillingManager>}
-          ></Route>
+            element={<BillingManager></BillingManager>}>
+              <Route path="proces-Clims" element={<ProcessingClaim></ProcessingClaim>} ></Route>
+              <Route path="Batching-climbs" element={<BatchingClaims></BatchingClaims>} ></Route>
+              <Route path="Manage-claims" element={<ManageClaims></ManageClaims>} ></Route>
+            </Route>
+
           <Route path="patient-List" element={<Patients></Patients>}></Route>
           <Route path="staffs" element={<Staffs></Staffs>}></Route>
           <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>

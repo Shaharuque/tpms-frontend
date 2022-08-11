@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const Settings = () => {
   // console.log(setting);
-  ///Redux works will be done here
+  //Redux works will be done here
   return (
     <div>
       <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap  justify-between">
