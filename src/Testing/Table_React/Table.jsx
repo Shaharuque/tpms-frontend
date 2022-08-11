@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTable, useSortBy } from "react-table";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Loading from '../../Loading/Loading';
 
 const Table = ({ columns, data, update,hasMore }) => {
     const {
@@ -28,7 +29,7 @@ const Table = ({ columns, data, update,hasMore }) => {
         dataLength={rows.length}
         next={update}
         hasMore={hasMore}
-        loader={<h4 className='text-red-700'>Loading more  items...</h4>}
+        loader={<Loading></Loading>}
       >
         <table className='m-12'  {...getTableProps()}>
           <thead className='sticky'>
