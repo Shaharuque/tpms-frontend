@@ -138,27 +138,27 @@ export const billing = [
   {
     report: "Sessions Rendered - Not Billed",
     count: "321",
-    link: "/admin/",
+    link: "/admin/session-not-bulled",
   },
   {
     report: "Last Weeks Deposits",
     count: "0",
-    link: "/admin/",
+    link: "/admin/last-week-deposit",
   },
   {
     report: "Last Month Statements",
     count: "0",
-    link: "/admin/",
+    link: "/admin/last-five-statement",
   },
   {
     report: "Last Month Billed Dates ",
     count: "0",
-    link: "/admin/",
+    link: "/admin/last-month-billed-dated",
   },
   {
     report: "Pending Secondary Claims",
     count: "0",
-    link: "/admin/",
+    link: "/admin/pending-secondary",
   },
 ];
 export const scheduler = [

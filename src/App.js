@@ -169,23 +169,23 @@ function App() {
 
           {/* Billing  */}
           <Route
-            path="signature-not-update"
+            path="session-not-bulled"
             element={<SessionRendered></SessionRendered>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-week-deposit"
             element={<LastWeeksDeposits></LastWeeksDeposits>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-five-statement"
             element={<LastMonthsStatements></LastMonthsStatements>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-month-billed-dated"
             element={<LastMonthBilledDates></LastMonthBilledDates>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="pending-secondary"
             element={<PendingSecondaryClaims></PendingSecondaryClaims>}
           ></Route>
 
