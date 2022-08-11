@@ -92,8 +92,11 @@ function App() {
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
         {/*Testing */}
-        <Route path='/testing' element={<Testing></Testing>}></Route>
-        <Route path='/testing/redux' element={<ReduxTesting></ReduxTesting>}></Route>
+        <Route path="/testing" element={<Testing></Testing>}></Route>
+        <Route
+          path="/testing/redux"
+          element={<ReduxTesting></ReduxTesting>}
+        ></Route>
 
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
@@ -105,19 +108,23 @@ function App() {
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/1"
-            element={<ProvideEscalation></ProvideEscalation>}
+            // element={<ProvideEscalation></ProvideEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/2"
-            element={<PayorEscalation></PayorEscalation>}
+            // element={<PayorEscalation></PayorEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/3"
-            element={<MGEscalation></MGEscalation>}
+            // element={<MGEscalation></MGEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/4"
-            element={<MedicalRecords></MedicalRecords>}
+            // element={<MedicalRecords></MedicalRecords>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           {/* Patients  */}
           <Route
@@ -162,23 +169,23 @@ function App() {
 
           {/* Billing  */}
           <Route
-            path="signature-not-update"
+            path="session-not-bulled"
             element={<SessionRendered></SessionRendered>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-week-deposit"
             element={<LastWeeksDeposits></LastWeeksDeposits>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-five-statement"
             element={<LastMonthsStatements></LastMonthsStatements>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-month-billed-dated"
             element={<LastMonthBilledDates></LastMonthBilledDates>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="pending-secondary"
             element={<PendingSecondaryClaims></PendingSecondaryClaims>}
           ></Route>
 
