@@ -18,6 +18,7 @@ const PatientInformation = () => {
   const [emailSend, setEmailSend] = useState(false);
   const [Guarantor, setGuarantor] = useState(false);
   const [file, setFile] = useState();
+  //
   const [open, setOpen] = useState(false);
   const [phoneOpen, setPhoneOpen] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
@@ -48,9 +49,22 @@ const PatientInformation = () => {
           : null,
         last_name: patient_details?.client_last_name,
         dob: patient_details?.client_dob,
+        email:patient_details?.email,
+        phone:patient_details?.phone_number,
+        gender:patient_details?.client_gender,
       });
     }, 0);
   }, [patient_details?.client_first_name]);
+
+  
+  const options = [
+    { value: 'C++', label: 'C++' },
+    { value: 'JAVA', label: 'JAVA' },
+    { value: 'Javascript', label: 'Javascript' },
+    { value: 'Python', label: 'Python' },
+    { value: 'Swift', label: 'Swift' }
+  ];
+
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -274,6 +288,7 @@ const PatientInformation = () => {
                     </div>
                   </motion.div>
                 )}
+
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   {" "}
                   <div>

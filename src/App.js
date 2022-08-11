@@ -83,11 +83,12 @@ import LastMonthsStatements from "./Pages/Pages/Dashboard/Billing/LastMonthsStat
 import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits";
 import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
-import Testing from "./Testing/Testing";
+
 import ReduxTesting from "./Testing/ReduxTesting";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
+import MainBase from "./Testing/Table_React/MainBase";
 
 function App() {
   return (
@@ -95,7 +96,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
         {/*Testing */}
-        <Route path="/testing" element={<Testing></Testing>}></Route>
+        <Route path="/table" element={<MainBase></MainBase>}></Route>
         <Route
           path="/testing/redux"
           element={<ReduxTesting></ReduxTesting>}
@@ -290,11 +291,21 @@ function App() {
           {/* BILLING  */}
           <Route
             path="submit-billing"
-            element={<BillingManager></BillingManager>}>
-              <Route path="proces-Clims" element={<ProcessingClaim></ProcessingClaim>} ></Route>
-              <Route path="Batching-climbs" element={<BatchingClaims></BatchingClaims>} ></Route>
-              <Route path="Manage-claims" element={<ManageClaims></ManageClaims>} ></Route>
-            </Route>
+            element={<BillingManager></BillingManager>}
+          >
+            <Route
+              path="proces-Clims"
+              element={<ProcessingClaim></ProcessingClaim>}
+            ></Route>
+            <Route
+              path="Batching-climbs"
+              element={<BatchingClaims></BatchingClaims>}
+            ></Route>
+            <Route
+              path="Manage-claims"
+              element={<ManageClaims></ManageClaims>}
+            ></Route>
+          </Route>
 
           <Route path="patient-List" element={<Patients></Patients>}></Route>
           <Route path="staffs" element={<Staffs></Staffs>}></Route>

@@ -48,7 +48,7 @@ const patientSlice = createSlice({
 export const patientDataReducer = patientSlice.reducer; //sliceName.reducer
 
 //----------------------------------------//
-//async action create
+//async action create (Patient Details)
 export const getpatientsDetails = createAsyncThunk("patients/getpatientsDetails", async (id) => {
   //onno api thik e kaj kortesey
   const response = await axios.get(`https://ovh.therapypms.com/api/v1/admin/ac/patient/info/${id}`,{
