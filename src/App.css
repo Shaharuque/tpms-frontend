@@ -2,12 +2,9 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
+  line-height: inherit !important;
 
 }
-
-/* .Side_container {
-  display: flex;
-} */
 
 main {
   width: 100%;
@@ -16,11 +13,10 @@ main {
 }
 
 .sidebar {
-  /* background-color: #09A2B3; */
   color: #fff;
   height: 100vh;
   transition: all 0.5s;
-  /* width: 230px; */
+
 }
 
 .top-section {
@@ -66,6 +62,6 @@ main {
 }
 
 .active {
-  background: #fff;
-  color: #02818F;
+  background: #fff !important;
+  color: #02818F !important;
 }

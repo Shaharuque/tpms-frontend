@@ -6,7 +6,7 @@ import "./Settings/SettingComponents/Setting.css";
 import { motion } from "framer-motion";
 
 const Settings = () => {
-  // console.log(setting);
+
   return (
     <div>
       <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap  justify-between">

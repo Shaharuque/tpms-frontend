@@ -1,0 +1,113 @@
+
+.rs-btn-primary {
+    color: #fff;
+    color: var(--rs-btn-primary-text);
+    background: linear-gradient(to right, rgba(13, 181, 200, 1) 0%, rgba(8, 155, 171, 1) 100%) !important;
+    background-color: "#70931b" !important;
+    border: none;
+}
+
+
+
+.rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
+    color: #fff;
+    color: var(--rs-calendar-date-selected-text);
+    background-color: #3498ff;
+    background: linear-gradient(to right, rgba(13, 181, 200, 1) 0%, rgba(8, 155, 171, 1) 100%) !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
+svg.rs-picker-toggle-caret.rs-icon {
+    margin: 0;
+}
+
+
+.rs-nav-tabs.rs-nav-horizontal .rs-nav-bar {
+    border-top: 2px solid #f2edff !important;
+    der-top: 1px solid var(--rs-navs-tab-border);
+}
+
+.rs-picker-default .rs-picker-toggle.rs-btn {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    width: 282px;
+}
+
+/* picked date align */
+.rs-picker-default .rs-picker-toggle {
+    position: relative;
+    z-index: 5;
+    padding-right: 67px;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    color: #575757;
+    border: 1px solid #e5e5ea;
+    padding-left: 44px;
+}
+/* calander align */
+.rs-picker-toggle-caret {
+    display: inline-block;
+    margin-right: 240px;
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-weight: normal;
+    color: #8e8e93;
+}
+
+/* ok button style */
+.rs-picker-toolbar-right-btn-ok { 
+    text-align: center; 
+    cursor: pointer;
+    outline: 0 ; 
+    border: none; 
+    padding: 8px 12px; 
+    font-size: 14px; 
+    border-radius: 30px;
+    color: #fff;
+    background-color: #bd0f0f;
+    width: 100px;
+}
+
+/* range style */
+.rs-picker-menu .rs-calendar .rs-calendar-table-cell-content {
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 21px;
+    display: inline-block;
+}
+
+
+.rs-nav-justified > .rs-nav-item, .rs-nav-justified > .rs-dropdown {
+    /* -ms-flex: 1 1 1%; */
+    flex: 0 1 20% !important ;
+}
+
+#jahid{
+    display: flex !important;
+    justify-content: space-evenly !important;
+}
+
+/* border color */
+.rs-nav-tabs.rs-nav-horizontal .rs-nav-item.rs-nav-item-active {
+    border-bottom-width: 0;
+    border-top-color: rgb(8 155 171) !important;
+    border-top-width: 4px !important;
+    border-bottom-width: 0;
+    border-top-color: rgb(8 155 171) !important;
+    border-top-width: 4px !important;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    border-top: 1px solid;
+   
+    
+}
+
+.badge {
+  
+    text-transform: capitalize;    
+
+}
