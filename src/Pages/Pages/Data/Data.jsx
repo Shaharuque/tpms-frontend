@@ -165,27 +165,27 @@ export const scheduler = [
   {
     report: "Scheduled Not Rendered",
     count: "71",
-    link: "/admin/",
+    link: "/admin/scheduler-not-render",
   },
   {
     report: "Sessions Not Attended Last Week",
     count: "0",
-    link: "/admin/",
+    link: "/admin/schedule-not-attend-last-week",
   },
   {
     report: "Provider Signature Missing In Session",
     count: "0",
-    link: "/admin/",
+    link: "/admin/provider-signature-missing-session",
   },
   {
     report: "Session Note Missing",
     count: "779",
-    link: "/admin/",
+    link: "/admin/session-note-missing",
   },
   {
     report: "Cancelled Session This Month",
     count: "23",
-    link: "/admin/",
+    link: "/admin/cancelled-session",
   },
 ];
 export const reports = [

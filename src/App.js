@@ -89,6 +89,11 @@ import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
 import MainBase from "./Testing/Table_React/MainBase";
+import Scheduled from "./Pages/Pages/Dashboard/Scheduler/Scheduled";
+import Sessions from "./Pages/Pages/Dashboard/Scheduler/Sessions";
+import Provider from "./Pages/Pages/Dashboard/Scheduler/Provider";
+import SessionNote from "./Pages/Pages/Dashboard/Scheduler/SessionNote";
+import CancelledSession from "./Pages/Pages/Dashboard/Scheduler/CancelledSession";
 
 function App() {
   return (
@@ -191,6 +196,28 @@ function App() {
           <Route
             path="pending-secondary"
             element={<PendingSecondaryClaims></PendingSecondaryClaims>}
+          ></Route>
+
+          {/* Scheduling  */}
+          <Route
+            path="scheduler-not-render"
+            element={<Scheduled></Scheduled>}
+          ></Route>
+          <Route
+            path="schedule-not-attend-last-week"
+            element={<Sessions></Sessions>}
+          ></Route>
+          <Route
+            path="provider-signature-missing-session"
+            element={<Provider></Provider>}
+          ></Route>
+          <Route
+            path="session-note-missing"
+            element={<SessionNote></SessionNote>}
+          ></Route>
+          <Route
+            path="cancelled-session"
+            element={<CancelledSession></CancelledSession>}
           ></Route>
 
           {/* APPOINTMENT ROUTES */}
