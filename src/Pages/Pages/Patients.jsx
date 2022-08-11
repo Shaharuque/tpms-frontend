@@ -71,11 +71,11 @@ const Patients = () => {
   } = useTable({ columns, data }, useFilters, useSortBy, usePagination);
 
   if (data.length === 0) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
 
   return (
-    <div>
+    <div className="">
       <h1 className="text-lg mb-2 text-orange-400">All Patients</h1>
       {
         <div>

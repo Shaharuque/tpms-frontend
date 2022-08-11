@@ -90,6 +90,11 @@ import MainBase from "./Testing/Table_React/MainBase";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
+import Scheduled from "./Pages/Pages/Dashboard/Scheduler/Scheduled";
+import Sessions from "./Pages/Pages/Dashboard/Scheduler/Sessions";
+import Provider from "./Pages/Pages/Dashboard/Scheduler/Provider";
+import SessionNote from "./Pages/Pages/Dashboard/Scheduler/SessionNote";
+import CancelledSession from "./Pages/Pages/Dashboard/Scheduler/CancelledSession";
 
 
 function App() {
@@ -98,8 +103,10 @@ function App() {
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
         {/*Testing */}
+
         <Route path='/table' element={<MainBase></MainBase>}></Route>
         <Route path='/testing/redux' element={<ReduxTesting></ReduxTesting>}></Route>
+
 
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
@@ -190,6 +197,28 @@ function App() {
           <Route
             path="pending-secondary"
             element={<PendingSecondaryClaims></PendingSecondaryClaims>}
+          ></Route>
+
+          {/* Scheduling  */}
+          <Route
+            path="scheduler-not-render"
+            element={<Scheduled></Scheduled>}
+          ></Route>
+          <Route
+            path="schedule-not-attend-last-week"
+            element={<Sessions></Sessions>}
+          ></Route>
+          <Route
+            path="provider-signature-missing-session"
+            element={<Provider></Provider>}
+          ></Route>
+          <Route
+            path="session-note-missing"
+            element={<SessionNote></SessionNote>}
+          ></Route>
+          <Route
+            path="cancelled-session"
+            element={<CancelledSession></CancelledSession>}
           ></Route>
 
           {/* APPOINTMENT ROUTES */}
@@ -290,11 +319,21 @@ function App() {
           {/* BILLING  */}
           <Route
             path="submit-billing"
-            element={<BillingManager></BillingManager>}>
-              <Route path="proces-Clims" element={<ProcessingClaim></ProcessingClaim>} ></Route>
-              <Route path="Batching-climbs" element={<BatchingClaims></BatchingClaims>} ></Route>
-              <Route path="Manage-claims" element={<ManageClaims></ManageClaims>} ></Route>
-            </Route>
+            element={<BillingManager></BillingManager>}
+          >
+            <Route
+              path="proces-Clims"
+              element={<ProcessingClaim></ProcessingClaim>}
+            ></Route>
+            <Route
+              path="Batching-climbs"
+              element={<BatchingClaims></BatchingClaims>}
+            ></Route>
+            <Route
+              path="Manage-claims"
+              element={<ManageClaims></ManageClaims>}
+            ></Route>
+          </Route>
 
           <Route path="patient-List" element={<Patients></Patients>}></Route>
           <Route path="staffs" element={<Staffs></Staffs>}></Route>
