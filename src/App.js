@@ -85,10 +85,11 @@ import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecon
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 
 import ReduxTesting from "./Testing/ReduxTesting";
+import MainBase from "./Testing/Table_React/MainBase";
+
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
-import MainBase from "./Testing/Table_React/MainBase";
 import Scheduled from "./Pages/Pages/Dashboard/Scheduler/Scheduled";
 import Sessions from "./Pages/Pages/Dashboard/Scheduler/Sessions";
 import Provider from "./Pages/Pages/Dashboard/Scheduler/Provider";
@@ -101,6 +102,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
         {/*Testing */}
+
         <Route path="/table" element={<MainBase></MainBase>}></Route>
         <Route
           path="/testing/redux"

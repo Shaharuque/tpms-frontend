@@ -1,5 +1,8 @@
 //This code is almost good for infinite scroling in React table
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Loading from '../../Loading/Loading';
+import { headers } from '../../Misc/BaseClient';
 import Table from './Table';
 
 
@@ -8,17 +11,17 @@ const MainBase = () => {
 
   const [hasMore, sethasMore] = useState(true);
 
-  const [page, setpage] = useState(10);
+  const [page, setpage] = useState(2);
 
   useEffect(() => {
     const getComments = async () => {
-      const res = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=10`
-        // For json server use url below
-        // `http://localhost:3004/comments?_page=1&_limit=20`
-      );
-      const result = await res.json();
-      const data = result.results;
+      const res = await axios({
+        method: "get",
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
+        headers: headers,
+      });
+      // const result = await res.json();
+      const data = res.data?.clients?.data;
       //console.log(data)
       setItems(data);
     };
@@ -27,39 +30,44 @@ const MainBase = () => {
   }, []);
 
   const fetchComments = async () => {
-    const res = await fetch(
-      `https://pokeapi.co/api/v2/pokemon?limit=${page}`
-      // For json server use url below
-      // `http://localhost:3004/comments?_page=${page}&_limit=20`
-    );
-    const result = await res.json();
-    const data = result.results
-    console.log(data)
+    const res = await axios({
+      method: "get",
+      url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
+      headers: headers,
+    });
+    const data = res.data?.clients?.data;
+    //console.log(data)
     return data;
   };
 
   const fetchData = async () => {
     const commentsFormServer = await fetchComments();
+    console.log(commentsFormServer)
 
     setItems([...items, ...commentsFormServer]);
+
     if (commentsFormServer.length === 0) {
       sethasMore(false);
     }
-    setpage(page + 10);
+    setpage(page + 1);
   };
-  console.log(items)
-  
+  //console.log(items)
+  console.log(page)
 
   //columns
   const columns = React.useMemo(
     () => [
       {
         Header: "Name",
-        accessor: "name"
+        accessor: "client_full_name"
       },
       {
-        Header: "Info",
-        accessor: ""
+        Header: "DOB",
+        accessor: "client_dob"
+      },
+      {
+        Header: "Phone Number",
+        accessor: "phone_number"
       }
     ],
     []
