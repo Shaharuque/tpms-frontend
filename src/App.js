@@ -83,7 +83,7 @@ import LastMonthsStatements from "./Pages/Pages/Dashboard/Billing/LastMonthsStat
 import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits";
 import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
-
+import Testing from "./Testing/Testing";
 import ReduxTesting from "./Testing/ReduxTesting";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
