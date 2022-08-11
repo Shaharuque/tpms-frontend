@@ -3,7 +3,7 @@ import { useFilters, usePagination, useSortBy, useTable } from "react-table";
 import { PatientsColumnsColumn } from "./Patients/PatientsColumns";
 import axios from "axios";
 import { memo } from "react";
-import {headers} from '../../Misc/BaseClient'
+import { headers } from "../../Misc/BaseClient";
 import Loading from "../../Loading/Loading";
 
 const Patients = () => {
@@ -37,11 +37,11 @@ const Patients = () => {
   } = useTable({ columns, data }, useFilters, useSortBy, usePagination);
 
   if (data.length === 0) {
-    return <Loading></Loading>
+    return <Loading></Loading>;
   }
 
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <h1 className="text-lg mb-2 text-orange-400">All Patients</h1>
       {
         <div>
