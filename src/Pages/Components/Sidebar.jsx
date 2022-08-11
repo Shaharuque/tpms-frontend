@@ -198,7 +198,7 @@ const Sidebar = () => {
       <div
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
-        className="Side_container fixed bg-secondary left-0 top-0"
+        className="Side_container fixed bg-secondary left-0 top-0 zfixed"
       >
         <div
           style={{

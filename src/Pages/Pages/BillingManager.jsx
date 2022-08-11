@@ -1,68 +1,58 @@
-import React, { useState } from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import BatchingClaims from "./BillingManager/BatchingClaims";
-import ManageClaims from "./BillingManager/ManageClaims";
-import ProcessingClaim from "./BillingManager/ProcessingClaim";
+import React from 'react';
+import { Nav } from "rsuite";
+import ReactDOM from 'react-dom';
+import { NavLink, Outlet  } from "react-router-dom";
+
+ 
 
 const BillingManager = () => {
-  const [toggle, setToggle] = useState(1);
+
   return (
-    <Tabs>
-      <TabList className=" mb-5 ">
-        <div className="flex flex-wrap ">
-          <Tab
-            onClick={() => setToggle(1)}
-            className={
-              toggle === 1
-                ? "py-2 px-6   text-xs text-primary font-normal  shadow-md"
-                : "py-2 px-6 text-xs tab-box font-normal "
-            }
-          >
-            Processing Claim(s){" "}
-            <span className="bg-orange-400 text-[10px] px-[4px] text-white ml-2 rounded-full">
-              Step-1
-            </span>
-          </Tab>
+    <div className="container mx-auto mb-5 mt-5">
+  <Nav appearance="tabs" justified className='mt-5'>
+      <NavLink
+        
+        className={(navinfo) =>
+          navinfo.isActive ? "rs-nav-item rs-nav-item-active" : "rs-nav-item "
+        }
+        to={"proces-Clims"}
+      >
+        Processing Claim(s)
+        <span className="bg-orange-400 badge text-white  rounded-full">
+          step-1
+        </span>
+      </NavLink>
 
-          <Tab
-            onClick={() => setToggle(2)}
-            className={
-              toggle === 2
-                ? "py-2 px-6  text-xs text-primary font-normal  shadow-md"
-                : "py-2 px-6 font-normal  text-xs tab-box"
-            }
-          >
-            Batching Claim(s){" "}
-            <span className="bg-orange-400 ml-2 text-[10px] px-[4px] text-white rounded-full">
-              Step-2
-            </span>
-          </Tab>
-          <Tab
-            onClick={() => setToggle(3)}
-            className={
-              toggle === 3
-                ? "py-2 px-6   text-xs text-primary font-normal  shadow-md"
-                : "py-2 px-6 font-normal  text-xs tab-box"
-            }
-          >
-            Manage Claim(s){" "}
-            <span className="bg-orange-400 ml-2 text-[10px] px-[4px] text-white rounded-full">
-              Step-3
-            </span>
-          </Tab>
-        </div>
-      </TabList>
+      <NavLink
+    
+        className={(navinfo) =>
+          navinfo.isActive ? "rs-nav-item rs-nav-item-active" : "rs-nav-item"
+        }
+        to={"Batching-climbs"}
+      >
+        Batching Claim(s)
+        <span className="bg-orange-400 badge text-white ml-2 rounded-full">
+          step-2
+        </span>
+      </NavLink>
+     
+      <NavLink
+        className={(navinfo) =>
+          navinfo.isActive ? "rs-nav-item rs-nav-item-active" : "rs-nav-item"
+        }
+        to={"Manage-claims"}
+      >
+        Manage claim(s)
+        <span className="bg-orange-400 badge text-white ml-2 rounded-full">
+          step-3
+        </span>
+      </NavLink>
 
-      <TabPanel>
-        <ProcessingClaim></ProcessingClaim>
-      </TabPanel>
-      <TabPanel>
-        <BatchingClaims></BatchingClaims>
-      </TabPanel>
-      <TabPanel>
-        <ManageClaims></ManageClaims>
-      </TabPanel>
-    </Tabs>
+       
+    </Nav>
+    <hr className='mb-5'></hr>
+    <Outlet/>
+  </div>
   );
 };
 

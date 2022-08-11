@@ -85,6 +85,9 @@ import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecon
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 import Testing from "./Testing/Testing";
 import ReduxTesting from "./Testing/ReduxTesting";
+import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
+import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
+import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
 
 function App() {
   return (
@@ -287,8 +290,12 @@ function App() {
           {/* BILLING  */}
           <Route
             path="submit-billing"
-            element={<BillingManager></BillingManager>}
-          ></Route>
+            element={<BillingManager></BillingManager>}>
+              <Route path="proces-Clims" element={<ProcessingClaim></ProcessingClaim>} ></Route>
+              <Route path="Batching-climbs" element={<BatchingClaims></BatchingClaims>} ></Route>
+              <Route path="Manage-claims" element={<ManageClaims></ManageClaims>} ></Route>
+            </Route>
+
           <Route path="patient-List" element={<Patients></Patients>}></Route>
           <Route path="staffs" element={<Staffs></Staffs>}></Route>
           <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>
