@@ -83,8 +83,10 @@ import LastMonthsStatements from "./Pages/Pages/Dashboard/Billing/LastMonthsStat
 import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits";
 import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
-import Testing from "./Testing/Testing";
+
 import ReduxTesting from "./Testing/ReduxTesting";
+import MainBase from "./Testing/Table_React/MainBase";
+
 
 function App() {
   return (
@@ -92,7 +94,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
         {/*Testing */}
-        <Route path='/testing' element={<Testing></Testing>}></Route>
+        <Route path='/table' element={<MainBase></MainBase>}></Route>
         <Route path='/testing/redux' element={<ReduxTesting></ReduxTesting>}></Route>
 
         <Route path="/admin" element={<Sidebar></Sidebar>}>

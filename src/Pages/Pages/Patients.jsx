@@ -21,6 +21,7 @@ const Patients = () => {
       setTableData(res.data?.clients?.data);
     });
   }, []);
+  
 
   const data = useMemo(() => tableData, [tableData]);
   const columns = useMemo(() => [...PatientsColumnsColumn], []);
