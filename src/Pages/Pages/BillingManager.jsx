@@ -51,6 +51,7 @@ const BillingManager = () => {
        
     </Nav>
     <hr className='mb-5'></hr>
+    {/* <div class="rs-nav-bar"></div> */}
     <Outlet/>
   </div>
   );

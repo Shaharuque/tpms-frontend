@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "../Settings/SettingComponents/CheckBox";
+
+
 import {
   ManageClaimsColumnsColumn,
   ManageClaimsColumnsData,

@@ -2,9 +2,8 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
-  line-height: inherit !important;
-
 }
+
 
 main {
   width: 100%;
@@ -27,6 +26,7 @@ main {
 
 .logo {
   /* font-size: 30px; */
+  /* dadasfkala */
 }
 
 .bars {
@@ -49,6 +49,7 @@ main {
 .link_text {
   font-weight: 500;
 }
+
 
 /* .icon {
   font-size: 25px;
