@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import bg from "../Assets/bg.png";
 import logo from "../Assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,29 +16,28 @@ const LogInForm = () => {
   } = useForm();
   const onSubmit = (data) => {
     fetch("https://ovh.therapypms.com/api/v1/admin/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),    //object k stringify korey server side a send kore lagey tai JSON.stringify korey
-                })
-                    .then((res) => {
-                        console.log(res)
-                        if (res.status === 201) {
-                          console.log("logged in")
-                        }
-                        else {
-                          console.log("Cann't perform the action")
-                        }
-                        return res.json()
-                    })
-                    .then(result=>{
-                      console.log(result)
-                      if(result.status=='success'){
-                        localStorage.setItem('token',result.access_token)
-                        navigate('/admin')
-                      }
-                    })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          console.log("logged in");
+        } else {
+          console.log("Cann't perform the action");
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.status == "success") {
+          localStorage.setItem("token", result.access_token);
+          navigate("/admin");
+        }
+      });
     reset();
   };
   return (

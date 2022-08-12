@@ -35,11 +35,7 @@
         padding: 0 10px;
     }
 
-    .login-form {
-        width: 95%;
-        top: 10em;
-        right: -6px;
-    }
+
 
 }
 
@@ -56,11 +52,7 @@
         padding: 0 10px;
     }
 
-    .login-form {
-        width: 95%;
-        top: 10em;
-        right: -6px;
-    }
+
 
 }
 
@@ -76,11 +68,7 @@
         padding: 0 8px;
     }
 
-    .login-form {
-        width: 65%;
-        top: 18em;
-        right: 7em;
-    }
+ 
 
 }
 
@@ -97,11 +85,7 @@
         padding: 0 8px;
     }
 
-    .login-form {
-        width: 65%;
-        top: 18em;
-        right: 7em;
-    }
+ 
 }
 
 @media only screen and (min-width:1025px) {
@@ -117,11 +101,6 @@
         margin: 0 auto;
     } */
 
-    .login-form {
-        width: 29%;
-        top: 15em;
-        right: 24em;
-    }
 }
 
 @media only screen and (min-width:1281px) {
@@ -132,10 +111,5 @@
         margin-left: 5%;
     }
 
-    .login-form {
-        width: 29%;
-        top: 15em;
-        right: 24em;
-    }
 
 }

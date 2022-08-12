@@ -96,7 +96,6 @@ import Provider from "./Pages/Pages/Dashboard/Scheduler/Provider";
 import SessionNote from "./Pages/Pages/Dashboard/Scheduler/SessionNote";
 import CancelledSession from "./Pages/Pages/Dashboard/Scheduler/CancelledSession";
 
-
 function App() {
   return (
     <div className="app-body">
@@ -104,9 +103,11 @@ function App() {
         <Route path="/" element={<LogIn></LogIn>}></Route>
         {/*Testing */}
 
-        <Route path='/table' element={<MainBase></MainBase>}></Route>
-        <Route path='/testing/redux' element={<ReduxTesting></ReduxTesting>}></Route>
-
+        <Route path="/table" element={<MainBase></MainBase>}></Route>
+        <Route
+          path="/testing/redux"
+          element={<ReduxTesting></ReduxTesting>}
+        ></Route>
 
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
