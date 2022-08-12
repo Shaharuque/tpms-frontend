@@ -192,27 +192,27 @@ export const reports = [
   {
     report: "Schedule Billable",
     count: "0",
-    link: "/admin/",
+    link: "/admin/session-manage",
   },
   {
     report: "Payment Deposits",
     count: "0",
-    link: "/admin/",
+    link: "/admin/m-remittance",
   },
   {
     report: "KPI Report by Month",
     count: "0",
-    link: "/admin/",
+    link: "/admin/kpi-reported-by-months-view",
   },
   {
     report: "KPI Report by Patient",
     count: "0",
-    link: "/admin/",
+    link: "/admin/kpi-reported-by-patient-view",
   },
   {
     report: "KPI Report by Insurance",
     count: "0",
-    link: "/admin/",
+    link: "/admin/kpi-reported-by-insurance-view",
   },
 ];
 

@@ -83,10 +83,8 @@ import LastMonthsStatements from "./Pages/Pages/Dashboard/Billing/LastMonthsStat
 import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits";
 import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
-
 import ReduxTesting from "./Testing/ReduxTesting";
 import MainBase from "./Testing/Table_React/MainBase";
-
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
@@ -95,6 +93,11 @@ import Sessions from "./Pages/Pages/Dashboard/Scheduler/Sessions";
 import Provider from "./Pages/Pages/Dashboard/Scheduler/Provider";
 import SessionNote from "./Pages/Pages/Dashboard/Scheduler/SessionNote";
 import CancelledSession from "./Pages/Pages/Dashboard/Scheduler/CancelledSession";
+import PaymentDeposits from "./Pages/Pages/Dashboard/TrendingReports/PaymentDeposits";
+import KPIReportsInsurance from "./Pages/Pages/Dashboard/TrendingReports/KPIReportsInsurance";
+import KPIReportsPatient from "./Pages/Pages/Dashboard/TrendingReports/KPIReportsPatient";
+import KPIReports from "./Pages/Pages/Dashboard/TrendingReports/KPIReports";
+import ScheduleBillable from "./Pages/Pages/Dashboard/TrendingReports/ScheduleBillable";
 
 function App() {
   return (
@@ -220,6 +223,25 @@ function App() {
           <Route
             path="cancelled-session"
             element={<CancelledSession></CancelledSession>}
+          ></Route>
+
+          {/* Trending Reports  */}
+          <Route path="sessions-manage" element={<ListView></ListView>}></Route>
+          <Route
+            path="m-remittance"
+            element={<PaymentDeposits></PaymentDeposits>}
+          ></Route>
+          <Route
+            path="kpi-reported-by-months-view"
+            element={<KPIReports></KPIReports>}
+          ></Route>
+          <Route
+            path="kpi-reported-by-patient-view"
+            element={<KPIReportsPatient></KPIReportsPatient>}
+          ></Route>
+          <Route
+            path="kpi-reported-by-insurance-view"
+            element={<KPIReportsInsurance></KPIReportsInsurance>}
           ></Route>
 
           {/* APPOINTMENT ROUTES */}

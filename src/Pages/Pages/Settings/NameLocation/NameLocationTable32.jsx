@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { FaPlus } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import NameLocationTableAddButton from "./NameLocationTableAddButton";
 
-const NameLocationTable32 = () => {
+const NameLocationTable32 = ({ data }) => {
   const [tableOpen, setTableOpen] = useState(false);
   const [add, setAdd] = useState(0);
+  // console.log(data[0]?.address);
 
   const handleTable = () => {
     setTableOpen(!tableOpen);
@@ -17,7 +17,7 @@ const NameLocationTable32 = () => {
     setAdd(add + 1);
   };
 
-  console.log(add);
+  // console.log(add);
   const {
     register,
     handleSubmit,
@@ -28,6 +28,16 @@ const NameLocationTable32 = () => {
     console.log(data);
     reset();
   };
+
+  // Editable value
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     reset({
+  //       address: data[0]?.address,
+  //     });
+  //   }, 0);
+  // }, [data[0]?.address]);
+
   console.log(errors);
   return (
     <div>
