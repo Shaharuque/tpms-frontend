@@ -98,6 +98,7 @@ import KPIReportsInsurance from "./Pages/Pages/Dashboard/TrendingReports/KPIRepo
 import KPIReportsPatient from "./Pages/Pages/Dashboard/TrendingReports/KPIReportsPatient";
 import KPIReports from "./Pages/Pages/Dashboard/TrendingReports/KPIReports";
 import ScheduleBillable from "./Pages/Pages/Dashboard/TrendingReports/ScheduleBillable";
+import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 
 function App() {
   return (
@@ -396,11 +397,23 @@ function App() {
             element={<MPostingEditAdd></MPostingEditAdd>}
           ></Route>
           <Route path="era-manager" element={<EraManager></EraManager>}></Route>
+
           {/* PAYROLL  */}
           <Route
             path="processing-payroll"
             element={<ProcessingPayroll></ProcessingPayroll>}
-          ></Route>
+          >
+            <Route path="process-payroll" element={<p>upcoming</p>}></Route>
+            <Route
+              path="submit-payroll"
+              element={<PayrollSubmission />}
+            ></Route>
+            <Route
+              path="completed-payroll"
+              element={<p>completed payroll</p>}
+            ></Route>
+          </Route>
+
           <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
           <Route path="report" element={<Report></Report>}></Route>
           {/* settings routes  */}

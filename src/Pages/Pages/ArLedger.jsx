@@ -13,6 +13,9 @@ import {
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
+// modi
+// import "rsuite/dist/rsuite.css";
+import { DateRangePicker } from "rsuite";
 
 const ArLedger = () => {
   const [select, setSelect] = useState("");
@@ -141,27 +144,10 @@ const ArLedger = () => {
                     <h1 className="text-xs text-gray-500 mb-2 ml-1 ">
                       Select Date
                     </h1>
-
-                    <div className="flex  items-center">
-                      <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[5px] text-3xl" />
-                      <DatePicker
-                        style={{
-                          color: "#5c5c5c",
-                          padding: "14px 5px",
-                          fontSize: "12px",
-                          border: "1px solid #a9a9a9",
-                          borderRadius: "0px",
-                        }}
-                        className=" green"
-                        value={dates}
-                        onChange={setDates}
-                        range
-                        sort
-                        format={format}
-                        calendarPosition="bottom-center"
-                        plugins={[<DatePanel />]}
-                      />
+                    <div>
+                    <DateRangePicker  placeholder="Select Date Range" />
                     </div>
+  
                   </div>
 
                   <div>
