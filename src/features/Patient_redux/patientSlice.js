@@ -4,6 +4,7 @@ import { headers } from "../../Misc/BaseClient";
 
 
 //async action(getAdmins) to fetch admins data list depending on page_ad
+//Action creator to fetch admins data list depending on page_ad
 export const getpatients = createAsyncThunk("patients/getpatients", async () => {
   //onno api thik e kaj kortesey
   const response = await axios.get(`https://ovh.therapypms.com/api/v1/admin/ac/patient`,{

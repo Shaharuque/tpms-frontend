@@ -84,7 +84,7 @@ import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits
 import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 
-import ReduxTesting from "./Testing/ReduxTesting";
+//For testing purpose
 import MainBase from "./Testing/Table_React/MainBase";
 
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
@@ -104,11 +104,7 @@ function App() {
         {/*Testing */}
 
         <Route path="/table" element={<MainBase></MainBase>}></Route>
-        <Route
-          path="/testing/redux"
-          element={<ReduxTesting></ReduxTesting>}
-        ></Route>
-
+       
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
           {/* DASHBOARD ROUTES  */}
