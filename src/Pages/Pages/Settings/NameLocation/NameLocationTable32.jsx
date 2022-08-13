@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { FaPlus } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import NameLocationTableAddButton from "./NameLocationTableAddButton";
+import Loading from "../../../../Loading/Loading";
 
-const NameLocationTable32 = () => {
-  const [tableOpen, setTableOpen] = useState(false);
+const NameLocationTable32 = ({
+  data,
+  Table33Open,
+  handleTableOpen,
+  table32Open,
+  handleTableOpen32,
+}) => {
   const [add, setAdd] = useState(0);
-
-  const handleTable = () => {
-    setTableOpen(!tableOpen);
-  };
+  // console.log(data);
 
   const handleAdd = () => {
     setAdd(add + 1);
   };
 
-  console.log(add);
+  // console.log(add);
   const {
     register,
     handleSubmit,
@@ -25,20 +27,30 @@ const NameLocationTable32 = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     reset();
   };
+
+  // Editable value
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     reset({
+  //       address: data[0]?.address,
+  //     });
+  //   }, 0);
+  // }, [data[0]?.address]);
+
   console.log(errors);
   return (
     <div>
       {/* Child 32  */}
       <h2
-        onClick={handleTable}
+        onClick={handleTableOpen}
         className=" mt-4 text-xs p-2 text-white bg-secondary"
       >
         Box No 32
       </h2>
-      {tableOpen && (
+      {!Table33Open && (
         <div className="border">
           <motion.div
             initial={{ opacity: 0, y: 15 }}

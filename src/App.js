@@ -86,7 +86,6 @@ import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 
 //For testing purpose
 import MainBase from "./Testing/Table_React/MainBase";
-
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
@@ -95,6 +94,12 @@ import Sessions from "./Pages/Pages/Dashboard/Scheduler/Sessions";
 import Provider from "./Pages/Pages/Dashboard/Scheduler/Provider";
 import SessionNote from "./Pages/Pages/Dashboard/Scheduler/SessionNote";
 import CancelledSession from "./Pages/Pages/Dashboard/Scheduler/CancelledSession";
+import PaymentDeposits from "./Pages/Pages/Dashboard/TrendingReports/PaymentDeposits";
+import KPIReportsInsurance from "./Pages/Pages/Dashboard/TrendingReports/KPIReportsInsurance";
+import KPIReportsPatient from "./Pages/Pages/Dashboard/TrendingReports/KPIReportsPatient";
+import KPIReports from "./Pages/Pages/Dashboard/TrendingReports/KPIReports";
+import ScheduleBillable from "./Pages/Pages/Dashboard/TrendingReports/ScheduleBillable";
+import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 
 function App() {
   return (
@@ -216,6 +221,25 @@ function App() {
           <Route
             path="cancelled-session"
             element={<CancelledSession></CancelledSession>}
+          ></Route>
+
+          {/* Trending Reports  */}
+          <Route path="sessions-manage" element={<ListView></ListView>}></Route>
+          <Route
+            path="m-remittance"
+            element={<PaymentDeposits></PaymentDeposits>}
+          ></Route>
+          <Route
+            path="kpi-reported-by-months-view"
+            element={<KPIReports></KPIReports>}
+          ></Route>
+          <Route
+            path="kpi-reported-by-patient-view"
+            element={<KPIReportsPatient></KPIReportsPatient>}
+          ></Route>
+          <Route
+            path="kpi-reported-by-insurance-view"
+            element={<KPIReportsInsurance></KPIReportsInsurance>}
           ></Route>
 
           {/* APPOINTMENT ROUTES */}
@@ -370,11 +394,23 @@ function App() {
             element={<MPostingEditAdd></MPostingEditAdd>}
           ></Route>
           <Route path="era-manager" element={<EraManager></EraManager>}></Route>
+
           {/* PAYROLL  */}
           <Route
             path="processing-payroll"
             element={<ProcessingPayroll></ProcessingPayroll>}
-          ></Route>
+          >
+            <Route path="process-payroll" element={<p>upcoming</p>}></Route>
+            <Route
+              path="submit-payroll"
+              element={<PayrollSubmission />}
+            ></Route>
+            <Route
+              path="completed-payroll"
+              element={<p>completed payroll</p>}
+            ></Route>
+          </Route>
+
           <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
           <Route path="report" element={<Report></Report>}></Route>
           {/* settings routes  */}

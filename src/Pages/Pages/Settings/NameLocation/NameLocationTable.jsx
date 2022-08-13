@@ -3,45 +3,56 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Switch } from "@mui/material";
 
-const NameLocationTable = () => {
+const NameLocationTable = ({ data, time, Table33Open, handleTableOpen }) => {
   const [tableOpen, setTableOpen] = useState(true);
-  const [combo, setCombo] = useState(0);
+  const [value, setValue] = useState(data?.is_combo);
 
+  // console.log(time);
+  // console.log(time?.mon_end_time);
   // timeChange
   const handleTable = () => {
-    setTableOpen(!tableOpen);
+    // setTable33Open(!Table33Open);
   };
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    // console.log(data);
+    // reset();
   };
 
   // Editable value
   useEffect(() => {
-    // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        facility_name: `ABC Behavioral Therapy Center`,
+        facility_name: data?.facility_name,
+        address: data?.address,
+        address_two: data?.address_two,
+        city: data?.city,
+        zip: data?.zip,
+        phone_one: data?.phone_one,
+        short_code: data?.short_code,
+        email: data?.email,
+        ein: data?.ein,
+        npi: data?.npi,
+        taxonomy_code: data?.taxonomy_code,
+        contact_person: data?.contact_person,
+        service_area_miles: data?.service_area_miles,
+        ftp_username: data?.ftp_username,
+        ftp_password: data?.ftp_password,
+        // mon_end_time: time?.mon_end_time,
       });
-    }, 2000);
-  }, [reset]);
-  console.log(errors);
+    }, 0);
+  }, [data?.address, time?.mon_end_time]);
+
   return (
     <div>
       {/* Child 33  */}
       <h2
-        onClick={handleTable}
+        onClick={handleTableOpen}
         className=" mt-4 text-xs p-2 text-white bg-secondary"
       >
         Box No 33
       </h2>
-      {tableOpen && (
+      {Table33Open && (
         <div className="border">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -86,6 +97,7 @@ const NameLocationTable = () => {
                     {...register("address")}
                   />
                 </div>
+                {/* address_two */}
                 <div>
                   {" "}
                   <label className="label">
@@ -159,8 +171,7 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <input
-                    type="number"
-                    placeholder="ABC Behavioral Therapy Center"
+                    type="text"
                     name="phone_one"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("phone_one")}
@@ -191,9 +202,9 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="shortCode"
+                    name="email"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("email")}
                   />
@@ -207,7 +218,7 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="ein"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
@@ -223,7 +234,7 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="npi"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
@@ -239,11 +250,11 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="ABC Behavioral Therapy Center"
-                    name="taxonomy"
+                    name="taxonomy_code"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("taxonomy")}
+                    {...register("taxonomy_code")}
                   />
                 </div>
                 {/* Contact person name  */}
@@ -271,7 +282,7 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="service_area_miles"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
@@ -303,7 +314,7 @@ const NameLocationTable = () => {
                     </span>
                   </label>
                   <input
-                    type="password"
+                    type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="ftp_password"
                     className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
@@ -344,10 +355,15 @@ const NameLocationTable = () => {
                     <option value="Dr">Dr</option>
                   </select>
                 </div>
-
                 <div className="md:mx-auto mt-10 items-start">
                   <div>
-                    <Switch size="small" onClick={() => setCombo(!combo)} />
+                    <Switch
+                      checked={value ? true : false}
+                      size="small"
+                      onClick={() => {
+                        setValue(!value);
+                      }}
+                    />
                     <label
                       className="form-check-label inline-block ml-2 text-sm text-gray-500"
                       htmlFor="flexSwitchCheckDefault"
@@ -356,9 +372,11 @@ const NameLocationTable = () => {
                     </label>
                   </div>
                 </div>
-
                 {/* done  */}
               </div>
+
+              {/* working hours  */}
+
               <div>
                 <h1 className="">Select Working Hours</h1>
                 <div className=" my-5 mr-2 gap-5">
@@ -366,119 +384,120 @@ const NameLocationTable = () => {
                     <h5 className="text-sm text-gray-600 w-20">Monday</h5>
                     <input
                       type="time"
-                      name="MondayTo"
+                      name="mon_start_time"
+                      // value={time?.mon_end_time}
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("MondayTo")}
+                      {...register("mon_start_time")}
                     />
 
                     <span className="text-sm text-gray-600">to</span>
                     <input
                       type="time"
-                      name="MondayFrom"
+                      name="mon_end_time"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("MondayFrom")}
+                      {...register("mon_end_time")}
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
                     <h5 className="text-sm text-gray-600 w-20">Tuesday</h5>
                     <input
                       type="time"
-                      name="TuesdayTo"
+                      name="tus_start"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("TuesdayTo")}
+                      {...register("tus_start")}
                     />
 
                     <span className="text-sm text-gray-600">to</span>
                     <input
                       type="time"
-                      name="TuesdayFrom"
+                      name="tus_end"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("TuesdayFrom")}
+                      {...register("tus_end")}
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
                     <h5 className="text-sm text-gray-600 w-20">Wednesday</h5>
                     <input
                       type="time"
-                      name="WednesdayTo"
+                      name="wed_start"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("WednesdayTo")}
+                      {...register("wed_start")}
                     />
 
                     <span className="text-sm text-gray-600">to</span>
                     <input
                       type="time"
-                      name="WednesdayFrom"
+                      name="wed_end"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("WednesdayFrom")}
+                      {...register("wed_end")}
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
                     <h5 className="text-sm text-gray-600 w-20">Thursday</h5>
                     <input
                       type="time"
-                      name="ThursdayTo"
+                      name="thur_start"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("ThursdayTo")}
+                      {...register("thur_start")}
                     />
 
                     <span className="text-sm text-gray-600">to</span>
                     <input
                       type="time"
-                      name="ThursdayFrom"
+                      name="thur_end"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("ThursdayFrom")}
+                      {...register("thur_end")}
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
                     <h5 className="text-sm text-gray-600 w-20">Friday</h5>
                     <input
                       type="time"
-                      name="FridayTo"
+                      name="fri_start"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("FridayTo")}
+                      {...register("fri_start")}
                     />
 
                     <span className="text-sm text-gray-600">to</span>
                     <input
                       type="time"
-                      name="FridayFrom"
+                      name="fri_end"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("FridayFrom")}
+                      {...register("fri_end")}
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
                     <h5 className="text-sm text-gray-600 w-20">Saturday</h5>
                     <input
                       type="time"
-                      name="SaturdayTo"
+                      name="sat_start"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("SaturdayTo")}
+                      {...register("sat_start")}
                     />
 
                     <span className="text-sm text-gray-600">to</span>
                     <input
                       type="time"
-                      name="SaturdayFrom"
+                      name="sat_end"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("SaturdayFrom")}
+                      {...register("sat_end")}
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
                     <h5 className="text-sm text-gray-600 w-20">Sunday</h5>
                     <input
                       type="time"
-                      name="SundayTo"
+                      name="sun_start"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("SundayTo")}
+                      {...register("sun_start")}
                     />
 
                     <span className="text-sm text-gray-600">to</span>
                     <input
                       type="time"
-                      name="SundayFrom"
+                      name="sun_end"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("SundayFrom")}
+                      {...register("sun_end")}
                     />
                   </div>
                 </div>
