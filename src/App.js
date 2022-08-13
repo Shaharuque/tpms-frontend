@@ -100,6 +100,7 @@ import KPIReportsPatient from "./Pages/Pages/Dashboard/TrendingReports/KPIReport
 import KPIReports from "./Pages/Pages/Dashboard/TrendingReports/KPIReports";
 import ScheduleBillable from "./Pages/Pages/Dashboard/TrendingReports/ScheduleBillable";
 import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
+import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
 
 function App() {
   return (
@@ -109,7 +110,7 @@ function App() {
         {/*Testing */}
 
         <Route path="/table" element={<MainBase></MainBase>}></Route>
-       
+
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
           {/* DASHBOARD ROUTES  */}
@@ -294,6 +295,10 @@ function App() {
             element={<AuthorizationEdit></AuthorizationEdit>}
           ></Route>
           {/* STAFF  */}
+          <Route
+            path="create-staff/staff"
+            element={<CreateStaff></CreateStaff>}
+          ></Route>
           <Route path="staff" element={<StaffInformation></StaffInformation>}>
             <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
             <Route

@@ -25,7 +25,6 @@ const NameLocation = () => {
   const working_hours = settingDetails?.working_hours;
   // console.log(working_hours);
 
-
   //getsettings action is dispatched [api calling]
   useEffect(() => {
     dispatch(getsettings());
