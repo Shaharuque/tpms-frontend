@@ -3,12 +3,7 @@ import { useForm } from "react-hook-form";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const NameLocationTableAddButton = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();

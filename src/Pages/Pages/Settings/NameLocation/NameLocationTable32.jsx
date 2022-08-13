@@ -4,14 +4,15 @@ import { motion } from "framer-motion";
 import { FaPlus } from "react-icons/fa";
 import NameLocationTableAddButton from "./NameLocationTableAddButton";
 
-const NameLocationTable32 = ({ data }) => {
-  const [tableOpen, setTableOpen] = useState(false);
+const NameLocationTable32 = ({
+  data,
+  Table33Open,
+  handleTableOpen,
+  table32Open,
+  handleTableOpne32,
+}) => {
   const [add, setAdd] = useState(0);
-  // console.log(data[0]?.address);
-
-  const handleTable = () => {
-    setTableOpen(!tableOpen);
-  };
+  console.log(data);
 
   const handleAdd = () => {
     setAdd(add + 1);
@@ -43,12 +44,12 @@ const NameLocationTable32 = ({ data }) => {
     <div>
       {/* Child 32  */}
       <h2
-        onClick={handleTable}
+        onClick={handleTableOpne32}
         className=" mt-4 text-xs p-2 text-white bg-secondary"
       >
         Box No 32
       </h2>
-      {tableOpen && (
+      {table32Open && (
         <div className="border">
           <motion.div
             initial={{ opacity: 0, y: 15 }}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NameLocationTable from "./NameLocation/NameLocationTable";
 import NameLocationTable32 from "./NameLocation/NameLocationTable32";
 //Redux
@@ -7,6 +7,8 @@ import { getsettings } from "../../../features/Settings_redux/settingSlice";
 import Loading from "../../../Loading/Loading";
 
 const NameLocation = () => {
+  const [Table33Open, setTable33Open] = useState(true);
+  const [table32Open, setTable32Open] = useState(false);
   // Parent
   //Redux works will be done here
   const dispatch = useDispatch();
@@ -32,14 +34,31 @@ const NameLocation = () => {
     return <Loading></Loading>;
   }
 
+  const handleTableOpen = () => {
+    setTable33Open(!Table33Open);
+  };
+
+  const handleTableOpne32 = () => {
+    setTable32Open(!table32Open);
+    setTable33Open(!Table33Open);
+  };
+
   return (
     <div className="p-2 ">
       <h1 className=" text-orange-500">Facility Setup</h1>
       <NameLocationTable
+        Table33Open={Table33Open}
+        handleTableOpen={handleTableOpen}
         time={working_hours}
         data={box_no_33}
       ></NameLocationTable>
-      <NameLocationTable32 data={box_no_32}></NameLocationTable32>
+      <NameLocationTable32
+        handleTableOpne32={handleTableOpne32}
+        table32Open={table32Open}
+        Table33Open={Table33Open}
+        handleTableOpen={handleTableOpen}
+        data={box_no_32}
+      ></NameLocationTable32>
     </div>
   );
 };
