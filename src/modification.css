@@ -25,7 +25,7 @@ svg.rs-picker-toggle-caret.rs-icon {
 
 
 .rs-nav-tabs.rs-nav-horizontal .rs-nav-bar {
-    border-top: 2px solid #f2edff !important;
+    border-top: 2px solid #e4e4f0 !important;
    
 }
 
@@ -33,19 +33,20 @@ svg.rs-picker-toggle-caret.rs-icon {
     padding-top: 7px;
     padding-bottom: 7px;
     width: 100%;
+    border-radius: 0px;
 }
 
 /* picked date align */
 .rs-picker-default .rs-picker-toggle {
     position: relative;
     z-index: 5;
-    padding-right: 67px;
+    /* padding-right: 67px; */
     display: inline-block;
     outline: none;
     cursor: pointer;
     color: #575757;
     border: 1px solid #e5e5ea;
-    padding-left: 44px;
+    /* padding-left: 44px; */
 }
 /* calander align */
 .rs-picker-toggle-caret {
@@ -102,7 +103,8 @@ svg.rs-picker-toggle-caret.rs-icon {
     border-right: 1px solid;
     border-left: 1px solid;
     border-top: 1px solid;
-   
+    border-color: #dee2e6;
+    color: rgb(8 155 171);
     
 }
 

@@ -342,9 +342,9 @@ function App() {
           <Route
             path="processing-payroll"
             element={<ProcessingPayroll></ProcessingPayroll>}>
-          <Route path="process-payroll" element={<p>upcoming</p>} ></Route>
+          <Route path="process-payroll" element={<PayrollSubmission/>} ></Route>
           <Route path="submit-payroll" element={<PayrollSubmission/>} ></Route>
-          <Route path="completed-payroll" element={<p>completed payroll</p>} ></Route>
+          <Route path="completed-payroll" element={<PayrollSubmission/>} ></Route>
           </Route>
 
           <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>

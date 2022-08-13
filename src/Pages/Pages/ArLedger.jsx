@@ -121,7 +121,7 @@ const ArLedger = () => {
                 <select
                   onChange={(e) => setSelect(e.target.value)}
                   name="post"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                 >
                   <option value=""></option>
                   <option value="claim_no">Claim No</option>
@@ -134,7 +134,7 @@ const ArLedger = () => {
                   <input
                     type="number"
                     name="check"
-                    className="border rounded-sm px-2 py-[6px] mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                     {...register("client_code")}
                   />
                 </div>
@@ -145,7 +145,7 @@ const ArLedger = () => {
                       Select Date
                     </h1>
                     <div>
-                    <DateRangePicker  placeholder="Select Date Range" />
+                    <DateRangePicker onChange={(date)=>{console.log(date)}}  placeholder="Select Date" />
                     </div>
   
                   </div>
@@ -157,7 +157,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                       {...register("patient")}
                     >
                       <option value="name"> abcd </option>
@@ -171,7 +171,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                       {...register("CPT_Code")}
                     >
                       <option value="name">EFT</option>
@@ -186,7 +186,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                       {...register("aging_status")}
                     >
                       <option value="name">EFT</option>

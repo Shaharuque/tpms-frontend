@@ -10736,7 +10736,7 @@ textarea.rs-picker-search-input {
   right: 20px;
 }
 .rs-picker-toggle-wrapper {
-  display: inline-block;
+  /* display: inline-block; */
   vertical-align: middle;
   max-width: 100%;
 }
@@ -10797,15 +10797,15 @@ textarea.rs-picker-search-input {
 }
 .rs-picker:not(.rs-picker-disabled):hover,
 .rs-picker.rs-picker-focused {
-  border-color: #3498ff;
-  border-color: var(--rs-input-focus-border);
+  /* border-color: #3498ff;
+  border-color: var(--rs-input-focus-border); */
 }
 .rs-picker-toggle-active,
 .rs-picker.rs-picker-focused {
-  -webkit-box-shadow: 0 0 0 3px rgba(52, 152, 255, 0.25);
+  /* -webkit-box-shadow: 0 0 0 3px rgba(52, 152, 255, 0.25);
   -webkit-box-shadow: var(--rs-state-focus-shadow);
           box-shadow: 0 0 0 3px rgba(52, 152, 255, 0.25);
-          box-shadow: var(--rs-state-focus-shadow);
+          box-shadow: var(--rs-state-focus-shadow); */
 }
 .rs-picker-toggle {
   display: inline-block;
@@ -10924,8 +10924,8 @@ textarea.rs-picker-search-input {
 .rs-picker-default:not(.rs-picker-disabled) .rs-picker-toggle:hover,
 .rs-picker-default:not(.rs-picker-disabled) .rs-picker-toggle:focus,
 .rs-picker-default:not(.rs-picker-disabled) .rs-picker-toggle-active {
-  border-color: #3498ff;
-  border-color: var(--rs-input-focus-border);
+  /* border-color: #3498ff;
+  border-color: var(--rs-input-focus-border); */
 }
 .rs-picker-subtle .rs-picker-toggle {
   color: #8e8e93;
@@ -11011,8 +11011,8 @@ textarea.rs-picker-search-input {
 .rs-picker-default:not(.rs-picker-disabled) .rs-picker-toggle:focus,
 .rs-picker-default:not(.rs-picker-disabled) .rs-btn-active,
 .rs-picker-default:not(.rs-picker-disabled) .rs-picker-toggle-active {
-  border-color: #3498ff;
-  border-color: var(--rs-input-focus-border);
+  /* border-color: #3498ff;
+  border-color: var(--rs-input-focus-border); */
 }
 .rs-picker-subtle .rs-btn,
 .rs-picker-subtle .rs-picker-toggle {
@@ -11508,6 +11508,7 @@ textarea.rs-picker-search-input {
 }
 .rs-picker-default .rs-picker-toggle.rs-btn-xs {
   padding-left: 7px;
+  /* margin: 0 0px -2px -33px; */
 }
 .rs-picker-input:not(.rs-picker-tag) .rs-picker-toggle.rs-btn-xs ~ .rs-picker-tag-wrapper .rs-picker-search-input {
   padding: 1px 8px;
