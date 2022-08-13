@@ -3,16 +3,17 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { FaPlus } from "react-icons/fa";
 import NameLocationTableAddButton from "./NameLocationTableAddButton";
+import Loading from "../../../../Loading/Loading";
 
 const NameLocationTable32 = ({
   data,
   Table33Open,
   handleTableOpen,
   table32Open,
-  handleTableOpne32,
+  handleTableOpen32,
 }) => {
   const [add, setAdd] = useState(0);
-  console.log(data);
+  // console.log(data);
 
   const handleAdd = () => {
     setAdd(add + 1);
@@ -26,7 +27,7 @@ const NameLocationTable32 = ({
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     reset();
   };
 
@@ -44,12 +45,12 @@ const NameLocationTable32 = ({
     <div>
       {/* Child 32  */}
       <h2
-        onClick={handleTableOpne32}
+        onClick={handleTableOpen}
         className=" mt-4 text-xs p-2 text-white bg-secondary"
       >
         Box No 32
       </h2>
-      {table32Open && (
+      {!Table33Open && (
         <div className="border">
           <motion.div
             initial={{ opacity: 0, y: 15 }}

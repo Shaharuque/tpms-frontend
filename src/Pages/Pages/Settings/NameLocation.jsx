@@ -38,7 +38,7 @@ const NameLocation = () => {
     setTable33Open(!Table33Open);
   };
 
-  const handleTableOpne32 = () => {
+  const handleTableOpen32 = () => {
     setTable32Open(!table32Open);
     setTable33Open(!Table33Open);
   };
@@ -53,7 +53,7 @@ const NameLocation = () => {
         data={box_no_33}
       ></NameLocationTable>
       <NameLocationTable32
-        handleTableOpne32={handleTableOpne32}
+        handleTableOpen32={handleTableOpen32}
         table32Open={table32Open}
         Table33Open={Table33Open}
         handleTableOpen={handleTableOpen}
