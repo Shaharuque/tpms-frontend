@@ -1,6 +1,5 @@
 import React from "react";
 import { Nav } from "rsuite";
-import ReactDOM from "react-dom";
 import { NavLink, Outlet } from "react-router-dom";
 
 const BillingManager = () => {
