@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+// import "../node_modules/"
 import "./index.css";
+// import "./datapicker.css"
+import "./CustomRsuite.css"
 import "./modification.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

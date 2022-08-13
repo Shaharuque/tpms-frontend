@@ -3,6 +3,20 @@
 @tailwind utilities;
 
 
+.rs-calendar-table-cell {
+  display: table-cell;
+  padding: 1px 0;
+  text-align: center;
+  vertical-align: middle;
+  width: 1%;
+}
+.rs-calendar-table-cell-in-range, .rs-calendar-table-cell-selected {
+  position: relative;
+}
+
+
+
+
 .rs-nav-justified {
   display: -ms-flexbox;
   display: flex;
@@ -92,10 +106,13 @@ code {
     monospace;
 }
 
-/* .rs-nav-horizontal .rs-nav-bar {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-} */
+@media only screen and (max-width: 600px) {
+  .rs-nav-justified {
+    display: flex;
+    flex-direction: column;
+}
 
-
+a.rs-nav-item {
+  margin: 13px 0px 1px -1px;
+}
+}

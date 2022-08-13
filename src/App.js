@@ -88,6 +88,7 @@ import ReduxTesting from "./Testing/ReduxTesting";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
+import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 
 function App() {
   return (
@@ -95,8 +96,11 @@ function App() {
       <Routes>
         <Route path="/" element={<LogIn></LogIn>}></Route>
         {/*Testing */}
-        <Route path='/testing' element={<Testing></Testing>}></Route>
-        <Route path='/testing/redux' element={<ReduxTesting></ReduxTesting>}></Route>
+        <Route path="/testing" element={<Testing></Testing>}></Route>
+        <Route
+          path="/testing/redux"
+          element={<ReduxTesting></ReduxTesting>}
+        ></Route>
 
         <Route path="/admin" element={<Sidebar></Sidebar>}>
           <Route index element={<Dashboard></Dashboard>}></Route>
@@ -108,19 +112,23 @@ function App() {
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/1"
-            element={<ProvideEscalation></ProvideEscalation>}
+            // element={<ProvideEscalation></ProvideEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/2"
-            element={<PayorEscalation></PayorEscalation>}
+            // element={<PayorEscalation></PayorEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/3"
-            element={<MGEscalation></MGEscalation>}
+            // element={<MGEscalation></MGEscalation>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           <Route
             path="billing/ar-followup-bucket-filter-types/4"
-            element={<MedicalRecords></MedicalRecords>}
+            // element={<MedicalRecords></MedicalRecords>}
+            element={<ArFollowupBucket></ArFollowupBucket>}
           ></Route>
           {/* Patients  */}
           <Route
@@ -165,23 +173,23 @@ function App() {
 
           {/* Billing  */}
           <Route
-            path="signature-not-update"
+            path="session-not-bulled"
             element={<SessionRendered></SessionRendered>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-week-deposit"
             element={<LastWeeksDeposits></LastWeeksDeposits>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-five-statement"
             element={<LastMonthsStatements></LastMonthsStatements>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="last-month-billed-dated"
             element={<LastMonthBilledDates></LastMonthBilledDates>}
           ></Route>
           <Route
-            path="signature-not-update"
+            path="pending-secondary"
             element={<PendingSecondaryClaims></PendingSecondaryClaims>}
           ></Route>
 
@@ -284,6 +292,7 @@ function App() {
           <Route
             path="submit-billing"
             element={<BillingManager></BillingManager>}>
+              {/* <Route path="/" element={<ProcessingClaim></ProcessingClaim>} ></Route> */}
               <Route path="proces-Clims" element={<ProcessingClaim></ProcessingClaim>} ></Route>
               <Route path="Batching-climbs" element={<BatchingClaims></BatchingClaims>} ></Route>
               <Route path="Manage-claims" element={<ManageClaims></ManageClaims>} ></Route>
@@ -327,11 +336,17 @@ function App() {
             element={<MPostingEditAdd></MPostingEditAdd>}
           ></Route>
           <Route path="era-manager" element={<EraManager></EraManager>}></Route>
+
+          
           {/* PAYROLL  */}
           <Route
             path="processing-payroll"
-            element={<ProcessingPayroll></ProcessingPayroll>}
-          ></Route>
+            element={<ProcessingPayroll></ProcessingPayroll>}>
+          <Route path="process-payroll" element={<p>upcoming</p>} ></Route>
+          <Route path="submit-payroll" element={<PayrollSubmission/>} ></Route>
+          <Route path="completed-payroll" element={<p>completed payroll</p>} ></Route>
+          </Route>
+
           <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
           <Route path="report" element={<Report></Report>}></Route>
           {/* settings routes  */}
