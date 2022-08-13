@@ -140,14 +140,15 @@ const ArLedger = () => {
                 </div>
               ) : (
                 <>
-                  <div className="mt-2 ml-2">
-                    <h1 className="text-xs text-gray-500 mb-2 ml-1 ">
-                      Select Date
-                    </h1>
+                  <div>
+                    <label className="label">
+                      <span className="label-text text-xs text-gray-500 text-left">
+                        Selected Date
+                      </span>
+                    </label>
                     <div>
-                    <DateRangePicker  placeholder="Select Date Range" />
+                      <DateRangePicker placeholder="Select Date Range" />
                     </div>
-  
                   </div>
 
                   <div>
