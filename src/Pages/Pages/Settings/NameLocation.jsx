@@ -7,14 +7,15 @@ import { getsettings } from "../../../features/Settings_redux/settingSlice";
 import Loading from "../../../Loading/Loading";
 
 const NameLocation = () => {
-  const [Table33Open, setTable33Open] = useState(true);
-  const [table32Open, setTable32Open] = useState(false);
+  const [box33Open, setbox33Open] = useState(true);       //Here: box33=>NameLocationTable
+  const [table32Open, setTable32Open] = useState(false);  //Here: table32=>NameLocationTable32
+  const [test,setTest]=useState({})
   // Parent
   //Redux works will be done here
   const dispatch = useDispatch();
 
   //response from async action
-  const data = useSelector((state) => state.settingInfo); //After action dispatched response can be received here
+  const data = useSelector((state) => state.settingInfo);  //After action dispatched response can be received here
 
   //Some Important data showing below
   const loading = data?.loading;
@@ -23,43 +24,50 @@ const NameLocation = () => {
   const box_no_33 = settingDetails?.box_no_33;
   const pos = settingDetails?.pos;
   const working_hours = settingDetails?.working_hours;
-  // console.log(working_hours);
-
+  //console.log(box_no_32);
 
   //getsettings action is dispatched [api calling]
   useEffect(() => {
     dispatch(getsettings());
-  }, [dispatch]);
+  }, []);
 
   if (loading) {
     return <Loading></Loading>;
   }
 
   const handleTableOpen = () => {
-    setTable33Open(!Table33Open);
+    setbox33Open(!box33Open);
+    setTable32Open(false)
   };
 
   const handleTableOpen32 = () => {
     setTable32Open(!table32Open);
-    setTable33Open(!Table33Open);
+    setbox33Open(false);
   };
 
   return (
     <div className="p-2 ">
       <h1 className=" text-orange-500">Facility Setup</h1>
       <NameLocationTable
-        Table33Open={Table33Open}
+        box33Open={box33Open}
         handleTableOpen={handleTableOpen}
         time={working_hours}
         data={box_no_33}
       ></NameLocationTable>
-      <NameLocationTable32
-        handleTableOpen32={handleTableOpen32}
-        table32Open={table32Open}
-        Table33Open={Table33Open}
-        handleTableOpen={handleTableOpen}
-        data={box_no_32}
-      ></NameLocationTable32>
+      {/*Jhamela asey*/}
+      {
+       box_no_32?.map((item)=>{
+         return(
+           <div>
+             <NameLocationTable32 
+             data={item} 
+             handleTableOpen32={handleTableOpen32} 
+             table32Open={table32Open} 
+             loading={loading}/>
+           </div>
+         )
+       })
+      }
     </div>
   );
 };
