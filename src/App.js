@@ -401,11 +401,15 @@ function App() {
           <Route path="era-manager" element={<EraManager></EraManager>}></Route>
 
           {/* PAYROLL  */}
+
           <Route
             path="processing-payroll"
             element={<ProcessingPayroll></ProcessingPayroll>}
           >
-            <Route index element={<PayrollSubmission />}></Route>
+            <Route
+              path="process-payroll"
+              element={<PayrollSubmission />}
+            ></Route>
             <Route
               path="submit-payroll"
               element={<PayrollSubmission />}

@@ -23,7 +23,6 @@ const PatientInformation = () => {
   const [phoneOpen, setPhoneOpen] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
-
   //Patient Information
   const { id } = useParams();
   //console.log("patient Info", id);
@@ -33,11 +32,17 @@ const PatientInformation = () => {
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
   console.log("patient details", patient_details);
+  // console.log("---",)
+  
+ 
 
   useEffect(() => {
     //action dispatched
     dispatch(getpatientsDetails(id));
+   
   }, []);
+
+  // console.log(test);
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -149,13 +154,15 @@ const PatientInformation = () => {
             {/* gender */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span  className="label-text text-xs text-gray-600 text-left">
                   Gender<span className="text-red-500">*</span>
                 </span>
               </label>
               <select
+               
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("gender")}
+        
               >
                 <option value="male">Male</option>
                 <option value="female">Female</option>

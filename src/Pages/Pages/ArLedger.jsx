@@ -13,7 +13,6 @@ import {
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
-// modi
 // import "rsuite/dist/rsuite.css";
 import { DateRangePicker } from "rsuite";
 
@@ -235,3 +234,5 @@ const ArLedger = () => {
 };
 
 export default ArLedger;
+
+// 
