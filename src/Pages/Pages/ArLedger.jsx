@@ -13,6 +13,9 @@ import {
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
+// modi
+// import "rsuite/dist/rsuite.css";
+import { DateRangePicker } from "rsuite";
 
 const ArLedger = () => {
   const [select, setSelect] = useState("");
@@ -118,7 +121,7 @@ const ArLedger = () => {
                 <select
                   onChange={(e) => setSelect(e.target.value)}
                   name="post"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                 >
                   <option value=""></option>
                   <option value="claim_no">Claim No</option>
@@ -131,7 +134,7 @@ const ArLedger = () => {
                   <input
                     type="number"
                     name="check"
-                    className="border rounded-sm px-2 py-[6px] mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                     {...register("client_code")}
                   />
                 </div>
@@ -141,25 +144,12 @@ const ArLedger = () => {
                     <h1 className="text-xs text-gray-500 mb-2 ml-1 ">
                       Select Date
                     </h1>
-
-                    <div className="flex  items-center">
-                      <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[5px] text-3xl" />
-                      <DatePicker
-                        style={{
-                          color: "#5c5c5c",
-                          padding: "14px 5px",
-                          fontSize: "12px",
-                          border: "1px solid #a9a9a9",
-                          borderRadius: "0px",
+                    <div>
+                      <DateRangePicker
+                        onChange={(date) => {
+                          console.log(date);
                         }}
-                        className=" green"
-                        value={dates}
-                        onChange={setDates}
-                        range
-                        sort
-                        format={format}
-                        calendarPosition="bottom-center"
-                        plugins={[<DatePanel />]}
+                        placeholder="Select Date"
                       />
                     </div>
                   </div>
@@ -171,7 +161,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                       {...register("patient")}
                     >
                       <option value="name"> abcd </option>
@@ -185,7 +175,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                       {...register("CPT_Code")}
                     >
                       <option value="name">EFT</option>
@@ -200,7 +190,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                       {...register("aging_status")}
                     >
                       <option value="name">EFT</option>
@@ -220,7 +210,7 @@ const ArLedger = () => {
 
               {/* submit  */}
               <button
-                className="px-5 mt-8 w-20 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className="px-5 mt-8 w-1/2 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
               >
                 View

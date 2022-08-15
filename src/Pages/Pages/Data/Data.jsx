@@ -5,6 +5,7 @@ import {
   BsHouseDoor,
   BsFileEarmarkMedical,
   BsFileEarmark,
+  BsFolder2Open,
 } from "react-icons/bs";
 import { MdOutlinePayment } from "react-icons/md";
 import { ImUsers } from "react-icons/im";
@@ -192,27 +193,27 @@ export const reports = [
   {
     report: "Schedule Billable",
     count: "0",
-    link: "/admin/",
+    link: "/admin/session-manage",
   },
   {
     report: "Payment Deposits",
     count: "0",
-    link: "/admin/",
+    link: "/admin/m-remittance",
   },
   {
     report: "KPI Report by Month",
     count: "0",
-    link: "/admin/",
+    link: "/admin/kpi-reported-by-months-view",
   },
   {
     report: "KPI Report by Patient",
     count: "0",
-    link: "/admin/",
+    link: "/admin/kpi-reported-by-patient-view",
   },
   {
     report: "KPI Report by Insurance",
     count: "0",
-    link: "/admin/",
+    link: "/admin/kpi-reported-by-insurance-view",
   },
 ];
 
@@ -300,6 +301,11 @@ export const setting = [
     link: "session-rule",
     name: "Create Service Rules",
     icon: <AiOutlineFile />,
+  },
+  {
+    link: "file-manager",
+    name: "QA Files",
+    icon: <BsFolder2Open />,
   },
   {
     link: "froms-builder",

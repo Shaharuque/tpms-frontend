@@ -5,7 +5,7 @@ import { headers } from "../../Misc/BaseClient";
 //async action(getAdmins) to fetch admins data list depending on page_ad
 export const getsettings = createAsyncThunk("patients/getsettings", async () => {
     //onno api thik e kaj kortesey
-    const response = await axios.get(``,{
+    const response = await axios.get(`https://ovh.therapypms.com/api/v1/admin/ac/get/setting/name/location`,{
       headers:headers
     });
     return response.data;
@@ -13,7 +13,7 @@ export const getsettings = createAsyncThunk("patients/getsettings", async () => 
   
   const initialState = {
     loading: false,
-    settingDetails:[],
+    settingDetails:{},
     error: ''
   }
   

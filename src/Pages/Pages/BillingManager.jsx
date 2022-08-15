@@ -1,13 +1,12 @@
 import React from "react";
 import { Nav } from "rsuite";
-import ReactDOM from "react-dom";
 import { NavLink, Outlet } from "react-router-dom";
 
 const BillingManager = () => {
   return (
     <div className="h-[100vh]">
       <div className="container mx-auto mb-5 mt-5">
-        <Nav appearance="tabs" justified className="mt-5">
+        <Nav appearance="tabs" justified className="mt-5 mb-5">
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
@@ -50,7 +49,6 @@ const BillingManager = () => {
             </span>
           </NavLink>
         </Nav>
-        <hr className="mb-5"></hr>
         <Outlet />
       </div>
     </div>

@@ -26,7 +26,7 @@ const NavigationBar = () => {
         >
           <div className="flex-1">
             <label tabIndex="0" className="flex gap-0 md:gap-2 items-center">
-              <div className="w-10 mr-1 rounded-full">
+              <div className="w-8 mr-1 rounded-full">
                 <img className=" rounded-full" src={company} alt="pic" />
               </div>
               <div>
@@ -124,7 +124,7 @@ const NavigationBar = () => {
           <div className="my-5 md:my-0">
             <div className="dropdown md:dropdown-end">
               <label tabIndex="0" className="flex gap-2 items-center">
-                <div className="w-10 mr-1 rounded-full">
+                <div className="w-8 mr-1 rounded-full">
                   <img className="avatar rounded-full" src={admin} alt="pic" />
                 </div>
                 <div>

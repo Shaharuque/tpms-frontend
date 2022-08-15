@@ -14,6 +14,10 @@ import { MultiSelect } from "react-multi-select-component";
 const ListView = () => {
   const [billable, setBillable] = useState(true);
   const [table, setTable] = useState(false);
+  const [sortBy, setSortBy] = useState("");
+  const handleSortBy = (e) => {
+    setSortBy(e.target.value);
+  };
 
   const data = useMemo(() => ManageTableColumnsData, []);
   const columns = useMemo(() => [...ManageTableColumnsColumn], []);
@@ -132,52 +136,88 @@ const ListView = () => {
           {billable && (
             <>
               <div>
-                <h1 className="text-xs mb-2 ml-1 ">Place Of Service</h1>
-
-                <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("POS")}
-                >
-                  <option value="Mr">Mr</option>
-                  <option value="Mrs">Mrs</option>
-                  <option value="Miss">Miss</option>
-                  <option value="Dr">Dr</option>
-                </select>
+                <label className="label">
+                  <span className="label-text text-xs text-gray-600 text-left">
+                    Place of Services
+                  </span>
+                </label>
+                <div>
+                  <select
+                    className="border rounded-sm px-2 py-[3px] font-thin mx-1 text-xs w-full"
+                    {...register("pos")}
+                  >
+                    <option value=""></option>
+                    <option value="Today">Today's follow up</option>
+                    <option value="UK">Lost 7 days</option>
+                    <option value="15">Lost 15 days</option>
+                    <option value="15">Lost 30 days</option>
+                    <option value="15">30 days & over</option>
+                  </select>
+                </div>
               </div>
 
               <div>
-                <h1 className="text-xs mb-2 ml-1 ">Status</h1>
-                <select
-                  className=" border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("status")}
-                >
-                  <option value="Mr">Mr</option>
-                  <option value="Mrs">Mrs</option>
-                  <option value="Miss">Miss</option>
-                  <option value="Dr">Dr</option>
-                </select>
+                <label className="label">
+                  <span className="label-text text-xs text-gray-600 text-left">
+                    Status
+                  </span>
+                </label>
+                <div>
+                  <select
+                    className="border rounded-sm px-2 py-[3px] font-thin mx-1 text-xs w-full"
+                    {...register("Status")}
+                  >
+                    <option value=""></option>
+                    <option value="Today">Today's follow up</option>
+                    <option value="UK">Lost 7 days</option>
+                    <option value="15">Lost 15 days</option>
+                    <option value="15">Lost 30 days</option>
+                    <option value="15">30 days & over</option>
+                  </select>
+                </div>
               </div>
+              <button
+                className="  mb-1 mt-8 w-1/2 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                type="submit"
+              >
+                Save
+              </button>
             </>
           )}
-          <button
-            className="px-5 mt-6 w-24 text-sm py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            type="submit"
-          >
-            Go
-          </button>
         </div>
       </form>
-      {/* table  */}
-      {table && (
-        <div className="my-5">
-          <SettingTableBox
-            getTableProps={getTableProps}
-            headerGroups={headerGroups}
-            getTableBodyProps={getTableBodyProps}
-            rows={page}
-            prepareRow={prepareRow}
-          ></SettingTableBox>
-        </div>
+      {billable && (
+        <>
+          {/* table  */}
+          {table && (
+            <div className="my-5">
+              <SettingTableBox
+                getTableProps={getTableProps}
+                headerGroups={headerGroups}
+                getTableBodyProps={getTableBodyProps}
+                rows={page}
+                prepareRow={prepareRow}
+              ></SettingTableBox>
+            </div>
+          )}
+
+          <div className="flex item-center flex-wrap">
+            <div>
+              <select
+                onChange={handleSortBy}
+                name="type"
+                className="border rounded-sm  font-normal px-2 w-36 py-1 text-xs "
+              >
+                <option value=""></option>
+                <option value="Specific_Date">Specific Date</option>
+                <option value="Date_Range">Provider</option>
+              </select>
+            </div>
+            <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
+              Go
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
