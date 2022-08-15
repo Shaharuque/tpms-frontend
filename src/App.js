@@ -16,7 +16,7 @@ import ContractRate from "./Pages/Pages/ContractRate";
 import PatientStatement from "./Pages/Pages/PatientStatement";
 import ERemittance from "./Pages/Pages/ERemittance";
 import MPosting from "./Pages/Pages/MPosting";
-import EraManager from "./Pages/Pages/EraManager";
+import EraManager from "./Pages/Pages/Settings/EraManager";
 import ProcessingPayroll from "./Pages/Pages/ProcessingPayroll";
 import Timesheet from "./Pages/Pages/Timesheet";
 import NameLocation from "./Pages/Pages/Settings/NameLocation";

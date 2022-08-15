@@ -6,7 +6,7 @@ import { memo } from "react";
 import { headers } from "../../Misc/BaseClient";
 import Loading from "../../Loading/Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ShimmerTableTet from "../../Testing/ShimmerTableTet";
+import ShimmerTableTet from "./Settings/SettingComponents/ShimmerTableTet";
 
 const Patients = () => {
   // root Patient component
