@@ -3,16 +3,13 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Switch } from "@mui/material";
 
-const NameLocationTable = ({ data, time, Table33Open, handleTableOpen }) => {
-  const [tableOpen, setTableOpen] = useState(true);
+const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
   const [value, setValue] = useState(data?.is_combo);
 
   // console.log(time);
   // console.log(time?.mon_end_time);
   // timeChange
-  const handleTable = () => {
-    // setTable33Open(!Table33Open);
-  };
+
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     // console.log(data);
@@ -52,7 +49,7 @@ const NameLocationTable = ({ data, time, Table33Open, handleTableOpen }) => {
       >
         Box No 33
       </h2>
-      {Table33Open && (
+      {box33Open && (
         <div className="border">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
