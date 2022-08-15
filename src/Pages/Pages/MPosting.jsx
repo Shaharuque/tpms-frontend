@@ -15,6 +15,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import { FiEdit3 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsFileEarmark, BsPrinter } from "react-icons/bs";
+import { DateRangePicker } from "rsuite";
 // import MDepositDetailsTable from "./MPosting/MDepositDetailsTable";
 
 const MPosting = () => {
@@ -127,56 +128,38 @@ const MPosting = () => {
       </div>
       <div>
         <form className="my-10" onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-8  mr-2 gap-2">
+          <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-6  mr-2 gap-2">
             <div>
-              <h1 className="text-xs mb-2 ml-1 ">Deposit Date Range</h1>
-              <div className="flex  items-center">
-                <BsCalendar3WeekFill className=" text-gray-600 ml-1 bg-gray-200 p-[6px] text-3xl" />
-                <DatePicker
-                  style={{
-                    color: "#5c5c5c",
-                    padding: "14px 5px",
-                    fontSize: "12px",
-                    border: "1px solid #a9a9a9",
-                    borderRadius: "0px",
-                  }}
-                  value={dates}
-                  onChange={setDates}
-                  range
-                  sort
-                  format={format}
-                  calendarPosition="bottom-center"
-                  plugins={[<DatePanel />]}
-                />
+              <div className="mt-2 ml-2">
+                <h1 className="text-xs mb-2 ml-1 ">Deposit Date Range</h1>
+                <div>
+                  <DateRangePicker
+                    onChange={(date) => {
+                      console.log(date);
+                    }}
+                    placeholder="Select Date"
+                  />
+                </div>
               </div>
             </div>
             <div>
-              <h1 className="text-xs mb-2 ml-1 ">Check Date Range</h1>
-              <div className="flex  items-center">
-                <BsCalendar3WeekFill className="ml-1 text-gray-600 bg-gray-200 p-[6px] text-3xl" />
-                <DatePicker
-                  style={{
-                    color: "#5c5c5c",
-                    padding: "14px 5px",
-                    fontSize: "12px",
-                    border: "1px solid #a9a9a9",
-                    borderRadius: "0px",
-                  }}
-                  value={Cdates}
-                  onChange={setCdates}
-                  range
-                  sort
-                  format={format}
-                  calendarPosition="bottom-center"
-                  plugins={[<DatePanel />]}
-                />
+              <div className="mt-2 ml-2">
+                <h1 className="text-xs mb-2 ml-1 ">Check Date Range</h1>
+                <div>
+                  <DateRangePicker
+                    onChange={(date) => {
+                      console.log(date);
+                    }}
+                    placeholder="Select Date"
+                  />
+                </div>
               </div>
             </div>
 
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Payee type</h1>
               <select
-                className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                 {...register("Pay_type")}
               >
                 <option value="Mr">Mr</option>
@@ -188,7 +171,7 @@ const MPosting = () => {
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Payee Name</h1>
               <select
-                className=" border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                className=" border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
                 {...register("payee_name")}
               >
                 <option value="Mr">Mr</option>

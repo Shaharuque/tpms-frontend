@@ -3,9 +3,10 @@ import { useFilters, usePagination, useSortBy, useTable } from "react-table";
 import { PatientsColumnsColumn } from "./Patients/PatientsColumns";
 import axios from "axios";
 import { memo } from "react";
-import { headers } from '../../Misc/BaseClient'
+import { headers } from "../../Misc/BaseClient";
 import Loading from "../../Loading/Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ShimmerTableTet from "../../Testing/ShimmerTableTet";
 
 const Patients = () => {
   // root Patient component
@@ -43,7 +44,7 @@ const Patients = () => {
 
   const fetchData = async () => {
     const commentsFormServer = await fetchComments();
-    console.log(commentsFormServer)
+    console.log(commentsFormServer);
 
     setItems([...items, ...commentsFormServer]);
 
@@ -53,8 +54,7 @@ const Patients = () => {
     setpage(page + 1);
   };
   //console.log(items)
-  console.log(page)
-
+  console.log(page);
 
   const data = useMemo(() => items, [items]);
   const columns = useMemo(() => [...PatientsColumnsColumn], []);
@@ -84,7 +84,8 @@ const Patients = () => {
               dataLength={rows.length}
               next={fetchData}
               hasMore={hasMore}
-              loader={<h1 className="text-teal-800 font-bold text-center">Loading...</h1>}
+              loader={<ShimmerTableTet></ShimmerTableTet>}
+              // loader={<h1 className="text-teal-800 font-bold text-center">Loading...</h1>}
             >
               <table
                 className="border overflow-scroll  sm:w-full "

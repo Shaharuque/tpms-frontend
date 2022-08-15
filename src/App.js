@@ -398,8 +398,6 @@ function App() {
             path="billing/deposit-add"
             element={<MPostingEditAdd></MPostingEditAdd>}
           ></Route>
-          <Route path="era-manager" element={<EraManager></EraManager>}></Route>
-
           {/* PAYROLL  */}
           <Route
             path="processing-payroll"
@@ -471,6 +469,10 @@ function App() {
             <Route
               path="session-rule"
               element={<CreateServiceRules></CreateServiceRules>}
+            ></Route>
+            <Route
+              path="file-manager"
+              element={<EraManager></EraManager>}
             ></Route>
             <Route
               path="froms-builder"

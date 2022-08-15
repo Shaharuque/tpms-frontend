@@ -210,7 +210,7 @@ const ArLedger = () => {
 
               {/* submit  */}
               <button
-                className="px-5 mt-8 w-20 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className="px-5 mt-8 w-1/2 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
               >
                 View
