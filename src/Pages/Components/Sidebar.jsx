@@ -107,18 +107,13 @@ const menuItem = [
     subRoute: [
       {
         path: "/admin/era-remittance",
-        name: "ER-Remittance",
+        name: "E-Remittance",
         icon: <FaFileAlt />,
       },
       {
         path: "/admin/m-posting",
-        name: "M Posting",
+        name: "Cash Posting",
         icon: <MdOutlineMonetizationOn />,
-      },
-      {
-        path: "/admin/era-manager",
-        name: "ER Manager",
-        icon: <AiOutlineFileDone />,
       },
     ],
   },
@@ -217,7 +212,7 @@ const Sidebar = () => {
               </>
             ) : (
               <>
-                <img className="h-10 w-10 transition-all" src={logo1} alt="" />{" "}
+                <img className="h-10  transition-all" src={logo1} alt="" />{" "}
               </>
             )}
           </div>

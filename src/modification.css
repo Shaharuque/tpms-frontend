@@ -35,7 +35,8 @@ svg.rs-picker-toggle-caret.rs-icon {
     padding-top: 7px;
     padding-bottom: 7px;
     width: 100%;
-    border-radius: 0px;
+    border-radius: 2px;
+   height: 27px;
 }
 
 /* picked date align */

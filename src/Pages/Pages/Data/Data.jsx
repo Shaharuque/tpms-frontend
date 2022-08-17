@@ -302,6 +302,11 @@ export const setting = [
     icon: <AiOutlineFile />,
   },
   {
+    link: "file-manager",
+    name: "QA Files",
+    icon: <AiOutlineFile />,
+  },
+  {
     link: "froms-builder",
     name: "Forms Builder",
     icon: <BsFileEarmarkMedical />,

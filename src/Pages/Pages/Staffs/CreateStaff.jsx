@@ -332,6 +332,14 @@ const CreateStaff = () => {
               </div>
             </div>
           </div>
+          <div className="mt-10">
+            <button
+              className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
         </div>
       </form>
     </div>

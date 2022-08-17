@@ -120,7 +120,7 @@ const ArLedger = () => {
                 <select
                   onChange={(e) => setSelect(e.target.value)}
                   name="post"
-                  className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                 >
                   <option value=""></option>
                   <option value="claim_no">Claim No</option>
@@ -133,7 +133,7 @@ const ArLedger = () => {
                   <input
                     type="number"
                     name="check"
-                    className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                     {...register("client_code")}
                   />
                 </div>
@@ -160,7 +160,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                       {...register("patient")}
                     >
                       <option value="name"> abcd </option>
@@ -174,7 +174,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                       {...register("CPT_Code")}
                     >
                       <option value="name">EFT</option>
@@ -189,7 +189,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                       {...register("aging_status")}
                     >
                       <option value="name">EFT</option>
@@ -209,7 +209,7 @@ const ArLedger = () => {
 
               {/* submit  */}
               <button
-                className="px-5 mt-8 w-20 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className="px-5 mt-8 w-1/2 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
               >
                 View
