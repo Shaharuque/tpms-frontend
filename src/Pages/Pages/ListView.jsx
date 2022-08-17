@@ -1,5 +1,6 @@
 import React, { memo, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import { CheckPicker, Checkbox, Button } from "rsuite";
 import {
   ManageTableColumnsColumn,
   ManageTableColumnsData,
@@ -90,6 +91,44 @@ const ListView = () => {
     reset();
   };
 
+
+  // ***************
+  const datat = [
+    "Eugenia",
+    "Bryan",
+    "Linda",
+    "Nancy",
+    "Lloyd",
+    "Alice",
+    "Julia",
+    "Albert",
+  ].map((item) => ({ label: item, value: item }));
+  
+  const footerStyles = {
+    padding: "10px 2px",
+    borderTop: "1px solid #e5e5e5",
+  };
+  
+  const footerButtonStyle = {
+    float: "right",
+    marginRight: 10,
+    marginTop: 2,
+  };
+  
+  const allValue = datat.map((item) => item.value);
+  
+ 
+    const picker = React.useRef();
+    const [value, setValue] = React.useState([]);
+    
+    const handleChange = (value) => {
+      setValue(value);
+    };
+  
+    const handleCheckAll = (value, checked) => {
+      setValue(checked ? allValue : []);
+    };
+
   return (
     <div className="h-[100vh]">
       <div className="flex flex-wrap justify-between items-center mb-5">
@@ -112,25 +151,80 @@ const ListView = () => {
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-8 my-5 mr-2 gap-5">
           {billable && (
             <div>
-              <h1 className="text-xs mb-2 ml-1 ">Patients</h1>
-              <MultiSelect
+              <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
+              {/* <MultiSelect
                 options={options}
                 value={patientsSelected}
                 onChange={setPatientsSelected}
                 labelledBy="Select"
                 className="text-xs"
-              />
+              /> */}
+   <CheckPicker
+        data={datat}
+        placeholder="Select"
+        ref={picker}
+        style={{ width: 224 }}
+        value={value}
+        onChange={handleChange}
+        renderExtraFooter={() => (
+          <div style={footerStyles}>
+            <Checkbox
+              inline
+              indeterminate={value.length > 0 && value.length < allValue.length}
+              checked={value.length === allValue.length}
+              onChange={handleCheckAll}
+            >
+              Select All
+            </Checkbox>
+
+            <Button
+              style={footerButtonStyle}
+              appearance="primary"
+              size="sm"
+              onClick={() => {
+                picker.current.close();
+              }}
+            >
+              Ok
+            </Button>
+          </div>
+        )}
+      />
             </div>
           )}
           <div className="w-full">
-            <h1 className="text-xs mb-2 ml-1 ">Provider</h1>
-            <MultiSelect
-              options={options}
-              value={providerSelected}
-              onChange={setProviderSelected}
-              labelledBy="Select"
-              className="text-xs"
-            />
+            <h1 className="text-xs mb-2 ml-1 mt-2 ">Provider</h1>
+            <CheckPicker
+        data={datat}
+        placeholder="Select"
+        ref={picker}
+        style={{ width: 224 }}
+        value={value}
+        onChange={handleChange}
+        renderExtraFooter={() => (
+          <div style={footerStyles}>
+            <Checkbox
+              inline
+              indeterminate={value.length > 0 && value.length < allValue.length}
+              checked={value.length === allValue.length}
+              onChange={handleCheckAll}
+            >
+              Select All
+            </Checkbox>
+
+            <Button
+              style={footerButtonStyle}
+              appearance="primary"
+              size="sm"
+              onClick={() => {
+                picker.current.close();
+              }}
+            >
+              Ok
+            </Button>
+          </div>
+        )}
+      />
           </div>
 
           {billable && (

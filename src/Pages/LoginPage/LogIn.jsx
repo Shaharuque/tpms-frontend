@@ -5,6 +5,7 @@ import ParticlesBg from "./ParticlesBg";
 const LogIn = () => {
   return (
     <div>
+    
       <LogInForm></LogInForm>
       <ParticlesBg></ParticlesBg>
     </div>
