@@ -7,47 +7,33 @@ import { ERATableColumn, ERATableData } from "./QAfileTableData";
 const ERA = () => {
   const data = useMemo(() => ERATableData, []);
   const columns = useMemo(() => [...ERATableColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    state,
-    selectedFlatRows,
-    setPageSize,
-    // page,
-    prepareRow,
-  } = useTable(
-    { columns, data },
-    useSortBy,
-    usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => {
-        return [
-          {
-            id: "selection",
-            Header: ({ getToggleAllRowsSelectedProps }) => (
-              <div>
-                <CheckBox {...getToggleAllRowsSelectedProps()} />
-              </div>
-            ),
-            Cell: ({ row }) => (
-              <div>
-                <CheckBox {...row.getToggleRowSelectedProps()} />
-              </div>
-            ),
-          },
-          ...columns,
-        ];
-      });
-    }
-  );
+  const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow } =
+    useTable(
+      { columns, data },
+      useSortBy,
+      usePagination,
+      useRowSelect,
+      (hooks) => {
+        hooks.visibleColumns.push((columns) => {
+          return [
+            {
+              id: "selection",
+              Header: ({ getToggleAllRowsSelectedProps }) => (
+                <div>
+                  <CheckBox {...getToggleAllRowsSelectedProps()} />
+                </div>
+              ),
+              Cell: ({ row }) => (
+                <div>
+                  <CheckBox {...row.getToggleRowSelectedProps()} />
+                </div>
+              ),
+            },
+            ...columns,
+          ];
+        });
+      }
+    );
   return (
     <div>
       <h1 className="text-lg my-2 text-orange-400">ERA FILE</h1>
