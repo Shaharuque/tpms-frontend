@@ -47,7 +47,7 @@ const NameLocation = () => {
 
   return (
     <div className="p-2 ">
-      <h1 className=" text-orange-500">Facility Setup</h1>
+      <h1 className="text-orange-500">Facility Setup</h1>
       <NameLocationTable
         box33Open={box33Open}
         handleTableOpen={handleTableOpen}
