@@ -62,13 +62,6 @@ export const ERATableColumn = [
     },
     accessor: "processed_data",
   },
-  {
-    Header: "Action",
-    Cell: ({ row }) => {
-      // console.log(row);
-      return <EraManagerAction row={row}></EraManagerAction>;
-    },
-  },
 ];
 export const EDITableData = [
   {
