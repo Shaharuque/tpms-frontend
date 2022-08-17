@@ -54,19 +54,12 @@ const NameLocation = () => {
         time={working_hours}
         data={box_no_33}
       ></NameLocationTable>
-      {/*Jhamela asey*/}
-      {box_no_32?.map((item) => {
-        return (
-          <div>
-            <NameLocationTable32
-              data={item}
-              handleTableOpen32={handleTableOpen32}
-              table32Open={table32Open}
-              loading={loading}
-            />
-          </div>
-        );
-      })}
+      <NameLocationTable32
+        data={box_no_32}
+        handleTableOpen32={handleTableOpen32}
+        table32Open={table32Open}
+        loading={loading}
+      />
     </div>
   );
 };
