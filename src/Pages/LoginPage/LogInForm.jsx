@@ -50,6 +50,7 @@ const LogInForm = () => {
         backgroundPosition: "fixed",
       }}
     >
+     
       <div className="px-7 sm:px-16 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute login-form">
         <div className="">
           <div div className="">

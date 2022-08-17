@@ -13,7 +13,6 @@ import {
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
-// modi
 // import "rsuite/dist/rsuite.css";
 import { DateRangePicker } from "rsuite";
 
@@ -121,7 +120,7 @@ const ArLedger = () => {
                 <select
                   onChange={(e) => setSelect(e.target.value)}
                   name="post"
-                  className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                 >
                   <option value=""></option>
                   <option value="claim_no">Claim No</option>
@@ -134,7 +133,7 @@ const ArLedger = () => {
                   <input
                     type="number"
                     name="check"
-                    className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                     {...register("client_code")}
                   />
                 </div>
@@ -161,7 +160,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                       {...register("patient")}
                     >
                       <option value="name"> abcd </option>
@@ -175,7 +174,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                       {...register("CPT_Code")}
                     >
                       <option value="name">EFT</option>
@@ -190,7 +189,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                       {...register("aging_status")}
                     >
                       <option value="name">EFT</option>
@@ -235,3 +234,5 @@ const ArLedger = () => {
 };
 
 export default ArLedger;
+
+// 

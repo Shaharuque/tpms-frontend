@@ -10738,6 +10738,7 @@ textarea.rs-picker-search-input {
 .rs-picker-toggle-wrapper {
   /* display: inline-block; */
   vertical-align: middle;
+  width: 100% !important;
   max-width: 100%;
 }
 .rs-picker-toggle.rs-btn .rs-ripple-pond {

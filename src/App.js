@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./Pages/Components/Sidebar.jsx";
 import Dashboard from "./Pages/Pages/Dashboard.jsx";
@@ -347,6 +347,8 @@ function App() {
             path="submit-billing"
             element={<BillingManager></BillingManager>}
           >
+
+            <Route index element={<Navigate to="proces-Clims"  />} />
             <Route
               path="proces-Clims"
               element={<ProcessingClaim></ProcessingClaim>}
@@ -399,11 +401,17 @@ function App() {
             element={<MPostingEditAdd></MPostingEditAdd>}
           ></Route>
           {/* PAYROLL  */}
+
           <Route
             path="processing-payroll"
             element={<ProcessingPayroll></ProcessingPayroll>}
           >
-            <Route index element={<PayrollSubmission />}></Route>
+            
+            <Route index element={<Navigate to="process-payroll"/>} />
+            <Route
+              path="process-payroll"
+              element={<PayrollSubmission />}
+            ></Route>
             <Route
               path="submit-payroll"
               element={<PayrollSubmission />}
