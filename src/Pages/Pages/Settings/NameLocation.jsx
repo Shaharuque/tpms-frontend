@@ -9,7 +9,7 @@ import Loading from "../../../Loading/Loading";
 const NameLocation = () => {
   const [box33Open, setbox33Open] = useState(true);       //Here: box33=>NameLocationTable
   const [table32Open, setTable32Open] = useState(false);  //Here: table32=>NameLocationTable32
-  const [test,setTest]=useState({})
+  const [test, setTest] = useState({})
   // Parent
   //Redux works will be done here
   const dispatch = useDispatch();
@@ -54,7 +54,14 @@ const NameLocation = () => {
         time={working_hours}
         data={box_no_33}
       ></NameLocationTable>
-      {/*Jhamela asey*/}
+
+
+      <NameLocationTable32
+        data={box_no_32}
+        handleTableOpen32={handleTableOpen32}
+        table32Open={table32Open}
+        loading={loading} />
+      {/*Jhamela asey
       {
        box_no_32?.map((item)=>{
          return(
@@ -68,6 +75,7 @@ const NameLocation = () => {
          )
        })
       }
+      */}
     </div>
   );
 };

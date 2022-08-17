@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
+import {BiFullscreen,BiExitFullscreen} from "react-icons/bi";
 import {
   AiOutlinePlus,
   AiOutlineNotification,
@@ -10,8 +11,9 @@ import admin from "../../Assets/user.png";
 import company from "../../Assets/company.jpg";
 import { motion } from "framer-motion";
 
-const NavigationBar = () => {
+const NavigationBar = ({ handle }) => {
   let [open, setOpen] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -15 }}
@@ -46,15 +48,26 @@ const NavigationBar = () => {
         </div>
 
         <div
-          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? "top-18 " : "top-[-490px]"
-          }`}
+          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-18 " : "top-[-490px]"
+            }`}
         >
+          {/*Full screen showing code */}
           <div>
-            <h1 className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
-              <BsArrowsFullscreen />
-            </h1>
+            {!handle.active ?
+              (
+                <h1 onClick={handle.enter} className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
+                  <BiFullscreen />
+                </h1>
+              )
+              :
+              (
+                <h1 onClick={handle.exit} className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
+                  <BiExitFullscreen />
+                </h1>
+              )
+            }
           </div>
+
           {/* adding  */}
           <div className=" md:mt-1 mt-6">
             <div className="dropdown md:dropdown-end">

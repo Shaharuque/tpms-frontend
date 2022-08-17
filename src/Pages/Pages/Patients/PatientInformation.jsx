@@ -44,14 +44,15 @@ const PatientInformation = () => {
     setTimeout(() => {
       reset({
         first_name: patient_details?.client_first_name,
-        middle_name: patient_details?.client_middle_name
-          ? patient_details?.client_middle_name
+        middle_name: patient_details?.client_middle
+          ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
         dob: patient_details?.client_dob,
         email:patient_details?.email,
         phone:patient_details?.phone_number,
         gender:patient_details?.client_gender,
+        fruit:patient_details?.client_gender,
       });
     }, 0);
   }, [patient_details?.client_first_name]);
@@ -155,12 +156,17 @@ const PatientInformation = () => {
               </label>
               <select
                 className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                name="gender"
                 {...register("gender")}
               >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+              {/*api thekey gathered data jemon thakbey value thik same bhabey assign kortey hobey */}
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
             </div>
+
+            
+
             {/* RelationShip */}
             <div>
               <label className="label">

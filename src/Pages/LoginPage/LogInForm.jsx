@@ -33,9 +33,12 @@ const LogInForm = () => {
       })
       .then((result) => {
         console.log(result);
-        if (result.status == "success") {
-          localStorage.setItem("token", result.access_token);
+        if (result.account_type == "admin") {
+          localStorage.setItem("admin", result.access_token);
           navigate("/admin");
+        }
+        else{
+          navigate('/notfound')
         }
       });
     reset();

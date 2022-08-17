@@ -100,393 +100,398 @@ import KPIReportsPatient from "./Pages/Pages/Dashboard/TrendingReports/KPIReport
 import KPIReports from "./Pages/Pages/Dashboard/TrendingReports/KPIReports";
 import ScheduleBillable from "./Pages/Pages/Dashboard/TrendingReports/ScheduleBillable";
 import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
+import NavigationBar from "./Pages/Pages/Shared/NavigationBar";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 function App() {
+  const handle = useFullScreenHandle();
   return (
     <div className="app-body">
-      <Routes>
-        <Route path="/" element={<LogIn></LogIn>}></Route>
-        {/*Testing */}
 
-        <Route path="/table" element={<MainBase></MainBase>}></Route>
-       
-        <Route path="/admin" element={<Sidebar></Sidebar>}>
-          <Route index element={<Dashboard></Dashboard>}></Route>
-          {/* DASHBOARD ROUTES  */}
-          {/* todays task  */}
-          <Route
-            path="billing/ar-followup-bucket"
-            element={<ArFollowupBucket></ArFollowupBucket>}
-          ></Route>
-          <Route
-            path="billing/ar-followup-bucket-filter-types/1"
-            // element={<ProvideEscalation></ProvideEscalation>}
-            element={<ArFollowupBucket></ArFollowupBucket>}
-          ></Route>
-          <Route
-            path="billing/ar-followup-bucket-filter-types/2"
-            // element={<PayorEscalation></PayorEscalation>}
-            element={<ArFollowupBucket></ArFollowupBucket>}
-          ></Route>
-          <Route
-            path="billing/ar-followup-bucket-filter-types/3"
-            // element={<MGEscalation></MGEscalation>}
-            element={<ArFollowupBucket></ArFollowupBucket>}
-          ></Route>
-          <Route
-            path="billing/ar-followup-bucket-filter-types/4"
-            // element={<MedicalRecords></MedicalRecords>}
-            element={<ArFollowupBucket></ArFollowupBucket>}
-          ></Route>
-          {/* Patients  */}
-          <Route
-            path="auth-to-expire"
-            element={<ExpiringAuthorization></ExpiringAuthorization>}
-          ></Route>
-          <Route
-            path="non-payor-tag"
-            element={<SelfPayClients></SelfPayClients>}
-          ></Route>
-          <Route
-            path="no-authorization"
-            element={<AuthorizationNotRequired></AuthorizationNotRequired>}
-          ></Route>
-          <Route
-            path="todays-copay"
-            element={<CoPayForToday></CoPayForToday>}
-          ></Route>
-          <Route
-            path="auth-place-holder"
-            element={<AuthPlaceHolders></AuthPlaceHolders>}
-          ></Route>
+      <FullScreen handle={handle}>
+        <Routes>
+          <Route path="/" element={<LogIn></LogIn>}></Route>
+          {/*Testing */}
+          <Route path="/table" element={<MainBase></MainBase>}></Route>
 
-          {/* Staffs  */}
-          <Route
-            path="vacation-pending"
-            element={<VacationPendingApproval></VacationPendingApproval>}
-          ></Route>
-          <Route
-            path="missing-credentials"
-            element={<MissingCredentials></MissingCredentials>}
-          ></Route>
-          <Route
-            path="credentials-expire"
-            element={<CredentialsToExpire></CredentialsToExpire>}
-          ></Route>
-
-          <Route
-            path="signature-not-update"
-            element={<SignatureNotLoaded></SignatureNotLoaded>}
-          ></Route>
-
-          {/* Billing  */}
-          <Route
-            path="session-not-bulled"
-            element={<SessionRendered></SessionRendered>}
-          ></Route>
-          <Route
-            path="last-week-deposit"
-            element={<LastWeeksDeposits></LastWeeksDeposits>}
-          ></Route>
-          <Route
-            path="last-five-statement"
-            element={<LastMonthsStatements></LastMonthsStatements>}
-          ></Route>
-          <Route
-            path="last-month-billed-dated"
-            element={<LastMonthBilledDates></LastMonthBilledDates>}
-          ></Route>
-          <Route
-            path="pending-secondary"
-            element={<PendingSecondaryClaims></PendingSecondaryClaims>}
-          ></Route>
-
-          {/* Scheduling  */}
-          <Route
-            path="scheduler-not-render"
-            element={<Scheduled></Scheduled>}
-          ></Route>
-          <Route
-            path="schedule-not-attend-last-week"
-            element={<Sessions></Sessions>}
-          ></Route>
-          <Route
-            path="provider-signature-missing-session"
-            element={<Provider></Provider>}
-          ></Route>
-          <Route
-            path="session-note-missing"
-            element={<SessionNote></SessionNote>}
-          ></Route>
-          <Route
-            path="cancelled-session"
-            element={<CancelledSession></CancelledSession>}
-          ></Route>
-
-          {/* Trending Reports  */}
-          <Route path="sessions-manage" element={<ListView></ListView>}></Route>
-          <Route
-            path="m-remittance"
-            element={<PaymentDeposits></PaymentDeposits>}
-          ></Route>
-          <Route
-            path="kpi-reported-by-months-view"
-            element={<KPIReports></KPIReports>}
-          ></Route>
-          <Route
-            path="kpi-reported-by-patient-view"
-            element={<KPIReportsPatient></KPIReportsPatient>}
-          ></Route>
-          <Route
-            path="kpi-reported-by-insurance-view"
-            element={<KPIReportsInsurance></KPIReportsInsurance>}
-          ></Route>
-
-          {/* APPOINTMENT ROUTES */}
-          <Route path="session-manage" element={<ListView></ListView>}></Route>
-          <Route
-            path="calender-view"
-            element={<CalendarView></CalendarView>}
-          ></Route>
-          <Route
-            path="recurring-session"
-            element={<RecurringSession></RecurringSession>}
-          ></Route>
-          <Route
-            path="recurring-session-edit"
-            element={<RecurringSessionEdit></RecurringSessionEdit>}
-          ></Route>
-
-          {/* PATIENT  */}
-          <Route path="patient/:id" element={<PatientsInfo></PatientsInfo>}>
-            {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
+          <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+            <Route index element={<Dashboard></Dashboard>}></Route>
+            {/* DASHBOARD ROUTES  */}
+            {/* todays task  */}
             <Route
-              path="patient-info/:id"
-              element={<PatientInformation></PatientInformation>}
+              path="billing/ar-followup-bucket"
+              element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
             <Route
-              path="patient-authorization/:id"
-              element={<Authorization></Authorization>}
+              path="billing/ar-followup-bucket-filter-types/1"
+              // element={<ProvideEscalation></ProvideEscalation>}
+              element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
             <Route
-              path="patient-authorization"
-              element={<Authorization></Authorization>}
+              path="billing/ar-followup-bucket-filter-types/2"
+              // element={<PayorEscalation></PayorEscalation>}
+              element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
             <Route
-              path="patient-document/:id"
-              element={<Documents></Documents>}
+              path="billing/ar-followup-bucket-filter-types/3"
+              // element={<MGEscalation></MGEscalation>}
+              element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
             <Route
-              path="patient-portal/:id"
-              element={<PatientPortal></PatientPortal>}
+              path="billing/ar-followup-bucket-filter-types/4"
+              // element={<MedicalRecords></MedicalRecords>}
+              element={<ArFollowupBucket></ArFollowupBucket>}
+            ></Route>
+            {/* Patients  */}
+            <Route
+              path="auth-to-expire"
+              element={<ExpiringAuthorization></ExpiringAuthorization>}
             ></Route>
             <Route
-              path="patient-ledger/:id"
-              element={<PatientLedger></PatientLedger>}
+              path="non-payor-tag"
+              element={<SelfPayClients></SelfPayClients>}
             ></Route>
+            <Route
+              path="no-authorization"
+              element={<AuthorizationNotRequired></AuthorizationNotRequired>}
+            ></Route>
+            <Route
+              path="todays-copay"
+              element={<CoPayForToday></CoPayForToday>}
+            ></Route>
+            <Route
+              path="auth-place-holder"
+              element={<AuthPlaceHolders></AuthPlaceHolders>}
+            ></Route>
+
+            {/* Staffs  */}
+            <Route
+              path="vacation-pending"
+              element={<VacationPendingApproval></VacationPendingApproval>}
+            ></Route>
+            <Route
+              path="missing-credentials"
+              element={<MissingCredentials></MissingCredentials>}
+            ></Route>
+            <Route
+              path="credentials-expire"
+              element={<CredentialsToExpire></CredentialsToExpire>}
+            ></Route>
+
+            <Route
+              path="signature-not-update"
+              element={<SignatureNotLoaded></SignatureNotLoaded>}
+            ></Route>
+
+            {/* Billing  */}
+            <Route
+              path="session-not-bulled"
+              element={<SessionRendered></SessionRendered>}
+            ></Route>
+            <Route
+              path="last-week-deposit"
+              element={<LastWeeksDeposits></LastWeeksDeposits>}
+            ></Route>
+            <Route
+              path="last-five-statement"
+              element={<LastMonthsStatements></LastMonthsStatements>}
+            ></Route>
+            <Route
+              path="last-month-billed-dated"
+              element={<LastMonthBilledDates></LastMonthBilledDates>}
+            ></Route>
+            <Route
+              path="pending-secondary"
+              element={<PendingSecondaryClaims></PendingSecondaryClaims>}
+            ></Route>
+
+            {/* Scheduling  */}
+            <Route
+              path="scheduler-not-render"
+              element={<Scheduled></Scheduled>}
+            ></Route>
+            <Route
+              path="schedule-not-attend-last-week"
+              element={<Sessions></Sessions>}
+            ></Route>
+            <Route
+              path="provider-signature-missing-session"
+              element={<Provider></Provider>}
+            ></Route>
+            <Route
+              path="session-note-missing"
+              element={<SessionNote></SessionNote>}
+            ></Route>
+            <Route
+              path="cancelled-session"
+              element={<CancelledSession></CancelledSession>}
+            ></Route>
+
+            {/* Trending Reports  */}
+            <Route path="sessions-manage" element={<ListView></ListView>}></Route>
+            <Route
+              path="m-remittance"
+              element={<PaymentDeposits></PaymentDeposits>}
+            ></Route>
+            <Route
+              path="kpi-reported-by-months-view"
+              element={<KPIReports></KPIReports>}
+            ></Route>
+            <Route
+              path="kpi-reported-by-patient-view"
+              element={<KPIReportsPatient></KPIReportsPatient>}
+            ></Route>
+            <Route
+              path="kpi-reported-by-insurance-view"
+              element={<KPIReportsInsurance></KPIReportsInsurance>}
+            ></Route>
+
+            {/* APPOINTMENT ROUTES */}
+            <Route path="session-manage" element={<ListView></ListView>}></Route>
+            <Route
+              path="calender-view"
+              element={<CalendarView></CalendarView>}
+            ></Route>
+            <Route
+              path="recurring-session"
+              element={<RecurringSession></RecurringSession>}
+            ></Route>
+            <Route
+              path="recurring-session-edit"
+              element={<RecurringSessionEdit></RecurringSessionEdit>}
+            ></Route>
+
+            {/* PATIENT  */}
+            <Route path="patient/:id" element={<PatientsInfo></PatientsInfo>}>
+              {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
+              <Route
+                path="patient-info/:id"
+                element={<PatientInformation></PatientInformation>}
+              ></Route>
+              <Route
+                path="patient-authorization/:id"
+                element={<Authorization></Authorization>}
+              ></Route>
+              <Route
+                path="patient-authorization"
+                element={<Authorization></Authorization>}
+              ></Route>
+              <Route
+                path="patient-document/:id"
+                element={<Documents></Documents>}
+              ></Route>
+              <Route
+                path="patient-portal/:id"
+                element={<PatientPortal></PatientPortal>}
+              ></Route>
+              <Route
+                path="patient-ledger/:id"
+                element={<PatientLedger></PatientLedger>}
+              ></Route>
+            </Route>
+            <Route
+              path="authorization-Edit"
+              element={<AuthorizationEdit></AuthorizationEdit>}
+            ></Route>
+            <Route
+              path="authorization-Edit/:id"
+              element={<AuthorizationEdit></AuthorizationEdit>}
+            ></Route>
+            {/* STAFF  */}
+            <Route path="staff" element={<StaffInformation></StaffInformation>}>
+              <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
+              <Route
+                path="staffs-contact-details"
+                element={<ContactDetails></ContactDetails>}
+              ></Route>
+              <Route
+                path="staffs-credentials"
+                element={<Credentials></Credentials>}
+              ></Route>
+              <Route
+                path="staffs-department"
+                element={<DepartmentSupervisor></DepartmentSupervisor>}
+              ></Route>
+              <Route
+                path="staffs-payroll"
+                element={<PayrollSetup></PayrollSetup>}
+              ></Route>
+              <Route
+                path="staffs-other-setup"
+                element={<OtherSetup></OtherSetup>}
+              ></Route>
+              <Route
+                path="staffs-leave-tracking"
+                element={<LeaveTracking></LeaveTracking>}
+              ></Route>
+              <Route
+                path="staffs-payor-exclusion"
+                element={<InsuranceExclusion></InsuranceExclusion>}
+              ></Route>
+              <Route
+                path="staffs-sub-activity-exclusion"
+                element={<ServiceSubTypeExclusions></ServiceSubTypeExclusions>}
+              ></Route>
+              <Route
+                path="staffs-client-exclusion"
+                element={<PatientExclusion></PatientExclusion>}
+              ></Route>
+              <Route
+                path="staffs-portal"
+                element={<StaffPortal></StaffPortal>}
+              ></Route>
+            </Route>
+            {/* BILLING  */}
+            <Route
+              path="submit-billing"
+              element={<BillingManager></BillingManager>}
+            >
+              <Route
+                path="proces-Clims"
+                element={<ProcessingClaim></ProcessingClaim>}
+              ></Route>
+              <Route
+                path="Batching-climbs"
+                element={<BatchingClaims></BatchingClaims>}
+              ></Route>
+              <Route
+                path="Manage-claims"
+                element={<ManageClaims></ManageClaims>}
+              ></Route>
+            </Route>
+
+            <Route path="patient-List" element={<Patients></Patients>}></Route>
+            <Route path="staffs" element={<Staffs></Staffs>}></Route>
+            <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>
+            <Route
+              path="contract-rate"
+              element={<ContractRate></ContractRate>}
+            ></Route>
+            <Route
+              path="billing/rate-list-add-edit"
+              element={<ContractRateEditAdd></ContractRateEditAdd>}
+            ></Route>
+            <Route
+              path="billing/rate-list-add-edit/:id"
+              element={<ContractRateEditAdd></ContractRateEditAdd>}
+            ></Route>
+            <Route
+              path="patient-statement"
+              element={<PatientStatement></PatientStatement>}
+            ></Route>
+            {/* PAYMENT */}
+            <Route
+              path="era-remittance"
+              element={<ERemittance></ERemittance>}
+            ></Route>
+            <Route path="m-posting" element={<MPosting></MPosting>}></Route>
+            <Route
+              path="billing/deposit-apply/:id"
+              element={<MDepositApply></MDepositApply>}
+            ></Route>
+            <Route
+              path="billing/deposit-add/:id"
+              element={<MPostingEditAdd></MPostingEditAdd>}
+            ></Route>
+            <Route
+              path="billing/deposit-add"
+              element={<MPostingEditAdd></MPostingEditAdd>}
+            ></Route>
+            <Route path="era-manager" element={<EraManager></EraManager>}></Route>
+
+            {/* PAYROLL  */}
+            <Route
+              path="processing-payroll"
+              element={<ProcessingPayroll></ProcessingPayroll>}
+            >
+              <Route path="process-payroll" element={<p>upcoming</p>}></Route>
+              <Route
+                path="submit-payroll"
+                element={<PayrollSubmission />}
+              ></Route>
+              <Route
+                path="completed-payroll"
+                element={<p>completed payroll</p>}
+              ></Route>
+            </Route>
+
+            <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
+            <Route path="report" element={<Report></Report>}></Route>
+            {/* settings routes  */}
+            <Route path="settings" element={<Settings></Settings>}>
+              <Route index element={<NameLocation></NameLocation>}></Route>
+              <Route
+                path="add-insurance"
+                element={<AddInsurance></AddInsurance>}
+              ></Route>
+              <Route
+                path="insurance-setup"
+                element={<InsuranceSetup></InsuranceSetup>}
+              ></Route>
+              <Route
+                path="add-treatment"
+                element={<AddTreatments></AddTreatments>}
+              ></Route>
+              <Route
+                path="services"
+                element={<AddServices></AddServices>}
+              ></Route>
+              <Route path="cpt-code" element={<AddCptCode></AddCptCode>}></Route>
+              <Route
+                path="sub-activity-setup"
+                element={<AddServiceSubType></AddServiceSubType>}
+              ></Route>
+              <Route
+                path="add-staff-type"
+                element={<AddStaffType></AddStaffType>}
+              ></Route>
+              <Route
+                path="rendering-provider"
+                element={<ReferringProvider></ReferringProvider>}
+              ></Route>
+              <Route
+                path="pos"
+                element={<PlaceOfServices></PlaceOfServices>}
+              ></Route>
+              <Route
+                path="vendor-number"
+                element={<VendorNumberSetup></VendorNumberSetup>}
+              ></Route>
+              <Route
+                path="holiday-setup"
+                element={<HolidaySetup></HolidaySetup>}
+              ></Route>
+              <Route path="pay-period" element={<PayPeriod></PayPeriod>}></Route>
+              <Route path="logo" element={<Logo></Logo>}></Route>
+              <Route
+                path="unbillable-activity"
+                element={<UnbillableActivity></UnbillableActivity>}
+              ></Route>
+              <Route
+                path="session-rule"
+                element={<CreateServiceRules></CreateServiceRules>}
+              ></Route>
+              <Route
+                path="froms-builder"
+                element={<FormsBuilder></FormsBuilder>}
+              ></Route>
+              <Route
+                path="notes-forms"
+                element={<FormAndLibrary></FormAndLibrary>}
+              ></Route>
+              <Route
+                path="business-documents"
+                element={<BusinessFiles></BusinessFiles>}
+              ></Route>
+              <Route
+                path="data-export"
+                element={<DataImport></DataImport>}
+              ></Route>
+              <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
+            </Route>
           </Route>
-          <Route
-            path="authorization-Edit"
-            element={<AuthorizationEdit></AuthorizationEdit>}
-          ></Route>
-          <Route
-            path="authorization-Edit/:id"
-            element={<AuthorizationEdit></AuthorizationEdit>}
-          ></Route>
-          {/* STAFF  */}
-          <Route path="staff" element={<StaffInformation></StaffInformation>}>
-            <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
-            <Route
-              path="staffs-contact-details"
-              element={<ContactDetails></ContactDetails>}
-            ></Route>
-            <Route
-              path="staffs-credentials"
-              element={<Credentials></Credentials>}
-            ></Route>
-            <Route
-              path="staffs-department"
-              element={<DepartmentSupervisor></DepartmentSupervisor>}
-            ></Route>
-            <Route
-              path="staffs-payroll"
-              element={<PayrollSetup></PayrollSetup>}
-            ></Route>
-            <Route
-              path="staffs-other-setup"
-              element={<OtherSetup></OtherSetup>}
-            ></Route>
-            <Route
-              path="staffs-leave-tracking"
-              element={<LeaveTracking></LeaveTracking>}
-            ></Route>
-            <Route
-              path="staffs-payor-exclusion"
-              element={<InsuranceExclusion></InsuranceExclusion>}
-            ></Route>
-            <Route
-              path="staffs-sub-activity-exclusion"
-              element={<ServiceSubTypeExclusions></ServiceSubTypeExclusions>}
-            ></Route>
-            <Route
-              path="staffs-client-exclusion"
-              element={<PatientExclusion></PatientExclusion>}
-            ></Route>
-            <Route
-              path="staffs-portal"
-              element={<StaffPortal></StaffPortal>}
-            ></Route>
-          </Route>
-          {/* BILLING  */}
-          <Route
-            path="submit-billing"
-            element={<BillingManager></BillingManager>}
-          >
-            <Route
-              path="proces-Clims"
-              element={<ProcessingClaim></ProcessingClaim>}
-            ></Route>
-            <Route
-              path="Batching-climbs"
-              element={<BatchingClaims></BatchingClaims>}
-            ></Route>
-            <Route
-              path="Manage-claims"
-              element={<ManageClaims></ManageClaims>}
-            ></Route>
-          </Route>
-
-          <Route path="patient-List" element={<Patients></Patients>}></Route>
-          <Route path="staffs" element={<Staffs></Staffs>}></Route>
-          <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>
-          <Route
-            path="contract-rate"
-            element={<ContractRate></ContractRate>}
-          ></Route>
-          <Route
-            path="billing/rate-list-add-edit"
-            element={<ContractRateEditAdd></ContractRateEditAdd>}
-          ></Route>
-          <Route
-            path="billing/rate-list-add-edit/:id"
-            element={<ContractRateEditAdd></ContractRateEditAdd>}
-          ></Route>
-          <Route
-            path="patient-statement"
-            element={<PatientStatement></PatientStatement>}
-          ></Route>
-          {/* PAYMENT */}
-          <Route
-            path="era-remittance"
-            element={<ERemittance></ERemittance>}
-          ></Route>
-          <Route path="m-posting" element={<MPosting></MPosting>}></Route>
-          <Route
-            path="billing/deposit-apply/:id"
-            element={<MDepositApply></MDepositApply>}
-          ></Route>
-          <Route
-            path="billing/deposit-add/:id"
-            element={<MPostingEditAdd></MPostingEditAdd>}
-          ></Route>
-          <Route
-            path="billing/deposit-add"
-            element={<MPostingEditAdd></MPostingEditAdd>}
-          ></Route>
-          <Route path="era-manager" element={<EraManager></EraManager>}></Route>
-
-          {/* PAYROLL  */}
-          <Route
-            path="processing-payroll"
-            element={<ProcessingPayroll></ProcessingPayroll>}
-          >
-            <Route path="process-payroll" element={<p>upcoming</p>}></Route>
-            <Route
-              path="submit-payroll"
-              element={<PayrollSubmission />}
-            ></Route>
-            <Route
-              path="completed-payroll"
-              element={<p>completed payroll</p>}
-            ></Route>
-          </Route>
-
-          <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
-          <Route path="report" element={<Report></Report>}></Route>
-          {/* settings routes  */}
-          <Route path="settings" element={<Settings></Settings>}>
-            <Route index element={<NameLocation></NameLocation>}></Route>
-            <Route
-              path="add-insurance"
-              element={<AddInsurance></AddInsurance>}
-            ></Route>
-            <Route
-              path="insurance-setup"
-              element={<InsuranceSetup></InsuranceSetup>}
-            ></Route>
-            <Route
-              path="add-treatment"
-              element={<AddTreatments></AddTreatments>}
-            ></Route>
-            <Route
-              path="services"
-              element={<AddServices></AddServices>}
-            ></Route>
-            <Route path="cpt-code" element={<AddCptCode></AddCptCode>}></Route>
-            <Route
-              path="sub-activity-setup"
-              element={<AddServiceSubType></AddServiceSubType>}
-            ></Route>
-            <Route
-              path="add-staff-type"
-              element={<AddStaffType></AddStaffType>}
-            ></Route>
-            <Route
-              path="rendering-provider"
-              element={<ReferringProvider></ReferringProvider>}
-            ></Route>
-            <Route
-              path="pos"
-              element={<PlaceOfServices></PlaceOfServices>}
-            ></Route>
-            <Route
-              path="vendor-number"
-              element={<VendorNumberSetup></VendorNumberSetup>}
-            ></Route>
-            <Route
-              path="holiday-setup"
-              element={<HolidaySetup></HolidaySetup>}
-            ></Route>
-            <Route path="pay-period" element={<PayPeriod></PayPeriod>}></Route>
-            <Route path="logo" element={<Logo></Logo>}></Route>
-            <Route
-              path="unbillable-activity"
-              element={<UnbillableActivity></UnbillableActivity>}
-            ></Route>
-            <Route
-              path="session-rule"
-              element={<CreateServiceRules></CreateServiceRules>}
-            ></Route>
-            <Route
-              path="froms-builder"
-              element={<FormsBuilder></FormsBuilder>}
-            ></Route>
-            <Route
-              path="notes-forms"
-              element={<FormAndLibrary></FormAndLibrary>}
-            ></Route>
-            <Route
-              path="business-documents"
-              element={<BusinessFiles></BusinessFiles>}
-            ></Route>
-            <Route
-              path="data-export"
-              element={<DataImport></DataImport>}
-            ></Route>
-            <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
-          </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </FullScreen>
     </div>
   );
 }
