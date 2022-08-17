@@ -5,6 +5,7 @@ import {
   BsHouseDoor,
   BsFileEarmarkMedical,
   BsFileEarmark,
+  BsFolder2Open,
 } from "react-icons/bs";
 import { MdOutlinePayment } from "react-icons/md";
 import { ImUsers } from "react-icons/im";
@@ -304,7 +305,7 @@ export const setting = [
   {
     link: "file-manager",
     name: "QA Files",
-    icon: <AiOutlineFile />,
+    icon: <BsFolder2Open />,
   },
   {
     link: "froms-builder",
