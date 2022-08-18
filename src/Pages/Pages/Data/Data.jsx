@@ -304,7 +304,7 @@ export const setting = [
   },
   {
     link: "file-manager",
-    name: "QA Files",
+    name: "QA File",
     icon: <BsFolder2Open />,
   },
   {

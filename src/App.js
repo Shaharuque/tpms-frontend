@@ -16,7 +16,6 @@ import ContractRate from "./Pages/Pages/ContractRate";
 import PatientStatement from "./Pages/Pages/PatientStatement";
 import ERemittance from "./Pages/Pages/ERemittance";
 import MPosting from "./Pages/Pages/MPosting";
-import EraManager from "./Pages/Pages/Settings/EraManager";
 import ProcessingPayroll from "./Pages/Pages/ProcessingPayroll";
 import Timesheet from "./Pages/Pages/Timesheet";
 import NameLocation from "./Pages/Pages/Settings/NameLocation";
@@ -28,6 +27,7 @@ import AddServiceSubType from "./Pages/Pages/Settings/AddServiceSubType";
 import AddStaffType from "./Pages/Pages/Settings/AddStaffType";
 import ReferringProvider from "./Pages/Pages/Settings/ReferringProvider";
 import PlaceOfServices from "./Pages/Pages/Settings/PlaceOfServices";
+import EraManager from "./Pages/Pages/Settings/EraManager";
 import VendorNumberSetup from "./Pages/Pages/Settings/VendorNumberSetup";
 import HolidaySetup from "./Pages/Pages/Settings/HolidaySetup";
 import PayPeriod from "./Pages/Pages/Settings/PayPeriod";
@@ -83,7 +83,6 @@ import LastMonthsStatements from "./Pages/Pages/Dashboard/Billing/LastMonthsStat
 import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits";
 import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
 import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
-
 //For testing purpose
 import MainBase from "./Testing/Table_React/MainBase";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
@@ -167,7 +166,6 @@ function App() {
               path="auth-place-holder"
               element={<AuthPlaceHolders></AuthPlaceHolders>}
             ></Route>
-
             {/* Staffs  */}
             <Route
               path="vacation-pending"
@@ -181,12 +179,10 @@ function App() {
               path="credentials-expire"
               element={<CredentialsToExpire></CredentialsToExpire>}
             ></Route>
-
             <Route
               path="signature-not-update"
               element={<SignatureNotLoaded></SignatureNotLoaded>}
             ></Route>
-
             {/* Billing  */}
             <Route
               path="session-not-bulled"
@@ -208,7 +204,6 @@ function App() {
               path="pending-secondary"
               element={<PendingSecondaryClaims></PendingSecondaryClaims>}
             ></Route>
-
             {/* Scheduling  */}
             <Route
               path="scheduler-not-render"
@@ -230,7 +225,6 @@ function App() {
               path="cancelled-session"
               element={<CancelledSession></CancelledSession>}
             ></Route>
-
             {/* Trending Reports  */}
             <Route
               path="sessions-manage"
@@ -252,7 +246,7 @@ function App() {
               path="kpi-reported-by-insurance-view"
               element={<KPIReportsInsurance></KPIReportsInsurance>}
             ></Route>
-
+            {/* ----------------------------------DashBoard End----------------------------------------------- */}
             {/* APPOINTMENT ROUTES */}
             <Route
               path="session-manage"
@@ -270,8 +264,9 @@ function App() {
               path="recurring-session-edit"
               element={<RecurringSessionEdit></RecurringSessionEdit>}
             ></Route>
-
+            {/* ----------------------------------Appointment End----------------------------------------------- */}
             {/* PATIENT  */}
+            <Route path="patient-List" element={<Patients></Patients>}></Route>
             <Route path="patient/:id" element={<PatientsInfo></PatientsInfo>}>
               {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
               <Route
@@ -307,7 +302,13 @@ function App() {
               path="authorization-Edit/:id"
               element={<AuthorizationEdit></AuthorizationEdit>}
             ></Route>
+            {/* ----------------------------------Patient End----------------------------------------------- */}
             {/* STAFF  */}
+            <Route path="staffs" element={<Staffs></Staffs>}></Route>
+            <Route
+              path="create-staff/staff"
+              element={<CreateStaff></CreateStaff>}
+            ></Route>
             <Route path="staff" element={<StaffInformation></StaffInformation>}>
               <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
               <Route
@@ -351,6 +352,7 @@ function App() {
                 element={<StaffPortal></StaffPortal>}
               ></Route>
             </Route>
+            {/* ----------------------------------Staff End----------------------------------------------- */}
             {/* BILLING  */}
             <Route
               path="submit-billing"
@@ -369,9 +371,6 @@ function App() {
                 element={<ManageClaims></ManageClaims>}
               ></Route>
             </Route>
-
-            <Route path="patient-List" element={<Patients></Patients>}></Route>
-            <Route path="staffs" element={<Staffs></Staffs>}></Route>
             <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>
             <Route
               path="contract-rate"
@@ -389,6 +388,7 @@ function App() {
               path="patient-statement"
               element={<PatientStatement></PatientStatement>}
             ></Route>
+            {/* ----------------------------------Billing End----------------------------------------------- */}
             {/* PAYMENT */}
             <Route
               path="era-remittance"
@@ -407,29 +407,31 @@ function App() {
               path="billing/deposit-add"
               element={<MPostingEditAdd></MPostingEditAdd>}
             ></Route>
-            <Route
-              path="era-manager"
-              element={<EraManager></EraManager>}
-            ></Route>
-
+            {/* ----------------------------------PAYMENT End----------------------------------------------- */}
             {/* PAYROLL  */}
             <Route
               path="processing-payroll"
               element={<ProcessingPayroll></ProcessingPayroll>}
             >
-              <Route path="process-payroll" element={<p>upcoming</p>}></Route>
+              <Route index element={<Navigate to="process-payroll" />} />
+              <Route
+                path="process-payroll"
+                element={<PayrollSubmission />}
+              ></Route>
               <Route
                 path="submit-payroll"
                 element={<PayrollSubmission />}
               ></Route>
               <Route
                 path="completed-payroll"
-                element={<p>completed payroll</p>}
+                element={<PayrollSubmission />}
               ></Route>
             </Route>
-
             <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
+            {/* ----------------------------------PAYROLL End----------------------------------------------- */}
+            {/* Report */}
             <Route path="report" element={<Report></Report>}></Route>
+            {/* ----------------------------------Report End----------------------------------------------- */}
             {/* settings routes  */}
             <Route path="settings" element={<Settings></Settings>}>
               <Route index element={<NameLocation></NameLocation>}></Route>
@@ -491,6 +493,10 @@ function App() {
                 element={<CreateServiceRules></CreateServiceRules>}
               ></Route>
               <Route
+                path="file-manager"
+                element={<EraManager></EraManager>}
+              ></Route>
+              <Route
                 path="froms-builder"
                 element={<FormsBuilder></FormsBuilder>}
               ></Route>
@@ -508,233 +514,19 @@ function App() {
               ></Route>
               <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
             </Route>
+            {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
-
-          <Route
-            path="authorization-Edit"
-            element={<AuthorizationEdit></AuthorizationEdit>}
-          ></Route>
           
-          <Route
-            path="authorization-Edit/:id"
-            element={<AuthorizationEdit></AuthorizationEdit>}
-          ></Route>
-          {/* STAFF  */}
-          <Route
-            path="create-staff/staff"
-            element={<CreateStaff></CreateStaff>}
-          ></Route>
-          <Route path="staff" element={<StaffInformation></StaffInformation>}>
-            <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
-            <Route
-              path="staffs-contact-details"
-              element={<ContactDetails></ContactDetails>}
-            ></Route>
-            <Route
-              path="staffs-credentials"
-              element={<Credentials></Credentials>}
-            ></Route>
-            <Route
-              path="staffs-department"
-              element={<DepartmentSupervisor></DepartmentSupervisor>}
-            ></Route>
-            <Route
-              path="staffs-payroll"
-              element={<PayrollSetup></PayrollSetup>}
-            ></Route>
-            <Route
-              path="staffs-other-setup"
-              element={<OtherSetup></OtherSetup>}
-            ></Route>
-            <Route
-              path="staffs-leave-tracking"
-              element={<LeaveTracking></LeaveTracking>}
-            ></Route>
-            <Route
-              path="staffs-payor-exclusion"
-              element={<InsuranceExclusion></InsuranceExclusion>}
-            ></Route>
-            <Route
-              path="staffs-sub-activity-exclusion"
-              element={<ServiceSubTypeExclusions></ServiceSubTypeExclusions>}
-            ></Route>
-            <Route
-              path="staffs-client-exclusion"
-              element={<PatientExclusion></PatientExclusion>}
-            ></Route>
-            <Route
-              path="staffs-portal"
-              element={<StaffPortal></StaffPortal>}
-            ></Route>
-          </Route>
-          {/* BILLING  */}
-          <Route
-            path="submit-billing"
-            element={<BillingManager></BillingManager>}
-          >
-            <Route index element={<Navigate to="proces-Clims" />} />
-            <Route
-              path="proces-Clims"
-              element={<ProcessingClaim></ProcessingClaim>}
-            ></Route>
-            <Route
-              path="Batching-climbs"
-              element={<BatchingClaims></BatchingClaims>}
-            ></Route>
-            <Route
-              path="Manage-claims"
-              element={<ManageClaims></ManageClaims>}
-            ></Route>
-          </Route>
+         {/* user */}
 
-          <Route path="patient-List" element={<Patients></Patients>}></Route>
-          <Route path="staffs" element={<Staffs></Staffs>}></Route>
-          <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>
-          <Route
-            path="contract-rate"
-            element={<ContractRate></ContractRate>}
-          ></Route>
-          <Route
-            path="billing/rate-list-add-edit"
-            element={<ContractRateEditAdd></ContractRateEditAdd>}
-          ></Route>
-          <Route
-            path="billing/rate-list-add-edit/:id"
-            element={<ContractRateEditAdd></ContractRateEditAdd>}
-          ></Route>
-          <Route
-            path="patient-statement"
-            element={<PatientStatement></PatientStatement>}
-          ></Route>
-          {/* PAYMENT */}
-          <Route
-            path="era-remittance"
-            element={<ERemittance></ERemittance>}
-          ></Route>
-          <Route path="m-posting" element={<MPosting></MPosting>}></Route>
-          <Route
-            path="billing/deposit-apply/:id"
-            element={<MDepositApply></MDepositApply>}
-          ></Route>
-          <Route
-            path="billing/deposit-add/:id"
-            element={<MPostingEditAdd></MPostingEditAdd>}
-          ></Route>
-          <Route
-            path="billing/deposit-add"
-            element={<MPostingEditAdd></MPostingEditAdd>}
-          ></Route>
-          {/* PAYROLL  */}
-
-          <Route
-            path="processing-payroll"
-            element={<ProcessingPayroll></ProcessingPayroll>}
-          >
-            <Route index element={<Navigate to="process-payroll" />} />
-            <Route
-              path="process-payroll"
-              element={<PayrollSubmission />}
-            ></Route>
-            <Route
-              path="submit-payroll"
-              element={<PayrollSubmission />}
-            ></Route>
-            <Route
-              path="completed-payroll"
-              element={<PayrollSubmission />}
-            ></Route>
-          </Route>
-
-          <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
-          <Route path="report" element={<Report></Report>}></Route>
-          {/* settings routes  */}
-          <Route path="settings" element={<Settings></Settings>}>
-            <Route index element={<NameLocation></NameLocation>}></Route>
-            <Route
-              path="add-insurance"
-              element={<AddInsurance></AddInsurance>}
-            ></Route>
-            <Route
-              path="insurance-setup"
-              element={<InsuranceSetup></InsuranceSetup>}
-            ></Route>
-            <Route
-              path="add-treatment"
-              element={<AddTreatments></AddTreatments>}
-            ></Route>
-            <Route
-              path="services"
-              element={<AddServices></AddServices>}
-            ></Route>
-            <Route path="cpt-code" element={<AddCptCode></AddCptCode>}></Route>
-            <Route
-              path="sub-activity-setup"
-              element={<AddServiceSubType></AddServiceSubType>}
-            ></Route>
-            <Route
-              path="add-staff-type"
-              element={<AddStaffType></AddStaffType>}
-            ></Route>
-            <Route
-              path="rendering-provider"
-              element={<ReferringProvider></ReferringProvider>}
-            ></Route>
-            <Route
-              path="pos"
-              element={<PlaceOfServices></PlaceOfServices>}
-            ></Route>
-            <Route
-              path="vendor-number"
-              element={<VendorNumberSetup></VendorNumberSetup>}
-            ></Route>
-            <Route
-              path="holiday-setup"
-              element={<HolidaySetup></HolidaySetup>}
-            ></Route>
-            <Route path="pay-period" element={<PayPeriod></PayPeriod>}></Route>
-            <Route path="logo" element={<Logo></Logo>}></Route>
-            <Route
-              path="unbillable-activity"
-              element={<UnbillableActivity></UnbillableActivity>}
-            ></Route>
-            <Route
-              path="session-rule"
-              element={<CreateServiceRules></CreateServiceRules>}
-            ></Route>
-            <Route
-              path="file-manager"
-              element={<EraManager></EraManager>}
-            ></Route>
-            <Route
-              path="froms-builder"
-              element={<FormsBuilder></FormsBuilder>}
-            ></Route>
-            <Route
-              path="notes-forms"
-              element={<FormAndLibrary></FormAndLibrary>}
-            ></Route>
-            <Route
-              path="business-documents"
-              element={<BusinessFiles></BusinessFiles>}
-            ></Route>
-            <Route
-              path="data-export"
-              element={<DataImport></DataImport>}
-            ></Route>
-            <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
-  
-
-        </Route>
-
-        {/* user */}
-
-        <Route path="/user" element={<Sidebar></Sidebar>}>
-        <Route path="myschedule" element={<ManageSessions/>} ></Route>
+          <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
+          <Route path="myschedule" element={<ManageSessions/>} ></Route>
           <Route path="biographic" element={<Biographic/>} ></Route>
           <Route path="Pataients" element={<Pataients/>} ></Route>
           <Route path="user-timesheet" element={<UserTimesheets/>} ></Route>
-      </Route>
-      </Routes>
+        </Route>
+
+        </Routes>
       </FullScreen>
     </div>
   );
