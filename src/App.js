@@ -103,6 +103,8 @@ import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
 import ManageSessions from "./Pages/Pages/User/My-Schedule/ManageSessions";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
+import Biographic from "./Pages/Pages/User/Biographic/Biographic";
+import Pataients from "./Pages/Pages/User/Patient/Pataients";
 
 function App() {
   return (
@@ -503,10 +505,19 @@ function App() {
             <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
           </Route>
 
-          <Route path="myschedule" element={<ManageSessions/>} ></Route>
+       
+          
 
-          <Route path="user-timesheet" element={<UserTimesheets/>} ></Route>
         </Route>
+
+        {/* user */}
+
+        <Route path="/user" element={<Sidebar></Sidebar>}>
+        <Route path="myschedule" element={<ManageSessions/>} ></Route>
+          <Route path="biographic" element={<Biographic/>} ></Route>
+          <Route path="Pataients" element={<Pataients/>} ></Route>
+          <Route path="user-timesheet" element={<UserTimesheets/>} ></Route>
+      </Route>
       </Routes>
     </div>
   );

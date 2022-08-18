@@ -35,6 +35,9 @@ import NavigationBar from "../Pages/Shared/NavigationBar";
 import Footer from "./Footer";
 // import StateUse from "../Hooks/StateUse";
 
+
+
+
 const menuItem = [
   {
     path: "/admin",
@@ -155,14 +158,28 @@ const menuItem = [
   },
 
   {
-    path : "/admin/myschedule",
+    path : "/user/myschedule",
     name : "My Schedule",
     icon : <FaHouseUser />,
     roll : "provider"
   },
 
   {
-    path : "/admin/user-timesheet",
+    path : "/user/biographic",
+    name : "biographic",
+    icon : <BsFileText />,
+    roll : "provider"
+  },
+
+  {
+    path : "/user/Pataients",
+    name : "Pataients",
+    icon : <BsFileText />,
+    roll : "provider"
+  },
+
+  {
+    path : "/user/user-timesheet",
     name : "Timesheet",
     icon : <BsFileText />,
     roll : "provider"
