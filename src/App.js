@@ -516,16 +516,15 @@ function App() {
             </Route>
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
-          
-         {/* user */}
+
+          {/* user */}
 
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
-          <Route path="myschedule" element={<ManageSessions/>} ></Route>
-          <Route path="biographic" element={<Biographic/>} ></Route>
-          <Route path="Pataients" element={<Pataients/>} ></Route>
-          <Route path="user-timesheet" element={<UserTimesheets/>} ></Route>
-        </Route>
-
+            <Route path="myschedule" element={<ManageSessions />}></Route>
+            <Route path="biographic" element={<Biographic />}></Route>
+            <Route path="Pataients" element={<Pataients />}></Route>
+            <Route path="user-timesheet" element={<UserTimesheets />}></Route>
+          </Route>
         </Routes>
       </FullScreen>
     </div>
