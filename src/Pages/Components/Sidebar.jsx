@@ -40,10 +40,12 @@ const menuItem = [
     path: "/admin",
     name: "Dashboard",
     icon: <FaHouseUser />,
+    roll : "admin"
   },
   {
     path: "/admin/appointment",
     name: "Appointment",
+    roll : "admin",
     icon: <FaRegCalendarAlt />,
     subRoute: [
       {
@@ -66,17 +68,20 @@ const menuItem = [
   {
     path: "/admin/patient-List",
     name: "Patients",
+    roll : 'admin',
     icon: <FaUserPlus />,
   },
   {
     path: "/admin/staffs",
     name: "Staffs",
     icon: <FaUserMd />,
+    roll : "admin"
   },
   {
     path: "/admin/billing",
     name: "Billing",
     icon: <FaFunnelDollar />,
+    roll : "admin",
     subRoute: [
       {
         path: "/admin/submit-billing",
@@ -104,6 +109,7 @@ const menuItem = [
     path: "/admin/payment",
     name: "Payment",
     icon: <FaMoneyCheckAlt />,
+    roll : "admin",
     subRoute: [
       {
         path: "/admin/era-remittance",
@@ -121,6 +127,7 @@ const menuItem = [
     path: "/admin/payroll",
     name: "Payroll",
     icon: <FaMoneyBillAlt />,
+    roll : "admin",
     subRoute: [
       {
         path: "/admin/processing-payroll",
@@ -138,19 +145,45 @@ const menuItem = [
     path: "/admin/report",
     name: "Report",
     icon: <GoGraph />,
+    roll : "admin"
   },
   {
     path: "/admin/settings",
     name: "Settings",
     icon: <FiSettings />,
+    roll : "admin"
   },
+
+  {
+    path : "/admin/myschedule",
+    name : "My Schedule",
+    icon : <FaHouseUser />,
+    roll : "provider"
+  },
+
+  {
+    path : "/admin/user-timesheet",
+    name : "Timesheet",
+    icon : <BsFileText />,
+    roll : "provider"
+  }
+
 ];
 
+
+
+// const initialDropState = {};
+// menuItem.map((item) => {
+//   if (item.subRoute) initialDropState[item.name] = false;
+// });
+
+
 const initialDropState = {};
-menuItem.map((item) => {
+const x = menuItem.map((item) => {
   if (item.subRoute) initialDropState[item.name] = false;
 });
 
+console.log(x);
 // console.log(initialDropState);
 
 const Sidebar = () => {
@@ -216,7 +249,7 @@ const Sidebar = () => {
               </>
             )}
           </div>
-          {menuItem.map((items, index) => (
+          {menuItem.filter(item => item.roll === 'provider').map((items, index) => (
             <div key={index}>
               {items.subRoute ? (
                 <NavLink

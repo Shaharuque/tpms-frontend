@@ -101,6 +101,8 @@ import KPIReports from "./Pages/Pages/Dashboard/TrendingReports/KPIReports";
 import ScheduleBillable from "./Pages/Pages/Dashboard/TrendingReports/ScheduleBillable";
 import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
+import ManageSessions from "./Pages/Pages/User/My-Schedule/ManageSessions";
+import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 
 function App() {
   return (
@@ -500,6 +502,10 @@ function App() {
             ></Route>
             <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
           </Route>
+
+          <Route path="myschedule" element={<ManageSessions/>} ></Route>
+
+          <Route path="user-timesheet" element={<UserTimesheets/>} ></Route>
         </Route>
       </Routes>
     </div>

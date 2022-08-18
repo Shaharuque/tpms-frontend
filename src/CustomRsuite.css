@@ -11117,7 +11117,7 @@ textarea.rs-picker-search-input {
 .rs-picker-daterange .rs-picker-toggle.rs-btn .rs-picker-toggle-clean,
 .rs-picker-date .rs-picker-toggle.rs-btn .rs-picker-toggle-caret,
 .rs-picker-daterange .rs-picker-toggle.rs-btn .rs-picker-toggle-caret {
-  top: 8px;
+  top: 3px;
 }
 .rs-picker-subtle .rs-picker-date .rs-picker-toggle.rs-btn .rs-picker-toggle-clean,
 .rs-picker-subtle .rs-picker-daterange .rs-picker-toggle.rs-btn .rs-picker-toggle-clean,
