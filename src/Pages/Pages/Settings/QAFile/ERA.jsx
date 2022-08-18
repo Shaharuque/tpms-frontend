@@ -3,12 +3,23 @@ import { BsEyeFill } from "react-icons/bs";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "../SettingComponents/CheckBox";
 import SettingTableBox from "../SettingComponents/SettingTableBox";
+import ERAActionModal from "./ERAActionModal";
 import { ERATableColumn, ERATableData } from "./QAfileTableData";
 
 const ERA = () => {
   const [action, setAction] = useState(false);
   const data = useMemo(() => ERATableData, []);
   const columns = useMemo(() => [...ERATableColumn], []);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
+  const [editableRowIndex, setEditableRowIndex] = React.useState(null);
+  // console.log(editableRowIndex);
   const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow } =
     useTable(
       { columns, data },
@@ -48,7 +59,13 @@ const ERA = () => {
               <>
                 <div>
                   <div className="flex justify-center gap-1 text-primary">
-                    <BsEyeFill className="text-primary" />
+                    <BsEyeFill
+                      onClick={() => {
+                        setEditableRowIndex(row);
+                        setOpenEditModal(true);
+                      }}
+                      className="text-primary"
+                    />
                   </div>
                 </div>
               </>
@@ -69,6 +86,13 @@ const ERA = () => {
           prepareRow={prepareRow}
         ></SettingTableBox>
       </div>
+      {openEditModal && (
+        <ERAActionModal
+          handleClose={handleClose}
+          open={openEditModal}
+          row={editableRowIndex}
+        ></ERAActionModal>
+      )}
     </div>
   );
 };
