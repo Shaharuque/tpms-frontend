@@ -261,7 +261,7 @@ const Sidebar = ({ handle }) => {
             )}
           </div>
           {menuItem
-            .filter((item) => item.roll === "admin")
+            .filter((item) => item.roll === "provider")
             .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (
