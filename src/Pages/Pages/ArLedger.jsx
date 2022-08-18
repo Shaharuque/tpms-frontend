@@ -15,7 +15,6 @@ import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 // import "rsuite/dist/rsuite.css";
 import { DateRangePicker } from "rsuite";
-
 const ArLedger = () => {
   const [select, setSelect] = useState("");
   const [table, setTable] = useState(false);

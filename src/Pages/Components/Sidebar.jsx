@@ -40,10 +40,12 @@ const menuItem = [
     path: "/admin",
     name: "Dashboard",
     icon: <FaHouseUser />,
+    roll: "admin",
   },
   {
     path: "/admin/appointment",
     name: "Appointment",
+    roll: "admin",
     icon: <FaRegCalendarAlt />,
     subRoute: [
       {
@@ -66,17 +68,20 @@ const menuItem = [
   {
     path: "/admin/patient-List",
     name: "Patients",
+    roll: "admin",
     icon: <FaUserPlus />,
   },
   {
     path: "/admin/staffs",
     name: "Staffs",
     icon: <FaUserMd />,
+    roll: "admin",
   },
   {
     path: "/admin/billing",
     name: "Billing",
     icon: <FaFunnelDollar />,
+    roll: "admin",
     subRoute: [
       {
         path: "/admin/submit-billing",
@@ -104,6 +109,7 @@ const menuItem = [
     path: "/admin/payment",
     name: "Payment",
     icon: <FaMoneyCheckAlt />,
+    roll: "admin",
     subRoute: [
       {
         path: "/admin/era-remittance",
@@ -121,6 +127,7 @@ const menuItem = [
     path: "/admin/payroll",
     name: "Payroll",
     icon: <FaMoneyBillAlt />,
+    roll: "admin",
     subRoute: [
       {
         path: "/admin/processing-payroll",
@@ -138,22 +145,59 @@ const menuItem = [
     path: "/admin/report",
     name: "Report",
     icon: <GoGraph />,
+    roll: "admin",
   },
   {
     path: "/admin/settings",
     name: "Settings",
     icon: <FiSettings />,
+    roll: "admin",
+  },
+
+  // user part
+  {
+    path: "/user/myschedule",
+    name: "My Schedule",
+    icon: <FaHouseUser />,
+    roll: "provider",
+  },
+
+  {
+    path: "/user/biographic",
+    name: "biographic",
+    icon: <BsFileText />,
+    roll: "provider",
+  },
+
+  {
+    path: "/user/Pataients",
+    name: "Pataients",
+    icon: <BsFileText />,
+    roll: "provider",
+  },
+
+  {
+    path: "/user/user-timesheet",
+    name: "Timesheet",
+    icon: <BsFileText />,
+    roll: "provider",
   },
 ];
 
-const initialDropState = {};
-menuItem.map((item) => {
-  if (item.subRoute) initialDropState[item.name] = false;
-});
+// const initialDropState = {};
+// menuItem.map((item) => {
+//   if (item.subRoute) initialDropState[item.name] = false;
+// });
 
+const initialDropState = {};
+// const x = menuItem.map((item) => {
+//   if (item.subRoute) initialDropState[item.name] = false;
+// });
+
+// console.log(x);
 // console.log(initialDropState);
 
-const Sidebar = ({handle}) => {
+const Sidebar = ({ handle }) => {
   const [isHovering, setIsHovering] = useState(false);
 
   const [dropState, setDropState] = useState(initialDropState);
@@ -176,7 +220,6 @@ const Sidebar = ({handle}) => {
   const handleMouseOut = () => {
     setIsHovering(false);
   };
-
 
   // console.log(menuItem[1].others.name);
   return (
@@ -217,47 +260,49 @@ const Sidebar = ({handle}) => {
               </>
             )}
           </div>
-          {menuItem.map((items, index) => (
-            <div key={index}>
-              {items.subRoute ? (
-                <NavLink
-                  to={"#"}
-                  key={index}
-                  className=""
-                  activeclassname="active"
-                >
-                  <SidebarMenu
-                    items={items}
-                    isHovering={isHovering}
-                    dropState={dropState[items.name]}
-                    handleDropState={handleDropState}
-                  ></SidebarMenu>
-                </NavLink>
-              ) : (
-                <NavLink
-                  to={items.path}
-                  key={index}
-                  className="link flex"
-                  activeclassname="active"
-                  onClick={(_) => handleDropState("other")}
-                >
-                  <div className="flex items-center">
-                    <div className=" text-xl px-2 py-1">{items.icon}</div>
+          {menuItem
+            .filter((item) => item.roll === "admin")
+            .map((items, index) => (
+              <div key={index}>
+                {items.subRoute ? (
+                  <NavLink
+                    to={"#"}
+                    key={index}
+                    className=""
+                    activeclassname="active"
+                  >
+                    <SidebarMenu
+                      items={items}
+                      isHovering={isHovering}
+                      dropState={dropState[items.name]}
+                      handleDropState={handleDropState}
+                    ></SidebarMenu>
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to={items.path}
+                    key={index}
+                    className="link flex"
+                    activeclassname="active"
+                    onClick={(_) => handleDropState("other")}
+                  >
+                    <div className="flex items-center">
+                      <div className=" text-xl px-2 py-1">{items.icon}</div>
 
-                    <div
-                      // onClick={() => setOpen(!open)}
-                      style={{
-                        display: isHovering ? "block" : "none",
-                      }}
-                      className="link_text text-sm"
-                    >
-                      {items.name}
+                      <div
+                        // onClick={() => setOpen(!open)}
+                        style={{
+                          display: isHovering ? "block" : "none",
+                        }}
+                        className="link_text text-sm"
+                      >
+                        {items.name}
+                      </div>
                     </div>
-                  </div>
-                </NavLink>
-              )}
-            </div>
-          ))}
+                  </NavLink>
+                )}
+              </div>
+            ))}
         </div>
       </div>
     </div>
