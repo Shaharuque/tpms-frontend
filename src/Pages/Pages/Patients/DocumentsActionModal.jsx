@@ -22,7 +22,6 @@ const DocumentsActionModal = ({ handleClose, open, row }) => {
 
   return (
     <div>
-      {" "}
       <Dialog
         // fullScreen={fullScreen}
         open={open}

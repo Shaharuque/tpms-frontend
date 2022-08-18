@@ -203,7 +203,7 @@ const x = menuItem.map((item) => {
 console.log(x);
 // console.log(initialDropState);
 
-const Sidebar = () => {
+const Sidebar = ({handle}) => {
   const [isHovering, setIsHovering] = useState(false);
 
   const [dropState, setDropState] = useState(initialDropState);
@@ -227,12 +227,13 @@ const Sidebar = () => {
     setIsHovering(false);
   };
 
+
   // console.log(menuItem[1].others.name);
   return (
     <div className="relative bg-neutral pt-3 pb-2">
       <div className=" slide">
         <div className="">
-          <NavigationBar></NavigationBar>
+          <NavigationBar handle={handle}></NavigationBar>
         </div>
         <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-3 ">
           <Outlet />

@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const ip = "https://ovh.therapypms.com";
+export const ip = "https://ovh.therapypms.com";
 
 // // Basic Client for general purpose
 // export const baseClient = axios.create({
