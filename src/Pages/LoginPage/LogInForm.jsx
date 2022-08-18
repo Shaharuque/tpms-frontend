@@ -27,18 +27,17 @@ const LogInForm = () => {
         if (res.status === 201) {
           console.log("logged in");
         } else {
-          console.log("Cann't perform the action");
+          console.log("Can't perform the action");
         }
         return res.json();
       })
       .then((result) => {
         console.log(result);
-        if (result.account_type == "admin") {
+        if (result.account_type === "admin") {
           localStorage.setItem("admin", result.access_token);
           navigate("/admin");
-        }
-        else{
-          navigate('/notfound')
+        } else {
+          navigate("/notfound");
         }
       });
     reset();
