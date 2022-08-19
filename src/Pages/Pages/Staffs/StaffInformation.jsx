@@ -11,6 +11,7 @@ const StaffInformation = () => {
     <div>
       {" "}
       <>
+        {/* Top part  */}
         <div className="flex flex-wrap justify-between">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <Link to={"/admin/staffs"} className="text-primary text-lg">
@@ -37,8 +38,10 @@ const StaffInformation = () => {
             </Link>
           </div>
         </div>
+        {/* top Part end  */}
 
         <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between">
+          {/* Navbar  */}
           <motion.div
             initial={{ opacity: 0, x: -25 }}
             animate={{ opacity: 1, x: 0 }}
@@ -146,6 +149,10 @@ const StaffInformation = () => {
               </CustomLink>
             </div>
           </motion.div>
+          {/* Navbar END */}
+
+          {/* changeable Box  */}
+
           <motion.div
             initial={{ opacity: 0, x: 25 }}
             animate={{ opacity: 1, x: 0 }}
