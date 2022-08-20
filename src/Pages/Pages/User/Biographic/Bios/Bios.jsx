@@ -10,20 +10,20 @@ export const Bios = () => {
 
     return (
         <div>
-        
+
             <div >
                 <h1 className="text-lg mt-2 text-left text-orange-400 p-2">Bio's</h1>
                 <div className="div-img ">
-                <div>
+                    <div>
                         <img src={person} className=' h-40 ' alt="Dami img not taken" />
-                 </div>
-                 <div>
+                    </div>
+                    <div>
                         <div class="mb-3 w-76">
-                            
+
                             <input class="form-control
-   " type="file" id="formFile"/>
+   " type="file" id="formFile" />
                         </div>
-                </div>
+                    </div>
                 </div>
                 <form >
                     <div className=" grid grid-rows-2 md:grid-cols-3 lg:grid-cols-4  gap-3 p-2">
@@ -351,7 +351,7 @@ export const Bios = () => {
 
                             />
                         </div>
-                        
+
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -442,9 +442,9 @@ export const Bios = () => {
 
                             />
                         </div>
-                       
 
-                       
+
+
                     </div>
 
                     <div>
@@ -483,9 +483,9 @@ export const Bios = () => {
                         >
                             Save
                         </button>
-                      
+
                     </div>
-                 
+
 
 
                 </form>
