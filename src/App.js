@@ -525,6 +525,9 @@ function App() {
             <Route path="Pataients" element={<Pataients />}></Route>
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>
           </Route>
+          {/* user end */}
+
+          {/* Patient-Portal start */}
         </Routes>
       </FullScreen>
     </div>

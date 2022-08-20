@@ -9,13 +9,15 @@ const CalendarView = () => {
     { start: new Date(), end: new Date(), title: "special event" },
   ];
   return (
-    <Calendar
-      localizer={localizer}
-      events={myEventsList}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 1200 }}
-    />
+    <div className="border-2 border-teal-500 rounded-md">
+      <Calendar
+        localizer={localizer}
+        events={myEventsList}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 1000 }}
+      />
+    </div>
   );
 };
 

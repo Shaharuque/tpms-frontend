@@ -260,8 +260,9 @@ const Sidebar = ({ handle }) => {
               </>
             )}
           </div>
+          {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
           {menuItem
-            .filter((item) => item.roll === "provider")
+            .filter((item) => item.roll === "admin")
             .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (

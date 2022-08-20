@@ -5,29 +5,38 @@ import { FaPlus } from "react-icons/fa";
 import NameLocationTableAddButton from "./NameLocationTableAddButton";
 
 const Form = (item) => {
-  const [add, setAdd] = useState(0);
-  const [test, setTest] = useState({});
-  //console.log(loading);
+  const [add, setAdd] = useState(false);
+  const [store, setStore] = useState([]);
 
   const handleAdd = () => {
-    setAdd(add + 1);
+    setAdd(!add);
   };
 
   // Editable value
-  useEffect(() => {
-    setTimeout(() => {
-      reset({
-        zone_name: item?.item[0]?.zone_name,
-        city: item?.item[0]?.city,
-        facility_name_two: item?.item[0]?.facility_name_two,
-        address: item?.item[0]?.address,
-        state: item?.item[0]?.state,
-        npi: item?.item[0]?.npi ? item?.item[0]?.npi : "",
-        phone_one: item?.item[0]?.phone_one,
-        zip: item?.item[0]?.zip,
-      });
-    }, 0);
-  }, [item?.item[1]?.zone_name]);
+  useEffect(
+    () => {
+      setTimeout(() => {
+        reset(
+          {
+            zone_name: item?.item[0]?.zone_name,
+            city: item?.item[0]?.city,
+            facility_name_two: item?.item[0]?.facility_name_two,
+            address: item?.item[0]?.address,
+            state: item?.item[0]?.state,
+            npi: item?.item[0]?.npi ? item?.item[0]?.npi : "",
+            phone_one: item?.item[0]?.phone_one,
+            zip: item?.item[0]?.zip,
+          },
+          {
+            zone_name: item?.item[1]?.zone_name,
+            city: item?.item[1]?.city,
+          }
+        );
+      }, 0);
+    },
+    [item?.item[1]?.zone_name],
+    item?.item[0]?.zone_name
+  );
 
   //console.log(item);
 
@@ -38,10 +47,12 @@ const Form = (item) => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
+    // const data_one = [data];
     console.log(data);
+    setStore([...store, data]);
     reset();
   };
-
+  console.log(store);
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -186,9 +197,11 @@ const Form = (item) => {
             transition={{ delay: 0.2 }}
           >
             <div className="divider"></div>
-            {add === 1 && (
-              <NameLocationTableAddButton></NameLocationTableAddButton>
-            )}
+            <NameLocationTableAddButton
+              handleAdd={handleAdd}
+              register={register}
+              setAdd={setAdd}
+            ></NameLocationTableAddButton>
           </motion.div>
         )}
 
