@@ -106,6 +106,9 @@ import ManageSessions from "./Pages/Pages/User/My-Schedule/ManageSessions";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
+import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
+import  ContactInfo  from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
+import  CredenTial  from "./Pages/Pages/User/Biographic/Credential/CredenTial";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -516,16 +519,20 @@ function App() {
             </Route>
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
-          
-         {/* user */}
+
+          {/* user */}
 
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
-          <Route path="myschedule" element={<ManageSessions/>} ></Route>
-          <Route path="biographic" element={<Biographic/>} ></Route>
-          <Route path="Pataients" element={<Pataients/>} ></Route>
-          <Route path="user-timesheet" element={<UserTimesheets/>} ></Route>
-        </Route>
-
+            <Route path="myschedule" element={<ManageSessions />}></Route>
+            <Route path="biographic" element={<Biographic />}>
+              <Route path="bios" element={<Bios></Bios>}></Route>
+              <Route path="bio-contactinfo" element={<ContactInfo></ContactInfo>}>
+              </Route>
+              <Route path="bio-credential" element={<CredenTial></CredenTial>}></Route> 
+            </Route>
+            <Route path="Pataients" element={<Pataients />}></Route>
+            <Route path="user-timesheet" element={<UserTimesheets />}></Route>
+          </Route>
         </Routes>
       </FullScreen>
     </div>
