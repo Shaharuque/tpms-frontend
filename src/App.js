@@ -358,6 +358,8 @@ function App() {
               path="submit-billing"
               element={<BillingManager></BillingManager>}
             >
+              <Route index element={<Navigate to="proces-Clims" />} />
+
               <Route
                 path="proces-Clims"
                 element={<ProcessingClaim></ProcessingClaim>}

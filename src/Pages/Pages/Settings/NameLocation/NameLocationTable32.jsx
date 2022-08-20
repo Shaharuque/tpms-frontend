@@ -64,9 +64,7 @@ const NameLocationTable32 = ({
               transition: "all .3s ease-out",
             }}
           >
-           {
-            data?.map((item, index) => {<Form item={item} key={index}></Form>})
-           }
+           <Form item={data}></Form>
           </motion.div>
         </div>
       )}
