@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
-import {BiFullscreen,BiExitFullscreen} from "react-icons/bi";
+import { BiFullscreen, BiExitFullscreen } from "react-icons/bi";
 import {
   AiOutlinePlus,
   AiOutlineNotification,
@@ -21,7 +21,7 @@ const NavigationBar = ({ handle }) => {
       transition={{ delay: 0.4 }}
       className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] navi rounded-3xl sticky "
     >
-      <div className="md:flex items-center justify-between bg-white rounded-3xl  md:px-10 px-7">
+      <div className="md:flex items-center justify-between bg-white rounded-3xl  md:px-10 px-7s">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
@@ -48,24 +48,27 @@ const NavigationBar = ({ handle }) => {
         </div>
 
         <div
-          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-18 " : "top-[-490px]"
-            }`}
+          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            open ? "top-18 " : "top-[-490px]"
+          }`}
         >
           {/*Full screen showing code */}
           <div>
-            {!handle.active ?
-              (
-                <h1 onClick={handle.enter} className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
-                  <BiFullscreen />
-                </h1>
-              )
-              :
-              (
-                <h1 onClick={handle.exit} className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
-                  <BiExitFullscreen />
-                </h1>
-              )
-            }
+            {!handle.active ? (
+              <h1
+                onClick={handle.enter}
+                className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+              >
+                <BiFullscreen />
+              </h1>
+            ) : (
+              <h1
+                onClick={handle.exit}
+                className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+              >
+                <BiExitFullscreen />
+              </h1>
+            )}
           </div>
 
           {/* adding  */}

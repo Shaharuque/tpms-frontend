@@ -17,6 +17,7 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
+import { MdPersonAddAlt1 } from "react-icons/md";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { MdOutlineMonetizationOn } from "react-icons/md";
 import {
@@ -28,6 +29,7 @@ import { VscDebugDisconnect } from "react-icons/vsc";
 import { RiFundsBoxLine } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
 import { TbWebhook } from "react-icons/tb";
+import { GrFormSchedule } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
@@ -181,6 +183,19 @@ const menuItem = [
     name: "Timesheet",
     icon: <BsFileText />,
     roll: "provider",
+  },
+  //Patient portal
+  {
+    path: "/patient",
+    name: "patient",
+    icon: <GrFormSchedule />,
+    roll: "patient",
+  },
+  {
+    path: "/my-info",
+    name: "My Info",
+    icon: <MdPersonAddAlt1 />,
+    roll: "patient",
   },
 ];
 

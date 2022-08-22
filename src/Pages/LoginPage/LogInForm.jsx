@@ -35,9 +35,9 @@ const LogInForm = () => {
         console.log(result);
         if (result.account_type === "admin") {
           localStorage.setItem("admin", result.access_token);
-          navigate("/admin");
+          navigate("/admin"); //admin panel a redirect
         } else {
-          navigate("/notfound");
+          navigate("/patient"); //patient panel a redirect
         }
       });
     reset();
@@ -52,7 +52,6 @@ const LogInForm = () => {
         backgroundPosition: "fixed",
       }}
     >
-     
       <div className="px-7 sm:px-16 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute login-form">
         <div className="">
           <div div className="">

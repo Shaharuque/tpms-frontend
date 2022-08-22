@@ -106,6 +106,8 @@ import ManageSessions from "./Pages/Pages/User/My-Schedule/ManageSessions";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
+import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
+import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -530,6 +532,10 @@ function App() {
           {/* user end */}
 
           {/* Patient-Portal start */}
+          <Route path="/" element={<Sidebar handle={handle}></Sidebar>}>
+            <Route path="/patient" element={<MySchedule />}></Route>
+            <Route path="/my-info" element={<MyInfo></MyInfo>}></Route>
+          </Route>
         </Routes>
       </FullScreen>
     </div>

@@ -15,7 +15,7 @@ const CalendarView = () => {
         events={myEventsList}
         startAccessor="start"
         endAccessor="end"
-        style={{ height: 1000 }}
+        style={{ height: 1000, padding: "10px" }}
       />
     </div>
   );
