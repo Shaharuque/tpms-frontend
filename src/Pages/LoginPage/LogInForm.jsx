@@ -35,9 +35,11 @@ const LogInForm = () => {
         console.log(result);
         if (result.account_type === "admin") {
           localStorage.setItem("admin", result.access_token);
+          localStorage.setItem("type", result.account_type);
           navigate("/admin"); //admin panel a redirect
         } else {
           navigate("/patient"); //patient panel a redirect
+          localStorage.setItem("type", "patient");
         }
       });
     reset();
