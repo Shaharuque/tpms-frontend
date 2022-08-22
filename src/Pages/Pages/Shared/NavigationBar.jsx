@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
-import {BiFullscreen,BiExitFullscreen} from "react-icons/bi";
+import { BiFullscreen, BiExitFullscreen } from "react-icons/bi";
 import {
   AiOutlinePlus,
   AiOutlineNotification,
@@ -48,24 +48,53 @@ const NavigationBar = ({ handle }) => {
         </div>
 
         <div
-          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-18 " : "top-[-490px]"
-            }`}
+          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            open ? "top-18 " : "top-[-490px]"
+          }`}
         >
           {/*Full screen showing code */}
           <div>
-            {!handle.active ?
-              (
-                <h1 onClick={handle.enter} className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
-                  <BiFullscreen />
-                </h1>
-              )
-              :
-              (
-                <h1 onClick={handle.exit} className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
-                  <BiExitFullscreen />
-                </h1>
-              )
-            }
+            {!handle.active ? (
+              <h1
+                onClick={handle.enter}
+                className=" tls mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 mt-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                  />
+                </svg>
+              </h1>
+            ) : (
+              <h1
+                onClick={handle.exit}
+                className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 mt-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                  />
+                </svg>
+              </h1>
+            )}
           </div>
 
           {/* adding  */}
