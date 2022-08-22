@@ -17,6 +17,7 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
+import { MdPersonAddAlt1 } from "react-icons/md";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { MdOutlineMonetizationOn } from "react-icons/md";
 import {
@@ -28,6 +29,7 @@ import { VscDebugDisconnect } from "react-icons/vsc";
 import { RiFundsBoxLine } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
 import { TbWebhook } from "react-icons/tb";
+import { GrFormSchedule } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
@@ -181,7 +183,20 @@ const menuItem = [
     name: "Timesheet",
     icon: <BsFileText />,
     roll: "provider",
-  }
+  },
+  //Patient portal
+  {
+    path: "/patient",
+    name: "patient",
+    icon: <GrFormSchedule />,
+    roll: "patient",
+  },
+  {
+    path: "/my-info",
+    name: "My Info",
+    icon: <MdPersonAddAlt1 />,
+    roll: "patient",
+  },
 ];
 
 // const initialDropState = {};
@@ -221,6 +236,8 @@ const Sidebar = ({ handle }) => {
   };
 
   // console.log(menuItem[1].others.name);
+  console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
+  const logged_type = localStorage.getItem("type");
   return (
     <div className="relative bg-neutral pt-3 pb-2">
       <div className=" slide">
@@ -244,7 +261,6 @@ const Sidebar = ({ handle }) => {
             // transition: isHovering ? "ease-in 0.5s" : "ease-out 0.3s",
           }}
           className="sidebar"
-          
         >
           <div className="top-section">
             {isHovering ? (
@@ -260,15 +276,13 @@ const Sidebar = ({ handle }) => {
               </>
             )}
           </div>
-          {menuItem.filter((item) => item.roll === "admin").map((items, index) => (
+          {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
+          {menuItem
+            .filter((item) => item.roll === 'provider') //dynamic bhabey now route render hobey
+            .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (
-                  <NavLink
-                    to={"#"}
-                    key={index}
-      
-                    activeclassname="active"
-                  >
+                  <NavLink to={"#"} key={index} activeclassname="active">
                     <SidebarMenu
                       items={items}
                       isHovering={isHovering}
@@ -293,10 +307,13 @@ const Sidebar = ({ handle }) => {
                         //   display: isHovering ? "block" : "none",
                         // }}
                         // className="link_text text-sm"
-                        className={ isHovering ? "opacity-1 duration-600 ease-in" : "opacity-0 duration-200 ease-out"}
+                        className={
+                          isHovering
+                            ? "opacity-1 duration-600 ease-in"
+                            : "opacity-0 duration-200 ease-out"
+                        }
                       >
                         {items.name}
-                      
                       </div>
                     </div>
                   </NavLink>

@@ -19,9 +19,9 @@ const NavigationBar = ({ handle }) => {
       initial={{ opacity: 0, y: -15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] navi rounded-3xl sticky "
+      className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem]  rounded-3xl sticky "
     >
-      <div className="md:flex items-center justify-between bg-white rounded-3xl  md:px-10 px-7">
+      <div className="md:flex items-center justify-between bg-white rounded-3xl  md:px-10 px-7s">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
