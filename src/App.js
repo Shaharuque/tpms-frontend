@@ -521,10 +521,8 @@ function App() {
           {/* user */}
 
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
-            <Route path="myschedule" element={<ManageSessions />}>
-              {/* test scheduler Calender */}
-              <Route path="calender" element={<SchedulerCalender />}></Route>
-            </Route>
+            <Route index element={<ManageSessions />}></Route>
+            <Route path="calender" element={<SchedulerCalender />}></Route>
             <Route path="biographic" element={<Biographic />}></Route>
             <Route path="Pataients" element={<Pataients />}></Route>
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>

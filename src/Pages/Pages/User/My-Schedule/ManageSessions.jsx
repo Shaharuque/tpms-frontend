@@ -124,7 +124,7 @@ const ManageSessions = () => {
       <div className="flex flex-wrap justify-between items-center">
         <h1 className="text-sm">Manage Sessions</h1>
         <NavLink
-          to={"calender"}
+          to={"/user/calender"}
           className="flex flex-wrap justify-between items-center px-2 py-1 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
         >
           <FaRegCalendarAlt className="mr-1" />

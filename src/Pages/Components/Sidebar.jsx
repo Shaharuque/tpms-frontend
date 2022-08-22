@@ -156,7 +156,7 @@ const menuItem = [
 
   // user part
   {
-    path: "/user/myschedule",
+    path: "/user",
     name: "My Schedule",
     icon: <FaHouseUser />,
     roll: "provider",

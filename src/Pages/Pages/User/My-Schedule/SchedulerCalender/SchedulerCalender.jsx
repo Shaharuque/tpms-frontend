@@ -4,7 +4,7 @@ import { Scheduler } from "@aldabil/react-scheduler";
 const SchedulerCalender = () => {
   const fetchRemote = async (query) => {
     console.log("Query: ", query);
-    /**Simulate fetchin remote data */
+    /**Simulate fetching remote data */
     return new Promise((res) => {
       setTimeout(() => {
         res(EVENTS);
