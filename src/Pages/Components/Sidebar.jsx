@@ -187,14 +187,20 @@ const menuItem = [
   //Patient portal
   {
     path: "/patient",
-    name: "Patient",
+    name: "My Schedule",
     icon: <GrFormSchedule />,
     roll: "patient",
   },
   {
-    path: "/my-info",
-    name: "MyInfo",
+    path: "/patient/my-info",
+    name: "My Info",
     icon: <MdPersonAddAlt1 />,
+    roll: "patient",
+  },
+  {
+    path: "/patient/my-statement",
+    name: "My Statement",
+    icon: <AiOutlineFileDone />,
     roll: "patient",
   },
 ];

@@ -112,6 +112,8 @@ import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
 import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
 import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
 import CredenTial from "./Pages/Pages/User/Biographic/Credential/CredenTial";
+import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
+import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -546,9 +548,14 @@ function App() {
           {/* user end */}
 
           {/* Patient-Portal start */}
-          <Route path="/" element={<Sidebar handle={handle}></Sidebar>}>
-            <Route path="/patient" element={<MySchedule />}></Route>
-            <Route path="/my-info" element={<MyInfo></MyInfo>}></Route>
+          <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
+            <Route index element={<MySchedule />}></Route>
+            <Route path="calender" element={<MyCalender></MyCalender>}></Route>
+            <Route path="my-info" element={<MyInfo></MyInfo>}></Route>
+            <Route
+              path="my-statement"
+              element={<MyStatement></MyStatement>}
+            ></Route>
           </Route>
         </Routes>
       </FullScreen>

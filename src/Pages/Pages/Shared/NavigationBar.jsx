@@ -10,10 +10,15 @@ import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.jpg";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavigationBar = ({ handle }) => {
+  const navigation = useNavigate();
   let [open, setOpen] = useState(false);
+
+  const handleSignOut = () => {
+    navigation("/");
+  };
 
   return (
     <motion.div
@@ -58,16 +63,42 @@ const NavigationBar = ({ handle }) => {
             {!handle.active ? (
               <h1
                 onClick={handle.enter}
-                className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+                className=" tls mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
               >
-                <BiFullscreen />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 mt-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                  />
+                </svg>
               </h1>
             ) : (
               <h1
                 onClick={handle.exit}
                 className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
               >
-                <BiExitFullscreen />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 mt-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                  />
+                </svg>
               </h1>
             )}
           </div>
@@ -165,7 +196,7 @@ const NavigationBar = ({ handle }) => {
                   <Link to="/admin">Settings</Link>
                 </li>
                 <li>
-                  <button>Logout</button>
+                  <button onClick={handleSignOut}>Logout</button>
                 </li>
               </ul>
             </div>
