@@ -9,7 +9,10 @@ const MySchedule = () => {
   return (
     <div>
       <h1>My Schedule Component</h1>
-      <button onClick={calenderClicked} className="bg-red-700 rounded">
+      <button
+        onClick={calenderClicked}
+        className="bg-red-700 rounded text-white p-2"
+      >
         Calender
       </button>
       <Outlet></Outlet>
