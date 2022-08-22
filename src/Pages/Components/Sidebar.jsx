@@ -159,7 +159,7 @@ const menuItem = [
   // user part
   {
     path: "/user/myschedule",
-    name: "My Schedule",
+    name: "MySchedule",
     icon: <FaHouseUser />,
     roll: "provider",
   },
@@ -187,13 +187,13 @@ const menuItem = [
   //Patient portal
   {
     path: "/patient",
-    name: "patient",
+    name: "Patient",
     icon: <GrFormSchedule />,
     roll: "patient",
   },
   {
     path: "/my-info",
-    name: "My Info",
+    name: "MyInfo",
     icon: <MdPersonAddAlt1 />,
     roll: "patient",
   },
@@ -236,7 +236,7 @@ const Sidebar = ({ handle }) => {
   };
 
   // console.log(menuItem[1].others.name);
-  console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
+  //console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
   const logged_type = localStorage.getItem("type");
   return (
     <div className="relative bg-neutral pt-3 pb-2">

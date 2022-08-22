@@ -10,6 +10,7 @@ import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.jpg";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const NavigationBar = ({ handle }) => {
   let [open, setOpen] = useState(false);
@@ -84,10 +85,10 @@ const NavigationBar = ({ handle }) => {
                 className="dropdown-content w-60 md:w-[25rem] menu mt-1 shadow bg-base-100 text-sm "
               >
                 <li>
-                  <a>Item 1</a>
+                  <Link to="/admin">Item 1</Link>
                 </li>
                 <li>
-                  <a>Item 2</a>
+                  <Link to="/admin">Item 2</Link>
                 </li>
               </ul>
             </div>
@@ -155,16 +156,16 @@ const NavigationBar = ({ handle }) => {
                 className="menu menu-compact dropdown-content w-60 md:w-[25rem] mt-3 p-2 shadow bg-base-100 "
               >
                 <li>
-                  <a href="google.com" className="justify-between">
+                  <Link to="/admin" className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <Link to="/admin">Settings</Link>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button>Logout</button>
                 </li>
               </ul>
             </div>
