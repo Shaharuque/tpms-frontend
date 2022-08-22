@@ -1,26 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 import "./Dashboard.css";
+import axios from "axios";
+import Loading from "../../../Loading/Loading";
+import { Placeholder } from 'rsuite';
 Chart.register(...registerables);
 
 const TreatmentBarChart = () => {
+  const [Graph, setGraph] = useState([]);
   const data1 = [9];
   const data2 = [5];
   const data3 = [5.08333333333, 0.063333333];
   const data4 = [0, 2.78333333333];
   const data5 = [0.1];
 
+
+  useEffect(()=>{
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+    .then((response)=>{
+      setGraph(response.data)  
+    })
+    .catch((error) => {
+      console.log(error)
+   }); 
+  },[])
   return (
     <div className="">
       {/* <div className="lg:w-4/12 md:w-5/12"> */}
       <h1 className=" graph-box bg-gradient-to-b from-teal-400 to-blue-900 py-1 mb-0 text-center text-white">
         Total Billed vs Total Paid
       </h1>
-      <Bar
+{ 
+  Graph.length > 0 ? 
+  
+     <Bar
+     
         className=" chart p-2 "
+
         data={{
-          labels: ["June", "July", "August"],
+          labels: Graph.map(x => x.name.slice(1, 8)),
+          // labels: ["June", "July", "August"],
+
           datasets: [
             {
               label: "97153",
@@ -54,6 +75,9 @@ const TreatmentBarChart = () => {
             },
           ],
         }}
+     
+
+      
         options={{
           tooltips: {
             mode: "index",
@@ -101,7 +125,8 @@ const TreatmentBarChart = () => {
             ],
           },
         }}
-      ></Bar>
+      ></Bar>  :  <Placeholder.Graph active />
+ }
     </div>
   );
 };

@@ -17,16 +17,14 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
         <div className="flex items-center">
           <div className=" text-xl px-2">{items.icon}</div>
           <div
-            style={{ display: isHovering ? "block" : "none" }}
-            className="link_text text-sm"
+              className={ isHovering ? "mr-2 opacity-1 duration-600 ease-in " : "mr-2 opacity-0 duration-200 ease-out"}
           >
             {items.name}
           </div>
         </div>
 
         <div
-          style={{ display: isHovering ? "block" : "none" }}
-          className="text-xl mr-2 transition-all"
+        className={ isHovering ? "mr-2 opacity-1 duration-600 ease-in " : "mr-2 opacity-0 duration-200 ease-out"}
         >
           <IoIosArrowUp
             style={{
@@ -51,18 +49,14 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
               to={s.path}
               key={i}
               style={{ display: "block" }}
-              className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white transition ease-in-out"
+              className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white duration-200 transition ease-in-out"
               activeclassname="active"
             >
               <div className="flex items-center">
                 <div className="  px-3 py-1">{s.icon}</div>
 
                 <div
-                  style={{
-                    display: isHovering ? "block" : "none",
-                    // padding: isHovering ? "8px" : "3px",
-                  }}
-                  className="link_text text-sm"
+                    className={ isHovering ? "mr-2 opacity-1 duration-600 ease-in" : "mr-2 opacity-0 duration-200 ease-out"}
                 >
                   {s.name}
                 </div>

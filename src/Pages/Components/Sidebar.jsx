@@ -208,7 +208,6 @@ const initialDropState = {};
 // const x = menuItem.map((item) => {
 //   if (item.subRoute) initialDropState[item.name] = false;
 // });
-
 // console.log(x);
 // console.log(initialDropState);
 
@@ -257,9 +256,10 @@ const Sidebar = ({ handle }) => {
         <div
           style={{
             width: isHovering ? "220px" : "70px",
-            transition: isHovering ? "ease-in 0.3s" : "ease-out 0.5s",
+            // transition: isHovering ? "ease-in 0.5s" : "ease-out 0.3s",
           }}
           className="sidebar"
+          
         >
           <div className="top-section">
             {isHovering ? (
@@ -284,7 +284,7 @@ const Sidebar = ({ handle }) => {
                   <NavLink
                     to={"#"}
                     key={index}
-                    className=""
+      
                     activeclassname="active"
                   >
                     <SidebarMenu
@@ -307,12 +307,14 @@ const Sidebar = ({ handle }) => {
 
                       <div
                         // onClick={() => setOpen(!open)}
-                        style={{
-                          display: isHovering ? "block" : "none",
-                        }}
-                        className="link_text text-sm"
+                        // style={{
+                        //   display: isHovering ? "block" : "none",
+                        // }}
+                        // className="link_text text-sm"
+                        className={ isHovering ? "opacity-1 duration-600 ease-in" : "opacity-0 duration-200 ease-out"}
                       >
                         {items.name}
+                      
                       </div>
                     </div>
                   </NavLink>
