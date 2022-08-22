@@ -153,6 +153,7 @@ export const Bios = () => {
                                     SSN
                                 </span>
                             </label>
+                            
                             <input
                                 type="text"
                                 name="ssn"
