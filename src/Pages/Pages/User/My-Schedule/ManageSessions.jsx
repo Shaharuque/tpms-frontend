@@ -1,7 +1,9 @@
 import React, { memo, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import { NavLink, Outlet } from "react-router-dom";
 import { CheckPicker, Checkbox, Button, DateRangePicker } from "rsuite";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { MultiSelect } from "react-multi-select-component";
@@ -119,6 +121,18 @@ const ManageSessions = () => {
 
   return (
     <div className="h-[100vh]">
+      <div className="flex flex-wrap justify-between items-center">
+        <h1 className="text-sm">Manage Sessions</h1>
+        <NavLink
+          to={"calender"}
+          className="flex flex-wrap justify-between items-center px-2 py-1 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+        >
+          <FaRegCalendarAlt className="mr-1" />
+          Calender View
+        </NavLink>
+        <Outlet />
+      </div>
+
       <div className="flex flex-wrap justify-between items-center mb-5">
         <h1 className="text-lg my-2 text-orange-500">Manage Sessions</h1>
         <div>
@@ -203,31 +217,29 @@ const ManageSessions = () => {
                   />
                 </div>
               </div>
-              </>
-              )}
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
-                    Date Range
-                  </span>
-                </label>
-                <div>
-                  <DateRangePicker
-                    onChange={(date) => {
-                      console.log(date);
-                    }}
-                    placeholder="Select Date"
-                  />
-                </div>
-              </div>
-              <button
-                className="  mb-1 mt-8 w-1/2 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                type="submit"
-              >
-                Save
-              </button>
-            
-          
+            </>
+          )}
+          <div>
+            <label className="label">
+              <span className="label-text text-xs text-gray-600 text-left">
+                Date Range
+              </span>
+            </label>
+            <div>
+              <DateRangePicker
+                onChange={(date) => {
+                  console.log(date);
+                }}
+                placeholder="Select Date"
+              />
+            </div>
+          </div>
+          <button
+            className="  mb-1 mt-8 w-1/2 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            type="submit"
+          >
+            Save
+          </button>
         </div>
       </form>
       {billable && (

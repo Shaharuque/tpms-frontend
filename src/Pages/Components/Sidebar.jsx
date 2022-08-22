@@ -181,7 +181,7 @@ const menuItem = [
     name: "Timesheet",
     icon: <BsFileText />,
     roll: "provider",
-  }
+  },
 ];
 
 // const initialDropState = {};
@@ -260,7 +260,9 @@ const Sidebar = ({ handle }) => {
               </>
             )}
           </div>
-          {menuItem.filter((item) => item.roll === "provider").map((items, index) => (
+          {menuItem
+            .filter((item) => item.roll === "provider")
+            .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (
                   <NavLink
