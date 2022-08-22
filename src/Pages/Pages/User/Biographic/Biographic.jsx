@@ -75,7 +75,7 @@ const Biographic = () => {
 
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
-                to={`bios`}
+                to={"bios"}
               >
                 <h1 className="ml-1 mt-1">Bio's</h1>
               </CustomLink>

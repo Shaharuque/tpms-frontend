@@ -158,8 +158,8 @@ const menuItem = [
 
   // user part
   {
-    path: "/user/myschedule",
-    name: "MySchedule",
+    path: "/user",
+    name: "My Schedule",
     icon: <FaHouseUser />,
     roll: "provider",
   },
@@ -284,7 +284,7 @@ const Sidebar = ({ handle }) => {
           </div>
           {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
           {menuItem
-            .filter((item) => item.roll === logged_type) //dynamic bhabey now route render hobey
+            .filter((item) => item.roll === "patient") //dynamic bhabey now route render hobey
             .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (

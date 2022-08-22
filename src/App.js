@@ -106,6 +106,7 @@ import ManageSessions from "./Pages/Pages/User/My-Schedule/ManageSessions";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
+import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/SchedulerCalender";
 
 import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
 import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
@@ -530,7 +531,8 @@ function App() {
           {/* user */}
 
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
-            <Route path="myschedule" element={<ManageSessions />}></Route>
+            <Route index element={<ManageSessions />}></Route>
+            <Route path="calender" element={<SchedulerCalender />}></Route>
             <Route path="biographic" element={<Biographic />}>
               <Route path="bios" element={<Bios></Bios>}></Route>
               <Route
@@ -545,7 +547,6 @@ function App() {
             <Route path="Pataients" element={<Pataients />}></Route>
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>
           </Route>
-          {/* user end */}
 
           {/* Patient-Portal start */}
           <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
