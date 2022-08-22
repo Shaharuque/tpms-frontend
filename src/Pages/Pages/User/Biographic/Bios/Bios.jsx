@@ -1,31 +1,47 @@
-
-
 import React from "react";
 import person from "../../../../Assets/user.png";
-
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 export const Bios = () => {
+    const [note, setNote] = useState("");
 
+    const { register, handleSubmit, reset } = useForm();
+    useEffect(() => {
+        // you can do async server request and fill up form
+        setTimeout(() => {
+            reset({
+                first_name: `tofayel`,
+                middle_name: "islam",
+            });
+        }, 600);
+    }, [reset]);
 
-
+    const onSubmit = (data) => {
+        console.log(data);
+        console.log(note);
+    };
 
     return (
         <div>
-
-            <div >
+            <div>
                 <h1 className="text-lg mt-2 text-left text-orange-400 p-2">Bio's</h1>
                 <div className="div-img ">
                     <div>
-                        <img src={person} className=' h-40 ' alt="Dami img not taken" />
+                        <img src={person} className=" h-40 " alt="Dami img not taken" />
                     </div>
                     <div>
-                        <div class="mb-3 w-76">
-
-                            <input class="form-control
-   " type="file" id="formFile" />
+                        <div className="mb-3 w-76">
+                            <input
+                                className="form-control"
+                                type="file"
+                                id="formFile"
+                            />
                         </div>
                     </div>
                 </div>
-                <form >
+
+                {/**form .....start */}
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className=" grid grid-rows-2 md:grid-cols-3 lg:grid-cols-4  gap-3 p-2">
                         {/* name  */}
                         <div>
@@ -47,9 +63,10 @@ export const Bios = () => {
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
 
-
+                                {...register("first_name")}
                             />
                         </div>
+                        {/**middle name */}
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -68,10 +85,10 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
+                                {...register("middle_name")}
                             />
                         </div>
+                        {/**last name */}
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -90,11 +107,10 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
-
+                                {...register("last_name")}
                             />
                         </div>
+                        {/**nick name */}
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -113,12 +129,10 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
-
+                                {...register("nick_name")}
                             />
                         </div>
-
+                        {/**birthday */}
                         <div>
                             {" "}
                             <label className="label">
@@ -129,9 +143,10 @@ export const Bios = () => {
                             <input
                                 className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                                 type="date"
-
+                                {...register("check_Date")}
                             />
                         </div>
+                        {/**SSN */}
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -150,9 +165,7 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
-
+                                {...register("ssn")}
                             />
                         </div>
                         {/* phone & email  */}
@@ -174,11 +187,12 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
                                 placeholder="(123)-456-7822"
+
+                                {...register("office_phone")}
                             />
                         </div>
+
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -197,19 +211,13 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
-
+                                {...register("office_email")}
                             />
                         </div>
-
-
-
-
-
                     </div>
 
-                    <div className="grid grid-cols-3 gap-3 p-2">{/* driving license */}
+                    <div className="grid grid-cols-3 gap-3 p-2">
+                        {/* driving license */}
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -228,10 +236,10 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
+                                {...register("driving_license")}
                             />
                         </div>
+                        {/**  Drivers License & Expiration Date */}
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -241,7 +249,7 @@ export const Bios = () => {
                             <input
                                 className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                                 type="date"
-
+                                {...register("license_Date")}
                             />
                         </div>
                         <div>
@@ -250,23 +258,17 @@ export const Bios = () => {
                                     Title
                                 </span>
                             </label>
-                            <select
-                                className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-
+                            <select className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                                {...register("title")}
                             >
                                 <option value="Speech Therapist">Speech Therapist</option>
                                 <option value="female">Female</option>
+
                             </select>
                         </div>
-
                     </div>
 
-
-
-
-
                     <div className="grid grid-rows-2 lg:grid-cols-4 gap-3 p-2">
-
                         <div>
                             <label className="label">
                                 <span className="label-text text-xs text-gray-600 text-left">
@@ -276,7 +278,7 @@ export const Bios = () => {
                             <input
                                 className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                                 type="date"
-
+                                {...register("hiring_date")}
                             />
                         </div>
                         <div>
@@ -285,9 +287,8 @@ export const Bios = () => {
                                     Credential Type
                                 </span>
                             </label>
-                            <select
-                                className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-
+                            <select className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                                {...register("credential_type")}
                             >
                                 <option value="Speech Therapist">Speech Therapist</option>
                                 <option value="female">Female</option>
@@ -299,9 +300,8 @@ export const Bios = () => {
                                     Tx Type
                                 </span>
                             </label>
-                            <select
-                                className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-
+                            <select className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                                {...register("Tx_type")}
                             >
                                 <option value="Speech Therapist">Select tx type</option>
                                 <option value="female">Female</option>
@@ -325,8 +325,7 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
+                                {...register("caqh_id")}
                             />
                         </div>
                         <div>
@@ -347,8 +346,7 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
+                                {...register("zip")}
                             />
                         </div>
 
@@ -370,8 +368,7 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
+                                {...register("language")}
                             />
                         </div>
                         <div className="">
@@ -383,7 +380,7 @@ export const Bios = () => {
                             <input
                                 className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                                 type="date"
-
+                                {...register("termination_date")}
                             />
                         </div>
                         <div>
@@ -404,8 +401,7 @@ export const Bios = () => {
                                 ease-in-out
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
-
-
+                                {...register("language")}
                             />
                         </div>
                         <div>
@@ -427,8 +423,7 @@ export const Bios = () => {
                                 m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600  focus:outline-none"
 
-
-                            />
+                                {...register("taxonomy_code")} />
                         </div>
                         <div className="">
                             <label className="label">
@@ -440,11 +435,10 @@ export const Bios = () => {
                                 className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                                 type="date"
 
+                                {...register("date")}
+
                             />
                         </div>
-
-
-
                     </div>
 
                     <div>
@@ -455,9 +449,7 @@ export const Bios = () => {
                         </label>
                         <div className="flex items-center">
                             <div className="flex ml-1 mt-1 items-center">
-                                <input
-                                    type="radio"
-                                    name="patient"
+                                <input type="radio" name="patient"
 
                                 />
                                 <span className="text-xs ml-1 text-gray-600 font-normal">
@@ -465,9 +457,7 @@ export const Bios = () => {
                                 </span>
                             </div>
                             <div className="flex ml-1 mt-1 items-center">
-                                <input
-                                    type="radio"
-                                    name="patient"
+                                <input type="radio" name="patient"
 
                                 />
                                 <span className="text-xs ml-1 text-gray-600 font-normal">
@@ -483,14 +473,10 @@ export const Bios = () => {
                         >
                             Save
                         </button>
-
                     </div>
-
-
-
                 </form>
+                {/**form ...end */}
             </div>
-
         </div>
-    )
-}
+    );
+};

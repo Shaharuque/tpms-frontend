@@ -97,7 +97,7 @@ const Biographic = () => {
                                     <h1 className="ml-1 mt-1">Credentials</h1>
                                 </CustomLink>
                             </div>
-                     
+                            
 
 
 

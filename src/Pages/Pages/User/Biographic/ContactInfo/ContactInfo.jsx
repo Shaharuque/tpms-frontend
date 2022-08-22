@@ -2,9 +2,9 @@ import React from 'react'
 
 export default function ContactInfo() {
   return (
-  
-    <div>  
-      
+
+    <div>
+
       <h4 className="text-lg mt-2 text-left text-orange-400 p-2">Contact Details</h4>
       <button type="submit" class="
       w-full
@@ -240,7 +240,7 @@ export default function ContactInfo() {
       w-full
       px-6
       py-2.5
-     
+      
       text-white
       text-start
       font-medium
@@ -253,7 +253,7 @@ export default function ContactInfo() {
       transition
       duration-150
       ease-in-out">Emergency Contact Details</button>
-    
+
     </div>
   )
 }
