@@ -288,7 +288,12 @@ const Sidebar = ({ handle }) => {
             .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (
-                  <NavLink to={"#"} key={index} activeclassname="active">
+                  <NavLink
+                    to={"#"}
+                    key={index}
+                    className=""
+                    activeclassname="active"
+                  >
                     <SidebarMenu
                       items={items}
                       isHovering={isHovering}

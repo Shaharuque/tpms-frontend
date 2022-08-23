@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckPicker, Checkbox, Button } from "rsuite";
 import {
@@ -12,16 +12,34 @@ import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { MultiSelect } from "react-multi-select-component";
 import { DateRangePicker } from "rsuite";
+import axios from "axios";
 
 const ListView = () => {
   const [billable, setBillable] = useState(true);
   const [table, setTable] = useState(false);
   const [sortBy, setSortBy] = useState("");
+  const [Tblinfo, setTblinfo] = useState([]);
+
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
 
-  const data = useMemo(() => ManageTableColumnsData, []);
+  // calling fake db
+  useEffect(() => {
+    axios("../Fakedb.json")
+      .then((response) => {
+        setTblinfo(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(Tblinfo);
+
+  // const data = useMemo(() => ManageTableColumnsData, []);
+  // const columns = useMemo(() => [...ManageTableColumnsColumn], []);
+  const data = useMemo(() => Tblinfo, [Tblinfo]);
   const columns = useMemo(() => [...ManageTableColumnsColumn], []);
 
   const options = [
@@ -40,7 +58,7 @@ const ListView = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
+    rows,
     nextPage,
     previousPage,
     canNextPage,
@@ -129,14 +147,17 @@ const ListView = () => {
   };
 
   return (
-    <div className="h-[100vh]">
+    <div className={!table ? "h-[100vh]" : ""}>
       <div className="flex flex-wrap justify-between items-center mb-5">
         <h1 className="text-lg my-1 text-orange-500">Manage Sessions</h1>
         <div>
           <Switch
             defaultChecked
             size="small"
-            onClick={() => setBillable(!billable)}
+            onClick={() => {
+              setBillable(!billable);
+              setTable(!table);
+            }}
           />
           <label
             className="form-check-label inline-block ml-2 text-sm text-gray-500"
@@ -309,7 +330,7 @@ const ListView = () => {
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
-              rows={page}
+              rows={rows}
               prepareRow={prepareRow}
             ></SettingTableBox>
           </div>

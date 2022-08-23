@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const SessionAddNote = ({ handleClose, open, editableRow }) => {
+const SessionViewNote = ({ handleClose, open, editableRow }) => {
   const { register, handleSubmit, reset } = useForm();
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
@@ -24,20 +24,20 @@ const SessionAddNote = ({ handleClose, open, editableRow }) => {
           onClose={handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          <div className="p-5 box  sm:w-[400px]">
+          <div className="p-5 box sm:w-[400px]">
             <div className="flex items-center justify-between">
-              <h1 className="text-lg text-left text-orange-400">Add Notes</h1>
+              <h1 className="text-lg text-left text-orange-400">View Notes</h1>
               <IoCloseCircleOutline
                 onClick={handleClose}
                 className="text-gray-500 text-2xl hover:text-primary"
               />
             </div>
-            <div className="divider"></div>
+            <hr />
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="label">
                   <span className="label-text flex items-center text-xs text-gray-600 text-left">
-                    Patient Name
+                    Select Form
                   </span>
                 </label>
                 <select
@@ -55,7 +55,7 @@ const SessionAddNote = ({ handleClose, open, editableRow }) => {
                   className=" py-[5px]  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                   type="submit"
                 >
-                  Go
+                  Save
                 </button>
 
                 <button
@@ -63,7 +63,7 @@ const SessionAddNote = ({ handleClose, open, editableRow }) => {
                   autoFocus
                   onClick={handleClose}
                 >
-                  Close
+                  CANCEL
                 </button>
               </div>
             </form>
@@ -74,4 +74,4 @@ const SessionAddNote = ({ handleClose, open, editableRow }) => {
   );
 };
 
-export default SessionAddNote;
+export default SessionViewNote;

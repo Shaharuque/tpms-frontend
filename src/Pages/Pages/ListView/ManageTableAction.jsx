@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlinePlus } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import { GoLocation } from "react-icons/go";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import { BsVectorPen } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import ViewNote from "../User/My-Schedule/ViewNote";
 import SessionAddNote from "./SessionAddNote";
+import SessionViewNote from "./SessionViewNote";
+import EditSession from "./EditSession";
 
 const ManageTableAction = ({ row }) => {
   const [openAddNote, setOpenAddNote] = useState(false);
   const [openViewNote, setOpenViewNote] = useState(false);
+  const [editSession, setEditSession] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpenAction = () => {
     setOpen(!open);
@@ -19,6 +18,7 @@ const ManageTableAction = ({ row }) => {
   const handleClose = () => {
     setOpenAddNote(false);
     setOpenViewNote(false);
+    setEditSession(false);
   };
   //   const handleContactClose = () => {
   //     setOpenContactModal(false);
@@ -45,12 +45,12 @@ const ManageTableAction = ({ row }) => {
             <AiOutlineEye /> View Note
           </button>
           <br />
-          <Link
+          <button
             className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-            to={"/admin"}
+            onClick={() => setEditSession(true)}
           >
             <MdOutlineModeEditOutline /> Edit Session
-          </Link>
+          </button>
         </div>
       )}
       {openAddNote && (
@@ -61,11 +61,18 @@ const ManageTableAction = ({ row }) => {
         ></SessionAddNote>
       )}
       {openViewNote && (
-        <ViewNote
+        <SessionViewNote
           handleClose={handleClose}
           open={openViewNote}
           editableRow={row}
-        ></ViewNote>
+        ></SessionViewNote>
+      )}
+      {editSession && (
+        <EditSession
+          handleClose={handleClose}
+          open={editSession}
+          editableRow={row}
+        ></EditSession>
       )}
     </div>
   );

@@ -124,7 +124,8 @@ const ManageSessions = () => {
           <FaRegCalendarAlt className="mr-1" />
           Calender View
         </NavLink>
-        <Outlet />
+       
+      
       </div>
 
       <div className="flex flex-wrap justify-between items-center mb-5">
@@ -260,6 +261,7 @@ const ManageSessions = () => {
           )}
         </>
       )}
+       <Outlet/>
     </div>
   );
 };
