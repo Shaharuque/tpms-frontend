@@ -1,12 +1,23 @@
-export const ManageTableColumnsData = [];
+import { AiFillLock, AiFillUnlock } from "react-icons/ai";
+import { BsFillCameraVideoFill } from "react-icons/bs";
+
+export const ManageTableColumnsData = [
+  {
+    notes: "hi",
+  },
+];
 
 export const ManageTableColumnsColumn = [
   {
     Header: "Lock",
     Cell: ({ row }) => {
-      // the value is 'this is a test'
-      // console.log(row);
-      // return <CreateServiceComponent row={row}></CreateServiceComponent>;
+      return (
+        <div>
+          {/* <AiFillLock className="mx-auto text-lg font-medium text-red-500" /> */}
+          {/* This gonna be conditionally changed */}
+          <AiFillUnlock className="mx-auto text-lg font-medium text-secondary" />
+        </div>
+      );
     },
   },
   {
@@ -34,10 +45,18 @@ export const ManageTableColumnsColumn = [
     accessor: "provider",
   },
   {
-    Header: () => {
-      return <span className="">POS</span>;
+    Header: "POS",
+    Cell: ({ row }) => {
+      return (
+        <>
+          {/* conditionally changed */}
+          <div className="flex items-center justify-center gap-2 font-normal text-xs">
+            Telehealth
+            <BsFillCameraVideoFill className="text-green-500" />
+          </div>
+        </>
+      );
     },
-    accessor: "pos",
   },
   {
     Header: () => {
@@ -54,8 +73,22 @@ export const ManageTableColumnsColumn = [
   {
     Header: "Status",
     Cell: ({ row }) => {
-      // console.log(row);
-      //   return <IsElectronic row={row}></IsElectronic>;
+      return (
+        <div>
+          {
+            <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded-lg">
+              Scheduled
+            </button>
+          }
+          {/* conditionally changed  */}
+          {/* <button className="bg-green-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
+            Rendered
+          </button>
+          <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
+            NO Show
+          </button> */}
+        </div>
+      );
     },
   },
   {

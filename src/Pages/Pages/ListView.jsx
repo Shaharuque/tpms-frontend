@@ -11,6 +11,7 @@ import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { MultiSelect } from "react-multi-select-component";
+import { DateRangePicker } from "rsuite";
 
 const ListView = () => {
   const [billable, setBillable] = useState(true);
@@ -91,7 +92,6 @@ const ListView = () => {
     reset();
   };
 
-
   // ***************
   const datat = [
     "Eugenia",
@@ -103,36 +103,35 @@ const ListView = () => {
     "Julia",
     "Albert",
   ].map((item) => ({ label: item, value: item }));
-  
+
   const footerStyles = {
     padding: "10px 2px",
     borderTop: "1px solid #e5e5e5",
   };
-  
+
   const footerButtonStyle = {
     float: "right",
     marginRight: 10,
     marginTop: 2,
   };
-  
+
   const allValue = datat.map((item) => item.value);
-  
- 
-    const picker = React.useRef();
-    const [value, setValue] = React.useState([]);
-    
-    const handleChange = (value) => {
-      setValue(value);
-    };
-  
-    const handleCheckAll = (value, checked) => {
-      setValue(checked ? allValue : []);
-    };
+
+  const picker = React.useRef();
+  const [value, setValue] = React.useState([]);
+
+  const handleChange = (value) => {
+    setValue(value);
+  };
+
+  const handleCheckAll = (value, checked) => {
+    setValue(checked ? allValue : []);
+  };
 
   return (
     <div className="h-[100vh]">
       <div className="flex flex-wrap justify-between items-center mb-5">
-        <h1 className="text-lg my-2 text-orange-500">Manage Sessions</h1>
+        <h1 className="text-lg my-1 text-orange-500">Manage Sessions</h1>
         <div>
           <Switch
             defaultChecked
@@ -148,83 +147,80 @@ const ListView = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-8 my-5 mr-2 gap-5">
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-9 my-5 mr-2 gap-5">
           {billable && (
             <div>
               <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
-              {/* <MultiSelect
-                options={options}
-                value={patientsSelected}
-                onChange={setPatientsSelected}
-                labelledBy="Select"
-                className="text-xs"
-              /> */}
-   <CheckPicker
-        data={datat}
-        placeholder="Select"
-        ref={picker}
-        style={{ width: 224 }}
-        value={value}
-        onChange={handleChange}
-        renderExtraFooter={() => (
-          <div style={footerStyles}>
-            <Checkbox
-              inline
-              indeterminate={value.length > 0 && value.length < allValue.length}
-              checked={value.length === allValue.length}
-              onChange={handleCheckAll}
-            >
-              Select All
-            </Checkbox>
+              <CheckPicker
+                data={datat}
+                placeholder="Select"
+                ref={picker}
+                style={{ width: 224 }}
+                value={value}
+                onChange={handleChange}
+                renderExtraFooter={() => (
+                  <div style={footerStyles}>
+                    <Checkbox
+                      inline
+                      indeterminate={
+                        value.length > 0 && value.length < allValue.length
+                      }
+                      checked={value.length === allValue.length}
+                      onChange={handleCheckAll}
+                    >
+                      Select All
+                    </Checkbox>
 
-            <Button
-              style={footerButtonStyle}
-              appearance="primary"
-              size="sm"
-              onClick={() => {
-                picker.current.close();
-              }}
-            >
-              Ok
-            </Button>
-          </div>
-        )}
-      />
+                    <Button
+                      style={footerButtonStyle}
+                      appearance="primary"
+                      size="sm"
+                      onClick={() => {
+                        picker.current.close();
+                      }}
+                    >
+                      Ok
+                    </Button>
+                  </div>
+                )}
+              />
             </div>
           )}
           <div className="w-full">
             <h1 className="text-xs mb-2 ml-1 mt-2 ">Provider</h1>
             <CheckPicker
-        data={datat}
-        placeholder="Select"
-        ref={picker}
-        style={{ width: 224 }}
-        value={value}
-        onChange={handleChange}
-        renderExtraFooter={() => (
-          <div style={footerStyles}>
-            <Checkbox
-              inline
-              indeterminate={value.length > 0 && value.length < allValue.length}
-              checked={value.length === allValue.length}
-              onChange={handleCheckAll}
-            >
-              Select All
-            </Checkbox>
+              data={datat}
+              placeholder="Select"
+              ref={picker}
+              style={{ width: 224 }}
+              value={value}
+              onChange={handleChange}
+              renderExtraFooter={() => (
+                <div style={footerStyles}>
+                  <Checkbox
+                    inline
+                    indeterminate={
+                      value.length > 0 && value.length < allValue.length
+                    }
+                    checked={value.length === allValue.length}
+                    onChange={handleCheckAll}
+                  >
+                    Select All
+                  </Checkbox>
 
-            <Button
-              style={footerButtonStyle}
-              appearance="primary"
-              size="sm"
-              onClick={() => {
-                picker.current.close();
-              }}
-            >
-              Ok
-            </Button>
-          </div>
-        )}
-      />
+                  <Button
+                    style={footerButtonStyle}
+                    appearance="primary"
+                    size="sm"
+                    onClick={() => {
+                      picker.current.close();
+                    }}
+                  >
+                    Ok
+                  </Button>
+                </div>
+              )}
+            />
           </div>
 
           {billable && (
@@ -253,6 +249,22 @@ const ListView = () => {
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-600 text-left">
+                    Selected date
+                  </span>
+                </label>
+                <div className="ml-1">
+                  <DateRangePicker
+                    onChange={(date) => {
+                      console.log(date);
+                    }}
+                    placeholder="Select Date"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="label">
+                  <span className="label-text text-xs text-gray-600 text-left">
                     Status
                   </span>
                 </label>
@@ -271,36 +283,42 @@ const ListView = () => {
                 </div>
               </div>
               <button
-                className="  mb-1 mt-8 w-1/2 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className="font-regular mt-8 sm:w-1/2 px-3 py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
               >
                 Save
               </button>
             </>
           )}
+          {!billable && (
+            <button
+              onClick={() => setTable(true)}
+              className="font-regular mt-8 w-1/4 px-3 py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            >
+              Go
+            </button>
+          )}
         </div>
       </form>
-      {billable && (
-        <>
-          {/* table  */}
-          {table && (
-            <div className="my-5">
-              <SettingTableBox
-                getTableProps={getTableProps}
-                headerGroups={headerGroups}
-                getTableBodyProps={getTableBodyProps}
-                rows={page}
-                prepareRow={prepareRow}
-              ></SettingTableBox>
-            </div>
-          )}
 
+      {/* table  */}
+      {table && (
+        <>
+          <div className="my-5">
+            <SettingTableBox
+              getTableProps={getTableProps}
+              headerGroups={headerGroups}
+              getTableBodyProps={getTableBodyProps}
+              rows={page}
+              prepareRow={prepareRow}
+            ></SettingTableBox>
+          </div>
           <div className="flex item-center flex-wrap">
             <div>
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="border rounded-sm py-[5px] font-normal px-2 w-36 py-1 text-xs "
+                className="border rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
               >
                 <option value=""></option>
                 <option value="Specific_Date">Specific Date</option>

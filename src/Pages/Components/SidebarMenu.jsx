@@ -17,14 +17,22 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
         <div className="flex items-center">
           <div className=" text-xl px-2">{items.icon}</div>
           <div
-              className={ isHovering ? "mr-2 opacity-1 duration-600 ease-in " : "mr-2 opacity-0 duration-200 ease-out"}
+            className={
+              isHovering
+                ? "mr-2 opacity-1 duration-600 ease-in text-[14px]"
+                : "mr-2 opacity-0 duration-200 ease-out text-[14px]"
+            }
           >
             {items.name}
           </div>
         </div>
 
         <div
-        className={ isHovering ? "mr-2 opacity-1 duration-600 ease-in " : "mr-2 opacity-0 duration-200 ease-out"}
+          className={
+            isHovering
+              ? "mr-2 opacity-1 duration-600 ease-in text-[14px]"
+              : "mr-2 opacity-0 duration-200 ease-out text-[14px]"
+          }
         >
           <IoIosArrowUp
             style={{
@@ -56,7 +64,11 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
                 <div className="  px-3 py-1">{s.icon}</div>
 
                 <div
-                    className={ isHovering ? "mr-2 opacity-1 duration-600 ease-in" : "mr-2 opacity-0 duration-200 ease-out"}
+                  className={
+                    isHovering
+                      ? "mr-2 opacity-0.5 duration-600 ease-in text-[14px]"
+                      : "mr-2 opacity-0 duration-200 ease-out text-[14px]"
+                  }
                 >
                   {s.name}
                 </div>

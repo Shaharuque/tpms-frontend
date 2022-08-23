@@ -211,10 +211,10 @@ const menuItem = [
 // });
 
 const initialDropState = {};
-// const x = menuItem.map((item) => {
-//   if (item.subRoute) initialDropState[item.name] = false;
-// });
-// console.log(x);
+const x = menuItem.map((item) => {
+  if (item.subRoute) initialDropState[item.name] = false;
+});
+console.log(x);
 // console.log(initialDropState);
 
 const Sidebar = ({ handle }) => {
