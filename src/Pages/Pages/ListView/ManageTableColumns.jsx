@@ -1,5 +1,6 @@
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 import { BsFillCameraVideoFill } from "react-icons/bs";
+import ManageTableAction from "./ManageTableAction";
 
 export const ManageTableColumnsData = [
   {
@@ -95,7 +96,7 @@ export const ManageTableColumnsColumn = [
     Header: "Action",
     Cell: ({ row }) => {
       // console.log(row);
-      //   return <IsElectronic row={row}></IsElectronic>;
+      return <ManageTableAction row={row}></ManageTableAction>;
     },
   },
 ];
