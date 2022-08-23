@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import {
   RecurringSessionColumnsColumn,
@@ -10,13 +10,29 @@ import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { Link } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { MultiSelect } from "react-multi-select-component";
+import axios from "axios";
 
 const RecurringSession = () => {
-  const data = useMemo(() => RecurringSessionColumnsData, []);
-  const columns = useMemo(() => [...RecurringSessionColumnsColumn], []);
 
   const [table, setTable] = useState(false);
   const [select, setSelect] = useState("");
+  const [SessionData, SetSessionData] = useState([])
+
+  // calling recurring session fakedb
+  useEffect(()=>{
+     axios('../recurringSession.json')
+     .then((response)=>{
+      SetSessionData(response?.data)
+     })
+     .catch((error)=>{
+      console.log(error);
+     })
+  },[])
+
+  const data = useMemo(() => SessionData, [SessionData]);
+  const columns = useMemo(() => [...RecurringSessionColumnsColumn], []);
+
+  
 
   const provider = [
     { value: "chocolate", label: "Chocolate" },

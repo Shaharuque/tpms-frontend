@@ -42,15 +42,6 @@ const ListView = () => {
   const data = useMemo(() => Tblinfo, [Tblinfo]);
   const columns = useMemo(() => [...ManageTableColumnsColumn], []);
 
-  const options = [
-    { label: "Grapes 🍇", value: "grapes" },
-    { label: "Mango 🥭", value: "mango" },
-    { label: "Strawberry 🍓", value: "strawberry" },
-    { label: "maru 🍓", value: "maru" },
-    { label: "mariu 🍓", value: "mariu" },
-    { label: "maruy 🍓", value: "maruy" },
-  ];
-
   const [patientsSelected, setPatientsSelected] = useState([]);
   const [providerSelected, setProviderSelected] = useState([]);
 
