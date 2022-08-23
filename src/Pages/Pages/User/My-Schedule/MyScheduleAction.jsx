@@ -6,9 +6,11 @@ import { MdOutlineModeEditOutline } from "react-icons/md";
 import { BsVectorPen } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import AddNoteModal from "./AddNoteModal";
+import ViewNote from "./ViewNote";
 
 const MyScheduleAction = ({ row }) => {
   const [openAddNote, setOpenAddNote] = useState(false);
+  const [openViewNote, setOpenViewNote] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpenAction = () => {
     setOpen(!open);
@@ -16,6 +18,7 @@ const MyScheduleAction = ({ row }) => {
 
   const handleClose = () => {
     setOpenAddNote(false);
+    setOpenViewNote(false);
   };
   //   const handleContactClose = () => {
   //     setOpenContactModal(false);
@@ -35,12 +38,12 @@ const MyScheduleAction = ({ row }) => {
             <AiOutlinePlus /> Add Note
           </button>
           <br />
-          <Link
+          <button
             className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-            to={"/admin"}
+            onClick={() => setOpenViewNote(true)}
           >
             <AiOutlineEye /> View Note
-          </Link>
+          </button>
           <br />
           <Link
             className="text-sm hover:text-secondary flex items-center font-normal gap-2"
@@ -70,6 +73,13 @@ const MyScheduleAction = ({ row }) => {
           open={openAddNote}
           editableRow={row}
         ></AddNoteModal>
+      )}
+      {openViewNote && (
+        <ViewNote
+          handleClose={handleClose}
+          open={openViewNote}
+          editableRow={row}
+        ></ViewNote>
       )}
     </div>
   );

@@ -2,7 +2,7 @@ import { Dialog } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const AddNoteModal = ({ handleClose, open, editableRow }) => {
+const ViewNote = ({ handleClose, open, editableRow }) => {
   const { register, handleSubmit, reset } = useForm();
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
@@ -23,20 +23,21 @@ const AddNoteModal = ({ handleClose, open, editableRow }) => {
           onClose={handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          <div className="p-5 box  sm:w-[400px]">
+          <div className="p-5 box sm:w-[400px]">
             <h1 className="text-lg text-left text-orange-400">ADD NOTE</h1>
-            <div className="divider"></div>
+            <hr />
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="label">
                   <span className="label-text flex items-center text-xs text-gray-600 text-left">
-                    Service
+                    Select Form
                   </span>
                 </label>
                 <select
                   className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   {...register("service")}
                 >
+                  <option value=""></option>
                   <option value="single">single</option>
                   <option value="married">married</option>
                 </select>
@@ -66,4 +67,4 @@ const AddNoteModal = ({ handleClose, open, editableRow }) => {
   );
 };
 
-export default AddNoteModal;
+export default ViewNote;

@@ -3,9 +3,9 @@ import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckPicker, Checkbox, Button, DateRangePicker } from "rsuite";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
-import UserScheduleTable from "./UserScheduleTable";
-import { CheckBox } from "../../Settings/SettingComponents/CheckBox";
-import { ManageSessionsColumn, ManageSessionsData } from "../UserTableData";
+import UserScheduleTable from "./My-Schedule/UserScheduleTable";
+import { CheckBox } from "../Settings/SettingComponents/CheckBox";
+import { ManageSessionsColumn, ManageSessionsData } from "./UserTableData";
 
 const ManageSessions = () => {
   const [billable, setBillable] = useState(true);
