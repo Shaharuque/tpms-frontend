@@ -278,11 +278,16 @@ const Sidebar = ({ handle }) => {
           </div>
           {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
           {menuItem
-            .filter((item) => item.roll === 'provider') //dynamic bhabey now route render hobey
+            .filter((item) => item.roll === 'admin') //dynamic bhabey now route render hobey
             .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (
-                  <NavLink to={"#"} key={index} activeclassname="active">
+                  <NavLink
+                    to={"#"}
+                    key={index}
+                    className=""
+                    activeclassname="active"
+                  >
                     <SidebarMenu
                       items={items}
                       isHovering={isHovering}

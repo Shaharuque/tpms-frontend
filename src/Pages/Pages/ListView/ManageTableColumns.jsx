@@ -1,4 +1,9 @@
-export const ManageTableColumnsData = [];
+export const ManageTableColumnsData = [
+  {
+    notes: "he",
+    patients : "dlfja"
+  }
+];
 
 export const ManageTableColumnsColumn = [
   {
@@ -19,19 +24,19 @@ export const ManageTableColumnsColumn = [
     Header: () => {
       return <span className="">Patients</span>;
     },
-    accessor: "patients",
+    accessor: "Patients",
   },
   {
     Header: () => {
       return <span className="">Service &and; Hrs.</span>;
     },
-    accessor: "service",
+    accessor: "Service&hrs",
   },
   {
     Header: () => {
       return <span className="">Provider</span>;
     },
-    accessor: "provider",
+    accessor: "Provider",
   },
   {
     Header: () => {
@@ -43,13 +48,13 @@ export const ManageTableColumnsColumn = [
     Header: () => {
       return <span className="">Scheduled Date</span>;
     },
-    accessor: "date",
+    accessor: "Scheduled Date",
   },
   {
     Header: () => {
       return <span className="">Hours</span>;
     },
-    accessor: "hours",
+    accessor: "Hours",
   },
   {
     Header: "Status",

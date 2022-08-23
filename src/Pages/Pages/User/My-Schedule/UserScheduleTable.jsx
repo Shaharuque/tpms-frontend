@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 const UserScheduleTable = ({
-    getTableProps,
+  getTableProps,
   headerGroups,
   getTableBodyProps,
   rows,
   prepareRow,
 }) => {
-    return (
-        <div className="pb-3 overflow-y-hidden">
+  return (
+    <div className="pb-3 overflow-y-hidden">
       <table
         className="border overflow-scroll  sm:w-full "
         {...getTableProps()}
@@ -59,7 +59,7 @@ const UserScheduleTable = ({
         </tbody>
       </table>
     </div>
-    );
+  );
 };
 
 export default UserScheduleTable;

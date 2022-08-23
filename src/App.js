@@ -109,6 +109,7 @@ import Pataients from "./Pages/Pages/User/Patient/Pataients";
 import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
 import  ContactInfo  from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
 import  CredenTial  from "./Pages/Pages/User/Biographic/Credential/CredenTial";
+import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/SchedulerCalender";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -525,7 +526,11 @@ function App() {
           {/* user */}
 
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
+          <Route path="calender" element={<SchedulerCalender />}></Route>
             <Route path="myschedule" element={<ManageSessions />}></Route>
+            {/* test scheduler Calender */}
+            
+
             <Route path="biographic" element={<Biographic />}>
               <Route path="bios" element={<Bios></Bios>}></Route>
               <Route path="bio-contactinfo" element={<ContactInfo></ContactInfo>}>
