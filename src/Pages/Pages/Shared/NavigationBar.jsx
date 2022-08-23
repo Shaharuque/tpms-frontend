@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
-import {BiFullscreen,BiExitFullscreen} from "react-icons/bi";
+import { BiFullscreen, BiExitFullscreen } from "react-icons/bi";
 import {
   AiOutlinePlus,
   AiOutlineNotification,
@@ -10,9 +10,15 @@ import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.jpg";
 import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavigationBar = ({ handle }) => {
+  const navigation = useNavigate();
   let [open, setOpen] = useState(false);
+
+  const handleSignOut = () => {
+    navigation("/");
+  };
 
   return (
     <motion.div
@@ -21,7 +27,7 @@ const NavigationBar = ({ handle }) => {
       transition={{ delay: 0.4 }}
       className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] navi rounded-3xl sticky "
     >
-      <div className="md:flex items-center justify-between bg-white rounded-3xl  md:px-10 px-7">
+      <div className="md:flex items-center justify-between bg-white rounded-3xl  md:px-10 px-7s">
         <div
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-800"
@@ -48,24 +54,53 @@ const NavigationBar = ({ handle }) => {
         </div>
 
         <div
-          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-18 " : "top-[-490px]"
-            }`}
+          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            open ? "top-18 " : "top-[-490px]"
+          }`}
         >
           {/*Full screen showing code */}
           <div>
-            {!handle.active ?
-              (
-                <h1 onClick={handle.enter} className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
-                  <BiFullscreen />
-                </h1>
-              )
-              :
-              (
-                <h1 onClick={handle.exit} className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary">
-                  <BiExitFullscreen />
-                </h1>
-              )
-            }
+            {!handle.active ? (
+              <h1
+                onClick={handle.enter}
+                className=" tls mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 mt-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                  />
+                </svg>
+              </h1>
+            ) : (
+              <h1
+                onClick={handle.exit}
+                className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 mt-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                  />
+                </svg>
+              </h1>
+            )}
           </div>
 
           {/* adding  */}
@@ -81,10 +116,10 @@ const NavigationBar = ({ handle }) => {
                 className="dropdown-content w-60 md:w-[25rem] menu mt-1 shadow bg-base-100 text-sm "
               >
                 <li>
-                  <a>Item 1</a>
+                  <Link to="/admin">Item 1</Link>
                 </li>
                 <li>
-                  <a>Item 2</a>
+                  <Link to="/admin">Item 2</Link>
                 </li>
               </ul>
             </div>
@@ -152,16 +187,16 @@ const NavigationBar = ({ handle }) => {
                 className="menu menu-compact dropdown-content w-60 md:w-[25rem] mt-3 p-2 shadow bg-base-100 "
               >
                 <li>
-                  <a href="google.com" className="justify-between">
+                  <Link to="/admin" className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <Link to="/admin">Settings</Link>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <button onClick={handleSignOut}>Logout</button>
                 </li>
               </ul>
             </div>

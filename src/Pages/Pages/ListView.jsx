@@ -237,7 +237,7 @@ const ListView = () => {
                 </label>
                 <div>
                   <select
-                    className="border rounded-sm px-2 py-[3px] font-thin mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
                     {...register("pos")}
                   >
                     <option value=""></option>
@@ -258,7 +258,7 @@ const ListView = () => {
                 </label>
                 <div>
                   <select
-                    className="border rounded-sm px-2 py-[3px] font-thin mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
                     {...register("Status")}
                   >
                     <option value=""></option>
@@ -300,7 +300,7 @@ const ListView = () => {
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="border rounded-sm  font-normal px-2 w-36 py-1 text-xs "
+                className="border rounded-sm py-[5px] font-normal px-2 w-36 py-1 text-xs "
               >
                 <option value=""></option>
                 <option value="Specific_Date">Specific Date</option>

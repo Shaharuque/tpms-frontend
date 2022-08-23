@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import { NavLink, Outlet } from "react-router-dom";
 import { CheckPicker, Checkbox, Button, DateRangePicker } from "rsuite";
+import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import { FaRegCalendarAlt } from "react-icons/fa";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import UserScheduleTable from "./My-Schedule/UserScheduleTable";
@@ -112,8 +115,20 @@ const ManageSessions = () => {
 
   return (
     <div className="h-[100vh]">
-      <div className="flex flex-wrap justify-between items-center mb-2">
-        <h1 className="text-lg my-2 text-orange-400">Manage Sessions</h1>
+      <div className="flex flex-wrap justify-between items-center">
+        <h1 className="text-sm">Manage Sessions</h1>
+        <NavLink
+          to={"/user/calender"}
+          className="flex flex-wrap justify-between items-center px-2 py-1 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+        >
+          <FaRegCalendarAlt className="mr-1" />
+          Calender View
+        </NavLink>
+        <Outlet />
+      </div>
+
+      <div className="flex flex-wrap justify-between items-center mb-5">
+        <h1 className="text-lg my-2 text-orange-500">Manage Sessions</h1>
         <div>
           <Switch
             defaultChecked

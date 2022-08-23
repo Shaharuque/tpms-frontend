@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+.fullscreen {
+  overflow: scroll;
+}
+
 .rs-calendar-table-cell {
   display: table-cell;
   padding: 1px 0;
