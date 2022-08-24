@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 import Swal from "sweetalert2";
 import SmallLoader from "../../Loading/SmallLoader";
+import { GoAlert } from "react-icons/go";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
@@ -71,11 +72,9 @@ const LogInForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 {message ? (
-                  <input
-                    className="text-red-600 border border-gray-300 rounded-md px-3 py-[10px] mx-1 text-xs w-full"
-                    defaultValue={message}
-                    disabled
-                  ></input>
+                  <div className="text-red-500 red-box  border border-gray-300 rounded-md px-3 font-medium py-[10px] mx-1 text-xs w-full flex items-center gap-2">
+                    <GoAlert className=" text-red-500" /> {message}
+                  </div>
                 ) : null}
                 <label className="label">
                   <span className="label-text font-medium text-xs text-gray-600 text-left">

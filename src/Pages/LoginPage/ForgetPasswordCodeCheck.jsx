@@ -5,6 +5,8 @@ import logo from "../Assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import ParticlesBg from "./ParticlesBg";
 import SmallLoader from "../../Loading/SmallLoader";
+import { GrAlert } from "react-icons/gr";
+import { GoAlert } from "react-icons/go";
 
 const ForgetPasswordCodeCheck = () => {
   const navigate = useNavigate();
@@ -39,17 +41,15 @@ const ForgetPasswordCodeCheck = () => {
         backgroundPosition: "fixed",
       }}
     >
-      <div className="px-7 sm:px-16 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute top-28 right-28">
+      <div className="px-7 login-form sm:px-10 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute top-28 right-28">
         <div div className="">
           <img src={logo} alt="TPMS-logo" className="mx-auto mb-3" />
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               {errMessage ? (
-                <input
-                  className="text-red-600 border border-gray-300 rounded-md px-3 py-[10px] mx-1 text-xs w-full"
-                  defaultValue={errMessage}
-                  disabled
-                ></input>
+                <div className="text-red-500 red-box  border border-gray-300 rounded-md px-3 font-medium py-[10px] mx-1 text-xs w-full flex items-center gap-2">
+                  <GoAlert className=" text-red-500" /> {errMessage}
+                </div>
               ) : null}
               <label className="label">
                 <span className="label-text font-medium text-xs text-gray-600 text-left">

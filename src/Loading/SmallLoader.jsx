@@ -6,7 +6,7 @@ const SmallLoader = () => {
   return (
     <div className="h-4">
       <Box sx={{ display: "flex" }}>
-        <CircularProgress sx={{ color: "teal" }} />
+        <CircularProgress size={20} sx={{ color: "teal", size: "10" }} />
       </Box>
     </div>
   );

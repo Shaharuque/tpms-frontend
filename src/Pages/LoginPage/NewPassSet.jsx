@@ -5,6 +5,7 @@ import logo from "../Assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import ParticlesBg from "./ParticlesBg";
 import SmallLoader from "../../Loading/SmallLoader";
+import { GoAlert } from "react-icons/go";
 
 const NewPassSet = () => {
   const navigate = useNavigate();
@@ -37,22 +38,20 @@ const NewPassSet = () => {
         backgroundPosition: "fixed",
       }}
     >
-      <div className="px-7 sm:px-16 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute top-28 right-28">
+      <div className="px-7 login-form sm:px-10 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute top-28 right-28">
         <div div className="">
           <img src={logo} alt="TPMS-logo" className="mx-auto mb-3" />
           <form onSubmit={handleSubmit(onSubmit)}>
             {message ? (
-              <input
-                className="text-red-600 border rounded-md px-3 py-[5px] mx-1 text-xs w-full mb-3"
-                defaultValue={message}
-                disabled
-              ></input>
+              <div className="text-red-500 red-box  border border-gray-300 rounded-md px-3 font-medium py-[10px] mx-1 text-xs w-full flex items-center gap-2">
+                <GoAlert className=" text-red-500" /> {message}
+              </div>
             ) : null}
             {/* Password */}
-            <div className="flex">
-              <label className="label flex justify-between items-end">
-                <span className="label-text text-xs font-medium text-gray-600 text-left">
-                  Password
+            <div className="">
+              <label className="label">
+                <span className="label-text font-medium text-xs text-gray-600 text-left">
+                  New Password
                 </span>
               </label>
 
@@ -90,7 +89,7 @@ const NewPassSet = () => {
             </label>
 
             {/*Confirm password */}
-            <div className="flex">
+            <div className="">
               <label className="label flex justify-between items-end">
                 <span className="label-text text-xs font-medium text-gray-600 text-left">
                   Confirm Password
