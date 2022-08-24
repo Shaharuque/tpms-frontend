@@ -20,14 +20,19 @@ import company from "../../Assets/company.jpg";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import CreateAppointment from "./AdditionFeatures/CreateAppointment";
+import CreatePatient from "./AdditionFeatures/CreatePatient";
 
 const NavigationBar = ({ handle }) => {
   const navigation = useNavigate();
   let [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [patientClicked, setPatientClicked] = useState(false);
 
   const handleAppointment = () => {
     setClicked(!clicked);
+  };
+  const handlePatient = () => {
+    setPatientClicked(!patientClicked);
   };
 
   return (
@@ -99,21 +104,26 @@ const NavigationBar = ({ handle }) => {
                 tabIndex="0"
                 className="dropdown-content p-3 md:w-52  w-auto mt-1 shadow-2xl border-2 rounded bg-white text-sm "
               >
-                <li className="flex items-center gap-2 hover:text-slate-600 mb-2">
+                <button className="flex items-center gap-2 hover:text-slate-600 mb-2">
                   <AiOutlinePlusCircle />
-                  <a href="#">create patient</a>
-                </li>
+                  <div onClick={handlePatient}>create patient</div>
+                </button>
 
-                <li className="flex items-center  gap-2 hover:text-slate-600">
+                <button className="flex items-center  gap-2 hover:text-slate-600">
                   <AiOutlinePlusSquare />
                   <div onClick={handleAppointment}>create Appoinment</div>
-                </li>
+                </button>
               </ul>
               {clicked && (
                 <div>
                   <CreateAppointment
                     handleClose={handleAppointment}
                   ></CreateAppointment>
+                </div>
+              )}
+              {patientClicked && (
+                <div>
+                  <CreatePatient handleClose={handlePatient}></CreatePatient>
                 </div>
               )}
             </div>
