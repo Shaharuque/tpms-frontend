@@ -524,12 +524,14 @@ function App() {
 
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
             <Route path="myschedule" element={<ManageSessions />}></Route>
+
             <Route path="biographic" element={<Biographic />}>
               <Route path="bios" element={<Bios></Bios>}></Route>
               <Route path="bio-contactinfo" element={<ContactInfo></ContactInfo>}>
               </Route>
               <Route path="bio-credential" element={<CredenTial></CredenTial>}></Route> 
             </Route>
+            
             <Route path="Pataients" element={<Pataients />}></Route>
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>
           </Route>

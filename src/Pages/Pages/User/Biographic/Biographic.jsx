@@ -48,7 +48,7 @@ const Biographic = () => {
                         </div>
 
                         <div className="mr-3">
-                            <Link to={`/admin/staffs`}>
+                            <Link to={`#`}>
                                 <button className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
                                     <IoCaretBackCircleOutline className="text-sm" /> Back
                                 </button>
