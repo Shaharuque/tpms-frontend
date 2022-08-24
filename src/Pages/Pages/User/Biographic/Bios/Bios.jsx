@@ -18,7 +18,7 @@ export const Bios = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-        console.log(note);
+       
     };
 
     return (

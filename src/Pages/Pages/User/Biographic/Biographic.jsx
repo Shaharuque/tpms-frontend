@@ -48,7 +48,7 @@ const Biographic = () => {
             </div>
 
             <div className="mr-3">
-              <Link to={`/admin/staffs`}>
+              <Link to={`#`}>
                 <button className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
                   <IoCaretBackCircleOutline className="text-sm" /> Back
                 </button>
@@ -75,7 +75,7 @@ const Biographic = () => {
 
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
-                to={"bios"}
+                to={`bios`}
               >
                 <h1 className="ml-1 mt-1">Bio's</h1>
               </CustomLink>
