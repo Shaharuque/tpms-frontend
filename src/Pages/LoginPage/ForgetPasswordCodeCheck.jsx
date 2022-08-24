@@ -41,7 +41,7 @@ const ForgetPasswordCodeCheck = () => {
         backgroundPosition: "fixed",
       }}
     >
-      <div className="px-7 login-form sm:px-10 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute top-28 right-28">
+      <div className="px-7 login-form sm:px-10 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute">
         <div div className="">
           <img src={logo} alt="TPMS-logo" className="mx-auto mb-3" />
           <form onSubmit={handleSubmit(onSubmit)}>
