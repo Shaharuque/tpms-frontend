@@ -102,7 +102,6 @@ import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
 import NavigationBar from "./Pages/Pages/Shared/NavigationBar";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import ManageSessions from "./Pages/Pages/User/My-Schedule/ManageSessions";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
@@ -118,6 +117,7 @@ import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
 import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
 import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
 import NewPassSet from "./Pages/LoginPage/NewPassSet";
+import ManageSessions from "./Pages/Pages/User/ManageSessions";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -379,12 +379,12 @@ function App() {
             </Route>
             {/* ----------------------------------Staff End----------------------------------------------- */}
             {/* BILLING  */}
+
             <Route
               path="submit-billing"
               element={<BillingManager></BillingManager>}
             >
               <Route index element={<Navigate to="proces-Clims" />} />
-
               <Route
                 path="proces-Clims"
                 element={<ProcessingClaim></ProcessingClaim>}

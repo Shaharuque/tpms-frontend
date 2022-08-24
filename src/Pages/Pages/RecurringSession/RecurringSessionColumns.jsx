@@ -1,6 +1,7 @@
-export const RecurringSessionColumnsData = [];
-
-export const RecurringSessionColumnsColumn = [
+import { GrStatusGoodSmall } from "react-icons/gr";
+import { FiEdit } from "react-icons/fi";
+import { Link } from "react-router-dom";
+export const RecurringSessionColumn = [
   {
     Header: () => {
       return <span className="">Patient</span>;
@@ -47,14 +48,18 @@ export const RecurringSessionColumnsColumn = [
     Header: "Status",
     Cell: ({ row }) => {
       // console.log(row);
-      //   return <IsElectronic row={row}></IsElectronic>;
+      return <GrStatusGoodSmall className="mx-auto text-red-600" />;
     },
   },
   {
     Header: "Action",
     Cell: ({ row }) => {
       // console.log(row);
-      //   return <IsElectronic row={row}></IsElectronic>;
+      return (
+        <Link to={`/admin/recurring-session-edit`}>
+          <FiEdit className="mx-auto text-primary text-sm font-thin" />
+        </Link>
+      );
     },
   },
 ];
