@@ -23,7 +23,7 @@ import CreateAppointment from "./AdditionFeatures/CreateAppointment";
 import CreatePatient from "./AdditionFeatures/CreatePatient";
 
 const NavigationBar = ({ handle }) => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
   let [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [patientClicked, setPatientClicked] = useState(false);
@@ -33,6 +33,10 @@ const NavigationBar = ({ handle }) => {
   };
   const handlePatient = () => {
     setPatientClicked(!patientClicked);
+  };
+
+  const handleSignOut = () => {
+    navigate("/");
   };
 
   return (
@@ -233,6 +237,7 @@ const NavigationBar = ({ handle }) => {
                 <button
                   type="button"
                   className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
+                  onClick={handleSignOut}
                 >
                   Sign out <AiOutlinePlusSquare />
                 </button>

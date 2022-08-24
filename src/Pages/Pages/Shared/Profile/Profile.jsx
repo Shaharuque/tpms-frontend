@@ -4,7 +4,7 @@ import CustomLink from "../CustomLink";
 
 const Profile = () => {
   return (
-    <div className="h-[100vh]">
+    <div className="h-[100vh] px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-3 mr-2 gap-x-0 gap-y-1">
         <CustomLink
           to={"/admin/profile/profile-information"}
@@ -19,7 +19,6 @@ const Profile = () => {
           Change Password
         </CustomLink>
       </div>
-      <hr />
       <div>
         <Outlet />
       </div>

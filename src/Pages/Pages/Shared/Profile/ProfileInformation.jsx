@@ -17,7 +17,7 @@ const ProfileInformation = () => {
       transition={{ delay: 0.2 }}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="div-img ">
+        <div className="div-img">
           <div>
             <img src={person} className=" h-40 " alt="Dami img not taken" />
           </div>
