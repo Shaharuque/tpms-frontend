@@ -1,4 +1,6 @@
-export const BatchingClaimsColumnsData = [];
+export const BatchingClaimsColumnsData = [
+  
+];
 
 export const BatchingClaimsColumnsColumn = [
   {

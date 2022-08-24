@@ -18,7 +18,7 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
       <Dialog
         // fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
+        // onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
         <div className="p-5 box">
@@ -121,6 +121,7 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
               <input
                 type="submit"
                 value={"SAVE"}
+                onClick={handleClose}
                 className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               />
               <button

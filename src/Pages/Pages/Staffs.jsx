@@ -7,7 +7,6 @@ const Staffs = () => {
   const [StafData, SetStafData] = useState([]);
 
   // fakeApi call 
-
   useEffect(()=>{
     axios("../Staff.json")
     .then((response)=>{
@@ -18,9 +17,9 @@ const Staffs = () => {
     })
 
   },[])
-
   console.log(StafData);
-
+  
+  
 
   return (
     <div className="h-[100vh]">
