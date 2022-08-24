@@ -115,6 +115,9 @@ import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
 import CredenTial from "./Pages/Pages/User/Biographic/Credential/CredenTial";
 import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
 import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
+import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
+import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
+import NewPassSet from "./Pages/LoginPage/NewPassSet";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -123,6 +126,19 @@ function App() {
       <FullScreen handle={handle}>
         <Routes>
           <Route path="/" element={<LogIn></LogIn>}></Route>
+          <Route
+            path="/forget-password"
+            element={<ForgetPassword></ForgetPassword>}
+          ></Route>
+          <Route
+            path="/code-check"
+            element={<ForgetPasswordCodeCheck></ForgetPasswordCodeCheck>}
+          ></Route>
+          <Route
+            path="/new-password"
+            element={<NewPassSet></NewPassSet>}
+          ></Route>
+
           {/*Testing */}
           <Route path="/table" element={<MainBase></MainBase>}></Route>
 

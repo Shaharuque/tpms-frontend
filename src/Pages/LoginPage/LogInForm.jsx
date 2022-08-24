@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import bg from "../Assets/bg.png";
 import logo from "../Assets/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
+import Swal from "sweetalert2";
+import SmallLoader from "../../Loading/SmallLoader";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
   const navigate = useNavigate();
+  const Swal = require("sweetalert2");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -15,6 +21,7 @@ const LogInForm = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
+    setLoading(true);
     fetch("https://ovh.therapypms.com/api/v1/admin/login", {
       method: "POST",
       headers: {
@@ -24,26 +31,29 @@ const LogInForm = () => {
     })
       .then((res) => {
         console.log(res);
-        if (res.status === 201) {
-          console.log("logged in");
-        } else {
-          console.log("Can't perform the action");
-        }
         return res.json();
       })
       .then((result) => {
-        console.log(result);
+        setLoading(false);
+        //console.log(result);
         if (result.account_type === "admin") {
           localStorage.setItem("admin", result.access_token);
           localStorage.setItem("type", result.account_type);
           navigate("/admin"); //admin panel a redirect
-        } else {
+        } else if (result.account_type === "patient") {
           navigate("/patient"); //patient panel a redirect
           localStorage.setItem("type", "patient");
+        } else {
+          setMessage("Invalid Credentials");
         }
       });
     reset();
   };
+
+  const forgetPass = () => {
+    navigate("/forget-password");
+  };
+
   return (
     <div
       style={{
@@ -60,6 +70,13 @@ const LogInForm = () => {
             <img src={logo} alt="TPMS-logo" className="mx-auto mb-3" />
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
+                {message ? (
+                  <input
+                    className="text-red-600 border border-gray-300 rounded-md px-3 py-[10px] mx-1 text-xs w-full"
+                    defaultValue={message}
+                    disabled
+                  ></input>
+                ) : null}
                 <label className="label">
                   <span className="label-text font-medium text-xs text-gray-600 text-left">
                     Email Address
@@ -73,7 +90,7 @@ const LogInForm = () => {
                   {...register("email", {
                     required: {
                       value: true,
-                      message: "Email is required",
+                      message: "Enter Email",
                     },
                     pattern: {
                       value: /@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
@@ -83,12 +100,6 @@ const LogInForm = () => {
                 />
               </div>
 
-              {errors.name && errors.name.type === "required" && (
-                <span>This is required</span>
-              )}
-              {errors.name && errors.name.type === "maxLength" && (
-                <span>Max length exceeded</span>
-              )}
               <label className="label">
                 <span className="label-text-alt">
                   {errors.email?.type === "required" && (
@@ -110,7 +121,10 @@ const LogInForm = () => {
                   <span className="label-text text-xs font-medium text-gray-600 text-left">
                     Password
                   </span>
-                  <span className="label-text text-xs text-secondary font-medium">
+                  <span
+                    onClick={forgetPass}
+                    className="label-text text-xs text-secondary font-medium cursor-pointer"
+                  >
                     Forget Password ?
                   </span>
                 </label>
@@ -123,7 +137,7 @@ const LogInForm = () => {
                   {...register("password", {
                     required: {
                       value: true,
-                      message: "Password is required",
+                      message: "Enter Password",
                     },
                     minLength: {
                       value: 6,
@@ -162,12 +176,18 @@ const LogInForm = () => {
                     Remember Me
                   </span>
                 </div>
-                <button
-                  className=" py-2 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                  type="submit"
-                >
-                  Sign In
-                </button>
+                {!loading ? (
+                  <button
+                    className=" py-2 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                    type="submit"
+                  >
+                    Sign In
+                  </button>
+                ) : (
+                  <div className="flex justify-center">
+                    <SmallLoader></SmallLoader>
+                  </div>
+                )}
               </div>
             </form>
             <p className="text-xs my-2 font-normal text-gray-400">
