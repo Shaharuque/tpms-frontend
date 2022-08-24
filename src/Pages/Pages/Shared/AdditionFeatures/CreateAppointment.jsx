@@ -47,7 +47,7 @@ const CreateAppointment = ({ handleClose }) => {
           <hr />
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5 mr-2 gap-1">
-              <span className="text-sm ml-1 text-gray-600 font-normal">
+              <span className="text-xs ml-1 text-gray-600 font-normal">
                 Active Patient
               </span>
               <div>
@@ -59,7 +59,7 @@ const CreateAppointment = ({ handleClose }) => {
                   }}
                 />
                 <label
-                  className="form-check-label inline-block ml-2 text-sm text-gray-500"
+                  className="form-check-label inline-block ml-2 text-xs text-gray-500"
                   htmlFor="flesmwitchCheckDefault"
                 >
                   {billable ? "Billable" : "Non-Billable"}
@@ -67,12 +67,12 @@ const CreateAppointment = ({ handleClose }) => {
               </div>
 
               <label className="label">
-                <span className="label-text flex items-center text-sm text-gray-500 text-left">
+                <span className="label-text flex items-center text-xs text-gray-500 text-left">
                   Patient Name
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                 {...register("patients")}
               >
                 <option value=""></option>
@@ -80,12 +80,12 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text flex items-center text-sm text-gray-500 text-left">
+                <span className="label-text flex items-center text-xs text-gray-500 text-left">
                   Auth
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                 {...register("Auth")}
               >
                 <option value=""></option>
@@ -93,12 +93,12 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text flex items-center text-sm text-gray-500 text-left">
+                <span className="label-text flex items-center text-xs text-gray-500 text-left">
                   Service
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                 {...register("service")}
               >
                 <option value=""></option>
@@ -106,13 +106,13 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text flex items-center text-sm text-gray-500 text-left">
+                <span className="label-text flex items-center text-xs text-gray-500 text-left">
                   Provider Name
                 </span>
               </label>
               {billable ? (
                 <select
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   {...register("provider")}
                 >
                   <option value=""></option>
@@ -129,12 +129,12 @@ const CreateAppointment = ({ handleClose }) => {
                 </>
               )}
               <label className="label">
-                <span className="label-text flex items-center text-sm text-gray-500 text-left">
+                <span className="label-text flex items-center text-xs text-gray-500 text-left">
                   POS
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                 {...register("pos")}
               >
                 <option value=""></option>
@@ -147,37 +147,37 @@ const CreateAppointment = ({ handleClose }) => {
                 </span>
               </label>
               <input
-                className="border rounded-sm px-2 py-[4px] mx-1 text-sm w-full"
+                className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                 type="date"
                 {...register("check_Date")}
               />
               <label className="label">
-                <span className="label-text flex items-center text-sm text-gray-500 text-left">
+                <span className="label-text flex items-center text-xs text-gray-500 text-left">
                   From Time
                 </span>
               </label>
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3  gap-1">
                 <input
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-sm w-full"
+                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                   type="time"
                   {...register("to_time")}
                 />
-                <div className="text-sm text-gray-500 mx-auto mt-2">
+                <div className="text-xs text-gray-500 mx-auto mt-2">
                   To Time
                 </div>
                 <input
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-sm w-full"
+                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                   type="time"
                   {...register("from_time")}
                 />
               </div>
               <label className="label">
-                <span className="label-text flex items-center text-sm text-gray-500 text-left">
+                <span className="label-text flex items-center text-xs text-gray-500 text-left">
                   Status
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                 {...register("status")}
               >
                 <option value=""></option>
@@ -192,7 +192,7 @@ const CreateAppointment = ({ handleClose }) => {
                   }}
                 />
                 <label
-                  className="form-check-label inline-block ml-2 text-sm text-gray-500"
+                  className="form-check-label inline-block ml-2 text-xs text-gray-500"
                   htmlFor="flesmwitchCheckDefault"
                 >
                   Recurrence Pattern?
@@ -217,7 +217,7 @@ const CreateAppointment = ({ handleClose }) => {
                       }}
                     />
                     <label
-                      className="form-check-label inline-block ml-2 text-sm text-gray-500"
+                      className="form-check-label inline-block ml-2 text-xs text-gray-500"
                       htmlFor="flesmwitchCheckDefault"
                     >
                       Daily
@@ -325,7 +325,7 @@ const CreateAppointment = ({ handleClose }) => {
             <div className="divider"></div>
             <div className="modal-action">
               <button
-                className=" py-[5px]  px-3 ml-3 text-sm font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className=" py-[5px]  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
                 onClick={handleClose}
               >
@@ -333,7 +333,7 @@ const CreateAppointment = ({ handleClose }) => {
               </button>
 
               <button
-                className=" py-[5px]  px-3 ml-3 text-sm font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                className=" py-[5px]  px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
                 autoFocus
                 onClick={handleClose}
               >
@@ -342,7 +342,6 @@ const CreateAppointment = ({ handleClose }) => {
             </div>
           </form>
         </div>
-        <h1>Mewao Mewao</h1>
       </Dialog>
     </div>
   );
