@@ -118,6 +118,9 @@ import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
 import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
 import NewPassSet from "./Pages/LoginPage/NewPassSet";
 import ManageSessions from "./Pages/Pages/User/ManageSessions";
+import Profile from "./Pages/Pages/Shared/Profile/Profile";
+import ProfileInformation from "./Pages/Pages/Shared/Profile/ProfileInformation";
+import PasswordChange from "./Pages/Pages/Shared/Profile/PasswordChange";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -143,6 +146,21 @@ function App() {
           <Route path="/table" element={<MainBase></MainBase>}></Route>
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+            {/* ----------------------------------Profile Start----------------------------------------------- */}
+
+            <Route path="profile" element={<Profile></Profile>}>
+              <Route
+                path="profile-information"
+                element={<ProfileInformation></ProfileInformation>}
+              ></Route>
+              <Route
+                path="password-change"
+                element={<PasswordChange></PasswordChange>}
+              ></Route>
+            </Route>
+
+            {/* ----------------------------------Profile End----------------------------------------------- */}
+
             <Route index element={<Dashboard></Dashboard>}></Route>
             {/* DASHBOARD ROUTES  */}
             {/* todays task  */}

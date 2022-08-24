@@ -177,24 +177,34 @@ const NavigationBar = ({ handle }) => {
                   <p className="text-xs text-white">admin@admin.com</p>
                 </div>
 
-                <div className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
-                  <div className=" rounded-full p-3 bg-[#CEEBEE]">
-                    <AiOutlineFileAdd />
-                  </div>
-                  <div className="text-xs text-wite">
-                    <h1 className="font-medium">My Profle</h1>
-                    <p>View personal profile details</p>
-                  </div>
+                <div>
+                  <Link
+                    to={"/admin/profile/profile-information"}
+                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
+                  >
+                    <div className=" rounded-full p-3 bg-[#CEEBEE]">
+                      <AiOutlineFileAdd />
+                    </div>
+                    <div className="text-xs text-wite">
+                      <h1 className="font-medium">My Profile</h1>
+                      <p>View personal profile details</p>
+                    </div>
+                  </Link>
                 </div>
 
-                <div className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
-                  <div className=" rounded-full p-3 bg-[#CEEBEE] ">
-                    <AiFillUnlock />
-                  </div>
-                  <div className="text-xs text-wite">
-                    <h1 className="font-medium">My Profle</h1>
-                    <p>Update your password</p>
-                  </div>
+                <div>
+                  <Link
+                    to={"/admin/profile/password-change"}
+                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
+                  >
+                    <div className=" rounded-full p-3 bg-[#CEEBEE] ">
+                      <AiFillUnlock />
+                    </div>
+                    <div className="text-xs text-wite">
+                      <h1 className="font-medium">My Profile</h1>
+                      <p>Update your password</p>
+                    </div>
+                  </Link>
                 </div>
                 <button
                   type="button"
