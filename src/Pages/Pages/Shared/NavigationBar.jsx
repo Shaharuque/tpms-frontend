@@ -19,10 +19,16 @@ import admin from "../../Assets/user.png";
 import company from "../../Assets/company.jpg";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
+import CreateAppointment from "./AdditionFeatures/CreateAppointment";
 
 const NavigationBar = ({ handle }) => {
   const navigation = useNavigate();
   let [open, setOpen] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const handleAppointment = () => {
+    setClicked(!clicked);
+  };
 
   return (
     <motion.div
@@ -97,11 +103,19 @@ const NavigationBar = ({ handle }) => {
                   <AiOutlinePlusCircle />
                   <a href="#">create patient</a>
                 </li>
+
                 <li className="flex items-center  gap-2 hover:text-slate-600">
                   <AiOutlinePlusSquare />
-                  <a href="#">create Appoinment</a>
+                  <div onClick={handleAppointment}>create Appoinment</div>
                 </li>
               </ul>
+              {clicked && (
+                <div>
+                  <CreateAppointment
+                    handleClose={handleAppointment}
+                  ></CreateAppointment>
+                </div>
+              )}
             </div>
           </div>
 
