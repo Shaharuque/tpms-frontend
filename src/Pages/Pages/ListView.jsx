@@ -1,24 +1,19 @@
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckPicker, Checkbox, Button } from "rsuite";
-import {
-  ManageTableColumnsColumn,
-  ManageTableColumnsData,
-} from "./ListView/ManageTableColumns";
+import { ManageTableColumnsColumn } from "./ListView/ManageTableColumns";
 import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
-import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { MultiSelect } from "react-multi-select-component";
 import { DateRangePicker } from "rsuite";
 import axios from "axios";
+import CustomMultiSelection from "./Shared/CustomMultiSelection";
 
 const ListView = () => {
   const [billable, setBillable] = useState(true);
   const [table, setTable] = useState(false);
   const [sortBy, setSortBy] = useState("");
-  const [Tblinfo, setTblinfo] = useState([]);
+  const [TData, setTData] = useState([]);
 
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
@@ -28,67 +23,46 @@ const ListView = () => {
   useEffect(() => {
     axios("../Fakedb.json")
       .then((response) => {
-        setTblinfo(response?.data);
+        setTData(response?.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  console.log(Tblinfo);
-
-  // const data = useMemo(() => ManageTableColumnsData, []);
-  // const columns = useMemo(() => [...ManageTableColumnsColumn], []);
-  const data = useMemo(() => Tblinfo, [Tblinfo]);
+  // -----------------------------------------------Table Data-------------------------------
+  const data = useMemo(() => TData, [TData]);
   const columns = useMemo(() => [...ManageTableColumnsColumn], []);
-
-  const [patientsSelected, setPatientsSelected] = useState([]);
-  const [providerSelected, setProviderSelected] = useState([]);
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    state,
-    selectedFlatRows,
-    setPageSize,
-    // page,
-    prepareRow,
-  } = useTable(
-    { columns, data },
-    useSortBy,
-    usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => {
-        return [
-          {
-            id: "selection",
-            Header: ({ getToggleAllRowsSelectedProps }) => (
-              <div>
-                <CheckBox {...getToggleAllRowsSelectedProps()} />
-              </div>
-            ),
-            Cell: ({ row }) => (
-              <div>
-                <CheckBox {...row.getToggleRowSelectedProps()} />
-              </div>
-            ),
-          },
-          ...columns,
-        ];
-      });
-    }
-  );
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      { columns, data },
+      useSortBy,
+      usePagination,
+      useRowSelect,
+      (hooks) => {
+        hooks.visibleColumns.push((columns) => {
+          return [
+            {
+              id: "selection",
+              Header: ({ getToggleAllRowsSelectedProps }) => (
+                <div>
+                  <CheckBox {...getToggleAllRowsSelectedProps()} />
+                </div>
+              ),
+              Cell: ({ row }) => (
+                <div>
+                  <CheckBox {...row.getToggleRowSelectedProps()} />
+                </div>
+              ),
+            },
+            ...columns,
+          ];
+        });
+      }
+    );
   // console.log(selectedFlatRows);
-  const { pageIndex, pageSize } = state;
 
+  // -----------------------------------------------Form-------------------------------
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
       filters: [],
@@ -101,6 +75,7 @@ const ListView = () => {
     reset();
   };
 
+  // -----------------------------------------------Multi-Select-------------------------------
   // ***************
   const datat = [
     "Eugenia",
@@ -112,30 +87,7 @@ const ListView = () => {
     "Julia",
     "Albert",
   ].map((item) => ({ label: item, value: item }));
-
-  const footerStyles = {
-    padding: "10px 2px",
-    borderTop: "1px solid #e5e5e5",
-  };
-
-  const footerButtonStyle = {
-    float: "right",
-    marginRight: 10,
-    marginTop: 2,
-  };
-
-  const allValue = datat.map((item) => item.value);
-
-  const picker = React.useRef();
   const [value, setValue] = React.useState([]);
-
-  const handleChange = (value) => {
-    setValue(value);
-  };
-
-  const handleCheckAll = (value, checked) => {
-    setValue(checked ? allValue : []);
-  };
 
   return (
     <div className={!table ? "h-[100vh]" : ""}>
@@ -163,76 +115,20 @@ const ListView = () => {
           {billable && (
             <div>
               <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
-              <CheckPicker
+              <CustomMultiSelection
                 data={datat}
-                placeholder="Select"
-                ref={picker}
-                style={{ width: 224 }}
                 value={value}
-                onChange={handleChange}
-                renderExtraFooter={() => (
-                  <div style={footerStyles}>
-                    <Checkbox
-                      inline
-                      indeterminate={
-                        value.length > 0 && value.length < allValue.length
-                      }
-                      checked={value.length === allValue.length}
-                      onChange={handleCheckAll}
-                    >
-                      Select All
-                    </Checkbox>
-
-                    <Button
-                      style={footerButtonStyle}
-                      appearance="primary"
-                      size="sm"
-                      onClick={() => {
-                        picker.current.close();
-                      }}
-                    >
-                      Ok
-                    </Button>
-                  </div>
-                )}
-              />
+                setValue={setValue}
+              ></CustomMultiSelection>
             </div>
           )}
           <div className="w-full">
             <h1 className="text-xs mb-2 ml-1 mt-2 ">Provider</h1>
-            <CheckPicker
+            <CustomMultiSelection
               data={datat}
-              placeholder="Select"
-              ref={picker}
-              style={{ width: 224 }}
               value={value}
-              onChange={handleChange}
-              renderExtraFooter={() => (
-                <div style={footerStyles}>
-                  <Checkbox
-                    inline
-                    indeterminate={
-                      value.length > 0 && value.length < allValue.length
-                    }
-                    checked={value.length === allValue.length}
-                    onChange={handleCheckAll}
-                  >
-                    Select All
-                  </Checkbox>
-
-                  <Button
-                    style={footerButtonStyle}
-                    appearance="primary"
-                    size="sm"
-                    onClick={() => {
-                      picker.current.close();
-                    }}
-                  >
-                    Ok
-                  </Button>
-                </div>
-              )}
-            />
+              setValue={setValue}
+            ></CustomMultiSelection>
           </div>
 
           {billable && (
