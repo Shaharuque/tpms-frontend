@@ -9,20 +9,6 @@ import CustomLink from "../../Shared/CustomLink";
 const Biographic = () => {
   return (
     <div>
-      {/** 1st nav bar ...start  */}
-      {/**  <div className="flex flex-col lg:flex-row justify-between items-center">
-                <div>
-                    <h1 className='text-sm font-bold'>Ashu Soni | <span className=' text-orange-600 font-bold text-sm'>DOB:</span> <span className='font-normal text-xs'>12/27/1999 |</span><span className=' text-orange-600 font-bold text-xs'>NPI:</span> <span className='font-normal text-xs'>5563289657 |</span> <span className=' text-orange-600 font-bold text-xs'>DOB:</span> <span className='font-normal text-xs'>12/27/1999 |</span><span className=' text-orange-600 font-bold text-xs'>Phone:</span> <span className='font-normal text-xs'>(123)-456-7822</span>  </h1>
-                </div>
-                <div>
-                    <button className=' bg-sky-600 bg-opacity-70 rounded px-4 py-1 text-sm font-normal text-white'>
-                        Back
-                    </button>
-                </div>
-
-            </div> */}
-
-      {/** 1st nav bar ...end  */}
       <div>
         {" "}
         <>
@@ -75,7 +61,7 @@ const Biographic = () => {
 
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
-                to={`bios`}
+                to={`/user/biographic`}
               >
                 <h1 className="ml-1 mt-1">Bio's</h1>
               </CustomLink>
