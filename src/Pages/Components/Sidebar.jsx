@@ -250,7 +250,7 @@ const Sidebar = ({ handle }) => {
         <div className="">
           <NavigationBar handle={handle}></NavigationBar>
         </div>
-        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-3 ">
+        <main className="font-medium  main bg-white shadow-md rounded-3xl w-auto mt-2 ml-[98px] mr-[22px] ">
           <Outlet />
         </main>
         <Footer></Footer>
@@ -284,7 +284,7 @@ const Sidebar = ({ handle }) => {
           </div>
           {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
           {menuItem
-            .filter((item) => item.roll === logged_type) //dynamic bhabey now route render hobey
+            .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
             .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (
