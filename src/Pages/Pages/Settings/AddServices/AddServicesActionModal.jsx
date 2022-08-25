@@ -29,7 +29,7 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
           <div className="divider"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* <div className="flex items-center text-sm gap-5"> */}
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-5">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-co ls-3 my-5 mr-2 gap-5">
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-500 text-left">
