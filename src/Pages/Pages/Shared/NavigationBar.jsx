@@ -1,42 +1,67 @@
 import React, { useState } from "react";
 import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
-import { BiFullscreen, BiExitFullscreen } from "react-icons/bi";
+import {
+  BiFullscreen,
+  BiExitFullscreen,
+  BiMessageRounded,
+} from "react-icons/bi";
 import {
   AiOutlinePlus,
   AiOutlineNotification,
   AiOutlineClose,
+  AiOutlinePlusCircle,
+  AiOutlinePlusSquare,
+  AiOutlineFileAdd,
+  AiFillUnlock,
 } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.jpg";
 import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import CreateAppointment from "./AdditionFeatures/CreateAppointment";
+import CreatePatient from "./AdditionFeatures/CreatePatient";
 
 const NavigationBar = ({ handle }) => {
+  const navigate = useNavigate();
   let [open, setOpen] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [patientClicked, setPatientClicked] = useState(false);
+
+  const handleAppointment = () => {
+    setClicked(!clicked);
+  };
+  const handlePatient = () => {
+    setPatientClicked(!patientClicked);
+  };
+
+  const handleSignOut = () => {
+    navigate("/");
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: -15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem]  rounded-3xl sticky "
+      className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] rounded-3xl sticky "
     >
-      <div className="md:flex items-center justify-between bg-white rounded-3xl  md:px-10 px-7s">
+      <div className="flex items-center justify-between bg-white rounded-3xl  p-3">
         <div
-          className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
+          className="flex justify-center items-center gap-2 font-medium cursor-pointer font-[Poppins] 
       text-gray-800"
         >
-          <div className="flex-1">
-            <label tabIndex="0" className="flex gap-0 md:gap-2 items-center">
-              <div className="w-8 mr-1 rounded-full">
-                <img className=" rounded-full" src={company} alt="pic" />
-              </div>
-              <div>
-                <p className="md:text-lg text-sm ">
-                  ABC Behavioral Therapy Center
-                </p>
-              </div>
-            </label>
+          <div className="w-9 rounded-full">
+            <img className=" rounded-full" src={company} alt="pic" />
+          </div>
+
+          <div>
+            <p
+              className="md:text-lg text-sm  bg-transparent "
+              style={{ textShadow: "2px 2px 4px #00000052" }}
+            >
+              ABC Behavioral Therapy Centers
+            </p>
           </div>
         </div>
 
@@ -48,7 +73,7 @@ const NavigationBar = ({ handle }) => {
         </div>
 
         <div
-          className={`md:flex md:items-center md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+          className={`md:flex md:items-center gap-10 md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
             open ? "top-18 " : "top-[-490px]"
           }`}
         >
@@ -57,79 +82,68 @@ const NavigationBar = ({ handle }) => {
             {!handle.active ? (
               <h1
                 onClick={handle.enter}
-                className=" tls mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+                className="mt-[-5px]  text-lg font-bold text-secondary"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 mt-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                  />
-                </svg>
+                <BiFullscreen />
               </h1>
             ) : (
               <h1
                 onClick={handle.exit}
-                className="mx-5 md:my-0 my-2 text-lg font-bold text-secondary"
+                className=" text-lg font-bold text-secondary"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 mt-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                  />
-                </svg>
+                <BiExitFullscreen />
               </h1>
             )}
           </div>
 
           {/* adding  */}
-          <div className=" md:mt-1 mt-6">
-            <div className="dropdown md:dropdown-end">
+          <div className="  ">
+            <div className="dropdown md:dropdown-start">
               <label tabIndex="0" className="">
-                <h1 className="mx-4 mt-3 text-xl font-bold text-secondary">
+                <h1 className=" text-xl font-bold text-secondary">
                   <AiOutlinePlus />
                 </h1>
               </label>
               <ul
                 tabIndex="0"
-                className="dropdown-content w-60 md:w-[25rem] menu mt-1 shadow bg-base-100 text-sm "
+                className="dropdown-content p-3 md:w-52  w-auto mt-1 shadow-2xl border-2 rounded bg-white text-sm "
               >
-                <li>
-                  <a>Item 1</a>
-                </li>
-                <li>
-                  <a>Item 2</a>
-                </li>
+                <button className="flex items-center gap-2 hover:text-slate-600 mb-2">
+                  <AiOutlinePlusCircle />
+                  <div onClick={handlePatient}>create patient</div>
+                </button>
+
+                <button className="flex items-center  gap-2 hover:text-slate-600">
+                  <AiOutlinePlusSquare />
+                  <div onClick={handleAppointment}>create Appoinment</div>
+                </button>
               </ul>
+              {clicked && (
+                <div>
+                  <CreateAppointment
+                    handleClose={handleAppointment}
+                  ></CreateAppointment>
+                </div>
+              )}
+              {patientClicked && (
+                <div>
+                  <CreatePatient handleClose={handlePatient}></CreatePatient>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* notify  */}
-          <div className="md:my-0 my-5 p-1">
+          {/* notify    */}
+          <div className="">
             <div className="dropdown md:dropdown-end">
-              <div className="mx-2">
+              <div className="">
                 <label tabIndex="0" className="">
                   <div className="relative">
                     <div>
-                      <h1 className=" mt-5 text-2xl text-secondary">
+                      <h1 className="  text-2xl text-secondary">
                         <AiOutlineNotification />
                       </h1>
-                      <span className=" absolute top-0 right-[-8px] bg-red-700 text-white badge-xs rounded-full">
+                      <span className=" absolute top-0 h-4 right-[-8px] bg-red-700 text-white badge-xs rounded-full">
                         8
                       </span>
                     </div>
@@ -138,14 +152,16 @@ const NavigationBar = ({ handle }) => {
               </div>
               <div
                 tabIndex="0"
-                className="mt-1 dropdown-content w-60 md:w-[25rem] bg-base-100 shadow"
+                className="mt-1 dropdown-content w-auto md:w-[25rem] bg-base-100 shadow-lg rounded-t-xl"
               >
                 <div className="card-body">
-                  <h4 className=" text-center">Latest Changes</h4>
+                  <h4 className=" text-center ">Latest Changes</h4>
                   <hr />
-                  <span className="text-info">
-                    <span className="badge badge-primary">new</span>
-                    Subtotal: $999 Subtotal: $99 Subtotal: $99 Subtotal: $99
+                  <span className="text-info text-xs">
+                    <span className="badge badge-primary mr-2">new </span>
+                    Latest changes NewTelehealth Video Session. Video Session
+                    feature for Telehealth For Telehealth, video session feature
+                    is added. You can...
                   </span>
                   <div className="card-actions">
                     <button className="btn btn-primary btn-block">
@@ -158,11 +174,17 @@ const NavigationBar = ({ handle }) => {
           </div>
           {/* download  */}
           <div>
-            <h1 className="mx-5 mt-3 text-lg font-bold text-secondary">
+            <h1 className="  text-xl font-bold text-secondary">
+              <BiMessageRounded />
+            </h1>
+          </div>
+
+          <div>
+            <h1 className="  text-lg font-bold text-secondary">
               <BsDownload />
             </h1>
           </div>
-          {/* admin part  */}
+          {/* admin settings part */}
           <div className="my-5 md:my-0">
             <div className="dropdown md:dropdown-end">
               <label tabIndex="0" className="flex gap-2 items-center">
@@ -176,23 +198,50 @@ const NavigationBar = ({ handle }) => {
                   </h5>
                 </div>
               </label>
-              <ul
-                tabIndex="0"
-                className="menu menu-compact dropdown-content w-60 md:w-[25rem] mt-3 p-2 shadow bg-base-100 "
-              >
-                <li>
-                  <a href="google.com" className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
-                </li>
-                <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a>Logout</a>
-                </li>
-              </ul>
+
+              <div className="flex justify-center menu menu-compact dropdown-content w-auto md:w-[18rem] shadow bg-teal-600 rounded-lg">
+                <div className="bg-[#0CADBF] rounded-t-xl p-4">
+                  <h5 className=" text-sm text-white font-bold">Hello admin</h5>
+                  <p className="text-xs text-white">admin@admin.com</p>
+                </div>
+
+                <div>
+                  <Link
+                    to={"/admin/profile/profile-information"}
+                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
+                  >
+                    <div className=" rounded-full p-3 bg-[#CEEBEE]">
+                      <AiOutlineFileAdd />
+                    </div>
+                    <div className="text-xs text-wite">
+                      <h1 className="font-medium">My Profile</h1>
+                      <p>View personal profile details</p>
+                    </div>
+                  </Link>
+                </div>
+
+                <div>
+                  <Link
+                    to={"/admin/profile/password-change"}
+                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
+                  >
+                    <div className=" rounded-full p-3 bg-[#CEEBEE] ">
+                      <AiFillUnlock />
+                    </div>
+                    <div className="text-xs text-wite">
+                      <h1 className="font-medium">My Profile</h1>
+                      <p>Update your password</p>
+                    </div>
+                  </Link>
+                </div>
+                <button
+                  type="button"
+                  className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
+                  onClick={handleSignOut}
+                >
+                  Sign out <AiOutlinePlusSquare />
+                </button>
+              </div>
             </div>
           </div>
         </div>

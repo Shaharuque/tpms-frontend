@@ -46,9 +46,7 @@ const Patients = () => {
   const fetchData = async () => {
     const commentsFormServer = await fetchComments();
     console.log(commentsFormServer);
-
     setItems([...items, ...commentsFormServer]);
-
     if (commentsFormServer.length === 0) {
       sethasMore(false);
     }

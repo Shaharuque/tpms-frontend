@@ -159,7 +159,7 @@ const MPosting = () => {
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Payee type</h1>
               <select
-                className="border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("Pay_type")}
               >
                 <option value="Mr">Mr</option>
@@ -171,7 +171,7 @@ const MPosting = () => {
             <div>
               <h1 className="text-xs mb-2 ml-1 ">Payee Name</h1>
               <select
-                className=" border rounded-sm px-2 py-[8px] mx-1 text-xs w-full"
+                className=" border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("payee_name")}
               >
                 <option value="Mr">Mr</option>

@@ -1,94 +1,68 @@
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckPicker, Checkbox, Button } from "rsuite";
-import {
-  ManageTableColumnsColumn,
-  ManageTableColumnsData,
-} from "./ListView/ManageTableColumns";
+import { ManageTableColumnsColumn } from "./ListView/ManageTableColumns";
 import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
-import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { MultiSelect } from "react-multi-select-component";
+import { DateRangePicker } from "rsuite";
 import axios from "axios";
+import CustomMultiSelection from "./Shared/CustomMultiSelection";
 
 const ListView = () => {
   const [billable, setBillable] = useState(true);
   const [table, setTable] = useState(false);
   const [sortBy, setSortBy] = useState("");
-  const [Tblinfo, setTblinfo] = useState([])
+  const [TData, setTData] = useState([]);
 
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
 
-  // calling fake db 
-    useEffect(()=>{
-      axios("../Fakedb.json")
-      .then((response)=>{
-        
-        setTblinfo(response?.data)
-
-      }).catch((error)=>{
-        console.log(error)
+  // calling fake db
+  useEffect(() => {
+    axios("../Fakedb.json")
+      .then((response) => {
+        setTData(response?.data);
       })
-    },[])
-
-    console.log(Tblinfo);
-
-  // const data = useMemo(() => ManageTableColumnsData, []);
-  // const columns = useMemo(() => [...ManageTableColumnsColumn], []);
-  const data = useMemo(() => Tblinfo, [Tblinfo]);
-  const columns = useMemo(() => [...ManageTableColumnsColumn], []);
-
-  const [patientsSelected, setPatientsSelected] = useState([]);
-  const [providerSelected, setProviderSelected] = useState([]);
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    state,
-    selectedFlatRows,
-    setPageSize,
-    // page,
-    prepareRow,
-  } = useTable(
-    { columns, data },
-    useSortBy,
-    usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => {
-        return [
-          {
-            id: "selection",
-            Header: ({ getToggleAllRowsSelectedProps }) => (
-              <div>
-                <CheckBox {...getToggleAllRowsSelectedProps()} />
-              </div>
-            ),
-            Cell: ({ row }) => (
-              <div>
-                <CheckBox {...row.getToggleRowSelectedProps()} />
-              </div>
-            ),
-          },
-          ...columns,
-        ];
+      .catch((error) => {
+        console.log(error);
       });
-    }
-  );
-  // console.log(selectedFlatRows);
-  const { pageIndex, pageSize } = state;
+  }, []);
 
+  // -----------------------------------------------Table Data-------------------------------
+  const data = useMemo(() => TData, [TData]);
+  const columns = useMemo(() => [...ManageTableColumnsColumn], []);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      { columns, data },
+      useSortBy,
+      usePagination,
+      useRowSelect,
+      (hooks) => {
+        hooks.visibleColumns.push((columns) => {
+          return [
+            {
+              id: "selection",
+              Header: ({ getToggleAllRowsSelectedProps }) => (
+                <div>
+                  <CheckBox {...getToggleAllRowsSelectedProps()} />
+                </div>
+              ),
+              Cell: ({ row }) => (
+                <div>
+                  <CheckBox {...row.getToggleRowSelectedProps()} />
+                </div>
+              ),
+            },
+            ...columns,
+          ];
+        });
+      }
+    );
+  // console.log(selectedFlatRows);
+
+  // -----------------------------------------------Form-------------------------------
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
       filters: [],
@@ -101,7 +75,7 @@ const ListView = () => {
     reset();
   };
 
-
+  // -----------------------------------------------Multi-Select-------------------------------
   // ***************
   const datat = [
     "Eugenia",
@@ -113,41 +87,20 @@ const ListView = () => {
     "Julia",
     "Albert",
   ].map((item) => ({ label: item, value: item }));
-  
-  const footerStyles = {
-    padding: "10px 2px",
-    borderTop: "1px solid #e5e5e5",
-  };
-  
-  const footerButtonStyle = {
-    float: "right",
-    marginRight: 10,
-    marginTop: 2,
-  };
-  
-  const allValue = datat.map((item) => item.value);
-  
- 
-    const picker = React.useRef();
-    const [value, setValue] = React.useState([]);
-    
-    const handleChange = (value) => {
-      setValue(value);
-    };
-  
-    const handleCheckAll = (value, checked) => {
-      setValue(checked ? allValue : []);
-    };
+  const [value, setValue] = React.useState([]);
 
   return (
-    <div className="h-[100vh]">
+    <div className={!table ? "h-[100vh]" : ""}>
       <div className="flex flex-wrap justify-between items-center mb-5">
-        <h1 className="text-lg my-2 text-orange-500">Manage Sessions</h1>
+        <h1 className="text-lg my-1 text-orange-500">Manage Sessions</h1>
         <div>
           <Switch
             defaultChecked
             size="small"
-            onClick={() => setBillable(!billable)}
+            onClick={() => {
+              setBillable(!billable);
+              setTable(!table);
+            }}
           />
           <label
             className="form-check-label inline-block ml-2 text-sm text-gray-500"
@@ -158,83 +111,24 @@ const ListView = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-8 my-5 mr-2 gap-5">
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-9 my-5 mr-2 gap-5">
           {billable && (
             <div>
               <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
-              {/* <MultiSelect
-                options={options}
-                value={patientsSelected}
-                onChange={setPatientsSelected}
-                labelledBy="Select"
-                className="text-xs"
-              /> */}
-   <CheckPicker
-        data={datat}
-        placeholder="Select"
-        ref={picker}
-        style={{ width: 224 }}
-        value={value}
-        onChange={handleChange}
-        renderExtraFooter={() => (
-          <div style={footerStyles}>
-            <Checkbox
-              inline
-              indeterminate={value.length > 0 && value.length < allValue.length}
-              checked={value.length === allValue.length}
-              onChange={handleCheckAll}
-            >
-              Select All
-            </Checkbox>
-
-            <Button
-              style={footerButtonStyle}
-              appearance="primary"
-              size="sm"
-              onClick={() => {
-                picker.current.close();
-              }}
-            >
-              Ok
-            </Button>
-          </div>
-        )}
-      />
+              <CustomMultiSelection
+                data={datat}
+                value={value}
+                setValue={setValue}
+              ></CustomMultiSelection>
             </div>
           )}
           <div className="w-full">
             <h1 className="text-xs mb-2 ml-1 mt-2 ">Provider</h1>
-            <CheckPicker
-        data={datat}
-        placeholder="Select"
-        ref={picker}
-        style={{ width: 224 }}
-        value={value}
-        onChange={handleChange}
-        renderExtraFooter={() => (
-          <div style={footerStyles}>
-            <Checkbox
-              inline
-              indeterminate={value.length > 0 && value.length < allValue.length}
-              checked={value.length === allValue.length}
-              onChange={handleCheckAll}
-            >
-              Select All
-            </Checkbox>
-
-            <Button
-              style={footerButtonStyle}
-              appearance="primary"
-              size="sm"
-              onClick={() => {
-                picker.current.close();
-              }}
-            >
-              Ok
-            </Button>
-          </div>
-        )}
-      />
+            <CustomMultiSelection
+              data={datat}
+              value={value}
+              setValue={setValue}
+            ></CustomMultiSelection>
           </div>
 
           {billable && (
@@ -263,6 +157,22 @@ const ListView = () => {
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-600 text-left">
+                    Selected date
+                  </span>
+                </label>
+                <div className="ml-1">
+                  <DateRangePicker
+                    onChange={(date) => {
+                      console.log(date);
+                    }}
+                    placeholder="Select Date"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="label">
+                  <span className="label-text text-xs text-gray-600 text-left">
                     Status
                   </span>
                 </label>
@@ -281,36 +191,42 @@ const ListView = () => {
                 </div>
               </div>
               <button
-                className="  mb-1 mt-8 w-1/2 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className="font-regular mt-8 sm:w-1/2 px-3 py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
               >
                 Save
               </button>
             </>
           )}
+          {!billable && (
+            <button
+              onClick={() => setTable(true)}
+              className="font-regular mt-8 w-1/4 px-3 py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            >
+              Go
+            </button>
+          )}
         </div>
       </form>
-      {billable && (
-        <>
-          {/* table  */}
-          {table && (
-            <div className="my-5">
-              <SettingTableBox
-                getTableProps={getTableProps}
-                headerGroups={headerGroups}
-                getTableBodyProps={getTableBodyProps}
-                rows={page}
-                prepareRow={prepareRow}
-              ></SettingTableBox>
-            </div>
-          )}
 
+      {/* table  */}
+      {table && (
+        <>
+          <div className="my-5">
+            <SettingTableBox
+              getTableProps={getTableProps}
+              headerGroups={headerGroups}
+              getTableBodyProps={getTableBodyProps}
+              rows={rows}
+              prepareRow={prepareRow}
+            ></SettingTableBox>
+          </div>
           <div className="flex item-center flex-wrap">
             <div>
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="border rounded-sm py-[5px] font-normal px-2 w-36 py-1 text-xs "
+                className="border rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
               >
                 <option value=""></option>
                 <option value="Specific_Date">Specific Date</option>

@@ -158,8 +158,8 @@ const menuItem = [
 
   // user part
   {
-    path: "/user/myschedule",
-    name: "MySchedule",
+    path: "/user",
+    name: "My Schedule",
     icon: <FaHouseUser />,
     roll: "provider",
   },
@@ -187,28 +187,34 @@ const menuItem = [
   //Patient portal
   {
     path: "/patient",
-    name: "patient",
+    name: "My Schedule",
     icon: <GrFormSchedule />,
     roll: "patient",
   },
   {
-    path: "/my-info",
+    path: "/patient/my-info",
     name: "My Info",
     icon: <MdPersonAddAlt1 />,
     roll: "patient",
   },
+  {
+    path: "/patient/my-statement",
+    name: "My Statement",
+    icon: <AiOutlineFileDone />,
+    roll: "patient",
+  },
 ];
-
+//devShaik444 commits
 // const initialDropState = {};
 // menuItem.map((item) => {
 //   if (item.subRoute) initialDropState[item.name] = false;
 // });
 
 const initialDropState = {};
-// const x = menuItem.map((item) => {
-//   if (item.subRoute) initialDropState[item.name] = false;
-// });
-// console.log(x);
+const x = menuItem.map((item) => {
+  if (item.subRoute) initialDropState[item.name] = false;
+});
+console.log(x);
 // console.log(initialDropState);
 
 const Sidebar = ({ handle }) => {
@@ -236,7 +242,7 @@ const Sidebar = ({ handle }) => {
   };
 
   // console.log(menuItem[1].others.name);
-  console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
+  //console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
   const logged_type = localStorage.getItem("type");
   return (
     <div className="relative bg-neutral pt-3 pb-2">
@@ -278,7 +284,7 @@ const Sidebar = ({ handle }) => {
           </div>
           {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
           {menuItem
-            .filter((item) => item.roll === 'admin') //dynamic bhabey now route render hobey
+            .filter((item) => item.roll === logged_type) //dynamic bhabey now route render hobey
             .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (

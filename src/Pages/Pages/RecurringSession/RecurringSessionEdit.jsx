@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import {
   FormControl,
   FormControlLabel,
@@ -15,6 +11,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BsCalendar3WeekFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { IoCaretBackCircleOutline } from "react-icons/io5";
 
 const RecurringSessionEdit = () => {
   const [fromDate, setFromDate] = useState(new Date());
@@ -35,8 +32,18 @@ const RecurringSessionEdit = () => {
   console.log(errors);
 
   return (
-    <div className="h-[100vh]">
-      <h1 className="text-lg my-2 text-orange-500">Recurring Session Edit</h1>
+    <div className="sm:h-[100vh]">
+      <div className="flex items-center flex-wrap gap-2 justify-between">
+        <h1 className="text-lg my-2 text-orange-500">Recurring Session Edit</h1>
+        <div className="flex items-center gap-3">
+          <Link
+            to={"/admin/recurring-session"}
+            className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+          >
+            <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
+          </Link>
+        </div>
+      </div>
       <div className="">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -48,35 +55,7 @@ const RecurringSessionEdit = () => {
           }}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-5">
-              {/* type  */}
-              <div>
-                <FormControl>
-                  <h1
-                    className="text-sm"
-                    id="demo-row-radio-buttons-group-label"
-                  >
-                    Add Type
-                  </h1>
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      value="Billable"
-                      control={<Radio />}
-                      label="Billable
-"
-                    />
-                    <FormControlLabel
-                      value="Non-Billable"
-                      control={<Radio />}
-                      label="Non-Billable"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </div>
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-3 mr-2 gap-3">
               {/* name  */}
               <div>
                 <label className="label">
@@ -85,10 +64,13 @@ const RecurringSessionEdit = () => {
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("Patient_name")}
+                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  {...register("patient_name")}
                 >
-                  <option value="name"> abcd </option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Dr">Dr</option>
                 </select>
               </div>
               <div>
@@ -98,10 +80,13 @@ const RecurringSessionEdit = () => {
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("auth")}
+                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  {...register("Auth")}
                 >
-                  <option value="name"> abcd </option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Dr">Dr</option>
                 </select>
               </div>
               <div>
@@ -111,10 +96,13 @@ const RecurringSessionEdit = () => {
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("service")}
+                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  {...register("Service")}
                 >
-                  <option value="name"> abcd </option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Dr">Dr</option>
                 </select>
               </div>
               <div>
@@ -124,10 +112,13 @@ const RecurringSessionEdit = () => {
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("provider_name")}
+                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  {...register("Provider_name")}
                 >
-                  <option value="name"> abcd </option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Dr">Dr</option>
                 </select>
               </div>
               <div>
@@ -137,24 +128,66 @@ const RecurringSessionEdit = () => {
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("pos")}
+                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  {...register("Pos")}
                 >
-                  <option value="name"> abcd </option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Dr">Dr</option>
                 </select>
+              </div>
+
+              <div>
+                <label className="label">
+                  <span className="label-text text-xs text-gray-600 text-left">
+                    From Date
+                  </span>
+                </label>
+                <input
+                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  type="date"
+                  {...register("from_Date")}
+                />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
-                    Time Duration
+                  <span className="label-text text-xs text-gray-600 text-left">
+                    To Date
                   </span>
                 </label>
-                <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("time_duration")}
-                >
-                  <option value="name"> abcd </option>
-                </select>
+                <input
+                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  type="date"
+                  {...register("To_Date")}
+                />
+              </div>
+
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  gap-3">
+                <div>
+                  <label className="label">
+                    <span className="label-text text-xs text-gray-600 text-left">
+                      From Time
+                    </span>
+                  </label>
+                  <input
+                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    type="time"
+                    {...register("from_time")}
+                  />
+                </div>
+                <div>
+                  <label className="label">
+                    <span className="label-text text-xs text-gray-600 text-left">
+                      To Time
+                    </span>
+                  </label>
+                  <input
+                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    type="time"
+                    {...register("To_time")}
+                  />
+                </div>
               </div>
 
               <div>
@@ -164,10 +197,13 @@ const RecurringSessionEdit = () => {
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("status")}
+                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  {...register("Status")}
                 >
-                  <option value="name"> abcd </option>
+                  <option value="Mr">Mr</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Miss">Miss</option>
+                  <option value="Dr">Dr</option>
                 </select>
               </div>
 
@@ -182,59 +218,26 @@ const RecurringSessionEdit = () => {
                   className="border text-sm p-1  ml-1 w-full"
                 ></textarea>
               </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
-                    From Time
-                  </span>
-                </label>
-                <div className="border flex">
-                  <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[6px] text-3xl" />
-                  <DatePicker
-                    className="mx-3 mt-1 text-sm font-normal text-gray-500 text-center"
-                    showTimeSelect
-                    selected={fromDate}
-                    onChange={(date) => setFromDate(date)}
-                    dateFormat="MM/dd/yyyy  EE hh:mm a"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
-                    To Time
-                  </span>
-                </label>
-                <div className="border flex">
-                  <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[6px] text-3xl" />
-                  <DatePicker
-                    className="mx-3 mt-1 text-sm font-normal text-gray-500 text-center"
-                    showTimeSelect
-                    selected={fromDate}
-                    onChange={(date) => setToDate(date)}
-                    dateFormat="MM/dd/yyyy  EE hh:mm a"
-                  />
-                </div>
-              </div>
-              <div className=""></div>
             </div>
             <div className="divider"></div>
             {/* submit  */}
-            <button
-              className="px-5 mt-6 w-24 text-sm py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              type="submit"
-            >
-              Save
-            </button>
-            <Link to={"/recurring-session"}>
+            <div className="mt-10">
               <button
-                className="px-5 ml-5 mt-6 w-24 text-sm py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
               >
-                Back
+                Save
               </button>
-            </Link>
+              <Link to={"/admin/recurring-session"}>
+                <button
+                  className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                  autoFocus
+                  onClick={reset}
+                >
+                  CANCEL
+                </button>
+              </Link>
+            </div>
           </form>
         </motion.div>
       </div>

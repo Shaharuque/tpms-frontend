@@ -102,14 +102,25 @@ import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
 import NavigationBar from "./Pages/Pages/Shared/NavigationBar";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import ManageSessions from "./Pages/Pages/User/My-Schedule/ManageSessions";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
-import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
-import  ContactInfo  from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
-import  CredenTial  from "./Pages/Pages/User/Biographic/Credential/CredenTial";
 import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/SchedulerCalender";
+
+import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
+import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
+import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
+import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
+import CredenTial from "./Pages/Pages/User/Biographic/Credential/CredenTial";
+import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
+import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
+import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
+import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
+import NewPassSet from "./Pages/LoginPage/NewPassSet";
+import ManageSessions from "./Pages/Pages/User/ManageSessions";
+import Profile from "./Pages/Pages/Shared/Profile/Profile";
+import ProfileInformation from "./Pages/Pages/Shared/Profile/ProfileInformation";
+import PasswordChange from "./Pages/Pages/Shared/Profile/PasswordChange";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -118,10 +129,38 @@ function App() {
       <FullScreen handle={handle}>
         <Routes>
           <Route path="/" element={<LogIn></LogIn>}></Route>
+          <Route
+            path="/forget-password"
+            element={<ForgetPassword></ForgetPassword>}
+          ></Route>
+          <Route
+            path="/code-check"
+            element={<ForgetPasswordCodeCheck></ForgetPasswordCodeCheck>}
+          ></Route>
+          <Route
+            path="/new-password"
+            element={<NewPassSet></NewPassSet>}
+          ></Route>
+
           {/*Testing */}
           <Route path="/table" element={<MainBase></MainBase>}></Route>
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+            {/* ----------------------------------Profile Start----------------------------------------------- */}
+
+            <Route path="profile" element={<Profile></Profile>}>
+              <Route
+                path="profile-information"
+                element={<ProfileInformation></ProfileInformation>}
+              ></Route>
+              <Route
+                path="password-change"
+                element={<PasswordChange></PasswordChange>}
+              ></Route>
+            </Route>
+
+            {/* ----------------------------------Profile End----------------------------------------------- */}
+
             <Route index element={<Dashboard></Dashboard>}></Route>
             {/* DASHBOARD ROUTES  */}
             {/* todays task  */}
@@ -358,12 +397,12 @@ function App() {
             </Route>
             {/* ----------------------------------Staff End----------------------------------------------- */}
             {/* BILLING  */}
+
             <Route
               path="submit-billing"
               element={<BillingManager></BillingManager>}
             >
               <Route index element={<Navigate to="proces-Clims" />} />
-
               <Route
                 path="proces-Clims"
                 element={<ProcessingClaim></ProcessingClaim>}
@@ -526,19 +565,33 @@ function App() {
           {/* user */}
 
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
-          <Route path="calender" element={<SchedulerCalender />}></Route>
-            <Route path="myschedule" element={<ManageSessions />}></Route>
-            {/* test scheduler Calender */}
-            
-
+            <Route index element={<ManageSessions />}></Route>
+            <Route path="calender" element={<SchedulerCalender />}></Route>
             <Route path="biographic" element={<Biographic />}>
               <Route path="bios" element={<Bios></Bios>}></Route>
-              <Route path="bio-contactinfo" element={<ContactInfo></ContactInfo>}>
-              </Route>
-              <Route path="bio-credential" element={<CredenTial></CredenTial>}></Route> 
+              <Route
+                path="bio-contactinfo"
+                element={<ContactInfo></ContactInfo>}
+              ></Route>
+              <Route
+                path="bio-credential"
+                element={<CredenTial></CredenTial>}
+              ></Route>
             </Route>
+
             <Route path="Pataients" element={<Pataients />}></Route>
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>
+          </Route>
+
+          {/* Patient-Portal start */}
+          <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
+            <Route index element={<MySchedule />}></Route>
+            <Route path="calender" element={<MyCalender></MyCalender>}></Route>
+            <Route path="my-info" element={<MyInfo></MyInfo>}></Route>
+            <Route
+              path="my-statement"
+              element={<MyStatement></MyStatement>}
+            ></Route>
           </Route>
         </Routes>
       </FullScreen>
