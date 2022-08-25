@@ -199,7 +199,7 @@ const NavigationBar = ({ handle }) => {
                 </div>
               </label>
 
-              <div className="flex justify-center menu menu-compact dropdown-content w-auto md:w-[18rem] shadow bg-white rounded-lg">
+              <div className="flex justify-center menu menu-compact dropdown-content w-auto md:w-[18rem] shadow bg-teal-600 rounded-lg">
                 <div className="bg-[#0CADBF] rounded-t-xl p-4">
                   <h5 className=" text-sm text-white font-bold">Hello admin</h5>
                   <p className="text-xs text-white">admin@admin.com</p>
