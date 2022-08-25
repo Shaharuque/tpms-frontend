@@ -228,7 +228,7 @@ const Sidebar = ({ handle }) => {
         <div className="">
           <NavigationBar handle={handle}></NavigationBar>
         </div>
-        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-3 ">
+        <main className="font-medium  main bg-white shadow-md rounded-3xl w-auto mt-2 ml-[98px] mr-[22px] ">
           <Outlet />
         </main>
         <Footer></Footer>
