@@ -17,7 +17,7 @@ const CreatePatient = ({ handleClose }) => {
         // onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <div className="p-5 box sm:w-[500px]">
+        <div className="px-5 py-2 box sm:w-[500px]">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400">
               Create Patient
@@ -28,30 +28,30 @@ const CreatePatient = ({ handleClose }) => {
             />
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1 mr-2 gap-1">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mb-1 mr-2 gap-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text font-medium text-xs  text-gray-600 text-left">
                     First Name<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="first_name"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1  text-xs w-full"
                   {...register("first_name")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">
                     Last Name<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="last_name"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   {...register("last_name")}
                 />
               </div>
@@ -59,7 +59,7 @@ const CreatePatient = ({ handleClose }) => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-1 mr-2 gap-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">
                     DOB<span className="text-red-500">*</span>
                   </span>
                 </label>
@@ -73,12 +73,12 @@ const CreatePatient = ({ handleClose }) => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">
                     Gender<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
                   {...register("gender")}
                 >
                   <option value=""></option>
@@ -88,12 +88,12 @@ const CreatePatient = ({ handleClose }) => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">
                     POS<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
                   {...register("pos")}
                 >
                   <option value=""></option>
@@ -106,7 +106,7 @@ const CreatePatient = ({ handleClose }) => {
               <div className="flex">
                 <div>
                   <label className="label">
-                    <span className="label-text items-center flex text-xs text-gray-600 text-left">
+                    <span className="label-text font-medium items-center flex text-xs text-gray-600 text-left">
                       Email Address
                       <AiOutlineQuestionCircle className="text-sm" />
                     </span>
@@ -114,13 +114,13 @@ const CreatePatient = ({ handleClose }) => {
                   <input
                     type="text"
                     name="email_Address"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
                     {...register("email_Address")}
                   />
                 </div>
                 <div>
                   <select
-                    className="border rounded-sm px-2 py-[3px] mx-1 mt-[34px] text-sm "
+                    className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 mt-[34px] text-sm "
                     {...register("gender")}
                   >
                     <option value=""></option>
@@ -132,20 +132,20 @@ const CreatePatient = ({ handleClose }) => {
               <div className="flex">
                 <div>
                   <label className="label">
-                    <span className="label-text items-center flex text-xs text-gray-600 text-left">
+                    <span className="label-text font-medium items-center flex text-xs text-gray-600 text-left">
                       Phone Number
                     </span>
                   </label>
                   <input
                     type="text"
                     name="email_Address"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
+                    className=" border-gray-300 border rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
                     {...register("email_Address")}
                   />
                 </div>
                 <div>
                   <select
-                    className="border rounded-sm px-2 py-[3px] mx-1 mt-[34px] text-sm "
+                    className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 mt-[34px] text-sm "
                     {...register("gender")}
                   >
                     <option value=""></option>
@@ -163,7 +163,7 @@ const CreatePatient = ({ handleClose }) => {
                   //   setValue(!value);
                   // }}
                 />
-                <span className="text-xs ml-1 text-gray-600 font-normal">
+                <span className="text-xs ml-1 text-gray-600 font-medium">
                   Send me an email reminder
                 </span>
               </div>
@@ -177,7 +177,7 @@ const CreatePatient = ({ handleClose }) => {
                     //   setValue(!value);
                     // }}
                   />
-                  <span className="text-xs ml-1 text-gray-600 font-normal">
+                  <span className="text-xs ml-1 text-gray-600 font-medium">
                     Send me a text message
                   </span>
                 </div>
@@ -192,27 +192,27 @@ const CreatePatient = ({ handleClose }) => {
                   //   setValue(!value);
                   // }}
                 />
-                <span className="text-xs ml-1 text-gray-600 font-normal">
+                <span className="text-xs ml-1 text-gray-600 font-medium">
                   Send me a voice message
                 </span>
               </div>
             </div>
-            <div className="divider"></div>
-            <div className="modal-action">
+            <div className="bg-gray-200 py-[1px] mt-3"></div>
+            <div className=" flex items-end justify-end mt-2">
               <button
-                className=" py-[5px]  px-3 ml-3 text-sm font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                 type="submit"
                 onClick={handleClose}
               >
-                Save
+                Create & Continue
               </button>
 
               <button
-                className=" py-[5px]  px-3 ml-3 text-sm font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                 autoFocus
                 onClick={handleClose}
               >
-                CANCEL
+                Close
               </button>
             </div>
           </form>
