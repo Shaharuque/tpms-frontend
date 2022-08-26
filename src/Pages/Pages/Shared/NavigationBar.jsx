@@ -29,7 +29,7 @@ const NavigationBar = ({ handle }) => {
       initial={{ opacity: 0, y: -15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className=" rounded-3xl sticky ml-[98px] mr-[22px]"
+      className="shadow-md rounded-3xl sticky  ml-[98px] mr-[22px]"
     >
       <div className="flex items-center justify-between bg-white rounded-3xl  p-2">
         <div
