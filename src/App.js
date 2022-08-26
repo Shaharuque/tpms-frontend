@@ -121,6 +121,7 @@ import ManageSessions from "./Pages/Pages/User/ManageSessions";
 import Profile from "./Pages/Pages/Shared/Profile/Profile";
 import ProfileInformation from "./Pages/Pages/Shared/Profile/ProfileInformation";
 import PasswordChange from "./Pages/Pages/Shared/Profile/PasswordChange";
+import DownloadView from "./Pages/Pages/Shared/Download/DownloadView";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -146,6 +147,10 @@ function App() {
           <Route path="/table" element={<MainBase></MainBase>}></Route>
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+            <Route
+              path="report-export-view"
+              element={<DownloadView></DownloadView>}
+            ></Route>
             {/* ----------------------------------Profile Start----------------------------------------------- */}
 
             <Route path="profile" element={<Profile></Profile>}>

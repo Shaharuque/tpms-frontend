@@ -26,7 +26,6 @@ const ERAActionModal = ({ handleClose, open, row }) => {
       <Dialog
         // fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
         <div className="p-5 box">
@@ -88,6 +87,7 @@ const ERAActionModal = ({ handleClose, open, row }) => {
               <button
                 className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
+                onClick={handleClose}
               >
                 Continue
               </button>

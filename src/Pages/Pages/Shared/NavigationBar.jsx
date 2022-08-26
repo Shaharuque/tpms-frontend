@@ -109,9 +109,9 @@ const NavigationBar = ({ handle }) => {
                   <div onClick={handlePatient}>create patient</div>
                 </button>
 
-                <button className="flex items-center  gap-2 hover:text-slate-600">
+                <button className="flex items-center  gap-2 hover:text-slate-600 mb-2">
                   <AiOutlinePlusSquare />
-                  <div onClick={handleAppointment}>create Appoinment</div>
+                  <div onClick={handleAppointment}>create Appointment</div>
                 </button>
               </ul>
               {clicked && (
