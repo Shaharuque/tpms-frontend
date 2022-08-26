@@ -1,0 +1,76 @@
+import React, { useMemo, useState } from "react";
+import { useSortBy, useTable } from "react-table";
+import ERAActionModal from "../../Settings/QAFile/ERAActionModal";
+import SettingTableBox from "../../Settings/SettingComponents/SettingTableBox";
+import DownloadTableData, {
+  DownloadTableDataColumn,
+} from "./DownloadTableData";
+
+const DownloadView = () => {
+  const data = useMemo(() => DownloadTableData, []);
+  const columns = useMemo(() => [...DownloadTableDataColumn], []);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
+  const [editableRowIndex, setEditableRowIndex] = React.useState(null);
+  // console.log(editableRowIndex);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, (hooks) => {
+      hooks.allColumns.push((columns) => [
+        // other hooks such as selection hook
+        ...columns,
+        // edit hook
+        {
+          accessor: "action",
+          id: "action",
+          Header: "Action",
+          Cell: ({ row, setEditableRow, editableRow }) => (
+            <>
+              <div>
+                <div className="flex justify-center gap-1 text-primary">
+                  <button
+                    onClick={() => {
+                      setEditableRowIndex(row);
+                      setOpenEditModal(true);
+                    }}
+                  >
+                    Export
+                  </button>
+                </div>
+              </div>
+            </>
+          ),
+        },
+      ]);
+    });
+  return (
+    <div className="h-[100vh]">
+      <h1 className="text-lg my-2 text-orange-500">
+        Activities Ready to Bill Not Billed
+      </h1>
+      <div>
+        <SettingTableBox
+          getTableProps={getTableProps}
+          headerGroups={headerGroups}
+          getTableBodyProps={getTableBodyProps}
+          rows={rows}
+          prepareRow={prepareRow}
+        ></SettingTableBox>
+      </div>
+      {openEditModal && (
+        <ERAActionModal
+          handleClose={handleClose}
+          open={openEditModal}
+          row={editableRowIndex}
+        ></ERAActionModal>
+      )}
+    </div>
+  );
+};
+
+export default DownloadView;
