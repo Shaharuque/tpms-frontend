@@ -121,6 +121,7 @@ import ManageSessions from "./Pages/Pages/User/ManageSessions";
 import Profile from "./Pages/Pages/Shared/Profile/Profile";
 import ProfileInformation from "./Pages/Pages/Shared/Profile/ProfileInformation";
 import PasswordChange from "./Pages/Pages/Shared/Profile/PasswordChange";
+import ContractContainer from "./Pages/Pages/User/Biographic/ContactInfo/ContractContainer";
 import DownloadView from "./Pages/Pages/Shared/Download/DownloadView";
 
 function App() {
@@ -568,15 +569,14 @@ function App() {
           </Route>
 
           {/* user */}
-
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ManageSessions />}></Route>
             <Route path="calender" element={<SchedulerCalender />}></Route>
             <Route path="biographic" element={<Biographic />}>
-              <Route path="bios" element={<Bios></Bios>}></Route>
+              <Route index element={<Bios></Bios>}></Route>
               <Route
                 path="bio-contactinfo"
-                element={<ContactInfo></ContactInfo>}
+                element={<ContractContainer></ContractContainer>}
               ></Route>
               <Route
                 path="bio-credential"

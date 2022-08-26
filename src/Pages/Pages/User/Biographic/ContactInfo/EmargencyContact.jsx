@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-export default function ContactInfo() {
+
+const EmargencyContact = () => {
   const [note, setNote] = useState("");
   const { register, handleSubmit, reset } = useForm();
   useEffect(() => {
@@ -222,7 +223,7 @@ export default function ContactInfo() {
                 className=" py-[5px]  px-2  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded"
                 type="submit"
               >
-                Save Contact
+                Save Emergency Contact
               </button>
             </div>
           </form>
@@ -230,4 +231,6 @@ export default function ContactInfo() {
       </div>
     </div>
   );
-}
+};
+
+export default EmargencyContact;
