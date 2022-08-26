@@ -111,7 +111,7 @@ import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
 import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
 import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
 import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
-import CredenTial from "./Pages/Pages/User/Biographic/Credential/CredenTial";
+import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
 import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
 import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
 import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
@@ -575,7 +575,7 @@ function App() {
               ></Route>
               <Route
                 path="bio-credential"
-                element={<CredenTial></CredenTial>}
+                element={<CredentialsContainer></CredentialsContainer>}
               ></Route>
             </Route>
 
