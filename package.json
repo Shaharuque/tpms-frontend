@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aldabil/react-scheduler": "^2.3.1",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/lab": "^5.0.0-alpha.87",
@@ -45,6 +46,7 @@
     "react-window": "^1.8.7",
     "rsuite": "^5.16.4",
     "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.29",
     "tsparticles": "^2.1.4",
     "tw-elements": "^1.0.0-alpha12",
     "web-vitals": "^2.1.4"

@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
+.fullscreen {
+  /*overflow-x: auto;*/
+  background: #edf6f7;
+}
+
 .rs-calendar-table-cell {
   display: table-cell;
   padding: 1px 0;
@@ -115,4 +120,26 @@ code {
 a.rs-nav-item {
   margin: 13px 0px 1px -1px;
 }
+}
+
+
+
+
+
+::-webkit-scrollbar {
+   width: 5px;
+   height: 10px;
+ }
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(66, 171, 146);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

@@ -10,6 +10,7 @@ import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import { DateRangePicker } from "rsuite";
 
 const PatientStatement = () => {
   const [select, setSelect] = useState("");
@@ -91,23 +92,13 @@ const PatientStatement = () => {
         <div>
           <h1 className="text-xs mb-2 ml-1 ">Select Date</h1>
           <div className="flex  items-center">
-            <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[6px] text-3xl" />
-            <DatePicker
-              style={{
-                color: "#5c5c5c",
-                padding: "14px 5px",
-                fontSize: "12px",
-                border: "1px solid #a9a9a9",
-                borderRadius: "0px",
-              }}
-              value={dates}
-              onChange={setDates}
-              range
-              sort
-              format={format}
-              calendarPosition="bottom-center"
-              plugins={[<DatePanel />]}
-            />
+            {/* <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[6px] text-3xl" /> */}
+            <DateRangePicker
+                    onChange={(date) => {
+                      console.log(date);
+                    }}
+                    placeholder="Select Date"
+              />
           </div>
         </div>
         <button

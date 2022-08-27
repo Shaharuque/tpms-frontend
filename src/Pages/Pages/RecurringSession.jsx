@@ -1,39 +1,30 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import {
-  RecurringSessionColumnsColumn,
-  RecurringSessionColumnsData,
-} from "./RecurringSession/RecurringSessionColumns";
+import { RecurringSessionColumn } from "./RecurringSession/RecurringSessionColumns";
 import { CheckBox } from "./Settings/SettingComponents/CheckBox";
-import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { Link } from "react-router-dom";
-import { Controller, useForm } from "react-hook-form";
-import { MultiSelect } from "react-multi-select-component";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import CustomMultiSelection from "./Shared/CustomMultiSelection";
 
 const RecurringSession = () => {
-  const data = useMemo(() => RecurringSessionColumnsData, []);
-  const columns = useMemo(() => [...RecurringSessionColumnsColumn], []);
-
   const [table, setTable] = useState(false);
   const [select, setSelect] = useState("");
+  const [SessionData, SetSessionData] = useState([]);
 
-  const provider = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vip", label: "VIP" },
-  ];
-
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
-
-  const [patientsSelected, setPatientsSelected] = useState([]);
-  const [providerSelected, setProviderSelected] = useState([]);
-
-  const { handleSubmit, control } = useForm({
+  // calling recurring session fakedb
+  useEffect(() => {
+    axios("../recurringSession.json")
+      .then((response) => {
+        SetSessionData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  // -----------------------------------------------form-------------------------------
+  const { handleSubmit } = useForm({
     defaultValues: {
       filters: [],
     },
@@ -44,62 +35,69 @@ const RecurringSession = () => {
     setTable(true);
   };
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    state,
-    selectedFlatRows,
-    setPageSize,
-    // page,
-    prepareRow,
-  } = useTable(
-    { columns, data },
-    useSortBy,
-    usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => {
-        return [
-          {
-            id: "selection",
-            Header: ({ getToggleAllRowsSelectedProps }) => (
-              <div>
-                <CheckBox {...getToggleAllRowsSelectedProps()} />
-              </div>
-            ),
-            Cell: ({ row }) => (
-              <div>
-                <CheckBox {...row.getToggleRowSelectedProps()} />
-              </div>
-            ),
-          },
-          ...columns,
-        ];
-      });
-    }
-  );
+  // -----------------------------------------------Table-------------------------------
+  const data = useMemo(() => SessionData, [SessionData]);
+  const columns = useMemo(() => [...RecurringSessionColumn], []);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      { columns, data },
+      useSortBy,
+      usePagination,
+      useRowSelect,
+      (hooks) => {
+        hooks.visibleColumns.push((columns) => {
+          return [
+            {
+              id: "selection",
+              Header: ({ getToggleAllRowsSelectedProps }) => (
+                <div>
+                  <CheckBox {...getToggleAllRowsSelectedProps()} />
+                </div>
+              ),
+              Cell: ({ row }) => (
+                <div>
+                  <CheckBox {...row.getToggleRowSelectedProps()} />
+                </div>
+              ),
+            },
+            ...columns,
+          ];
+        });
+      }
+    );
   // console.log(selectedFlatRows);
-  const { pageIndex, pageSize } = state;
+
+  // -----------------------------------------------Multi-Select-------------------------------
+  const [value, setValue] = useState([]);
+  const datat = [
+    "Eugenia",
+    "Bryan",
+    "Linda",
+    "Nancy",
+    "Lloyd",
+    "Alice",
+    "Julia",
+    "Albert",
+  ].map((item) => ({ label: item, value: item }));
+
+  console.log(value);
 
   return (
-    <div className="h-[100vh]">
+    <div className={!table ? "h-[100vh]" : ""}>
       <h1 className="text-lg my-2 text-orange-500">Recurring Session</h1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-9 my-5 mr-2 gap-2">
           <div>
-            <h1 className="text-xs mb-2 ml-1 ">Select Any</h1>
+            <label className="label">
+              <span className="label-text text-xs text-gray-600 text-left">
+                Place of Services
+              </span>
+            </label>
             <select
+              className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
               onChange={(e) => setSelect(e.target.value)}
               name="type"
-              className="border rounded-sm px-2 w-36 py-2 text-xs "
             >
               <option value="all">All</option>
               <option value="patient">Patient</option>
@@ -108,35 +106,28 @@ const RecurringSession = () => {
           </div>
 
           {select === "patient" ? (
-            <div className="w-[100%] md:w-[20%]">
-              <div>
-                <h1 className="text-xs mb-2 ml-1 ">Patients</h1>
-                <MultiSelect
-                  options={options}
-                  value={patientsSelected}
-                  onChange={setPatientsSelected}
-                  labelledBy="Select"
-                  className="text-xs"
-                />
-              </div>
+            <div>
+              <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
+              <CustomMultiSelection
+                data={datat}
+                value={value}
+                setValue={setValue}
+              ></CustomMultiSelection>
             </div>
           ) : select === "provider" ? (
-            <div className="w-[100%] md:w-[20%]">
-              <h1 className="text-xs mb-2 ml-1 ">Provider</h1>
-              <MultiSelect
-                options={options}
-                value={providerSelected}
-                onChange={setProviderSelected}
-                labelledBy="Select"
-                className="text-xs"
-              />
+            <div>
+              <h1 className="text-xs mb-2 ml-1 mt-2">Provider</h1>
+              <CustomMultiSelection
+                data={datat}
+                value={value}
+                setValue={setValue}
+              ></CustomMultiSelection>
             </div>
           ) : (
             <></>
           )}
-
           <button
-            className="px-5 mt-6 text-sm py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="font-regular mt-[35px] w-1/4 px-3 py-[3px]  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             type="submit"
           >
             Go
@@ -150,46 +141,11 @@ const RecurringSession = () => {
             getTableProps={getTableProps}
             headerGroups={headerGroups}
             getTableBodyProps={getTableBodyProps}
-            rows={page}
+            rows={rows}
             prepareRow={prepareRow}
           ></SettingTableBox>
-
-          <div className="flex gap-2 items-center my-5 justify-center">
-            <button
-              className="hover:bg-secondary page text-lg text-secondary hover:text-white py-1 px-3"
-              onClick={() => previousPage()}
-              disabled={!canPreviousPage}
-            >
-              <BiLeftArrow />
-            </button>
-            <div className="text-sm font-normal">
-              Page{" "}
-              <strong>
-                {pageIndex + 1} of {pageOptions.length}
-              </strong>{" "}
-            </div>
-            <button
-              className="hover:bg-secondary text-lg page text-secondary  hover:text-white py-1 px-3"
-              onClick={() => nextPage()}
-              disabled={!canNextPage}
-            >
-              <BiRightArrow />
-            </button>
-            <select
-              className="bg-secondary text-sm p-[3px] text-white "
-              value={pageSize}
-              onChange={(e) => setPageSize(Number(e.target.value))}
-            >
-              {[10, 15, 20, 50].map((p) => (
-                <option key={p} value={p}>
-                  <span className="bg-primary">{p}</span>
-                </option>
-              ))}
-            </select>
-          </div>
         </div>
       )}
-      <Link to={"/admin/recurring-session-edit"}> Click Here</Link>
     </div>
   );
 };
