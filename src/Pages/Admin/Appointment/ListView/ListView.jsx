@@ -111,7 +111,7 @@ const ListView = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-9 my-5 mr-2 gap-5">
+        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 my-5 mr-2 gap-5">
           {billable && (
             <div>
               <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
@@ -201,7 +201,7 @@ const ListView = () => {
           {!billable && (
             <button
               onClick={() => setTable(true)}
-              className="font-regular mt-8 w-1/4 px-3 py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             >
               Go
             </button>
