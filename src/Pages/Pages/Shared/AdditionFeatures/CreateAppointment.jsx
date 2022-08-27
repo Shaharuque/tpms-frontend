@@ -14,7 +14,8 @@ const CreateAppointment = ({ handleClose }) => {
     reset();
   };
 
-  // -----------------------------------------------Multi-Select-------------------------------
+
+  // --------------------------------------------------Multi-Select-------------------------------
   const [value, setValue] = useState([]);
   const datat = [
     "Eugenia",
