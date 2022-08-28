@@ -25,7 +25,7 @@ const ArLedger = () => {
 
   // fakedb call
   useEffect(()=>{
-    axios("../../ArLadger.json")
+    axios("../../All_Fake_Api/ArLadger.json")
     .then((response)=>{
       SetladgerData(response?.data)
     }).catch((error)=>{
@@ -113,7 +113,7 @@ const ArLedger = () => {
 
   const { pageIndex, pageSize } = state;
   return (
-    <div className="h-[100vh]">
+    <div >
       <div>
         <motion.div
           initial={{ opacity: 0, y: 15 }}

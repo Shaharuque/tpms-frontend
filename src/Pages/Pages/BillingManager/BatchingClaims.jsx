@@ -19,7 +19,7 @@ const BatchingClaims = () => {
 
   // fakedb call 
   useEffect(()=>{
-    axios("../../batchingClimb.json")
+    axios("../../All_Fake_Api/batchingClimb.json")
     .then((response)=>{
       SetBatchingData(response?.data)
     })
@@ -28,6 +28,7 @@ const BatchingClaims = () => {
     })
 
   },[])
+ 
 
   const data = useMemo(() => BatchingData, [BatchingData]);
   const columns = useMemo(() => [...BatchingClaimsColumnsColumn], []);

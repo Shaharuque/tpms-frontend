@@ -36,7 +36,7 @@ const ManageClaims = () => {
 
     // fakedb call 
     useEffect(()=>{
-      axios("../../ManageClimbs.json")
+      axios("../../All_Fake_Api/ManageClimbs.json")
       .then((response)=>{
         SetManageClimbsData(response.data)
       })

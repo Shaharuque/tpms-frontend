@@ -11674,6 +11674,7 @@ textarea.rs-picker-search-input {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  /*  */
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -11722,6 +11723,8 @@ textarea.rs-picker-search-input {
 .rs-picker-menu.rs-picker-select-menu,
 .rs-picker-menu.rs-picker-check-menu {
   padding-top: 6px;
+  z-index: 9000;
+  height: 50%;
 }
 .rs-picker-menu .rs-picker-search-bar {
   position: relative;

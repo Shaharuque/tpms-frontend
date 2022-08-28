@@ -2,7 +2,7 @@ import { Dialog, Switch } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import CustomMultiSelection from "../CustomMultiSelection";
+import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 
 const CreateAppointment = ({ handleClose }) => {
   const [billable, setBillable] = useState(true);
@@ -17,7 +17,7 @@ const CreateAppointment = ({ handleClose }) => {
 
   // --------------------------------------------------Multi-Select-------------------------------
   const [value, setValue] = useState([]);
-  const datat = [
+  const data = [
     "Eugenia",
     "Bryan",
     "Linda",
@@ -34,24 +34,24 @@ const CreateAppointment = ({ handleClose }) => {
         // onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <div className="p-5 box sm:w-[500px]">
+        <div className="px-5 py-2 box sm:w-[500px]">
           <div className="flex items-center justify-between">
-            <h1 className="text-lg text-left text-orange-400">
+            <h1 className="text-lg text-left text-orange-400 ">
               Add Appointment
             </h1>
             <IoCloseCircleOutline
               onClick={handleClose}
-              className="text-gray-500 text-2xl hover:text-primary"
+              className="text-gray-600 text-2xl hover:text-primary"
             />
           </div>
 
-          <hr />
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5 mr-2 gap-1">
-              <span className="text-xs ml-1 text-gray-600 font-normal">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1">
+              <span className="text-xs ml-1 text-gray-600 font-medium">
                 Active Patient
               </span>
-              <div>
+              <div className="col-span-2">
                 <Switch
                   defaultChecked
                   size="small"
@@ -60,7 +60,7 @@ const CreateAppointment = ({ handleClose }) => {
                   }}
                 />
                 <label
-                  className="form-check-label inline-block ml-2 text-xs text-gray-500"
+                  className="form-check-label inline-block font-medium ml-2 text-xs text-gray-600"
                   htmlFor="flesmwitchCheckDefault"
                 >
                   {billable ? "Billable" : "Non-Billable"}
@@ -68,12 +68,12 @@ const CreateAppointment = ({ handleClose }) => {
               </div>
 
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-500 text-left">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   Patient Name
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                className="border border-gray-300  col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
                 {...register("patients")}
               >
                 <option value=""></option>
@@ -81,12 +81,12 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-500 text-left">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   Auth
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
                 {...register("Auth")}
               >
                 <option value=""></option>
@@ -94,12 +94,12 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-500 text-left">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   Service
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
                 {...register("service")}
               >
                 <option value=""></option>
@@ -107,13 +107,13 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-500 text-left">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   Provider Name
                 </span>
               </label>
               {billable ? (
                 <select
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
                   {...register("provider")}
                 >
                   <option value=""></option>
@@ -121,21 +121,21 @@ const CreateAppointment = ({ handleClose }) => {
                   <option value="married">married</option>
                 </select>
               ) : (
-                <>
+                <div className="col-span-2 ml-1">
                   <CustomMultiSelection
-                    data={datat}
+                    data={data}
                     value={value}
                     setValue={setValue}
                   ></CustomMultiSelection>
-                </>
+                </div>
               )}
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-500 text-left">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   POS
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
                 {...register("pos")}
               >
                 <option value=""></option>
@@ -143,49 +143,52 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-500 text-left">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   From Date
                 </span>
               </label>
               <input
-                className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
                 type="date"
                 {...register("check_Date")}
               />
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-500 text-left">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   From Time
                 </span>
               </label>
-              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3  gap-1">
+              <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-3  gap-1">
                 <input
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                   type="time"
                   {...register("to_time")}
                 />
-                <div className="text-xs text-gray-500 mx-auto mt-2">
+                <div className="text-xs text-gray-600 mx-auto mt-2">
                   To Time
                 </div>
                 <input
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                   type="time"
                   {...register("from_time")}
                 />
               </div>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-500 text-left">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   Status
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 col-span-2 py-[1px] mx-1 text-xs w-full"
                 {...register("status")}
               >
                 <option value=""></option>
                 <option value="single">single</option>
                 <option value="married">married</option>
               </select>
-              <div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5 mr-2 gap-1">
+              <div className="">
                 <Switch
                   size="small"
                   onClick={() => {
@@ -193,7 +196,7 @@ const CreateAppointment = ({ handleClose }) => {
                   }}
                 />
                 <label
-                  className="form-check-label inline-block ml-2 text-xs text-gray-500"
+                  className="form-check-label  font-medium inline-block ml-2 text-xs text-gray-600"
                   htmlFor="flesmwitchCheckDefault"
                 >
                   Recurrence Pattern?
@@ -202,7 +205,7 @@ const CreateAppointment = ({ handleClose }) => {
               <div>
                 {recurrence && (
                   <input
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="border border-gray-300 col-span-2 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                     type="date"
                     {...register("check_Date")}
                   />
@@ -218,7 +221,7 @@ const CreateAppointment = ({ handleClose }) => {
                       }}
                     />
                     <label
-                      className="form-check-label inline-block ml-2 text-xs text-gray-500"
+                      className="form-check-label font-medium inline-block ml-2 text-xs text-gray-600"
                       htmlFor="flesmwitchCheckDefault"
                     >
                       Daily
@@ -323,22 +326,22 @@ const CreateAppointment = ({ handleClose }) => {
               )}
             </div>
 
-            <div className="divider"></div>
-            <div className="modal-action">
+            <div className="bg-gray-200 py-[1px] mt-3"></div>
+            <div className=" flex items-end justify-end mt-2">
               <button
-                className=" py-[5px]  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                 type="submit"
                 onClick={handleClose}
               >
-                Save
+                Add Appointment
               </button>
 
               <button
-                className=" py-[5px]  px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                 autoFocus
                 onClick={handleClose}
               >
-                CANCEL
+                Close
               </button>
             </div>
           </form>
