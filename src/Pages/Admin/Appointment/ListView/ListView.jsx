@@ -3,6 +3,7 @@ import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { ManageTableColumnsColumn } from "./ListView/ManageTableColumns";
 import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
 import { Switch } from "@mui/material";
+import { Toggle } from 'rsuite';
 import { useForm } from "react-hook-form";
 import { DateRangePicker } from "rsuite";
 import axios from "axios";
@@ -103,7 +104,8 @@ const ListView = () => {
               setBillable(!billable);
               setTable(!table);
             }}
-          />
+          />      
+            
           <label
             className="form-check-label inline-block ml-2 text-sm text-gray-500"
             htmlFor="flexSwitchCheckDefault"
