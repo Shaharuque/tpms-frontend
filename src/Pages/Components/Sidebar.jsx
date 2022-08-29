@@ -57,12 +57,12 @@ const menuItem = [
       },
       {
         path: "/admin/calender-view",
-        name: "calender view",
+        name: "Calender View",
         icon: <FaCalendarAlt />,
       },
       {
         path: "/admin/recurring-session",
-        name: "recurring session",
+        name: "Recurring Session",
         icon: <VscDebugDisconnect />,
       },
     ],
@@ -320,8 +320,8 @@ const Sidebar = ({ handle }) => {
                         // className="link_text text-sm"
                         className={
                           isHovering
-                            ? "opacity-1 duration-600 ease-in"
-                            : "opacity-0 duration-200 ease-out"
+                            ? "opacity-1 duration-600 ease-in text-[14px] "
+                            : "opacity-0 duration-200 ease-out text-[14px] "
                         }
                       >
                         {items.name}
