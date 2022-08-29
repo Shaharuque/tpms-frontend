@@ -1,6 +1,6 @@
 export const DownloadTableData = [
   {
-    patient: "asd",
+    sl_no: "asd",
   },
   {
     patient: "mina",
