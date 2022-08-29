@@ -22,19 +22,12 @@ const ExpiringAuthorization = () => {
       });
   }, []);
 
-  
   const data = useMemo(() => ExpireAuthData, [ExpireAuthData]);
   const columns = useMemo(() => [...ExpiringAuthorizationColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div className={!ExpireAuthData ? "h-[100vh]" : ""}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">
           Expiring Authorizations
@@ -54,7 +47,7 @@ const ExpiringAuthorization = () => {
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
         ></UseTable>
       </div>

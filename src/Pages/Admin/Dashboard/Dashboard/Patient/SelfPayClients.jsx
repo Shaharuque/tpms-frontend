@@ -26,16 +26,10 @@ const SelfPayClients = () => {
 
   const data = useMemo(() => SelfPayData, [SelfPayData]);
   const columns = useMemo(() => [...SelfPayClientsColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div className={!SelfPayData ? "h-[100vh]" : ""}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">Self-Pay Clients</h1>
         <div className="flex items-center gap-3">
@@ -54,7 +48,7 @@ const SelfPayClients = () => {
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
         ></UseTable>
       </div>

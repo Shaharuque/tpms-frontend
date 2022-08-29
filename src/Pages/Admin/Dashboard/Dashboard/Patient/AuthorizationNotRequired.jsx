@@ -24,15 +24,10 @@ const AuthorizationNotRequired = () => {
 
   const data = useMemo(() => AuthorizationNotData, [AuthorizationNotData]);
   const columns = useMemo(() => [...AuthorizationNotRequiredColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div className={!AuthorizationNotData ? "h-[100vh]" : ""}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">
           Authorization Not Required
@@ -52,7 +47,7 @@ const AuthorizationNotRequired = () => {
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
         ></UseTable>
       </div>
