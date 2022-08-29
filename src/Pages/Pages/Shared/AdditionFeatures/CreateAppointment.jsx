@@ -14,17 +14,14 @@ const CreateAppointment = ({ handleClose }) => {
     reset();
   };
 
-  // -----------------------------------------------Multi-Select-------------------------------
+
+  // --------------------------------------------------Multi-Select-------------------------------
   const [value, setValue] = useState([]);
   const data = [
     "Eugenia",
     "Bryan",
     "Linda",
-    "Nancy",
-    "Lloyd",
-    "Alice",
-    "Julia",
-    "Albert",
+   
   ].map((item) => ({ label: item, value: item }));
   return (
     <div>

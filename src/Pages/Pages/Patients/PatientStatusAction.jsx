@@ -8,6 +8,7 @@ const PatientStatusAction = ({ row }) => {
 
   return (
     <div>
+
       <Switch
         checked={value ? true : false}
         size="small"
@@ -16,6 +17,14 @@ const PatientStatusAction = ({ row }) => {
         }}
       />
       {value ? "Active" : "In-active"}
+
+      {/* <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text">Remember me</span> 
+          <input type="checkbox" class="toggle"  />
+        </label>
+      </div> */}
+
     </div>
   );
 };

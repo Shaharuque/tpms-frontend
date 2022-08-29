@@ -1,25 +1,32 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import {
-  AuthPlaceHoldersColumn,
-  AuthPlaceHoldersData,
-} from "./PatientTableData";
+import { AuthPlaceHoldersColumn } from "./PatientTableData";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import axios from "axios";
+import UseTable from "../../../../../CustomHooks/UseTable";
 
 const AuthPlaceHolders = () => {
-  const data = useMemo(() => AuthPlaceHoldersData, []);
+  const [AuthPlaceHoldersData, SetAuthPlaceHoldersData] = useState([]);
+
+  // fakedb call
+  useEffect(() => {
+    axios("../../All_Fake_Api/CoPayForToday.json")
+      .then((response) => {
+        SetAuthPlaceHoldersData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // to let noting com
+
+  const data = useMemo(() => AuthPlaceHoldersData, [AuthPlaceHoldersData]);
   const columns = useMemo(() => [...AuthPlaceHoldersColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
     <div className="h-[100vh]">
       <div className="flex items-center flex-wrap gap-2 justify-between">
@@ -35,13 +42,13 @@ const AuthPlaceHolders = () => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );

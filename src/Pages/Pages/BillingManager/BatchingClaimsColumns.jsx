@@ -1,4 +1,6 @@
-export const BatchingClaimsColumnsData = [];
+export const BatchingClaimsColumnsData = [
+  
+];
 
 export const BatchingClaimsColumnsColumn = [
   {
@@ -153,6 +155,6 @@ export const ManageClaimsColumnsColumn = [
     Header: () => {
       return <span className="">Original Ref. No.</span>;
     },
-    accessor: "original_ref",
+    accessor: "nav",
   },
 ];

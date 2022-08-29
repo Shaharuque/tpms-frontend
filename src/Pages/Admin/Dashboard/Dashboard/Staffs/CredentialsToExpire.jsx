@@ -1,16 +1,27 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import {
-  CredentialsToExpireColumn,
-  CredentialsToExpireData,
-} from "./StaffDataTAble";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import { CredentialsToExpireColumn } from "./StaffDataTAble";
+import UseTable from "../../../../../CustomHooks/UseTable";
+import axios from "axios";
 
 const CredentialsToExpire = () => {
-  const data = useMemo(() => CredentialsToExpireData, []);
+  const [VacationData, SetVacationData] = useState([]);
+
+  // fakedb call
+  useEffect(() => {
+    axios("../../All_Fake_Api/VacationPending.json")
+      .then((response) => {
+        SetVacationData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const data = useMemo(() => VacationData, [VacationData]);
   const columns = useMemo(() => [...CredentialsToExpireColumn], []);
   const {
     getTableProps,
@@ -35,13 +46,13 @@ const CredentialsToExpire = () => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );

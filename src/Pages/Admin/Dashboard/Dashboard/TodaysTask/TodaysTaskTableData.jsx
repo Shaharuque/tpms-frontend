@@ -1,8 +1,8 @@
 export const ArFollowupBucketData = [
-  {
-    id: "1200245453244",
-    patient: "mr Smith",
-  },
+  // {
+  //   id: "1200245453244",
+  //   patient: "mr Smith",
+  // },
 ];
 
 export const ArFollowupBucketColumn = [
@@ -63,7 +63,12 @@ export const ArFollowupBucketColumn = [
   },
 ];
 
-export const TransitionTableData = [];
+export const TransitionTableData = [
+  {
+    id: "1200245453244",
+    patient: "mr Smith",
+  }
+];
 
 export const TransitionTableColumn = [
   {

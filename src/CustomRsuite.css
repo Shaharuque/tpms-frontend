@@ -10738,8 +10738,9 @@ textarea.rs-picker-search-input {
 .rs-picker-toggle-wrapper {
   /* display: inline-block; */
   vertical-align: middle;
-  width: 100% !important;
-  max-width: 100%;
+  width: 101% !important;
+  max-width: 101%;
+
 }
 .rs-picker-toggle.rs-btn .rs-ripple-pond {
   display: none !important;
@@ -11674,6 +11675,7 @@ textarea.rs-picker-search-input {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  /*  */
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -11722,6 +11724,10 @@ textarea.rs-picker-search-input {
 .rs-picker-menu.rs-picker-select-menu,
 .rs-picker-menu.rs-picker-check-menu {
   padding-top: 6px;
+  z-index: 9000;
+  font-family: 'Poppins';
+  font-size: 12px;
+  /* height: 50%; */
 }
 .rs-picker-menu .rs-picker-search-bar {
   position: relative;

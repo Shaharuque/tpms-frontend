@@ -15,7 +15,7 @@ const RecurringSession = () => {
 
   // calling recurring session fakedb
   useEffect(() => {
-    axios("../recurringSession.json")
+    axios("../All_Fake_Api/recurringSession.json")
       .then((response) => {
         SetSessionData(response?.data);
       })

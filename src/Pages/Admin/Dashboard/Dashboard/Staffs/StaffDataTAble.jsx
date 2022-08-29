@@ -7,6 +7,7 @@ export const VacationPendingApprovalData = [
   },
   {
     patient: "mina",
+    
   },
 ];
 
@@ -47,6 +48,7 @@ export const VacationPendingApprovalColumn = [
     Cell: ({ row }) => {
       return <VacationAction row={row}></VacationAction>;
     },
+  
   },
 ];
 // Missing Credentials
