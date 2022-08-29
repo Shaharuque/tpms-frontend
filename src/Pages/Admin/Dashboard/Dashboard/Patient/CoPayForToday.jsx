@@ -27,7 +27,7 @@ const CoPayForToday = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
+    rows,
     // page,
     prepareRow,
   } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
@@ -50,7 +50,7 @@ const CoPayForToday = () => {
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
         ></UseTable>
       </div>

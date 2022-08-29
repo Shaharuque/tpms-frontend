@@ -30,8 +30,6 @@ const ListView = () => {
       });
   }, []);
 
- 
-
   // -----------------------------------------------Table Data-------------------------------
   const data = useMemo(() => TData, [TData]);
   const columns = useMemo(() => [...ManageTableColumnsColumn], []);
