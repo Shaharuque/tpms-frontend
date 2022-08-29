@@ -21,11 +21,7 @@ const CreateAppointment = ({ handleClose }) => {
     "Eugenia",
     "Bryan",
     "Linda",
-    "Nancy",
-    "Lloyd",
-    "Alice",
-    "Julia",
-    "Albert",
+   
   ].map((item) => ({ label: item, value: item }));
   return (
     <div>

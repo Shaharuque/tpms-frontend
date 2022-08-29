@@ -21,6 +21,8 @@ const AuthPlaceHolders = () => {
       });
   }, []);
 
+  // to let noting com
+
   const data = useMemo(() => AuthPlaceHoldersData, [AuthPlaceHoldersData]);
   const columns = useMemo(() => [...AuthPlaceHoldersColumn], []);
   const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow } =

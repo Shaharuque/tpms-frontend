@@ -10,7 +10,7 @@ import UseTable from "../../../../../CustomHooks/UseTable";
 const AuthorizationNotRequired = () => {
   const [AuthorizationNotData, SetAuthorizationNotData] = useState([]);
 
-  // fake Api call
+  // fake Api cal
 
   useEffect(() => {
     axios("../../All_Fake_Api/ExpiringAuthorization.json")
@@ -29,7 +29,6 @@ const AuthorizationNotRequired = () => {
     getTableBodyProps,
     headerGroups,
     page,
-    // page,
     prepareRow,
   } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (

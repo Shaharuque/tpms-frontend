@@ -1,16 +1,27 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import {
-  SignatureNotLoadedColumn,
-  SignatureNotLoadedData,
-} from "./StaffDataTAble";
+import { SignatureNotLoadedColumn } from "./StaffDataTAble";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import UseTable from "../../../../../CustomHooks/UseTable";
+import axios from "axios";
 
 const SignatureNotLoaded = () => {
+  const [SignatureData, SetSignatureData] = useState([]);
+
+  // fakedb call
+  useEffect(() => {
+    axios("../../All_Fake_Api/Signature.json")
+      .then((response) => {
+        SetSignatureData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const { register, handleSubmit, reset } = useForm();
   const [tableOpen, setTableOpen] = useState(false);
   const onSubmit = (data) => {
@@ -18,7 +29,7 @@ const SignatureNotLoaded = () => {
     setTableOpen(true);
   };
 
-  const data = useMemo(() => SignatureNotLoadedData, []);
+  const data = useMemo(() => SignatureData, [SignatureData]);
   const columns = useMemo(() => [...SignatureNotLoadedColumn], []);
   const {
     getTableProps,

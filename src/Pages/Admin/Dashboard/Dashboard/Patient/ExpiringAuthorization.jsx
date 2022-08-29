@@ -22,6 +22,7 @@ const ExpiringAuthorization = () => {
       });
   }, []);
 
+  
   const data = useMemo(() => ExpireAuthData, [ExpireAuthData]);
   const columns = useMemo(() => [...ExpiringAuthorizationColumn], []);
   const {
