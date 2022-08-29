@@ -18,23 +18,9 @@ const VendorNumberSetup = () => {
   const [tableOpen, setTableOpen] = useState(false);
   const data = useMemo(() => VendorNumberSetupData, []);
   const columns = useMemo(() => [...VendorNumberSetupColumns], []);
-  const defaultColumn = React.useMemo(
-    () => ({
-      minWidth: 30,
-      width: 150,
-      maxWidth: 400,
-    }),
-    []
-  );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    getResizerProps,
-  } = useTable({ columns, data }, useSortBy, useResizeColumns);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination);
   // console.log("tableOpen,", tableOpen);
 
   const handleClickOpen = () => {
@@ -119,7 +105,6 @@ const VendorNumberSetup = () => {
                       >
                         {column.render("Header")}
                         {/* Add a sort direction indicator */}
-                        <span {...column.getResizerProps()} />
                         <span className=" ml-4 ">
                           {column.isSorted
                             ? column.isSortedDesc
