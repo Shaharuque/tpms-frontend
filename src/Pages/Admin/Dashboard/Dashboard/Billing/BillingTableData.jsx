@@ -25,7 +25,7 @@ export const SessionRenderedColumn = [
     Header: () => {
       return <span className="">Patient First Name</span>;
     },
-    accessor: "Dos",
+    accessor: "adj",
   },
   {
     Header: () => {
@@ -37,7 +37,7 @@ export const SessionRenderedColumn = [
     Header: () => {
       return <span className="">Date of Service</span>;
     },
-    accessor: "DOS",
+    accessor: "date_billed",
   },
 ];
 

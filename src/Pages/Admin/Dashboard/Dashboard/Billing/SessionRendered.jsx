@@ -1,13 +1,29 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { SessionRenderedColumn, SessionRenderedData } from "./BillingTableData";
 import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import axios from "axios";
 
 const SessionRendered = () => {
-  const data = useMemo(() => SessionRenderedData, []);
+
+  const [SessionData , setSessionData] = useState([])
+
+   // fakedb call
+   useEffect(()=>{
+    axios("../../All_Fake_Api/ArLadger.json")
+    .then((response)=>{
+      setSessionData(response?.data)
+     
+    }).catch((error)=>{
+      console.log(error)
+    })
+  },[])
+
+
+  const data = useMemo(() => SessionData, [SessionData]);
   const columns = useMemo(() => [...SessionRenderedColumn], []);
   const {
     getTableProps,

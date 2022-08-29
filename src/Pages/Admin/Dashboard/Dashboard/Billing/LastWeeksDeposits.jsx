@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
@@ -9,9 +9,21 @@ import {
   LastWeeksDepositsData,
 } from "./BillingTableData";
 import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import axios from "axios";
 
 const LastWeeksDeposits = () => {
-  const data = useMemo(() => LastWeeksDepositsData, []);
+  const [LastDepoData, SetLastDepoData] = useState([])
+  // fake api call
+  useEffect(()=>{
+    axios('../../All_Fake_Api/LastWeekDeposit.json')
+    .then((response)=>{
+      SetLastDepoData(response?.data)
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  },[])
+  const data = useMemo(() => LastDepoData, [LastDepoData]);
   const columns = useMemo(() => [...LastWeeksDepositsColumn], []);
   const {
     getTableProps,
@@ -22,7 +34,7 @@ const LastWeeksDeposits = () => {
     prepareRow,
   } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div >
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">Last Five Deposits</h1>
         <div className="flex items-center gap-3">
