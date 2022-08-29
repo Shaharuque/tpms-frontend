@@ -1,13 +1,29 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import SettingTableBox from "../../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import {
   TransitionTableColumn,
   TransitionTableData,
 } from "../TodaysTaskTableData";
+import axios from "axios";
 
 const TransitionTable = () => {
-  const data = useMemo(() => TransitionTableData, []);
+
+  const [TrnsData, SetTrnsData] = useState([]);
+
+  // fakedb call
+  useEffect(()=>{
+    axios('../../TransitionTable.json')
+    .then((response)=>{
+      SetTrnsData(response.data)
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+    
+  },[])
+
+  const data = useMemo(() => TrnsData, [TrnsData]);
   const columns = useMemo(() => [...TransitionTableColumn], []);
 
   const {

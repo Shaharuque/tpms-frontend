@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import {
   ArFollowupBucketColumn,
@@ -12,11 +12,33 @@ import TransitionTable from "./ArFollowupBucket/TransitionTable";
 import AddNote from "./ArFollowupBucket/AddNote";
 import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
+import axios from "axios";
+
+
+
 
 const ArFollowupBucket = () => {
+
+
   const [select, setSelect] = useState("");
   const [tableOpen, setTableOpen] = useState(false);
-  const data = useMemo(() => ArFollowupBucketData, []);
+  const[FlowupData, SetFlowupData] = useState([]);
+
+  // fakedb call
+  useEffect(()=>{
+    axios('../../All_Fake_Api/FollowupBucket.json')
+    .then(response=>{
+      SetFlowupData(response.data)
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  },[])
+
+  console.log(FlowupData);
+
+//
+  const data = useMemo(() => FlowupData, [FlowupData]);
   const columns = useMemo(() => [...ArFollowupBucketColumn], []);
   const {
     getTableProps,
@@ -64,7 +86,7 @@ const ArFollowupBucket = () => {
     console.log(data);
   };
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="flex items-center justify-between">
         <h1 className="text-lg my-2 text-orange-500">Follow Up Bucket</h1>
         <Link

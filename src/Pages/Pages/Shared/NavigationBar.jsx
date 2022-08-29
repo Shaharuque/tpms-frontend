@@ -65,14 +65,21 @@ const NavigationBar = ({ handle }) => {
               ABC Behavioral Therapy Centers
             </p>
           </div>
+
+
         </div>
+
+
+
 
         <div
           onClick={() => setOpen(!open)}
-          className="text-xl absolute right-2 top-1 mt-3 cursor-pointer md:hidden"
+          className="text-3xl absolute right-3 top-1 cursor-pointer md:hidden"
         >
           <p className="">{open ? <AiOutlineClose /> : <FaBars />}</p>
         </div>
+
+
 
         <div
           className={`md:flex md:items-center gap-10  md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${
@@ -142,10 +149,10 @@ const NavigationBar = ({ handle }) => {
                 <label tabIndex="0" className="">
                   <div className="relative">
                     <div>
-                      <h1 className="  text-2xl text-secondary">
+                      <h1 className="  text-2xl text-secondary -mt-1">
                         <AiOutlineNotification />
                       </h1>
-                      <span className=" absolute top-0 h-4 right-[-8px] bg-red-700 text-white badge-xs rounded-full">
+                      <span className=" absolute top-0 h-4 right-[-8px]  bg-red-700 text-white badge-xs rounded-full">
                         8
                       </span>
                     </div>
@@ -154,16 +161,15 @@ const NavigationBar = ({ handle }) => {
               </div>
               <div
                 tabIndex="0"
-                className="mt-1 dropdown-content w-auto md:w-[25rem] bg-base-100 shadow-lg rounded-xl"
+                className="mt-1 dropdown-content w-auto md:w-[25rem] bg-base-100 shadow-lg rounded-t-xl"
               >
                 <div className="card-body">
                   <h4 className=" text-center ">Latest Changes</h4>
                   <hr />
                   <span className="text-info text-xs">
                     <span className="badge badge-primary mr-2">new </span>
-                    Latest changes NewTelehealth Video Session. Video Session
-                    feature for Telehealth For Telehealth, video session feature
-                    is added. You can...
+                    Latest changes
+                    NewTelehealth Video Session. Video Session feature for Telehealth For Telehealth, video session feature is added. You can...
                   </span>
                   <div className="card-actions">
                     <button className="btn btn-primary btn-block">

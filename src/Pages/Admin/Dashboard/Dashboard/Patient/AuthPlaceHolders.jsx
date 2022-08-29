@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import {
   AuthPlaceHoldersColumn,
@@ -8,9 +8,25 @@ import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import axios from "axios";
 
 const AuthPlaceHolders = () => {
-  const data = useMemo(() => AuthPlaceHoldersData, []);
+
+  const [AuthPlaceHoldersData , SetAuthPlaceHoldersData] = useState([])
+
+  // fakedb call
+  useEffect(()=>{
+    axios('../../All_Fake_Api/CoPayForToday.json')
+    .then((response)=>{
+      SetAuthPlaceHoldersData(response?.data);
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  },[])
+
+
+  const data = useMemo(() => AuthPlaceHoldersData, [AuthPlaceHoldersData]);
   const columns = useMemo(() => [...AuthPlaceHoldersColumn], []);
   const {
     getTableProps,

@@ -21,7 +21,7 @@ const ListView = () => {
 
   // calling fake db
   useEffect(() => {
-    axios("../Fakedb.json")
+    axios("../All_Fake_Api/Fakedb.json")
       .then((response) => {
         setTData(response?.data);
       })
@@ -29,6 +29,8 @@ const ListView = () => {
         console.log(error);
       });
   }, []);
+
+ 
 
   // -----------------------------------------------Table Data-------------------------------
   const data = useMemo(() => TData, [TData]);

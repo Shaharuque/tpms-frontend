@@ -18,7 +18,7 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
       <Dialog
         // fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
+        // onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
         <div className="p-5 box">
@@ -29,7 +29,7 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
           <div className="divider"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* <div className="flex items-center text-sm gap-5"> */}
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-5">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-co ls-3 my-5 mr-2 gap-5">
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-500 text-left">
@@ -121,6 +121,7 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
               <input
                 type="submit"
                 value={"SAVE"}
+                onClick={handleClose}
                 className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               />
               <button

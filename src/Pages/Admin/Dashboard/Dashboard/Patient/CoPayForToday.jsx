@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import {
   AuthorizationNotRequiredColumn,
@@ -10,9 +10,24 @@ import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import axios from "axios";
 
 const CoPayForToday = () => {
-  const data = useMemo(() => CoPayForTodayData, []);
+
+  const [CoPayData , SetCoPayData] = useState([])
+
+  // fakedb call
+  useEffect(()=>{
+    axios('../../All_Fake_Api/CoPayForToday.json')
+    .then((response)=>{
+      SetCoPayData(response?.data);
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+  },[])
+
+  const data = useMemo(() => CoPayData, [CoPayData]);
   const columns = useMemo(() => [...CoPayForTodayColumn], []);
   const {
     getTableProps,

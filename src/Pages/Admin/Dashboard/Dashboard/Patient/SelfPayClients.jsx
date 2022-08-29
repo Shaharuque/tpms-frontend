@@ -1,13 +1,33 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { SelfPayClientsColumn, SelfPayClientsData } from "./PatientTableData";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import axios from "axios";
 
 const SelfPayClients = () => {
-  const data = useMemo(() => SelfPayClientsData, []);
+
+const [SelfPayData,  SetSelfPayData] = useState([]);
+
+
+   // fake Api call
+
+   useEffect(()=>{
+    axios('../../All_Fake_Api/ExpiringAuthorization.json')
+    .then((response)=>{
+    SetSelfPayData(response.data)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+
+  },[])
+
+  console.log(SelfPayData);
+
+  const data = useMemo(() => SelfPayData, [SelfPayData]);
   const columns = useMemo(() => [...SelfPayClientsColumn], []);
   const {
     getTableProps,

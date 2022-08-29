@@ -15,10 +15,24 @@ import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 // import "rsuite/dist/rsuite.css";
 import { DateRangePicker } from "rsuite";
+import { useEffect } from "react";
+import axios from "axios";
 const ArLedger = () => {
   const [select, setSelect] = useState("");
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);
+  const [ladgerData, SetladgerData] = useState([]);
+
+  // fakedb call
+  useEffect(()=>{
+    axios("../../All_Fake_Api/ArLadger.json")
+    .then((response)=>{
+      SetladgerData(response?.data)
+    }).catch((error)=>{
+      console.log(error)
+    })
+  },[])
+
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
       filters: [],
@@ -38,7 +52,7 @@ const ArLedger = () => {
 
   // console.log(dates);
 
-  const data = useMemo(() => ARLedgerColumnsData, []);
+  const data = useMemo(() => ladgerData, [ladgerData]);
   const columns = useMemo(() => [...ARLedgerColumnsColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
 
@@ -99,7 +113,7 @@ const ArLedger = () => {
 
   const { pageIndex, pageSize } = state;
   return (
-    <div className="h-[100vh]">
+    <div >
       <div>
         <motion.div
           initial={{ opacity: 0, y: 15 }}

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import {
   AuthorizationNotRequiredColumn,
@@ -8,9 +8,27 @@ import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import axios from "axios";
 
 const AuthorizationNotRequired = () => {
-  const data = useMemo(() => AuthorizationNotRequiredData, []);
+
+  const [AuthorizationNotData , SetAuthorizationNotData] = useState([]);
+  
+
+  // fake Api call
+
+  useEffect(()=>{
+    axios('../../All_Fake_Api/ExpiringAuthorization.json')
+    .then((response)=>{
+      SetAuthorizationNotData(response.data)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+
+  },[])
+
+  const data = useMemo(() => AuthorizationNotData, [AuthorizationNotData]);
   const columns = useMemo(() => [...AuthorizationNotRequiredColumn], []);
   const {
     getTableProps,
