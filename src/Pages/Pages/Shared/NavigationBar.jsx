@@ -4,6 +4,7 @@ import {
   BiFullscreen,
   BiExitFullscreen,
   BiMessageRounded,
+  BiBadge,
 } from "react-icons/bi";
 import {
   AiOutlinePlus,
@@ -13,10 +14,11 @@ import {
   AiOutlinePlusSquare,
   AiOutlineFileAdd,
   AiFillUnlock,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
-import company from "../../Assets/company.jpg";
+import company from "../../Assets/company.png";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import CreateAppointment from "./AdditionFeatures/CreateAppointment";
@@ -44,12 +46,12 @@ const NavigationBar = ({ handle }) => {
       initial={{ opacity: 0, y: -15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className="shadow-md resp ml-[5.2rem] md:ml-[5rem] lg:ml-[5.2rem] rounded-3xl sticky "
+      className="shadow-md rounded-3xl sticky ml-[98px] mr-[22px]"
     >
-      <div className="flex items-center justify-between bg-white rounded-3xl  p-3">
+      <div className="flex items-center justify-between bg-white rounded-3xl  p-2">
         <div
-          className="flex justify-center items-center gap-2 font-medium cursor-pointer font-[Poppins] 
-      text-gray-800"
+          className="flex justify-center items-center gap-2 md:gap-4  font-medium cursor-pointer font-[Poppins] 
+      text-gray-800 ml-2"
         >
           <div className="w-9 rounded-full">
             <img className=" rounded-full" src={company} alt="pic" />
@@ -57,8 +59,8 @@ const NavigationBar = ({ handle }) => {
 
           <div>
             <p
-              className="md:text-lg text-sm  bg-transparent "
-              style={{ textShadow: "2px 2px 4px #00000052" }}
+              className="md:text-base font-semibold text-[8px]  bg-transparent "
+              style={{ textShadow: "2px 2px 4px #00000052", color: "#495057" }}
             >
               ABC Behavioral Therapy Centers
             </p>
@@ -67,14 +69,14 @@ const NavigationBar = ({ handle }) => {
 
         <div
           onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-3 top-1 cursor-pointer md:hidden"
+          className="text-xl absolute right-2 top-1 mt-3 cursor-pointer md:hidden"
         >
           <p className="">{open ? <AiOutlineClose /> : <FaBars />}</p>
         </div>
 
         <div
-          className={`md:flex md:items-center gap-10 md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? "top-18 " : "top-[-490px]"
+          className={`md:flex md:items-center gap-10  md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${
+            open ? "top-10 " : "top-[-490px]"
           }`}
         >
           {/*Full screen showing code */}
@@ -89,7 +91,7 @@ const NavigationBar = ({ handle }) => {
             ) : (
               <h1
                 onClick={handle.exit}
-                className=" text-lg font-bold text-secondary"
+                className="mt-[-5px] text-xl font-bold text-secondary"
               >
                 <BiExitFullscreen />
               </h1>
@@ -106,7 +108,7 @@ const NavigationBar = ({ handle }) => {
               </label>
               <ul
                 tabIndex="0"
-                className="dropdown-content p-3 md:w-52  w-auto mt-1 shadow-2xl border-2 rounded bg-white text-sm "
+                className="dropdown-content p-3 md:w-52 sm:w-56  w-auto mt-1 shadow-2xl border-2 rounded bg-white text-sm "
               >
                 <button className="flex items-center gap-2 hover:text-slate-600 mb-2">
                   <AiOutlinePlusCircle />
@@ -152,7 +154,7 @@ const NavigationBar = ({ handle }) => {
               </div>
               <div
                 tabIndex="0"
-                className="mt-1 dropdown-content w-auto md:w-[25rem] bg-base-100 shadow-lg rounded-t-xl"
+                className="mt-1 dropdown-content w-auto md:w-[25rem] bg-base-100 shadow-lg rounded-xl"
               >
                 <div className="card-body">
                   <h4 className=" text-center ">Latest Changes</h4>
@@ -172,19 +174,91 @@ const NavigationBar = ({ handle }) => {
               </div>
             </div>
           </div>
-          {/* download  */}
+          {/* message  */}
           <div>
-            <h1 className="  text-xl font-bold text-secondary">
+            <h1 className="  text-2xl font-bold text-secondary md:-mt-2">
               <BiMessageRounded />
             </h1>
           </div>
+          {/**download */}
+          <div className="  ">
+            <div className="dropdown md:dropdown-end">
+              <label tabIndex="0" className="">
+                <h1 className=" text-xl font-bold text-secondary">
+                  <BsDownload />
+                </h1>
+              </label>
+              <div className="flex justify-center menu menu-compact dropdown-content w-auto md:w-[18rem] sm:w-56 shadow bg-white rounded-lg">
+                <div className="bg-[#0CADBF] rounded-t-xl p-4 flex justify-between items-center">
+                  <h5 className="inline  text-sm text-white font-bold">
+                    Schedule export
+                  </h5>
+                  <span class="inline-block  px-2 text-xs text-center  align-baseline font-bold bg-white text-black rounded">
+                    64
+                  </span>
+                </div>
+                <div>
+                  <div className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
+                    <div>
+                      <h1 className=" text-3xl font-bold text-secondary">
+                        <AiOutlineCloudDownload />
+                      </h1>
+                    </div>
+                    <div className="text-xs text-wite">
+                      <h1 className="font-semibold mb-1">
+                        837-11660888499.txt
+                      </h1>
+                      <h1 className="font-medium text-md">CSV file</h1>
+                      <small class="block text-xs text-gray-600">
+                        5 day left
+                      </small>
+                      <button
+                        type="button"
+                        class="inline-block px-2 bg-[#0CADBF] text-white font-semibold text-[10px] leading-tight  rounded-md shadow-md  hover:shadow-lg  "
+                      >
+                        Ready To Download
+                      </button>
+                    </div>
+                  </div>
+                  <hr className="-mt-[0] w-11/12 mx-auto" />
+                </div>
+                <div>
+                  <div className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3 mt-[3]">
+                    <div>
+                      <h1 className=" text-2xl font-bold text-secondary">
+                        <AiOutlineCloudDownload />
+                      </h1>
+                    </div>
+                    <div className="text-xs text-wite">
+                      <h1 className="font-semibold mb-1">
+                        837-11660888499.txt
+                      </h1>
+                      <h1 className="font-medium text-md">CSV file</h1>
+                      <small class="block text-xs text-gray-600">
+                        5 day left
+                      </small>
+                      <button
+                        type="button"
+                        class="inline-block px-2 bg-[#0CADBF] text-white font-semibold text-[10px] leading-tight  rounded-md shadow-md  hover:shadow-lg  "
+                      >
+                        Ready To Download
+                      </button>
+                    </div>
+                  </div>
+                  <hr className="-mt-[0] w-11/12 mx-auto" />
+                </div>
 
-          <div>
-            <h1 className="  text-lg font-bold text-secondary">
-              <BsDownload />
-            </h1>
+                <Link
+                  to={"/admin/report-export-view"}
+                  className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
+                >
+                  view more
+                </Link>
+              </div>
+            </div>
           </div>
-          {/* admin settings part */}
+
+          {/* admin part  */}
           <div className="my-5 md:my-0">
             <div className="dropdown md:dropdown-end">
               <label tabIndex="0" className="flex gap-2 items-center">
