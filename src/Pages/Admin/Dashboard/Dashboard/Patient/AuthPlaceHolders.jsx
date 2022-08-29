@@ -14,7 +14,7 @@ const AuthPlaceHolders = () => {
 
   const [AuthPlaceHoldersData , SetAuthPlaceHoldersData] = useState([])
 
-  // fakedb call
+  // fakedb call     
   useEffect(()=>{
     axios('../../All_Fake_Api/CoPayForToday.json')
     .then((response)=>{
@@ -24,7 +24,8 @@ const AuthPlaceHolders = () => {
       console.log(error);
     })
   },[])
-
+ 
+// to let noting com
 
   const data = useMemo(() => AuthPlaceHoldersData, [AuthPlaceHoldersData]);
   const columns = useMemo(() => [...AuthPlaceHoldersColumn], []);

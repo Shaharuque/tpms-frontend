@@ -49,9 +49,10 @@ const [SelfPayData,  SetSelfPayData] = useState([]);
           >
             <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
           </Link>
+{/**/}
         </div>
       </div>
-      <div className="my-2">
+      <div className="my-2 ">
         <SettingTableBox
           getTableProps={getTableProps}
           headerGroups={headerGroups}

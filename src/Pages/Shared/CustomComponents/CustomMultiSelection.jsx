@@ -28,7 +28,8 @@ const CustomMultiSelection = ({ data, setValue, value }) => {
         data={data}
         placeholder="Select"
         ref={picker}
-        style={{ width: 224 }}
+        // style={{ width: 224 }}
+        style={{ width: 150 }}
         value={value}
         onChange={handleChange}
         renderExtraFooter={() => (
