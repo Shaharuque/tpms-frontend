@@ -38,7 +38,7 @@ export const ManageTableColumnsColumn = [
   },
   {
     Header: () => {
-      return <span className="">Service &and; Hrs.</span>;
+      return <span className="">Service & Hrs.</span>;
     },
     accessor: "Service&hrs",
   },
