@@ -5,14 +5,31 @@ import { MdOutlineModeEditOutline } from "react-icons/md";
 import SessionAddNote from "./SessionAddNote";
 import SessionViewNote from "./SessionViewNote";
 import EditSession from "./EditSession";
+import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
 
 const ManageTableAction = ({ row }) => {
+  const { ref, visible, setVisible } = useOutsideAlerter(false);
   const [openAddNote, setOpenAddNote] = useState(false);
   const [openViewNote, setOpenViewNote] = useState(false);
   const [editSession, setEditSession] = useState(false);
-  const [open, setOpen] = useState(false);
-  const handleOpenAction = () => {
-    setOpen(!open);
+  //const [open, setOpen] = useState(false);
+
+  const handleOpenAction = (e) => {
+    e.preventDefault();
+    setVisible(!visible);
+  };
+
+  const addNoteHandler = () => {
+    setVisible(false);
+    setOpenAddNote(true);
+  };
+  const viewNoteHandler = () => {
+    setVisible(false);
+    setOpenViewNote(true);
+  };
+  const editSessionHandler = () => {
+    setVisible(false);
+    setEditSession(true);
   };
 
   const handleClose = () => {
@@ -20,34 +37,36 @@ const ManageTableAction = ({ row }) => {
     setOpenViewNote(false);
     setEditSession(false);
   };
+
+  console.log(visible, setVisible);
   //   const handleContactClose = () => {
   //     setOpenContactModal(false);
   //   };
   return (
-    <div>
+    <div ref={ref}>
       <BsThreeDots
         onClick={handleOpenAction}
         className="text-secondary mx-auto text-sm"
       />
-      {open && (
+      {visible && (
         <div className="absolute bg-white border shadow-md px-3 py-4  right-[39px] w-[175px]">
           <button
             className="text-sm hover:text-secondary flex items-center font-normal  gap-2"
-            onClick={() => setOpenAddNote(true)}
+            onClick={() => addNoteHandler()}
           >
             <AiOutlinePlus /> Add Note
           </button>
           <br />
           <button
             className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-            onClick={() => setOpenViewNote(true)}
+            onClick={viewNoteHandler}
           >
             <AiOutlineEye /> View Note
           </button>
           <br />
           <button
             className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-            onClick={() => setEditSession(true)}
+            onClick={editSessionHandler}
           >
             <MdOutlineModeEditOutline /> Edit Session
           </button>
