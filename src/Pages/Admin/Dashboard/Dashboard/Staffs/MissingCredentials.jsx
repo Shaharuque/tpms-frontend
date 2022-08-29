@@ -3,11 +3,11 @@ import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import {
   MissingCredentialsColumn,
   MissingCredentialsData,
 } from "./StaffDataTAble";
+import UseTable from "../../../../../CustomHooks/UseTable";
 
 const MissingCredentials = () => {
   const data = useMemo(() => MissingCredentialsData, []);
@@ -35,13 +35,13 @@ const MissingCredentials = () => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );

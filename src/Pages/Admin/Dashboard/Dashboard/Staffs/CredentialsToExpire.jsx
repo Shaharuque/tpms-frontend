@@ -7,7 +7,7 @@ import {
   CredentialsToExpireColumn,
   CredentialsToExpireData,
 } from "./StaffDataTAble";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../../CustomHooks/UseTable";
 
 const CredentialsToExpire = () => {
   const data = useMemo(() => CredentialsToExpireData, []);
@@ -35,13 +35,13 @@ const CredentialsToExpire = () => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );

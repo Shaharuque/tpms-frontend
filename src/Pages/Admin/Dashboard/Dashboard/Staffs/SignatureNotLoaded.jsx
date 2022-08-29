@@ -8,7 +8,7 @@ import {
   SignatureNotLoadedData,
 } from "./StaffDataTAble";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../../CustomHooks/UseTable";
 
 const SignatureNotLoaded = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -70,13 +70,13 @@ const SignatureNotLoaded = () => {
       <div>
         {tableOpen && (
           <div className="my-2">
-            <SettingTableBox
+            <UseTable
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
               rows={page}
               prepareRow={prepareRow}
-            ></SettingTableBox>
+            ></UseTable>
           </div>
         )}
       </div>

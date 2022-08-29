@@ -1,31 +1,25 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import {
-  AuthorizationNotRequiredColumn,
-  AuthorizationNotRequiredData,
-  CoPayForTodayColumn,
-  CoPayForTodayData,
-} from "./PatientTableData";
+import { CoPayForTodayColumn } from "./PatientTableData";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import axios from "axios";
+import UseTable from "../../../../../CustomHooks/UseTable";
 
 const CoPayForToday = () => {
-
-  const [CoPayData , SetCoPayData] = useState([])
+  const [CoPayData, SetCoPayData] = useState([]);
 
   // fakedb call
-  useEffect(()=>{
-    axios('../../All_Fake_Api/CoPayForToday.json')
-    .then((response)=>{
-      SetCoPayData(response?.data);
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
-  },[])
+  useEffect(() => {
+    axios("../../All_Fake_Api/CoPayForToday.json")
+      .then((response) => {
+        SetCoPayData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const data = useMemo(() => CoPayData, [CoPayData]);
   const columns = useMemo(() => [...CoPayForTodayColumn], []);
@@ -52,13 +46,13 @@ const CoPayForToday = () => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );

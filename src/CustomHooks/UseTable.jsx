@@ -1,6 +1,6 @@
 import React from "react";
 
-const UseCustomTable = ({
+const UseTable = ({
   getTableProps,
   headerGroups,
   getTableBodyProps,
@@ -63,4 +63,4 @@ const UseCustomTable = ({
   );
 };
 
-export default UseCustomTable;
+export default UseTable;
