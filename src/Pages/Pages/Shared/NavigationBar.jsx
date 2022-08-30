@@ -65,12 +65,7 @@ const NavigationBar = ({ handle }) => {
               ABC Behavioral Therapy Centers
             </p>
           </div>
-
-
         </div>
-
-
-
 
         <div
           onClick={() => setOpen(!open)}
@@ -78,8 +73,6 @@ const NavigationBar = ({ handle }) => {
         >
           <p className="">{open ? <AiOutlineClose /> : <FaBars />}</p>
         </div>
-
-
 
         <div
           className={`md:flex md:items-center gap-10  md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${
@@ -168,8 +161,9 @@ const NavigationBar = ({ handle }) => {
                   <hr />
                   <span className="text-info text-xs">
                     <span className="badge badge-primary mr-2">new </span>
-                    Latest changes
-                    NewTelehealth Video Session. Video Session feature for Telehealth For Telehealth, video session feature is added. You can...
+                    Latest changes NewTelehealth Video Session. Video Session
+                    feature for Telehealth For Telehealth, video session feature
+                    is added. You can...
                   </span>
                   <div className="card-actions">
                     <button className="btn btn-primary btn-block">
