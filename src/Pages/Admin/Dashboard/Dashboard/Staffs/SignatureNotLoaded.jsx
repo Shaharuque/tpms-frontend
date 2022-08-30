@@ -5,8 +5,8 @@ import { FiDownload } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { SignatureNotLoadedColumn } from "./StaffDataTAble";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import UseTable from "../../../../../CustomHooks/UseTable";
 import axios from "axios";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const SignatureNotLoaded = () => {
   const [SignatureData, SetSignatureData] = useState([]);
@@ -27,6 +27,7 @@ const SignatureNotLoaded = () => {
   const onSubmit = (data) => {
     console.log(data);
     setTableOpen(true);
+    reset();
   };
 
   const data = useMemo(() => SignatureData, [SignatureData]);

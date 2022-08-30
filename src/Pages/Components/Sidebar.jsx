@@ -33,8 +33,8 @@ import { GrFormSchedule } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
-import NavigationBar from "../Pages/Shared/NavigationBar";
-import Footer from "./Footer";
+import NavigationBar from "../Shared/NavigationBar/NavigationBar";
+import Footer from "../Shared/Footer/Footer";
 // import StateUse from "../Hooks/StateUse";
 
 const menuItem = [

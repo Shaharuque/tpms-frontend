@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import axios from "axios";
-import UseTable from "../../../../../CustomHooks/UseTable";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const CoPayForToday = () => {
   const [CoPayData, SetCoPayData] = useState([]);

@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { CredentialsToExpireColumn } from "./StaffDataTAble";
-import UseTable from "../../../../../CustomHooks/UseTable";
 import axios from "axios";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const CredentialsToExpire = () => {
   const [VacationData, SetVacationData] = useState([]);

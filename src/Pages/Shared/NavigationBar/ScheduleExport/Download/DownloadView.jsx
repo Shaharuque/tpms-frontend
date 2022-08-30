@@ -1,27 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { useSortBy, useTable } from "react-table";
-import ERAActionModal from "../../Settings/QAFile/ERAActionModal";
-import SettingTableBox from "../../Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../../Utilities/UseTable";
+import ERAActionModal from "../../../../Pages/Settings/QAFile/ERAActionModal";
 import DownloadTableData, {
   DownloadTableDataColumn,
 } from "./DownloadTableData";
 
 const DownloadView = () => {
-const [DownloadData, setDownloadData] = useState([])
+  const [DownloadData, setDownloadData] = useState([]);
 
-// fakedb api call
-    useEffect(()=>{
-      axios('../../All_Fake_Api/DownlodView.json')
-      .then((response)=>{
+  // fakedb api call
+  useEffect(() => {
+    axios("../../All_Fake_Api/DownlodView.json")
+      .then((response) => {
         setDownloadData(response.data);
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log(error);
-      })
-
-    },[])
-
+      });
+  }, []);
 
   const data = useMemo(() => DownloadData, [DownloadData]);
   const columns = useMemo(() => [...DownloadTableDataColumn], []);
@@ -65,18 +63,18 @@ const [DownloadData, setDownloadData] = useState([])
       ]);
     });
   return (
-    <div >
+    <div>
       <h1 className="text-lg my-2 text-orange-500">
         Activities Ready to Bill Not Billed
       </h1>
       <div>
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={rows}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
       {openEditModal && (
         <ERAActionModal
