@@ -22,7 +22,7 @@ const ScheduleExport = (setVisible) => {
           64
         </span>
       </div>
-      <div className="h-[398px] mt-2 overflow-scroll">
+      <div className="h-[360px] mt-2 overflow-scroll">
         <ExportedFiles></ExportedFiles>
         <ExportedFiles></ExportedFiles>
         <ExportedFiles></ExportedFiles>
@@ -33,11 +33,11 @@ const ScheduleExport = (setVisible) => {
         <ExportedFiles></ExportedFiles>
         <ExportedFiles></ExportedFiles>
       </div>
-      <div className=" absolute bottom-0 py-2  w-full bg-white">
+      <div className=" absolute bottom-0 py-2 rounded-b-xl w-full bg-white">
         <Link
           onClick={handleDownload}
           to={"/admin/report-export-view"}
-          className="py-[5px] font-medium px-3 text-xs mx-auto flex gap-2 items-center justify-center w-32  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+          className="py-[5px] font-medium px-3 text-xs mx-auto flex gap-2 items-center justify-center w-32  bg-gradient-to-r from-secondary to-primary   hover:to-secondary text-white rounded-sm"
         >
           View More
         </Link>
