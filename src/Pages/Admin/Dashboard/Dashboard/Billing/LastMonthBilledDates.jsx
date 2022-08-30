@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { FiDownload } from "react-icons/fi";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
@@ -8,6 +8,7 @@ import { BilledTableColumn, BilledTableData } from "./BillingTableData";
 import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import { AiOutlineFileText } from "react-icons/ai";
 import DetailTable from "./LastMonthBilledDetails/DetailTable";
+import axios from "axios";
 
 const LastMonthBilledDates = () => {
   const [sortBy, setSortBy] = useState("");
@@ -22,8 +23,23 @@ const LastMonthBilledDates = () => {
     reset();
   };
 
+
+  
+  const [LastMonthdata, SetLastMonthData] = useState([]);
+  
+  // fake api call
+  useEffect(()=>{
+     axios('../../All_Fake_Api/LastFiveStatement.json')
+     .then((response)=>{
+      SetLastMonthData(response?.data);
+     })
+    .catch((error)=>{
+      console.log(error);
+      })
+  },[]) 
+
   const [tableOpen, setTableOpen] = useState(false);
-  const data = useMemo(() => BilledTableData, []);
+  const data = useMemo(() => LastMonthdata, [LastMonthdata]);
   const columns = useMemo(() => [...BilledTableColumn], []);
   const [editableRowIndex, setEditableRowIndex] = React.useState(null);
   console.log(editableRowIndex);
@@ -33,11 +49,11 @@ const LastMonthBilledDates = () => {
     headerGroups,
     page,
     // page,
+    rows,
     prepareRow,
   } = useTable(
     { columns, data },
     useSortBy,
-    usePagination,
     useRowSelect,
     (hooks) => {
       hooks.allColumns.push((columns) => [
@@ -67,7 +83,7 @@ const LastMonthBilledDates = () => {
     }
   );
   return (
-    <div className="h-[100vh]">
+    <div>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">
           Last Month Billed Dates
@@ -160,7 +176,7 @@ const LastMonthBilledDates = () => {
             getTableProps={getTableProps}
             headerGroups={headerGroups}
             getTableBodyProps={getTableBodyProps}
-            rows={page}
+            rows={rows}
             prepareRow={prepareRow}
           ></SettingTableBox>
         </div>

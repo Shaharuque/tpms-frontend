@@ -25,7 +25,7 @@ export const SessionRenderedColumn = [
     Header: () => {
       return <span className="">Patient First Name</span>;
     },
-    accessor: "Dos",
+    accessor: "adj",
   },
   {
     Header: () => {
@@ -37,7 +37,7 @@ export const SessionRenderedColumn = [
     Header: () => {
       return <span className="">Date of Service</span>;
     },
-    accessor: "DOS",
+    accessor: "date_billed",
   },
 ];
 
@@ -128,22 +128,65 @@ export const LastMonthsStatementsData = [
 export const LastMonthsStatementsColumn = [
   {
     Header: () => {
-      return <span className="">Patient Last Name</span>;
+      return <span className="">Deposit Date</span>;
     },
-    accessor: "patient",
+    accessor: "depositDate",
   },
   {
     Header: () => {
-      return <span className="">Patient First Name</span>;
+      return <span className="">Check No</span>;
     },
-    accessor: "provider",
+    accessor: "checkNo",
   },
   {
     Header: () => {
-      return <span className="">Total</span>;
+      return <span className="">Check Date</span>;
     },
-    accessor: "Dos",
+    accessor: "checkDate",
   },
+
+  
+  {
+    Header: () => {
+      return <span className="">Payee Name</span>;
+    },
+    accessor: "payeeName",
+  },
+
+  {
+    Header: () => {
+      return <span className="">Allocated Check Amit.</span>;
+    },
+    accessor: "allocatedCheck",
+  },
+
+  {
+    Header: () => {
+      return <span className="">Unallocated</span>;
+    },
+    accessor: "unallocated",
+  },
+
+  {
+    Header: () => {
+      return <span className="">Pay Type</span>;
+    },
+    accessor: "payType",
+  },
+  {
+    Header: () => {
+      return <span className="">Description</span>;
+    },
+    accessor: "description",
+  },
+  {
+    Header: () => {
+      return <span className="">file</span>;
+    },
+    accessor: "file",
+  },
+
+
 ];
 
 // LastMonthBilledDates BilledTable;
@@ -161,19 +204,19 @@ export const BilledTableColumn = [
     Header: () => {
       return <span className="">Batch No</span>;
     },
-    accessor: "batch_no",
+    accessor: "checkNo",
   },
   {
     Header: () => {
       return <span className="">Date</span>;
     },
-    accessor: "date",
+    accessor: "depositDate",
   },
   {
     Header: () => {
       return <span className="">Total</span>;
     },
-    accessor: "total",
+    accessor: "payType",
   },
 ];
 
