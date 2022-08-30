@@ -132,7 +132,7 @@ const CalendarView = () => {
       {/* <Scheduler
         view="week"
         events={EVENTS}
-        selectedDate={new Date(2021, 4, 5)}
+        selectedDate={new Date(2022, 4, 5)}
       /> */}
     </div>
   );

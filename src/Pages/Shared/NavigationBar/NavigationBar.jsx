@@ -4,7 +4,6 @@ import {
   BiFullscreen,
   BiExitFullscreen,
   BiMessageRounded,
-  BiBadge,
 } from "react-icons/bi";
 import {
   AiOutlinePlus,
@@ -14,7 +13,6 @@ import {
   AiOutlinePlusSquare,
   AiOutlineFileAdd,
   AiFillUnlock,
-  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
@@ -27,8 +25,9 @@ import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { useOutsideAlerter } from "../../../CustomHooks/useDetectOutsideClick";
 
 const NavigationBar = ({ handle }) => {
-  const [dOpen, setDOpen] = useState(false);
+  //const [dOpen, setDOpen] = useState(false);
   const { visible, setVisible, ref } = useOutsideAlerter(false);
+  const [dOpen, setDOpen] = useState(false);
   const navigate = useNavigate();
   let [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -139,7 +138,7 @@ const NavigationBar = ({ handle }) => {
             </div>
           </div>
 
-          {/* notify    */}
+          {/* notify*/}
           <div className="">
             <div className="dropdown md:dropdown-end">
               <div className="">
@@ -188,12 +187,14 @@ const NavigationBar = ({ handle }) => {
           <div ref={ref}>
             <div
               onClick={() => setVisible(!visible)}
-              className="text-xl font-bold text-secondary md:-mt-2"
+              className="text-xl font-bold text-secondary md:-mt-2  cursor-pointer"
             >
               <BsDownload />
             </div>
             {visible && (
-              <ScheduleExport setVisible={setVisible}></ScheduleExport>
+              <div>
+                <ScheduleExport setVisible={setVisible}></ScheduleExport>
+              </div>
             )}
           </div>
           {/* admin part  */}
