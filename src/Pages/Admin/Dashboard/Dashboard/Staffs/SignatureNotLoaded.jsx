@@ -3,28 +3,24 @@ import { useForm } from "react-hook-form";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import {
-  SignatureNotLoadedColumn,
-  SignatureNotLoadedData,
-} from "./StaffDataTAble";
+import { SignatureNotLoadedColumn } from "./StaffDataTAble";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../../CustomHooks/UseTable";
 import axios from "axios";
 
 const SignatureNotLoaded = () => {
-
   const [SignatureData, SetSignatureData] = useState([]);
 
   // fakedb call
-  useEffect(()=>{
-    axios('../../All_Fake_Api/Signature.json')
-    .then((response)=>{
-      SetSignatureData(response.data)
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-  },[])
+  useEffect(() => {
+    axios("../../All_Fake_Api/Signature.json")
+      .then((response) => {
+        SetSignatureData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const { register, handleSubmit, reset } = useForm();
   const [tableOpen, setTableOpen] = useState(false);
@@ -85,13 +81,13 @@ const SignatureNotLoaded = () => {
       <div>
         {tableOpen && (
           <div className="my-2">
-            <SettingTableBox
+            <UseTable
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
               rows={page}
               prepareRow={prepareRow}
-            ></SettingTableBox>
+            ></UseTable>
           </div>
         )}
       </div>

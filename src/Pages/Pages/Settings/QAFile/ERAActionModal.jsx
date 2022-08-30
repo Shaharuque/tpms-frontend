@@ -30,8 +30,8 @@ const ERAActionModal = ({ handleClose, open, row }) => {
       >
         <div className="p-5 box">
           <h1 className="text-lg  text-left text-orange-400">Export Report</h1>
-          <div className="divider"></div>
-          <h1 className=" text-sm font-medium">
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
+          <h1 className=" text-sm py-1 text-gray-600 font-medium">
             You can encrypt your file with password to prevent unauthorized
             access to your data.
           </h1>
@@ -44,7 +44,7 @@ const ERAActionModal = ({ handleClose, open, row }) => {
                 setPassword(!password);
               }}
             />
-            <span className="text-xs ml-1 text-gray-600 font-normal">
+            <span className="text-xs ml-1 text-gray-600 font-medium">
               crypt with password
             </span>
           </div>
@@ -53,7 +53,7 @@ const ERAActionModal = ({ handleClose, open, row }) => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
+                    <span className="label-text text-xs text-gray-600 font-medium text-left">
                       Password
                     </span>
                   </label>
@@ -61,13 +61,13 @@ const ERAActionModal = ({ handleClose, open, row }) => {
                     placeholder="Enter Password to encrypt with"
                     type="text"
                     name="password"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("password")}
                   />
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
+                    <span className="label-text text-xs text-gray-600 font-medium text-left">
                       Confirm Password
                     </span>
                   </label>
@@ -75,17 +75,16 @@ const ERAActionModal = ({ handleClose, open, row }) => {
                     placeholder="Confirm the password"
                     type="text"
                     name="confirm_password"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("confirm_password")}
                   />
                 </div>
               </div>
             )}
-            <div className="divider"></div>
-            <div className="modal-action">
-              {/* <input type="submit" /> */}
+            <div className="bg-gray-200 py-[1px] mt-3"></div>
+            <div className=" flex items-end justify-end mt-2">
               <button
-                className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className=" py-[5px] font-medium px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                 type="submit"
                 onClick={handleClose}
               >
@@ -93,11 +92,11 @@ const ERAActionModal = ({ handleClose, open, row }) => {
               </button>
 
               <button
-                className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                className=" py-[5px]  px-3  text-xs font-medium bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                 autoFocus
                 onClick={handleClose}
               >
-                CANCEL
+                Close
               </button>
             </div>
           </form>

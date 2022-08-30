@@ -1,5 +1,5 @@
 [
-    {
+  {
     "patient": "Celestine Luty",
     "provider": "Celestine",
     "Dos": 1,
@@ -12,9 +12,10 @@
     "Unit": "5.16",
     "billed_Amt": "$5.81",
     "insurance_name": "Warfarin Sodium",
-    "nt": "243",
+    "nt": "0913",
     "id": 1
-  }, {
+  },
+  {
     "patient": "Annaliese Woolam",
     "provider": "Annaliese",
     "Dos": 2,
@@ -29,7 +30,8 @@
     "insurance_name": "Aspirin",
     "nt": "5",
     "id": 2
-  }, {
+  },
+  {
     "patient": "Maude Forge",
     "provider": "Maude",
     "Dos": 3,
@@ -44,7 +46,8 @@
     "insurance_name": "Governing Vessel Conception Vessel Meridian Opener",
     "nt": "72818",
     "id": 3
-  }, {
+  },
+  {
     "patient": "Molly Wolvey",
     "provider": "Molly",
     "Dos": 4,
@@ -59,7 +62,8 @@
     "insurance_name": "triamcinolone acetonide",
     "nt": "17",
     "id": 4
-  }, {
+  },
+  {
     "patient": "Karla Mirfin",
     "provider": "Karla",
     "Dos": 5,
@@ -74,7 +78,8 @@
     "insurance_name": "Metronidazole",
     "nt": "506",
     "id": 5
-  }, {
+  },
+  {
     "patient": "Marcellus Patifield",
     "provider": "Marcellus",
     "Dos": 6,
@@ -89,7 +94,8 @@
     "insurance_name": "Loperamide Hydrochloride",
     "nt": "472",
     "id": 6
-  }, {
+  },
+  {
     "patient": "Hilton Ganforthe",
     "provider": "Hilton",
     "Dos": 7,
@@ -104,7 +110,8 @@
     "insurance_name": "Muscle and Joint",
     "nt": "062",
     "id": 7
-  }, {
+  },
+  {
     "patient": "Reginauld Himsworth",
     "provider": "Reginauld",
     "Dos": 8,
@@ -119,7 +126,8 @@
     "insurance_name": "ORIGINAL POWER REFIRMING AMPOULE",
     "nt": "98942",
     "id": 8
-  }, {
+  },
+  {
     "patient": "Eddy Buston",
     "provider": "Eddy",
     "Dos": 9,
@@ -134,7 +142,8 @@
     "insurance_name": "Simply Right Loratadine",
     "nt": "0552",
     "id": 9
-  }, {
+  },
+  {
     "patient": "Nikos Guinane",
     "provider": "Nikos",
     "Dos": 10,
@@ -149,7 +158,8 @@
     "insurance_name": "Oxycodone and Acetaminophen",
     "nt": "54725",
     "id": 10
-  }, {
+  },
+  {
     "patient": "Peggy Vollam",
     "provider": "Peggy",
     "Dos": 11,
@@ -164,7 +174,8 @@
     "insurance_name": "Thiothixene",
     "nt": "304",
     "id": 11
-  }, {
+  },
+  {
     "patient": "Lolly Baudesson",
     "provider": "Lolly",
     "Dos": 12,
@@ -179,7 +190,8 @@
     "insurance_name": "Desmopressin Acetate",
     "nt": "50609",
     "id": 12
-  }, {
+  },
+  {
     "patient": "Peter Lyst",
     "provider": "Peter",
     "Dos": 13,
@@ -194,7 +206,8 @@
     "insurance_name": "Enviroclenz",
     "nt": "2",
     "id": 13
-  }, {
+  },
+  {
     "patient": "Rodina Shepton",
     "provider": "Rodina",
     "Dos": 14,
@@ -209,7 +222,8 @@
     "insurance_name": "OXYGEN",
     "nt": "9",
     "id": 14
-  }, {
+  },
+  {
     "patient": "Jonell Fairbridge",
     "provider": "Jonell",
     "Dos": 15,
@@ -224,7 +238,8 @@
     "insurance_name": "Ammonium Lactate",
     "nt": "51",
     "id": 15
-  }, {
+  },
+  {
     "patient": "Olympia MacGillreich",
     "provider": "Olympia",
     "Dos": 16,
@@ -239,7 +254,8 @@
     "insurance_name": "Pepto-Bismol",
     "nt": "864",
     "id": 16
-  }, {
+  },
+  {
     "patient": "Renae Roads",
     "provider": "Renae",
     "Dos": 17,
@@ -254,7 +270,8 @@
     "insurance_name": "nicotine",
     "nt": "7863",
     "id": 17
-  }, {
+  },
+  {
     "patient": "Lefty Moncrieffe",
     "provider": "Lefty",
     "Dos": 18,
@@ -269,7 +286,8 @@
     "insurance_name": "FungaZoil Advanced",
     "nt": "4",
     "id": 18
-  }, {
+  },
+  {
     "patient": "Brigg Senecaut",
     "provider": "Brigg",
     "Dos": 19,
@@ -284,7 +302,8 @@
     "insurance_name": "Omeprazole",
     "nt": "9209",
     "id": 19
-  }, {
+  },
+  {
     "patient": "Jan Walewicz",
     "provider": "Jan",
     "Dos": 20,
@@ -299,7 +318,8 @@
     "insurance_name": "Epsom Salt",
     "nt": "4728",
     "id": 20
-  }, {
+  },
+  {
     "patient": "Gabriellia O'Neal",
     "provider": "Gabriellia",
     "Dos": 21,
@@ -314,7 +334,8 @@
     "insurance_name": "Cold relief",
     "nt": "94185",
     "id": 21
-  }, {
+  },
+  {
     "patient": "Beniamino O'Lagen",
     "provider": "Beniamino",
     "Dos": 22,
@@ -329,7 +350,8 @@
     "insurance_name": "Gabapentin",
     "nt": "60",
     "id": 22
-  }, {
+  },
+  {
     "patient": "Damian Corten",
     "provider": "Damian",
     "Dos": 23,
@@ -344,7 +366,8 @@
     "insurance_name": "XL-3",
     "nt": "7987",
     "id": 23
-  }, {
+  },
+  {
     "patient": "Janella Comfort",
     "provider": "Janella",
     "Dos": 24,
@@ -359,7 +382,8 @@
     "insurance_name": "Lidocaine Hydrochloride",
     "nt": "15",
     "id": 24
-  }, {
+  },
+  {
     "patient": "Lucie Duguid",
     "provider": "Lucie",
     "Dos": 25,
@@ -374,7 +398,8 @@
     "insurance_name": "Tramadol Hydrochloride",
     "nt": "327",
     "id": 25
-  }, {
+  },
+  {
     "patient": "Alexia Kantor",
     "provider": "Alexia",
     "Dos": 26,
@@ -389,7 +414,8 @@
     "insurance_name": "Threda",
     "nt": "36492",
     "id": 26
-  }, {
+  },
+  {
     "patient": "Frederic Furmenger",
     "provider": "Frederic",
     "Dos": 27,
@@ -404,7 +430,8 @@
     "insurance_name": "CVS PHARMACY",
     "nt": "57",
     "id": 27
-  }, {
+  },
+  {
     "patient": "Sylvia Chaffyn",
     "provider": "Sylvia",
     "Dos": 28,
@@ -419,7 +446,8 @@
     "insurance_name": "ZINC",
     "nt": "7373",
     "id": 28
-  }, {
+  },
+  {
     "patient": "Norri Cammacke",
     "provider": "Norri",
     "Dos": 29,
@@ -434,7 +462,8 @@
     "insurance_name": "Fomepizole",
     "nt": "63197",
     "id": 29
-  }, {
+  },
+  {
     "patient": "Lexi Prazer",
     "provider": "Lexi",
     "Dos": 30,
@@ -449,7 +478,8 @@
     "insurance_name": "Rouge Dior 710 Beige Serum",
     "nt": "4492",
     "id": 30
-  }, {
+  },
+  {
     "patient": "Garreth Neary",
     "provider": "Garreth",
     "Dos": 31,
@@ -464,7 +494,8 @@
     "insurance_name": "Moist SURE",
     "nt": "34",
     "id": 31
-  }, {
+  },
+  {
     "patient": "Dyana Elnough",
     "provider": "Dyana",
     "Dos": 32,
@@ -479,7 +510,8 @@
     "insurance_name": "Nice and Clean Antibacterial",
     "nt": "18033",
     "id": 32
-  }, {
+  },
+  {
     "patient": "Devlin Foulser",
     "provider": "Devlin",
     "Dos": 33,
@@ -494,7 +526,8 @@
     "insurance_name": "Alprazolam",
     "nt": "755",
     "id": 33
-  }, {
+  },
+  {
     "patient": "Rickert Kitchen",
     "provider": "Rickert",
     "Dos": 34,
@@ -509,7 +542,8 @@
     "insurance_name": "SunMark All Day Allergy",
     "nt": "001",
     "id": 34
-  }, {
+  },
+  {
     "patient": "Enos Truluck",
     "provider": "Enos",
     "Dos": 35,
@@ -524,7 +558,8 @@
     "insurance_name": "Venelex",
     "nt": "48283",
     "id": 35
-  }, {
+  },
+  {
     "patient": "Fonsie Clawley",
     "provider": "Fonsie",
     "Dos": 36,
@@ -539,7 +574,8 @@
     "insurance_name": "Pioglitazone",
     "nt": "870",
     "id": 36
-  }, {
+  },
+  {
     "patient": "Tessa Thursby",
     "provider": "Tessa",
     "Dos": 37,
@@ -554,7 +590,8 @@
     "insurance_name": "Cefdinir",
     "nt": "47",
     "id": 37
-  }, {
+  },
+  {
     "patient": "Sibelle Lanyon",
     "provider": "Sibelle",
     "Dos": 38,
@@ -569,7 +606,8 @@
     "insurance_name": "Chewable Aspirin",
     "nt": "37503",
     "id": 38
-  }, {
+  },
+  {
     "patient": "Claire Toolan",
     "provider": "Claire",
     "Dos": 39,
@@ -584,7 +622,8 @@
     "insurance_name": "UREA",
     "nt": "39",
     "id": 39
-  }, {
+  },
+  {
     "patient": "Spence Maytom",
     "provider": "Spence",
     "Dos": 40,
@@ -599,7 +638,8 @@
     "insurance_name": "Ampicillin",
     "nt": "9883",
     "id": 40
-  }, {
+  },
+  {
     "patient": "Bonni Jeandillou",
     "provider": "Bonni",
     "Dos": 41,
@@ -614,7 +654,8 @@
     "insurance_name": "Fenofibrate",
     "nt": "26691",
     "id": 41
-  }, {
+  },
+  {
     "patient": "Linn Dumper",
     "provider": "Linn",
     "Dos": 42,
@@ -629,7 +670,8 @@
     "insurance_name": "Methylergonovine Maleate",
     "nt": "5138",
     "id": 42
-  }, {
+  },
+  {
     "patient": "Harv Prestney",
     "provider": "Harv",
     "Dos": 43,
@@ -644,7 +686,8 @@
     "insurance_name": "GRANISETRON HYDROCHLORIDE",
     "nt": "162",
     "id": 43
-  }, {
+  },
+  {
     "patient": "Burk Silwood",
     "provider": "Burk",
     "Dos": 44,
@@ -659,7 +702,8 @@
     "insurance_name": "Amlodipine and Benazepril Hydrochloride",
     "nt": "900",
     "id": 44
-  }, {
+  },
+  {
     "patient": "Tremayne Streak",
     "provider": "Tremayne",
     "Dos": 45,
@@ -674,7 +718,8 @@
     "insurance_name": "Clonidine Hydrochloride",
     "nt": "4699",
     "id": 45
-  }, {
+  },
+  {
     "patient": "Bobette Baribal",
     "provider": "Bobette",
     "Dos": 46,
@@ -689,7 +734,8 @@
     "insurance_name": "Eczemin",
     "nt": "26787",
     "id": 46
-  }, {
+  },
+  {
     "patient": "Rosa Ashton",
     "provider": "Rosa",
     "Dos": 47,
@@ -704,7 +750,8 @@
     "insurance_name": "Lancome Paris Renergie Lift Volumetry",
     "nt": "481",
     "id": 47
-  }, {
+  },
+  {
     "patient": "Marmaduke Northover",
     "provider": "Marmaduke",
     "Dos": 48,
@@ -719,7 +766,8 @@
     "insurance_name": "SUPER SENSITIVE DIAPER RASH",
     "nt": "3",
     "id": 48
-  }, {
+  },
+  {
     "patient": "Jasmine Zamora",
     "provider": "Jasmine",
     "Dos": 49,
@@ -734,7 +782,8 @@
     "insurance_name": "IL-10",
     "nt": "44024",
     "id": 49
-  }, {
+  },
+  {
     "patient": "Averil Loude",
     "provider": "Averil",
     "Dos": 50,

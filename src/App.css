@@ -69,3 +69,7 @@ main {
   background: #fff !important;
   color: #02818F !important;
 }
+
+input[type='checkbox'] {
+  accent-color: teal;
+}

@@ -63,7 +63,7 @@
         padding: 0 8px;
     }
 
- 
+
 
 }
 
@@ -80,7 +80,7 @@
         padding: 0 8px;
     }
 
- 
+
 }
 
 @media only screen and (min-width:1025px) {
@@ -110,4 +110,20 @@
 }
 
 
+.resizer {
+    display: inline-block;
+    background: #0AA7B8;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(50%);
+    z-index: 1;
+    /* prevent scroll on touch devices */
+    touch-action: none;
+}
 
+.isResizing {
+    background: #0AA7B8;
+}

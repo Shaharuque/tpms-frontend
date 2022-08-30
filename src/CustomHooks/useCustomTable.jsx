@@ -1,6 +1,6 @@
 import React from "react";
 
-const SettingTableBox = ({
+const UseCustomTable = ({
   getTableProps,
   headerGroups,
   getTableBodyProps,
@@ -63,4 +63,4 @@ const SettingTableBox = ({
   );
 };
 
-export default SettingTableBox;
+export default UseCustomTable;

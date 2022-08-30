@@ -1,6 +1,12 @@
 import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { usePagination, useSortBy, useTable } from "react-table";
+import {
+  usePagination,
+  useSortBy,
+  useTable,
+  useBlockLayout,
+  useResizeColumns,
+} from "react-table";
 import VendorNumberSetupActionModal from "./VendorNumberSetup/VendorNumberSetupActionModal";
 import {
   VendorNumberSetupColumns,
@@ -12,14 +18,9 @@ const VendorNumberSetup = () => {
   const [tableOpen, setTableOpen] = useState(false);
   const data = useMemo(() => VendorNumberSetupData, []);
   const columns = useMemo(() => [...VendorNumberSetupColumns], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination);
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination);
   // console.log("tableOpen,", tableOpen);
 
   const handleClickOpen = () => {
@@ -97,7 +98,7 @@ const VendorNumberSetup = () => {
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th
-                        className="bg-secondary border  px-2 py-1 text-sm text-white"
+                        className="bg-secondary border  min-w-[120px]  py-1 text-xs font-normal text-white"
                         {...column.getHeaderProps(
                           column.getSortByToggleProps()
                         )}

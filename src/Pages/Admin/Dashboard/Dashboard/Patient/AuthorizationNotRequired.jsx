@@ -1,44 +1,33 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import {
-  AuthorizationNotRequiredColumn,
-  AuthorizationNotRequiredData,
-} from "./PatientTableData";
+import { AuthorizationNotRequiredColumn } from "./PatientTableData";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import axios from "axios";
+import UseTable from "../../../../../CustomHooks/UseTable";
 
 const AuthorizationNotRequired = () => {
-
-  const [AuthorizationNotData , SetAuthorizationNotData] = useState([]);
-  
+  const [AuthorizationNotData, SetAuthorizationNotData] = useState([]);
 
   // fake Api cal
 
-  useEffect(()=>{
-    axios('../../All_Fake_Api/ExpiringAuthorization.json')
-    .then((response)=>{
-      SetAuthorizationNotData(response.data)
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
-
-  },[])
+  useEffect(() => {
+    axios("../../All_Fake_Api/ExpiringAuthorization.json")
+      .then((response) => {
+        SetAuthorizationNotData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const data = useMemo(() => AuthorizationNotData, [AuthorizationNotData]);
   const columns = useMemo(() => [...AuthorizationNotRequiredColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div className={!AuthorizationNotData ? "h-[100vh]" : ""}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">
           Authorization Not Required
@@ -54,13 +43,13 @@ const AuthorizationNotRequired = () => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );

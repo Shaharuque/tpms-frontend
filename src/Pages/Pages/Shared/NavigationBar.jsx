@@ -309,7 +309,7 @@ const NavigationBar = ({ handle }) => {
                       <AiFillUnlock />
                     </div>
                     <div className="text-xs text-wite">
-                      <h1 className="font-medium">My Profile</h1>
+                      <h1 className="font-medium">Change Password</h1>
                       <p>Update your password</p>
                     </div>
                   </Link>

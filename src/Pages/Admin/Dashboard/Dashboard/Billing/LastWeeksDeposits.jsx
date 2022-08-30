@@ -13,7 +13,7 @@ import axios from "axios";
 
 const LastWeeksDeposits = () => {
   const [LastDepoData, SetLastDepoData] = useState([])
-  // fake api call
+  // fake api cal
   useEffect(()=>{
     axios('../../All_Fake_Api/LastWeekDeposit.json')
     .then((response)=>{
@@ -29,10 +29,10 @@ const LastWeeksDeposits = () => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
+    rows,
     // page,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  } = useTable({ columns, data }, useSortBy, useRowSelect);
   return (
     <div >
       <div className="flex items-center flex-wrap gap-2 justify-between">
@@ -52,7 +52,7 @@ const LastWeeksDeposits = () => {
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
         ></SettingTableBox>
       </div>
