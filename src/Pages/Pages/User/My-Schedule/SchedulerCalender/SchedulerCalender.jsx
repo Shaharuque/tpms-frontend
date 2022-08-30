@@ -1,6 +1,6 @@
 // import { Scheduler } from "../../../../../../node_modules/@aldabil/react-scheduler/dist";
 import React from "react";
-import { Scheduler } from "@aldabil/react-scheduler";
+// import { Scheduler } from "@aldabil/react-scheduler";
 
 const SchedulerCalender = () => {
   const fetchRemote = async (query) => {
@@ -129,11 +129,11 @@ const SchedulerCalender = () => {
   ];
   return (
     <div>
-      <Scheduler
+      {/* <Scheduler
         view="week"
         events={EVENTS}
         selectedDate={new Date(2021, 4, 5)}
-      />
+      /> */}
     </div>
   );
 };
