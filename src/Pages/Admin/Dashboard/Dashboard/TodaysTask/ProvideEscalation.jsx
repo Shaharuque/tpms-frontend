@@ -8,8 +8,9 @@ import TransitionTable from "./ArFollowupBucket/TransitionTable";
 import AddNote from "./ArFollowupBucket/AddNote";
 import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
 import { FiDownload } from "react-icons/fi";
-import UseTable from "../../../../../CustomHooks/UseTable";
+
 import axios from "axios";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const ProvideEscalation = () => {
   const [select, setSelect] = useState("");

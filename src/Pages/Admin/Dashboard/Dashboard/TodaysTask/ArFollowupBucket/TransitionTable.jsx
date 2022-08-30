@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { TransitionTableColumn } from "../TodaysTaskTableData";
 import axios from "axios";
-import UseTable from "../../../../../../CustomHooks/UseTable";
+import UseTable from "../../../../../../Utilities/UseTable";
 
 const TransitionTable = () => {
   const [transData, SetTransData] = useState([]);
