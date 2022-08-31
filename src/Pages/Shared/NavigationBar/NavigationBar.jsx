@@ -25,7 +25,7 @@ import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { useOutsideAlerter } from "../../../CustomHooks/useDetectOutsideClick";
 
 const NavigationBar = ({ handle }) => {
-  //const [dOpen, setDOpen] = useState(false);
+  const [dOpen, setDOpen] = useState(false);
   const { visible, setVisible, ref } = useOutsideAlerter(false);
   const navigate = useNavigate();
   let [open, setOpen] = useState(false);
@@ -41,6 +41,11 @@ const NavigationBar = ({ handle }) => {
 
   const handleSignOut = () => {
     navigate("/");
+  };
+
+  const handleModal = () => {
+    setVisible(false);
+    setDOpen(!dOpen);
   };
 
   return (
@@ -185,7 +190,10 @@ const NavigationBar = ({ handle }) => {
           {/**download */}
           <div ref={ref}>
             <div
-              onClick={() => setVisible(!visible)}
+              onClick={() => {
+                setVisible(!visible);
+                setDOpen(false);
+              }}
               className="text-xl font-bold text-secondary md:-mt-2  cursor-pointer"
             >
               <BsDownload />
@@ -197,62 +205,83 @@ const NavigationBar = ({ handle }) => {
             )}
           </div>
           {/* admin part  */}
-          <div className="my-5 md:my-0">
-            <div className="dropdown md:dropdown-end">
-              <label tabIndex="0" className="flex gap-2 items-center">
-                <div className="w-8 mr-1 rounded-full">
-                  <img className="avatar rounded-full" src={admin} alt="pic" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-lg">Admin</h4>
-                  <h5 className="text-secondary font-medium text-xs">
-                    admin@admin.com
-                  </h5>
-                </div>
-              </label>
-
-              <div className="flex justify-center menu menu-compact dropdown-content w-auto md:w-[18rem] shadow bg-white rounded-lg">
-                <div className="bg-[#0CADBF] rounded-t-xl p-4">
-                  <h5 className=" text-sm text-white font-bold">Hello admin</h5>
-                  <p className="text-xs text-white">admin@admin.com</p>
-                </div>
-
-                <div>
-                  <Link
-                    to={"/admin/profile/profile-information"}
-                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                  >
-                    <div className=" rounded-full p-3 bg-[#CEEBEE]">
-                      <AiOutlineFileAdd />
-                    </div>
-                    <div className="text-xs text-wite">
-                      <h1 className="font-medium">My Profile</h1>
-                      <p>View personal profile details</p>
-                    </div>
-                  </Link>
-                </div>
-
-                <div>
-                  <Link
-                    to={"/admin/profile/password-change"}
-                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                  >
-                    <div className=" rounded-full p-3 bg-[#CEEBEE] ">
-                      <AiFillUnlock />
-                    </div>
-                    <div className="text-xs text-wite">
-                      <h1 className="font-medium">Change Password</h1>
-                      <p>Update your password</p>
-                    </div>
-                  </Link>
-                </div>
-                <button
-                  type="button"
-                  className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
-                  onClick={handleSignOut}
+          <div>
+            <div className="my-5 md:my-0">
+              <div className="" onClick={handleModal}>
+                <label
+                  tabIndex="0"
+                  className="flex gap-2 items-center cursor-pointer"
                 >
-                  Sign out <AiOutlinePlusSquare />
-                </button>
+                  <div className="w-8 mr-1 rounded-full">
+                    <img
+                      className="avatar rounded-full"
+                      src={admin}
+                      alt="pic"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-lg">Admin</h4>
+                    <h5 className="text-secondary font-medium text-xs">
+                      admin@admin.com
+                    </h5>
+                  </div>
+                </label>
+
+                {dOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 25 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="absolute bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl border : ;
+       mt-2 sm:right-0 cursor-pointer"
+                  >
+                    <div className="bg-gradient-to-r from-primary to-secondary rounded-t-xl p-4">
+                      <h5 className=" text-sm text-white font-bold">
+                        Hello admin
+                      </h5>
+                      <p className="text-xs text-white">admin@admin.com</p>
+                    </div>
+
+                    <div>
+                      <Link
+                        to={"/admin/profile/profile-information"}
+                        className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
+                      >
+                        <div className=" rounded-full p-3 bg-[#CEEBEE]">
+                          <AiOutlineFileAdd className="text-teal-500" />
+                        </div>
+                        <div className="text-xs text-wite">
+                          <h1 className="font-bold">My Profile</h1>
+                          <p className="text-[#7c8186]">
+                            View personal profile details
+                          </p>
+                        </div>
+                      </Link>
+                    </div>
+
+                    <div>
+                      <Link
+                        to={"/admin/profile/password-change"}
+                        className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
+                      >
+                        <div className=" rounded-full p-3 bg-[#CEEBEE] ">
+                          <AiFillUnlock className="text-teal-500" />
+                        </div>
+                        <div className="text-xs text-wite">
+                          <h1 className="font-bold">Change Password</h1>
+                          <p className="text-[#7c8186]">Update your password</p>
+                        </div>
+                      </Link>
+                    </div>
+                    <button
+                      type="button"
+                      className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
+                      onClick={handleSignOut}
+                    >
+                      Sign out <AiOutlinePlusSquare />
+                    </button>
+                  </motion.div>
+                )}
               </div>
             </div>
           </div>
