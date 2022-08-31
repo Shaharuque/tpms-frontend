@@ -33,11 +33,12 @@ const VacationPendingApproval = () => {
     getTableBodyProps,
     headerGroups,
     page,
+    rows,
     // page,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  } = useTable({ columns, data }, useSortBy,  useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div >
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">Vacation Pending</h1>
         <div className="flex items-center gap-3">
@@ -55,7 +56,7 @@ const VacationPendingApproval = () => {
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
         ></SettingTableBox>
       </div>

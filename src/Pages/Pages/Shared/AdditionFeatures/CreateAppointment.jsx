@@ -20,8 +20,7 @@ const CreateAppointment = ({ handleClose }) => {
   const data = [
     "Eugenia",
     "Bryan",
-    "Linda"
-   
+    "Linda",
   ].map((item) => ({ label: item, value: item }));
   return (
     <div>
@@ -30,7 +29,7 @@ const CreateAppointment = ({ handleClose }) => {
         // onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <div className="px-5 py-2 box sm:w-[500px]">
+        <div className="px-5 py-2 box  sm:w-[500px]">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
               Add Appointment
@@ -158,6 +157,7 @@ const CreateAppointment = ({ handleClose }) => {
                   className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                   type="time"
                   {...register("to_time")}
+                 
                 />
                 <div className="text-xs text-gray-600 mx-auto mt-2">
                   To Time
