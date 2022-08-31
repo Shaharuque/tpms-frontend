@@ -121,6 +121,7 @@ import ListView from "./Pages/Admin/Appointment/ListView/ListView";
 import CalendarView from "./Pages/Admin/Appointment/CalenderView/CalendarView";
 import RecurringSession from "./Pages/Admin/Appointment/RecurringSession/RecurringSession";
 import RecurringSessionEdit from "./Pages/Admin/Appointment/RecurringSession/RecurringSession/RecurringSessionEdit";
+import NotFound from "./NoPageFound/NotFound";
 // ######
 
 function App() {
@@ -145,7 +146,6 @@ function App() {
 
           {/*Testing */}
           <Route path="/table" element={<MainBase></MainBase>}></Route>
-
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
             <Route
               path="report-export-view"
@@ -597,6 +597,8 @@ function App() {
               element={<MyStatement></MyStatement>}
             ></Route>
           </Route>
+          {/* No Page Found */}
+          <Route path='*' element={<NotFound></NotFound>}></Route>
         </Routes>
       </FullScreen>
     </div>

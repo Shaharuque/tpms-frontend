@@ -296,6 +296,9 @@ const NavigationBar = ({ handle }) => {
                     </div>
                   </Link>
                 </div>
+                {/* testing button */}
+
+                {/* alkjfld */}
                 <button
                   type="button"
                   className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
