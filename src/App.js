@@ -121,6 +121,8 @@ import RecurringSessionEdit from "./Pages/Admin/Appointment/RecurringSession/Rec
 import ProvideEscalation from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/ProvideEscalation";
 // ###### NAVIGATION BAR
 import DownloadView from "./Pages/Shared/NavigationBar/ScheduleExport/Download/DownloadView";
+import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/ApplyPayment";
+import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
 // ######
 
 function App() {
@@ -288,6 +290,31 @@ function App() {
             <Route
               path="kpi-reported-by-patient-view"
               element={<KPIReportsPatient></KPIReportsPatient>}
+            ></Route>
+            <Route
+              path="kpi-reported-by-insurance-view"
+              element={<KPIReportsInsurance></KPIReportsInsurance>}
+            ></Route>
+            {/* ------------------------------  */}
+            <Route
+              path="deposit-apply/:id"
+              element={<ApplyPayment></ApplyPayment>}
+            ></Route>
+            <Route
+              path="deposit-edit/:id"
+              element={<AddDeposit></AddDeposit>}
+            ></Route>
+            <Route
+              path="kpi-reported-by-insurance-view"
+              element={<KPIReportsInsurance></KPIReportsInsurance>}
+            ></Route>
+            <Route
+              path="kpi-reported-by-insurance-view"
+              element={<KPIReportsInsurance></KPIReportsInsurance>}
+            ></Route>
+            <Route
+              path="kpi-reported-by-insurance-view"
+              element={<KPIReportsInsurance></KPIReportsInsurance>}
             ></Route>
             <Route
               path="kpi-reported-by-insurance-view"

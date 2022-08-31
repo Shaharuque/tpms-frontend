@@ -3,12 +3,11 @@ import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { ManageTableColumnsColumn } from "./ListView/ManageTableColumns";
 import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
 import { Switch } from "@mui/material";
-import { Toggle } from 'rsuite';
 import { useForm } from "react-hook-form";
 import { DateRangePicker } from "rsuite";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
-import SettingTableBox from "../../../Pages/Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../Utilities/UseTable";
 
 const ListView = () => {
   const [billable, setBillable] = useState(true);
@@ -102,8 +101,8 @@ const ListView = () => {
               setBillable(!billable);
               setTable(!table);
             }}
-          />      
-            
+          />
+
           <label
             className="form-check-label inline-block ml-2 text-sm text-gray-500"
             htmlFor="flexSwitchCheckDefault"
@@ -215,20 +214,20 @@ const ListView = () => {
       {table && (
         <>
           <div className="my-5">
-            <SettingTableBox
+            <UseTable
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
               rows={rows}
               prepareRow={prepareRow}
-            ></SettingTableBox>
+            ></UseTable>
           </div>
           <div className="flex item-center flex-wrap">
             <div>
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="border rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
+                className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
               >
                 <option value=""></option>
                 <option value="Specific_Date">Specific Date</option>

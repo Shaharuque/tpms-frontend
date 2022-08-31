@@ -198,7 +198,7 @@ const NavigationBar = ({ handle }) => {
             )}
           </div>
           {/* admin part  */}
-          <div ref={ref} className="my-5 md:my-0">
+          <div className="my-5 md:my-0">
             <div className="" onClick={() => setDOpen(!dOpen)}>
               <label tabIndex="0" className="flex gap-2 items-center">
                 <div className="w-8 mr-1 rounded-full">
