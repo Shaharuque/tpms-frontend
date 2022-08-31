@@ -20,7 +20,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
             className={
               isHovering
                 ? "mr-2 opacity-1 duration-600 ease-in text-[14px]"
-                : "mr-2 opacity-0 duration-200 ease-out text-[14px]"
+                : "mr-2 opacity-0 duration-200 ease-out text-[14px] hidden"
             }
           >
             {items.name}
@@ -57,7 +57,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
               to={s.path}
               key={i}
               style={{ display: "block" }}
-              className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white duration-200 transition ease-in-out"
+              className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white"
               activeclassname="active"
             >
               <div className="flex items-center h-8">
@@ -71,8 +71,8 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
                   <div
                     className={
                       isHovering
-                        ? "mr-2 opacity-0.5 duration-700 ease-in text-[14px]"
-                        : "mr-2 opacity-0 duration-200 ease-out text-[14px]"
+                        ? "mr-2 opacity-0.5 ease-in text-[14px] text-red-500"
+                        : "mr-2 opacity-0 ease-out text-[14px] hidden"
                     }
                   >
                     {s.name}

@@ -214,7 +214,7 @@ const initialDropState = {};
 const x = menuItem.map((item) => {
   if (item.subRoute) initialDropState[item.name] = false;
 });
-console.log(x);
+//console.log(x);
 // console.log(initialDropState);
 
 const Sidebar = ({ handle }) => {
@@ -263,7 +263,7 @@ const Sidebar = ({ handle }) => {
       >
         <div
           style={{
-            width: isHovering ? "220px" : "70px",
+            width: isHovering ? "240px" : "70px",
             // transition: isHovering ? "ease-in 0.5s" : "ease-out 0.3s",
           }}
           className="sidebar"
@@ -321,7 +321,7 @@ const Sidebar = ({ handle }) => {
                         className={
                           isHovering
                             ? "opacity-1 duration-600 ease-in text-[14px] "
-                            : "opacity-0 duration-200 ease-out text-[14px] "
+                            : "opacity-0 duration-200 ease-out text-[14px] hidden"
                         }
                       >
                         {items.name}
