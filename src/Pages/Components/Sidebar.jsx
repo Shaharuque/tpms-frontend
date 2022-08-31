@@ -33,8 +33,8 @@ import { GrFormSchedule } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
-import NavigationBar from "../Pages/Shared/NavigationBar";
-import Footer from "./Footer";
+import NavigationBar from "../Shared/NavigationBar/NavigationBar";
+import Footer from "../Shared/Footer/Footer";
 // import StateUse from "../Hooks/StateUse";
 // 
 const menuItem = [
@@ -57,12 +57,12 @@ const menuItem = [
       },
       {
         path: "/admin/calender-view",
-        name: "calender view",
+        name: "Calender View",
         icon: <FaCalendarAlt />,
       },
       {
         path: "/admin/recurring-session",
-        name: "recurring session",
+        name: "Recurring Session",
         icon: <VscDebugDisconnect />,
       },
     ],
@@ -320,8 +320,8 @@ const Sidebar = ({ handle }) => {
                         // className="link_text text-sm"
                         className={
                           isHovering
-                            ? "opacity-1 duration-600 ease-in"
-                            : "opacity-0 duration-200 ease-out"
+                            ? "opacity-1 duration-600 ease-in text-[14px] "
+                            : "opacity-0 duration-200 ease-out text-[14px] "
                         }
                       >
                         {items.name}

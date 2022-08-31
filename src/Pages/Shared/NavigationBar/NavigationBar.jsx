@@ -4,7 +4,6 @@ import {
   BiFullscreen,
   BiExitFullscreen,
   BiMessageRounded,
-  BiBadge,
 } from "react-icons/bi";
 import {
   AiOutlinePlus,
@@ -14,17 +13,21 @@ import {
   AiOutlinePlusSquare,
   AiOutlineFileAdd,
   AiFillUnlock,
-  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.png";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import CreateAppointment from "./AdditionFeatures/CreateAppointment";
-import CreatePatient from "./AdditionFeatures/CreatePatient";
+import CreateAppointment from "../../Pages/Shared/AdditionFeatures/CreateAppointment";
+import CreatePatient from "../../Pages/Shared/AdditionFeatures/CreatePatient";
+import ScheduleExport from "./ScheduleExport/ScheduleExport";
+import { useOutsideAlerter } from "../../../CustomHooks/useDetectOutsideClick";
 
 const NavigationBar = ({ handle }) => {
+  //const [dOpen, setDOpen] = useState(false);
+  const { visible, setVisible, ref } = useOutsideAlerter(false);
+  const [dOpen, setDOpen] = useState(false);
   const navigate = useNavigate();
   let [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -65,12 +68,7 @@ const NavigationBar = ({ handle }) => {
               ABC Behavioral Therapy Centers
             </p>
           </div>
-
-
         </div>
-
-
-
 
         <div
           onClick={() => setOpen(!open)}
@@ -78,8 +76,6 @@ const NavigationBar = ({ handle }) => {
         >
           <p className="">{open ? <AiOutlineClose /> : <FaBars />}</p>
         </div>
-
-
 
         <div
           className={`md:flex md:items-center gap-10  md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${
@@ -142,7 +138,7 @@ const NavigationBar = ({ handle }) => {
             </div>
           </div>
 
-          {/* notify    */}
+          {/* notify*/}
           <div className="">
             <div className="dropdown md:dropdown-end">
               <div className="">
@@ -168,8 +164,9 @@ const NavigationBar = ({ handle }) => {
                   <hr />
                   <span className="text-info text-xs">
                     <span className="badge badge-primary mr-2">new </span>
-                    Latest changes
-                    NewTelehealth Video Session. Video Session feature for Telehealth For Telehealth, video session feature is added. You can...
+                    Latest changes NewTelehealth Video Session. Video Session
+                    feature for Telehealth For Telehealth, video session feature
+                    is added. You can...
                   </span>
                   <div className="card-actions">
                     <button className="btn btn-primary btn-block">
@@ -182,91 +179,27 @@ const NavigationBar = ({ handle }) => {
           </div>
           {/* message  */}
           <div>
-            <h1 className="  text-2xl font-bold text-secondary md:-mt-2">
+            <button className="  text-2xl font-bold text-secondary md:-mt-2">
               <BiMessageRounded />
-            </h1>
+            </button>
           </div>
           {/**download */}
-          <div className="  ">
-            <div className="dropdown md:dropdown-end">
-              <label tabIndex="0" className="">
-                <h1 className=" text-xl font-bold text-secondary">
-                  <BsDownload />
-                </h1>
-              </label>
-              <div className="flex justify-center menu menu-compact dropdown-content w-auto md:w-[18rem] sm:w-56 shadow bg-white rounded-lg">
-                <div className="bg-[#0CADBF] rounded-t-xl p-4 flex justify-between items-center">
-                  <h5 className="inline  text-sm text-white font-bold">
-                    Schedule export
-                  </h5>
-                  <span class="inline-block  px-2 text-xs text-center  align-baseline font-bold bg-white text-black rounded">
-                    64
-                  </span>
-                </div>
-                <div>
-                  <div className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
-                    <div>
-                      <h1 className=" text-3xl font-bold text-secondary">
-                        <AiOutlineCloudDownload />
-                      </h1>
-                    </div>
-                    <div className="text-xs text-wite">
-                      <h1 className="font-semibold mb-1">
-                        837-11660888499.txt
-                      </h1>
-                      <h1 className="font-medium text-md">CSV file</h1>
-                      <small class="block text-xs text-gray-600">
-                        5 day left
-                      </small>
-                      <button
-                        type="button"
-                        class="inline-block px-2 bg-[#0CADBF] text-white font-semibold text-[10px] leading-tight  rounded-md shadow-md  hover:shadow-lg  "
-                      >
-                        Ready To Download
-                      </button>
-                    </div>
-                  </div>
-                  <hr className="-mt-[0] w-11/12 mx-auto" />
-                </div>
-                <div>
-                  <div className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3 mt-[3]">
-                    <div>
-                      <h1 className=" text-2xl font-bold text-secondary">
-                        <AiOutlineCloudDownload />
-                      </h1>
-                    </div>
-                    <div className="text-xs text-wite">
-                      <h1 className="font-semibold mb-1">
-                        837-11660888499.txt
-                      </h1>
-                      <h1 className="font-medium text-md">CSV file</h1>
-                      <small class="block text-xs text-gray-600">
-                        5 day left
-                      </small>
-                      <button
-                        type="button"
-                        class="inline-block px-2 bg-[#0CADBF] text-white font-semibold text-[10px] leading-tight  rounded-md shadow-md  hover:shadow-lg  "
-                      >
-                        Ready To Download
-                      </button>
-                    </div>
-                  </div>
-                  <hr className="-mt-[0] w-11/12 mx-auto" />
-                </div>
-
-                <Link
-                  to={"/admin/report-export-view"}
-                  className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
-                >
-                  view more
-                </Link>
-              </div>
+          <div ref={ref}>
+            <div
+              onClick={() => setVisible(!visible)}
+              className="text-xl font-bold text-secondary md:-mt-2  cursor-pointer"
+            >
+              <BsDownload />
             </div>
+            {visible && (
+              <div>
+                <ScheduleExport setVisible={setVisible}></ScheduleExport>
+              </div>
+            )}
           </div>
-
           {/* admin part  */}
           <div className="my-5 md:my-0">
-            <div className="dropdown md:dropdown-end">
+            <div className="" onClick={() => setDOpen(!dOpen)}>
               <label tabIndex="0" className="flex gap-2 items-center">
                 <div className="w-8 mr-1 rounded-full">
                   <img className="avatar rounded-full" src={admin} alt="pic" />
@@ -279,49 +212,59 @@ const NavigationBar = ({ handle }) => {
                 </div>
               </label>
 
-              <div className="flex justify-center menu menu-compact dropdown-content w-auto md:w-[18rem] shadow bg-white rounded-lg">
-                <div className="bg-[#0CADBF] rounded-t-xl p-4">
-                  <h5 className=" text-sm text-white font-bold">Hello admin</h5>
-                  <p className="text-xs text-white">admin@admin.com</p>
-                </div>
-
-                <div>
-                  <Link
-                    to={"/admin/profile/profile-information"}
-                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                  >
-                    <div className=" rounded-full p-3 bg-[#CEEBEE]">
-                      <AiOutlineFileAdd />
-                    </div>
-                    <div className="text-xs text-wite">
-                      <h1 className="font-medium">My Profile</h1>
-                      <p>View personal profile details</p>
-                    </div>
-                  </Link>
-                </div>
-
-                <div>
-                  <Link
-                    to={"/admin/profile/password-change"}
-                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                  >
-                    <div className=" rounded-full p-3 bg-[#CEEBEE] ">
-                      <AiFillUnlock />
-                    </div>
-                    <div className="text-xs text-wite">
-                      <h1 className="font-medium">Change Password</h1>
-                      <p>Update your password</p>
-                    </div>
-                  </Link>
-                </div>
-                <button
-                  type="button"
-                  className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
-                  onClick={handleSignOut}
+              {dOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 25 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="absolute bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl border : ;
+       mt-2 sm:right-0 "
                 >
-                  Sign out <AiOutlinePlusSquare />
-                </button>
-              </div>
+                  <div className="bg-gradient-to-r from-primary to-secondary rounded-t-xl p-4">
+                    <h5 className=" text-sm text-white font-bold">
+                      Hello admin
+                    </h5>
+                    <p className="text-xs text-white">admin@admin.com</p>
+                  </div>
+
+                  <div>
+                    <Link
+                      to={"/admin/profile/profile-information"}
+                      className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
+                    >
+                      <div className=" rounded-full p-3 bg-[#CEEBEE]">
+                        <AiOutlineFileAdd />
+                      </div>
+                      <div className="text-xs text-wite">
+                        <h1 className="font-medium">My Profile</h1>
+                        <p>View personal profile details</p>
+                      </div>
+                    </Link>
+                  </div>
+
+                  <div>
+                    <Link
+                      to={"/admin/profile/password-change"}
+                      className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
+                    >
+                      <div className=" rounded-full p-3 bg-[#CEEBEE] ">
+                        <AiFillUnlock />
+                      </div>
+                      <div className="text-xs text-wite">
+                        <h1 className="font-medium">Change Password</h1>
+                        <p>Update your password</p>
+                      </div>
+                    </Link>
+                  </div>
+                  <button
+                    type="button"
+                    className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
+                    onClick={handleSignOut}
+                  >
+                    Sign out <AiOutlinePlusSquare />
+                  </button>
+                </motion.div>
+              )}
             </div>
           </div>
         </div>

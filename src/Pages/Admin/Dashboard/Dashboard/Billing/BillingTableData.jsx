@@ -145,7 +145,6 @@ export const LastMonthsStatementsColumn = [
     accessor: "checkDate",
   },
 
-  
   {
     Header: () => {
       return <span className="">Payee Name</span>;
@@ -185,8 +184,6 @@ export const LastMonthsStatementsColumn = [
     },
     accessor: "file",
   },
-
-
 ];
 
 // LastMonthBilledDates BilledTable;
@@ -309,5 +306,90 @@ export const DetailTableColumn = [
       return <span className="">Paid</span>;
     },
     accessor: "paid",
+  },
+];
+// DetailTable;
+
+export const PendingSecondaryClaimsData = [
+  {
+    patient: "asd",
+  },
+  {
+    patient: "mina",
+  },
+];
+
+export const PendingSecondaryClaimsColumn = [
+  {
+    Header: () => {
+      return <span className="">Claim No.</span>;
+    },
+    accessor: "patient",
+  },
+  {
+    Header: () => {
+      return <span className="">Payor</span>;
+    },
+    accessor: "provider",
+  },
+  {
+    Header: () => {
+      return <span className="">Patient</span>;
+    },
+    accessor: "Dos",
+  },
+  {
+    Header: () => {
+      return <span className="">Date Range</span>;
+    },
+    accessor: "date-range",
+  },
+  {
+    Header: () => {
+      return <span className="">Total</span>;
+    },
+    accessor: "Total",
+  },
+  {
+    Header: () => {
+      return <span className="">Action</span>;
+    },
+    accessor: "Action",
+  },
+  {
+    Header: () => {
+      return <span className="">F. Billed Dt.</span>;
+    },
+    accessor: "F_Billed_Dt",
+  },
+  {
+    Header: () => {
+      return <span className="">L. Billed Dt.</span>;
+    },
+    accessor: "l_Billed_Dt",
+  },
+  {
+    Header: () => {
+      return <span className="">Box 19</span>;
+    },
+    accessor: "Box19",
+  },
+  {
+    Header: () => {
+      return <span className="">ReSub. Code</span>;
+    },
+    accessor: "ReSubCode",
+  },
+  {
+    Header: () => {
+      return <span className="">Total Charge</span>;
+    },
+    accessor: "charge",
+  },
+  {
+    Header: () => {
+      return <span className="">Org. Ref. no.</span>;
+    },
+    accessor: "org_no",
   },
 ];

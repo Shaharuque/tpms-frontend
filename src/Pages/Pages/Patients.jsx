@@ -14,7 +14,7 @@ const Patients = () => {
   const [hasMore, sethasMore] = useState(true);
   const [page, setpage] = useState(2);
 
-  // get data from API 
+  // get data from API
 
   useEffect(() => {
     const getComments = async () => {

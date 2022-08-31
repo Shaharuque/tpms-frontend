@@ -1,5 +1,7 @@
 import React from "react";
+import { IoMdArrowDropdown } from "react-icons/io";
 
+//mewao mewao
 const SettingTableBox = ({
   getTableProps,
   headerGroups,
@@ -26,8 +28,8 @@ const SettingTableBox = ({
                   <span className="">
                     {column.isSorted
                       ? column.isSortedDesc
-                        ? " ⇓ "
-                        : " ⇑ "
+                        ? " ⇑ "
+                        : " ⇓ "
                       : ""}
                   </span>
                 </th>

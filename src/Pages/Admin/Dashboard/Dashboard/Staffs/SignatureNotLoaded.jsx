@@ -5,8 +5,8 @@ import { FiDownload } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { SignatureNotLoadedColumn } from "./StaffDataTAble";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import UseTable from "../../../../../CustomHooks/UseTable";
 import axios from "axios";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const SignatureNotLoaded = () => {
   const [SignatureData, SetSignatureData] = useState([]);
@@ -27,20 +27,15 @@ const SignatureNotLoaded = () => {
   const onSubmit = (data) => {
     console.log(data);
     setTableOpen(true);
+    reset();
   };
 
   const data = useMemo(() => SignatureData, [SignatureData]);
   const columns = useMemo(() => [...SignatureNotLoadedColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div className={!SignatureData ? "h-[100vh]" : ""}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">Signature Not Uploaded</h1>
         <div className="flex items-center gap-3">
@@ -85,7 +80,7 @@ const SignatureNotLoaded = () => {
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
-              rows={page}
+              rows={rows}
               prepareRow={prepareRow}
             ></UseTable>
           </div>

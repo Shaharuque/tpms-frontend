@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { MissingCredentialsColumn } from "./StaffDataTAble";
-import UseTable from "../../../../../CustomHooks/UseTable";
 import axios from "axios";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const MissingCredentials = () => {
   const [VacationData, SetVacationData] = useState([]);
@@ -23,16 +23,10 @@ const MissingCredentials = () => {
 
   const data = useMemo(() => VacationData, [VacationData]);
   const columns = useMemo(() => [...MissingCredentialsColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div className={!VacationData ? "h-[100vh]" : ""}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">Missing Credentials</h1>
         <div className="flex items-center gap-3">
@@ -50,7 +44,7 @@ const MissingCredentials = () => {
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
         ></UseTable>
       </div>

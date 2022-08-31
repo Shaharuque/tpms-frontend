@@ -10,8 +10,8 @@ import AddNote from "./ArFollowupBucket/AddNote";
 import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
 import axios from "axios";
 import { FiDownload } from "react-icons/fi";
-import UseTable from "../../../../../CustomHooks/UseTable";
 import { DateRangePicker } from "rsuite";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const ArFollowupBucket = () => {
   const [select, setSelect] = useState("");
