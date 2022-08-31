@@ -123,6 +123,7 @@ import ProvideEscalation from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/Prov
 import DownloadView from "./Pages/Shared/NavigationBar/ScheduleExport/Download/DownloadView";
 import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/ApplyPayment";
 import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
+import EditDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/EditDeposit";
 // ######
 
 function App() {
@@ -302,24 +303,13 @@ function App() {
             ></Route>
             <Route
               path="deposit-edit/:id"
+              element={<EditDeposit></EditDeposit>}
+            ></Route>
+            <Route
+              path="deposit-add"
               element={<AddDeposit></AddDeposit>}
             ></Route>
-            <Route
-              path="kpi-reported-by-insurance-view"
-              element={<KPIReportsInsurance></KPIReportsInsurance>}
-            ></Route>
-            <Route
-              path="kpi-reported-by-insurance-view"
-              element={<KPIReportsInsurance></KPIReportsInsurance>}
-            ></Route>
-            <Route
-              path="kpi-reported-by-insurance-view"
-              element={<KPIReportsInsurance></KPIReportsInsurance>}
-            ></Route>
-            <Route
-              path="kpi-reported-by-insurance-view"
-              element={<KPIReportsInsurance></KPIReportsInsurance>}
-            ></Route>
+
             {/* ----------------------------------DashBoard End----------------------------------------------- */}
             {/* APPOINTMENT ROUTES */}
             <Route

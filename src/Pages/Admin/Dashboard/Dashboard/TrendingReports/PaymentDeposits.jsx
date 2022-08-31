@@ -48,12 +48,11 @@ const PaymentDeposits = () => {
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-600">Cash-Posting</h1>
         <div className="flex items-center gap-3">
-          <FiDownload className="text-secondary font-medium" />
           <Link
-            to={"/admin"}
+            to={"/admin/deposit-add"}
             className=" py-[6px] flex items-center  px-4  text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
           >
-            <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
+            + ADD Deposit
           </Link>
         </div>
       </div>
