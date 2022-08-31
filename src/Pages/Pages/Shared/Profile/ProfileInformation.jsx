@@ -24,7 +24,7 @@ const ProfileInformation = () => {
           <div>
             <div className="my-3 ">
               <input
-                className="form-control text-sm"
+                className="form-control text-sm border border-gray-300"
                 type="file"
                 id="formFile"
                 onChange={(e) => setProfileImage(e.target.value)}
@@ -42,7 +42,7 @@ const ProfileInformation = () => {
             <input
               type="text"
               name="first_name"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               {...register("first_name")}
             />
           </div>

@@ -130,7 +130,7 @@ const CalendarView = () => {
   return (
     <div>
       <Scheduler
-        view="week"
+        view="month"
         events={EVENTS}
         selectedDate={new Date(2022, 4, 5)}
       />
