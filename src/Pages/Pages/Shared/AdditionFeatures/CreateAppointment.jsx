@@ -20,7 +20,7 @@ const CreateAppointment = ({ handleClose }) => {
   const data = [
     "Eugenia",
     "Bryan",
-    "Linda",
+    "Linda"
    
   ].map((item) => ({ label: item, value: item }));
   return (

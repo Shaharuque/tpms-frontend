@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import person from "../../../Assets/user.png";
 import { motion } from "framer-motion";
+import { Uploader } from 'rsuite';
+import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 
 const ProfileInformation = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -17,7 +19,7 @@ const ProfileInformation = () => {
       transition={{ delay: 0.2 }}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="div-img">
+        {/* <div className="div-img">
           <div>
             <img src={person} className=" h-40 " alt="Dami img not taken" />
           </div>
@@ -31,7 +33,11 @@ const ProfileInformation = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
+       
+        {/* my cod     */}
+
+     
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-3 gap-y-1">
           <div>
             <label className="label">

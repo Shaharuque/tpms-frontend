@@ -1,14 +1,14 @@
 import React from "react";
-import { motion } from "framer-motion";
 import ExportedFiles from "./ExportedFiles";
-import { useNavigate } from "react-router-dom";
 import { Fade } from "react-reveal";
+import { useNavigate } from "react-router-dom";
 
 const ScheduleExport = ({ setVisible }) => {
   const navigate = useNavigate();
   const handleDownload = () => {
-    setVisible(false);
     navigate("/admin/report-export-view");
+    console.log("use");
+    setVisible(false);
   };
   return (
     <Fade button>

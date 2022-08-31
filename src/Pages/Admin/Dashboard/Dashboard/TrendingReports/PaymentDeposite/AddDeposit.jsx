@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 
-const RecurringSessionEdit = () => {
+const AddDeposit = () => {
   const {
     register,
     handleSubmit,
@@ -20,10 +20,10 @@ const RecurringSessionEdit = () => {
   return (
     <div className="sm:h-[100vh]">
       <div className="flex items-center flex-wrap gap-2 justify-between">
-        <h1 className="text-lg my-2 text-orange-500">Recurring Session Edit</h1>
+        <h1 className="text-sm font-semibold my-2 ">Add/Edit Deposit</h1>
         <div className="flex items-center gap-3">
           <Link
-            to={"/admin/recurring-session"}
+            to={"/admin/m-remittance"}
             className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
           >
             <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
@@ -46,7 +46,7 @@ const RecurringSessionEdit = () => {
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-500 text-left">
-                    Patient Name
+                    Select Payee type
                   </span>
                 </label>
                 <select
@@ -62,7 +62,7 @@ const RecurringSessionEdit = () => {
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-500 text-left">
-                    Auth
+                    Payee
                   </span>
                 </label>
                 <select
@@ -77,8 +77,21 @@ const RecurringSessionEdit = () => {
               </div>
               <div>
                 <label className="label">
+                  <span className="label-text text-xs text-gray-600 text-left">
+                    Deposit Date
+                  </span>
+                </label>
+                <input
+                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  type="date"
+                  {...register("from_Date")}
+                />
+              </div>
+
+              <div>
+                <label className="label">
                   <span className="label-text text-xs text-gray-500 text-left">
-                    Service
+                    Payment Method
                   </span>
                 </label>
                 <select
@@ -93,110 +106,70 @@ const RecurringSessionEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
-                    Provider Name
-                  </span>
-                </label>
-                <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                  {...register("Provider_name")}
-                >
-                  <option value="Mr">Mr</option>
-                  <option value="Mrs">Mrs</option>
-                  <option value="Miss">Miss</option>
-                  <option value="Dr">Dr</option>
-                </select>
-              </div>
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
-                    POS
-                  </span>
-                </label>
-                <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                  {...register("Pos")}
-                >
-                  <option value="Mr">Mr</option>
-                  <option value="Mrs">Mrs</option>
-                  <option value="Miss">Miss</option>
-                  <option value="Dr">Dr</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
-                    From Date
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">
+                    Check #
                   </span>
                 </label>
                 <input
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                  type="date"
-                  {...register("from_Date")}
+                  className="border border-gray-300 rounded-sm font-medium px-2 py-[5px] mx-1 text-xs w-full"
+                  type="text"
+                  {...register("check_no")}
                 />
               </div>
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-600 text-left">
-                    To Date
+                    Check Date
                   </span>
                 </label>
                 <input
                   className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                   type="date"
-                  {...register("To_Date")}
+                  {...register("check_Date")}
+                />
+              </div>
+              <div>
+                <label className="label">
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">
+                    Amount
+                  </span>
+                </label>
+                <input
+                  className="border border-gray-300 rounded-sm font-medium px-2 py-[5px] mx-1 text-xs w-full"
+                  type="text"
+                  {...register("amount")}
+                />
+              </div>
+              <div className=" ">
+                <label className="label">
+                  <span className="label-text text-xs text-gray-500 text-left">
+                    File
+                  </span>
+                </label>
+                <input
+                  type="file"
+                  className=" border bg-white rounded-sm ml-1  text-xs"
+                  {...register("fileName")}
+                />
+              </div>
+              <div>
+                <label className="label">
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">
+                    Unallocated Amount
+                  </span>
+                </label>
+                <input
+                  disabled
+                  className="border bg-gray-200 border-gray-300 rounded-sm font-medium px-2 py-[5px] mx-1 text-xs w-full"
+                  type="text"
+                  {...register("un_amount")}
                 />
               </div>
 
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  gap-3">
-                <div>
-                  <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      From Time
-                    </span>
-                  </label>
-                  <input
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                    type="time"
-                    {...register("from_time")}
-                  />
-                </div>
-                <div>
-                  <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      To Time
-                    </span>
-                  </label>
-                  <input
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                    type="time"
-                    {...register("To_time")}
-                  />
-                </div>
-              </div>
-
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-500 text-left">
-                    Status
-                  </span>
-                </label>
-                <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                  {...register("Status")}
-                >
-                  <option value="Mr">Mr</option>
-                  <option value="Mrs">Mrs</option>
-                  <option value="Miss">Miss</option>
-                  <option value="Dr">Dr</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
-                    Office Notes
+                    Notes
                   </span>
                 </label>
                 <textarea
@@ -205,7 +178,6 @@ const RecurringSessionEdit = () => {
                 ></textarea>
               </div>
             </div>
-            <div className="divider"></div>
             {/* submit  */}
             <div className="mt-10">
               <button
@@ -231,4 +203,4 @@ const RecurringSessionEdit = () => {
   );
 };
 
-export default RecurringSessionEdit;
+export default AddDeposit;
