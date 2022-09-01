@@ -142,7 +142,7 @@ const CalendarView = () => {
     },
   ];
   return (
-    <div style={{ backgroundColor: "teal" }}>
+    <div>
       <Scheduler view="month" events={EVENTS} selectedDate={new Date()} />
     </div>
   );

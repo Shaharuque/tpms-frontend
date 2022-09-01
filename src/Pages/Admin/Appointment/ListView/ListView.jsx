@@ -94,15 +94,15 @@ const ListView = () => {
       <div className="flex flex-wrap justify-between items-center mb-5">
         <h1 className="text-lg my-1 text-orange-500">Manage Sessions</h1>
         <div>
-          {/* <Switch
+          <Switch
             defaultChecked
             size="small"
             onClick={() => {
               setBillable(!billable);
               setTable(!table);
             }}
-          /> */}
-          <button className="bg-yellow-700 rounded-lg p-3">Click</button>
+          />
+          {/* <button className="bg-yellow-700 rounded-lg p-3">Click</button> */}
 
           <label
             className="form-check-label inline-block ml-2 text-sm text-gray-500"

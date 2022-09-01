@@ -14,15 +14,12 @@ const CreateAppointment = ({ handleClose }) => {
     reset();
   };
 
-
   // --------------------------------------------------Multi-Select-------------------------------
   const [value, setValue] = useState([]);
-  const data = [
-    "Eugenia",
-    "Bryan",
-    "Linda"
-   
-  ].map((item) => ({ label: item, value: item }));
+  const data = ["Eugenia", "Bryan", "Linda"].map((item) => ({
+    label: item,
+    value: item,
+  }));
   return (
     <div>
       <Dialog
@@ -327,7 +324,6 @@ const CreateAppointment = ({ handleClose }) => {
               <button
                 className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                 type="submit"
-                onClick={handleClose}
               >
                 Add Appointment
               </button>

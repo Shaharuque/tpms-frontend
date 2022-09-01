@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
+import { BsDownload } from "react-icons/bs";
 import {
   BiFullscreen,
   BiExitFullscreen,
@@ -28,7 +28,7 @@ const NavigationBar = ({ handle }) => {
   const [dOpen, setDOpen] = useState(false);
   const { visible, setVisible, ref } = useOutsideAlerter(false);
   const navigate = useNavigate();
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [patientClicked, setPatientClicked] = useState(false);
 
