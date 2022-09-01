@@ -14,6 +14,7 @@ import {
   AiOutlineFileAdd,
   AiFillUnlock,
 } from "react-icons/ai";
+import { Dropdown } from 'rsuite';
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.png";
@@ -113,9 +114,10 @@ const NavigationBar = ({ handle }) => {
                   <AiOutlinePlus />
                 </h1>
               </label>
-              <ul
+              <div
                 tabIndex="0"
                 className="dropdown-content p-3 md:w-52 sm:w-56  w-auto mt-1 shadow-2xl border-2 rounded bg-white text-sm "
+                // className="dropdown md:dropdown-start"
               >
                 <button className="flex items-center gap-2 hover:text-slate-600 mb-2">
                   <AiOutlinePlusCircle />
@@ -126,7 +128,7 @@ const NavigationBar = ({ handle }) => {
                   <AiOutlinePlusSquare />
                   <div onClick={handleAppointment}>create Appointment</div>
                 </button>
-              </ul>
+              </div>
               {clicked && (
                 <div>
                   <CreateAppointment
@@ -207,6 +209,17 @@ const NavigationBar = ({ handle }) => {
           {/* admin part  */}
           <div>
             <div className="my-5 md:my-0">
+{/* mycdoe */}
+{/* <Dropdown title="Dropdown">
+    <Dropdown.Item>New File</Dropdown.Item>
+    <Dropdown.Item>New File with Current Profile</Dropdown.Item>
+    <Dropdown.Item>Download As...</Dropdown.Item>
+    <Dropdown.Item>Export PDF</Dropdown.Item>
+    <Dropdown.Item>Export HTML</Dropdown.Item>
+    <Dropdown.Item>Settings</Dropdown.Item>
+    <Dropdown.Item>About</Dropdown.Item>
+  </Dropdown> */}
+              {/*  my code*/}
               <div className="" onClick={handleModal}>
                 <label
                   tabIndex="0"
@@ -285,6 +298,8 @@ const NavigationBar = ({ handle }) => {
               </div>
             </div>
           </div>
+
+          
         </div>
       </div>
     </motion.div>

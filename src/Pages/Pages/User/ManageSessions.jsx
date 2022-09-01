@@ -37,11 +37,11 @@ const ManageSessions = () => {
     selectedFlatRows,
     setPageSize,
     // page,
+    rows,
     prepareRow,
   } = useTable(
     { columns, data },
     useSortBy,
-    usePagination,
     useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((columns) => {
@@ -114,7 +114,7 @@ const ManageSessions = () => {
   };
 
   return (
-    <div className="h-[100vh]">
+    <div >
       <div className="flex flex-wrap justify-between items-center">
         <h1 className="text-sm">Manage Sessions</h1>
         <NavLink
@@ -254,7 +254,7 @@ const ManageSessions = () => {
                 getTableProps={getTableProps}
                 headerGroups={headerGroups}
                 getTableBodyProps={getTableBodyProps}
-                rows={page}
+                rows={rows}
                 prepareRow={prepareRow}
               ></UserScheduleTable>
             </div>

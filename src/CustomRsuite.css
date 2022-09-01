@@ -15153,19 +15153,21 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   cursor: not-allowed;
 }
 .rs-toggle-checked .rs-toggle-presentation {
-  background-color: #3498ff;
-  background-color: var(--rs-toggle-checked-bg);
+  background-color: #0aa7b8;
+  /* background-color: var(--rs-toggle-checked-bg); */
   color: #fff;
   color: var(--rs-toggle-checked-thumb);
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 .rs-toggle-checked .rs-toggle-presentation:hover {
-  background-color: #2589f5;
-  background-color: var(--rs-toggle-checked-hover-bg);
+  /* background-color: #2589f5;
+  background-color: var(--rs-toggle-checked-hover-bg); */
+      background-color: #0aa7b8;
 }
 .rs-toggle-disabled.rs-toggle-checked .rs-toggle-presentation {
-  background-color: #cce9ff;
+  /* background-color: #cce9ff; */
+  background-color: #0aa7b8;
   background-color: var(--rs-toggle-checked-disabled-bg);
   color: #fff;
   color: var(--rs-toggle-checked-disabled-thumb);
