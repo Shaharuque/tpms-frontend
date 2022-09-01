@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
 import {
   BiFullscreen,
@@ -14,7 +15,7 @@ import {
   AiOutlineFileAdd,
   AiFillUnlock,
 } from "react-icons/ai";
-import { Dropdown } from 'rsuite';
+import { Dropdown, IconButton } from 'rsuite';
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.png";
@@ -25,6 +26,7 @@ import CreatePatient from "../../Pages/Shared/AdditionFeatures/CreatePatient";
 import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { useOutsideAlerter } from "../../../CustomHooks/useDetectOutsideClick";
 
+// i am using alakaja 
 const NavigationBar = ({ handle }) => {
   const [dOpen, setDOpen] = useState(false);
   const { visible, setVisible, ref } = useOutsideAlerter(false);
@@ -49,12 +51,18 @@ const NavigationBar = ({ handle }) => {
     setDOpen(!dOpen);
   };
 
+  const renderIconButton = (props, ref) => {
+    return (
+      <IconButton {...props} ref={ref} icon={"+"} circle color="blue" appearance="primary" />
+    );
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className="shadow-md rounded-3xl sticky ml-[98px] mr-[22px]"
+      className=" relative shadow-md rounded-3xl ml-[98px] mr-[22px]"
     >
       <div className="flex items-center justify-between bg-white rounded-3xl  p-2">
         <div
@@ -144,6 +152,17 @@ const NavigationBar = ({ handle }) => {
             </div>
           </div>
 
+          {/* jakir code */}
+
+          {/* <Dropdown renderToggle={renderIconButton}>
+      <Dropdown.Item icon={"j"}>New File</Dropdown.Item>
+      <Dropdown.Item icon={"474"}> File with Current Profile</Dropdown.Item>
+      <Dropdown.Item icon={"-"}>Download As...</Dropdown.Item>
+      <Dropdown.Item icon={"+"}>Export PDF</Dropdown.Item>
+    </Dropdown> */}
+
+          {/* end */}
+
           {/* notify*/}
           <div className="">
             <div className="dropdown md:dropdown-end">
@@ -209,17 +228,6 @@ const NavigationBar = ({ handle }) => {
           {/* admin part  */}
           <div>
             <div className="my-5 md:my-0">
-{/* mycdoe */}
-{/* <Dropdown title="Dropdown">
-    <Dropdown.Item>New File</Dropdown.Item>
-    <Dropdown.Item>New File with Current Profile</Dropdown.Item>
-    <Dropdown.Item>Download As...</Dropdown.Item>
-    <Dropdown.Item>Export PDF</Dropdown.Item>
-    <Dropdown.Item>Export HTML</Dropdown.Item>
-    <Dropdown.Item>Settings</Dropdown.Item>
-    <Dropdown.Item>About</Dropdown.Item>
-  </Dropdown> */}
-              {/*  my code*/}
               <div className="" onClick={handleModal}>
                 <label
                   tabIndex="0"
@@ -245,7 +253,7 @@ const NavigationBar = ({ handle }) => {
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="absolute bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl border : ;
+                    className="absolute z-10 bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl border : ;
        mt-2 sm:right-0 cursor-pointer"
                   >
                     <div className="bg-gradient-to-r from-primary to-secondary rounded-t-xl p-4">

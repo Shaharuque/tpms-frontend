@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import ExportedFiles from "./ExportedFiles";
 import { Fade } from "react-reveal";
 import { useNavigate } from "react-router-dom";
-
+// 
 const ScheduleExport = ({ setVisible }) => {
   const navigate = useNavigate();
   const handleDownload = () => {
@@ -10,10 +10,12 @@ const ScheduleExport = ({ setVisible }) => {
     console.log("use");
     setVisible(false);
   };
+
+
   return (
     <Fade button>
       <div
-        className="absolute bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl
+        className="absolute z-10 bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl
        mt-2 sm:right-52 "
       >
         <div className="rounded-t-xl p-4 flex justify-between items-center bg-gradient-to-r from-primary to-secondary">
