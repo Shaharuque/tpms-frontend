@@ -187,15 +187,14 @@ const EditDeposit = () => {
               >
                 Save
               </button>
-              <Link to={"/admin/recurring-session"}>
-                <button
-                  className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-                  autoFocus
-                  onClick={reset}
-                >
-                  CANCEL
-                </button>
-              </Link>
+
+              <button
+                className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                autoFocus
+                onClick={reset}
+              >
+                CANCEL
+              </button>
             </div>
           </form>
         </motion.div>

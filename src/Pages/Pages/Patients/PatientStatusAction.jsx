@@ -1,10 +1,9 @@
-import { Switch } from "@mui/material";
 import React, { useState } from "react";
 import { memo } from "react";
 
-import { Toggle } from 'rsuite';
-import CheckIcon from '@rsuite/icons/Check';
-import CloseIcon from '@rsuite/icons/Close';
+import { Toggle } from "rsuite";
+import CheckIcon from "@rsuite/icons/Check";
+import CloseIcon from "@rsuite/icons/Close";
 
 const PatientStatusAction = ({ row }) => {
   const status = row?.original?.is_active_client;
@@ -27,10 +26,10 @@ const PatientStatusAction = ({ row }) => {
         checked={value ? true : false}
         size="sm"
         onClick={() => {
-          setValue(!value)
+          setValue(!value);
         }}
       />
-     
+
       {/* {value ? "Active" : "In-active"} */}
 
       {/* <div class="form-control">

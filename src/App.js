@@ -124,6 +124,7 @@ import DownloadView from "./Pages/Shared/NavigationBar/ScheduleExport/Download/D
 import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/ApplyPayment";
 import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
 import EditDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/EditDeposit";
+import DepositDetails from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/DepositDetails";
 // ######
 
 function App() {
@@ -304,6 +305,10 @@ function App() {
             <Route
               path="deposit-edit/:id"
               element={<EditDeposit></EditDeposit>}
+            ></Route>
+            <Route
+              path="deposit-details/:id"
+              element={<DepositDetails></DepositDetails>}
             ></Route>
             <Route
               path="deposit-add"
