@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Uploader } from 'rsuite';
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 
+
 const ProfileInformation = () => {
   const { register, handleSubmit, reset } = useForm();
   const [profileImage, setProfileImage] = useState("");
@@ -42,8 +43,8 @@ const ProfileInformation = () => {
             </div>
           </div>
         </div>
-      
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-3 gap-y-1">
+    {/**/}
+        <div className=" grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-3 gap-y-1">
           <div>
             <label className="label">
               <span className="label-text text-xs text-gray-600 text-left">

@@ -71,7 +71,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
                   <div
                     className={
                       isHovering
-                        ? "mr-2 opacity-0.5 ease-in text-[14px] text-red-500"
+                        ? "mr-2 opacity-0.5 ease-in text-[14px] text-#0aa7b8 "
                         : "mr-2 opacity-0 ease-out text-[14px] hidden"
                     }
                   >
