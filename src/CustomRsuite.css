@@ -1159,12 +1159,15 @@ img {
   vertical-align: middle;
 }
 hr {
-  margin-top: 20px;
+  background-color: "white";
+  width: 0px;
+  /* margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
   border-top: 1px solid #e5e5ea;
-  border-top: 1px solid var(--rs-border-primary);
+  border-top: 1px solid var(--rs-border-primary); */
 }
+
 [role='button'] {
   cursor: pointer;
 }
@@ -4624,7 +4627,7 @@ label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
 }
 .rs-drawer-wrapper {
   position: fixed;
-  z-index: 1050;
+  z-index: 999;
   top: 0;
   left: 0;
   width: 100%;
@@ -4634,7 +4637,7 @@ label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
   display: none;
   overflow: hidden;
   position: fixed;
-  z-index: 1050;
+  z-index: 999;
   -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
   -webkit-box-shadow: var(--rs-drawer-shadow);
           box-shadow: 0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06);
@@ -4738,7 +4741,7 @@ label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1050;
+  z-index: 999;
   background-color: rgba(39, 44, 54, 0.3);
   background-color: var(--rs-bg-backdrop);
 }
@@ -8804,10 +8807,10 @@ textarea.rs-picker-search-input {
   cursor: move;
 }
 .rs-modal-open .rs-list-item-helper {
-  z-index: 1149;
+  z-index: 999;
 }
 .rs-drawer-open .rs-list-item-helper {
-  z-index: 1149;
+  z-index: 999;
 }
 .rs-list-item-holder {
   background-color: rgba(242, 250, 255, 0.5);
@@ -9389,7 +9392,7 @@ textarea.rs-picker-search-input {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1049;
+  z-index: 999;
   background-color: rgba(39, 44, 54, 0.3);
   background-color: var(--rs-bg-backdrop);
 }
@@ -9407,7 +9410,7 @@ textarea.rs-picker-search-input {
 .rs-modal-wrapper {
   position: fixed;
   overflow: auto;
-  z-index: 1050;
+  z-index: 999;
   top: 0;
   left: 0;
   width: 100%;
@@ -9420,7 +9423,7 @@ textarea.rs-picker-search-input {
   margin: 30px auto 0 auto;
   position: relative;
   width: auto;
-  z-index: 1050;
+  z-index: 999;
 }
 .rs-modal-lg {
   width: 968px;
@@ -11716,15 +11719,15 @@ textarea.rs-picker-search-input {
   border: 1px solid var(--rs-border-primary);
 }
 .rs-modal-open .rs-picker-menu {
-  z-index: 1055;
+  z-index: 999;
 }
 .rs-drawer-open .rs-picker-menu {
-  z-index: 1055;
+  z-index: 999;
 }
 .rs-picker-menu.rs-picker-select-menu,
 .rs-picker-menu.rs-picker-check-menu {
   padding-top: 6px;
-  z-index: 9000;
+  z-index: 1300;
   font-family: 'Poppins';
   font-size: 12px;
   /* height: 50%; */
@@ -12046,7 +12049,7 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   position: absolute;
   top: 0;
   left: 0 /* rtl:ignore */;
-  z-index: 1060;
+  z-index: 999;
   display: none;
   padding: 12px;
   font-size: 14px;
@@ -15153,19 +15156,21 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   cursor: not-allowed;
 }
 .rs-toggle-checked .rs-toggle-presentation {
-  background-color: #3498ff;
-  background-color: var(--rs-toggle-checked-bg);
+  background-color: #0aa7b8;
+  /* background-color: var(--rs-toggle-checked-bg); */
   color: #fff;
   color: var(--rs-toggle-checked-thumb);
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 .rs-toggle-checked .rs-toggle-presentation:hover {
-  background-color: #2589f5;
-  background-color: var(--rs-toggle-checked-hover-bg);
+  /* background-color: #2589f5;
+  background-color: var(--rs-toggle-checked-hover-bg); */
+      background-color: #0aa7b8;
 }
 .rs-toggle-disabled.rs-toggle-checked .rs-toggle-presentation {
-  background-color: #cce9ff;
+  /* background-color: #cce9ff; */
+  background-color: #0aa7b8;
   background-color: var(--rs-toggle-checked-disabled-bg);
   color: #fff;
   color: var(--rs-toggle-checked-disabled-thumb);
@@ -15337,7 +15342,7 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 /* rtl:end:ignore */
 .rs-tooltip {
   position: absolute;
-  z-index: 1070;
+  z-index: 999;
   display: block;
   font-size: 12px;
   opacity: 0;
@@ -16906,7 +16911,7 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 }
 .rs-toast-container {
   position: fixed;
-  z-index: 1080;
+  z-index: 999;
   pointer-events: none;
   display: -webkit-box;
   display: -ms-flexbox;

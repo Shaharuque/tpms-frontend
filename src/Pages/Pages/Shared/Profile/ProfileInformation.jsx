@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Uploader } from 'rsuite';
 import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
 
+
 const ProfileInformation = () => {
   const { register, handleSubmit, reset } = useForm();
   const [profileImage, setProfileImage] = useState("");
@@ -12,6 +13,13 @@ const ProfileInformation = () => {
     console.log(data);
     console.log(profileImage);
   };
+
+  // image uploding code
+  const [file, setFile] = useState();
+  function handleChange(e) {
+      console.log(e.target.files);
+      setFile(URL.createObjectURL(e.target.files[0]));
+  }
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -19,9 +27,10 @@ const ProfileInformation = () => {
       transition={{ delay: 0.2 }}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* <div className="div-img">
+      
+          <div className="div-img">
           <div>
-            <img src={person} className=" h-40 " alt="Dami img not taken" />
+            <img src={file || person } className=" h-40 " alt="alt" />
           </div>
           <div>
             <div className="my-3 ">
@@ -29,16 +38,13 @@ const ProfileInformation = () => {
                 className="form-control text-sm border border-gray-300"
                 type="file"
                 id="formFile"
-                onChange={(e) => setProfileImage(e.target.value)}
+                onChange={handleChange}
               />
             </div>
           </div>
-        </div> */}
-       
-        {/* my cod     */}
-
-     
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-3 gap-y-1">
+        </div>
+    {/**/}
+        <div className=" grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-3 gap-y-1">
           <div>
             <label className="label">
               <span className="label-text text-xs text-gray-600 text-left">

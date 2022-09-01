@@ -27,7 +27,7 @@ const CreateAppointment = ({ handleClose }) => {
         // onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <div className="px-5 py-2 box sm:w-[500px]">
+        <div className="px-5 py-2 box  sm:w-[500px]">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
               Add Appointment

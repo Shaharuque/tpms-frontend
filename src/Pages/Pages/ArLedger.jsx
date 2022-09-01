@@ -62,6 +62,7 @@ const ArLedger = () => {
     getTableBodyProps,
     headerGroups,
     page,
+    rows,
     nextPage,
     previousPage,
     canNextPage,
@@ -74,7 +75,6 @@ const ArLedger = () => {
   } = useTable(
     { columns, data },
     useSortBy,
-    usePagination,
     useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((columns) => {
@@ -237,7 +237,7 @@ const ArLedger = () => {
             getTableProps={getTableProps}
             headerGroups={headerGroups}
             getTableBodyProps={getTableBodyProps}
-            rows={page}
+            rows={rows}
             prepareRow={prepareRow}
           ></SettingTableBox>
         </div>

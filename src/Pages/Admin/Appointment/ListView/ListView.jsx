@@ -14,7 +14,7 @@ const ListView = () => {
   const [table, setTable] = useState(false);
   const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
-
+  const [simpldata, setsimpledata] = useState([])  
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
@@ -29,6 +29,8 @@ const ListView = () => {
         console.log(error);
       });
   }, []);
+
+ 
 
   // -----------------------------------------------Table Data-------------------------------
   const data = useMemo(() => TData, [TData]);

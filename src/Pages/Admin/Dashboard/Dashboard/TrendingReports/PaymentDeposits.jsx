@@ -156,7 +156,10 @@ const PaymentDeposits = () => {
       </form>
 
       <div className="my-3">
-        <h1 className="text-sm font-medium my-2">Deposit List</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-sm font-medium my-2">Deposit List</h1>
+          <FiDownload className="text-secondary font-medium" />
+        </div>
         <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
