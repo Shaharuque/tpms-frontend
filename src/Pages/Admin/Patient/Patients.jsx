@@ -54,10 +54,8 @@ const Patients = () => {
   };
   //console.log(items)
   console.log(page);
-
   const data = useMemo(() => items, [items]);
   const columns = useMemo(() => [...PatientsColumnsColumn], []);
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useFilters, useSortBy, usePagination);
 
@@ -87,7 +85,7 @@ const Patients = () => {
                     <tr {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map((column) => (
                         <th
-                          className="bg-secondary border px-1 min-w-[20px] max-w-[50px]   py-1 text-xs font-normal text-white"
+                          className="bg-secondary border px-1 min-w-[20px] max-w-[50px] py-1 text-xs font-normal text-white"
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}

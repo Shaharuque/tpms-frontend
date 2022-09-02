@@ -18,6 +18,8 @@ const PatientInformation = () => {
   const [emailSend, setEmailSend] = useState(false);
   const [Guarantor, setGuarantor] = useState(false);
   const [file, setFile] = useState();
+  const [relation, setRelation] = useState("");
+  console.log(relation);
   //
   const [open, setOpen] = useState(false);
   const [phoneOpen, setPhoneOpen] = useState(false);
@@ -55,15 +57,10 @@ const PatientInformation = () => {
         fruit: patient_details?.client_gender,
       });
     }, 0);
-  }, [patient_details?.client_first_name]);
+  }, [patient_details?.client_first_name, patient_details?.is_active_client]);
 
-  const options = [
-    { value: "C++", label: "C++" },
-    { value: "JAVA", label: "JAVA" },
-    { value: "Javascript", label: "Javascript" },
-    { value: "Python", label: "Python" },
-    { value: "Swift", label: "Swift" },
-  ];
+  console.log(patient_details?.is_active_client);
+  const [value, setValue] = useState(patient_details?.is_active_client);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -80,13 +77,13 @@ const PatientInformation = () => {
           <div className="flex ml-1 mt-1 items-center">
             <input
               type="checkbox"
-              // checked={value ? true : false}
+              checked={value ? true : false}
               name="patient"
-              // onClick={() => {
-              //   setValue(!value);
-              // }}
+              onClick={() => {
+                setValue(!value);
+              }}
             />
-            <span className="text-xs ml-1 text-gray-600 font-normal">
+            <span className="text-xs ml-1 text-gray-700 font-bold">
               Active Patient
             </span>
           </div>
@@ -94,53 +91,52 @@ const PatientInformation = () => {
             {/* name  */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-xs text-gray-700 text-left">
                   First Name<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="first_name"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("first_name")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-xs text-gray-700 text-left">
                   Middle Name
                 </span>
               </label>
               <input
                 type="text"
                 name="middle_name"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("middle_name")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-xs text-gray-700 text-left">
                   Last Name<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="last_name"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("last_name")}
               />
             </div>
             {/* DOB */}
             <div>
-              {" "}
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-xs text-gray-700 text-left">
                   Date of Birth<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 name="dob"
                 type="date"
                 {...register("dob")}
@@ -149,12 +145,12 @@ const PatientInformation = () => {
             {/* gender */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-xs text-gray-700 text-left">
                   Gender<span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 name="gender"
                 {...register("gender")}
               >
@@ -167,27 +163,43 @@ const PatientInformation = () => {
             {/* RelationShip */}
             <div>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-600 text-left">
+                <span className="label-text flex items-center text-xs text-gray-700 text-left">
                   RelationShip
                   <AiOutlineQuestionCircle className="text-sm" />
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                {...register("gender")}
+                onChange={(e) => {
+                  setRelation(e.target.value);
+                }}
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               >
-                <option value="single">single</option>
-                <option value="married">married</option>
+                <option value="Self">Self</option>
+                <option value="Spouse">Spouse</option>
+                <option value="Other">Other</option>
+                <option value="Child">Child</option>
+                <option value="Grandfather or Grandmother">
+                  Grandfather or Grandmother
+                </option>
+                <option value="Grandson or Granddaughter">
+                  Grandson or Granddaughter
+                </option>
+                <option value="Nephew or Niece">Nephew or Niece</option>
+                <option value="Adopter Child">Adopter Child</option>
+                <option value="Foster Child">Foster Child</option>
+                <option value="Stepson">Stepson</option>
+                <option value="Ward">Ward</option>
+                <option value="Stepdaughter">Stepdaughter</option>
               </select>
             </div>
           </div>
-          <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
             {/* address  */}
             <div className="">
               <>
                 <label className="label">
-                  <span className="label-text items-center flex text-xs text-gray-600 text-left">
+                  <span className="label-text items-center flex text-xs text-gray-700 text-left">
                     Address
                     <AiOutlineQuestionCircle className="text-sm" />
                     <span className="text-red-500">*</span>
@@ -197,7 +209,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     name="add_1"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("add_1")}
                   />
                   <div
@@ -211,14 +223,14 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     name="add_2"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("add_2")}
                   />
                 </div>
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   <div>
                     <select
-                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                       {...register("country")}
                     >
                       <option value="NY">NY</option>
@@ -229,7 +241,7 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       name="add_2"
-                      className="border  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("add_2")}
                     />
                   </div>
@@ -242,7 +254,7 @@ const PatientInformation = () => {
                     transition={{ delay: 0.2 }}
                   >
                     <label className="label">
-                      <span className="label-text items-center flex text-xs text-gray-600 text-left">
+                      <span className="label-text items-center flex text-xs text-gray-700 text-left">
                         Address
                         <AiOutlineQuestionCircle className="text-sm" />
                         <span className="text-red-500">*</span>
@@ -252,7 +264,7 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         name="add_1"
-                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                        className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                         {...register("add_1")}
                       />
                       <div
@@ -266,14 +278,14 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         name="add_2"
-                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                        className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                         {...register("add_2")}
                       />
                     </div>
                     <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                       <div>
                         <select
-                          className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                           {...register("country")}
                         >
                           <option value="NY">NY</option>
@@ -284,7 +296,7 @@ const PatientInformation = () => {
                         <input
                           type="text"
                           name="add_2"
-                          className="border  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                          className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                           {...register("add_2")}
                         />
                       </div>
@@ -296,12 +308,12 @@ const PatientInformation = () => {
                   {" "}
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs text-gray-600 text-left">
+                      <span className="label-text text-xs text-gray-700 text-left">
                         POS<span className="text-red-500">*</span>
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                       {...register("pos")}
                     >
                       <option value="work">work</option>
@@ -311,12 +323,12 @@ const PatientInformation = () => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs text-gray-600 text-left">
+                      <span className="label-text text-xs text-gray-700 text-left">
                         Region<span className="text-red-500">*</span>
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                       {...register("region")}
                     >
                       <option value="work">work</option>
@@ -332,7 +344,7 @@ const PatientInformation = () => {
             <div className=" lg:mx-auto md:mx-0">
               <>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs text-gray-700 text-left">
                     Phone
                   </span>
                 </label>
@@ -341,13 +353,13 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       name="phone"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("phone")}
                     />
                   </div>
                   <div>
                     <select
-                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-40"
+                      className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                       {...register("group")}
                     >
                       <option value="work">work</option>
@@ -371,7 +383,7 @@ const PatientInformation = () => {
                         setVoiceMsg(!voiceMsg);
                       }}
                     />
-                    <span className="text-xs ml-1 text-gray-600 font-normal">
+                    <span className="text-xs ml-1 text-gray-700 font-normal">
                       Voice message ok
                     </span>
                   </div>
@@ -384,7 +396,7 @@ const PatientInformation = () => {
                         setTextMsg(!textMsg);
                       }}
                     />
-                    <span className="text-xs ml-1 text-gray-600 font-normal">
+                    <span className="text-xs ml-1 text-gray-700 font-normal">
                       Text message ok
                     </span>
                   </div>
@@ -398,7 +410,7 @@ const PatientInformation = () => {
                       setAppointment(!appointment);
                     }}
                   />
-                  <span className="text-xs ml-1 text-gray-600 font-normal">
+                  <span className="text-xs ml-1 text-gray-700 font-normal">
                     Send text/voice appointment reminders
                   </span>
                 </div>
@@ -410,7 +422,7 @@ const PatientInformation = () => {
                   transition={{ delay: 0.2 }}
                 >
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
+                    <span className="label-text text-xs text-gray-700 text-left">
                       Phone
                     </span>
                   </label>
@@ -419,13 +431,13 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         name="phone"
-                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                        className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                         {...register("phone")}
                       />
                     </div>
                     <div>
                       <select
-                        className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-40"
+                        className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                         {...register("group")}
                       >
                         <option value="work">work</option>
@@ -449,7 +461,7 @@ const PatientInformation = () => {
                           setVoiceMsg(!voiceMsg);
                         }}
                       />
-                      <span className="text-xs ml-1 text-gray-600 font-normal">
+                      <span className="text-xs ml-1 text-gray-700 font-normal">
                         Voice message ok
                       </span>
                     </div>
@@ -462,7 +474,7 @@ const PatientInformation = () => {
                           setTextMsg(!textMsg);
                         }}
                       />
-                      <span className="text-xs ml-1 text-gray-600 font-normal">
+                      <span className="text-xs ml-1 text-gray-700 font-normal">
                         Text message ok
                       </span>
                     </div>
@@ -476,7 +488,7 @@ const PatientInformation = () => {
                         setAppointment(!appointment);
                       }}
                     />
-                    <span className="text-xs ml-1 text-gray-600 font-normal">
+                    <span className="text-xs ml-1 text-gray-700 font-normal">
                       Send text/voice appointment reminders
                     </span>
                   </div>
@@ -487,7 +499,7 @@ const PatientInformation = () => {
             <div className=" lg:mx-auto md:mx-0">
               <>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs text-gray-700 text-left">
                     Email
                   </span>
                 </label>
@@ -496,13 +508,13 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       name="email"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("email")}
                     />
                   </div>
                   <div>
                     <select
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-40"
+                      className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                       {...register("group2")}
                     >
                       <option value="work">work</option>
@@ -517,19 +529,17 @@ const PatientInformation = () => {
                     <FaPlus />
                   </div>
                 </div>
-                <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
-                  <div className="">
-                    <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {
-                        setEmail(!email);
-                      }}
-                    />
-                    <span className="text-xs ml-1 text-gray-600 font-normal">
-                      Email OK
-                    </span>
-                  </div>
+                <div className="flex ml-1 mt-1 items-center ">
+                  <input
+                    type="checkbox"
+                    name="patient"
+                    onClick={() => {
+                      setEmail(!email);
+                    }}
+                  />
+                  <span className="text-xs ml-1 text-gray-700 font-medium">
+                    Email OK
+                  </span>
                 </div>
 
                 <div className="flex ml-1 mt-1 items-center">
@@ -540,7 +550,7 @@ const PatientInformation = () => {
                       setEmailSend(!emailSend);
                     }}
                   />
-                  <span className="text-xs ml-1 text-gray-600 font-normal">
+                  <span className="text-xs ml-1 text-gray-700 font-medium">
                     Send email appointment reminders
                   </span>
                 </div>
@@ -552,7 +562,7 @@ const PatientInformation = () => {
                   transition={{ delay: 0.2 }}
                 >
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
+                    <span className="label-text text-xs text-gray-700 text-left">
                       Email
                     </span>
                   </label>
@@ -561,13 +571,13 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         name="email"
-                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                        className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                         {...register("email")}
                       />
                     </div>
                     <div>
                       <select
-                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-40"
+                        className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                         {...register("group2")}
                       >
                         <option value="work">work</option>
@@ -591,7 +601,7 @@ const PatientInformation = () => {
                           setEmail(!email);
                         }}
                       />
-                      <span className="text-xs ml-1 text-gray-600 font-normal">
+                      <span className="text-xs ml-1 text-gray-700 font-normal">
                         Email OK
                       </span>
                     </div>
@@ -605,7 +615,7 @@ const PatientInformation = () => {
                         setEmailSend(!emailSend);
                       }}
                     />
-                    <span className="text-xs ml-1 text-gray-600 font-normal">
+                    <span className="text-xs ml-1 text-gray-700 font-normal">
                       Send email appointment reminders
                     </span>
                   </div>
@@ -616,19 +626,19 @@ const PatientInformation = () => {
 
           <>
             <label className="label">
-              <span className="label-text text-xs text-gray-700 text-left">
+              <span className="label-text text-xs text-gray-700 text-left font-bold">
                 About Patient
               </span>
             </label>
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 mb-1 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs text-gray-700 text-left">
                     Race &amp; Ethnicity Details
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   {...register("race_details")}
                 >
                   <option value="male">Male</option>
@@ -637,12 +647,12 @@ const PatientInformation = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs text-gray-700 text-left">
                     Preferred Language
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   {...register("language")}
                 >
                   <option value="male">Male</option>
@@ -651,24 +661,24 @@ const PatientInformation = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs text-gray-700 text-left">
                     Date First Seen
                   </span>
                 </label>
                 <input
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   type="date"
                   {...register("first_date")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs text-gray-700 text-left">
                     Referred By
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   {...register("referred_by")}
                 >
                   <option value="male">Male</option>
@@ -677,12 +687,12 @@ const PatientInformation = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs text-gray-700 text-left">
                     Assignment
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   {...register("assignment")}
                 >
                   <option value="male">Male</option>
@@ -696,13 +706,14 @@ const PatientInformation = () => {
 
           <div className="flex ml-1 mt-1 items-center">
             <input
+              disabled
               type="checkbox"
               name="patient"
               onClick={() => {
                 setGuarantor(!Guarantor);
               }}
             />
-            <span className="text-xs ml-1 text-gray-600 font-normal">
+            <span className="text-xs ml-1 text-gray-700 font-normal">
               Is Guarantor Available?
             </span>
           </div>
@@ -710,28 +721,28 @@ const PatientInformation = () => {
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-xs text-gray-700 text-left">
                   First Name
                 </span>
               </label>
               <input
                 type="text"
                 name="guarantor_first_name"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("guarantor_first_name")}
               />
             </div>
 
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-xs text-gray-700 text-left">
                   Last Name
                 </span>
               </label>
               <input
                 type="text"
                 name="guarantor_last_name"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("guarantor_last_name")}
               />
             </div>
@@ -739,12 +750,12 @@ const PatientInformation = () => {
             <div>
               {" "}
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-xs text-gray-700 text-left">
                   Check Date
                 </span>
               </label>
               <input
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 type="date"
                 {...register("guarantor_check_Date")}
               />
@@ -763,7 +774,7 @@ const PatientInformation = () => {
                 <input
                   type="text"
                   name="add_1"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full "
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full "
                   {...register("add_1")}
                 />
               </div>
@@ -779,13 +790,13 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="add_2"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("add_2")}
               />
             </div>
             <div>
               <select
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("country")}
               >
                 <option value="NY">NY</option>
@@ -796,7 +807,7 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="add_2"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("add_2")}
               />
             </div>
@@ -804,7 +815,7 @@ const PatientInformation = () => {
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
             <textarea
               name="comment"
-              className="border text-sm p-1 mt-3 ml-1 h-24 w-full"
+              className="border border-gray-300 text-sm p-1 mt-3 ml-1 h-24 w-full"
             >
               Notes
             </textarea>
@@ -817,7 +828,6 @@ const PatientInformation = () => {
             </div>
           </div>
           <div className="mb-5">
-            {" "}
             {/* submit  */}
             <button
               className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
