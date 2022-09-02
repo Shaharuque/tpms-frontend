@@ -9,13 +9,13 @@ import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import { usePagination, useSortBy, useTable } from "react-table";
 import {
   AuthorizationEditColumnsColumn,
   AuthorizationEditColumnsData,
 } from "./AuthorizationEditColumns";
-import { usePagination, useSortBy, useTable } from "react-table";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
-import AuthorizationEditModal from "./AuthorizationEditModal";
+import UseTable from "../../../../../../Utilities/UseTable";
+import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
@@ -476,13 +476,13 @@ const AuthorizationEdit = () => {
           <div className="divider"></div>
 
           <div>
-            <SettingTableBox
+            <UseTable
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
               rows={page}
               prepareRow={prepareRow}
-            ></SettingTableBox>
+            ></UseTable>
           </div>
           <button
             onClick={() => {

@@ -1,6 +1,6 @@
 //react big-calender ar jaigae react-scheduler use kora hoisey
 import React from "react";
-import { Scheduler } from "@aldabil/react-scheduler";
+// import { Scheduler } from "@aldabil/react-scheduler";
 
 const CalendarView = () => {
   const fetchRemote = async (query) => {
@@ -143,7 +143,7 @@ const CalendarView = () => {
   ];
   return (
     <div>
-      <Scheduler view="month" events={EVENTS} selectedDate={new Date()} />
+      {/* <Scheduler view="month" events={EVENTS} selectedDate={new Date()} /> */}
     </div>
   );
 };

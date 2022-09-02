@@ -1,6 +1,5 @@
 import { Dialog } from "@mui/material";
 import React, { useEffect } from "react";
-import { memo } from "react";
 import { useForm } from "react-hook-form";
 
 const PatientLedgerActionModal = ({ handleClose, open, row }) => {

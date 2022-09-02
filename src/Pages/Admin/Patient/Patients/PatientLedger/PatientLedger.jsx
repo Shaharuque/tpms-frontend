@@ -4,18 +4,17 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import { BsCalendar3WeekFill } from "react-icons/bs";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import { Switch } from "@mui/material";
+import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import { useParams } from "react-router-dom";
 import {
   PatientLedgerColumnsColumn,
   PatientLedgerColumnsData,
-} from "./PatientLedgerColumns";
-import { CheckBox } from "../Settings/SettingComponents/CheckBox";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
-import { useParams } from "react-router-dom";
+} from "./PatientLedger/PatientLedgerColumns";
+import UseTable from "../../../../../Utilities/UseTable";
+import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
 const PatientLedger = () => {
   const { id } = useParams();
   console.log("patient Ledger", id);
-  const [select, setSelect] = useState("");
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);
 
@@ -39,48 +38,34 @@ const PatientLedger = () => {
   const data = useMemo(() => PatientLedgerColumnsData, []);
   const columns = useMemo(() => [...PatientLedgerColumnsColumn], []);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    pageOptions,
-    state,
-    setPageSize,
-    // page,
-    prepareRow,
-  } = useTable(
-    { columns, data },
-    useSortBy,
-    usePagination,
-    useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => {
-        return [
-          {
-            id: "selection",
-            Header: ({ getToggleAllRowsSelectedProps }) => (
-              <div>
-                <CheckBox {...getToggleAllRowsSelectedProps()} />
-              </div>
-            ),
-            Cell: ({ row }) => (
-              <div>
-                <CheckBox {...row.getToggleRowSelectedProps()} />
-              </div>
-            ),
-          },
-          ...columns,
-        ];
-      });
-    }
-  );
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      { columns, data },
+      useSortBy,
+      usePagination,
+      useRowSelect,
+      (hooks) => {
+        hooks.visibleColumns.push((columns) => {
+          return [
+            {
+              id: "selection",
+              Header: ({ getToggleAllRowsSelectedProps }) => (
+                <div>
+                  <CheckBox {...getToggleAllRowsSelectedProps()} />
+                </div>
+              ),
+              Cell: ({ row }) => (
+                <div>
+                  <CheckBox {...row.getToggleRowSelectedProps()} />
+                </div>
+              ),
+            },
+            ...columns,
+          ];
+        });
+      }
+    );
 
-  const { pageIndex, pageSize } = state;
   return (
     <div className="h-[100vh]">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -173,13 +158,13 @@ const PatientLedger = () => {
       </form>
       {table && (
         <div className="my-5">
-          <SettingTableBox
+          <UseTable
             getTableProps={getTableProps}
             headerGroups={headerGroups}
             getTableBodyProps={getTableBodyProps}
-            rows={page}
+            rows={rows}
             prepareRow={prepareRow}
-          ></SettingTableBox>
+          ></UseTable>
         </div>
       )}
     </div>

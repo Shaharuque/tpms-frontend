@@ -7,8 +7,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getpatientsDetails } from "../../../features/Patient_redux/patientSlice";
-import Loading from "../../../Loading/Loading";
+import { getpatientsDetails } from "../../../../../features/Patient_redux/patientSlice";
+import Loading from "../../../../../Loading/Loading";
 
 const PatientInformation = () => {
   const [voiceMsg, setVoiceMsg] = useState(false);

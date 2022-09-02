@@ -1,11 +1,14 @@
 import React, { useMemo, useState } from "react";
 import { useSortBy, useTable } from "react-table";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
-import { DocumentsColumnColumns, DocumentsColumnData } from "./DocumentsColumn";
 import { HiPlus } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
+import {
+  DocumentsColumnColumns,
+  DocumentsColumnData,
+} from "./Documents/DocumentsColumn";
+import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 
 const Documents = () => {
   const { id } = useParams();

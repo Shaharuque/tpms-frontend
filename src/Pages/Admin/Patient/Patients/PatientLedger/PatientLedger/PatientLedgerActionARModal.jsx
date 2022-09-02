@@ -1,6 +1,6 @@
 import { Dialog } from "@mui/material";
 import React from "react";
-import img1 from "../../Assets/doctor.png";
+import img1 from "../../../../../Assets/doctor.png";
 
 const PatientLedgerActionARModal = ({ handleClose, open, row }) => {
   return (
