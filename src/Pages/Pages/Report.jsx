@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DateRangePicker } from "rsuite";
 
 const Report = () => {
   const [date, setDate] = useState("");
@@ -84,11 +85,12 @@ const Report = () => {
           <div>
             {" "}
             <h1 className="text-xs mb-2 ml-1 ">Date Range</h1>
-            <input
-              name="date"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-              type="date"
-            />
+            <DateRangePicker
+                    onChange={(date) => {
+                      console.log(date);
+                    }}
+                    placeholder="Select Date"
+              />
           </div>
         )}
         <div>

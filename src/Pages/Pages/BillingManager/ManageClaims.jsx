@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "../Settings/SettingComponents/CheckBox";
@@ -8,6 +8,7 @@ import {
 } from "./BatchingClaimsColumns";
 import { RiPencilLine } from "react-icons/ri";
 import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
+import axios from "axios";
 
 const ManageClaims = () => {
   const [active, setActive] = useState(false);
@@ -16,6 +17,7 @@ const ManageClaims = () => {
   const [select, setSelect] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [sort_By, setSort_By] = useState("");
+  const [ManageClimbsData, SetManageClimbsData] = useState([]);
   const { handleSubmit, register, reset } = useForm();
   const onSubmit = (data) => {
     // console.log(data);
@@ -31,7 +33,22 @@ const ManageClaims = () => {
     setNextActive(true);
   };
 
-  const data = useMemo(() => ManageClaimsColumnsData, []);
+
+    // fakedb call 
+    useEffect(()=>{
+      axios("../../All_Fake_Api/ManageClimbs.json")
+      .then((response)=>{
+        SetManageClimbsData(response.data)
+      })
+      .catch((error)=>{
+         console.log(error)
+      })
+  
+    },[])
+
+    console.log(ManageClimbsData);
+
+  const data = useMemo(() => ManageClimbsData, [ManageClimbsData]);
   const columns = useMemo(() => [...ManageClaimsColumnsColumn], []);
 
   const {

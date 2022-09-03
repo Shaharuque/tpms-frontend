@@ -3,7 +3,6 @@ import PatientAuthAction from "./PatientAuthAction";
 import PatientAuthorizationsTableActionModal from "./PatientAuthorizationsTableActionModal";
 import PatientName from "./PatientName";
 import PatientStatusAction from "./PatientStatusAction";
-
 export const PatientsColumnsColumn = [
   {
     Header: "Patient",

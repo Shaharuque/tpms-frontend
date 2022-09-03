@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { FaPlus } from "react-icons/fa";
 import NameLocationTableAddButton from "./NameLocationTableAddButton";
 import Form from "./Form";
-
 
 const NameLocationTable32 = ({
   data,
@@ -13,24 +11,23 @@ const NameLocationTable32 = ({
   loading,
 }) => {
   const [add, setAdd] = useState(0);
-  const [test,setTest]=useState({})
+  const [test, setTest] = useState({});
   //console.log(loading);
   //const {id,facility_name_two,address}=data
-  console.log(data)
+  console.log(data);
 
   const handleAdd = () => {
     setAdd(add + 1);
   };
-  
+
   // Editable value
   useEffect(() => {
     setTimeout(() => {
       reset({
-        address: '',
+        address: "",
       });
     }, 0);
   }, []);
-
 
   const {
     register,
@@ -42,7 +39,6 @@ const NameLocationTable32 = ({
     console.log(data);
     reset();
   };
-
 
   return (
     <div>
@@ -64,9 +60,7 @@ const NameLocationTable32 = ({
               transition: "all .3s ease-out",
             }}
           >
-           {
-            data?.map((item, index) => {<Form item={item} key={index}></Form>})
-           }
+            <Form item={data}></Form>
           </motion.div>
         </div>
       )}

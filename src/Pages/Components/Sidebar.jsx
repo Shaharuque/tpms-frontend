@@ -17,6 +17,7 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
+import { MdPersonAddAlt1 } from "react-icons/md";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { MdOutlineMonetizationOn } from "react-icons/md";
 import {
@@ -28,13 +29,14 @@ import { VscDebugDisconnect } from "react-icons/vsc";
 import { RiFundsBoxLine } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
 import { TbWebhook } from "react-icons/tb";
+import { GrFormSchedule } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
-import NavigationBar from "../Pages/Shared/NavigationBar";
-import Footer from "./Footer";
+import NavigationBar from "../Shared/NavigationBar/NavigationBar";
+import Footer from "../Shared/Footer/Footer";
 // import StateUse from "../Hooks/StateUse";
-
+// 
 const menuItem = [
   {
     path: "/admin",
@@ -55,12 +57,12 @@ const menuItem = [
       },
       {
         path: "/admin/calender-view",
-        name: "calender view",
+        name: "Calender View",
         icon: <FaCalendarAlt />,
       },
       {
         path: "/admin/recurring-session",
-        name: "recurring session",
+        name: "Recurring Session",
         icon: <VscDebugDisconnect />,
       },
     ],
@@ -182,19 +184,37 @@ const menuItem = [
     icon: <BsFileText />,
     roll: "provider",
   },
+  //Patient portal
+  {
+    path: "/patient",
+    name: "My Schedule",
+    icon: <GrFormSchedule />,
+    roll: "patient",
+  },
+  {
+    path: "/patient/my-info",
+    name: "My Info",
+    icon: <MdPersonAddAlt1 />,
+    roll: "patient",
+  },
+  {
+    path: "/patient/my-statement",
+    name: "My Statement",
+    icon: <AiOutlineFileDone />,
+    roll: "patient",
+  },
 ];
-
+//devShaik444 commits
 // const initialDropState = {};
 // menuItem.map((item) => {
 //   if (item.subRoute) initialDropState[item.name] = false;
 // });
 
 const initialDropState = {};
-// const x = menuItem.map((item) => {
-//   if (item.subRoute) initialDropState[item.name] = false;
-// });
-
-// console.log(x);
+const x = menuItem.map((item) => {
+  if (item.subRoute) initialDropState[item.name] = false;
+});
+//console.log(x);
 // console.log(initialDropState);
 
 const Sidebar = ({ handle }) => {
@@ -222,13 +242,15 @@ const Sidebar = ({ handle }) => {
   };
 
   // console.log(menuItem[1].others.name);
+  //console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
+  const logged_type = localStorage.getItem("type");
   return (
     <div className="relative bg-neutral pt-3 pb-2">
       <div className=" slide">
         <div className="">
           <NavigationBar handle={handle}></NavigationBar>
         </div>
-        <main className="font-medium resp main bg-white shadow-md rounded-3xl mt-3 ">
+        <main className="font-medium  main bg-white shadow-md rounded-3xl w-auto mt-2 ml-[98px] mr-[22px] ">
           <Outlet />
         </main>
         <Footer></Footer>
@@ -241,8 +263,8 @@ const Sidebar = ({ handle }) => {
       >
         <div
           style={{
-            width: isHovering ? "220px" : "70px",
-            transition: isHovering ? "ease-in 0.3s" : "ease-out 0.5s",
+            width: isHovering ? "240px" : "70px",
+            // transition: isHovering ? "ease-in 0.5s" : "ease-out 0.3s",
           }}
           className="sidebar"
         >
@@ -260,8 +282,9 @@ const Sidebar = ({ handle }) => {
               </>
             )}
           </div>
+          {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
           {menuItem
-            .filter((item) => item.roll === "provider")
+            .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
             .map((items, index) => (
               <div key={index}>
                 {items.subRoute ? (
@@ -291,10 +314,15 @@ const Sidebar = ({ handle }) => {
 
                       <div
                         // onClick={() => setOpen(!open)}
-                        style={{
-                          display: isHovering ? "block" : "none",
-                        }}
-                        className="link_text text-sm"
+                        // style={{
+                        //   display: isHovering ? "block" : "none",
+                        // }}
+                        // className="link_text text-sm"
+                        className={
+                          isHovering
+                            ? "opacity-1 duration-600 ease-in text-[14px] "
+                            : "opacity-0 duration-200 ease-out text-[14px] hidden"
+                        }
                       >
                         {items.name}
                       </div>

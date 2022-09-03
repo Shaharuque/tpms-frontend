@@ -15,6 +15,7 @@ const Patients = () => {
   const [page, setpage] = useState(2);
 
   // get data from API
+
   useEffect(() => {
     const getComments = async () => {
       const res = await axios({
@@ -45,9 +46,7 @@ const Patients = () => {
   const fetchData = async () => {
     const commentsFormServer = await fetchComments();
     console.log(commentsFormServer);
-
     setItems([...items, ...commentsFormServer]);
-
     if (commentsFormServer.length === 0) {
       sethasMore(false);
     }

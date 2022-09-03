@@ -1,15 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./Pages/Components/Sidebar.jsx";
-import Dashboard from "./Pages/Pages/Dashboard.jsx";
 import Patients from "./Pages/Pages/Patients.jsx";
 import Staffs from "./Pages/Pages/Staffs.jsx";
 import Report from "./Pages/Pages/Report.jsx";
 import Settings from "./Pages/Pages/Settings.jsx";
-// import Test from "./Pages/Components/Test.jsx";
-import ListView from "./Pages/Pages/ListView";
-import CalendarView from "./Pages/Pages/CalendarView";
-import RecurringSession from "./Pages/Pages/RecurringSession";
 import BillingManager from "./Pages/Pages/BillingManager";
 import ArLedger from "./Pages/Pages/ArLedger";
 import ContractRate from "./Pages/Pages/ContractRate";
@@ -40,7 +35,6 @@ import BusinessFiles from "./Pages/Pages/Settings/BusinessFiles";
 import DataImport from "./Pages/Pages/Settings/DataImport";
 import TpmsMeet from "./Pages/Pages/Settings/TpmsMeet";
 import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
-import RecurringSessionEdit from "./Pages/Pages/RecurringSession/RecurringSessionEdit";
 import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
 import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
 import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
@@ -64,49 +58,74 @@ import ServiceSubTypeExclusions from "./Pages/Pages/Staffs/ServiceSubTypeExclusi
 import PatientExclusion from "./Pages/Pages/Staffs/PatientExclusion";
 import StaffPortal from "./Pages/Pages/Staffs/StaffPortal";
 import LogIn from "./Pages/LoginPage/LogIn";
-import ArFollowupBucket from "./Pages/Pages/Dashboard/TodaysTask/ArFollowupBucket";
-import ProvideEscalation from "./Pages/Pages/Dashboard/TodaysTask/ProvideEscalation";
-import PayorEscalation from "./Pages/Pages/Dashboard/TodaysTask/PayorEscalation";
-import MGEscalation from "./Pages/Pages/Dashboard/TodaysTask/MGEscalation";
-import MedicalRecords from "./Pages/Pages/Dashboard/TodaysTask/MedicalRecords";
-import AuthorizationNotRequired from "./Pages/Pages/Dashboard/Patient/AuthorizationNotRequired";
-import SelfPayClients from "./Pages/Pages/Dashboard/Patient/SelfPayClients";
-import AuthPlaceHolders from "./Pages/Pages/Dashboard/Patient/AuthPlaceHolders";
-import ExpiringAuthorization from "./Pages/Pages/Dashboard/Patient/ExpiringAuthorization";
-import CoPayForToday from "./Pages/Pages/Dashboard/Patient/CoPayForToday";
-import SignatureNotLoaded from "./Pages/Pages/Dashboard/Staffs/SignatureNotLoaded";
-import CredentialsToExpire from "./Pages/Pages/Dashboard/Staffs/CredentialsToExpire";
-import MissingCredentials from "./Pages/Pages/Dashboard/Staffs/MissingCredentials";
-import VacationPendingApproval from "./Pages/Pages/Dashboard/Staffs/VacationPendingApproval";
-import LastMonthBilledDates from "./Pages/Pages/Dashboard/Billing/LastMonthBilledDates";
-import LastMonthsStatements from "./Pages/Pages/Dashboard/Billing/LastMonthsStatements";
-import LastWeeksDeposits from "./Pages/Pages/Dashboard/Billing/LastWeeksDeposits";
-import PendingSecondaryClaims from "./Pages/Pages/Dashboard/Billing/PendingSecondaryClaims";
-import SessionRendered from "./Pages/Pages/Dashboard/Billing/SessionRendered";
 //For testing purpose
 import MainBase from "./Testing/Table_React/MainBase";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
-import Scheduled from "./Pages/Pages/Dashboard/Scheduler/Scheduled";
-import Sessions from "./Pages/Pages/Dashboard/Scheduler/Sessions";
-import Provider from "./Pages/Pages/Dashboard/Scheduler/Provider";
-import SessionNote from "./Pages/Pages/Dashboard/Scheduler/SessionNote";
-import CancelledSession from "./Pages/Pages/Dashboard/Scheduler/CancelledSession";
-import PaymentDeposits from "./Pages/Pages/Dashboard/TrendingReports/PaymentDeposits";
-import KPIReportsInsurance from "./Pages/Pages/Dashboard/TrendingReports/KPIReportsInsurance";
-import KPIReportsPatient from "./Pages/Pages/Dashboard/TrendingReports/KPIReportsPatient";
-import KPIReports from "./Pages/Pages/Dashboard/TrendingReports/KPIReports";
-import ScheduleBillable from "./Pages/Pages/Dashboard/TrendingReports/ScheduleBillable";
 import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
-import NavigationBar from "./Pages/Pages/Shared/NavigationBar";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import ManageSessions from "./Pages/Pages/User/My-Schedule/ManageSessions";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
 import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/SchedulerCalender";
+import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
+import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
+import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
+import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
+import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
+import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
+import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
+import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
+import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
+import NewPassSet from "./Pages/LoginPage/NewPassSet";
+import ManageSessions from "./Pages/Pages/User/ManageSessions";
+import Profile from "./Pages/Pages/Shared/Profile/Profile";
+import ProfileInformation from "./Pages/Pages/Shared/Profile/ProfileInformation";
+import PasswordChange from "./Pages/Pages/Shared/Profile/PasswordChange";
+import ContractContainer from "./Pages/Pages/User/Biographic/ContactInfo/ContractContainer";
+// --------new start with folder structure ------------------------------------------------------------------------------------------------
+
+// ###### DASHBOARD
+import Dashboard from "./Pages/Admin/Dashboard/Dashboard";
+import ArFollowupBucket from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/ArFollowupBucket";
+import ExpiringAuthorization from "./Pages/Admin/Dashboard/Dashboard/Patient/ExpiringAuthorization";
+import SelfPayClients from "./Pages/Admin/Dashboard/Dashboard/Patient/SelfPayClients";
+import AuthorizationNotRequired from "./Pages/Admin/Dashboard/Dashboard/Patient/AuthorizationNotRequired";
+import CoPayForToday from "./Pages/Admin/Dashboard/Dashboard/Patient/CoPayForToday";
+import AuthPlaceHolders from "./Pages/Admin/Dashboard/Dashboard/Patient/AuthPlaceHolders";
+import VacationPendingApproval from "./Pages/Admin/Dashboard/Dashboard/Staffs/VacationPendingApproval";
+import MissingCredentials from "./Pages/Admin/Dashboard/Dashboard/Staffs/MissingCredentials";
+import CredentialsToExpire from "./Pages/Admin/Dashboard/Dashboard/Staffs/CredentialsToExpire";
+import SignatureNotLoaded from "./Pages/Admin/Dashboard/Dashboard/Staffs/SignatureNotLoaded";
+import SessionRendered from "./Pages/Admin/Dashboard/Dashboard/Billing/SessionRendered";
+import LastWeeksDeposits from "./Pages/Admin/Dashboard/Dashboard/Billing/LastWeeksDeposits";
+import LastMonthsStatements from "./Pages/Admin/Dashboard/Dashboard/Billing/LastMonthsStatements";
+import LastMonthBilledDates from "./Pages/Admin/Dashboard/Dashboard/Billing/LastMonthBilledDates";
+import PendingSecondaryClaims from "./Pages/Admin/Dashboard/Dashboard/Billing/PendingSecondaryClaims";
+import Scheduled from "./Pages/Admin/Dashboard/Dashboard/Scheduler/Scheduled";
+import Sessions from "./Pages/Admin/Dashboard/Dashboard/Scheduler/Sessions";
+import Provider from "./Pages/Admin/Dashboard/Dashboard/Scheduler/Provider";
+import SessionNote from "./Pages/Admin/Dashboard/Dashboard/Scheduler/SessionNote";
+import CancelledSession from "./Pages/Admin/Dashboard/Dashboard/Scheduler/CancelledSession";
+import KPIReports from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/KPIReports";
+import KPIReportsInsurance from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/KPIReportsInsurance";
+import KPIReportsPatient from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/KPIReportsPatient";
+import PaymentDeposits from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposits";
+// ###### APPOINTMENT
+import ListView from "./Pages/Admin/Appointment/ListView/ListView";
+import CalendarView from "./Pages/Admin/Appointment/CalenderView/CalendarView";
+import RecurringSession from "./Pages/Admin/Appointment/RecurringSession/RecurringSession";
+import RecurringSessionEdit from "./Pages/Admin/Appointment/RecurringSession/RecurringSession/RecurringSessionEdit";
+import ProvideEscalation from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/ProvideEscalation";
+// ###### NAVIGATION BAR
+import DownloadView from "./Pages/Shared/NavigationBar/ScheduleExport/Download/DownloadView";
+import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/ApplyPayment";
+import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
+import EditDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/EditDeposit";
+import DepositDetails from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/DepositDetails";
+// ######
 
 function App() {
   const handle = useFullScreenHandle();
@@ -115,10 +134,42 @@ function App() {
       <FullScreen handle={handle}>
         <Routes>
           <Route path="/" element={<LogIn></LogIn>}></Route>
+          <Route
+            path="/forget-password"
+            element={<ForgetPassword></ForgetPassword>}
+          ></Route>
+          <Route
+            path="/code-check"
+            element={<ForgetPasswordCodeCheck></ForgetPasswordCodeCheck>}
+          ></Route>
+          <Route
+            path="/new-password"
+            element={<NewPassSet></NewPassSet>}
+          ></Route>
+
           {/*Testing */}
           <Route path="/table" element={<MainBase></MainBase>}></Route>
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+            <Route
+              path="report-export-view"
+              element={<DownloadView></DownloadView>}
+            ></Route>
+            {/* ----------------------------------Profile Start----------------------------------------------- */}
+
+            <Route path="profile" element={<Profile></Profile>}>
+              <Route
+                path="profile-information"
+                element={<ProfileInformation></ProfileInformation>}
+              ></Route>
+              <Route
+                path="password-change"
+                element={<PasswordChange></PasswordChange>}
+              ></Route>
+            </Route>
+
+            {/* ----------------------------------Profile End----------------------------------------------- */}
+
             <Route index element={<Dashboard></Dashboard>}></Route>
             {/* DASHBOARD ROUTES  */}
             {/* todays task  */}
@@ -128,8 +179,7 @@ function App() {
             ></Route>
             <Route
               path="billing/ar-followup-bucket-filter-types/1"
-              // element={<ProvideEscalation></ProvideEscalation>}
-              element={<ArFollowupBucket></ArFollowupBucket>}
+              element={<ProvideEscalation></ProvideEscalation>}
             ></Route>
             <Route
               path="billing/ar-followup-bucket-filter-types/2"
@@ -247,6 +297,24 @@ function App() {
               path="kpi-reported-by-insurance-view"
               element={<KPIReportsInsurance></KPIReportsInsurance>}
             ></Route>
+            {/* ------------------------------  */}
+            <Route
+              path="deposit-apply/:id"
+              element={<ApplyPayment></ApplyPayment>}
+            ></Route>
+            <Route
+              path="deposit-edit/:id"
+              element={<EditDeposit></EditDeposit>}
+            ></Route>
+            <Route
+              path="deposit-details/:id"
+              element={<DepositDetails></DepositDetails>}
+            ></Route>
+            <Route
+              path="deposit-add"
+              element={<AddDeposit></AddDeposit>}
+            ></Route>
+
             {/* ----------------------------------DashBoard End----------------------------------------------- */}
             {/* APPOINTMENT ROUTES */}
             <Route
@@ -355,10 +423,12 @@ function App() {
             </Route>
             {/* ----------------------------------Staff End----------------------------------------------- */}
             {/* BILLING  */}
+
             <Route
               path="submit-billing"
               element={<BillingManager></BillingManager>}
             >
+              <Route index element={<Navigate to="proces-Clims" />} />
               <Route
                 path="proces-Clims"
                 element={<ProcessingClaim></ProcessingClaim>}
@@ -519,13 +589,34 @@ function App() {
           </Route>
 
           {/* user */}
-
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ManageSessions />}></Route>
             <Route path="calender" element={<SchedulerCalender />}></Route>
-            <Route path="biographic" element={<Biographic />}></Route>
+            <Route path="biographic" element={<Biographic />}>
+              <Route index element={<Bios></Bios>}></Route>
+              <Route
+                path="bio-contactinfo"
+                element={<ContractContainer></ContractContainer>}
+              ></Route>
+              <Route
+                path="bio-credential"
+                element={<CredentialsContainer></CredentialsContainer>}
+              ></Route>
+            </Route>
+
             <Route path="Pataients" element={<Pataients />}></Route>
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>
+          </Route>
+
+          {/* Patient-Portal start */}
+          <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
+            <Route index element={<MySchedule />}></Route>
+            <Route path="calender" element={<MyCalender></MyCalender>}></Route>
+            <Route path="my-info" element={<MyInfo></MyInfo>}></Route>
+            <Route
+              path="my-statement"
+              element={<MyStatement></MyStatement>}
+            ></Route>
           </Route>
         </Routes>
       </FullScreen>

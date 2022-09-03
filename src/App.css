@@ -21,6 +21,7 @@ main {
 
 .top-section {
   display: flex;
+  height: 80px;
   align-items: center;
   padding: 20px 15px;
 }
@@ -59,9 +60,16 @@ main {
   background: #02818F;
   color: #fff;
   transition: all 0.5s;
+  /* margin: 5px;
+  border-radius: 10px; */
+
 }
 
 .active {
   background: #fff !important;
   color: #02818F !important;
+}
+
+input[type='checkbox'] {
+  accent-color: teal;
 }

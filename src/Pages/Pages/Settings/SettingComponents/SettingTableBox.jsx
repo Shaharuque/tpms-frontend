@@ -1,5 +1,7 @@
 import React from "react";
+import { IoMdArrowDropdown } from "react-icons/io";
 
+//mewao mewao
 const SettingTableBox = ({
   getTableProps,
   headerGroups,
@@ -18,7 +20,7 @@ const SettingTableBox = ({
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th
-                  className="bg-secondary border  min-w-[120px]  py-1 text-xs font-normal text-white"
+                  className="bg-secondary border min-w-[30px]  py-1 text-xs font-normal text-white"
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render("Header")}
@@ -26,8 +28,8 @@ const SettingTableBox = ({
                   <span className="">
                     {column.isSorted
                       ? column.isSortedDesc
-                        ? " ⇓ "
-                        : " ⇑ "
+                        ? " ⇑ "
+                        : " ⇓ "
                       : ""}
                   </span>
                 </th>
@@ -47,7 +49,8 @@ const SettingTableBox = ({
                       style={{
                         border: "solid 1px #aeaeae55",
                       }}
-                      className="text-xs py-[6px] w-10 md:w-24 text-center text-gray-600 "
+                      //just use min-w-[30px] to solve the issue of customized cell width and md:something is removed no needed here
+                      className="text-xs py-[6px] min-w-[30px] text-center text-gray-600 "
                     >
                       {cell.render("Cell")}
                     </td>

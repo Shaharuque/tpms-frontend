@@ -15,10 +15,24 @@ import { CheckBox } from "./Settings/SettingComponents/CheckBox";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 // import "rsuite/dist/rsuite.css";
 import { DateRangePicker } from "rsuite";
+import { useEffect } from "react";
+import axios from "axios";
 const ArLedger = () => {
   const [select, setSelect] = useState("");
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);
+  const [ladgerData, SetladgerData] = useState([]);
+
+  // fakedb call
+  useEffect(()=>{
+    axios("../../All_Fake_Api/ArLadger.json")
+    .then((response)=>{
+      SetladgerData(response?.data)
+    }).catch((error)=>{
+      console.log(error)
+    })
+  },[])
+
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
       filters: [],
@@ -38,7 +52,7 @@ const ArLedger = () => {
 
   // console.log(dates);
 
-  const data = useMemo(() => ARLedgerColumnsData, []);
+  const data = useMemo(() => ladgerData, [ladgerData]);
   const columns = useMemo(() => [...ARLedgerColumnsColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
 
@@ -48,6 +62,7 @@ const ArLedger = () => {
     getTableBodyProps,
     headerGroups,
     page,
+    rows,
     nextPage,
     previousPage,
     canNextPage,
@@ -60,7 +75,6 @@ const ArLedger = () => {
   } = useTable(
     { columns, data },
     useSortBy,
-    usePagination,
     useRowSelect,
     (hooks) => {
       hooks.visibleColumns.push((columns) => {
@@ -99,7 +113,7 @@ const ArLedger = () => {
 
   const { pageIndex, pageSize } = state;
   return (
-    <div className="h-[100vh]">
+    <div >
       <div>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -119,7 +133,7 @@ const ArLedger = () => {
                 <select
                   onChange={(e) => setSelect(e.target.value)}
                   name="post"
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 >
                   <option value=""></option>
                   <option value="claim_no">Claim No</option>
@@ -132,7 +146,7 @@ const ArLedger = () => {
                   <input
                     type="number"
                     name="check"
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("client_code")}
                   />
                 </div>
@@ -159,7 +173,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("patient")}
                     >
                       <option value="name"> abcd </option>
@@ -173,7 +187,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("CPT_Code")}
                     >
                       <option value="name">EFT</option>
@@ -188,7 +202,7 @@ const ArLedger = () => {
                       </span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("aging_status")}
                     >
                       <option value="name">EFT</option>
@@ -223,7 +237,7 @@ const ArLedger = () => {
             getTableProps={getTableProps}
             headerGroups={headerGroups}
             getTableBodyProps={getTableBodyProps}
-            rows={page}
+            rows={rows}
             prepareRow={prepareRow}
           ></SettingTableBox>
         </div>
