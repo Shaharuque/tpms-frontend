@@ -1,9 +1,5 @@
 import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import DatePicker, { DateObject } from "react-multi-date-picker";
-import { BsCalendar3WeekFill } from "react-icons/bs";
-import DatePanel from "react-multi-date-picker/plugins/date_panel";
-import { Switch } from "@mui/material";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { useParams } from "react-router-dom";
 import {
@@ -12,17 +8,19 @@ import {
 } from "./PatientLedger/PatientLedgerColumns";
 import UseTable from "../../../../../Utilities/UseTable";
 import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
+import { DateRangePicker, Toggle } from "rsuite";
+import CheckIcon from "@rsuite/icons/Check";
+import CloseIcon from "@rsuite/icons/Close";
+
 const PatientLedger = () => {
   const { id } = useParams();
   console.log("patient Ledger", id);
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);
-
-  const format = "MM/DD/YYYY";
-  const [dates, setDates] = React.useState([
-    new DateObject().set({ day: 25, format }),
-    new DateObject().set({ day: 20, format }),
-  ]);
+  const [sortBy, setSortBy] = useState("");
+  const handleSortBy = (e) => {
+    setSortBy(e.target.value);
+  };
 
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
@@ -35,9 +33,9 @@ const PatientLedger = () => {
     setTable(true);
   };
 
+  // table
   const data = useMemo(() => PatientLedgerColumnsData, []);
   const columns = useMemo(() => [...PatientLedgerColumnsColumn], []);
-
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
       { columns, data },
@@ -69,41 +67,33 @@ const PatientLedger = () => {
   return (
     <div className="h-[100vh]">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="text-lg my-2 text-orange-500">AR Ledger</h1>
+        <h1 className="text-lg mt-2 text-orange-500">Patient Ar Ledger</h1>
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7  my-5 mr-2 gap-2">
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
+              <span className="label-text text-xs text-gray-600 text-left">
                 Patient
               </span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               {...register("patient")}
             >
               <option value="name"> abcd </option>
             </select>
           </div>
-          <div className="mt-2 ml-2">
-            <h1 className="text-xs text-gray-500 mb-2 ml-1 ">Select Date</h1>
-
-            <div className="flex  items-center">
-              <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[5px] text-3xl" />
-              <DatePicker
-                style={{
-                  color: "#5c5c5c",
-                  padding: "14px 5px",
-                  fontSize: "12px",
-                  border: "1px solid #a9a9a9",
-                  borderRadius: "0px",
+          <div>
+            <label className="label">
+              <span className="label-text text-xs text-gray-600 text-left">
+                Selected date
+              </span>
+            </label>
+            <div className="ml-1">
+              <DateRangePicker
+                onChange={(date) => {
+                  console.log(date);
                 }}
-                value={dates}
-                onChange={setDates}
-                range
-                sort
-                format={format}
-                calendarPosition="bottom-center"
-                plugins={[<DatePanel />]}
+                placeholder="Select Date"
               />
             </div>
           </div>
@@ -111,12 +101,12 @@ const PatientLedger = () => {
           {/* CPT Code  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
+              <span className="label-text text-xs text-gray-600 text-left">
                 CPT Code
               </span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               {...register("CPT_Code")}
             >
               <option value="name">EFT</option>
@@ -126,34 +116,37 @@ const PatientLedger = () => {
           {/*Aging Status  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
+              <span className="label-text text-xs text-gray-600 text-left">
                 Aging Status
               </span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               {...register("aging_status")}
             >
               <option value="name">EFT</option>
             </select>
           </div>
-          <div className="flex mt-6 items-center ">
-            <Switch
-              size="small"
-              onClick={() => {
-                setValue(!value);
-              }}
-            />
-            <h1 className="text-xs ">Zero Paid</h1>
+          <div className="mt-[35px] flex sm:col-span-2">
+            <div>
+              <Toggle
+                checkedChildren={<CheckIcon />}
+                unCheckedChildren={<CloseIcon />}
+                checked={value ? true : false}
+                size="sm"
+                onClick={() => {
+                  setValue(!value);
+                }}
+              />
+              <span className="text-xs text-gray-500 mr-3"> Zero to Paid</span>
+            </div>
+            <div>
+              {/* submit  */}
+              <button className="py-[5px]  px-3 text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
+                View
+              </button>
+            </div>
           </div>
-
-          {/* submit  */}
-          <button
-            className="px-5 mt-8 w-20 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            type="submit"
-          >
-            View
-          </button>
         </div>
       </form>
       {table && (
@@ -165,6 +158,22 @@ const PatientLedger = () => {
             rows={rows}
             prepareRow={prepareRow}
           ></UseTable>
+          <div className="flex item-center flex-wrap">
+            <div>
+              <select
+                onChange={handleSortBy}
+                name="type"
+                className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
+              >
+                <option value=""></option>
+                <option value="Specific_Date">Specific Date</option>
+                <option value="Date_Range">Provider</option>
+              </select>
+            </div>
+            <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
+              Go
+            </button>
+          </div>
         </div>
       )}
     </div>

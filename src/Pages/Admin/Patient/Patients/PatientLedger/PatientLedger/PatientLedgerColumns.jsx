@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import PatientLedgerAction from "./PatientLedgerAction";
+import { BsFileEarmarkPlusFill } from "react-icons/bs";
 
 export const PatientLedgerColumnsData = [
   {
@@ -9,10 +11,19 @@ export const PatientLedgerColumnsData = [
 
 export const PatientLedgerColumnsColumn = [
   {
-    Header: () => {
-      return <span className="">Patient</span>;
+    Header: "Patient",
+    Cell: ({ row }) => {
+      return (
+        <div>
+          <Link
+            className="font-normal text-secondary"
+            to={"/admin/patient-List"}
+          >
+            Andrew Philippe
+          </Link>
+        </div>
+      );
     },
-    accessor: "patient",
   },
   {
     Header: () => {
@@ -81,16 +92,29 @@ export const PatientLedgerColumnsColumn = [
     accessor: "insurance_name",
   },
   {
-    Header: () => {
-      return <span className="">Claim No</span>;
+    Header: "Claims",
+    Cell: ({ row }) => {
+      return (
+        <div>
+          <button className="font-normal text-secondary">1002</button>
+        </div>
+      );
     },
-    accessor: "claim_no",
   },
   {
-    Header: () => {
-      return <span className="">NT</span>;
+    Header: "NT",
+    Cell: ({ row }) => {
+      return (
+        <div className="mx-auto">
+          <span className="font-normal flex justify-center items-center text-gray-500">
+            <BsFileEarmarkPlusFill />
+          </span>
+          {/* <span className="font-normal flex justify-center items-center text-green-600">
+            <BsFileEarmarkPlusFill />
+          </span> */}
+        </div>
+      );
     },
-    accessor: "nt",
   },
   {
     Header: "Action",
