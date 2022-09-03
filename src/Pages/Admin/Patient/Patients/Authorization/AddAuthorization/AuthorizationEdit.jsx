@@ -1,9 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import DatePanel from "react-multi-date-picker/plugins/date_panel";
-import DatePicker, { DateObject } from "react-multi-date-picker";
-import { BsCalendar3WeekFill } from "react-icons/bs";
-import { Switch } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
@@ -16,13 +12,14 @@ import {
 } from "./AuthorizationEditColumns";
 import UseTable from "../../../../../../Utilities/UseTable";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
+import { DateRangePicker, Toggle } from "rsuite";
+import CheckIcon from "@rsuite/icons/Check";
+import CloseIcon from "@rsuite/icons/Close";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
   console.log("param ", id);
   const [value, setValue] = useState(false);
-  const [active, setActive] = useState(false);
-  const [placeHolder, setPlaceHolder] = useState(false);
   const [notes, setNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -49,66 +46,52 @@ const AuthorizationEdit = () => {
     console.log(notes);
   };
 
-  const format = "MM/DD/YYYY";
-  const [dates, setDates] = React.useState([
-    new DateObject().set({ day: 25, format }),
-    new DateObject().set({ day: 20, format }),
-  ]);
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-
-    state,
-    // page,
-    prepareRow,
-  } = useTable(
-    { columns, data, editableRow, setEditableRow },
-    useSortBy,
-    usePagination,
-    (hooks) => {
-      hooks.allColumns.push((columns) => [
-        // other hooks such as selection hook
-        ...columns,
-        // edit hook
-        {
-          accessor: "action",
-          id: "action",
-          Header: "Action",
-          Cell: ({ row, setEditableRow, editableRow }) => (
-            <>
-              <div>
-                <div className="flex justify-center gap-1 text-primary">
-                  {/* <Link to={`/billing/deposit-apply/${row.original.id}`}>
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      { columns, data, editableRow, setEditableRow },
+      useSortBy,
+      usePagination,
+      (hooks) => {
+        hooks.allColumns.push((columns) => [
+          // other hooks such as selection hook
+          ...columns,
+          // edit hook
+          {
+            accessor: "action",
+            id: "action",
+            Header: "Action",
+            Cell: ({ row, setEditableRow, editableRow }) => (
+              <>
+                <div>
+                  <div className="flex justify-center gap-1 text-primary">
+                    {/* <Link to={`/billing/deposit-apply/${row.original.id}`}>
                     <MdOutlineDashboard title="Deposit" />
                   </Link> */}
 
-                  <button
-                    onClick={() => {
-                      setOpenEditModal(true);
-                      setEditableRow(row);
-                    }}
-                  >
-                    <FiEdit className="text-xs mx-2 " />
-                  </button>
+                    <button
+                      onClick={() => {
+                        setOpenEditModal(true);
+                        setEditableRow(row);
+                      }}
+                    >
+                      <FiEdit className="text-xs mx-2 " />
+                    </button>
 
-                  <span>|</span>
-                  <Link to={"/"}>
-                    <AiOutlineDelete
-                      className="text-xs text-red-500 mx-2"
-                      title="Delete"
-                    />
-                  </Link>
+                    <span>|</span>
+                    <Link to={"/"}>
+                      <AiOutlineDelete
+                        className="text-xs text-red-500 mx-2"
+                        title="Delete"
+                      />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </>
-          ),
-        },
-      ]);
-    }
-  );
+              </>
+            ),
+          },
+        ]);
+      }
+    );
 
   return (
     <div className="md:h-[100vh]">
@@ -130,9 +113,9 @@ const AuthorizationEdit = () => {
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-sm">Add Auth</h1>
+        <h1 className="text-sm font-semibold">Add Auth</h1>
         <Link to={`/admin/patient/${id}/patient-authorization/${id}`}>
-          <button className="px-10 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md">
+          <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-sm">
             <IoCaretBackCircleOutline className="mr-1 text-sm" />
             Back
           </button>
@@ -144,7 +127,7 @@ const AuthorizationEdit = () => {
         transition={{ delay: 0.3 }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-2 gap-y-1">
             <div>
               <label className="label">
                 <span className="label-text text-xs text-gray-600 text-left">
@@ -154,7 +137,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="description"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("description")}
               />
             </div>
@@ -166,7 +149,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("insurance")}
               >
                 <option value="single">single</option>
@@ -181,7 +164,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("tx_type")}
               >
                 <option value="single">single</option>
@@ -196,12 +179,28 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("sup_provider")}
               >
                 <option value="single">single</option>
                 <option value="married">married</option>
               </select>
+            </div>
+
+            <div>
+              <label className="label">
+                <span className="label-text text-xs text-gray-600 text-left">
+                  Selected date
+                </span>
+              </label>
+              <div className="ml-1">
+                <DateRangePicker
+                  onChange={(date) => {
+                    console.log(date);
+                  }}
+                  placeholder="Select Date"
+                />
+              </div>
             </div>
 
             <div>
@@ -213,7 +212,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="authorization_number"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("authorization_number")}
               />
             </div>
@@ -226,7 +225,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="uci_id"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("uci_id")}
               />
             </div>
@@ -239,7 +238,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("cob")}
               >
                 <option value="single">single</option>
@@ -247,35 +246,7 @@ const AuthorizationEdit = () => {
               </select>
             </div>
 
-            <div>
-              <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-600 text-left">
-                  Select Date<span className="text-red-500">*</span>
-                </span>
-              </label>
-              <div className="flex  items-center">
-                <BsCalendar3WeekFill className=" text-gray-600 ml-1 bg-gray-200 p-[6px] text-3xl" />
-                <DatePicker
-                  className=""
-                  style={{
-                    color: "#5c5c5c",
-                    padding: "14px 5px",
-                    fontSize: "12px",
-                    border: "1px solid #a9a9a9",
-                    borderRadius: "0px",
-                  }}
-                  value={dates}
-                  onChange={setDates}
-                  range
-                  sort
-                  format={format}
-                  calendarPosition="bottom-center"
-                  plugins={[<DatePanel />]}
-                />
-              </div>
-            </div>
-
-            <div>
+            <div className="">
               <label className="label">
                 <span className="label-text text-xs text-gray-600 text-left">
                   Upload Authorization
@@ -288,7 +259,7 @@ const AuthorizationEdit = () => {
               />
             </div>
 
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-600 text-left">
@@ -298,7 +269,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   {...register("diagnosis1")}
                 />
               </div>
@@ -311,13 +282,13 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis2"
-                  className="border rounded-sm px-2 py-[5px] mx-2 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-2 text-xs w-full"
                   {...register("diagnosis2")}
                 />
               </div>
             </div>
 
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-600 text-left">
@@ -327,7 +298,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis3"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   {...register("diagnosis3")}
                 />
               </div>
@@ -340,13 +311,13 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis4"
-                  className="border rounded-sm px-2 py-[5px] mx-2 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-2 text-xs w-full"
                   {...register("diagnosis4")}
                 />
               </div>
             </div>
 
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-600 text-left">
@@ -356,11 +327,11 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                   {...register("deductible")}
                 />
               </div>
-              <div className="mt-8">
+              <div className="mt-[35px]">
                 <div className="flex ml-1 mt-1 items-center">
                   <input
                     type="checkbox"
@@ -385,7 +356,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="copay"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("copay")}
               />
             </div>
@@ -398,7 +369,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="cms4"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("cms4")}
               />
             </div>
@@ -411,28 +382,34 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="cms11"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("cms11")}
               />
             </div>
-            <div className="ml-2">
-              <div className="flex mt-5 items-center ">
-                <Switch
-                  size="small"
+            <div className="ml-2 mt-5">
+              <div>
+                <Toggle
+                  checkedChildren={<CheckIcon />}
+                  unCheckedChildren={<CloseIcon />}
+                  checked={value ? true : false}
+                  size="sm"
                   onClick={() => {
-                    setActive(!active);
+                    setValue(!value);
                   }}
                 />
-                <h1 className="text-xs ">Active</h1>
+                <span className="text-xs text-gray-500 mx-3">Active</span>
               </div>
-              <div className="flex  items-center ">
-                <Switch
-                  size="small"
+              <div>
+                <Toggle
+                  checkedChildren={<CheckIcon />}
+                  unCheckedChildren={<CloseIcon />}
+                  checked={value ? true : false}
+                  size="sm"
                   onClick={() => {
-                    setPlaceHolder(!placeHolder);
+                    setValue(!value);
                   }}
                 />
-                <h1 className="text-xs ">PlaceHolder</h1>
+                <span className="text-xs text-gray-500 mx-3">Placeholder</span>
               </div>
             </div>
             <div>
@@ -444,7 +421,7 @@ const AuthorizationEdit = () => {
               <textarea
                 onChange={(e) => setNotes(e.target.value)}
                 name="comment"
-                className="border text-xs p-2  ml-1 h-24 w-full"
+                className="border border-gray-300 text-xs p-2  ml-1 h-24 w-full"
               >
                 Notes
               </textarea>
@@ -452,17 +429,18 @@ const AuthorizationEdit = () => {
           </div>
           {/* submit  */}
           <button
-            className=" py-[6px] mt-7 px-3  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
             type="submit"
           >
-            Save Auth
+            Save
           </button>
 
           <button
-            className="py-[6px] mt-7 ml-3 px-3  text-xs font-normal bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md"
-            onClick={() => reset()}
+            className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+            autoFocus
+            onClick={handleClose}
           >
-            Cancel
+            Close
           </button>
         </form>
       </motion.div>
@@ -480,7 +458,7 @@ const AuthorizationEdit = () => {
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
-              rows={page}
+              rows={rows}
               prepareRow={prepareRow}
             ></UseTable>
           </div>
@@ -488,7 +466,7 @@ const AuthorizationEdit = () => {
             onClick={() => {
               setOpenEditModal(true);
             }}
-            className="px-10 my-3 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md"
+            className="px-2 my-3 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-sm"
           >
             + Add Service
           </button>

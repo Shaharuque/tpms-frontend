@@ -12,6 +12,7 @@ import {
 import UseTable from "../../../../../Utilities/UseTable";
 import AuthorizationContactedModal from "./Authorization/AuthorizationContactedModal";
 import AuthorizationEditModal from "./Authorization/AuthorizationEditModal";
+import SelectContactRate from "./Authorization/SelectContactRate";
 
 const Authorization = () => {
   const { id } = useParams();
@@ -21,129 +22,95 @@ const Authorization = () => {
   const data = useMemo(() => ARAuthorizationColumnData, []);
   const columns = useMemo(() => [...ARAuthorizationColumnColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
+  const [selectContact, setSelectContact] = useState(false);
 
   const handleClose = () => {
     setOpenEditModal(false);
+    setSelectContact(false);
   };
   const handleContactClose = () => {
     setOpenContactModal(false);
   };
 
   console.log("editableRow", editableRow);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-
-    state,
-    // page,
-    prepareRow,
-  } = useTable(
-    { columns, data, editableRow, setEditableRow },
-    useSortBy,
-    usePagination,
-    (hooks) => {
-      hooks.allColumns.push((columns) => [
-        // other hooks such as selection hook
-        ...columns,
-        // edit hook
-        {
-          accessor: "action",
-          id: "action",
-          Header: "Action",
-          Cell: ({ row, setEditableRow, editableRow }) => (
-            <>
-              <div>
-                <div className="flex justify-center gap-1 text-primary">
-                  {/* <Link to={`/billing/deposit-apply/${row.original.id}`}>
-                    <MdOutlineDashboard title="Deposit" />
-                  </Link> */}
-
-                  <label for="my-modal-6">
-                    <MdContentCopy className="text-xs mx-2 " />
-                  </label>
-                  {/* <button
-                    onClick={() => {
-                      setOpenContactModal(true);
-                    }}
-                  >
-                    <MdContentCopy className="text-xs mx-2 " />
-                  </button> */}
-
-                  <span>|</span>
-                  <button
-                    onClick={() => {
-                      setOpenEditModal(true);
-                      setEditableRow(row);
-                    }}
-                  >
-                    <AiOutlinePlus className="text-xs mx-2 " />
-                  </button>
-
-                  <span>|</span>
-                  <Link to={`/admin/authorization-Edit/${row.original.id}`}>
-                    <FiEdit
-                      className="text-xs mx-2  text-lime-700"
-                      title="Edit"
-                    />
-                  </Link>
-
-                  <span>|</span>
-                  <Link to={"/"}>
-                    <AiOutlineDelete
-                      className="text-xs text-red-500 mx-2"
-                      title="Delete"
-                    />
-                  </Link>
-
-                  {/* <BsFileEarmark
-                    title="Details"
-                    onClick={() => {
-                      const currentIndex = row.index;
-                      if (editableRow !== currentIndex) {
-                        // row requested for edit access
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      { columns, data, editableRow, setEditableRow },
+      useSortBy,
+      usePagination,
+      (hooks) => {
+        hooks.allColumns.push((columns) => [
+          // other hooks such as selection hook
+          ...columns,
+          // edit hook
+          {
+            accessor: "action",
+            id: "action",
+            Header: "Action",
+            Cell: ({ row, setEditableRow, editableRow }) => (
+              <>
+                <div>
+                  <div className="flex justify-center gap-1 text-primary">
+                    <button
+                      onClick={() => {
+                        setSelectContact(true);
                         setEditableRow(row);
-                      } else {
-                        // request for saving the updated row
-                        setEditableRow(null); // keep the row closed for edit after we finish updating it
-                        const updatedRow = row.values;
-                        console.log("updated row values:");
-                        console.log(updatedRow);
-                        // call your updateRow API
-                      }
-                    }}
-                  /> */}
+                      }}
+                    >
+                      <MdContentCopy className="text-xs mx-2 " />
+                    </button>
 
-                  {/* <Link to={"/"}>
-                    <BsPrinter title="Print" />
-                  </Link> */}
+                    <span>|</span>
+                    <button
+                      onClick={() => {
+                        setOpenEditModal(true);
+                        setEditableRow(row);
+                      }}
+                    >
+                      <AiOutlinePlus className="text-xs mx-2 " />
+                    </button>
+
+                    <span>|</span>
+                    <Link to={`/admin/authorization-Edit/${row.original.id}`}>
+                      <FiEdit
+                        className="text-xs mx-2  text-lime-700"
+                        title="Edit"
+                      />
+                    </Link>
+
+                    <span>|</span>
+                    <Link to={"/"}>
+                      <AiOutlineDelete
+                        className="text-xs text-red-500 mx-2"
+                        title="Delete"
+                      />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </>
-          ),
-        },
-        {
-          accessor: "status",
-          id: "status",
-          Header: "Status",
-          Cell: ({ row, setEditableRow, editableRow }) => (
-            <>
-              <div className="text-center">
-                <GrStatusGoodSmall className=" mx-auto text-red-500" />
-              </div>
-            </>
-          ),
-        },
-      ]);
-    }
-  );
+              </>
+            ),
+          },
+          {
+            accessor: "status",
+            id: "status",
+            Header: "Status",
+            Cell: ({ row, setEditableRow, editableRow }) => (
+              <>
+                <div className="text-center">
+                  <GrStatusGoodSmall className=" mx-auto text-red-500" />
+                </div>
+              </>
+            ),
+          },
+        ]);
+      }
+    );
   return (
     <div className="h-[100vh]">
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
         <h1 className="text-sm font-semibold">Authorization</h1>
         <Link to={"/admin/authorization-Edit"}>
-          <button className="px-10 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md">
+          <button className="px-2 flex items-center py-2 bg-gradient-to-r to-secondary from-primary text-xs  hover:to-secondary text-white rounded-sm">
             + Add Authorization
           </button>
         </Link>
@@ -153,13 +120,12 @@ const Authorization = () => {
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
         ></UseTable>
       </div>
 
-      <div>
-        {" "}
+      {/* <div>
         <input type="checkbox" id="my-modal-6" className="modal-toggle" />
         <div className="modal modal-middle">
           <div className="modal-box box">
@@ -183,7 +149,16 @@ const Authorization = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+
+      {selectContact && (
+        <SelectContactRate
+          handleClose={handleClose}
+          open={selectContact}
+          editableRow={editableRow}
+        ></SelectContactRate>
+      )}
+
       {openEditModal && (
         <AuthorizationEditModal
           handleClose={handleClose}
