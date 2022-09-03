@@ -108,15 +108,15 @@ const CalendarView = () => {
     {
       event_id: 9,
       title: "Event 11",
-      start: new Date("2021 5 5 10:00"),
-      end: new Date("2021 5 6 17:00"),
+      start: new Date("2022 8 31 10:00"),
+      end: new Date("2022 8 31 17:00"),
       admin_id: 1,
     },
     {
       event_id: 10,
       title: "Event 9",
-      start: new Date("2021 5 6  15:00"),
-      end: new Date("2021 5 6 16:00"),
+      start: new Date("2022 8 31 10:00"),
+      end: new Date("2022 8 31 18:00"),
       admin_id: 2,
     },
     {
@@ -126,14 +126,24 @@ const CalendarView = () => {
       end: new Date("2021 5 6 15:00"),
       admin_id: 2,
     },
+    {
+      event_id: 12,
+      title: "Event 11",
+      start: new Date("2022 8 31 12:00"),
+      end: new Date("2022 8 31 19:00"),
+      admin_id: 2,
+    },
+    {
+      event_id: 13,
+      title: "Event 12",
+      start: new Date("2022 8 31 12:30"),
+      end: new Date("2022 8 31 14:00"),
+      admin_id: 2,
+    },
   ];
   return (
     <div>
-      {/* <Scheduler
-        view="month"
-        events={EVENTS}
-        selectedDate={new Date(2022, 4, 5)}
-      /> */}
+      {/* <Scheduler view="month" events={EVENTS} selectedDate={new Date()} /> */}
     </div>
   );
 };

@@ -1,12 +1,12 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useFilters, usePagination, useSortBy, useTable } from "react-table";
-import { PatientsColumnsColumn } from "./Patients/PatientsColumns";
 import axios from "axios";
 import { memo } from "react";
-import { headers } from "../../Misc/BaseClient";
-import Loading from "../../Loading/Loading";
+import { headers } from "../../../Misc/BaseClient";
+import Loading from "../../../Loading/Loading";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ShimmerTableTet from "./Settings/SettingComponents/ShimmerTableTet";
+import ShimmerTableTet from "../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import { PatientsColumnsColumn } from "./Patients/PatientsColumns";
 
 const Patients = () => {
   // root Patient component
@@ -54,20 +54,10 @@ const Patients = () => {
   };
   //console.log(items)
   console.log(page);
-
   const data = useMemo(() => items, [items]);
   const columns = useMemo(() => [...PatientsColumnsColumn], []);
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    state,
-    setGlobalFilter,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useFilters, useSortBy, usePagination);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useFilters, useSortBy, usePagination);
 
   if (data.length === 0) {
     return <Loading></Loading>;
@@ -95,7 +85,7 @@ const Patients = () => {
                     <tr {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map((column) => (
                         <th
-                          className="bg-secondary border px-1 min-w-[120px]  py-1 text-xs font-normal text-white"
+                          className="bg-secondary border px-1 min-w-[20px] max-w-[50px] py-1 text-xs font-normal text-white"
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}
@@ -129,7 +119,7 @@ const Patients = () => {
                               style={{
                                 border: "solid 1px #aeaeae55",
                               }}
-                              className="text-xs py-[3px] w-10 md:w-24 text-center text-gray-600 "
+                              className="text-xs py-[3px] w-10 min-w-[20px] max-w-[50px]  text-center text-gray-600 "
                             >
                               {cell.render("Cell")}
                             </td>

@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./Pages/Components/Sidebar.jsx";
-import Patients from "./Pages/Pages/Patients.jsx";
 import Staffs from "./Pages/Pages/Staffs.jsx";
 import Report from "./Pages/Pages/Report.jsx";
 import Settings from "./Pages/Pages/Settings.jsx";
@@ -38,13 +37,6 @@ import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
 import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
 import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
 import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
-import PatientsInfo from "./Pages/Pages/Patients/PatientsInfo";
-import Authorization from "./Pages/Pages/Patients/Authorization";
-import Documents from "./Pages/Pages/Patients/Documents";
-import PatientPortal from "./Pages/Pages/Patients/PatientPortal";
-import PatientLedger from "./Pages/Pages/Patients/PatientLedger";
-import PatientInformation from "./Pages/Pages/Patients/PatientInformation";
-import AuthorizationEdit from "./Pages/Pages/Patients/AuthorizationEdit";
 import StaffInformation from "./Pages/Pages/Staffs/StaffInformation";
 import Bio from "./Pages/Pages/Staffs/Bio";
 import ContactDetails from "./Pages/Pages/Staffs/ContactDetails";
@@ -125,6 +117,14 @@ import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/Paym
 import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
 import EditDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/EditDeposit";
 import DepositDetails from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/DepositDetails";
+import Patients from "./Pages/Admin/Patient/Patients";
+import PatientsInfo from "./Pages/Admin/Patient/Patients/PatientsInfo";
+import PatientInformation from "./Pages/Admin/Patient/Patients/PatientInfo/PatientInformation";
+import Authorization from "./Pages/Admin/Patient/Patients/Authorization/Authorization";
+import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AuthorizationEdit";
+import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
+import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
+import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
 import NotFound from "./NoPageFound/NotFound";
 // ######
 

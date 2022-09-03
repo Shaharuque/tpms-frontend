@@ -1,12 +1,10 @@
-import { Dialog } from "@mui/material";
 import React, { useMemo } from "react";
 import { useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "../Settings/SettingComponents/CheckBox";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
+import { CheckBox } from "../../../../../Pages/Settings/SettingComponents/CheckBox";
 import {
   ContactedModalColumn,
   ContactedModalData,
-} from "./AuthorizationEditColumns";
+} from "../AddAuthorization/AuthorizationEditColumns";
 
 const AuthorizationContactedModal = () => {
   const data = useMemo(() => ContactedModalData, []);

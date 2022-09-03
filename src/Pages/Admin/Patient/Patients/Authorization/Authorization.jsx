@@ -1,17 +1,17 @@
 import React, { useMemo, useState } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
-import {
-  ARAuthorizationColumnColumn,
-  ARAuthorizationColumnData,
-} from "./ARAuthorizationColumn";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { MdContentCopy } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
-import AuthorizationEditModal from "./AuthorizationEditModal";
-import AuthorizationContactedModal from "./AuthorizationContactedModal";
+import {
+  ARAuthorizationColumnColumn,
+  ARAuthorizationColumnData,
+} from "./Authorization/ARAuthorizationColumn";
+import UseTable from "../../../../../Utilities/UseTable";
+import AuthorizationContactedModal from "./Authorization/AuthorizationContactedModal";
+import AuthorizationEditModal from "./Authorization/AuthorizationEditModal";
 
 const Authorization = () => {
   const { id } = useParams();
@@ -149,13 +149,13 @@ const Authorization = () => {
         </Link>
       </div>
       <div>
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
 
       <div>

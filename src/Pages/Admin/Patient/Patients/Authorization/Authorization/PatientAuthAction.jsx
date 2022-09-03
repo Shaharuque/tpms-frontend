@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { FaRegAddressCard } from "react-icons/fa";
-import PatientAuthorizationsTableModal from "./PatientAuthorizationsTableModal";
+import PatientAuthorizationsTableModal from "../../PatientAuthorizationsTableModal";
 
 const PatientAuthAction = ({ row }) => {
   const [openEditModal, setOpenEditModal] = useState(false);

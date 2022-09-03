@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { useState } from "react";
 import { BiPlusCircle, BiCommentDetail } from "react-icons/bi";
 import PatientLedgerActionARModal from "./PatientLedgerActionARModal";
 import PatientLedgerActionModal from "./PatientLedgerActionModal";
