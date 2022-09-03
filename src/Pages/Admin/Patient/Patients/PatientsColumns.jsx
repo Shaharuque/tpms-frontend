@@ -1,8 +1,9 @@
-import { ColumnFilter } from "../Settings/SettingComponents/FilterBox";
-import PatientAuthAction from "./PatientAuthAction";
-import PatientAuthorizationsTableActionModal from "./PatientAuthorizationsTableActionModal";
+import PatientAuthAction from "./Authorization/Authorization/PatientAuthAction";
 import PatientName from "./PatientName";
 import PatientStatusAction from "./PatientStatusAction";
+import PatientAuthorizationsTableActionModal from "./PatientAuthorizationsTableModal";
+import { ColumnFilter } from "../../../Shared/CustomComponents/FilterBox";
+
 export const PatientsColumnsColumn = [
   {
     Header: "Patient",
