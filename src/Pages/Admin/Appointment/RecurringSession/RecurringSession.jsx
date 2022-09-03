@@ -3,7 +3,6 @@ import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { RecurringSessionColumn } from "./RecurringSession/RecurringSessionColumns";
 import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
 import SettingTableBox from "../../../Pages/Settings/SettingComponents/SettingTableBox";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";

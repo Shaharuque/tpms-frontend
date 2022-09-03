@@ -1,7 +1,6 @@
 import { Dialog } from "@mui/material";
 import React, { useMemo } from "react";
 import { useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "../Settings/SettingComponents/CheckBox";
 import {
   PatientsAuthorizationsTableColumn,
   PatientsAuthorizationsTableData,
