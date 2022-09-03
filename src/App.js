@@ -125,6 +125,7 @@ import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/Paym
 import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
 import EditDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/EditDeposit";
 import DepositDetails from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/DepositDetails";
+import Test from "./Testing/Test";
 // ######
 
 function App() {
@@ -133,6 +134,7 @@ function App() {
     <div className="app-body">
       <FullScreen handle={handle}>
         <Routes>
+          {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
           <Route
             path="/forget-password"
@@ -149,6 +151,8 @@ function App() {
 
           {/*Testing */}
           <Route path="/table" element={<MainBase></MainBase>}></Route>
+          <Route path="/test" element={<Test></Test>}></Route>
+          {/* Testing End */}
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
             <Route
