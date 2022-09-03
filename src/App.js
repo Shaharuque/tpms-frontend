@@ -125,6 +125,7 @@ import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AddA
 import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
+import NotFound from "./NoPageFound/NotFound";
 // ######
 
 function App() {
@@ -149,7 +150,6 @@ function App() {
 
           {/*Testing */}
           <Route path="/table" element={<MainBase></MainBase>}></Route>
-
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
             <Route
               path="report-export-view"
@@ -618,6 +618,8 @@ function App() {
               element={<MyStatement></MyStatement>}
             ></Route>
           </Route>
+          {/* No Page Found */}
+          <Route path='*' element={<NotFound></NotFound>}></Route>
         </Routes>
       </FullScreen>
     </div>
