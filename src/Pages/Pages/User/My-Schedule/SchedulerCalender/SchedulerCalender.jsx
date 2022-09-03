@@ -128,13 +128,11 @@ const SchedulerCalender = () => {
     },
   ];
   return (
-    <div className="">
+    <div>
       {/* <Scheduler
-        view="month"
-        remoteEvents={fetchRemote}
-        onConfirm={handleConfirm}
-        onDelete={handleDelete}
-        selectedDate={new Date()}
+        view="week"
+        events={EVENTS}
+        selectedDate={new Date(2021, 4, 5)}
       /> */}
     </div>
   );

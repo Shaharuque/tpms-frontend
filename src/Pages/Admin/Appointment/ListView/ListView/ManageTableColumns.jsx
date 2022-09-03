@@ -14,7 +14,7 @@ export const ManageTableColumnsColumn = [
     Header: "Lock",
     Cell: ({ row }) => {
       const [lock, setLock] = useState(row.original.lock);
-      // console.log(lock);
+      console.log(row);
       return (
         <div>
           {lock === "Yes" && (
@@ -38,7 +38,7 @@ export const ManageTableColumnsColumn = [
   },
   {
     Header: () => {
-      return <span className="">Service &and; Hrs.</span>;
+      return <span className="">Service & Hrs.</span>;
     },
     accessor: "Service&hrs",
   },

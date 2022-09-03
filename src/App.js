@@ -65,18 +65,16 @@ import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
 import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
-import NavigationBar from "./Pages/Pages/Shared/NavigationBar";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
 import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/SchedulerCalender";
-
 import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
 import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
 import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
 import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
-import CredenTial from "./Pages/Pages/User/Biographic/Credential/CredenTial";
+import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
 import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
 import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
 import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
@@ -87,7 +85,6 @@ import Profile from "./Pages/Pages/Shared/Profile/Profile";
 import ProfileInformation from "./Pages/Pages/Shared/Profile/ProfileInformation";
 import PasswordChange from "./Pages/Pages/Shared/Profile/PasswordChange";
 import ContractContainer from "./Pages/Pages/User/Biographic/ContactInfo/ContractContainer";
-import DownloadView from "./Pages/Pages/Shared/Download/DownloadView";
 // --------new start with folder structure ------------------------------------------------------------------------------------------------
 
 // ###### DASHBOARD
@@ -121,6 +118,13 @@ import ListView from "./Pages/Admin/Appointment/ListView/ListView";
 import CalendarView from "./Pages/Admin/Appointment/CalenderView/CalendarView";
 import RecurringSession from "./Pages/Admin/Appointment/RecurringSession/RecurringSession";
 import RecurringSessionEdit from "./Pages/Admin/Appointment/RecurringSession/RecurringSession/RecurringSessionEdit";
+import ProvideEscalation from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/ProvideEscalation";
+// ###### NAVIGATION BAR
+import DownloadView from "./Pages/Shared/NavigationBar/ScheduleExport/Download/DownloadView";
+import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/ApplyPayment";
+import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
+import EditDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/EditDeposit";
+import DepositDetails from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/DepositDetails";
 import NotFound from "./NoPageFound/NotFound";
 // ######
 
@@ -175,8 +179,7 @@ function App() {
             ></Route>
             <Route
               path="billing/ar-followup-bucket-filter-types/1"
-              // element={<ProvideEscalation></ProvideEscalation>}
-              element={<ArFollowupBucket></ArFollowupBucket>}
+              element={<ProvideEscalation></ProvideEscalation>}
             ></Route>
             <Route
               path="billing/ar-followup-bucket-filter-types/2"
@@ -294,6 +297,24 @@ function App() {
               path="kpi-reported-by-insurance-view"
               element={<KPIReportsInsurance></KPIReportsInsurance>}
             ></Route>
+            {/* ------------------------------  */}
+            <Route
+              path="deposit-apply/:id"
+              element={<ApplyPayment></ApplyPayment>}
+            ></Route>
+            <Route
+              path="deposit-edit/:id"
+              element={<EditDeposit></EditDeposit>}
+            ></Route>
+            <Route
+              path="deposit-details/:id"
+              element={<DepositDetails></DepositDetails>}
+            ></Route>
+            <Route
+              path="deposit-add"
+              element={<AddDeposit></AddDeposit>}
+            ></Route>
+
             {/* ----------------------------------DashBoard End----------------------------------------------- */}
             {/* APPOINTMENT ROUTES */}
             <Route
@@ -579,7 +600,7 @@ function App() {
               ></Route>
               <Route
                 path="bio-credential"
-                element={<CredenTial></CredenTial>}
+                element={<CredentialsContainer></CredentialsContainer>}
               ></Route>
             </Route>
 

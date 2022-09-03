@@ -7,19 +7,13 @@ import {
   CancelledSessionColumn,
   CancelledSessionData,
 } from "./SchedulerTableData";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const CancelledSession = () => {
   const data = useMemo(() => CancelledSessionData, []);
   const columns = useMemo(() => [...CancelledSessionColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
     <div className="h-[100vh]">
       <div className="flex items-center flex-wrap gap-2 justify-between">
@@ -35,13 +29,13 @@ const CancelledSession = () => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );

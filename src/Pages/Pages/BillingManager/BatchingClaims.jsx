@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { CheckBox } from "../Settings/SettingComponents/CheckBox";
@@ -14,8 +15,22 @@ const BatchingClaims = () => {
   const [insuranceSelect, setInsuranceSelect] = useState("");
   const [sortBy, setSortBy] = useState("");
   const { handleSubmit, register, reset } = useForm();
+  const [BatchingData, SetBatchingData] = useState([]);
 
-  const data = useMemo(() => BatchingClaimsColumnsData, []);
+  // fakedb call 
+  useEffect(()=>{
+    axios("../../All_Fake_Api/batchingClimb.json")
+    .then((response)=>{
+      SetBatchingData(response?.data)
+    })
+    .catch((error)=>{
+       console.log(error)
+    })
+
+  },[])
+ 
+
+  const data = useMemo(() => BatchingData, [BatchingData]);
   const columns = useMemo(() => [...BatchingClaimsColumnsColumn], []);
 
   const onSubmit = (data) => {
@@ -38,7 +53,7 @@ const BatchingClaims = () => {
   } = useTable({ columns, data }, useSortBy, usePagination);
 
   return (
-    <div className="h-[100vh]">
+    <div>
       <h1 className="text-lg text-orange-400">Batching Claim(s)</h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>

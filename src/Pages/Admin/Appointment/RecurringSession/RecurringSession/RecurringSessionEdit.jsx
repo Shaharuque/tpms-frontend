@@ -1,24 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import {
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { BsCalendar3WeekFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 
 const RecurringSessionEdit = () => {
-  const [fromDate, setFromDate] = useState(new Date());
-  const [toDate, setToDate] = useState(new Date());
-  const [value, setValue] = React.useState(new Date());
-  const [toValue, setToValue] = React.useState(new Date());
-  console.log(<fromDate></fromDate>);
   const {
     register,
     handleSubmit,

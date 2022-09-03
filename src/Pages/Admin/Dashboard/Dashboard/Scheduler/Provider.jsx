@@ -1,24 +1,31 @@
-import React, { useMemo } from "react";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import React, { useEffect, useMemo, useState } from "react";
+import { useRowSelect, useSortBy, useTable } from "react-table";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
-import { ProviderData, ProviderColumn } from "./SchedulerTableData";
+import { ProviderColumn } from "./SchedulerTableData";
+import axios from "axios";
+import UseTable from "../../../../../Utilities/UseTable";
 
 const Provider = () => {
-  const data = useMemo(() => ProviderData, []);
+  const [ProviderInfoData, SetProviderInfoData] = useState([]);
+  // fake api cal
+  useEffect(() => {
+    axios("../../All_Fake_Api/LastWeekDeposit.json")
+      .then((response) => {
+        SetProviderInfoData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const data = useMemo(() => ProviderInfoData, [ProviderInfoData]);
   const columns = useMemo(() => [...ProviderColumn], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy, useRowSelect);
   return (
-    <div className="h-[100vh]">
+    <div>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">
           Providing Missing Signature Sessions
@@ -34,13 +41,13 @@ const Provider = () => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
-          rows={page}
+          rows={rows}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );

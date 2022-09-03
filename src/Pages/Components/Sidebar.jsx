@@ -33,10 +33,10 @@ import { GrFormSchedule } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
-import NavigationBar from "../Pages/Shared/NavigationBar";
-import Footer from "./Footer";
+import NavigationBar from "../Shared/NavigationBar/NavigationBar";
+import Footer from "../Shared/Footer/Footer";
 // import StateUse from "../Hooks/StateUse";
-
+// 
 const menuItem = [
   {
     path: "/admin",
@@ -57,12 +57,12 @@ const menuItem = [
       },
       {
         path: "/admin/calender-view",
-        name: "calender view",
+        name: "Calender View",
         icon: <FaCalendarAlt />,
       },
       {
         path: "/admin/recurring-session",
-        name: "recurring session",
+        name: "Recurring Session",
         icon: <VscDebugDisconnect />,
       },
     ],
@@ -214,7 +214,7 @@ const initialDropState = {};
 const x = menuItem.map((item) => {
   if (item.subRoute) initialDropState[item.name] = false;
 });
-console.log(x);
+//console.log(x);
 // console.log(initialDropState);
 
 const Sidebar = ({ handle }) => {
@@ -263,7 +263,7 @@ const Sidebar = ({ handle }) => {
       >
         <div
           style={{
-            width: isHovering ? "220px" : "70px",
+            width: isHovering ? "240px" : "70px",
             // transition: isHovering ? "ease-in 0.5s" : "ease-out 0.3s",
           }}
           className="sidebar"
@@ -320,8 +320,8 @@ const Sidebar = ({ handle }) => {
                         // className="link_text text-sm"
                         className={
                           isHovering
-                            ? "opacity-1 duration-600 ease-in"
-                            : "opacity-0 duration-200 ease-out"
+                            ? "opacity-1 duration-600 ease-in text-[14px] "
+                            : "opacity-0 duration-200 ease-out text-[14px] hidden"
                         }
                       >
                         {items.name}

@@ -15,6 +15,7 @@ const Patients = () => {
   const [page, setpage] = useState(2);
 
   // get data from API
+
   useEffect(() => {
     const getComments = async () => {
       const res = await axios({

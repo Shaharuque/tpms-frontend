@@ -7,21 +7,21 @@ import { useForm } from "react-hook-form";
 import { DateRangePicker } from "rsuite";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
-import SettingTableBox from "../../../Pages/Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../Utilities/UseTable";
 
 const ListView = () => {
   const [billable, setBillable] = useState(true);
   const [table, setTable] = useState(false);
   const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
-
+  const [simpldata, setsimpledata] = useState([])  
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
 
   // calling fake db
   useEffect(() => {
-    axios("../Fakedb.json")
+    axios("../All_Fake_Api/Fakedb.json")
       .then((response) => {
         setTData(response?.data);
       })
@@ -29,6 +29,8 @@ const ListView = () => {
         console.log(error);
       });
   }, []);
+
+ 
 
   // -----------------------------------------------Table Data-------------------------------
   const data = useMemo(() => TData, [TData]);
@@ -102,6 +104,7 @@ const ListView = () => {
               setTable(!table);
             }}
           />
+
           <label
             className="form-check-label inline-block ml-2 text-sm text-gray-500"
             htmlFor="flexSwitchCheckDefault"
@@ -111,7 +114,7 @@ const ListView = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-9 my-5 mr-2 gap-5">
+        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 my-5 mr-2 gap-5">
           {billable && (
             <div>
               <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
@@ -201,7 +204,7 @@ const ListView = () => {
           {!billable && (
             <button
               onClick={() => setTable(true)}
-              className="font-regular mt-8 w-1/4 px-3 py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             >
               Go
             </button>
@@ -213,20 +216,20 @@ const ListView = () => {
       {table && (
         <>
           <div className="my-5">
-            <SettingTableBox
+            <UseTable
               getTableProps={getTableProps}
               headerGroups={headerGroups}
               getTableBodyProps={getTableBodyProps}
               rows={rows}
               prepareRow={prepareRow}
-            ></SettingTableBox>
+            ></UseTable>
           </div>
           <div className="flex item-center flex-wrap">
             <div>
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="border rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
+                className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
               >
                 <option value=""></option>
                 <option value="Specific_Date">Specific Date</option>

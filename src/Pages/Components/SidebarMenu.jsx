@@ -20,7 +20,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
             className={
               isHovering
                 ? "mr-2 opacity-1 duration-600 ease-in text-[14px]"
-                : "mr-2 opacity-0 duration-200 ease-out text-[14px]"
+                : "mr-2 opacity-0 duration-200 ease-out text-[14px] hidden"
             }
           >
             {items.name}
@@ -57,21 +57,27 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
               to={s.path}
               key={i}
               style={{ display: "block" }}
-              className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white duration-200 transition ease-in-out"
+              className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white"
               activeclassname="active"
             >
-              <div className="flex items-center">
+              <div className="flex items-center h-8">
                 <div className="  px-3 py-1">{s.icon}</div>
 
-                <div
-                  className={
-                    isHovering
-                      ? "mr-2 opacity-0.5 duration-600 ease-in text-[14px]"
-                      : "mr-2 opacity-0 duration-200 ease-out text-[14px]"
-                  }
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 }}
                 >
-                  {s.name}
-                </div>
+                  <div
+                    className={
+                      isHovering
+                        ? "mr-2 opacity-0.5 ease-in text-[14px]"
+                        : "mr-2 opacity-0 ease-out text-[14px] hidden"
+                    }
+                  >
+                    {s.name}
+                  </div>
+                </motion.div>
               </div>
             </NavLink>
           ))}

@@ -202,7 +202,6 @@ const CreatePatient = ({ handleClose }) => {
               <button
                 className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                 type="submit"
-                onClick={handleClose}
               >
                 Create & Continue
               </button>

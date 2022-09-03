@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { usePagination, useSortBy, useTable } from "react-table";
 import {
@@ -9,11 +9,20 @@ import { FiEdit3 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
+import axios from "axios";
 
 const ContractRate = () => {
   const [select, setSelect] = useState("");
+  const [contactData, setcontactData] = useState([]);
 
-  const data = useMemo(() => ContractRateColumnsData, []);
+  useEffect(()=>{
+     axios('../../contactRate.json')
+     .then((response)=>{
+      setcontactData(response?.data)
+     })
+  },[])
+
+  const data = useMemo(() => contactData, [contactData]);
   const columns = useMemo(() => [...ContractRateColumnsColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
 

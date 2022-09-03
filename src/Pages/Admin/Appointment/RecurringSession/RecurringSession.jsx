@@ -15,7 +15,7 @@ const RecurringSession = () => {
 
   // calling recurring session fakedb
   useEffect(() => {
-    axios("../recurringSession.json")
+    axios("../All_Fake_Api/recurringSession.json")
       .then((response) => {
         SetSessionData(response?.data);
       })
@@ -127,7 +127,7 @@ const RecurringSession = () => {
             <></>
           )}
           <button
-            className="font-regular mt-[35px] w-1/4 px-3 py-[3px]  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="font-regular mt-[35px] w-1/4  py-[3px]  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             type="submit"
           >
             Go

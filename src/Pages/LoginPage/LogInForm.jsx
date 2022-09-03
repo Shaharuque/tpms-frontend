@@ -4,14 +4,14 @@ import bg from "../Assets/bg.png";
 import logo from "../Assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import SmallLoader from "../../Loading/SmallLoader";
 import { GoAlert } from "react-icons/go";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
   const navigate = useNavigate();
-  const Swal = require("sweetalert2");
+  // const Swal = require("sweetalert2");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 

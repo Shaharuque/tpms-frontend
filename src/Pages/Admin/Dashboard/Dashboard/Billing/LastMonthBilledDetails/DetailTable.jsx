@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { FiDownload } from "react-icons/fi";
 import { DetailTableColumn, DetailTableData } from "../BillingTableData";
-import SettingTableBox from "../../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../../../Utilities/UseTable";
 
 const DetailTable = ({ row }) => {
   const data = useMemo(() => DetailTableData, []);
@@ -24,13 +24,13 @@ const DetailTable = ({ row }) => {
         </div>
       </div>
       <div className="my-2">
-        <SettingTableBox
+        <UseTable
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></UseTable>
       </div>
     </div>
   );
