@@ -13,7 +13,6 @@ import { getpatientsDetails } from "../../../features/Patient_redux/patientSlice
 const PatientsInfo = () => {
   // Great parent component
   const { id } = useParams();
-
   return (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-2">

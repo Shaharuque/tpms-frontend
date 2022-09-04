@@ -9,6 +9,8 @@ const ERemittance = () => {
   console.log(file);
   console.log(file2);
 
+  
+
   return (
     <div className="h-[100vh]">
       <h1 className="text-lg mb-5 text-orange-400">E-Remittance</h1>

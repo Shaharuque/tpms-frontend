@@ -12,7 +12,8 @@ function CustomLink({ children, to, ...props }) {
           color: match ? "#fff" : "",
           backgroundColor: match ? "#09A2B3" : "",
 
-          //   textTransform: match ? "capitalize" : "none",
+          //   tex  rm: match ? "capitalize" : "none",
+          //    0rddfc textTransform: match ? "capitalize" : "none",
         }}
         to={to}
         {...props}
