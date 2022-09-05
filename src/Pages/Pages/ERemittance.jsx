@@ -8,7 +8,6 @@ const ERemittance = () => {
 
   console.log(file);
   console.log(file2);
-
   
 
   return (
