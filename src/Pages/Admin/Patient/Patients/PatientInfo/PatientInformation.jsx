@@ -72,7 +72,7 @@ const PatientInformation = () => {
   }
 
   return (
-    <div className="">
+    <div>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex ml-1 mt-1 items-center">
@@ -217,6 +217,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     name="add_1"
+                    placeholder="Street"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("add_1")}
                   />
@@ -231,6 +232,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     name="add_2"
+                    placeholder="City"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("add_2")}
                   />
@@ -249,6 +251,7 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       name="add_2"
+                      placeholder="Zip"
                       className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("add_2")}
                     />
@@ -725,13 +728,14 @@ const PatientInformation = () => {
               Is Guarantor Available?
             </span>
           </div>
-          <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
+
           {Guarantor && (
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
+              <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
                 <div>
                   <label className="label">
