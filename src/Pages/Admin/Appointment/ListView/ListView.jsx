@@ -94,16 +94,10 @@ const ListView = () => {
 
   // -----------------------------------------------Multi-Select-------------------------------
   // ***************
-  const datat = [
-    "Eugenia",
-    "Bryan",
-    "Linda",
-    "Nancy",
-    "Lloyd",
-    "Alice",
-    "Julia",
-    "Albert",
-  ].map((item) => ({ label: item, value: item }));
+  const datat = ["Eugenia", "Bryan", "Linda"].map((item) => ({
+    label: item,
+    value: item,
+  }));
   const [value, setValue] = React.useState([]);
 
   return (
