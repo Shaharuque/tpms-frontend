@@ -12,6 +12,21 @@ const CreateAppointment = ({ handleClose }) => {
   const [daily, setDaily] = useState(false);
   const [date, setDate] = useState(new Date());
   const { register, handleSubmit, reset } = useForm();
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const month = date.toLocaleString("en-us", { month: "long" });
+  const currentDate = date.getDate();
+  const year = date.getFullYear();
+
+  console.log(month, currentDate, year);
 
   React.useEffect(() => {
     // you can do async server request and fill up form
@@ -166,33 +181,37 @@ const CreateAppointment = ({ handleClose }) => {
               <input type="checkbox" id="my-modal-6" class="modal-toggle" />
               <div class="modal modal-middle">
                 <div class="modal-box p-0">
-                  <div className="grid grid-cols-2">
-                    <div className="bg-teal-500 bold text-white text-center rounded-l-lg">
-                      <span className="">
-                        Selected Date:{date.toDateString()}
-                      </span>
+                  <div className="grid lg:grid-cols-[180px_minmax(300px,_1fr)]">
+                    <div className="bg-teal-500 bold text-white rounded-l-lg ">
+                      <div className="w-full h-16 flex justify-center items-center bg-[#2D8A87] bg-opacity-50 backdrop-blur-xl rounded drop-shadow-lg">
+                        <span className="text-2xl">{days[date.getDay()]}</span>
+                      </div>
+                      <div className="flex flex-col justify-center items-center">
+                        <h1 className="text-8xl">{currentDate}</h1>
+                        <h1>{month}</h1>
+                      </div>
+                      <div className="flex justify-center items-end">
+                        <h1 className="text-3xl">{year}</h1>
+                      </div>
                     </div>
-                    <div>
-                      <div>
-                        <Calendar onChange={setDate} value={date} />
-                        <div className="flex justify-between px-2">
-                          <button className="text-xs text-red-500">
-                            Clear
-                          </button>
-                          <div modal-action>
-                            <label
-                              for="my-modal-6"
-                              className="text-xs text-teal-500"
-                            >
-                              CANCEL
-                            </label>
-                            <label
-                              for="my-modal-6"
-                              className="text-xs ml-2 text-teal-500"
-                            >
-                              OK
-                            </label>
-                          </div>
+
+                    <div className="">
+                      <Calendar onChange={setDate} value={date} />
+                      <div className="flex justify-between px-2">
+                        <button className="text-xs text-red-500">Clear</button>
+                        <div modal-action>
+                          <label
+                            for="my-modal-6"
+                            className="text-xs text-teal-500"
+                          >
+                            CANCEL
+                          </label>
+                          <label
+                            for="my-modal-6"
+                            className="text-xs ml-2 text-teal-500"
+                          >
+                            OK
+                          </label>
                         </div>
                       </div>
                     </div>

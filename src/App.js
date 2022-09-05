@@ -125,6 +125,7 @@ import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AddA
 import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
+import CustomSearch from "./Testing/CustomSearch/CustomSearch";
 // ######
 
 function App() {
@@ -149,7 +150,7 @@ function App() {
           ></Route>
 
           {/*Testing */}
-          <Route path="/table" element={<MainBase></MainBase>}></Route>
+          <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
             <Route
@@ -337,7 +338,7 @@ function App() {
             {/* ----------------------------------Appointment End----------------------------------------------- */}
             {/* PATIENT  */}
             <Route path="patient-List" element={<Patients></Patients>}></Route>
-            <Route path="patient/:id" element={<PatientsInfo></PatientsInfo>}>
+            <Route path="patient" element={<PatientsInfo></PatientsInfo>}>
               {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
               <Route
                 path="patient-info/:id"

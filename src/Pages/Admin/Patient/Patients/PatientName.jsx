@@ -5,7 +5,7 @@ const PatientName = ({ row }) => {
   // console.log("row", row);
   return (
     <Link
-      to={`/admin/patient/${row.original.id}/patient-info/${row.original.id}`}
+      to={`/admin/patient/patient-info/${row.original.id}`}
       className="text-secondary"
     >
       {row.original.client_full_name}
