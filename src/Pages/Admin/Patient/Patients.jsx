@@ -85,7 +85,7 @@ const Patients = () => {
                     <tr {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map((column) => (
                         <th
-                          className="bg-secondary border px-1 min-w-[20px] max-w-[50px] py-1 text-xs font-normal text-white"
+                          className="bg-secondary border px-1 min-w-[20px]  py-1 text-xs font-normal text-white"
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}
@@ -99,7 +99,20 @@ const Patients = () => {
                                 : " ⇑ "
                               : ""}
                           </span>
-                          <div>
+                          {/* <div>
+                            {column.canFilter ? column.render("Filter") : null}
+                          </div> */}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+
+                  {/* Show only Search Filter */}
+                  {headerGroups.map((headerGroup) => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                      {headerGroup.headers.map((column) => (
+                        <th className=" border px-1 min-w-[20px]  py-1 text-xs font-normal text-white">
+                          <div className="border border-gray-500 rounded-sm">
                             {column.canFilter ? column.render("Filter") : null}
                           </div>
                         </th>
@@ -109,6 +122,7 @@ const Patients = () => {
                 </thead>
                 <tbody {...getTableBodyProps()}>
                   {rows.map((row) => {
+                    console.log(row);
                     prepareRow(row);
                     return (
                       <tr {...row.getRowProps()}>
@@ -119,7 +133,7 @@ const Patients = () => {
                               style={{
                                 border: "solid 1px #aeaeae55",
                               }}
-                              className="text-xs py-[3px] w-10 min-w-[20px] max-w-[50px]  text-center text-gray-600 "
+                              className="text-xs py-[3px] w-10 min-w-[20px] text-center text-gray-600 "
                             >
                               {cell.render("Cell")}
                             </td>

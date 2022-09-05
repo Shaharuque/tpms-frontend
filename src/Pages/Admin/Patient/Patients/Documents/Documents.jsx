@@ -8,7 +8,8 @@ import {
   DocumentsColumnColumns,
   DocumentsColumnData,
 } from "./Documents/DocumentsColumn";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
+import UseTable from "../../../../../Utilities/UseTable";
+import check from "../../../../Assets/contact.png";
 
 const Documents = () => {
   const { id } = useParams();
@@ -22,31 +23,33 @@ const Documents = () => {
     console.log(data);
     reset();
   };
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns, data }, useSortBy);
   return (
     <div className="h-[100vh]">
-      <h1 className="text-sm font-semibold mb-2">Document</h1>
-      <SettingTableBox
-        getTableProps={getTableProps}
-        headerGroups={headerGroups}
-        getTableBodyProps={getTableBodyProps}
-        rows={rows}
-        prepareRow={prepareRow}
-      ></SettingTableBox>
+      <div className="mt-10">
+        <img className="mx-auto" src={check} alt="" />
+        <p className="text-xs font-light text-gray-600 flex items-center justify-center my-2">
+          admin admin has no document
+        </p>
+      </div>
+
+      <h1 className="text-sm font-semibold mb-3">Document</h1>
+      {
+        <UseTable
+          getTableProps={getTableProps}
+          headerGroups={headerGroups}
+          getTableBodyProps={getTableBodyProps}
+          rows={rows}
+          prepareRow={prepareRow}
+        ></UseTable>
+      }
       <div className="my-10">
         <button
           onClick={() => {
             setOpen(!open);
           }}
-          className="px-5 mb-5 text-xs font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md flex items-center"
+          className="px-3 mb-5 text-xs font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm flex items-center"
         >
           <HiPlus /> Add New Data
         </button>
@@ -67,7 +70,7 @@ const Documents = () => {
                   <input
                     type="text"
                     name="description"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("description")}
                   />
                 </div>
@@ -80,7 +83,7 @@ const Documents = () => {
                     </span>
                   </label>
                   <input
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
                     type="date"
                     {...register("check_Date")}
                   />
@@ -97,20 +100,19 @@ const Documents = () => {
                     {...register("fileName")}
                   />
                 </div>
-                <div>
+                <div className=" mt-[34px]">
                   <button
-                    className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                    className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                     type="submit"
                   >
                     Save
                   </button>
 
                   <button
-                    className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                    className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                     autoFocus
-                    onClick={() => reset()}
                   >
-                    CANCEL
+                    Close
                   </button>
                 </div>
               </div>

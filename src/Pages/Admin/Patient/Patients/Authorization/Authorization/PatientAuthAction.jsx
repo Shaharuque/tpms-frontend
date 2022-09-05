@@ -10,7 +10,6 @@ const PatientAuthAction = ({ row }) => {
   };
   return (
     <>
-      {" "}
       <button
         onClick={() => {
           setOpenEditModal(true);
