@@ -2023,8 +2023,10 @@ tbody.rs-anim-collapse.rs-anim-in {
   opacity: 0.5;
 }
 .rs-btn-link {
-  color: #1675e0;
-  color: var(--rs-btn-link-text);
+  /* color: #1675e0; */
+  /* color: var(--rs-btn-link-text); */
+      font-weight: 700;
+    color: #0baec0;
   background-color: transparent;
   border: none;
 }
@@ -10760,8 +10762,9 @@ textarea.rs-picker-search-input {
 }
 .rs-picker-has-value .rs-btn .rs-picker-toggle-value,
 .rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
-  color: #1675e0;
-  color: var(--rs-picker-value);
+  font-size: 12px;
+  color: #0aa7b8;
+  /* color: var(--rs-picker-value); */
 }
 .rs-picker-none {
   padding: 6px 12px 12px;
@@ -11080,7 +11083,7 @@ textarea.rs-picker-search-input {
 }
 .rs-picker-default .rs-picker-toggle.rs-btn .rs-picker-toggle-caret,
 .rs-picker-default .rs-picker-toggle.rs-btn .rs-picker-toggle-clean {
-  top: 7px;
+  top: 5px;
 }
 .rs-picker-toggle.rs-btn .rs-picker-toggle-caret {
   right: 12px;

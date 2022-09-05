@@ -98,6 +98,12 @@ const ListView = () => {
     label: item,
     value: item,
   }));
+
+  const datatf = ["demo", "pos", "minda"].map((item) => ({
+    label: item,
+    value: item,
+  }));
+
   const [value, setValue] = React.useState([]);
 
   return (
@@ -172,7 +178,7 @@ const ListView = () => {
                         Provider
                       </h1>
                       <CustomMultiSelection
-                        data={datat}
+                        data={datatf}
                         value={value}
                         setValue={setValue}
                       ></CustomMultiSelection>
