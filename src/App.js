@@ -125,6 +125,7 @@ import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AddA
 import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
+import CustomSearch from "./Testing/CustomSearch/CustomSearch";
 import NotFound from "./NoPageFound/NotFound";
 // ######
 
@@ -134,6 +135,7 @@ function App() {
     <div className="app-body">
       <FullScreen handle={handle}>
         <Routes>
+          {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
           <Route
             path="/forget-password"
@@ -149,7 +151,8 @@ function App() {
           ></Route>
 
           {/*Testing */}
-          <Route path="/table" element={<MainBase></MainBase>}></Route>
+          <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
+
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
             <Route
               path="report-export-view"
@@ -336,7 +339,7 @@ function App() {
             {/* ----------------------------------Appointment End----------------------------------------------- */}
             {/* PATIENT  */}
             <Route path="patient-List" element={<Patients></Patients>}></Route>
-            <Route path="patient/:id" element={<PatientsInfo></PatientsInfo>}>
+            <Route path="patient" element={<PatientsInfo></PatientsInfo>}>
               {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
               <Route
                 path="patient-info/:id"
@@ -619,7 +622,7 @@ function App() {
             ></Route>
           </Route>
           {/* No Page Found */}
-          <Route path='*' element={<NotFound></NotFound>}></Route>
+          <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
       </FullScreen>
     </div>

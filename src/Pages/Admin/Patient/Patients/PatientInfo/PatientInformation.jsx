@@ -70,6 +70,8 @@ const PatientInformation = () => {
     return <Loading></Loading>;
   }
 
+  console.log(relation);
+
   return (
     <div className="">
       <div>

@@ -10,7 +10,7 @@ import "../../../Style/Patient.css";
 const PatientsInfo = () => {
   // Great parent component
   const { id } = useParams();
-
+  console.log(id);
   return (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-2">
