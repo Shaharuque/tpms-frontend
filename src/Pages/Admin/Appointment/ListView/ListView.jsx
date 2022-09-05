@@ -153,7 +153,7 @@ const ListView = () => {
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 gap-5 mb-2">
+                  <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-2">
                     {billable === "non-billable" ||
                       (billable === "billable" && (
                         <div>
@@ -188,10 +188,9 @@ const ListView = () => {
                           </label>
                           <div>
                             <select
-                              className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
+                              className=" bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
                               {...register("pos")}
                             >
-                              <option value=""></option>
                               <option value="Today">Today's follow up</option>
                               <option value="UK">Lost 7 days</option>
                               <option value="15">Lost 15 days</option>
@@ -225,7 +224,7 @@ const ListView = () => {
                           </label>
                           <div>
                             <select
-                              className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
+                              className="bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
                               {...register("Status")}
                             >
                               <option value=""></option>
@@ -238,7 +237,7 @@ const ListView = () => {
                           </div>
                         </div>
                         <button
-                          className="font-regular mt-[33px] sm:w-1/4    text-xs font-normal bg-secondary  hover:to-secondary text-white rounded-sm"
+                          className="font-regular mt-[33px] sm:w-1/3  text-xs font-normal bg-secondary  hover:to-secondary text-white rounded-sm"
                           type="submit"
                         >
                           Save
@@ -248,7 +247,7 @@ const ListView = () => {
                     {billable === "non-billable" && (
                       <button
                         onClick={() => setTable(true)}
-                        className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                        className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-secondary to-primary  hover:to-secondary text-white rounded-md"
                       >
                         Go
                       </button>
