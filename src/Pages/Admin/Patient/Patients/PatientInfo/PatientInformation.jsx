@@ -18,14 +18,15 @@ const PatientInformation = () => {
   const [emailSend, setEmailSend] = useState(false);
   const [Guarantor, setGuarantor] = useState(false);
   const [file, setFile] = useState();
-  const [relation, setRelation] = useState("");
-  console.log(relation);
+  const [relation, setRelation] = useState("Self");
+
   //
   const [open, setOpen] = useState(false);
   const [phoneOpen, setPhoneOpen] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
+  //console.log(Guarantor);
   //Patient Information
   const { id } = useParams();
   //console.log("patient Info", id);
@@ -73,7 +74,7 @@ const PatientInformation = () => {
   console.log(relation);
 
   return (
-    <div className="">
+    <div>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex ml-1 mt-1 items-center">
@@ -172,13 +173,20 @@ const PatientInformation = () => {
                 </span>
               </label>
               <select
-                onChange={(e) => {
+                onClick={(e) => {
                   setRelation(e.target.value);
                 }}
                 className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               >
                 <option value="Self">Self</option>
-                <option value="Spouse">Spouse</option>
+                <option
+                  value="Spouse"
+                  onChange={() => {
+                    setGuarantor(true);
+                  }}
+                >
+                  Spouse
+                </option>
                 <option value="Other">Other</option>
                 <option value="Child">Child</option>
                 <option value="Grandfather or Grandmother">
@@ -211,6 +219,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     name="add_1"
+                    placeholder="Street"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("add_1")}
                   />
@@ -225,6 +234,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     name="add_2"
+                    placeholder="City"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("add_2")}
                   />
@@ -243,6 +253,7 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       name="add_2"
+                      placeholder="Zip"
                       className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                       {...register("add_2")}
                     />
@@ -708,7 +719,7 @@ const PatientInformation = () => {
 
           <div className="flex ml-1 mt-1 items-center">
             <input
-              disabled
+              disabled={relation === "Self" ? "true" : null}
               type="checkbox"
               name="patient"
               onClick={() => {
@@ -719,101 +730,114 @@ const PatientInformation = () => {
               Is Guarantor Available?
             </span>
           </div>
-          <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
-            <div>
-              <label className="label">
-                <span className="label-text text-xs text-gray-700 text-left">
-                  First Name
-                </span>
-              </label>
-              <input
-                type="text"
-                name="guarantor_first_name"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                {...register("guarantor_first_name")}
-              />
-            </div>
 
-            <div>
-              <label className="label">
-                <span className="label-text text-xs text-gray-700 text-left">
-                  Last Name
-                </span>
-              </label>
-              <input
-                type="text"
-                name="guarantor_last_name"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                {...register("guarantor_last_name")}
-              />
-            </div>
-            {/* DOB */}
-            <div>
-              {" "}
-              <label className="label">
-                <span className="label-text text-xs text-gray-700 text-left">
-                  Check Date
-                </span>
-              </label>
-              <input
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                type="date"
-                {...register("guarantor_check_Date")}
-              />
-            </div>
-          </div>
+          {Guarantor && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
+                <div>
+                  <label className="label">
+                    <span className="label-text text-xs text-gray-700 text-left">
+                      First Name
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    name="guarantor_first_name"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    {...register("guarantor_first_name")}
+                  />
+                </div>
 
-          {/* --------------------------  */}
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
-            <div>
-              <label className="label">
-                <span className="label-text text-xs text-gray-700 text-left">
-                  Address
-                </span>
-              </label>
-              <div className="mb-2">
-                <input
-                  type="text"
-                  name="add_1"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full "
-                  {...register("add_1")}
-                />
+                <div>
+                  <label className="label">
+                    <span className="label-text text-xs text-gray-700 text-left">
+                      Last Name
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    name="guarantor_last_name"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    {...register("guarantor_last_name")}
+                  />
+                </div>
+                {/* DOB */}
+                <div>
+                  {" "}
+                  <label className="label">
+                    <span className="label-text text-xs text-gray-700 text-left">
+                      Check Date
+                    </span>
+                  </label>
+                  <input
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    type="date"
+                    {...register("guarantor_check_Date")}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="my-auto text-xs bg-secondary text-white ml-1 py-2 mb-2 text-center rounded-md">
-              <button>Same as patient address</button>
-            </div>
-          </div>
 
-          {/* --------------------------- */}
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
-            <div className="mb-2">
-              <input
-                type="text"
-                name="add_2"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                {...register("add_2")}
-              />
-            </div>
-            <div>
-              <select
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                {...register("country")}
-              >
-                <option value="NY">NY</option>
-                <option value="UK">UK</option>
-              </select>
-            </div>
-            <div className="mb-2">
-              <input
-                type="text"
-                name="add_2"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                {...register("add_2")}
-              />
-            </div>
-          </div>
+              {/* --------------------------  */}
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
+                <div>
+                  <label className="label">
+                    <span className="label-text text-xs text-gray-700 text-left">
+                      Address
+                    </span>
+                  </label>
+                  <div className="mb-2">
+                    <input
+                      type="text"
+                      name="add_1"
+                      placeholder="Street"
+                      className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full "
+                      {...register("add_1")}
+                    />
+                  </div>
+                </div>
+                <div className="my-auto text-xs bg-secondary text-white ml-1 py-2 mb-2 text-center rounded-md">
+                  <button>Same as patient address</button>
+                </div>
+              </div>
+
+              {/* --------------------------- */}
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
+                <div className="mb-2">
+                  <input
+                    type="text"
+                    name="add_2"
+                    placeholder="City"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    {...register("add_2")}
+                  />
+                </div>
+                <div>
+                  <select
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    {...register("country")}
+                  >
+                    <option value="NY">NY</option>
+                    <option value="UK">UK</option>
+                  </select>
+                </div>
+                <div className="mb-2">
+                  <input
+                    type="text"
+                    name="add_2"
+                    placeholder="Zip"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    {...register("add_2")}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
             <textarea
               name="comment"

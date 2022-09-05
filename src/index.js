@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 // import "../node_modules/"
 import "./index.css";
 // import "./datapicker.css"
-import "./CustomRsuite.css"
+import "./CustomRsuite.css";
 import "./modification.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -15,19 +15,20 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import ContextWrapper from "./Pages/Pages/User/My-Schedule/CalendarContext/ContextWrapper";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient();
 root.render(
-
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <App />
+        <ContextWrapper>
+          <App />
+        </ContextWrapper>
       </BrowserRouter>
     </QueryClientProvider>
   </Provider>
-
 );
 
 // If you want to start measuring performance in your app, pass a function
