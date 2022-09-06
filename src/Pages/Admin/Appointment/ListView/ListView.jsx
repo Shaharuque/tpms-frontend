@@ -9,6 +9,8 @@ import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import UseTable from "../../../../Utilities/UseTable";
 import { MdOutlineCancel } from "react-icons/md";
+import { motion } from "framer-motion";
+import { Fade } from "react-reveal";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -28,7 +30,6 @@ const ListView = () => {
   };
   const handleClose = () => {
     setClicked(!clicked);
-    setTable(!table);
   };
 
   const handleBillable = (e) => {
@@ -110,7 +111,7 @@ const ListView = () => {
     <div className={!table ? "h-[100vh]" : ""}>
       <div>
         <div className="cursor-pointer">
-          <div className="bg-gradient-to-r from-secondary via-primary to-cyan-700 rounded-lg px-4 py-2">
+          <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">
             <div onClick={clickHandler} className="  flex items-center ">
               {/* <button
               onClick={() => setLoader(true)}
@@ -124,143 +125,145 @@ const ListView = () => {
             </div>
             {/* Upper div */}
             {clicked && (
-              <>
-                <div className="  flex justify-between">
-                  <div className="flex items-center">
-                    <div className="flex mt-1 items-center">
-                      <input
-                        type="radio"
-                        name="billable"
-                        onChange={(e) => handleBillable("billable")}
-                      />
-                      <span className="text-sm ml-1 text-white font-normal">
-                        Billable
-                      </span>
+              <div>
+                <Fade>
+                  <div className="  flex justify-between">
+                    <div className="flex items-center">
+                      <div className="flex mt-1 items-center">
+                        <input
+                          type="radio"
+                          name="billable"
+                          onChange={(e) => handleBillable("billable")}
+                        />
+                        <span className="text-sm ml-1 text-white font-normal">
+                          Billable
+                        </span>
+                      </div>
+                      <div className="flex ml-1 mt-1 items-center">
+                        <input
+                          type="radio"
+                          name="billable"
+                          onChange={(e) => handleBillable("non-billable")}
+                        />
+                        <span className="text-sm ml-1 text-white font-normal">
+                          Non-Billable
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex ml-1 mt-1 items-center">
-                      <input
-                        type="radio"
-                        name="billable"
-                        onChange={(e) => handleBillable("non-billable")}
-                      />
-                      <span className="text-sm ml-1 text-white font-normal">
-                        Non-Billable
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <button
-                      onClick={handleClose}
-                      className="text-white text-2xl font-light"
-                    >
-                      <MdOutlineCancel />
-                    </button>
-                  </div>
-                </div>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-2">
-                    {billable === "non-billable" ||
-                      (billable === "billable" && (
-                        <div>
-                          <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
-                            Patients
-                          </h1>
-                          <CustomMultiSelection
-                            data={datat}
-                            value={value}
-                            setValue={setValue}
-                          ></CustomMultiSelection>
-                        </div>
-                      ))}
-                    <div className="w-full">
-                      <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
-                        Provider
-                      </h1>
-                      <CustomMultiSelection
-                        data={datatf}
-                        value={value}
-                        setValue={setValue}
-                      ></CustomMultiSelection>
-                    </div>
-
-                    {billable === "billable" && (
-                      <>
-                        <div>
-                          <label className="label">
-                            <span className="label-text text-xs text-gray-100 text-left">
-                              Place of Services
-                            </span>
-                          </label>
-                          <div>
-                            <select
-                              className=" bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
-                              {...register("pos")}
-                            >
-                              <option value="Today">Today's follow up</option>
-                              <option value="UK">Lost 7 days</option>
-                              <option value="15">Lost 15 days</option>
-                              <option value="15">Lost 30 days</option>
-                              <option value="15">30 days & over</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="label">
-                            <span className="label-text text-xs text-gray-100 text-left">
-                              Selected date
-                            </span>
-                          </label>
-                          <div className="ml-1">
-                            <DateRangePicker
-                              onChange={(date) => {
-                                console.log(date);
-                              }}
-                              placeholder="Select Date"
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="label">
-                            <span className="label-text text-xs text-gray-100 text-left">
-                              Status
-                            </span>
-                          </label>
-                          <div>
-                            <select
-                              className="bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
-                              {...register("Status")}
-                            >
-                              <option value=""></option>
-                              <option value="Today">Today's follow up</option>
-                              <option value="UK">Lost 7 days</option>
-                              <option value="15">Lost 15 days</option>
-                              <option value="15">Lost 30 days</option>
-                              <option value="15">30 days & over</option>
-                            </select>
-                          </div>
-                        </div>
-                        <button
-                          className="font-regular mt-[33px] sm:w-1/3  text-xs font-normal bg-secondary  hover:to-secondary text-white rounded-sm"
-                          type="submit"
-                        >
-                          Save
-                        </button>
-                      </>
-                    )}
-                    {billable === "non-billable" && (
+                    <div>
                       <button
-                        onClick={() => setTable(true)}
-                        className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-secondary to-primary  hover:to-secondary text-white rounded-md"
+                        onClick={handleClose}
+                        className="text-white text-2xl font-light"
                       >
-                        Go
+                        <MdOutlineCancel />
                       </button>
-                    )}
+                    </div>
                   </div>
-                </form>
-              </>
+
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-2">
+                      {billable === "non-billable" ||
+                        (billable === "billable" && (
+                          <div>
+                            <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
+                              Patients
+                            </h1>
+                            <CustomMultiSelection
+                              data={datat}
+                              value={value}
+                              setValue={setValue}
+                            ></CustomMultiSelection>
+                          </div>
+                        ))}
+                      <div className="w-full ">
+                        <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
+                          Provider
+                        </h1>
+                        <CustomMultiSelection
+                          data={datatf}
+                          value={value}
+                          setValue={setValue}
+                        ></CustomMultiSelection>
+                      </div>
+
+                      {billable === "billable" && (
+                        <>
+                          <div>
+                            <label className="label">
+                              <span className="label-text text-xs text-gray-100 text-left">
+                                Place of Services
+                              </span>
+                            </label>
+                            <div>
+                              <select
+                                className=" bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
+                                {...register("pos")}
+                              >
+                                <option value="Today">Today's follow up</option>
+                                <option value="UK">Lost 7 days</option>
+                                <option value="15">Lost 15 days</option>
+                                <option value="15">Lost 30 days</option>
+                                <option value="15">30 days & over</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="label">
+                              <span className="label-text text-xs text-gray-100 text-left">
+                                Selected date
+                              </span>
+                            </label>
+                            <div className="ml-1">
+                              <DateRangePicker
+                                onChange={(date) => {
+                                  console.log(date);
+                                }}
+                                placeholder="Select Date"
+                              />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="label">
+                              <span className="label-text text-xs text-gray-100 text-left">
+                                Status
+                              </span>
+                            </label>
+                            <div>
+                              <select
+                                className="bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
+                                {...register("Status")}
+                              >
+                                <option value=""></option>
+                                <option value="Today">Today's follow up</option>
+                                <option value="UK">Lost 7 days</option>
+                                <option value="15">Lost 15 days</option>
+                                <option value="15">Lost 30 days</option>
+                                <option value="15">30 days & over</option>
+                              </select>
+                            </div>
+                          </div>
+                          <button
+                            className="font-regular mt-[33px] sm:w-1/3  text-xs font-normal bg-secondary  hover:to-secondary text-white rounded-sm"
+                            type="submit"
+                          >
+                            Go
+                          </button>
+                        </>
+                      )}
+                      {billable === "non-billable" && (
+                        <button
+                          onClick={() => setTable(true)}
+                          className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-secondary to-primary  hover:to-secondary text-white rounded-md"
+                        >
+                          Go
+                        </button>
+                      )}
+                    </div>
+                  </form>
+                </Fade>
+              </div>
             )}
 
             {/* Lower Div */}
