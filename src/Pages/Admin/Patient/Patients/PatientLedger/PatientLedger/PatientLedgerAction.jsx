@@ -20,6 +20,8 @@ const PatientLedgerAction = ({ row }) => {
   const handleArClose = () => {
     setOpenARFollowup(false);
   };
+
+
   console.log("row=", row);
   return (
     <div>

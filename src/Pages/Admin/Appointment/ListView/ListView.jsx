@@ -256,176 +256,39 @@ const ListView = () => {
                 </Fade>
               </div>
             )}
-
-            {/* Lower Div */}
-
-            {/* {clicked && (
-            <div className=" p-4 flex justify-between">
-              <div className="flex flex-col">
-                <label className="text-xs text-white">Name</label>
-                <input
-                  className="w-64 border-0 bg-[transparent] text-white"
-                  type="text"
-                  placeholder="Select Patient"
-                />
-              </div>
-              <div></div>
-            </div>
-          )} */}
           </div>
         </div>
-      </div>
 
-      {/* -------------------------------------------TEST----------------------------------------------  */}
-      <div className="flex flex-wrap justify-between items-center mb-5">
-        {/* <h1 className="text-lg my-1 text-orange-500">Manage Sessions</h1> */}
-        {/* <div>
-          <Switch
-            defaultChecked
-            size="small"
-            onClick={() => {
-              setBillable(!billable);
-              setTable(!table);
-            }}
-          />
-
-          <label
-            className="form-check-label inline-block ml-2 text-sm text-gray-500"
-            htmlFor="flexSwitchCheckDefault"
-          >
-            {billable ? "Billable" : "Non-Billable"}
-          </label>
-        </div> */}
-      </div>
-      {/* <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 my-5 mr-2 gap-5">
-          {billable && (
-            <div>
-              <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
-              <CustomMultiSelection
-                data={datat}
-                value={value}
-                setValue={setValue}
-              ></CustomMultiSelection>
+        {table && (
+          <>
+            <div className="my-5">
+              <UseTable
+                getTableProps={getTableProps}
+                headerGroups={headerGroups}
+                getTableBodyProps={getTableBodyProps}
+                rows={rows}
+                prepareRow={prepareRow}
+              ></UseTable>
             </div>
-          )}
-          <div className="w-full">
-            <h1 className="text-xs mb-2 ml-1 mt-2 ">Provider</h1>
-            <CustomMultiSelection
-              data={datat}
-              value={value}
-              setValue={setValue}
-            ></CustomMultiSelection>
-          </div>
-
-          {billable && (
-            <>
+            <div className="flex item-center flex-wrap">
               <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-100 text-left">
-                    Place of Services
-                  </span>
-                </label>
-                <div>
-                  <select
-                    className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
-                    {...register("pos")}
-                  >
-                    <option value=""></option>
-                    <option value="Today">Today's follow up</option>
-                    <option value="UK">Lost 7 days</option>
-                    <option value="15">Lost 15 days</option>
-                    <option value="15">Lost 30 days</option>
-                    <option value="15">30 days & over</option>
-                  </select>
-                </div>
+                <select
+                  onChange={handleSortBy}
+                  name="type"
+                  className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
+                >
+                  <option value=""></option>
+                  <option value="Specific_Date">Specific Date</option>
+                  <option value="Date_Range">Provider</option>
+                </select>
               </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-100 text-left">
-                    Selected date
-                  </span>
-                </label>
-                <div className="ml-1">
-                  <DateRangePicker
-                    onChange={(date) => {
-                      console.log(date);
-                    }}
-                    placeholder="Select Date"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-100 text-left">
-                    Status
-                  </span>
-                </label>
-                <div>
-                  <select
-                    className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
-                    {...register("Status")}
-                  >
-                    <option value=""></option>
-                    <option value="Today">Today's follow up</option>
-                    <option value="UK">Lost 7 days</option>
-                    <option value="15">Lost 15 days</option>
-                    <option value="15">Lost 30 days</option>
-                    <option value="15">30 days & over</option>
-                  </select>
-                </div>
-              </div>
-              <button
-                className="font-regular mt-8 sm:w-1/2 px-3 py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                type="submit"
-              >
-                Save
+              <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
+                Go
               </button>
-            </>
-          )}
-          {!billable && (
-            <button
-              onClick={() => setTable(true)}
-              className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            >
-              Go
-            </button>
-          )}
-        </div>
-      </form> */}
-
-      {/* table  */}
-      {table && (
-        <>
-          <div className="my-5">
-            <UseTable
-              getTableProps={getTableProps}
-              headerGroups={headerGroups}
-              getTableBodyProps={getTableBodyProps}
-              rows={rows}
-              prepareRow={prepareRow}
-            ></UseTable>
-          </div>
-          <div className="flex item-center flex-wrap">
-            <div>
-              <select
-                onChange={handleSortBy}
-                name="type"
-                className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
-              >
-                <option value=""></option>
-                <option value="Specific_Date">Specific Date</option>
-                <option value="Date_Range">Provider</option>
-              </select>
             </div>
-            <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-              Go
-            </button>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

@@ -11,7 +11,6 @@ const ScheduleExport = ({ setVisible }) => {
     setVisible(false);
   };
 
-
   return (
     <Fade button>
       <div

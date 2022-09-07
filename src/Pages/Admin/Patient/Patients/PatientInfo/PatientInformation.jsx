@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getpatientsDetails } from "../../../../../features/Patient_redux/patientSlice";
 import Loading from "../../../../../Loading/Loading";
+import SmallLoader from "../../../../../Loading/SmallLoader";
 
 const PatientInformation = () => {
   const [voiceMsg, setVoiceMsg] = useState(false);
@@ -26,6 +27,7 @@ const PatientInformation = () => {
   const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
+  console.log("file = ", file);
   //console.log(Guarantor);
   //Patient Information
   const { id } = useParams();
@@ -40,7 +42,7 @@ const PatientInformation = () => {
   useEffect(() => {
     //action dispatched
     dispatch(getpatientsDetails(id));
-  }, []);
+  }, [id, dispatch]);
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -242,7 +244,7 @@ const PatientInformation = () => {
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   <div>
                     <select
-                      className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                       {...register("country")}
                     >
                       <option value="NY">NY</option>
@@ -266,6 +268,7 @@ const PatientInformation = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                   >
+                    {/*  */}
                     <label className="label">
                       <span className="label-text items-center flex text-xs text-gray-700 text-left">
                         Address
@@ -277,7 +280,7 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         name="add_1"
-                        className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                        className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                         {...register("add_1")}
                       />
                       <div
@@ -298,7 +301,7 @@ const PatientInformation = () => {
                     <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                       <div>
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                          className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                           {...register("country")}
                         >
                           <option value="NY">NY</option>
@@ -309,13 +312,15 @@ const PatientInformation = () => {
                         <input
                           type="text"
                           name="add_2"
-                          className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                          className="border border-gray-300   rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                           {...register("add_2")}
                         />
                       </div>
                     </div>
                   </motion.div>
                 )}
+
+                {/* this m */}
 
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   {" "}
@@ -508,6 +513,8 @@ const PatientInformation = () => {
                 </motion.div>
               )}
             </div>
+
+            {/*  */}
             {/* Email  */}
             <div className=" lg:mx-auto md:mx-0">
               <>
@@ -845,6 +852,7 @@ const PatientInformation = () => {
             >
               Notes
             </textarea>
+
             <div className="mx-auto">
               <SimpleFileUpload
                 apiKey={`b7deee9a71131791da71b4a74e6169c2`}
