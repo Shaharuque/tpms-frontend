@@ -39,11 +39,15 @@ const PatientsInfo = () => {
         >
           <div className="">
             <div className="">
-              <img src={doctor} className="h-24 w-24 m-auto" alt="" />
+              <img
+                src={doctor}
+                className="h-24 w-24 m-auto rounded-full border border-gray-100"
+                alt=""
+              />
             </div>
           </div>
 
-          <div className="text-xs text-secondary font-normal patient-nav mb-1">
+          <div className="text-xs text-secondary font-normal patient-nav mt-2 mb-1">
             <CustomLink
               className="flex gap-1  hover:text-white pb-1 hover:bg-primary items-center"
               to={`patient-info/${id}`}
