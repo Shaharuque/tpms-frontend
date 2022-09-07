@@ -26,7 +26,7 @@ import CreatePatient from "../../Pages/Shared/AdditionFeatures/CreatePatient";
 import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { useOutsideAlerter } from "../../../CustomHooks/useDetectOutsideClick";
 
-// NAVIGATION BAR
+// i am using alakaja
 const NavigationBar = ({ handle }) => {
   const [dOpen, setDOpen] = useState(false);
   const { visible, setVisible, ref } = useOutsideAlerter(false);

@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import { Fade } from "react-reveal";
 
 const ListView = () => {
-  const [billable, setBillable] = useState(true);
+  const [billable, setBillable] = useState("billable");
   const [table, setTable] = useState(false);
   const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
@@ -95,16 +95,16 @@ const ListView = () => {
 
   // -----------------------------------------------Multi-Select-------------------------------
   // ***************
-  const datat = [
-    "Eugenia",
-    "Bryan",
-    "Linda",
-    "Nancy",
-    "Lloyd",
-    "Alice",
-    "Julia",
-    "Albert",
-  ].map((item) => ({ label: item, value: item }));
+  const datat = ["Eugenia", "Bryan", "Linda"].map((item) => ({
+    label: item,
+    value: item,
+  }));
+
+  const datatf = ["demo", "pos", "minda"].map((item) => ({
+    label: item,
+    value: item,
+  }));
+
   const [value, setValue] = React.useState([]);
 
   return (
@@ -179,7 +179,7 @@ const ListView = () => {
                           Provider
                         </h1>
                         <CustomMultiSelection
-                          data={datat}
+                          data={datatf}
                           value={value}
                           setValue={setValue}
                         ></CustomMultiSelection>
@@ -195,7 +195,7 @@ const ListView = () => {
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
+                                className=" bg-transparent border-b-[3px] border-[#e5e5e5]  rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
                                 {...register("pos")}
                               >
                                 <option value="Today">Today's follow up</option>
@@ -231,7 +231,7 @@ const ListView = () => {
                             </label>
                             <div>
                               <select
-                                className="bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
+                                className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
                                 {...register("Status")}
                               >
                                 <option value=""></option>

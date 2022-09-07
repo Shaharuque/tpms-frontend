@@ -1,5 +1,5 @@
 import React from "react";
-import Medicalgif from "../Pages/Assets/medical1.gif";
+import Medicalgif from "../Pages/Assets/output-onlinegiftools.gif";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import found from "../Pages/Assets/404.png";
 import { useNavigate } from "react-router-dom";
