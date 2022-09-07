@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import { Fade } from "react-reveal";
 
 const ListView = () => {
-  const [billable, setBillable] = useState("billable");
+  const [billable, setBillable] = useState(true);
   const [table, setTable] = useState(false);
   const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
@@ -33,7 +33,7 @@ const ListView = () => {
   };
 
   const handleBillable = (e) => {
-    setBillable(e);
+    setBillable(!billable);
     setTable(false);
   };
 
@@ -119,62 +119,61 @@ const ListView = () => {
             >
               {loader ? <h1>Loading</h1> : "Search"}
             </button> */}
-              <h1 className="text-[16px]  text-white font-normal ">
-                Manage Sessions
-              </h1>
+              {!clicked && (
+                <h1 className="text-[16px]  text-white font-normal ">
+                  Manage Sessions
+                </h1>
+              )}
             </div>
             {/* Upper div */}
             {clicked && (
               <div>
                 <Fade>
-                  <div className="  flex justify-between">
-                    <div className="flex items-center">
-                      <div className="flex mt-1 items-center">
-                        <input
-                          type="radio"
-                          name="billable"
-                          onChange={(e) => handleBillable("billable")}
+                  <div className="flex justify-between items-center">
+                    <h1 className="text-[16px]  text-white font-normal ">
+                      Manage Sessions
+                    </h1>
+                    <div className="  flex justify-end gap-3">
+                      <div>
+                        <Switch
+                          color="default"
+                          defaultChecked
+                          size="small"
+                          onClick={handleBillable}
                         />
-                        <span className="text-sm ml-1 text-white font-normal">
-                          Billable
-                        </span>
+
+                        <label
+                          className="form-check-label inline-block ml-2 text-sm text-gray-100"
+                          htmlFor="flexSwitchCheckDefault"
+                        >
+                          {billable ? "Billable" : "Non-Billable"}
+                        </label>
                       </div>
-                      <div className="flex ml-1 mt-1 items-center">
-                        <input
-                          type="radio"
-                          name="billable"
-                          onChange={(e) => handleBillable("non-billable")}
-                        />
-                        <span className="text-sm ml-1 text-white font-normal">
-                          Non-Billable
-                        </span>
+                      <div>
+                        <button
+                          onClick={handleClose}
+                          className="text-white text-2xl font-light"
+                        >
+                          <MdOutlineCancel />
+                        </button>
                       </div>
-                    </div>
-                    <div>
-                      <button
-                        onClick={handleClose}
-                        className="text-white text-2xl font-light"
-                      >
-                        <MdOutlineCancel />
-                      </button>
                     </div>
                   </div>
 
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-2">
-                      {billable === "non-billable" ||
-                        (billable === "billable" && (
-                          <div>
-                            <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
-                              Patients
-                            </h1>
-                            <CustomMultiSelection
-                              data={datat}
-                              value={value}
-                              setValue={setValue}
-                            ></CustomMultiSelection>
-                          </div>
-                        ))}
+                      {billable && (
+                        <div>
+                          <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
+                            Patients
+                          </h1>
+                          <CustomMultiSelection
+                            data={datat}
+                            value={value}
+                            setValue={setValue}
+                          ></CustomMultiSelection>
+                        </div>
+                      )}
                       <div className="w-full">
                         <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
                           Provider
@@ -186,7 +185,7 @@ const ListView = () => {
                         ></CustomMultiSelection>
                       </div>
 
-                      {billable === "billable" && (
+                      {billable && (
                         <>
                           <div>
                             <label className="label">
@@ -244,22 +243,14 @@ const ListView = () => {
                               </select>
                             </div>
                           </div>
-                          <button
-                            className="font-regular mt-[33px] sm:w-1/3  text-xs font-normal bg-secondary  hover:to-secondary text-white rounded-sm"
-                            type="submit"
-                          >
-                            Save
-                          </button>
                         </>
                       )}
-                      {billable === "non-billable" && (
-                        <button
-                          onClick={() => setTable(true)}
-                          className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-secondary to-primary  hover:to-secondary text-white rounded-md"
-                        >
-                          Go
-                        </button>
-                      )}
+                      <button
+                        className="font-regular mt-[33px] sm:w-1/4  text-sm font-normal bg-secondary  hover:to-secondary text-white rounded-md"
+                        type="submit"
+                      >
+                        Go
+                      </button>
                     </div>
                   </form>
                 </Fade>
