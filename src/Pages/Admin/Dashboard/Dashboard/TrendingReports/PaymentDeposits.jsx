@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRowSelect, useSortBy, useTable } from "react-table";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
@@ -11,16 +11,29 @@ import {
 } from "./TrendingReportsTableData";
 import UseTable from "../../../../../Utilities/UseTable";
 import { DateRangePicker } from "rsuite";
+import axios from "axios";
 
 const PaymentDeposits = () => {
   const { handleSubmit, register, reset } = useForm();
   const onSubmit = (data) => {
-    // console.log(data);
     reset();
   };
+
+
   const handleSortBy = (e) => {};
 
-  const data = useMemo(() => [...PaymentDepositsData], []);
+  const [paymentDepositData, setPaymentDepositData] = useState([])
+
+  // fake api call
+  useEffect(()=>{
+    axios('../../All_Fake_Api/PaymentDeposit.json')
+    .then((response)=>{
+      setPaymentDepositData(response?.data)
+      })
+  },[])
+
+  
+  const data = useMemo(() => [...paymentDepositData], [paymentDepositData]);
   const columns = useMemo(() => [...PaymentDepositsColumn], []);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy, useRowSelect, (hooks) => {
@@ -43,8 +56,10 @@ const PaymentDeposits = () => {
         ];
       });
     });
+
+
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-600">Cash-Posting</h1>
         <div className="flex items-center gap-3">

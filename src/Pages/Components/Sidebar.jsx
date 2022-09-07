@@ -36,7 +36,7 @@ import SidebarMenu from "./SidebarMenu";
 import NavigationBar from "../Shared/NavigationBar/NavigationBar";
 import Footer from "../Shared/Footer/Footer";
 // import StateUse from "../Hooks/StateUse";
-// 
+//
 const menuItem = [
   {
     path: "/admin",
@@ -204,7 +204,8 @@ const menuItem = [
     roll: "patient",
   },
 ];
-//devShaik444 commits
+
+
 // const initialDropState = {};
 // menuItem.map((item) => {
 //   if (item.subRoute) initialDropState[item.name] = false;
@@ -214,7 +215,7 @@ const initialDropState = {};
 const x = menuItem.map((item) => {
   if (item.subRoute) initialDropState[item.name] = false;
 });
-//console.log(x);
+
 // console.log(initialDropState);
 
 const Sidebar = ({ handle }) => {
@@ -241,7 +242,7 @@ const Sidebar = ({ handle }) => {
     setIsHovering(false);
   };
 
-  // console.log(menuItem[1].others.name);
+ 
   //console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
   const logged_type = localStorage.getItem("type");
   return (
@@ -255,12 +256,12 @@ const Sidebar = ({ handle }) => {
         </main>
         <Footer></Footer>
       </div>
-
       <div
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
         className="Side_container fixed bg-secondary left-0 top-0 zfixed"
       >
+      
         <div
           style={{
             width: isHovering ? "240px" : "70px",

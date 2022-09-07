@@ -8,6 +8,7 @@ const ERemittance = () => {
 
   console.log(file);
   console.log(file2);
+  
 
   return (
     <div className="h-[100vh]">
