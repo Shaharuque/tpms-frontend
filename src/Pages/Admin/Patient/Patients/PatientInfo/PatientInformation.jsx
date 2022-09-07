@@ -12,8 +12,6 @@ import Loading from "../../../../../Loading/Loading";
 
 const PatientInformation = () => {
   const [voiceMsg, setVoiceMsg] = useState(false);
-
-  
   const [textMsg, setTextMsg] = useState(false);
   const [appointment, setAppointment] = useState(false);
   const [email, setEmail] = useState(false);
@@ -202,6 +200,7 @@ const PatientInformation = () => {
             {/* address  */}
             <div className="">
               <>
+            
                 <label className="label">
                   <span className="label-text items-center flex text-xs text-gray-700 text-left">
                     Address
@@ -257,6 +256,7 @@ const PatientInformation = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                   >
+            {/*  */}
                     <label className="label">
                       <span className="label-text items-center flex text-xs text-gray-700 text-left">
                         Address
@@ -308,6 +308,8 @@ const PatientInformation = () => {
                   </motion.div>
                 )}
 
+                {/* this m */}
+              
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   {" "}
                   <div>
@@ -343,6 +345,8 @@ const PatientInformation = () => {
                 </div>
               </>
             </div>
+
+
 
             {/* phone  */}
             <div className=" lg:mx-auto md:mx-0">
@@ -499,6 +503,8 @@ const PatientInformation = () => {
                 </motion.div>
               )}
             </div>
+
+          {/*  */}
             {/* Email  */}
             <div className=" lg:mx-auto md:mx-0">
               <>
@@ -559,8 +565,6 @@ const PatientInformation = () => {
                   </span>
                 </div>
               </>
-
-              {/* task looping */}
               {emailOpen && (
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}

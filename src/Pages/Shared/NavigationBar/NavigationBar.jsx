@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { BsDownload, BsArrowsFullscreen } from "react-icons/bs";
+import { BsDownload } from "react-icons/bs";
 import {
   BiFullscreen,
   BiExitFullscreen,
@@ -15,7 +15,7 @@ import {
   AiOutlineFileAdd,
   AiFillUnlock,
 } from "react-icons/ai";
-import { Dropdown, IconButton } from 'rsuite';
+import { Dropdown, IconButton } from "rsuite";
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.png";
@@ -26,12 +26,12 @@ import CreatePatient from "../../Pages/Shared/AdditionFeatures/CreatePatient";
 import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { useOutsideAlerter } from "../../../CustomHooks/useDetectOutsideClick";
 
-// NAVIGATION BAR
+// i am using alakaja
 const NavigationBar = ({ handle }) => {
   const [dOpen, setDOpen] = useState(false);
   const { visible, setVisible, ref } = useOutsideAlerter(false);
   const navigate = useNavigate();
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [patientClicked, setPatientClicked] = useState(false);
 
@@ -54,7 +54,14 @@ const NavigationBar = ({ handle }) => {
 
   const renderIconButton = (props, ref) => {
     return (
-      <IconButton {...props} ref={ref} icon={"+"} circle color="blue" appearance="primary" />
+      <IconButton
+        {...props}
+        ref={ref}
+        icon={"+"}
+        circle
+        color="blue"
+        appearance="primary"
+      />
     );
   };
 
@@ -307,8 +314,6 @@ const NavigationBar = ({ handle }) => {
               </div>
             </div>
           </div>
-
-          
         </div>
       </div>
     </motion.div>

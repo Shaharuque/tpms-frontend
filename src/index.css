@@ -4,7 +4,7 @@
 
 
 .fullscreen {
-  /*overflow-x: auto;*/
+  overflow: auto;
   background: #edf6f7;
 }
 
@@ -114,7 +114,6 @@ body {
   -moz-osx-font-smoothing: grayscale; */
   font-family: 'Poppins',
     sans-serif;
-
 }
 
 code {
@@ -136,7 +135,8 @@ code {
 /* scrolling  */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
+  height:7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -146,7 +146,9 @@ code {
 ::-webkit-scrollbar-thumb {
   background-color: #8e8e93;
   border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

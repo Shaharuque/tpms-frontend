@@ -3,12 +3,40 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
+import Calendar from "react-calendar";
+import "./CutomCSS/calenderDesign.css";
 
 const CreateAppointment = ({ handleClose }) => {
   const [billable, setBillable] = useState(true);
   const [recurrence, setRecurrence] = useState(false);
   const [daily, setDaily] = useState(false);
+  const [date, setDate] = useState(new Date());
   const { register, handleSubmit, reset } = useForm();
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const month = date.toLocaleString("en-us", { month: "long" });
+  const currentDate = date.getDate();
+  const year = date.getFullYear();
+
+  console.log(month, currentDate, year);
+
+  React.useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        check_date: date.toLocaleDateString(),
+      });
+    }, 0);
+  }, [date.toLocaleDateString()]);
+
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -16,10 +44,12 @@ const CreateAppointment = ({ handleClose }) => {
 
   // --------------------------------------------------Multi-Select-------------------------------
   const [value, setValue] = useState([]);
-  const data = ["Eugenia", "Bryan", "Linda"].map((item) => ({
-    label: item,
-    value: item,
-  }));
+  const data = ["Eugenia", "Bryan", "Linda", "Eugenia", "Bryan", "Linda"].map(
+    (item) => ({
+      label: item,
+      value: item,
+    })
+  );
   return (
     <div>
       <Dialog
@@ -135,7 +165,61 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="single">single</option>
                 <option value="married">married</option>
               </select>
-              <label className="label">
+              {/* calender */}
+              <label for="my-modal-6" className="label">
+                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
+                  From Date
+                </span>
+              </label>
+              <input
+                name="check_date"
+                value={date.toLocaleDateString()}
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
+                {...register("check_date")}
+              />
+
+              <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+              <div class="modal modal-middle">
+                <div class="modal-box p-0">
+                  <div className="grid lg:grid-cols-[180px_minmax(300px,_1fr)]">
+                    <div className="bg-teal-500 bold text-white rounded-l-lg ">
+                      <div className="w-full h-16 flex justify-center items-center bg-[#2D8A87] bg-opacity-50 backdrop-blur-xl rounded drop-shadow-lg">
+                        <span className="text-2xl">{days[date.getDay()]}</span>
+                      </div>
+                      <div className="flex flex-col justify-center items-center">
+                        <h1 className="text-8xl">{currentDate}</h1>
+                        <h1>{month}</h1>
+                      </div>
+                      <div className="flex justify-center items-end">
+                        <h1 className="text-3xl">{year}</h1>
+                      </div>
+                    </div>
+
+                    <div className="">
+                      <Calendar onChange={setDate} value={date} />
+                      <div className="flex justify-between px-2">
+                        <button className="text-xs text-red-500">Clear</button>
+                        <div modal-action>
+                          <label
+                            for="my-modal-6"
+                            className="text-xs text-teal-500"
+                          >
+                            CANCEL
+                          </label>
+                          <label
+                            for="my-modal-6"
+                            className="text-xs ml-2 text-teal-500"
+                          >
+                            OK
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Custom Calender End */}
+              {/* <label className="label">
                 <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   From Date
                 </span>
@@ -144,7 +228,7 @@ const CreateAppointment = ({ handleClose }) => {
                 className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
                 type="date"
                 {...register("check_Date")}
-              />
+              /> */}
               <label className="label">
                 <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   From Time

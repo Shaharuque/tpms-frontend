@@ -18,7 +18,7 @@ const UseTable = ({
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th
-                  className="bg-secondary border min-w-[30px]  py-1 text-xs font-normal text-white"
+                  className="bg-secondary border min-w-[20px]  py-1 text-xs font-normal text-white"
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render("Header")}
@@ -48,7 +48,7 @@ const UseTable = ({
                         border: "solid 1px #aeaeae55",
                       }}
                       //just use min-w-[30px] to solve the issue of customized cell width and md:something is removed no needed here
-                      className="text-xs py-[6px] min-w-[30px] text-center text-gray-600 "
+                      className="text-xs py-[6px] min-w-[20px]  text-center text-gray-600 "
                     >
                       {cell.render("Cell")}
                     </td>

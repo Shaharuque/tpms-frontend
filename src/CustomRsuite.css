@@ -2024,8 +2024,10 @@ tbody.rs-anim-collapse.rs-anim-in {
   opacity: 0.5;
 }
 .rs-btn-link {
-  color: #1675e0;
-  color: var(--rs-btn-link-text);
+  /* color: #1675e0; */
+  /* color: var(--rs-btn-link-text); */
+      font-weight: 700;
+    color: #0baec0;
   background-color: transparent;
   border: none;
 }
@@ -10754,15 +10756,19 @@ textarea.rs-picker-search-input {
 }
 .rs-picker-disabled {
   opacity: 0.3;
+  color: white;
 }
 .rs-picker-toggle .rs-picker-toggle-placeholder {
-  color: #8e8e93;
-  color: var(--rs-text-secondary);
+  /* color: #8e8e93;
+  color: var(--rs-text-secondary); */
+  color: white;
 }
 .rs-picker-has-value .rs-btn .rs-picker-toggle-value,
 .rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
-  color: #1675e0;
-  color: var(--rs-picker-value);
+  font-size: 14px;
+  /* color: #0aa7b8; */
+  /* color: var(--rs-picker-value); */
+  color: white;
 }
 .rs-picker-none {
   padding: 6px 12px 12px;
@@ -10985,8 +10991,9 @@ textarea.rs-picker-search-input {
   padding-right: 32px;
   color: #575757;
   color: var(--rs-text-primary);
-  background-color: #fff;
-  background-color: var(--rs-input-bg);
+  /* background-color: #fff;
+  background-color: var(--rs-input-bg); */
+  background-color: transparent;
   outline: none;
 }
 .rs-picker-toggle.rs-btn-lg .rs-picker-toggle-textbox {
@@ -11081,7 +11088,8 @@ textarea.rs-picker-search-input {
 }
 .rs-picker-default .rs-picker-toggle.rs-btn .rs-picker-toggle-caret,
 .rs-picker-default .rs-picker-toggle.rs-btn .rs-picker-toggle-clean {
-  top: 7px;
+  top: 5px;
+  color: white;
 }
 .rs-picker-toggle.rs-btn .rs-picker-toggle-caret {
   right: 12px;
@@ -11831,8 +11839,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 .rs-picker-input .rs-btn,
 .rs-picker-default .rs-picker-toggle,
 .rs-picker-input .rs-picker-toggle {
-  background-color: #fff !important;
-  background-color: var(--rs-input-bg) !important;
+  /* background-color: #fff !important;
+  background-color: var(--rs-input-bg) !important; */
+  background-color: transparent;
 }
 .rs-picker-default.rs-picker-disabled .rs-picker-toggle,
 .rs-picker-input.rs-picker-disabled .rs-picker-toggle,
@@ -17021,11 +17030,13 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 }
 .rs-btn-close .rs-icon {
   vertical-align: bottom;
+  color: white;
 }
 .rs-stack {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+ 
 }
 
 /*# sourceMappingURL=index.css.map */
