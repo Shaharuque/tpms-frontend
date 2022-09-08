@@ -22,17 +22,62 @@ const PatientInformation = () => {
   const [relation, setRelation] = useState("Self");
   const [isSubscribed, setIsSubscribed] = useState(false);
 
+  const [checkLocation, setLocation] = useState(false);
+
   //
   const [open, setOpen] = useState(false);
   const [phoneOpen, setPhoneOpen] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
-  //console.log("file = ", file);
-  //console.log(Guarantor);
-  //Patient Information
+  // Address state
+  const [addressRendomValue, setAddressRendomValue] = useState([]);
+  // phone state
+  const [phoneRendomValue, setPhoneRendomValue] = useState([]);
+  // Email State
+  const [emailRendomValue, setEmailRendomValue] = useState([]);
+
+  // Address + icon Click Handeler
+  const handleClick = () => {
+    setAddressRendomValue((current) => [...current, Math.random()]);
+  };
+  // Phone + icon click handeler
+  const handlePhoneClick = () => {
+    setPhoneRendomValue((current) => [...current, Math.random()]);
+  };
+
+  // email + icon click handeler
+  const handleEmailClick = () => {
+    setEmailRendomValue((current) => [...current, Math.random()]);
+  };
+
+  // address icon delete handeler
+  const addressHandleRemove = (index) => {
+    console.log(index);
+    const list = [...addressRendomValue];
+    list.splice(index, 1);
+    setAddressRendomValue(list);
+  };
+
+  // Phone icon delete handeler
+  const phoneHandleRemove = (index) => {
+    const list = [...phoneRendomValue];
+    list.splice(index, 1);
+    setPhoneRendomValue(list);
+  };
+
+  // email icon delete handeler
+  const EmailHandleRemove = (index) => {
+    const list = [...emailRendomValue];
+    list.splice(index, 1);
+    setEmailRendomValue(list);
+  };
+
+  console.log("file = ", file);
+  // console.log(Guarantor);
+  // Patient Information
   const { id } = useParams();
-  //console.log("patient Info", id);
+  // console.log("patient Info", id);
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.patientInfo);
@@ -41,7 +86,7 @@ const PatientInformation = () => {
   console.log("patient details", patient_details);
 
   useEffect(() => {
-    //action dispatched
+    // action dispatched
     dispatch(getpatientsDetails(id));
   }, [id, dispatch]);
 
@@ -97,7 +142,13 @@ const PatientInformation = () => {
     return <Loading></Loading>;
   }
 
-  //console.log(relation);
+  console.log(relation);
+
+  // testing 779
+  const testingfunc = () => {
+    console.log("hello i am test");
+    setLocation(true);
+  };
 
   return (
     <div>
@@ -200,12 +251,19 @@ const PatientInformation = () => {
               </label>
               <select
                 onClick={(e) => {
-                  settingRelation(e);
+                  setRelation(e.target.value);
                 }}
                 className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               >
                 <option value="Self">Self</option>
-                <option value="Spouse">Spouse</option>
+                <option
+                  value="Spouse"
+                  onChange={() => {
+                    setGuarantor(true);
+                  }}
+                >
+                  Spouse
+                </option>
                 <option value="Other">Other</option>
                 <option value="Child">Child</option>
                 <option value="Grandfather or Grandmother">
@@ -242,8 +300,8 @@ const PatientInformation = () => {
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                     {...register("add_1")}
                   />
-                  <div
-                    onClick={() => setOpen(true)}
+                  <div // onClick={() => setOpen(true)}
+                    onClick={handleClick}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
@@ -279,10 +337,16 @@ const PatientInformation = () => {
                   </div>
                 </div>
 
-                {open && (
+                {addressRendomValue.map((x, index) => (
                   <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{
+                      opacity: 0,
+                      y: 15,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                    }}
                     transition={{ delay: 0.2 }}
                   >
                     {/*  */}
@@ -300,8 +364,10 @@ const PatientInformation = () => {
                         className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                         {...register("add_1")}
                       />
-                      <div
-                        onClick={() => setOpen(false)}
+                      <div // onClick={() => setOpen(false)}
+                        onClick={() => {
+                          addressHandleRemove(index);
+                        }}
                         className="bg-red-500 text-white p-[6px]"
                       >
                         <RiDeleteBin6Line />
@@ -335,9 +401,7 @@ const PatientInformation = () => {
                       </div>
                     </div>
                   </motion.div>
-                )}
-
-                {/* this m */}
+                ))}
 
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   {" "}
@@ -402,8 +466,10 @@ const PatientInformation = () => {
                       <option value="family">family</option>
                     </select>
                   </div>
-                  <div
-                    onClick={() => setPhoneOpen(true)}
+                  <div // onClick={() => setPhoneOpen(true)}
+                    onClick={() => {
+                      handlePhoneClick();
+                    }}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
@@ -450,10 +516,16 @@ const PatientInformation = () => {
                   </span>
                 </div>
               </>
-              {phoneOpen && (
+              {phoneRendomValue.map((x, index) => (
                 <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{
+                    opacity: 0,
+                    y: 15,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
                   transition={{ delay: 0.2 }}
                 >
                   <label className="label">
@@ -481,7 +553,7 @@ const PatientInformation = () => {
                       </select>
                     </div>
                     <div
-                      onClick={() => setPhoneOpen(false)}
+                      onClick={() => phoneHandleRemove(index)}
                       className="bg-red-500 text-white p-[6px]"
                     >
                       <RiDeleteBin6Line />
@@ -528,7 +600,7 @@ const PatientInformation = () => {
                     </span>
                   </div>
                 </motion.div>
-              )}
+              ))}{" "}
             </div>
 
             {/*  */}
@@ -560,7 +632,9 @@ const PatientInformation = () => {
                     </select>
                   </div>
                   <div
-                    onClick={() => setEmailOpen(true)}
+                    onClick={() => {
+                      handleEmailClick();
+                    }}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
@@ -592,7 +666,8 @@ const PatientInformation = () => {
                   </span>
                 </div>
               </>
-              {emailOpen && (
+
+              {emailRendomValue.map((x, index) => (
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -623,7 +698,7 @@ const PatientInformation = () => {
                       </select>
                     </div>
                     <div
-                      onClick={() => setEmailOpen(false)}
+                      onClick={() => EmailHandleRemove(index)}
                       className="bg-red-500 text-white p-[6px]"
                     >
                       <RiDeleteBin6Line />
@@ -657,7 +732,7 @@ const PatientInformation = () => {
                     </span>
                   </div>
                 </motion.div>
-              )}
+              ))}
             </div>
           </div>
 
@@ -745,13 +820,10 @@ const PatientInformation = () => {
             <input
               disabled={relation === "Self" ? "true" : null}
               type="checkbox"
-              onChange={handleChange}
-              value={isSubscribed}
               name="patient"
-              id="checkbox"
-              // onClick={() => {
-              //   setGuarantor(!Guarantor);
-              // }}
+              onClick={() => {
+                setGuarantor(!Guarantor);
+              }}
             />
             <span className="text-xs ml-1 text-gray-700 font-normal">
               Is Guarantor Available?
@@ -760,8 +832,14 @@ const PatientInformation = () => {
 
           {Guarantor && (
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{
+                opacity: 0,
+                y: 15,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
               transition={{ delay: 0.2 }}
             >
               <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
@@ -818,6 +896,7 @@ const PatientInformation = () => {
                     </span>
                   </label>
                   <div className="mb-2">
+                    {/* <input type="text" name="add_1" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full " {...register(checkLocation=="true" ? "add_1" : "")}/> */}
                     <input
                       type="text"
                       name="add_1"
@@ -828,7 +907,13 @@ const PatientInformation = () => {
                   </div>
                 </div>
                 <div className="my-auto text-xs bg-secondary text-white ml-1 py-2 mb-2 text-center rounded-md">
-                  <button>Same as patient address</button>
+                  <button
+                    onClick={() => {
+                      testingfunc();
+                    }}
+                  >
+                    Same as patient address
+                  </button>
                 </div>
               </div>
 
