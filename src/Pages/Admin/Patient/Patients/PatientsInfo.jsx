@@ -61,7 +61,7 @@ const PatientsInfo = () => {
               className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
               to={`patient-authorization/${id}`}
             >
-              <h1 className="ml-1 mt-1">Authorization</h1>
+              <h1 className="ml-1 mt-1">Ins/Authorization</h1>
             </CustomLink>
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">

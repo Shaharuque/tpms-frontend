@@ -845,26 +845,26 @@ const PatientInformation = () => {
             </motion.div>
           )}
 
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-1 mr-2 gap-x-3 gap-y-1">
             <textarea
               name="comment"
-              className="border border-gray-300 text-sm p-1 mt-3 ml-1 h-24 w-full"
+              className="border border-gray-300 text-sm font-normal p-1 mt-3  h-40 "
             >
               Notes
             </textarea>
 
-            <div className="mx-auto">
+            <div className="ml-2 mt-[12px] ">
               <SimpleFileUpload
                 apiKey={`b7deee9a71131791da71b4a74e6169c2`}
                 onSuccess={setFile}
               />
-              <p className="mt-1 text-sm text-center">Upload Signature</p>
+              <p className="mt-3 text-sm ml-[17px]">Upload Signature</p>
             </div>
           </div>
           <div className="mb-5">
             {/* submit  */}
             <button
-              className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className=" py-[5px] mt-7 px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               type="submit"
             >
               Save Patient

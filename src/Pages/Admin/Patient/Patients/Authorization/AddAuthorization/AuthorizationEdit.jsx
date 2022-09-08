@@ -117,7 +117,7 @@ const AuthorizationEdit = () => {
         <h1 className="text-sm">Add Auth</h1>
         {/* Back a click korley routing problem solved {`/admin/patient/${id}/patient-authorization/${id}`}*/}
         <Link to={`/admin/patient/patient-authorization/${id}`}>
-          <button className="px-10 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-md">
+          <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs font-medium  hover:to-secondary text-white rounded-md">
             <IoCaretBackCircleOutline className="mr-1 text-sm" />
             Back
           </button>

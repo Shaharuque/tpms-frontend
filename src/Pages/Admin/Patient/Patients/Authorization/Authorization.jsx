@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
@@ -10,19 +10,30 @@ import {
   ARAuthorizationColumnData,
 } from "./Authorization/ARAuthorizationColumn";
 import UseTable from "../../../../../Utilities/UseTable";
-import AuthorizationContactedModal from "./Authorization/AuthorizationContactedModal";
 import AuthorizationEditModal from "./Authorization/AuthorizationEditModal";
 import SelectContactRate from "./Authorization/SelectContactRate";
+import axios from "axios";
 
 const Authorization = () => {
   const { id } = useParams();
-  console.log("lo auth id no ", id);
+  // console.log("lo auth id no ", id);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openContactModal, setOpenContactModal] = useState(false);
-  const data = useMemo(() => ARAuthorizationColumnData, []);
-  const columns = useMemo(() => [...ARAuthorizationColumnColumn], []);
   const [editableRow, setEditableRow] = React.useState(null);
   const [selectContact, setSelectContact] = useState(false);
+  const [authData, setAuthData] = useState("");
+
+  // calling fake db
+  useEffect(() => {
+    axios("./All_Fake_Api/Authorization.json")
+      .then((response) => {
+        console.log(response.data);
+        // setAuthData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -32,7 +43,10 @@ const Authorization = () => {
     setOpenContactModal(false);
   };
 
-  console.log("editableRow", editableRow);
+  const data = useMemo(() => ARAuthorizationColumnData, []);
+  const columns = useMemo(() => [...ARAuthorizationColumnColumn], []);
+
+  // console.log("editableRow", editableRow);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
       { columns, data, editableRow, setEditableRow },
