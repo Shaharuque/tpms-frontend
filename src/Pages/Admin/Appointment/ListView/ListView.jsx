@@ -9,6 +9,9 @@ import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import UseTable from "../../../../Utilities/UseTable";
 import { MdOutlineCancel } from "react-icons/md";
+import { motion } from "framer-motion";
+import { Fade } from "react-reveal";
+
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -28,11 +31,10 @@ const ListView = () => {
   };
   const handleClose = () => {
     setClicked(!clicked);
-    setTable(!table);
   };
 
   const handleBillable = (e) => {
-    setBillable(e);
+    setBillable(!billable);
     setTable(false);
   };
 
@@ -110,7 +112,7 @@ const ListView = () => {
     <div className={!table ? "h-[100vh]" : ""}>
       <div>
         <div className="cursor-pointer">
-          <div className="bg-gradient-to-r from-secondary via-primary to-cyan-700 rounded-lg px-4 py-2">
+          <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">
             <div onClick={clickHandler} className="  flex items-center ">
               {/* <button
               onClick={() => setLoader(true)}
@@ -118,50 +120,51 @@ const ListView = () => {
             >
               {loader ? <h1>Loading</h1> : "Search"}
             </button> */}
-              <h1 className="text-[16px]  text-white font-normal ">
-                Manage Sessions
-              </h1>
+              {!clicked && (
+                <h1 className="text-[16px]  text-white font-normal ">
+                  Manage Sessions
+                </h1>
+              )}
             </div>
-            {/* upper div */}
+            {/* Upper div */}
             {clicked && (
-              <>
-                <div className="  flex justify-between">
-                  <div className="flex items-center">
-                    <div className="flex mt-1 items-center">
-                      <input
-                        type="radio"
-                        name="billable"
-                        onChange={(e) => handleBillable("billable")}
-                      />
-                      <span className="text-sm ml-1 text-white font-normal">
-                        Billable
-                      </span>
-                    </div>
-                    <div className="flex ml-1 mt-1 items-center">
-                      <input
-                        type="radio"
-                        name="billable"
-                        onChange={(e) => handleBillable("non-billable")}
-                      />
-                      <span className="text-sm ml-1 text-white font-normal">
-                        Non-Billable
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <button
-                      onClick={handleClose}
-                      className="text-white text-2xl font-light"
-                    >
-                      <MdOutlineCancel />
-                    </button>
-                  </div>
-                </div>
+              <div>
+                <Fade>
+                  <div className="flex justify-between items-center">
+                    <h1 className="text-[16px]  text-white font-normal ">
+                      Manage Sessions
+                    </h1>
+                    <div className="  flex justify-end gap-3">
+                      <div>
+                        <Switch
+                      
+                          color="default"
+                          defaultChecked
+                          size="small"
+                          onClick={handleBillable}
+                        />
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-2">
-                    {billable === "non-billable" ||
-                      (billable === "billable" && (
+                        <label
+                          className="form-check-label inline-block ml-2 text-sm text-gray-100"
+                          htmlFor="flexSwitchCheckDefault"
+                        >
+                          {billable ? "Billable" : "Non-Billable"}
+                        </label>
+                      </div>
+                      <div>
+                        <button
+                          onClick={handleClose}
+                          className="text-white text-2xl font-light"
+                        >
+                          <MdOutlineCancel />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-2">
+                      {billable && (
                         <div>
                           <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
                             Patients
@@ -172,266 +175,122 @@ const ListView = () => {
                             setValue={setValue}
                           ></CustomMultiSelection>
                         </div>
-                      ))}
-                    <div className="w-full">
-                      <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
-                        Provider
-                      </h1>
-                      <CustomMultiSelection
-                        data={datatf}
-                        value={value}
-                        setValue={setValue}
-                      ></CustomMultiSelection>
-                    </div>
+                      )}
+                      <div className="w-full">
+                        <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
+                          Provider
+                        </h1>
+                        <CustomMultiSelection
+                          data={datat}
+                          value={value}
+                          setValue={setValue}
+                        ></CustomMultiSelection>
+                      </div>
 
-                    {billable === "billable" && (
-                      <>
-                        <div>
-                          <label className="label">
-                            <span className="label-text text-xs text-gray-100 text-left">
-                              Place of Services
-                            </span>
-                          </label>
+                      {billable && (
+                        <>
                           <div>
-                            <select
-                              className=" bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
-                              {...register("pos")}
-                            >
-                              <option value="Today">Today's follow up</option>
-                              <option value="UK">Lost 7 days</option>
-                              <option value="15">Lost 15 days</option>
-                              <option value="15">Lost 30 days</option>
-                              <option value="15">30 days & over</option>
-                            </select>
+                            <label className="label">
+                              <span className="label-text text-xs text-gray-100 text-left">
+                                Place of Services
+                              </span>
+                            </label>
+                            <div>
+                              <select
+                                className=" bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
+                                {...register("pos")}
+                              >
+                                <option value="Today">Today's follow up</option>
+                                <option value="UK">Lost 7 days</option>
+                                <option value="15">Lost 15 days</option>
+                                <option value="15">Lost 30 days</option>
+                                <option value="15">30 days & over</option>
+                              </select>
+                            </div>
                           </div>
-                        </div>
 
-                        <div>
-                          <label className="label">
-                            <span className="label-text text-xs text-gray-100 text-left">
-                              Selected date
-                            </span>
-                          </label>
-                          <div className="ml-1">
-                            <DateRangePicker
-                              onChange={(date) => {
-                                console.log(date);
-                              }}
-                              placeholder="Select Date"
-                            />
-                          </div>
-                        </div>
-
-                        <div>
-                          <label className="label">
-                            <span className="label-text text-xs text-gray-100 text-left">
-                              Status
-                            </span>
-                          </label>
                           <div>
-                            <select
-                              className="bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
-                              {...register("Status")}
-                            >
-                              <option value=""></option>
-                              <option value="Today">Today's follow up</option>
-                              <option value="UK">Lost 7 days</option>
-                              <option value="15">Lost 15 days</option>
-                              <option value="15">Lost 30 days</option>
-                              <option value="15">30 days & over</option>
-                            </select>
+                            <label className="label">
+                              <span className="label-text text-xs text-gray-100 text-left">
+                                Selected date
+                              </span>
+                            </label>
+                            <div className="ml-1">
+                              <DateRangePicker
+                                onChange={(date) => {
+                                  console.log(date);
+                                }}
+                                placeholder="Select Date"
+                              />
+                            </div>
                           </div>
-                        </div>
-                        <button
-                          className="font-regular mt-[33px] sm:w-1/3  text-xs font-normal bg-secondary  hover:to-secondary text-white rounded-sm"
-                          type="submit"
-                        >
-                          Save
-                        </button>
-                      </>
-                    )}
-                    {billable === "non-billable" && (
+
+                          <div>
+                            <label className="label">
+                              <span className="label-text text-xs text-gray-100 text-left">
+                                Status
+                              </span>
+                            </label>
+                            <div>
+                              <select
+                                className="bg-transparent border-b-2 border-secondary rounded-sm px-1 py-[5px] font-normal text-black mx-1 text-xs w-full"
+                                {...register("Status")}
+                              >
+                                <option value=""></option>
+                                <option value="Today">Today's follow up</option>
+                                <option value="UK">Lost 7 days</option>
+                                <option value="15">Lost 15 days</option>
+                                <option value="15">Lost 30 days</option>
+                                <option value="15">30 days & over</option>
+                              </select>
+                            </div>
+                          </div>
+                        </>
+                      )}
                       <button
-                        onClick={() => setTable(true)}
-                        className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-secondary to-primary  hover:to-secondary text-white rounded-md"
+                        className="font-regular mt-[33px] sm:w-1/4  text-sm font-normal bg-secondary  hover:to-secondary text-white rounded-md"
+                        type="submit"
                       >
                         Go
                       </button>
-                    )}
-                  </div>
-                </form>
-              </>
+                    </div>
+                  </form>
+                </Fade>
+              </div>
             )}
-
-            {/* {/ Lower Div /} */}
-
-            {/* {clicked && (
-            <div className=" p-4 flex justify-between">
-              <div className="flex flex-col">
-                <label className="text-xs text-white">Name</label>
-                <input
-                  className="w-64 border-0 bg-[transparent] text-white"
-                  type="text"
-                  placeholder="Select Patient"
-                />
-              </div>
-              <div></div>
-            </div>
-          )} */ }
           </div>
         </div>
-      </div>
 
-      {/* {/ -------------------------------------------TEST----------------------------------------------  /} */}
-      <div className="flex flex-wrap justify-between items-center mb-5">
-        {<h1 className="text-lg my-1 text-orange-500">Manage Sessions</h1> }
-        {/* <div>
-          <Switch
-            defaultChecked
-            size="small"
-            onClick={() => {
-              setBillable(!billable);
-              setTable(!table);
-            }}
-          />
-
-          <label
-            className="form-check-label inline-block ml-2 text-sm text-gray-500"
-            htmlFor="flexSwitchCheckDefault"
-          >
-            {billable ? "Billable" : "Non-Billable"}
-          </label>
-        </div> */}
-      </div>
-      {/* <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 my-5 mr-2 gap-5">
-          {billable && (
-            <div>
-              <h1 className="text-xs mb-2 ml-1 mt-2">Patients</h1>
-              <CustomMultiSelection
-                data={datat}
-                value={value}
-                setValue={setValue}
-              ></CustomMultiSelection>
+        {table && (
+          <>
+            <div className="my-5">
+              <UseTable
+                getTableProps={getTableProps}
+                headerGroups={headerGroups}
+                getTableBodyProps={getTableBodyProps}
+                rows={rows}
+                prepareRow={prepareRow}
+              ></UseTable>
             </div>
-          )}
-          <div className="w-full">
-            <h1 className="text-xs mb-2 ml-1 mt-2 ">Provider</h1>
-            <CustomMultiSelection
-              data={datat}
-              value={value}
-              setValue={setValue}
-            ></CustomMultiSelection>
-          </div>
-
-          {billable && (
-            <>
+            <div className="flex item-center flex-wrap">
               <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-100 text-left">
-                    Place of Services
-                  </span>
-                </label>
-                <div>
-                  <select
-                    className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
-                    {...register("pos")}
-                  >
-                    <option value=""></option>
-                    <option value="Today">Today's follow up</option>
-                    <option value="UK">Lost 7 days</option>
-                    <option value="15">Lost 15 days</option>
-                    <option value="15">Lost 30 days</option>
-                    <option value="15">30 days & over</option>
-                  </select>
-                </div>
+                <select
+                  onChange={handleSortBy}
+                  name="type"
+                  className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
+                >
+                  <option value=""></option>
+                  <option value="Specific_Date">Specific Date</option>
+                  <option value="Date_Range">Provider</option>
+                </select>
               </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-100 text-left">
-                    Selected date
-                  </span>
-                </label>
-                <div className="ml-1">
-                  <DateRangePicker
-                    onChange={(date) => {
-                      console.log(date);
-                    }}
-                    placeholder="Select Date"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-100 text-left">
-                    Status
-                  </span>
-                </label>
-                <div>
-                  <select
-                    className="border rounded-sm px-2 py-[5px] font-thin mx-1 text-xs w-full"
-                    {...register("Status")}
-                  >
-                    <option value=""></option>
-                    <option value="Today">Today's follow up</option>
-                    <option value="UK">Lost 7 days</option>
-                    <option value="15">Lost 15 days</option>
-                    <option value="15">Lost 30 days</option>
-                    <option value="15">30 days & over</option>
-                  </select>
-                </div>
-              </div>
-              <button
-                className="font-regular mt-8 sm:w-1/2 px-3 py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                type="submit"
-              >
-                Save
+              <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
+                Go
               </button>
-            </>
-          )}
-          {!billable && (
-            <button
-              onClick={() => setTable(true)}
-              className="font-regular mt-8 w-1/4  py-1  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            >
-              Go
-            </button>
-          )}
-        </div>
-      </form> */}
-
-      {/* {/ table  /} */}
-      {table && (
-        <>
-          <div className="my-5">
-            <UseTable
-              getTableProps={getTableProps}
-              headerGroups={headerGroups}
-              getTableBodyProps={getTableBodyProps}
-              rows={rows}
-              prepareRow={prepareRow}
-            ></UseTable>
-          </div>
-          <div className="flex item-center flex-wrap">
-            <div>
-              <select
-                onChange={handleSortBy}
-                name="type"
-                className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
-              >
-                <option value=""></option>
-                <option value="Specific_Date">Specific Date</option>
-                <option value="Date_Range">Provider</option>
-              </select>
             </div>
-            <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-              Go
-            </button>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

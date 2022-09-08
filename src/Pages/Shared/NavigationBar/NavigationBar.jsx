@@ -39,7 +39,6 @@ const NavigationBar = ({ handle }) => {
     setClicked(!clicked);
   };
   const handlePatient = () => {
-    
     setPatientClicked(!patientClicked);
   };
 
