@@ -109,7 +109,7 @@ const ListView = () => {
 
   return (
     // For responsive view point
-    <div className={!table ? "h-full" : "h-full"}>
+    <div className={!table ? "h-[100vh]" : ""}>
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">

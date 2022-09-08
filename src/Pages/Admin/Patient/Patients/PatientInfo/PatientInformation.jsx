@@ -20,6 +20,7 @@ const PatientInformation = () => {
   const [Guarantor, setGuarantor] = useState(false);
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   //
   const [open, setOpen] = useState(false);
@@ -27,7 +28,7 @@ const PatientInformation = () => {
   const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
-  console.log("file = ", file);
+  //console.log("file = ", file);
   //console.log(Guarantor);
   //Patient Information
   const { id } = useParams();
@@ -69,11 +70,34 @@ const PatientInformation = () => {
     console.log(data);
   };
 
+  ///relation value handle
+  const settingRelation = (e) => {
+    //console.log("selected option", e.target.value);
+    if (e.target.value === "Self") {
+      setGuarantor(false);
+      document.getElementById("checkbox").checked = false;
+    }
+    setRelation(e.target.value);
+  };
+  //Guarentor handler code
+  const handleChange = (event) => {
+    if (event.target.checked) {
+      console.log("✅ Checkbox is checked");
+      setGuarantor(true);
+    } else {
+      console.log("⛔️ Checkbox is NOT checked");
+      setGuarantor(false);
+    }
+    setIsSubscribed((current) => !current);
+  };
+  //console.log("guarentor", Guarantor);
+  //console.log("subscribed", isSubscribed);
+
   if (loading) {
     return <Loading></Loading>;
   }
 
-  console.log(relation);
+  //console.log(relation);
 
   return (
     <div>
@@ -176,19 +200,12 @@ const PatientInformation = () => {
               </label>
               <select
                 onClick={(e) => {
-                  setRelation(e.target.value);
+                  settingRelation(e);
                 }}
                 className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               >
                 <option value="Self">Self</option>
-                <option
-                  value="Spouse"
-                  onChange={() => {
-                    setGuarantor(true);
-                  }}
-                >
-                  Spouse
-                </option>
+                <option value="Spouse">Spouse</option>
                 <option value="Other">Other</option>
                 <option value="Child">Child</option>
                 <option value="Grandfather or Grandmother">
@@ -728,10 +745,13 @@ const PatientInformation = () => {
             <input
               disabled={relation === "Self" ? "true" : null}
               type="checkbox"
+              onChange={handleChange}
+              value={isSubscribed}
               name="patient"
-              onClick={() => {
-                setGuarantor(!Guarantor);
-              }}
+              id="checkbox"
+              // onClick={() => {
+              //   setGuarantor(!Guarantor);
+              // }}
             />
             <span className="text-xs ml-1 text-gray-700 font-normal">
               Is Guarantor Available?
