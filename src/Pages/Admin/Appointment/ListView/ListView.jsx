@@ -80,7 +80,6 @@ const ListView = () => {
       }
     );
   // console.log(selectedFlatRows);
-
   // -----------------------------------------------Form-------------------------------
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {

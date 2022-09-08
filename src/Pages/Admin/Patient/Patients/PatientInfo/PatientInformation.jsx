@@ -22,6 +22,8 @@ const PatientInformation = () => {
     const [file, setFile] = useState();
     const [relation, setRelation] = useState("Self");
 
+    const [checkLocation, setLocation] = useState(false)
+
     //
     const [open, setOpen] = useState(false);
     const [phoneOpen, setPhoneOpen] = useState(false);
@@ -52,7 +54,17 @@ const PatientInformation = () => {
     }
 
 
-    // address icon delte handeler
+     // email + icon click handeler
+     const handleEmailClick = () => {
+      setEmailRendomValue(current => [
+          ...current,
+          Math.random()
+      ]);
+
+  }
+
+
+    // address icon delete handeler
     const addressHandleRemove = (index) => {
         console.log(index)
         const list = [...addressRendomValue];
@@ -66,6 +78,14 @@ const PatientInformation = () => {
         const list = [...phoneRendomValue];
         list.splice(index, 1)
         setPhoneRendomValue(list)
+    }
+
+    // email icon delete handeler
+    const EmailHandleRemove = (index) => {
+      const list = [...emailRendomValue];
+      list.splice(index, 1)
+      setEmailRendomValue(list)
+
     }
 
     console.log("file = ", file);
@@ -114,6 +134,12 @@ const PatientInformation = () => {
     }
 
     console.log(relation);
+
+    // testing 779 
+    const testingfunc = () =>{
+        console.log("hello i am test")
+        setLocation(true)
+    }
 
 
     return (
@@ -513,9 +539,10 @@ const PatientInformation = () => {
                                             <option value="home">home</option>
                                             <option value="family">family</option>
                                         </select>
+                                     
                                     </div>
                                     <div onClick={
-                                            () => setEmailOpen(true)
+                                            () => {handleEmailClick()}
                                         }
                                         className="bg-secondary text-white p-[6px]">
                                         <FaPlus/>
@@ -545,6 +572,73 @@ const PatientInformation = () => {
                                     </span>
                                 </div>
                             </>
+
+                {emailRendomValue.map((x,index) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <label className="label">
+                    <span className="label-text text-xs text-gray-700 text-left">
+                      Email
+                    </span>
+                  </label>
+                  <div className="flex flex-wrap items-center gap-x-2 ">
+                    <div>
+                      <input
+                        type="text"
+                        name="email"
+                        className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                        {...register("email")}
+                      />
+                    </div>
+                    <div>
+                      <select
+                        className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                        {...register("group2")}
+                      >
+                        <option value="work">work</option>
+                        <option value="home">home</option>
+                        <option value="family">family</option>
+                      </select>
+                    </div>
+                    <div
+                      onClick={() => EmailHandleRemove(index)}
+                      className="bg-red-500 text-white p-[6px]"
+                    >
+                      <RiDeleteBin6Line />
+                    </div>
+                  </div>
+                  <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
+                    <div className="">
+                      <input
+                        type="checkbox"
+                        name="patient"
+                        onClick={() => {
+                          setEmail(!email);
+                        }}
+                      />
+                      <span className="text-xs ml-1 text-gray-700 font-normal">
+                        Email OK
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex ml-1 mt-1 items-center">
+                    <input
+                      type="checkbox"
+                      name="patient"
+                      onClick={() => {
+                        setEmailSend(!emailSend);
+                      }}
+                    />
+                    <span className="text-xs ml-1 text-gray-700 font-normal">
+                      Send email appointment reminders
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
                            </div>
                     </div>
 
@@ -684,11 +778,12 @@ const PatientInformation = () => {
                                         </span>
                                     </label>
                                     <div className="mb-2">
+                                        {/* <input type="text" name="add_1" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full " {...register(checkLocation=="true" ? "add_1" : "")}/> */}
                                         <input type="text" name="add_1" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full " {...register("add_1")}/>
                                     </div>
                                 </div>
                                 <div className="my-auto text-xs bg-secondary text-white ml-1 py-2 mb-2 text-center rounded-md">
-                                    <button>Same as patient address</button>
+                                    <button onClick={()=>{testingfunc()}}>Same as patient address</button>
                                 </div>
                             </div>
 
