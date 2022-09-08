@@ -178,7 +178,7 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="first_name"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("first_name")}
               />
             </div>
@@ -191,7 +191,7 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="middle_name"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("middle_name")}
               />
             </div>
@@ -204,7 +204,7 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="last_name"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("last_name")}
               />
             </div>
@@ -216,7 +216,7 @@ const PatientInformation = () => {
                 </span>
               </label>
               <input
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
                 name="dob"
                 type="date"
                 {...register("dob")}
@@ -230,7 +230,7 @@ const PatientInformation = () => {
                 </span>
               </label>
               <select
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
                 name="gender"
                 {...register("gender")}
               >
@@ -253,7 +253,7 @@ const PatientInformation = () => {
                 onClick={(e) => {
                   setRelation(e.target.value);
                 }}
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
               >
                 <option value="Self">Self</option>
                 <option
