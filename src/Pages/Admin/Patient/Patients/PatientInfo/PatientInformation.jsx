@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getpatientsDetails } from "../../../../../features/Patient_redux/patientSlice";
 import Loading from "../../../../../Loading/Loading";
-import SmallLoader from "../../../../../Loading/SmallLoader";
 
 const PatientInformation = () => {
   const [voiceMsg, setVoiceMsg] = useState(false);
@@ -21,13 +20,9 @@ const PatientInformation = () => {
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
   const [isSubscribed, setIsSubscribed] = useState(false);
-
   const [checkLocation, setLocation] = useState(false);
 
   //
-  const [open, setOpen] = useState(false);
-  const [phoneOpen, setPhoneOpen] = useState(false);
-  const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
   // Address state
@@ -135,8 +130,6 @@ const PatientInformation = () => {
     }
     setIsSubscribed((current) => !current);
   };
-  //console.log("guarentor", Guarantor);
-  //console.log("subscribed", isSubscribed);
 
   if (loading) {
     return <Loading></Loading>;
@@ -251,7 +244,7 @@ const PatientInformation = () => {
               </label>
               <select
                 onClick={(e) => {
-                  setRelation(e.target.value);
+                  settingRelation(e);
                 }}
                 className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
               >
@@ -820,10 +813,13 @@ const PatientInformation = () => {
             <input
               disabled={relation === "Self" ? "true" : null}
               type="checkbox"
+              onChange={handleChange}
+              value={isSubscribed}
               name="patient"
-              onClick={() => {
-                setGuarantor(!Guarantor);
-              }}
+              id="checkbox"
+              // onClick={() => {
+              //   setGuarantor(!Guarantor);
+              // }}
             />
             <span className="text-xs ml-1 text-gray-700 font-normal">
               Is Guarantor Available?
