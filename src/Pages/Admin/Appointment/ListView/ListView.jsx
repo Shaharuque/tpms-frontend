@@ -11,20 +11,22 @@ import UseTable from "../../../../Utilities/UseTable";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import { Fade } from "react-reveal";
+import CardsView from "./CardView/CardsView";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
   const [table, setTable] = useState(false);
   const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
-  const [simpldata, setsimpledata] = useState([]);
+  const [listView, setListView] = useState(true);
+  const [card, setCard] = useState(false);
+
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
 
   //test design
   const [clicked, setClicked] = useState(false);
-  const [loader, setLoader] = useState(false);
   const clickHandler = () => {
     setClicked(true);
   };
@@ -35,6 +37,10 @@ const ListView = () => {
   const handleBillable = (e) => {
     setBillable(!billable);
     setTable(false);
+  };
+
+  const handleListView = () => {
+    setListView(!listView);
   };
 
   // calling fake db
@@ -79,7 +85,6 @@ const ListView = () => {
       }
     );
   // console.log(selectedFlatRows);
-
   // -----------------------------------------------Form-------------------------------
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
@@ -114,12 +119,6 @@ const ListView = () => {
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">
             <div onClick={clickHandler} className="  flex items-center ">
-              {/* <button
-              onClick={() => setLoader(true)}
-              className="bg-teal-600 px-2 text-white rounded-lg text-sm"
-            >
-              {loader ? <h1>Loading</h1> : "Search"}
-            </button> */}
               {!clicked && (
                 <h1 className="text-[16px]  text-white font-normal ">
                   Manage Sessions
@@ -158,6 +157,36 @@ const ListView = () => {
                           <MdOutlineCancel />
                         </button>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* List view or table view  */}
+
+                  <div
+                    className={
+                      listView
+                        ? "flex justify-end mr-[26px]"
+                        : "flex justify-end mr-[15px]"
+                    }
+                  >
+                    <div>
+                      <Switch
+                        color="default"
+                        defaultChecked
+                        size="small"
+                        onClick={handleListView}
+                      />
+
+                      <label
+                        className="form-check-label inline-block ml-2 text-sm text-gray-100"
+                        htmlFor="flexSwitchCheckDefault"
+                      >
+                        {listView ? (
+                          <span className="">List View</span>
+                        ) : (
+                          "Card View"
+                        )}
+                      </label>
                     </div>
                   </div>
 
@@ -287,16 +316,28 @@ const ListView = () => {
 
         {table && (
           <>
-            <div className="my-5">
-              <UseTable
-                getTableProps={getTableProps}
-                headerGroups={headerGroups}
-                getTableBodyProps={getTableBodyProps}
-                rows={rows}
-                prepareRow={prepareRow}
-              ></UseTable>
-            </div>
-            <div className="flex item-center flex-wrap">
+            {listView && (
+              <div className="my-5">
+                <UseTable
+                  getTableProps={getTableProps}
+                  headerGroups={headerGroups}
+                  getTableBodyProps={getTableBodyProps}
+                  rows={rows}
+                  prepareRow={prepareRow}
+                ></UseTable>
+              </div>
+            )}
+            {!listView && (
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="my-5"
+              >
+                <CardsView data={TData}></CardsView>
+              </motion.div>
+            )}
+            {/* <div className="flex item-center flex-wrap">
               <div>
                 <select
                   onChange={handleSortBy}
@@ -311,7 +352,7 @@ const ListView = () => {
               <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
                 Go
               </button>
-            </div>
+            </div> */}
           </>
         )}
       </div>

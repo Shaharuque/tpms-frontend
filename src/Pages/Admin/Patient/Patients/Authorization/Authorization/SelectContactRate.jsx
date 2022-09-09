@@ -43,18 +43,18 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
     <div>
       <div>
         <Dialog
+          maxWidth="xl"
           open={open}
-          onClose={handleClose}
           aria-labelledby="responsive-dialog-title"
         >
-          <div className="px-5 py-2 box sm:w-[1200px]">
+          <div className="px-5 py-2 box sm:w-[1600px] ">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">
                 Edit Document
               </h1>
               <IoCloseCircleOutline
                 onClick={handleClose}
-                className="text-gray-600 font-semibold  text-2xl hover:text-primary"
+                className="text-gray-600 font-semibold  text-2xl hover:text-primary "
               />
             </div>
             <UseTable
@@ -64,6 +64,22 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
               rows={rows}
               prepareRow={prepareRow}
             ></UseTable>
+            <div className=" flex items-end justify-end mt-2">
+              <button
+                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                type="submit"
+              >
+                Copy
+              </button>
+
+              <button
+                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                autoFocus
+                onClick={handleClose}
+              >
+                Close
+              </button>
+            </div>
           </div>
         </Dialog>
       </div>
