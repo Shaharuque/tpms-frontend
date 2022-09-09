@@ -88,7 +88,7 @@ const PatientInformation = () => {
       console.log("⛔️ Checkbox is NOT checked");
       setGuarantor(false);
     }
-    setIsSubscribed((current) => !current);
+    // setIsSubscribed((current) => !current);
   };
   //console.log("guarentor", Guarantor);
   //console.log("subscribed", isSubscribed);
@@ -179,7 +179,7 @@ const PatientInformation = () => {
                 </span>
               </label>
               <select
-                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
+                className="border-[#09A2B3] border-b-2 rounded-sm px-2 pt-[3px] pb-[5px] mx-1 text-xs w-full focus:outline-none"
                 name="gender"
                 {...register("gender")}
               >
@@ -202,7 +202,7 @@ const PatientInformation = () => {
                 onClick={(e) => {
                   settingRelation(e);
                 }}
-                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
+                className="border-[#09A2B3] border-b-2 rounded-sm pt-[3px] pb-[5px] mx-1 text-xs w-full focus:outline-none"
               >
                 <option value="Self">Self</option>
                 <option value="Spouse">Spouse</option>
@@ -746,8 +746,8 @@ const PatientInformation = () => {
               disabled={relation === "Self" ? "true" : null}
               type="checkbox"
               onChange={handleChange}
-              value={isSubscribed}
-              name="patient"
+              // value={isSubscribed}
+              // name="patient"
               id="checkbox"
               // onClick={() => {
               //   setGuarantor(!Guarantor);
@@ -759,10 +759,10 @@ const PatientInformation = () => {
           </div>
 
           {Guarantor && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+            <div
+            // initial={{ opacity: 0, y: 15 }}
+            // animate={{ opacity: 1, y: 0 }}
+            // transition={{ delay: 0.2 }}
             >
               <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
@@ -862,7 +862,7 @@ const PatientInformation = () => {
                   />
                 </div>
               </div>
-            </motion.div>
+            </div>
           )}
 
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
