@@ -243,20 +243,11 @@ const PatientInformation = () => {
                 </span>
               </label>
               <select
-                onClick={(e) => {
-                  settingRelation(e);
-                }}
+                onChange={settingRelation}
                 className="border-[#09A2B3] border-b-2 rounded-sm pt-[3px] pb-[5px] mx-1 text-xs w-full focus:outline-none"
               >
                 <option value="Self">Self</option>
-                <option
-                  value="Spouse"
-                  onChange={() => {
-                    setGuarantor(true);
-                  }}
-                >
-                  Spouse
-                </option>
+                <option value="Spouse">Spouse</option>
                 <option value="Other">Other</option>
                 <option value="Child">Child</option>
                 <option value="Grandfather or Grandmother">
