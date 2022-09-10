@@ -113,12 +113,15 @@ const PatientInformation = () => {
   ///relation value handle
   const settingRelation = (e) => {
     //console.log("selected option", e.target.value);
+    //const relation = e.target.value;
     if (e.target.value === "Self") {
       setGuarantor(false);
       document.getElementById("checkbox").checked = false;
     }
+    //setRelation(relation);
     setRelation(e.target.value);
   };
+  console.log(relation);
   //Guarentor handler code
   const handleChange = (event) => {
     if (event.target.checked) {
@@ -134,8 +137,6 @@ const PatientInformation = () => {
   if (loading) {
     return <Loading></Loading>;
   }
-
-  console.log(relation);
 
   // testing 779
   const testingfunc = () => {
