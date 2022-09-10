@@ -83,7 +83,7 @@ const LogInForm = () => {
                 </label>
                 <input
                   type="email"
-                  placeholder="Enter Email"
+                  placeholder="Enter Email Adress"
                   name="email"
                   className="border rounded-md px-3 py-[5px] mx-1 text-xs w-full"
                   {...register("email", {
