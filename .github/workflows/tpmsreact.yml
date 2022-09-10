@@ -27,8 +27,7 @@ jobs:
     - run: npm i --force
     - run: CI=false npm run build
 
-    - name: 📂 Sync files
-        uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
+    - uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
         with:
           ftp_host: ${{ secrets.ftp_server }}
           ftp_username: ${{ secrets.ftp_name }}
