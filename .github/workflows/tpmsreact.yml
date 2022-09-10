@@ -26,7 +26,8 @@ jobs:
         cache: 'npm'
     - run: npm i --force
     - run: CI=false npm run build
-    - name: 📂 upload files
+    
+    - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
           server: ${{ secrets.ftp_server }}
