@@ -113,12 +113,15 @@ const PatientInformation = () => {
   ///relation value handle
   const settingRelation = (e) => {
     //console.log("selected option", e.target.value);
+    //const relation = e.target.value;
     if (e.target.value === "Self") {
       setGuarantor(false);
       document.getElementById("checkbox").checked = false;
     }
+    //setRelation(relation);
     setRelation(e.target.value);
   };
+  console.log(relation);
   //Guarentor handler code
   const handleChange = (event) => {
     if (event.target.checked) {
@@ -128,14 +131,12 @@ const PatientInformation = () => {
       console.log("⛔️ Checkbox is NOT checked");
       setGuarantor(false);
     }
-    setIsSubscribed((current) => !current);
+    // setIsSubscribed((current) => !current);
   };
 
   if (loading) {
     return <Loading></Loading>;
   }
-
-  console.log(relation);
 
   // testing 779
   const testingfunc = () => {
@@ -223,7 +224,7 @@ const PatientInformation = () => {
                 </span>
               </label>
               <select
-                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
+                className="border-[#09A2B3] border-b-2 rounded-sm px-2 pt-[3px] pb-[5px] mx-1 text-xs w-full focus:outline-none"
                 name="gender"
                 {...register("gender")}
               >
@@ -243,20 +244,11 @@ const PatientInformation = () => {
                 </span>
               </label>
               <select
-                onClick={(e) => {
-                  settingRelation(e);
-                }}
-                className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
+                onChange={settingRelation}
+                className="border-[#09A2B3] border-b-2 rounded-sm pt-[3px] pb-[5px] mx-1 text-xs w-full focus:outline-none"
               >
                 <option value="Self">Self</option>
-                <option
-                  value="Spouse"
-                  onChange={() => {
-                    setGuarantor(true);
-                  }}
-                >
-                  Spouse
-                </option>
+                <option value="Spouse">Spouse</option>
                 <option value="Other">Other</option>
                 <option value="Child">Child</option>
                 <option value="Grandfather or Grandmother">
@@ -814,8 +806,8 @@ const PatientInformation = () => {
               disabled={relation === "Self" ? "true" : null}
               type="checkbox"
               onChange={handleChange}
-              value={isSubscribed}
-              name="patient"
+              // value={isSubscribed}
+              // name="patient"
               id="checkbox"
               // onClick={() => {
               //   setGuarantor(!Guarantor);

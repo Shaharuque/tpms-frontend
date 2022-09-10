@@ -1,0 +1,71 @@
+.card {
+    transition: ease-in-out 0.3s;
+    margin: 10px auto;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    /* box-shadow:  (51, 57, 50, .2); */
+    border-bottom: 4px solid #0AA7B8;
+    box-shadow: 0 8px 24px rgba(10, 167, 184, 0.087);
+}
+
+
+@media only screen and (min-width:320px) {
+
+    /* smartphones, iPhone, portrait 480x320 phones */
+    /* For mobile  */
+    .card {
+        width: 100%
+    }
+
+}
+
+@media only screen and (min-width:481px) {
+
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    /* For mobile  */
+    .card {
+        width: 100%
+    }
+}
+
+@media only screen and (min-width:641px) {
+
+    /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+    .card {
+        width: 100%
+    }
+}
+
+@media only screen and (min-width:961px) and (max-width:1024px) {
+
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+    /* For tablets: */
+    .card {
+        width: 100%
+    }
+}
+
+@media only screen and (min-width:1025px) {
+
+    /* big landscape tablets, laptops, and desktops */
+    /* For desktop: */
+    .card {
+        margin: 10px auto;
+        width: 75%
+    }
+
+
+}
+
+@media only screen and (min-width:1281px) {
+
+    /* hi-res laptops and desktops */
+
+    .card {
+
+        width: 75%
+    }
+
+}
