@@ -27,10 +27,11 @@ jobs:
     - run: npm i --force
     - run: CI=false npm run build
 
-    - uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.1
-        with:
-          ftp_host: ${{ secrets.ftp_server }}
-          ftp_username: ${{ secrets.ftp_name }}
-          ftp_password: ${{ secrets.ftp_password }}
-          dangerous-clean-slate: true
-          local-dir: ./build/
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ftp.samkirkland.com
+        username: myFtpUserName
+        password: ${{ secrets.ftp_password }}
+        dangerous-clean-slate: true
+        local-dir: ./build/
