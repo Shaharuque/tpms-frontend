@@ -22,6 +22,8 @@ import { Fade } from "react-reveal";
 
 const CardView = ({ data }) => {
   const [patientDetails, setPatientDetails] = useState(false);
+  const [checkBox, setCheckBox] = useState([]);
+  console.log(checkBox);
   console.log("data", data);
   const {
     Patients,
@@ -75,6 +77,7 @@ const CardView = ({ data }) => {
               // id={`custom-checkbox-${index}`}
               // name={name}
               // value={name}
+              onChange={() => setCheckBox(data)}
             />
             <label>
               {locked ? (
@@ -190,7 +193,7 @@ const CardView = ({ data }) => {
                   </div>
                 </div>
               </div>
-              <div className="bg-secondary">
+              <div className="bg-secondary py-2">
                 <div className="flex justify-center items-center">
                   <div>
                     <div>
