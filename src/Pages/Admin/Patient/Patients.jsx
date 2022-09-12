@@ -95,8 +95,8 @@ const Patients = () => {
                           <span className="">
                             {column.isSorted
                               ? column.isSortedDesc
-                                ? " ⇓ "
-                                : " ⇑ "
+                                ? " ▼"
+                                : " ▲"
                               : ""}
                           </span>
                           {/* <div>

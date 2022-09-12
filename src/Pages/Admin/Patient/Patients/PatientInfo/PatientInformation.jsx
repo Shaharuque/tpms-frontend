@@ -20,7 +20,7 @@ const PatientInformation = () => {
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [checkLocation, setLocation] = useState(false);
+  const [clientAdress, setClientAdress] = useState(false);
 
   //
   const { register, handleSubmit, reset } = useForm();
@@ -78,7 +78,7 @@ const PatientInformation = () => {
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
-  console.log("patient details", patient_details);
+  //console.log("patient details", patient_details);
 
   useEffect(() => {
     // action dispatched
@@ -98,7 +98,12 @@ const PatientInformation = () => {
         email: patient_details?.email,
         phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
+        client_street: patient_details?.client_street,
+        client_city: patient_details?.client_city,
+        client_state: patient_details?.client_state,
+        client_zip: patient_details?.client_zip,
         fruit: patient_details?.client_gender,
+        guarantor_street: patient_details?.client_street,
       });
     }, 0);
   }, [patient_details?.client_first_name, patient_details?.is_active_client]);
@@ -138,10 +143,15 @@ const PatientInformation = () => {
     return <Loading></Loading>;
   }
 
+  //testing updated value get
+  const handleChangeName = (e) => {
+    console.log(e.target.value);
+  };
+
   // testing 779
   const testingfunc = () => {
     console.log("hello i am test");
-    setLocation(true);
+    setClientAdress(true);
   };
 
   return (
@@ -172,6 +182,7 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="first_name"
+                // onChange={handleChangeName}
                 className="border-[#09A2B3] border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("first_name")}
               />
@@ -280,10 +291,10 @@ const PatientInformation = () => {
                 <div className="mb-2 flex items-center gap-2">
                   <input
                     type="text"
-                    name="add_1"
+                    name="client_street"
                     placeholder="Street"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("add_1")}
+                    {...register("client_street")}
                   />
                   <div // onClick={() => setOpen(true)}
                     onClick={handleClick}
@@ -295,29 +306,31 @@ const PatientInformation = () => {
                 <div className="mb-2">
                   <input
                     type="text"
-                    name="add_2"
+                    name="client_city"
                     placeholder="City"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("add_2")}
+                    {...register("client_city")}
                   />
                 </div>
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   <div>
                     <select
                       className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                      {...register("country")}
+                      name="client_state"
+                      {...register("client_state")}
                     >
                       <option value="NY">NY</option>
                       <option value="UK">UK</option>
+                      <option value="AK">AK</option>
                     </select>
                   </div>
                   <div>
                     <input
                       type="text"
-                      name="add_2"
                       placeholder="Zip"
                       className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                      {...register("add_2")}
+                      name="client_zip"
+                      {...register("client_zip")}
                     />
                   </div>
                 </div>
@@ -887,21 +900,26 @@ const PatientInformation = () => {
                     {/* <input type="text" name="add_1" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full " {...register(checkLocation=="true" ? "add_1" : "")}/> */}
                     <input
                       type="text"
-                      name="add_1"
+                      name={
+                        clientAdress ? "guarantor_street" : "gurantor_adress"
+                      }
                       placeholder="Street"
                       className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full "
-                      {...register("add_1")}
+                      {...register(
+                        clientAdress ? "guarantor_street" : "gurantor_adress"
+                      )}
                     />
                   </div>
                 </div>
-                <div className="my-auto text-xs bg-secondary text-white ml-1 py-2 mb-2 text-center rounded-md">
-                  <button
+                <div className="my-auto text-xs bg-secondary text-white ml-1 py-2 mb-2 text-center rounded-md cursor-pointer">
+                  {/* Don't use button here to prevent form submit */}
+                  <div
                     onClick={() => {
                       testingfunc();
                     }}
                   >
                     Same as patient address
-                  </button>
+                  </div>
                 </div>
               </div>
 
