@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import SimpleFileUpload from "react-simple-file-upload";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -23,7 +23,12 @@ const PatientInformation = () => {
   const [checkLocation, setLocation] = useState(false);
 
   //
-  const { register, handleSubmit, reset } = useForm();
+  const [open, setOpen] = useState(false);
+  const [phoneOpen, setPhoneOpen] = useState(false);
+  const [emailOpen, setEmailOpen] = useState(false);
+  const { register, handleSubmit, reset, setValue, getValues } = useForm();
+  const [hook, setHook] = useState("");
+  const [addressmain, setaddressmain] = useState("");
 
   // Address state
   const [addressRendomValue, setAddressRendomValue] = useState([]);
@@ -104,7 +109,7 @@ const PatientInformation = () => {
   }, [patient_details?.client_first_name, patient_details?.is_active_client]);
 
   console.log(patient_details?.is_active_client);
-  const [value, setValue] = useState(patient_details?.is_active_client);
+  const [value, setValues] = useState(patient_details?.is_active_client);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -138,10 +143,25 @@ const PatientInformation = () => {
     return <Loading></Loading>;
   }
 
+  // console.log(relation);
+
   // testing 779
-  const testingfunc = () => {
-    console.log("hello i am test");
+  const SameasPatientBtn = () => {
+    // console.log("hello i am test")
     setLocation(true);
+    // console.log("hook data", hook)
+    // console.log("check new update", hook)
+    // const streetvalue = document.getElementById("streetval").value
+    setValue("GuaratorStreet", getValues("Street"));
+    setValue("GuaratorCity", getValues("City"));
+    setValue("GuratorCountry", getValues("country"));
+    setValue("GuratorZip", getValues("zip"));
+    // console.log("ref vlaue",inputRef.current.value)
+    console.log("getvalue street", getValues("Street"));
+    console.log("getvalue city", getValues("City"));
+    console.log("getvalue country", getValues("country"));
+    console.log("getvalue zip", getValues("zip"));
+    // console.log("value check by id",document.getElementById("streetval").value)
   };
 
   return (
@@ -235,6 +255,7 @@ const PatientInformation = () => {
             </div>
 
             {/* RelationShip */}
+
             <div>
               <label className="label">
                 <span className="label-text flex items-center text-xs text-gray-700 text-left">
@@ -244,11 +265,20 @@ const PatientInformation = () => {
                 </span>
               </label>
               <select
-                onChange={settingRelation}
-                className="border-[#09A2B3] border-b-2 rounded-sm pt-[3px] pb-[5px] mx-1 text-xs w-full focus:outline-none"
+                onClick={(e) => {
+                  setRelation(e.target.value);
+                }}
+                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               >
                 <option value="Self">Self</option>
-                <option value="Spouse">Spouse</option>
+                <option
+                  value="Spouse"
+                  onChange={() => {
+                    setGuarantor(true);
+                  }}
+                >
+                  Spouse
+                </option>
                 <option value="Other">Other</option>
                 <option value="Child">Child</option>
                 <option value="Grandfather or Grandmother">
@@ -280,10 +310,11 @@ const PatientInformation = () => {
                 <div className="mb-2 flex items-center gap-2">
                   <input
                     type="text"
-                    name="add_1"
                     placeholder="Street"
+                    id="streetval"
+                    defaultValue={"America"}
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("add_1")}
+                    {...register("Street")}
                   />
                   <div // onClick={() => setOpen(true)}
                     onClick={handleClick}
@@ -295,16 +326,17 @@ const PatientInformation = () => {
                 <div className="mb-2">
                   <input
                     type="text"
-                    name="add_2"
                     placeholder="City"
-                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("add_2")}
+                    className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    defaultValue={"Buffalo"}
+                    {...register("City")}
                   />
                 </div>
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   <div>
                     <select
                       className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      defaultValue={"NY"}
                       {...register("country")}
                     >
                       <option value="NY">NY</option>
@@ -314,10 +346,9 @@ const PatientInformation = () => {
                   <div>
                     <input
                       type="text"
-                      name="add_2"
                       placeholder="Zip"
                       className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                      {...register("add_2")}
+                      {...register("zip")}
                     />
                   </div>
                 </div>
@@ -345,9 +376,8 @@ const PatientInformation = () => {
                     <div className="mb-2 flex items-center gap-2">
                       <input
                         type="text"
-                        name="add_1"
                         className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                        {...register("add_1")}
+                        {...register("Permanent_Street")}
                       />
                       <div // onClick={() => setOpen(false)}
                         onClick={() => {
@@ -361,16 +391,16 @@ const PatientInformation = () => {
                     <div className="mb-2">
                       <input
                         type="text"
-                        name="add_2"
+                        placeholder="adfaljdfasd"
                         className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                        {...register("add_2")}
+                        {...register("more_City")}
                       />
                     </div>
                     <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                       <div>
                         <select
                           className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                          {...register("country")}
+                          {...register("more_Country")}
                         >
                           <option value="NY">NY</option>
                           <option value="UK">UK</option>
@@ -379,9 +409,8 @@ const PatientInformation = () => {
                       <div>
                         <input
                           type="text"
-                          name="add_2"
                           className="border border-gray-300   rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                          {...register("add_2")}
+                          {...register("more_zip")}
                         />
                       </div>
                     </div>
@@ -875,7 +904,7 @@ const PatientInformation = () => {
                 </div>
               </div>
 
-              {/* --------------------------  */}
+              {/* ---------------------------------*/}
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
                 <div>
                   <label className="label">
@@ -884,20 +913,19 @@ const PatientInformation = () => {
                     </span>
                   </label>
                   <div className="mb-2">
-                    {/* <input type="text" name="add_1" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full " {...register(checkLocation=="true" ? "add_1" : "")}/> */}
                     <input
                       type="text"
-                      name="add_1"
                       placeholder="Street"
                       className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full "
-                      {...register("add_1")}
+                      {...register(checkLocation ? "GuaratorStreet" : "null")}
                     />
                   </div>
                 </div>
+
                 <div className="my-auto text-xs bg-secondary text-white ml-1 py-2 mb-2 text-center rounded-md">
                   <button
                     onClick={() => {
-                      testingfunc();
+                      SameasPatientBtn();
                     }}
                   >
                     Same as patient address
@@ -910,16 +938,16 @@ const PatientInformation = () => {
                 <div className="mb-2">
                   <input
                     type="text"
-                    name="add_2"
                     placeholder="City"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("add_2")}
+                    defaultValue={hook?.City}
+                    {...register(checkLocation ? "GuaratorCity" : "dj")}
                   />
                 </div>
                 <div>
                   <select
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("country")}
+                    {...register(checkLocation ? "GuratorCountry" : "null")}
                   >
                     <option value="NY">NY</option>
                     <option value="UK">UK</option>
@@ -928,10 +956,9 @@ const PatientInformation = () => {
                 <div className="mb-2">
                   <input
                     type="text"
-                    name="add_2"
                     placeholder="Zip"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("add_2")}
+                    {...register(checkLocation ? "GuratorZip" : "dj")}
                   />
                 </div>
               </div>
