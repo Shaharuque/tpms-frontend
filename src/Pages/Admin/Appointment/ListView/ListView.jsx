@@ -49,7 +49,7 @@ const ListView = () => {
       });
   }, []);
 
-  // -----------------------------------------------Table Data-------------------------------
+  // -------------------------------------------Table Data-----------------------------------
   const data = useMemo(() => TData, [TData]);
   const columns = useMemo(() => [...ManageTableColumnsColumn], []);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -93,7 +93,8 @@ const ListView = () => {
     reset();
   };
 
-  // -----------------------------------------------Multi-Select-------------------------------
+  
+  // ----------------------------------------Multi-Select---------------------------------
   // ***************
   const datat = ["Eugenia", "Bryan", "Linda"].map((item) => ({
     label: item,

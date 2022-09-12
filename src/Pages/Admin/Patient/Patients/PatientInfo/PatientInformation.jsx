@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useForm} from "react-hook-form";
 import SimpleFileUpload from "react-simple-file-upload";
 import {AiOutlineQuestionCircle} from "react-icons/ai";
@@ -13,6 +13,7 @@ import SmallLoader from "../../../../../Loading/SmallLoader";
 
 
 const PatientInformation = () => {
+    const inputRef = useRef();
     const [voiceMsg, setVoiceMsg] = useState(false);
     const [textMsg, setTextMsg] = useState(false);
     const [appointment, setAppointment] = useState(false);
@@ -21,14 +22,18 @@ const PatientInformation = () => {
     const [Guarantor, setGuarantor] = useState(false);
     const [file, setFile] = useState();
     const [relation, setRelation] = useState("Self");
-
     const [checkLocation, setLocation] = useState(false)
+    const [checkStree, setcheckStreet] = useState("")
 
     //
     const [open, setOpen] = useState(false);
     const [phoneOpen, setPhoneOpen] = useState(false);
     const [emailOpen, setEmailOpen] = useState(false);
-    const {register, handleSubmit, reset} = useForm();
+    const {register, handleSubmit, reset, setValue, getValues} = useForm();
+    const [hook, setHook] = useState("");
+    const [addressmain, setaddressmain] = useState("")
+
+  
 
     // Address state
     const [addressRendomValue, setAddressRendomValue] = useState([]);
@@ -53,17 +58,14 @@ const PatientInformation = () => {
 
     }
 
+    // email + icon click handeler
+    const handleEmailClick = () => {
+        setEmailRendomValue(current => [
+            ...current,
+            Math.random()
+        ]);
 
-     // email + icon click handeler
-     const handleEmailClick = () => {
-      setEmailRendomValue(current => [
-          ...current,
-          Math.random()
-      ]);
-
-  }
-
-
+    }
     // address icon delete handeler
     const addressHandleRemove = (index) => {
         console.log(index)
@@ -82,15 +84,12 @@ const PatientInformation = () => {
 
     // email icon delete handeler
     const EmailHandleRemove = (index) => {
-      const list = [...emailRendomValue];
-      list.splice(index, 1)
-      setEmailRendomValue(list)
+        const list = [...emailRendomValue];
+        list.splice(index, 1)
+        setEmailRendomValue(list)
 
     }
 
-    console.log("file = ", file);
-    // console.log(Guarantor);
-    // Patient Information
     const {id} = useParams();
     // console.log("patient Info", id);
     const dispatch = useDispatch();
@@ -98,9 +97,10 @@ const PatientInformation = () => {
     const data = useSelector((state) => state.patientInfo);
     const patient_details = data ?. patientDetails ?. clients;
     const loading = data ?. loading;
-    console.log("patient details", patient_details);
+    // console.log("patient details", patient_details);
 
-    useEffect(() => { // action dispatched
+    useEffect(() => { 
+        // action dispatched
         dispatch(getpatientsDetails(id));
     }, [id, dispatch]);
 
@@ -123,37 +123,62 @@ const PatientInformation = () => {
     ]);
 
     console.log(patient_details ?. is_active_client);
-    const [value, setValue] = useState(patient_details ?. is_active_client);
+    const [value, setValues] = useState(patient_details ?. is_active_client);
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const func = (data) => {
+        setHook(data)
+        console.log("testing", data)
     };
 
     if (loading) {
         return <Loading></Loading>;
     }
 
-    console.log(relation);
+    // console.log(relation);
 
-    // testing 779 
-    const testingfunc = () =>{
-        console.log("hello i am test")
-        setLocation(true)
+    // testing 779
+    const SameasPatientBtn = () => {
+        // console.log("hello i am test")
+        setLocation(true);
+        // console.log("hook data", hook)
+        // console.log("check new update", hook)
+        // const streetvalue = document.getElementById("streetval").value
+        setValue("GuaratorStreet", getValues("Street"))
+        setValue("GuaratorCity", getValues("City"))
+        setValue("GuratorCountry", getValues("country"))
+        setValue("GuratorZip", getValues("zip"))
+        // console.log("ref vlaue",inputRef.current.value)
+        console.log("getvalue street",getValues("Street"))
+        console.log("getvalue city",getValues("City"))
+        console.log("getvalue country",getValues("country"))
+        console.log("getvalue zip",getValues("zip"))
+        // console.log("value check by id",document.getElementById("streetval").value)
+
+
     }
 
+
+    // console.log("checking location", checkLocation)
+    // console.log("hook", hook)
+    const streetCheck = (x, e) => { // console.log(e.target.value, x)
+        const set = setValue(x, e.target.value);
+        return set
+    }
+    // console.log("testing", hook)
+    
 
     return (
         <div>
             <div>
                 <form onSubmit={
-                    handleSubmit(onSubmit)
+                    handleSubmit(func)
                 }>
+
                     <div className="flex ml-1 mt-1 items-center">
                         <input type="checkbox"
                             checked={
                                 value ? true : false
                             }
-                            name="patient"
                             onClick={
                                 () => {
                                     setValue(!value);
@@ -171,7 +196,7 @@ const PatientInformation = () => {
                                     First Name<span className="text-red-500">*</span>
                                 </span>
                             </label>
-                            <input type="text" name="first_name" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("first_name")}/>
+                            <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("first_name")}/>
                         </div>
                         <div>
                             <label className="label">
@@ -179,7 +204,7 @@ const PatientInformation = () => {
                                     Middle Name
                                 </span>
                             </label>
-                            <input type="text" name="middle_name" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("middle_name")}/>
+                            <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("middle_name")}/>
                         </div>
                         <div>
                             <label className="label">
@@ -187,7 +212,7 @@ const PatientInformation = () => {
                                     Last Name<span className="text-red-500">*</span>
                                 </span>
                             </label>
-                            <input type="text" name="last_name" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("last_name")}/>
+                            <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("last_name")}/>
                         </div>
                         {/* DOB */}
                         <div>
@@ -196,7 +221,7 @@ const PatientInformation = () => {
                                     Date of Birth<span className="text-red-500">*</span>
                                 </span>
                             </label>
-                            <input className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" name="dob" type="date" {...register("dob")}/>
+                            <input className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" type="date" {...register("dob")}/>
                         </div>
                         {/* gender */}
                         <div>
@@ -205,7 +230,7 @@ const PatientInformation = () => {
                                     Gender<span className="text-red-500">*</span>
                                 </span>
                             </label>
-                            <select className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" name="gender" {...register("gender")}>
+                            <select className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("gender")}>
                                 {/*api thekey gathered data jemon thakbey value thik same bhabey assign kortey hobey */}
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -213,6 +238,7 @@ const PatientInformation = () => {
                         </div>
 
                         {/* RelationShip */}
+
                         <div>
                             <label className="label">
                                 <span className="label-text flex items-center text-xs text-gray-700 text-left">
@@ -265,7 +291,7 @@ const PatientInformation = () => {
                                     </span>
                                 </label>
                                 <div className="mb-2 flex items-center gap-2">
-                                    <input type="text" name="add_1" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("add_1")}/>
+                                    <input type="text" placeholder="Street" id="streetval" defaultValue={"America"} className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("Street")}/> 
                                     <div // onClick={() => setOpen(true)}
                                         onClick={handleClick}
                                         className="bg-secondary text-white p-[6px]">
@@ -273,17 +299,17 @@ const PatientInformation = () => {
                                     </div>
                                 </div>
                                 <div className="mb-2">
-                                    <input type="text" name="add_2" placeholder="City" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("add_2")}/>
+                                    <input type="text" placeholder="City" className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full" defaultValue={"Buffalo"}  {...register("City")}/>
                                 </div>
                                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                                     <div>
-                                        <select className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full" {...register("country")}>
+                                        <select className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full" defaultValue={"NY"}  {...register("country")}>
                                             <option value="NY">NY</option>
                                             <option value="UK">UK</option>
                                         </select>
                                     </div>
                                     <div>
-                                        <input type="text" name="add_2" placeholder="Zip" className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("add_2")}/>
+                                        <input type="text" placeholder="Zip" className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("zip")}/>
                                     </div>
                                 </div>
 
@@ -313,7 +339,7 @@ const PatientInformation = () => {
                                             </span>
                                         </label>
                                         <div className="mb-2 flex items-center gap-2">
-                                            <input type="text" name="add_1" className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("add_1")}/>
+                                            <input type="text" className="border border-gray-300  rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("Permanent_Street")}/>
                                             <div // onClick={() => setOpen(false)}
                                                 onClick={
                                                     () => {
@@ -325,17 +351,17 @@ const PatientInformation = () => {
                                             </div>
                                         </div>
                                         <div className="mb-2">
-                                            <input type="text" name="add_2" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("add_2")}/>
+                                            <input type="text" placeholder="adfaljdfasd" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("more_City")}/>
                                         </div>
                                         <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                                             <div>
-                                                <select className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full" {...register("country")}>
+                                                <select className="border border-gray-300  rounded-sm px-2 py-[3px] mx-1 text-xs w-full" {...register("more_Country")}>
                                                     <option value="NY">NY</option>
                                                     <option value="UK">UK</option>
                                                 </select>
                                             </div>
                                             <div>
-                                                <input type="text" name="add_2" className="border border-gray-300   rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("add_2")}/>
+                                                <input type="text" className="border border-gray-300   rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("more_zip")}/>
                                             </div>
                                         </div>
                                     </motion.div>
@@ -371,7 +397,7 @@ const PatientInformation = () => {
                                 </div>
                             </>
                         </div>
-
+                            
                         {/* phone  */}
                         <div className=" lg:mx-auto md:mx-0">
                             <>
@@ -382,7 +408,7 @@ const PatientInformation = () => {
                                 </label>
                                 <div className="flex flex-wrap gap-1 items-center gap-x-2 ">
                                     <div>
-                                        <input type="text" name="phone" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("phone")}/>
+                                        <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("phone")}/>
                                     </div>
                                     <div>
                                         <select className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full" {...register("group")}>
@@ -403,7 +429,7 @@ const PatientInformation = () => {
                                 </div>
                                 <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
                                     <div className="flex items-center">
-                                        <input type="checkbox" name="patient"
+                                        <input type="checkbox"
                                             onClick={
                                                 () => {
                                                     setVoiceMsg(!voiceMsg);
@@ -415,7 +441,7 @@ const PatientInformation = () => {
                                     </div>
 
                                     <div className="flex items-center">
-                                        <input type="checkbox" name="patient"
+                                        <input type="checkbox"
                                             onClick={
                                                 () => {
                                                     setTextMsg(!textMsg);
@@ -428,7 +454,7 @@ const PatientInformation = () => {
                                 </div>
 
                                 <div className="flex ml-1 mt-1 items-center">
-                                    <input type="checkbox" name="patient"
+                                    <input type="checkbox"
                                         onClick={
                                             () => {
                                                 setAppointment(!appointment);
@@ -463,7 +489,7 @@ const PatientInformation = () => {
                                     </label>
                                     <div className="flex flex-wrap gap-1 items-center gap-x-2 ">
                                         <div>
-                                            <input type="text" name="phone" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("phone")}/>
+                                            <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("phone")}/>
                                         </div>
                                         <div>
                                             <select className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full" {...register("group")}>
@@ -481,7 +507,7 @@ const PatientInformation = () => {
                                     </div>
                                     <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
                                         <div className="flex items-center">
-                                            <input type="checkbox" name="patient"
+                                            <input type="checkbox"
                                                 onClick={
                                                     () => {
                                                         setVoiceMsg(!voiceMsg);
@@ -493,7 +519,7 @@ const PatientInformation = () => {
                                         </div>
 
                                         <div className="flex items-center">
-                                            <input type="checkbox" name="patient"
+                                            <input type="checkbox"
                                                 onClick={
                                                     () => {
                                                         setTextMsg(!textMsg);
@@ -506,7 +532,7 @@ const PatientInformation = () => {
                                     </div>
 
                                     <div className="flex ml-1 mt-1 items-center">
-                                        <input type="checkbox" name="patient"
+                                        <input type="checkbox"
                                             onClick={
                                                 () => {
                                                     setAppointment(!appointment);
@@ -531,7 +557,7 @@ const PatientInformation = () => {
                                 </label>
                                 <div className="flex flex-wrap items-center gap-x-2 ">
                                     <div>
-                                        <input type="text" name="email" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("email")}/>
+                                        <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("email")}/>
                                     </div>
                                     <div>
                                         <select className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full" {...register("group2")}>
@@ -539,17 +565,19 @@ const PatientInformation = () => {
                                             <option value="home">home</option>
                                             <option value="family">family</option>
                                         </select>
-                                     
+
                                     </div>
                                     <div onClick={
-                                            () => {handleEmailClick()}
+                                            () => {
+                                                handleEmailClick()
+                                            }
                                         }
                                         className="bg-secondary text-white p-[6px]">
                                         <FaPlus/>
                                     </div>
                                 </div>
                                 <div className="flex ml-1 mt-1 items-center ">
-                                    <input type="checkbox" name="patient"
+                                    <input type="checkbox"
                                         onClick={
                                             () => {
                                                 setEmail(!email);
@@ -561,7 +589,7 @@ const PatientInformation = () => {
                                 </div>
 
                                 <div className="flex ml-1 mt-1 items-center">
-                                    <input type="checkbox" name="patient"
+                                    <input type="checkbox"
                                         onClick={
                                             () => {
                                                 setEmailSend(!emailSend);
@@ -573,73 +601,75 @@ const PatientInformation = () => {
                                 </div>
                             </>
 
-                {emailRendomValue.map((x,index) => (
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <label className="label">
-                    <span className="label-text text-xs text-gray-700 text-left">
-                      Email
-                    </span>
-                  </label>
-                  <div className="flex flex-wrap items-center gap-x-2 ">
-                    <div>
-                      <input
-                        type="text"
-                        name="email"
-                        className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                        {...register("email")}
-                      />
-                    </div>
-                    <div>
-                      <select
-                        className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                        {...register("group2")}
-                      >
-                        <option value="work">work</option>
-                        <option value="home">home</option>
-                        <option value="family">family</option>
-                      </select>
-                    </div>
-                    <div
-                      onClick={() => EmailHandleRemove(index)}
-                      className="bg-red-500 text-white p-[6px]"
-                    >
-                      <RiDeleteBin6Line />
-                    </div>
-                  </div>
-                  <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
-                    <div className="">
-                      <input
-                        type="checkbox"
-                        name="patient"
-                        onClick={() => {
-                          setEmail(!email);
-                        }}
-                      />
-                      <span className="text-xs ml-1 text-gray-700 font-normal">
-                        Email OK
-                      </span>
-                    </div>
-                  </div>
+                            {
+                            emailRendomValue.map((x, index) => (
+                                <motion.div initial={
+                                        {
+                                            opacity: 0,
+                                            y: 15
+                                        }
+                                    }
+                                    animate={
+                                        {
+                                            opacity: 1,
+                                            y: 0
+                                        }
+                                    }
+                                    transition={
+                                        {delay: 0.2}
+                                }>
+                                    <label className="label">
+                                        <span className="label-text text-xs text-gray-700 text-left">
+                                            Email
+                                        </span>
+                                    </label>
+                                    <div className="flex flex-wrap items-center gap-x-2 ">
+                                        <div>
+                                            <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("email")}/>
+                                        </div>
+                                        <div>
+                                            <select className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full" {...register("group2")}>
+                                                <option value="work">work</option>
+                                                <option value="home">home</option>
+                                                <option value="family">family</option>
+                                            </select>
+                                        </div>
+                                        <div onClick={
+                                                () => EmailHandleRemove(index)
+                                            }
+                                            className="bg-red-500 text-white p-[6px]">
+                                            <RiDeleteBin6Line/>
+                                        </div>
+                                    </div>
+                                    <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
+                                        <div className="">
+                                            <input type="checkbox"
 
-                  <div className="flex ml-1 mt-1 items-center">
-                    <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {
-                        setEmailSend(!emailSend);
-                      }}
-                    />
-                    <span className="text-xs ml-1 text-gray-700 font-normal">
-                      Send email appointment reminders
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-                           </div>
+                                                onClick={
+                                                    () => {
+                                                        setEmail(!email);
+                                                    }
+                                                }/>
+                                            <span className="text-xs ml-1 text-gray-700 font-normal">
+                                                Email OK
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex ml-1 mt-1 items-center">
+                                        <input type="checkbox"
+                                            onClick={
+                                                () => {
+                                                    setEmailSend(!emailSend);
+                                                }
+                                            }/>
+                                        <span className="text-xs ml-1 text-gray-700 font-normal">
+                                            Send email appointment reminders
+                                        </span>
+                                    </div>
+                                </motion.div>
+                            ))
+                        } </div>
                     </div>
 
                     <>
@@ -711,7 +741,7 @@ const PatientInformation = () => {
                                 relation === "Self" ? "true" : null
                             }
                             type="checkbox"
-                            name="patient"
+
                             onClick={
                                 () => {
                                     setGuarantor(!Guarantor);
@@ -747,7 +777,8 @@ const PatientInformation = () => {
                                             First Name
                                         </span>
                                     </label>
-                                    <input type="text" name="guarantor_first_name" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("guarantor_first_name")}/>
+                                    {/* <input type="text" name="guarantor_first_name"  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("guarantor_first_name")}/> */}
+                                    <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("guarantor_first_name")}/>
                                 </div>
 
                                 <div>
@@ -756,7 +787,7 @@ const PatientInformation = () => {
                                             Last Name
                                         </span>
                                     </label>
-                                    <input type="text" name="guarantor_last_name" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("guarantor_last_name")}/>
+                                    <input type="text" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("guarantor_last_name")}/>
                                 </div>
                                 {/* DOB */}
                                 <div> {" "}
@@ -769,7 +800,7 @@ const PatientInformation = () => {
                                 </div>
                             </div>
 
-                            {/* --------------------------  */}
+                            {/* ---------------------------------*/}
                             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
                                 <div>
                                     <label className="label">
@@ -778,28 +809,33 @@ const PatientInformation = () => {
                                         </span>
                                     </label>
                                     <div className="mb-2">
-                                        {/* <input type="text" name="add_1" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full " {...register(checkLocation=="true" ? "add_1" : "")}/> */}
-                                        <input type="text" name="add_1" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full " {...register("add_1")}/>
+                                        <input type="text" placeholder="Street" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full "  {...register(checkLocation ? "GuaratorStreet" : "null")}/>
                                     </div>
                                 </div>
+
                                 <div className="my-auto text-xs bg-secondary text-white ml-1 py-2 mb-2 text-center rounded-md">
-                                    <button onClick={()=>{testingfunc()}}>Same as patient address</button>
+                                    <button onClick={
+                                        () => {
+                                            SameasPatientBtn()
+                                        }
+                                    }>Same as patient address</button>
                                 </div>
                             </div>
 
                             {/* --------------------------- */}
                             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
                                 <div className="mb-2">
-                                    <input type="text" name="add_2" placeholder="City" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("add_2")}/>
+                                    <input type="text" placeholder="City" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" defaultValue={hook?.City} {...register(checkLocation ? "GuaratorCity" : "dj")}/>
                                 </div>
                                 <div>
-                                    <select className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("country")}>
+                                    <select className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register(checkLocation ? "GuratorCountry" : "null")}>
                                         <option value="NY">NY</option>
                                         <option value="UK">UK</option>
                                     </select>
+
                                 </div>
                                 <div className="mb-2">
-                                    <input type="text" name="add_2" placeholder="Zip" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("add_2")}/>
+                                    <input type="text" placeholder="Zip" className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register(checkLocation ? "GuratorZip" : "dj")}/>
                                 </div>
                             </div>
                         </motion.div>
@@ -808,7 +844,7 @@ const PatientInformation = () => {
 
 
                     <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-1 mr-2 gap-x-2 gap-y-1">
-                        <textarea name="comment" className="border border-gray-300 text-sm p-1 mt-3 ml-1 h-24 w-full">
+                        <textarea className="border border-gray-300 text-sm p-1 mt-3 ml-1 h-24 w-full">
                             Notes
                         </textarea>
 
