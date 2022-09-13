@@ -139,7 +139,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="description"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("description")}
               />
             </div>
@@ -151,7 +151,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("insurance")}
               >
                 <option value="single">single</option>
@@ -166,7 +166,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("tx_type")}
               >
                 <option value="single">single</option>
@@ -181,7 +181,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("sup_provider")}
               >
                 <option value="single">single</option>
@@ -214,7 +214,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="authorization_number"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("authorization_number")}
               />
             </div>
@@ -227,7 +227,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="uci_id"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("uci_id")}
               />
             </div>
@@ -240,7 +240,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("cob")}
               >
                 <option value="single">single</option>
@@ -271,7 +271,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("diagnosis1")}
                 />
               </div>
@@ -284,7 +284,8 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis2"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-2 text-xs w-full"
+                  // className="border border-gray-300 rounded-sm px-2 py-[5px] mx-2 text-xs w-full"
+                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("diagnosis2")}
                 />
               </div>
@@ -300,7 +301,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis3"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("diagnosis3")}
                 />
               </div>
@@ -313,7 +314,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis4"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-2 text-xs w-full"
+                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("diagnosis4")}
                 />
               </div>
@@ -329,7 +330,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("deductible")}
                 />
               </div>
@@ -358,7 +359,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="copay"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("copay")}
               />
             </div>
@@ -371,7 +372,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="cms4"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("cms4")}
               />
             </div>
@@ -384,7 +385,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="cms11"
-                className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("cms11")}
               />
             </div>

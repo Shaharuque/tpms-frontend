@@ -52,7 +52,7 @@ const DocumentsActionModal = ({ handleClose, open, row }) => {
                 <input
                   type="text"
                   name="description"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("description")}
                 />
               </div>
@@ -66,7 +66,8 @@ const DocumentsActionModal = ({ handleClose, open, row }) => {
                 </label>
                 <input
                   type="date"
-                  className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  // className="border border-gray-300 rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  className="border-secondary border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
                   {...register("expiry_Date")}
                 />
               </div>
