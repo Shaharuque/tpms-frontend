@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
 import { Button, Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
@@ -91,7 +91,7 @@ const TestingTable = () => {
 
   //   fetch data
   React.useEffect(() => {
-    fetch("All_Fake_Api/Fakedb.json")
+    fetch("../All_Fake_Api/Fakedb.json")
       .then((res) => res.json())
       .then((d) => {
         setAllData(d);
@@ -196,28 +196,6 @@ const TestingTable = () => {
       },
       sortOrder:
         sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      filters: [
-        {
-          text: "London",
-          value: "London",
-        },
-        {
-          text: "New York",
-          value: "New York",
-        },
-      ],
-      filteredValue: filteredInfo.address || null,
-      onFilter: (value, record) => record.address.includes(value),
-      sorter: (a, b) => {
-        return a.address > b.address ? -1 : 1;
-      },
-      sortOrder: sortedInfo.columnKey === "address" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -395,7 +373,7 @@ const TestingTable = () => {
           size="small"
           className=" text-xs font-normal px-8"
           columns={columns}
-          dataSource={data}
+          dataSource={allData}
           rowSelection={{
             ...rowSelection,
           }}
