@@ -1,25 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import TestingTable from "../../Testing/AntTableTest/TestingTable";
 
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [StafData, SetStafData] = useState([]);
 
-  // fakeApi call 
-  useEffect(()=>{
+  // fakeApi call
+  useEffect(() => {
     axios("../Staff.json")
-    .then((response)=>{
-      SetStafData(response?.data)
-    })
-    .catch((error)=>{
-       console.log(error)
-    })
-
-  },[])
+      .then((response) => {
+        SetStafData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   console.log(StafData);
-  
-  
 
   return (
     <div className="h-[100vh]">
@@ -49,6 +47,8 @@ const Staffs = () => {
           </Link>
         </div>
       )}
+
+      <TestingTable></TestingTable>
       <Link to={"/admin/staff"}> click here</Link>
     </div>
   );
