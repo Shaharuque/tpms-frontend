@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./Pages/Components/Sidebar.jsx";
-import Staffs from "./Pages/Pages/Staffs.jsx";
 import Report from "./Pages/Pages/Report.jsx";
 import Settings from "./Pages/Pages/Settings.jsx";
 import BillingManager from "./Pages/Pages/BillingManager";
@@ -37,18 +36,6 @@ import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
 import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
 import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
 import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
-import StaffInformation from "./Pages/Pages/Staffs/StaffInformation";
-import Bio from "./Pages/Pages/Staffs/Bio";
-import ContactDetails from "./Pages/Pages/Staffs/ContactDetails";
-import Credentials from "./Pages/Pages/Staffs/Credentials";
-import DepartmentSupervisor from "./Pages/Pages/Staffs/DepartmentSupervisor";
-import PayrollSetup from "./Pages/Pages/Staffs/PayrollSetup";
-import OtherSetup from "./Pages/Pages/Staffs/OtherSetup";
-import LeaveTracking from "./Pages/Pages/Staffs/LeaveTracking";
-import InsuranceExclusion from "./Pages/Pages/Staffs/InsuranceExclusion";
-import ServiceSubTypeExclusions from "./Pages/Pages/Staffs/ServiceSubTypeExclusions";
-import PatientExclusion from "./Pages/Pages/Staffs/PatientExclusion";
-import StaffPortal from "./Pages/Pages/Staffs/StaffPortal";
 import LogIn from "./Pages/LoginPage/LogIn";
 //For testing purpose
 import MainBase from "./Testing/Table_React/MainBase";
@@ -56,7 +43,7 @@ import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
 import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
-import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
+import CreateStaff from "./Pages/Admin/Staff/AddStaff/CreateStaff";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
@@ -117,6 +104,7 @@ import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/Paym
 import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
 import EditDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/EditDeposit";
 import DepositDetails from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/DepositDetails";
+// ###### Patient
 import Patients from "./Pages/Admin/Patient/Patients";
 import PatientsInfo from "./Pages/Admin/Patient/Patients/PatientsInfo";
 import PatientInformation from "./Pages/Admin/Patient/Patients/PatientInfo/PatientInformation";
@@ -125,9 +113,23 @@ import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AddA
 import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
+// ###### Not Found
 import CustomSearch from "./Testing/CustomSearch/CustomSearch";
 import NotFound from "./NoPageFound/NotFound";
-// ######
+// ###### Staff
+import Staffs from "./Pages/Admin/Staff/Staffs";
+import StaffInformation from "./Pages/Admin/Staff/Staffs/StaffInformation";
+import Bio from "./Pages/Admin/Staff/Staffs/StaffBio/Bio";
+import ContactDetails from "./Pages/Admin/Staff/Staffs/ContactInfo/ContactDetails";
+import Credentials from "./Pages/Admin/Staff/Staffs/Credential/Credentials";
+import DepartmentSupervisor from "./Pages/Admin/Staff/Staffs/DepartmentSupervisor/DepartmentSupervisor";
+import PayrollSetup from "./Pages/Admin/Staff/Staffs/PayrollSetup/PayrollSetup";
+import OtherSetup from "./Pages/Admin/Staff/Staffs/OtherSetUp/OtherSetup";
+import LeaveTracking from "./Pages/Admin/Staff/Staffs/LeaveTracking/LeaveTracking";
+import InsuranceExclusion from "./Pages/Admin/Staff/Staffs/InsuranceExclusion/InsuranceExclusion";
+import StaffPortal from "./Pages/Admin/Staff/Staffs/StaffPortal/StaffPortal";
+import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeExclusion/ServiceSubTypeExclusions";
+import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
 
 function App() {
   const handle = useFullScreenHandle();

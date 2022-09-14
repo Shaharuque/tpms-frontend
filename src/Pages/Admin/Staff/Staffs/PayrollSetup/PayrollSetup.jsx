@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "../Settings/SettingComponents/CheckBox";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
+import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
+import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import {
   PayrollSetupColumnsColumn,
   PayrollSetupColumnsData,

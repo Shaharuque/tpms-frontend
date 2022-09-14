@@ -91,13 +91,15 @@ const TestingTable = () => {
 
   //   fetch data
   React.useEffect(() => {
-    fetch("All_Fake_Api/Fakedb.json")
+    fetch("Fakedb.json")
       .then((res) => res.json())
       .then((d) => {
         setAllData(d);
         // setLoading2(false);
       });
   }, []);
+
+  console.log(allData);
 
   const handleOpenAction = (e) => {
     e.preventDefault();
@@ -239,6 +241,10 @@ const TestingTable = () => {
           </>
         );
       },
+      sorter: (a, b) => {
+        return a.pos > b.pos ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "pos" ? sortedInfo.order : null,
       filters: [
         {
           text: "telehealth",
@@ -395,7 +401,7 @@ const TestingTable = () => {
           size="small"
           className=" text-xs font-normal px-8"
           columns={columns}
-          dataSource={data}
+          dataSource={allData}
           rowSelection={{
             ...rowSelection,
           }}
