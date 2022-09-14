@@ -1,97 +1,19 @@
 import React, { useState } from "react";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
 import { Button, Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableTesting from "./ManageTableTesting";
 
-//data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
-const data = [
-  {
-    id: 1,
-    key: "111", //id:'1' diley kaj korey na
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    lock: false,
-    Patients: "Vernon Barlow",
-    Service_hrs: "Eget Magna Corp.",
-    Provider: "Travis Wagner",
-    pos: "telehealth",
-    Scheduled_Date: "Aug 6, 2023",
-    Hours: "9:57 PM",
-    Status: "hold",
-  },
-  {
-    id: 2,
-    key: "255",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    lock: true,
-    Patients: "Brett Campbell",
-    Service_hrs: "Amet Ultricies PC",
-    Provider: "Ryder Foster",
-    pos: "School",
-    Scheduled_Date: "Feb 20, 2023",
-    Hours: "3:01 PM",
-    Status: "Rendered",
-  },
-  {
-    id: 3,
-    key: "333",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    lock: true,
-    Patients: "Coby Gonzalez",
-    Service_hrs: "Malesuada Corporation",
-    Provider: "Bianca Lowery",
-    pos: "School",
-    Scheduled_Date: "Apr 30, 2022",
-    Hours: "10:14 PM",
-    Status: "Rendered",
-  },
-  {
-    id: 4,
-    key: "4",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    lock: true,
-    Patients: "Donovan Robertson",
-    Service_hrs: "At Industries",
-    Provider: "Sara Burke",
-    pos: "School",
-    Scheduled_Date: "Dec 30, 2021",
-    Hours: "9:28 AM",
-    Status: "hold",
-  },
-];
-
-// const menu = (
-//   <Menu
-//     items={[
-//       {
-//         key: "1",
-//         label: "Action 1",
-//       },
-//       {
-//         key: "2",
-//         label: "Action 2",
-//       },
-//     ]}
-//   />
-// );
-
 const TestingTable = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [openAddNote, setOpenAddNote] = useState(false);
-  const [openViewNote, setOpenViewNote] = useState(false);
-  const [editSession, setEditSession] = useState(false);
   const [allData, setAllData] = useState([]);
   //const [open, setOpen] = useState(false);
 
   //   fetch data
   React.useEffect(() => {
-    fetch("Fakedb.json")
+    fetch("../All_Fake_Api/Fakedb.json")
       .then((res) => res.json())
       .then((d) => {
         setAllData(d);
@@ -100,26 +22,6 @@ const TestingTable = () => {
   }, []);
 
   console.log(allData);
-
-  const handleOpenAction = (e) => {
-    e.preventDefault();
-  };
-
-  const addNoteHandler = () => {
-    setOpenAddNote(true);
-  };
-  const viewNoteHandler = () => {
-    setOpenViewNote(true);
-  };
-  const editSessionHandler = () => {
-    setEditSession(true);
-  };
-
-  const handleClose = () => {
-    setOpenAddNote(false);
-    setOpenViewNote(false);
-    setEditSession(false);
-  };
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -136,7 +38,7 @@ const TestingTable = () => {
       title: "Lock",
       key: "lock",
       dataIndex: "lock",
-      width: 60,
+      width: 50,
       // render contains what we want to reflect as our data
       render: (_, { lock }) => {
         console.log("tags : ", lock);
@@ -158,14 +60,27 @@ const TestingTable = () => {
       title: "Patients",
       dataIndex: "Patients",
       key: "Patients",
+      width: 200,
       filters: [
         {
           text: `Vernon`,
           value: "Vernon",
         },
         {
+          text: `Aileen Newman`,
+          value: "Aileen Newman",
+        },
+        {
           text: "Donovan",
           value: "Donovan",
+        },
+        {
+          text: "Burke Beard",
+          value: "Burke Beard",
+        },
+        {
+          text: "Hector Moses",
+          value: "Hector Moses",
         },
       ],
       filteredValue: filteredInfo.Patients || null,
@@ -180,6 +95,7 @@ const TestingTable = () => {
       title: "Service & Hrs",
       dataIndex: "Service_hrs",
       key: "Service_hrs",
+      width: 200,
       filters: [
         {
           text: `Amet`,
@@ -201,31 +117,10 @@ const TestingTable = () => {
       ellipsis: true,
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      filters: [
-        {
-          text: "London",
-          value: "London",
-        },
-        {
-          text: "New York",
-          value: "New York",
-        },
-      ],
-      filteredValue: filteredInfo.address || null,
-      onFilter: (value, record) => record.address.includes(value),
-      sorter: (a, b) => {
-        return a.address > b.address ? -1 : 1;
-      },
-      sortOrder: sortedInfo.columnKey === "address" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
       title: "Pos",
       key: "pos",
       dataIndex: "pos",
+      width: 100,
       render: (_, { pos }) => {
         console.log("pos : ", pos);
         return (
@@ -244,6 +139,7 @@ const TestingTable = () => {
       sorter: (a, b) => {
         return a.pos > b.pos ? -1 : 1;
       },
+
       sortOrder: sortedInfo.columnKey === "pos" ? sortedInfo.order : null,
       filters: [
         {
@@ -262,6 +158,7 @@ const TestingTable = () => {
       title: "Scheduled Date",
       dataIndex: "Scheduled_Date",
       key: "Scheduled_Date",
+      width: 150,
       filters: [
         {
           text: `Feb 20, 2023`,
@@ -286,6 +183,7 @@ const TestingTable = () => {
       title: "Hours",
       dataIndex: "Hours",
       key: "Hours",
+      width: 100,
       filters: [
         {
           text: `9:57 PM`,
@@ -361,11 +259,11 @@ const TestingTable = () => {
           overlay={<ManageTableTesting></ManageTableTesting>}
           trigger={["click"]}
         >
-          <a onClick={(e) => e.preventDefault()}>
+          <button onClick={(e) => e.preventDefault()}>
             <Space>
               <BsThreeDots />
             </Space>
-          </a>
+          </button>
         </Dropdown>
       ),
     },
@@ -387,19 +285,15 @@ const TestingTable = () => {
     },
   };
   return (
-    <div>
+    <div className=" overflow-scroll ">
       <>
-        <Space
-          style={{
-            marginBottom: 16,
-          }}
-        >
+        <Space>
           <Button onClick={clearFilters}>Clear filters</Button>
         </Space>
         <Table
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           size="small"
-          className=" text-xs font-normal px-8"
+          className=" text-xs font-normal mt-5"
           columns={columns}
           dataSource={allData}
           rowSelection={{
@@ -407,25 +301,6 @@ const TestingTable = () => {
           }}
           onChange={handleChange}
         />
-        {/* {openAddNote && (
-          <SessionAddNote
-            handleClose={handleClose}
-            open={openAddNote}
-          ></SessionAddNote>
-        )}
-        {openViewNote && (
-          <SessionViewNote
-            handleClose={handleClose}
-            open={openViewNote}
-          ></SessionViewNote>
-        )}
-        {editSession && (
-          <EditSession
-            pagination={false}
-            handleClose={handleClose}
-            open={editSession}
-          ></EditSession>
-        )} */}
       </>
     </div>
   );

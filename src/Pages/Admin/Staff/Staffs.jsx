@@ -20,7 +20,7 @@ const Staffs = () => {
   console.log(StafData);
 
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="flex items-center flex-wrap justify-between">
         <h1>Staffs part</h1>
         <button
