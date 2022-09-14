@@ -29022,7 +29022,8 @@ textarea.ant-mentions {
   padding: 2px 2px;
   background-color: #0AA7B8;
   border: 1px solid #CED4DA;
-  color: white
+  color: white;
+  text-align: center;
 }
 
 .ant-table.ant-table-small .ant-table-filter-trigger {
@@ -29184,11 +29185,12 @@ textarea.ant-mentions {
 
 .ant-table table {
   width: 100%;
-  text-align: left;
+  text-align: center !important;
   border-radius: 2px 2px 0 0;
   border-collapse: separate;
   border-spacing: 0;
 }
+
 
 .ant-table-thead>tr>th,
 .ant-table-tbody>tr>td,

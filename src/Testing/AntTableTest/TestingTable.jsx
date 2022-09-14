@@ -50,7 +50,7 @@ const TestingTable = () => {
               </button>
             )}
             {lock === false && (
-              <AiFillLock className=" text-lg font-medium text-red-600" />
+              <AiFillLock className=" text-lg font-medium mx-auto  text-red-600" />
             )}
           </div>
         );
@@ -126,7 +126,7 @@ const TestingTable = () => {
         return (
           <>
             {pos === "telehealth" ? (
-              <div className="flex items-center gap-2 ">
+              <div className="flex items-center justify-center gap-2 ">
                 Telehealth
                 <BsFillCameraVideoFill className="text-green-500" />
               </div>
@@ -149,6 +149,10 @@ const TestingTable = () => {
         {
           text: "School",
           value: "School",
+        },
+        {
+          text: "Office",
+          value: "office",
         },
       ],
       filteredValue: filteredInfo.pos || null,
