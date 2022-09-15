@@ -120,7 +120,11 @@ const AuthorizationAntdTable = () => {
       });
     }
 
-    return <Table columns={columns} dataSource={data} pagination={false} />;
+    return (
+      <div className="mx-0">
+        <Table columns={columns} dataSource={data} pagination={false} />
+      </div>
+    );
   };
 
   //   fetch data
@@ -413,17 +417,13 @@ const AuthorizationAntdTable = () => {
   return (
     <div>
       <>
-        <Space
-          style={{
-            marginBottom: 16,
-          }}
-        >
+        <div className="flex justify-end my-2">
           <Button onClick={clearFilters}>Clear filters</Button>
-        </Space>
+        </div>
         <Table
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           size="small"
-          className=" text-xs font-normal px-8"
+          className=" text-xs font-normal "
           columns={columns}
           dataSource={allData}
           rowSelection={{
