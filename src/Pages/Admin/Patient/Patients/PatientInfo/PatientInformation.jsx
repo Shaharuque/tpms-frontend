@@ -185,14 +185,14 @@ const PatientInformation = () => {
             {/* name  */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-700 text-left">
+                <span className="label-text text-xs text-gray-500 text-left">
                   First Name<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="first_name"
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-[#b5c4c5e7] border-b-2 rounded-sm py-[5px] mx-1 text-lg font-medium w-full focus:outline-none"
                 {...register("first_name")}
               />
             </div>

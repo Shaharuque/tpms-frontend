@@ -108,3 +108,5 @@ export const ManageTableColumnsColumn = [
     },
   },
 ];
+
+// Manage Table

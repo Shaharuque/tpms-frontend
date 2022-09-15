@@ -13,6 +13,7 @@ import UseTable from "../../../../../Utilities/UseTable";
 import AuthorizationEditModal from "./Authorization/AuthorizationEditModal";
 import SelectContactRate from "./Authorization/SelectContactRate";
 import axios from "axios";
+import AuthorizationAntdTable from "./AuthorizationAntdTable/AuthorizationAntdTable";
 
 const Authorization = () => {
   const { id } = useParams();
@@ -120,7 +121,7 @@ const Authorization = () => {
       }
     );
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
         <h1 className="text-sm font-semibold">Authorization</h1>
         <Link to={"/admin/authorization-Edit"}>
@@ -164,6 +165,10 @@ const Authorization = () => {
           </div>
         </div>
       </div> */}
+
+      <div>
+        <AuthorizationAntdTable></AuthorizationAntdTable>
+      </div>
 
       {selectContact && (
         <SelectContactRate
