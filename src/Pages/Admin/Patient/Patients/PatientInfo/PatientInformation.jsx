@@ -104,6 +104,7 @@ const PatientInformation = () => {
         phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
+        checkedActive: patient_details?.is_active_client,
       });
     }, 0);
   }, [patient_details?.client_first_name, patient_details?.is_active_client]);
@@ -113,6 +114,11 @@ const PatientInformation = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    const is_client_active = data?.checkedActive ? 1 : 0;
+    const formData = {
+      is_client_active,
+    };
+    console.log(formData);
   };
 
   ///relation value handle
@@ -171,11 +177,8 @@ const PatientInformation = () => {
           <div className="flex ml-1 mt-1 items-center">
             <input
               type="checkbox"
-              checked={value ? true : false}
-              name="patient"
-              onClick={() => {
-                setValue(!value);
-              }}
+              name="checkedActive"
+              {...register("checkedActive")}
             />
             <span className="text-xs ml-1 text-gray-700 font-bold">
               Active Patient
@@ -192,7 +195,7 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="first_name"
-                className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                 {...register("first_name")}
               />
             </div>
@@ -205,7 +208,7 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="middle_name"
-                className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                 {...register("middle_name")}
               />
             </div>
@@ -218,7 +221,7 @@ const PatientInformation = () => {
               <input
                 type="text"
                 name="last_name"
-                className="input-border text-gray-600 rounded-sm  text-lg font-medium ml-1 w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 w-full focus:outline-none"
                 {...register("last_name")}
               />
             </div>
@@ -230,7 +233,7 @@ const PatientInformation = () => {
                 </span>
               </label>
               <input
-                className="border-secondary border-b-2 rounded-sm py-[4px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
                 name="dob"
                 type="date"
                 {...register("dob")}
@@ -244,7 +247,7 @@ const PatientInformation = () => {
                 </span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                 name="gender"
                 {...register("gender")}
               >
@@ -266,7 +269,7 @@ const PatientInformation = () => {
               </label>
               <select
                 onChange={settingRelation}
-                className="border-[#09A2B3] border-b-2 rounded-sm pt-[3px] pb-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
               >
                 <option value="Self">Self</option>
                 <option value="Spouse">Spouse</option>
@@ -304,7 +307,7 @@ const PatientInformation = () => {
                     placeholder="Street"
                     id="streetval"
                     defaultValue={"America"}
-                    className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                     {...register("Street")}
                   />
                   <div // onClick={() => setOpen(true)}
@@ -318,7 +321,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     placeholder="City"
-                    className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                     defaultValue={"Buffalo"}
                     {...register("City")}
                   />
@@ -326,7 +329,7 @@ const PatientInformation = () => {
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                       defaultValue={"NY"}
                       {...register("country")}
                     >
@@ -338,7 +341,7 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       placeholder="Zip"
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                       {...register("zip")}
                     />
                   </div>
@@ -367,7 +370,7 @@ const PatientInformation = () => {
                     <div className="mb-2 flex items-center gap-2">
                       <input
                         type="text"
-                        className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                         {...register("Permanent_Street")}
                       />
                       <div // onClick={() => setOpen(false)}
@@ -383,14 +386,14 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         placeholder="adfaljdfasd"
-                        className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                         {...register("more_City")}
                       />
                     </div>
                     <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
                       <div>
                         <select
-                          className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                          className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                           {...register("more_Country")}
                         >
                           <option value="NY">NY</option>
@@ -400,7 +403,7 @@ const PatientInformation = () => {
                       <div>
                         <input
                           type="text"
-                          className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                          className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                           {...register("more_zip")}
                         />
                       </div>
@@ -417,7 +420,7 @@ const PatientInformation = () => {
                       </span>
                     </label>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                       {...register("pos")}
                     >
                       <option value="work">work</option>
@@ -432,7 +435,7 @@ const PatientInformation = () => {
                       </span>
                     </label>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                       {...register("region")}
                     >
                       <option value="work">work</option>
@@ -457,13 +460,13 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       name="phone"
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full py-[1px] ml-1 focus:outline-none"
                       {...register("phone")}
                     />
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                       {...register("group")}
                     >
                       <option value="work">work</option>
@@ -543,13 +546,13 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         name="phone"
-                        className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[16px] py-[1px] font-medium w-full ml-1 focus:outline-none"
                         {...register("phone")}
                       />
                     </div>
                     <div>
                       <select
-                        className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                         {...register("group")}
                       >
                         <option value="work">work</option>
@@ -622,13 +625,13 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       name="email"
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                       {...register("email")}
                     />
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                       {...register("group2")}
                     >
                       <option value="work">work</option>
@@ -688,13 +691,13 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         name="email"
-                        className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                         {...register("email")}
                       />
                     </div>
                     <div>
                       <select
-                        className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                         {...register("group2")}
                       >
                         <option value="work">work</option>
@@ -755,7 +758,7 @@ const PatientInformation = () => {
                   </span>
                 </label>
                 <select
-                  className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                   {...register("race_details")}
                 >
                   <option value="male">Male</option>
@@ -769,7 +772,7 @@ const PatientInformation = () => {
                   </span>
                 </label>
                 <select
-                  className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                   {...register("language")}
                 >
                   <option value="male">Male</option>
@@ -783,7 +786,7 @@ const PatientInformation = () => {
                   </span>
                 </label>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                   type="date"
                   {...register("first_date")}
                 />
@@ -795,7 +798,7 @@ const PatientInformation = () => {
                   </span>
                 </label>
                 <select
-                  className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                   {...register("referred_by")}
                 >
                   <option value="male">Male</option>
@@ -809,7 +812,7 @@ const PatientInformation = () => {
                   </span>
                 </label>
                 <select
-                  className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                   {...register("assignment")}
                 >
                   <option value="male">Male</option>
@@ -861,7 +864,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     name="guarantor_first_name"
-                    className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                     {...register("guarantor_first_name")}
                   />
                 </div>
@@ -875,7 +878,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     name="guarantor_last_name"
-                    className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                     {...register("guarantor_last_name")}
                   />
                 </div>
@@ -888,7 +891,7 @@ const PatientInformation = () => {
                     </span>
                   </label>
                   <input
-                    className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                     type="date"
                     {...register("guarantor_check_Date")}
                   />
@@ -907,7 +910,7 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       placeholder="Street"
-                      className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                       {...register(checkLocation ? "GuaratorStreet" : "null")}
                     />
                   </div>
@@ -930,14 +933,14 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     placeholder="City"
-                    className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                     defaultValue={hook?.City}
                     {...register(checkLocation ? "GuaratorCity" : "dj")}
                   />
                 </div>
                 <div>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                     {...register(checkLocation ? "GuratorCountry" : "null")}
                   >
                     <option value="NY">NY</option>
@@ -948,7 +951,7 @@ const PatientInformation = () => {
                   <input
                     type="text"
                     placeholder="Zip"
-                    className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full ml-1 focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
                     {...register(checkLocation ? "GuratorZip" : "dj")}
                   />
                 </div>
