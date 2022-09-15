@@ -76,9 +76,11 @@ const PatientLedger = () => {
               </span>
             </label>
             <select
-              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="border-secondary border-b-2 rounded-sm  py-[5px] mx-1 text-xs w-full focus:outline-none"
               {...register("patient")}
             >
+              <option value="name"> abcd </option>
+              <option value="name"> abcd </option>
               <option value="name"> abcd </option>
             </select>
           </div>
@@ -106,7 +108,7 @@ const PatientLedger = () => {
               </span>
             </label>
             <select
-              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="border-secondary border-b-2 rounded-sm  py-[5px] mx-1 text-xs w-full focus:outline-none"
               {...register("CPT_Code")}
             >
               <option value="name">EFT</option>
@@ -121,7 +123,7 @@ const PatientLedger = () => {
               </span>
             </label>
             <select
-              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="border-secondary border-b-2 rounded-sm  py-[5px] mx-1 text-xs w-full focus:outline-none"
               {...register("aging_status")}
             >
               <option value="name">EFT</option>

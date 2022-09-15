@@ -34,7 +34,7 @@ const Staffs = () => {
         </button>
       </div>
       {openStaff && (
-        <div className=" absolute bg-white border shadow-md px-3 py-4 font-normal text-sm right-9">
+        <div className=" absolute bg-white border shadow-md px-3 py-4 font-normal text-sm right-9 z-10 ">
           <Link
             className="hover:text-primary my-2 "
             to={"/admin/create-staff/staff"}
