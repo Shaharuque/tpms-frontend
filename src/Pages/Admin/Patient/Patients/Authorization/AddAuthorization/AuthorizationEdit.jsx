@@ -3,18 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
-import { AiOutlineDelete } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
-import { usePagination, useSortBy, useTable } from "react-table";
-import {
-  AuthorizationEditColumnsColumn,
-  AuthorizationEditColumnsData,
-} from "./AuthorizationEditColumns";
-import UseTable from "../../../../../../Utilities/UseTable";
-import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import { DateRangePicker, Toggle } from "rsuite";
 import CheckIcon from "@rsuite/icons/Check";
 import CloseIcon from "@rsuite/icons/Close";
+import AuthorizationEditTable from "./AuthorizationEditTable";
+import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
@@ -23,9 +16,6 @@ const AuthorizationEdit = () => {
   const [notes, setNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [openEditModal, setOpenEditModal] = useState(false);
-  const data = useMemo(() => AuthorizationEditColumnsData, []);
-  const columns = useMemo(() => [...AuthorizationEditColumnsColumn], []);
-  const [editableRow, setEditableRow] = React.useState(null);
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -45,53 +35,6 @@ const AuthorizationEdit = () => {
     console.log(data);
     console.log(notes);
   };
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      { columns, data, editableRow, setEditableRow },
-      useSortBy,
-      usePagination,
-      (hooks) => {
-        hooks.allColumns.push((columns) => [
-          // other hooks such as selection hook
-          ...columns,
-          // edit hook
-          {
-            accessor: "action",
-            id: "action",
-            Header: "Action",
-            Cell: ({ row, setEditableRow, editableRow }) => (
-              <>
-                <div>
-                  <div className="flex justify-center gap-1 text-primary">
-                    {/* <Link to={`/billing/deposit-apply/${row.original.id}`}>
-                    <MdOutlineDashboard title="Deposit" />
-                  </Link> */}
-
-                    <button
-                      onClick={() => {
-                        setOpenEditModal(true);
-                        setEditableRow(row);
-                      }}
-                    >
-                      <FiEdit className="text-xs mx-2 " />
-                    </button>
-
-                    <span>|</span>
-                    <Link to={"/"}>
-                      <AiOutlineDelete
-                        className="text-xs text-red-500 mx-2"
-                        title="Delete"
-                      />
-                    </Link>
-                  </div>
-                </div>
-              </>
-            ),
-          },
-        ]);
-      }
-    );
 
   return (
     <div className="md:h-[100vh]">
@@ -453,16 +396,7 @@ const AuthorizationEdit = () => {
           transition={{ delay: 0.3 }}
         >
           <div className="divider"></div>
-
-          <div>
-            <UseTable
-              getTableProps={getTableProps}
-              headerGroups={headerGroups}
-              getTableBodyProps={getTableBodyProps}
-              rows={rows}
-              prepareRow={prepareRow}
-            ></UseTable>
-          </div>
+          <AuthorizationEditTable></AuthorizationEditTable>
           <button
             onClick={() => {
               setOpenEditModal(true);
@@ -471,14 +405,13 @@ const AuthorizationEdit = () => {
           >
             + Add Service
           </button>
-          {openEditModal && (
-            <AuthorizationEditModal
-              handleClose={handleClose}
-              open={openEditModal}
-              editableRow={editableRow}
-            ></AuthorizationEditModal>
-          )}
         </motion.div>
+      )}
+      {openEditModal && (
+        <AuthorizationEditModal
+          handleClose={handleClose}
+          open={openEditModal}
+        ></AuthorizationEditModal>
       )}
     </div>
   );

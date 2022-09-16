@@ -255,7 +255,7 @@ const AuthorizationAntdTable = () => {
             </button>
 
             <span>|</span>
-            <Link to={`/admin/authorization-Edit`}>
+            <Link to={`/admin/authorization-Edit/123`}>
               <FiEdit className="text-xs mx-2  text-lime-700" title="Edit" />
             </Link>
 
