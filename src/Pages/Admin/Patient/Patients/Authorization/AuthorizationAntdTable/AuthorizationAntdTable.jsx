@@ -1,184 +1,57 @@
 import React, { useState } from "react";
-import { Button, Space, Table, Badge } from "antd";
-import { AiFillLock, AiFillUnlock } from "react-icons/ai";
-import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
-
+import { Button, Table } from "antd";
+import { GiPlainCircle } from "react-icons/gi";
+import { Link } from "react-router-dom";
+import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
+import { FiEdit } from "react-icons/fi";
+import { MdContentCopy } from "react-icons/md";
+import SelectContactRate from "../Authorization/SelectContactRate";
+import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
+import AuthorizationEditTable from "../AddAuthorization/AuthorizationEditTable";
 //data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
-const data = [
-  {
-    id: 1,
-    key: "111", //id:'1' diley kaj korey na
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    lock: false,
-    Patients: "Vernon Barlow",
-    Service_hrs: "Eget Magna Corp.",
-    Provider: "Travis Wagner",
-    pos: "telehealth",
-    Scheduled_Date: "Aug 6, 2023",
-    Hours: "9:57 PM",
-    Status: "hold",
-  },
-  {
-    id: 2,
-    key: "255",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    lock: true,
-    Patients: "Brett Campbell",
-    Service_hrs: "Amet Ultricies PC",
-    Provider: "Ryder Foster",
-    pos: "School",
-    Scheduled_Date: "Feb 20, 2023",
-    Hours: "3:01 PM",
-    Status: "Rendered",
-  },
-  {
-    id: 3,
-    key: "333",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    lock: true,
-    Patients: "Coby Gonzalez",
-    Service_hrs: "Malesuada Corporation",
-    Provider: "Bianca Lowery",
-    pos: "School",
-    Scheduled_Date: "Apr 30, 2022",
-    Hours: "10:14 PM",
-    Status: "Rendered",
-  },
-  {
-    id: 4,
-    key: "4",
-    age: 32,
-    address: "London No. 2 Lake Park",
-    lock: true,
-    Patients: "Donovan Robertson",
-    Service_hrs: "At Industries",
-    Provider: "Sara Burke",
-    pos: "School",
-    Scheduled_Date: "Dec 30, 2021",
-    Hours: "9:28 AM",
-    Status: "hold",
-  },
-];
 
 const AuthorizationAntdTable = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [openAddNote, setOpenAddNote] = useState(false);
-  const [openViewNote, setOpenViewNote] = useState(false);
-  const [editSession, setEditSession] = useState(false);
-  const [allData, setAllData] = useState([]);
-  //const [open, setOpen] = useState(false);
+  const [authData, setAuthData] = useState([]);
+  const [selectContact, setSelectContact] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   //row expand code related
   const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
+  //const [open, setOpen] = useState(false);
 
   //expendable row ar data jeita expand korley show korbey
   const expandedRowRender = () => {
-    const columns = [
-      {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
-      },
-      {
-        title: "Service",
-        dataIndex: "service",
-        key: "service",
-      },
-      {
-        title: "Name",
-        dataIndex: "name",
-        key: "name",
-      },
-      {
-        title: "Status",
-        key: "state",
-        render: () => (
-          <span>
-            <Badge status="success" />
-            Finished
-          </span>
-        ),
-      },
-      {
-        title: "Upgrade Status",
-        dataIndex: "upgradeNum",
-        key: "upgradeNum",
-      },
-    ];
-    const data = [];
-
-    for (let i = 0; i < 2; ++i) {
-      data.push({
-        key: i.toString(),
-        date: "2014-12-24 23:12:00",
-        name: "This is production name",
-        upgradeNum: "Upgraded: 56",
-        service: "Direct Behavior Therapy RBT",
-      });
-    }
-
     return (
-      <div className="mx-0">
-        <Table columns={columns} dataSource={data} pagination={false} />
+      <div className="ml-[-40px] my-2">
+        <AuthorizationEditTable></AuthorizationEditTable>
       </div>
     );
   };
 
-  //   fetch data
+  const handleClose = () => {
+    setOpenEditModal(false);
+    setSelectContact(false);
+  };
+
+  // fetch data
   React.useEffect(() => {
-    fetch("../../../All_Fake_Api/Fakedb.json")
+    fetch("../../../All_Fake_Api/Authorization.json")
       .then((res) => res.json())
       .then((d) => {
-        setAllData(d);
+        setAuthData(d);
         // setLoading2(false);
       });
   }, []);
 
-  console.log("allData", allData);
-  const handleOpenAction = (e) => {
-    e.preventDefault();
-  };
-
-  const handleChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
-    setFilteredInfo(filters);
-    setSortedInfo(sorter);
-  };
-
-  const clearFilters = () => {
-    setFilteredInfo({});
-  };
+  console.log("authData", authData);
 
   const columns = [
     {
-      title: "Lock",
-      key: "lock",
-      dataIndex: "lock",
-      width: 60,
-      // render contains what we want to reflect as our data
-      render: (_, { lock }) => {
-        console.log("tags : ", lock);
-        return (
-          <div>
-            {lock === true && (
-              <button onClink={() => console.log(lock)}>
-                <AiFillUnlock className="mx-auto text-lg font-medium text-secondary" />
-              </button>
-            )}
-            {lock === false && (
-              <AiFillLock className=" text-lg mx-auto font-medium text-red-600" />
-            )}
-          </div>
-        );
-      },
-    },
-    {
-      title: "Patients",
-      dataIndex: "Patients",
-      key: "Patients",
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+      width: 200,
       filters: [
         {
           text: `Vernon`,
@@ -201,18 +74,20 @@ const AuthorizationAntdTable = () => {
           value: "Hector Moses",
         },
       ],
-      filteredValue: filteredInfo.Patients || null,
-      onFilter: (value, record) => record.Patients.includes(value),
+      filteredValue: filteredInfo.description || null,
+      onFilter: (value, record) => record.description.includes(value),
       sorter: (a, b) => {
-        return a.Patients > b.Patients ? -1 : 1;
+        return a.description > b.description ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "Patients" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "description" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: "Service & Hrs",
-      dataIndex: "Service_hrs",
-      key: "Service_hrs",
+      title: "Onset Date",
+      dataIndex: "onset_date",
+      key: "onset_date",
+      width: 150,
       filters: [
         {
           text: `Amet`,
@@ -223,31 +98,194 @@ const AuthorizationAntdTable = () => {
           value: "Malesuada",
         },
       ],
-      filteredValue: filteredInfo.Service_hrs || null,
-      onFilter: (value, record) => record.Service_hrs.includes(value),
-      //   sorter is for sorting asc or dsc purpose
+      filteredValue: filteredInfo.onset_date || null,
+      onFilter: (value, record) => record.onset_date.includes(value),
+      //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
-        return a.Service_hrs > b.Service_hrs ? -1 : 1; //sorting problem solved using this logic
+        return a.onset_date > b.onset_date ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: "Pos",
-      key: "pos",
-      dataIndex: "pos",
-      render: (_, { pos }) => {
-        console.log("pos : ", pos);
+      title: "End Date",
+      dataIndex: "end_date",
+      key: "end_date",
+      width: 150,
+      filters: [
+        {
+          text: `Amet`,
+          value: "Amet",
+        },
+        {
+          text: "Malesuada",
+          value: "Malesuada",
+        },
+      ],
+      filteredValue: filteredInfo.end_date || null,
+      onFilter: (value, record) => record.end_date.includes(value),
+      //   sorter is for sorting asc or dsc purstatuse
+      sorter: (a, b) => {
+        return a.end_date > b.end_date ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "end_date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Insurance",
+      dataIndex: "insurance",
+      key: "insurance",
+      width: 120,
+      filters: [
+        {
+          text: `Amet`,
+          value: "Amet",
+        },
+        {
+          text: "Malesuada",
+          value: "Malesuada",
+        },
+      ],
+      filteredValue: filteredInfo.insurance || null,
+      onFilter: (value, record) => record.insurance.includes(value),
+      //   sorter is for sorting asc or dsc purstatuse
+      sorter: (a, b) => {
+        return a.insurance > b.insurance ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "insurance" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Ins. ID",
+      dataIndex: "id",
+      key: "id",
+      width: 100,
+      filters: [
+        {
+          text: `Amet`,
+          value: "Amet",
+        },
+        {
+          text: "Malesuada",
+          value: "Malesuada",
+        },
+      ],
+      filteredValue: filteredInfo.id || null,
+      onFilter: (value, record) => record.id.includes(value),
+      //   sorter is for sorting asc or dsc purstatuse
+      sorter: (a, b) => {
+        return a.id > b.id ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Auth No.",
+      dataIndex: "auth_no",
+      key: "auth_no",
+      width: 100,
+      filters: [
+        {
+          text: `Amet`,
+          value: "Amet",
+        },
+        {
+          text: "Malesuada",
+          value: "Malesuada",
+        },
+      ],
+      filteredValue: filteredInfo.auth_no || null,
+      onFilter: (value, record) => record.auth_no.includes(value),
+      //   sorter is for sorting asc or dsc purstatuse
+      sorter: (a, b) => {
+        return a.auth_no > b.auth_no ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "auth_no" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "COB",
+      dataIndex: "cob",
+      key: "cob",
+      width: 200,
+      filters: [
+        {
+          text: `Amet`,
+          value: "Amet",
+        },
+        {
+          text: "Malesuada",
+          value: "Malesuada",
+        },
+      ],
+      filteredValue: filteredInfo.cob || null,
+      onFilter: (value, record) => record.cob.includes(value),
+      //   sorter is for sorting asc or dsc purstatuse
+      sorter: (a, b) => {
+        return a.cob > b.cob ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "cob" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+
+    {
+      title: "Action",
+      dataIndex: "operation",
+      key: "operation",
+      width: 200,
+      render: () => (
+        <div>
+          <div className="flex justify-center gap-1 text-primary">
+            <button
+              onClick={() => {
+                setSelectContact(true);
+              }}
+            >
+              <MdContentCopy className="text-xs mx-2 " />
+            </button>
+
+            <span>|</span>
+            <button
+              onClick={() => {
+                setOpenEditModal(true);
+              }}
+            >
+              <AiOutlinePlus className="text-xs mx-2 " />
+            </button>
+
+            <span>|</span>
+            <Link to={`/admin/authorization-Edit`}>
+              <FiEdit className="text-xs mx-2  text-lime-700" title="Edit" />
+            </Link>
+
+            <span>|</span>
+            <Link to={"/"}>
+              <AiOutlineDelete
+                className="text-xs text-red-500 mx-2"
+                title="Delete"
+              />
+            </Link>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Status",
+      key: "status",
+      dataIndex: "status",
+      width: 100,
+      render: (_, { status }) => {
         return (
           <>
-            {pos === "telehealth" ? (
+            {status === true ? (
               <div className="flex items-center justify-center gap-2 ">
-                Telehealth
-                <BsFillCameraVideoFill className="text-green-500" />
+                <GiPlainCircle className="text-green-500" />
               </div>
             ) : (
-              <div>{pos}</div>
+              <div className="flex items-center justify-center gap-2 ">
+                <GiPlainCircle className="text-red-500" />
+              </div>
             )}
           </>
         );
@@ -266,142 +304,25 @@ const AuthorizationAntdTable = () => {
           value: "office",
         },
       ],
-      filteredValue: filteredInfo.pos || null,
-      onFilter: (value, record) => record.pos.includes(value),
-      //   sorter is for sorting asc or dsc purpose
+      filteredValue: filteredInfo.status || null,
+      onFilter: (value, record) => record.status.includes(value),
+      //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
-        return a.pos > b.pos ? -1 : 1; //sorting problem solved using this logic
+        return a.status > b.status ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "pos" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
       ellipsis: true,
     },
-    {
-      title: "Scheduled Date",
-      dataIndex: "Scheduled_Date",
-      key: "Scheduled_Date",
-      filters: [
-        {
-          text: `Feb 20, 2023`,
-          value: "Feb 20, 2023",
-        },
-        {
-          text: "Dec 30, 2021",
-          value: "Dec 30, 2021",
-        },
-      ],
-      filteredValue: filteredInfo.Scheduled_Date || null,
-      onFilter: (value, record) => record.Scheduled_Date.includes(value),
-      sorter: (a, b) => {
-        return a.Scheduled_Date > b.Scheduled_Date ? -1 : 1;
-        // a.Scheduled_Date - b.Scheduled_Date
-      },
-      sortOrder:
-        sortedInfo.columnKey === "Scheduled_Date" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Hours",
-      dataIndex: "Hours",
-      key: "Hours",
-      filters: [
-        {
-          text: `9:57 PM`,
-          value: "9:57 PM",
-        },
-        {
-          text: "3:01 PM",
-          value: "3:01 PM",
-        },
-      ],
-      filteredValue: filteredInfo.Hours || null,
-      onFilter: (value, record) => {
-        return record.Hours.includes(value);
-      },
-      sorter: (a, b) => {
-        return a.Hours > b.Hours ? -1 : 1;
-        // a.Hours - b.Hours,
-      },
-      sortOrder: sortedInfo.columnKey === "Hours" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Status",
-      key: "Status",
-      dataIndex: "Status",
-      width: 100,
-      render: (_, { Status }) => {
-        //console.log("Status : ", Status);
-        return (
-          <div>
-            {Status === "Scheduled" && (
-              <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-            {Status === "Rendered" && (
-              <button className="bg-green-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-            {Status === "hold" && (
-              <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-          </div>
-        );
-      },
-      filters: [
-        {
-          text: "hold",
-          value: "hold",
-        },
-        {
-          text: "Rendered",
-          value: "Rendered",
-        },
-        {
-          text: "Scheduled",
-          value: "Scheduled",
-        },
-      ],
-      filteredValue: filteredInfo.Status || null,
-      onFilter: (value, record) => record.Status.includes(value),
-    },
-    // {
-    //   title: "Action",
-    //   dataIndex: "operation",
-    //   key: "operation",
-    //   width: 60,
-    //   render: () => (
-    //     <Dropdown
-    //       overlay={<ManageTableAction></ManageTableAction>}
-    //       trigger={["click"]}
-    //     >
-    //       <a onClick={(e) => e.preventDefault()}>
-    //         <Space>
-    //           <BsThreeDots />
-    //         </Space>
-    //       </a>
-    //     </Dropdown>
-    //   ),
-    // },
   ];
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
-    },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows);
-    },
+  const handleChange = (pagination, filters, sorter) => {
+    console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
   };
 
   //If one new row is expanded then row expendation will be hidden
@@ -417,45 +338,54 @@ const AuthorizationAntdTable = () => {
   return (
     <div>
       <>
-        <div className="flex justify-end my-2">
-          <Button onClick={clearFilters}>Clear filters</Button>
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <h1 className="text-sm font-semibold">Authorization</h1>
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              onClick={clearFilters}
+              className="px-2 flex items-center py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+            >
+              Clear filters
+            </button>
+            <Link to={"/admin/authorization-Edit"}>
+              <button className="px-2 flex items-center py-2 bg-gradient-to-r to-secondary from-primary text-xs  hover:to-secondary text-white rounded-sm">
+                + Add Authorization
+              </button>
+            </Link>
+          </div>
         </div>
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          size="small"
-          className=" text-xs font-normal "
-          columns={columns}
-          dataSource={allData}
-          rowSelection={{
-            ...rowSelection,
-          }}
-          expandable={{
-            expandedRowRender,
-          }}
-          expandedRowKeys={expandedRowKeys}
-          onExpand={onTableRowExpand}
-          onChange={handleChange}
-        />
-        {/* {openAddNote && (
-          <SessionAddNote
-            handleClose={handleClose}
-            open={openAddNote}
-          ></SessionAddNote>
-        )}
-        {openViewNote && (
-          <SessionViewNote
-            handleClose={handleClose}
-            open={openViewNote}
-          ></SessionViewNote>
-        )}
-        {editSession && (
-          <EditSession
-            pagination={false}
-            handleClose={handleClose}
-            open={editSession}
-          ></EditSession>
-        )} */}
+
+        <div className=" overflow-scroll ">
+          <Table
+            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            size="small"
+            className=" text-xs font-normal "
+            columns={columns}
+            dataSource={authData}
+            expandable={{
+              expandedRowRender,
+            }}
+            expandedRowKeys={expandedRowKeys}
+            onExpand={onTableRowExpand}
+            onChange={handleChange}
+          />
+        </div>
       </>
+      {selectContact && (
+        <SelectContactRate
+          handleClose={handleClose}
+          open={selectContact}
+          // editableRow={editableRow}
+        ></SelectContactRate>
+      )}
+
+      {openEditModal && (
+        <AuthorizationEditModal
+          handleClose={handleClose}
+          open={openEditModal}
+          // editableRow={editableRow}
+        ></AuthorizationEditModal>
+      )}
     </div>
   );
 };

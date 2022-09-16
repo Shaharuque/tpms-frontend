@@ -29620,7 +29620,7 @@ table tr th.ant-table-selection-column::after {
 }
 
 .ant-table-row-expand-icon {
-  color: #1890ff;
+  color: #0AA7B8;
   outline: none;
   cursor: pointer;
   transition: color 0.3s;
@@ -29645,11 +29645,13 @@ table tr th.ant-table-selection-column::after {
 
 .ant-table-row-expand-icon:focus-visible,
 .ant-table-row-expand-icon:hover {
-  color: #40a9ff;
+  color: #0AA7B8;
+
 }
 
 .ant-table-row-expand-icon:active {
-  color: #096dd9;
+  color: #0AA7B8;
+
 }
 
 .ant-table-row-expand-icon:focus,
