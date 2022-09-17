@@ -28,7 +28,6 @@ const Patients = () => {
       //console.log(data)
       setItems(data);
     };
-
     getComments();
   }, []);
 

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { Table } from "antd";
 import { GiPlainCircle } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
@@ -35,7 +35,7 @@ const AuthorizationAntdTable = () => {
   };
 
   // fetch data
-  React.useEffect(() => {
+  useEffect(() => {
     fetch("../../../All_Fake_Api/Authorization.json")
       .then((res) => res.json())
       .then((d) => {
@@ -44,7 +44,7 @@ const AuthorizationAntdTable = () => {
       });
   }, []);
 
-  console.log("authData", authData);
+  // console.log("authData", authData);
 
   const columns = [
     {

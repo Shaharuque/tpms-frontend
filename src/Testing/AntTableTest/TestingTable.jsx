@@ -297,6 +297,7 @@ const TestingTable = () => {
         <Table
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           size="small"
+          bordered
           className=" text-xs font-normal mt-5"
           columns={columns}
           dataSource={allData}

@@ -9,9 +9,9 @@
     "M2": 19,
     "M3": 35,
     "M4": 55,
-    "Rate Per": 77,
-    "Contacted Rate": "2",
-    "Billing Rate": 76
+    "Rate_Per": 77,
+    "Contacted_Rate": "2",
+    "Billing_Rate": 76
   },
   {
     "id": "94-716-1577",
@@ -23,9 +23,9 @@
     "M2": 31,
     "M3": 41,
     "M4": 66,
-    "Rate Per": 89,
-    "Contacted Rate": "41",
-    "Billing Rate": 81
+    "Rate_Per": 89,
+    "Contacted_Rate": "41",
+    "Billing_Rate": 81
   },
   {
     "id": "46-295-2775",
@@ -37,9 +37,9 @@
     "M2": 25,
     "M3": 61,
     "M4": 23,
-    "Rate Per": 65,
-    "Contacted Rate": "55459",
-    "Billing Rate": 25
+    "Rate_Per": 65,
+    "Contacted_Rate": "55459",
+    "Billing_Rate": 25
   },
   {
     "id": "50-790-1664",
@@ -51,9 +51,9 @@
     "M2": 83,
     "M3": 47,
     "M4": 54,
-    "Rate Per": 93,
-    "Contacted Rate": "62443",
-    "Billing Rate": 20
+    "Rate_Per": 93,
+    "Contacted_Rate": "62443",
+    "Billing_Rate": 20
   },
   {
     "id": "70-859-2627",
@@ -65,9 +65,9 @@
     "M2": 53,
     "M3": 37,
     "M4": 80,
-    "Rate Per": 89,
-    "Contacted Rate": "99",
-    "Billing Rate": 7
+    "Rate_Per": 89,
+    "Contacted_Rate": "99",
+    "Billing_Rate": 7
   },
   {
     "id": "44-977-4356",
@@ -79,9 +79,9 @@
     "M2": 59,
     "M3": 91,
     "M4": 80,
-    "Rate Per": 33,
-    "Contacted Rate": "708",
-    "Billing Rate": 31
+    "Rate_Per": 33,
+    "Contacted_Rate": "708",
+    "Billing_Rate": 31
   },
   {
     "id": "42-436-2531",
@@ -93,50 +93,8 @@
     "M2": 74,
     "M3": 39,
     "M4": 21,
-    "Rate Per": 55,
-    "Contacted Rate": "37075",
-    "Billing Rate": 45
-  },
-  {
-    "id": "43-852-0758",
-    "key": 8,
-    "service_type": "Saunders",
-    "service_sub_type": "Sonny",
-    "cpt": 87,
-    "M1": 47,
-    "M2": 78,
-    "M3": 21,
-    "M4": 54,
-    "Rate Per": 96,
-    "Contacted Rate": "7",
-    "Billing Rate": 50
-  },
-  {
-    "id": "50-075-1357",
-    "key": 9,
-    "service_type": "Brownsell",
-    "service_sub_type": "Alyce",
-    "cpt": 33,
-    "M1": 35,
-    "M2": 74,
-    "M3": 32,
-    "M4": 2,
-    "Rate Per": 82,
-    "Contacted Rate": "941",
-    "Billing Rate": 56
-  },
-  {
-    "id": "64-788-2792",
-    "key": 10,
-    "service_type": "Retallick",
-    "service_sub_type": "Sharity",
-    "cpt": 93,
-    "M1": 90,
-    "M2": 49,
-    "M3": 40,
-    "M4": 25,
-    "Rate Per": 81,
-    "Contacted Rate": "490",
-    "Billing Rate": 24
+    "Rate_Per": 55,
+    "Contacted_Rate": "37075",
+    "Billing_Rate": 45
   }
 ]

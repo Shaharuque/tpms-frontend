@@ -56,7 +56,7 @@ const PatientsInfo = () => {
               className="flex gap-1  hover:text-white pb-1 hover:bg-primary items-center"
               to={`patient-info/${id}`}
             >
-              <h1 className="ml-1 mt-1 flex items-center gap-1 ">
+              <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <MdPersonSearch /> Patient Info
               </h1>
             </CustomLink>
@@ -67,7 +67,7 @@ const PatientsInfo = () => {
               className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
               to={`patient-authorization/${id}`}
             >
-              <h1 className="ml-1 mt-1 flex items-center gap-1 ">
+              <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <BsFillFileEarmarkLock2Fill /> Ins/Authorization
               </h1>
             </CustomLink>
@@ -77,7 +77,7 @@ const PatientsInfo = () => {
               className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
               to={`patient-document/${id}`}
             >
-              <h1 className="ml-1 mt-1 flex items-center gap-1 ">
+              <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <IoDocumentsOutline /> Documents
               </h1>
             </CustomLink>
@@ -87,7 +87,7 @@ const PatientsInfo = () => {
               className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
               to={`patient-portal/${id}`}
             >
-              <h1 className="ml-1 mt-1 flex items-center gap-1 ">
+              <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <TbReport /> Patient Portal
               </h1>
             </CustomLink>
@@ -97,8 +97,8 @@ const PatientsInfo = () => {
               className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
               to={`patient-ledger/${id}`}
             >
-              <h1 className="ml-1 mt-1 flex items-center gap-1 ">
-                <RiFileDamageFill /> patient Ledger
+              <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <RiFileDamageFill /> Patient Ledger
               </h1>
             </CustomLink>
           </div>
