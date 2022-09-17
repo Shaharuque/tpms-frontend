@@ -114,8 +114,14 @@ import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
 // ###### Not Found
-import CustomSearch from "./Testing/CustomSearch/CustomSearch";
 import NotFound from "./NoPageFound/NotFound";
+//Testing
+import CustomSearch from "./Testing/CustomSearch/CustomSearch";
+import RowSelect from "./Testing/AntTableTest/RowSelect";
+import AntTableTest from "./Testing/AntTableTest/AntTableTest";
+import ExpendedTable from "./Testing/AntTableTest/ExpendedTable";
+import TableApi from "./Testing/AntTableTest/TableApi/TableApi";
+import SingleDetails from "./Testing/AntTableTest/TableApi/SingleDetails";
 // ###### Staff
 import Staffs from "./Pages/Admin/Staff/Staffs";
 import StaffInformation from "./Pages/Admin/Staff/Staffs/StaffInformation";
@@ -130,6 +136,7 @@ import InsuranceExclusion from "./Pages/Admin/Staff/Staffs/InsuranceExclusion/In
 import StaffPortal from "./Pages/Admin/Staff/Staffs/StaffPortal/StaffPortal";
 import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeExclusion/ServiceSubTypeExclusions";
 import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
+import TestingTable from "./Testing/AntTableTest/TestingTable";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -154,6 +161,18 @@ function App() {
 
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
+          <Route path="test" element={<AntTableTest></AntTableTest>}></Route>
+          {/* <Route path="expandTable" element={<ExpendedTable></ExpendedTable>} /> */}
+          <Route path="table-api" element={<TableApi></TableApi>}></Route>
+          <Route
+            path="/details/:id"
+            element={<SingleDetails></SingleDetails>}
+          ></Route>
+          <Route
+            path="/testing"
+            element={<TestingTable></TestingTable>}
+          ></Route>
+          {/* Testing End */}
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
             <Route
