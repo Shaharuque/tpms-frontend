@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import "../staff.css";
 import CredentialsModal from "./CredentialsModal";
+import "../../../../../Style/staff.css";
 
 const CredentialsBoxOne = ({ name }) => {
   const [tableOpen, setTableOpen] = useState(true);

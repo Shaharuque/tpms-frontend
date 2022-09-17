@@ -1,4 +1,6 @@
-/* @import '~antd/dist/antd.css'; */
+/* @import 'antd/dist/antd.css'; */
+@import "./customAntd.css";
+
 * {
   margin: 0;
   padding: 0;
@@ -67,10 +69,10 @@ main {
 
 }
 
-.active {
+/* .active {
   background: #fff !important;
   color: #02818F !important;
-}
+} */
 
 input[type='checkbox'] {
   accent-color: teal;

@@ -1,10 +1,10 @@
 import React from "react";
-import CustomLink from "../Shared/CustomLink";
+import CustomLink from "../../../Pages/Shared/CustomLink";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Outlet, useParams } from "react-router-dom";
-import doctor from "../../Assets/doctor.png";
+import doctor from "../../../Assets/doctor.png";
 
 const StaffInformation = () => {
   return (

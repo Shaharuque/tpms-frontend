@@ -71,20 +71,22 @@ const PatientLedger = () => {
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7  my-5 mr-2 gap-2">
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Patient
               </span>
             </label>
             <select
-              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border rounded-sm  text-lg font-medium w-full focus:outline-none"
               {...register("patient")}
             >
+              <option value="name"> </option>
+              <option value="name"> Abcd </option>
               <option value="name"> abcd </option>
             </select>
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Selected date
               </span>
             </label>
@@ -101,14 +103,18 @@ const PatientLedger = () => {
           {/* CPT Code  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 CPT Code
               </span>
             </label>
             <select
-              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm  text-lg font-medium w-full focus:outline-none"
               {...register("CPT_Code")}
             >
+              <option value="name"></option>
+              <option value="name">EFT</option>
+              <option value="name">rounded-sm</option>
+              <option value="name">EFT</option>
               <option value="name">EFT</option>
             </select>
           </div>
@@ -116,12 +122,12 @@ const PatientLedger = () => {
           {/*Aging Status  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Aging Status
               </span>
             </label>
             <select
-              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border rounded-sm  text-lg font-medium w-full focus:outline-none"
               {...register("aging_status")}
             >
               <option value="name">EFT</option>

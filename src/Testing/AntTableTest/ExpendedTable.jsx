@@ -1,5 +1,5 @@
 import React from "react";
-import "./antDesign.css";
+//import "./antDesign.css";
 import { Badge, Dropdown, Menu, Space, Table } from "antd";
 
 const ExpendedTable = () => {

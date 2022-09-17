@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import "antd/dist/antd.css";
-import "../antDesign.css";
+// import "../antDesign.css";
 import { Button, Space, Table } from "antd";
 import axios from "axios";
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";

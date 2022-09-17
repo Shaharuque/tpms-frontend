@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "antd/dist/antd.css";
+//import "antd/dist/antd.css";
 import { Divider, Radio, Table } from "antd";
 
 const data = [

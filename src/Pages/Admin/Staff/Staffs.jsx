@@ -1,28 +1,26 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import TestingTable from "../../../Testing/AntTableTest/TestingTable";
 
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [StafData, SetStafData] = useState([]);
 
-  // fakeApi call 
-  useEffect(()=>{
+  // fakeApi call
+  useEffect(() => {
     axios("../Staff.json")
-    .then((response)=>{
-      SetStafData(response?.data)
-    })
-    .catch((error)=>{
-       console.log(error)
-    })
-
-  },[])
+      .then((response) => {
+        SetStafData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   console.log(StafData);
-  
-  
 
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="flex items-center flex-wrap justify-between">
         <h1>Staffs part</h1>
         <button
@@ -36,7 +34,7 @@ const Staffs = () => {
         </button>
       </div>
       {openStaff && (
-        <div className=" absolute bg-white border shadow-md px-3 py-4 font-normal text-sm right-9">
+        <div className=" absolute bg-white border shadow-md px-3 py-4 font-normal text-sm right-9 z-10 ">
           <Link
             className="hover:text-primary my-2 "
             to={"/admin/create-staff/staff"}
@@ -49,6 +47,8 @@ const Staffs = () => {
           </Link>
         </div>
       )}
+
+      <TestingTable></TestingTable>
       <Link to={"/admin/staff"}> click here</Link>
     </div>
   );
