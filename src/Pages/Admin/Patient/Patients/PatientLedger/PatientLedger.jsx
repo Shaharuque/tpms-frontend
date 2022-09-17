@@ -1,14 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Link, useParams } from "react-router-dom";
 import { Table, Typography } from "antd";
-import {
-  PatientLedgerColumnsColumn,
-  PatientLedgerColumnsData,
-} from "./PatientLedger/PatientLedgerColumns";
-import UseTable from "../../../../../Utilities/UseTable";
-import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
 import { DateRangePicker, Toggle } from "rsuite";
 import CheckIcon from "@rsuite/icons/Check";
 import CloseIcon from "@rsuite/icons/Close";
@@ -342,35 +335,6 @@ const PatientLedger = () => {
   };
 
   // table
-  const data = useMemo(() => PatientLedgerColumnsData, []);
-  const columns = useMemo(() => [...PatientLedgerColumnsColumn], []);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      { columns, data },
-      useSortBy,
-      usePagination,
-      useRowSelect,
-      (hooks) => {
-        hooks.visibleColumns.push((columns) => {
-          return [
-            {
-              id: "selection",
-              Header: ({ getToggleAllRowsSelectedProps }) => (
-                <div>
-                  <CheckBox {...getToggleAllRowsSelectedProps()} />
-                </div>
-              ),
-              Cell: ({ row }) => (
-                <div>
-                  <CheckBox {...row.getToggleRowSelectedProps()} />
-                </div>
-              ),
-            },
-            ...columns,
-          ];
-        });
-      }
-    );
 
   return (
     <div className="h-[100vh]">
