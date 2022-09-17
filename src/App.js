@@ -127,6 +127,11 @@ import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientL
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
 import CustomSearch from "./Testing/CustomSearch/CustomSearch";
 import NotFound from "./NoPageFound/NotFound";
+import RowSelect from "./Testing/AntTableTest/RowSelect";
+import AntTableTest from "./Testing/AntTableTest/AntTableTest";
+import ExpendedTable from "./Testing/AntTableTest/ExpendedTable";
+import TableApi from "./Testing/AntTableTest/TableApi/TableApi";
+import SingleDetails from "./Testing/AntTableTest/TableApi/SingleDetails";
 // ######
 
 function App() {
@@ -152,6 +157,14 @@ function App() {
 
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
+          <Route path="test" element={<AntTableTest></AntTableTest>}></Route>
+          <Route path="expandTable" element={<ExpendedTable></ExpendedTable>} />
+          <Route path="table-api" element={<TableApi></TableApi>}></Route>
+          <Route
+            path="/details/:id"
+            element={<SingleDetails></SingleDetails>}
+          ></Route>
+          {/* Testing End */}
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
             <Route
