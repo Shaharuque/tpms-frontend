@@ -13,7 +13,7 @@ import ManageTableTesting from "./ManageTableTesting";
 const data = [
   {
     id: 1,
-    key: "111", //id:'1' diley kaj korey na
+    // key: "111", //id:'1' diley kaj korey na
     age: 32,
     address: "New York No. 1 Lake Park",
     lock: false,
@@ -27,7 +27,7 @@ const data = [
   },
   {
     id: 2,
-    key: "255",
+    // key: "255",
     age: 42,
     address: "London No. 1 Lake Park",
     lock: true,
@@ -41,7 +41,7 @@ const data = [
   },
   {
     id: 3,
-    key: "333",
+    // key: "333",
     age: 32,
     address: "Sidney No. 1 Lake Park",
     lock: true,
@@ -55,7 +55,7 @@ const data = [
   },
   {
     id: 4,
-    key: "4",
+    // key: "4",
     age: 32,
     address: "London No. 2 Lake Park",
     lock: true,
@@ -374,7 +374,7 @@ const AntTableTest = () => {
               </button>
             )}
             {Status === "Rendered" && (
-              <button className="bg-green-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
+              <button className="bg-teal-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
                 {Status}
               </button>
             )}
@@ -464,7 +464,7 @@ const AntTableTest = () => {
           size="small"
           className=" text-xs font-normal px-8"
           columns={columns}
-          dataSource={allData}
+          dataSource={data}
           rowSelection={{
             ...rowSelection,
           }}
@@ -475,25 +475,6 @@ const AntTableTest = () => {
           onExpand={onTableRowExpand}
           onChange={handleChange}
         />
-        {/* {openAddNote && (
-          <SessionAddNote
-            handleClose={handleClose}
-            open={openAddNote}
-          ></SessionAddNote>
-        )}
-        {openViewNote && (
-          <SessionViewNote
-            handleClose={handleClose}
-            open={openViewNote}
-          ></SessionViewNote>
-        )}
-        {editSession && (
-          <EditSession
-            pagination={false}
-            handleClose={handleClose}
-            open={editSession}
-          ></EditSession>
-        )} */}
       </>
     </div>
   );

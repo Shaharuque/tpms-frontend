@@ -136,6 +136,7 @@ import InsuranceExclusion from "./Pages/Admin/Staff/Staffs/InsuranceExclusion/In
 import StaffPortal from "./Pages/Admin/Staff/Staffs/StaffPortal/StaffPortal";
 import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeExclusion/ServiceSubTypeExclusions";
 import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
+import TestingTable from "./Testing/AntTableTest/TestingTable";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -166,6 +167,10 @@ function App() {
           <Route
             path="/details/:id"
             element={<SingleDetails></SingleDetails>}
+          ></Route>
+          <Route
+            path="/testing"
+            element={<TestingTable></TestingTable>}
           ></Route>
           {/* Testing End */}
 

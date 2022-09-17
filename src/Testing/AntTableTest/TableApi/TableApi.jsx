@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 // import "../antDesign.css";
 import { Button, Space, Table } from "antd";
 import axios from "axios";
-import { AiFillLock, AiFillUnlock } from "react-icons/ai";
-import { BsFillCameraVideoFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -13,9 +11,6 @@ import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/Shi
 const TableApi = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [openAddNote, setOpenAddNote] = useState(false);
-  const [openViewNote, setOpenViewNote] = useState(false);
-  const [editSession, setEditSession] = useState(false);
   const [allData, setAllData] = useState([]);
   const [items, setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
@@ -23,14 +18,14 @@ const TableApi = () => {
   const navigate = useNavigate();
 
   //   fetch data
-  React.useEffect(() => {
-    fetch("All_Fake_Api/Fakedb.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setAllData(d);
-      });
-  }, []);
-  console.log(allData);
+  // React.useEffect(() => {
+  //   fetch("All_Fake_Api/Fakedb.json")
+  //     .then((res) => res.json())
+  //     .then((d) => {
+  //       setAllData(d);
+  //     });
+  // }, []);
+  // console.log(allData);
 
   // get data from API
 
@@ -57,7 +52,7 @@ const TableApi = () => {
       headers: headers,
     });
     const data = res.data?.clients?.data;
-    console.log(data);
+    //console.log(data);
     return data;
   };
 
@@ -74,7 +69,7 @@ const TableApi = () => {
   console.log(items);
 
   const handleChange = (pagination, filters, sorter) => {
-    //console.log("Various parameters", pagination, filters, sorter);
+    console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
@@ -83,7 +78,7 @@ const TableApi = () => {
     setFilteredInfo({});
   };
 
-  console.log(filteredInfo?.client_first_name);
+  //console.log(filteredInfo?.client_first_name);
 
   const patientDetails = (id) => {
     //console.log(id);
@@ -127,7 +122,7 @@ const TableApi = () => {
 
       // render contains what we want to reflect as our data
       render: (_, { client_first_name, id, key }) => {
-        console.log("tags : ", client_first_name, id, key);
+        //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
             <h1 onClick={() => patientDetails(id)} style={{ color: "teal" }}>
@@ -143,27 +138,27 @@ const TableApi = () => {
       dataIndex: "phone_number",
       key: "phone_number",
       width: 200,
-      filters: [
-        {
-          text: "(940)-234-0329",
-          value: "(940)-234-0329",
-        },
-        {
-          text: "(124)-996-5455",
-          value: "(124)-996-5455",
-        },
-        {
-          text: "(972)-202-5007",
-          value: "(972)-202-5007",
-        },
-      ],
-      filteredValue: filteredInfo.phone_number || null,
-      onFilter: (value, record) => record.phone_number.includes(value),
-      // sorter: (a, b) => {
-      //   return a.phone_number > b.phone_number ? -1 : 1;
-      // },
-      // sortOrder:
-      //   sortedInfo.columnKey === "phone_number" ? sortedInfo.order : null,
+      // filters: [
+      //   {
+      //     text: "(940)-234-0329",
+      //     value: "(940)-234-0329",
+      //   },
+      //   {
+      //     text: "(124)-996-5455",
+      //     value: "(124)-996-5455",
+      //   },
+      //   {
+      //     text: "(972)-202-5007",
+      //     value: "(972)-202-5007",
+      //   },
+      // ],
+      // filteredValue: filteredInfo.phone_number || null,
+      // onFilter: (value, record) => record.phone_number.includes(value),
+      sorter: (a, b) => {
+        return a.phone_number > b.phone_number ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "phone_number" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
       render: (_, { phone_number }) => {
@@ -332,9 +327,15 @@ const TableApi = () => {
         >
           <Button onClick={clearFilters}>Clear filters</Button>
         </Space>
-        <div className="border-teal-500 bg-gray-300 flex mb-4">
+        <div className="border-2 border-[#34A7B8] bg-gray-200 flex mb-2 mx-4 p-2 rounded">
+          <span className="border-black font-bold mr-2 flex items-center">
+            NAME:
+          </span>
           {filteredInfo?.client_first_name?.map((tag, index) => (
-            <h1 className="text-red-600 border-black mr-2" key={index}>
+            <h1
+              className="text-red-600 border-2 border-black mr-2 rounded-lg px-2"
+              key={index}
+            >
               {tag}
             </h1>
           ))}
