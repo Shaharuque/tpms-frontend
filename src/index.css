@@ -5,7 +5,8 @@
 
 .fullscreen {
   overflow: auto;
-  background: #edf6f7;
+  /* background: #edf6f7; */
+  background: white;
 }
 
 .rs-calendar-table-cell {

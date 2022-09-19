@@ -70,7 +70,7 @@ const Documents = () => {
                   <input
                     type="text"
                     name="description"
-                    className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                    className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                     {...register("description")}
                   />
                 </div>
@@ -83,7 +83,7 @@ const Documents = () => {
                     </span>
                   </label>
                   <input
-                    className="border-secondary border-b-2 rounded-sm px-2 py-[4px] mx-1 text-xs w-full focus:outline-none"
+                    className="border-secondary border-b-2 rounded-sm py-[4px] mx-1 text-xs w-full focus:outline-none"
                     type="date"
                     {...register("check_Date")}
                   />

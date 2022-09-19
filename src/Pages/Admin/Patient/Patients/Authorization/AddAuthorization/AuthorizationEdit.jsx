@@ -3,18 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
-import { AiOutlineDelete } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
-import { usePagination, useSortBy, useTable } from "react-table";
-import {
-  AuthorizationEditColumnsColumn,
-  AuthorizationEditColumnsData,
-} from "./AuthorizationEditColumns";
-import UseTable from "../../../../../../Utilities/UseTable";
-import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import { DateRangePicker, Toggle } from "rsuite";
 import CheckIcon from "@rsuite/icons/Check";
 import CloseIcon from "@rsuite/icons/Close";
+import AuthorizationEditTable from "./AuthorizationEditTable";
+import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
@@ -23,9 +16,6 @@ const AuthorizationEdit = () => {
   const [notes, setNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [openEditModal, setOpenEditModal] = useState(false);
-  const data = useMemo(() => AuthorizationEditColumnsData, []);
-  const columns = useMemo(() => [...AuthorizationEditColumnsColumn], []);
-  const [editableRow, setEditableRow] = React.useState(null);
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -45,53 +35,6 @@ const AuthorizationEdit = () => {
     console.log(data);
     console.log(notes);
   };
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      { columns, data, editableRow, setEditableRow },
-      useSortBy,
-      usePagination,
-      (hooks) => {
-        hooks.allColumns.push((columns) => [
-          // other hooks such as selection hook
-          ...columns,
-          // edit hook
-          {
-            accessor: "action",
-            id: "action",
-            Header: "Action",
-            Cell: ({ row, setEditableRow, editableRow }) => (
-              <>
-                <div>
-                  <div className="flex justify-center gap-1 text-primary">
-                    {/* <Link to={`/billing/deposit-apply/${row.original.id}`}>
-                    <MdOutlineDashboard title="Deposit" />
-                  </Link> */}
-
-                    <button
-                      onClick={() => {
-                        setOpenEditModal(true);
-                        setEditableRow(row);
-                      }}
-                    >
-                      <FiEdit className="text-xs mx-2 " />
-                    </button>
-
-                    <span>|</span>
-                    <Link to={"/"}>
-                      <AiOutlineDelete
-                        className="text-xs text-red-500 mx-2"
-                        title="Delete"
-                      />
-                    </Link>
-                  </div>
-                </div>
-              </>
-            ),
-          },
-        ]);
-      }
-    );
 
   return (
     <div className="md:h-[100vh]">
@@ -139,7 +82,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="description"
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("description")}
               />
             </div>
@@ -151,7 +94,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("insurance")}
               >
                 <option value="single">single</option>
@@ -166,7 +109,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("tx_type")}
               >
                 <option value="single">single</option>
@@ -181,7 +124,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("sup_provider")}
               >
                 <option value="single">single</option>
@@ -214,7 +157,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="authorization_number"
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("authorization_number")}
               />
             </div>
@@ -227,7 +170,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="uci_id"
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("uci_id")}
               />
             </div>
@@ -240,7 +183,7 @@ const AuthorizationEdit = () => {
                 </span>
               </label>
               <select
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("cob")}
               >
                 <option value="single">single</option>
@@ -271,7 +214,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("diagnosis1")}
                 />
               </div>
@@ -284,8 +227,8 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis2"
-                  // className="border border-gray-300 rounded-sm px-2 py-[5px] mx-2 text-xs w-full"
-                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  // className="border border-gray-300 rounded-sm py-[5px] mx-2 text-xs w-full"
+                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("diagnosis2")}
                 />
               </div>
@@ -301,7 +244,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis3"
-                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("diagnosis3")}
                 />
               </div>
@@ -314,7 +257,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis4"
-                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("diagnosis4")}
                 />
               </div>
@@ -330,7 +273,7 @@ const AuthorizationEdit = () => {
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                   {...register("deductible")}
                 />
               </div>
@@ -359,7 +302,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="copay"
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("copay")}
               />
             </div>
@@ -372,7 +315,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="cms4"
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("cms4")}
               />
             </div>
@@ -385,7 +328,7 @@ const AuthorizationEdit = () => {
               <input
                 type="text"
                 name="cms11"
-                className="border-secondary border-b-2 rounded-sm px-2 py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
                 {...register("cms11")}
               />
             </div>
@@ -425,9 +368,7 @@ const AuthorizationEdit = () => {
                 onChange={(e) => setNotes(e.target.value)}
                 name="comment"
                 className="border border-gray-300 text-xs p-2  ml-1 h-24 w-full"
-              >
-                Notes
-              </textarea>
+              ></textarea>
             </div>
           </div>
           {/* submit  */}
@@ -455,16 +396,7 @@ const AuthorizationEdit = () => {
           transition={{ delay: 0.3 }}
         >
           <div className="divider"></div>
-
-          <div>
-            <UseTable
-              getTableProps={getTableProps}
-              headerGroups={headerGroups}
-              getTableBodyProps={getTableBodyProps}
-              rows={rows}
-              prepareRow={prepareRow}
-            ></UseTable>
-          </div>
+          <AuthorizationEditTable></AuthorizationEditTable>
           <button
             onClick={() => {
               setOpenEditModal(true);
@@ -473,14 +405,13 @@ const AuthorizationEdit = () => {
           >
             + Add Service
           </button>
-          {openEditModal && (
-            <AuthorizationEditModal
-              handleClose={handleClose}
-              open={openEditModal}
-              editableRow={editableRow}
-            ></AuthorizationEditModal>
-          )}
         </motion.div>
+      )}
+      {openEditModal && (
+        <AuthorizationEditModal
+          handleClose={handleClose}
+          open={openEditModal}
+        ></AuthorizationEditModal>
       )}
     </div>
   );

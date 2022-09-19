@@ -9,3 +9,7 @@
 .active-nav {
     background-color: aqua;
 }
+
+.input-border {
+    border-bottom: 2px solid #1ca0ae4e;
+}
