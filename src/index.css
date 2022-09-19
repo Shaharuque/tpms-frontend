@@ -187,19 +187,37 @@ element.style {
   width: 100% !important;
 }
 
-@media only screen and (min-width:641px) {
+.rdrDayNumber,
+.rdrStaticRangeLabel,
+.rdrDay{
+    color: #0AA1B2 !important;
+}
+
+.rdrDay:hover{
+  border-color: #000 !important;
+}
+
+@media only screen and (max-width:640px) {
+
+  .rdrMonths{
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
   .rdrDateRangePickerWrapper{
     flex-direction: column-reverse;
   }
 
   .rdrStaticRanges{
     flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
   }
-      /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones  */
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones  */
     
 }
 
-@media only screen and (min-width:961px) and (max-width:1024px) {
+@media only screen and (min-width:768px){
   .rdrDateRangePickerWrapper{
     flex-direction: column-reverse;
   }

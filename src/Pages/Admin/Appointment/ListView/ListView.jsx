@@ -4,7 +4,6 @@ import { ManageTableColumnsColumn } from "./ListView/ManageTableColumns";
 import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
-// import { DateRangePicker } from "rsuite";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import UseTable from "../../../../Utilities/UseTable";
@@ -143,18 +142,18 @@ const ListView = () => {
     const [open, setOpen] = useState(false);
   
     // get the target element to toggle
-    const refOne = useRef(null);
+    // const refOne = useRef(null);
   
-    useEffect(() => {
-      document.addEventListener("click", hideOnClickOutside, true);
-    }, []);
+    // useEffect(() => {
+    //   document.addEventListener("click", hideOnClickOutside, true);
+    // }, []);
   
-    // Hide dropdown on outside click
-    const hideOnClickOutside = (e) => {
-      if (refOne.current && !refOne.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
+    // // Hide dropdown on outside click
+    // const hideOnClickOutside = (e) => {
+    //   if (refOne.current && !refOne.current.contains(e.target)) {
+    //     setOpen(false);
+    //   }
+    // };
 
   return (
     // For responsive view point
@@ -301,12 +300,6 @@ const ListView = () => {
                               </span>
                             </label>
                             <div className="ml-1">
-                              {/* <DateRangePicker
-                                onChange={(date) => {
-                                  console.log(date);
-                                }}
-                                placeholder="Select Date"
-                              /> */}
                               <div className="flex flex-wrap justify-between items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
                                 <input
                                   value={`${startDay} ${startMonth}`}
@@ -372,21 +365,33 @@ const ListView = () => {
             )}
           </div>
           <div
-              ref={refOne}
-              className="absolute lg:ml-[20%] md:ml-[10%] z-10 border rounded shadow-[0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06)]"
-            >
-              {open && (
-                <DateRangePicker
-                  onChange={(item) => setRange([item.selection])}
-                  editableDateInputs={true}
-                  moveRangeOnFirstSelection={false}
-                  ranges={range}
-                  months={2}
-                  direction="horizontal"
-                  className=""
-                />
-              )}
-            </div>
+            // ref={refOne}
+            className="absolute lg:ml-[15%] md:ml-[10%] z-10 border rounded shadow-[0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06)]"
+          >
+            {open && (
+              <div>
+                <div>
+                  <DateRangePicker
+                    onChange={(item) => setRange([item.selection])}
+                    editableDateInputs={true}
+                    moveRangeOnFirstSelection={false}
+                    ranges={range}
+                    months={2}
+                    direction="horizontal"
+                  />
+                </div>
+                <div className="text-right bg-white">
+                  <button
+                    className="bg-gray-600 py-1 px-2 m-2 text-white rounded"
+                    type="submit"
+                    onClick={()=>setOpen(false)}
+                  >
+                    Ok
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {table && (
