@@ -78,6 +78,10 @@ const TableApi = () => {
     setFilteredInfo({});
   };
 
+  const singleFilter = () => {
+    setFilteredInfo();
+  };
+
   //console.log(filteredInfo?.client_first_name);
 
   const patientDetails = (id) => {

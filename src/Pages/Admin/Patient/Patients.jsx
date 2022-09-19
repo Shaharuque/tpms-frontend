@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
+import { TiDelete } from "react-icons/ti";
 
 const TableApi = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -15,18 +16,17 @@ const TableApi = () => {
   const [page, setpage] = useState(2);
   const navigate = useNavigate();
 
-  //   fetch data
-  React.useEffect(() => {
-    fetch("All_Fake_Api/Fakedb.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setAllData(d);
-      });
-  }, []);
-  console.log(allData);
+  // fetch data
+  // React.useEffect(() => {
+  //   fetch("All_Fake_Api/Fakedb.json")
+  //     .then((res) => res.json())
+  //     .then((d) => {
+  //       setAllData(d);
+  //     });
+  // }, []);
+  // console.log(allData);
 
-  // get data from API
-
+  // get data from API + data fetch from api while scrolling
   useEffect(() => {
     const getComments = async () => {
       const res = await axios({
@@ -63,12 +63,61 @@ const TableApi = () => {
     setpage(page + 1);
   };
   //console.log(items)
-  console.log(items);
 
   const handleChange = (pagination, filters, sorter) => {
-    //console.log("Various parameters", pagination, filters, sorter);
+    console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
+  };
+
+  //Individual filtering [tagging feature]
+  const deleteFirstNameTag = (tag) => {
+    console.log(tag);
+    const client_first_name_array = filteredInfo?.client_first_name?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: client_first_name_array,
+      client_gender: filteredInfo?.client_gender,
+      client_dob: filteredInfo?.client_dob,
+      location: filteredInfo?.location,
+    });
+  };
+  const deleteDobTag = (tag) => {
+    console.log(tag);
+    const client_dob_array = filteredInfo?.client_dob?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: filteredInfo?.client_first_name,
+      client_gender: filteredInfo?.client_gender,
+      client_dob: client_dob_array,
+      location: filteredInfo?.location,
+    });
+  };
+  const deleteGenderTag = (tag) => {
+    console.log(tag);
+    const client_gender_array = filteredInfo?.client_gender?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: filteredInfo?.client_first_name,
+      client_gender: client_gender_array,
+      client_dob: filteredInfo?.client_dob,
+      location: filteredInfo?.location,
+    });
+  };
+  const deletelocationTag = (tag) => {
+    console.log(tag);
+    const location_array = filteredInfo?.location?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: filteredInfo?.client_first_name,
+      client_gender: filteredInfo?.client_gender,
+      client_dob: filteredInfo?.client_dob,
+      location: location_array,
+    });
   };
 
   const clearFilters = () => {
@@ -118,6 +167,7 @@ const TableApi = () => {
         sortedInfo.columnKey === "client_first_name" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
+      // client_first_name, id, key=>each row data(object) property value can be accessed.
       render: (_, { client_first_name, id, key }) => {
         console.log("tags : ", client_first_name, id, key);
         return (
@@ -324,13 +374,86 @@ const TableApi = () => {
         >
           <Button onClick={clearFilters}>Clear filters</Button>
         </Space>
-        <div className="border-teal-500 bg-gray-300 flex mb-4">
-          {filteredInfo?.client_first_name?.map((tag, index) => (
+
+        {/* filtering tag showing part */}
+        <div className="bg-gray-300 flex mb-4 text-xs">
+          {/* {filteredInfo?.client_first_name?.map((tag, index) => (
             <h1 className="text-red-600 border-black mr-2" key={index}>
               {tag}
             </h1>
-          ))}
+          ))} */}
+          <div className="border border-[#34A7B8] bg-gray-200 p-2 rounded ">
+            <div className="flex mb-2">
+              <span className="border-black font-bold mr-2 flex items-center">
+                Patient:
+              </span>
+              {filteredInfo?.client_first_name?.map((tag, index) => (
+                <h1
+                  className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                  key={index}
+                >
+                  {tag}
+                  <TiDelete
+                    className="cursor-pointer text-lg"
+                    onClick={() => deleteFirstNameTag(tag)}
+                  ></TiDelete>
+                </h1>
+              ))}
+            </div>
+            <div className="flex mb-2">
+              <span className="border-black font-bold mr-2 flex items-center">
+                DOB:
+              </span>
+              {filteredInfo?.client_dob?.map((tag, index) => (
+                <h1
+                  className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                  key={index}
+                >
+                  {tag}
+                  <TiDelete
+                    className="cursor-pointer text-lg"
+                    onClick={() => deleteDobTag(tag)}
+                  ></TiDelete>
+                </h1>
+              ))}
+            </div>
+            <div className="flex mb-2">
+              <span className="border-black font-bold mr-2 flex items-center">
+                Gender:
+              </span>
+              {filteredInfo?.client_gender?.map((tag, index) => (
+                <h1
+                  className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                  key={index}
+                >
+                  {tag}
+                  <TiDelete
+                    className="cursor-pointer text-lg"
+                    onClick={() => deleteGenderTag(tag)}
+                  ></TiDelete>
+                </h1>
+              ))}
+            </div>
+            <div className="flex mb-2">
+              <span className="border-black font-bold mr-2 flex items-center">
+                POS:
+              </span>
+              {filteredInfo?.location?.map((tag, index) => (
+                <h1
+                  className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                  key={index}
+                >
+                  {tag}
+                  <TiDelete
+                    className="cursor-pointer text-lg"
+                    onClick={() => deletelocationTag(tag)}
+                  ></TiDelete>
+                </h1>
+              ))}
+            </div>
+          </div>
         </div>
+
         <InfiniteScroll
           dataLength={items.length} //items is basically all data here
           next={fetchData}
