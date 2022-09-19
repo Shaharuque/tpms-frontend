@@ -5,7 +5,7 @@ import {
   LeaveTrackingTableDataData,
 } from "./LeaveTracking/LeaveTrackingTableData";
 import { AiOutlineDelete } from "react-icons/ai";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
+import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 

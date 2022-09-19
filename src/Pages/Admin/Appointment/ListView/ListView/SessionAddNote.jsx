@@ -19,11 +19,7 @@ const SessionAddNote = ({ handleClose, open, editableRow }) => {
   return (
     <div>
       <div>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="responsive-dialog-title"
-        >
+        <Dialog open={open} aria-labelledby="responsive-dialog-title">
           <div className="px-5 py-2  box  sm:w-[400px]">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400">Add Notes</h1>

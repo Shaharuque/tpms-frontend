@@ -17,13 +17,12 @@ export const ManageTableColumnsColumn = [
       console.log(row);
       return (
         <div>
-          {lock === "Yes" && (
-            <AiFillUnlock
-              onClink={() => console.log(lock)}
-              className="mx-auto text-lg font-medium text-secondary"
-            />
+          {lock === true && (
+            <button onClink={() => console.log(lock)}>
+              <AiFillUnlock className="mx-auto text-lg font-medium text-secondary" />
+            </button>
           )}
-          {lock === "No" && (
+          {lock === false && (
             <AiFillLock className="mx-auto text-lg font-medium text-red-600" />
           )}
         </div>
@@ -40,7 +39,7 @@ export const ManageTableColumnsColumn = [
     Header: () => {
       return <span className="">Service & Hrs.</span>;
     },
-    accessor: "Service&hrs",
+    accessor: "Service_hrs",
   },
   {
     Header: () => {
@@ -69,7 +68,7 @@ export const ManageTableColumnsColumn = [
     Header: () => {
       return <span className="">Scheduled Date</span>;
     },
-    accessor: "Scheduled Date",
+    accessor: "Scheduled_Date",
   },
   {
     Header: () => {
@@ -109,3 +108,5 @@ export const ManageTableColumnsColumn = [
     },
   },
 ];
+
+// Manage Table

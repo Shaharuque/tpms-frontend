@@ -5,7 +5,8 @@
 
 .fullscreen {
   overflow: auto;
-  background: #edf6f7;
+  /* background: #edf6f7; */
+  background: white;
 }
 
 .rs-calendar-table-cell {
@@ -154,4 +155,59 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #089bab;
 
+}
+
+ /* date range picker calendar   */
+element.style {
+    color: #0AA1B2 !important;
+}
+
+.rdrSelected, .rdrInRange{
+    background: #0AA1B2 !important;
+    border: #000;
+}
+
+.rdrStartEdge, .rdrEndEdge{
+  background-color: #0AA1B2 !important;
+}
+
+.rdrDateDisplayWrapper{
+  display: none !important;
+}
+
+.rdrDateDisplayWrapper{
+  background-color: #fff !important;
+}
+
+.rdrInputRanges{
+  display: none !important;
+}
+
+.rdrDefinedRangesWrapper{
+  width: 100% !important;
+}
+
+@media only screen and (min-width:641px) {
+  .rdrDateRangePickerWrapper{
+    flex-direction: column-reverse;
+  }
+
+  .rdrStaticRanges{
+    flex-direction: row !important;
+  }
+      /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones  */
+    
+}
+
+@media only screen and (min-width:961px) and (max-width:1024px) {
+  .rdrDateRangePickerWrapper{
+    flex-direction: column-reverse;
+  }
+
+  .rdrStaticRanges{
+    flex-direction: row !important;
+  }
+      /* tablet, landscape iPad, lo-res laptops ands desktops   */
+      /* For tablets:   */
+    
 }

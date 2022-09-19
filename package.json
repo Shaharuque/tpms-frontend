@@ -1,9 +1,11 @@
 {
   "name": "therapypms",
+  "homepage": "http://punchstart.me",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@aldabil/react-scheduler": "^2.3.1",
+    "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/lab": "^5.0.0-alpha.87",
@@ -15,6 +17,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^4.23.1",
     "axios": "^0.27.2",
     "chart.js": "^3.8.0",
     "daisyui": "^2.15.4",
@@ -27,6 +30,7 @@
     "react-calendar": "^3.7.0",
     "react-chartjs-2": "^4.2.0",
     "react-copy-to-clipboard": "^5.1.0",
+    "react-date-range": "^1.4.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-full-screen": "^1.1.1",
@@ -54,7 +58,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
