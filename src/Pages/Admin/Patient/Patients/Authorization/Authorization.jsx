@@ -4,16 +4,6 @@ import AuthorizationAntdTable from "./AuthorizationAntdTable/AuthorizationAntdTa
 const Authorization = () => {
   return (
     <div className="h-[100vh]">
-      {/* <div>
-        <UseTable
-          getTableProps={getTableProps}
-          headerGroups={headerGroups}
-          getTableBodyProps={getTableBodyProps}
-          rows={rows}
-          prepareRow={prepareRow}
-        ></UseTable>
-      </div> */}
-
       <div>
         <AuthorizationAntdTable></AuthorizationAntdTable>
       </div>

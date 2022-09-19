@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, Space, Table } from "antd";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
+import { FaRegAddressCard } from "react-icons/fa";
+import PatientAuthorizationsTableModal from "./Patients/PatientAuthorizationsTableModal";
+import PatientStatusAction from "./Patients/PatientStatusAction";
 
 const TableApi = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -13,7 +16,11 @@ const TableApi = () => {
   const [items, setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
   const [page, setpage] = useState(2);
-  const navigate = useNavigate();
+  const [openEditModal, setOpenEditModal] = useState(false);
+  //console.log(row);
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
 
   //   fetch data
   React.useEffect(() => {
@@ -74,13 +81,7 @@ const TableApi = () => {
   const clearFilters = () => {
     setFilteredInfo({});
   };
-
   console.log(filteredInfo?.client_first_name);
-
-  const patientDetails = (id) => {
-    //console.log(id);
-    navigate(`/admin/patient/patient-info/${id}`);
-  };
   const columns = [
     {
       title: "Patient",
@@ -121,11 +122,12 @@ const TableApi = () => {
       render: (_, { client_first_name, id, key }) => {
         console.log("tags : ", client_first_name, id, key);
         return (
-          <div>
-            <h1 onClick={() => patientDetails(id)} style={{ color: "teal" }}>
-              {client_first_name}
-            </h1>
-          </div>
+          <Link
+            to={`/admin/patient/patient-info/${id}`}
+            className="text-secondary"
+          >
+            {client_first_name}
+          </Link>
         );
       },
       ellipsis: true,
@@ -270,46 +272,44 @@ const TableApi = () => {
       ellipsis: true,
     },
     {
-      title: "Status",
-      key: "Status",
-      dataIndex: "Status",
-      width: 100,
-      render: (_, { Status }) => {
-        //console.log("Status : ", Status);
+      title: "Auth",
+      key: "id",
+      dataIndex: "id",
+      width: 50,
+      render: (_, { id }) => {
+        // console.log("patient_id = ", id);
         return (
-          <div>
-            {Status === "Scheduled" && (
-              <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
+          <>
+            <button
+              onClick={() => {
+                setOpenEditModal(true);
+              }}
+            >
+              <FaRegAddressCard className="text-sm mx-auto text-secondary" />
+            </button>
+            {openEditModal && (
+              <PatientAuthorizationsTableModal
+                patient_id={id}
+                handleClose={handleClose}
+                open={openEditModal}
+              ></PatientAuthorizationsTableModal>
             )}
-            {Status === "Rendered" && (
-              <button className="bg-green-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-            {Status === "hold" && (
-              <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-          </div>
+          </>
         );
       },
-      filters: [
-        {
-          text: "hold",
-          value: "hold",
-        },
-        {
-          text: "Rendered",
-          value: "Rendered",
-        },
-        {
-          text: "Scheduled",
-          value: "Scheduled",
-        },
-      ],
+    },
+    {
+      title: "Status",
+      key: "is_active_client",
+      dataIndex: "is_active_client",
+      width: 70,
+      render: (_, { is_active_client }) => {
+        //console.log("Status : ", Status);
+        return (
+          <PatientStatusAction status={is_active_client}></PatientStatusAction>
+        );
+      },
+      filters: [],
       filteredValue: filteredInfo.Status || null,
       onFilter: (value, record) => record.Status.includes(value),
     },
