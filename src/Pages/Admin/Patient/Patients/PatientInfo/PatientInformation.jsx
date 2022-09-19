@@ -136,32 +136,21 @@ const PatientInformation = () => {
       console.log("⛔️ Checkbox is NOT checked");
       setGuarantor(false);
     }
-    // setIsSubscribed((current) => !current);
   };
 
   if (loading) {
     return <Loading></Loading>;
   }
-
-  // console.log(relation);
-
-  // testing 779
   const SameasPatientBtn = () => {
-    // console.log("hello i am test")
     setLocation(true);
-    // console.log("hook data", hook)
-    // console.log("check new update", hook)
-    // const streetvalue = document.getElementById("streetval").value
     setValue("GuaratorStreet", getValues("Street"));
     setValue("GuaratorCity", getValues("City"));
     setValue("GuratorCountry", getValues("country"));
     setValue("GuratorZip", getValues("zip"));
-    // console.log("ref vlaue",inputRef.current.value)
     console.log("getvalue street", getValues("Street"));
     console.log("getvalue city", getValues("City"));
     console.log("getvalue country", getValues("country"));
     console.log("getvalue zip", getValues("zip"));
-    // console.log("value check by id",document.getElementById("streetval").value)
   };
 
   return (

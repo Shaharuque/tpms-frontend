@@ -7,6 +7,7 @@ const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [StafData, SetStafData] = useState([]);
 
+
   // fakeApi call
   useEffect(() => {
     axios("../Staff.json")
@@ -14,7 +15,7 @@ const Staffs = () => {
         SetStafData(response?.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
       });
   }, []);
   console.log(StafData);
@@ -31,15 +32,16 @@ const Staffs = () => {
           type="submit"
         >
           Add Staff
+          
         </button>
       </div>
       {openStaff && (
         <div className=" absolute bg-white border shadow-md px-3 py-4 font-normal text-sm right-9">
           <Link
-            className="hover:text-primary my-2 "
+            className="hover:text-primary my-2"
             to={"/admin/create-staff/staff"}
           >
-            Provider (Therapist)
+            Provider(Therapist)
           </Link>
           <br />
           <Link className="hover:text-primary my-2 " to={"#"}>
@@ -49,7 +51,7 @@ const Staffs = () => {
       )}
 
       <TestingTable></TestingTable>
-      <Link to={"/admin/staff"}> click here</Link>
+      <Link to={"/admin/staff"}>click here</Link>
     </div>
   );
 };
