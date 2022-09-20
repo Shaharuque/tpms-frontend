@@ -178,9 +178,12 @@ const TableApi = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <h1 onClick={() => patientDetails(id)} style={{ color: "teal" }}>
+            <button
+              onClick={() => patientDetails(id)}
+              className="text-secondary"
+            >
               {client_first_name}
-            </h1>
+            </button>
           </div>
         );
       },
@@ -361,7 +364,16 @@ const TableApi = () => {
     },
   ];
   return (
-    <div>
+    <div
+      className={
+        filteredInfo?.client_first_name ||
+        filteredInfo?.client_dob ||
+        filteredInfo?.client_gender ||
+        filteredInfo?.location
+          ? "h-[100vh]"
+          : ""
+      }
+    >
       <>
         <div className="flex items-center justify-between gap-2 my-2">
           <h1 className="text-lg text-orange-500 text-left font-semibold ">
@@ -379,33 +391,43 @@ const TableApi = () => {
         filteredInfo?.client_dob ||
         filteredInfo?.client_gender ||
         filteredInfo?.location ? (
-          <div className="bg-gray-300 flex mb-4 text-xs">
+          <div className="border border-secondary bg-gray-100 flex-wrap flex mb-4 text-xs ">
             {/* {filteredInfo?.client_first_name?.map((tag, index) => (
-            <h1 className="text-red-600 border-black mr-2" >
+            <h1 className="text-red-600 border-black mr-2" key={index}>
               {tag}
             </h1>
           ))} */}
-            <div className="border border-[#34A7B8] bg-gray-200 p-2 rounded ">
-              <div className="flex mb-2">
-                <span className="border-black font-bold mr-2 flex items-center">
+            <div className="p-2 rounded ">
+              <div className="flex mb-2 flex-wrap gap-1">
+                <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
                   Patient:
                 </span>
-                {filteredInfo?.client_first_name?.map((tag) => (
-                  <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
-                    {tag}
-                    <TiDelete
-                      className="cursor-pointer text-lg"
-                      onClick={() => deleteFirstNameTag(tag)}
-                    ></TiDelete>
-                  </h1>
+                {filteredInfo?.client_first_name?.map((tag, index) => (
+                  <div
+                    className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className=" text-sm">{tag}</div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
+                        onClick={() => deleteFirstNameTag(tag)}
+                      >
+                        X
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
               <div className="flex mb-2">
                 <span className="border-black font-bold mr-2 flex items-center">
                   DOB:
                 </span>
-                {filteredInfo?.client_dob?.map((tag) => (
-                  <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+                {filteredInfo?.client_dob?.map((tag, index) => (
+                  <h1
+                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                    key={index}
+                  >
                     {tag}
                     <TiDelete
                       className="cursor-pointer text-lg"
@@ -418,8 +440,11 @@ const TableApi = () => {
                 <span className="border-black font-bold mr-2 flex items-center">
                   Gender:
                 </span>
-                {filteredInfo?.client_gender?.map((tag) => (
-                  <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+                {filteredInfo?.client_gender?.map((tag, index) => (
+                  <h1
+                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                    key={index}
+                  >
                     {tag}
                     <TiDelete
                       className="cursor-pointer text-lg"
@@ -432,8 +457,11 @@ const TableApi = () => {
                 <span className="border-black font-bold mr-2 flex items-center">
                   POS:
                 </span>
-                {filteredInfo?.location?.map((tag) => (
-                  <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+                {filteredInfo?.location?.map((tag, index) => (
+                  <h1
+                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                    key={index}
+                  >
                     {tag}
                     <TiDelete
                       className="cursor-pointer text-lg"
