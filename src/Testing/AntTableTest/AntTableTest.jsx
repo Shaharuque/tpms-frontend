@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 // import "antd/dist/antd.css";
 // import "./antDesign.css";
-import { Button, Dropdown, Menu, Space, Table, Badge } from "antd";
-
+import { Button, Dropdown, Space, Table, Badge } from "antd";
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
+import { TiDelete } from "react-icons/ti";
 // import ManageTableAction from "../../Pages/Admin/Appointment/ListView/ListView/ManageTableAction";
 import { Link, useNavigate } from "react-router-dom";
 import ManageTableTesting from "./ManageTableTesting";
-
 //data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
 const data = [
   {
@@ -67,14 +66,39 @@ const data = [
     Hours: "9:28 AM",
     Status: "hold",
   },
+  {
+    id: 5,
+    // key: "4",
+    age: 32,
+    address: "London No. 2 Lake Park",
+    lock: true,
+    Patients: "Donovan Robertson",
+    Service_hrs: "At Industries",
+    Provider: "Sara Burke",
+    pos: "School",
+    Scheduled_Date: "Dec 30, 2021",
+    Hours: "9:28 AM",
+    Status: "hold",
+  },
+  {
+    id: 6,
+    // key: "4",
+    age: 32,
+    address: "London No. 2 Lake Park",
+    lock: true,
+    Patients: "Donovan Robertson",
+    Service_hrs: "At Industries",
+    Provider: "Sara Burke",
+    pos: "School",
+    Scheduled_Date: "Dec 30, 2021",
+    Hours: "9:28 AM",
+    Status: "hold",
+  },
 ];
 
 const AntTableTest = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [openAddNote, setOpenAddNote] = useState(false);
-  const [openViewNote, setOpenViewNote] = useState(false);
-  const [editSession, setEditSession] = useState(false);
   const [allData, setAllData] = useState([]);
   //const [open, setOpen] = useState(false);
   //row expand code related
@@ -130,9 +154,9 @@ const AntTableTest = () => {
     return <Table columns={columns} dataSource={data} pagination={false} />;
   };
 
-  const patientDetails = (record, service) => {
-    console.log(record, service);
-    //navigate(`/details/${record}`);
+  const patientDetails = (id, Patients, service) => {
+    console.log(id, Patients, service);
+    //navigate(`/details/${id}`);
   };
 
   //   fetch data
@@ -155,6 +179,56 @@ const AntTableTest = () => {
     setSortedInfo(sorter);
   };
 
+  // let patientArray = [];
+  // let serviceArray = [];
+  const deletePatientTag = (tag) => {
+    console.log(tag);
+    const patientArray = filteredInfo?.Patients?.filter((item) => item !== tag);
+    setFilteredInfo({
+      Patients: patientArray,
+      Service_hrs: filteredInfo?.Service_hrs,
+      Status: filteredInfo?.Service_hrs,
+      pos: filteredInfo?.pos,
+    });
+  };
+
+  const deleteServiceTag = (tag) => {
+    console.log(tag);
+    const serviceArray = filteredInfo?.Service_hrs?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      Patients: filteredInfo?.Patients,
+      Service_hrs: serviceArray,
+      Status: filteredInfo?.Status,
+      pos: filteredInfo?.pos,
+    });
+  };
+
+  const deletePosTag = (tag) => {
+    console.log(tag);
+    const posArray = filteredInfo?.pos?.filter((item) => item !== tag);
+    setFilteredInfo({
+      Patients: filteredInfo?.Patients,
+      Service_hrs: filteredInfo?.Service_hrs,
+      Status: filteredInfo?.Status,
+      pos: posArray,
+    });
+  };
+  const deleteStatusTag = (tag) => {
+    console.log(tag);
+    const statusArray = filteredInfo?.Status?.filter((item) => item !== tag);
+    setFilteredInfo({
+      Patients: filteredInfo?.Patients,
+      Service_hrs: filteredInfo?.Service_hrs,
+      Status: statusArray,
+      pos: filteredInfo?.pos,
+      // Hours: filteredInfo?.Hours,
+    });
+  };
+
+  console.log("new filteredInfo:", filteredInfo);
+
   const clearFilters = () => {
     setFilteredInfo({});
   };
@@ -167,7 +241,7 @@ const AntTableTest = () => {
       width: 60,
       // render contains what we want to reflect as our data
       render: (_, { lock }) => {
-        console.log("tags : ", lock);
+        //console.log("tags : ", lock);
         return (
           <div>
             {lock === true && (
@@ -217,12 +291,12 @@ const AntTableTest = () => {
 
       // render contains what we want to reflect as our data
       //key, Patients, Service_hrs=>these are the property of table object so we will pass these and can use these dynamically..
-      render: (_, { key, Patients, Service_hrs }) => {
+      render: (_, { id, Patients, Service_hrs }) => {
         console.log("patient_name : ", Patients);
         return (
           <div>
             <h1
-              onClick={() => patientDetails(key, Service_hrs)}
+              onClick={() => patientDetails(id, Patients, Service_hrs)}
               style={{ color: "teal" }}
             >
               {Patients}
@@ -250,13 +324,15 @@ const AntTableTest = () => {
       key: "Service_hrs",
       filters: [
         {
-          text: `Amet`,
-          value: "Amet",
+          text: "Eget Magna Corp.",
+          value: "Eget Magna Corp.",
         },
         {
           text: "Malesuada",
           value: "Malesuada",
         },
+        { text: "At Industries", value: "At Industries" },
+        { text: "Amet Ultricies PC", value: "Amet Ultricies PC" },
       ],
       filteredValue: filteredInfo.Service_hrs || null,
       onFilter: (value, record) => record.Service_hrs.includes(value),
@@ -424,15 +500,15 @@ const AntTableTest = () => {
   ];
 
   const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
+    // onChange: (selectedRowKeys, selectedRows) => {
+    //   console.log(
+    //     `selectedRowKeys: ${selectedRowKeys}`,
+    //     "selectedRows: ",
+    //     selectedRows
+    //   );
+    // },
     onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
+      console.log(record, selected, selectedRows); //here, record=> is the present data row which is selected and selectRows=>all the selected data rows
     },
     onSelectAll: (selected, selectedRows, changeRows) => {
       console.log(selected, selectedRows, changeRows);
@@ -443,7 +519,7 @@ const AntTableTest = () => {
   const onTableRowExpand = (expanded, record) => {
     const keys = [];
     if (expanded) {
-      keys.push(record.key); // I have set my record.id as row key. Check the documentation for more details.
+      keys.push(record.id); // I have set my record.id as row key. Check the documentation for more details.
     }
 
     setExpandedRowKeys(keys);
@@ -459,8 +535,84 @@ const AntTableTest = () => {
         >
           <Button onClick={clearFilters}>Clear filters</Button>
         </Space>
+        {/* For showing filtered tags/words */}
+        <div className="border-2 border-[#34A7B8] bg-gray-200 mb-2 mx-4 p-2 rounded ">
+          <div className="flex mb-2">
+            <span className="border-black font-bold mr-2 flex items-center">
+              NAME:
+            </span>
+            {filteredInfo?.Patients?.map((tag, index) => (
+              <h1
+                className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                key={index}
+              >
+                {tag}
+                <TiDelete
+                  className="cursor-pointer text-lg"
+                  onClick={() => deletePatientTag(tag)}
+                ></TiDelete>
+              </h1>
+            ))}
+          </div>
+
+          <div className="flex mb-2">
+            <span className="border-black font-bold mr-2 flex items-center">
+              SERVICE_HOURS:
+            </span>
+            {filteredInfo?.Service_hrs?.map((t, index) => (
+              <h1
+                className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                key={index}
+              >
+                {t}
+                <TiDelete
+                  className="cursor-pointer text-lg"
+                  onClick={() => deleteServiceTag(t)}
+                ></TiDelete>
+              </h1>
+            ))}
+          </div>
+
+          <div className="flex mb-2">
+            <span className="border-black font-bold mr-2 flex items-center">
+              POS:
+            </span>
+            {filteredInfo?.pos?.map((tag, index) => (
+              <h1
+                className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                key={index}
+              >
+                {tag}
+                <TiDelete
+                  className="cursor-pointer text-lg"
+                  onClick={() => deletePosTag(tag)}
+                ></TiDelete>
+              </h1>
+            ))}
+          </div>
+
+          <div className="flex mb-2">
+            <span className="border-black font-bold mr-2 flex items-center">
+              STATUS:
+            </span>
+            {filteredInfo?.Status?.map((tag, index) => (
+              <h1
+                className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                key={index}
+              >
+                {tag}
+                <TiDelete
+                  className="cursor-pointer text-lg"
+                  onClick={() => deleteStatusTag(tag)}
+                ></TiDelete>
+              </h1>
+            ))}
+          </div>
+        </div>
+
         <Table
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
           size="small"
           className=" text-xs font-normal px-8"
           columns={columns}

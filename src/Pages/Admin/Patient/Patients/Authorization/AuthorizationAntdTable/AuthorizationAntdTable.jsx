@@ -51,7 +51,7 @@ const AuthorizationAntdTable = () => {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      width: 200,
+      width: 120,
       filters: [
         {
           text: `Vernon`,
@@ -87,7 +87,7 @@ const AuthorizationAntdTable = () => {
       title: "Onset Date",
       dataIndex: "onset_date",
       key: "onset_date",
-      width: 150,
+      width: 100,
       filters: [
         {
           text: `Amet`,
@@ -112,7 +112,7 @@ const AuthorizationAntdTable = () => {
       title: "End Date",
       dataIndex: "end_date",
       key: "end_date",
-      width: 150,
+      width: 100,
       filters: [
         {
           text: `Amet`,
@@ -136,7 +136,7 @@ const AuthorizationAntdTable = () => {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
-      width: 120,
+      width: 100,
       filters: [
         {
           text: `Amet`,
@@ -160,7 +160,7 @@ const AuthorizationAntdTable = () => {
       title: "Ins. ID",
       dataIndex: "id",
       key: "id",
-      width: 100,
+      width: 60,
       filters: [
         {
           text: `Amet`,
@@ -184,7 +184,7 @@ const AuthorizationAntdTable = () => {
       title: "Auth No.",
       dataIndex: "auth_no",
       key: "auth_no",
-      width: 100,
+      width: 60,
       filters: [
         {
           text: `Amet`,
@@ -208,7 +208,7 @@ const AuthorizationAntdTable = () => {
       title: "COB",
       dataIndex: "cob",
       key: "cob",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `Amet`,
@@ -233,7 +233,7 @@ const AuthorizationAntdTable = () => {
       title: "Action",
       dataIndex: "operation",
       key: "operation",
-      width: 200,
+      width: 150,
       render: () => (
         <div>
           <div className="flex justify-center gap-1 text-primary">
@@ -274,7 +274,7 @@ const AuthorizationAntdTable = () => {
       title: "Status",
       key: "status",
       dataIndex: "status",
-      width: 100,
+      width: 60,
       render: (_, { status }) => {
         return (
           <>

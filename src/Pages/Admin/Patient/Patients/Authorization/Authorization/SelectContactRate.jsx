@@ -3,7 +3,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { Dialog } from "@mui/material";
 import { Table } from "antd";
 
-const SelectContactRate = ({ handleClose, open, editableRow }) => {
+const SelectContactRate = ({ handleClose, open }) => {
   const [tableData, settableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -27,7 +27,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "Service Type",
       dataIndex: "service_type",
       key: "service_type",
-      width: 120,
+      width: 100,
       filters: [{}],
       filteredValue: filteredInfo.service_type || null,
       onFilter: (value, record) => record.service_type.includes(value),
@@ -42,7 +42,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "Service Sub Type",
       dataIndex: "service_sub_type",
       key: "service_sub_type",
-      width: 130,
+      width: 120,
       filters: [
         {
           text: "Malesuada",
@@ -63,7 +63,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "cpt",
       key: "cpt",
       dataIndex: "cpt",
-      width: 80,
+      width: 50,
       filters: [{}],
       filteredValue: filteredInfo.cpt || null,
       onFilter: (value, record) => record.cpt.includes(value),
@@ -79,7 +79,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "M1",
       key: "M1",
       dataIndex: "M1",
-      width: 70,
+      width: 50,
       filters: [{}],
       filteredValue: filteredInfo.M1 || null,
       onFilter: (value, record) => record.M1.includes(value),
@@ -94,7 +94,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "M2",
       key: "M2",
       dataIndex: "M2",
-      width: 70,
+      width: 50,
       filters: [{}],
       filteredValue: filteredInfo.M2 || null,
       onFilter: (value, record) => record.M2.includes(value),
@@ -109,7 +109,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "M3",
       key: "M3",
       dataIndex: "M3",
-      width: 70,
+      width: 50,
       filters: [{}],
       filteredValue: filteredInfo.M3 || null,
       onFilter: (value, record) => record.M3.includes(value),
@@ -124,7 +124,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "M4",
       key: "M4",
       dataIndex: "M4",
-      width: 70,
+      width: 50,
       filters: [{}],
       filteredValue: filteredInfo.M4 || null,
       onFilter: (value, record) => record.M4.includes(value),
@@ -139,7 +139,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "Rate_Per",
       key: "Rate_Per",
       dataIndex: "Rate_Per",
-      width: 110,
+      width: 70,
       filters: [{}],
       filteredValue: filteredInfo.Rate_Per || null,
       onFilter: (value, record) => record.Rate_Per.includes(value),
@@ -154,7 +154,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "Contacted_Rate",
       key: "Contacted_Rate",
       dataIndex: "Contacted_Rate",
-      width: 120,
+      width: 70,
       filters: [{}],
       filteredValue: filteredInfo.Contacted_Rate || null,
       onFilter: (value, record) => record.Contacted_Rate.includes(value),
@@ -170,7 +170,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
       title: "Billing_Rate",
       key: "Billing_Rate",
       dataIndex: "Billing_Rate",
-      width: 120,
+      width: 70,
       filters: [{}],
       filteredValue: filteredInfo.Billing_Rate || null,
       onFilter: (value, record) => record.Billing_Rate.includes(value),
@@ -260,7 +260,7 @@ const SelectContactRate = ({ handleClose, open, editableRow }) => {
               </button>
 
               <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-500 to-red-400  hover:to-red-500 text-white rounded-sm"
                 autoFocus
                 onClick={handleClose}
               >

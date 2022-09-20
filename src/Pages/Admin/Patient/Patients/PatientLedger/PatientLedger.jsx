@@ -165,7 +165,7 @@ const PatientLedger = () => {
       title: "Billed Amount",
       key: "billed_amount",
       dataIndex: "billed_amount",
-      width: 130,
+      width: 70,
       filters: [{}],
       filteredValue: filteredInfo.billed_amount || null,
       onFilter: (value, record) => record.billed_amount.includes(value),
@@ -181,7 +181,7 @@ const PatientLedger = () => {
       title: "Allowed Amount",
       key: "allowed_amount",
       dataIndex: "allowed_amount",
-      width: 120,
+      width: 70,
       filters: [{}],
       filteredValue: filteredInfo.allowed_amount || null,
       onFilter: (value, record) => record.allowed_amount.includes(value),
@@ -228,7 +228,7 @@ const PatientLedger = () => {
       title: "Balance",
       key: "balance",
       dataIndex: "balance",
-      width: 100,
+      width: 70,
       filters: [{}],
       filteredValue: filteredInfo.balance || null,
       onFilter: (value, record) => record.balance.includes(value),
@@ -527,7 +527,10 @@ const PatientLedger = () => {
                   <>
                     <Table.Summary.Row>
                       <Table.Summary.Cell index={2} colSpan={7}>
-                        <span className="text-black font-bold "> Total</span>
+                        <span className="text-black font-bold flex justify-end mx-5 ">
+                          {" "}
+                          Total
+                        </span>
                       </Table.Summary.Cell>
                       <Table.Summary.Cell index={8}>
                         <Text className="text-black font-bold">
@@ -554,7 +557,7 @@ const PatientLedger = () => {
                       </Table.Summary.Cell>
                       <Table.Summary.Cell
                         index={2}
-                        colSpan={2}
+                        colSpan={4}
                       ></Table.Summary.Cell>
                     </Table.Summary.Row>
                   </>

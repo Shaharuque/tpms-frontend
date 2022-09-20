@@ -1,81 +1,151 @@
 import React, { useState, useEffect } from "react";
 import { Button, Space, Table } from "antd";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
+import { FaRegAddressCard } from "react-icons/fa";
+import PatientAuthorizationsTableModal from "./Patients/PatientAuthorizationsTableModal";
+import PatientStatusAction from "./Patients/PatientStatusAction";
+import { TiDelete, TiDeleteOutline } from "react-icons/ti";
 
 const TableApi = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [allData, setAllData] = useState([]);
   const [items, setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
   const [page, setpage] = useState(2);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [patientId, setPatientId] = useState();
+  const [data, setData] = useState([]);
+
   const navigate = useNavigate();
+  //console.log(row);
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
 
-  //   fetch data
-  React.useEffect(() => {
-    fetch("All_Fake_Api/Fakedb.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setAllData(d);
-      });
-  }, []);
-  console.log(allData);
+  //Auth click event handler
+  const handleAuthClick = (id) => {
+    console.log(id);
+    setOpenEditModal(true);
+    setPatientId(id);
+  };
 
-  // get data from API
-
+  //getting data from public folder(fakedata)
+  // fakeApi call
   useEffect(() => {
-    const getComments = async () => {
-      const res = await axios({
-        method: "get",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
-        headers: headers,
+    axios("../../All_Fake_Api/Patients.json")
+      .then((response) => {
+        setData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      // const result = await res.json();
-      const data = res.data?.clients?.data;
-      //console.log(data)
-      setItems(data);
-    };
-    getComments();
   }, []);
+  console.log(data);
+  // END
 
-  const fetchComments = async () => {
-    const res = await axios({
-      method: "get",
-      url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
-      headers: headers,
-    });
-    const data = res.data?.clients?.data;
-    console.log(data);
-    return data;
-  };
+  // get data from API + data fetch from api while scrolling[Important]
+  // useEffect(() => {
+  //   const getComments = async () => {
+  //     const res = await axios({
+  //       method: "get",
+  //       url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
+  //       headers: headers,
+  //     });
+  //     // const result = await res.json();
+  //     const data = res.data?.clients?.data;
+  //     //console.log(data)
+  //     setItems(data);
+  //   };
+  //   getComments();
+  // }, []);
 
-  const fetchData = async () => {
-    const commentsFormServer = await fetchComments();
-    console.log(commentsFormServer);
-    setItems([...items, ...commentsFormServer]);
-    if (commentsFormServer.length === 0) {
-      sethasMore(false);
-    }
-    setpage(page + 1);
-  };
+  // const fetchComments = async () => {
+  //   const res = await axios({
+  //     method: "get",
+  //     url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
+  //     headers: headers,
+  //   });
+  //   const data = res.data?.clients?.data;
+  //   console.log(data);
+  //   return data;
+  // };
+
+  // const fetchData = async () => {
+  //   const commentsFormServer = await fetchComments();
+  //   console.log(commentsFormServer);
+  //   setItems([...items, ...commentsFormServer]);
+  //   if (commentsFormServer.length === 0) {
+  //     sethasMore(false);
+  //   }
+  //   setpage(page + 1);
+  // };
   //console.log(items)
-  console.log(items);
 
   const handleChange = (pagination, filters, sorter) => {
-    //console.log("Various parameters", pagination, filters, sorter);
+    console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
+  };
+
+  //Individual filtering [tagging feature]
+  const deleteFirstNameTag = (tag) => {
+    console.log(tag);
+    const client_first_name_array = filteredInfo?.client_first_name?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: client_first_name_array,
+      client_gender: filteredInfo?.client_gender,
+      client_dob: filteredInfo?.client_dob,
+      location: filteredInfo?.location,
+    });
+  };
+  const deleteDobTag = (tag) => {
+    console.log(tag);
+    const client_dob_array = filteredInfo?.client_dob?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: filteredInfo?.client_first_name,
+      client_gender: filteredInfo?.client_gender,
+      client_dob: client_dob_array,
+      location: filteredInfo?.location,
+    });
+  };
+  const deleteGenderTag = (tag) => {
+    console.log(tag);
+    const client_gender_array = filteredInfo?.client_gender?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: filteredInfo?.client_first_name,
+      client_gender: client_gender_array,
+      client_dob: filteredInfo?.client_dob,
+      location: filteredInfo?.location,
+    });
+  };
+  const deletelocationTag = (tag) => {
+    console.log(tag);
+    const location_array = filteredInfo?.location?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: filteredInfo?.client_first_name,
+      client_gender: filteredInfo?.client_gender,
+      client_dob: filteredInfo?.client_dob,
+      location: location_array,
+    });
   };
 
   const clearFilters = () => {
     setFilteredInfo({});
   };
 
-  console.log(filteredInfo?.client_first_name);
+  console.log(filteredInfo);
 
   const patientDetails = (id) => {
     //console.log(id);
@@ -86,8 +156,10 @@ const TableApi = () => {
       title: "Patient",
       dataIndex: "client_first_name",
       key: "client_first_name",
-      width: 200,
+      width: 160,
       filters: [
+        { text: "Milissent", value: "Milissent" },
+        { text: "Timmy", value: "Timmy" },
         {
           text: `Jamey`,
           value: "Jamey",
@@ -118,13 +190,17 @@ const TableApi = () => {
         sortedInfo.columnKey === "client_first_name" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
+      // client_first_name, id, key=>each row data(object) property value can be accessed.
       render: (_, { client_first_name, id, key }) => {
-        console.log("tags : ", client_first_name, id, key);
+        //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <h1 onClick={() => patientDetails(id)} style={{ color: "teal" }}>
+            <button
+              onClick={() => patientDetails(id)}
+              className="text-secondary"
+            >
               {client_first_name}
-            </h1>
+            </button>
           </div>
         );
       },
@@ -134,7 +210,7 @@ const TableApi = () => {
       title: "Contact Info",
       dataIndex: "phone_number",
       key: "phone_number",
-      width: 200,
+      width: 120,
       // filters: [
       //   {
       //     text: "(940)-234-0329",
@@ -171,7 +247,7 @@ const TableApi = () => {
       title: "DOB",
       dataIndex: "client_dob",
       key: "client_dob",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `1986-08-28`,
@@ -196,7 +272,7 @@ const TableApi = () => {
       title: "Gender",
       dataIndex: "client_gender",
       key: "client_gender",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `Male`,
@@ -221,7 +297,7 @@ const TableApi = () => {
       title: "POS",
       dataIndex: "location",
       key: "location",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `Main Office`,
@@ -249,7 +325,7 @@ const TableApi = () => {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `Male`,
@@ -270,83 +346,179 @@ const TableApi = () => {
       ellipsis: true,
     },
     {
-      title: "Status",
-      key: "Status",
-      dataIndex: "Status",
-      width: 100,
-      render: (_, { Status }) => {
-        //console.log("Status : ", Status);
+      title: "Auth",
+      key: "id",
+      dataIndex: "id",
+      width: 50,
+      render: (_, { id }) => {
         return (
-          <div>
-            {Status === "Scheduled" && (
-              <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-            {Status === "Rendered" && (
-              <button className="bg-green-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-            {Status === "hold" && (
-              <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-          </div>
+          <>
+            <button
+              onClick={() => {
+                handleAuthClick(id);
+              }}
+            >
+              <FaRegAddressCard className="text-sm mx-auto text-secondary" />
+            </button>
+          </>
         );
       },
-      filters: [
-        {
-          text: "hold",
-          value: "hold",
-        },
-        {
-          text: "Rendered",
-          value: "Rendered",
-        },
-        {
-          text: "Scheduled",
-          value: "Scheduled",
-        },
-      ],
+    },
+    {
+      title: "Status",
+      key: "is_active_client",
+      dataIndex: "is_active_client",
+      width: 60,
+      render: (_, { is_active_client }) => {
+        //console.log("Status : ", Status);
+        return (
+          <PatientStatusAction status={is_active_client}></PatientStatusAction>
+        );
+      },
+      filters: [],
       filteredValue: filteredInfo.Status || null,
       onFilter: (value, record) => record.Status.includes(value),
     },
   ];
   return (
-    <div>
+    <div
+      className={
+        filteredInfo?.client_first_name ||
+        filteredInfo?.client_dob ||
+        filteredInfo?.client_gender ||
+        filteredInfo?.location
+          ? "h-[100vh]"
+          : ""
+      }
+    >
       <>
-        <Space
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          <Button onClick={clearFilters}>Clear filters</Button>
-        </Space>
-        <div className="border-teal-500 bg-gray-300 flex mb-4">
-          {filteredInfo?.client_first_name?.map((tag, index) => (
+        <div className="flex items-center justify-between gap-2 my-2">
+          <h1 className="text-lg text-orange-500 text-left font-semibold ">
+            Patient
+          </h1>
+          <button
+            onClick={clearFilters}
+            className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+          >
+            Clear filters
+          </button>
+        </div>
+        {/* filtering tag showing part */}
+        {filteredInfo?.client_first_name ||
+        filteredInfo?.client_dob ||
+        filteredInfo?.client_gender ||
+        filteredInfo?.location ? (
+          <div className="border border-secondary bg-gray-100 flex-wrap flex mb-4 text-xs ">
+            {/* {filteredInfo?.client_first_name?.map((tag, index) => (
             <h1 className="text-red-600 border-black mr-2" key={index}>
               {tag}
             </h1>
-          ))}
-        </div>
-        <InfiniteScroll
+          ))} */}
+            <div className="p-2 rounded ">
+              <div className="flex mb-2 flex-wrap gap-1">
+                <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
+                  Patient:
+                </span>
+                {filteredInfo?.client_first_name?.map((tag, index) => (
+                  <div
+                    className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className=" text-sm">{tag}</div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
+                        onClick={() => deleteFirstNameTag(tag)}
+                      >
+                        X
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex mb-2">
+                <span className="border-black font-bold mr-2 flex items-center">
+                  DOB:
+                </span>
+                {filteredInfo?.client_dob?.map((tag, index) => (
+                  <h1
+                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                    key={index}
+                  >
+                    {tag}
+                    <TiDelete
+                      className="cursor-pointer text-lg"
+                      onClick={() => deleteDobTag(tag)}
+                    ></TiDelete>
+                  </h1>
+                ))}
+              </div>
+              <div className="flex mb-2">
+                <span className="border-black font-bold mr-2 flex items-center">
+                  Gender:
+                </span>
+                {filteredInfo?.client_gender?.map((tag, index) => (
+                  <h1
+                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                    key={index}
+                  >
+                    {tag}
+                    <TiDelete
+                      className="cursor-pointer text-lg"
+                      onClick={() => deleteGenderTag(tag)}
+                    ></TiDelete>
+                  </h1>
+                ))}
+              </div>
+              <div className="flex mb-2">
+                <span className="border-black font-bold mr-2 flex items-center">
+                  POS:
+                </span>
+                {filteredInfo?.location?.map((tag, index) => (
+                  <h1
+                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                    key={index}
+                  >
+                    {tag}
+                    <TiDelete
+                      className="cursor-pointer text-lg"
+                      onClick={() => deletelocationTag(tag)}
+                    ></TiDelete>
+                  </h1>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
+        {/* <InfiniteScroll
           dataLength={items.length} //items is basically all data here
           next={fetchData}
           hasMore={hasMore}
           loader={<ShimmerTableTet></ShimmerTableTet>}
           // loader={<h1 className="text-teal-800 font-bold text-center">Loading...</h1>}
-        >
+        > */}
+
+        {/* className=" overflow-scroll" used for responsive scrolling But if you use InfiniteScroll don't need overflow-scroll class */}
+        <div className=" overflow-scroll">
           <Table
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
             className=" text-xs font-normal"
             columns={columns}
-            dataSource={items}
+            dataSource={data} //Which data chunk you want to show in table
             onChange={handleChange}
           />
-        </InfiniteScroll>
+        </div>
+        {/* </InfiniteScroll> */}
+
+        {/* PatientAuthorizationTableModal component render and particular patient id also passed to the PatientAuthorizationTableModal component*/}
+        {openEditModal && (
+          <PatientAuthorizationsTableModal
+            patient_id={patientId}
+            handleClose={handleClose}
+            open={openEditModal}
+          ></PatientAuthorizationsTableModal>
+        )}
       </>
     </div>
   );

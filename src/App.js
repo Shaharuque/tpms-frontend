@@ -38,7 +38,6 @@ import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
 import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
 //For testing purpose
-import MainBase from "./Testing/Table_React/MainBase";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
@@ -52,7 +51,6 @@ import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/
 import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
 import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
 import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
-import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
 import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
 import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
 import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
@@ -117,9 +115,7 @@ import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientP
 import NotFound from "./NoPageFound/NotFound";
 //Testing
 import CustomSearch from "./Testing/CustomSearch/CustomSearch";
-import RowSelect from "./Testing/AntTableTest/RowSelect";
 import AntTableTest from "./Testing/AntTableTest/AntTableTest";
-import ExpendedTable from "./Testing/AntTableTest/ExpendedTable";
 import TableApi from "./Testing/AntTableTest/TableApi/TableApi";
 import SingleDetails from "./Testing/AntTableTest/TableApi/SingleDetails";
 // ###### Staff
@@ -137,6 +133,7 @@ import StaffPortal from "./Pages/Admin/Staff/Staffs/StaffPortal/StaffPortal";
 import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeExclusion/ServiceSubTypeExclusions";
 import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
 import TestingTable from "./Testing/AntTableTest/TestingTable";
+import AntTransfer from "./Testing/AntTableTest/AntTransfer";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -172,6 +169,7 @@ function App() {
             path="/testing"
             element={<TestingTable></TestingTable>}
           ></Route>
+          <Route path="transfer" element={<AntTransfer></AntTransfer>}></Route>
           {/* Testing End */}
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
@@ -403,45 +401,45 @@ function App() {
               element={<CreateStaff></CreateStaff>}
             ></Route>
             <Route path="staff" element={<StaffInformation></StaffInformation>}>
-              <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
+              <Route path="staffs-biographic/:id" element={<Bio></Bio>}></Route>
               <Route
-                path="staffs-contact-details"
+                path="staffs-contact-details/:id"
                 element={<ContactDetails></ContactDetails>}
               ></Route>
               <Route
-                path="staffs-credentials"
+                path="staffs-credentials/:id"
                 element={<Credentials></Credentials>}
               ></Route>
               <Route
-                path="staffs-department"
+                path="staffs-department/:id"
                 element={<DepartmentSupervisor></DepartmentSupervisor>}
               ></Route>
               <Route
-                path="staffs-payroll"
+                path="staffs-payroll/:id"
                 element={<PayrollSetup></PayrollSetup>}
               ></Route>
               <Route
-                path="staffs-other-setup"
+                path="staffs-other-setup/:id"
                 element={<OtherSetup></OtherSetup>}
               ></Route>
               <Route
-                path="staffs-leave-tracking"
+                path="staffs-leave-tracking/:id"
                 element={<LeaveTracking></LeaveTracking>}
               ></Route>
               <Route
-                path="staffs-payor-exclusion"
+                path="staffs-payor-exclusion/:id"
                 element={<InsuranceExclusion></InsuranceExclusion>}
               ></Route>
               <Route
-                path="staffs-sub-activity-exclusion"
+                path="staffs-sub-activity-exclusion/:id"
                 element={<ServiceSubTypeExclusions></ServiceSubTypeExclusions>}
               ></Route>
               <Route
-                path="staffs-client-exclusion"
+                path="staffs-client-exclusion/:id"
                 element={<PatientExclusion></PatientExclusion>}
               ></Route>
               <Route
-                path="staffs-portal"
+                path="staffs-portal/:id"
                 element={<StaffPortal></StaffPortal>}
               ></Route>
             </Route>
