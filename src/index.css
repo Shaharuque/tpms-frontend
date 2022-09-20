@@ -158,47 +158,52 @@ code {
 }
 
  /* date range picker calendar   */
-element.style {
-    color: #0AA1B2 !important;
-}
-
 .rdrSelected, .rdrInRange{
     background: #0AA1B2 !important;
     border: #000;
 }
-
 .rdrStartEdge, .rdrEndEdge{
   background-color: #0AA1B2 !important;
 }
-
 .rdrDateDisplayWrapper{
   display: none !important;
 }
-
 .rdrDateDisplayWrapper{
   background-color: #fff !important;
 }
-
 .rdrInputRanges{
   display: none !important;
 }
-
 .rdrDefinedRangesWrapper{
   width: 100% !important;
 }
-
 .rdrDayNumber,
 .rdrStaticRangeLabel,
 .rdrDay{
     color: #0AA1B2 !important;
 }
 
-.rdrDay:hover{
-  border-color: #000 !important;
+@media only screen and (max-width:450px){
+  .rdrMonthAndYearPickers{
+    flex-direction: column !important;
+  }
 }
 
-@media only screen and (max-width:640px) {
-
+@media only screen and (max-width:767px) {
+  .rdrDateRangePickerWrapper{
+    flex-direction: column-reverse;
+  }
+  .rdrStaticRanges{
+    flex-direction: row !important;
+  }
+  .rdrDateRangePickerWrapper,
+  .rdrMonth,
+  .range-date-ok{
+    width: 80% !important;
+  }
+  .rdrMonthAndYearPickers{
+    margin: 0 auto !important;
+  }
   .rdrMonths{
     flex-direction: column !important;
     flex-wrap: wrap !important;
@@ -207,25 +212,18 @@ element.style {
   .rdrDateRangePickerWrapper{
     flex-direction: column-reverse;
   }
-
   .rdrStaticRanges{
     flex-direction: row !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
   }
-  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones  */
-    
 }
 
-@media only screen and (min-width:768px){
+@media only screen and (max-width:1023px){
   .rdrDateRangePickerWrapper{
-    flex-direction: column-reverse;
+    flex-direction: column-reverse !important;
   }
-
   .rdrStaticRanges{
     flex-direction: row !important;
   }
-      /* tablet, landscape iPad, lo-res laptops ands desktops   */
-      /* For tablets:   */
-    
 }

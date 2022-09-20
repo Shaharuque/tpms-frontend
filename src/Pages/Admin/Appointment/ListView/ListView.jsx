@@ -120,6 +120,7 @@ const ListView = () => {
   const [value, setValue] = React.useState([]);
 
     // date range picker calendar
+    const [open, setOpen] = useState(false);
     const [range, setRange] = useState([
       {
         startDate: new Date(),
@@ -134,26 +135,8 @@ const ListView = () => {
     const endMonth = endDate.toLocaleString("en-us", { month: "short" });
     const startDay = startDate.getDate();
     const endDay = endDate.getDate();
-    const startYear = startDate.getFullYear();
-    const endYear = endDate.getFullYear();
-    console.log(startMonth, endMonth, startDay, endDay, startYear, endYear);
-  
-    // open close
-    const [open, setOpen] = useState(false);
-  
-    // get the target element to toggle
-    // const refOne = useRef(null);
-  
-    // useEffect(() => {
-    //   document.addEventListener("click", hideOnClickOutside, true);
-    // }, []);
-  
-    // // Hide dropdown on outside click
-    // const hideOnClickOutside = (e) => {
-    //   if (refOne.current && !refOne.current.contains(e.target)) {
-    //     setOpen(false);
-    //   }
-    // };
+    // const startYear = startDate.getFullYear();
+    // const endYear = endDate.getFullYear();
 
   return (
     // For responsive view point
@@ -365,8 +348,7 @@ const ListView = () => {
             )}
           </div>
           <div
-            // ref={refOne}
-            className="absolute lg:ml-[15%] md:ml-[10%] z-10 border rounded shadow-[0 4px 4px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.06)]"
+            className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20]"
           >
             {open && (
               <div>
@@ -378,9 +360,10 @@ const ListView = () => {
                     ranges={range}
                     months={2}
                     direction="horizontal"
+                    className="border-2 border-gray-100"
                   />
                 </div>
-                <div className="text-right bg-white">
+                <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
                   <button
                     className="bg-gray-600 py-1 px-2 m-2 text-white rounded"
                     type="submit"
