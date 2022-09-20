@@ -7,6 +7,7 @@ import { Outlet, useParams } from "react-router-dom";
 import doctor from "../../../Assets/doctor.png";
 
 const StaffInformation = () => {
+  const { id } = useParams();
   return (
     <div>
       {" "}
@@ -63,7 +64,7 @@ const StaffInformation = () => {
 
             <CustomLink
               className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
-              to={`staffs-biographic`}
+              to={`staffs-biographic/${id}`}
             >
               <h1 className="ml-1 mt-1">Bio's</h1>
             </CustomLink>
@@ -71,7 +72,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-contact-details`}
+                to={`staffs-contact-details/${id}`}
               >
                 <h1 className="ml-1 mt-1">Contact Info</h1>
               </CustomLink>
@@ -79,7 +80,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-credentials`}
+                to={`staffs-credentials/${id}`}
               >
                 <h1 className="ml-1 mt-1">Credentials</h1>
               </CustomLink>
@@ -87,7 +88,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-department`}
+                to={`staffs-department/${id}`}
               >
                 <h1 className="ml-1 mt-1">Department Supervisor(S)</h1>
               </CustomLink>
@@ -95,7 +96,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-payroll`}
+                to={`staffs-payroll/${id}`}
               >
                 <h1 className="ml-1 mt-1">Payroll Setup</h1>
               </CustomLink>
@@ -103,7 +104,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-other-setup`}
+                to={`staffs-other-setup/${id}`}
               >
                 <h1 className="ml-1 mt-1">Other Setup</h1>
               </CustomLink>
@@ -111,7 +112,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-leave-tracking`}
+                to={`staffs-leave-tracking/${id}`}
               >
                 <h1 className="ml-1 mt-1">Leave Tracking</h1>
               </CustomLink>
@@ -119,7 +120,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-payor-exclusion`}
+                to={`staffs-payor-exclusion/${id}`}
               >
                 <h1 className="ml-1 mt-1">Insurance Exclusion(S)</h1>
               </CustomLink>
@@ -127,7 +128,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-sub-activity-exclusion`}
+                to={`staffs-sub-activity-exclusion/${id}`}
               >
                 <h1 className="ml-1 mt-1">Service Sub-Type Exclusions</h1>
               </CustomLink>
@@ -135,7 +136,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-client-exclusion`}
+                to={`staffs-client-exclusion/${id}`}
               >
                 <h1 className="ml-1 mt-1">Patient Exclusion</h1>
               </CustomLink>
@@ -143,7 +144,7 @@ const StaffInformation = () => {
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
-                to={`staffs-portal`}
+                to={`staffs-portal/${id}`}
               >
                 <h1 className="ml-1 mt-1">Staff Portal</h1>
               </CustomLink>

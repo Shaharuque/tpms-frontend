@@ -401,45 +401,45 @@ function App() {
               element={<CreateStaff></CreateStaff>}
             ></Route>
             <Route path="staff" element={<StaffInformation></StaffInformation>}>
-              <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
+              <Route path="staffs-biographic/:id" element={<Bio></Bio>}></Route>
               <Route
-                path="staffs-contact-details"
+                path="staffs-contact-details/:id"
                 element={<ContactDetails></ContactDetails>}
               ></Route>
               <Route
-                path="staffs-credentials"
+                path="staffs-credentials/:id"
                 element={<Credentials></Credentials>}
               ></Route>
               <Route
-                path="staffs-department"
+                path="staffs-department/:id"
                 element={<DepartmentSupervisor></DepartmentSupervisor>}
               ></Route>
               <Route
-                path="staffs-payroll"
+                path="staffs-payroll/:id"
                 element={<PayrollSetup></PayrollSetup>}
               ></Route>
               <Route
-                path="staffs-other-setup"
+                path="staffs-other-setup/:id"
                 element={<OtherSetup></OtherSetup>}
               ></Route>
               <Route
-                path="staffs-leave-tracking"
+                path="staffs-leave-tracking/:id"
                 element={<LeaveTracking></LeaveTracking>}
               ></Route>
               <Route
-                path="staffs-payor-exclusion"
+                path="staffs-payor-exclusion/:id"
                 element={<InsuranceExclusion></InsuranceExclusion>}
               ></Route>
               <Route
-                path="staffs-sub-activity-exclusion"
+                path="staffs-sub-activity-exclusion/:id"
                 element={<ServiceSubTypeExclusions></ServiceSubTypeExclusions>}
               ></Route>
               <Route
-                path="staffs-client-exclusion"
+                path="staffs-client-exclusion/:id"
                 element={<PatientExclusion></PatientExclusion>}
               ></Route>
               <Route
-                path="staffs-portal"
+                path="staffs-portal/:id"
                 element={<StaffPortal></StaffPortal>}
               ></Route>
             </Route>
