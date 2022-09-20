@@ -64,11 +64,12 @@ const Staffs = () => {
 
       // render contains what we want to reflect as our data
       // Name, id, key=>each row data(object) property value can be accessed.
-      render: (_, { Name, id, key }) => {
-        console.log("tags : ", Name, id, key);
+      //here,using id as key, as key isn't availale in the data we got.
+      render: (_, { Name, id }) => {
+        console.log("tags : ", Name, id);
         return (
           <Link
-            to={`/admin/patient/patient-info/${id}`}
+            to={`/admin/staff/staffs-biographic/${id}`}
             className="text-secondary"
           >
             {Name}
@@ -200,7 +201,11 @@ const Staffs = () => {
       ],
       render: (_, { Status }) => {
         //console.log("Status : ", Status);
-        return <div className=" text-secondary ">View</div>;
+        return (
+          <Link to="/admin" className=" text-secondary ">
+            View
+          </Link>
+        );
       },
       sorter: (a, b) => {
         return a.insurance > b.insurance ? -1 : 1; //sorting problem solved using this logic
@@ -270,15 +275,16 @@ const Staffs = () => {
           </Link>
         </div>
       )}
-
-      <Table
-        pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-        size="small"
-        className=" text-xs font-normal"
-        columns={columns}
-        dataSource={StafData}
-        onChange={handleChange}
-      />
+      <div className=" overflow-scroll">
+        <Table
+          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+          size="small"
+          className=" text-xs font-normal"
+          columns={columns}
+          dataSource={StafData}
+          onChange={handleChange}
+        />
+      </div>
 
       {/* <TestingTable></TestingTable> */}
       <Link to={"/admin/staff"}> click here</Link>

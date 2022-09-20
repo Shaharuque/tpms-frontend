@@ -18,6 +18,7 @@ const TableApi = () => {
   const [page, setpage] = useState(2);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [patientId, setPatientId] = useState();
+  const [data, setData] = useState([]);
 
   const navigate = useNavigate();
   //console.log(row);
@@ -32,42 +33,56 @@ const TableApi = () => {
     setPatientId(id);
   };
 
-  // get data from API + data fetch from api while scrolling
+  //getting data from public folder(fakedata)
+  // fakeApi call
   useEffect(() => {
-    const getComments = async () => {
-      const res = await axios({
-        method: "get",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
-        headers: headers,
+    axios("../../All_Fake_Api/Patients.json")
+      .then((response) => {
+        setData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      // const result = await res.json();
-      const data = res.data?.clients?.data;
-      //console.log(data)
-      setItems(data);
-    };
-    getComments();
   }, []);
+  console.log(data);
+  // END
 
-  const fetchComments = async () => {
-    const res = await axios({
-      method: "get",
-      url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
-      headers: headers,
-    });
-    const data = res.data?.clients?.data;
-    console.log(data);
-    return data;
-  };
+  // get data from API + data fetch from api while scrolling[Important]
+  // useEffect(() => {
+  //   const getComments = async () => {
+  //     const res = await axios({
+  //       method: "get",
+  //       url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
+  //       headers: headers,
+  //     });
+  //     // const result = await res.json();
+  //     const data = res.data?.clients?.data;
+  //     //console.log(data)
+  //     setItems(data);
+  //   };
+  //   getComments();
+  // }, []);
 
-  const fetchData = async () => {
-    const commentsFormServer = await fetchComments();
-    console.log(commentsFormServer);
-    setItems([...items, ...commentsFormServer]);
-    if (commentsFormServer.length === 0) {
-      sethasMore(false);
-    }
-    setpage(page + 1);
-  };
+  // const fetchComments = async () => {
+  //   const res = await axios({
+  //     method: "get",
+  //     url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
+  //     headers: headers,
+  //   });
+  //   const data = res.data?.clients?.data;
+  //   console.log(data);
+  //   return data;
+  // };
+
+  // const fetchData = async () => {
+  //   const commentsFormServer = await fetchComments();
+  //   console.log(commentsFormServer);
+  //   setItems([...items, ...commentsFormServer]);
+  //   if (commentsFormServer.length === 0) {
+  //     sethasMore(false);
+  //   }
+  //   setpage(page + 1);
+  // };
   //console.log(items)
 
   const handleChange = (pagination, filters, sorter) => {
@@ -143,6 +158,8 @@ const TableApi = () => {
       key: "client_first_name",
       width: 160,
       filters: [
+        { text: "Milissent", value: "Milissent" },
+        { text: "Timmy", value: "Timmy" },
         {
           text: `Jamey`,
           value: "Jamey",
@@ -473,22 +490,26 @@ const TableApi = () => {
             </div>
           </div>
         ) : null}
-        <InfiniteScroll
+        {/* <InfiniteScroll
           dataLength={items.length} //items is basically all data here
           next={fetchData}
           hasMore={hasMore}
           loader={<ShimmerTableTet></ShimmerTableTet>}
           // loader={<h1 className="text-teal-800 font-bold text-center">Loading...</h1>}
-        >
+        > */}
+
+        {/* className=" overflow-scroll" used for responsive scrolling But if you use InfiniteScroll don't need overflow-scroll class */}
+        <div className=" overflow-scroll">
           <Table
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
             className=" text-xs font-normal"
             columns={columns}
-            dataSource={items}
+            dataSource={data} //Which data chunk you want to show in table
             onChange={handleChange}
           />
-        </InfiniteScroll>
+        </div>
+        {/* </InfiniteScroll> */}
 
         {/* PatientAuthorizationTableModal component render and particular patient id also passed to the PatientAuthorizationTableModal component*/}
         {openEditModal && (
