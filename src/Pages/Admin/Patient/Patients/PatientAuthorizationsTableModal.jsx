@@ -3,22 +3,26 @@ import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
+import Loading from "../../../../Loading/Loading";
+import { motion } from "framer-motion";
 
 const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
   const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [loading, setLoading] = useState(false);
 
   //   fetch data
   useEffect(() => {
+    setLoading(true);
     fetch("../../../All_Fake_Api/PatientAuthorization.json")
       .then((res) => res.json())
       .then((d) => {
         setTableData(d);
-        console.log(tableData, "tableData");
-        // setLoading2(false);
+        setLoading(false);
       });
   }, []);
+  console.log(tableData, "tableData");
 
   const column = [
     {
@@ -193,21 +197,25 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
               </button>
             </div>
 
-            <div className=" overflow-scroll">
-              <Table
-                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                size="small"
-                className=" text-xs font-normal mt-5"
-                columns={column}
-                bordered
-                rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                dataSource={tableData}
-                rowSelection={{
-                  ...rowSelection,
-                }}
-                onChange={handleChange}
-              />
-            </div>
+            {loading ? (
+              <Loading></Loading>
+            ) : (
+              <div className=" overflow-scroll">
+                <Table
+                  pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                  size="small"
+                  className=" text-xs font-normal mt-5"
+                  columns={column}
+                  bordered
+                  rowKey={(record) => record.id} //record is kind of whole one data object and here we are
+                  dataSource={tableData}
+                  rowSelection={{
+                    ...rowSelection,
+                  }}
+                  onChange={handleChange}
+                />
+              </div>
+            )}
 
             <div className="modal-action">
               {/* <input type="submit" /> */}

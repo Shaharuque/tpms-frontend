@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Space, Table } from "antd";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
@@ -17,9 +17,19 @@ const TableApi = () => {
   const [hasMore, sethasMore] = useState(true);
   const [page, setpage] = useState(2);
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [patientId, setPatientId] = useState();
+
+  const navigate = useNavigate();
   //console.log(row);
   const handleClose = () => {
     setOpenEditModal(false);
+  };
+
+  //Auth click event handler
+  const handleAuthClick = (id) => {
+    console.log(id);
+    setOpenEditModal(true);
+    setPatientId(id);
   };
 
   // get data from API + data fetch from api while scrolling
@@ -119,7 +129,13 @@ const TableApi = () => {
   const clearFilters = () => {
     setFilteredInfo({});
   };
-  console.log(filteredInfo?.client_first_name);
+
+  console.log(filteredInfo);
+
+  const patientDetails = (id) => {
+    //console.log(id);
+    navigate(`/admin/patient/patient-info/${id}`);
+  };
   const columns = [
     {
       title: "Patient",
@@ -159,14 +175,13 @@ const TableApi = () => {
       // render contains what we want to reflect as our data
       // client_first_name, id, key=>each row data(object) property value can be accessed.
       render: (_, { client_first_name, id, key }) => {
-        console.log("tags : ", client_first_name, id, key);
+        //console.log("tags : ", client_first_name, id, key);
         return (
-          <Link
-            to={`/admin/patient/patient-info/${id}`}
-            className="text-secondary"
-          >
-            {client_first_name}
-          </Link>
+          <div>
+            <h1 onClick={() => patientDetails(id)} style={{ color: "teal" }}>
+              {client_first_name}
+            </h1>
+          </div>
         );
       },
       ellipsis: true,
@@ -316,23 +331,15 @@ const TableApi = () => {
       dataIndex: "id",
       width: 50,
       render: (_, { id }) => {
-        // console.log("patient_id = ", id);
         return (
           <>
             <button
               onClick={() => {
-                setOpenEditModal(true);
+                handleAuthClick(id);
               }}
             >
               <FaRegAddressCard className="text-sm mx-auto text-secondary" />
             </button>
-            {openEditModal && (
-              <PatientAuthorizationsTableModal
-                patient_id={id}
-                handleClose={handleClose}
-                open={openEditModal}
-              ></PatientAuthorizationsTableModal>
-            )}
           </>
         );
       },
@@ -368,88 +375,76 @@ const TableApi = () => {
           </button>
         </div>
         {/* filtering tag showing part */}
-        <div className="border border-secondary bg-gray-100 flex-wrap flex mb-4 text-xs ">
-          {/* {filteredInfo?.client_first_name?.map((tag, index) => (
-            <h1 className="text-red-600 border-black mr-2" key={index}>
+        {filteredInfo?.client_first_name ||
+        filteredInfo?.client_dob ||
+        filteredInfo?.client_gender ||
+        filteredInfo?.location ? (
+          <div className="bg-gray-300 flex mb-4 text-xs">
+            {/* {filteredInfo?.client_first_name?.map((tag, index) => (
+            <h1 className="text-red-600 border-black mr-2" >
               {tag}
             </h1>
           ))} */}
-          <div className="p-2 rounded ">
-            <div className="flex mb-2 flex-wrap gap-1">
-              <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
-                Patient:
-              </span>
-              {filteredInfo?.client_first_name?.map((tag, index) => (
-                <div
-                  className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
-                  key={index}
-                >
-                  <div className=" text-sm">{tag}</div>
-                  <div>
-                    <div
-                      className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
+            <div className="border border-[#34A7B8] bg-gray-200 p-2 rounded ">
+              <div className="flex mb-2">
+                <span className="border-black font-bold mr-2 flex items-center">
+                  Patient:
+                </span>
+                {filteredInfo?.client_first_name?.map((tag) => (
+                  <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+                    {tag}
+                    <TiDelete
+                      className="cursor-pointer text-lg"
                       onClick={() => deleteFirstNameTag(tag)}
-                    >
-                      X
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex mb-2">
-              <span className="border-black font-bold mr-2 flex items-center">
-                DOB:
-              </span>
-              {filteredInfo?.client_dob?.map((tag, index) => (
-                <h1
-                  className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
-                  key={index}
-                >
-                  {tag}
-                  <TiDelete
-                    className="cursor-pointer text-lg"
-                    onClick={() => deleteDobTag(tag)}
-                  ></TiDelete>
-                </h1>
-              ))}
-            </div>
-            <div className="flex mb-2">
-              <span className="border-black font-bold mr-2 flex items-center">
-                Gender:
-              </span>
-              {filteredInfo?.client_gender?.map((tag, index) => (
-                <h1
-                  className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
-                  key={index}
-                >
-                  {tag}
-                  <TiDelete
-                    className="cursor-pointer text-lg"
-                    onClick={() => deleteGenderTag(tag)}
-                  ></TiDelete>
-                </h1>
-              ))}
-            </div>
-            <div className="flex mb-2">
-              <span className="border-black font-bold mr-2 flex items-center">
-                POS:
-              </span>
-              {filteredInfo?.location?.map((tag, index) => (
-                <h1
-                  className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
-                  key={index}
-                >
-                  {tag}
-                  <TiDelete
-                    className="cursor-pointer text-lg"
-                    onClick={() => deletelocationTag(tag)}
-                  ></TiDelete>
-                </h1>
-              ))}
+                    ></TiDelete>
+                  </h1>
+                ))}
+              </div>
+              <div className="flex mb-2">
+                <span className="border-black font-bold mr-2 flex items-center">
+                  DOB:
+                </span>
+                {filteredInfo?.client_dob?.map((tag) => (
+                  <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+                    {tag}
+                    <TiDelete
+                      className="cursor-pointer text-lg"
+                      onClick={() => deleteDobTag(tag)}
+                    ></TiDelete>
+                  </h1>
+                ))}
+              </div>
+              <div className="flex mb-2">
+                <span className="border-black font-bold mr-2 flex items-center">
+                  Gender:
+                </span>
+                {filteredInfo?.client_gender?.map((tag) => (
+                  <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+                    {tag}
+                    <TiDelete
+                      className="cursor-pointer text-lg"
+                      onClick={() => deleteGenderTag(tag)}
+                    ></TiDelete>
+                  </h1>
+                ))}
+              </div>
+              <div className="flex mb-2">
+                <span className="border-black font-bold mr-2 flex items-center">
+                  POS:
+                </span>
+                {filteredInfo?.location?.map((tag) => (
+                  <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+                    {tag}
+                    <TiDelete
+                      className="cursor-pointer text-lg"
+                      onClick={() => deletelocationTag(tag)}
+                    ></TiDelete>
+                  </h1>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-
+        ) : null}
         <InfiniteScroll
           dataLength={items.length} //items is basically all data here
           next={fetchData}
@@ -466,6 +461,15 @@ const TableApi = () => {
             onChange={handleChange}
           />
         </InfiniteScroll>
+
+        {/* PatientAuthorizationTableModal component render and particular patient id also passed to the PatientAuthorizationTableModal component*/}
+        {openEditModal && (
+          <PatientAuthorizationsTableModal
+            patient_id={patientId}
+            handleClose={handleClose}
+            open={openEditModal}
+          ></PatientAuthorizationsTableModal>
+        )}
       </>
     </div>
   );

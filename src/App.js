@@ -137,6 +137,7 @@ import StaffPortal from "./Pages/Admin/Staff/Staffs/StaffPortal/StaffPortal";
 import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeExclusion/ServiceSubTypeExclusions";
 import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
 import TestingTable from "./Testing/AntTableTest/TestingTable";
+import AntTransfer from "./Testing/AntTableTest/AntTransfer";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -172,6 +173,7 @@ function App() {
             path="/testing"
             element={<TestingTable></TestingTable>}
           ></Route>
+          <Route path="transfer" element={<AntTransfer></AntTransfer>}></Route>
           {/* Testing End */}
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
