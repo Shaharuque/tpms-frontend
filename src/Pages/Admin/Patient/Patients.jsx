@@ -125,7 +125,7 @@ const TableApi = () => {
       title: "Patient",
       dataIndex: "client_first_name",
       key: "client_first_name",
-      width: 200,
+      width: 160,
       filters: [
         {
           text: `Jamey`,
@@ -175,7 +175,7 @@ const TableApi = () => {
       title: "Contact Info",
       dataIndex: "phone_number",
       key: "phone_number",
-      width: 200,
+      width: 120,
       // filters: [
       //   {
       //     text: "(940)-234-0329",
@@ -212,7 +212,7 @@ const TableApi = () => {
       title: "DOB",
       dataIndex: "client_dob",
       key: "client_dob",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `1986-08-28`,
@@ -237,7 +237,7 @@ const TableApi = () => {
       title: "Gender",
       dataIndex: "client_gender",
       key: "client_gender",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `Male`,
@@ -262,7 +262,7 @@ const TableApi = () => {
       title: "POS",
       dataIndex: "location",
       key: "location",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `Main Office`,
@@ -290,7 +290,7 @@ const TableApi = () => {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `Male`,
@@ -341,7 +341,7 @@ const TableApi = () => {
       title: "Status",
       key: "is_active_client",
       dataIndex: "is_active_client",
-      width: 70,
+      width: 60,
       render: (_, { is_active_client }) => {
         //console.log("Status : ", Status);
         return (
