@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useState, useRef } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { ManageTableColumnsColumn } from "./ListView/ManageTableColumns";
 import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
@@ -30,6 +30,15 @@ const ListView = () => {
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
+  
+  const [open, setOpen] = useState(false);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 0),
+      key: "selection",
+    },
+  ]);
 
   //test design
   const [clicked, setClicked] = useState(false);
@@ -104,7 +113,6 @@ const ListView = () => {
     reset();
   };
 
-  
   // ----------------------------------------Multi-Select---------------------------------
   // ***************
   const datat = ["Eugenia", "Bryan", "Linda"].map((item) => ({
@@ -119,24 +127,15 @@ const ListView = () => {
 
   const [value, setValue] = React.useState([]);
 
-    // date range picker calendar
-    const [open, setOpen] = useState(false);
-    const [range, setRange] = useState([
-      {
-        startDate: new Date(),
-        endDate: addDays(new Date(), 0),
-        key: "selection",
-      },
-    ]);
-  
-    const startDate = range[0]?.startDate;
-    const endDate = range[0]?.endDate;
-    const startMonth = startDate.toLocaleString("en-us", { month: "short" });
-    const endMonth = endDate.toLocaleString("en-us", { month: "short" });
-    const startDay = startDate.getDate();
-    const endDay = endDate.getDate();
-    // const startYear = startDate.getFullYear();
-    // const endYear = endDate.getFullYear();
+  // date range picker calendar
+  const startDate = range[0]?.startDate;
+  const endDate = range[0]?.endDate;
+  const startMonth = startDate.toLocaleString("en-us", { month: "short" });
+  const endMonth = endDate.toLocaleString("en-us", { month: "short" });
+  const startDay = startDate.getDate();
+  const endDay = endDate.getDate();
+  // const startYear = startDate.getFullYear();
+  // const endYear = endDate.getFullYear();
 
   return (
     // For responsive view point
@@ -347,9 +346,7 @@ const ListView = () => {
               </div>
             )}
           </div>
-          <div
-            className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20]"
-          >
+          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20]">
             {open && (
               <div>
                 <div>
@@ -367,7 +364,7 @@ const ListView = () => {
                   <button
                     className="bg-gray-600 py-1 px-2 m-2 text-white rounded"
                     type="submit"
-                    onClick={()=>setOpen(false)}
+                    onClick={() => setOpen(false)}
                   >
                     Ok
                   </button>
