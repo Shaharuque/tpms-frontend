@@ -17,10 +17,10 @@ import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableAction from "./ListView/ManageTableAction";
 
 //for date range picker calendar
-import { DateRangePicker } from 'react-date-range'
-import { addDays } from 'date-fns'
-import 'react-date-range/dist/styles.css'
-import 'react-date-range/dist/theme/default.css'
+import { DateRangePicker } from "react-date-range";
+import { addDays } from "date-fns";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
 
 const ListView = () => {
@@ -36,7 +36,7 @@ const ListView = () => {
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
-  
+
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([
     {
