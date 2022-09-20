@@ -15,7 +15,6 @@ import {
 import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
 import "../../../../Style/ListView.css";
 import EditSession from "../ListView/EditSession";
-import ManageTableAction from "../ListView/ManageTableAction";
 import SessionAddNote from "../ListView/SessionAddNote";
 import SessionViewNote from "../ListView/SessionViewNote";
 import { Fade } from "react-reveal";
@@ -221,7 +220,7 @@ const CardView = ({ data }) => {
                         </button>
 
                         <button
-                          className="text-xs text-white border px-3 py-1 mb-2 rounded-sm border-white hover:text-secondary hover:bg-white flex items-center font-semibold gap-2"
+                          className="text-xs text-white border px-[14px] py-1 mb-2 rounded-sm border-white hover:text-secondary hover:bg-white flex items-center font-semibold gap-2"
                           onClick={editSessionHandler}
                         >
                           <MdOutlineModeEditOutline /> Edit Session

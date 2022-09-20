@@ -271,14 +271,16 @@ const Staffs = () => {
         </div>
       )}
 
-      <Table
-        pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-        size="small"
-        className=" text-xs font-normal"
-        columns={columns}
-        dataSource={StafData}
-        onChange={handleChange}
-      />
+      <div className=" overflow-scroll">
+        <Table
+          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+          size="small"
+          className=" text-xs font-normal"
+          columns={columns}
+          dataSource={StafData}
+          onChange={handleChange}
+        />
+      </div>
 
       {/* <TestingTable></TestingTable> */}
       <Link to={"/admin/staff"}> click here</Link>
