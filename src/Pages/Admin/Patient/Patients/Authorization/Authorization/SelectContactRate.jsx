@@ -3,7 +3,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { Dialog } from "@mui/material";
 import { Table } from "antd";
 
-const SelectContactRate = ({ handleClose, open, editableRow }) => {
+const SelectContactRate = ({ handleClose, open }) => {
   const [tableData, settableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});

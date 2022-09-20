@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { Button, Space, Table } from "antd";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
-import { TiDelete } from "react-icons/ti";
+import { FaRegAddressCard } from "react-icons/fa";
+import PatientAuthorizationsTableModal from "./Patients/PatientAuthorizationsTableModal";
+import PatientStatusAction from "./Patients/PatientStatusAction";
+import { TiDelete, TiDeleteOutline } from "react-icons/ti";
 
 const TableApi = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [allData, setAllData] = useState([]);
   const [items, setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
   const [page, setpage] = useState(2);
-  const navigate = useNavigate();
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [patientId, setPatientId] = useState();
 
-  // fetch data
-  // React.useEffect(() => {
-  //   fetch("All_Fake_Api/Fakedb.json")
-  //     .then((res) => res.json())
-  //     .then((d) => {
-  //       setAllData(d);
-  //     });
-  // }, []);
-  // console.log(allData);
+  const navigate = useNavigate();
+  //console.log(row);
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
+
+  //Auth click event handler
+  const handleAuthClick = (id) => {
+    console.log(id);
+    setOpenEditModal(true);
+    setPatientId(id);
+  };
 
   // get data from API + data fetch from api while scrolling
   useEffect(() => {
@@ -320,46 +326,36 @@ const TableApi = () => {
       ellipsis: true,
     },
     {
-      title: "Status",
-      key: "Status",
-      dataIndex: "Status",
-      width: 100,
-      render: (_, { Status }) => {
-        //console.log("Status : ", Status);
+      title: "Auth",
+      key: "id",
+      dataIndex: "id",
+      width: 50,
+      render: (_, { id }) => {
         return (
-          <div>
-            {Status === "Scheduled" && (
-              <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-            {Status === "Rendered" && (
-              <button className="bg-green-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-            {Status === "hold" && (
-              <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
-              </button>
-            )}
-          </div>
+          <>
+            <button
+              onClick={() => {
+                handleAuthClick(id);
+              }}
+            >
+              <FaRegAddressCard className="text-sm mx-auto text-secondary" />
+            </button>
+          </>
         );
       },
-      filters: [
-        {
-          text: "hold",
-          value: "hold",
-        },
-        {
-          text: "Rendered",
-          value: "Rendered",
-        },
-        {
-          text: "Scheduled",
-          value: "Scheduled",
-        },
-      ],
+    },
+    {
+      title: "Status",
+      key: "is_active_client",
+      dataIndex: "is_active_client",
+      width: 70,
+      render: (_, { is_active_client }) => {
+        //console.log("Status : ", Status);
+        return (
+          <PatientStatusAction status={is_active_client}></PatientStatusAction>
+        );
+      },
+      filters: [],
       filteredValue: filteredInfo.Status || null,
       onFilter: (value, record) => record.Status.includes(value),
     },
@@ -367,16 +363,22 @@ const TableApi = () => {
   return (
     <div>
       <>
-        <Space
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          <Button onClick={clearFilters}>Clear filters</Button>
-        </Space>
-
+        <div className="flex items-center justify-between gap-2 my-2">
+          <h1 className="text-lg text-orange-500 text-left font-semibold ">
+            Patient
+          </h1>
+          <button
+            onClick={clearFilters}
+            className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+          >
+            Clear filters
+          </button>
+        </div>
         {/* filtering tag showing part */}
-        {filteredInfo?.client_first_name ? (
+        {filteredInfo?.client_first_name ||
+        filteredInfo?.client_dob ||
+        filteredInfo?.client_gender ||
+        filteredInfo?.location ? (
           <div className="bg-gray-300 flex mb-4 text-xs">
             {/* {filteredInfo?.client_first_name?.map((tag, index) => (
             <h1 className="text-red-600 border-black mr-2" >
@@ -442,9 +444,7 @@ const TableApi = () => {
               </div>
             </div>
           </div>
-        ) : (
-          clearFilters
-        )}
+        ) : null}
         <InfiniteScroll
           dataLength={items.length} //items is basically all data here
           next={fetchData}
@@ -461,6 +461,15 @@ const TableApi = () => {
             onChange={handleChange}
           />
         </InfiniteScroll>
+
+        {/* PatientAuthorizationTableModal component render and particular patient id also passed to the PatientAuthorizationTableModal component*/}
+        {openEditModal && (
+          <PatientAuthorizationsTableModal
+            patient_id={patientId}
+            handleClose={handleClose}
+            open={openEditModal}
+          ></PatientAuthorizationsTableModal>
+        )}
       </>
     </div>
   );
