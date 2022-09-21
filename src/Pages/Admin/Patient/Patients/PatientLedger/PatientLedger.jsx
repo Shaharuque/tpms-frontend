@@ -391,14 +391,17 @@ const PatientLedger = () => {
                   value={`${startDay} ${startMonth}`}
                   readOnly
                   onClick={() => setOpen((open) => !open)}
-                  className="focus:outline-none font-medium pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                  className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                 />
-                <BsArrowRight className="w-1/3 text-gray-600 text-[14px] font-medium"></BsArrowRight>
+                <BsArrowRight
+                  onClick={() => setOpen((open) => !open)}
+                  className="w-1/3 text-gray-600 text-[14px] font-medium"
+                ></BsArrowRight>
                 <input
                   value={`${endDay} ${endMonth}`}
                   readOnly
                   onClick={() => setOpen((open) => !open)}
-                  className="focus:outline-none font-medium bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                  className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                 />
               </div>
             </div>

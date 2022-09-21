@@ -524,19 +524,22 @@ const ListView = () => {
                               </span>
                             </label>
                             <div className="ml-1">
-                              <div className="flex flex-wrap justify-between items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
+                              <div className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
                                 <input
                                   value={`${startDay} ${startMonth}`}
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
-                                  className="focus:outline-none font-normal bg-transparent text-white w-1/3 cursor-pointer"
+                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
-                                <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
+                                <BsArrowRight
+                                  onClick={() => setOpen((open) => !open)}
+                                  className="w-1/3 text-white"
+                                ></BsArrowRight>
                                 <input
                                   value={`${endDay} ${endMonth}`}
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
-                                  className="focus:outline-none font-normal bg-transparent text-white w-1/3 cursor-pointer"
+                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
                               </div>
                             </div>
@@ -620,7 +623,7 @@ const ListView = () => {
           <>
             {listView && (
               <div className="my-5">
-                <div className=" overflow-scroll ">
+                <div className="overflow-scroll">
                   <>
                     <Table
                       pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
