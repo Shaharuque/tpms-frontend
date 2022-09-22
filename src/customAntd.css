@@ -33041,4 +33041,8 @@ div.ant-typography-edit-content.ant-typography-rtl {
 }
 
 
+span.anticon.anticon-delete svg{
+  color: red;
+}
+
 /*# sourceMappingURL=antd.css.map*/
