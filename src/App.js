@@ -37,8 +37,6 @@ import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
 import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
 import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
-//For testing purpose
-import MainBase from "./Testing/Table_React/MainBase";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
@@ -137,7 +135,6 @@ import StaffPortal from "./Pages/Admin/Staff/Staffs/StaffPortal/StaffPortal";
 import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeExclusion/ServiceSubTypeExclusions";
 import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
 import TestingTable from "./Testing/AntTableTest/TestingTable";
-import AntTransfer from "./Testing/AntTableTest/AntTransfer";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -173,7 +170,6 @@ function App() {
             path="/testing"
             element={<TestingTable></TestingTable>}
           ></Route>
-          <Route path="transfer" element={<AntTransfer></AntTransfer>}></Route>
           {/* Testing End */}
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>

@@ -1,22 +1,25 @@
-import {
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-} from "@mui/material";
+import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 const Bio = () => {
   const [note, setNote] = useState("");
 
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+    control,
+  } = useForm();
+
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
         first_name: `bill`,
         middle_name: "luo",
+        comment: "Notes",
       });
     }, 600);
   }, [reset]);
@@ -30,7 +33,7 @@ const Bio = () => {
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
-          {/* name  */}
+          {/* First Name with all the validation  */}
           <div>
             <label className="label">
               <span className="label-text text-xs text-gray-600 text-left">
@@ -41,9 +44,30 @@ const Bio = () => {
               type="text"
               name="first_name"
               className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-              {...register("first_name")}
+              {...register("first_name", {
+                required: "This input is required.",
+                minLength: {
+                  value: 4,
+                  message: "This input must exceed 4 characters",
+                },
+              })}
             />
+            <label className="label">
+              <span className="label-text-alt">
+                {errors.first_name?.type === "required" && (
+                  <p className=" text-xs text-red-500">
+                    {errors.first_name.message}
+                  </p>
+                )}
+                {errors.first_name?.type === "minLength" && (
+                  <p className=" text-xs text-red-500">
+                    {errors.first_name.message}
+                  </p>
+                )}
+              </span>
+            </label>
           </div>
+
           <div>
             <label className="label">
               <span className="label-text text-xs text-gray-600 text-left">
@@ -251,7 +275,7 @@ const Bio = () => {
               {...register("zip")}
             />
           </div>
-          <div className="">
+          <div>
             <label className="label">
               <span className="label-text text-xs text-gray-600 text-left">
                 Termination Date
@@ -350,7 +374,6 @@ const Bio = () => {
               </div>
             </div>
           </div>
-
           <div>
             <label className="label">
               <span className="label-text text-xs text-gray-600 text-left">
@@ -358,13 +381,29 @@ const Bio = () => {
               </span>
             </label>
             <textarea
-              onChange={(e) => setNote(e.target.value)}
+              // onChange={(e) => setNote(e.target.value)}
               name="comment"
               className="border text-sm p-1 mt-1 ml-1 h-24 w-full"
-            >
-              Notes
-            </textarea>
+              {...register("comment")}
+            ></textarea>
           </div>
+
+          {/* <div>
+            <label className="label">
+              <span className="label-text text-xs text-gray-600 text-left">
+                Notes
+              </span>
+            </label>
+            <Controller
+              name="note"
+              label="Notes"
+              multiline
+              maxRows={7}
+              control={control}
+              render={({ Notes }) => <TextField {...Notes} />}
+              register={"note"}
+            />
+          </div> */}
         </div>
         <div className="mt-10">
           <button

@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 
-const ContactDetailsOne = () => {
+const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
   const [note, setNote] = useState("");
-  const [tableOpen, setTableOpen] = useState(true);
-  const handleTable = () => {
-    setTableOpen(!tableOpen);
-  };
   const {
     register,
     handleSubmit,
@@ -22,12 +18,12 @@ const ContactDetailsOne = () => {
     <div>
       {" "}
       <h2
-        onClick={handleTable}
+        onClick={handleContactDetails}
         className=" mt-4 text-xs font-normal px-2 py-2 text-white bg-secondary rounded-sm"
       >
         Contact Details
       </h2>
-      {tableOpen && (
+      {contactDetails && (
         <div className="border">
           <motion.div
             initial={{ opacity: 0, y: 15 }}

@@ -285,9 +285,6 @@ const Staffs = () => {
           onChange={handleChange}
         />
       </div>
-
-      {/* <TestingTable></TestingTable> */}
-      <Link to={"/admin/staff"}> click here</Link>
     </div>
   );
 };
