@@ -3,6 +3,11 @@
     background-color: #ffeeee97;
 }
 
+.green-box {
+    border: 1px solid #55da729d;
+    background-color: #defae47e;
+}
+
 .other-box {
     width: 25%;
 }

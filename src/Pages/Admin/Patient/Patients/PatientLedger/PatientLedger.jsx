@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { Table, Typography } from "antd";
-import { DateRangePicker, Toggle } from "rsuite";
+import { Toggle } from "rsuite";
 import CheckIcon from "@rsuite/icons/Check";
 import CloseIcon from "@rsuite/icons/Close";
 import { BsFileEarmarkPlusFill } from "react-icons/bs";
 import PatientLedgerAction from "./PatientLedger/PatientLedgerAction";
+
+//for date range picker calendar
+import { DateRangePicker } from "react-date-range";
+import { addDays } from "date-fns";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { BsArrowRight } from "react-icons/bs";
 
 const PatientLedger = () => {
   const { id } = useParams();
@@ -22,6 +29,15 @@ const PatientLedger = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const { Text } = Typography;
+
+  const [open, setOpen] = useState(false);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 0),
+      key: "selection",
+    },
+  ]);
 
   //   fetch data
   React.useEffect(() => {
@@ -333,14 +349,21 @@ const PatientLedger = () => {
     reset();
     setTable(true);
   };
-
-  // table
+  // date range picker calendar
+  const startDate = range[0]?.startDate;
+  const endDate = range[0]?.endDate;
+  const startMonth = startDate.toLocaleString("en-us", { month: "short" });
+  const endMonth = endDate.toLocaleString("en-us", { month: "short" });
+  const startDay = startDate.getDate();
+  const endDay = endDate.getDate();
+  // const startYear = startDate.getFullYear();
+  // const endYear = endDate.getFullYear();
 
   return (
     <div className="h-[100vh]">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-lg mt-2 text-orange-500">Patient Ar Ledger</h1>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7  my-5 mr-2 gap-2">
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-5 mr-2 gap-2">
           <div>
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
@@ -363,12 +386,21 @@ const PatientLedger = () => {
               </span>
             </label>
             <div className="ml-1">
-              <DateRangePicker
-                onChange={(date) => {
-                  console.log(date);
-                }}
-                placeholder="Select Date"
-              />
+              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border text-gray-600 rounded-sm px-1 mx-1 w-full">
+                <input
+                  value={`${startDay} ${startMonth}`}
+                  readOnly
+                  onClick={() => setOpen((open) => !open)}
+                  className="focus:outline-none font-medium pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                />
+                <BsArrowRight className="w-1/3 text-gray-600 text-[14px] font-medium"></BsArrowRight>
+                <input
+                  value={`${endDay} ${endMonth}`}
+                  readOnly
+                  onClick={() => setOpen((open) => !open)}
+                  className="focus:outline-none font-medium bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                />
+              </div>
             </div>
           </div>
 
@@ -425,6 +457,32 @@ const PatientLedger = () => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="absolute z-10 lg:ml-[8%] xl:ml-[12%] 2xl:ml-[15]">
+          {open && (
+            <div>
+              <div>
+                <DateRangePicker
+                  onChange={(item) => setRange([item.selection])}
+                  editableDateInputs={true}
+                  moveRangeOnFirstSelection={false}
+                  ranges={range}
+                  months={2}
+                  direction="horizontal"
+                  className="border-2 border-gray-100"
+                />
+              </div>
+              <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
+                <button
+                  className="bg-gray-600 py-1 px-2 m-2 text-white rounded"
+                  type="submit"
+                  onClick={() => setOpen(false)}
+                >
+                  Ok
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </form>
       {table && (

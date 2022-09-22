@@ -30,9 +30,6 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       dataIndex: "Description",
       key: "Description",
       width: 120,
-      filters: [{}],
-      filteredValue: filteredInfo.Description || null,
-      onFilter: (value, record) => record.Description.includes(value),
       sorter: (a, b) => {
         return a.Description > b.Description ? -1 : 1;
       },
@@ -46,9 +43,6 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "Onset_Date",
       dataIndex: "Onset_Date",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.Onset_Date || null,
-      onFilter: (value, record) => record.Onset_Date.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
         return a.Onset_Date > b.Onset_Date ? -1 : 1; //sorting problem solved using this logic
@@ -63,9 +57,6 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "End_Date",
       dataIndex: "End_Date",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.End_Date || null,
-      onFilter: (value, record) => record.End_Date.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
         return a.End_Date > b.End_Date ? -1 : 1; //sorting problem solved using this logic
@@ -78,9 +69,6 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "Primary_insurance",
       dataIndex: "Primary_insurance",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.Primary_insurance || null,
-      onFilter: (value, record) => record.Primary_insurance.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
         return a.Primary_insurance > b.Primary_insurance ? -1 : 1; //sorting problem solved using this logic
@@ -94,9 +82,6 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "Treatment_type",
       dataIndex: "Treatment_type",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.Treatment_type || null,
-      onFilter: (value, record) => record.Treatment_type.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
         return a.Treatment_type > b.Treatment_type ? -1 : 1; //sorting problem solved using this logic
@@ -110,9 +95,6 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "uci",
       dataIndex: "uci",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.uci || null,
-      onFilter: (value, record) => record.uci.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
         return a.uci > b.uci ? -1 : 1; //sorting problem solved using this logic
@@ -154,15 +136,9 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       console.log(selected, selectedRows, changeRows);
     },
   };
-
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
-    setFilteredInfo(filters);
     setSortedInfo(sorter);
-  };
-
-  const clearFilters = () => {
-    setFilteredInfo({});
   };
 
   return (
@@ -189,12 +165,6 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
               <h1 className="text-sm text-gray-600 text-left font-semibold ">
                 Auth List
               </h1>
-              <button
-                onClick={clearFilters}
-                className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
-              >
-                Clear filters
-              </button>
             </div>
 
             {loading ? (

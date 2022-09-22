@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import CustomCard from "./CustomCard";
 
 const CustomSearch = () => {
   const [clicked, setClicked] = useState(false);
@@ -11,7 +12,7 @@ const CustomSearch = () => {
     setClicked(!clicked);
   };
   return (
-    <div>
+    <div className="bg-white">
       <div className="cursor-pointer">
         {/* Upper div */}
         {clicked && (
@@ -62,7 +63,18 @@ const CustomSearch = () => {
           </div>
         )}
       </div>
+      <CustomCard></CustomCard>
     </div>
+    // <div className="w-full bg-gradient-to-r from-secondary to-primary">
+    //   <div className=""></div>
+    //   <form>
+    //     {/* radio button */}
+    //     <div>
+    //       <input type="radio" name="" id="" className="pr-[5px]" />
+    //       <label htmlFor="radio">One Way</label>
+    //     </div>
+    //   </form>
+    // </div>
   );
 };
 

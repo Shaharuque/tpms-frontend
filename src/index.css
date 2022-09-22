@@ -156,3 +156,74 @@ code {
   background-color: #089bab;
 
 }
+
+ /* date range picker calendar   */
+.rdrSelected, .rdrInRange{
+    background: #0AA1B2 !important;
+    border: #000;
+}
+.rdrStartEdge, .rdrEndEdge{
+  background-color: #0AA1B2 !important;
+}
+.rdrDateDisplayWrapper{
+  display: none !important;
+}
+.rdrDateDisplayWrapper{
+  background-color: #fff !important;
+}
+.rdrInputRanges{
+  display: none !important;
+}
+.rdrDefinedRangesWrapper{
+  width: 100% !important;
+}
+.rdrDayNumber,
+.rdrStaticRangeLabel,
+.rdrDay{
+    color: #0AA1B2 !important;
+}
+
+@media only screen and (max-width:450px){
+  .rdrMonthAndYearPickers{
+    flex-direction: column !important;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .rdrDateRangePickerWrapper{
+    flex-direction: column-reverse;
+  }
+  .rdrStaticRanges{
+    flex-direction: row !important;
+  }
+  .rdrDateRangePickerWrapper,
+  .rdrMonth,
+  .range-date-ok{
+    width: 80% !important;
+  }
+  .rdrMonthAndYearPickers{
+    margin: 0 auto !important;
+  }
+  .rdrMonths{
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+  .rdrDateRangePickerWrapper{
+    flex-direction: column-reverse;
+  }
+  .rdrStaticRanges{
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}
+
+@media only screen and (max-width:1023px){
+  .rdrDateRangePickerWrapper{
+    flex-direction: column-reverse !important;
+  }
+  .rdrStaticRanges{
+    flex-direction: row !important;
+  }
+}

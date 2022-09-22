@@ -1,12 +1,14 @@
 import React from "react";
-import CredentialsBoxOne from "./Credentials/CredentialsBoxOne";
+import Clearance from "./Credentials/Clearance/Clearance";
+import Credential from "./Credentials/Credential/Credential";
+import Qualification from "./Credentials/Qualification/Qualification";
 
 const Credentials = () => {
   return (
     <div className="h-[100vh]">
-      <CredentialsBoxOne name="Credential"></CredentialsBoxOne>
-      <CredentialsBoxOne name="Clearance"></CredentialsBoxOne>
-      <CredentialsBoxOne name="Qualification"></CredentialsBoxOne>
+      <Credential></Credential>
+      <Clearance></Clearance>
+      <Qualification></Qualification>
     </div>
   );
 };

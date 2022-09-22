@@ -37,6 +37,8 @@ import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
 import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
 import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
+//For testing purpose
+import MainBase from "./Testing/Table_React/MainBase";
 import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
 import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
 import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
@@ -50,7 +52,6 @@ import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/
 import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
 import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
 import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
-import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
 import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
 import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
 import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
@@ -115,9 +116,7 @@ import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientP
 import NotFound from "./NoPageFound/NotFound";
 //Testing
 import CustomSearch from "./Testing/CustomSearch/CustomSearch";
-import RowSelect from "./Testing/AntTableTest/RowSelect";
 import AntTableTest from "./Testing/AntTableTest/AntTableTest";
-import ExpendedTable from "./Testing/AntTableTest/ExpendedTable";
 import TableApi from "./Testing/AntTableTest/TableApi/TableApi";
 import SingleDetails from "./Testing/AntTableTest/TableApi/SingleDetails";
 // ###### Staff
@@ -159,6 +158,10 @@ function App() {
 
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
+          <Route
+            path="/auth-table"
+            element={<CustomSearch></CustomSearch>}
+          ></Route>
           <Route path="test" element={<AntTableTest></AntTableTest>}></Route>
           {/* <Route path="expandTable" element={<ExpendedTable></ExpendedTable>} /> */}
           <Route path="table-api" element={<TableApi></TableApi>}></Route>
