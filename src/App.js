@@ -158,6 +158,10 @@ function App() {
 
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
+          <Route
+            path="/auth-table"
+            element={<CustomSearch></CustomSearch>}
+          ></Route>
           <Route path="test" element={<AntTableTest></AntTableTest>}></Route>
           {/* <Route path="expandTable" element={<ExpendedTable></ExpendedTable>} /> */}
           <Route path="table-api" element={<TableApi></TableApi>}></Route>
