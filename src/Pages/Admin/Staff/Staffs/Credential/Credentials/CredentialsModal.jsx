@@ -40,7 +40,7 @@ const CredentialsModal = ({ handleClose, open, name }) => {
                   </label>
                   <select
                     className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                    {...register(`${name}`)}
+                    {...register("credential")}
                   >
                     <option value="Speech Therapist">Speech Therapist</option>
                     <option value="female">Female</option>
@@ -115,7 +115,6 @@ const CredentialsModal = ({ handleClose, open, name }) => {
                   Close
                 </button>
               </div>
-              s
             </form>
           </div>
         </Dialog>

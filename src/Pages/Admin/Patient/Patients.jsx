@@ -19,6 +19,8 @@ const TableApi = () => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [patientId, setPatientId] = useState();
   const [data, setData] = useState([]);
+  //For ANTd Modal
+  const [modalOpen, setModalOpen] = useState(false);
 
   const navigate = useNavigate();
   //console.log(row);
@@ -29,7 +31,8 @@ const TableApi = () => {
   //Auth click event handler
   const handleAuthClick = (id) => {
     console.log(id);
-    setOpenEditModal(true);
+    //setOpenEditModal(true);
+    setModalOpen(true);
     setPatientId(id);
   };
 
@@ -512,11 +515,19 @@ const TableApi = () => {
         {/* </InfiniteScroll> */}
 
         {/* PatientAuthorizationTableModal component render and particular patient id also passed to the PatientAuthorizationTableModal component*/}
-        {openEditModal && (
+        {/* {openEditModal && (
           <PatientAuthorizationsTableModal
             patient_id={patientId}
             handleClose={handleClose}
             open={openEditModal}
+          ></PatientAuthorizationsTableModal>
+        )} */}
+        {modalOpen && (
+          <PatientAuthorizationsTableModal
+            patient_id={patientId}
+            handleClose={handleClose}
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
           ></PatientAuthorizationsTableModal>
         )}
       </>

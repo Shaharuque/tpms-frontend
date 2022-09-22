@@ -6,13 +6,9 @@ import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const Clearance = ({ name }) => {
-  const [tableOpen, setTableOpen] = useState(true);
+const Clearance = ({ handleClearence, clearenceOpen, name }) => {
+  console.log(name);
   const [display, setDisplay] = useState(true);
-  const handleTable = () => {
-    setTableOpen(!tableOpen);
-  };
-
   const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -138,12 +134,12 @@ const Clearance = ({ name }) => {
   return (
     <div>
       <h2
-        onClick={handleTable}
+        onClick={handleClearence}
         className=" mt-4 text-xs font-normal px-2 py-2 text-white bg-secondary rounded-sm"
       >
         Clearance
       </h2>
-      {tableOpen && (
+      {clearenceOpen && (
         <div className="border">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
