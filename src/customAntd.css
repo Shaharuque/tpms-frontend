@@ -1,10 +1,9 @@
+
 /*!
  * antd v4.23.1
  * 
  * Copyright 2015-present, Alipay, Inc.
  * All rights reserved.
- *       
- */
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable */
@@ -33041,5 +33040,9 @@ div.ant-typography-edit-content.ant-typography-rtl {
   padding: 0;
 }
 
+
+span.anticon.anticon-delete svg{
+  color: red;
+}
 
 /*# sourceMappingURL=antd.css.map*/

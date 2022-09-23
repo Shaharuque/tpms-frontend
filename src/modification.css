@@ -1,15 +1,12 @@
 
-
-
 .rs-btn-primary {
     color: #fff;
     color: var(--rs-btn-primary-text);
     background: linear-gradient(to right, rgba(13, 181, 200, 1) 0%, rgba(8, 155, 171, 1) 100%) !important;
     background-color: "#70931b" !important;
     border: none;
+    
 }
-
-
 
 .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
     color: #fff;
@@ -20,11 +17,9 @@
     box-shadow: none;
 }
 
-
 svg.rs-picker-toggle-caret.rs-icon {
     margin: 0;
 }
-
 
 .rs-nav-tabs.rs-nav-horizontal .rs-nav-bar {
     border-top: 2px solid #e4e4f0 !important;
