@@ -96,7 +96,7 @@
 // export default InsuranceExclusionMultiSelection;
 
 import React, { useEffect, useState } from "react";
-import { Switch, Transfer } from "antd";
+import { Switch, Table, Transfer } from "antd";
 import axios from "axios";
 
 const InsuranceExclusionMultiSelection = () => {

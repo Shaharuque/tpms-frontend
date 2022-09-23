@@ -403,6 +403,10 @@ function App() {
               path="create-staff/staff"
               element={<CreateStaff></CreateStaff>}
             ></Route>
+            <Route
+              path="create-staff/officeStaff"
+              element={<CreateStaff></CreateStaff>}
+            ></Route>
             <Route path="staff" element={<StaffInformation></StaffInformation>}>
               <Route path="staffs-biographic/:id" element={<Bio></Bio>}></Route>
               <Route

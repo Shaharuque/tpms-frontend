@@ -270,7 +270,10 @@ const Staffs = () => {
             Provider (Therapist)
           </Link>
           <br />
-          <Link className="hover:text-primary my-3 " to={"#"}>
+          <Link
+            className="hover:text-primary my-3 "
+            to={"/admin/create-staff/officeStaff"}
+          >
             Office Staff
           </Link>
         </div>

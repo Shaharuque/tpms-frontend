@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getpatientsDetails } from "../../../../../features/Patient_redux/patientSlice";
 import Loading from "../../../../../Loading/Loading";
+import TextArea from "antd/lib/input/TextArea";
 
 const PatientInformation = () => {
   const [voiceMsg, setVoiceMsg] = useState(false);
@@ -53,7 +54,7 @@ const PatientInformation = () => {
 
   // address icon delete handeler
   const addressHandleRemove = (index) => {
-    console.log(index);
+    // console.log(index);
     const list = [...addressRendomValue];
     list.splice(index, 1);
     setAddressRendomValue(list);
@@ -72,9 +73,6 @@ const PatientInformation = () => {
     list.splice(index, 1);
     setEmailRendomValue(list);
   };
-
-  console.log("file = ", file);
-  // console.log(Guarantor);
   // Patient Information
   const { id } = useParams();
   // console.log("patient Info", id);
@@ -83,7 +81,7 @@ const PatientInformation = () => {
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
-  console.log("patient details", patient_details);
+  // console.log("patient details", patient_details);
 
   useEffect(() => {
     // action dispatched
@@ -109,7 +107,7 @@ const PatientInformation = () => {
     }, 0);
   }, [patient_details?.client_first_name, patient_details?.is_active_client]);
 
-  console.log(patient_details?.is_active_client);
+  // console.log(patient_details?.is_active_client);
   const [value, setValues] = useState(patient_details?.is_active_client);
 
   const onSubmit = (data) => {
@@ -132,7 +130,7 @@ const PatientInformation = () => {
     //setRelation(relation);
     setRelation(e.target.value);
   };
-  console.log(relation);
+  // console.log(relation);
   //Guarentor handler code
   const handleChange = (event) => {
     if (event.target.checked) {
@@ -815,7 +813,7 @@ const PatientInformation = () => {
 
           <div className="flex ml-1 mt-1 items-center">
             <input
-              disabled={relation === "Self" ? "true" : null}
+              disabled={relation === "Self" ? true : null}
               type="checkbox"
               onChange={handleChange}
               // value={isSubscribed}
@@ -948,13 +946,15 @@ const PatientInformation = () => {
             </motion.div>
           )}
 
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-1 mr-2 gap-x-3 gap-y-1">
-            <textarea
-              name="comment"
-              className="border border-gray-300 text-sm font-normal p-1 mt-3  h-40 "
-            >
-              Notes
-            </textarea>
+          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2 gap-x-3 gap-y-1">
+            <div className="mt-3">
+              <TextArea
+                maxLength={2}
+                rows={7}
+                placeholder=" Notes"
+                size="large"
+              />
+            </div>
 
             <div className="ml-2 mt-[12px] ">
               <SimpleFileUpload

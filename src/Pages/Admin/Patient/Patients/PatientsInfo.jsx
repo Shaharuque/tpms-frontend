@@ -14,7 +14,7 @@ import { RiFileDamageFill } from "react-icons/ri";
 const PatientsInfo = () => {
   // Great parent component
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   return (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-2">

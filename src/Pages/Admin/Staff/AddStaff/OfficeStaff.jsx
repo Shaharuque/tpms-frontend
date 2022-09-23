@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const CreateStaff = () => {
+const OfficeStaff = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
@@ -346,5 +346,4 @@ const CreateStaff = () => {
     </div>
   );
 };
-
-export default CreateStaff;
+export default OfficeStaff;

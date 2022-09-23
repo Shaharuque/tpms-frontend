@@ -1,7 +1,12 @@
 import React from "react";
+import ServiceSubTypeExclusions from "../ServiceSubTypeExclusion/ServiceSubTypeExclusions";
 
 const PatientExclusion = () => {
-  return <div>PatientExclusion</div>;
+  return (
+    <div>
+      <ServiceSubTypeExclusions></ServiceSubTypeExclusions>
+    </div>
+  );
 };
 
 export default PatientExclusion;

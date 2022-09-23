@@ -1,10 +1,21 @@
 import React from "react";
 import CustomLink from "../../../Pages/Shared/CustomLink";
-import { IoCaretBackCircleOutline } from "react-icons/io5";
+import { IoCaretBackCircleOutline, IoSettingsSharp } from "react-icons/io5";
+import { BiIdCard } from "react-icons/bi";
+import { IoIosContact } from "react-icons/io";
+import { GiReceiveMoney } from "react-icons/gi";
+import { FaUserTimes } from "react-icons/fa";
+import { RiUserFill, RiUserUnfollowLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Outlet, useParams } from "react-router-dom";
 import doctor from "../../../Assets/doctor.png";
+import {
+  MdOutlineSavings,
+  MdOutlineSupervisorAccount,
+  MdOutlineWorkOff,
+  MdPersonSearch,
+} from "react-icons/md";
 
 const StaffInformation = () => {
   const { id } = useParams();
@@ -50,7 +61,7 @@ const StaffInformation = () => {
             className=" p-2 setting-nav rounded-md"
           >
             <div className="">
-              <div className="">
+              <div className="mb-2">
                 <img
                   src={doctor}
                   className="h-24 rounded-full border mb-8 w-24 m-auto"
@@ -66,7 +77,9 @@ const StaffInformation = () => {
               className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
               to={`staffs-biographic/${id}`}
             >
-              <h1 className="ml-1 mt-1">Bio's</h1>
+              <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <MdPersonSearch /> Bio's
+              </h1>
             </CustomLink>
 
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -74,7 +87,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-contact-details/${id}`}
               >
-                <h1 className="ml-1 mt-1">Contact Info</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <IoIosContact /> Contact Info
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -82,7 +97,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-credentials/${id}`}
               >
-                <h1 className="ml-1 mt-1">Credentials</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <BiIdCard /> Credentials
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -90,7 +107,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-department/${id}`}
               >
-                <h1 className="ml-1 mt-1">Department Supervisor(S)</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <MdOutlineSupervisorAccount /> Department Supervisor(S)
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -98,7 +117,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-payroll/${id}`}
               >
-                <h1 className="ml-1 mt-1">Payroll Setup</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <GiReceiveMoney /> Payroll Setup
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -106,7 +127,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-other-setup/${id}`}
               >
-                <h1 className="ml-1 mt-1">Other Setup</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <IoSettingsSharp /> Other Setup
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -114,7 +137,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-leave-tracking/${id}`}
               >
-                <h1 className="ml-1 mt-1">Leave Tracking</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <MdOutlineWorkOff /> Leave Tracking
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -122,7 +147,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-payor-exclusion/${id}`}
               >
-                <h1 className="ml-1 mt-1">Insurance Exclusion(S)</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <MdOutlineSavings /> Insurance Exclusion(S)
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -130,7 +157,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-sub-activity-exclusion/${id}`}
               >
-                <h1 className="ml-1 mt-1">Service Sub-Type Exclusions</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <RiUserUnfollowLine /> Service Sub-Type Exclusions
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -138,7 +167,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-client-exclusion/${id}`}
               >
-                <h1 className="ml-1 mt-1">Patient Exclusion</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <FaUserTimes /> Patient Exclusion
+                </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
@@ -146,7 +177,9 @@ const StaffInformation = () => {
                 className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
                 to={`staffs-portal/${id}`}
               >
-                <h1 className="ml-1 mt-1">Staff Portal</h1>
+                <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                  <RiUserFill /> Staff Portal
+                </h1>
               </CustomLink>
             </div>
           </motion.div>
