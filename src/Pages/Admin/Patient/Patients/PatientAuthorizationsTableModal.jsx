@@ -1,12 +1,17 @@
-import { Dialog } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
 import Loading from "../../../../Loading/Loading";
-import { motion } from "framer-motion";
+//Ant Design modal used here[to solve table data filtering issue]
+import { Modal } from "antd";
 
-const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
+const PatientAuthorizationsTableModal = ({
+  patient_id,
+  handleClose,
+  modalOpen,
+  setModalOpen,
+}) => {
   const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -30,8 +35,15 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       dataIndex: "Description",
       key: "Description",
       width: 120,
+      filters: [
+        { text: "Aloysius", value: "Aloysius" },
+        { text: "Louisa", value: "Louisa" },
+        { text: `Wynn`, value: "Wynn" },
+      ],
+      filteredValue: filteredInfo.Description || null,
+      onFilter: (value, record) => record.Description.includes(value),
       sorter: (a, b) => {
-        return a.Description > b.Description ? -1 : 1;
+        return a.Description > b.Description ? 1 : -1;
       },
       sortOrder:
         sortedInfo.columnKey === "Description" ? sortedInfo.order : null,
@@ -43,9 +55,15 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "Onset_Date",
       dataIndex: "Onset_Date",
       width: 100,
+      filters: [
+        { text: "5/31/2022", value: "5/31/2022" },
+        { text: `	4/25/2022`, value: "4/25/2022" },
+      ],
+      filteredValue: filteredInfo.Onset_Date || null,
+      onFilter: (value, record) => record.Onset_Date.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
-        return a.Onset_Date > b.Onset_Date ? -1 : 1; //sorting problem solved using this logic
+        return a.Onset_Date > b.Onset_Date ? 1 : -1; //sorting problem solved using this logic
       },
       sortOrder:
         sortedInfo.columnKey === "Onset_Date" ? sortedInfo.order : null,
@@ -57,9 +75,15 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "End_Date",
       dataIndex: "End_Date",
       width: 100,
+      filters: [
+        { text: "2/16/2022", value: "2/16/2022" },
+        { text: `	4/25/2022`, value: "4/25/2022" },
+      ],
+      filteredValue: filteredInfo.End_Date || null,
+      onFilter: (value, record) => record.End_Date.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
-        return a.End_Date > b.End_Date ? -1 : 1; //sorting problem solved using this logic
+        return a.End_Date > b.End_Date ? 1 : -1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "End_Date" ? sortedInfo.order : null,
       ellipsis: true,
@@ -69,9 +93,12 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "Primary_insurance",
       dataIndex: "Primary_insurance",
       width: 100,
+      filters: [{ text: "Mineral Oil", value: "Mineral Oil" }],
+      filteredValue: filteredInfo.Primary_insurance || null,
+      onFilter: (value, record) => record.Primary_insurance.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
-        return a.Primary_insurance > b.Primary_insurance ? -1 : 1; //sorting problem solved using this logic
+        return a.Primary_insurance > b.Primary_insurance ? 1 : -1; //sorting problem solved using this logic
       },
       sortOrder:
         sortedInfo.columnKey === "Primary_insurance" ? sortedInfo.order : null,
@@ -82,9 +109,15 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "Treatment_type",
       dataIndex: "Treatment_type",
       width: 100,
+      filters: [
+        { text: "Cardinal Health", value: "Cardinal Health" },
+        { text: "ALK-Abello, Inc.", value: "ALK-Abello, Inc." },
+      ],
+      filteredValue: filteredInfo.Treatment_type || null,
+      onFilter: (value, record) => record.Treatment_type.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
-        return a.Treatment_type > b.Treatment_type ? -1 : 1; //sorting problem solved using this logic
+        return a.Treatment_type > b.Treatment_type ? 1 : -1; //sorting problem solved using this logic
       },
       sortOrder:
         sortedInfo.columnKey === "Treatment_type" ? sortedInfo.order : null,
@@ -95,9 +128,16 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
       key: "uci",
       dataIndex: "uci",
       width: 100,
+      filters: [
+        { text: "06-741-5403", value: "06-741-5403" },
+        { text: "95-398-9962", value: "95-398-9962" },
+        { text: "62-476-0410", value: "62-476-0410" },
+      ],
+      filteredValue: filteredInfo.uci || null,
+      onFilter: (value, record) => record.uci.includes(value),
       //   sorter is for sorting asc or dsc purOnset_Datee
       sorter: (a, b) => {
-        return a.uci > b.uci ? -1 : 1; //sorting problem solved using this logic
+        return a.uci > b.uci ? 1 : -1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "uci" ? sortedInfo.order : null,
       ellipsis: true,
@@ -122,13 +162,13 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
   ];
 
   const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
+    // onChange: (selectedRowKeys, selectedRows) => {
+    //   console.log(
+    //     `selectedRowKeys: ${selectedRowKeys}`,
+    //     "selectedRows: ",
+    //     selectedRows
+    //   );
+    // },
     onSelect: (record, selected, selectedRows) => {
       console.log(record, selected, selectedRows);
     },
@@ -138,18 +178,21 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
   };
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
 
   return (
     <div>
       <div>
-        <Dialog
-          maxWidth="xl"
-          open={open}
-          aria-labelledby="responsive-dialog-title"
+        <Modal
+          centered
+          open={modalOpen}
+          onOk={() => setModalOpen(false)}
+          onCancel={() => setModalOpen(false)}
+          width={1200}
         >
-          <div className="px-5 py-2 box sm:w-[1400px] ">
+          <div>
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">
                 All Authorizations
@@ -172,6 +215,7 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
             ) : (
               <div className=" overflow-scroll">
                 <Table
+                  sortDirections={["ascend", "descend"]}
                   pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                   size="small"
                   className=" text-xs font-normal mt-5"
@@ -186,26 +230,8 @@ const PatientAuthorizationsTableModal = ({ handleClose, open, patient_id }) => {
                 />
               </div>
             )}
-
-            <div className="modal-action">
-              {/* <input type="submit" /> */}
-              <button
-                className=" py-[5px]  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                type="submit"
-              >
-                Save
-              </button>
-
-              <button
-                className=" py-[5px]  px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-                autoFocus
-                onClick={handleClose}
-              >
-                CANCEL
-              </button>
-            </div>
           </div>
-        </Dialog>
+        </Modal>
       </div>
     </div>
   );

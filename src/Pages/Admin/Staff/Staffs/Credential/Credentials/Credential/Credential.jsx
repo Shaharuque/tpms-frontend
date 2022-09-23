@@ -6,17 +6,11 @@ import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 
-const Credential = ({ name }) => {
-  const [tableOpen, setTableOpen] = useState(true);
+const Credential = ({ handleCredential, credentialOpen }) => {
   const [display, setDisplay] = useState(true);
-  const handleTable = () => {
-    setTableOpen(!tableOpen);
-  };
-
   const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  console.log(tableData, "tableData");
 
   //   fetch data
   useEffect(() => {
@@ -34,7 +28,12 @@ const Credential = ({ name }) => {
       dataIndex: "name",
       key: "name",
       width: 120,
-      filters: [{}],
+      filters: [
+        {
+          text: "Miner",
+          value: "Miner",
+        },
+      ],
       filteredValue: filteredInfo.name || null,
       onFilter: (value, record) => record.name.includes(value),
       sorter: (a, b) => {
@@ -138,12 +137,12 @@ const Credential = ({ name }) => {
   return (
     <div>
       <h2
-        onClick={handleTable}
+        onClick={handleCredential}
         className=" mt-4 text-xs font-normal  px-2 py-2 text-white bg-secondary rounded-sm"
       >
         Credential
       </h2>
-      {tableOpen && (
+      {credentialOpen && (
         <div className="border">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
