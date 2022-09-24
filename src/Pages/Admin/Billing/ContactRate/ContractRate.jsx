@@ -7,20 +7,19 @@ import {
 } from "./ContractRate/ContractRateColumns";
 import { FiEdit3 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
-import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import axios from "axios";
+import SettingTableBox from "../../../Pages/Settings/SettingComponents/SettingTableBox";
 
 const ContractRate = () => {
   const [select, setSelect] = useState("");
   const [contactData, setcontactData] = useState([]);
 
-  useEffect(()=>{
-     axios('../../contactRate.json')
-     .then((response)=>{
-      setcontactData(response?.data)
-     })
-  },[])
+  useEffect(() => {
+    axios("../../contactRate.json").then((response) => {
+      setcontactData(response?.data);
+    });
+  }, []);
 
   const data = useMemo(() => contactData, [contactData]);
   const columns = useMemo(() => [...ContractRateColumnsColumn], []);

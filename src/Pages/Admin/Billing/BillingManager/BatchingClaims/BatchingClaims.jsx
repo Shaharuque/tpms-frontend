@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "../Settings/SettingComponents/CheckBox";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
 import {
   BatchingClaimsColumnsColumn,
   BatchingClaimsColumnsData,
@@ -17,18 +15,16 @@ const BatchingClaims = () => {
   const { handleSubmit, register, reset } = useForm();
   const [BatchingData, SetBatchingData] = useState([]);
 
-  // fakedb call 
-  useEffect(()=>{
+  // fakedb call
+  useEffect(() => {
     axios("../../All_Fake_Api/batchingClimb.json")
-    .then((response)=>{
-      SetBatchingData(response?.data)
-    })
-    .catch((error)=>{
-       console.log(error)
-    })
-
-  },[])
- 
+      .then((response) => {
+        SetBatchingData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const data = useMemo(() => BatchingData, [BatchingData]);
   const columns = useMemo(() => [...BatchingClaimsColumnsColumn], []);

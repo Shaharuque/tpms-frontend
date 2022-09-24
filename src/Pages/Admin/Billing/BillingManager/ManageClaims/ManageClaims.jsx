@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "../Settings/SettingComponents/CheckBox";
 import {
   ManageClaimsColumnsColumn,
   ManageClaimsColumnsData,
-} from "./BatchingClaimsColumns";
+} from "../BatchingClaims/BatchingClaimsColumns";
 import { RiPencilLine } from "react-icons/ri";
-import SettingTableBox from "../Settings/SettingComponents/SettingTableBox";
 import axios from "axios";
+import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
+import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 
 const ManageClaims = () => {
   const [active, setActive] = useState(false);
@@ -33,20 +33,18 @@ const ManageClaims = () => {
     setNextActive(true);
   };
 
-
-    // fakedb call 
-    useEffect(()=>{
-      axios("../../All_Fake_Api/ManageClimbs.json")
-      .then((response)=>{
-        SetManageClimbsData(response.data)
+  // fakedb call
+  useEffect(() => {
+    axios("../../All_Fake_Api/ManageClimbs.json")
+      .then((response) => {
+        SetManageClimbsData(response.data);
       })
-      .catch((error)=>{
-         console.log(error)
-      })
-  
-    },[])
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-    console.log(ManageClimbsData);
+  console.log(ManageClimbsData);
 
   const data = useMemo(() => ManageClimbsData, [ManageClimbsData]);
   const columns = useMemo(() => [...ManageClaimsColumnsColumn], []);

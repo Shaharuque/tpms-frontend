@@ -7,10 +7,10 @@ import {
   PatientStatementColumnData,
 } from "./PatientStatement/PatientStatementColumn";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "./Settings/SettingComponents/CheckBox";
-import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { DateRangePicker } from "rsuite";
+import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
+import SettingTableBox from "../../../Pages/Settings/SettingComponents/SettingTableBox";
 
 const PatientStatement = () => {
   const [select, setSelect] = useState("");
@@ -94,11 +94,11 @@ const PatientStatement = () => {
           <div className="flex  items-center">
             {/* <BsCalendar3WeekFill className=" text-gray-600 bg-gray-200 p-[6px] text-3xl" /> */}
             <DateRangePicker
-                    onChange={(date) => {
-                      console.log(date);
-                    }}
-                    placeholder="Select Date"
-              />
+              onChange={(date) => {
+                console.log(date);
+              }}
+              placeholder="Select Date"
+            />
           </div>
         </div>
         <button

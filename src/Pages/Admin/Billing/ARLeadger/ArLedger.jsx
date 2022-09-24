@@ -11,12 +11,12 @@ import {
   ARLedgerColumnsData,
 } from "./ARLedger/ARLedgerColumns";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "./Settings/SettingComponents/CheckBox";
-import SettingTableBox from "./Settings/SettingComponents/SettingTableBox";
 // import "rsuite/dist/rsuite.css";
 import { DateRangePicker } from "rsuite";
 import { useEffect } from "react";
 import axios from "axios";
+import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
+import SettingTableBox from "../../../Pages/Settings/SettingComponents/SettingTableBox";
 const ArLedger = () => {
   const [select, setSelect] = useState("");
   const [table, setTable] = useState(false);
@@ -24,14 +24,15 @@ const ArLedger = () => {
   const [ladgerData, SetladgerData] = useState([]);
 
   // fakedb call
-  useEffect(()=>{
+  useEffect(() => {
     axios("../../All_Fake_Api/ArLadger.json")
-    .then((response)=>{
-      SetladgerData(response?.data)
-    }).catch((error)=>{
-      console.log(error)
-    })
-  },[])
+      .then((response) => {
+        SetladgerData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
@@ -113,7 +114,7 @@ const ArLedger = () => {
 
   const { pageIndex, pageSize } = state;
   return (
-    <div >
+    <div>
       <div>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -248,4 +249,4 @@ const ArLedger = () => {
 
 export default ArLedger;
 
-// 
+//
