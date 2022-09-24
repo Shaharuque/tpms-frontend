@@ -1,12 +1,14 @@
-import { Dialog } from "@mui/material";
+//import { Dialog } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { Modal } from "antd";
 
 const EditSession = ({ handleClose, open, editableRow }) => {
   const { register, handleSubmit, reset } = useForm();
   const [notes, setNotes] = useState("");
-  const onSubmit = (data) => {
+  const onSubmit = (data, e) => {
+    e.preventDefault();
     console.log(data);
     reset();
   };
@@ -15,14 +17,18 @@ const EditSession = ({ handleClose, open, editableRow }) => {
     setTimeout(() => {
       reset({});
     }, 500);
-  }, [reset, editableRow]);
+  }, [reset]);
   return (
     <div>
       <div>
-        <Dialog
-          open={handleClose}
-          // onClose={handleClose}
-          aria-labelledby="responsive-dialog-title"
+        <Modal
+          open={open}
+          centered
+          zIndex={1000}
+          footer={false}
+          closable={false}
+          //onClose={handleClose}
+          // aria-labelledby="responsive-dialog-title"
         >
           <div className="px-5 py-2 box sm:w-[500px]">
             <div className="flex items-center justify-between">
@@ -153,22 +159,22 @@ const EditSession = ({ handleClose, open, editableRow }) => {
                 <button
                   className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                   type="submit"
-                  onClick={handleClose}
                 >
                   Save Changes
                 </button>
 
                 <button
+                  onClick={handleClose}
+                  type="button"
                   className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                   autoFocus
-                  onClick={handleClose}
                 >
                   Close
                 </button>
               </div>
             </form>
           </div>
-        </Dialog>
+        </Modal>
       </div>
     </div>
   );

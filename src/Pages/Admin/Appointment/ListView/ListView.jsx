@@ -1,12 +1,9 @@
-import React, { memo, useEffect, useMemo, useState } from "react";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { ManageTableColumnsColumn } from "./ListView/ManageTableColumns";
+import React, { memo, useEffect, useState } from "react";
 import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
-import UseTable from "../../../../Utilities/UseTable";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import { Fade } from "react-reveal";
@@ -26,16 +23,11 @@ import { BsArrowRight } from "react-icons/bs";
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
   const [table, setTable] = useState(false);
-  const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
   const [listView, setListView] = useState(true);
   const [card, setCard] = useState(false);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-
-  const handleSortBy = (e) => {
-    setSortBy(e.target.value);
-  };
 
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([

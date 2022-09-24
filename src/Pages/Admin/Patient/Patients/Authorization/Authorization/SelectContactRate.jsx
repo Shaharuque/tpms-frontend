@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { Dialog } from "@mui/material";
-import { Table } from "antd";
+import { Table, Modal } from "antd";
 
 const SelectContactRate = ({ handleClose, open }) => {
   const [tableData, settableData] = useState([]);
@@ -28,7 +27,12 @@ const SelectContactRate = ({ handleClose, open }) => {
       dataIndex: "service_type",
       key: "service_type",
       width: 100,
-      filters: [{}],
+      filters: [
+        {
+          text: "Berka",
+          value: "Berka",
+        },
+      ],
       filteredValue: filteredInfo.service_type || null,
       onFilter: (value, record) => record.service_type.includes(value),
       sorter: (a, b) => {
@@ -213,12 +217,15 @@ const SelectContactRate = ({ handleClose, open }) => {
   return (
     <div>
       <div>
-        <Dialog
-          maxWidth="xl"
+        <Modal
           open={open}
-          aria-labelledby="responsive-dialog-title"
+          centered
+          footer={false}
+          closable={false}
+          width={1000}
+          bodyStyle={{ padding: "0" }}
         >
-          <div className="px-5 py-2 box sm:w-[1400px] ">
+          <div className="px-5 py-2 box">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">
                 Edit Document
@@ -268,7 +275,7 @@ const SelectContactRate = ({ handleClose, open }) => {
               </button>
             </div>
           </div>
-        </Dialog>
+        </Modal>
       </div>
     </div>
   );
