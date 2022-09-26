@@ -79,7 +79,7 @@ const ServiceSubTypeExclusions = () => {
                   {item.key}
                   {item.title}
                 </option>
-              ))}{" "}
+              ))}
           </select>
         </div>
 

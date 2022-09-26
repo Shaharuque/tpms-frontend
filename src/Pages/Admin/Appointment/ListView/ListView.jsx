@@ -1,12 +1,8 @@
-import React, { memo, useEffect, useMemo, useState } from "react";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { ManageTableColumnsColumn } from "./ListView/ManageTableColumns";
-import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
+import React, { memo, useEffect, useState } from "react";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
-import UseTable from "../../../../Utilities/UseTable";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import { Fade } from "react-reveal";
@@ -29,7 +25,6 @@ const ListView = () => {
   const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
   const [listView, setListView] = useState(true);
-  const [card, setCard] = useState(false);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
@@ -387,7 +382,7 @@ const ListView = () => {
           <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">
             <div onClick={clickHandler} className="  flex items-center ">
               {!clicked && (
-                <h1 className="text-[16px]  text-white font-normal ">
+                <h1 className="text-[16px]  text-white font-semibold ">
                   Manage Sessions
                 </h1>
               )}
@@ -397,7 +392,7 @@ const ListView = () => {
               <div>
                 <Fade>
                   <div className="flex justify-between items-center">
-                    <h1 className="text-[16px]  text-white font-normal ">
+                    <h1 className="text-[20px]  text-white font-semibold ">
                       Manage Sessions
                     </h1>
                     <div className="  flex justify-end gap-3">
@@ -461,8 +456,8 @@ const ListView = () => {
                     <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-2">
                       {billable && (
                         <div>
-                          <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
-                            Patients
+                          <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
+                            Clients
                           </h1>
                           <CustomMultiSelection
                             data={datat}
@@ -472,7 +467,7 @@ const ListView = () => {
                         </div>
                       )}
                       <div className="w-full">
-                        <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
+                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                           Provider
                         </h1>
                         <CustomMultiSelection
@@ -486,7 +481,7 @@ const ListView = () => {
                         <>
                           <div>
                             <label className="label">
-                              <span className="label-text text-xs text-gray-100 text-left">
+                              <span className="label-text text-[16px] text-gray-100 text-left">
                                 Place of Services
                               </span>
                             </label>
@@ -519,7 +514,7 @@ const ListView = () => {
 
                           <div>
                             <label className="label">
-                              <span className="label-text text-xs text-gray-100 text-left">
+                              <span className="label-text text-[16px] text-gray-100 text-left">
                                 Selected date
                               </span>
                             </label>
@@ -544,7 +539,7 @@ const ListView = () => {
 
                           <div>
                             <label className="label">
-                              <span className="label-text text-xs text-gray-100 text-left">
+                              <span className="label-text text-[16px] text-gray-100 text-left">
                                 Status
                               </span>
                             </label>
@@ -577,7 +572,7 @@ const ListView = () => {
                         </>
                       )}
                       <button
-                        className="font-regular mt-[33px] sm:w-1/4  text-sm font-normal bg-secondary  hover:to-secondary text-white rounded-md"
+                        className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
                         type="submit"
                       >
                         Go
@@ -648,22 +643,6 @@ const ListView = () => {
                 <CardsView data={TData}></CardsView>
               </motion.div>
             )}
-            {/* <div className="flex item-center flex-wrap">
-              <div>
-                <select
-                  onChange={handleSortBy}
-                  name="type"
-                  className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
-                >
-                  <option value=""></option>
-                  <option value="Specific_Date">Specific Date</option>
-                  <option value="Date_Range">Provider</option>
-                </select>
-              </div>
-              <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-                Go
-              </button>
-            </div> */}
           </>
         )}
       </div>

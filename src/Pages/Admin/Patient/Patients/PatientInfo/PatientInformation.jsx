@@ -171,11 +171,11 @@ const PatientInformation = () => {
               Active Patient
             </span>
           </div>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-3 mr-2 gap-x-2 gap-y-1">
-            {/* name  */}
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 my-3 mr-2 gap-x-6 gap-y-1">
+            {/* name  */} ee we ww
             <div>
               <label className="label">
-                <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   First Name<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -188,7 +188,7 @@ const PatientInformation = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Middle Name
                 </span>
               </label>
@@ -201,7 +201,7 @@ const PatientInformation = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Last Name<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -215,7 +215,7 @@ const PatientInformation = () => {
             {/* DOB */}
             <div>
               <label className="label">
-                <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Date of Birth<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -227,9 +227,9 @@ const PatientInformation = () => {
               />
             </div>
             {/* gender */}
-            <div>
+            <div className=" ">
               <label className="label">
-                <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Gender<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -243,12 +243,10 @@ const PatientInformation = () => {
                 <option value="Female">Female</option>
               </select>
             </div>
-
             {/* RelationShip */}
-
             <div>
               <label className="label">
-                <span className="label-text flex items-center text-xs font-medium text-[#9b9b9b] text-left">
+                <span className="label-text flex items-center text-[17px] font-medium text-[#9b9b9b] text-left">
                   RelationShip
                   <AiOutlineQuestionCircle className="text-sm" />
                   <span className="text-red-500">*</span>
