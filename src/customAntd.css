@@ -5385,11 +5385,12 @@ li:last-child>.ant-breadcrumb-separator {
   content: '';
 }
 
+/* button hover color changing */
 .ant-btn-primary:hover,
 .ant-btn-primary:focus {
   color: #fff;
-  border-color: #40a9ff;
-  background: #40a9ff;
+  border-color: black;
+  background: black;
 }
 
 .ant-btn-primary:hover>a:only-child,

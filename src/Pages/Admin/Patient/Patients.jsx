@@ -41,13 +41,14 @@ const TableApi = () => {
   useEffect(() => {
     axios("../../All_Fake_Api/Patients.json")
       .then((response) => {
+        console.log("calling");
         setData(response?.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  console.log(data);
+  //console.log(data);
   // END
 
   // get data from API + data fetch from api while scrolling[Important]
@@ -148,7 +149,7 @@ const TableApi = () => {
     setFilteredInfo({});
   };
 
-  console.log(filteredInfo);
+  console.log("flited-info", filteredInfo);
 
   const patientDetails = (id) => {
     //console.log(id);
@@ -407,89 +408,91 @@ const TableApi = () => {
           </button>
         </div>
         {/* filtering tag showing part */}
-        {filteredInfo?.client_first_name ||
-        filteredInfo?.client_dob ||
-        filteredInfo?.client_gender ||
-        filteredInfo?.location ? (
-          <div className="border border-secondary bg-gray-100 flex-wrap flex mb-4 text-xs ">
+        {filteredInfo?.client_first_name?.length > 0 ? (
+          <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
             {/* {filteredInfo?.client_first_name?.map((tag, index) => (
             <h1 className="text-red-600 border-black mr-2" key={index}>
               {tag}
             </h1>
           ))} */}
             <div className="p-2 rounded ">
-              <div className="flex mb-2 flex-wrap gap-1">
-                <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
-                  Patient:
-                </span>
-                {filteredInfo?.client_first_name?.map((tag, index) => (
-                  <div
-                    className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
-                    key={index}
-                  >
-                    <div className=" text-sm">{tag}</div>
-                    <div>
-                      <div
-                        className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
-                        onClick={() => deleteFirstNameTag(tag)}
-                      >
-                        X
+              {filteredInfo?.client_first_name?.length > 0 && (
+                <div className="flex mb-2 gap-1">
+                  <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
+                    Patient:
+                  </span>
+                  {filteredInfo?.client_first_name?.map((tag, index) => (
+                    <div
+                      className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
+                      key={index}
+                    >
+                      <div className=" text-sm">{tag}</div>
+                      <div>
+                        <div
+                          className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
+                          onClick={() => deleteFirstNameTag(tag)}
+                        >
+                          X
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-              <div className="flex mb-2">
-                <span className="border-black font-bold mr-2 flex items-center">
-                  DOB:
-                </span>
-                {filteredInfo?.client_dob?.map((tag, index) => (
-                  <h1
-                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
-                    key={index}
-                  >
-                    {tag}
-                    <TiDelete
-                      className="cursor-pointer text-lg"
-                      onClick={() => deleteDobTag(tag)}
-                    ></TiDelete>
-                  </h1>
-                ))}
-              </div>
-              <div className="flex mb-2">
-                <span className="border-black font-bold mr-2 flex items-center">
-                  Gender:
-                </span>
-                {filteredInfo?.client_gender?.map((tag, index) => (
-                  <h1
-                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
-                    key={index}
-                  >
-                    {tag}
-                    <TiDelete
-                      className="cursor-pointer text-lg"
-                      onClick={() => deleteGenderTag(tag)}
-                    ></TiDelete>
-                  </h1>
-                ))}
-              </div>
-              <div className="flex mb-2">
-                <span className="border-black font-bold mr-2 flex items-center">
-                  POS:
-                </span>
-                {filteredInfo?.location?.map((tag, index) => (
-                  <h1
-                    className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
-                    key={index}
-                  >
-                    {tag}
-                    <TiDelete
-                      className="cursor-pointer text-lg"
-                      onClick={() => deletelocationTag(tag)}
-                    ></TiDelete>
-                  </h1>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
+              {filteredInfo?.client_dob?.length > 0 && (
+                <div className="flex mb-2">
+                  <span className="border-black font-bold mr-2 flex items-center">
+                    DOB:
+                  </span>
+                  {filteredInfo?.client_dob?.map((tag, index) => (
+                    <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+                      {tag}
+                      <TiDelete
+                        className="cursor-pointer text-lg"
+                        onClick={() => deleteDobTag(tag)}
+                      ></TiDelete>
+                    </h1>
+                  ))}
+                </div>
+              )}
+              {filteredInfo?.client_gender?.length > 0 && (
+                <div className="flex mb-2">
+                  <span className="border-black font-bold mr-2 flex items-center">
+                    Gender:
+                  </span>
+                  {filteredInfo?.client_gender?.map((tag, index) => (
+                    <h1
+                      className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                      key={index}
+                    >
+                      {tag}
+                      <TiDelete
+                        className="cursor-pointer text-lg"
+                        onClick={() => deleteGenderTag(tag)}
+                      ></TiDelete>
+                    </h1>
+                  ))}
+                </div>
+              )}
+              {filteredInfo?.location?.length > 0 && (
+                <div className="flex mb-2">
+                  <span className="border-black font-bold mr-2 flex items-center">
+                    POS:
+                  </span>
+                  {filteredInfo?.location?.map((tag, index) => (
+                    <h1
+                      className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
+                      key={index}
+                    >
+                      {tag}
+                      <TiDelete
+                        className="cursor-pointer text-lg"
+                        onClick={() => deletelocationTag(tag)}
+                      ></TiDelete>
+                    </h1>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ) : null}
