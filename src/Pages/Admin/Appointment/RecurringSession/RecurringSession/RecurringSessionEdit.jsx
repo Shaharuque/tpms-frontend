@@ -15,7 +15,7 @@ const RecurringSessionEdit = () => {
     console.log(data);
     reset();
   };
-  console.log(errors);
+  //console.log(errors);
 
   return (
     <div className="sm:h-[100vh]">

@@ -355,7 +355,7 @@ function App() {
               element={<RecurringSession></RecurringSession>}
             ></Route>
             <Route
-              path="recurring-session-edit"
+              path="recurring-session-edit/:id"
               element={<RecurringSessionEdit></RecurringSessionEdit>}
             ></Route>
             {/* ----------------------------------Appointment End----------------------------------------------- */}

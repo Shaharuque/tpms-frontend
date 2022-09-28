@@ -263,16 +263,23 @@ const Staffs = () => {
       </div>
       {openStaff && (
         <div className=" absolute bg-white border shadow-md px-3 py-4 mt-1  text-[15px] right-10 z-10 ">
-          <Link
-            className="hover:text-primary my-3 "
-            to={"/admin/create-staff/staff"}
-          >
-            Provider (Therapist)
-          </Link>
+          <div>
+            <Link
+              className="text-white hover:text-black border border-[#34A7B8] rounded bg-[#34A7B8] px-2"
+              to={"/admin/create-staff/staff"}
+            >
+              Provider (Therapist)
+            </Link>
+          </div>
           <br />
-          <Link className="hover:text-primary my-3 " to={"#"}>
-            Office Staff
-          </Link>
+          <div>
+            <Link
+              className="text-white hover:text-black border border-[#34A7B8] rounded bg-[#34A7B8] px-2 w-full"
+              to={"#"}
+            >
+              Office Staff
+            </Link>
+          </div>
         </div>
       )}
       <div className=" overflow-scroll">

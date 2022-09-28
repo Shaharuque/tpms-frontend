@@ -1,5 +1,4 @@
 import React, { memo, useEffect, useState } from "react";
-import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -28,7 +27,6 @@ const ListView = () => {
   const [card, setCard] = useState(false);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [action, setAction] = useState(false);
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([
     {
@@ -64,10 +62,6 @@ const ListView = () => {
 
   const handleListView = () => {
     setListView(!listView);
-  };
-
-  const manageTableAction = (id) => {
-    setAction(!action);
   };
   // calling fake db
   // useEffect(() => {
@@ -272,17 +266,17 @@ const ListView = () => {
         return (
           <div>
             {Status === "Scheduled" && (
-              <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded-lg">
+              <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
                 {Status}
               </button>
             )}
             {Status === "Rendered" && (
-              <button className="bg-green-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
+              <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
                 {Status}
               </button>
             )}
             {Status === "hold" && (
-              <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
+              <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
                 {Status}
               </button>
             )}
@@ -603,7 +597,7 @@ const ListView = () => {
                 </div>
                 <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
                   <button
-                    className="bg-gray-600 py-1 px-2 m-2 text-white rounded"
+                    className="bg-gray-600 py-1  m-2 text-white rounded"
                     type="submit"
                     onClick={() => setOpen(false)}
                   >
@@ -653,7 +647,7 @@ const ListView = () => {
                 <select
                   onChange={handleSortBy}
                   name="type"
-                  className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
+                  className="border border-gray-300 rounded-sm py-[5px] font-normal  w-36 text-xs "
                 >
                   <option value=""></option>
                   <option value="Specific_Date">Specific Date</option>

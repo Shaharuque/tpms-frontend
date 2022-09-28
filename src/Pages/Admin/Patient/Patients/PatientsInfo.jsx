@@ -15,6 +15,7 @@ const PatientsInfo = () => {
   // Great parent component
   const { id } = useParams();
   console.log(id);
+  localStorage.setItem("p_key", id);
   return (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-2">
