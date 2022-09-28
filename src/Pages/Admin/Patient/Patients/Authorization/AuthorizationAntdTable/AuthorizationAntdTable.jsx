@@ -23,6 +23,7 @@ const AuthorizationAntdTable = () => {
   const navigate = useNavigate();
 
   const editAuth = (id) => {
+    console.log(id);
     navigate(`/admin/authorization-Edit/${id}`);
   };
 
@@ -295,22 +296,6 @@ const AuthorizationAntdTable = () => {
           </>
         );
       },
-      filters: [
-        {
-          text: "telehealth",
-          value: "telehealth",
-        },
-        {
-          text: "School",
-          value: "School",
-        },
-        {
-          text: "Office",
-          value: "office",
-        },
-      ],
-      filteredValue: filteredInfo.status || null,
-      onFilter: (value, record) => record.status.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.status > b.status ? -1 : 1; //sorting problem solved using this logic

@@ -12,7 +12,10 @@ import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
-  console.log("param ", id);
+  console.log("description id ", id);
+  const patientId = localStorage.getItem("p_key");
+  console.log(patientId);
+
   const [value, setValue] = useState(false);
   const [notes, setNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
@@ -60,7 +63,7 @@ const AuthorizationEdit = () => {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-sm">Add Auth</h1>
         {/* Back a click korley routing problem solved {`/admin/patient/${id}/patient-authorization/${id}`}*/}
-        <Link to={`/admin/patient/patient-authorization/${id}`}>
+        <Link to={`/admin/patient/patient-authorization/${patientId}`}>
           <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs font-medium  hover:to-secondary text-white rounded-md">
             <IoCaretBackCircleOutline className="mr-1 text-sm" />
             Back

@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { RecurringSessionColumn } from "./RecurringSession/RecurringSessionColumns";
-import { CheckBox } from "../../../Pages/Settings/SettingComponents/CheckBox";
-import SettingTableBox from "../../../Pages/Settings/SettingComponents/SettingTableBox";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import { Fade } from "react-reveal";
 import { MdOutlineCancel } from "react-icons/md";
-import { Table } from "antd";
+import { Dropdown, Space, Table } from "antd";
+import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
+import RecurringSessionEdit from "./RecurringSession/RecurringSessionEdit";
+import { Link } from "react-router-dom";
+import { BiEdit } from "react-icons/bi";
 
 const RecurringSession = () => {
   const [table, setTable] = useState(false);
@@ -20,7 +20,7 @@ const RecurringSession = () => {
 
   // calling recurring session fakedb
   useEffect(() => {
-    axios("../All_Fake_Api/recurringSession.json")
+    axios("../All_Fake_Api/Fakedb.json")
       .then((response) => {
         SetSessionData(response?.data);
       })
@@ -38,38 +38,55 @@ const RecurringSession = () => {
   // Table columns
   const columns = [
     {
-      title: "Patient",
-      dataIndex: "patient",
-      key: "patient",
+      title: "Patients",
+      dataIndex: "Patients",
+      key: "Patients",
       width: 100,
       filters: [
-        { text: "Harding Matthews", value: "Harding Matthews" },
-        { text: "Tyrone Dorsey", value: "Tyrone Dorsey" },
-        { text: `Griffith Byrd`, value: "Griffith Byrd" },
+        {
+          text: `Vernon`,
+          value: "Vernon",
+        },
+        {
+          text: `Aileen Newman`,
+          value: "Aileen Newman",
+        },
+        {
+          text: "Donovan",
+          value: "Donovan",
+        },
+        {
+          text: "Burke Beard",
+          value: "Burke Beard",
+        },
+        {
+          text: "Hector Moses",
+          value: "Hector Moses",
+        },
       ],
-      filteredValue: filteredInfo.patient || null,
-      onFilter: (value, record) => record.patient.includes(value),
+      filteredValue: filteredInfo.Patients || null,
+      onFilter: (value, record) => record.Patients.includes(value),
       sorter: (a, b) => {
-        return a.patient > b.patient ? -1 : 1;
+        return a.Patients > b.Patients ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "patient" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "Patients" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
       // client_first_name, id, key=>each row data(object) property value can be accessed.
-      render: (_, { patient, id, key }) => {
+      render: (_, { Patients, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div className="flex justify-start px-2">
-            <button className="text-secondary">{patient}</button>
+            <button className="text-secondary">{Patients}</button>
           </div>
         );
       },
       ellipsis: true,
     },
     {
-      title: "Service",
-      dataIndex: "service",
-      key: "service",
+      title: "Service & Hrs.",
+      dataIndex: "Service_hrs",
+      key: "Service_hrs",
       width: 100,
       filters: [
         { text: "Milissent", value: "Milissent" },
@@ -83,18 +100,21 @@ const RecurringSession = () => {
           value: "Minnie",
         },
       ],
-      filteredValue: filteredInfo.service || null,
-      onFilter: (value, record) => record.service.includes(value),
+      filteredValue: filteredInfo.Service_hrs || null,
+      onFilter: (value, record) => record.Service_hrs.includes(value),
       sorter: (a, b) => {
-        return a.service > b.service ? -1 : 1;
+        return a.Service_hrs > b.Service_hrs ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "service" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
-      render: (_, { service }) => {
+      render: (_, { Service_hrs }) => {
         return (
           <div className="flex justify-start px-2">
-            <h1 className="text-orange-700">{service ? service : "No Data"}</h1>
+            <h1 className="text-orange-700">
+              {Service_hrs ? Service_hrs : "No Data"}
+            </h1>
           </div>
         );
       },
@@ -102,8 +122,8 @@ const RecurringSession = () => {
     },
     {
       title: "Provider",
-      dataIndex: "provider",
-      key: "provider",
+      dataIndex: "Provider",
+      key: "Provider",
       width: 100,
       filters: [
         {
@@ -115,56 +135,47 @@ const RecurringSession = () => {
           value: "2021-04-06",
         },
       ],
-      filteredValue: filteredInfo.provider || null,
-      onFilter: (value, record) => record.provider.includes(value),
+      filteredValue: filteredInfo.Provider || null,
+      onFilter: (value, record) => record.Provider.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.provider > b.provider ? -1 : 1; //sorting problem solved using this logic
+        return a.Provider > b.Provider ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "provider" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "Provider" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-      width: 100,
-      filters: [
-        {
-          text: "Jan 15, 2022",
-          value: "Jan 15, 2022",
-        },
-        {
-          text: "May 9, 2023",
-          value: "May 9, 2023",
-        },
-      ],
-      filteredValue: filteredInfo.date || null,
-      onFilter: (value, record) => record.date.includes(value),
-      //   sorter is for sorting asc or dsc purpose
-      sorter: (a, b) => {
-        return a.date > b.date ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "date" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "POS",
-      dataIndex: "pos",
+      title: "Pos",
       key: "pos",
-      width: 100,
+      dataIndex: "pos",
+      width: 80,
+      render: (_, { pos }) => {
+        //console.log("pos : ", pos);
+        return (
+          <>
+            {pos === "telehealth" ? (
+              <div className="flex items-center justify-center gap-2 ">
+                Telehealth
+                <BsFillCameraVideoFill className="text-green-500" />
+              </div>
+            ) : (
+              <div>{pos}</div>
+            )}
+          </>
+        );
+      },
       filters: [
         {
-          text: 1,
-          value: "1",
+          text: "telehealth",
+          value: "telehealth",
         },
         {
-          text: 2,
-          value: "2",
+          text: "School",
+          value: "School",
         },
         {
-          text: 6,
-          value: "6",
+          text: "Office",
+          value: "office",
         },
       ],
       filteredValue: filteredInfo.pos || null,
@@ -177,42 +188,119 @@ const RecurringSession = () => {
       ellipsis: true,
     },
     {
-      title: "Hours",
-      dataIndex: "hours",
-      key: "hours",
+      title: "Start Date",
+      dataIndex: "Scheduled_Date",
+      key: "Scheduled_Date",
       width: 80,
       filters: [
         {
-          text: "4:25 PM",
-          value: "4:25 PM",
+          text: "Jan 15, 2022",
+          value: "Jan 15, 2022",
         },
         {
-          text: "9:22 PM",
-          value: "9:22 PM",
-        },
-        {
-          text: "4:28 PM",
-          value: "4:28 PM",
+          text: "May 9, 2023",
+          value: "May 9, 2023",
         },
       ],
-      filteredValue: filteredInfo.hours || null,
-      onFilter: (value, record) => record.hours.includes(value),
+      filteredValue: filteredInfo.Scheduled_Date || null,
+      onFilter: (value, record) => record.Scheduled_Date.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.hours > b.hours ? -1 : 1; //sorting problem solved using this logic
+        return a.Scheduled_Date > b.Scheduled_Date ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "hours" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "Scheduled_Date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Hours",
+      dataIndex: "Hours",
+      key: "Hours",
+      width: 100,
+      filters: [
+        {
+          text: `9:57 PM`,
+          value: "9:57 PM",
+        },
+        {
+          text: "3:01 PM",
+          value: "3:01 PM",
+        },
+      ],
+      filteredValue: filteredInfo.Hours || null,
+      onFilter: (value, record) => {
+        return record.Hours.includes(value);
+      },
+      sorter: (a, b) => {
+        return a.Hours > b.Hours ? -1 : 1;
+        // a.Hours - b.Hours,
+      },
+      sortOrder: sortedInfo.columnKey === "Hours" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Status",
+      dataIndex: "Status",
+      key: "Status",
+      width: 80,
+      filters: [
+        {
+          text: "hold",
+          value: "hold",
+        },
+        {
+          text: "Rendered",
+          value: "Rendered",
+        },
+        {
+          text: "Scheduled",
+          value: "Scheduled",
+        },
+      ],
+      filteredValue: filteredInfo.Status || null,
+      onFilter: (value, record) => record.Status.includes(value),
+      //   sorter is for sorting asc or dsc purpose
+      sorter: (a, b) => {
+        return a.Status > b.Status ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "Status" ? sortedInfo.order : null,
       // render contains what we want to reflect as our data
-      render: (_, { hours }) => {
+      render: (_, { Status }) => {
+        //console.log("Status : ", Status);
         return (
-          <div className="flex justify-end px-2">
-            <h1 className="font-bold text-red-500">
-              {hours ? hours : "No Data"}
-            </h1>
+          <div>
+            {Status === "Scheduled" && (
+              <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded w-14">
+                {Status}
+              </button>
+            )}
+            {Status === "Rendered" && (
+              <button className="bg-teal-700 text-white text-[9px] py-[2px] px-2 rounded w-14">
+                {Status}
+              </button>
+            )}
+            {Status === "hold" && (
+              <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded w-14">
+                {Status}
+              </button>
+            )}
           </div>
         );
       },
       ellipsis: true,
+    },
+    {
+      title: "Action",
+      dataIndex: "id",
+      key: "id",
+      width: 60,
+      render: (_, { id }) => (
+        <div className="flex justify-center">
+          <Link to={`/admin/recurring-session-edit/${id}`}>
+            <BiEdit className="text-[#34A6B7] text-lg" />
+          </Link>
+        </div>
+      ),
     },
   ];
   // -----------------------------------------------form-------------------------------
@@ -243,7 +331,7 @@ const RecurringSession = () => {
 
   // -----------------------------------------------Multi-Select-------------------------------
   const [value, setValue] = useState([]);
-  const patientData = [
+  const PatientsData = [
     "Eugenia",
     "Bryan",
     "Linda",
@@ -254,7 +342,7 @@ const RecurringSession = () => {
     "Albert",
   ].map((item) => ({ label: item, value: item }));
 
-  const providerData = ["demo", "pos", "minda"].map((item) => ({
+  const ProviderData = ["demo", "pos", "minda"].map((item) => ({
     label: item,
     value: item,
   }));
@@ -297,7 +385,7 @@ const RecurringSession = () => {
                     <div>
                       <label className="label">
                         <span className="label-text text-xs text-gray-100 text-left">
-                          Place of Services
+                          Place of Service_hrss
                         </span>
                       </label>
                       <select
@@ -308,33 +396,33 @@ const RecurringSession = () => {
                         <option value="all" className="text-black">
                           All
                         </option>
-                        <option value="patient" className="text-black">
-                          Patient
+                        <option value="Patients" className="text-black">
+                          Patients
                         </option>
-                        <option value="provider" className="text-black">
+                        <option value="Provider" className="text-black">
                           Provider
                         </option>
                       </select>
                     </div>
 
-                    {select === "patient" ? (
+                    {select === "Patients" ? (
                       <div>
                         <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
-                          Patients
+                          Patientss
                         </h1>
                         <CustomMultiSelection
-                          data={patientData}
+                          data={PatientsData}
                           value={value}
                           setValue={setValue}
                         ></CustomMultiSelection>
                       </div>
-                    ) : select === "provider" ? (
+                    ) : select === "Provider" ? (
                       <div className="w-full">
                         <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
                           Provider
                         </h1>
                         <CustomMultiSelection
-                          data={providerData}
+                          data={ProviderData}
                           value={value}
                           setValue={setValue}
                         ></CustomMultiSelection>
