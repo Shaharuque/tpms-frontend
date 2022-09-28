@@ -5,6 +5,7 @@ import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideCl
 import EditSession from "./EditSession";
 import SessionAddNote from "./SessionAddNote";
 import SessionViewNote from "./SessionViewNote";
+import { Menu } from "antd";
 
 const ManageTableAction = ({ row }) => {
   const { ref, visible, setVisible } = useOutsideAlerter(false);
@@ -37,34 +38,32 @@ const ManageTableAction = ({ row }) => {
     setEditSession(false);
   };
 
-  console.log(visible, setVisible);
-  //   const handleContactClose = () => {
-  //     setOpenContactModal(false);
-  //   };
   return (
-    <div ref={ref}>
-      <div className=" bg-red-500 border shadow-md px-3 py-4  right-[-20px] w-[150px] rounded-md">
-        <button
-          className="text-sm hover:text-secondary flex items-center font-normal  gap-2"
-          onClick={() => addNoteHandler()}
-        >
-          <AiOutlinePlus /> Add Note
-        </button>
-        <br />
-        <button
-          className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-          onClick={viewNoteHandler}
-        >
-          <AiOutlineEye /> View Note
-        </button>
-        <br />
-        <button
-          className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-          onClick={editSessionHandler}
-        >
-          <MdOutlineModeEditOutline /> Edit Session
-        </button>
-      </div>
+    <div>
+      {!editSession && !openAddNote && !openViewNote ? (
+        <div className=" bg-white border shadow-md px-3 py-4 z-30 right-[-20px] w-[150px] rounded-md">
+          <button
+            className="text-sm hover:text-secondary flex items-center font-normal  gap-2"
+            onClick={() => addNoteHandler()}
+          >
+            <AiOutlinePlus /> Add Note
+          </button>
+          <br />
+          <button
+            className="text-sm hover:text-secondary flex items-center font-normal gap-2"
+            onClick={viewNoteHandler}
+          >
+            <AiOutlineEye /> View Note
+          </button>
+          <br />
+          <button
+            className="text-sm hover:text-secondary flex items-center font-normal gap-2"
+            onClick={editSessionHandler}
+          >
+            <MdOutlineModeEditOutline /> Edit Session
+          </button>
+        </div>
+      ) : null}
       {openAddNote && (
         <SessionAddNote
           handleClose={handleClose}
@@ -80,11 +79,7 @@ const ManageTableAction = ({ row }) => {
         ></SessionViewNote>
       )}
       {editSession && (
-        <EditSession
-          handleClose={handleClose}
-          open={editSession}
-          editableRow={row}
-        ></EditSession>
+        <EditSession handleClose={handleClose} open={editSession}></EditSession>
       )}
     </div>
   );

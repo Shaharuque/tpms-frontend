@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Space, Table } from "antd";
+import { Button, Input, Space, Table } from "antd";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { headers } from "../../../Misc/BaseClient";
@@ -21,6 +21,9 @@ const TableApi = () => {
   const [data, setData] = useState([]);
   //For ANTd Modal
   const [modalOpen, setModalOpen] = useState(false);
+  //for global filtering
+  const [serachText, setSearchText] = useState();
+  console.log(serachText);
 
   const navigate = useNavigate();
   //console.log(row);
@@ -48,6 +51,30 @@ const TableApi = () => {
         console.log(error);
       });
   }, []);
+
+  const globalFilter = (value) => {
+    //console.log(value);
+    const filteredData = data?.filter(
+      (each) =>
+        each?.client_first_name?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.client_gender?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.client_dob?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.location?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.insurance?.toLowerCase().includes(value)
+    );
+    setData(filteredData);
+
+    if (!value) {
+      axios("../../All_Fake_Api/Patients.json")
+        .then((response) => {
+          console.log("calling");
+          setData(response?.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   //console.log(data);
   // END
 
@@ -106,6 +133,7 @@ const TableApi = () => {
       client_gender: filteredInfo?.client_gender,
       client_dob: filteredInfo?.client_dob,
       location: filteredInfo?.location,
+      insurance: filteredInfo?.insurance,
     });
   };
   const deleteDobTag = (tag) => {
@@ -118,6 +146,7 @@ const TableApi = () => {
       client_gender: filteredInfo?.client_gender,
       client_dob: client_dob_array,
       location: filteredInfo?.location,
+      insurance: filteredInfo?.insurance,
     });
   };
   const deleteGenderTag = (tag) => {
@@ -130,6 +159,7 @@ const TableApi = () => {
       client_gender: client_gender_array,
       client_dob: filteredInfo?.client_dob,
       location: filteredInfo?.location,
+      insurance: filteredInfo?.insurance,
     });
   };
   const deletelocationTag = (tag) => {
@@ -142,6 +172,20 @@ const TableApi = () => {
       client_gender: filteredInfo?.client_gender,
       client_dob: filteredInfo?.client_dob,
       location: location_array,
+      insurance: filteredInfo?.insurance,
+    });
+  };
+  const deleteInsuranceTag = (tag) => {
+    console.log(tag);
+    const insurance_array = filteredInfo?.insurance?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      client_first_name: filteredInfo?.client_first_name,
+      client_gender: filteredInfo?.client_gender,
+      client_dob: filteredInfo?.client_dob,
+      location: filteredInfo?.location,
+      insurance: insurance_array,
     });
   };
 
@@ -149,7 +193,7 @@ const TableApi = () => {
     setFilteredInfo({});
   };
 
-  console.log("flited-info", filteredInfo);
+  //console.log("flited-info", filteredInfo);
 
   const patientDetails = (id) => {
     //console.log(id);
@@ -160,7 +204,7 @@ const TableApi = () => {
       title: "Patient",
       dataIndex: "client_first_name",
       key: "client_first_name",
-      width: 160,
+      width: 100,
       filters: [
         { text: "Milissent", value: "Milissent" },
         { text: "Timmy", value: "Timmy" },
@@ -214,7 +258,7 @@ const TableApi = () => {
       title: "Contact Info",
       dataIndex: "phone_number",
       key: "phone_number",
-      width: 120,
+      width: 100,
       // filters: [
       //   {
       //     text: "(940)-234-0329",
@@ -251,7 +295,7 @@ const TableApi = () => {
       title: "DOB",
       dataIndex: "client_dob",
       key: "client_dob",
-      width: 100,
+      width: 80,
       filters: [
         {
           text: `1986-08-28`,
@@ -276,7 +320,7 @@ const TableApi = () => {
       title: "Gender",
       dataIndex: "client_gender",
       key: "client_gender",
-      width: 100,
+      width: 80,
       filters: [
         {
           text: `Male`,
@@ -301,7 +345,7 @@ const TableApi = () => {
       title: "POS",
       dataIndex: "location",
       key: "location",
-      width: 100,
+      width: 120,
       filters: [
         {
           text: `Main Office`,
@@ -329,17 +373,20 @@ const TableApi = () => {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
-      width: 100,
+      width: 80,
       filters: [
+        { text: "6780496111", value: "6780496111" },
         {
-          text: `Male`,
-          value: "Male",
+          text: "1261739329",
+          value: "1261739329",
         },
-        {
-          text: "Female",
-          value: "Female",
-        },
+        { text: "5614267557", value: "5614267557" },
+        { text: "8136767092", value: "8136767092" },
+        { text: "813676700092", value: "813676700092" },
       ],
+      render: (_, { insurance }) => {
+        return <div className="flex justify-end px-1">{insurance}</div>;
+      },
       filteredValue: filteredInfo.insurance || null,
       onFilter: (value, record) => record.insurance.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -353,31 +400,30 @@ const TableApi = () => {
       title: "Auth",
       key: "id",
       dataIndex: "id",
-      width: 50,
+      width: 40,
       render: (_, { id }) => {
         return (
-          <>
+          <div className="flex justify-center">
             <button
               onClick={() => {
                 handleAuthClick(id);
               }}
+              className="flex justify-center"
             >
-              <FaRegAddressCard className="text-sm mx-auto text-secondary" />
+              <FaRegAddressCard className="text-sm  text-secondary" />
             </button>
-          </>
+          </div>
         );
       },
     },
     {
       title: "Status",
-      key: "is_active_client",
-      dataIndex: "is_active_client",
+      key: "status",
+      dataIndex: "status",
       width: 60,
-      render: (_, { is_active_client }) => {
+      render: (_, { status }) => {
         //console.log("Status : ", Status);
-        return (
-          <PatientStatusAction status={is_active_client}></PatientStatusAction>
-        );
+        return <PatientStatusAction status={status}></PatientStatusAction>;
       },
       filters: [],
       filteredValue: filteredInfo.Status || null,
@@ -400,36 +446,47 @@ const TableApi = () => {
           <h1 className="text-lg text-orange-500 text-left font-semibold ">
             Patient
           </h1>
-          <button
-            onClick={clearFilters}
-            className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
-          >
-            Clear filters
-          </button>
+          <div>
+            <input
+              placeholder="Search here..."
+              className="px-2 w-52 mr-2 py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+              onChange={(e) => globalFilter(e.target.value)}
+            />
+
+            <button
+              onClick={clearFilters}
+              className="px-2  py-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+            >
+              Clear filters
+            </button>
+          </div>
         </div>
+
         {/* filtering tag showing part */}
-        {filteredInfo?.client_first_name?.length > 0 ? (
-          <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
-            {/* {filteredInfo?.client_first_name?.map((tag, index) => (
-            <h1 className="text-red-600 border-black mr-2" key={index}>
-              {tag}
-            </h1>
-          ))} */}
-            <div className="p-2 rounded ">
-              {filteredInfo?.client_first_name?.length > 0 && (
+        {filteredInfo?.client_first_name?.length > 0 ||
+        filteredInfo?.client_dob?.length > 0 ||
+        filteredInfo?.client_gender?.length > 0 ||
+        filteredInfo?.location?.length > 0 ||
+        filteredInfo?.insurance?.length > 0 ? (
+          // <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
+          <div className="my-5">
+            {filteredInfo?.client_first_name?.length > 0 && (
+              <div className=" ">
                 <div className="flex mb-2 gap-1">
-                  <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
-                    Patient:
-                  </span>
                   {filteredInfo?.client_first_name?.map((tag, index) => (
                     <div
-                      className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
+                      className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
                       key={index}
                     >
-                      <div className=" text-sm">{tag}</div>
+                      <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                        <span className="text-secondary text-[15px] font-medium mr-1  ">
+                          Patient:
+                        </span>
+                        {tag}
+                      </div>
                       <div>
                         <div
-                          className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
+                          className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
                           onClick={() => deleteFirstNameTag(tag)}
                         >
                           X
@@ -438,64 +495,111 @@ const TableApi = () => {
                     </div>
                   ))}
                 </div>
-              )}
-              {filteredInfo?.client_dob?.length > 0 && (
-                <div className="flex mb-2">
-                  <span className="border-black font-bold mr-2 flex items-center">
-                    DOB:
-                  </span>
-                  {filteredInfo?.client_dob?.map((tag, index) => (
-                    <h1 className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex">
+              </div>
+            )}
+            {filteredInfo?.client_dob?.length > 0 && (
+              <div className="flex mb-2 gap-1">
+                {filteredInfo?.client_dob?.map((tag, index) => (
+                  <div
+                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">
+                        DOB:
+                      </span>
                       {tag}
-                      <TiDelete
-                        className="cursor-pointer text-lg"
+                    </div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
                         onClick={() => deleteDobTag(tag)}
-                      ></TiDelete>
-                    </h1>
-                  ))}
-                </div>
-              )}
-              {filteredInfo?.client_gender?.length > 0 && (
-                <div className="flex mb-2">
-                  <span className="border-black font-bold mr-2 flex items-center">
-                    Gender:
-                  </span>
-                  {filteredInfo?.client_gender?.map((tag, index) => (
-                    <h1
-                      className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
-                      key={index}
-                    >
+                      >
+                        X
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {filteredInfo?.client_gender?.length > 0 && (
+              <div className="flex mb-2 gap-1">
+                {filteredInfo?.client_gender?.map((tag, index) => (
+                  <div
+                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">
+                        Gender:
+                      </span>
                       {tag}
-                      <TiDelete
-                        className="cursor-pointer text-lg"
+                    </div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
                         onClick={() => deleteGenderTag(tag)}
-                      ></TiDelete>
-                    </h1>
-                  ))}
-                </div>
-              )}
-              {filteredInfo?.location?.length > 0 && (
-                <div className="flex mb-2">
-                  <span className="border-black font-bold mr-2 flex items-center">
-                    POS:
-                  </span>
-                  {filteredInfo?.location?.map((tag, index) => (
-                    <h1
-                      className="text-white border-2 border-black mr-2 rounded-lg px-1 bg-black flex"
-                      key={index}
-                    >
+                      >
+                        X
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {filteredInfo?.location?.length > 0 && (
+              <div className="flex mb-2 gap-1">
+                {filteredInfo?.location?.map((tag, index) => (
+                  <div
+                    className="text-gray-700  shadow-sm font-medium  rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">
+                        Pos:
+                      </span>
                       {tag}
-                      <TiDelete
-                        className="cursor-pointer text-lg"
+                    </div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
                         onClick={() => deletelocationTag(tag)}
-                      ></TiDelete>
-                    </h1>
-                  ))}
-                </div>
-              )}
-            </div>
+                      >
+                        X
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {filteredInfo?.insurance?.length > 0 && (
+              <div className="flex mb-2 gap-1">
+                {filteredInfo?.insurance?.map((tag, index) => (
+                  <div
+                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">
+                        Insurance :
+                      </span>
+                      {tag}
+                    </div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
+                        onClick={() => deleteInsuranceTag(tag)}
+                      >
+                        X
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        ) : null}
+        ) : // </div>
+        null}
         {/* <InfiniteScroll
           dataLength={items.length} //items is basically all data here
           next={fetchData}
@@ -507,6 +611,7 @@ const TableApi = () => {
         {/* className=" overflow-scroll" used for responsive scrolling But if you use InfiniteScroll don't need overflow-scroll class */}
         <div className=" overflow-scroll">
           <Table
+            rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
             className=" text-xs font-normal"

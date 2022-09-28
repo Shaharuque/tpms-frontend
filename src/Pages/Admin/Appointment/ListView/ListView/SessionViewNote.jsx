@@ -1,4 +1,4 @@
-import { Dialog } from "@mui/material";
+import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -19,8 +19,16 @@ const SessionViewNote = ({ handleClose, open, editableRow }) => {
   return (
     <div>
       <div>
-        <Dialog open={open} aria-labelledby="responsive-dialog-title">
-          <div className="px-5 py-2 box sm:w-[400px]">
+        <Modal
+          open={open}
+          centered
+          zIndex={100}
+          footer={false}
+          closable={false}
+          bodyStyle={{ padding: "0" }}
+          className="box rounded-md"
+        >
+          <div className="px-5 py-2 ">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400">View Notes</h1>
               <IoCloseCircleOutline
@@ -50,7 +58,6 @@ const SessionViewNote = ({ handleClose, open, editableRow }) => {
                 <button
                   className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                   type="submit"
-                  onClick={handleClose}
                 >
                   Save
                 </button>
@@ -65,7 +72,7 @@ const SessionViewNote = ({ handleClose, open, editableRow }) => {
               </div>
             </form>
           </div>
-        </Dialog>
+        </Modal>
       </div>
     </div>
   );

@@ -6,9 +6,10 @@ import CloseIcon from "@rsuite/icons/Close";
 
 const PatientStatusAction = ({ status }) => {
   const [value, setValue] = useState(status);
+  console.log(status);
 
   return (
-    <div>
+    <div className="flex justify-center">
       <Toggle
         checkedChildren={<CheckIcon />}
         unCheckedChildren={<CloseIcon />}

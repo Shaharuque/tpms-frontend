@@ -8,11 +8,15 @@ import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import { Fade } from "react-reveal";
 import { MdOutlineCancel } from "react-icons/md";
+import { Table } from "antd";
 
 const RecurringSession = () => {
   const [table, setTable] = useState(false);
   const [select, setSelect] = useState("");
   const [SessionData, SetSessionData] = useState([]);
+  // For Antd table
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
 
   // calling recurring session fakedb
   useEffect(() => {
@@ -25,6 +29,192 @@ const RecurringSession = () => {
       });
   }, []);
   console.log(SessionData);
+
+  const handleChange = (pagination, filters, sorter) => {
+    console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
+  // Table columns
+  const columns = [
+    {
+      title: "Patient",
+      dataIndex: "patient",
+      key: "patient",
+      width: 100,
+      filters: [
+        { text: "Harding Matthews", value: "Harding Matthews" },
+        { text: "Tyrone Dorsey", value: "Tyrone Dorsey" },
+        { text: `Griffith Byrd`, value: "Griffith Byrd" },
+      ],
+      filteredValue: filteredInfo.patient || null,
+      onFilter: (value, record) => record.patient.includes(value),
+      sorter: (a, b) => {
+        return a.patient > b.patient ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "patient" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // client_first_name, id, key=>each row data(object) property value can be accessed.
+      render: (_, { patient, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div className="flex justify-start px-2">
+            <button className="text-secondary">{patient}</button>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Service",
+      dataIndex: "service",
+      key: "service",
+      width: 100,
+      filters: [
+        { text: "Milissent", value: "Milissent" },
+        { text: "Timmy", value: "Timmy" },
+        {
+          text: `Jamey`,
+          value: "Jamey",
+        },
+        {
+          text: `Minnie`,
+          value: "Minnie",
+        },
+      ],
+      filteredValue: filteredInfo.service || null,
+      onFilter: (value, record) => record.service.includes(value),
+      sorter: (a, b) => {
+        return a.service > b.service ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "service" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      render: (_, { service }) => {
+        return (
+          <div className="flex justify-start px-2">
+            <h1 className="text-orange-700">{service ? service : "No Data"}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Provider",
+      dataIndex: "provider",
+      key: "provider",
+      width: 100,
+      filters: [
+        {
+          text: `1986-08-28`,
+          value: "1986-08-28",
+        },
+        {
+          text: "2021-04-06",
+          value: "2021-04-06",
+        },
+      ],
+      filteredValue: filteredInfo.provider || null,
+      onFilter: (value, record) => record.provider.includes(value),
+      //   sorter is for sorting asc or dsc purpose
+      sorter: (a, b) => {
+        return a.provider > b.provider ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "provider" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+      width: 100,
+      filters: [
+        {
+          text: "Jan 15, 2022",
+          value: "Jan 15, 2022",
+        },
+        {
+          text: "May 9, 2023",
+          value: "May 9, 2023",
+        },
+      ],
+      filteredValue: filteredInfo.date || null,
+      onFilter: (value, record) => record.date.includes(value),
+      //   sorter is for sorting asc or dsc purpose
+      sorter: (a, b) => {
+        return a.date > b.date ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "POS",
+      dataIndex: "pos",
+      key: "pos",
+      width: 100,
+      filters: [
+        {
+          text: 1,
+          value: "1",
+        },
+        {
+          text: 2,
+          value: "2",
+        },
+        {
+          text: 6,
+          value: "6",
+        },
+      ],
+      filteredValue: filteredInfo.pos || null,
+      onFilter: (value, record) => record.pos.includes(value),
+      //   sorter is for sorting asc or dsc purpose
+      sorter: (a, b) => {
+        return a.pos > b.pos ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "pos" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Hours",
+      dataIndex: "hours",
+      key: "hours",
+      width: 80,
+      filters: [
+        {
+          text: "4:25 PM",
+          value: "4:25 PM",
+        },
+        {
+          text: "9:22 PM",
+          value: "9:22 PM",
+        },
+        {
+          text: "4:28 PM",
+          value: "4:28 PM",
+        },
+      ],
+      filteredValue: filteredInfo.hours || null,
+      onFilter: (value, record) => record.hours.includes(value),
+      //   sorter is for sorting asc or dsc purpose
+      sorter: (a, b) => {
+        return a.hours > b.hours ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "hours" ? sortedInfo.order : null,
+      // render contains what we want to reflect as our data
+      render: (_, { hours }) => {
+        return (
+          <div className="flex justify-end px-2">
+            <h1 className="font-bold text-red-500">
+              {hours ? hours : "No Data"}
+            </h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+  ];
   // -----------------------------------------------form-------------------------------
   const { handleSubmit } = useForm({
     defaultValues: {
@@ -167,7 +357,21 @@ const RecurringSession = () => {
       </div>
 
       {/* table  */}
-      {table && <div className="my-5"></div>}
+      {table && (
+        <div className="my-5">
+          <div className=" overflow-scroll">
+            <Table
+              rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              size="small"
+              className=" text-xs font-normal"
+              columns={columns}
+              dataSource={SessionData} //Which data chunk you want to show in table
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
