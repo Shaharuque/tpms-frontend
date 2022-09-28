@@ -28,7 +28,7 @@ const ListView = () => {
   const [card, setCard] = useState(false);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-
+  const [action, setAction] = useState(false);
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([
     {
@@ -37,6 +37,16 @@ const ListView = () => {
       key: "selection",
     },
   ]);
+  const [value, setValue] = React.useState([]);
+  // date range picker calendar
+  const startDate = range[0]?.startDate;
+  const endDate = range[0]?.endDate;
+  const startMonth = startDate.toLocaleString("en-us", { month: "short" });
+  const endMonth = endDate.toLocaleString("en-us", { month: "short" });
+  const startDay = startDate.getDate();
+  const endDay = endDate.getDate();
+  // const startYear = startDate.getFullYear();
+  // const endYear = endDate.getFullYear();
 
   //test design
   const [clicked, setClicked] = useState(false);
@@ -56,15 +66,23 @@ const ListView = () => {
     setListView(!listView);
   };
 
+  const manageTableAction = (id) => {
+    setAction(!action);
+  };
   // calling fake db
+  // useEffect(() => {
+  //   axios("../All_Fake_Api/Fakedb.json")
+  //     .then((response) => {
+  //       setTData(response?.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
   useEffect(() => {
-    axios("../All_Fake_Api/Fakedb.json")
-      .then((response) => {
-        setTData(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    fetch("../All_Fake_Api/Fakedb.json")
+      .then((res) => res.json())
+      .then((data) => setTData(data));
   }, []);
 
   // -------------------------------------------Table Data-----------------------------------
@@ -76,7 +94,7 @@ const ListView = () => {
       width: 50,
       // render contains what we want to reflect as our data
       render: (_, { lock }) => {
-        console.log("tags : ", lock);
+        //console.log("tags : ", lock);
         return (
           <div>
             {lock === true && (
@@ -157,7 +175,7 @@ const ListView = () => {
       dataIndex: "pos",
       width: 100,
       render: (_, { pos }) => {
-        console.log("pos : ", pos);
+        //console.log("pos : ", pos);
         return (
           <>
             {pos === "telehealth" ? (
@@ -293,10 +311,11 @@ const ListView = () => {
       dataIndex: "operation",
       key: "operation",
       width: 60,
-      render: () => (
+      render: (_, { id }) => (
         <Dropdown
           overlay={<ManageTableAction></ManageTableAction>}
           trigger={["click"]}
+          overlayStyle={{ zIndex: "100" }}
         >
           <button onClick={(e) => e.preventDefault()}>
             <Space>
@@ -358,18 +377,6 @@ const ListView = () => {
     label: item,
     value: item,
   }));
-
-  const [value, setValue] = React.useState([]);
-
-  // date range picker calendar
-  const startDate = range[0]?.startDate;
-  const endDate = range[0]?.endDate;
-  const startMonth = startDate.toLocaleString("en-us", { month: "short" });
-  const endMonth = endDate.toLocaleString("en-us", { month: "short" });
-  const startDay = startDate.getDate();
-  const endDay = endDate.getDate();
-  // const startYear = startDate.getFullYear();
-  // const endYear = endDate.getFullYear();
 
   return (
     // For responsive view point
@@ -616,6 +623,7 @@ const ListView = () => {
                   <>
                     <Table
                       pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                      rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
                       size="small"
                       bordered
                       className=" text-xs font-normal mt-5"

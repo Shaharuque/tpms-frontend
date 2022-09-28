@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Modal } from "antd";
 
-const EditSession = ({ handleClose, open, editableRow }) => {
+const EditSession = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
   const [notes, setNotes] = useState("");
   const onSubmit = (data, e) => {
@@ -24,13 +24,14 @@ const EditSession = ({ handleClose, open, editableRow }) => {
         <Modal
           open={open}
           centered
-          zIndex={1000}
+          zIndex={100}
           footer={false}
           closable={false}
+          bodyStyle={{ padding: "0" }}
           //onClose={handleClose}
           // aria-labelledby="responsive-dialog-title"
         >
-          <div className="px-5 py-2 box sm:w-[500px]">
+          <div className="px-5 py-2 box">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">
                 Add Appointment

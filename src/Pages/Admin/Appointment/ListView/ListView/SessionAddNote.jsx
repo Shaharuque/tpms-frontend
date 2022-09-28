@@ -1,9 +1,9 @@
-import { Dialog } from "@mui/material";
+import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const SessionAddNote = ({ handleClose, open, editableRow }) => {
+const SessionAddNote = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
@@ -15,12 +15,19 @@ const SessionAddNote = ({ handleClose, open, editableRow }) => {
     setTimeout(() => {
       reset({});
     }, 500);
-  }, [reset, editableRow]);
+  }, [reset]);
   return (
     <div>
       <div>
-        <Dialog open={open} aria-labelledby="responsive-dialog-title">
-          <div className="px-5 py-2  box  sm:w-[400px]">
+        <Modal
+          open={open}
+          centered
+          zIndex={100}
+          footer={false}
+          closable={false}
+          bodyStyle={{ padding: "0" }}
+        >
+          <div className="px-5 py-2  box ">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400">Add Notes</h1>
               <IoCloseCircleOutline
@@ -50,7 +57,6 @@ const SessionAddNote = ({ handleClose, open, editableRow }) => {
                 <button
                   className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                   type="submit"
-                  onClick={handleClose}
                 >
                   Go
                 </button>
@@ -65,7 +71,7 @@ const SessionAddNote = ({ handleClose, open, editableRow }) => {
               </div>
             </form>
           </div>
-        </Dialog>
+        </Modal>
       </div>
     </div>
   );
