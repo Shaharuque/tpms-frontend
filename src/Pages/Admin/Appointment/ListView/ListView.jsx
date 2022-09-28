@@ -22,15 +22,10 @@ import { BsArrowRight } from "react-icons/bs";
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
   const [table, setTable] = useState(false);
-  const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
   const [listView, setListView] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-
-  const handleSortBy = (e) => {
-    setSortBy(e.target.value);
-  };
 
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([

@@ -1,15 +1,17 @@
-import { Dialog, Switch } from "@mui/material";
+import { Switch } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import Calendar from "react-calendar";
 import "./CutomCSS/calenderDesign.css";
+import { Modal } from "antd";
 
 const CreateAppointment = ({ handleClose }) => {
   const [billable, setBillable] = useState(true);
   const [recurrence, setRecurrence] = useState(false);
   const [daily, setDaily] = useState(false);
+  const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const { register, handleSubmit, reset } = useForm();
   const days = [
@@ -52,12 +54,16 @@ const CreateAppointment = ({ handleClose }) => {
   );
   return (
     <div>
-      <Dialog
-        open={handleClose}
+      <Modal
+        open={true} //aikhaney true na likey ekta state ana lagbey tar value 'true'
+        centered
+        footer={null}
+        bodyStyle={{ padding: "0" }}
+        closable={false}
         // onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        // aria-labelledby="responsive-dialog-title"
       >
-        <div className="px-5 py-2 box  sm:w-[500px]">
+        <div className="px-5 py-2 box">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
               Add Appointment
@@ -166,23 +172,30 @@ const CreateAppointment = ({ handleClose }) => {
                 <option value="married">married</option>
               </select>
               {/* calender */}
-              <label for="my-modal-6" className="label">
+              <label className="label">
                 <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
                   From Date
                 </span>
               </label>
               <input
                 name="check_date"
+                readOnly
+                onClick={() => setOpen(!open)}
                 value={date.toLocaleDateString()}
                 className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
                 {...register("check_date")}
               />
 
-              <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-              <div class="modal modal-middle">
-                <div class="modal-box p-0">
+              {open && (
+                <Modal
+                  open={open}
+                  centered
+                  footer={null}
+                  closable={false}
+                  bodyStyle={{ padding: "0px" }}
+                >
                   <div className="grid lg:grid-cols-[180px_minmax(300px,_1fr)]">
-                    <div className="bg-teal-500 bold text-white rounded-l-lg ">
+                    <div className="bg-teal-500 bold text-white ">
                       <div className="w-full h-16 flex justify-center items-center bg-[#2D8A87] bg-opacity-50 backdrop-blur-xl rounded drop-shadow-lg">
                         <span className="text-2xl">{days[date.getDay()]}</span>
                       </div>
@@ -195,29 +208,34 @@ const CreateAppointment = ({ handleClose }) => {
                       </div>
                     </div>
 
-                    <div className="">
-                      <Calendar onChange={setDate} value={date} />
-                      <div className="flex justify-between px-2">
-                        <button className="text-xs text-red-500">Clear</button>
-                        <div modal-action>
-                          <label
-                            for="my-modal-6"
-                            className="text-xs text-teal-500"
-                          >
-                            CANCEL
-                          </label>
-                          <label
-                            for="my-modal-6"
-                            className="text-xs ml-2 text-teal-500"
-                          >
-                            OK
-                          </label>
-                        </div>
-                      </div>
+                    <Calendar onChange={setDate} value={date} />
+                  </div>
+                  <div className="flex justify-between cursor-pointer bg-black rounded">
+                    <button
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                      className="text-xs text-red-400 p-2 hover:bg-white"
+                    >
+                      CLEAR
+                    </button>
+                    <div modal-action>
+                      <button
+                        onClick={() => setOpen(false)}
+                        className="text-xs text-white hover:bg-teal-500 p-2"
+                      >
+                        CANCEL
+                      </button>
+                      <button
+                        onClick={() => setOpen(false)}
+                        className="text-xs text-white hover:bg-teal-500 p-2"
+                      >
+                        OK
+                      </button>
                     </div>
                   </div>
-                </div>
-              </div>
+                </Modal>
+              )}
               {/* Custom Calender End */}
               {/* <label className="label">
                 <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
@@ -422,7 +440,7 @@ const CreateAppointment = ({ handleClose }) => {
             </div>
           </form>
         </div>
-      </Dialog>
+      </Modal>
     </div>
   );
 };

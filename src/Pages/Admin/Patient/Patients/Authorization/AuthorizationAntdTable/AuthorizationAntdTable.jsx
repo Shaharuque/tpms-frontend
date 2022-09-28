@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { GiPlainCircle } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
@@ -19,6 +19,12 @@ const AuthorizationAntdTable = () => {
   //row expand code related
   const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
   //const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const editAuth = (id) => {
+    navigate(`/admin/authorization-Edit/${id}`);
+  };
 
   //expendable row ar data jeita expand korley show korbey
   const expandedRowRender = () => {
@@ -40,7 +46,6 @@ const AuthorizationAntdTable = () => {
       .then((res) => res.json())
       .then((d) => {
         setAuthData(d);
-        // setLoading2(false);
       });
   }, []);
 
@@ -54,12 +59,12 @@ const AuthorizationAntdTable = () => {
       width: 120,
       filters: [
         {
-          text: `Vernon`,
-          value: "Vernon",
+          text: "Realcube",
+          value: "Realcube",
         },
         {
-          text: `Aileen Newman`,
-          value: "Aileen Newman",
+          text: "Mycat",
+          value: "Mycat",
         },
         {
           text: "Donovan",
@@ -234,7 +239,7 @@ const AuthorizationAntdTable = () => {
       dataIndex: "operation",
       key: "operation",
       width: 150,
-      render: () => (
+      render: (_, { id }) => (
         <div>
           <div className="flex justify-center gap-1 text-primary">
             <button
@@ -255,9 +260,9 @@ const AuthorizationAntdTable = () => {
             </button>
 
             <span>|</span>
-            <Link to={`/admin/authorization-Edit/123`}>
+            <button onClick={() => editAuth(id)}>
               <FiEdit className="text-xs mx-2  text-lime-700" title="Edit" />
-            </Link>
+            </button>
 
             <span>|</span>
             <Link to={"/"}>
@@ -329,7 +334,7 @@ const AuthorizationAntdTable = () => {
   const onTableRowExpand = (expanded, record) => {
     const keys = [];
     if (expanded) {
-      keys.push(record.key); // I have set my record.id as row key. Check the documentation for more details.
+      keys.push(record.id); // I have set my record.id as row key. Check the documentation for more details.
     }
 
     setExpandedRowKeys(keys);
@@ -358,6 +363,7 @@ const AuthorizationAntdTable = () => {
         <div className=" overflow-scroll ">
           <Table
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            rowKey={(record) => record.id} //record is kind of whole one data object and here we are
             size="small"
             className=" text-xs font-normal "
             columns={columns}

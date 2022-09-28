@@ -2,6 +2,7 @@ import { Dialog } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { Modal } from "antd";
 
 const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
   const { register, handleSubmit, reset } = useForm();
@@ -23,13 +24,16 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
     <div>
       <div>
         <div>
-          <Dialog
+          <Modal
             // fullScreen={fullScreen}
             open={open}
-            onClose={handleClose}
-            aria-labelledby="responsive-dialog-title"
+            centered
+            width={800}
+            footer={false}
+            closable={false}
+            bodyStyle={{ padding: "0" }}
           >
-            <div className="px-5 py-2 box sm:w-[600px]">
+            <div className="px-5 py-2 box">
               <div className="flex items-center justify-between">
                 <h1 className="text-lg text-left text-orange-400 ">
                   Edit Document
@@ -348,7 +352,7 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                 </div>
               </form>
             </div>
-          </Dialog>
+          </Modal>
         </div>
       </div>
     </div>

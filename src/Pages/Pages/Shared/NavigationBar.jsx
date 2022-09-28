@@ -75,8 +75,9 @@ const NavigationBar = ({ handle }) => {
         </div>
 
         <div
-          className={`md:flex md:items-center gap-10  md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${open ? "top-10 " : "top-[-490px]"
-            }`}
+          className={`md:flex md:items-center gap-10  md:pt-0 pt-10 md:pb-0 pb-10 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${
+            open ? "top-10 " : "top-[-490px]"
+          }`}
         >
           {/*Full screen showing code */}
           <div>
@@ -197,42 +198,56 @@ const NavigationBar = ({ handle }) => {
                   </span>
                 </div>
                 <div>
-                  <div
-                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                  >
+                  <div className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
                     <div>
                       <h1 className=" text-3xl font-bold text-secondary">
                         <AiOutlineCloudDownload />
                       </h1>
                     </div>
                     <div className="text-xs text-wite">
-                      <h1 className="font-semibold mb-1">837-11660888499.txt</h1>
+                      <h1 className="font-semibold mb-1">
+                        837-11660888499.txt
+                      </h1>
                       <h1 className="font-medium text-md">CSV file</h1>
-                      <small  class="block text-xs text-gray-600">5 day left</small>
-                      <button type="button" class="inline-block px-2 bg-[#0CADBF] text-white font-semibold text-[10px] leading-tight  rounded-md shadow-md  hover:shadow-lg  ">Ready To Download</button>
+                      <small class="block text-xs text-gray-600">
+                        5 day left
+                      </small>
+                      <button
+                        type="button"
+                        class="inline-block px-2 bg-[#0CADBF] text-white font-semibold text-[10px] leading-tight  rounded-md shadow-md  hover:shadow-lg  "
+                      >
+                        Ready To Download
+                      </button>
                     </div>
                   </div>
-                  <hr className="-mt-[0] w-11/12 mx-auto"/>
+                  <hr className="-mt-[0] w-11/12 mx-auto" />
                 </div>
                 <div>
-                  <div
-                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3 mt-[3]"
-                  >
+                  <div className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3 mt-[3]">
                     <div>
                       <h1 className=" text-2xl font-bold text-secondary">
                         <AiOutlineCloudDownload />
                       </h1>
                     </div>
                     <div className="text-xs text-wite">
-                      <h1 className="font-semibold mb-1">837-11660888499.txt</h1>
+                      <h1 className="font-semibold mb-1">
+                        837-11660888499.txt
+                      </h1>
                       <h1 className="font-medium text-md">CSV file</h1>
-                      <small class="block text-xs text-gray-600">5 day left</small>
-                      <button type="button" class="inline-block px-2 bg-[#0CADBF] text-white font-semibold text-[10px] leading-tight  rounded-md shadow-md  hover:shadow-lg  ">Ready To Download</button>
+                      <small class="block text-xs text-gray-600">
+                        5 day left
+                      </small>
+                      <button
+                        type="button"
+                        class="inline-block px-2 bg-[#0CADBF] text-white font-semibold text-[10px] leading-tight  rounded-md shadow-md  hover:shadow-lg  "
+                      >
+                        Ready To Download
+                      </button>
                     </div>
                   </div>
                   <hr className="-mt-[0] w-11/12 mx-auto" />
                 </div>
-                
+
                 <button
                   type="button"
                   className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
@@ -243,8 +258,6 @@ const NavigationBar = ({ handle }) => {
               </div>
             </div>
           </div>
-
-        
 
           {/* admin part  */}
           <div className="my-5 md:my-0">

@@ -43,7 +43,7 @@ const ManageTableAction = ({ row }) => {
   //   };
   return (
     <div ref={ref}>
-      <div className="absolute bg-white border shadow-md px-3 py-4  right-[-20px] w-[150px] rounded-md">
+      <div className=" bg-red-500 border shadow-md px-3 py-4  right-[-20px] w-[150px] rounded-md">
         <button
           className="text-sm hover:text-secondary flex items-center font-normal  gap-2"
           onClick={() => addNoteHandler()}

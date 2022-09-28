@@ -3,10 +3,9 @@ import AuthorizationAntdTable from "./AuthorizationAntdTable/AuthorizationAntdTa
 
 const Authorization = () => {
   return (
-    <div className="h-[100vh]">
-      <div>
-        <AuthorizationAntdTable></AuthorizationAntdTable>
-      </div>
+    // className="h-[100vh]"
+    <div>
+      <AuthorizationAntdTable></AuthorizationAntdTable>
     </div>
   );
 };

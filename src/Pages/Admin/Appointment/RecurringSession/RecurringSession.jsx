@@ -24,6 +24,7 @@ const RecurringSession = () => {
         console.log(error);
       });
   }, []);
+  console.log(SessionData);
   // -----------------------------------------------form-------------------------------
   const { handleSubmit } = useForm({
     defaultValues: {
@@ -47,39 +48,12 @@ const RecurringSession = () => {
 
   // -----------------------------------------------Table-------------------------------
   const data = useMemo(() => SessionData, [SessionData]);
-  const columns = useMemo(() => [...RecurringSessionColumn], []);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
-      { columns, data },
-      useSortBy,
-      usePagination,
-      useRowSelect,
-      (hooks) => {
-        hooks.visibleColumns.push((columns) => {
-          return [
-            {
-              id: "selection",
-              Header: ({ getToggleAllRowsSelectedProps }) => (
-                <div>
-                  <CheckBox {...getToggleAllRowsSelectedProps()} />
-                </div>
-              ),
-              Cell: ({ row }) => (
-                <div>
-                  <CheckBox {...row.getToggleRowSelectedProps()} />
-                </div>
-              ),
-            },
-            ...columns,
-          ];
-        });
-      }
-    );
+
   // console.log(selectedFlatRows);
 
   // -----------------------------------------------Multi-Select-------------------------------
   const [value, setValue] = useState([]);
-  const datat = [
+  const patientData = [
     "Eugenia",
     "Bryan",
     "Linda",
@@ -90,7 +64,7 @@ const RecurringSession = () => {
     "Albert",
   ].map((item) => ({ label: item, value: item }));
 
-  const datatf = ["demo", "pos", "minda"].map((item) => ({
+  const providerData = ["demo", "pos", "minda"].map((item) => ({
     label: item,
     value: item,
   }));
@@ -159,7 +133,7 @@ const RecurringSession = () => {
                           Patients
                         </h1>
                         <CustomMultiSelection
-                          data={datat}
+                          data={patientData}
                           value={value}
                           setValue={setValue}
                         ></CustomMultiSelection>
@@ -170,7 +144,7 @@ const RecurringSession = () => {
                           Provider
                         </h1>
                         <CustomMultiSelection
-                          data={datatf}
+                          data={providerData}
                           value={value}
                           setValue={setValue}
                         ></CustomMultiSelection>
@@ -193,17 +167,7 @@ const RecurringSession = () => {
       </div>
 
       {/* table  */}
-      {table && (
-        <div className="my-5">
-          <SettingTableBox
-            getTableProps={getTableProps}
-            headerGroups={headerGroups}
-            getTableBodyProps={getTableBodyProps}
-            rows={rows}
-            prepareRow={prepareRow}
-          ></SettingTableBox>
-        </div>
-      )}
+      {table && <div className="my-5"></div>}
     </div>
   );
 };
