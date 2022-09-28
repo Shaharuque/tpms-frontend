@@ -17,10 +17,10 @@ import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableAction from "./ListView/ManageTableAction";
 
 //for date range picker calendar
-import { DateRangePicker } from 'react-date-range'
-import { addDays } from 'date-fns'
-import 'react-date-range/dist/styles.css'
-import 'react-date-range/dist/theme/default.css'
+import { DateRangePicker } from "react-date-range";
+import { addDays } from "date-fns";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
 
 const ListView = () => {
@@ -36,7 +36,7 @@ const ListView = () => {
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
-  
+
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([
     {
@@ -605,9 +605,9 @@ const ListView = () => {
                     className="border-2 border-gray-100"
                   />
                 </div>
-                <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
+                <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
                   <button
-                    className="py-[5px] px-2.5 m-2 text-white rounded-md bg-gradient-to-r from-[#0db5c8] to-[#089bab]"
+                    className="px-4 m-2 text-white border border-white rounded hover:bg-white hover:text-[#26818f]"
                     type="submit"
                     onClick={() => setOpen(false)}
                   >

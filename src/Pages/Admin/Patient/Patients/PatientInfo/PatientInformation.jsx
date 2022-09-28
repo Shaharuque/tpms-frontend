@@ -9,6 +9,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getpatientsDetails } from "../../../../../features/Patient_redux/patientSlice";
 import Loading from "../../../../../Loading/Loading";
+import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
+import Calendar from "react-calendar";
+import "./SingleCalendar.css";
 
 const PatientInformation = () => {
   const [voiceMsg, setVoiceMsg] = useState(false);
@@ -22,7 +25,8 @@ const PatientInformation = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [checkLocation, setLocation] = useState(false);
 
-  //
+  // calender hide
+  const { ref, visible, setVisible } = useOutsideAlerter(false);
   const [open, setOpen] = useState(false);
   const [phoneOpen, setPhoneOpen] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
@@ -36,6 +40,16 @@ const PatientInformation = () => {
   const [phoneRendomValue, setPhoneRendomValue] = useState([]);
   // Email State
   const [emailRendomValue, setEmailRendomValue] = useState([]);
+
+  // testing single calendar
+  const [date, setDate] = useState(new Date());
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const changeDate = (date) => {
+    setDate(date);
+  };
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const year = date.getFullYear();
 
   // Address + icon Click Handeler
   const handleClick = () => {
@@ -232,12 +246,27 @@ const PatientInformation = () => {
                   Date of Birth<span className="text-red-500">*</span>
                 </span>
               </label>
-              <input
-                className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
-                name="dob"
-                type="date"
-                {...register("dob")}
-              />
+              <div ref={ref}>
+                <input
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none pb-[0.8px]"
+                  value={`${month}/${day}/${year}`}
+                  readOnly
+                  onClick={() =>
+                    setOpenCalendar((openCalendar) => !openCalendar)
+                  }
+                />
+                {openCalendar && (
+                  <div className="absolute z-10 p-1">
+                    <Calendar onChange={changeDate} value={date}></Calendar>
+                    <button
+                      onClick={() => setOpenCalendar(false)}
+                      className="bg-white w-full py-1 text-right rounded pr-1"
+                    >
+                      Ok
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
             {/* gender */}
             <div>
