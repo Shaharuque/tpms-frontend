@@ -1,3 +1,4 @@
+//This particular navigation bar is used in our project
 import React, { useState } from "react";
 
 import { BsDownload } from "react-icons/bs";
@@ -136,12 +137,12 @@ const NavigationBar = ({ handle }) => {
               >
                 <button className="flex items-center gap-2 hover:text-slate-600 mb-2">
                   <AiOutlinePlusCircle />
-                  <div onClick={handlePatient}>create patient</div>
+                  <div onClick={handlePatient}>Create Patient</div>
                 </button>
 
                 <button className="flex items-center  gap-2 hover:text-slate-600 mb-2">
                   <AiOutlinePlusSquare />
-                  <div onClick={handleAppointment}>create Appointment</div>
+                  <div onClick={handleAppointment}>Create Appointment</div>
                 </button>
               </div>
               {clicked && (

@@ -24,7 +24,6 @@ const EditSession = ({ handleClose, open }) => {
         <Modal
           open={open}
           centered
-          zIndex={100}
           footer={false}
           closable={false}
           bodyStyle={{ padding: "0" }}
