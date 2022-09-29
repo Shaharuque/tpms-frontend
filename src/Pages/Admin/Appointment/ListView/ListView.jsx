@@ -607,11 +607,11 @@ const ListView = () => {
                 </div>
                 <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
                   <button
-                    className="px-4 m-2 text-white border border-white rounded hover:bg-white hover:text-[#26818f]"
+                    className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
                     type="submit"
                     onClick={() => setOpen(false)}
                   >
-                    Ok
+                    Cancel
                   </button>
                 </div>
               </div>
