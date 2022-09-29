@@ -591,9 +591,9 @@ const ListView = () => {
               </div>
             )}
           </div>
-          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20]">
+          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl">
             {open && (
-              <div className="shadow-xl">
+              <div>
                 <div>
                   <DateRangePicker
                     onChange={(item) => setRange([item.selection])}
