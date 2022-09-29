@@ -6,6 +6,7 @@ import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSe
 import Calendar from "react-calendar";
 import "./CutomCSS/calenderDesign.css";
 import { Modal } from "antd";
+import AppoinmentMultiSelection from "../../../Shared/CustomComponents/AppoinmentMultiSelection";
 
 const CreateAppointment = ({ handleClose }) => {
   const [billable, setBillable] = useState(true);
@@ -151,11 +152,7 @@ const CreateAppointment = ({ handleClose }) => {
                 </select>
               ) : (
                 <div className="col-span-2 ml-1">
-                  <CustomMultiSelection
-                    data={data}
-                    value={value}
-                    setValue={setValue}
-                  ></CustomMultiSelection>
+                  <AppoinmentMultiSelection/>
                 </div>
               )}
               <label className="label">
