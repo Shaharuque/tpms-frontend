@@ -56,7 +56,7 @@ const PatientLedger = () => {
       title: "Patient",
       dataIndex: "patient",
       key: "patient",
-      width: 120,
+      width: 100,
       filters: [{}],
       filteredValue: filteredInfo.patient || null,
       onFilter: (value, record) => record.patient.includes(value),
@@ -83,7 +83,7 @@ const PatientLedger = () => {
       title: "Provider",
       dataIndex: "provider",
       key: "provider",
-      width: 130,
+      width: 100,
       filters: [
         {
           text: "Malesuada",
@@ -176,6 +176,10 @@ const PatientLedger = () => {
       sortOrder:
         sortedInfo.columnKey === "billed_amount" ? sortedInfo.order : null,
       ellipsis: true,
+      render: (_, { billed_amount }) => {
+        //console.log("Status : ", Status);
+        return <div className="flex justify-end">{billed_amount}</div>;
+      },
     },
     {
       title: "Allowed Amount",
@@ -192,6 +196,10 @@ const PatientLedger = () => {
       sortOrder:
         sortedInfo.columnKey === "allowed_amount" ? sortedInfo.order : null,
       ellipsis: true,
+      render: (_, { allowed_amount }) => {
+        //console.log("Status : ", Status);
+        return <div className="flex justify-end">{allowed_amount}</div>;
+      },
     },
 
     {
@@ -208,6 +216,10 @@ const PatientLedger = () => {
       },
       sortOrder: sortedInfo.columnKey === "paid" ? sortedInfo.order : null,
       ellipsis: true,
+      render: (_, { paid }) => {
+        //console.log("Status : ", Status);
+        return <div className="flex justify-end">{paid}</div>;
+      },
     },
     {
       title: "Adj",
@@ -223,6 +235,10 @@ const PatientLedger = () => {
       },
       sortOrder: sortedInfo.columnKey === "adj" ? sortedInfo.order : null,
       ellipsis: true,
+      render: (_, { adj }) => {
+        //console.log("Status : ", Status);
+        return <div className="flex justify-end">{adj}</div>;
+      },
     },
     {
       title: "Balance",
@@ -238,6 +254,10 @@ const PatientLedger = () => {
       },
       sortOrder: sortedInfo.columnKey === "balance" ? sortedInfo.order : null,
       ellipsis: true,
+      render: (_, { balance }) => {
+        //console.log("Status : ", Status);
+        return <div className="flex justify-end">{balance}</div>;
+      },
     },
     {
       title: "Insurance Name",
@@ -360,7 +380,7 @@ const PatientLedger = () => {
   // const endYear = endDate.getFullYear();
 
   return (
-    <div className="h-[100vh]">
+    <div className={table ? "" : "h-[100vh]"}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-lg mt-2 text-orange-500">Patient Ar Ledger</h1>
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-5 mr-2 gap-2">
@@ -386,7 +406,7 @@ const PatientLedger = () => {
               </span>
             </label>
             <div className="ml-1">
-              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border text-gray-600 rounded-sm px-1 mx-1 w-full">
+              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border  rounded-sm px-1 mx-1 w-full">
                 <input
                   value={`${startDay} ${startMonth}`}
                   readOnly
@@ -510,6 +530,9 @@ const PatientLedger = () => {
               rowSelection={{
                 ...rowSelection,
               }}
+              scroll={{
+                y: 700,
+              }}
               onChange={handleChange}
               summary={(pageData) => {
                 let totalBill = 0;
@@ -536,25 +559,27 @@ const PatientLedger = () => {
                         </span>
                       </Table.Summary.Cell>
                       <Table.Summary.Cell index={8}>
-                        <Text className="text-black font-bold">
+                        <Text className="text-black font-bold flex justify-end">
                           {totalBill}
                         </Text>
                       </Table.Summary.Cell>
                       <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold">
+                        <Text className="text-black font-bold flex justify-end">
                           {totalAllowed}
                         </Text>
                       </Table.Summary.Cell>
                       <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold">
+                        <Text className="text-black font-bold flex justify-end">
                           {totalPaid}
                         </Text>
                       </Table.Summary.Cell>
                       <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold">{totalAdj}</Text>
+                        <Text className="text-black font-bold flex justify-end">
+                          {totalAdj}
+                        </Text>
                       </Table.Summary.Cell>
                       <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold">
+                        <Text className="text-black font-bold flex justify-end">
                           {totalBalance}
                         </Text>
                       </Table.Summary.Cell>
