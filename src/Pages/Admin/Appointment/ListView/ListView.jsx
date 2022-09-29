@@ -47,8 +47,8 @@ const ListView = () => {
   const endMonth = endDate.toLocaleString("en-us", { month: "short" });
   const startDay = startDate.getDate();
   const endDay = endDate.getDate();
-  // const startYear = startDate.getFullYear();
-  // const endYear = endDate.getFullYear();
+  const startYear = startDate.getFullYear().toString().slice(2, 4);
+  const endYear = endDate.getFullYear().toString().slice(2, 4);
 
   //test design
   const [clicked, setClicked] = useState(false);
@@ -531,7 +531,7 @@ const ListView = () => {
                             <div className="ml-1">
                               <div className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
                                 <input
-                                  value={`${startDay} ${startMonth}`}
+                                  value={`${startDay} ${startMonth}, ${startYear}`}
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
@@ -541,7 +541,7 @@ const ListView = () => {
                                   className="w-1/3 text-white"
                                 ></BsArrowRight>
                                 <input
-                                  value={`${endDay} ${endMonth}`}
+                                  value={`${endDay} ${endMonth}, ${endYear}`}
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
