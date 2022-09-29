@@ -183,7 +183,7 @@ const ListView = () => {
         return (
           <>
             {pos === "telehealth" ? (
-              <div className="flex items-center justify-center gap-2 ">
+              <div className="flex items-center gap-2 ">
                 Telehealth
                 <BsFillCameraVideoFill className="text-green-500" />
               </div>
@@ -640,6 +640,9 @@ const ListView = () => {
                       dataSource={TData}
                       rowSelection={{
                         ...rowSelection,
+                      }}
+                      scroll={{
+                        y: 650,
                       }}
                       onChange={handleChange}
                     />

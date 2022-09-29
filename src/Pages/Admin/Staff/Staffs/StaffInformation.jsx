@@ -78,7 +78,7 @@ const StaffInformation = () => {
               to={`staffs-biographic/${id}`}
             >
               <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <MdPersonSearch /> Bio's
+                <MdPersonSearch className=" text-2xl" /> Bio's
               </h1>
             </CustomLink>
 
@@ -88,7 +88,7 @@ const StaffInformation = () => {
                 to={`staffs-contact-details/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <IoIosContact /> Contact Info
+                  <IoIosContact className=" text-2xl" /> Contact Info
                 </h1>
               </CustomLink>
             </div>
@@ -98,7 +98,7 @@ const StaffInformation = () => {
                 to={`staffs-credentials/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <BiIdCard /> Credentials
+                  <BiIdCard className=" text-2xl" /> Credentials
                 </h1>
               </CustomLink>
             </div>
@@ -108,7 +108,8 @@ const StaffInformation = () => {
                 to={`staffs-department/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <MdOutlineSupervisorAccount /> Department Supervisor(S)
+                  <MdOutlineSupervisorAccount className=" text-2xl" />{" "}
+                  Department Supervisor(S)
                 </h1>
               </CustomLink>
             </div>
@@ -118,7 +119,7 @@ const StaffInformation = () => {
                 to={`staffs-payroll/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <GiReceiveMoney /> Payroll Setup
+                  <GiReceiveMoney className=" text-2xl" /> Payroll Setup
                 </h1>
               </CustomLink>
             </div>
@@ -128,7 +129,7 @@ const StaffInformation = () => {
                 to={`staffs-other-setup/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <IoSettingsSharp /> Other Setup
+                  <IoSettingsSharp className=" text-2xl" /> Other Setup
                 </h1>
               </CustomLink>
             </div>
@@ -138,7 +139,7 @@ const StaffInformation = () => {
                 to={`staffs-leave-tracking/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <MdOutlineWorkOff /> Leave Tracking
+                  <MdOutlineWorkOff className=" text-2xl" /> Leave Tracking
                 </h1>
               </CustomLink>
             </div>
@@ -148,7 +149,8 @@ const StaffInformation = () => {
                 to={`staffs-payor-exclusion/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <MdOutlineSavings /> Insurance Exclusion(S)
+                  <MdOutlineSavings className=" text-2xl" /> Insurance
+                  Exclusion(S)
                 </h1>
               </CustomLink>
             </div>
@@ -158,7 +160,8 @@ const StaffInformation = () => {
                 to={`staffs-sub-activity-exclusion/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <RiUserUnfollowLine /> Service Sub-Type Exclusions
+                  <RiUserUnfollowLine className=" text-2xl" /> Service Sub-Type
+                  Exclusions
                 </h1>
               </CustomLink>
             </div>
@@ -168,7 +171,7 @@ const StaffInformation = () => {
                 to={`staffs-client-exclusion/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <FaUserTimes /> Patient Exclusion
+                  <FaUserTimes className=" text-2xl" /> Patient Exclusion
                 </h1>
               </CustomLink>
             </div>
@@ -178,7 +181,7 @@ const StaffInformation = () => {
                 to={`staffs-portal/${id}`}
               >
                 <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                  <RiUserFill /> Staff Portal
+                  <RiUserFill className=" text-2xl" /> Staff Portal
                 </h1>
               </CustomLink>
             </div>
