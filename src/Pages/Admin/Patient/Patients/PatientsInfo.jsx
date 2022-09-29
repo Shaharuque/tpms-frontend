@@ -58,7 +58,7 @@ const PatientsInfo = () => {
               to={`patient-info/${id}`}
             >
               <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <MdPersonSearch /> Patient Info
+                <MdPersonSearch className=" text-2xl" /> Patient Info
               </h1>
             </CustomLink>
           </div>
@@ -69,7 +69,8 @@ const PatientsInfo = () => {
               to={`patient-authorization/${id}`}
             >
               <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <BsFillFileEarmarkLock2Fill /> Ins/Authorization
+                <BsFillFileEarmarkLock2Fill className=" text-2xl" />{" "}
+                Ins/Authorization
               </h1>
             </CustomLink>
           </div>
@@ -79,7 +80,7 @@ const PatientsInfo = () => {
               to={`patient-document/${id}`}
             >
               <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <IoDocumentsOutline /> Documents
+                <IoDocumentsOutline className=" text-2xl" /> Documents
               </h1>
             </CustomLink>
           </div>
@@ -89,7 +90,7 @@ const PatientsInfo = () => {
               to={`patient-portal/${id}`}
             >
               <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <TbReport /> Patient Portal
+                <TbReport className=" text-2xl" /> Patient Portal
               </h1>
             </CustomLink>
           </div>
@@ -99,7 +100,7 @@ const PatientsInfo = () => {
               to={`patient-ledger/${id}`}
             >
               <h1 className="ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <RiFileDamageFill /> Patient Ledger
+                <RiFileDamageFill className=" text-2xl" /> Patient Ledger
               </h1>
             </CustomLink>
           </div>
