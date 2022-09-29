@@ -29,7 +29,7 @@ const AuthorizationEditTable = () => {
     setSortedInfo(sorter);
   };
 
-  console.log("authData", authEditData);
+  // console.log("authData", authEditData);
 
   const columns = [
     {

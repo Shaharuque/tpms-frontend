@@ -14,7 +14,7 @@ import { RiFileDamageFill } from "react-icons/ri";
 const PatientsInfo = () => {
   // Great parent component
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   localStorage.setItem("p_key", id);
   return (
     <>

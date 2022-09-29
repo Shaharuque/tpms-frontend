@@ -204,7 +204,7 @@ const TableApi = () => {
       title: "Patient",
       dataIndex: "client_first_name",
       key: "client_first_name",
-      width: 160,
+      width: 100,
       filters: [
         { text: "Milissent", value: "Milissent" },
         { text: "Timmy", value: "Timmy" },
@@ -258,7 +258,7 @@ const TableApi = () => {
       title: "Contact Info",
       dataIndex: "phone_number",
       key: "phone_number",
-      width: 120,
+      width: 100,
       // filters: [
       //   {
       //     text: "(940)-234-0329",
@@ -295,7 +295,7 @@ const TableApi = () => {
       title: "DOB",
       dataIndex: "client_dob",
       key: "client_dob",
-      width: 100,
+      width: 80,
       filters: [
         {
           text: `1986-08-28`,
@@ -320,7 +320,7 @@ const TableApi = () => {
       title: "Gender",
       dataIndex: "client_gender",
       key: "client_gender",
-      width: 100,
+      width: 80,
       filters: [
         {
           text: `Male`,
@@ -345,7 +345,7 @@ const TableApi = () => {
       title: "POS",
       dataIndex: "location",
       key: "location",
-      width: 100,
+      width: 120,
       filters: [
         {
           text: `Main Office`,
@@ -373,7 +373,7 @@ const TableApi = () => {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
-      width: 100,
+      width: 80,
       filters: [
         { text: "6780496111", value: "6780496111" },
         {
@@ -384,6 +384,9 @@ const TableApi = () => {
         { text: "8136767092", value: "8136767092" },
         { text: "813676700092", value: "813676700092" },
       ],
+      render: (_, { insurance }) => {
+        return <div className="flex justify-end px-1">{insurance}</div>;
+      },
       filteredValue: filteredInfo.insurance || null,
       onFilter: (value, record) => record.insurance.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -397,31 +400,30 @@ const TableApi = () => {
       title: "Auth",
       key: "id",
       dataIndex: "id",
-      width: 50,
+      width: 40,
       render: (_, { id }) => {
         return (
-          <>
+          <div className="flex justify-center">
             <button
               onClick={() => {
                 handleAuthClick(id);
               }}
+              className="flex justify-center"
             >
-              <FaRegAddressCard className="text-sm mx-auto text-secondary" />
+              <FaRegAddressCard className="text-sm  text-secondary" />
             </button>
-          </>
+          </div>
         );
       },
     },
     {
       title: "Status",
-      key: "is_active_client",
-      dataIndex: "is_active_client",
+      key: "status",
+      dataIndex: "status",
       width: 60,
-      render: (_, { is_active_client }) => {
+      render: (_, { status }) => {
         //console.log("Status : ", Status);
-        return (
-          <PatientStatusAction status={is_active_client}></PatientStatusAction>
-        );
+        return <PatientStatusAction status={status}></PatientStatusAction>;
       },
       filters: [],
       filteredValue: filteredInfo.Status || null,
@@ -429,48 +431,62 @@ const TableApi = () => {
     },
   ];
   return (
-    <div className="">
+    <div
+      className={
+        filteredInfo?.client_first_name ||
+        filteredInfo?.client_dob ||
+        filteredInfo?.client_gender ||
+        filteredInfo?.location
+          ? "h-[100vh]"
+          : ""
+      }
+    >
       <>
         <div className="flex items-center justify-between gap-2 my-2">
           <h1 className="text-lg text-orange-500 text-left font-semibold ">
             Patient
           </h1>
-          <button
-            onClick={clearFilters}
-            className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
-          >
-            Clear filters
-          </button>
+          <div>
+            <input
+              placeholder="Search here..."
+              className="px-2 w-52 mr-2 py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+              onChange={(e) => globalFilter(e.target.value)}
+            />
+
+            <button
+              onClick={clearFilters}
+              className="px-2  py-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+            >
+              Clear filters
+            </button>
+          </div>
         </div>
-        <div className="flex justify-end mb-8">
-          <input
-            placeholder="Search here..."
-            className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
-            onChange={(e) => globalFilter(e.target.value)}
-          />
-        </div>
+
         {/* filtering tag showing part */}
         {filteredInfo?.client_first_name?.length > 0 ||
         filteredInfo?.client_dob?.length > 0 ||
         filteredInfo?.client_gender?.length > 0 ||
         filteredInfo?.location?.length > 0 ||
         filteredInfo?.insurance?.length > 0 ? (
-          <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
-            <div className="p-2 rounded ">
-              {filteredInfo?.client_first_name?.length > 0 && (
+          // <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
+          <div className="my-5">
+            {filteredInfo?.client_first_name?.length > 0 && (
+              <div className=" ">
                 <div className="flex mb-2 gap-1">
-                  <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
-                    Patient:
-                  </span>
                   {filteredInfo?.client_first_name?.map((tag, index) => (
                     <div
-                      className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
+                      className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
                       key={index}
                     >
-                      <div className=" text-sm">{tag}</div>
+                      <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                        <span className="text-secondary text-[15px] font-medium mr-1  ">
+                          Patient:
+                        </span>
+                        {tag}
+                      </div>
                       <div>
                         <div
-                          className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
+                          className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
                           onClick={() => deleteFirstNameTag(tag)}
                         >
                           X
@@ -479,102 +495,111 @@ const TableApi = () => {
                     </div>
                   ))}
                 </div>
-              )}
-              {filteredInfo?.client_dob?.length > 0 && (
-                <div className="flex mb-2 gap-1">
-                  <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
-                    DOB:
-                  </span>
-                  {filteredInfo?.client_dob?.map((tag, index) => (
-                    <div
-                      className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
-                      key={index}
-                    >
-                      <div className=" text-sm">{tag}</div>
-                      <div>
-                        <div
-                          className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
-                          onClick={() => deleteDobTag(tag)}
-                        >
-                          X
-                        </div>
+              </div>
+            )}
+            {filteredInfo?.client_dob?.length > 0 && (
+              <div className="flex mb-2 gap-1">
+                {filteredInfo?.client_dob?.map((tag, index) => (
+                  <div
+                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">
+                        DOB:
+                      </span>
+                      {tag}
+                    </div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
+                        onClick={() => deleteDobTag(tag)}
+                      >
+                        X
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-              {filteredInfo?.client_gender?.length > 0 && (
-                <div className="flex mb-2 gap-1">
-                  <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
-                    Gender:
-                  </span>
-                  {filteredInfo?.client_gender?.map((tag, index) => (
-                    <div
-                      className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
-                      key={index}
-                    >
-                      <div className=" text-sm">{tag}</div>
-                      <div>
-                        <div
-                          className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
-                          onClick={() => deleteGenderTag(tag)}
-                        >
-                          X
-                        </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {filteredInfo?.client_gender?.length > 0 && (
+              <div className="flex mb-2 gap-1">
+                {filteredInfo?.client_gender?.map((tag, index) => (
+                  <div
+                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">
+                        Gender:
+                      </span>
+                      {tag}
+                    </div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
+                        onClick={() => deleteGenderTag(tag)}
+                      >
+                        X
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-              {filteredInfo?.location?.length > 0 && (
-                <div className="flex mb-2 gap-1">
-                  <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
-                    POS:
-                  </span>
-                  {filteredInfo?.location?.map((tag, index) => (
-                    <div
-                      className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
-                      key={index}
-                    >
-                      <div className=" text-sm">{tag}</div>
-                      <div>
-                        <div
-                          className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
-                          onClick={() => deletelocationTag(tag)}
-                        >
-                          X
-                        </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {filteredInfo?.location?.length > 0 && (
+              <div className="flex mb-2 gap-1">
+                {filteredInfo?.location?.map((tag, index) => (
+                  <div
+                    className="text-gray-700  shadow-sm font-medium  rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">
+                        Pos:
+                      </span>
+                      {tag}
+                    </div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
+                        onClick={() => deletelocationTag(tag)}
+                      >
+                        X
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-              {filteredInfo?.insurance?.length > 0 && (
-                <div className="flex mb-2 gap-1">
-                  <span className="text-secondary text-[15px] font-semibold mr-2 flex items-center">
-                    POS:
-                  </span>
-                  {filteredInfo?.insurance?.map((tag, index) => (
-                    <div
-                      className="text-gray-700 shadow-sm font-medium border border-primary  rounded-sm pl-1 bg-white flex items-center"
-                      key={index}
-                    >
-                      <div className=" text-sm">{tag}</div>
-                      <div>
-                        <div
-                          className="cursor-pointer text-sm text-white ml-3 bg-primary px-1"
-                          onClick={() => deleteInsuranceTag(tag)}
-                        >
-                          X
-                        </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {filteredInfo?.insurance?.length > 0 && (
+              <div className="flex mb-2 gap-1">
+                {filteredInfo?.insurance?.map((tag, index) => (
+                  <div
+                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                    key={index}
+                  >
+                    <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">
+                        Insurance :
+                      </span>
+                      {tag}
+                    </div>
+                    <div>
+                      <div
+                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
+                        onClick={() => deleteInsuranceTag(tag)}
+                      >
+                        X
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        ) : null}
+        ) : // </div>
+        null}
         {/* <InfiniteScroll
           dataLength={items.length} //items is basically all data here
           next={fetchData}

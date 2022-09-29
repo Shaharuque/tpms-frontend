@@ -1,34 +1,30 @@
-import { Switch } from "antd";
-import TextArea from "antd/lib/input/TextArea";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { IoCaretBackCircleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
-const Bio = () => {
-  const [note, setNote] = useState("");
-  const [session, setSession] = useState(false);
+const OfficeStaff = () => {
   const { register, handleSubmit, reset } = useForm();
-  console.log(session);
-  useEffect(() => {
-    // you can do async server request and fill up form
-    setTimeout(() => {
-      reset({
-        first_name: `bill`,
-        middle_name: "luo",
-        comment: "Notes",
-      });
-    }, 600);
-  }, [reset]);
-
   const onSubmit = (data) => {
     console.log(data);
-    console.log(note);
+    reset();
   };
   return (
-    <div className="md:h-[100vh]">
-      <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
+    <div className="h-[100vh]">
+      <div className="flex items-center flex-wrap gap-2 justify-between">
+        <h1 className="text-lg my-2 text-orange-500">Today's Copay</h1>
+        <div className="flex items-center gap-3">
+          <Link
+            to={"/admin/staffs"}
+            className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+          >
+            <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
+          </Link>
+        </div>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-2">
-          {/* First Name with all the validation  */}
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
+          {/* name  */}
           <div>
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
@@ -42,7 +38,6 @@ const Bio = () => {
               {...register("first_name")}
             />
           </div>
-
           <div>
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
@@ -84,6 +79,7 @@ const Bio = () => {
           </div>
           {/* DOB */}
           <div>
+            {" "}
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Date of Birth<span className="text-red-500">*</span>
@@ -104,7 +100,7 @@ const Bio = () => {
             <input
               type="text"
               name="ssn"
-              className="input-border text-gray-600 rounded-sm py-[1px]  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("ssn")}
             />
           </div>
@@ -113,6 +109,19 @@ const Bio = () => {
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Office Phone <span className="text-red-500">*</span>
+              </span>
+            </label>
+            <input
+              type="text"
+              name="office_phone"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              {...register("office_phone")}
+            />
+          </div>
+          <div>
+            <label className="label">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                Office Fax
               </span>
             </label>
             <input
@@ -142,20 +151,24 @@ const Bio = () => {
                 Drivers License & Expiration Date
               </span>
             </label>
-            <input
-              type="text"
-              name="driving_license"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-              {...register("driving_license")}
-            />
-          </div>
-          <div className="md:mt-8">
-            {" "}
-            <input
-              className="input-border text-gray-600 rounded-sm text-[14px]  font-medium w-full focus:outline-none"
-              type="date"
-              {...register("license_Date")}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-2 gap-y-1">
+              <div>
+                <input
+                  type="text"
+                  name="driving_license"
+                  className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                  {...register("driving_license")}
+                />
+              </div>
+              <div className="">
+                {" "}
+                <input
+                  className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
+                  type="date"
+                  {...register("license_Date")}
+                />
+              </div>
+            </div>
           </div>
           <div>
             <label className="label">
@@ -189,7 +202,7 @@ const Bio = () => {
               </span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px]  font-medium w-full focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               {...register("credential_type")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -199,12 +212,12 @@ const Bio = () => {
           <div>
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Tx Type <span className="text-red-500">*</span>
+                Treatment Type
               </span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px]  font-medium w-full focus:outline-none"
-              {...register("tx_type")}
+              className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
+              {...register("credential_type")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
               <option value="female">Female</option>
@@ -218,9 +231,9 @@ const Bio = () => {
             </label>
             <input
               type="text"
-              name="npi"
+              name="individual_npi"
               className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-              {...register("npi")}
+              {...register("individual_npi")}
             />
           </div>
           <div>
@@ -231,9 +244,9 @@ const Bio = () => {
             </label>
             <input
               type="text"
-              name="caqh_id"
+              name="cahq_id"
               className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-              {...register("caqh_id")}
+              {...register("cahq_id")}
             />
           </div>
           <div>
@@ -244,21 +257,21 @@ const Bio = () => {
             </label>
             <input
               type="text"
-              name="zip"
+              name="service_area_zip"
               className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-              {...register("zip")}
+              {...register("service_area_zip")}
             />
           </div>
-          <div>
+          <div className="">
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Termination Date
               </span>
             </label>
             <input
-              className="input-border text-gray-600 rounded-sm text-[14px]  font-medium w-full focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               type="date"
-              {...register("termination_date")}
+              {...register("terminate_Date")}
             />
           </div>
           <div>
@@ -287,7 +300,6 @@ const Bio = () => {
               {...register("taxonomy_code")}
             />
           </div>
-
           <div>
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
@@ -321,41 +333,17 @@ const Bio = () => {
               </div>
             </div>
           </div>
-          <div>
-            <div className="flex items-center gap-2 my-5">
-              <Switch onClick={() => setSession(!session)} size="small" />
-              <span>Create Session</span>
-            </div>
+          <div className="mt-10">
+            <button
+              className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              type="submit"
+            >
+              Save
+            </button>
           </div>
-          <div></div>
-          <div className="col-span-2">
-            <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Notes
-              </span>
-            </label>
-            <TextArea rows={4} placeholder="maxLength is 6" size="middle" />
-          </div>
-        </div>
-
-        <div className="mt-10">
-          <button
-            className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            type="submit"
-          >
-            Save
-          </button>
-          <button
-            className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-            autoFocus
-            onClick={reset}
-          >
-            CANCEL
-          </button>
         </div>
       </form>
     </div>
   );
 };
-
-export default Bio;
+export default OfficeStaff;

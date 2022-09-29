@@ -1,10 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 
 const RecurringSessionEdit = () => {
+  const { id } = useParams();
+  console.log(id);
   const {
     register,
     handleSubmit,

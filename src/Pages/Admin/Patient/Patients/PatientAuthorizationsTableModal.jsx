@@ -188,9 +188,27 @@ const PatientAuthorizationsTableModal = ({
         <Modal
           centered
           open={modalOpen}
-          onOk={() => setModalOpen(false)}
           onCancel={() => setModalOpen(false)}
           width={1200}
+          className="p-5 box rounded-lg"
+          footer={[
+            <div className=" flex items-end justify-end mt-2">
+              <Link
+                to={`/admin/patient/patient-authorization/${patient_id}`}
+                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+              >
+                Add New Auth
+              </Link>
+
+              <button
+                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                autoFocus
+                onClick={() => setModalOpen(false)}
+              >
+                Close
+              </button>
+            </div>,
+          ]}
         >
           <div>
             <div className="flex items-center justify-between">
@@ -198,10 +216,7 @@ const PatientAuthorizationsTableModal = ({
                 All Authorizations
               </h1>
 
-              <IoCloseCircleOutline
-                onClick={handleClose}
-                className="text-gray-600 font-semibold  text-2xl hover:text-primary "
-              />
+              <IoCloseCircleOutline className="text-gray-600 font-semibold  text-2xl hover:text-primary " />
             </div>
             <div className="bg-gray-200 py-[1px] mt-3 "></div>
             <div className="flex items-center justify-between gap-2 my-2">

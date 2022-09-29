@@ -17,7 +17,7 @@ const TestingTable = () => {
       .then((res) => res.json())
       .then((d) => {
         setAllData(d);
-        // setLoading2(false);
+        // setLoading2(false)
       });
   }, []);
 

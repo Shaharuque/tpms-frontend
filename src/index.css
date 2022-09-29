@@ -43,6 +43,7 @@
 
 .rs-nav-tabs.rs-nav-horizontal .rs-nav-item.rs-nav-item-active {
   border-bottom-width: 0;
+
 }
 
 .rs-nav-tabs.rs-nav-horizontal>.rs-nav-item,
@@ -181,6 +182,33 @@ code {
 .rdrStaticRangeLabel,
 .rdrDay{
     color: #0AA1B2 !important;
+}
+
+.rdrWeekDay{
+  color: #000 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.rdrDayNumber,
+.rdrMonthAndYearPicker > select{
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.rdrMonthAndYearWrapper{
+  height: 30px !important;
+  /* padding-top: 0px !important; */
+}
+
+.rdrMonthName,
+.rdrMonthPicker,
+.rdrYearPicker{
+  font-size: 16px !important;
+}
+
+.rdrStaticRangeLabel{
+  font-size: 16px !important;
 }
 
 @media only screen and (max-width:450px){

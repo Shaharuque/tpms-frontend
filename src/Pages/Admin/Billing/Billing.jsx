@@ -1,11 +1,7 @@
 import React from "react";
 
 const Billing = () => {
-  return (
-    <div>
-      <h1>This is Billing part</h1>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Billing;

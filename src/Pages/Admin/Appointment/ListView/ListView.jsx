@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
@@ -22,11 +21,16 @@ import { BsArrowRight } from "react-icons/bs";
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
   const [table, setTable] = useState(false);
+  const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
   const [listView, setListView] = useState(true);
-  const [card, setCard] = useState(false);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+
+  const handleSortBy = (e) => {
+    setSortBy(e.target.value);
+  };
+
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([
     {
@@ -85,19 +89,21 @@ const ListView = () => {
       title: "Lock",
       key: "lock",
       dataIndex: "lock",
-      width: 50,
+      width: 40,
       // render contains what we want to reflect as our data
       render: (_, { lock }) => {
         //console.log("tags : ", lock);
         return (
-          <div>
+          <div className="flex justify-center">
             {lock === true && (
               <button onClink={() => console.log(lock)}>
-                <AiFillUnlock className="mx-auto text-lg font-medium text-secondary" />
+                <AiFillUnlock className=" text-lg font-medium text-green-600" />
               </button>
             )}
             {lock === false && (
-              <AiFillLock className=" text-lg font-medium mx-auto  text-red-600" />
+              <button>
+                <AiFillLock className="text-lg font-medium  text-red-600" />
+              </button>
             )}
           </div>
         );
@@ -107,7 +113,7 @@ const ListView = () => {
       title: "Patients",
       dataIndex: "Patients",
       key: "Patients",
-      width: 200,
+      width: 100,
       filters: [
         {
           text: `Vernon`,
@@ -130,6 +136,10 @@ const ListView = () => {
           value: "Hector Moses",
         },
       ],
+      render: (_, { Patients }) => {
+        //console.log("tags : ", lock);
+        return <div className=" text-secondary">{Patients}</div>;
+      },
       filteredValue: filteredInfo.Patients || null,
       onFilter: (value, record) => record.Patients.includes(value),
       sorter: (a, b) => {
@@ -142,7 +152,7 @@ const ListView = () => {
       title: "Service & Hrs",
       dataIndex: "Service_hrs",
       key: "Service_hrs",
-      width: 200,
+      width: 150,
       filters: [
         {
           text: `Amet`,
@@ -167,7 +177,7 @@ const ListView = () => {
       title: "Pos",
       key: "pos",
       dataIndex: "pos",
-      width: 100,
+      width: 80,
       render: (_, { pos }) => {
         //console.log("pos : ", pos);
         return (
@@ -209,7 +219,7 @@ const ListView = () => {
       title: "Scheduled Date",
       dataIndex: "Scheduled_Date",
       key: "Scheduled_Date",
-      width: 150,
+      width: 100,
       filters: [
         {
           text: `Feb 20, 2023`,
@@ -264,7 +274,7 @@ const ListView = () => {
       render: (_, { Status }) => {
         //console.log("Status : ", Status);
         return (
-          <div>
+          <div className="flex justify-center">
             {Status === "Scheduled" && (
               <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
                 {Status}
@@ -306,17 +316,19 @@ const ListView = () => {
       key: "operation",
       width: 60,
       render: (_, { id }) => (
-        <Dropdown
-          overlay={<ManageTableAction></ManageTableAction>}
-          trigger={["click"]}
-          overlayStyle={{ zIndex: "100" }}
-        >
-          <button onClick={(e) => e.preventDefault()}>
-            <Space>
-              <BsThreeDots />
-            </Space>
-          </button>
-        </Dropdown>
+        <div className="flex justify-center">
+          <Dropdown
+            overlay={<ManageTableAction></ManageTableAction>}
+            trigger={["click"]}
+            overlayStyle={{ zIndex: "100" }}
+          >
+            <button onClick={(e) => e.preventDefault()}>
+              <Space>
+                <BsThreeDots />
+              </Space>
+            </button>
+          </Dropdown>
+        </div>
       ),
     },
   ];
@@ -380,7 +392,7 @@ const ListView = () => {
           <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">
             <div onClick={clickHandler} className="  flex items-center ">
               {!clicked && (
-                <h1 className="text-[16px]  text-white font-normal ">
+                <h1 className="text-[16px]  text-white font-semibold ">
                   Manage Sessions
                 </h1>
               )}
@@ -390,7 +402,7 @@ const ListView = () => {
               <div>
                 <Fade>
                   <div className="flex justify-between items-center">
-                    <h1 className="text-[16px]  text-white font-normal ">
+                    <h1 className="text-[20px]  text-white font-semibold ">
                       Manage Sessions
                     </h1>
                     <div className="  flex justify-end gap-3">
@@ -451,11 +463,11 @@ const ListView = () => {
                   </div>
 
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-5 mb-2">
+                    <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-7 gap-5 mb-2">
                       {billable && (
                         <div>
-                          <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
-                            Patients
+                          <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
+                            Clients
                           </h1>
                           <CustomMultiSelection
                             data={datat}
@@ -465,7 +477,7 @@ const ListView = () => {
                         </div>
                       )}
                       <div className="w-full">
-                        <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
+                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                           Provider
                         </h1>
                         <CustomMultiSelection
@@ -479,7 +491,7 @@ const ListView = () => {
                         <>
                           <div>
                             <label className="label">
-                              <span className="label-text text-xs text-gray-100 text-left">
+                              <span className="label-text text-[16px] text-gray-100 text-left">
                                 Place of Services
                               </span>
                             </label>
@@ -512,24 +524,27 @@ const ListView = () => {
 
                           <div>
                             <label className="label">
-                              <span className="label-text text-xs text-gray-100 text-left">
+                              <span className="label-text text-[16px] text-gray-100 text-left">
                                 Selected date
                               </span>
                             </label>
                             <div className="ml-1">
-                              <div className="flex flex-wrap justify-between items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
+                              <div className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
                                 <input
                                   value={`${startDay} ${startMonth}`}
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
-                                  className="focus:outline-none font-normal bg-transparent text-white w-1/3 cursor-pointer"
+                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
-                                <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
+                                <BsArrowRight
+                                  onClick={() => setOpen((open) => !open)}
+                                  className="w-1/3 text-white"
+                                ></BsArrowRight>
                                 <input
                                   value={`${endDay} ${endMonth}`}
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
-                                  className="focus:outline-none font-normal bg-transparent text-white w-1/3 cursor-pointer"
+                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
                               </div>
                             </div>
@@ -537,7 +552,7 @@ const ListView = () => {
 
                           <div>
                             <label className="label">
-                              <span className="label-text text-xs text-gray-100 text-left">
+                              <span className="label-text text-[16px] text-gray-100 text-left">
                                 Status
                               </span>
                             </label>
@@ -570,7 +585,7 @@ const ListView = () => {
                         </>
                       )}
                       <button
-                        className="font-regular mt-[33px] sm:w-1/4  text-sm font-normal bg-secondary  hover:to-secondary text-white rounded-md"
+                        className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
                         type="submit"
                       >
                         Go
@@ -581,7 +596,7 @@ const ListView = () => {
               </div>
             )}
           </div>
-          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20]">
+          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl">
             {open && (
               <div>
                 <div>
@@ -595,13 +610,13 @@ const ListView = () => {
                     className="border-2 border-gray-100"
                   />
                 </div>
-                <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
+                <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
                   <button
-                    className="bg-gray-600 py-1  m-2 text-white rounded"
+                    className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
                     type="submit"
                     onClick={() => setOpen(false)}
                   >
-                    Ok
+                    Cancel
                   </button>
                 </div>
               </div>
@@ -613,7 +628,7 @@ const ListView = () => {
           <>
             {listView && (
               <div className="my-5">
-                <div className=" overflow-scroll ">
+                <div className="overflow-scroll">
                   <>
                     <Table
                       pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
@@ -642,22 +657,6 @@ const ListView = () => {
                 <CardsView data={TData}></CardsView>
               </motion.div>
             )}
-            {/* <div className="flex item-center flex-wrap">
-              <div>
-                <select
-                  onChange={handleSortBy}
-                  name="type"
-                  className="border border-gray-300 rounded-sm py-[5px] font-normal  w-36 text-xs "
-                >
-                  <option value=""></option>
-                  <option value="Specific_Date">Specific Date</option>
-                  <option value="Date_Range">Provider</option>
-                </select>
-              </div>
-              <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-                Go
-              </button>
-            </div> */}
           </>
         )}
       </div>

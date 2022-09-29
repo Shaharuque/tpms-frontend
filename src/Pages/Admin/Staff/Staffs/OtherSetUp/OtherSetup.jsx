@@ -27,142 +27,142 @@ const OtherSetup = () => {
           {/* name  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Max Hours For Day
               </span>
             </label>
             <input
               type="text"
               name="max_day"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_day")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Max Hours For Week
               </span>
             </label>
             <input
               type="text"
               name="max_week"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_week")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 ADP Employee Id
               </span>
             </label>
             <input
               type="text"
               name="employ_id"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("employ_id")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Provider Level
               </span>
             </label>
             <input
               type="text"
               name="provider_lvl"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("provider_lvl")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Custom2
               </span>
             </label>
             <input
               type="text"
               name="Custom2"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("Custom2")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Custom3
               </span>
             </label>
             <input
               type="text"
               name="Custom3"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("Custom3")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Custom4
               </span>
             </label>
             <input
               type="text"
               name="Custom4"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("Custom4")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Custom5
               </span>
             </label>
             <input
               type="text"
               name="Custom5"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("Custom5")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Custom6
               </span>
             </label>
             <input
               type="text"
               name="Custom6"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("Custom6")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Highest Degree
               </span>
             </label>
             <input
               type="text"
               name="highest_degree"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("highest_degree")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Degree Level
               </span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -171,45 +171,45 @@ const OtherSetup = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 External Software Id
               </span>
             </label>
             <input
               type="text"
               name="software_id"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("software_id")}
             />
           </div>
 
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Signature Valid From
               </span>
             </label>
             <input
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               type="date"
               {...register("valid_from")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Signature Valid To
               </span>
             </label>
             <input
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               type="date"
               {...register("valid_to")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Upload File
               </span>
             </label>
@@ -314,11 +314,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -330,11 +330,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -346,11 +346,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -362,11 +362,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapy</option>
@@ -378,11 +378,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -394,11 +394,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -411,7 +411,7 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("max_day")}
             />
           </div> */}

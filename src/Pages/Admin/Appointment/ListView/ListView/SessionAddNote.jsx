@@ -18,7 +18,7 @@ const SessionAddNote = ({ handleClose, open }) => {
   }, [reset]);
   return (
     <div>
-      <div>
+      <div className="rounded-lg">
         <Modal
           open={open}
           centered
@@ -26,8 +26,9 @@ const SessionAddNote = ({ handleClose, open }) => {
           footer={false}
           closable={false}
           bodyStyle={{ padding: "0" }}
+          className="box rounded-md"
         >
-          <div className="px-5 py-2  box ">
+          <div className="px-5 py-2  ">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400">Add Notes</h1>
               <IoCloseCircleOutline

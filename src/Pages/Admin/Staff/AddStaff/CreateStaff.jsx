@@ -7,6 +7,7 @@ const CreateStaff = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    reset();
   };
   return (
     <div className="h-[100vh]">
@@ -26,53 +27,53 @@ const CreateStaff = () => {
           {/* name  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 First Name<span className="text-red-500">*</span>
               </span>
             </label>
             <input
               type="text"
               name="first_name"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("first_name")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Middle Name
               </span>
             </label>
             <input
               type="text"
               name="middle_name"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("middle_name")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Last Name<span className="text-red-500">*</span>
               </span>
             </label>
             <input
               type="text"
               name="last_name"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("last_name")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Nick Name
               </span>
             </label>
             <input
               type="text"
               name="nick_name"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("nick_name")}
             />
           </div>
@@ -80,73 +81,73 @@ const CreateStaff = () => {
           <div>
             {" "}
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Date of Birth<span className="text-red-500">*</span>
               </span>
             </label>
             <input
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               type="date"
               {...register("check_Date")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 SSN
               </span>
             </label>
             <input
               type="text"
               name="ssn"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("ssn")}
             />
           </div>
           {/* phone & email  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Office Phone <span className="text-red-500">*</span>
               </span>
             </label>
             <input
               type="text"
               name="office_phone"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("office_phone")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Office Fax
               </span>
             </label>
             <input
               type="text"
               name="office_phone"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("office_phone")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Office Email<span className="text-red-500">*</span>
               </span>
             </label>
             <input
               type="text"
               name="office_email"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("office_email")}
             />
           </div>
           {/* driving license */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Drivers License & Expiration Date
               </span>
             </label>
@@ -155,14 +156,14 @@ const CreateStaff = () => {
                 <input
                   type="text"
                   name="driving_license"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
                   {...register("driving_license")}
                 />
               </div>
               <div className="">
                 {" "}
                 <input
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full "
+                  className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
                   type="date"
                   {...register("license_Date")}
                 />
@@ -171,37 +172,37 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Title
               </span>
             </label>
             <input
               type="text"
               name="title"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("title")}
             />
           </div>
           <div className="">
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Hiring Date with Company
               </span>
             </label>
             <input
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               type="date"
               {...register("hiring_date")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Credential Type
               </span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               {...register("credential_type")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -210,12 +211,12 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Treatment Type
               </span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               {...register("credential_type")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -224,84 +225,84 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Individual NPI
               </span>
             </label>
             <input
               type="text"
               name="individual_npi"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("individual_npi")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 CAQH Id
               </span>
             </label>
             <input
               type="text"
               name="cahq_id"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("cahq_id")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Service Area Zip
               </span>
             </label>
             <input
               type="text"
               name="service_area_zip"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("service_area_zip")}
             />
           </div>
           <div className="">
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Termination Date
               </span>
             </label>
             <input
-              className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               type="date"
               {...register("terminate_Date")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Language(s)
               </span>
             </label>
             <input
               type="text"
               name="language"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("language")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Taxonomy Code
               </span>
             </label>
             <input
               type="text"
               name="taxonomy_code"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("taxonomy_code")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
+              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Gender <span className="text-red-500">*</span>
               </span>
             </label>

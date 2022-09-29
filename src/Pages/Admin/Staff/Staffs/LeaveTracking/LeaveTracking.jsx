@@ -3,6 +3,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Table } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 
 const LeaveTracking = () => {
   const [tableData, setTableData] = useState([]);
@@ -136,19 +137,20 @@ const LeaveTracking = () => {
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                     Description
                   </span>
                 </label>
-                <textarea
+                <TextArea
+                  rows={4}
+                  placeholder="description"
+                  size="middle"
                   onChange={(e) => setNote(e.target.value)}
-                  name="comment"
-                  className="border text-sm p-1  ml-1 h-24 w-full"
-                ></textarea>
+                />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                     Date
                   </span>
                 </label>

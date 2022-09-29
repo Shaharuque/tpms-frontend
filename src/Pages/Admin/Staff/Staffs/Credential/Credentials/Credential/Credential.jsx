@@ -154,7 +154,7 @@ const Credential = ({ handleCredential, credentialOpen }) => {
             }}
           >
             {display && (
-              <p className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
+              <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
                 <p>No Credential Records</p>
                 <button
                   onClick={() => setDisplay(false)}
@@ -162,7 +162,7 @@ const Credential = ({ handleCredential, credentialOpen }) => {
                 >
                   X
                 </button>
-              </p>
+              </div>
             )}
 
             <div>

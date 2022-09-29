@@ -293,8 +293,8 @@ const RecurringSession = () => {
     },
     {
       title: "Action",
-      dataIndex: "operation",
-      key: "operation",
+      dataIndex: "id",
+      key: "id",
       width: 60,
       render: (_, { id }) => (
         <div className="flex justify-center">

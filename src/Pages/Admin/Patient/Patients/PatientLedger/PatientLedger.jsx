@@ -391,14 +391,17 @@ const PatientLedger = () => {
                   value={`${startDay} ${startMonth}`}
                   readOnly
                   onClick={() => setOpen((open) => !open)}
-                  className="focus:outline-none font-medium pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                  className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                 />
-                <BsArrowRight className="w-1/3 text-gray-600 text-[14px] font-medium"></BsArrowRight>
+                <BsArrowRight
+                  onClick={() => setOpen((open) => !open)}
+                  className="w-1/3 text-gray-600 text-[14px] font-medium"
+                ></BsArrowRight>
                 <input
                   value={`${endDay} ${endMonth}`}
                   readOnly
                   onClick={() => setOpen((open) => !open)}
-                  className="focus:outline-none font-medium bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                  className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                 />
               </div>
             </div>
@@ -474,7 +477,7 @@ const PatientLedger = () => {
               </div>
               <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
                 <button
-                  className="bg-gray-600 py-1 px-2 m-2 text-white rounded"
+                  className="py-[5px] px-2.5 m-2 text-white rounded-md bg-gradient-to-r from-[#0db5c8] to-[#089bab]"
                   type="submit"
                   onClick={() => setOpen(false)}
                 >
@@ -490,7 +493,7 @@ const PatientLedger = () => {
           <div className="flex justify-end items-center mr-2">
             <button
               onClick={clearFilters}
-              className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+              className="px-2 py-2 bg-white from-primary text-xs hover:to-secondary text-secondary border border-secondary rounded-sm"
             >
               Clear filters
             </button>

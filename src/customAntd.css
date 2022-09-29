@@ -3,8 +3,6 @@
  * 
  * Copyright 2015-present, Alipay, Inc.
  * All rights reserved.
- *       
- */
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable */
@@ -28830,7 +28828,7 @@ textarea.ant-mentions {
 }
 
 .ant-switch-checked {
-  background-color: #1890ff;
+  background-color: #08979c;
 }
 
 .ant-switch-loading,
@@ -29011,7 +29009,7 @@ textarea.ant-mentions {
 .ant-table.ant-table-small .ant-table-tbody>tr>td,
 .ant-table.ant-table-small tfoot>tr>th,
 .ant-table.ant-table-small tfoot>tr>td {
-  padding: 2px 4px;
+  padding: 1px 6px 10px;
   background-color: white;
   border: 1px solid #EDF6F7;
 
@@ -29019,11 +29017,11 @@ textarea.ant-mentions {
 
 /* change occured table header[added part]*/
 .ant-table.ant-table-small .ant-table-thead>tr>th {
-  padding: 2px 2px;
+  padding: 2px 6px;
   background-color: #0AA7B8;
   border: 1px solid #CED4DA;
   color: white;
-  text-align: center;
+
 }
 
 .ant-table.ant-table-small .ant-table-filter-trigger {
@@ -29178,14 +29176,15 @@ textarea.ant-mentions {
   list-style: none;
   font-feature-settings: 'tnum';
   position: relative;
-  font-size: 14px;
+  font-size: 10px;
   background: #fff;
   border-radius: 2px;
 }
 
 .ant-table table {
   width: 100%;
-  text-align: center !important;
+  font-size: 13px;
+  font-weight: 500;
   border-radius: 2px 2px 0 0;
   border-collapse: separate;
   border-spacing: 0;
@@ -33042,5 +33041,9 @@ div.ant-typography-edit-content.ant-typography-rtl {
   padding: 0;
 }
 
+
+span.anticon.anticon-delete svg {
+  color: red;
+}
 
 /*# sourceMappingURL=antd.css.map*/

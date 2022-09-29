@@ -28,10 +28,11 @@ const EditSession = ({ handleClose, open }) => {
           footer={false}
           closable={false}
           bodyStyle={{ padding: "0" }}
+          className="box rounded-md"
           //onClose={handleClose}
           // aria-labelledby="responsive-dialog-title"
         >
-          <div className="px-5 py-2 box">
+          <div className="px-5 py-2 ">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">
                 Add Appointment
