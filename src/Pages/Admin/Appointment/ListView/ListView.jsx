@@ -21,10 +21,16 @@ import { BsArrowRight } from "react-icons/bs";
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
   const [table, setTable] = useState(false);
+  const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
   const [listView, setListView] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+
+  const handleSortBy = (e) => {
+    setSortBy(e.target.value);
+  };
+
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([
     {
@@ -523,19 +529,22 @@ const ListView = () => {
                               </span>
                             </label>
                             <div className="ml-1">
-                              <div className="flex flex-wrap justify-between items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
+                              <div className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
                                 <input
                                   value={`${startDay} ${startMonth}`}
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
-                                  className="focus:outline-none font-normal bg-transparent text-white w-1/3 cursor-pointer"
+                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
-                                <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
+                                <BsArrowRight
+                                  onClick={() => setOpen((open) => !open)}
+                                  className="w-1/3 text-white"
+                                ></BsArrowRight>
                                 <input
                                   value={`${endDay} ${endMonth}`}
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
-                                  className="focus:outline-none font-normal bg-transparent text-white w-1/3 cursor-pointer"
+                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
                               </div>
                             </div>
@@ -587,7 +596,7 @@ const ListView = () => {
               </div>
             )}
           </div>
-          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20]">
+          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl">
             {open && (
               <div>
                 <div>
@@ -601,13 +610,13 @@ const ListView = () => {
                     className="border-2 border-gray-100"
                   />
                 </div>
-                <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
+                <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
                   <button
-                    className="bg-gray-600 py-1  m-2 text-white rounded"
+                    className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
                     type="submit"
                     onClick={() => setOpen(false)}
                   >
-                    Ok
+                    Cancel
                   </button>
                 </div>
               </div>
@@ -619,7 +628,7 @@ const ListView = () => {
           <>
             {listView && (
               <div className="my-5">
-                <div className=" overflow-scroll ">
+                <div className="overflow-scroll">
                   <>
                     <Table
                       pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
