@@ -91,7 +91,7 @@ const ListView = () => {
           <div className="flex justify-center">
             {lock === true && (
               <button onClink={() => console.log(lock)}>
-                <AiFillUnlock className=" text-lg font-medium text-secondary" />
+                <AiFillUnlock className=" text-lg font-medium text-green-600" />
               </button>
             )}
             {lock === false && (
