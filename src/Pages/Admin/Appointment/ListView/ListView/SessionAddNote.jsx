@@ -18,14 +18,14 @@ const SessionAddNote = ({ handleClose, open }) => {
   }, [reset]);
   return (
     <div>
-      <div className="rounded-lg">
+      <div>
         <Modal
           open={open}
           centered
           footer={false}
           closable={false}
           bodyStyle={{ padding: "0" }}
-          className="box rounded-md"
+          className="box rounded-lg"
         >
           <div className="px-5 py-2  ">
             <div className="flex items-center justify-between">

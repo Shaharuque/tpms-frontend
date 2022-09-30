@@ -16,6 +16,7 @@ import {
   AiOutlineFileAdd,
   AiFillUnlock,
 } from "react-icons/ai";
+import { VscSignOut } from "react-icons/vsc";
 import { Dropdown, IconButton } from "rsuite";
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
@@ -30,6 +31,7 @@ import { useOutsideAlerter } from "../../../CustomHooks/useDetectOutsideClick";
 // i am using alakaja
 const NavigationBar = ({ handle }) => {
   const [dOpen, setDOpen] = useState(false);
+  const [plus, setPlus] = useState(false);
   const { visible, setVisible, ref } = useOutsideAlerter(false);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -49,20 +51,8 @@ const NavigationBar = ({ handle }) => {
 
   const handleModal = () => {
     setVisible(false);
+    setPlus(false);
     setDOpen(!dOpen);
-  };
-
-  const renderIconButton = (props, ref) => {
-    return (
-      <IconButton
-        {...props}
-        ref={ref}
-        icon={"+"}
-        circle
-        color="blue"
-        appearance="primary"
-      />
-    );
   };
 
   return (
@@ -84,7 +74,10 @@ const NavigationBar = ({ handle }) => {
           <div>
             <p
               className="md:text-base font-semibold text-[8px]  bg-transparent "
-              style={{ textShadow: "2px 2px 4px #00000052", color: "#495057" }}
+              style={{
+                textShadow: "2px 2px 4px #615e5ec6",
+                color: "#282c30ef",
+              }}
             >
               ABC Behavioral Therapy Centers
             </p>
@@ -123,41 +116,55 @@ const NavigationBar = ({ handle }) => {
           </div>
 
           {/* adding  */}
-          <div className="  ">
-            <div className="dropdown md:dropdown-start">
-              <label tabIndex="0" className="">
+          <div>
+            <div ref={ref}>
+              <label
+                onClick={() => {
+                  setPlus(!plus);
+                  setDOpen(false);
+                }}
+              >
                 <h1 className=" text-xl font-bold text-secondary">
                   <AiOutlinePlus />
                 </h1>
               </label>
-              <div
-                tabIndex="0"
-                className="dropdown-content p-3 md:w-52 sm:w-56  w-auto mt-1 shadow-2xl border-2 rounded bg-white text-sm "
-                // className="dropdown md:dropdown-start"
-              >
-                <button className="flex items-center gap-2 hover:text-slate-600 mb-2">
-                  <AiOutlinePlusCircle />
-                  <div onClick={handlePatient}>Create Patient</div>
-                </button>
-
-                <button className="flex items-center  gap-2 hover:text-slate-600 mb-2">
-                  <AiOutlinePlusSquare />
-                  <div onClick={handleAppointment}>Create Appointment</div>
-                </button>
-              </div>
-              {clicked && (
-                <div>
-                  <CreateAppointment
-                    handleClose={handleAppointment}
-                  ></CreateAppointment>
-                </div>
-              )}
-              {patientClicked && (
-                <div>
-                  <CreatePatient handleClose={handlePatient}></CreatePatient>
-                </div>
-              )}
             </div>
+
+            {plus && (
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="absolute z-10 bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl mt-2 sm:right-0 cursor-pointer"
+              >
+                <div
+                  className="p-3 md:w-52 sm:w-56  w-auto mt-1 shadow-2xl border-2 rounded bg-white text-sm mx-auto"
+                  // className="dropdown md:dropdown-start"
+                >
+                  <button className="flex items-center gap-2 hover:text-slate-600 mb-2">
+                    <AiOutlinePlusCircle />
+                    <div onClick={handlePatient}>Create Patient</div>
+                  </button>
+
+                  <button className="flex items-center  gap-2 hover:text-slate-600 mb-2">
+                    <AiOutlinePlusSquare />
+                    <div onClick={handleAppointment}>Create Appointment</div>
+                  </button>
+                </div>
+                {clicked && (
+                  <div>
+                    <CreateAppointment
+                      handleClose={handleAppointment}
+                    ></CreateAppointment>
+                  </div>
+                )}
+                {patientClicked && (
+                  <div>
+                    <CreatePatient handleClose={handlePatient}></CreatePatient>
+                  </div>
+                )}
+              </motion.div>
+            )}
           </div>
 
           {/* jakir code */}
@@ -212,7 +219,7 @@ const NavigationBar = ({ handle }) => {
           </div>
           {/* message  */}
           <div>
-            <button className="  text-2xl font-bold text-secondary md:-mt-2">
+            <button className="  text-2xl font-bold text-secondary md:-mt-2 flex items-center">
               <BiMessageRounded />
             </button>
           </div>
@@ -222,6 +229,7 @@ const NavigationBar = ({ handle }) => {
               onClick={() => {
                 setVisible(!visible);
                 setDOpen(false);
+                setPlus(false);
               }}
               className="text-xl font-bold text-secondary md:-mt-2  cursor-pointer"
             >
@@ -237,10 +245,7 @@ const NavigationBar = ({ handle }) => {
           <div>
             <div className="my-5 md:my-0">
               <div className="" onClick={handleModal}>
-                <label
-                  tabIndex="0"
-                  className="flex gap-2 items-center cursor-pointer"
-                >
+                <label className="flex gap-2 items-center cursor-pointer">
                   <div className="w-8 mr-1 rounded-full">
                     <img
                       className="avatar rounded-full"
@@ -261,14 +266,22 @@ const NavigationBar = ({ handle }) => {
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="absolute z-10 bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl border : ;
-       mt-2 sm:right-0 cursor-pointer"
+                    className="absolute z-10 bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl mt-2 sm:right-0 cursor-pointer"
                   >
-                    <div className="bg-gradient-to-r from-primary to-secondary rounded-t-xl p-4">
-                      <h5 className=" text-sm text-white font-bold">
-                        Hello admin
-                      </h5>
-                      <p className="text-xs text-white">admin@admin.com</p>
+                    <div className="bg-gradient-to-r from-primary to-secondary rounded-t-xl p-4 flex justify-between">
+                      <div className="w-8 mr-1 rounded-full">
+                        <img
+                          className="avatar rounded-full"
+                          src={admin}
+                          alt="pic"
+                        />
+                      </div>
+                      <div>
+                        <h5 className=" text-sm text-white font-bold text-end">
+                          Hello admin
+                        </h5>
+                        <p className="text-xs text-white">admin@admin.com</p>
+                      </div>
                     </div>
 
                     <div>
@@ -279,9 +292,9 @@ const NavigationBar = ({ handle }) => {
                         <div className=" rounded-full p-3 bg-[#CEEBEE]">
                           <AiOutlineFileAdd className="text-teal-500" />
                         </div>
-                        <div className="text-xs text-wite">
-                          <h1 className="font-bold">My Profile</h1>
-                          <p className="text-[#7c8186]">
+                        <div>
+                          <h1 className="font-bold text-sm">My Profile</h1>
+                          <p className="text-[#7c8186] text-xs">
                             View personal profile details
                           </p>
                         </div>
@@ -296,18 +309,22 @@ const NavigationBar = ({ handle }) => {
                         <div className=" rounded-full p-3 bg-[#CEEBEE] ">
                           <AiFillUnlock className="text-teal-500" />
                         </div>
-                        <div className="text-xs text-wite">
-                          <h1 className="font-bold">Change Password</h1>
-                          <p className="text-[#7c8186]">Update your password</p>
+                        <div>
+                          <h1 className="font-bold text-sm ">
+                            Change Password
+                          </h1>
+                          <p className="text-[#7c8186] text-xs ">
+                            Update your password
+                          </p>
                         </div>
                       </Link>
                     </div>
                     <button
                       type="button"
-                      className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-xs  shadow-md mb-3 mt-5 flex gap-2 items-center justify-center py-1 "
+                      className="rounded  w-30 mx-auto bg-[#0CADBF] text-white font-medium text-sm  shadow-md mb-3 mt-5 flex items-center justify-center py-1 hover:bg-[#B91C1C]"
                       onClick={handleSignOut}
                     >
-                      Sign out <AiOutlinePlusSquare />
+                      Sign Out <VscSignOut className="font-bold text-lg" />
                     </button>
                   </motion.div>
                 )}

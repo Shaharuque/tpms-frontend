@@ -204,8 +204,6 @@ const menuItem = [
     roll: "patient",
   },
 ];
-
-
 // const initialDropState = {};
 // menuItem.map((item) => {
 //   if (item.subRoute) initialDropState[item.name] = false;
@@ -242,7 +240,6 @@ const Sidebar = ({ handle }) => {
     setIsHovering(false);
   };
 
- 
   //console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
   const logged_type = localStorage.getItem("type");
   return (
@@ -261,7 +258,6 @@ const Sidebar = ({ handle }) => {
         onMouseOut={handleMouseOut}
         className="Side_container fixed bg-secondary left-0 top-0 zfixed"
       >
-      
         <div
           style={{
             width: isHovering ? "240px" : "70px",

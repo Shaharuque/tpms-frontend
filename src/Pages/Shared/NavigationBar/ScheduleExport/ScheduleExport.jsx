@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ExportedFiles from "./ExportedFiles";
 import { Fade } from "react-reveal";
 import { useNavigate } from "react-router-dom";
-// 
+//
 const ScheduleExport = ({ setVisible }) => {
   const navigate = useNavigate();
   const handleDownload = () => {
@@ -12,12 +12,12 @@ const ScheduleExport = ({ setVisible }) => {
   };
 
   return (
-    <Fade button>
+    <div>
       <div
-        className="absolute z-10 bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl
+        className="absolute z-10 bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-lg
        mt-2 sm:right-52 "
       >
-        <div className="rounded-t-xl p-4 flex justify-between items-center bg-gradient-to-r from-primary to-secondary">
+        <div className="rounded-t-lg p-4 flex justify-between items-center bg-gradient-to-r from-primary to-secondary">
           <h5 className="inline  text-sm text-white font-bold">
             Schedule export
           </h5>
@@ -45,7 +45,7 @@ const ScheduleExport = ({ setVisible }) => {
           </button>
         </div>
       </div>
-    </Fade>
+    </div>
   );
 };
 
