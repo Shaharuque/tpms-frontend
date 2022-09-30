@@ -22,7 +22,6 @@ const SessionViewNote = ({ handleClose, open, editableRow }) => {
         <Modal
           open={open}
           centered
-          zIndex={100}
           footer={false}
           closable={false}
           bodyStyle={{ padding: "0" }}

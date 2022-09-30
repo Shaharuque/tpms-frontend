@@ -9,6 +9,7 @@ import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import RecurringSessionEdit from "./RecurringSession/RecurringSessionEdit";
 import { Link } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
 
 const RecurringSession = () => {
   const [table, setTable] = useState(false);
@@ -18,6 +19,7 @@ const RecurringSession = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
+  // -----------------------------------------------Table-------------------------------
   // calling recurring session fakedb
   useEffect(() => {
     axios("../All_Fake_Api/Fakedb.json")
@@ -303,6 +305,10 @@ const RecurringSession = () => {
       ),
     },
   ];
+
+  const clearFilters = () => {
+    setFilteredInfo({});
+  };
   // -----------------------------------------------form-------------------------------
   const { handleSubmit } = useForm({
     defaultValues: {
@@ -323,9 +329,6 @@ const RecurringSession = () => {
   const handleClose = () => {
     setClicked(!clicked);
   };
-
-  // -----------------------------------------------Table-------------------------------
-  const data = useMemo(() => SessionData, [SessionData]);
 
   // console.log(selectedFlatRows);
 
@@ -385,7 +388,7 @@ const RecurringSession = () => {
                     <div>
                       <label className="label">
                         <span className="label-text text-xs text-gray-100 text-left">
-                          Place of Service_hrss
+                          Place of Service_hrs
                         </span>
                       </label>
                       <select
@@ -408,7 +411,7 @@ const RecurringSession = () => {
                     {select === "Patients" ? (
                       <div>
                         <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
-                          Patientss
+                          Patients
                         </h1>
                         <CustomMultiSelection
                           data={PatientsData}
@@ -446,7 +449,19 @@ const RecurringSession = () => {
 
       {/* table  */}
       {table && (
-        <div className="my-5">
+        <div className="my-3">
+          <div className="flex items-center justify-between gap-2 my-2">
+            <h1 className="text-lg text-orange-500 text-left font-semibold ">
+              Recurring Session
+            </h1>
+            <button
+              onClick={clearFilters}
+              className="px-2 py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm flex items-center"
+            >
+              CLEAR FILTERS
+              <AiFillDelete className="text-red-700" />
+            </button>
+          </div>
           <div className=" overflow-scroll">
             <Table
               rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey

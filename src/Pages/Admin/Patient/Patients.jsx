@@ -617,6 +617,10 @@ const TableApi = () => {
             className=" text-xs font-normal"
             columns={columns}
             dataSource={data} //Which data chunk you want to show in table
+            // For fixed header table at top
+            scroll={{
+              y: 650,
+            }}
             onChange={handleChange}
             scroll={{
               y: 700,

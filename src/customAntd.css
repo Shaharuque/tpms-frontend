@@ -81,7 +81,8 @@ h6 {
 } */
 p {
   margin-top: 0;
-  margin-bottom: 1em;
+/* commenting out due to navbar responsiveness */
+  /* margin-bottom: 1em;*/
 }
 
 abbr[title],
@@ -26081,6 +26082,7 @@ textarea.ant-mentions {
   max-width: calc(100vw - 32px);
   margin: 0 auto;
   padding-bottom: 24px;
+  /* border-radius: 15px; */
 }
 
 .ant-modal.ant-zoom-enter,
@@ -26103,7 +26105,7 @@ textarea.ant-mentions {
   left: 0;
   z-index: 1000;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(10, 167, 184, 0.154);
 }
 
 .ant-modal-mask-hidden {
@@ -26141,6 +26143,8 @@ textarea.ant-mentions {
   border-radius: 2px;
   box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   pointer-events: auto;
+  /* chage happens */
+  /* border-radius: 15px; */
 }
 
 .ant-modal-close {
