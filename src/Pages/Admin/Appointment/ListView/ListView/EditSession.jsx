@@ -27,7 +27,7 @@ const EditSession = ({ handleClose, open }) => {
           footer={false}
           closable={false}
           bodyStyle={{ padding: "0" }}
-          className="box rounded-md"
+          className="box rounded-lg"
           //onClose={handleClose}
           // aria-labelledby="responsive-dialog-title"
         >

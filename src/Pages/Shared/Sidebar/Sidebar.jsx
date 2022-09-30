@@ -204,7 +204,6 @@ const menuItem = [
     roll: "patient",
   },
 ];
-
 // const initialDropState = {};
 // menuItem.map((item) => {
 //   if (item.subRoute) initialDropState[item.name] = false;

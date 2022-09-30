@@ -41,22 +41,22 @@ const ManageTableAction = ({ row }) => {
   return (
     <div>
       {!editSession && !openAddNote && !openViewNote ? (
-        <div className=" bg-white border shadow-md flex justify-center py-2 z-30 right-[-20px] w-[135px] rounded-md">
+        <div className=" bg-white py-2 border shadow-md flex justify-center z-30  w-[135px] rounded-sm">
           <div>
             <button
-              className="text-sm hover:text-secondary flex items-center font-normal  my-1 gap-2"
+              className="text-xs text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
               onClick={() => addNoteHandler()}
             >
               <AiOutlinePlus /> Add Note
             </button>
             <button
-              className="text-sm hover:text-secondary flex items-center font-normal my-1 gap-2"
+              className="text-xs text-secondary border px-[18px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
               onClick={viewNoteHandler}
             >
               <AiOutlineEye /> View Note
             </button>
             <button
-              className="text-sm hover:text-secondary flex items-center font-normal my-1 gap-2"
+              className="text-xs text-secondary border px-[14px] py-1 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
               onClick={editSessionHandler}
             >
               <MdOutlineModeEditOutline /> Edit Session
