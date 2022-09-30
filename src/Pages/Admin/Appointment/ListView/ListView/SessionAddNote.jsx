@@ -18,7 +18,7 @@ const SessionAddNote = ({ handleClose, open }) => {
   }, [reset]);
   return (
     <div>
-      <div className="rounded-lg">
+      <div className="rounded-lg ">
         <Modal
           open={open}
           centered

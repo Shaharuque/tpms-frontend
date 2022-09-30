@@ -41,27 +41,27 @@ const ManageTableAction = ({ row }) => {
   return (
     <div>
       {!editSession && !openAddNote && !openViewNote ? (
-        <div className=" bg-white border shadow-md px-3 py-4 z-30 right-[-20px] w-[150px] rounded-md">
-          <button
-            className="text-sm hover:text-secondary flex items-center font-normal  gap-2"
-            onClick={() => addNoteHandler()}
-          >
-            <AiOutlinePlus /> Add Note
-          </button>
-          <br />
-          <button
-            className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-            onClick={viewNoteHandler}
-          >
-            <AiOutlineEye /> View Note
-          </button>
-          <br />
-          <button
-            className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-            onClick={editSessionHandler}
-          >
-            <MdOutlineModeEditOutline /> Edit Session
-          </button>
+        <div className=" bg-white border shadow-md flex justify-center py-2 z-30 right-[-20px] w-[135px] rounded-md">
+          <div>
+            <button
+              className="text-sm hover:text-secondary flex items-center font-normal  my-1 gap-2"
+              onClick={() => addNoteHandler()}
+            >
+              <AiOutlinePlus /> Add Note
+            </button>
+            <button
+              className="text-sm hover:text-secondary flex items-center font-normal my-1 gap-2"
+              onClick={viewNoteHandler}
+            >
+              <AiOutlineEye /> View Note
+            </button>
+            <button
+              className="text-sm hover:text-secondary flex items-center font-normal my-1 gap-2"
+              onClick={editSessionHandler}
+            >
+              <MdOutlineModeEditOutline /> Edit Session
+            </button>
+          </div>
         </div>
       ) : null}
       {openAddNote && (

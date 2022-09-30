@@ -20,7 +20,9 @@ main {
   color: #fff;
   height: 100vh;
   transition: all 0.5s;
-
+  box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+  -webkit-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+  -moz-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
 }
 
 .top-section {

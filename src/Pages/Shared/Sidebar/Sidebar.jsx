@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import "../Style/slide.css";
-import logo1 from "../Assets/favicon.png";
-import logo2 from "../Assets/logo-new.png";
+import "../../Style/slide.css";
+import logo2 from "../../Assets/logo-new.png";
+import logo1 from "../../Assets/favicon.png";
 import {
   FaUserPlus,
   FaFunnelDollar,
@@ -33,8 +33,8 @@ import { GrFormSchedule } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
-import NavigationBar from "../Shared/NavigationBar/NavigationBar";
-import Footer from "../Shared/Footer/Footer";
+import NavigationBar from "../NavigationBar/NavigationBar";
+import Footer from "../Footer/Footer";
 // import StateUse from "../Hooks/StateUse";
 //
 const menuItem = [
@@ -205,7 +205,6 @@ const menuItem = [
   },
 ];
 
-
 // const initialDropState = {};
 // menuItem.map((item) => {
 //   if (item.subRoute) initialDropState[item.name] = false;
@@ -242,12 +241,11 @@ const Sidebar = ({ handle }) => {
     setIsHovering(false);
   };
 
- 
   //console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
   const logged_type = localStorage.getItem("type");
   return (
     <div className="relative bg-neutral pt-3 pb-2">
-      <div className=" slide">
+      <div className="slide">
         <div className="">
           <NavigationBar handle={handle}></NavigationBar>
         </div>
@@ -261,7 +259,6 @@ const Sidebar = ({ handle }) => {
         onMouseOut={handleMouseOut}
         className="Side_container fixed bg-secondary left-0 top-0 zfixed"
       >
-      
         <div
           style={{
             width: isHovering ? "240px" : "70px",
@@ -321,8 +318,8 @@ const Sidebar = ({ handle }) => {
                         // className="link_text text-sm"
                         className={
                           isHovering
-                            ? "opacity-1 duration-600 ease-in text-[14px] "
-                            : "opacity-0 duration-200 ease-out text-[14px] hidden"
+                            ? "opacity-1 duration-600 ease-in text-[18px]  font-semibold"
+                            : "opacity-0 duration-200 ease-out text-[18px] font-semibold hidden"
                         }
                       >
                         {items.name}

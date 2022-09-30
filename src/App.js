@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Sidebar from "./Pages/Components/Sidebar.jsx";
 import Report from "./Pages/Pages/Report.jsx";
 import Settings from "./Pages/Pages/Settings.jsx";
 import ERemittance from "./Pages/Pages/ERemittance";
@@ -134,6 +133,7 @@ import BillingManager from "./Pages/Admin/Billing/BillingManager/BillingManager"
 import ArLedger from "./Pages/Admin/Billing/ARLeadger/ArLedger";
 import ContractRate from "./Pages/Admin/Billing/ContactRate/ContractRate";
 import PatientStatement from "./Pages/Admin/Billing/PatientStatement/PatientStatement";
+import Sidebar from "./Pages/Shared/Sidebar/Sidebar";
 
 function App() {
   const handle = useFullScreenHandle();
