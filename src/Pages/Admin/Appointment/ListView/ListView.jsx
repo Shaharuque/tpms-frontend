@@ -389,7 +389,7 @@ const ListView = () => {
     <div className={!table ? "h-[100vh]" : ""}>
       <div>
         <div className="cursor-pointer">
-          <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">
+          <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
             <div onClick={clickHandler} className="  flex items-center ">
               {!clicked && (
                 <h1 className="text-[16px]  text-white font-semibold ">
