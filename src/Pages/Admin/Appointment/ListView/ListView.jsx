@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useRef } from "react";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
@@ -57,6 +57,19 @@ const ListView = () => {
   };
   const handleClose = () => {
     setClicked(!clicked);
+  };
+
+  // Hide calendar on outside click
+  const refClose = useRef(null);
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (e) => {
+    if (refClose.current && !refClose.current.contains(e.target)) {
+      setOpen(false);
+    }
   };
 
   const handleBillable = (e) => {
@@ -596,9 +609,16 @@ const ListView = () => {
               </div>
             )}
           </div>
-          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl">
+          <div
+            ref={refClose}
+            className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
+          >
             {open && (
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
                 <div>
                   <DateRangePicker
                     onChange={(item) => setRange([item.selection])}
@@ -619,7 +639,7 @@ const ListView = () => {
                     Cancel
                   </button>
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
