@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import Calendar from "react-calendar";
-import "./CutomCSS/calenderDesign.css";
+// import "./CutomCSS/calenderDesign.css";
 import { Modal } from "antd";
 
 const CreateAppointment = ({ handleClose }) => {
