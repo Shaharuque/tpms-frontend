@@ -60,10 +60,11 @@ const CreateAppointment = ({ handleClose }) => {
         footer={null}
         bodyStyle={{ padding: "0" }}
         closable={false}
+        className="box rounded-xl"
         // onClose={handleClose}
         // aria-labelledby="responsive-dialog-title"
       >
-        <div className="px-5 py-2 box">
+        <div className="px-5 py-2">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
               Add Appointment
@@ -194,7 +195,7 @@ const CreateAppointment = ({ handleClose }) => {
                   closable={false}
                   bodyStyle={{ padding: "0px" }}
                 >
-                  <div className="grid lg:grid-cols-[180px_minmax(300px,_1fr)]">
+                  <div className="grid lg:grid-cols-2">
                     <div className="bg-teal-500 bold text-white ">
                       <div className="w-full h-16 flex justify-center items-center bg-[#2D8A87] bg-opacity-50 backdrop-blur-xl rounded drop-shadow-lg">
                         <span className="text-2xl">{days[date.getDay()]}</span>

@@ -113,7 +113,7 @@ const ListView = () => {
       title: "Patients",
       dataIndex: "Patients",
       key: "Patients",
-      width: 100,
+      width: 150,
       filters: [
         {
           text: `Vernon`,
