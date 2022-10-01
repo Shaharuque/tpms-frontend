@@ -326,12 +326,12 @@ const PatientInformation = () => {
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("Street")}
                   />
-                  <div // onClick={() => setOpen(true)}
+                  <button // onClick={() => setOpen(true)}
                     onClick={handleClick}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
-                  </div>
+                  </button>
                 </div>
                 <div className="mb-2">
                   <input
@@ -490,14 +490,14 @@ const PatientInformation = () => {
                       <option value="family">family</option>
                     </select>
                   </div>
-                  <div // onClick={() => setPhoneOpen(true)}
+                  <button // onClick={() => setPhoneOpen(true)}
                     onClick={() => {
                       handlePhoneClick();
                     }}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
-                  </div>
+                  </button>
                 </div>
                 <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
                   <div className="flex items-center">
@@ -576,12 +576,12 @@ const PatientInformation = () => {
                         <option value="family">family</option>
                       </select>
                     </div>
-                    <div
+                    <button
                       onClick={() => phoneHandleRemove(index)}
                       className="bg-red-500 text-white p-[6px]"
                     >
                       <RiDeleteBin6Line />
-                    </div>
+                    </button>
                   </div>
                   <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
                     <div className="flex items-center">
@@ -624,7 +624,7 @@ const PatientInformation = () => {
                     </span>
                   </div>
                 </motion.div>
-              ))}{" "}
+              ))}
             </div>
 
             {/*  */}
@@ -655,14 +655,14 @@ const PatientInformation = () => {
                       <option value="family">family</option>
                     </select>
                   </div>
-                  <div
+                  <button
                     onClick={() => {
                       handleEmailClick();
                     }}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
-                  </div>
+                  </button>
                 </div>
                 <div className="flex ml-1 mt-1 items-center ">
                   <input
@@ -721,12 +721,12 @@ const PatientInformation = () => {
                         <option value="family">family</option>
                       </select>
                     </div>
-                    <div
+                    <button
                       onClick={() => EmailHandleRemove(index)}
                       className="bg-red-500 text-white p-[6px]"
                     >
                       <RiDeleteBin6Line />
-                    </div>
+                    </button>
                   </div>
                   <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
                     <div className="">
