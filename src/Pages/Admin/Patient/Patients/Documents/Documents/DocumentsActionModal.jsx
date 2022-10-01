@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-
+                                                               
 const DocumentsActionModal = ({ handleClose, open, row }) => {
   const { register, handleSubmit, reset } = useForm();
 

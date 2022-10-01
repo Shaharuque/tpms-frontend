@@ -442,14 +442,14 @@ const TableApi = () => {
       }
     >
       <>
-        <div className="flex items-center justify-between gap-2 my-2">
+        <div className="flex items-center flex-wrap justify-between gap-2 my-2">
           <h1 className="text-lg text-orange-500 text-left font-semibold ">
             Patient
           </h1>
           <div>
             <input
               placeholder="Search here..."
-              className="px-2 w-52 mr-2 py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+              className="px-2 w-52 mr-2 py-2 mb-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
               onChange={(e) => globalFilter(e.target.value)}
             />
 
@@ -622,9 +622,6 @@ const TableApi = () => {
               y: 650,
             }}
             onChange={handleChange}
-            scroll={{
-              y: 700,
-            }}
           />
         </div>
         {/* </InfiniteScroll> */}

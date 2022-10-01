@@ -245,7 +245,7 @@ const Sidebar = ({ handle }) => {
   return (
     <div className="relative bg-neutral pt-3 pb-2">
       <div className="slide">
-        <div className="">
+        <div className="ml-[98px]">
           <NavigationBar handle={handle}></NavigationBar>
         </div>
         <main className="font-medium  main bg-white shadow-md rounded-3xl w-auto mt-2 ml-[98px] mr-[22px] ">
