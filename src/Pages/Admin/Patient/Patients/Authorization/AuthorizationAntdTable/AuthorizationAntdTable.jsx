@@ -326,7 +326,7 @@ const AuthorizationAntdTable = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <>
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
           <h1 className="text-sm font-semibold">Authorization</h1>

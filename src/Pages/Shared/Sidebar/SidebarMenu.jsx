@@ -19,8 +19,8 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
           <div
             className={
               isHovering
-                ? "mr-2 opacity-1 duration-600 ease-in text-[14px]"
-                : "mr-2 opacity-0 duration-200 ease-out text-[14px] hidden"
+                ? "mr-2 opacity-1 duration-600 ease-in text-[18px] font-semibold "
+                : "mr-2 opacity-0 duration-200 ease-out text-[18px] font-semibold hidden"
             }
           >
             {items.name}
@@ -47,7 +47,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mr-4"
+          className={isHovering ? "ml-5 mr-5" : ""}
           style={{
             transition: "all .3s ease-out",
           }}
@@ -61,7 +61,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
               activeclassname="active"
             >
               <div className="flex items-center h-8">
-                <div className="  px-3 py-1">{s.icon}</div>
+                <div className="text-lg  px-3 py-1">{s.icon}</div>
 
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
@@ -71,8 +71,8 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
                   <div
                     className={
                       isHovering
-                        ? "mr-2 opacity-0.5 ease-in text-[14px]"
-                        : "mr-2 opacity-0 ease-out text-[14px] hidden"
+                        ? "mr-2 opacity-0.5 ease-in text-[16px] font-medium "
+                        : "mr-2 opacity-0 ease-out text-[16px]  font-medium hidden"
                     }
                   >
                     {s.name}

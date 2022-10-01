@@ -243,14 +243,16 @@ const PatientInformation = () => {
                   }
                 />
                 {openCalendar && (
-                  <div className="absolute z-10 p-1">
+                  <div className="absolute z-10 rounded">
                     <Calendar onChange={changeDate} value={date}></Calendar>
-                    <button
-                      onClick={() => setOpenCalendar(false)}
-                      className="bg-white w-full py-1 text-right rounded pr-1"
-                    >
-                      Ok
-                    </button>
+                    <div className="bg-white py-2 text-right rounded-b-[5px]">
+                      <button
+                        onClick={() => setOpenCalendar(false)}
+                        className=" text-white py-1 mr-1 rounded px-2 bg-[#0AA7B8] hover:bg-red-700 hover:border-red-700"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>

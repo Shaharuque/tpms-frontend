@@ -3,6 +3,26 @@
 @tailwind utilities;
 
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  /* font-family: 'Poppins',
+ sans-serif; */
+  font-family: 'Roboto',
+    sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 .fullscreen {
   overflow: auto;
   /* background: #edf6f7; */
@@ -105,23 +125,6 @@
   z-index: 999;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
-body {
-  margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
-  font-family: 'Poppins',
-    sans-serif;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 @media only screen and (max-width: 600px) {
   .rs-nav-justified {
@@ -138,7 +141,7 @@ code {
 
 ::-webkit-scrollbar {
   width: 7px;
-  height:7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -158,100 +161,115 @@ code {
 
 }
 
- /* date range picker calendar   */
-.rdrSelected, .rdrInRange{
-    background: #0AA1B2 !important;
-    border: #000;
-}
-.rdrStartEdge, .rdrEndEdge{
-  background-color: #0AA1B2 !important;
-}
-.rdrDateDisplayWrapper{
-  display: none !important;
-}
-.rdrDateDisplayWrapper{
-  background-color: #fff !important;
-}
-.rdrInputRanges{
-  display: none !important;
-}
-.rdrDefinedRangesWrapper{
-  width: 100% !important;
-}
-.rdrDayNumber,
-.rdrStaticRangeLabel,
-.rdrDay{
-    color: #0AA1B2 !important;
+/* date range picker calendar   */
+.rdrSelected,
+.rdrInRange {
+  background: #0AA1B2 !important;
+  border: #000;
 }
 
-.rdrWeekDay{
+.rdrStartEdge,
+.rdrEndEdge {
+  background-color: #0AA1B2 !important;
+}
+
+.rdrDateDisplayWrapper {
+  display: none !important;
+}
+
+.rdrDateDisplayWrapper {
+  background-color: #fff !important;
+}
+
+.rdrInputRanges {
+  display: none !important;
+}
+
+.rdrDefinedRangesWrapper {
+  width: 100% !important;
+}
+
+.rdrDayNumber,
+.rdrStaticRangeLabel,
+.rdrDay {
+  color: #0AA1B2 !important;
+}
+
+.rdrWeekDay {
   color: #000 !important;
   font-size: 16px !important;
   font-weight: 600 !important;
 }
 
 .rdrDayNumber,
-.rdrMonthAndYearPicker > select{
+.rdrMonthAndYearPicker>select {
   font-size: 14px !important;
   font-weight: 500 !important;
 }
 
-.rdrMonthAndYearWrapper{
+.rdrMonthAndYearWrapper {
   height: 30px !important;
   /* padding-top: 0px !important; */
 }
 
 .rdrMonthName,
 .rdrMonthPicker,
-.rdrYearPicker{
+.rdrYearPicker {
   font-size: 16px !important;
 }
 
-.rdrStaticRangeLabel{
+.rdrStaticRangeLabel {
   font-size: 16px !important;
 }
 
-@media only screen and (max-width:450px){
-  .rdrMonthAndYearPickers{
+@media only screen and (max-width:450px) {
+  .rdrMonthAndYearPickers {
     flex-direction: column !important;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .rdrDateRangePickerWrapper{
+  .rdrDateRangePickerWrapper {
     flex-direction: column-reverse;
   }
-  .rdrStaticRanges{
+
+  .rdrStaticRanges {
     flex-direction: row !important;
   }
+
   .rdrDateRangePickerWrapper,
   .rdrMonth,
-  .range-date-ok{
+  .range-date-ok {
     width: 80% !important;
   }
-  .rdrMonthAndYearPickers{
+
+  .rdrMonthAndYearPickers {
     margin: 0 auto !important;
   }
-  .rdrMonths{
+
+  .rdrMonths {
     flex-direction: column !important;
     flex-wrap: wrap !important;
     align-items: center !important;
   }
-  .rdrDateRangePickerWrapper{
+
+  .rdrDateRangePickerWrapper {
     flex-direction: column-reverse;
   }
-  .rdrStaticRanges{
+
+  .rdrStaticRanges {
     flex-direction: row !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
   }
 }
 
-@media only screen and (max-width:1023px){
-  .rdrDateRangePickerWrapper{
+@media only screen and (max-width:1023px) {
+  .rdrDateRangePickerWrapper {
     flex-direction: column-reverse !important;
   }
-  .rdrStaticRanges{
+
+  .rdrStaticRanges {
     flex-direction: row !important;
   }
 }

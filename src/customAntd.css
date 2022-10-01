@@ -29188,6 +29188,8 @@ textarea.ant-mentions {
 .ant-table table {
   width: 100%;
   font-size: 13px;
+  font-family: 'Roboto',
+    sans-serif;
   font-weight: 500;
   border-radius: 2px 2px 0 0;
   border-collapse: separate;

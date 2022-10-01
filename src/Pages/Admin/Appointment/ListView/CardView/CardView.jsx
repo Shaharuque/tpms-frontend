@@ -109,17 +109,17 @@ const CardView = ({ data }) => {
               <h1 className="text-xs font-medium text-gray-500">Status</h1>
               <div>
                 {Status === "Scheduled" && (
-                  <button className="bg-gray-500 text-white text-xs py-[4px] px-6 rounded-lg">
+                  <button className="bg-gray-500 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {Status}
                   </button>
                 )}
                 {Status === "Rendered" && (
-                  <button className="bg-green-700 text-white text-xs py-[4px] px-6 rounded-lg">
+                  <button className="bg-green-700 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {Status}
                   </button>
                 )}
                 {Status === "hold" && (
-                  <button className="bg-red-700 text-white text-xs py-[4px] px-6 rounded-lg">
+                  <button className="bg-red-700 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {Status}
                   </button>
                 )}
