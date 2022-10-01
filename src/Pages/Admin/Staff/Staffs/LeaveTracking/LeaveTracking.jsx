@@ -23,7 +23,7 @@ const LeaveTracking = () => {
 
   const column = [
     {
-      title: "Holiday Date",
+      title: "Date of Holiday",
       dataIndex: "history_date",
       key: "history_date",
       width: 120,
@@ -55,20 +55,70 @@ const LeaveTracking = () => {
       ellipsis: true,
     },
     {
+      title: "Status",
+      key: "status",
+      dataIndex: "status",
+      width: 80,
+      filters: [
+        {
+          text: "Hold",
+          value: "Hold",
+        },
+        {
+          text: "Pending",
+          value: "Pending",
+        },
+      ],
+      render: (_, { status, id }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div className="flex justify-center items-center">
+            {status === "Hold" && (
+              <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
+                {status}
+              </button>
+            )}
+            {status === "Pending" && (
+              <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
+                {status}
+              </button>
+            )}
+            {status === "Scheduled" && (
+              <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
+                {status}
+              </button>
+            )}
+          </div>
+        );
+      },
+      filteredValue: filteredInfo.status || null,
+      onFilter: (value, record) => record.status.includes(value),
+      //   sorter is for sorting asc or dsc purdescription
+      sorter: (a, b) => {
+        return a.status > b.status ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
       title: "Action",
       dataIndex: "id",
       key: "id",
-      width: 160,
+      width: 30,
       render: (_, { client_first_name, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div>
+          <div className="flex justify-center">
             <button className="text-red-500">
               <AiOutlineDelete />
             </button>
           </div>
         );
       },
+      sorter: (a, b) => {
+        return a.id > b.id ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
       ellipsis: true,
     },
   ];

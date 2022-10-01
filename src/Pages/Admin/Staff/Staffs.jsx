@@ -1,4 +1,4 @@
-import { Menu, Table } from "antd";
+import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -26,32 +26,6 @@ const Staffs = () => {
   const clearFilters = () => {
     // setFilteredInfo({});
   };
-
-  const menu = (
-    <Menu
-      items={[
-        {
-          label: (
-            <Link to={"/admin/create-staff/staff"}> Provider (Therapist)</Link>
-          ),
-          key: "0",
-        },
-        {
-          label: (
-            <Link href="/admin/create-staff/officeStaff">2nd menu item</Link>
-          ),
-          key: "1",
-        },
-        {
-          type: "divider",
-        },
-        {
-          label: "3rd menu item",
-          key: "3",
-        },
-      ]}
-    />
-  );
 
   const columns = [
     {
@@ -290,13 +264,18 @@ const Staffs = () => {
       {openStaff && (
         <div className=" absolute bg-white border shadow-md px-3 py-4 mt-1  text-[15px] right-10 z-10 ">
           <div>
-            <Link className="text-white hover:text-black border border-[#34A7B8] rounded bg-[#34A7B8] px-2"></Link>
+            <Link
+              className="text-white hover:text-black border border-[#34A7B8] rounded bg-[#34A7B8] px-2"
+              to={"/admin/create-staff/staff"}
+            >
+              Provider (Therapist)
+            </Link>
           </div>
           <br />
           <div>
             <Link
               className="text-white hover:text-black border border-[#34A7B8] rounded bg-[#34A7B8] px-2 w-full"
-              to={"/admin/create-staff/officeStaff"}
+              to={"#"}
             >
               Office Staff
             </Link>
