@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PatientStatusAction from "../Patient/Patients/PatientStatusAction";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { BsPersonLinesFill, BsPersonPlusFill } from "react-icons/bs";
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [StafData, SetStafData] = useState([]);
@@ -24,7 +25,7 @@ const Staffs = () => {
   console.log(StafData);
 
   const clearFilters = () => {
-    // setFilteredInfo({});
+    setFilteredInfo({});
   };
 
   const columns = [
@@ -266,12 +267,18 @@ const Staffs = () => {
               </div>
               <Link to={"/admin/create-staff/staff"}>
                 <button className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary mx-auto flex items-center font-semibold gap-2">
-                  <div>Provider (Therapist)</div>
+                  <div className="flex items-center">
+                    <BsPersonPlusFill className="mr-2" />
+                    Provider (Therapist)
+                  </div>
                 </button>
               </Link>
               <Link to={"/admin/create-staff/officeStaff"}>
                 <button className="text-[14px] text-secondary border px-12 py-1 mx-auto rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2">
-                  <div>Office Staff</div>
+                  <div className="flex items-center">
+                    <BsPersonLinesFill className="mr-2" />
+                    Office Staff
+                  </div>
                 </button>
               </Link>
             </div>
