@@ -24,11 +24,10 @@ const EditSession = ({ handleClose, open }) => {
         <Modal
           open={open}
           centered
-          zIndex={100}
           footer={false}
           closable={false}
           bodyStyle={{ padding: "0" }}
-          className="box rounded-md"
+          className="box rounded-lg"
           //onClose={handleClose}
           // aria-labelledby="responsive-dialog-title"
         >

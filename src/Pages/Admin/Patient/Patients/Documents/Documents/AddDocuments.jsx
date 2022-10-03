@@ -1,25 +1,15 @@
 import { Modal } from "antd";
-import React, { useEffect } from "react";
-import { memo } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-                                                               
-const DocumentsActionModal = ({ handleClose, open, row }) => {
+
+const AddDocuments = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     reset();
   };
-  console.log(row);
-  useEffect(() => {
-    setTimeout(() => {
-      reset({
-        description: `${row.original.description}`,
-        // expiry_Date: `${row.original.upload_date}`,
-      });
-    }, 500);
-  }, [reset, row]);
 
   return (
     <div>
@@ -112,4 +102,4 @@ const DocumentsActionModal = ({ handleClose, open, row }) => {
   );
 };
 
-export default memo(DocumentsActionModal);
+export default AddDocuments;

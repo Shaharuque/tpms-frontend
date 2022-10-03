@@ -15,7 +15,7 @@ const DocumentsAction = ({ id, fileName }) => {
   return (
     <div>
       <div className="flex justify-center gap-2">
-        <button className="text-sm mx-1 text-secondary">
+        <button className="text-sm mx-1 text-green-600">
           <Link to={`/${fileName}`}>
             <AiOutlineEye />
           </Link>
@@ -23,7 +23,7 @@ const DocumentsAction = ({ id, fileName }) => {
         <button onClick={handleClickOpen} className="text-secondary">
           <AiOutlineEdit />
         </button>
-        <button className="text-sm mx-1 text-secondary">
+        <button className="text-sm mx-1 text-rose-600">
           <AiOutlineDelete />
         </button>
       </div>

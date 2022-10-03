@@ -1,44 +1,28 @@
 // Authorization edit
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { DateRangePicker } from "rsuite";
-import AuthorizationEditTable from "./AuthorizationEditTable";
-import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import { Switch } from "antd";
 
-const AuthorizationEdit = () => {
-  const { id } = useParams();
-  console.log("description id ", id);
+const AddAuthorization = () => {
   const patientId = localStorage.getItem("p_key");
   console.log(patientId);
   const [value, setValue] = useState(false);
   const [notes, setNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
-  const [openEditModal, setOpenEditModal] = useState(false);
   const [active, setActive] = useState(false);
   const [placeHolder, setPlaceHolder] = useState(true);
-
-  console.log(active);
-  const handleClose = () => {
-    setOpenEditModal(false);
-  };
-
-  useEffect(() => {
-    // you can do async server request and fill up form
-    setTimeout(() => {
-      reset({
-        first_name: `bill`,
-        middle_name: "luo",
-      });
-    }, 600);
-  }, [reset]);
 
   const onSubmit = (data) => {
     console.log(data);
     console.log(notes);
+  };
+
+  const handleClose = () => {
+    reset();
   };
 
   return (
@@ -62,7 +46,7 @@ const AuthorizationEdit = () => {
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-lg font-medium mx-1">Edit Auth</h1>
+        <h1 className="text-lg font-medium mx-1">Add Auth</h1>
         <Link to={`/admin/patient/patient-authorization/${patientId}`}>
           <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs font-medium  hover:to-secondary text-white rounded-md">
             <IoCaretBackCircleOutline className="mr-1 text-sm" />
@@ -388,33 +372,8 @@ const AuthorizationEdit = () => {
           </button>
         </form>
       </motion.div>
-
-      {id && (
-        <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="divider"></div>
-          <AuthorizationEditTable></AuthorizationEditTable>
-          <button
-            onClick={() => {
-              setOpenEditModal(true);
-            }}
-            className="px-2 my-3 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-sm"
-          >
-            + Add Service
-          </button>
-        </motion.div>
-      )}
-      {openEditModal && (
-        <AuthorizationEditModal
-          handleClose={handleClose}
-          open={openEditModal}
-        ></AuthorizationEditModal>
-      )}
     </div>
   );
 };
 
-export default AuthorizationEdit;
+export default AddAuthorization;

@@ -21,9 +21,9 @@ const Test = () => {
         </label>
       </div>
 
-      <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-      <div class="modal modal-middle">
-        <div class="modal-box p-0">
+      <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+      <div className="modal modal-middle">
+        <div className="modal-box p-0">
           <div className="grid grid-cols-2">
             <div className="bg-teal-500 bold text-white text-center rounded-l-lg">
               <span className="">Selected Date:{date.toDateString()}</span>

@@ -14,12 +14,12 @@ const ExportedFiles = () => {
           <div className="text-xs text-wite">
             <h1 className="font-semibold mb-1">837-11660888499.txt</h1>
             <h1 className=" text-xs font-light text-[#28A745]">CSV file</h1>
-            <small class="block text-xs font-thin text-gray-600">
+            <small className="block text-xs font-thin text-gray-600">
               5 day left
             </small>
             <button
               type="button"
-              class="inline-block px-2 bg-secondary text-white font-normal text-[9px] leading-tight py-[1px] rounded-md shadow-md  hover:shadow-lg  "
+              className="inline-block px-2 bg-secondary text-white font-normal text-[9px] leading-tight py-[1px] rounded-md shadow-md  hover:shadow-lg  "
             >
               Ready To Download
             </button>

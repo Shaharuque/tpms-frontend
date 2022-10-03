@@ -67,7 +67,7 @@ const CardView = ({ data }) => {
   };
 
   return (
-    <div className="border shadow-md pt-3  rounded-md card bg-white">
+    <div className="border shadow-md pt-3 z-0 rounded-md card bg-white">
       <div className="px-5">
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-5 mb-2">
           <div className="flex items-center gap-2">
@@ -109,17 +109,17 @@ const CardView = ({ data }) => {
               <h1 className="text-xs font-medium text-gray-500">Status</h1>
               <div>
                 {Status === "Scheduled" && (
-                  <button className="bg-gray-500 text-white text-xs py-[4px] px-6 rounded-lg">
+                  <button className="bg-gray-500 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {Status}
                   </button>
                 )}
                 {Status === "Rendered" && (
-                  <button className="bg-green-700 text-white text-xs py-[4px] px-6 rounded-lg">
+                  <button className="bg-green-700 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {Status}
                   </button>
                 )}
                 {Status === "hold" && (
-                  <button className="bg-red-700 text-white text-xs py-[4px] px-6 rounded-lg">
+                  <button className="bg-red-700 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {Status}
                   </button>
                 )}

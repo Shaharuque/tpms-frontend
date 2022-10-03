@@ -128,7 +128,7 @@ const ListView = () => {
         return (
           <div className="flex justify-center">
             {lock === true && (
-              <button onClink={() => console.log(lock)}>
+              <button>
                 <AiFillUnlock className=" text-lg font-medium text-green-600" />
               </button>
             )}
@@ -145,7 +145,7 @@ const ListView = () => {
       title: "Patients",
       dataIndex: "Patients",
       key: "Patients",
-      width: 100,
+      width: 150,
       filters: [
         {
           text: `Vernon`,
@@ -215,7 +215,7 @@ const ListView = () => {
         return (
           <>
             {pos === "telehealth" ? (
-              <div className="flex items-center justify-center gap-2 ">
+              <div className="flex items-center gap-2 ">
                 Telehealth
                 <BsFillCameraVideoFill className="text-green-500" />
               </div>
@@ -421,7 +421,7 @@ const ListView = () => {
     <div className={!table ? "h-[100vh]" : ""}>
       <div>
         <div className="cursor-pointer">
-          <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">
+          <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
             <div onClick={clickHandler} className="  flex items-center ">
               {!clicked && (
                 <h1 className="text-[16px]  text-white font-semibold ">
@@ -495,7 +495,7 @@ const ListView = () => {
                   </div>
 
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-7 gap-5 mb-2">
+                    <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-7 gap-5 mb-2">
                       {billable && (
                         <div>
                           <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
@@ -519,7 +519,7 @@ const ListView = () => {
                         ></CustomMultiSelection>
                       </div>
 
-                      {billable && (
+                      {billable ? (
                         <>
                           <div>
                             <label className="label">
@@ -590,46 +590,55 @@ const ListView = () => {
                             </div>
                           </div>
 
-                          <div>
-                            <label className="label">
-                              <span className="label-text text-[16px] text-gray-100 text-left">
-                                Status
-                              </span>
-                            </label>
+                          <div className="flex gap-5">
                             <div>
-                              <select
-                                className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[3px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
-                                {...register("Status")}
-                              >
-                                <option value="" className="text-black">
-                                  Select
-                                </option>
-                                <option value="Today" className="text-black">
-                                  Today's follow up
-                                </option>
-                                <option className="text-black" value="UK">
-                                  Lost 7 days
-                                </option>
-                                <option className="text-black" value="15">
-                                  Lost 15 days
-                                </option>
-                                <option className="text-black" value="15">
-                                  Lost 30 days
-                                </option>
-                                <option className="text-black" value="15">
-                                  30 days & over
-                                </option>
-                              </select>
+                              <label className="label">
+                                <span className="label-text text-[16px] text-gray-100 text-left">
+                                  Status
+                                </span>
+                              </label>
+                              <div>
+                                <select
+                                  className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[3px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                  {...register("Status")}
+                                >
+                                  <option value="" className="text-black">
+                                    Select
+                                  </option>
+                                  <option value="Today" className="text-black">
+                                    Today's follow up
+                                  </option>
+                                  <option className="text-black" value="UK">
+                                    Lost 7 days
+                                  </option>
+                                  <option className="text-black" value="15">
+                                    Lost 15 days
+                                  </option>
+                                  <option className="text-black" value="15">
+                                    Lost 30 days
+                                  </option>
+                                  <option className="text-black" value="15">
+                                    30 days & over
+                                  </option>
+                                </select>
+                              </div>
                             </div>
+                            <button
+                              className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
+                              type="submit"
+                            >
+                              Go
+                            </button>
                           </div>
                         </>
+                      ) : (
+                        <button
+                          className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
+                          type="submit"
+                        >
+                          Go
+                        </button>
                       )}
-                      <button
-                        className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
-                        type="submit"
-                      >
-                        Go
-                      </button>
                     </div>
                   </form>
                 </Fade>
@@ -694,6 +703,9 @@ const ListView = () => {
                       dataSource={TData}
                       rowSelection={{
                         ...rowSelection,
+                      }}
+                      scroll={{
+                        y: 650,
                       }}
                       onChange={handleChange}
                     />
