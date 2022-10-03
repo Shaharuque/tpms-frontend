@@ -43,9 +43,16 @@ const PatientInformation = () => {
   const changeDate = (date) => {
     setDate(date);
   };
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const year = date.getFullYear();
+  console.log(date);
+
+  const month = date ? date.getMonth() + 1 : null;
+  const day = date ? date.getDate() : null;
+  const year = date ? date.getFullYear() : null;
+
+  const handleCancelDate = () => {
+    // setOpenCalendar(false);
+    setDate(null);
+  };
 
   // Address + icon Click Handeler
   const handleClick = () => {
@@ -106,7 +113,8 @@ const PatientInformation = () => {
           ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
-        dob: patient_details?.client_dob,
+        // dob: patient_details?.client_dob,
+        dob: date ? `${month}/${day}/${year}` : null,
         email: patient_details?.email,
         phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
@@ -114,7 +122,11 @@ const PatientInformation = () => {
         checkedActive: patient_details?.is_active_client,
       });
     }, 0);
-  }, [patient_details?.client_first_name, patient_details?.is_active_client]);
+  }, [
+    patient_details?.client_first_name,
+    patient_details?.is_active_client,
+    date,
+  ]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -229,18 +241,20 @@ const PatientInformation = () => {
               <div ref={ref}>
                 <input
                   className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none pb-[0.8px]"
-                  value={`${month}/${day}/${year}`}
+                  // value={`${month}/${day}/${year}`}
+                  name="dob"
                   readOnly
                   onClick={() =>
                     setOpenCalendar((openCalendar) => !openCalendar)
                   }
+                  {...register("dob")}
                 />
                 {openCalendar && (
                   <div className="absolute z-10 rounded">
-                    <Calendar onChange={changeDate} value={date}></Calendar>
+                    <Calendar onChange={changeDate}></Calendar>
                     <div className="bg-white py-2 text-right rounded-b-[5px]">
                       <button
-                        onClick={() => setOpenCalendar(false)}
+                        onClick={handleCancelDate}
                         className=" text-white py-1 mr-1 rounded px-2 bg-[#0AA7B8] hover:bg-red-700 hover:border-red-700"
                       >
                         Cancel

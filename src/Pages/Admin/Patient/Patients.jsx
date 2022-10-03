@@ -469,7 +469,7 @@ const TableApi = () => {
         filteredInfo?.location?.length > 0 ||
         filteredInfo?.insurance?.length > 0 ? (
           // <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
-          <div className="my-5 flex items-center gap-2">
+          <div className="my-5 flex flex-wrap items-center gap-2">
             {filteredInfo?.client_first_name?.length > 0 && (
               <div className=" ">
                 <div className="flex mb-2 gap-1">
@@ -618,9 +618,6 @@ const TableApi = () => {
             columns={columns}
             dataSource={data} //Which data chunk you want to show in table
             // For fixed header table at top
-            scroll={{
-              y: 650,
-            }}
             onChange={handleChange}
           />
         </div>
