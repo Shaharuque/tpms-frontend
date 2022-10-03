@@ -71,6 +71,7 @@ const ListView = () => {
       setOpen(false);
     }
   };
+  //end outside click
 
   const handleBillable = (e) => {
     setBillable(!billable);
