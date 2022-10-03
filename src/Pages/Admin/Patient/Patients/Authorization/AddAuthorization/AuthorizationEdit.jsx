@@ -1,12 +1,10 @@
-// Authorization edit ar jnno ekta component and add authorization ar jnno alada component create kora lagbey but akhn dynamically AuthorizationEdit e doita r kaj kortesey...
-import React, { useEffect, useMemo, useState } from "react";
+// Authorization edit
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
-import { DateRangePicker, Toggle } from "rsuite";
-import CheckIcon from "@rsuite/icons/Check";
-import CloseIcon from "@rsuite/icons/Close";
+import { DateRangePicker } from "rsuite";
 import AuthorizationEditTable from "./AuthorizationEditTable";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import { Switch } from "antd";
@@ -21,6 +19,7 @@ const AuthorizationEdit = () => {
   const { register, handleSubmit, reset } = useForm();
   const [openEditModal, setOpenEditModal] = useState(false);
   const [active, setActive] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState(true);
 
   console.log(active);
   const handleClose = () => {
@@ -47,24 +46,23 @@ const AuthorizationEdit = () => {
       <div className="flex flex-wrap items-center gap-2 mb-2">
         {/* Changes needed */}
         <Link
-          to={`/admin/patient/${id}/patient-authorization/${id}`}
+          to={`/admin/patient/patient-authorization/${patientId}`}
           className="text-primary text-lg"
         >
           <IoCaretBackCircleOutline />
         </Link>
-        <div className="text-xs font-normal">
+        <div className="text-xs font-medium">
           <span className="text-sm font-semibold text-primary">Amro LLC |</span>
-          <span className="text-orange-400 font-semibold">DOB :</span>
+          <span className="text-orange-400 font-semibold"> DOB :</span>
           09/28/2021 |
-          <span className="text-orange-400 font-semibold">Phone : </span>
+          <span className="text-orange-400 font-semibold"> Phone : </span>
           (894)-023-8043 |
-          <span className="text-orange-400 font-semibold">Address : </span>
+          <span className="text-orange-400 font-semibold"> Address : </span>
           1222, OTtn, With Jersey City NJ 32809
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-lg font-medium mx-1">Add Auth</h1>
-        {/* Back a click korley routing problem solved {`/admin/patient/${id}/patient-authorization/${id}`}*/}
+        <h1 className="text-lg font-medium mx-1">Edit Auth</h1>
         <Link to={`/admin/patient/patient-authorization/${patientId}`}>
           <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs font-medium  hover:to-secondary text-white rounded-md">
             <IoCaretBackCircleOutline className="mr-1 text-sm" />
@@ -210,7 +208,7 @@ const AuthorizationEdit = () => {
               />
             </div>
 
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-2 gap-y-1">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -240,7 +238,7 @@ const AuthorizationEdit = () => {
               </div>
             </div>
 
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mr-2 gap-x-2 gap-y-1">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -269,7 +267,7 @@ const AuthorizationEdit = () => {
               </div>
             </div>
 
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-2 gap-y-1">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -283,7 +281,7 @@ const AuthorizationEdit = () => {
                   {...register("deductible")}
                 />
               </div>
-              <div className="mt-[35px]">
+              <div className="mt-[30px]">
                 <div className="flex ml-1 mt-1 items-center">
                   <input
                     type="checkbox"
@@ -292,7 +290,7 @@ const AuthorizationEdit = () => {
                       setValue(!value);
                     }}
                   />
-                  <span className="text-xs ml-1 text-gray-600 font-normal">
+                  <span className="text-[14px] ml-1 text-gray-600 font-medium">
                     In Network
                   </span>
                 </div>
@@ -339,13 +337,25 @@ const AuthorizationEdit = () => {
               />
             </div>
             <div className="ml-2 mt-5">
-              <div>
-                <Switch size="small" />
-                <span className="text-xs text-gray-500 mx-3">Active</span>
+              <div className="my-1">
+                <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
+                <span className="text-[14px] font-medium text-gray-500 mx-3">
+                  Active
+                </span>
               </div>
               <div>
-                <Switch size="small" onClick={() => setActive(!active)} />
-                <span className="text-xs text-gray-500 mx-3">Placeholder</span>
+                <Switch
+                  size="small"
+                  checked={placeHolder ? true : false}
+                  onClick={() => setPlaceHolder(!placeHolder)}
+                />
+                <span className="text-[14px] font-medium text-gray-500 mx-3">
+                  Placeholder
+                </span>
               </div>
             </div>
             <div>

@@ -134,6 +134,7 @@ import ArLedger from "./Pages/Admin/Billing/ARLeadger/ArLedger";
 import ContractRate from "./Pages/Admin/Billing/ContactRate/ContractRate";
 import PatientStatement from "./Pages/Admin/Billing/PatientStatement/PatientStatement";
 import Sidebar from "./Pages/Shared/Sidebar/Sidebar";
+import AddAuthorization from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AddAuthorization";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -389,8 +390,8 @@ function App() {
               ></Route>
             </Route>
             <Route
-              path="authorization-Edit"
-              element={<AuthorizationEdit></AuthorizationEdit>}
+              path="authorization-add"
+              element={<AddAuthorization></AddAuthorization>}
             ></Route>
             <Route
               path="authorization-Edit/:id"
