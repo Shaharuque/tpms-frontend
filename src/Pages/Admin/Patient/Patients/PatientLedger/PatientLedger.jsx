@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { Table, Typography } from "antd";
@@ -7,6 +7,7 @@ import CheckIcon from "@rsuite/icons/Check";
 import CloseIcon from "@rsuite/icons/Close";
 import { BsFileEarmarkPlusFill } from "react-icons/bs";
 import PatientLedgerAction from "./PatientLedger/PatientLedgerAction";
+import { motion } from "framer-motion";
 
 //for date range picker calendar
 import { DateRangePicker } from "react-date-range";
@@ -376,8 +377,22 @@ const PatientLedger = () => {
   const endMonth = endDate.toLocaleString("en-us", { month: "short" });
   const startDay = startDate.getDate();
   const endDay = endDate.getDate();
-  // const startYear = startDate.getFullYear();
-  // const endYear = endDate.getFullYear();
+  const startYear = startDate.getFullYear().toString().slice(2, 4);
+  const endYear = endDate.getFullYear().toString().slice(2, 4);
+
+  // Hide calendar on outside click
+  const refClose = useRef(null);
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (e) => {
+    if (refClose.current && !refClose.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+  //end outside click
 
   return (
     <div className={table ? "" : "h-[100vh]"}>
@@ -406,24 +421,54 @@ const PatientLedger = () => {
               </span>
             </label>
             <div className="ml-1">
-              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border  rounded-sm px-1 mx-1 w-full">
+              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                 <input
-                  value={`${startDay} ${startMonth}`}
+                  value={`${startDay} ${startMonth}, ${startYear}`}
                   readOnly
                   onClick={() => setOpen((open) => !open)}
                   className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                 />
                 <BsArrowRight
                   onClick={() => setOpen((open) => !open)}
-                  className="w-1/3 text-gray-600 text-[14px] font-medium"
+                  className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
                 ></BsArrowRight>
                 <input
-                  value={`${endDay} ${endMonth}`}
+                  value={`${endDay} ${endMonth}, ${endYear}`}
                   readOnly
                   onClick={() => setOpen((open) => !open)}
                   className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                 />
               </div>
+            </div>
+            <div ref={refClose} className="absolute z-10 shadow-xl">
+              {open && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <div>
+                    <DateRangePicker
+                      onChange={(item) => setRange([item.selection])}
+                      editableDateInputs={true}
+                      moveRangeOnFirstSelection={false}
+                      ranges={range}
+                      months={2}
+                      direction="horizontal"
+                      className="border-2 border-gray-100"
+                    />
+                  </div>
+                  <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+                    <button
+                      className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                      type="submit"
+                      onClick={() => setOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </div>
 
@@ -480,32 +525,6 @@ const PatientLedger = () => {
               </button>
             </div>
           </div>
-        </div>
-        <div className="absolute z-10 lg:ml-[8%] xl:ml-[12%] 2xl:ml-[15]">
-          {open && (
-            <div>
-              <div>
-                <DateRangePicker
-                  onChange={(item) => setRange([item.selection])}
-                  editableDateInputs={true}
-                  moveRangeOnFirstSelection={false}
-                  ranges={range}
-                  months={2}
-                  direction="horizontal"
-                  className="border-2 border-gray-100"
-                />
-              </div>
-              <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
-                <button
-                  className="py-[5px] px-2.5 m-2 text-white rounded-md bg-gradient-to-r from-[#0db5c8] to-[#089bab]"
-                  type="submit"
-                  onClick={() => setOpen(false)}
-                >
-                  Ok
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </form>
       {table && (
