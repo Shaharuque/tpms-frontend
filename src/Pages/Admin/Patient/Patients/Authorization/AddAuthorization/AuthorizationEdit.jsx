@@ -9,18 +9,20 @@ import CheckIcon from "@rsuite/icons/Check";
 import CloseIcon from "@rsuite/icons/Close";
 import AuthorizationEditTable from "./AuthorizationEditTable";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
+import { Switch } from "antd";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
   console.log("description id ", id);
   const patientId = localStorage.getItem("p_key");
   console.log(patientId);
-
   const [value, setValue] = useState(false);
   const [notes, setNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [active, setActive] = useState(false);
 
+  console.log(active);
   const handleClose = () => {
     setOpenEditModal(false);
   };
@@ -61,7 +63,7 @@ const AuthorizationEdit = () => {
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-sm">Add Auth</h1>
+        <h1 className="text-lg font-medium mx-1">Add Auth</h1>
         {/* Back a click korley routing problem solved {`/admin/patient/${id}/patient-authorization/${id}`}*/}
         <Link to={`/admin/patient/patient-authorization/${patientId}`}>
           <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs font-medium  hover:to-secondary text-white rounded-md">
@@ -76,29 +78,29 @@ const AuthorizationEdit = () => {
         transition={{ delay: 0.3 }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-2 gap-y-1">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-6 gap-y-1">
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Description<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="description"
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("description")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Insurance
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                 {...register("insurance")}
               >
                 <option value="single">single</option>
@@ -107,13 +109,13 @@ const AuthorizationEdit = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Tx Type
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                 {...register("tx_type")}
               >
                 <option value="single">single</option>
@@ -122,13 +124,13 @@ const AuthorizationEdit = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   SUPV. Provider
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                 {...register("sup_provider")}
               >
                 <option value="single">single</option>
@@ -138,7 +140,7 @@ const AuthorizationEdit = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Selected date
                 </span>
               </label>
@@ -154,40 +156,40 @@ const AuthorizationEdit = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Authorization Number<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="authorization_number"
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("authorization_number")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   UCI / Insurance ID<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="uci_id"
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("uci_id")}
               />
             </div>
 
             <div>
               <label className="label">
-                <span className="label-text flex items-center text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   COB
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                 {...register("cob")}
               >
                 <option value="single">single</option>
@@ -197,7 +199,7 @@ const AuthorizationEdit = () => {
 
             <div className="">
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Upload Authorization
                 </span>
               </label>
@@ -211,20 +213,20 @@ const AuthorizationEdit = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Diagnosis1<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("diagnosis1")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Diagnosis2
                   </span>
                 </label>
@@ -232,7 +234,7 @@ const AuthorizationEdit = () => {
                   type="text"
                   name="diagnosis2"
                   // className="border border-gray-300 rounded-sm py-[5px] mx-2 text-xs w-full"
-                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("diagnosis2")}
                 />
               </div>
@@ -241,27 +243,27 @@ const AuthorizationEdit = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Diagnosis3<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis3"
-                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("diagnosis3")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Diagnosis4
                   </span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis4"
-                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("diagnosis4")}
                 />
               </div>
@@ -270,14 +272,14 @@ const AuthorizationEdit = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Deductible
                   </span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("deductible")}
                 />
               </div>
@@ -299,72 +301,56 @@ const AuthorizationEdit = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   CoPay
                 </span>
               </label>
               <input
                 type="text"
                 name="copay"
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("copay")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   CMS 4 (Insured Name)
                 </span>
               </label>
               <input
                 type="text"
                 name="cms4"
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("cms4")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   CMS 11 (Group No)
                 </span>
               </label>
               <input
                 type="text"
                 name="cms11"
-                className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("cms11")}
               />
             </div>
             <div className="ml-2 mt-5">
               <div>
-                <Toggle
-                  checkedChildren={<CheckIcon />}
-                  unCheckedChildren={<CloseIcon />}
-                  checked={value ? true : false}
-                  size="sm"
-                  onClick={() => {
-                    setValue(!value);
-                  }}
-                />
+                <Switch size="small" />
                 <span className="text-xs text-gray-500 mx-3">Active</span>
               </div>
               <div>
-                <Toggle
-                  checkedChildren={<CheckIcon />}
-                  unCheckedChildren={<CloseIcon />}
-                  checked={value ? true : false}
-                  size="sm"
-                  onClick={() => {
-                    setValue(!value);
-                  }}
-                />
+                <Switch size="small" onClick={() => setActive(!active)} />
                 <span className="text-xs text-gray-500 mx-3">Placeholder</span>
               </div>
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Notes
                 </span>
               </label>
@@ -377,7 +363,7 @@ const AuthorizationEdit = () => {
           </div>
           {/* submit  */}
           <button
-            className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+            className=" py-[5px] font-normal px-3 mr-1 text-xs ml-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
             type="submit"
           >
             Save

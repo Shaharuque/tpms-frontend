@@ -20,7 +20,7 @@ const ScheduleExport = () => {
           <h5 className="inline  text-sm text-white font-bold">
             Schedule export
           </h5>
-          <span class="inline-block  px-2 text-xs text-center align-baseline font-bold bg-white text-black rounded">
+          <span className="inline-block  px-2 text-xs text-center align-baseline font-bold bg-white text-black rounded">
             64
           </span>
         </div>

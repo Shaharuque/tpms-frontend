@@ -23,17 +23,12 @@ const PatientInformation = () => {
   const [Guarantor, setGuarantor] = useState(false);
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
-  const [isSubscribed, setIsSubscribed] = useState(false);
   const [checkLocation, setLocation] = useState(false);
 
   // calender hide
   const { ref, visible, setVisible } = useOutsideAlerter(false);
-  const [open, setOpen] = useState(false);
-  const [phoneOpen, setPhoneOpen] = useState(false);
-  const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset, setValue, getValues } = useForm();
   const [hook, setHook] = useState("");
-  const [addressmain, setaddressmain] = useState("");
 
   // Address state
   const [addressRendomValue, setAddressRendomValue] = useState([]);
@@ -121,9 +116,6 @@ const PatientInformation = () => {
     }, 0);
   }, [patient_details?.client_first_name, patient_details?.is_active_client]);
 
-  // console.log(patient_details?.is_active_client);
-  const [value, setValues] = useState(patient_details?.is_active_client);
-
   const onSubmit = (data) => {
     console.log(data);
     const is_client_active = data?.checkedActive ? 1 : 0;
@@ -131,6 +123,7 @@ const PatientInformation = () => {
       is_client_active,
     };
     console.log(formData);
+    console.log(file);
   };
 
   ///relation value handle
@@ -342,10 +335,10 @@ const PatientInformation = () => {
                     {...register("City")}
                   />
                 </div>
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
+                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                       defaultValue={"NY"}
                       {...register("country")}
                     >
@@ -406,10 +399,10 @@ const PatientInformation = () => {
                         {...register("more_City")}
                       />
                     </div>
-                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
+                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
                       <div>
                         <select
-                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                           {...register("more_Country")}
                         >
                           <option value="NY">NY</option>
@@ -427,8 +420,7 @@ const PatientInformation = () => {
                   </motion.div>
                 ))}
 
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
-                  {" "}
+                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
                   <div>
                     <label className="label">
                       <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -471,7 +463,7 @@ const PatientInformation = () => {
                     Phone
                   </span>
                 </label>
-                <div className="flex flex-wrap gap-1 items-center gap-x-2 ">
+                <div className="flex flex-wrap gap-1 items-center gap-x-4 ">
                   <div>
                     <input
                       type="text"
@@ -482,7 +474,7 @@ const PatientInformation = () => {
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                       {...register("group")}
                     >
                       <option value="work">work</option>
@@ -557,7 +549,7 @@ const PatientInformation = () => {
                       Phone
                     </span>
                   </label>
-                  <div className="flex flex-wrap gap-1 items-center gap-x-2 ">
+                  <div className="flex flex-wrap gap-1 items-center gap-x-4 ">
                     <div>
                       <input
                         type="text"
@@ -568,7 +560,7 @@ const PatientInformation = () => {
                     </div>
                     <div>
                       <select
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                         {...register("group")}
                       >
                         <option value="work">work</option>
@@ -636,7 +628,7 @@ const PatientInformation = () => {
                     Email
                   </span>
                 </label>
-                <div className="flex flex-wrap items-center gap-x-2 ">
+                <div className="flex flex-wrap items-center gap-x-4 ">
                   <div>
                     <input
                       type="text"
@@ -647,7 +639,7 @@ const PatientInformation = () => {
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 w-full focus:outline-none"
                       {...register("group2")}
                     >
                       <option value="work">work</option>
@@ -702,7 +694,7 @@ const PatientInformation = () => {
                       Email
                     </span>
                   </label>
-                  <div className="flex flex-wrap items-center gap-x-2 ">
+                  <div className="flex flex-wrap items-center gap-x-4 ">
                     <div>
                       <input
                         type="text"
@@ -713,7 +705,7 @@ const PatientInformation = () => {
                     </div>
                     <div>
                       <select
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 w-full focus:outline-none"
                         {...register("group2")}
                       >
                         <option value="work">work</option>
@@ -996,7 +988,7 @@ const PatientInformation = () => {
           <div className="mb-5">
             {/* submit  */}
             <button
-              className=" py-[5px] mt-7 px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className=" py-[5px] mt-7 px-3 my-1 text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
               type="submit"
             >
               Save Patient

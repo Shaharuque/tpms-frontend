@@ -33,7 +33,7 @@ const NotFound = () => {
               type="button"
               data-mdb-ripple="true"
               data-mdb-ripple-color="light"
-              class="inline-block px-6 py-2.5 mb-1 bg-blue-600 mx-auto flex gap-1 justify-center items-center text-white font-medium text-sm leading-tight rounded-3xl shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out"
+              className=" px-6 py-2.5 mb-1 bg-blue-600 mx-auto flex gap-1 justify-center items-center text-white font-medium text-sm leading-tight rounded-3xl shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out"
               onClick={backToHome}
             >
               <AiOutlineArrowRight className="border-white text-lg"></AiOutlineArrowRight>{" "}
