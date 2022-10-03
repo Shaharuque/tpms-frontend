@@ -439,7 +439,7 @@ const TestNaviBar = ({ handle }) => {
                   <p className="text-xs text-white">admin@admin.com</p>
                 </div>
               </div>
-              <div className="shadow-lg bg-white">
+              <div className="shadow-md bg-white">
                 <div>
                   <Link
                     to={"/admin/profile/profile-information"}
