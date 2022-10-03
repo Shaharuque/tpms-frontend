@@ -19,7 +19,7 @@ const ContractContainer = () => {
       {/*Contact details part */}
       <button
         onClick={contactDetailsHandle}
-        class="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out mb-4"
+        className="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out mb-4"
       >
         Contact Details
       </button>
@@ -31,7 +31,7 @@ const ContractContainer = () => {
       {/*Emergency contact details part */}
       <button
         onClick={emergencyContactHandle}
-        class="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out"
+        className="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out"
       >
         Emergency Contact Details
       </button>

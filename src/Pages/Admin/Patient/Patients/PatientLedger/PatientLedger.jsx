@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { Table, Typography } from "antd";
@@ -7,6 +7,7 @@ import CheckIcon from "@rsuite/icons/Check";
 import CloseIcon from "@rsuite/icons/Close";
 import { BsFileEarmarkPlusFill } from "react-icons/bs";
 import PatientLedgerAction from "./PatientLedger/PatientLedgerAction";
+import { motion } from "framer-motion";
 
 //for date range picker calendar
 import { DateRangePicker } from "react-date-range";
@@ -29,15 +30,6 @@ const PatientLedger = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const { Text } = Typography;
-
-  const [open, setOpen] = useState(false);
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 0),
-      key: "selection",
-    },
-  ]);
 
   //   fetch data
   React.useEffect(() => {
@@ -369,15 +361,57 @@ const PatientLedger = () => {
     reset();
     setTable(true);
   };
+
+  //Date Range Picker
+  const [open, setOpen] = useState(false);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+
+  const handleCancelDate = () => {
+    setRange([
+      {
+        startDate: new Date(),
+        endDate: null,
+        key: "selection",
+      },
+    ]);
+  };
+
   // date range picker calendar
-  const startDate = range[0]?.startDate;
-  const endDate = range[0]?.endDate;
-  const startMonth = startDate.toLocaleString("en-us", { month: "short" });
-  const endMonth = endDate.toLocaleString("en-us", { month: "short" });
-  const startDay = startDate.getDate();
-  const endDay = endDate.getDate();
-  // const startYear = startDate.getFullYear();
-  // const endYear = endDate.getFullYear();
+  const startDate = range ? range[0]?.startDate : null;
+  const endDate = range ? range[0]?.endDate : null;
+  const startMonth = startDate
+    ? startDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const endMonth = endDate
+    ? endDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const startDay = startDate ? startDate.getDate() : null;
+  const endDay = endDate ? endDate.getDate() : null;
+  const startYear = startDate
+    ? startDate.getFullYear().toString().slice(2, 4)
+    : null;
+  const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+  //End Date Range Picker
+
+  // Hide calendar on outside click
+  const refClose = useRef(null);
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (e) => {
+    if (refClose.current && !refClose.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+  //end outside click
 
   return (
     <div className={table ? "" : "h-[100vh]"}>
@@ -406,19 +440,25 @@ const PatientLedger = () => {
               </span>
             </label>
             <div className="ml-1">
-              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border  rounded-sm px-1 mx-1 w-full">
+              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                 <input
-                  value={`${startDay} ${startMonth}`}
+                  value={
+                    startDate
+                      ? `${startMonth} ${startDay}, ${startYear}`
+                      : "Start Date"
+                  }
                   readOnly
                   onClick={() => setOpen((open) => !open)}
                   className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                 />
                 <BsArrowRight
                   onClick={() => setOpen((open) => !open)}
-                  className="w-1/3 text-gray-600 text-[14px] font-medium"
+                  className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
                 ></BsArrowRight>
                 <input
-                  value={`${endDay} ${endMonth}`}
+                  value={
+                    endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
+                  }
                   readOnly
                   onClick={() => setOpen((open) => !open)}
                   className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
@@ -481,9 +521,16 @@ const PatientLedger = () => {
             </div>
           </div>
         </div>
-        <div className="absolute z-10 lg:ml-[8%] xl:ml-[12%] 2xl:ml-[15]">
+        <div
+          ref={refClose}
+          className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
+        >
           {open && (
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
               <div>
                 <DateRangePicker
                   onChange={(item) => setRange([item.selection])}
@@ -495,16 +542,23 @@ const PatientLedger = () => {
                   className="border-2 border-gray-100"
                 />
               </div>
-              <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
+              <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
                 <button
-                  className="py-[5px] px-2.5 m-2 text-white rounded-md bg-gradient-to-r from-[#0db5c8] to-[#089bab]"
+                  className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                  type="submit"
+                  onClick={handleCancelDate}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 m-2 text-secondary border border-white bg-white rounded"
                   type="submit"
                   onClick={() => setOpen(false)}
                 >
-                  Ok
+                  Save
                 </button>
               </div>
-            </div>
+            </motion.div>
           )}
         </div>
       </form>

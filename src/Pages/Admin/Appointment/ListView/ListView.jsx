@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useRef } from "react";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
@@ -26,29 +26,47 @@ const ListView = () => {
   const [listView, setListView] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-
+  const [value, setValue] = useState([]);
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
 
+  //Date Range Picker
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 0),
+      endDate: null,
       key: "selection",
     },
   ]);
-  const [value, setValue] = React.useState([]);
+
+  const handleCancelDate = () => {
+    setRange([
+      {
+        startDate: new Date(),
+        endDate: null,
+        key: "selection",
+      },
+    ]);
+  };
+
   // date range picker calendar
-  const startDate = range[0]?.startDate;
-  const endDate = range[0]?.endDate;
-  const startMonth = startDate.toLocaleString("en-us", { month: "short" });
-  const endMonth = endDate.toLocaleString("en-us", { month: "short" });
-  const startDay = startDate.getDate();
-  const endDay = endDate.getDate();
-  const startYear = startDate.getFullYear().toString().slice(2, 4);
-  const endYear = endDate.getFullYear().toString().slice(2, 4);
+  const startDate = range ? range[0]?.startDate : null;
+  const endDate = range ? range[0]?.endDate : null;
+  const startMonth = startDate
+    ? startDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const endMonth = endDate
+    ? endDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const startDay = startDate ? startDate.getDate() : null;
+  const endDay = endDate ? endDate.getDate() : null;
+  const startYear = startDate
+    ? startDate.getFullYear().toString().slice(2, 4)
+    : null;
+  const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+  //End Date Range Picker
 
   //test design
   const [clicked, setClicked] = useState(false);
@@ -58,6 +76,20 @@ const ListView = () => {
   const handleClose = () => {
     setClicked(!clicked);
   };
+
+  // Hide calendar on outside click
+  const refClose = useRef(null);
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (e) => {
+    if (refClose.current && !refClose.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+  //end outside click
 
   const handleBillable = (e) => {
     setBillable(!billable);
@@ -531,7 +563,11 @@ const ListView = () => {
                             <div className="ml-1">
                               <div className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
                                 <input
-                                  value={`${startDay} ${startMonth}, ${startYear}`}
+                                  value={
+                                    startDate
+                                      ? `${startMonth} ${startDay}, ${startYear}`
+                                      : "Start Date"
+                                  }
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
@@ -541,7 +577,11 @@ const ListView = () => {
                                   className="w-1/3 text-white"
                                 ></BsArrowRight>
                                 <input
-                                  value={`${endDay} ${endMonth}, ${endYear}`}
+                                  value={
+                                    endDate
+                                      ? `${endMonth} ${endDay}, ${endYear}`
+                                      : "End Date"
+                                  }
                                   readOnly
                                   onClick={() => setOpen((open) => !open)}
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
@@ -605,9 +645,16 @@ const ListView = () => {
               </div>
             )}
           </div>
-          <div className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl">
+          <div
+            ref={refClose}
+            className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
+          >
             {open && (
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
                 <div>
                   <DateRangePicker
                     onChange={(item) => setRange([item.selection])}
@@ -623,12 +670,19 @@ const ListView = () => {
                   <button
                     className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
                     type="submit"
-                    onClick={() => setOpen(false)}
+                    onClick={handleCancelDate}
                   >
                     Cancel
                   </button>
+                  <button
+                    className="px-4 m-2 text-secondary border border-white bg-white rounded"
+                    type="submit"
+                    onClick={() => setOpen(false)}
+                  >
+                    Save
+                  </button>
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>

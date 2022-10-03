@@ -29,7 +29,7 @@ const CredentialsContainer = () => {
       <h4 className="text-md text-left text-orange-400 mb-4">Credentials</h4>
       <button
         onClick={credentialHandle}
-        class="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out"
+        className="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out"
       >
         Credentails
       </button>
@@ -41,7 +41,7 @@ const CredentialsContainer = () => {
       {/*clearence part */}
       <button
         onClick={clearanceHandle}
-        class="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out mt-4"
+        className="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out mt-4"
       >
         Clearance
       </button>
@@ -53,7 +53,7 @@ const CredentialsContainer = () => {
       {/*qualification part */}
       <button
         onClick={qualificationHandle}
-        class="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out mt-4"
+        className="w-full py-1.5 px-2 text-white text-start font-normal text-xs leading-tight rounded shadow-md bg-gradient-to-r from-secondary to-primary  hover:to-secondary transition duration-150 ease-in-out mt-4"
       >
         Qualification
       </button>

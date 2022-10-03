@@ -329,15 +329,15 @@ const AuthorizationAntdTable = () => {
     <div className="">
       <>
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <h1 className="text-sm font-semibold">Authorization</h1>
+          <h1 className="text-[14px] font-semibold">Authorization</h1>
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={clearFilters}
-              className="px-2 flex items-center py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+              className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
             >
               Clear filters
             </button>
-            <Link to={"/admin/authorization-Edit"}>
+            <Link to={"/admin/authorization-add"}>
               <button className="px-2 flex items-center py-2 bg-gradient-to-r to-secondary from-primary text-xs  hover:to-secondary text-white rounded-sm">
                 + Add Authorization
               </button>
