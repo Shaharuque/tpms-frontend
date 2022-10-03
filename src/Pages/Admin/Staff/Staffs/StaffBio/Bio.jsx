@@ -30,7 +30,7 @@ const Bio = () => {
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-2">
           {/* First Name with all the validation  */}
           <div>
-            <label className="label">
+            <label>
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 First Name<span className="text-red-500">*</span>
               </span>
@@ -44,7 +44,7 @@ const Bio = () => {
           </div>
 
           <div>
-            <label className="label">
+            <label>
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
                 Middle Name
               </span>
