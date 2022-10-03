@@ -25,7 +25,7 @@ const ExportedFiles = () => {
             </button>
           </div>
         </div>
-        <hr className=" w-11/12 mx-auto" />
+        <hr className=" w-11/12 mx-auto mt-2" />
       </div>
     </div>
   );
