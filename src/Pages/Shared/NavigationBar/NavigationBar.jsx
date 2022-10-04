@@ -14,6 +14,8 @@ import {
   AiOutlinePlusSquare,
   AiOutlineFileAdd,
   AiFillUnlock,
+  AiOutlineIdcard,
+  AiOutlineUserAdd,
 } from "react-icons/ai";
 import { VscSignOut } from "react-icons/vsc";
 import { FaBars } from "react-icons/fa";
@@ -322,12 +324,12 @@ const TestNaviBar = ({ handle }) => {
                   onClick={handlePatient}
                   className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
                 >
-                  <AiOutlinePlusCircle className="text-lg font-semibold" />
+                  <AiOutlineUserAdd className="text-lg font-bold " />
                   <div>Create Patient</div>
                 </button>
 
                 <button className="text-[14px] text-secondary border px-[15px] py-1  rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2">
-                  <AiOutlinePlusSquare className="text-lg font-semibold" />
+                  <AiOutlineIdcard className="text-lg font-bold" />
                   <div onClick={handleAppointment}>Create Appointment</div>
                 </button>
               </div>
@@ -394,13 +396,16 @@ const TestNaviBar = ({ handle }) => {
           </div>
           {/**download */}
 
-          <div className="dropdown ">
+          <div className="dropdown">
             <label tabIndex={0}>
               <h1 className=" text-xl font-bold text-secondary">
                 <BsDownload />
               </h1>
             </label>
-            <div tabIndex={0} className="dropdown-content menu mt-3 ">
+            <div
+              tabIndex={0}
+              className="dropdown-content menu mt-3 shadow-lg shadow-red-600"
+            >
               <ScheduleExport></ScheduleExport>
             </div>
           </div>
@@ -434,7 +439,7 @@ const TestNaviBar = ({ handle }) => {
                   <p className="text-xs text-white">admin@admin.com</p>
                 </div>
               </div>
-              <div className="shadow-lg bg-white">
+              <div className="shadow-md bg-white">
                 <div>
                   <Link
                     to={"/admin/profile/profile-information"}

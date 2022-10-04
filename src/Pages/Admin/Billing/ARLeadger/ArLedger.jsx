@@ -402,7 +402,7 @@ const ArLedger = () => {
   //end outside click
 
   return (
-    <div>
+    <div className={!table ? "h-[100vh]" : ""}>
       <div>
         <motion.div
           initial={{ opacity: 0, y: 15 }}

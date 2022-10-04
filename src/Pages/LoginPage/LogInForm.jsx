@@ -99,15 +99,15 @@ const LogInForm = () => {
                 />
               </div>
 
-              <label className="label">
+              <label>
                 <span className="label-text-alt">
                   {errors.email?.type === "required" && (
-                    <p className=" text-xs text-red-500">
+                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
                       {errors.email.message}
                     </p>
                   )}
                   {errors.email?.type === "pattern" && (
-                    <p className=" text-xs text-red-500">
+                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
                       {errors.email.message}
                     </p>
                   )}
@@ -146,15 +146,15 @@ const LogInForm = () => {
                 />
               </div>
 
-              <label className="label">
+              <label>
                 <span className="label-text-alt">
                   {errors.password?.type === "required" && (
-                    <p className=" text-xs text-red-500">
+                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
                       {errors.password.message}
                     </p>
                   )}
                   {errors.password?.type === "minLength" && (
-                    <p className=" text-xs text-red-500">
+                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
                       {errors.password.message}
                     </p>
                   )}

@@ -13,7 +13,7 @@ const ScheduleExport = () => {
   return (
     <div>
       <div
-        className="absolute z-10 bg-white w-[15rem] sm:w-[18rem] shadow rounded-lg
+        className="absolute z-10 bg-white w-[15rem] sm:w-[18rem] shadow-md rounded-lg
        mt-2 lg:right-[-20px] md:right-[-280px] sm:right-[-280px]  "
       >
         <div className="rounded-t-lg p-4 flex justify-between items-center bg-gradient-to-r from-primary to-secondary">

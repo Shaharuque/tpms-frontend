@@ -29,6 +29,31 @@ code {
   background: white;
 }
 
+/* down arrow animation */
+.arrow {
+  color:white;
+  font-size: 18px;
+  
+}
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(11px);
+  }
+  60% {
+    transform: translateY(11px);
+  }
+}
+/* end */
+
 .rs-calendar-table-cell {
   display: table-cell;
   padding: 1px 0;
