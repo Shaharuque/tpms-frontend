@@ -21,9 +21,9 @@ import admin from "../../Assets/user.png";
 import company from "../../Assets/company.png";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import CreateAppointment from "../../Pages/Shared/AdditionFeatures/CreateAppointment";
-import CreatePatient from "../../Pages/Shared/AdditionFeatures/CreatePatient";
 import ScheduleExport from "./ScheduleExport/ScheduleExport";
+import CreatePatient from "./AdditionFeatures/CreatePatient";
+import CreateAppointment from "./AdditionFeatures/CreateAppointment";
 
 // i am using alakaja
 const TestNaviBar = ({ handle }) => {

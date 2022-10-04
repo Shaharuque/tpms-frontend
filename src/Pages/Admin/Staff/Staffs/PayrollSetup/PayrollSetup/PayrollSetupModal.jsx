@@ -1,4 +1,4 @@
-import { Dialog } from "@mui/material";
+import { Modal } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -14,12 +14,17 @@ const PayrollSetupModal = ({ handleClose, open }) => {
   return (
     <div>
       <div>
-        <Dialog
-          open={handleClose}
+        <Modal
+          open={true} //aikhaney true na likey ekta state ana lagbey tar value 'true'
+          centered
+          footer={null}
+          bodyStyle={{ padding: "0" }}
+          closable={false}
+          className="box rounded-xl"
           // onClose={handleClose}
-          aria-labelledby="responsive-dialog-title"
+          // aria-labelledby="responsive-dialog-title"
         >
-          <div className="px-5 py-2 box  sm:w-[500px]">
+          <div className="px-5 py-2">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">Payroll</h1>
               <IoCloseCircleOutline
@@ -111,7 +116,7 @@ const PayrollSetupModal = ({ handleClose, open }) => {
               </div>
             </form>
           </div>
-        </Dialog>
+        </Modal>
       </div>
     </div>
   );
