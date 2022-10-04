@@ -11,7 +11,6 @@ import { motion } from "framer-motion";
 
 //for date range picker calendar
 import { DateRangePicker } from "react-date-range";
-import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";

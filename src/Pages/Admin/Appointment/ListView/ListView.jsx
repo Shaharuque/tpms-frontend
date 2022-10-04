@@ -561,7 +561,10 @@ const ListView = () => {
                               </span>
                             </label>
                             <div className="ml-1">
-                              <div onClick={() => setOpen(true)} className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
+                              <div
+                                onClick={() => setOpen(true)}
+                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
+                              >
                                 <input
                                   value={
                                     startDate
@@ -571,9 +574,7 @@ const ListView = () => {
                                   readOnly
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
-                                <BsArrowRight
-                                  className="w-1/3 text-white"
-                                ></BsArrowRight>
+                                <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
                                 <input
                                   value={
                                     endDate

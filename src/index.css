@@ -226,6 +226,9 @@ code {
   .rdrMonthAndYearPickers {
     flex-direction: column !important;
   }
+  .rdrWeekDay{
+    font-size: 12px !important;
+  }
 }
 
 @media only screen and (max-width:768px) {
