@@ -756,11 +756,13 @@ const ArFollowupBucket = () => {
             </div>
           </div>
           <div className="mb-3">
-            <h1 className="text-xs mb-2 ml-1 ">Select Insurance</h1>
+            <h1 className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              Select Insurance
+            </h1>
             <select
               onChange={(e) => setSelect(e.target.value)}
               name="post"
-              className="border border-gray-300 rounded-sm px-2 py-[6px] mx-1 text-xs "
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium px-2 py-[6px] mx-1 text-xs focus:outline-none"
             >
               <option value="h"></option>
               <option value="view_transition">View Transition</option>
