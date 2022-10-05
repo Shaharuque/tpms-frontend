@@ -2,17 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 
-import { Link, useParams } from "react-router-dom";
-
-const ContractRateEditAdd = () => {
-  const { id } = useParams();
-
+const ContractRateAdd = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
   };
-
   const onCancel = (data) => {
     reset();
   };
@@ -319,4 +314,4 @@ const ContractRateEditAdd = () => {
   );
 };
 
-export default ContractRateEditAdd;
+export default ContractRateAdd;

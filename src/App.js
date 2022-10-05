@@ -135,6 +135,7 @@ import ContractRate from "./Pages/Admin/Billing/ContactRate/ContractRate";
 import PatientStatement from "./Pages/Admin/Billing/PatientStatement/PatientStatement";
 import Sidebar from "./Pages/Shared/Sidebar/Sidebar";
 import AddAuthorization from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AddAuthorization";
+import ContractRateAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateAdd";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -478,8 +479,8 @@ function App() {
               element={<ContractRate></ContractRate>}
             ></Route>
             <Route
-              path="billing/rate-list-add-edit"
-              element={<ContractRateEditAdd></ContractRateEditAdd>}
+              path="billing/rate-list-add"
+              element={<ContractRateAdd></ContractRateAdd>}
             ></Route>
             <Route
               path="billing/rate-list-add-edit/:id"

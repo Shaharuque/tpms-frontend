@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import axios from "axios";
 import { BsArrowRight, BsFileEarmarkPlusFill } from "react-icons/bs";
 import { DateRangePicker } from "react-date-range";
 import { Switch, Table, Typography } from "antd";
@@ -12,7 +11,6 @@ const ArLedger = () => {
   const [select, setSelect] = useState("");
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);
-  const [ladgerData, SetladgerData] = useState([]);
   const [sortBy, setSortBy] = useState("");
   const [allData, setAllData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
