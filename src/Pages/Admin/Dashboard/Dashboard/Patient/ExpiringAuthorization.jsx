@@ -8,7 +8,8 @@ import axios from "axios";
 import UseTable from "../../../../../Utilities/UseTable";
 
 const ExpiringAuthorization = () => {
-  const [ExpireAuthData, SetExpireAuthData] = useState([]);
+  const [expireAuthData, SetExpireAuthData] = useState([]);
+  const [table, setTable] = useState(false);
 
   // fake Api call
 
@@ -22,12 +23,14 @@ const ExpiringAuthorization = () => {
       });
   }, []);
 
-  const data = useMemo(() => ExpireAuthData, [ExpireAuthData]);
+  console.log(expireAuthData);
+
+  const data = useMemo(() => expireAuthData, [expireAuthData]);
   const columns = useMemo(() => [...ExpiringAuthorizationColumn], []);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
   return (
-    <div className={!ExpireAuthData ? "h-[100vh]" : ""}>
+    <div className={table ? "" : "h-[100vh]"}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">
           Expiring Authorizations
@@ -42,15 +45,42 @@ const ExpiringAuthorization = () => {
           </Link>
         </div>
       </div>
-      <div className="my-2">
-        <UseTable
-          getTableProps={getTableProps}
-          headerGroups={headerGroups}
-          getTableBodyProps={getTableBodyProps}
-          rows={rows}
-          prepareRow={prepareRow}
-        ></UseTable>
+      <div>
+        <h1 className="label-text text-base font-medium text-[#9b9b9b] text-left">
+          Select Interval
+        </h1>
+        <div className="flex item-center flex-wrap my-3">
+          <div>
+            <select
+              name="type"
+              className="input-border text-gray-600 rounded-sm text-[14px] font-medium px-2 py-[6px] mx-1 text-xs focus:outline-none"
+            >
+              <option value="30 Days">30 Days</option>
+              <option value="60 Days">60 Days</option>
+              <option value="90 Days">90 Days</option>
+              <option value="120 Days">120 Days</option>
+            </select>
+          </div>
+          <button
+            onClick={() => setTable(true)}
+            className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+          >
+            Go
+          </button>
+        </div>
       </div>
+
+      {table && (
+        <div className="my-2">
+          <UseTable
+            getTableProps={getTableProps}
+            headerGroups={headerGroups}
+            getTableBodyProps={getTableBodyProps}
+            rows={rows}
+            prepareRow={prepareRow}
+          ></UseTable>
+        </div>
+      )}
     </div>
   );
 };
