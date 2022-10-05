@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import person from "../../../Assets/user.png";
 import { motion } from "framer-motion";
-import { Uploader } from 'rsuite';
-import CameraRetroIcon from '@rsuite/icons/legacy/CameraRetro';
-
 
 const ProfileInformation = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -17,8 +14,8 @@ const ProfileInformation = () => {
   // image uploding code
   const [file, setFile] = useState();
   function handleChange(e) {
-      console.log(e.target.files);
-      setFile(URL.createObjectURL(e.target.files[0]));
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
   }
   return (
     <motion.div
@@ -27,10 +24,9 @@ const ProfileInformation = () => {
       transition={{ delay: 0.2 }}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
-      
-          <div className="div-img">
+        <div className="div-img">
           <div>
-            <img src={file || person } className=" h-40 " alt="alt" />
+            <img src={file || person} className=" h-40 " alt="alt" />
           </div>
           <div>
             <div className="my-3 ">
@@ -43,7 +39,7 @@ const ProfileInformation = () => {
             </div>
           </div>
         </div>
-    {/**/}
+        {/**/}
         <div className=" grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-3 gap-y-1">
           <div>
             <label className="label">
