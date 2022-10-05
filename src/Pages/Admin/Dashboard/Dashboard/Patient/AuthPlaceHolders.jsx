@@ -1,11 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { AuthPlaceHoldersColumn } from "./PatientTableData";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import axios from "axios";
-import UseTable from "../../../../../Utilities/UseTable";
 import { Table } from "antd";
 
 const AuthPlaceHolders = () => {
@@ -75,7 +72,7 @@ const AuthPlaceHolders = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{patient}</button>
+            <h1>{patient}</h1>
           </div>
         );
       },
@@ -123,7 +120,7 @@ const AuthPlaceHolders = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{provider}</button>
+            <h1>{provider}</h1>
           </div>
         );
       },
@@ -172,7 +169,7 @@ const AuthPlaceHolders = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{supervisor}</button>
+            <h1>{supervisor}</h1>
           </div>
         );
       },
@@ -221,7 +218,7 @@ const AuthPlaceHolders = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{authorization}</button>
+            <h1>{authorization}</h1>
           </div>
         );
       },
@@ -248,7 +245,7 @@ const AuthPlaceHolders = () => {
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal"
+            className=" text-xs font-normal text-center"
             columns={columns}
             dataSource={AuthPlaceHoldersData} //Which data chunk you want to show in table
             // For fixed header table at top

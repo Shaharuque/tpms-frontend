@@ -1,11 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CoPayForTodayColumn } from "./PatientTableData";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import axios from "axios";
-import UseTable from "../../../../../Utilities/UseTable";
 import { Table } from "antd";
 
 const CoPayForToday = () => {
@@ -76,7 +73,7 @@ const CoPayForToday = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{region}</button>
+            <h1>{region}</h1>
           </div>
         );
       },
@@ -124,7 +121,7 @@ const CoPayForToday = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{patient}</button>
+            <h1>{patient}</h1>
           </div>
         );
       },
@@ -172,7 +169,7 @@ const CoPayForToday = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{provider}</button>
+            <h1>{provider}</h1>
           </div>
         );
       },
@@ -221,7 +218,7 @@ const CoPayForToday = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{supervisor}</button>
+            <h1>{supervisor}</h1>
           </div>
         );
       },
@@ -231,7 +228,7 @@ const CoPayForToday = () => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: 100,
+      width: 80,
       // filters: [
       //   { text: "Celestine", value: "Celestine" },
       //   { text: "Annaliese", value: "Annaliese" },
@@ -269,7 +266,7 @@ const CoPayForToday = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{date}</button>
+            <h1>{date}</h1>
           </div>
         );
       },
@@ -279,7 +276,7 @@ const CoPayForToday = () => {
       title: "Copay",
       dataIndex: "copay",
       key: "copay",
-      width: 100,
+      width: 80,
       // filters: [
       //   { text: "Celestine", value: "Celestine" },
       //   { text: "Annaliese", value: "Annaliese" },
@@ -317,7 +314,7 @@ const CoPayForToday = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{copay}</button>
+            <h1>{copay}</h1>
           </div>
         );
       },
@@ -344,7 +341,7 @@ const CoPayForToday = () => {
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal"
+            className=" text-xs font-normal text-center"
             columns={columns}
             dataSource={CoPayData} //Which data chunk you want to show in table
             // For fixed header table at top

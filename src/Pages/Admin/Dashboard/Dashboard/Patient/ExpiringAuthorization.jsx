@@ -1,11 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { ExpiringAuthorizationColumn } from "./PatientTableData";
+import React, { useEffect,  useState } from "react";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import axios from "axios";
-import UseTable from "../../../../../Utilities/UseTable";
 import { Table } from "antd";
 
 const ExpiringAuthorization = () => {
@@ -78,7 +75,7 @@ const ExpiringAuthorization = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{patient}</button>
+            <h1>{patient}</h1>
           </div>
         );
       },
@@ -126,7 +123,7 @@ const ExpiringAuthorization = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{provider}</button>
+            <h1>{provider}</h1>
           </div>
         );
       },
@@ -174,7 +171,7 @@ const ExpiringAuthorization = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{Dos}</button>
+            <h1>{Dos}</h1>
           </div>
         );
       },
@@ -222,7 +219,7 @@ const ExpiringAuthorization = () => {
         //console.log("tags : ", CPT, id, key);
         return (
           <div>
-            <button>{CPT}</button>
+            <h1>{CPT}</h1>
           </div>
         );
       },
@@ -271,7 +268,7 @@ const ExpiringAuthorization = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{date_billed}</button>
+            <h1>{date_billed}</h1>
           </div>
         );
       },
@@ -319,7 +316,7 @@ const ExpiringAuthorization = () => {
         //console.log("tags : ", allwd, id, key);
         return (
           <div>
-            <button>{allwd}</button>
+            <h1>{allwd}</h1>
           </div>
         );
       },
@@ -374,7 +371,7 @@ const ExpiringAuthorization = () => {
               rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
               pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
               size="small"
-              className=" text-xs font-normal"
+              className=" text-xs font-normal text-center"
               columns={columns}
               dataSource={expireAuthData} //Which data chunk you want to show in table
               // For fixed header table at top

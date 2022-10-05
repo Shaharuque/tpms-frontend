@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { SignatureNotLoadedColumn } from "./StaffDataTAble";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import axios from "axios";
-import UseTable from "../../../../../Utilities/UseTable";
+import { Table } from "antd";
 
 const SignatureNotLoaded = () => {
   const [SignatureData, SetSignatureData] = useState([]);
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
 
   // fakedb call
   useEffect(() => {
@@ -21,6 +21,7 @@ const SignatureNotLoaded = () => {
         console.log(error);
       });
   }, []);
+  console.log(SignatureData);
 
   const { register, handleSubmit, reset } = useForm();
   const [tableOpen, setTableOpen] = useState(false);
@@ -30,10 +31,259 @@ const SignatureNotLoaded = () => {
     reset();
   };
 
-  const data = useMemo(() => SignatureData, [SignatureData]);
-  const columns = useMemo(() => [...SignatureNotLoadedColumn], []);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy, usePagination, useRowSelect);
+  // ---------------------------------Table Data-------------------------
+  const handleChange = (pagination, filters, sorter) => {
+    console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
+
+  const columns = [
+    {
+      title: "Provider Name",
+      dataIndex: "patient",
+      key: "patient",
+      width: 100,
+      // filters: [
+      //   { text: "Celestine", value: "Celestine" },
+      //   { text: "Annaliese", value: "Annaliese" },
+      //   {
+      //     text: `Maude`,
+      //     value: "Maude",
+      //   },
+      //   {
+      //     text: `Molly`,
+      //     value: "Molly",
+      //   },
+      //   {
+      //     text: "Karla",
+      //     value: "Karla",
+      //   },
+      //   {
+      //     text: "Marcellus",
+      //     value: "Marcellus",
+      //   },
+      //   {
+      //     text: "Hilton",
+      //     value: "Hilton",
+      //   },
+      // ],
+      filteredValue: filteredInfo.patient || null,
+      onFilter: (value, record) => record.patient.includes(value),
+      sorter: (a, b) => {
+        return a.patient > b.patient ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "patient" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { patient, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{patient}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Dos",
+      dataIndex: "provider",
+      key: "provider",
+      width: 100,
+      // filters: [
+      //   { text: "Celestine", value: "Celestine" },
+      //   { text: "Annaliese", value: "Annaliese" },
+      //   {
+      //     text: `Maude`,
+      //     value: "Maude",
+      //   },
+      //   {
+      //     text: `Molly`,
+      //     value: "Molly",
+      //   },
+      //   {
+      //     text: "Karla",
+      //     value: "Karla",
+      //   },
+      //   {
+      //     text: "Marcellus",
+      //     value: "Marcellus",
+      //   },
+      //   {
+      //     text: "Hilton",
+      //     value: "Hilton",
+      //   },
+      // ],
+      filteredValue: filteredInfo.provider || null,
+      onFilter: (value, record) => record.provider.includes(value),
+      sorter: (a, b) => {
+        return a.provider > b.provider ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "provider" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { provider, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{provider}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Patient Name",
+      dataIndex: "patient_name",
+      key: "patient_name",
+      width: 200,
+      // filters: [
+      //   { text: "Celestine", value: "Celestine" },
+      //   { text: "Annaliese", value: "Annaliese" },
+      //   {
+      //     text: `Maude`,
+      //     value: "Maude",
+      //   },
+      //   {
+      //     text: `Molly`,
+      //     value: "Molly",
+      //   },
+      //   {
+      //     text: "Karla",
+      //     value: "Karla",
+      //   },
+      //   {
+      //     text: "Marcellus",
+      //     value: "Marcellus",
+      //   },
+      //   {
+      //     text: "Hilton",
+      //     value: "Hilton",
+      //   },
+      // ],
+      filteredValue: filteredInfo.patient_name || null,
+      onFilter: (value, record) => record.patient_name.includes(value),
+      sorter: (a, b) => {
+        return a.patient_name > b.patient_name ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "patient_name" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient_name, id, key=>each row data(object) property value can be accessed.
+      render: (_, { patient_name, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{patient_name}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Session Name",
+      dataIndex: "session_name",
+      key: "session_name",
+      width: 100,
+      // filters: [
+      //   { text: "Celestine", value: "Celestine" },
+      //   { text: "Annaliese", value: "Annaliese" },
+      //   {
+      //     text: `Maude`,
+      //     value: "Maude",
+      //   },
+      //   {
+      //     text: `Molly`,
+      //     value: "Molly",
+      //   },
+      //   {
+      //     text: "Karla",
+      //     value: "Karla",
+      //   },
+      //   {
+      //     text: "Marcellus",
+      //     value: "Marcellus",
+      //   },
+      //   {
+      //     text: "Hilton",
+      //     value: "Hilton",
+      //   },
+      // ],
+      filteredValue: filteredInfo.session_name || null,
+      onFilter: (value, record) => record.session_name.includes(value),
+      sorter: (a, b) => {
+        return a.session_name > b.session_name ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "session_name" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { session_name, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{session_name}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Signature",
+      dataIndex: "provider_signature",
+      key: "provider_signature",
+      width: 100,
+      // filters: [
+      //   { text: "Celestine", value: "Celestine" },
+      //   { text: "Annaliese", value: "Annaliese" },
+      //   {
+      //     text: `Maude`,
+      //     value: "Maude",
+      //   },
+      //   {
+      //     text: `Molly`,
+      //     value: "Molly",
+      //   },
+      //   {
+      //     text: "Karla",
+      //     value: "Karla",
+      //   },
+      //   {
+      //     text: "Marcellus",
+      //     value: "Marcellus",
+      //   },
+      //   {
+      //     text: "Hilton",
+      //     value: "Hilton",
+      //   },
+      // ],
+      filteredValue: filteredInfo.provider_signature || null,
+      onFilter: (value, record) => record.provider_signature.includes(value),
+      sorter: (a, b) => {
+        return a.provider_signature > b.provider_signature ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "provider_signature" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { provider_signature, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{provider_signature}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+  ];
+
   return (
     <div className={!SignatureData ? "h-[100vh]" : ""}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
@@ -76,13 +326,18 @@ const SignatureNotLoaded = () => {
       <div>
         {tableOpen && (
           <div className="my-2">
-            <UseTable
-              getTableProps={getTableProps}
-              headerGroups={headerGroups}
-              getTableBodyProps={getTableBodyProps}
-              rows={rows}
-              prepareRow={prepareRow}
-            ></UseTable>
+            <div className=" overflow-scroll">
+              <Table
+                rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
+                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                size="small"
+                className=" text-xs font-normal text-center"
+                columns={columns}
+                dataSource={SignatureData} //Which data chunk you want to show in table
+                // For fixed header table at top
+                onChange={handleChange}
+              />
+            </div>
           </div>
         )}
       </div>

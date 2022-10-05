@@ -1,14 +1,9 @@
-import React, { useMemo, useState } from "react";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import { VacationPendingApprovalColumn } from "./StaffDataTAble";
-import { useEffect } from "react";
 import axios from "axios";
-import UseTable from "../../../../../Utilities/UseTable";
 import { Table } from "antd";
-import { BsThreeDots } from "react-icons/bs";
 import VacationAction from "./VacationAction/VacationAction";
 import PendingStatus from "./VacationAction/PendingStatus";
 
@@ -16,7 +11,6 @@ const VacationPendingApproval = () => {
   const [VacationData, SetVacationData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [open, setOpen] = useState(false);
 
   // fakedb call
   useEffect(() => {
@@ -350,7 +344,7 @@ const VacationPendingApproval = () => {
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal"
+            className=" text-xs font-normal text-center"
             columns={columns}
             dataSource={VacationData} //Which data chunk you want to show in table
             // For fixed header table at top
