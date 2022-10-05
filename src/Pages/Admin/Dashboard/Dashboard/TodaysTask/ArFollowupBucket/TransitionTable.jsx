@@ -168,7 +168,7 @@ const TransitionTable = () => {
       title: "Dos",
       dataIndex: "provider",
       key: "provider",
-      width: 100,
+      width: 80,
       // filters: [
       //   { text: "Luis Pocknell", value: "Luis Pocknell" },
       //   { text: "Benedetta Kindread", value: "Benedetta Kindread" },
@@ -216,7 +216,7 @@ const TransitionTable = () => {
       title: "Code",
       dataIndex: "Dos",
       key: "Dos",
-      width: 100,
+      width: 50,
       // filters: [
       //   { text: "Luis Pocknell", value: "Luis Pocknell" },
       //   { text: "Benedetta Kindread", value: "Benedetta Kindread" },
@@ -264,7 +264,7 @@ const TransitionTable = () => {
       title: "M1",
       dataIndex: "CPT",
       key: "CPT",
-      width: 100,
+      width: 200,
       // filters: [
       //   { text: "Luis Pocknell", value: "Luis Pocknell" },
       //   { text: "Benedetta Kindread", value: "Benedetta Kindread" },
@@ -313,7 +313,7 @@ const TransitionTable = () => {
       title: "Amount",
       dataIndex: "date_billed",
       key: "date_billed",
-      width: 100,
+      width: 80,
       filters: [
         { text: "$5.77", value: "$5.77" },
         { text: "$5.88", value: "$5.88" },
@@ -362,7 +362,7 @@ const TransitionTable = () => {
       title: "Payment",
       dataIndex: "allwd",
       key: "allwd",
-      width: 100,
+      width: 80,
       // filters: [
       //   { text: "Luis Pocknell", value: "Luis Pocknell" },
       //   { text: "Benedetta Kindread", value: "Benedetta Kindread" },
@@ -410,7 +410,7 @@ const TransitionTable = () => {
       title: "Paid",
       dataIndex: "paid",
       key: "paid",
-      width: 100,
+      width: 80,
       // filters: [
       //   { text: "Luis Pocknell", value: "Luis Pocknell" },
       //   { text: "Benedetta Kindread", value: "Benedetta Kindread" },
@@ -458,7 +458,7 @@ const TransitionTable = () => {
       title: "Adjustment",
       dataIndex: "adj",
       key: "adj",
-      width: 100,
+      width: 120,
       filters: [
         { text: "Neophron percnopterus", value: "Neophron percnopterus" },
         { text: "Cacatua tenuirostris", value: "Cacatua tenuirostris" },
@@ -506,7 +506,7 @@ const TransitionTable = () => {
       title: "Who paid",
       dataIndex: "whopaid",
       key: "whopaid",
-      width: 100,
+      width: 120,
       // filters: [
       //   { text: "Neophron percnopterus", value: "Neophron percnopterus" },
       //   { text: "Cacatua tenuirostris", value: "Cacatua tenuirostris" },
@@ -603,7 +603,7 @@ const TransitionTable = () => {
       title: "Posted Date",
       dataIndex: "posted_date",
       key: "posted_date",
-      width: 100,
+      width: 80,
       filters: [
         { text: "8/12/2022", value: "8/12/2022" },
         { text: "9/8/2021", value: "9/8/2021" },

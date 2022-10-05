@@ -10,10 +10,7 @@ import { Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableAction from "./ListView/ManageTableAction";
-
-//for date range picker calendar
 import { DateRangePicker } from "react-date-range";
-import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";

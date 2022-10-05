@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ArFollowupBucketColumn } from "./TodaysTaskTableData";
 
 import { IoCaretBackCircleOutline } from "react-icons/io5";
@@ -9,9 +9,13 @@ import AddNote from "./ArFollowupBucket/AddNote";
 import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
 import axios from "axios";
 import { FiDownload } from "react-icons/fi";
-import { DateRangePicker } from "rsuite";
 import UseTable from "../../../../../Utilities/UseTable";
 import { Table } from "antd";
+import { BsArrowRight } from "react-icons/bs";
+import { motion } from "framer-motion";
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 const ArFollowupBucket = () => {
   const [select, setSelect] = useState("");
@@ -448,6 +452,57 @@ const ArFollowupBucket = () => {
     console.log(data);
     reset();
   };
+
+  //Date Range Picker
+  const [open, setOpen] = useState(false);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+
+  const handleCancelDate = () => {
+    setRange([
+      {
+        startDate: new Date(),
+        endDate: null,
+        key: "selection",
+      },
+    ]);
+  };
+
+  // date range picker calendar
+  const startDate = range ? range[0]?.startDate : null;
+  const endDate = range ? range[0]?.endDate : null;
+  const startMonth = startDate
+    ? startDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const endMonth = endDate
+    ? endDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const startDay = startDate ? startDate.getDate() : null;
+  const endDay = endDate ? endDate.getDate() : null;
+  const startYear = startDate
+    ? startDate.getFullYear().toString().slice(2, 4)
+    : null;
+  const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+  //End Date Range Picker
+
+  // Hide calendar on outside click
+  const refClose = useRef(null);
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (e) => {
+    if (refClose.current && !refClose.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+  //end outside click
   return (
     <div className={!tableOpen ? "h-[100vh]" : ""}>
       <div className="flex items-center justify-between">
@@ -566,13 +621,27 @@ const ArFollowupBucket = () => {
                 Selected Date
               </span>
             </label>
-            <div className="ml-1">
-              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
-                <DateRangePicker
-                  onChange={(date) => {
-                    console.log(date);
-                  }}
-                  placeholder="Select Date"
+            <div className="ml-1 input-border text-gray-600 rounded-sm focus:outline-none font-medium">
+              <div
+                onClick={() => setOpen(true)}
+                className="flex flex-wrap justify-center items-center  px-1 py-[1px] mx-1 text-[14px] w-full"
+              >
+                <input
+                  value={
+                    startDate
+                      ? `${startMonth} ${startDay}, ${startYear}`
+                      : "Start Date"
+                  }
+                  readOnly
+                  className="focus:outline-none font-normal text-center bg-transparent text-gray-600 w-1/3 cursor-pointer"
+                />
+                <BsArrowRight className="w-1/3 text-gray-600"></BsArrowRight>
+                <input
+                  value={
+                    endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
+                  }
+                  readOnly
+                  className="focus:outline-none font-normal text-center bg-transparent text-gray-600 w-1/3 cursor-pointer"
                 />
               </div>
             </div>
@@ -598,6 +667,46 @@ const ArFollowupBucket = () => {
               View
             </button>
           </div>
+        </div>
+        <div
+          ref={refClose}
+          className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
+        >
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <div>
+                <DateRangePicker
+                  onChange={(item) => setRange([item.selection])}
+                  editableDateInputs={true}
+                  moveRangeOnFirstSelection={false}
+                  ranges={range}
+                  months={2}
+                  direction="horizontal"
+                  className="border-2 border-gray-100"
+                />
+              </div>
+              <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+                <button
+                  className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                  type="submit"
+                  onClick={handleCancelDate}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 m-2 text-secondary border border-white bg-white rounded"
+                  type="submit"
+                  onClick={() => setOpen(false)}
+                >
+                  Save
+                </button>
+              </div>
+            </motion.div>
+          )}
         </div>
       </form>
       {tableOpen && (
@@ -756,7 +865,7 @@ const ArFollowupBucket = () => {
             </div>
           </div>
           <div className="mb-3">
-            <h1 className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+            <h1 className="label-text text-base font-medium text-[#9b9b9b] text-left">
               Select Insurance
             </h1>
             <select
