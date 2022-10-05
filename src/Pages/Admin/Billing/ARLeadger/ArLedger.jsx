@@ -582,7 +582,7 @@ const ArLedger = () => {
                       <span className="text-[14px] font-medium text-gray-500 mx-3">
                         Zero Paid
                       </span>
-                    </div>{" "}
+                    </div>
                     {/* submit  */}
                     <button
                       className="px-5 mt-8 py-1  text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"

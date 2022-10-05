@@ -303,7 +303,7 @@ const ContractRateAdd = () => {
                   >
                     Cancel
                   </button>
-                </div>{" "}
+                </div>
                 {/* submit  */}
               </div>
             </form>

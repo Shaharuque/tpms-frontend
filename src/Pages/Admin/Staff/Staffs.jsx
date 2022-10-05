@@ -251,7 +251,7 @@ const Staffs = () => {
           >
             Clear filters
           </button>
-          <button type="submit"></button>
+
           <div className="dropdown sm:dropdown-end ">
             <label tabIndex={0}>
               <h1 className="px-5 py-2 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
