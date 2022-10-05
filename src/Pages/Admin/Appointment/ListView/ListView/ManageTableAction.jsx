@@ -41,25 +41,25 @@ const ManageTableAction = ({ row }) => {
   return (
     <div>
       {!editSession && !openAddNote && !openViewNote ? (
-        <div className=" bg-white py-2 border shadow-md flex justify-center z-30  w-[135px] rounded-sm">
+        <div className=" bg-white py-2 border shadow-xl flex flex-col items-center z-30  w-[130px] rounded-sm">
           <div>
             <button
-              className="text-xs text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
               onClick={() => addNoteHandler()}
             >
-              <AiOutlinePlus /> Add Note
+              <AiOutlinePlus className="text-sm" /> Add Note
             </button>
             <button
-              className="text-xs text-secondary border px-[18px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
               onClick={viewNoteHandler}
             >
-              <AiOutlineEye /> View Note
+              <AiOutlineEye className="text-sm" /> View Note
             </button>
             <button
-              className="text-xs text-secondary border px-[14px] py-1 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
+              className="text-xs text-secondary px-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
               onClick={editSessionHandler}
             >
-              <MdOutlineModeEditOutline /> Edit Session
+              <MdOutlineModeEditOutline className="text-sm" /> Edit Session
             </button>
           </div>
         </div>

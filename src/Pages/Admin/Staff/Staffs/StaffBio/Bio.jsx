@@ -24,10 +24,10 @@ const Bio = () => {
     console.log(note);
   };
   return (
-    <div className="md:h-[100vh]">
+    <div className="">
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 my-3 mr-2 gap-x-6 gap-y-1 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 my-3 mr-2 gap-x-6 gap-y-3 ">
           {/* First Name with all the validation  */}
           <div>
             <label className="label">
@@ -328,7 +328,7 @@ const Bio = () => {
           </div>
           <div></div>
           <div></div>
-          <div className="col-span-2">
+          <div>
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Notes
@@ -338,7 +338,7 @@ const Bio = () => {
           </div>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-4">
           <button
             className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             type="submit"
@@ -346,7 +346,7 @@ const Bio = () => {
             Save
           </button>
           <button
-            className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+            className=" py-[5px] px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
             autoFocus
             onClick={reset}
           >

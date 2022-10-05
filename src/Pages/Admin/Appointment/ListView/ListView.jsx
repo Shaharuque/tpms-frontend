@@ -632,7 +632,7 @@ const ListView = () => {
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                                className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
                                 {...register("pos")}
                               >
                                 <option value="" className="text-black">
@@ -664,7 +664,7 @@ const ListView = () => {
                               </span>
                             </label>
                             <div className="ml-1">
-                              <div className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full">
+                              <div className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[5px] mx-1 text-[14px] w-full">
                                 <input
                                   value={
                                     startDate
@@ -702,7 +702,7 @@ const ListView = () => {
                               </label>
                               <div>
                                 <select
-                                  className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[3px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                  className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
                                   {...register("Status")}
                                 >
                                   <option value="" className="text-black">
@@ -727,7 +727,7 @@ const ListView = () => {
                               </div>
                             </div>
                             <button
-                              className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
+                              className="font-regular mt-[40px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
                               type="submit"
                             >
                               Go
@@ -736,7 +736,7 @@ const ListView = () => {
                         </>
                       ) : (
                         <button
-                          className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
+                          className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
                           type="submit"
                         >
                           Go
@@ -794,8 +794,8 @@ const ListView = () => {
           <>
             {listView && (
               <div className="my-5">
-                <div className=" flex justify-end mb-3">
-                  <div className="px-2 w-52 mr-2 bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
+                <div className=" lg:flex justify-end mb-3">
+                  <div className="px-2 w-52 mr-2 bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center mt-2">
                     <input
                       placeholder="Search here..."
                       onChange={(e) => globalFilter(e.target.value)}
@@ -808,7 +808,7 @@ const ListView = () => {
 
                   <button
                     onClick={clearFilters}
-                    className="px-2  py-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                    className="px-2 py-2 mt-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
                   >
                     Clear filters
                   </button>
@@ -989,7 +989,7 @@ const ListView = () => {
               <div>
                 <div className="flex">
                   <select
-                    className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none"
+                    className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
                     {...register("pos")}
                   >
                     <option value="" className="text-black">
