@@ -220,7 +220,7 @@ const ArFollowupBucket = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button className="text-secondary">{provider}</button>
+            <button>{provider}</button>
           </div>
         );
       },
