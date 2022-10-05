@@ -285,7 +285,7 @@ const SignatureNotLoaded = () => {
   ];
 
   return (
-    <div className={!SignatureData ? "h-[100vh]" : ""}>
+    <div className={tableOpen ? "" : "h-[100vh]"}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">Signature Not Uploaded</h1>
         <div className="flex items-center gap-3">

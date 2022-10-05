@@ -1,13 +1,13 @@
-import React, { useEffect,  useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import axios from "axios";
 import { Table } from "antd";
+import { useForm } from "react-hook-form";
 
 const ExpiringAuthorization = () => {
   const [expireAuthData, SetExpireAuthData] = useState([]);
-  const [table, setTable] = useState(false);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
@@ -24,6 +24,14 @@ const ExpiringAuthorization = () => {
   }, []);
 
   console.log(expireAuthData);
+
+  const { register, handleSubmit, reset } = useForm();
+  const [tableOpen, setTableOpen] = useState(false);
+  const onSubmit = (data) => {
+    console.log(data);
+    setTableOpen(true);
+    reset();
+  };
 
   // ---------------------------------Table Data-------------------------
   const handleChange = (pagination, filters, sorter) => {
@@ -324,7 +332,7 @@ const ExpiringAuthorization = () => {
     },
   ];
   return (
-    <div className={table ? "" : "h-[100vh]"}>
+    <div className={tableOpen ? "" : "h-[100vh]"}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">
           Expiring Authorizations
@@ -339,32 +347,35 @@ const ExpiringAuthorization = () => {
           </Link>
         </div>
       </div>
-      <div>
-        <h1 className="label-text text-base font-medium text-[#9b9b9b] text-left">
-          Select Interval
-        </h1>
-        <div className="flex item-center flex-wrap my-3">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 my-5 mr-2 gap-2">
           <div>
+            <label className="label">
+              <span className="label-text text-base text-gray-500 text-left">
+                Select Interval
+              </span>
+            </label>
             <select
-              name="type"
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium px-2 py-[6px] mx-1 text-xs focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              {...register("interval")}
             >
-              <option value="30 Days">30 Days</option>
-              <option value="60 Days">60 Days</option>
-              <option value="90 Days">90 Days</option>
-              <option value="120 Days">120 Days</option>
+              <option value="name"> 30 Days </option>
+              <option value="name"> 60 Days </option>
+              <option value="name"> 90 Days </option>
+              <option value="name"> 120 Days </option>
             </select>
           </div>
+
           <button
-            onClick={() => setTable(true)}
-            className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="w-1/2  py-2 mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            type="submit"
           >
             Go
           </button>
         </div>
-      </div>
+      </form>
 
-      {table && (
+      {tableOpen && (
         <div className="my-2">
           <div className=" overflow-scroll">
             <Table
