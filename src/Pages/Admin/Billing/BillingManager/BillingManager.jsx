@@ -4,7 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const BillingManager = () => {
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="container mx-auto mb-5 mt-5">
         <Nav appearance="tabs" justified className="mt-5 mb-5">
           <NavLink
@@ -21,7 +21,7 @@ const BillingManager = () => {
             </span>
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             className={(navinfo) =>
               navinfo.isActive
                 ? "rs-nav-item rs-nav-item-active font-normal text-xs"
@@ -33,7 +33,7 @@ const BillingManager = () => {
             <span className="bg-orange-400 badge text-white ml-2 text-[10px] rounded-full">
               step-2
             </span>
-          </NavLink>
+          </NavLink> */}
 
           <NavLink
             className={(navinfo) =>

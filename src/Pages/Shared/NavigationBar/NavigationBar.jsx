@@ -87,19 +87,19 @@ const TestNaviBar = ({ handle }) => {
             {/*Full screen showing code */}
             <div>
               {!handle.active ? (
-                <h1
+                <button
                   onClick={handle.enter}
                   className="  text-2xl font-bold text-secondary"
                 >
                   <BiFullscreen />
-                </h1>
+                </button>
               ) : (
-                <h1
+                <button
                   onClick={handle.exit}
                   className=" text-xl font-bold text-secondary"
                 >
                   <BiExitFullscreen />
-                </h1>
+                </button>
               )}
             </div>
 
@@ -107,9 +107,9 @@ const TestNaviBar = ({ handle }) => {
             <div>
               <div className="dropdown sm:dropdown-start">
                 <label tabIndex={0}>
-                  <h1 className=" text-xl my-3 font-bold text-secondary">
+                  <button className=" text-xl my-3 font-bold text-secondary">
                     <AiOutlinePlus />
-                  </h1>
+                  </button>
                 </label>
                 <div
                   tabIndex={0}
@@ -150,9 +150,9 @@ const TestNaviBar = ({ handle }) => {
                   <label tabIndex="0" className="">
                     <div className="relative">
                       <div>
-                        <h1 className="  text-2xl text-secondary mt-1">
+                        <button className="  text-2xl text-secondary mt-1">
                           <AiOutlineNotification />
-                        </h1>
+                        </button>
                         <span className=" absolute top-0 h-4 right-[-8px]  bg-red-700 text-white badge-xs rounded-full">
                           8
                         </span>
@@ -191,9 +191,9 @@ const TestNaviBar = ({ handle }) => {
             {/**download */}
             <div className="dropdown sm:dropdown-start">
               <label tabIndex={0}>
-                <h1 className=" text-xl font-bold text-secondary">
+                <button className=" text-xl font-bold text-secondary">
                   <BsDownload />
-                </h1>
+                </button>
               </label>
               <div tabIndex={0} className="dropdown-content menu lg:mt-3 ">
                 <ScheduleExport></ScheduleExport>
@@ -248,7 +248,9 @@ const TestNaviBar = ({ handle }) => {
                         <AiOutlineFileAdd className="text-teal-500" />
                       </div>
                       <div>
-                        <h1 className="font-bold text-sm">My Profile</h1>
+                        <button className="font-bold text-sm">
+                          My Profile
+                        </button>
                         <p className="text-[#7c8186] text-xs">
                           View personal profile details
                         </p>
@@ -264,7 +266,9 @@ const TestNaviBar = ({ handle }) => {
                         <AiFillUnlock className="text-teal-500" />
                       </div>
                       <div>
-                        <h1 className="font-bold text-sm ">Change Password</h1>
+                        <button className="font-bold text-sm ">
+                          Change Password
+                        </button>
                         <p className="text-[#7c8186] text-xs ">
                           Update your password
                         </p>
@@ -292,19 +296,19 @@ const TestNaviBar = ({ handle }) => {
           {/*Full screen showing code */}
           <div>
             {!handle.active ? (
-              <h1
+              <button
                 onClick={handle.enter}
                 className="  text-lg font-bold text-secondary"
               >
                 <BiFullscreen />
-              </h1>
+              </button>
             ) : (
-              <h1
+              <button
                 onClick={handle.exit}
                 className=" text-xl font-bold text-secondary"
               >
                 <BiExitFullscreen />
-              </h1>
+              </button>
             )}
           </div>
 
@@ -312,9 +316,9 @@ const TestNaviBar = ({ handle }) => {
           <div>
             <div className="dropdown md:dropdown-end">
               <label tabIndex={0}>
-                <h1 className=" text-xl mt-[3px] font-bold text-secondary">
+                <button className=" text-xl mt-[3px] font-bold text-secondary">
                   <AiOutlinePlus />
-                </h1>
+                </button>
               </label>
               <div
                 tabIndex={0}
@@ -356,9 +360,9 @@ const TestNaviBar = ({ handle }) => {
                 <label tabIndex="0" className="">
                   <div className="relative">
                     <div>
-                      <h1 className="  text-2xl text-secondary mt-1">
+                      <button className="  text-2xl text-secondary mt-1">
                         <AiOutlineNotification />
-                      </h1>
+                      </button>
                       <span className=" absolute top-0 h-4 right-[-8px]  bg-red-700 text-white badge-xs rounded-full">
                         8
                       </span>
@@ -398,9 +402,9 @@ const TestNaviBar = ({ handle }) => {
 
           <div className="dropdown">
             <label tabIndex={0}>
-              <h1 className=" text-xl font-bold text-secondary">
+              <button className=" text-xl font-bold text-secondary">
                 <BsDownload />
-              </h1>
+              </button>
             </label>
             <div
               tabIndex={0}
@@ -449,7 +453,7 @@ const TestNaviBar = ({ handle }) => {
                       <AiOutlineFileAdd className="text-teal-500" />
                     </div>
                     <div>
-                      <h1 className="font-bold text-sm">My Profile</h1>
+                      <button className="font-bold text-sm">My Profile</button>
                       <p className="text-[#7c8186] text-xs">
                         View personal profile details
                       </p>
@@ -465,7 +469,9 @@ const TestNaviBar = ({ handle }) => {
                       <AiFillUnlock className="text-teal-500" />
                     </div>
                     <div>
-                      <h1 className="font-bold text-sm ">Change Password</h1>
+                      <button className="font-bold text-sm ">
+                        Change Password
+                      </button>
                       <p className="text-[#7c8186] text-xs ">
                         Update your password
                       </p>

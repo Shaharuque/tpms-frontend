@@ -298,3 +298,13 @@ code {
     flex-direction: row !important;
   }
 }
+
+
+
+.rmsc .dropdown-content {
+  position: absolute !important;
+  z-index: 13000 !important;
+  top: 100% !important;
+  width: 100% !important;
+  padding-top: 8px !important;
+}

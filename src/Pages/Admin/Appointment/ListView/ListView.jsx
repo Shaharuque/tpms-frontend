@@ -98,6 +98,7 @@ const ListView = () => {
   const handleListView = () => {
     setListView(!listView);
   };
+
   // calling fake db
   // useEffect(() => {
   //   axios("../All_Fake_Api/Fakedb.json")
@@ -114,7 +115,7 @@ const ListView = () => {
       .then((data) => setTData(data));
   }, []);
 
-  // -------------------------------------------Table Data-----------------------------------
+  // -----------------------------------------Table Data-----------------------------------
   const columns = [
     {
       title: "Lock",
@@ -956,6 +957,11 @@ const ListView = () => {
                 <div className="overflow-scroll">
                   <>
                     <Table
+                      // styles={{
+                      // Fixes the overlapping problem of the component
+                      //   menu: provided => ({ ...provided, zIndex: -1 })
+                      // }}
+
                       pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                       rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
                       size="small"
