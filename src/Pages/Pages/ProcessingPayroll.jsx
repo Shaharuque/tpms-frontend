@@ -10,7 +10,7 @@ const ProcessingPayroll = () => {
   return (
     <>
       <h1 className="text-sm mb-5 text-orange-400">Payroll</h1>
-      <div className="container mx-auto mb-5 mt-5">
+      <div className="container mx-auto mb-5 mt-5 widthfix">
       <Nav appearance="tabs" justified className="mt-5 mb-5">
         <NavLink
           className={(navinfo) =>
