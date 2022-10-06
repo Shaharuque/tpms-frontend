@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
-import { Table, Typography } from "antd";
-import { Toggle } from "rsuite";
-import CheckIcon from "@rsuite/icons/Check";
-import CloseIcon from "@rsuite/icons/Close";
+import { Switch, Table, Typography } from "antd";
 import { BsFileEarmarkPlusFill } from "react-icons/bs";
 import PatientLedgerAction from "./PatientLedger/PatientLedgerAction";
 import { motion } from "framer-motion";
@@ -416,15 +413,15 @@ const PatientLedger = () => {
     <div className={table ? "" : "h-[100vh]"}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-lg mt-2 text-orange-500">Patient Ar Ledger</h1>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-5 mr-2 gap-2">
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-5 mr-2 gap-4">
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Patient
               </span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
               {...register("patient")}
             >
               <option value="name"> </option>
@@ -434,7 +431,7 @@ const PatientLedger = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Selected date
               </span>
             </label>
@@ -462,17 +459,54 @@ const PatientLedger = () => {
                 />
               </div>
             </div>
+            <div ref={refClose} className="absolute z-10  shadow-xl">
+              {open && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <div>
+                    <DateRangePicker
+                      onChange={(item) => setRange([item.selection])}
+                      editableDateInputs={true}
+                      moveRangeOnFirstSelection={false}
+                      ranges={range}
+                      months={2}
+                      direction="horizontal"
+                      className="border-2 border-gray-100"
+                    />
+                  </div>
+                  <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+                    <button
+                      className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                      type="submit"
+                      onClick={handleCancelDate}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="px-4 m-2 text-secondary border border-white bg-white rounded"
+                      type="submit"
+                      onClick={() => setOpen(false)}
+                    >
+                      Save
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
 
           {/* CPT Code  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 CPT Code
               </span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
               {...register("CPT_Code")}
             >
               <option value="name"></option>
@@ -486,12 +520,12 @@ const PatientLedger = () => {
           {/*Aging Status  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Aging Status
               </span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
               {...register("aging_status")}
             >
               <option value="name">EFT</option>
@@ -499,17 +533,16 @@ const PatientLedger = () => {
           </div>
           <div className="mt-[35px] flex sm:col-span-2">
             <div>
-              <Toggle
-                checkedChildren={<CheckIcon />}
-                unCheckedChildren={<CloseIcon />}
+              <Switch
+                size="small"
                 checked={value ? true : false}
-                size="sm"
-                onClick={() => {
-                  setValue(!value);
-                }}
+                onClick={() => setValue(!value)}
               />
-              <span className="text-xs text-gray-500 mr-3"> Zero to Paid</span>
+              <span className="text-[14px] font-medium text-gray-500 mx-3">
+                Zero to Paid
+              </span>
             </div>
+
             <div>
               {/* submit  */}
               <button className="py-[5px]  px-3 text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
@@ -518,53 +551,13 @@ const PatientLedger = () => {
             </div>
           </div>
         </div>
-        <div
-          ref={refClose}
-          className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
-        >
-          {open && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <div>
-                <DateRangePicker
-                  onChange={(item) => setRange([item.selection])}
-                  editableDateInputs={true}
-                  moveRangeOnFirstSelection={false}
-                  ranges={range}
-                  months={2}
-                  direction="horizontal"
-                  className="border-2 border-gray-100"
-                />
-              </div>
-              <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                <button
-                  className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                  type="submit"
-                  onClick={handleCancelDate}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                  type="submit"
-                  onClick={() => setOpen(false)}
-                >
-                  Save
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </div>
       </form>
       {table && (
         <div className="my-2">
           <div className="flex justify-end items-center mr-2">
             <button
               onClick={clearFilters}
-              className="px-2 py-2 bg-white from-primary text-xs hover:to-secondary text-secondary border border-secondary rounded-sm"
+              className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
             >
               Clear filters
             </button>

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
@@ -9,7 +9,7 @@ import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import RecurringSessionEdit from "./RecurringSession/RecurringSessionEdit";
 import { Link } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
+import { AiOutlineDown } from "react-icons/ai";
 
 const RecurringSession = () => {
   const [table, setTable] = useState(false);
@@ -156,7 +156,7 @@ const RecurringSession = () => {
         return (
           <>
             {pos === "telehealth" ? (
-              <div className="flex items-center justify-center gap-2 ">
+              <div className="flex items-center gap-2 ">
                 Telehealth
                 <BsFillCameraVideoFill className="text-green-500" />
               </div>
@@ -355,12 +355,20 @@ const RecurringSession = () => {
   return (
     <div className={!table ? "h-[100vh]" : ""}>
       <div className="cursor-pointer">
-        <div className="bg-gradient-to-r from-secondary to-cyan-900 rounded-lg px-4 py-2">
-          <div onClick={clickHandler} className="  flex items-center ">
+        <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
+          <div
+            onClick={clickHandler}
+            className="  flex items-center justify-between"
+          >
             {!clicked && (
-              <h1 className="text-[16px]  text-white font-normal ">
-                Recurring Session
-              </h1>
+              <>
+                <div className="text-[16px]  text-white font-semibold ">
+                  Recurring Session
+                </div>
+                <div className="arrow bounce">
+                  <AiOutlineDown />
+                </div>
+              </>
             )}
           </div>
           {/* Upper div */}
@@ -368,7 +376,7 @@ const RecurringSession = () => {
             <div>
               <Fade>
                 <div className="flex justify-between items-center">
-                  <h1 className="text-[16px]  text-white font-normal ">
+                  <h1 className="text-[20px]  text-white font-semibold ">
                     Recurring Session
                   </h1>
                   <div className="  flex justify-end gap-3">
@@ -387,12 +395,12 @@ const RecurringSession = () => {
                   <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-9 my-5 mr-2 gap-x-3">
                     <div>
                       <label className="label">
-                        <span className="label-text text-xs text-gray-100 text-left">
-                          Place of Service_hrs
+                        <span className="text-[16px] mb-2 ml-1 text-gray-100">
+                          Select Any
                         </span>
                       </label>
                       <select
-                        className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                        className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm font-normal mx-1 text-[14px] w-full focus:outline-none"
                         onChange={(e) => setSelect(e.target.value)}
                         name="type"
                       >
@@ -410,7 +418,7 @@ const RecurringSession = () => {
 
                     {select === "Patients" ? (
                       <div>
-                        <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
+                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                           Patients
                         </h1>
                         <CustomMultiSelection
@@ -421,7 +429,7 @@ const RecurringSession = () => {
                       </div>
                     ) : select === "Provider" ? (
                       <div className="w-full">
-                        <h1 className="text-xs mb-2 ml-1 mt-2 text-gray-100">
+                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                           Provider
                         </h1>
                         <CustomMultiSelection
@@ -434,7 +442,7 @@ const RecurringSession = () => {
                       <></>
                     )}
                     <button
-                      className="font-regular mt-[33px] sm:w-1/4  text-sm font-normal bg-secondary  hover:to-secondary text-white rounded-md"
+                      className="font-regular mt-[50px] sm:w-2/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
                       type="submit"
                     >
                       Go
@@ -458,8 +466,7 @@ const RecurringSession = () => {
               onClick={clearFilters}
               className="px-2 py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm flex items-center"
             >
-              CLEAR FILTERS
-              <AiFillDelete className="text-red-700" />
+              Clear Filters
             </button>
           </div>
           <div className=" overflow-scroll">

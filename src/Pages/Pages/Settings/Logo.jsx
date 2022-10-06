@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import person from "../../Assets/favicon.png";
 
 const Logo = () => {
+  const [profileImage, setProfileImage] = useState("");
+
+  // image uploding code
+  const [file, setFile] = useState();
+  function handleChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
   const {
     register,
     handleSubmit,
@@ -15,24 +24,38 @@ const Logo = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="sm:flex text-sm">
+        <div className="sm:flex text-sm gap-6">
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
-                Upload File
+              <span className="label-text text-lg text-gray-600 text-left">
+                Browse Logo
               </span>
             </label>
-            <input
-              type="file"
-              className=" py-[5px] mx-1 text-xs w-full"
-              {...register("fileName")}
-            />
+            <div className="div-img">
+              <div>
+                <div className="my-3 ">
+                  <input
+                    className="form-control text-sm border border-gray-300 w-[100px] lg:w-full "
+                    type="file"
+                    id="formFile"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div>
+                  <img
+                    src={file || person}
+                    className=" h-40 border-2 border-black lg:w-[250px] w-full mt-2 lg:mt-6 rounded"
+                    alt="alt"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="mt-1">
+          <div className="lg:mt-5">
             {/* <input type="submit" /> */}
             <input
               type="submit"
-              value={"SAVE"}
+              value={"Upload"}
               className=" py-[5px] mt-7 px-3  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             ></input>
             <label
@@ -43,7 +66,6 @@ const Logo = () => {
             </label>
           </div>
         </div>
-        <div className="divider"></div>
       </form>
     </div>
   );

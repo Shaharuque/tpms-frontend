@@ -7,26 +7,24 @@ import { motion } from "framer-motion";
 import { Fade } from "react-reveal";
 import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
-import { AiFillLock, AiFillUnlock } from "react-icons/ai";
+import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
+import { BiSearchAlt } from "react-icons/bi";
 import ManageTableAction from "./ListView/ManageTableAction";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
+import axios from "axios";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
   const [table, setTable] = useState(false);
-  const [sortBy, setSortBy] = useState("");
   const [TData, setTData] = useState([]);
   const [listView, setListView] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [value, setValue] = useState([]);
-  const handleSortBy = (e) => {
-    setSortBy(e.target.value);
-  };
 
   //Date Range Picker
   const [open, setOpen] = useState(false);
@@ -72,6 +70,7 @@ const ListView = () => {
   };
   const handleClose = () => {
     setClicked(!clicked);
+    setTable(false);
   };
 
   // Hide calendar on outside click
@@ -96,6 +95,7 @@ const ListView = () => {
   const handleListView = () => {
     setListView(!listView);
   };
+
   // calling fake db
   // useEffect(() => {
   //   axios("../All_Fake_Api/Fakedb.json")
@@ -112,7 +112,7 @@ const ListView = () => {
       .then((data) => setTData(data));
   }, []);
 
-  // -------------------------------------------Table Data-----------------------------------
+  // -----------------------------------------Table Data-----------------------------------
   const columns = [
     {
       title: "Lock",
@@ -190,6 +190,10 @@ const ListView = () => {
         {
           text: "Malesuada",
           value: "Malesuada",
+        },
+        {
+          text: "Nunc Ut LLC",
+          value: "Nunc Ut LLC",
         },
       ],
       filteredValue: filteredInfo.Service_hrs || null,
@@ -384,8 +388,99 @@ const ListView = () => {
     setSortedInfo(sorter);
   };
 
+  const globalFilter = (value) => {
+    //console.log(value);
+    const filteredData = TData?.filter(
+      (each) =>
+        each?.Patients?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.Service_hrs?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.pos?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.Scheduled_Date?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.Status?.toLowerCase().includes(value)
+    );
+    setTData(filteredData);
+
+    if (!value) {
+      axios("../All_Fake_Api/Fakedb.json")
+        .then((response) => {
+          console.log("calling");
+          setTData(response?.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   const clearFilters = () => {
     setFilteredInfo({});
+  };
+
+  //Individual filtering [tagging feature]
+  const deletePatientTag = (tag) => {
+    console.log(tag);
+    const patients_array = filteredInfo?.Patients?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      Patients: patients_array,
+      Service_hrs: filteredInfo?.Service_hrs,
+      Status: filteredInfo?.Status,
+      pos: filteredInfo?.pos,
+      Scheduled_Date: filteredInfo?.Scheduled_Date,
+    });
+  };
+
+  const deleteServiceTag = (tag) => {
+    console.log(tag);
+    const Service_hrs_array = filteredInfo?.Service_hrs?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      Patients: filteredInfo?.Patients,
+      Service_hrs: Service_hrs_array,
+      Status: filteredInfo?.Status,
+      pos: filteredInfo?.pos,
+      Scheduled_Date: filteredInfo?.Scheduled_Date,
+    });
+  };
+
+  const deleteStatusTag = (tag) => {
+    console.log(tag);
+    const status_array = filteredInfo?.Status?.filter((item) => item !== tag);
+    setFilteredInfo({
+      Patients: filteredInfo?.Patients,
+      Service_hrs: filteredInfo?.Service_hrs,
+      Status: status_array,
+      pos: filteredInfo?.pos,
+      Scheduled_Date: filteredInfo?.Scheduled_Date,
+    });
+  };
+
+  const deletePosTag = (tag) => {
+    console.log(tag);
+    const pos_array = filteredInfo?.pos?.filter((item) => item !== tag);
+    setFilteredInfo({
+      Patients: filteredInfo?.Patients,
+      Service_hrs: filteredInfo?.Service_hrs,
+      Status: filteredInfo?.Status,
+      pos: pos_array,
+      Scheduled_Date: filteredInfo?.Scheduled_Date,
+    });
+  };
+
+  const deleteScheduleTag = (tag) => {
+    console.log(tag);
+    const schedule_array = filteredInfo?.Scheduled_Date?.filter(
+      (item) => item !== tag
+    );
+    setFilteredInfo({
+      Patients: filteredInfo?.Patients,
+      Service_hrs: filteredInfo?.Service_hrs,
+      Status: filteredInfo?.Status,
+      pos: filteredInfo?.pos,
+      Scheduled_Date: schedule_array,
+    });
   };
 
   // -----------------------------------------------Form-------------------------------
@@ -419,11 +514,20 @@ const ListView = () => {
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
-            <div onClick={clickHandler} className="  flex items-center ">
+            <div
+              onClick={clickHandler}
+              className="  flex items-center justify-between"
+            >
               {!clicked && (
-                <h1 className="text-[16px]  text-white font-semibold ">
-                  Manage Sessions
-                </h1>
+                <>
+                  {" "}
+                  <div className="text-[16px]  text-white font-semibold ">
+                    Manage Sessions
+                  </div>
+                  <div className="arrow bounce">
+                    <AiOutlineDown />
+                  </div>
+                </>
               )}
             </div>
             {/* Upper div */}
@@ -526,7 +630,7 @@ const ListView = () => {
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                                className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
                                 {...register("pos")}
                               >
                                 <option value="" className="text-black">
@@ -594,7 +698,7 @@ const ListView = () => {
                               </label>
                               <div>
                                 <select
-                                  className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[3px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                  className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
                                   {...register("Status")}
                                 >
                                   <option value="" className="text-black">
@@ -619,7 +723,7 @@ const ListView = () => {
                               </div>
                             </div>
                             <button
-                              className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
+                              className="font-regular mt-[40px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
                               type="submit"
                             >
                               Go
@@ -628,7 +732,7 @@ const ListView = () => {
                         </>
                       ) : (
                         <button
-                          className="font-regular mt-[35px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded-md"
+                          className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
                           type="submit"
                         >
                           Go
@@ -686,6 +790,165 @@ const ListView = () => {
           <>
             {listView && (
               <div className="my-5">
+                <div className=" lg:flex justify-end mb-3">
+                  <div className="px-2 w-52 mr-2 bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center mt-2">
+                    <input
+                      placeholder="Search here..."
+                      onChange={(e) => globalFilter(e.target.value)}
+                      className="focus:outline-none"
+                    />
+                    <label>
+                      <BiSearchAlt />
+                    </label>
+                  </div>
+
+                  <button
+                    onClick={clearFilters}
+                    className="px-2 py-2 mt-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                  >
+                    Clear filters
+                  </button>
+                </div>
+                {filteredInfo?.Patients?.length > 0 ||
+                filteredInfo?.Service_hrs?.length > 0 ||
+                filteredInfo?.pos?.length > 0 ||
+                filteredInfo?.Status?.length > 0 ||
+                filteredInfo?.Scheduled_Date?.length > 0 ? (
+                  <div className="my-5 flex flex-wrap items-center gap-2">
+                    {filteredInfo?.Patients?.length > 0 && (
+                      <div className=" ">
+                        <div className="flex mb-2 gap-1">
+                          {filteredInfo?.Patients?.map((tag, index) => (
+                            <div
+                              className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                              key={index}
+                            >
+                              <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                                <span className="text-secondary text-[15px] font-medium mr-1  ">
+                                  Patient:
+                                </span>
+                                {tag}
+                              </div>
+                              <div>
+                                <div
+                                  className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
+                                  onClick={() => deletePatientTag(tag)}
+                                >
+                                  X
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {filteredInfo?.Service_hrs?.length > 0 && (
+                      <div className="flex mb-2 gap-1">
+                        {filteredInfo?.Service_hrs?.map((tag, index) => (
+                          <div
+                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                            key={index}
+                          >
+                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                              <span className="text-secondary text-[15px] font-medium mr-1  ">
+                                Service_hrs:
+                              </span>
+                              {tag}
+                            </div>
+                            <div>
+                              <div
+                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
+                                onClick={() => deleteServiceTag(tag)}
+                              >
+                                X
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {filteredInfo?.Status?.length > 0 && (
+                      <div className="flex mb-2 gap-1">
+                        {filteredInfo?.Status?.map((tag, index) => (
+                          <div
+                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                            key={index}
+                          >
+                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                              <span className="text-secondary text-[15px] font-medium mr-1  ">
+                                Status:
+                              </span>
+                              {tag}
+                            </div>
+                            <div>
+                              <div
+                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
+                                onClick={() => deleteStatusTag(tag)}
+                              >
+                                X
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {filteredInfo?.pos?.length > 0 && (
+                      <div className="flex mb-2 gap-1">
+                        {filteredInfo?.pos?.map((tag, index) => (
+                          <div
+                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                            key={index}
+                          >
+                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                              <span className="text-secondary text-[15px] font-medium mr-1  ">
+                                Pos:
+                              </span>
+                              {tag}
+                            </div>
+                            <div>
+                              <div
+                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
+                                onClick={() => deletePosTag(tag)}
+                              >
+                                X
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {filteredInfo?.Scheduled_Date?.length > 0 && (
+                      <div className="flex mb-2 gap-1">
+                        {filteredInfo?.Scheduled_Date?.map((tag, index) => (
+                          <div
+                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                            key={index}
+                          >
+                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
+                              <span className="text-secondary text-[15px] font-medium mr-1  ">
+                                Scheduled_Date:
+                              </span>
+                              {tag}
+                            </div>
+                            <div>
+                              <div
+                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
+                                onClick={() => deleteScheduleTag(tag)}
+                              >
+                                X
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : null}
+
                 <div className="overflow-scroll">
                   <>
                     <Table
@@ -693,7 +956,7 @@ const ListView = () => {
                       rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
                       size="small"
                       bordered
-                      className=" text-xs font-normal mt-5"
+                      className=" text-xs font-normal"
                       columns={columns}
                       dataSource={TData}
                       rowSelection={{
@@ -718,7 +981,40 @@ const ListView = () => {
                 <CardsView data={TData}></CardsView>
               </motion.div>
             )}
+            {
+              <div>
+                <div className="flex">
+                  <select
+                    className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
+                    {...register("pos")}
+                  >
+                    <option value="" className="text-black">
+                      Select
+                    </option>
+                    <option value="Today" className="text-black">
+                      Scheduled
+                    </option>
+                    <option value="UK" className="text-black">
+                      No Show
+                    </option>
+                    <option value="15" className="text-black">
+                      Bulk Delete
+                    </option>
+                    <option value="15" className="text-black">
+                      Lost 30 days
+                    </option>
+                    <option value="15" className="text-black">
+                      30 days & over
+                    </option>
+                  </select>
+                  <button className="bg-[#34A7B8] px-2 text-white rounded">
+                    Go
+                  </button>
+                </div>
+              </div>
+            }
           </>
+          //
         )}
       </div>
     </div>

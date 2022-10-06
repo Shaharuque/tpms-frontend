@@ -33,11 +33,11 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
           >
             {" "}
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
+              <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 my-3 mr-2 gap-x-4 gap-y-1">
                 {/* name  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Address1
                     </span>
                   </label>
@@ -50,7 +50,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Address2
                     </span>
                   </label>
@@ -63,7 +63,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       City
                     </span>
                   </label>
@@ -77,7 +77,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
 
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       State
                     </span>
                   </label>
@@ -92,7 +92,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
 
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Zip
                     </span>
                   </label>
@@ -105,7 +105,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Mobile
                     </span>
                   </label>
@@ -118,7 +118,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Fax
                     </span>
                   </label>
@@ -132,7 +132,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
 
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Main Phone
                     </span>
                   </label>
@@ -147,13 +147,12 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Notes
                     </span>
                   </label>
                   <TextArea
                     rows={4}
-                    placeholder="maxLength is 6"
                     size="middle"
                     onChange={(e) => setNote(e.target.value)}
                   />
@@ -161,7 +160,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
               </div>
               <div className="my-3 ml-1">
                 <button
-                  className=" py-[5px]  px-4  text-sm font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                  className=" py-[5px]  px-4  text-sm font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                   type="submit"
                 >
                   Save Contact

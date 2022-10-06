@@ -3925,6 +3925,8 @@ tbody.rs-anim-collapse.rs-anim-in {
   margin-bottom: 0;
   font-weight: normal;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
 }
 .rs-checkbox-inner::before {
   border-color: #3498ff;
@@ -3944,7 +3946,7 @@ tbody.rs-anim-collapse.rs-anim-in {
   vertical-align: middle;
   font-weight: normal;
   margin-top: 0;
-  margin-left: 10px;
+  margin-left: 0px;
 }
 .rs-plaintext .rs-checkbox-inline:first-child {
   margin-left: 0;
@@ -3956,12 +3958,14 @@ tbody.rs-anim-collapse.rs-anim-in {
           box-shadow: var(--rs-state-focus-shadow);
 }
 .rs-checkbox-checker {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 36px;
-  min-height: 36px;
-  line-height: 1;
-  position: relative;
+  display: flex;
+    padding-bottom: 6px;
+    padding-left: 36px;
+    min-height: 36px;
+    line-height: 1;
+    position: relative;
+    margin: 0px 0px;
+    align-items: flex-end;
 }
 /* rtl:begin:ignore */
 .rs-checkbox-wrapper::before,
@@ -11739,33 +11743,33 @@ textarea.rs-picker-search-input {
   z-index: 1300;
   font-family: 'Poppins';
   font-size: 12px;
+  min-width: 100px !important;
   /* height: 50%; */
 }
 .rs-picker-menu .rs-picker-search-bar {
   position: relative;
-  padding: 6px 12px 12px;
+  /* padding: 6px 12px 12px; */
 }
-.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
-  display: block;
-  width: 100%;
-  color: #575757;
-  color: var(--rs-text-primary);
-  background-color: #fff;
-  background-color: var(--rs-input-bg);
-  background-image: none;
-  border: 1px solid #e5e5ea;
-  border: 1px solid var(--rs-border-primary);
-  -webkit-transition: border-color ease-in-out 0.3s;
-  transition: border-color ease-in-out 0.3s;
-  border-radius: 6px;
-  /* stylelint-disable */
-  padding: 7px 11px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  /* stylelint-enable */
-  min-width: 200px;
-  padding-right: 36px;
+
+  .rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
+    display: block;
+    width: 100%;
+    color: #575757;
+    color: var(--rs-text-primary);
+    background-color: #fff;
+    background-color: var(--rs-input-bg);
+    /* background-image: none; */
+    /* border: 1px solid #e5e5ea; */
+    /* border: 1px solid var(--rs-border-primary); */
+    transition: border-color ease-in-out 0.3s;
+    /* border-radius: 6px; */
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    /* padding-right: 36px; */
+    border-bottom: 1px solid;
 }
+
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   .rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
     height: 36px;
@@ -11801,8 +11805,8 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   outline: 0;
 }
 .rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input:focus {
-  outline: 3px solid rgba(52, 152, 255, 0.25);
-  outline: 3px solid var(--rs-color-focus-ring);
+  /* outline: 3px solid rgba(52, 152, 255, 0.25);
+  outline: 3px solid var(--rs-color-focus-ring); */
 }
 .rs-theme-high-contrast .rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input:focus {
   outline-offset: 2px;
@@ -11816,8 +11820,9 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
 .rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-search-icon {
   position: absolute;
   width: 14px;
-  color: #8e8e93;
-  color: var(--rs-text-secondary);
+  /* color: #8e8e93;
+  color: var(--rs-text-secondary); */
+  color: #ffffff;
   font-size: 14px;
   height: 20px;
   top: 14px;
@@ -11887,10 +11892,12 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   position: relative;
   cursor: pointer;
   display: block;
-  padding: 8px 12px 8px 38px;
+  padding: 10px 10px 10px 38px;
   -webkit-transition: color 0.3s linear, background-color 0.3s linear;
   transition: color 0.3s linear, background-color 0.3s linear;
   line-height: 20px;
+  font-size: 15px;
+    font-weight: 500;
   /* stylelint-disable-next-line */
 }
 .rs-theme-high-contrast .rs-check-item .rs-checkbox-checker > label {
@@ -11913,7 +11920,8 @@ textarea.rs-picker-menu .rs-picker-search-bar .rs-picker-search-bar-input {
   cursor: not-allowed;
 }
 .rs-check-item .rs-checkbox-checker > label .rs-checkbox-wrapper {
-  left: 12px;
+  /* left: 12px; */
+  margin: 3px 1px;
 }
 .grouped .rs-check-item .rs-checkbox-checker > label .rs-checkbox-wrapper,
 .rs-picker-check-menu-group-children .rs-check-item .rs-checkbox-checker > label .rs-checkbox-wrapper {

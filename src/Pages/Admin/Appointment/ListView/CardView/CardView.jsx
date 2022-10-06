@@ -67,7 +67,7 @@ const CardView = ({ data }) => {
   };
 
   return (
-    <div className="border shadow-md pt-3 z-0 rounded-md card bg-white">
+    <div className="border shadow-md pt-3 z-0 card rounded-md bg-white">
       <div className="px-5">
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-5 mb-2">
           <div className="flex items-center gap-2">

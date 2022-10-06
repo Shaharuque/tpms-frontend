@@ -32,11 +32,11 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
               }}
             >
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
+                <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 my-3 mr-2 gap-x-4 gap-y-1">
                   {/* name  */}
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         Contact Name
                       </span>
                     </label>
@@ -49,7 +49,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         Address1
                       </span>
                     </label>
@@ -62,7 +62,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         Address2
                       </span>
                     </label>
@@ -75,7 +75,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         City
                       </span>
                     </label>
@@ -89,7 +89,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
 
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         State
                       </span>
                     </label>
@@ -104,7 +104,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
 
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         Zip
                       </span>
                     </label>
@@ -117,7 +117,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         Mobile
                       </span>
                     </label>
@@ -130,7 +130,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         Fax
                       </span>
                     </label>
@@ -144,7 +144,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
 
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         Main Phone
                       </span>
                     </label>
@@ -159,7 +159,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         Notes
                       </span>
                     </label>

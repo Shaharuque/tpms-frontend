@@ -25,8 +25,19 @@
     border-bottom: 10px solid #0AA7B8;
 }
 
+.edit-box {
+    border-top: 5px solid #0AA7B8;
+    border-bottom: 5px solid #0AA7B8;
+    transition: all 0.5s;
+    box-shadow: 6px 5px 5px -4px rgba(39, 50, 51, 0.87);
+    -webkit-box-shadow: 6px 5px 5px -4px rgba(39, 50, 51, 0.87);
+    -moz-box-shadow: 6px 5px 5px -4px rgba(39, 50, 51, 0.87);
+}
+
 .page {
-    border: 1px solid #09A2B3;
+    border: 1px solid #CED4DB;
+    border-radius: 5px;
+    max-width: 100%;
 }
 
 .tab-box {
