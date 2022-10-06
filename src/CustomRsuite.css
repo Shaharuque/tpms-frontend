@@ -9806,6 +9806,7 @@ textarea.rs-picker-search-input {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  text-align: center;
 }
 .rs-nav-justified > .rs-nav-item,
 .rs-nav-justified > .rs-dropdown {

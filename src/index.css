@@ -265,3 +265,7 @@ code {
   width: 100% !important;
   padding-top: 8px !important;
 }
+
+.widthfix{
+  min-width: 100% !important;
+}
