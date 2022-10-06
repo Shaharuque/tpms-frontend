@@ -1,142 +1,180 @@
 import { CssBaseline } from "@mui/material";
-import React, { useMemo, useState } from "react";
-import { usePagination, useSortBy, useTable } from "react-table";
-import {
-  BusinessColumns,
-  BusinessColumnsData,
-} from "./BusinessFiles/BusinessFileColumns";
+import React, { useEffect, useState } from "react";
 import { HiPlus } from "react-icons/hi";
-import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import axios from "axios";
+import { Table } from "antd";
+import BusinessActionModal from "./BusinessFiles/BusinessActionModal";
+import BusinessDocAddModal from "./BusinessFiles/BusinessDocAddModal";
 
 const BusinessFiles = () => {
   const [open, setOpen] = useState(false);
-  const data = useMemo(() => BusinessColumnsData, []);
+  const [tableData, setTableData] = useState();
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
+  const [openEditModal, setOpenEditModal] = useState(false);
 
-  const columns = useMemo(() => [...BusinessColumns], []);
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination);
-
-  const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  // Business Document edit
+  const handleDocumentEdit = () => {
+    setOpenEditModal(true);
   };
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
+
+  //Add business document close handler
+  const handleAddDocClose = () => {
+    setOpen(false);
+  };
+  // Ant Table is starting
+  useEffect(() => {
+    axios("../../../All_Fake_Api/BusinessDoc.json")
+      .then((response) => {
+        console.log("calling");
+        setTableData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  //console.log(tableData);
+  const handleChange = (pagination, filters, sorter) => {
+    console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
+
+  const columns = [
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+      width: 100,
+      sorter: (a, b) => {
+        return a.created > b.created ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "created" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Uploaded On",
+      dataIndex: "date",
+      key: "date",
+      width: 100,
+      filters: [
+        {
+          text: "01/17/2022",
+          value: "01/17/2022",
+        },
+        {
+          text: `06/25/2022`,
+          value: "06/25/2022",
+        },
+      ],
+      filteredValue: filteredInfo.date || null,
+      onFilter: (value, record) => record.date.includes(value),
+      sorter: (a, b) => {
+        return a.date > b.date ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Created By",
+      dataIndex: "creator",
+      key: "creator",
+      width: 80,
+      filters: [
+        {
+          text: "admin",
+          value: "admin admin",
+        },
+      ],
+      filteredValue: filteredInfo.creator || null,
+      onFilter: (value, record) => record.creator.includes(value),
+      sorter: (a, b) => {
+        return a.creator > b.creator ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "creator" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Actions",
+      dataIndex: "id",
+      key: "id",
+      width: 80,
+      render: (_, { id }) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className="flex justify-center">
+            <button className="text-sm mx-1 text-secondary">
+              <AiOutlineEye className="text-green-600" />
+            </button>
+            <button onClick={handleDocumentEdit} className="text-secondary">
+              <AiOutlineEdit />
+            </button>
+            <button className="text-sm mx-1 text-secondary">
+              <AiOutlineDelete className="text-red-500" />
+            </button>
+          </div>
+        );
+      },
+      sorter: (a, b) => {
+        return a.creator > b.creator ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "creator" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+  ];
+
+  // const { register, handleSubmit, reset } = useForm();
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  //   reset();
+  // };
   return (
     <div className="p-2 ">
       <h1 className="text-lg my-2 text-orange-400">Business Documents</h1>
       <CssBaseline />
-      <div className="pb-3 overflow-y-hidden">
-        <table
-          className="border overflow-scroll  sm:w-full "
-          {...getTableProps()}
-        >
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    className="bg-secondary border min-w-[120px]  py-1 text-sm text-white"
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                  >
-                    {column.render("Header")}
-                    {/* Add a sort direction indicator */}
-                    <span className=" ">
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " ⇓ "
-                          : " ⇑ "
-                        : ""}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        style={{
-                          border: "solid 1px gray",
-                        }}
-                        className="text-xs py-[6px] w-10 md:w-24 text-center max-w-[120px] text-gray-600 "
-                      >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="pb-3 overflow-scroll">
+        <Table
+          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+          size="small"
+          bordered
+          className=" text-xs font-normal"
+          columns={columns}
+          dataSource={tableData}
+          scroll={{
+            y: 650,
+          }}
+          onChange={handleChange}
+        />
       </div>
-      <div className="my-10">
+      {/* Business Document Edit */}
+      {openEditModal && (
+        <BusinessActionModal
+          handleClose={handleClose}
+          open={openEditModal}
+        ></BusinessActionModal>
+      )}
+
+      {/* Add Business Document */}
+      <div className="my-2">
         <button
           onClick={() => {
             setOpen(!open);
           }}
-          className="px-5 mb-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md flex items-center"
+          className="px-2 mb-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded flex items-center"
         >
-          <HiPlus /> Add New Data
+          <HiPlus /> Add Documents
         </button>
+        {/* Add business documents modal */}
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="sm:flex items-center gap-2 text-sm">
-                <div>
-                  <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      Description
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Description"
-                    name="description"
-                    className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
-                    {...register("description")}
-                  />
-                </div>
-
-                <div>
-                  <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      Upload File
-                    </span>
-                  </label>
-                  <input
-                    type="file"
-                    className=" py-[5px] mx-1 text-xs w-full"
-                    {...register("fileName")}
-                  />
-                </div>
-                <button
-                  className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                  type="submit"
-                >
-                  Save
-                </button>
-              </div>
-              <div className="divider"></div>
-            </form>
-          </motion.div>
+          <BusinessDocAddModal
+            open={open}
+            handleAddDocClose={handleAddDocClose}
+          ></BusinessDocAddModal>
         )}
       </div>
     </div>

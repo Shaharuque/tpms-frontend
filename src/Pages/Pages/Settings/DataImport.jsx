@@ -1,100 +1,139 @@
 import { CssBaseline } from "@mui/material";
-import React, { useMemo } from "react";
-import { usePagination, useSortBy, useTable } from "react-table";
-import { DataColumns } from "./DataImport/Columns";
-import DataImportComponent from "./DataImport/DataImportComponent";
+import { Table } from "antd";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const DataImport = () => {
-  const data = useMemo(() => DataColumns, []);
+  const [data, setData] = useState();
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
+  // Ant Table is starting
+  useEffect(() => {
+    axios("../../../All_Fake_Api/DataImport.json")
+      .then((response) => {
+        setData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  //console.log(data);
+  const handleChange = (pagination, filters, sorter) => {
+    console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Created",
-        accessor: "col1", // accessor is the "key" in the data
-      },
-      {
-        Header: "Filename",
-        accessor: "col2",
-      },
-      {
-        Header: "Password",
-        accessor: "col3",
-      },
-      {
-        Header: "Status",
-        Cell: ({ row }) => {
-          // the value is 'this is a test'
-          // console.log(row);
-          return <DataImportComponent row={row}></DataImportComponent>;
+  const columns = [
+    {
+      title: "Created",
+      dataIndex: "created",
+      key: "created",
+      width: 100,
+      filters: [
+        {
+          text: "January 6,2021 1.27PM",
+          value: "January 6,2021 1.27PM",
         },
+        {
+          text: "January 9, 2020 2.30PM",
+          value: "January 9, 2020 2.30PM",
+        },
+      ],
+      render: (_, { created }) => {
+        //console.log("tags : ", lock);
+        return <div className="font-bold">{created}</div>;
       },
-    ],
-    []
-  );
+      filteredValue: filteredInfo.created || null,
+      onFilter: (value, record) => record.created.includes(value),
+      sorter: (a, b) => {
+        return a.created > b.created ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "created" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "File Name",
+      dataIndex: "filename",
+      key: "filename",
+      width: 100,
+      filters: [
+        {
+          text: "January 6, 2021 ",
+          value: "January 6, 2021 ",
+        },
+        {
+          text: "January 9, 2020 ",
+          value: "January 9, 2020 ",
+        },
+      ],
+      filteredValue: filteredInfo.filename || null,
+      onFilter: (value, record) => record.filename.includes(value),
+      sorter: (a, b) => {
+        return a.filename > b.filename ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "filename" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Password",
+      dataIndex: "password",
+      key: "password",
+      width: 80,
+      render: (_, { password }) => {
+        //console.log("tags : ", lock);
+        return <div className="font-bold text-red-600">{password}</div>;
+      },
+      sorter: (a, b) => {
+        return a.password > b.password ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "password" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    // page,
-    prepareRow,
-  } = useTable({ columns, data }, useSortBy, usePagination);
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      width: 80,
+      render: (_, { status }) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className="font-semibold flex justify-center">
+            {status === "download" && (
+              <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
+                {status}
+              </button>
+            )}
+          </div>
+        );
+      },
+      sorter: (a, b) => {
+        return a.status > b.status ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+  ];
+
   return (
     <div className="p-2">
       <h1 className="text-sm my-2">Recent Exports</h1>
       <CssBaseline />
       <div className="pb-3 overflow-y-hidden">
-        <table
-          className="border overflow-scroll  sm:w-full "
-          {...getTableProps()}
-        >
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    className="bg-secondary border  min-w-[120px]  py-1 text-sm text-white"
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                  >
-                    {column.render("Header")}
-                    {/* Add a sort direction indicator */}
-                    <span className="  ">
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " ⇓ "
-                          : " ⇑ "
-                        : ""}
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        style={{
-                          border: "solid 1px gray",
-                        }}
-                        className="text-xs py-[6px] w-10 md:w-24 text-center text-gray-600 "
-                      >
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <Table
+          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+          size="small"
+          bordered
+          className=" text-xs font-normal"
+          columns={columns}
+          dataSource={data}
+          scroll={{
+            y: 650,
+          }}
+          onChange={handleChange}
+        />
       </div>
     </div>
   );

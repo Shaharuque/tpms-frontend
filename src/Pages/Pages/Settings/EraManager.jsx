@@ -53,8 +53,9 @@ const EraManager = () => {
               name="type"
               className="border rounded-sm px-2 w-36 py-[6px] text-xs "
             >
-              <option value="Home">Home</option>
-              <option value="Home t">Home t</option>
+              <option value="process era">Process ERA</option>
+              <option value="reviewed">Reviewed</option>
+              <option value="unreviewed">Unreviewed</option>
             </select>
             <button
               // onClick={submitHandle}
