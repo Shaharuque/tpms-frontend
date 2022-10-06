@@ -635,7 +635,7 @@ const ArFollowupBucket = () => {
                   readOnly
                   className="focus:outline-none font-normal text-center bg-transparent text-gray-600 w-1/3 cursor-pointer"
                 />
-                <BsArrowRight className="w-1/3 text-gray-600"></BsArrowRight>
+                <BsArrowRight className="w-1/3 text-gray-600 cursor-pointer"></BsArrowRight>
                 <input
                   value={
                     endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
