@@ -1,19 +1,23 @@
 import { Table } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { DateRangePicker } from "react-date-range";
 import { useForm } from "react-hook-form";
+import { BsArrowRight } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
-  const [active, setActive] = useState(false);
   const [insuranceSelect, setInsuranceSelect] = useState("");
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy1, setSortBy1] = useState("");
+  const [sortBy2, setSortBy2] = useState("");
   const [TData, setTData] = useState([]);
 
   // table
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [tableopen, settableopen] = useState(false);
+  console.log(sortBy2);
 
   // calling fake db
   useEffect(() => {
@@ -31,7 +35,7 @@ const ProcessingClaim = () => {
       title: "Patients",
       dataIndex: "Patients",
       key: "Patients",
-      width: 40,
+      width: 100,
       render: (_, { Patients }) => {
         //console.log("tags : ", lock);
         return <div className=" text-secondary">{Patients}</div>;
@@ -47,7 +51,7 @@ const ProcessingClaim = () => {
       title: "Dos",
       dataIndex: "Dos",
       key: "Dos",
-      width: 30,
+      width: 90,
       render: (_, { Dos }) => {
         //console.log("tags : ", lock);
         return <div className=" text-secondary">{Dos}</div>;
@@ -63,7 +67,7 @@ const ProcessingClaim = () => {
       title: "Service & Hrs",
       dataIndex: "ServiceHrs",
       key: "ServiceHrs",
-      width: 30,
+      width: 100,
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
         return a.ServiceHrs > b.ServiceHrs ? -1 : 1; //sorting problem solved using this logic
@@ -77,7 +81,7 @@ const ProcessingClaim = () => {
       title: "Tx Provider",
       key: "TxProvider",
       dataIndex: "TxProvider",
-      width: 40,
+      width: 80,
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
         return a.TxProvider > b.TxProvider ? -1 : 1; //sorting problem solved using this logic
@@ -90,7 +94,7 @@ const ProcessingClaim = () => {
       title: "Cpt",
       dataIndex: "Cpt",
       key: "Cpt",
-      width: 40,
+      width: 70,
       sorter: (a, b) => {
         return a.Cpt > b.Cpt ? -1 : 1;
         // a.Scheduled_Date - b.Scheduled_Date
@@ -102,7 +106,7 @@ const ProcessingClaim = () => {
       title: "Pos",
       dataIndex: "Pos",
       key: "Pos",
-      width: 50,
+      width: 70,
       sorter: (a, b) => {
         return a.Pos > b.Pos ? -1 : 1;
         // a.Pos - b.Pos,
@@ -114,7 +118,7 @@ const ProcessingClaim = () => {
       title: "M1",
       key: "M1",
       dataIndex: "M1",
-      width: 40,
+      width: 50,
       sorter: (a, b) => {
         return a.M1 > b.M1 ? -1 : 1;
         // a.Pos - b.Pos,
@@ -151,7 +155,7 @@ const ProcessingClaim = () => {
       title: "M4",
       key: "M4",
       dataIndex: "M4",
-      width: 30,
+      width: 50,
       sorter: (a, b) => {
         return a.M4 > b.M4 ? -1 : 1;
         // a.Pos - b.Pos,
@@ -164,7 +168,7 @@ const ProcessingClaim = () => {
       title: "Units",
       key: "Units",
       dataIndex: "Units",
-      width: 30,
+      width: 60,
       sorter: (a, b) => {
         return a.Units > b.Units ? -1 : 1;
         // a.Pos - b.Pos,
@@ -177,7 +181,7 @@ const ProcessingClaim = () => {
       title: "Rate",
       key: "Rate",
       dataIndex: "Rate",
-      width: 30,
+      width: 50,
       sorter: (a, b) => {
         return a.Rate > b.Rate ? -1 : 1;
         // a.Pos - b.Pos,
@@ -189,7 +193,7 @@ const ProcessingClaim = () => {
       title: "Rendering24-j",
       key: "Rendering24",
       dataIndex: "Rendering24",
-      width: 30,
+      width: 100,
       sorter: (a, b) => {
         return a.Rendering24 > b.Rendering24 ? -1 : 1;
         // a.Pos - b.Pos,
@@ -228,42 +232,89 @@ const ProcessingClaim = () => {
     setInsurance(true);
   };
 
-  const handleSortBy = (e) => {
-    setSortBy(e.target.value);
-    setActive(true);
-  };
   const { handleSubmit, register, reset } = useForm();
   const onSubmit = (data) => {
-    // console.log(data);
-
     reset();
   };
+
+  //Date Range Picker
+  const [open, setOpen] = useState(false);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+
+  const handleCancelDate = () => {
+    setRange([
+      {
+        startDate: new Date(),
+        endDate: null,
+        key: "selection",
+      },
+    ]);
+  };
+
+  // date range picker calendar
+  const startDate = range ? range[0]?.startDate : null;
+  const endDate = range ? range[0]?.endDate : null;
+  const startMonth = startDate
+    ? startDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const endMonth = endDate
+    ? endDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const startDay = startDate ? startDate.getDate() : null;
+  const endDay = endDate ? endDate.getDate() : null;
+  const startYear = startDate
+    ? startDate.getFullYear().toString().slice(2, 4)
+    : null;
+  const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+  //End Date Range Picker
+
+  // Hide calendar on outside click
+  const refClose = useRef(null);
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (e) => {
+    if (refClose.current && !refClose.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+  //end outside click
   return (
-    <div className="">
+    <div className="h-[100vh]">
       <h1 className="text-lg text-orange-400">Processing Claim(s)</h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" flex flex-wrap items-center gap-2">
-            <div>
-              {" "}
-              <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  To Date<span className="text-red-500">*</span>
-                </span>
-              </label>
-              <input
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                type="date"
-                {...register("date")}
-              />
+          <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
+            <div className="flex gap-2 ">
+              <div className="w-3/4">
+                <label className="label">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    To Date<span className="text-red-500">*</span>
+                  </span>
+                </label>
+                <input
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  type="date"
+                  {...register("date")}
+                />
+              </div>
+              {/* go*/}
+              <button
+                onClick={handleGO}
+                className=" mt-8 w-12 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              >
+                Go
+              </button>
             </div>
-            {/* go*/}
-            <button
-              onClick={handleGO}
-              className=" py-1 mt-8 w-14 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            >
-              Go
-            </button>
+
             {insurance && (
               <>
                 {/* insurance  */}
@@ -291,87 +342,268 @@ const ProcessingClaim = () => {
                     </span>
                   </label>
                   <select
-                    onChange={handleSortBy}
+                    onChange={(e) => setSortBy1(e.target.value)}
                     name="type"
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   >
-                    <option value="all">All</option>
-                    <option value="patient">Patient</option>
-                    <option value="provider">Provider</option>
+                    <option value="Patient">Patient(s)</option>
+                    <option value="Tx Providers">Tx Providers</option>
+                    <option value="CMS Therapist">CMS Therapist</option>
+                    <option value="Service Type">Service Type</option>
+                    <option value="Claim Status">Claim Status</option>
+                    <option value="Date Range">Date Range</option>
+                    <option value="Degree Level">Degree Level</option>
+                    <option value="Region">Region</option>
+                    <option value="CPT Code">CPT Code</option>
+                    <option value="Zero Units">Zero Units</option>
+                    <option value="Place Of Service">Place Of Service</option>
+                    <option value="Modifier">Modifier</option>
                   </select>
                 </div>
-                {active && (
+                {sortBy1 && (
                   <>
-                    {" "}
-                    <div>
-                      <label className="label">
-                        <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                          Service Type{" "}
-                        </span>
-                      </label>
-                      <select
-                        // onChange={(e) => setInsuranceSelect(e.target.value)}
-                        name="type"
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                      >
-                        <option value="all">All</option>
-                        <option value="patient">Patient</option>
-                        <option value="provider">Provider</option>
-                      </select>
-                    </div>
+                    {sortBy1 === "Date Range" ? (
+                      <div>
+                        <label className="label">
+                          <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                            {sortBy1}
+                          </span>
+                        </label>
+                        <div className="ml-1 text-[14px]">
+                          <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                            <input
+                              value={
+                                startDate
+                                  ? `${startMonth} ${startDay}, ${startYear}`
+                                  : "Start Date"
+                              }
+                              readOnly
+                              onClick={() => setOpen((open) => !open)}
+                              className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                            />
+                            <BsArrowRight
+                              onClick={() => setOpen((open) => !open)}
+                              className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
+                            ></BsArrowRight>
+                            <input
+                              value={
+                                endDate
+                                  ? `${endMonth} ${endDay}, ${endYear}`
+                                  : "End Date"
+                              }
+                              readOnly
+                              onClick={() => setOpen((open) => !open)}
+                              className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          ref={refClose}
+                          className="absolute z-10  2xl:ml-[20] shadow-xl"
+                        >
+                          {open && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 15 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.2 }}
+                            >
+                              <div>
+                                <DateRangePicker
+                                  onChange={(item) =>
+                                    setRange([item.selection])
+                                  }
+                                  editableDateInputs={true}
+                                  moveRangeOnFirstSelection={false}
+                                  ranges={range}
+                                  months={2}
+                                  direction="horizontal"
+                                  className="border-2 border-gray-100"
+                                />
+                              </div>
+                              <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+                                <button
+                                  className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                                  type="submit"
+                                  onClick={handleCancelDate}
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  className="px-4 m-2 text-secondary border border-white bg-white rounded"
+                                  type="submit"
+                                  onClick={() => setOpen(false)}
+                                >
+                                  Save
+                                </button>
+                              </div>
+                            </motion.div>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <label className="label">
+                          <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                            {sortBy1}
+                          </span>
+                        </label>
+                        <select
+                          // onChange={(e) => setInsuranceSelect(e.target.value)}
+                          name="type"
+                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                        >
+                          <option value="all">All</option>
+                          <option value="patient">Patient</option>
+                          <option value="provider">Provider</option>
+                        </select>
+                      </div>
+                    )}
+
                     {/* Sort By  */}
                     <div>
                       <label className="label">
                         <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                          Sort By
+                          Sort By<span className="text-red-500">*</span>
                         </span>
                       </label>
                       <select
-                        onChange={handleSortBy}
+                        onChange={(e) => setSortBy2(e.target.value)}
                         name="type"
                         className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                       >
-                        <option value="all">All</option>
-                        <option value="patient">Patient</option>
-                        <option value="provider">Provider</option>
+                        <option value="Patient">Patient(s)</option>
+                        <option value="Tx Providers">Tx Providers</option>
+                        <option value="CMS Therapist">CMS Therapist</option>
+                        <option value="Service Type">Service Type</option>
+                        <option value="Claim Status">Claim Status</option>
+                        <option value="Date Range">Date Range</option>
+                        <option value="Degree Level">Degree Level</option>
+                        <option value="Region">Region</option>
+                        <option value="CPT Code">CPT Code</option>
+                        <option value="Zero Units">Zero Units</option>
+                        <option value="Place Of Service">
+                          Place Of Service
+                        </option>
+                        <option value="Modifier">Modifier</option>
                       </select>
                     </div>
-                    {active && (
+                    {sortBy2 && (
                       <>
-                        {" "}
-                        <div>
-                          <label className="label">
-                            <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                              Tx Provider
-                            </span>
-                          </label>
-                          <select
-                            // onChange={(e) => setInsuranceSelect(e.target.value)}
-                            name="type"
-                            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                          >
-                            <option value="all">All</option>
-                            <option value="patient">Patient</option>
-                            <option value="provider">Provider</option>
-                          </select>
-                        </div>
+                        {sortBy2 === "Date Range" ? (
+                          <div>
+                            <label className="label">
+                              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                                {sortBy2}
+                              </span>
+                            </label>
+                            <div className="ml-1 text-[14px]">
+                              <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                                <input
+                                  value={
+                                    startDate
+                                      ? `${startMonth} ${startDay}, ${startYear}`
+                                      : "Start Date"
+                                  }
+                                  readOnly
+                                  onClick={() => setOpen((open) => !open)}
+                                  className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                                />
+                                <BsArrowRight
+                                  onClick={() => setOpen((open) => !open)}
+                                  className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
+                                ></BsArrowRight>
+                                <input
+                                  value={
+                                    endDate
+                                      ? `${endMonth} ${endDay}, ${endYear}`
+                                      : "End Date"
+                                  }
+                                  readOnly
+                                  onClick={() => setOpen((open) => !open)}
+                                  className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              ref={refClose}
+                              className="absolute z-10  2xl:ml-[20] shadow-xl"
+                            >
+                              {open && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: 15 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: 0.2 }}
+                                >
+                                  <div>
+                                    <DateRangePicker
+                                      onChange={(item) =>
+                                        setRange([item.selection])
+                                      }
+                                      editableDateInputs={true}
+                                      moveRangeOnFirstSelection={false}
+                                      ranges={range}
+                                      months={2}
+                                      direction="horizontal"
+                                      className="border-2 border-gray-100"
+                                    />
+                                  </div>
+                                  <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+                                    <button
+                                      className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                                      type="submit"
+                                      onClick={handleCancelDate}
+                                    >
+                                      Cancel
+                                    </button>
+                                    <button
+                                      className="px-4 m-2 text-secondary border border-white bg-white rounded"
+                                      type="submit"
+                                      onClick={() => setOpen(false)}
+                                    >
+                                      Save
+                                    </button>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </div>
+                          </div>
+                        ) : (
+                          <div>
+                            <label className="label">
+                              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                                {sortBy2}
+                              </span>
+                            </label>
+                            <select
+                              // onChange={(e) => setInsuranceSelect(e.target.value)}
+                              name="type"
+                              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                            >
+                              <option value="all">All</option>
+                              <option value="patient">Patient</option>
+                              <option value="provider">Provider</option>
+                            </select>
+                          </div>
+                        )}
                       </>
                     )}
                   </>
                 )}
                 {/* submit  */}
-                <button
-                  className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                  type="submit"
-                  onClick={() => {
-                    settableopen(true);
-                  }}
-                >
-                  Run
-                </button>
-                <button className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
-                  Cancel
-                </button>
+                <div className="gap-2 flex">
+                  <button
+                    className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                    type="submit"
+                    onClick={() => {
+                      settableopen(true);
+                    }}
+                  >
+                    Run
+                  </button>
+                  <button className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
+                    Cancel
+                  </button>
+                </div>
               </>
             )}
           </div>
@@ -394,7 +626,7 @@ const ProcessingClaim = () => {
                   ...rowSelection,
                 }}
                 scroll={{
-                  y: 650,
+                  y: 750,
                 }}
                 onChange={handleChange}
               />

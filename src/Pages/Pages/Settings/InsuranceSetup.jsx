@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { BiPencil } from "react-icons/bi";
 import axios from "axios";
 import { Table, Switch } from "antd";
+import InsuranceEditComponent from "./InsuranceSetup/InsuranceEditComponent";
 
 const InsuranceSetup = () => {
   const [insuranceData, setInsuranceData] = useState();
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [checkSwitch, setCheckSwitch] = useState(false);
+  const [rowId, setRowId] = useState("");
+  const [insuranceEdit, setInsuranceEdit] = useState(false);
 
   // Ant Table is starting
   useEffect(() => {
@@ -98,7 +101,7 @@ const InsuranceSetup = () => {
           <div className="">
             <input
               name="cms"
-              className="page py-2  focus:outline-none"
+              className="page py-[3px]  focus:outline-none"
               onChange={inputHandle}
               type="text"
             ></input>
@@ -122,7 +125,7 @@ const InsuranceSetup = () => {
           <div className="">
             <input
               name="cms"
-              className="page py-2 focus:outline-none"
+              className="page py-[3px] focus:outline-none"
               onChange={inputHandle}
               type="text"
             ></input>
@@ -146,7 +149,7 @@ const InsuranceSetup = () => {
           <div className="">
             <input
               name="cms"
-              className="page py-2  focus:outline-none"
+              className="page py-[3px]  focus:outline-none"
               onChange={inputHandle}
               type="text"
             ></input>
@@ -170,7 +173,7 @@ const InsuranceSetup = () => {
           <div className="">
             <input
               name="cms"
-              className="page py-2  focus:outline-none"
+              className="page py-[3px]  focus:outline-none"
               onChange={inputHandle}
               type="text"
             ></input>
@@ -194,7 +197,7 @@ const InsuranceSetup = () => {
           <div className="">
             <input
               name="cms"
-              className="page py-2  focus:outline-none"
+              className="page py-[3px]  focus:outline-none"
               onChange={inputHandle}
               type="text"
             ></input>
@@ -247,7 +250,12 @@ const InsuranceSetup = () => {
         return (
           <div className="flex justify-center text-teal-700">
             <div>
-              <BiPencil />
+              <BiPencil
+                onClick={() => {
+                  setRowId(id);
+                  setInsuranceEdit(true);
+                }}
+              />
             </div>
           </div>
         );
@@ -290,6 +298,10 @@ const InsuranceSetup = () => {
       <button className="p-2 bg-[#33A4B5] mt-3 rounded text-white">
         Save Payer Setup
       </button>
+
+      {insuranceEdit && (
+        <InsuranceEditComponent id={rowId}></InsuranceEditComponent>
+      )}
     </div>
   );
 };
