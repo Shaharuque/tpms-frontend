@@ -1,9 +1,9 @@
-import * as React from "react";
-import { useForm } from "react-hook-form";
 import { Modal } from "antd";
-export default function BusinessActionModal({ handleClose, open }) {
-  const { register, handleSubmit, reset } = useForm();
+import React from "react";
+import { useForm } from "react-hook-form";
 
+const BusinessDocAddModal = ({ open, handleAddDocClose }) => {
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -19,7 +19,7 @@ export default function BusinessActionModal({ handleClose, open }) {
         className="box rounded-xl"
       >
         <div className="p-2">
-          <h1 className="text-lg text-left text-orange-400">Edit Document</h1>
+          <h1 className="text-lg text-left text-orange-400">Add Document</h1>
           <div className="divider mt-0"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center gap-3 text-sm">
@@ -47,7 +47,7 @@ export default function BusinessActionModal({ handleClose, open }) {
                 <input
                   type="file"
                   className=" py-[5px] mx-1 text-sm w-full"
-                  {...register("fileName")}
+                  {...register("new_file")}
                 />
               </div>
             </div>
@@ -58,12 +58,12 @@ export default function BusinessActionModal({ handleClose, open }) {
                 className=" py-[5px] px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 type="submit"
               >
-                Save
+                Upload
               </button>
               <button
                 className="py-[5px] px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
                 autoFocus
-                onClick={handleClose}
+                onClick={handleAddDocClose}
               >
                 CANCEL
               </button>
@@ -73,4 +73,6 @@ export default function BusinessActionModal({ handleClose, open }) {
       </Modal>
     </div>
   );
-}
+};
+
+export default BusinessDocAddModal;

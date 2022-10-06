@@ -1,88 +1,122 @@
-import React, { useMemo } from "react";
-import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
-import { useSortBy, useTable } from "react-table";
-import { MeetColumns } from "./TPMS/Columns";
+import { Table } from "antd";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { BsCalendar2PlusFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const TpmsMeet = () => {
-  const data = useMemo(() => MeetColumns, []);
+  const [data, setData] = useState();
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
+  // Ant Table is starting
+  useEffect(() => {
+    axios("../../../All_Fake_Api/MeetLinks.json")
+      .then((response) => {
+        console.log("calling");
+        setData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  console.log(data);
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Meet Link",
-        accessor: "col1", // accessor is the "key" in the data
-      },
-      {
-        Header: "Created Date",
-        accessor: "col2",
-      },
-      {
-        Header: "Video Url",
-        accessor: "col3",
-      },
-    ],
-    []
-  );
+  const handleChange = (pagination, filters, sorter) => {
+    console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
+  const columns = [
+    {
+      title: "Meet Link",
+      dataIndex: "meet_link",
+      key: "meet_link",
+      width: 100,
+      filters: [
+        {
+          text: "Duck Duci",
+          value: "xpLb2phVleSb6YjISm9b2427116509082476266dc57898a2",
+        },
+        {
+          text: `Health Net`,
+          value: "xpLb2phVleSb6YjISm9b2427116509082476266dc57898a2",
+        },
+      ],
+      render: (_, { meet_link }) => {
+        //console.log("tags : ", lock);
+        return (
+          <Link
+            to={
+              "https://ant.design/components/table/#components-table-demo-dynamic-settings"
+            }
+            className=" text-secondary"
+          >
+            {meet_link}
+          </Link>
+        );
+      },
+      filteredValue: filteredInfo.meet_link || null,
+      onFilter: (value, record) => record.meet_link.includes(value),
+      ellipsis: true,
+    },
+    {
+      title: "Created Date",
+      dataIndex: "created",
+      key: "created",
+      width: 100,
+      filters: [
+        {
+          text: "Duck Duci",
+          value: "xpLb2phVleSb6YjISm9b2427116509082476266dc57898a2",
+        },
+        {
+          text: `Health Net`,
+          value: "xpLb2phVleSb6YjISm9b2427116509082476266dc57898a2",
+        },
+      ],
+      filteredValue: filteredInfo.created || null,
+      onFilter: (value, record) => record.created.includes(value),
+      sorter: (a, b) => {
+        return a.created > b.created ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "created" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Video URL",
+      dataIndex: "id",
+      key: "id",
+      width: 80,
+      render: (_, { id }) => {
+        //console.log("tags : ", lock);
+        return <div className=" text-secondary flex justify-center">-</div>;
+      },
+      ellipsis: true,
+    },
+  ];
 
   return (
     <div className="p-2 overflow-y-hidden">
       <div className="md:flex mb-2 flex-wrap  items-center justify-between">
         <h1 className="text-sm">Meet Lists</h1>
-        <button className="px-10 py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-          Add New Data
+        <button className="flex items-center gap-2 px-2 py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
+          <BsCalendar2PlusFill className="text-[18px]" /> Create New Meet
         </button>
       </div>
-      <table
-        className="border overflow-scroll  sm:w-full "
-        {...getTableProps()}
-      >
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  className="bg-secondary border   py-1 text-sm text-white"
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  {column.render("Header")}
-                  {/* Add a sort direction indicator */}
-                  <span className=" ml-4 ">
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " ⇓ "
-                        : " ⇑ "
-                      : ""}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      style={{
-                        border: "solid 1px gray",
-                      }}
-                      className="text-xs w-10 md:w-24 text-center text-gray-600 py-[6px]"
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+
+      <Table
+        pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+        rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+        size="small"
+        bordered
+        className=" text-xs font-normal"
+        columns={columns}
+        dataSource={data}
+        scroll={{
+          y: 650,
+        }}
+        onChange={handleChange}
+      />
     </div>
   );
 };
