@@ -435,8 +435,11 @@ const PatientLedger = () => {
                 Selected date
               </span>
             </label>
-            <div className="ml-1 text-[14px]">
-              <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+            <div className="ml-1">
+              <div
+                onClick={() => setOpen(true)}
+                className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full"
+              >
                 <input
                   value={
                     startDate
@@ -444,19 +447,14 @@ const PatientLedger = () => {
                       : "Start Date"
                   }
                   readOnly
-                  onClick={() => setOpen((open) => !open)}
                   className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                 />
-                <BsArrowRight
-                  onClick={() => setOpen((open) => !open)}
-                  className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                ></BsArrowRight>
+                <BsArrowRight className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"></BsArrowRight>
                 <input
                   value={
                     endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
                   }
                   readOnly
-                  onClick={() => setOpen((open) => !open)}
                   className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                 />
               </div>

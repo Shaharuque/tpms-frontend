@@ -264,6 +264,10 @@ code {
   .rdrMonthAndYearPickers {
     flex-direction: column !important;
   }
+
+  .rdrWeekDay {
+    font-size: 12px !important;
+  }
 }
 
 @media only screen and (max-width:768px) {
@@ -310,6 +314,11 @@ code {
   .rdrStaticRanges {
     flex-direction: row !important;
   }
+}
+
+/* Ant Table Design Title center */
+.ant-table-cell-ellipsis .ant-table-column-title {
+  text-align: center !important;
 }
 
 

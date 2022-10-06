@@ -52,6 +52,8 @@ const TableApi = () => {
       });
   }, []);
 
+  console.log(data);
+
   const globalFilter = (value) => {
     //console.log(value);
     const filteredData = data?.filter(

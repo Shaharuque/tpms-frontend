@@ -11,10 +11,7 @@ import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import { BiSearchAlt } from "react-icons/bi";
 import ManageTableAction from "./ListView/ManageTableAction";
-
-//for date range picker calendar
 import { DateRangePicker } from "react-date-range";
-import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
@@ -665,7 +662,10 @@ const ListView = () => {
                               </span>
                             </label>
                             <div className="ml-1">
-                              <div className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[5px] mx-1 text-[14px] w-full">
+                              <div
+                                onClick={() => setOpen(true)}
+                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
+                              >
                                 <input
                                   value={
                                     startDate
@@ -673,13 +673,9 @@ const ListView = () => {
                                       : "Start Date"
                                   }
                                   readOnly
-                                  onClick={() => setOpen(true)}
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
-                                <BsArrowRight
-                                  onClick={() => setOpen(true)}
-                                  className="w-1/3 text-white"
-                                ></BsArrowRight>
+                                <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
                                 <input
                                   value={
                                     endDate
@@ -687,7 +683,6 @@ const ListView = () => {
                                       : "End Date"
                                   }
                                   readOnly
-                                  onClick={() => setOpen((open) => !open)}
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
                               </div>
@@ -957,11 +952,6 @@ const ListView = () => {
                 <div className="overflow-scroll">
                   <>
                     <Table
-                      // styles={{
-                      // Fixes the overlapping problem of the component
-                      //   menu: provided => ({ ...provided, zIndex: -1 })
-                      // }}
-
                       pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                       rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
                       size="small"
