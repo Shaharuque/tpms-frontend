@@ -316,11 +316,6 @@ code {
   }
 }
 
-/* Ant Table Design Title center */
-.ant-table-cell-ellipsis .ant-table-column-title {
-  text-align: center !important;
-}
-
 
 
 .rmsc .dropdown-content {

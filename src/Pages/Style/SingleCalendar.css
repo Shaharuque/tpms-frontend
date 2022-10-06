@@ -1,5 +1,4 @@
 .react-calendar {
-  width: 280px;
   max-width: 100%;
   line-height: 1em;
   font-size: 12px;
@@ -14,9 +13,13 @@
 abbr[title] {
   text-decoration: none;
   color: black;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   text-transform: capitalize;
+}
+
+.react-calendar__tile abbr{
+  font-size: 16px;
 }
 
 /* .react-calendar__navigation{
@@ -52,14 +55,14 @@ abbr[title] {
   margin: 0.5em;
 }
 
-.react-calendar,
+/* .react-calendar,
 .react-calendar *,
 .react-calendar *:before,
 .react-calendar *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-}
+} */
 
 .react-calendar button {
   margin: 0;
@@ -74,14 +77,16 @@ abbr[title] {
 /* calendar navigation */
 .react-calendar__navigation {
   display: flex;
+  align-items: center;
   /* height: 30px; */
   font-size: 15px;
   font-weight: 700;
-  border-top-left-radius: 5px;
+  /* border-top-left-radius: 5px; */
   border-top-right-radius: 5px;
   background-color: #0AA7B8;
-  margin-bottom: 0px;
-  height: 25px;
+  /* margin-bottom: 0px; */
+  height: 35px;
+  padding: 0 5px;
 }
 
 /* calender top button */
@@ -98,11 +103,11 @@ abbr[title] {
 }
 
 .react-calendar__navigation button span {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .react-calendar__navigation__arrow {
-  font-size: 22px;
+  font-size: 27px;
 }
 
 .react-calendar__navigation button:enabled:hover,

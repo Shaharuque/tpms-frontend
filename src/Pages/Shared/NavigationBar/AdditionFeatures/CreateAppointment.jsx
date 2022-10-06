@@ -7,6 +7,7 @@ import Calendar from "react-calendar";
 // import "./CutomCSS/calenderDesign.css";
 import { Modal } from "antd";
 import AppoinmentMultiSelection from "../../../Shared/CustomComponents/AppoinmentMultiSelection";
+import "../../../Style/SingleCalendar.css";
 
 const CreateAppointment = ({ handleClose }) => {
   const [billable, setBillable] = useState(true);
@@ -190,11 +191,13 @@ const CreateAppointment = ({ handleClose }) => {
                   centered
                   footer={null}
                   closable={false}
-                  bodyStyle={{ padding: "0px" }}
+                  bodyStyle={{
+                    padding: "0px",
+                  }}
                 >
-                  <div className="grid lg:grid-cols-2">
-                    <div className="bg-teal-500 bold text-white ">
-                      <div className="w-full h-16 flex justify-center items-center bg-[#2D8A87] bg-opacity-50 backdrop-blur-xl rounded drop-shadow-lg">
+                  <div className="grid lg:grid-cols-3">
+                    <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-tl-[5px]">
+                      <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
                         <span className="text-2xl">{days[date.getDay()]}</span>
                       </div>
                       <div className="flex flex-col justify-center items-center">
@@ -206,14 +209,18 @@ const CreateAppointment = ({ handleClose }) => {
                       </div>
                     </div>
 
-                    <Calendar onChange={setDate} value={date} />
+                    <Calendar
+                      onChange={setDate}
+                      value={date}
+                      className="col-span-2"
+                    />
                   </div>
-                  <div className="flex justify-between cursor-pointer bg-black rounded">
+                  <div className="flex justify-between cursor-pointer bg-black rounded-b-[5px]">
                     <button
                       onClick={() => {
                         setOpen(false);
                       }}
-                      className="text-xs text-red-400 p-2 hover:bg-white"
+                      className="text-xs text-red-400 p-2 hover:text-white hover:bg-teal-500"
                     >
                       CLEAR
                     </button>
