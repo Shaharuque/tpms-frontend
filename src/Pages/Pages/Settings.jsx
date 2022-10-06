@@ -7,9 +7,8 @@ import { motion } from "framer-motion";
 
 const Settings = () => {
   // console.log(setting);
-
   //Redux works will be done here
-  
+
   return (
     <div>
       <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap  justify-between">
@@ -20,7 +19,7 @@ const Settings = () => {
           className=" p-2 setting-nav rounded-md"
         >
           <div className="">
-            <h1 className=" text-sm bg-secondary p-2 px-3 text-white mb-0">
+            <h1 className=" text-base bg-secondary p-2 px-3 text-white mb-0">
               Facility Setup
             </h1>
           </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import CustomLink from "../../Shared/CustomLink";
 
 const SettingNav = ({ s }) => {
@@ -11,7 +10,7 @@ const SettingNav = ({ s }) => {
         to={link}
       >
         <span className="text-2xl ml-2 ">{icon}</span>
-        <h1 className="text-sm">{name}</h1>
+        <h1 className="text-sm font-medium">{name}</h1>
       </CustomLink>
     </div>
   );

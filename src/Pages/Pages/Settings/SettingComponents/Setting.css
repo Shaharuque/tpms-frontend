@@ -1,7 +1,7 @@
 .setting-nav-child {
     border: 1px solid #09A2B3;
-    border-left-width: 4px;
-    border-right-width: 4px;
+    border-left-width: 2px;
+    border-right-width: 2px;
     transition: all 0.3s;
 }
 

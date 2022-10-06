@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Checkbox, FormControlLabel, Switch } from "@mui/material";
+import { Checkbox, FormControlLabel } from "@mui/material";
+import { Switch } from "antd";
 
 const InsuranceEditComponent = ({ id }) => {
   const [value, setValue] = React.useState(false);
@@ -28,7 +29,6 @@ const InsuranceEditComponent = ({ id }) => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 my-5 1D-2 gap-6">
                 {/* name  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       CoPay Number {id}
@@ -44,20 +44,22 @@ const InsuranceEditComponent = ({ id }) => {
                 <span className="label-text-alt">
                   {" "}
                   {errors.name?.type === "required" && (
-                    <p className=" text-red-500">{errors.name.message}</p>
+                    <p className=" text-red- 500 ">{errors.name.message}</p>
                   )}
-                </span>
+                </span>  
               </label> */}
                 </div>
-                <div className="flex items-center mt-7">
+                <div className="flex items-center ">
                   <Switch
                     size="small"
-                    onClick={() => {
-                      setValue(!value);
-                    }}
+                    checked={value ? true : false}
+                    onClick={() => setValue(!value)}
                   />
-                  <span className="text-sm font-normal">Is Electronic</span>
+                  <span className="text-[14px] font-medium text-gray-500 mx-3">
+                    Is Electronic
+                  </span>
                 </div>
+                <span className="text-sm font-normal"></span>{" "}
                 <div>
                   {" "}
                   <label className="label">
@@ -171,34 +173,35 @@ const InsuranceEditComponent = ({ id }) => {
                   />
                 </div>
                 <div className="flex items-center">
-                  <div className="flex items-center mt-7">
+                  <div className="flex items-center ">
                     <Switch
                       size="small"
-                      onClick={() => {
-                        setValue(!value);
-                      }}
+                      checked={value ? true : false}
+                      onClick={() => setValue(!value)}
                     />
-                    <span className="text-sm font-normal">Active</span>
+                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                      Active
+                    </span>
                   </div>
-                  <div className="flex items-center mt-7">
+                  <div className="flex items-center ">
                     <Switch
                       size="small"
-                      onClick={() => {
-                        setValue(!value);
-                      }}
+                      checked={value ? true : false}
+                      onClick={() => setValue(!value)}
                     />
-                    <span className="text-sm font-normal">Is Fill Box-17</span>
+                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                      Is Fill Box-17
+                    </span>
                   </div>
                 </div>
                 <div>
-                  <div className="flex items-center mt-7">
+                  <div className="flex items-center mt-5">
                     <Switch
                       size="small"
-                      onClick={() => {
-                        setValue(!value);
-                      }}
+                      checked={value ? true : false}
+                      onClick={() => setValue(!value)}
                     />
-                    <span className="text-sm font-normal">
+                    <span className="text-[14px] font-medium text-gray-500 mx-3">
                       is time required Code
                     </span>
                   </div>

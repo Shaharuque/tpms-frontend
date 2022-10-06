@@ -47,7 +47,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className={isHovering ? "ml-5 mr-5" : ""}
+          className={isHovering ? "ml-5 mr-5" : " mr-[10px] ml-[-4px]"}
           style={{
             transition: "all .3s ease-out",
           }}
