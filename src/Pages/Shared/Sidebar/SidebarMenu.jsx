@@ -58,7 +58,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
               key={i}
               style={{ display: "block" }}
               className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white"
-              activeclassname="active"
+              activeclassname="active_sidebar"
             >
               <div className="flex items-center h-8">
                 <div className="text-lg  px-3 py-1">{s.icon}</div>
