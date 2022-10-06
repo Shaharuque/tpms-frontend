@@ -302,12 +302,12 @@ const SignatureNotLoaded = () => {
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 my-5 mr-2 gap-2">
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
+              <span className="label-text text-base text-gray-500 text-left">
                 Provider
               </span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("again_status")}
             >
               <option value="name"> Payor </option>
