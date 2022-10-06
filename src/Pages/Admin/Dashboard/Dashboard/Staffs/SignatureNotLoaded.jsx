@@ -299,7 +299,7 @@ const SignatureNotLoaded = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 my-5 mr-2 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-7 my-5 mr-2 gap-2">
           <div>
             <label className="label">
               <span className="label-text text-base text-gray-500 text-left">
@@ -316,7 +316,7 @@ const SignatureNotLoaded = () => {
           </div>
 
           <button
-            className="w-1/2  py-2 mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="w-1/4 mt-7 ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             type="submit"
           >
             Go

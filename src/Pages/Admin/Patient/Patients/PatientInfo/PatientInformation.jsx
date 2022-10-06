@@ -11,8 +11,8 @@ import { getpatientsDetails } from "../../../../../features/Patient_redux/patien
 import Loading from "../../../../../Loading/Loading";
 import TextArea from "antd/lib/input/TextArea";
 import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
-import Calendar from "react-calendar";
-import "./SingleCalendar.css";
+// import Calendar from "react-calendar";
+// import "./SingleCalendar.css";
 
 const PatientInformation = () => {
   const [voiceMsg, setVoiceMsg] = useState(false);
@@ -37,22 +37,22 @@ const PatientInformation = () => {
   // Email State
   const [emailRendomValue, setEmailRendomValue] = useState([]);
 
-  // testing single calendar
-  const [date, setDate] = useState(new Date());
-  const [openCalendar, setOpenCalendar] = useState(false);
-  const changeDate = (date) => {
-    setDate(date);
-  };
-  console.log(date);
+  // // testing single calendar
+  // const [date, setDate] = useState(new Date());
+  // const [openCalendar, setOpenCalendar] = useState(false);
+  // const changeDate = (date) => {
+  //   setDate(date);
+  // };
+  // console.log(date);
 
-  const month = date ? date.getMonth() + 1 : null;
-  const day = date ? date.getDate() : null;
-  const year = date ? date.getFullYear() : null;
+  // const month = date ? date.getMonth() + 1 : null;
+  // const day = date ? date.getDate() : null;
+  // const year = date ? date.getFullYear() : null;
 
-  const handleCancelDate = () => {
-    // setOpenCalendar(false);
-    setDate(null);
-  };
+  // const handleCancelDate = () => {
+  //   // setOpenCalendar(false);
+  //   setDate(null);
+  // };
 
   // Address + icon Click Handeler
   const handleClick = () => {
@@ -113,8 +113,8 @@ const PatientInformation = () => {
           ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
-        // dob: patient_details?.client_dob,
-        dob: date ? `${month}/${day}/${year}` : null,
+        dob: patient_details?.client_dob,
+        // dob: date ? `${month}/${day}/${year}` : null,
         email: patient_details?.email,
         phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
@@ -122,11 +122,7 @@ const PatientInformation = () => {
         checkedActive: patient_details?.is_active_client,
       });
     }, 0);
-  }, [
-    patient_details?.client_first_name,
-    patient_details?.is_active_client,
-    date,
-  ]);
+  }, [patient_details?.client_first_name, patient_details?.is_active_client]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -238,7 +234,12 @@ const PatientInformation = () => {
                   Date of Birth<span className="text-red-500">*</span>
                 </span>
               </label>
-              <div ref={ref}>
+              <input
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                type="date"
+                {...register("client_dob")}
+              />
+              {/* <div ref={ref}>
                 <input
                   className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none pb-[0.8px]"
                   // value={`${month}/${day}/${year}`}
@@ -262,7 +263,7 @@ const PatientInformation = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
             </div>
             {/* gender */}
             <div className=" ">
