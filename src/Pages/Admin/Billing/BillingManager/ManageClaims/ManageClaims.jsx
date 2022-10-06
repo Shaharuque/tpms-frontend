@@ -209,7 +209,7 @@ const ManageClaims = () => {
 
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" flex flex-wrap items-center gap-2">
+          <div className=" items-center gap-2 grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
             {" "}
             {/* Sort By  */}
             <div>
@@ -221,11 +221,20 @@ const ManageClaims = () => {
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none "
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
               >
-                <option value="all">All</option>
-                <option value="patient">Patient</option>
-                <option value="provider">Provider</option>
+                <option value="all">Batch</option>
+                <option value="Tx Providers">Tx Providers</option>
+                        <option value="CMS Therapist">CMS Therapist</option>
+                        <option value="Service Type">Service Type</option>
+                        <option value="Claim Status">Claim Status</option>
+                        <option value="Date Range">Date Range</option>
+                        <option value="Degree Level">Degree Level</option>
+                        <option value="Region">Region</option>
+                        <option value="CPT Code">CPT Code</option>
+                        <option value="Zero Units">Zero Units</option>
+                        <option value="Place Of Service"> Place Of Service
+                        </option>
               </select>
             </div>
             {active && (
@@ -285,8 +294,9 @@ const ManageClaims = () => {
               </>
             )}
             {/* submit  */}
+            <div className="flex gap-2">
             <button
-              className=" py-2 mt-8  px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className=" py-2 px-5 mt-8 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               type="submit"
             >
               Get Claim(s)
@@ -294,6 +304,7 @@ const ManageClaims = () => {
             <button className="font-normal  py-2 mt-8 px-3 text-xs bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
               Cancel
             </button>
+            </div>
           </div>
         </form>
       </div>

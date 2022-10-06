@@ -23,17 +23,12 @@ const PatientInformation = () => {
   const [Guarantor, setGuarantor] = useState(false);
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
-  const [isSubscribed, setIsSubscribed] = useState(false);
   const [checkLocation, setLocation] = useState(false);
 
   // calender hide
   const { ref, visible, setVisible } = useOutsideAlerter(false);
-  const [open, setOpen] = useState(false);
-  const [phoneOpen, setPhoneOpen] = useState(false);
-  const [emailOpen, setEmailOpen] = useState(false);
   const { register, handleSubmit, reset, setValue, getValues } = useForm();
   const [hook, setHook] = useState("");
-  const [addressmain, setaddressmain] = useState("");
 
   // Address state
   const [addressRendomValue, setAddressRendomValue] = useState([]);
@@ -48,9 +43,16 @@ const PatientInformation = () => {
   const changeDate = (date) => {
     setDate(date);
   };
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const year = date.getFullYear();
+  console.log(date);
+
+  const month = date ? date.getMonth() + 1 : null;
+  const day = date ? date.getDate() : null;
+  const year = date ? date.getFullYear() : null;
+
+  const handleCancelDate = () => {
+    // setOpenCalendar(false);
+    setDate(null);
+  };
 
   // Address + icon Click Handeler
   const handleClick = () => {
@@ -111,7 +113,8 @@ const PatientInformation = () => {
           ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
-        dob: patient_details?.client_dob,
+        // dob: patient_details?.client_dob,
+        dob: date ? `${month}/${day}/${year}` : null,
         email: patient_details?.email,
         phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
@@ -119,10 +122,11 @@ const PatientInformation = () => {
         checkedActive: patient_details?.is_active_client,
       });
     }, 0);
-  }, [patient_details?.client_first_name, patient_details?.is_active_client]);
-
-  // console.log(patient_details?.is_active_client);
-  const [value, setValues] = useState(patient_details?.is_active_client);
+  }, [
+    patient_details?.client_first_name,
+    patient_details?.is_active_client,
+    date,
+  ]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -131,6 +135,7 @@ const PatientInformation = () => {
       is_client_active,
     };
     console.log(formData);
+    console.log(file);
   };
 
   ///relation value handle
@@ -236,21 +241,25 @@ const PatientInformation = () => {
               <div ref={ref}>
                 <input
                   className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none pb-[0.8px]"
-                  value={`${month}/${day}/${year}`}
+                  // value={`${month}/${day}/${year}`}
+                  name="dob"
                   readOnly
                   onClick={() =>
                     setOpenCalendar((openCalendar) => !openCalendar)
                   }
+                  {...register("dob")}
                 />
                 {openCalendar && (
-                  <div className="absolute z-10 p-1">
-                    <Calendar onChange={changeDate} value={date}></Calendar>
-                    <button
-                      onClick={() => setOpenCalendar(false)}
-                      className="bg-white w-full py-1 text-right rounded pr-1"
-                    >
-                      Ok
-                    </button>
+                  <div className="absolute z-10 rounded">
+                    <Calendar onChange={changeDate}></Calendar>
+                    <div className="bg-white py-2 text-right rounded-b-[5px]">
+                      <button
+                        onClick={handleCancelDate}
+                        className=" text-white py-1 mr-1 rounded px-2 bg-[#0AA7B8] hover:bg-red-700 hover:border-red-700"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -324,12 +333,12 @@ const PatientInformation = () => {
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("Street")}
                   />
-                  <div // onClick={() => setOpen(true)}
+                  <button // onClick={() => setOpen(true)}
                     onClick={handleClick}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
-                  </div>
+                  </button>
                 </div>
                 <div className="mb-2">
                   <input
@@ -340,10 +349,10 @@ const PatientInformation = () => {
                     {...register("City")}
                   />
                 </div>
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
+                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                       defaultValue={"NY"}
                       {...register("country")}
                     >
@@ -404,10 +413,10 @@ const PatientInformation = () => {
                         {...register("more_City")}
                       />
                     </div>
-                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
+                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
                       <div>
                         <select
-                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                           {...register("more_Country")}
                         >
                           <option value="NY">NY</option>
@@ -425,8 +434,7 @@ const PatientInformation = () => {
                   </motion.div>
                 ))}
 
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-2 gap-y-1">
-                  {" "}
+                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
                   <div>
                     <label className="label">
                       <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -469,7 +477,7 @@ const PatientInformation = () => {
                     Phone
                   </span>
                 </label>
-                <div className="flex flex-wrap gap-1 items-center gap-x-2 ">
+                <div className="flex flex-wrap gap-1 items-center gap-x-4 ">
                   <div>
                     <input
                       type="text"
@@ -480,7 +488,7 @@ const PatientInformation = () => {
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                       {...register("group")}
                     >
                       <option value="work">work</option>
@@ -488,14 +496,14 @@ const PatientInformation = () => {
                       <option value="family">family</option>
                     </select>
                   </div>
-                  <div // onClick={() => setPhoneOpen(true)}
+                  <button // onClick={() => setPhoneOpen(true)}
                     onClick={() => {
                       handlePhoneClick();
                     }}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
-                  </div>
+                  </button>
                 </div>
                 <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
                   <div className="flex items-center">
@@ -555,7 +563,7 @@ const PatientInformation = () => {
                       Phone
                     </span>
                   </label>
-                  <div className="flex flex-wrap gap-1 items-center gap-x-2 ">
+                  <div className="flex flex-wrap gap-1 items-center gap-x-4 ">
                     <div>
                       <input
                         type="text"
@@ -566,7 +574,7 @@ const PatientInformation = () => {
                     </div>
                     <div>
                       <select
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                         {...register("group")}
                       >
                         <option value="work">work</option>
@@ -574,12 +582,12 @@ const PatientInformation = () => {
                         <option value="family">family</option>
                       </select>
                     </div>
-                    <div
+                    <button
                       onClick={() => phoneHandleRemove(index)}
                       className="bg-red-500 text-white p-[6px]"
                     >
                       <RiDeleteBin6Line />
-                    </div>
+                    </button>
                   </div>
                   <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
                     <div className="flex items-center">
@@ -622,7 +630,7 @@ const PatientInformation = () => {
                     </span>
                   </div>
                 </motion.div>
-              ))}{" "}
+              ))}
             </div>
 
             {/*  */}
@@ -634,7 +642,7 @@ const PatientInformation = () => {
                     Email
                   </span>
                 </label>
-                <div className="flex flex-wrap items-center gap-x-2 ">
+                <div className="flex flex-wrap items-center gap-x-4 ">
                   <div>
                     <input
                       type="text"
@@ -645,7 +653,7 @@ const PatientInformation = () => {
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 w-full focus:outline-none"
                       {...register("group2")}
                     >
                       <option value="work">work</option>
@@ -653,14 +661,14 @@ const PatientInformation = () => {
                       <option value="family">family</option>
                     </select>
                   </div>
-                  <div
+                  <button
                     onClick={() => {
                       handleEmailClick();
                     }}
                     className="bg-secondary text-white p-[6px]"
                   >
                     <FaPlus />
-                  </div>
+                  </button>
                 </div>
                 <div className="flex ml-1 mt-1 items-center ">
                   <input
@@ -700,7 +708,7 @@ const PatientInformation = () => {
                       Email
                     </span>
                   </label>
-                  <div className="flex flex-wrap items-center gap-x-2 ">
+                  <div className="flex flex-wrap items-center gap-x-4 ">
                     <div>
                       <input
                         type="text"
@@ -711,7 +719,7 @@ const PatientInformation = () => {
                     </div>
                     <div>
                       <select
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 w-full focus:outline-none"
                         {...register("group2")}
                       >
                         <option value="work">work</option>
@@ -719,12 +727,12 @@ const PatientInformation = () => {
                         <option value="family">family</option>
                       </select>
                     </div>
-                    <div
+                    <button
                       onClick={() => EmailHandleRemove(index)}
                       className="bg-red-500 text-white p-[6px]"
                     >
                       <RiDeleteBin6Line />
-                    </div>
+                    </button>
                   </div>
                   <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
                     <div className="">
@@ -994,7 +1002,7 @@ const PatientInformation = () => {
           <div className="mb-5">
             {/* submit  */}
             <button
-              className=" py-[5px] mt-7 px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className=" py-[5px] mt-7 px-3 my-1 text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
               type="submit"
             >
               Save Patient

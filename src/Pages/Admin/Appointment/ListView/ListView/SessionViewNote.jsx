@@ -22,11 +22,10 @@ const SessionViewNote = ({ handleClose, open, editableRow }) => {
         <Modal
           open={open}
           centered
-          zIndex={100}
           footer={false}
           closable={false}
           bodyStyle={{ padding: "0" }}
-          className="box rounded-md"
+          className="box rounded-lg"
         >
           <div className="px-5 py-2 ">
             <div className="flex items-center justify-between">

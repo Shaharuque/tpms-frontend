@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import { DateRangePicker } from "rsuite";
 
 const Report = () => {
-  const [date, setDate] = useState("");
-  const [type, setType] = useState(false);
+  const [type, setType] = useState("");
 
   const handleType = (e) => {
-    setType(!type);
+    setType(e);
   };
-
-  console.log("date = ", date);
+  console.log(type);
 
   const handlePlaceOrder = (event) => {
     event.preventDefault();
@@ -24,10 +21,14 @@ const Report = () => {
         onSubmit={handlePlaceOrder}
       >
         <div>
-          <h1 className="text-xs mb-2 ml-1">Tx Type</h1>
+          <label className="label">
+            <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              All Report
+            </span>
+          </label>
           <select
             name="tx_type"
-            className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
           >
             <option value="0"></option>
             <option value="Insurance Collection">Insurance Collection</option>
@@ -71,28 +72,22 @@ const Report = () => {
           </select>
         </div>
         <div>
-          <h1 className="text-xs mb-2 ml-1 ">Type</h1>
+          <label className="label">
+            <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              Type
+            </span>
+          </label>
           <select
-            onChange={(e) => handleType(e)}
+            onChange={(e) => setType(e.target.value)}
             name="type"
-            className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
           >
-            <option value="Select Tx type">Specific Date</option>
-            <option value="Behavior Therapy">Date Range</option>
+            <option value=""></option>
+            <option value="specific_date">Specific Date</option>
+            <option value="date_range">Date Range</option>
           </select>
         </div>
-        {type && (
-          <div>
-            {" "}
-            <h1 className="text-xs mb-2 ml-1 ">Date Range</h1>
-            <DateRangePicker
-                    onChange={(date) => {
-                      console.log(date);
-                    }}
-                    placeholder="Select Date"
-              />
-          </div>
-        )}
+
         <div>
           <input
             className="hover:shadow-lg rounded-md bg-secondary text-white py-2 text-xs px-3 mt-6 mx-2"

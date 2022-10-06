@@ -5,7 +5,7 @@ import { NavLink, Outlet } from "react-router-dom";
 const BillingManager = () => {
   return (
     <>
-      <div className="container mx-auto mb-5 mt-5 widthfix">
+      <div className="container width-fix  mx-auto mb-5 mt-5">
         <Nav appearance="tabs" justified className="mt-5 mb-5">
           <NavLink
             className={(navinfo) =>

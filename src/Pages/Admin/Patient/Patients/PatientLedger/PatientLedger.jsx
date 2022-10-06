@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
-import { Table, Typography } from "antd";
-import { Toggle } from "rsuite";
-import CheckIcon from "@rsuite/icons/Check";
-import CloseIcon from "@rsuite/icons/Close";
+import { Switch, Table, Typography } from "antd";
 import { BsFileEarmarkPlusFill } from "react-icons/bs";
 import PatientLedgerAction from "./PatientLedger/PatientLedgerAction";
+import { motion } from "framer-motion";
 
 //for date range picker calendar
 import { DateRangePicker } from "react-date-range";
-import { addDays } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
@@ -29,15 +26,6 @@ const PatientLedger = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const { Text } = Typography;
-
-  const [open, setOpen] = useState(false);
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 0),
-      key: "selection",
-    },
-  ]);
 
   //   fetch data
   React.useEffect(() => {
@@ -369,29 +357,71 @@ const PatientLedger = () => {
     reset();
     setTable(true);
   };
+
+  //Date Range Picker
+  const [open, setOpen] = useState(false);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+
+  const handleCancelDate = () => {
+    setRange([
+      {
+        startDate: new Date(),
+        endDate: null,
+        key: "selection",
+      },
+    ]);
+  };
+
   // date range picker calendar
-  const startDate = range[0]?.startDate;
-  const endDate = range[0]?.endDate;
-  const startMonth = startDate.toLocaleString("en-us", { month: "short" });
-  const endMonth = endDate.toLocaleString("en-us", { month: "short" });
-  const startDay = startDate.getDate();
-  const endDay = endDate.getDate();
-  // const startYear = startDate.getFullYear();
-  // const endYear = endDate.getFullYear();
+  const startDate = range ? range[0]?.startDate : null;
+  const endDate = range ? range[0]?.endDate : null;
+  const startMonth = startDate
+    ? startDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const endMonth = endDate
+    ? endDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const startDay = startDate ? startDate.getDate() : null;
+  const endDay = endDate ? endDate.getDate() : null;
+  const startYear = startDate
+    ? startDate.getFullYear().toString().slice(2, 4)
+    : null;
+  const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+  //End Date Range Picker
+
+  // Hide calendar on outside click
+  const refClose = useRef(null);
+  useEffect(() => {
+    document.addEventListener("click", hideOnClickOutside, true);
+  }, []);
+
+  // Hide dropdown on outside click
+  const hideOnClickOutside = (e) => {
+    if (refClose.current && !refClose.current.contains(e.target)) {
+      setOpen(false);
+    }
+  };
+  //end outside click
 
   return (
     <div className={table ? "" : "h-[100vh]"}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-lg mt-2 text-orange-500">Patient Ar Ledger</h1>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-5 mr-2 gap-2">
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-5 mr-2 gap-4">
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Patient
               </span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
               {...register("patient")}
             >
               <option value="name"> </option>
@@ -401,41 +431,82 @@ const PatientLedger = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Selected date
               </span>
             </label>
             <div className="ml-1">
-              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border  rounded-sm px-1 mx-1 w-full">
+              <div
+                onClick={() => setOpen(true)}
+                className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full"
+              >
                 <input
-                  value={`${startDay} ${startMonth}`}
+                  value={
+                    startDate
+                      ? `${startMonth} ${startDay}, ${startYear}`
+                      : "Start Date"
+                  }
                   readOnly
-                  onClick={() => setOpen((open) => !open)}
                   className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                 />
-                <BsArrowRight
-                  onClick={() => setOpen((open) => !open)}
-                  className="w-1/3 text-gray-600 text-[14px] font-medium"
-                ></BsArrowRight>
+                <BsArrowRight className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"></BsArrowRight>
                 <input
-                  value={`${endDay} ${endMonth}`}
+                  value={
+                    endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
+                  }
                   readOnly
-                  onClick={() => setOpen((open) => !open)}
                   className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                 />
               </div>
+            </div>
+            <div ref={refClose} className="absolute z-10  shadow-xl">
+              {open && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <div>
+                    <DateRangePicker
+                      onChange={(item) => setRange([item.selection])}
+                      editableDateInputs={true}
+                      moveRangeOnFirstSelection={false}
+                      ranges={range}
+                      months={2}
+                      direction="horizontal"
+                      className="border-2 border-gray-100"
+                    />
+                  </div>
+                  <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+                    <button
+                      className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                      type="submit"
+                      onClick={handleCancelDate}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="px-4 m-2 text-secondary border border-white bg-white rounded"
+                      type="submit"
+                      onClick={() => setOpen(false)}
+                    >
+                      Save
+                    </button>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </div>
 
           {/* CPT Code  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 CPT Code
               </span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
               {...register("CPT_Code")}
             >
               <option value="name"></option>
@@ -449,12 +520,12 @@ const PatientLedger = () => {
           {/*Aging Status  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Aging Status
               </span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
               {...register("aging_status")}
             >
               <option value="name">EFT</option>
@@ -462,17 +533,16 @@ const PatientLedger = () => {
           </div>
           <div className="mt-[35px] flex sm:col-span-2">
             <div>
-              <Toggle
-                checkedChildren={<CheckIcon />}
-                unCheckedChildren={<CloseIcon />}
+              <Switch
+                size="small"
                 checked={value ? true : false}
-                size="sm"
-                onClick={() => {
-                  setValue(!value);
-                }}
+                onClick={() => setValue(!value)}
               />
-              <span className="text-xs text-gray-500 mr-3"> Zero to Paid</span>
+              <span className="text-[14px] font-medium text-gray-500 mx-3">
+                Zero to Paid
+              </span>
             </div>
+
             <div>
               {/* submit  */}
               <button className="py-[5px]  px-3 text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
@@ -481,39 +551,13 @@ const PatientLedger = () => {
             </div>
           </div>
         </div>
-        <div className="absolute z-10 lg:ml-[8%] xl:ml-[12%] 2xl:ml-[15]">
-          {open && (
-            <div>
-              <div>
-                <DateRangePicker
-                  onChange={(item) => setRange([item.selection])}
-                  editableDateInputs={true}
-                  moveRangeOnFirstSelection={false}
-                  ranges={range}
-                  months={2}
-                  direction="horizontal"
-                  className="border-2 border-gray-100"
-                />
-              </div>
-              <div className="text-right bg-white border-r-2 border-b-2 border-l-2 border-r-gray-100 border-b-gray-100 border-l-gray-100 range-date-ok">
-                <button
-                  className="py-[5px] px-2.5 m-2 text-white rounded-md bg-gradient-to-r from-[#0db5c8] to-[#089bab]"
-                  type="submit"
-                  onClick={() => setOpen(false)}
-                >
-                  Ok
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
       </form>
       {table && (
         <div className="my-2">
           <div className="flex justify-end items-center mr-2">
             <button
               onClick={clearFilters}
-              className="px-2 py-2 bg-white from-primary text-xs hover:to-secondary text-secondary border border-secondary rounded-sm"
+              className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
             >
               Clear filters
             </button>

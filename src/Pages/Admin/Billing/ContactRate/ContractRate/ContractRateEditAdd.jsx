@@ -1,28 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Switch,
-  TextField,
-} from "@mui/material";
+
 import { Link, useParams } from "react-router-dom";
 
 const ContractRateEditAdd = () => {
   const { id } = useParams();
-  // console.log("param ", id);
-  const [combo, setCombo] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
     reset();
   };
 
@@ -43,15 +30,15 @@ const ContractRateEditAdd = () => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex flex-wrap items-center gap-2 my-5">
-                <div className="w-[30%]">
+              <div className="flex flex-wrap items-center gap-6 my-5">
+                <div className="w-[20%]">
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Select Insurance
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("insurance")}
                   >
                     <option value="name"> Payor </option>
@@ -61,7 +48,7 @@ const ContractRateEditAdd = () => {
                 {/* File  */}
                 <div className=" ">
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       File
                     </span>
                   </label>
@@ -74,16 +61,16 @@ const ContractRateEditAdd = () => {
               </div>
               <div className="divider"></div>
               <h1 className="text-lg my-2 text-orange-500">Add/Edit Rate:</h1>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  mr-2 gap-2">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5  mr-2 gap-6">
                 {/* name  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Select Tx type
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("tx_type")}
                   >
                     <option value="name"> abcd </option>
@@ -91,12 +78,12 @@ const ContractRateEditAdd = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Service
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("service")}
                   >
                     <option value="name"> abcd </option>
@@ -105,12 +92,12 @@ const ContractRateEditAdd = () => {
                 {/* Service Sub-Type  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Service Sub-Type
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("service_sub_type")}
                   >
                     <option value="name">EFT</option>
@@ -119,12 +106,12 @@ const ContractRateEditAdd = () => {
                 {/* CPT Code  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       CPT Code
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("CPT_Code")}
                   >
                     <option value="name">EFT</option>
@@ -135,14 +122,14 @@ const ContractRateEditAdd = () => {
                   <div>
                     {" "}
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         M1
                       </span>
                     </label>
                     <input
                       type="number"
                       name="m1"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="input-border py-[1px] text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                       {...register("m1")}
                     />
                   </div>
@@ -150,31 +137,30 @@ const ContractRateEditAdd = () => {
                   <div>
                     {" "}
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         M2
                       </span>
                     </label>
                     <input
                       type="number"
                       name="m2"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="input-border py-[1px] text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                       {...register("21")}
                     />
                   </div>
-                </div>
-                <div className="flex justify-between gap-2">
+
                   {/* m3 #  */}
                   <div>
                     {" "}
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         M3
                       </span>
                     </label>
                     <input
                       type="number"
                       name="m3"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="input-border text-gray-600 py-[1px] rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                       {...register("m3")}
                     />
                   </div>
@@ -182,14 +168,14 @@ const ContractRateEditAdd = () => {
                   <div>
                     {" "}
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         M4
                       </span>
                     </label>
                     <input
                       type="number"
                       name="m4"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                      className="input-border text-gray-600 rounded-sm py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
                       {...register("m4")}
                     />
                   </div>
@@ -197,12 +183,12 @@ const ContractRateEditAdd = () => {
                 {/* Rate Type  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Rate Type
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("rate_type")}
                   >
                     <option value="name">EFT</option>
@@ -211,12 +197,12 @@ const ContractRateEditAdd = () => {
                 {/* Rate Per  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Rate Per
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("rate_Per")}
                   >
                     <option value="name">EFT</option>
@@ -226,14 +212,14 @@ const ContractRateEditAdd = () => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Contract Rate
                     </span>
                   </label>
                   <input
                     type="number"
                     name="contract_rate"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("contract_rate")}
                   />
                 </div>
@@ -241,14 +227,14 @@ const ContractRateEditAdd = () => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Billing Rate
                     </span>
                   </label>
                   <input
                     type="number"
                     name="billing_rate"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("billing_rate")}
                   />
                 </div>
@@ -256,14 +242,14 @@ const ContractRateEditAdd = () => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       % Increase
                     </span>
                   </label>
                   <input
                     type="number"
                     name="increase"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("increase")}
                   />
                 </div>
@@ -271,56 +257,59 @@ const ContractRateEditAdd = () => {
                 {/* Degree Level  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Degree Level
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("degree_level")}
                   >
                     <option value="name">EFT</option>
                   </select>
                 </div>
                 <div className="flex ml-1 gap-3">
-                  <div>
-                    <FormGroup>
-                      <FormControlLabel
-                        className="form-check-label inline-block ml-2 text-xs text-gray-500"
-                        control={<Checkbox />}
-                        label="Active"
-                      />
-                    </FormGroup>
+                  <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                      Active
+                    </span>
                   </div>
-                  <div>
-                    <FormGroup>
-                      <FormControlLabel
-                        className="form-check-label inline-block ml-2 text-xs text-gray-500"
-                        control={<Checkbox />}
-                        label="Add to auth"
-                      />
-                    </FormGroup>
+                  <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
+                    <input
+                      type="checkbox"
+                      name="addAuth"
+                      {...register("addAuth")}
+                    />
+                    <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                      Add to auth
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="mb-3">
-                {" "}
-                {/* submit  */}
-                <input
-                  className=" py-2   px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                  type="submit"
-                  value={"Save"}
-                />
-                <Link to={"/admin/contract-rate"}>
-                  {" "}
+                <div className=" flex items-end justify-start mt-2">
                   <button
-                    className="font-normal  py-2 mt-8 px-3 text-xs bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md"
+                    className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                    type="submit"
+                  >
+                    Save
+                  </button>
+
+                  <button
+                    className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                    autoFocus
                     onClick={onCancel}
                   >
                     Cancel
                   </button>
-                </Link>
+                </div>{" "}
+                {/* submit  */}
               </div>
             </form>
           </motion.div>

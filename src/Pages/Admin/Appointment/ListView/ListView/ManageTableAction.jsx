@@ -41,27 +41,27 @@ const ManageTableAction = ({ row }) => {
   return (
     <div>
       {!editSession && !openAddNote && !openViewNote ? (
-        <div className=" bg-white border shadow-md px-3 py-4 z-30 right-[-20px] w-[150px] rounded-md">
-          <button
-            className="text-sm hover:text-secondary flex items-center font-normal  gap-2"
-            onClick={() => addNoteHandler()}
-          >
-            <AiOutlinePlus /> Add Note
-          </button>
-          <br />
-          <button
-            className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-            onClick={viewNoteHandler}
-          >
-            <AiOutlineEye /> View Note
-          </button>
-          <br />
-          <button
-            className="text-sm hover:text-secondary flex items-center font-normal gap-2"
-            onClick={editSessionHandler}
-          >
-            <MdOutlineModeEditOutline /> Edit Session
-          </button>
+        <div className=" bg-white py-2 border shadow-xl flex flex-col items-center z-30  w-[130px] rounded-sm">
+          <div>
+            <button
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              onClick={() => addNoteHandler()}
+            >
+              <AiOutlinePlus className="text-sm" /> Add Note
+            </button>
+            <button
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              onClick={viewNoteHandler}
+            >
+              <AiOutlineEye className="text-sm" /> View Note
+            </button>
+            <button
+              className="text-xs text-secondary px-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              onClick={editSessionHandler}
+            >
+              <MdOutlineModeEditOutline className="text-sm" /> Edit Session
+            </button>
+          </div>
         </div>
       ) : null}
       {openAddNote && (

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Modal } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 
 const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
   const { register, handleSubmit, reset } = useForm();
@@ -28,12 +29,13 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
             // fullScreen={fullScreen}
             open={open}
             centered
-            width={800}
+            width={600}
             footer={false}
             closable={false}
             bodyStyle={{ padding: "0" }}
+            className="box rounded-md"
           >
-            <div className="px-5 py-2 box">
+            <div className="px-5 py-2 ">
               <div className="flex items-center justify-between">
                 <h1 className="text-lg text-left text-orange-400 ">
                   Edit Document
@@ -101,7 +103,7 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       <input
                         type="text"
                         name="m1"
-                        className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                        className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
                         {...register("m1")}
                       />
                     </div>
@@ -114,7 +116,7 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       <input
                         type="text"
                         name="m2"
-                        className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                        className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
                         {...register("m2")}
                       />
                     </div>
@@ -127,7 +129,7 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       <input
                         type="text"
                         name="m3"
-                        className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                        className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
                         {...register("m3")}
                       />
                     </div>
@@ -140,7 +142,7 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       <input
                         type="text"
                         name="m4"
-                        className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                        className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
                         {...register("m4")}
                       />
                     </div>
@@ -161,17 +163,18 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                         <option value="married">married</option>
                       </select>
                     </div>
-                    <div className="mt-[35px]">
+                    <div className="mt-[32px]">
                       <select
                         className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                         {...register("minute")}
                       >
+                        <option value="single"></option>
                         <option value="single">single</option>
                         <option value="married">married</option>
                       </select>
                     </div>
                   </div>
-                  <div>
+                  <div className="w-1/2">
                     <label className="label">
                       <span className="label-text text-xs text-gray-600 font-medium text-left">
                         Rate
@@ -180,7 +183,7 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                     <input
                       type="text"
                       name="rate"
-                      className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
                       {...register("rate")}
                     />
                   </div>
@@ -192,7 +195,7 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       <span className="text-red-500">*</span>
                     </span>
                   </label>
-                  <div className="flex flex-wrap gap-1 border border-gray-300 p-1">
+                  <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
                     <div className="  text-sm font-semibold my-auto px-3">
                       Maximum
                     </div>
@@ -228,13 +231,9 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                         <option value="single">single</option>
                         <option value="married">married</option>
                       </select>
-                    </div>
-
-                    <div className="text-sm font-bold my-auto px-3 ml-1">
-                      AND
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-1 border border-gray-300 p-1">
+                  <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
                     <div className="  text-sm font-semibold my-auto px-3">
                       Maximum
                     </div>
@@ -270,13 +269,9 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                         <option value="single">single</option>
                         <option value="married">married</option>
                       </select>
-                    </div>
-
-                    <div className="text-sm font-bold my-auto px-3 ml-1">
-                      AND
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-1 border border-gray-300 p-1">
+                  <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
                     <div className="  text-sm font-semibold my-auto px-3">
                       Maximum
                     </div>
@@ -312,10 +307,6 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                         <option value="single">single</option>
                         <option value="married">married</option>
                       </select>
-                    </div>
-
-                    <div className="text-sm font-bold my-auto px-3 ml-1">
-                      AND
                     </div>
                   </div>
                 </div>
@@ -325,13 +316,16 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       Notes
                     </span>
                   </label>
-                  <textarea
-                    onChange={(e) => setNotes(e.target.value)}
-                    name="comment"
-                    className="border border-gray-300 text-xs p-2  ml-1 h-24 w-full"
-                  >
-                    Notes
-                  </textarea>
+
+                  <div className="mt-3">
+                    <TextArea
+                      onChange={(e) => setNotes(e.target.value)}
+                      maxLength={2}
+                      rows={5}
+                      placeholder=" Notes"
+                      size="large"
+                    />
+                  </div>
                 </div>
                 <div className="bg-gray-200 py-[1px] mt-3"></div>
                 <div className=" flex items-end justify-end mt-2">

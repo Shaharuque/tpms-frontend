@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { HiPlus } from "react-icons/hi";
-import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import check from "../../../../Assets/contact.png";
 import { Table } from "antd";
 import DocumentsAction from "./Documents/DocumentsAction";
+import AddDocuments from "./Documents/AddDocuments";
 
 const Documents = () => {
   const { id } = useParams();
   console.log("patient Documents", id);
-  const [open, setOpen] = useState(false);
-
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
   const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -128,12 +132,6 @@ const Documents = () => {
     setFilteredInfo({});
   };
 
-  const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
-  };
-
   return (
     <div className="h-[100vh]">
       <div className="mt-10">
@@ -169,78 +167,16 @@ const Documents = () => {
       </div>
       <div className="my-10">
         <button
-          onClick={() => {
-            setOpen(!open);
-          }}
+          onClick={handleClickOpen}
           className="px-3 mb-5 text-xs font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm flex items-center"
         >
           <HiPlus /> Add New Data
         </button>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
-                <div>
-                  <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                      Document
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    name="Document"
-                    className="input-border text-gray-600 rounded-sm  pb-[2px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-                    {...register("Document")}
-                  />
-                </div>
-
-                <div>
-                  {" "}
-                  <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                      Expiry Date
-                    </span>
-                  </label>
-                  <input
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
-                    type="date"
-                    {...register("check_Date")}
-                  />
-                </div>
-                <div>
-                  <label className="label">
-                    <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                      Upload File
-                    </span>
-                  </label>
-                  <input
-                    type="file"
-                    className=" px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("fileName")}
-                  />
-                </div>
-                <div className=" mt-[34px]">
-                  <button
-                    className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                    type="submit"
-                  >
-                    Save
-                  </button>
-
-                  <button
-                    className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                    autoFocus
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </form>
-          </motion.div>
+        {openEditModal && (
+          <AddDocuments
+            handleClose={handleClose}
+            open={openEditModal}
+          ></AddDocuments>
         )}
       </div>
     </div>

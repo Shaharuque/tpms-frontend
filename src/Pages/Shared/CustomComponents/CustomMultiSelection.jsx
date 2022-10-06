@@ -13,19 +13,16 @@
 //   ];
 //   const [selected, setSelected] = useState([]);
 
-
 //   const customValueRenderer = (selected, _options) => {
 //       if(selected.length){
 //         if(selected.length > 3) return `All Selected ${selected.length}`
 //         return selected.map(({ label }) => label)
-//       }  
+//       }
 //       return  "None selected";
 //     };
 
 //     console.log("Multi Select data",selected)
 //   return (
-
-
 
 // <MultiSelect
 //     // styles={{
@@ -42,7 +39,6 @@
 //       labelledBy="Select"
 //       valueRenderer={customValueRenderer}
 //     />
-   
 
 //   );
 // };
@@ -51,7 +47,6 @@
 
 import React from "react";
 import { CheckPicker, Checkbox, Button } from "rsuite";
-
 
 const CustomMultiSelection = ({ data, setValue, value }) => {
   const footerStyles = {
@@ -75,7 +70,7 @@ const CustomMultiSelection = ({ data, setValue, value }) => {
   };
   return (
     <div>
- <CheckPicker
+      <CheckPicker
         data={data}
         placeholder="Select"
         ref={picker}
@@ -106,7 +101,7 @@ const CustomMultiSelection = ({ data, setValue, value }) => {
             </Button> */}
           </div>
         )}
-      /> 
+      />
     </div>
   );
 };

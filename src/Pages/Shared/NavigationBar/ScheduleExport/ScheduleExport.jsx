@@ -2,26 +2,25 @@ import React, { useState } from "react";
 import ExportedFiles from "./ExportedFiles";
 import { Fade } from "react-reveal";
 import { useNavigate } from "react-router-dom";
-// 
-const ScheduleExport = ({ setVisible }) => {
+//
+const ScheduleExport = () => {
   const navigate = useNavigate();
   const handleDownload = () => {
     navigate("/admin/report-export-view");
     console.log("use");
-    setVisible(false);
   };
 
   return (
-    <Fade button>
+    <div>
       <div
-        className="absolute z-10 bg-white w-auto md:w-[18rem] sm:w-56 shadow rounded-xl
-       mt-2 sm:right-52 "
+        className="absolute z-10 bg-white w-[15rem] sm:w-[18rem] shadow-md rounded-lg
+       mt-2 lg:right-[-20px] md:right-[-280px] sm:right-[-280px]  "
       >
-        <div className="rounded-t-xl p-4 flex justify-between items-center bg-gradient-to-r from-primary to-secondary">
+        <div className="rounded-t-lg p-4 flex justify-between items-center bg-gradient-to-r from-primary to-secondary">
           <h5 className="inline  text-sm text-white font-bold">
             Schedule export
           </h5>
-          <span class="inline-block  px-2 text-xs text-center  align-baseline font-bold bg-white text-black rounded">
+          <span className="inline-block  px-2 text-xs text-center align-baseline font-bold bg-white text-black rounded">
             64
           </span>
         </div>
@@ -45,7 +44,7 @@ const ScheduleExport = ({ setVisible }) => {
           </button>
         </div>
       </div>
-    </Fade>
+    </div>
   );
 };
 

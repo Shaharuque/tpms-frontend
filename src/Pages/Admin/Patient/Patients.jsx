@@ -52,6 +52,8 @@ const TableApi = () => {
       });
   }, []);
 
+  console.log(data);
+
   const globalFilter = (value) => {
     //console.log(value);
     const filteredData = data?.filter(
@@ -442,14 +444,14 @@ const TableApi = () => {
       }
     >
       <>
-        <div className="flex items-center justify-between gap-2 my-2">
+        <div className="flex items-center flex-wrap justify-between gap-2 my-2">
           <h1 className="text-lg text-orange-500 text-left font-semibold ">
             Patient
           </h1>
           <div>
             <input
               placeholder="Search here..."
-              className="px-2 w-52 mr-2 py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+              className="px-2 w-52 mr-2 py-2 mb-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
               onChange={(e) => globalFilter(e.target.value)}
             />
 
@@ -469,7 +471,7 @@ const TableApi = () => {
         filteredInfo?.location?.length > 0 ||
         filteredInfo?.insurance?.length > 0 ? (
           // <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
-          <div className="my-5 flex items-center gap-2">
+          <div className="my-5 flex flex-wrap items-center gap-2">
             {filteredInfo?.client_first_name?.length > 0 && (
               <div className=" ">
                 <div className="flex mb-2 gap-1">
@@ -617,10 +619,8 @@ const TableApi = () => {
             className=" text-xs font-normal"
             columns={columns}
             dataSource={data} //Which data chunk you want to show in table
+            // For fixed header table at top
             onChange={handleChange}
-            scroll={{
-              y: 700,
-            }}
           />
         </div>
         {/* </InfiniteScroll> */}

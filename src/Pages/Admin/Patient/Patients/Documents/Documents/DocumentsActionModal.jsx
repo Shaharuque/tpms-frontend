@@ -1,9 +1,9 @@
-import { Dialog } from "@mui/material";
+import { Modal } from "antd";
 import React, { useEffect } from "react";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-
+                                                               
 const DocumentsActionModal = ({ handleClose, open, row }) => {
   const { register, handleSubmit, reset } = useForm();
 
@@ -23,13 +23,17 @@ const DocumentsActionModal = ({ handleClose, open, row }) => {
 
   return (
     <div>
-      <Dialog
+      <Modal
         // fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        centered
+        width={600}
+        footer={false}
+        closable={false}
+        bodyStyle={{ padding: "0" }}
+        className="box rounded-md"
       >
-        <div className="px-5 py-2 box sm:w-[550px]">
+        <div className="px-5 py-2 ">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
               Edit Document
@@ -103,7 +107,7 @@ const DocumentsActionModal = ({ handleClose, open, row }) => {
             </div>
           </form>
         </div>
-      </Dialog>
+      </Modal>
     </div>
   );
 };

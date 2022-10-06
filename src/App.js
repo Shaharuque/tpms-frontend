@@ -1,10 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Sidebar from "./Pages/Components/Sidebar.jsx";
-import Report from "./Pages/Pages/Report.jsx";
 import Settings from "./Pages/Pages/Settings.jsx";
 import ERemittance from "./Pages/Pages/ERemittance";
-import MPosting from "./Pages/Pages/MPosting";
 import ProcessingPayroll from "./Pages/Pages/ProcessingPayroll";
 import Timesheet from "./Pages/Pages/Timesheet";
 import NameLocation from "./Pages/Pages/Settings/NameLocation";
@@ -29,12 +26,9 @@ import BusinessFiles from "./Pages/Pages/Settings/BusinessFiles";
 import DataImport from "./Pages/Pages/Settings/DataImport";
 import TpmsMeet from "./Pages/Pages/Settings/TpmsMeet";
 import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
-import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
-import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
 import ContractRateEditAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
 //For testing purpose
-import MainBase from "./Testing/Table_React/MainBase";
 import BatchingClaims from "./Pages/Admin/Billing/BillingManager/BatchingClaims/BatchingClaims";
 import ManageClaims from "./Pages/Admin/Billing/BillingManager/ManageClaims/ManageClaims";
 import ProcessingClaim from "./Pages/Admin/Billing/BillingManager/ProcessingClaims/ProcessingClaim";
@@ -134,6 +128,13 @@ import BillingManager from "./Pages/Admin/Billing/BillingManager/BillingManager"
 import ArLedger from "./Pages/Admin/Billing/ARLeadger/ArLedger";
 import ContractRate from "./Pages/Admin/Billing/ContactRate/ContractRate";
 import PatientStatement from "./Pages/Admin/Billing/PatientStatement/PatientStatement";
+import Sidebar from "./Pages/Shared/Sidebar/Sidebar";
+import AddAuthorization from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AddAuthorization";
+import ContractRateAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateAdd";
+import MPosting from "./Pages/Admin/Payment/MPosting";
+import MPostingEditAdd from "./Pages/Admin/Payment/MPosting/MPostingEditAdd";
+import MDepositApply from "./Pages/Admin/Payment/MPosting/MDepositApply";
+import Report from "./Pages/Admin/Report/Report";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -389,8 +390,8 @@ function App() {
               ></Route>
             </Route>
             <Route
-              path="authorization-Edit"
-              element={<AuthorizationEdit></AuthorizationEdit>}
+              path="authorization-add"
+              element={<AddAuthorization></AddAuthorization>}
             ></Route>
             <Route
               path="authorization-Edit/:id"
@@ -477,8 +478,8 @@ function App() {
               element={<ContractRate></ContractRate>}
             ></Route>
             <Route
-              path="billing/rate-list-add-edit"
-              element={<ContractRateEditAdd></ContractRateEditAdd>}
+              path="billing/rate-list-add"
+              element={<ContractRateAdd></ContractRateAdd>}
             ></Route>
             <Route
               path="billing/rate-list-add-edit/:id"
