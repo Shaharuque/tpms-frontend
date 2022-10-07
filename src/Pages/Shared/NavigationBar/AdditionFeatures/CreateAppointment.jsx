@@ -26,20 +26,42 @@ const CreateAppointment = ({ handleClose }) => {
     "Saturday",
   ];
 
-  const month = date.toLocaleString("en-us", { month: "long" });
-  const currentDate = date.getDate();
-  const year = date.getFullYear();
+  // // testing single calendar
+  // const [date, setDate] = useState(new Date());
+  // const [openCalendar, setOpenCalendar] = useState(false);
+  // const changeDate = (date) => {
+  //   setDate(date);
+  // };
+  // console.log(date);
+
+  // const month = date ? date.getMonth() + 1 : null;
+  // const day = date ? date.getDate() : null;
+  // const year = date ? date.getFullYear() : null;
+
+  // const handleCancelDate = () => {
+  //   // setOpenCalendar(false);
+  //   setDate(null);
+  // };
+  const month = date ? date.toLocaleString("en-us", { month: "long" }) : null;
+  const currentDate = date ? date.getDate() : null;
+  const year = date ? date.getFullYear() : null;
 
   console.log(month, currentDate, year);
+  const handleCancelDate = () => {
+    setOpen(false);
+    setDate(null);
+    console.log(date);
+  };
 
   React.useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        check_date: date.toLocaleDateString(),
+        check_date: date ? date.toLocaleDateString() : null,
       });
     }, 0);
-  }, [date.toLocaleDateString()]);
+    // }, [date.toLocaleDateString()]);
+  }, []);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -180,7 +202,7 @@ const CreateAppointment = ({ handleClose }) => {
                 name="check_date"
                 readOnly
                 onClick={() => setOpen(!open)}
-                value={date.toLocaleDateString()}
+                value={date ? date.toLocaleDateString() : "Select a date"}
                 className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
                 {...register("check_date")}
               />
@@ -198,14 +220,18 @@ const CreateAppointment = ({ handleClose }) => {
                   <div className="grid lg:grid-cols-3">
                     <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-tl-[5px]">
                       <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
-                        <span className="text-2xl">{days[date.getDay()]}</span>
+                        <span className="text-2xl">
+                          {date ? days[date.getDay()] : null}
+                        </span>
                       </div>
                       <div className="flex flex-col justify-center items-center">
-                        <h1 className="text-8xl">{currentDate}</h1>
-                        <h1>{month}</h1>
+                        <h1 className="text-8xl">
+                          {date ? currentDate : null}
+                        </h1>
+                        <h1>{date ? month : null}</h1>
                       </div>
                       <div className="flex justify-center items-end">
-                        <h1 className="text-3xl">{year}</h1>
+                        <h1 className="text-3xl">{date ? year : null}</h1>
                       </div>
                     </div>
 
@@ -217,9 +243,10 @@ const CreateAppointment = ({ handleClose }) => {
                   </div>
                   <div className="flex justify-between cursor-pointer bg-black rounded-b-[5px]">
                     <button
-                      onClick={() => {
-                        setOpen(false);
-                      }}
+                      // onClick={() => {
+                      //   setOpen(false);
+                      // }}
+                      onClick={() => handleCancelDate()}
                       className="text-xs text-red-400 p-2 hover:text-white hover:bg-teal-500"
                     >
                       CLEAR
@@ -436,7 +463,7 @@ const CreateAppointment = ({ handleClose }) => {
               </button>
 
               <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                className="py-[5px] px-3 text-xs font-normal bg-gradient-to-r from-red-700 to-red-400 hover:to-red-700 text-white rounded-sm"
                 autoFocus
                 onClick={handleClose}
               >
