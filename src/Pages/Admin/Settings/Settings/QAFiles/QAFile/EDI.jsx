@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "../SettingComponents/CheckBox";
-import SettingTableBox from "../SettingComponents/SettingTableBox";
+// import { CheckBox } from "../SettingComponents/CheckBox";
+// import SettingTableBox from "../SettingComponents/SettingTableBox";
 import { EDITableColumn, EDITableData } from "./QAfileTableData";
 
 const EDI = () => {
@@ -20,12 +20,12 @@ const EDI = () => {
               id: "selection",
               Header: ({ getToggleAllRowsSelectedProps }) => (
                 <div>
-                  <CheckBox {...getToggleAllRowsSelectedProps()} />
+                  {/* <CheckBox {...getToggleAllRowsSelectedProps()} /> */}
                 </div>
               ),
               Cell: ({ row }) => (
                 <div>
-                  <CheckBox {...row.getToggleRowSelectedProps()} />
+                  {/* <CheckBox {...row.getToggleRowSelectedProps()} /> */}
                 </div>
               ),
             },
@@ -38,13 +38,13 @@ const EDI = () => {
     <div>
       <h1 className="text-lg my-2 text-orange-400">EDI FILE</h1>
       <div>
-        <SettingTableBox
+        {/* <SettingTableBox
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></SettingTableBox> */}
       </div>
     </div>
   );

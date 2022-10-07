@@ -127,7 +127,6 @@ import VendorNumberSetup from "./Pages/Admin/Settings/Settings/VendorNumberSetup
 import PayPeriod from "./Pages/Admin/Settings/Settings/PayPeriod/PayPeriod";
 import UnbillableActivity from "./Pages/Admin/Settings/Settings/UnbillableActivity/UnbillableActivity";
 import CreateServiceRules from "./Pages/Admin/Settings/Settings/CreateServiceRules/CreateServiceRules";
-import EraManager from "./Pages/Pages/Settings/EraManager";
 import FormAndLibrary from "./Pages/Admin/Settings/Settings/FormAndLIbrary/FormAndLibrary";
 import TpmsMeet from "./Pages/Admin/Settings/Settings/TPMSMeet/TpmsMeet";
 import BusinessFiles from "./Pages/Admin/Settings/Settings/BusinessFiles/BusinessFiles";
@@ -137,6 +136,7 @@ import Logo from "./Pages/Admin/Settings/Settings/Logo/Logo";
 import HolidaySetup from "./Pages/Admin/Settings/Settings/HolidaySetUp/HolidaySetup";
 import AddServiceSubType from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType";
 import AddInsurance from "./Pages/Admin/Settings/Settings/AddInsurance/AddInsurance";
+import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
 
 function App() {
   const handle = useFullScreenHandle();

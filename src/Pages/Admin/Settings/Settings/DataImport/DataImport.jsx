@@ -2,6 +2,7 @@ import { CssBaseline } from "@mui/material";
 import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const DataImport = () => {
   const [data, setData] = useState();
@@ -42,7 +43,11 @@ const DataImport = () => {
       ],
       render: (_, { created }) => {
         //console.log("tags : ", lock);
-        return <div className="font-bold">{created}</div>;
+        return (
+          <div className=" font-medium">
+            {created} <span className="font-thin text-gray-700">1:27 PM</span>
+          </div>
+        );
       },
       filteredValue: filteredInfo.created || null,
       onFilter: (value, record) => record.created.includes(value),
@@ -82,7 +87,7 @@ const DataImport = () => {
       width: 80,
       render: (_, { password }) => {
         //console.log("tags : ", lock);
-        return <div className="font-bold text-red-600">{password}</div>;
+        return <div className=" font-medium text-red-600">{password}</div>;
       },
       sorter: (a, b) => {
         return a.password > b.password ? -1 : 1;
@@ -101,9 +106,9 @@ const DataImport = () => {
         return (
           <div className="font-semibold flex justify-center">
             {status === "download" && (
-              <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
+              <Link to={"#"} className="text-secondary font-normal">
+                Ready To Download
+              </Link>
             )}
           </div>
         );

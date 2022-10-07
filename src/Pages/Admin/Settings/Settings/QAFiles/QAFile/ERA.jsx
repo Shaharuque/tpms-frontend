@@ -1,8 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { BsEyeFill } from "react-icons/bs";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import { CheckBox } from "../SettingComponents/CheckBox";
-import SettingTableBox from "../SettingComponents/SettingTableBox";
 import ERAActionModal from "./ERAActionModal";
 import { ERATableColumn, ERATableData } from "./QAfileTableData";
 
@@ -33,12 +31,12 @@ const ERA = () => {
               id: "selection",
               Header: ({ getToggleAllRowsSelectedProps }) => (
                 <div>
-                  <CheckBox {...getToggleAllRowsSelectedProps()} />
+                  {/* <CheckBox {...getToggleAllRowsSelectedProps()} /> */}
                 </div>
               ),
               Cell: ({ row }) => (
                 <div>
-                  <CheckBox {...row.getToggleRowSelectedProps()} />
+                  {/* <CheckBox {...row.getToggleRowSelectedProps()} /> */}
                 </div>
               ),
             },
@@ -78,13 +76,13 @@ const ERA = () => {
     <div>
       <h1 className="text-lg my-2 text-orange-400">ERA FILE</h1>
       <div>
-        <SettingTableBox
+        {/* <SettingTableBox
           getTableProps={getTableProps}
           headerGroups={headerGroups}
           getTableBodyProps={getTableBodyProps}
           rows={page}
           prepareRow={prepareRow}
-        ></SettingTableBox>
+        ></SettingTableBox> */}
       </div>
       {openEditModal && (
         <ERAActionModal
