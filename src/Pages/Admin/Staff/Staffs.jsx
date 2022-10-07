@@ -247,7 +247,7 @@ const Staffs = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={clearFilters}
-            className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
+            className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
           >
             Clear filters
           </button>
