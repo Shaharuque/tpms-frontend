@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DatePicker from "react-multi-date-picker";
 import SimpleFileUpload from "react-simple-file-upload";
 
 const ERemittance = () => {
@@ -8,7 +7,6 @@ const ERemittance = () => {
 
   console.log(file);
   console.log(file2);
-  
 
   return (
     <div className="h-[100vh]">

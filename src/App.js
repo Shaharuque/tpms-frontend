@@ -1,38 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Settings from "./Pages/Pages/Settings.jsx";
 import ERemittance from "./Pages/Pages/ERemittance";
-import ProcessingPayroll from "./Pages/Pages/ProcessingPayroll";
-import Timesheet from "./Pages/Pages/Timesheet";
-import NameLocation from "./Pages/Pages/Settings/NameLocation";
-import AddInsurance from "./Pages/Pages/Settings/AddInsurance";
-import AddTreatments from "./Pages/Pages/Settings/AddTreatments";
-import AddServices from "./Pages/Pages/Settings/AddServices";
-import AddCptCode from "./Pages/Pages/Settings/AddCptCode";
-import AddServiceSubType from "./Pages/Pages/Settings/AddServiceSubType";
-import AddStaffType from "./Pages/Pages/Settings/AddStaffType";
-import ReferringProvider from "./Pages/Pages/Settings/ReferringProvider";
-import PlaceOfServices from "./Pages/Pages/Settings/PlaceOfServices";
-import EraManager from "./Pages/Pages/Settings/EraManager";
-import VendorNumberSetup from "./Pages/Pages/Settings/VendorNumberSetup";
-import HolidaySetup from "./Pages/Pages/Settings/HolidaySetup";
-import PayPeriod from "./Pages/Pages/Settings/PayPeriod";
-import Logo from "./Pages/Pages/Settings/Logo";
-import UnbillableActivity from "./Pages/Pages/Settings/UnbillableActivity";
-import CreateServiceRules from "./Pages/Pages/Settings/CreateServiceRules";
-import FormsBuilder from "./Pages/Pages/Settings/FormsBuilder";
-import FormAndLibrary from "./Pages/Pages/Settings/FormAndLibrary";
-import BusinessFiles from "./Pages/Pages/Settings/BusinessFiles";
-import DataImport from "./Pages/Pages/Settings/DataImport";
-import TpmsMeet from "./Pages/Pages/Settings/TpmsMeet";
-import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
 import ContractRateEditAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
 //For testing purpose
 import BatchingClaims from "./Pages/Admin/Billing/BillingManager/BatchingClaims/BatchingClaims";
 import ManageClaims from "./Pages/Admin/Billing/BillingManager/ManageClaims/ManageClaims";
 import ProcessingClaim from "./Pages/Admin/Billing/BillingManager/ProcessingClaims/ProcessingClaim";
-import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
 import CreateStaff from "./Pages/Admin/Staff/AddStaff/CreateStaff";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
@@ -135,6 +109,34 @@ import MPosting from "./Pages/Admin/Payment/MPosting";
 import MPostingEditAdd from "./Pages/Admin/Payment/MPosting/MPostingEditAdd";
 import MDepositApply from "./Pages/Admin/Payment/MPosting/MDepositApply";
 import Report from "./Pages/Admin/Report/Report";
+import Timesheet from "./Pages/Admin/Payroll/TimeSheet/Timesheet";
+import ProcessingPayroll from "./Pages/Admin/Payroll/ProcessingPayroll/ProcessingPayroll";
+import Processing_Payroll from "./Pages/Admin/Payroll/ProcessingPayroll/ProcessingPayroll/Processing_Payroll";
+import PayrollSubmission from "./Pages/Admin/Payroll/ProcessingPayroll/PayrollSubmission/PayrollSubmission";
+import ProcessedPayroll from "./Pages/Admin/Payroll/ProcessingPayroll/ProcessedPayroll/ProcessedPayroll";
+import Settings from "./Pages/Admin/Settings/Settings";
+import NameLocation from "./Pages/Admin/Settings/Settings/NameLocation/NameLocation";
+import InsuranceSetup from "./Pages/Admin/Settings/Settings/InsuranceSetUp/InsuranceSetup";
+import AddTreatments from "./Pages/Admin/Settings/Settings/AddTreatment/AddTreatments";
+import AddServices from "./Pages/Admin/Settings/Settings/AddServices/AddServices";
+import AddCptCode from "./Pages/Admin/Settings/Settings/AddCptCode/AddCptCode";
+import AddStaffType from "./Pages/Admin/Settings/Settings/AddStaffType/AddStaffType";
+import ReferringProvider from "./Pages/Admin/Settings/Settings/ReferringProvider/ReferringProvider";
+import PlaceOfServices from "./Pages/Admin/Settings/Settings/PlaceOfService/PlaceOfServices";
+import VendorNumberSetup from "./Pages/Admin/Settings/Settings/VendorNumberSetup/VendorNumberSetup";
+import PayPeriod from "./Pages/Admin/Settings/Settings/PayPeriod/PayPeriod";
+import UnbillableActivity from "./Pages/Admin/Settings/Settings/UnbillableActivity/UnbillableActivity";
+import CreateServiceRules from "./Pages/Admin/Settings/Settings/CreateServiceRules/CreateServiceRules";
+import EraManager from "./Pages/Pages/Settings/EraManager";
+import FormAndLibrary from "./Pages/Admin/Settings/Settings/FormAndLIbrary/FormAndLibrary";
+import TpmsMeet from "./Pages/Admin/Settings/Settings/TPMSMeet/TpmsMeet";
+import BusinessFiles from "./Pages/Admin/Settings/Settings/BusinessFiles/BusinessFiles";
+import DataImport from "./Pages/Admin/Settings/Settings/DataImport/DataImport";
+import FormsBuilder from "./Pages/Admin/Settings/Settings/FormsBuilder/FormsBuilder";
+import Logo from "./Pages/Admin/Settings/Settings/Logo/Logo";
+import HolidaySetup from "./Pages/Admin/Settings/Settings/HolidaySetUp/HolidaySetup";
+import AddServiceSubType from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType";
+import AddInsurance from "./Pages/Admin/Settings/Settings/AddInsurance/AddInsurance";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -517,7 +519,7 @@ function App() {
               <Route index element={<Navigate to="process-payroll" />} />
               <Route
                 path="process-payroll"
-                element={<PayrollSubmission />}
+                element={<Processing_Payroll />}
               ></Route>
               <Route
                 path="submit-payroll"
@@ -525,7 +527,7 @@ function App() {
               ></Route>
               <Route
                 path="completed-payroll"
-                element={<PayrollSubmission />}
+                element={<ProcessedPayroll />}
               ></Route>
             </Route>
             <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
