@@ -1,13 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsXCircle } from "react-icons/bs";
 import { FiCheckCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const VacationAction = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpenAction = () => {
-    setOpen(!open);
-  };
   return (
     <div className="bg-white py-2 border shadow-xl flex flex-col items-center z-30  w-[130px] rounded-sm">
       <div>
