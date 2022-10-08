@@ -4,6 +4,7 @@ import { TransitionTableColumn } from "../TodaysTaskTableData";
 import axios from "axios";
 import UseTable from "../../../../../../Utilities/UseTable";
 import { Table } from "antd";
+import { BiSearchAlt } from "react-icons/bi";
 
 const TransitionTable = () => {
   const [transData, SetTransData] = useState([]);
@@ -44,6 +45,10 @@ const TransitionTable = () => {
           console.log(error);
         });
     }
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
   };
 
   const handleChange = (pagination, filters, sorter) => {
@@ -158,7 +163,7 @@ const TransitionTable = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button className="text-secondary">{patient}</button>
+            <h1>{patient}</h1>
           </div>
         );
       },
@@ -653,6 +658,25 @@ const TransitionTable = () => {
   return (
     <div>
       <div className="my-5">
+        <div className=" lg:flex justify-end mb-3">
+          <div className="px-2 w-52 mr-2 bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center mt-2">
+            <input
+              placeholder="Search here..."
+              onChange={(e) => globalFilter(e.target.value)}
+              className="focus:outline-none"
+            />
+            <label>
+              <BiSearchAlt />
+            </label>
+          </div>
+
+          <button
+            onClick={clearFilters}
+            className="px-2 py-2 mt-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+          >
+            Clear filters
+          </button>
+        </div>
         {/* filtering tag showing part */}
         {filteredInfo?.patient?.length > 0 ||
         filteredInfo?.date_billed?.length > 0 ||
