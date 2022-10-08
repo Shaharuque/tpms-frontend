@@ -19,9 +19,9 @@ const EraManager = () => {
     <div className="h-[100vh]">
       <h1 className="text-lg my-2 text-orange-400">OA Files</h1>
       <div className="flex flex-wrap items-center my-3">
-        <div>
+        <div className="w-1/2 md:w-[10%]">
           <label className="label">
-            <span className="label-text text-xs text-gray-500 text-left">
+            <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
               File Type
             </span>
           </label>
@@ -30,7 +30,7 @@ const EraManager = () => {
               setFileType(e.target.value);
             }}
             name="fileType"
-            className="border rounded-sm px-2 w-36 py-1 text-xs"
+            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
           >
             <option value=""></option>
             <option value="ERA">ERA</option>
@@ -47,21 +47,22 @@ const EraManager = () => {
       {tableOpen && (
         <>
           {fileType === "ERA" ? <ERA></ERA> : <EDI></EDI>}
-          <div>
+          <div className="flex items-center">
             <select
               onChange={(e) => setService(e.target.value)}
               name="type"
-              className="border rounded-sm px-2 w-36 py-[6px] text-xs "
+              className="input-border text-gray-600 rounded-sm mt-8 text-[14px] font-medium ml-1 py-[1px] w-1/2 md:w-[10%] focus:outline-none"
             >
               <option value="process era">Process ERA</option>
               <option value="reviewed">Reviewed</option>
               <option value="unreviewed">Unreviewed</option>
             </select>
+
             <button
               // onClick={submitHandle}
-              className="px-5 mt-7 ml-4 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className="px-3 mt-7 ml-4 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             >
-              Save
+              Go
             </button>
           </div>
         </>

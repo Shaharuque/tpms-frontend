@@ -9,7 +9,7 @@ const Logo = () => {
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
   }
-  const { register, handleSubmit, reset } = useForm();
+  const { handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -26,7 +26,7 @@ const Logo = () => {
             </label>
             <div className="div-img">
               <div>
-                <div className="my-3 ">
+                <div className="my-3">
                   <input
                     className="form-control text-sm border border-gray-300 w-[100px] lg:w-full "
                     type="file"
@@ -34,10 +34,10 @@ const Logo = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div>
+                <div className="p-5 border border-gray-500">
                   <img
                     src={file || person}
-                    className=" h-40 border-2 border-black lg:w-[250px] w-full mt-2 lg:mt-6 rounded"
+                    className=" h-52 w-52 border-2 border-black rounded"
                     alt="alt"
                   />
                 </div>
