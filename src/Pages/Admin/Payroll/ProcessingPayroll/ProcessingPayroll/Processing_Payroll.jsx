@@ -1,12 +1,33 @@
 import { Button, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { MultiSelect } from "react-multi-select-component";
+import CustomMultiSelection from "../../../../Shared/CustomComponents/CustomMultiSelection";
+import GlobalMultiSelect from "../../../../Shared/CustomComponents/GlobalMultiSelect";
+
+const options = [
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+];
 
 const Processing_Payroll = () => {
   const [select, setSelect] = useState("");
   const [tData, setTData] = useState([]);
   const [table, setTable] = useState(false);
-
 
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -368,7 +389,7 @@ const Processing_Payroll = () => {
               </span>
             </label>
             <>
-              
+              <GlobalMultiSelect/>
             </>
           </div>
           <button

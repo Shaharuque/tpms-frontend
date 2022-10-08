@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { BiSearchAlt } from "react-icons/bi";
 
 const ArFollowupBucket = () => {
   const [select, setSelect] = useState("");
@@ -35,37 +36,40 @@ const ArFollowupBucket = () => {
         console.log(error);
       });
   }, []);
-
   console.log(flowUpData);
-
-  // const globalFilter = (value) => {
-  //   //console.log(value);
-  //   const filteredData = flowUpData?.filter(
-  //     (each) =>
-  //       each?.patient?.toLowerCase().includes(value.toLowerCase()) ||
-  //       each?.provider?.toLowerCase().includes(value.toLowerCase()) ||
-  //       each?.date_billed?.toLowerCase().includes(value.toLowerCase()) ||
-  //       each?.paid?.toLowerCase().includes(value) ||
-  //       each?.balance?.toLowerCase().includes(value)
-  //   );
-  //   SetFlowUpData(filteredData);
-
-  //   if (!value) {
-  //     axios("../../All_Fake_Api/FollowupBucket.json")
-  //       .then((response) => {
-  //         console.log("calling");
-  //         SetFlowUpData(response?.data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // };
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
+  };
+
+  const globalFilter = (value) => {
+    //console.log(value);
+    const filteredData = flowUpData?.filter(
+      (each) =>
+        each?.patient?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.provider?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.date_billed?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.paid?.toLowerCase().includes(value) ||
+        each?.balance?.toLowerCase().includes(value)
+    );
+    SetFlowUpData(filteredData);
+
+    if (!value) {
+      axios("../../All_Fake_Api/FollowupBucket.json")
+        .then((response) => {
+          console.log("calling");
+          SetFlowUpData(response?.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
   };
 
   //Individual filtering [tagging feature] pore eikhane bosabo
@@ -172,7 +176,7 @@ const ArFollowupBucket = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button className="text-secondary">{patient}</button>
+            <h1>{patient}</h1>
           </div>
         );
       },
@@ -220,7 +224,7 @@ const ArFollowupBucket = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div>
-            <button>{provider}</button>
+            <h1>{provider}</h1>
           </div>
         );
       },
@@ -522,7 +526,7 @@ const ArFollowupBucket = () => {
           {/* select  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Select
               </span>
             </label>
@@ -541,7 +545,7 @@ const ArFollowupBucket = () => {
           {/* patients */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Patients
               </span>
             </label>
@@ -560,7 +564,7 @@ const ArFollowupBucket = () => {
           {/* Insurance */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Insurance
               </span>
             </label>
@@ -579,7 +583,7 @@ const ArFollowupBucket = () => {
           {/* CPT codes */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 CPT Codes
               </span>
             </label>
@@ -598,7 +602,7 @@ const ArFollowupBucket = () => {
           {/* aging status */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Aging Status
               </span>
             </label>
@@ -617,14 +621,14 @@ const ArFollowupBucket = () => {
           {/* Selected Date */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Selected Date
               </span>
             </label>
             <div className="ml-1 input-border text-gray-600 rounded-sm focus:outline-none font-medium">
               <div
                 onClick={() => setOpen(true)}
-                className="flex flex-wrap justify-center items-center  px-1 py-[1px] mx-1 text-[14px] w-full"
+                className="flex flex-wrap justify-center items-center  px-1 py-[1px] mx-1  text-[14px] w-full"
               >
                 <input
                   value={
@@ -633,15 +637,15 @@ const ArFollowupBucket = () => {
                       : "Start Date"
                   }
                   readOnly
-                  className="focus:outline-none font-normal text-center bg-transparent text-gray-600 w-1/3 cursor-pointer"
+                  className="focus:outline-none text-center bg-transparent text-gray-600 text-[14px] font-medium w-1/3 cursor-pointer"
                 />
-                <BsArrowRight className="w-1/3 text-gray-600"></BsArrowRight>
+                <BsArrowRight className="w-1/3 text-gray-600 cursor-pointer font-medium"></BsArrowRight>
                 <input
                   value={
                     endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
                   }
                   readOnly
-                  className="focus:outline-none font-normal text-center bg-transparent text-gray-600 w-1/3 cursor-pointer"
+                  className="focus:outline-none text-center bg-transparent text-gray-600 w-1/3 cursor-pointer font-medium"
                 />
               </div>
             </div>
@@ -655,13 +659,14 @@ const ArFollowupBucket = () => {
                 // onClick={() => {
                 //   setValue(!value);
                 // }}
+                className="text-[14px] text-gray-600 font-medium"
               />
-              <span className="text-xs ml-1 text-gray-600 font-normal">
+              <span className="text-[14px] ml-1 text-gray-600 font-medium">
                 Zero Paid
               </span>
             </div>
             <button
-              className=" py-[4px] mt-7 px-2 ml-2 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+              className="py-[4px] mt-7 px-2 ml-2 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
               type="submit"
             >
               View
@@ -712,6 +717,25 @@ const ArFollowupBucket = () => {
       {tableOpen && (
         <>
           <div className="my-5">
+            <div className=" lg:flex justify-end mb-3">
+              <div className="px-2 w-52 mr-2 bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center mt-2">
+                <input
+                  placeholder="Search here..."
+                  onChange={(e) => globalFilter(e.target.value)}
+                  className="focus:outline-none"
+                />
+                <label>
+                  <BiSearchAlt />
+                </label>
+              </div>
+
+              <button
+                onClick={clearFilters}
+                className="px-2 py-2 mt-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+              >
+                Clear filters
+              </button>
+            </div>
             {/* filtering tag showing part */}
             {filteredInfo?.patient?.length > 0 ||
             filteredInfo?.provider?.length > 0 ||

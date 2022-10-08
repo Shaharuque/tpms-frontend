@@ -442,7 +442,7 @@ const RecurringSession = () => {
                       <></>
                     )}
                     <button
-                      className="font-regular mt-[50px] sm:w-2/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                      className="font-regular mt-[50px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
                       type="submit"
                     >
                       Go

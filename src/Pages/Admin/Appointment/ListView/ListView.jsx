@@ -304,6 +304,12 @@ const ListView = () => {
       key: "Status",
       dataIndex: "Status",
       width: 100,
+      sorter: (a, b) => {
+        return a.Status > b.Status ? -1 : 1;
+        // a.Status - b.Status,
+      },
+      sortOrder: sortedInfo.columnKey === "Status" ? sortedInfo.order : null,
+      ellipsis: true,
       render: (_, { Status }) => {
         //console.log("Status : ", Status);
         return (
@@ -673,7 +679,7 @@ const ListView = () => {
                                       : "Start Date"
                                   }
                                   readOnly
-                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                  className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 />
                                 <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
                                 <input

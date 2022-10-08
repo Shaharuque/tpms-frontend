@@ -289,7 +289,7 @@ const Sidebar = ({ handle }) => {
                     to={"#"}
                     key={index}
                     className=""
-                    activeclassname="active"
+                    activeClassName="active_sidebar"
                   >
                     <SidebarMenu
                       items={items}
@@ -303,7 +303,7 @@ const Sidebar = ({ handle }) => {
                     to={items.path}
                     key={index}
                     className="link flex"
-                    activeclassname="active"
+                    activeClassName="active_sidebar"
                     onClick={(_) => handleDropState("other")}
                   >
                     <div className="flex items-center">

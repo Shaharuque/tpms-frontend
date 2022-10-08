@@ -47,7 +47,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className={isHovering ? "ml-5 mr-5" : ""}
+          className={isHovering ? "ml-5 mr-5" : " mr-[10px] ml-[-4px]"}
           style={{
             transition: "all .3s ease-out",
           }}
@@ -58,7 +58,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
               key={i}
               style={{ display: "block" }}
               className="hover:bg-white rounded-md py-1 my-2 hover:text-primary text-white"
-              activeclassname="active"
+              activeclassname="active_sidebar"
             >
               <div className="flex items-center h-8">
                 <div className="text-lg  px-3 py-1">{s.icon}</div>
