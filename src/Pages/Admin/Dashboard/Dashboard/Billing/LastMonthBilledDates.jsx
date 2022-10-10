@@ -264,7 +264,7 @@ const LastMonthBilledDates = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-9 items-end my-3 mr-2 gap-x-2 gap-y-1">
+        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 items-end my-3 mr-2 gap-x-2 gap-y-1">
           <div>
             <label className="label">
               <span className="label-text text-base text-gray-500 text-left">

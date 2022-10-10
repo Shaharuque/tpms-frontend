@@ -217,7 +217,7 @@ const CreateAppointment = ({ handleClose }) => {
                     padding: "0px",
                   }}
                 >
-                  <div className="grid lg:grid-cols-3">
+                  <div className="grid grid-cols-3">
                     {date ? (
                       <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-tl-[5px]">
                         <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
