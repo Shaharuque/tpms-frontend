@@ -202,7 +202,7 @@ const CreateAppointment = ({ handleClose }) => {
                 name="check_date"
                 readOnly
                 onClick={() => setOpen(!open)}
-                value={date ? date.toLocaleDateString() : "Select a date"}
+                value={date ? date.toLocaleDateString() : "Select a Date"}
                 className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
                 {...register("check_date")}
               />
@@ -218,22 +218,31 @@ const CreateAppointment = ({ handleClose }) => {
                   }}
                 >
                   <div className="grid lg:grid-cols-3">
-                    <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-tl-[5px]">
-                      <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
-                        <span className="text-2xl">
-                          {date ? days[date.getDay()] : null}
-                        </span>
+                    {date ? (
+                      <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-tl-[5px]">
+                        <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
+                          <span className="text-2xl">
+                            {date ? days[date.getDay()] : null}
+                          </span>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                          <h1 className="text-8xl">
+                            {date ? currentDate : null}
+                          </h1>
+                          <h1>{date ? month : null}</h1>
+                        </div>
+                        <div className="flex justify-center items-end">
+                          <h1 className="text-3xl">{date ? year : null}</h1>
+                        </div>
                       </div>
-                      <div className="flex flex-col justify-center items-center">
-                        <h1 className="text-8xl">
-                          {date ? currentDate : null}
-                        </h1>
-                        <h1>{date ? month : null}</h1>
+                    ) : (
+                      <div className="bg-[#0AA7B8] text-white font-bold rounded-tl-[5px]">
+                        <div className="w-full h-16 bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg"></div>
+                        <div className="text-center m-1 pt-8">
+                          <h1 className="text-3xl">Please Select a Date</h1>
+                        </div>
                       </div>
-                      <div className="flex justify-center items-end">
-                        <h1 className="text-3xl">{date ? year : null}</h1>
-                      </div>
-                    </div>
+                    )}
 
                     <Calendar
                       onChange={setDate}
