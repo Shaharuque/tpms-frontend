@@ -1,7 +1,27 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { MultiSelect } from "react-multi-select-component";
 import CustomMultiSelection from "../../../../Shared/CustomComponents/CustomMultiSelection";
+
+const options = [
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+  { label: "adf ", value: "grapes" },
+  { label: "sdfgf ", value: "mango" },
+];
 
 const Processing_Payroll = () => {
   const [select, setSelect] = useState("");
@@ -17,6 +37,28 @@ const Processing_Payroll = () => {
 
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+
+  // multi selection jakir vai
+
+  const [selected, setSelected] = useState([]);
+
+  const customValueRenderer = (selected, _options) => {
+    // console.log("hi")
+    if (selected.length) {
+      if (selected.length > 3) return `All Selected ${selected.length}`;
+      return selected.map(({ label }) => label);
+    }
+
+    return "None selected";
+  };
+
+  const varselected = `All Selected ${options.length}`;
+  const handleNewField = (hasSelectAll, value) => {
+    setSelected(options);
+    console.log("selected", selected);
+  };
+
+  console.log("Appoinment Multi select data", selected);
 
   // Ant Table is starting
   useEffect(() => {
@@ -375,11 +417,25 @@ const Processing_Payroll = () => {
               </span>
             </label>
 
-            <CustomMultiSelection
+            {/* <CustomMultiSelection
               data={datat}
               value={value}
               setValue={setValue}
-            ></CustomMultiSelection>
+            ></CustomMultiSelection> */}
+            <>
+              <div className="parentSelection">
+                <div>
+                  <MultiSelect
+                    className="AppoinmentGlobal"
+                    options={options}
+                    value={selected}
+                    onChange={setSelected}
+                    labelledBy="Select"
+                    valueRenderer={customValueRenderer}
+                  />
+                </div>
+              </div>
+            </>
           </div>
           <button
             className=" py-[5px] w-1/4 font-normal mt-8 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
