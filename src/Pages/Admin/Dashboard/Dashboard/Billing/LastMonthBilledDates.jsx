@@ -10,6 +10,8 @@ import DetailTable from "./LastMonthBilledDetails/DetailTable";
 import axios from "axios";
 import { DateRangePicker } from "rsuite";
 import UseTable from "../../../../../Utilities/UseTable";
+import { Table } from "antd";
+import { RiFileLine } from "react-icons/ri";
 
 const LastMonthBilledDates = () => {
   const [sortBy, setSortBy] = useState("");
@@ -23,8 +25,10 @@ const LastMonthBilledDates = () => {
     // console.log(data);
     reset();
   };
-
   const [LastMonthdata, SetLastMonthData] = useState([]);
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
+  const [tableOpen, setTableOpen] = useState(false);
 
   // fake api call
   useEffect(() => {
@@ -36,39 +40,214 @@ const LastMonthBilledDates = () => {
         console.log(error);
       });
   }, []);
+  console.log(LastMonthdata);
 
-  const [tableOpen, setTableOpen] = useState(false);
-  const data = useMemo(() => LastMonthdata, [LastMonthdata]);
-  const columns = useMemo(() => [...BilledTableColumn], []);
-  const [editableRowIndex, setEditableRowIndex] = React.useState(null);
-  console.log(editableRowIndex);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy, useRowSelect, (hooks) => {
-      hooks.allColumns.push((columns) => [
-        // other hooks such as selection hook
-        ...columns,
-        // edit hook
+  // ---------------------------------Table Data-------------------------
+  const handleChange = (pagination, filters, sorter) => {
+    console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
+  };
+
+  const columns = [
+    {
+      title: "Batch No",
+      dataIndex: "checkNo",
+      key: "checkNo",
+      width: 100,
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
         {
-          accessor: "action",
-          id: "action",
-          Header: "Action",
-          Cell: ({ row, setEditableRow, editableRow }) => (
-            <>
-              <div>
-                <AiOutlineFileText
-                  className="mx-auto text-primary"
-                  onClick={() => {
-                    setTableOpen(true);
-                    setEditableRowIndex(row);
-                  }}
-                  row={row}
-                />
-              </div>
-            </>
-          ),
+          text: `Maude`,
+          value: "Maude",
         },
-      ]);
-    });
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
+      filteredValue: filteredInfo.checkNo || null,
+      onFilter: (value, record) => record.checkNo.includes(value),
+      sorter: (a, b) => {
+        return a.checkNo > b.checkNo ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "checkNo" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { checkNo, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{checkNo}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Date",
+      dataIndex: "checkDate",
+      key: "checkDate",
+      width: 100,
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
+      filteredValue: filteredInfo.checkDate || null,
+      onFilter: (value, record) => record.checkDate.includes(value),
+      sorter: (a, b) => {
+        return a.checkDate > b.checkDate ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "checkDate" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { checkDate, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{checkDate}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Total",
+      dataIndex: "payType",
+      key: "payType",
+      width: 80,
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
+      filteredValue: filteredInfo.payType || null,
+      onFilter: (value, record) => record.payType.includes(value),
+      sorter: (a, b) => {
+        return a.payType > b.payType ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "payType" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { payType, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{payType}</h1>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      width: 60,
+      // filters: [
+      //   { text: "Celestine", value: "Celestine" },
+      //   { text: "Annaliese", value: "Annaliese" },
+      //   {
+      //     text: `Maude`,
+      //     value: "Maude",
+      //   },
+      //   {
+      //     text: `Molly`,
+      //     value: "Molly",
+      //   },
+      //   {
+      //     text: "Karla",
+      //     value: "Karla",
+      //   },
+      //   {
+      //     text: "Marcellus",
+      //     value: "Marcellus",
+      //   },
+      //   {
+      //     text: "Hilton",
+      //     value: "Hilton",
+      //   },
+      // ],
+      filteredValue: filteredInfo.action || null,
+      onFilter: (value, record) => record.action.includes(value),
+      sorter: (a, b) => {
+        return a.action > b.action ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "action" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { action, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <button>
+            <RiFileLine />
+          </button>
+        );
+      },
+      ellipsis: true,
+    },
+  ];
+
   return (
     <div>
       <div className="flex items-center flex-wrap gap-2 justify-between">
@@ -85,17 +264,17 @@ const LastMonthBilledDates = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-9 my-3 mr-2 gap-x-2 gap-y-1">
+        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-9 items-end my-3 mr-2 gap-x-2 gap-y-1">
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
+              <span className="label-text text-base text-gray-500 text-left">
                 Date Type
               </span>
             </label>
             <select
               onChange={handleSortBy}
               name="type"
-              className="border rounded-sm  font-normal px-2 w-full py-1 text-xs "
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
             >
               <option value=""></option>
               <option value="Specific_Date">Specific Date</option>
@@ -107,12 +286,12 @@ const LastMonthBilledDates = () => {
               {sortBy === "Specific_Date" && (
                 <div>
                   <label className="label">
-                    <span className="label-text font-normal text-xs text-gray-500 text-left">
+                    <span className="label-text text-base text-gray-500 text-left">
                       Specific Date
                     </span>
                   </label>
                   <input
-                    className="border rounded-sm font-normal px-2 py-1 mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
                     type="date"
                     {...register("date_range")}
                   />
@@ -121,12 +300,13 @@ const LastMonthBilledDates = () => {
               {sortBy === "Date_Range" && (
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs  font-normal text-gray-500 text-left">
+                    <span className="label-text text-base text-gray-500 text-left">
                       Date Range
                     </span>
                   </label>
                   <div>
                     <DateRangePicker
+                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
                       onChange={(date) => {
                         console.log(date);
                       }}
@@ -140,12 +320,12 @@ const LastMonthBilledDates = () => {
 
           <div>
             <button
-              className=" mr-1 py-1 mt-9 px-2 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className="w-1/4 mx-1 py-1 px-2 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               type="submit"
             >
               Go
             </button>
-            <button className=" py-1 mt-9 px-2 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
+            <button className="w-2/4 py-1 px-2 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
               Export
             </button>
           </div>
@@ -161,18 +341,31 @@ const LastMonthBilledDates = () => {
           </div>
         </div>
         <div className="my-2">
-          <UseTable
-            getTableProps={getTableProps}
-            headerGroups={headerGroups}
-            getTableBodyProps={getTableBodyProps}
-            rows={rows}
-            prepareRow={prepareRow}
-          ></UseTable>
+          <div className="flex justify-end items-center mr-2">
+            <button
+              onClick={clearFilters}
+              className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+            >
+              Clear filters
+            </button>
+          </div>
+          <div className=" overflow-scroll pt-3">
+            <Table
+              rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              size="small"
+              className=" text-xs font-normal"
+              columns={columns}
+              dataSource={LastMonthdata} //Which data chunk you want to show in table
+              // For fixed header table at top
+              onChange={handleChange}
+            />
+          </div>
         </div>
       </div>
 
       {/* Detail Table  */}
-      {tableOpen && <DetailTable row={editableRowIndex}></DetailTable>}
+      <DetailTable></DetailTable>
     </div>
   );
 };
