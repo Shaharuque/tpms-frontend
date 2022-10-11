@@ -12,8 +12,8 @@
   height: 20px !important; */
 }
 
-.Global{
-  border-bottom: 1px solid #09aab9 !important;
+.Global {
+  border-bottom: 1px solid rgba(9, 162, 179, 0.498) !important;
 }
 
 .Global .dropdown-container {

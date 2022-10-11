@@ -1,28 +1,7 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { MultiSelect } from "react-multi-select-component";
-import CustomMultiSelection from "../../../../Shared/CustomComponents/CustomMultiSelection";
 import GlobalMultiSelect from "../../../../Shared/CustomComponents/GlobalMultiSelect";
-
-const options = [
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-];
 
 const Processing_Payroll = () => {
   const [select, setSelect] = useState("");
@@ -355,7 +334,7 @@ const Processing_Payroll = () => {
   return (
     <div className={!table ? "h-[100vh]" : ""}>
       <div className="my-5">
-        <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6  mr-2 gap-6">
+        <div className=" grid grid-cols-1 items-center md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6  mr-2 gap-6">
           <div>
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -382,7 +361,7 @@ const Processing_Payroll = () => {
               <option value="01-12-2021">01/12/2021-07/12/2021</option>
             </select>
           </div>
-          <div>
+          <div className="lg:mt-4 2xl:mt-0">
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Choose Staff to process
@@ -393,7 +372,7 @@ const Processing_Payroll = () => {
             </>
           </div>
           <button
-            className=" py-[5px] w-1/4 font-normal mt-8 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+            className=" py-[5px] w-1/4 font-normal mt-10 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
             type="submit"
             onClick={() => setTable(true)}
           >

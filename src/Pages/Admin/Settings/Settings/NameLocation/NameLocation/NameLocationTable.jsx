@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Switch } from "@mui/material";
+import { Switch } from "antd";
 
 const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
-  const [value, setValue] = useState(data?.is_combo);
+  const [value, setValue] = useState(true);
 
   // console.log(time);
   // console.log(time?.mon_end_time);
@@ -17,28 +17,28 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
   };
 
   // Editable value
-  useEffect(() => {
-    setTimeout(() => {
-      reset({
-        facility_name: data?.facility_name,
-        address: data?.address,
-        address_two: data?.address_two,
-        city: data?.city,
-        zip: data?.zip,
-        phone_one: data?.phone_one,
-        short_code: data?.short_code,
-        email: data?.email,
-        ein: data?.ein,
-        npi: data?.npi,
-        taxonomy_code: data?.taxonomy_code,
-        contact_person: data?.contact_person,
-        service_area_miles: data?.service_area_miles,
-        ftp_username: data?.ftp_username,
-        ftp_password: data?.ftp_password,
-        // mon_end_time: time?.mon_end_time,
-      });
-    }, 0);
-  }, [data?.address, time?.mon_end_time]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     reset({
+  //       facility_name: data?.facility_name,
+  //       address: data?.address,
+  //       address_two: data?.address_two,
+  //       city: data?.city,
+  //       zip: data?.zip,
+  //       phone_one: data?.phone_one,
+  //       short_code: data?.short_code,
+  //       email: data?.email,
+  //       ein: data?.ein,
+  //       npi: data?.npi,
+  //       taxonomy_code: data?.taxonomy_code,
+  //       contact_person: data?.contact_person,
+  //       service_area_miles: data?.service_area_miles,
+  //       ftp_username: data?.ftp_username,
+  //       ftp_password: data?.ftp_password,
+  //       // mon_end_time: time?.mon_end_time,
+  //     });
+  //   }, 0);
+  // }, [data?.address, time?.mon_end_time]);
 
   return (
     <div>
@@ -61,20 +61,19 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-2">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-5 mr-2 gap-6">
                 {/* name  */}
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Name
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="facility_name"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("facility_name")}
                   />
                 </div>
@@ -82,15 +81,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Address
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="address"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("address")}
                   />
                 </div>
@@ -98,15 +96,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Address 2
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="address_two"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("address_two")}
                   />
                 </div>
@@ -114,27 +111,26 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       City
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="city"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("city")}
                   />
                 </div>
                 {/* state  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       State
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("state")}
                   >
                     <option value="Mr">Mr</option>
@@ -147,15 +143,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Zip
                     </span>
                   </label>
                   <input
                     type="number"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="zip"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("zip")}
                   />
                 </div>
@@ -163,14 +158,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Phone
                     </span>
                   </label>
                   <input
                     type="text"
                     name="phone_one"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("phone_one")}
                   />
                 </div>
@@ -178,15 +173,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Short Code
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="short_code"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("short_code")}
                   />
                 </div>
@@ -194,15 +188,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Email
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="email"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("email")}
                   />
                 </div>
@@ -210,15 +203,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       EIN
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="ein"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("ein")}
                   />
                 </div>
@@ -226,15 +218,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       NPI
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="npi"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("npi")}
                   />
                 </div>
@@ -242,15 +233,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Taxonomy
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="taxonomy_code"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("taxonomy_code")}
                   />
                 </div>
@@ -258,15 +248,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Contact Person
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="contact_person"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("contact_person")}
                   />
                 </div>
@@ -274,15 +263,14 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Service Area Miles
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="service_area_miles"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("service_area_miles")}
                   />
                 </div>
@@ -290,7 +278,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       SFTP Username
                     </span>
                   </label>
@@ -298,7 +286,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                     type="text"
                     placeholder="demo"
                     name="ftp_username"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("ftp_username")}
                   />
                 </div>
@@ -306,27 +294,26 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       SFTP Password
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="ABC Behavioral Therapy Center"
                     name="ftp_password"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("ftp_password")}
                   />
                 </div>
                 {/* Default POS  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Default POS
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("DefaultPOS")}
                   >
                     <option value="Mr">Mr</option>
@@ -338,12 +325,12 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 {/* Default Timezone:  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-500 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Default Timezone:
                     </span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("DefaultTime")}
                   >
                     <option value="Mr">Mr</option>
@@ -355,18 +342,13 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div className="md:mx-auto mt-10 items-start">
                   <div>
                     <Switch
-                      checked={value ? true : false}
                       size="small"
-                      onClick={() => {
-                        setValue(!value);
-                      }}
+                      checked={value ? true : false}
+                      onClick={() => setValue(!value)}
                     />
-                    <label
-                      className="form-check-label inline-block ml-2 text-sm text-gray-500"
-                      htmlFor="flexSwitchCheckDefault"
-                    >
-                      Combo codes
-                    </label>
+                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                      Combo Code
+                    </span>
                   </div>
                 </div>
                 {/* done  */}
