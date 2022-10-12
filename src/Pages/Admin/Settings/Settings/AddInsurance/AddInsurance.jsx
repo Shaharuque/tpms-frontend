@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, Select } from "@mui/material";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 const names = [
   "AVIVA Life Ins. Co. India Pvt. Ltd. ",
@@ -30,6 +31,25 @@ const names = [
 ];
 
 const AddInsurance = () => {
+  const [TransferData, setTransferData] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState("");
+
+  // testing spaceee............
+  useEffect(() => {
+    axios("../../../All_Fake_Api/Transfer.json")
+      .then((response) => {
+        // console.log("chkd ata", response?.data)
+        setTransferData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const arr1 = [];
+  console.log(arr1);
+
+  // -------------------------
+
   // add table
   const [optionNames, setOptionNames] = useState(names);
   // console.log("option name :", optionNames);
@@ -67,7 +87,7 @@ const AddInsurance = () => {
     setSelectedNames(value);
   };
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -76,7 +96,8 @@ const AddInsurance = () => {
       <div className="flex flex-wrap gap-5 p-0 sm:p-2 items-center">
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
-          <FormControl className="sm:w-[550px] md:w-[350] w-[260px] m-0 sm:m-2 bg-white ">
+
+          {/* <FormControl className="sm:w-[550px] md:w-[350] w-[260px] m-0 sm:m-2 bg-white ">
             <InputLabel shrink htmlFor="select-multiple-native">
               -----------
             </InputLabel>
@@ -96,7 +117,28 @@ const AddInsurance = () => {
                 </option>
               ))}
             </Select>
-          </FormControl>
+          </FormControl> */}
+
+          {/* new code added */}
+          <select
+            multiple
+            id="countries_multiple"
+            // className="h-40"
+            className="text-black border h-48 border-gray-300  rounded-md focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
+          >
+            {TransferData.length > 0 &&
+              TransferData.map((item, index) => (
+                <option
+                  className="px-2 text-sm"
+                  onClick={(e) => arr1.push(item)}
+                  // onClick={(e) => console.log(e.target.title)}
+                  value={item.id}
+                >
+                  {item.key}
+                  {item.title}{" "}
+                </option>
+              ))}{" "}
+          </select>
           <br />
           <button className="px-5 my-5 mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
             View Details
@@ -104,8 +146,8 @@ const AddInsurance = () => {
         </div>
         <div>
           {" "}
-          <button
-            onClick={handleAddItems}
+          <button // onClick={handleAddItems}
+            onClick={() => setSelectedKeys(arr1)}
             className="px-5 mx-3 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
           >
             Add
@@ -121,11 +163,11 @@ const AddInsurance = () => {
           <h1 className="text-sm text-gray-700 my-2">
             Facility Selected Insurance
           </h1>
-          <FormControl className="sm:w-[550px] md:w-[350] w-[260px]  bg-white ">
+          {/* <FormControl className="sm:w-[550px] md:w-[350] w-[260px]  bg-white ">
             <InputLabel shrink htmlFor="select-multiple-native">
               -----------
-            </InputLabel>
-            <Select
+            </InputLabel> */}
+          {/* <Select
               multiple
               native
               value={selectedNames}
@@ -141,8 +183,21 @@ const AddInsurance = () => {
                   {name}
                 </option>
               ))}
-            </Select>
-          </FormControl>
+            </Select> */}
+
+          {/* ------ */}
+          <select
+            multiple
+            id="countries_multiple"
+            // className="h-40"
+            className="text-black border h-48 border-gray-300  rounded-md focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block md:w-[30rem] lg:w-[30rem] 2xl: w-[40rem] xl:w-[30rem] sm:w-full  w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
+          >
+            {selectedKeys.length > 0 &&
+              selectedKeys.map((item, index) => (
+                <option>{item.title}</option>
+              ))}{" "}
+          </select>
+          {/* </FormControl> */}
           <br />
           <button className="px-5 my-5 mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
             View Details
@@ -152,58 +207,58 @@ const AddInsurance = () => {
       <div className="border p-5">
         <h1 className="text-lg text-orange-500 my-1">Insurance Details</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-6 gap-y-1">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
             {/* name  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Name
                 </span>
               </label>
               <input
                 type="text"
                 name="name"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("name")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Address
                 </span>
               </label>
               <input
                 type="text"
                 name="Address"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("Address")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   City
                 </span>
               </label>
               <input
                 type="text"
                 name="city"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("city")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   State
                 </span>
               </label>
               <div>
                 <select
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                  className="border rounded-sm px-2 py-[3px] font-thin mx-1 text-xs w-full"
                   {...register("state")}
                 >
                   <option value="Today">Today's follow up</option>
@@ -217,68 +272,68 @@ const AddInsurance = () => {
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Zip
                 </span>
               </label>
               <input
                 type="text"
                 name="zip"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("zip")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Contract1
                 </span>
               </label>
               <input
                 type="text"
                 name="contract1"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("contract1")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Contract2
                 </span>
               </label>
               <input
                 type="text"
                 name="contract2"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("contract2")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Phone1
                 </span>
               </label>
               <input
                 type="text"
                 name="phone1"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("phone1")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Phone2
                 </span>
               </label>
               <input
                 type="text"
                 name="phone2"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("phone2")}
               />
             </div>
@@ -297,27 +352,27 @@ const AddInsurance = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Billing abreviation(3 char)
                 </span>
               </label>
               <input
                 type="text"
                 name="billing observation"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("billing_observation")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-xs text-gray-600 text-left">
                   Electronic Insurance ID
                 </span>
               </label>
               <input
                 type="text"
                 name="Electronic_"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
                 {...register("phone2")}
               />
             </div>

@@ -1,7 +1,7 @@
 // import React, {useState } from "react";
 // import { MdImportantDevices } from "react-icons/md";
 // import { MultiSelect } from "react-multi-select-component";
-// import  "./CustomMultiSelect.css"
+// import  "./CustomMultiSelect.css"  
 
 // const CustomMultiSelection = () => {
 //   const options = [
