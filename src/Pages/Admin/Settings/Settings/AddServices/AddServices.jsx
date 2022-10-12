@@ -167,7 +167,6 @@ const AddServices = () => {
         </div>
       </div>
       <div>
-        {" "}
         <Table
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key

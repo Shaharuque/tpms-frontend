@@ -1,13 +1,13 @@
 import React from "react";
-import MultiSelectionDiv from "../../../../Pages/Settings/SettingComponents/MultiSelectionDiv";
+import MultiTransferData from "../SettingsComponent/MultiTransferData";
 
 const AddTreatments = () => {
   return (
     <div>
-      <MultiSelectionDiv
-        selectBox={"All Treatments"}
-        addBox={"Facility Selected Treatments"}
-      ></MultiSelectionDiv>
+      <MultiTransferData
+        name1={"All Staff Types"}
+        name2={"Facility Selected Staff Types"}
+      ></MultiTransferData>
     </div>
   );
 };
