@@ -3,16 +3,12 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
+import TextArea from "antd/lib/input/TextArea";
 
 const RecurringSessionEdit = () => {
   const { id } = useParams();
   console.log(id);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -43,16 +39,16 @@ const RecurringSessionEdit = () => {
           }}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-3 mr-2 gap-3">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 my-3 mr-2 gap-6">
               {/* name  */}
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Patient Name
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("patient_name")}
                 >
                   <option value="Mr">Mr</option>
@@ -63,12 +59,12 @@ const RecurringSessionEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Auth
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("Auth")}
                 >
                   <option value="Mr">Mr</option>
@@ -79,12 +75,12 @@ const RecurringSessionEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Service
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("Service")}
                 >
                   <option value="Mr">Mr</option>
@@ -95,12 +91,12 @@ const RecurringSessionEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Provider Name
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("Provider_name")}
                 >
                   <option value="Mr">Mr</option>
@@ -111,12 +107,12 @@ const RecurringSessionEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     POS
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("Pos")}
                 >
                   <option value="Mr">Mr</option>
@@ -128,24 +124,24 @@ const RecurringSessionEdit = () => {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     From Date
                   </span>
                 </label>
                 <input
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   type="date"
                   {...register("from_Date")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     To Date
                   </span>
                 </label>
                 <input
-                  className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   type="date"
                   {...register("To_Date")}
                 />
@@ -154,24 +150,24 @@ const RecurringSessionEdit = () => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  gap-3">
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       From Time
                     </span>
                   </label>
                   <input
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     type="time"
                     {...register("from_time")}
                   />
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       To Time
                     </span>
                   </label>
                   <input
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     type="time"
                     {...register("To_time")}
                   />
@@ -180,12 +176,12 @@ const RecurringSessionEdit = () => {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Status
                   </span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                   {...register("Status")}
                 >
                   <option value="Mr">Mr</option>
@@ -197,14 +193,18 @@ const RecurringSessionEdit = () => {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-500 text-left">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Office Notes
                   </span>
                 </label>
-                <textarea
-                  name="comment"
-                  className="border text-sm p-1  ml-1 w-full"
-                ></textarea>
+                <div className="">
+                  <TextArea
+                    maxLength={2}
+                    rows={4}
+                    placeholder=" Notes"
+                    size="large"
+                  />
+                </div>
               </div>
             </div>
             <div className="divider"></div>

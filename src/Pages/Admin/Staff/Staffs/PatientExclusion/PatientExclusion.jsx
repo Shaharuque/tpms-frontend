@@ -33,7 +33,11 @@ const PatientExclusion = () => {
       dataIndex: "id",
       width: 100,
       render: (_, { id, File_name }) => {
-        return <div className="mx-auto font-bold text-red-500">X</div>;
+        return (
+          <div className="flex items-center justify-center font-bold text-red-500">
+            X
+          </div>
+        );
       },
     },
   ];
@@ -55,10 +59,10 @@ const PatientExclusion = () => {
       <h1 className="text-lg text-orange-500 text-left font-semibold ">
         Patient Exclusion
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-2  gap-y-2">
         <div className="w-full">
           <label
-            for="countries_multiple"
+            htmlFor="countries_multiple"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
           >
             Insurance
