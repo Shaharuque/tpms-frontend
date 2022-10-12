@@ -1,5 +1,6 @@
+import { Modal } from "antd";
 import * as React from "react";
-import Dialog from "@mui/material/Dialog";
+// import Dialog from "@mui/material/Dialog";
 import { useForm } from "react-hook-form";
 export default function AddServicesActionModal({ handleClose, open, row }) {
   const {
@@ -15,21 +16,24 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
   };
   return (
     <div>
-      <Dialog
+      <Modal
         // fullScreen={fullScreen}
         open={open}
-        // onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        centered
+        footer={false}
+        closable={false}
+        bodyStyle={{ padding: "0" }}
+        className="box rounded-lg"
       >
-        <div className="p-5 box">
+        <div className="p-3">
           {/* <h1>{row.original.place_of_Service}</h1> */}
-          <h1 className="text-lg  text-left text-orange-400">
+          <h1 className="text-lg text-left text-orange-400">
             Add/Edit Service
           </h1>
-          <div className="divider"></div>
+          <div className="divider m-0"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* <div className="flex items-center text-sm gap-5"> */}
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-co ls-3 my-5 mr-2 gap-5">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mr-2 gap-5">
               <div>
                 <label className="label">
                   <span className="label-text text-xs text-gray-500 text-left">
@@ -115,17 +119,16 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
                 />
               </div>
             </div>
-            <div className="divider"></div>
-            <div className="modal-action">
+            <div className="divider mb-0"></div>
+            <div className="mt-2 flex justify-end">
               {/* <input type="submit" /> */}
               <input
                 type="submit"
                 value={"SAVE"}
-                onClick={handleClose}
-                className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className="px-3 py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               />
               <button
-                className="px-5  bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                className="px-3 py-1 ml-2 bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
                 autoFocus
                 onClick={handleClose}
               >
@@ -134,7 +137,7 @@ export default function AddServicesActionModal({ handleClose, open, row }) {
             </div>
           </form>
         </div>
-      </Dialog>
+      </Modal>
     </div>
   );
 }
