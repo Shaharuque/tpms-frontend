@@ -1,18 +1,23 @@
-import * as React from "react";
-import { useForm } from "react-hook-form";
 import { Modal } from "antd";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-export default function ReferringProviderActionModal({
-  handleClose,
-  open,
-  row,
-}) {
-  const { register, handleSubmit, reset } = useForm();
 
+const PayPeriodEnitModal = ({ handleClose, open }) => {
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
   };
+  //   console.log(editableRow);
+  useEffect(() => {
+    setTimeout(() => {
+      reset({
+        // description: `${row.original.description}`,
+        // expiry_Date: `${row.original.upload_date}`,
+      });
+    }, 500);
+  }, [reset]);
   return (
     <div>
       <Modal
@@ -28,74 +33,66 @@ export default function ReferringProviderActionModal({
         <div className="px-5 py-2 ">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
-              Edit Document
+              Create/Edit Pay Period
             </h1>
             <IoCloseCircleOutline
               onClick={handleClose}
-              className="text-gray-600 font-medium  text-2xl hover:text-primary"
+              className="text-gray-600 font-semibold  text-2xl hover:text-primary"
             />
           </div>
           <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* <div className="flex items-center text-sm gap-5"> */}
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 mr-2 gap-3">
+            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-4 gap-y-4">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Provider First Name
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    From Date
                   </span>
                 </label>
                 <input
-                  type="text"
-                  placeholder="Provider First Name"
-                  name="first_name"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("first_name")}
+                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
+                  type="date"
+                  {...register("check_Date")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Provider Last Name
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    End Date
                   </span>
                 </label>
                 <input
-                  type="text"
-                  placeholder="Provider First Name"
-                  name="last_name"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("last_name")}
+                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
+                  type="date"
+                  {...register("check_Date")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    NPI
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    Check Date
                   </span>
                 </label>
                 <input
+                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
+                  type="date"
+                  {...register("check_Date")}
+                />
+              </div>
+              <div className="col-span-2">
+                <label className="label">
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    After how many days staff can't submit time sheet?
+                  </span>
+                </label>
+                <input
+                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
                   type="number"
-                  placeholder="NPI"
-                  name="npi"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("npi")}
-                />
-              </div>
-              <div>
-                <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    UPIN
-                  </span>
-                </label>
-                <input
-                  type="number"
-                  placeholder="UPIN"
-                  name="upin"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("upin")}
+                  {...register("time_sheet")}
                 />
               </div>
             </div>
+
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
               <button
@@ -118,4 +115,6 @@ export default function ReferringProviderActionModal({
       </Modal>
     </div>
   );
-}
+};
+
+export default PayPeriodEnitModal;

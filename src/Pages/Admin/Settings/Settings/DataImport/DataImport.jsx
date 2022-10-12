@@ -1,3 +1,4 @@
+// ellipsis=false and use width value you will get the whole packed data
 import { CssBaseline } from "@mui/material";
 import { Table } from "antd";
 import axios from "axios";
@@ -30,7 +31,7 @@ const DataImport = () => {
       title: "Created",
       dataIndex: "created",
       key: "created",
-      width: 100,
+      width: 200,
       filters: [
         {
           text: "January 6,2021 1.27PM",
@@ -55,13 +56,12 @@ const DataImport = () => {
         return a.created > b.created ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "created" ? sortedInfo.order : null,
-      ellipsis: true,
     },
     {
       title: "File Name",
       dataIndex: "filename",
       key: "filename",
-      width: 100,
+      width: 200,
       filters: [
         {
           text: "January 6, 2021 ",
@@ -78,13 +78,12 @@ const DataImport = () => {
         return a.filename > b.filename ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "filename" ? sortedInfo.order : null,
-      ellipsis: true,
     },
     {
       title: "Password",
       dataIndex: "password",
       key: "password",
-      width: 80,
+      width: 100,
       render: (_, { password }) => {
         //console.log("tags : ", lock);
         return <div className=" font-medium text-red-600">{password}</div>;
@@ -93,14 +92,13 @@ const DataImport = () => {
         return a.password > b.password ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "password" ? sortedInfo.order : null,
-      ellipsis: true,
     },
 
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      width: 80,
+      width: 200,
       render: (_, { status }) => {
         //console.log("tags : ", lock);
         return (
@@ -117,7 +115,6 @@ const DataImport = () => {
         return a.status > b.status ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
-      ellipsis: true,
     },
   ];
 
@@ -135,7 +132,8 @@ const DataImport = () => {
           columns={columns}
           dataSource={data}
           scroll={{
-            y: 650,
+            y: 500,
+            x: 20,
           }}
           onChange={handleChange}
         />

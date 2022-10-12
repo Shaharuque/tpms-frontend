@@ -1,15 +1,10 @@
 import * as React from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
 import { useForm } from "react-hook-form";
+import { Modal } from "antd";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function VendorNumberSetupActionModal({ open, handleClose }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -17,130 +12,130 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
   return (
     <div>
       <div>
-        {" "}
-        <Dialog
+        <Modal
+          // fullScreen={fullScreen}
           open={open}
-          onClose={handleClose}
-          aria-labelledby="responsive-dialog-title"
+          centered
+          width={500}
+          footer={false}
+          closable={false}
+          bodyStyle={{ padding: "0" }}
+          className="box rounded-md"
         >
-          <DialogContent className="box">
-            <div>
-              <h1 className="text-lg  text-left text-orange-400">
+          <div className="px-5 py-2 ">
+            <div className="flex items-center justify-between">
+              <h1 className="text-lg text-left text-orange-400 ">
                 Edit Vendor Setup
               </h1>
-              <div className="divider"></div>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="w-full text-sm">
-                  <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-5">
-                    <div>
-                      <label className="label">
-                        <span className="label-text text-xs text-gray-500 text-left">
-                          Select Pay Period length
-                        </span>
-                      </label>
-                      <select
-                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                        {...register("Length")}
-                      >
-                        <option value="Mr">Bi Weekly</option>
-                        <option value="Mrs">Yearly</option>
-                        <option value="Miss">Miss</option>
-                        <option value="Dr">Dr</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="label">
-                        <span className="label-text text-xs text-gray-500 text-left">
-                          Week Day
-                        </span>
-                      </label>
-                      <select
-                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                        {...register("week_day")}
-                      >
-                        <option value="Mr">Sunday</option>
-                        <option value="Mrs">Monday</option>
-                        <option value="Miss">Tuesday</option>
-                        <option value="Dr">Wednesday</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="label">
-                        <span className="label-text text-xs text-gray-500 text-left">
-                          Select Year
-                        </span>
-                      </label>
-                      <select
-                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                        {...register("year")}
-                      >
-                        <option value="Mr">2019</option>
-                        <option value="Mrs">2020</option>
-                        <option value="Miss">2021</option>
-                        <option value="Dr">2022</option>
-                      </select>
-                    </div>
+              <IoCloseCircleOutline
+                onClick={handleClose}
+                className="text-gray-600 font-semibold  text-2xl hover:text-primary"
+              />
+            </div>
+            <div className="bg-gray-200 py-[1px] mt-3"></div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="w-full text-sm">
+                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-5">
+                  <div>
+                    <label className="label">
+                      <span className="label-text text-xs text-gray-500 text-left">
+                        Service
+                      </span>
+                    </label>
+                    <select
+                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      {...register("Length")}
+                    >
+                      <option value="Mr">Bi Weekly</option>
+                      <option value="Mrs">Yearly</option>
+                      <option value="Miss">Miss</option>
+                      <option value="Dr">Dr</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="label">
+                      <span className="label-text text-xs text-gray-500 text-left">
+                        Tx Type
+                      </span>
+                    </label>
+                    <select
+                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      {...register("week_day")}
+                    >
+                      <option value="Mr">Sunday</option>
+                      <option value="Mrs">Monday</option>
+                      <option value="Miss">Tuesday</option>
+                      <option value="Dr">Wednesday</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="label">
+                      <span className="label-text text-xs text-gray-500 text-left">
+                        Regional Center
+                      </span>
+                    </label>
+                    <select
+                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      {...register("year")}
+                    >
+                      <option value="Mr">2019</option>
+                      <option value="Mrs">2020</option>
+                      <option value="Miss">2021</option>
+                      <option value="Dr">2022</option>
+                    </select>
+                  </div>
 
-                    {/* staff_number  */}
-                    <div className="mt-[-15px]">
-                      {" "}
-                      <label className="label">
-                        <span className="label-text text-xs text-gray-500 text-left">
-                          After how many days staff can't submit time sheet?
-                        </span>
-                      </label>
-                      <input
-                        type="number"
-                        name="staff_number"
-                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                        {...register("staff_number")}
-                      />
-                    </div>
-                    <div>
-                      <label className="label">
-                        <span className="label-text text-xs text-gray-500 text-left">
-                          Check Date
-                        </span>
-                      </label>
-                      <select
-                        className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                        {...register("week_day")}
-                      >
-                        <option value="Mr">Sunday</option>
-                        <option value="Mrs">Monday</option>
-                        <option value="Miss">Tuesday</option>
-                        <option value="Dr">Wednesday</option>
-                      </select>
-                    </div>
+                  {/* staff_number  */}
+                  <div className="mt-[-15px]">
+                    {" "}
+                    <label className="label">
+                      <span className="label-text text-xs text-gray-500 text-left">
+                        Vendor No
+                      </span>
+                    </label>
+                    <input
+                      type="number"
+                      name="staff_number"
+                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      {...register("staff_number")}
+                    />
+                  </div>
+                  <div className="mt-[-15px]">
+                    {" "}
+                    <label className="label">
+                      <span className="label-text text-xs text-gray-500 text-left">
+                        Service Code
+                      </span>
+                    </label>
+                    <input
+                      type="number"
+                      name="service_code"
+                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      {...register("service_code")}
+                    />
                   </div>
                 </div>
+              </div>
+              <div className="bg-gray-200 py-[1px] mt-3"></div>
+              <div className=" flex items-end justify-end mt-2">
+                <button
+                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                  type="submit"
+                >
+                  Save
+                </button>
 
-                <div className="divider"></div>
-                {/* submit box  */}
-
-                {/* <input type="submit" /> */}
-
-                <div className="modal-action">
-                  {/* <input type="submit" /> */}
-                  <button
-                    className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                    type="submit"
-                  >
-                    Save
-                  </button>
-
-                  <button
-                    className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-                    autoFocus
-                    onClick={handleClose}
-                  >
-                    CANCEL
-                  </button>
-                </div>
-              </form>
-            </div>
-          </DialogContent>
-        </Dialog>
+                <button
+                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                  autoFocus
+                  onClick={handleClose}
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
+        </Modal>
       </div>
     </div>
   );

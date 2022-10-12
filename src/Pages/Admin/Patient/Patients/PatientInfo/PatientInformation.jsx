@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import SimpleFileUpload from "react-simple-file-upload";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -26,7 +26,6 @@ const PatientInformation = () => {
   const [checkLocation, setLocation] = useState(false);
 
   // calender hide
-  const { ref, visible, setVisible } = useOutsideAlerter(false);
   const { register, handleSubmit, reset, setValue, getValues } = useForm();
   const [hook, setHook] = useState("");
 

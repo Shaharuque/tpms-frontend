@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, Select } from "@mui/material";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 const names = [
   "AVIVA Life Ins. Co. India Pvt. Ltd. ",
@@ -30,6 +31,25 @@ const names = [
 ];
 
 const AddInsurance = () => {
+  const [TransferData, setTransferData] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState("");
+
+  // testing spaceee............
+  useEffect(() => {
+    axios("../../../All_Fake_Api/Transfer.json")
+      .then((response) => {
+        // console.log("chkd ata", response?.data)
+        setTransferData(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const arr1 = [];
+  console.log(arr1);
+
+  // -------------------------
+
   // add table
   const [optionNames, setOptionNames] = useState(names);
   // console.log("option name :", optionNames);
@@ -76,7 +96,8 @@ const AddInsurance = () => {
       <div className="flex flex-wrap gap-5 p-0 sm:p-2 items-center">
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
-          <FormControl className="sm:w-[550px] md:w-[350] w-[260px] m-0 sm:m-2 bg-white ">
+
+          {/* <FormControl className="sm:w-[550px] md:w-[350] w-[260px] m-0 sm:m-2 bg-white ">
             <InputLabel shrink htmlFor="select-multiple-native">
               -----------
             </InputLabel>
@@ -96,7 +117,28 @@ const AddInsurance = () => {
                 </option>
               ))}
             </Select>
-          </FormControl>
+          </FormControl> */}
+
+          {/* new code added */}
+          <select
+            multiple
+            id="countries_multiple"
+            // className="h-40"
+            className="text-black border h-48 border-gray-300  rounded-md focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
+          >
+            {TransferData.length > 0 &&
+              TransferData.map((item, index) => (
+                <option
+                  className="px-2 text-sm"
+                  onClick={(e) => arr1.push(item)}
+                  // onClick={(e) => console.log(e.target.title)}
+                  value={item.id}
+                >
+                  {item.key}
+                  {item.title}{" "}
+                </option>
+              ))}{" "}
+          </select>
           <br />
           <button className="px-5 my-5 mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
             View Details
@@ -104,8 +146,8 @@ const AddInsurance = () => {
         </div>
         <div>
           {" "}
-          <button
-            onClick={handleAddItems}
+          <button // onClick={handleAddItems}
+            onClick={() => setSelectedKeys(arr1)}
             className="px-5 mx-3 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
           >
             Add
@@ -121,11 +163,11 @@ const AddInsurance = () => {
           <h1 className="text-sm text-gray-700 my-2">
             Facility Selected Insurance
           </h1>
-          <FormControl className="sm:w-[550px] md:w-[350] w-[260px]  bg-white ">
+          {/* <FormControl className="sm:w-[550px] md:w-[350] w-[260px]  bg-white ">
             <InputLabel shrink htmlFor="select-multiple-native">
               -----------
-            </InputLabel>
-            <Select
+            </InputLabel> */}
+          {/* <Select
               multiple
               native
               value={selectedNames}
@@ -141,8 +183,21 @@ const AddInsurance = () => {
                   {name}
                 </option>
               ))}
-            </Select>
-          </FormControl>
+            </Select> */}
+
+          {/* ------ */}
+          <select
+            multiple
+            id="countries_multiple"
+            // className="h-40"
+            className="text-black border h-48 border-gray-300  rounded-md focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block md:w-[30rem] lg:w-[30rem] 2xl: w-[40rem] xl:w-[30rem] sm:w-full  w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
+          >
+            {selectedKeys.length > 0 &&
+              selectedKeys.map((item, index) => (
+                <option>{item.title}</option>
+              ))}{" "}
+          </select>
+          {/* </FormControl> */}
           <br />
           <button className="px-5 my-5 mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
             View Details

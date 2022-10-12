@@ -20,7 +20,7 @@ const InsuranceEdit = ({ row }) => {
       </div>
       {/* {openEditModal && (
         <InsuranceEditModal
-          handleClose={handleClose}
+          handleClose={handleClose}                                       
           open={openEditModal}
           row={row}
         ></InsuranceEditModal>

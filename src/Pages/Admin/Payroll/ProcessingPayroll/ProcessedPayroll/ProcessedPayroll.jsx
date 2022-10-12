@@ -1,19 +1,13 @@
 import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CustomMultiSelection from "../../../../Shared/CustomComponents/CustomMultiSelection";
+import GlobalMultiSelect from "../../../../Shared/CustomComponents/GlobalMultiSelect";
 
 const ProcessedPayroll = () => {
   const [select, setSelect] = useState("");
-  const [value, setValue] = useState([]);
   const [tData, setTData] = useState([]);
   const [table, setTable] = useState(false);
   // ----------------------------------------Multi-Select---------------------------------
-  // ***************
-  const datat = ["Eugenia", "Bryan", "Linda"].map((item) => ({
-    label: item,
-    value: item,
-  }));
 
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -341,7 +335,7 @@ const ProcessedPayroll = () => {
   return (
     <div className={!table ? "h-[100vh]" : ""}>
       <div className="my-5">
-        <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6  mr-2 gap-6">
+        <div className=" grid grid-cols-1 items-center md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6  mr-2 gap-6">
           <div>
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -370,21 +364,18 @@ const ProcessedPayroll = () => {
           </div>
           {select && (
             <>
-              <div>
+              <div className="lg:mt-4 2xl:mt-0">
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                     Choose Staff to process
                   </span>
                 </label>
-
-                <CustomMultiSelection
-                  data={datat}
-                  value={value}
-                  setValue={setValue}
-                ></CustomMultiSelection>
+                <>
+                  <GlobalMultiSelect />
+                </>
               </div>
               <button
-                className=" py-[5px] w-1/4 font-normal mt-8 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                className=" py-[5px] w-1/4 font-normal mt-10 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                 type="submit"
                 onClick={() => setTable(true)}
               >

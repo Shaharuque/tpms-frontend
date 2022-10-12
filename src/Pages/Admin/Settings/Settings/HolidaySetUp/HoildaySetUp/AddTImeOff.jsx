@@ -1,29 +1,16 @@
-import * as React from "react";
-import { useForm } from "react-hook-form";
+// Good practise of using textarea and focused input box
 import { Modal } from "antd";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-export default function PlaceOfServicesActionAddModal({ handleClose, open }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+import TextArea from "antd/lib/input/TextArea";
 
+const AddTImeOff = ({ handleClose, open }) => {
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
   };
-
-  // Editable value
-  React.useEffect(() => {
-    // you can do async server request and fill up form
-    setTimeout(() => {
-      reset({});
-    }, 500);
-  }, [reset]);
-  console.log(errors);
-
   return (
     <div>
       <Modal
@@ -39,7 +26,7 @@ export default function PlaceOfServicesActionAddModal({ handleClose, open }) {
         <div className="px-5 py-2 ">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
-              Edit Document
+              Create Holiday
             </h1>
             <IoCloseCircleOutline
               onClick={handleClose}
@@ -48,34 +35,29 @@ export default function PlaceOfServicesActionAddModal({ handleClose, open }) {
           </div>
           <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 my-3 mr-2 gap-x-4 gap-y-4">
-              <div className="mt-[-15px]">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 2xl:grid-cols-1 my-3 mr-2 gap-x-4 gap-y-2">
+              <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Place of Service
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    From Date
                   </span>
                 </label>
                 <input
-                  type="number"
-                  name="staff_number"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("staff_number")}
+                  className="border border-gray-300 text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-teal-700 py-1 px-2"
+                  type="date"
+                  {...register("check_Date")}
                 />
               </div>
-              <div className="mt-[-15px]">
+              <div className="">
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Place of Service Code
+                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    Notes
                   </span>
                 </label>
-                <input
-                  type="number"
-                  name="staff_number"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("staff_number")}
-                />
+                <TextArea maxLength={2} rows={7} size="medium" />
               </div>
             </div>
+
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
               <button
@@ -98,4 +80,6 @@ export default function PlaceOfServicesActionAddModal({ handleClose, open }) {
       </Modal>
     </div>
   );
-}
+};
+
+export default AddTImeOff;

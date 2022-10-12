@@ -381,24 +381,23 @@ const UnbillableActivity = () => {
         }}
         onChange={handleChange}
       />
-      <div className="my-5 flex">
-        <Autocomplete
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
-          }}
-          id="controllable-states-demo"
-          options={options}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-        <div className="ml-4 mt-4">
-          <button className="bg-[#34A7B8] p-2 rounded text-white">Save</button>
-        </div>
+      <div className="flex items-center">
+        <select
+          // onChange={(e) => setService(e.target.value)}
+          name="type"
+          className="input-border text-gray-600 rounded-sm mt-8 text-[14px] font-medium ml-1 py-[1px] w-1/2 md:w-[15%] focus:outline-none"
+        >
+          <option value="process era">Process ERA</option>
+          <option value="reviewed">Reviewed</option>
+          <option value="unreviewed">Unreviewed</option>
+        </select>
+
+        <button
+          // onClick={submitHandle}
+          className="px-3 mt-7 ml-4 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+        >
+          Save
+        </button>
       </div>
     </div>
   );

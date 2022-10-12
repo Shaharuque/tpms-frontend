@@ -33,7 +33,11 @@ const InsuranceExclusionMultiSelection = () => {
       dataIndex: "id",
       width: 100,
       render: (_, { id, File_name }) => {
-        return <div className="mx-auto font-bold text-red-500">X</div>;
+        return (
+          <div className="flex items-center justify-center font-bold text-red-500">
+            X
+          </div>
+        );
       },
     },
   ];

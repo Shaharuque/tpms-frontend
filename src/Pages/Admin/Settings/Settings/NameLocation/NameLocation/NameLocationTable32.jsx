@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import NameLocationTableAddButton from "./NameLocationTableAddButton";
 import Form from "./Form";
 
 const NameLocationTable32 = ({
