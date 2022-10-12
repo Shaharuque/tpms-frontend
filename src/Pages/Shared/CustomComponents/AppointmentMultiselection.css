@@ -1,7 +1,3 @@
-/* .jahid .dropdown-container {
-  border: 2px solid red !important;
-} */
-
 .AppoinmentGlobal .dropdown-container {
     max-width: 200px !important;
     min-width: 220px !important;
@@ -27,7 +23,6 @@
    
   }
   
- 
   .rmsc {
     --rmsc-main: #4285f4;
     --rmsc-hover: #f1f3f5;
@@ -39,19 +34,27 @@
     --rmsc-radius: 4px;
     --rmsc-h: 30px;
 }
- 
-  .jakir .dropdown-heading {
-    height: var(--rmsc-h) !important;
-    /* height: calc(1.5em + 0.5rem + 2px) !important; */
-    /* padding: 1rem !important; */
-    /* padding: 5px 10px !important;
-    height: 30px !important; */
-  }
-  
-  .parentSelection{
-    display: flex;
-    justify-content: space-between;
-  }
+
+.rmsc .dropdown-container{
+  border: 0 !important;
+  /* height: 0 !important; */
+}
+
+.rmsc .dropdown-container:focus{
+  outline: 0 !important;
+}
+
+.rmsc .dropdown-heading .dropdown-heading-value{
+  border: 0 !important;
+}
+.rmsc .dropdown-heading{
+  height: 21px !important;
+}
+
+.parentSelection{
+  display: flex;
+  justify-content: space-between;
+}
 
   .btnCustom{
     margin: 0 5px;
