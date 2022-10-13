@@ -1,25 +1,25 @@
 .react-calendar {
-  max-width: 100%;
+  width: 100%;
   line-height: 1em;
   font-size: 12px;
   /* margin: 50px; */
-  border-radius: 5px 5px 0px 0px;
+  /* border-radius: 0px 5px 0px 0px; */
   /* box-shadow: 0 30px 40px 0 rgb(16 36 94 / 20%); */
   background-color: white;
+  height: 300px;
 }
-
 
 /* week days */
 abbr[title] {
   text-decoration: none;
-  color: black;
+  color: #0AA7B8;
   font-size: 15px;
   font-weight: 700;
   text-transform: capitalize;
 }
 
 .react-calendar__tile abbr{
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /* .react-calendar__navigation{
@@ -83,10 +83,10 @@ abbr[title] {
   font-weight: 700;
   /* border-top-left-radius: 5px; */
   border-top-right-radius: 5px;
-  background-color: #0AA7B8;
-  /* margin-bottom: 0px; */
-  height: 35px;
-  padding: 0 5px;
+  background-color: #fff;
+  margin-bottom: 5px;
+  /* height: 35px; */
+  /* padding: 0 6px; */
 }
 
 /* calender top button */
@@ -99,7 +99,7 @@ abbr[title] {
 .react-calendar__navigation button span,
 .react-calendar__navigation__arrow {
   font-weight: 700;
-  color: white;
+  color: #949495;
 }
 
 .react-calendar__navigation button span {
@@ -112,16 +112,12 @@ abbr[title] {
 
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
-  background-color: #0AA7B8;
-  color: white;
+  /* background-color: #0AA7B8;
+  color: white; */
 }
 
 .react-calendar__navigation button[disabled] {
   background-color: #f0f0f0;
-}
-
-.react-calendar__month-view {
-  padding: 2px 5px 5px;
 }
 
 .react-calendar__month-view__weekdays {
@@ -222,17 +218,32 @@ abbr[title] {
   border-radius: 8px;
 }
 
-@media only screen and (max-width: 420px) {
-  .react-calendar {
-    width: 220px;
-  }
-
-  /* week days */
+@media only screen and (max-width: 530px) {
   abbr[title] {
-    font-size: 12px;
+    font-size: 14px;
   }
-
   .react-calendar__month-view {
     padding: 1px;
   }
+  .react-calendar__month-view__weekdays__weekday {
+    padding: 0.4em;
+  }
 }
+
+@media only screen and (max-width: 480px) {
+  abbr[title] {
+    font-size: 12px;
+  }
+  .react-calendar__month-view__weekdays__weekday {
+    padding: 0.2em;
+  }
+}
+
+/* @media only screen and (max-width: 400px) {
+  abbr[title] {
+    font-size: 12px;
+  }
+  .react-calendar__month-view__weekdays__weekday {
+    padding: 0.3em;
+  }
+} */

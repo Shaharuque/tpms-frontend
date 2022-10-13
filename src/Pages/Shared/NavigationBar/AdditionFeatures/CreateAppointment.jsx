@@ -9,7 +9,7 @@ import { Modal } from "antd";
 import AppoinmentMultiSelection from "../../../Shared/CustomComponents/AppoinmentMultiSelection";
 import "../../../Style/SingleCalendar.css";
 
-const CreateAppointment = ({ handleClose }) => {
+const CreateAppointment = ({ handleClose, clicked }) => {
   const [billable, setBillable] = useState(true);
   const [recurrence, setRecurrence] = useState(false);
   const [daily, setDaily] = useState(false);
@@ -46,11 +46,14 @@ const CreateAppointment = ({ handleClose }) => {
   const currentDate = date ? date.getDate() : null;
   const year = date ? date.getFullYear() : null;
 
-  console.log(month, currentDate, year);
-  const handleCancelDate = () => {
+  const handleClearDate = () => {
     setOpen(false);
     setDate(null);
-    console.log(date);
+  };
+
+  const handleCancelDate = () => {
+    setOpen(false);
+    setDate(new Date());
   };
 
   React.useEffect(() => {
@@ -79,10 +82,11 @@ const CreateAppointment = ({ handleClose }) => {
   return (
     <div>
       <Modal
-        open={true} //aikhaney true na likey ekta state ana lagbey tar value 'true'
+        open={clicked} //aikhaney true na likey ekta state ana lagbey tar value 'true'
         centered
         footer={null}
         bodyStyle={{ padding: "0" }}
+        width={550}
         closable={false}
         className="box rounded-xl"
         // onClose={handleClose}
@@ -222,17 +226,17 @@ const CreateAppointment = ({ handleClose }) => {
                       <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-tl-[5px]">
                         <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
                           <span className="text-2xl">
-                            {date ? days[date.getDay()] : null}
+                            {days[date.getDay()]}
                           </span>
                         </div>
                         <div className="flex flex-col justify-center items-center">
-                          <h1 className="text-8xl">
-                            {date ? currentDate : null}
+                          <h1 className="text-8xl font-medium">
+                            {currentDate}
                           </h1>
-                          <h1>{date ? month : null}</h1>
+                          <h1 className="text-2xl font-medium">{month}</h1>
                         </div>
                         <div className="flex justify-center items-end">
-                          <h1 className="text-3xl">{date ? year : null}</h1>
+                          <h1 className="text-4xl font-medium mt-4">{year}</h1>
                         </div>
                       </div>
                     ) : (
@@ -244,26 +248,30 @@ const CreateAppointment = ({ handleClose }) => {
                       </div>
                     )}
                     {/* single calendar */}
-                    <Calendar
-                      onChange={setDate}
-                      value={date}
-                      className="col-span-2"
-                    />
-                  </div>
-                  <div className="flex justify-end cursor-pointer rounded-b-[5px] bg-white drop-shadow-2xl shadow-lg">
-                    <div modal-action>
-                      <button
-                        onClick={() => handleCancelDate()}
-                        className="px-2 py-1 text-xs bg-secondary text-white border border-secondary hover:text-secondary hover:bg-white hover:border-secondary rounded-sm"
-                      >
-                        CANCEL
-                      </button>
-                      <button
-                        onClick={() => setOpen(false)}
-                        className="px-2 py-1 mx-2 text-xs bg-secondary text-white border border-secondary hover:text-secondary hover:bg-white hover:border-secondary rounded-sm"
-                      >
-                        OK
-                      </button>
+                    <div className="col-span-2 w-[95%] my-0 mx-auto">
+                      <Calendar onChange={setDate} value={date} />
+                      <div className="flex justify-between rounded-b-[5px] bg-white py-1">
+                        <button
+                          onClick={() => handleClearDate()}
+                          className="text-xs text-red-400"
+                        >
+                          CLEAR
+                        </button>
+                        <div>
+                          <button
+                            onClick={() => handleCancelDate()}
+                            className="text-xs text-[#0AA7B8]"
+                          >
+                            CANCEL
+                          </button>
+                          <button
+                            onClick={() => setOpen(false)}
+                            className="text-xs ml-2 text-[#0AA7B8]"
+                          >
+                            OK
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </Modal>

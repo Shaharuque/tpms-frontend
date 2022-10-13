@@ -15,7 +15,7 @@
     /* background-color: brown; */
     border-color: #80bdff !important;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgb(71 92 199 / 25%) !important;
+    /* box-shadow: 0 0 0 0.2rem rgb(71 92 199 / 25%) !important; */
   }
   
   .AppoinmentGlobal .dropdown-content .panel-content {
@@ -42,6 +42,10 @@
 
 .rmsc .dropdown-container:focus{
   outline: 0 !important;
+}
+
+.rmsc .dropdown-container:focus-within{
+  box-shadow: none;
 }
 
 .rmsc .dropdown-heading .dropdown-heading-value{

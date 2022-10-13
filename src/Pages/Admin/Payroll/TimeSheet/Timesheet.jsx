@@ -158,7 +158,7 @@ const Timesheet = () => {
           </div>
         );
       },
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Patient",
@@ -206,7 +206,7 @@ const Timesheet = () => {
           </div>
         );
       },
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Activity",
@@ -254,7 +254,7 @@ const Timesheet = () => {
           </div>
         );
       },
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Time In",
@@ -404,7 +404,7 @@ const Timesheet = () => {
       title: "Miles",
       dataIndex: "miles",
       key: "miles",
-      width: 60,
+      width: 80,
       // filters: [
       //   { text: "Celestine", value: "Celestine" },
       //   { text: "Annaliese", value: "Annaliese" },
@@ -441,9 +441,9 @@ const Timesheet = () => {
       render: (_, { miles, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div>
+          <div className="flex justify-center">
             <input
-              value={miles}
+              defaultValue={miles}
               className="w-[60px] h-[28px] text-center border border-[#ced4da] focus:border-secondary"
             />
           </div>
@@ -533,7 +533,7 @@ const Timesheet = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-8 my-5 mr-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 my-5 mr-2 gap-4">
           <div>
             <label className="label">
               <span className="label-text text-base text-gray-500 text-left">
@@ -599,7 +599,7 @@ const Timesheet = () => {
           )}
 
           <button
-            className="w-1/4 mt-7 ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="w-1/4 mt-2 md:mt-7 md:ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             type="submit"
           >
             Go
@@ -654,7 +654,7 @@ const Timesheet = () => {
               onChange={handleChange}
             />
           </div>
-          <div className="grid items-end grid-cols-1 md:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-8 my-5 mr-2 lg:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 items-end my-5 mr-2 gap-4">
             <div>
               <select
                 name="type"
@@ -667,7 +667,7 @@ const Timesheet = () => {
               </select>
             </div>
             <button
-              className="w-1/4 py-1 px-2 ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className="w-1/4 py-1 px-2 md:ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               type="submit"
             >
               Ok
