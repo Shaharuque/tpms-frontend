@@ -243,33 +243,24 @@ const CreateAppointment = ({ handleClose }) => {
                         </div>
                       </div>
                     )}
-
+                    {/* single calendar */}
                     <Calendar
                       onChange={setDate}
                       value={date}
                       className="col-span-2"
                     />
                   </div>
-                  <div className="flex justify-between cursor-pointer bg-black rounded-b-[5px]">
-                    <button
-                      // onClick={() => {
-                      //   setOpen(false);
-                      // }}
-                      onClick={() => handleCancelDate()}
-                      className="text-xs text-red-400 p-2 hover:text-white hover:bg-teal-500"
-                    >
-                      CLEAR
-                    </button>
+                  <div className="flex justify-end cursor-pointer rounded-b-[5px] bg-white drop-shadow-2xl shadow-lg">
                     <div modal-action>
                       <button
-                        onClick={() => setOpen(false)}
-                        className="text-xs text-white hover:bg-teal-500 p-2"
+                        onClick={() => handleCancelDate()}
+                        className="px-2 py-1 text-xs bg-secondary text-white border border-secondary hover:text-secondary hover:bg-white hover:border-secondary rounded-sm"
                       >
                         CANCEL
                       </button>
                       <button
                         onClick={() => setOpen(false)}
-                        className="text-xs text-white hover:bg-teal-500 p-2"
+                        className="px-2 py-1 mx-2 text-xs bg-secondary text-white border border-secondary hover:text-secondary hover:bg-white hover:border-secondary rounded-sm"
                       >
                         OK
                       </button>
