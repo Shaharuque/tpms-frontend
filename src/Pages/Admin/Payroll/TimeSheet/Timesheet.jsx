@@ -53,6 +53,10 @@ const Timesheet = () => {
   }, []);
   console.log(TimeSheetData);
 
+  const inputHandle = (e) => {
+    console.log(e.target.value);
+  };
+
   // ---------------------------------Table Data-------------------------
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -442,11 +446,14 @@ const Timesheet = () => {
       render: (_, { miles, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div className="flex justify-center">
+          <div>
             <input
+              name="cms"
               defaultValue={miles}
-              className="w-[60px] h-[28px] text-center border border-[#ced4da] focus:border-secondary"
-            />
+              className="page py-[3px] text-center focus:outline-none"
+              onChange={inputHandle}
+              type="text"
+            ></input>
           </div>
         );
       },
@@ -574,9 +581,7 @@ const Timesheet = () => {
                 </label>
                 <>
                   <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1">
-                    <>
-                      <GlobalMultiSelect />
-                    </>
+                    <GlobalMultiSelect />
                   </div>
                 </>
               </div>
