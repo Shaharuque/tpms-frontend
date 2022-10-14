@@ -137,6 +137,7 @@ import HolidaySetup from "./Pages/Admin/Settings/Settings/HolidaySetUp/HolidaySe
 import AddServiceSubType from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType";
 import AddInsurance from "./Pages/Admin/Settings/Settings/AddInsurance/AddInsurance";
 import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
+import UnBillableTimeSheet from "./Pages/Admin/Settings/Settings/UnBillableTimesheet/UnBillableTimeSheet";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -594,6 +595,10 @@ function App() {
               <Route
                 path="unbillable-activity"
                 element={<UnbillableActivity></UnbillableActivity>}
+              ></Route>
+              <Route
+                path="unbillable-time-sheet"
+                element={<UnBillableTimeSheet></UnBillableTimeSheet>}
               ></Route>
               <Route
                 path="session-rule"
