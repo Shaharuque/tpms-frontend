@@ -133,6 +133,7 @@ const TestNaviBar = ({ handle }) => {
                 <div>
                   <CreateAppointment
                     handleClose={handleAppointment}
+                    clicked={clicked}
                   ></CreateAppointment>
                 </div>
               )}
@@ -342,6 +343,7 @@ const TestNaviBar = ({ handle }) => {
               <div>
                 <CreateAppointment
                   handleClose={handleAppointment}
+                  clicked={clicked}
                 ></CreateAppointment>
               </div>
             )}

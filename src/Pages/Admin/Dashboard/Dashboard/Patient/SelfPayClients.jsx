@@ -31,36 +31,40 @@ const SelfPayClients = () => {
     setSortedInfo(sorter);
   };
 
+  const clearFilters = () => {
+    setFilteredInfo({});
+  };
+
   const columns = [
     {
       title: "Patient Last Name",
       dataIndex: "patient",
       key: "patient",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.patient || null,
       onFilter: (value, record) => record.patient.includes(value),
       sorter: (a, b) => {
@@ -85,30 +89,30 @@ const SelfPayClients = () => {
       dataIndex: "provider",
       key: "provider",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.provider || null,
       onFilter: (value, record) => record.provider.includes(value),
       sorter: (a, b) => {
@@ -133,30 +137,30 @@ const SelfPayClients = () => {
       dataIndex: "Dos",
       key: "Dos",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.Dos || null,
       onFilter: (value, record) => record.Dos.includes(value),
       sorter: (a, b) => {
@@ -195,12 +199,20 @@ const SelfPayClients = () => {
         </div>
       </div>
       <div className="my-2">
-        <div className=" overflow-scroll">
+        <div className="flex justify-end items-center mr-2">
+          <button
+            onClick={clearFilters}
+            className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+          >
+            Clear filters
+          </button>
+        </div>
+        <div className=" overflow-scroll py-3">
           <Table
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal text-center"
+            className=" text-xs font-normal"
             columns={columns}
             dataSource={SelfPayData} //Which data chunk you want to show in table
             // For fixed header table at top

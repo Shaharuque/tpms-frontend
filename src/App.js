@@ -205,9 +205,13 @@ function App() {
               path="billing/ar-followup-bucket"
               element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
-            <Route
+            {/* <Route
               path="billing/ar-followup-bucket-filter-types/1"
               element={<ProvideEscalation></ProvideEscalation>}
+            ></Route> */}
+            <Route
+              path="billing/ar-followup-bucket-filter-types/1"
+              element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
             <Route
               path="billing/ar-followup-bucket-filter-types/2"
