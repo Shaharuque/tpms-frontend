@@ -1,17 +1,13 @@
 import * as React from "react";
-import Dialog from "@mui/material/Dialog";
 import { useForm } from "react-hook-form";
+import { Modal } from "antd";
+import { IoCloseCircleOutline } from "react-icons/io5";
 export default function AddServiceSubTypeTabEditModal({
   handleClose,
   open,
   row,
 }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -20,18 +16,27 @@ export default function AddServiceSubTypeTabEditModal({
   // console.log("row", row.original.place_of_Service);
   return (
     <div>
-      <Dialog
+      <Modal
         // fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        centered
+        width={500}
+        footer={false}
+        closable={false}
+        bodyStyle={{ padding: "0" }}
+        className="box rounded-md"
       >
-        <div className="p-10 box">
-          {/* <h1>{row.original.place_of_Service}</h1> */}
-          <h1 className="text-lg  text-left text-orange-400">
-            Add/Edit Service Sub Type
-          </h1>
-          <div className="divider"></div>
+        <div className="px-5 py-2 ">
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg text-left text-orange-400 ">
+              Add/Edit Service Sub Type
+            </h1>
+            <IoCloseCircleOutline
+              onClick={handleClose}
+              className="text-gray-600 font-semibold  text-2xl hover:text-primary"
+            />
+          </div>
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
           {row ? (
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* <div className="flex items-center text-sm gap-5"> */}
@@ -50,20 +55,21 @@ export default function AddServiceSubTypeTabEditModal({
                   />
                 </div>
               </div>
-              <div className="divider"></div>
-              <div className="modal-action">
-                {/* <input type="submit" /> */}
-                <input
-                  type="submit"
-                  value={"SAVE"}
-                  className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                />
+              <div className="bg-gray-200 py-[1px] mt-3"></div>
+              <div className=" flex items-end justify-end mt-2">
                 <button
-                  className="px-5  bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                  type="submit"
+                >
+                  Save
+                </button>
+
+                <button
+                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                   autoFocus
                   onClick={handleClose}
                 >
-                  CANCEL
+                  Close
                 </button>
               </div>
             </form>
@@ -84,26 +90,27 @@ export default function AddServiceSubTypeTabEditModal({
                   />
                 </div>
               </div>
-              <div className="divider"></div>
-              <div className="modal-action">
-                {/* <input type="submit" /> */}
-                <input
-                  type="submit"
-                  value={"SAVE"}
-                  className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                />
+              <div className="bg-gray-200 py-[1px] mt-3"></div>
+              <div className=" flex items-end justify-end mt-2">
                 <button
-                  className="px-5  bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                  type="submit"
+                >
+                  Save
+                </button>
+
+                <button
+                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                   autoFocus
                   onClick={handleClose}
                 >
-                  CANCEL
+                  Close
                 </button>
               </div>
             </form>
           )}
         </div>
-      </Dialog>
+      </Modal>
     </div>
   );
 }

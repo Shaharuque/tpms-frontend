@@ -8,11 +8,7 @@ export default function InsuranceEditModal({ handleClose, open, row }) {
   const [value, setValue] = React.useState(false);
 
   console.log(value);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
   };

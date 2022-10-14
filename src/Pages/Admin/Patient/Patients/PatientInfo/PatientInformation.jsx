@@ -240,7 +240,7 @@ const PatientInformation = () => {
               />
               {/* <div ref={ref}>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none pb-[0.8px]"
+                           className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none pb-[0.8px]"
                   // value={`${month}/${day}/${year}`}
                   name="dob"
                   readOnly
@@ -248,7 +248,7 @@ const PatientInformation = () => {
                     setOpenCalendar((openCalendar) => !openCalendar)
                   }
                   {...register("dob")}
-                />
+                />                                                 
                 {openCalendar && (
                   <div className="absolute z-10 rounded">
                     <Calendar onChange={changeDate}></Calendar>

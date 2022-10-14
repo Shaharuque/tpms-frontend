@@ -98,54 +98,54 @@ const AddInsurance = () => {
             {/* name  */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Name
                 </span>
               </label>
               <input
                 type="text"
                 name="name"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("name")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Address
                 </span>
               </label>
               <input
                 type="text"
                 name="Address"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("Address")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   City
                 </span>
               </label>
               <input
                 type="text"
                 name="city"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("city")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   State
                 </span>
               </label>
               <div>
                 <select
-                  className="border rounded-sm px-2 py-[3px] font-thin mx-1 text-xs w-full"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                   {...register("state")}
                 >
                   <option value="Today">Today's follow up</option>
@@ -159,72 +159,72 @@ const AddInsurance = () => {
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Zip
                 </span>
               </label>
               <input
                 type="text"
                 name="zip"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("zip")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Contract1
                 </span>
               </label>
               <input
                 type="text"
                 name="contract1"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("contract1")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Contract2
                 </span>
               </label>
               <input
                 type="text"
                 name="contract2"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("contract2")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Phone1
                 </span>
               </label>
               <input
                 type="text"
                 name="phone1"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("phone1")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Phone2
                 </span>
               </label>
               <input
                 type="text"
                 name="phone2"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("phone2")}
               />
             </div>
-            <div className="flex ml-1 mt-8 items-center">
+            <div className="flex justify-center ml-1 mt-8 items-center">
               <input
                 type="checkbox"
                 // checked={value ? true : false}
@@ -233,33 +233,33 @@ const AddInsurance = () => {
                 //   setValue(!value);
                 // }}
               />
-              <span className="text-xs ml-1 text-gray-600 font-normal">
+              <span className="text-base font-medium ml-1 text-gray-600">
                 Regional Center
               </span>
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Billing abreviation(3 char)
                 </span>
               </label>
               <input
                 type="text"
                 name="billing observation"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("billing_observation")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-xs text-gray-600 text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Electronic Insurance ID
                 </span>
               </label>
               <input
                 type="text"
                 name="Electronic_"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("phone2")}
               />
             </div>

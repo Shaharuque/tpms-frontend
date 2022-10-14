@@ -1,4 +1,3 @@
-//import { Dialog } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -28,8 +27,6 @@ const EditSession = ({ handleClose, open }) => {
           closable={false}
           bodyStyle={{ padding: "0" }}
           className="box rounded-lg"
-          //onClose={handleClose}
-          // aria-labelledby="responsive-dialog-title"
         >
           <div className="px-5 py-2 ">
             <div className="flex items-center justify-between">

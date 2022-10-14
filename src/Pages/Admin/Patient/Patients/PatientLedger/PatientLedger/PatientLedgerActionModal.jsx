@@ -1,4 +1,4 @@
-import { Dialog } from "@mui/material";
+import { Modal } from "antd";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -22,15 +22,24 @@ const PatientLedgerActionModal = ({ handleClose, open, row }) => {
   return (
     <div>
       <div>
-        <Dialog open={open} aria-labelledby="responsive-dialog-title">
-          <div className="px-5 py-2 box  sm:w-[500px]">
+        <Modal
+          // fullScreen={fullScreen}
+          open={open}
+          centered
+          width={500}
+          footer={false}
+          closable={false}
+          bodyStyle={{ padding: "0" }}
+          className="box rounded-md"
+        >
+          <div className="px-5 py-2 ">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">
                 Edit Document
               </h1>
               <IoCloseCircleOutline
                 onClick={handleClose}
-                className="text-gray-600 font-medium text-2xl hover:text-primary"
+                className="text-gray-600 font-semibold  text-2xl hover:text-primary"
               />
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>
@@ -104,7 +113,7 @@ const PatientLedgerActionModal = ({ handleClose, open, row }) => {
               </div>
             </form>
           </div>
-        </Dialog>
+        </Modal>
       </div>
     </div>
   );
