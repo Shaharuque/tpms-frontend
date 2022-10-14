@@ -223,7 +223,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 >
                   <div className="grid grid-cols-3">
                     {date ? (
-                      <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-tl-[5px]">
+                      <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-l-[5px]">
                         <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
                           <span className="text-2xl">
                             {days[date.getDay()]}
@@ -240,7 +240,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                         </div>
                       </div>
                     ) : (
-                      <div className="bg-[#0AA7B8] text-white font-bold rounded-tl-[5px]">
+                      <div className="bg-[#0AA7B8] text-white font-bold rounded-l-[5px]">
                         <div className="w-full h-16 bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg"></div>
                         <div className="text-center m-1 pt-8">
                           <h1 className="text-3xl">Please Select a Date</h1>
@@ -250,7 +250,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                     {/* single calendar */}
                     <div className="col-span-2 w-[95%] my-0 mx-auto">
                       <Calendar onChange={setDate} value={date} />
-                      <div className="flex justify-between rounded-b-[5px] bg-white py-1">
+                      <div className="flex justify-between rounded-b-[5px] bg-white py-1 rounded-br-[5px]">
                         <button
                           onClick={() => handleClearDate()}
                           className="text-xs text-red-400"
