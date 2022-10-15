@@ -17,7 +17,7 @@ const ContractRateEditAdd = () => {
     reset();
   };
   return (
-    <div className="h-[100vh]">
+    <div className="sm:h-[100vh]">
       <div>
         <div className="border">
           <motion.div
@@ -30,8 +30,8 @@ const ContractRateEditAdd = () => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex flex-wrap items-center gap-6 my-5">
-                <div className="w-[20%]">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7  mr-2 gap-6">
+                <div className="">
                   <label className="label">
                     <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Select Insurance
@@ -54,7 +54,7 @@ const ContractRateEditAdd = () => {
                   </label>
                   <input
                     type="file"
-                    className=" border bg-white rounded-sm ml-1  text-xs"
+                    className=" rounded-sm ml-1  text-xs"
                     {...register("fileName")}
                   />
                 </div>

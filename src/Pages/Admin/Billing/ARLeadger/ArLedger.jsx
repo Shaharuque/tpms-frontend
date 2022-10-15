@@ -493,11 +493,7 @@ const ArLedger = () => {
                       className="absolute z-10  2xl:ml-[20] shadow-xl"
                     >
                       {open && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 15 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.2 }}
-                        >
+                        <div>
                           <div>
                             <DateRangePicker
                               onChange={(item) => setRange([item.selection])}
@@ -525,7 +521,7 @@ const ArLedger = () => {
                               Save
                             </button>
                           </div>
-                        </motion.div>
+                        </div>
                       )}
                     </div>
                   </div>

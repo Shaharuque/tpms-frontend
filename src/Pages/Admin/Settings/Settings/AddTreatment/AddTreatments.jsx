@@ -5,8 +5,8 @@ const AddTreatments = () => {
   return (
     <div>
       <MultiTransferData
-        name1={"All Staff Types"}
-        name2={"Facility Selected Staff Types"}
+        name1={"All Treatments"}
+        name2={"Facility Selected Treatments"}
       ></MultiTransferData>
     </div>
   );

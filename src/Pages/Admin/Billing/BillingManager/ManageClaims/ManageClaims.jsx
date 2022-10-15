@@ -1,16 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
-import {
-  ManageClaimsColumnsColumn,
-  ManageClaimsColumnsData,
-} from "../BatchingClaims/BatchingClaimsColumns";
-import { RiPencilLine } from "react-icons/ri";
 import axios from "axios";
-import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox";
-import SettingTableBox from "../../../../Pages/Settings/SettingComponents/SettingTableBox";
 import { Table } from "antd";
-import { BsFillPencilFill, BsThreeDots } from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs";
 
 const ManageClaims = () => {
   const [active, setActive] = useState(false);
@@ -24,7 +16,6 @@ const ManageClaims = () => {
   // table
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [tableopen, settableopen] = useState(false)
 
   const onSubmit = (data) => {
     // console.log(data);
@@ -45,7 +36,7 @@ const ManageClaims = () => {
     axios("../../All_Fake_Api/ManageClimbs.json")
       .then((response) => {
         SetManageClimbsData(response.data);
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -87,7 +78,6 @@ const ManageClaims = () => {
       ellipsis: true,
     },
 
-
     {
       title: "Patient",
       dataIndex: "patient",
@@ -97,8 +87,7 @@ const ManageClaims = () => {
       sorter: (a, b) => {
         return a.patient > b.patient ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "patient" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "patient" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -114,7 +103,6 @@ const ManageClaims = () => {
       sortOrder:
         sortedInfo.columnKey === "date_range" ? sortedInfo.order : null,
       ellipsis: true,
-     
     },
     {
       title: "Total",
@@ -122,11 +110,10 @@ const ManageClaims = () => {
       key: "total",
       width: 50,
       sorter: (a, b) => {
-        return a.total> b.total ? -1 : 1;
+        return a.total > b.total ? -1 : 1;
         // a.Scheduled_Date - b.Scheduled_Date
       },
-      sortOrder:
-        sortedInfo.columnKey === "total" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "total" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -153,7 +140,7 @@ const ManageClaims = () => {
       sortOrder: sortedInfo.columnKey === "L_billed" ? sortedInfo.order : null,
       ellipsis: true,
     },
-    
+
     {
       title: "Action",
       key: "M2",
@@ -171,13 +158,12 @@ const ManageClaims = () => {
         return (
           <div className="flex justify-center text-teal-700">
             <div>
-              <BsThreeDots/>
+              <BsThreeDots />
             </div>
           </div>
         );
       },
     },
-
   ];
 
   const handleChange = (pagination, filters, sorter) => {
@@ -202,19 +188,18 @@ const ManageClaims = () => {
     },
   };
 
-
   return (
-    <div className="h-[100vh]">
+    <div className={!tActive ? "h-[100vh]" : ""}>
       <h1 className="text-lg text-orange-400">Manage Claim(s)</h1>
 
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" items-center gap-2 grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
+          <div className="grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
             {" "}
             {/* Sort By  */}
             <div>
               <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                   Sort By
                 </span>
               </label>
@@ -225,16 +210,15 @@ const ManageClaims = () => {
               >
                 <option value="all">Batch</option>
                 <option value="Tx Providers">Tx Providers</option>
-                        <option value="CMS Therapist">CMS Therapist</option>
-                        <option value="Service Type">Service Type</option>
-                        <option value="Claim Status">Claim Status</option>
-                        <option value="Date Range">Date Range</option>
-                        <option value="Degree Level">Degree Level</option>
-                        <option value="Region">Region</option>
-                        <option value="CPT Code">CPT Code</option>
-                        <option value="Zero Units">Zero Units</option>
-                        <option value="Place Of Service"> Place Of Service
-                        </option>
+                <option value="CMS Therapist">CMS Therapist</option>
+                <option value="Service Type">Service Type</option>
+                <option value="Claim Status">Claim Status</option>
+                <option value="Date Range">Date Range</option>
+                <option value="Degree Level">Degree Level</option>
+                <option value="Region">Region</option>
+                <option value="CPT Code">CPT Code</option>
+                <option value="Zero Units">Zero Units</option>
+                <option value="Place Of Service"> Place Of Service</option>
               </select>
             </div>
             {active && (
@@ -242,7 +226,7 @@ const ManageClaims = () => {
                 {" "}
                 <div>
                   <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       {sortBy}
                     </span>
                   </label>
@@ -259,7 +243,7 @@ const ManageClaims = () => {
                 {/* Sort By  */}
                 <div>
                   <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Sort By
                     </span>
                   </label>
@@ -277,7 +261,7 @@ const ManageClaims = () => {
                 {nextActive && (
                   <div>
                     <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         {sort_By}
                       </span>
                     </label>
@@ -295,15 +279,15 @@ const ManageClaims = () => {
             )}
             {/* submit  */}
             <div className="flex gap-2">
-            <button
-              className=" py-2 px-5 mt-8 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              type="submit"
-            >
-              Get Claim(s)
-            </button>
-            <button className="font-normal  py-2 mt-8 px-3 text-xs bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
-              Cancel
-            </button>
+              <button
+                className=" py-2 px-5 mt-8 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                type="submit"
+              >
+                Get Claim(s)
+              </button>
+              <button className="font-normal  py-2 mt-8 px-3 text-xs bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
+                Cancel
+              </button>
             </div>
           </div>
         </form>
@@ -318,23 +302,22 @@ const ManageClaims = () => {
               rows={page}
               prepareRow={prepareRow}
             ></SettingTableBox> */}
-             <Table
-                      pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                      rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                      size="small"
-                      bordered
-                      className=" text-xs font-normal mt-5"
-                      columns={columns}
-                      dataSource={ManageClimbsData}
-                      rowSelection={{
-                        ...rowSelection,
-                      }}
-                      scroll={{
-                        y: 650,
-                      }}
-                      onChange={handleChange}
-                    />
-          
+            <Table
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+              size="small"
+              bordered
+              className=" text-xs font-normal mt-5"
+              columns={columns}
+              dataSource={ManageClimbsData}
+              rowSelection={{
+                ...rowSelection,
+              }}
+              scroll={{
+                y: 650,
+              }}
+              onChange={handleChange}
+            />
           </div>
           <div className=" flex flex-wrap items-center gap-2">
             <div>

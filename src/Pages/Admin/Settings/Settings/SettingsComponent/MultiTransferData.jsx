@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
 
 const MultiTransferData = ({ name1, name2 }) => {
   const [TransferData, setTransferData] = useState([]);
@@ -45,15 +46,17 @@ const MultiTransferData = ({ name1, name2 }) => {
               ))}
           </select>
         </div>
-        <div className=" flex items-center justify-center ">
+        <div className=" flex flex-col items-center justify-center my-4">
           <button // onClick={handleAddItems}
             onClick={() => setSelectedKeys(arr1)}
-            className="px-5 mx-3 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md mb-2 flex"
           >
             Add
+            <DoubleRightOutlined className="ml-2" />
           </button>
-          <button className="px-5 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md">
-            REMOVE
+          <button className="px-2 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md flex">
+            <DoubleLeftOutlined className="mr-2" />
+            Remove
           </button>
         </div>
         <div>
