@@ -1,3 +1,4 @@
+import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -57,15 +58,17 @@ const AddInsurance = () => {
             View Details
           </button>
         </div>
-        <div className=" flex items-center justify-center ">
+        <div className=" flex flex-col items-center justify-center my-4">
           <button // onClick={handleAddItems}
             onClick={() => setSelectedKeys(arr1)}
-            className="px-5 mx-3 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md mb-2 flex"
           >
             Add
+            <DoubleRightOutlined className="ml-2" />
           </button>
-          <button className="px-5 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md">
-            REMOVE
+          <button className="px-2 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md flex">
+            <DoubleLeftOutlined className="mr-2" />
+            Remove
           </button>
         </div>
         <div>
@@ -94,11 +97,11 @@ const AddInsurance = () => {
       <div className="border p-5">
         <h1 className="text-lg text-orange-500 my-1">Insurance Details</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-4 gap-y-2">
             {/* name  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Name
                 </span>
               </label>
@@ -112,7 +115,7 @@ const AddInsurance = () => {
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Address
                 </span>
               </label>
@@ -126,7 +129,7 @@ const AddInsurance = () => {
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   City
                 </span>
               </label>
@@ -139,7 +142,7 @@ const AddInsurance = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   State
                 </span>
               </label>
@@ -159,7 +162,7 @@ const AddInsurance = () => {
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Zip
                 </span>
               </label>
@@ -173,7 +176,7 @@ const AddInsurance = () => {
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Contract1
                 </span>
               </label>
@@ -186,7 +189,7 @@ const AddInsurance = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Contract2
                 </span>
               </label>
@@ -200,7 +203,7 @@ const AddInsurance = () => {
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Phone1
                 </span>
               </label>
@@ -213,7 +216,7 @@ const AddInsurance = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Phone2
                 </span>
               </label>
@@ -224,22 +227,24 @@ const AddInsurance = () => {
                 {...register("phone2")}
               />
             </div>
-            <div className="flex justify-center ml-1 mt-8 items-center">
-              <input
-                type="checkbox"
-                // checked={value ? true : false}
-                name="patient"
-                // onClick={() => {
-                //   setValue(!value);
-                // }}
-              />
-              <span className="text-base font-medium ml-1 text-gray-600">
-                Regional Center
-              </span>
+            <div className="flex justify-start items-end my-2 md:my-0">
+              <div className="flex justify-center ml-1 items-center">
+                <input
+                  type="checkbox"
+                  // checked={value ? true : false}
+                  name="patient"
+                  // onClick={() => {
+                  //   setValue(!value);
+                  // }}
+                />
+                <span className="font-medium ml-1 text-gray-600 text-[14px]">
+                  Regional Center
+                </span>
+              </div>
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Billing abreviation(3 char)
                 </span>
               </label>
@@ -252,7 +257,7 @@ const AddInsurance = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
                   Electronic Insurance ID
                 </span>
               </label>
@@ -265,12 +270,12 @@ const AddInsurance = () => {
             </div>
           </div>
           <button
-            className=" py-[5px] mt-7  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className=" py-[5px] mt-7 px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             type="submit"
           >
             Save
           </button>
-          <button className="py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md">
+          <button className="py-[5px] mt-7 ml-2 px-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md">
             Delete
           </button>
         </form>

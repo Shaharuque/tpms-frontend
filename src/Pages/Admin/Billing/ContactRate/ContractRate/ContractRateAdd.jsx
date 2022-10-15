@@ -263,7 +263,7 @@ const ContractRateAdd = () => {
                     <option value="name">EFT</option>
                   </select>
                 </div>
-                <div className="flex ml-1 gap-3">
+                <div className="flex items-end ml-1 gap-3">
                   <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
                     <input
                       type="checkbox"
@@ -288,7 +288,7 @@ const ContractRateAdd = () => {
               </div>
 
               <div className="mb-3">
-                <div className=" flex items-end justify-start mt-2">
+                <div className=" flex items-end justify-start mt-6">
                   <button
                     className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                     type="submit"
