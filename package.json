@@ -4,10 +4,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@aldabil/react-scheduler": "^2.3.1",
+    "@aldabil/react-scheduler": "^2.4.1",
     "@ant-design/icons": "^4.7.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.10.9",
     "@mui/lab": "^5.0.0-alpha.87",
     "@mui/material": "^5.8.5",
     "@mui/x-data-grid": "^5.12.3",
