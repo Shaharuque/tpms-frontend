@@ -37,7 +37,7 @@ const AddInsurance = () => {
             multiple
             id="countries_multiple"
             // className="h-40"
-            className="text-black border h-48 border-gray-300  rounded-md focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
+            className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {TransferData.length > 0 &&
               TransferData.map((item, index) => (
@@ -57,7 +57,7 @@ const AddInsurance = () => {
             View Details
           </button>
         </div>
-        <div className=" flex items-center justify-center ">
+        <div className=" flex items-center justify-center my-4">
           <button // onClick={handleAddItems}
             onClick={() => setSelectedKeys(arr1)}
             className="px-5 mx-3 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
@@ -77,7 +77,7 @@ const AddInsurance = () => {
             multiple
             id="countries_multiple"
             // className="h-40"
-            className="text-black border h-48 border-gray-300  rounded-md focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
+            className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {selectedKeys.length > 0 &&
               selectedKeys.map((item, index) => (
@@ -94,7 +94,7 @@ const AddInsurance = () => {
       <div className="border p-5">
         <h1 className="text-lg text-orange-500 my-1">Insurance Details</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-6 gap-y-2">
             {/* name  */}
             <div>
               <label className="label">
@@ -224,18 +224,20 @@ const AddInsurance = () => {
                 {...register("phone2")}
               />
             </div>
-            <div className="flex justify-center ml-1 mt-8 items-center">
-              <input
-                type="checkbox"
-                // checked={value ? true : false}
-                name="patient"
-                // onClick={() => {
-                //   setValue(!value);
-                // }}
-              />
-              <span className="text-base font-medium ml-1 text-gray-600">
-                Regional Center
-              </span>
+            <div className="flex items-end mt-4">
+              <div className="flex justify-start ml-1  items-center">
+                <input
+                  type="checkbox"
+                  // checked={value ? true : false}
+                  name="patient"
+                  // onClick={() => {
+                  //   setValue(!value);
+                  // }}
+                />
+                <span className="text-base font-medium ml-1 text-gray-600">
+                  Regional Center
+                </span>
+              </div>
             </div>
             <div>
               <label className="label">
@@ -265,7 +267,7 @@ const AddInsurance = () => {
             </div>
           </div>
           <button
-            className=" py-[5px] mt-7  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className=" py-[5px] mt-7  px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
             type="submit"
           >
             Save
