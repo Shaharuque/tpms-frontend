@@ -137,6 +137,7 @@ import HolidaySetup from "./Pages/Admin/Settings/Settings/HolidaySetUp/HolidaySe
 import AddServiceSubType from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType";
 import AddInsurance from "./Pages/Admin/Settings/Settings/AddInsurance/AddInsurance";
 import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
+import AddServiceSubTypeTab from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType/AddServiceSubTypeTab";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -560,9 +561,20 @@ function App() {
               ></Route>
               <Route
                 path="sub-activity-setup"
-                element={<AddServiceSubType></AddServiceSubType>}
-              ></Route>
+               element={<AddServiceSubType></AddServiceSubType>}
+              >
+                <Route index element={<Navigate to="SubTypeTab" />} />
+              
               <Route
+              // sub type
+                path="SubTypeTab"
+               element={<AddServiceSubTypeTab></AddServiceSubTypeTab>}
+              >
+              </Route>
+              </Route>
+
+              <Route
+              
                 path="add-staff-type"
                 element={<AddStaffType></AddStaffType>}
               ></Route>
