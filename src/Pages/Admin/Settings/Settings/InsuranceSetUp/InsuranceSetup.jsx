@@ -301,7 +301,10 @@ const InsuranceSetup = () => {
       </button>
 
       {insuranceEdit && (
-        <InsuranceEditComponent id={rowId}></InsuranceEditComponent>
+        <>
+          {" "}
+          <InsuranceEditComponent id={rowId}></InsuranceEditComponent>
+        </>
       )}
     </div>
   );

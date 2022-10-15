@@ -13,7 +13,7 @@ export default function AddServiceSubTypeTabEditModal({
     console.log(data);
     reset();
   };
-  // console.log("row", row.original.place_of_Service);
+  console.log("row", row);
   return (
     <div>
       <Modal
@@ -46,7 +46,7 @@ export default function AddServiceSubTypeTabEditModal({
                     <span className="text-sm">Description</span>
                   </label>
                   <input
-                    value={row.original.place_of_Service}
+                    value={row.last_name}
                     type="text"
                     placeholder="Description"
                     name="description"

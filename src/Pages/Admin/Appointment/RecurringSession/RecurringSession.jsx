@@ -10,6 +10,7 @@ import RecurringSessionEdit from "./RecurringSession/RecurringSessionEdit";
 import { Link } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
 import { AiOutlineDown } from "react-icons/ai";
+import GlobalMultiSelect from "../../../Shared/CustomComponents/GlobalMultiSelect";
 
 const RecurringSession = () => {
   const [table, setTable] = useState(false);
@@ -19,7 +20,7 @@ const RecurringSession = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
-  // -----------------------------------------------Table-------------------------------
+  // ------------------------------------------Table-------------------------------
   // calling recurring session fakedb
   useEffect(() => {
     axios("../All_Fake_Api/Fakedb.json")
@@ -415,7 +416,6 @@ const RecurringSession = () => {
                         </option>
                       </select>
                     </div>
-
                     {select === "Patients" ? (
                       <div>
                         <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">

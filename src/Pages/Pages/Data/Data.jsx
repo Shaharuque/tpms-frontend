@@ -253,7 +253,12 @@ export const setting = [
     icon: <FiLayers />,
   },
   {
-    link: "sub-activity-setup",
+    link: "cpt-code-exclusion",
+    name: "CPT Code Exclusion(S)",
+    icon: <FiLayers />,
+  },
+  {
+    link: "sub-activity-setup/SubTypeTab",
     name: "Add Service Sub-Type",
     icon: <RiSendPlaneLine />,
   },
