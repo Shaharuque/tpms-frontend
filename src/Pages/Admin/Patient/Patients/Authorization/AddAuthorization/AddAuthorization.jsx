@@ -112,10 +112,10 @@ const AddAuthorization = () => {
         transition={{ delay: 0.3 }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-6 gap-y-1">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-6 gap-y-3">
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Description<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -128,7 +128,7 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Insurance
                   <span className="text-red-500">*</span>
                 </span>
@@ -143,7 +143,7 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Tx Type
                   <span className="text-red-500">*</span>
                 </span>
@@ -158,7 +158,7 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   SUPV. Provider
                   <span className="text-red-500">*</span>
                 </span>
@@ -174,7 +174,7 @@ const AddAuthorization = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Selected date
                 </span>
               </label>
@@ -245,7 +245,7 @@ const AddAuthorization = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Authorization Number<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -258,7 +258,7 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   UCI / Insurance ID<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -272,7 +272,7 @@ const AddAuthorization = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   COB
                   <span className="text-red-500">*</span>
                 </span>
@@ -288,7 +288,7 @@ const AddAuthorization = () => {
 
             <div className="">
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Upload Authorization
                 </span>
               </label>
@@ -302,7 +302,7 @@ const AddAuthorization = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                     Diagnosis1<span className="text-red-500">*</span>
                   </span>
                 </label>
@@ -315,7 +315,7 @@ const AddAuthorization = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                     Diagnosis2
                   </span>
                 </label>
@@ -332,7 +332,7 @@ const AddAuthorization = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                     Diagnosis3<span className="text-red-500">*</span>
                   </span>
                 </label>
@@ -345,7 +345,7 @@ const AddAuthorization = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                     Diagnosis4
                   </span>
                 </label>
@@ -361,7 +361,7 @@ const AddAuthorization = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                     Deductible
                   </span>
                 </label>
@@ -390,7 +390,7 @@ const AddAuthorization = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   CoPay
                 </span>
               </label>
@@ -403,7 +403,7 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   CMS 4 (Insured Name)
                 </span>
               </label>
@@ -416,7 +416,7 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   CMS 11 (Group No)
                 </span>
               </label>
@@ -451,7 +451,7 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Notes
                 </span>
               </label>
