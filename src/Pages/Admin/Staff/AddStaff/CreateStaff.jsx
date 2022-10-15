@@ -10,7 +10,7 @@ const CreateStaff = () => {
     reset();
   };
   return (
-    <div className="h-[100vh]">
+    <div className="sm:h-[100vh]">
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">Today's Copay</h1>
         <div className="flex items-center gap-3">
