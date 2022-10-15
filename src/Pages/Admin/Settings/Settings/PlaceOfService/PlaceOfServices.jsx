@@ -9,10 +9,13 @@ const PlaceOfServices = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [recordData, setRecordData] = useState();
 
-  const handleClickOpen2 = () => {
+  const handleClickOpen2 = (record) => {
     setOpenAddModal(true);
+    setRecordData(record);
   };
+  console.log(recordData);
 
   const handleClose2 = () => {
     setOpenAddModal(false);
@@ -24,15 +27,15 @@ const PlaceOfServices = () => {
     setSortedInfo(sorter);
   };
 
-  const [table, setTable] = useState(false);
+  const [table, setTable] = useState([]);
   useEffect(() => {
     axios("../../../All_Fake_Api/Holiday.json")
       .then((response) => {
-        console.log("calling");
+        //console.log("calling");
         setTable(response?.data);
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   }, []);
   console.log(table);
@@ -40,7 +43,7 @@ const PlaceOfServices = () => {
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
     {
-      title: "Date of Holiday",
+      title: "Place of Service",
       dataIndex: "date",
       key: "date",
       width: 100,
@@ -71,7 +74,7 @@ const PlaceOfServices = () => {
       ellipsis: true,
     },
     {
-      title: "Description",
+      title: "Place of Service Code",
       dataIndex: "description",
       key: "description",
       width: 150,
@@ -104,12 +107,15 @@ const PlaceOfServices = () => {
       dataIndex: "action",
       key: "action",
       width: 70,
-      render: () => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
             <div className="flex justify-center">
-              <button onClick={handleClickOpen2} className="text-secondary">
+              <button
+                onClick={() => handleClickOpen2(record)}
+                className="text-secondary"
+              >
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
@@ -133,22 +139,22 @@ const PlaceOfServices = () => {
   };
   return (
     <div>
-      <div className="flex mb-2 items-center justify-between">
-        <h1 className="text-lg my-2 text-orange-400">Holiday</h1>
+      <div className="md:flex mb-2 items-center justify-between">
+        <h1 className="text-lg my-2 text-orange-400">Place of Service</h1>
 
-        <div className="flex items-center">
+        <div className=" md:flex items-center">
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
-              <h1
+              <button
                 onClick={handleClickOpen2}
                 className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
               >
-                Add Place of service
-              </h1>
+                Add Place of Service
+              </button>
             </label>
           </div>
-          <div className="flex justify-end items-end my-2">
+          <div className="md:flex justify-end items-end my-2">
             <button
               onClick={clearFilters}
               className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
@@ -178,6 +184,7 @@ const PlaceOfServices = () => {
         <PlaceOfServicesActionAddModal
           handleClose={handleClose2}
           open={openAddModal}
+          recordData={recordData}
         ></PlaceOfServicesActionAddModal>
       )}
     </div>

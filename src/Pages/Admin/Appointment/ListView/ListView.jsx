@@ -16,6 +16,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
+import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -44,6 +45,7 @@ const ListView = () => {
         key: "selection",
       },
     ]);
+    setOpen(false);
   };
 
   // date range picker calendar
@@ -497,10 +499,19 @@ const ListView = () => {
   });
   const onSubmit = (data) => {
     // setSubmitted(data);
-    // console.log(data);
+    console.log(data);
     setTable(true);
     reset();
   };
+
+  useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        start_date: startDate && `${startMonth} ${startDay}, ${startYear}`,
+      });
+    }, 0);
+  }, [startDate, reset]);
 
   // ----------------------------------------Multi-Select---------------------------------
   // ***************
@@ -637,15 +648,18 @@ const ListView = () => {
                             <div>
                               <select
                                 className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
-                                {...register("pos")}
+                                {...register("place_of_service")}
                               >
                                 <option value="" className="text-black">
                                   Select
                                 </option>
-                                <option value="Today" className="text-black">
+                                <option
+                                  value="follow up"
+                                  className="text-black"
+                                >
                                   Today's follow up
                                 </option>
-                                <option value="UK" className="text-black">
+                                <option value="cat" className="text-black">
                                   Lost 7 days
                                 </option>
                                 <option value="15" className="text-black">
@@ -667,6 +681,7 @@ const ListView = () => {
                                 Selected date
                               </span>
                             </label>
+                            {/* Date Range calender will be set here */}
                             <div className="ml-1">
                               <div
                                 onClick={() => setOpen(true)}
@@ -680,6 +695,7 @@ const ListView = () => {
                                   }
                                   readOnly
                                   className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                  {...register("start_date")}
                                 />
                                 <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
                                 <input
@@ -750,44 +766,18 @@ const ListView = () => {
               </div>
             )}
           </div>
+          {/* Multi date picker component called */}
           <div
             ref={refClose}
             className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
           >
             {open && (
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <div>
-                  <DateRangePicker
-                    onChange={(item) => setRange([item.selection])}
-                    editableDateInputs={true}
-                    moveRangeOnFirstSelection={false}
-                    ranges={range}
-                    months={2}
-                    direction="horizontal"
-                    className="border-2 border-gray-100"
-                  />
-                </div>
-                <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                  <button
-                    className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                    type="submit"
-                    onClick={handleCancelDate}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                    type="submit"
-                    onClick={() => setOpen(false)}
-                  >
-                    Save
-                  </button>
-                </div>
-              </motion.div>
+              <CustomDateRange
+                range={range}
+                setRange={setRange}
+                handleCancelDate={handleCancelDate}
+                setOpen={setOpen}
+              ></CustomDateRange>
             )}
           </div>
         </div>

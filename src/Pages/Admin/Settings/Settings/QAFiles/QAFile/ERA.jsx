@@ -1,6 +1,7 @@
 import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Loading from "../../../../../../Loading/Loading";
 import EraManagerAction from "./EraManagerAction";
 
 const ERA = () => {
@@ -57,7 +58,7 @@ const ERA = () => {
         return a.file_name > b.file_name ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "file_name" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Received Data",
@@ -157,7 +158,7 @@ const ERA = () => {
 
   return (
     <div>
-      <h1 className="text-lg my-2 text-orange-400">EDI FILE</h1>
+      <h1 className="text-lg mt-4 mb-2 text-orange-400">ERA FILE</h1>
       <div>
         <div className="flex justify-end items-end my-2">
           <button

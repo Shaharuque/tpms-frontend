@@ -3,8 +3,24 @@ import { useForm } from "react-hook-form";
 import { Modal } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-export default function VendorNumberSetupActionModal({ open, handleClose }) {
+export default function VendorNumberSetupActionModal({
+  open,
+  handleClose,
+  recordData,
+}) {
+  const { vendor, service_code } = recordData;
   const { register, handleSubmit, reset } = useForm();
+
+  React.useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        vendor_no: vendor,
+        service_no: service_code,
+      });
+    }, 0);
+  }, [vendor, service_code, reset]);
+
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -22,7 +38,7 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
           bodyStyle={{ padding: "0" }}
           className="box rounded-md"
         >
-          <div className="px-5 py-2 ">
+          <div className="px-5 py-2">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">
                 Edit Vendor Setup
@@ -32,13 +48,12 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                 className="text-gray-600 font-semibold  text-2xl hover:text-primary"
               />
             </div>
-            <div className="bg-gray-200 py-[1px] mt-3"></div>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="w-full text-sm">
+              <div className="w-full font-semibold">
                 <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-5">
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-sm text-gray-500 text-left">
                         Service
                       </span>
                     </label>
@@ -54,7 +69,7 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-sm text-gray-500 text-left">
                         Tx Type
                       </span>
                     </label>
@@ -70,7 +85,7 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-sm text-gray-500 text-left">
                         Regional Center
                       </span>
                     </label>
@@ -89,29 +104,29 @@ export default function VendorNumberSetupActionModal({ open, handleClose }) {
                   <div className="mt-[-15px]">
                     {" "}
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-sm text-gray-500 text-left">
                         Vendor No
                       </span>
                     </label>
                     <input
                       type="number"
-                      name="staff_number"
+                      name="vendor_no"
                       className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                      {...register("staff_number")}
+                      {...register("vendor_no")}
                     />
                   </div>
                   <div className="mt-[-15px]">
                     {" "}
                     <label className="label">
-                      <span className="label-text text-xs text-gray-500 text-left">
+                      <span className="label-text text-sm text-gray-500 text-left">
                         Service Code
                       </span>
                     </label>
                     <input
                       type="number"
-                      name="service_code"
+                      name="service_no"
                       className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                      {...register("service_code")}
+                      {...register("service_no")}
                     />
                   </div>
                 </div>

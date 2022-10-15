@@ -71,9 +71,6 @@ const MultiSelectionDiv = ({ selectBox, addBox }) => {
         <div>
           <h1 className="text-sm text-gray-700 my-2">{selectBox}</h1>
           <FormControl className="sm:w-[550px] md:w-[350] w-[260px] m-0 sm:m-2 bg-white ">
-            <InputLabel shrink htmlFor="select-multiple-native">
-              -----------
-            </InputLabel>
             <Select
               multiple
               native

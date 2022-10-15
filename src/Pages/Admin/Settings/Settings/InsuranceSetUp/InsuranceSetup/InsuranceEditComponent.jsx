@@ -30,7 +30,7 @@ const InsuranceEditComponent = ({ id }) => {
                 {/* name  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       CoPay Number {id}
                     </span>
                   </label>
@@ -49,7 +49,7 @@ const InsuranceEditComponent = ({ id }) => {
                 </span>  
               </label> */}
                 </div>
-                <div className="flex items-center ">
+                <div className="flex items-end ">
                   <Switch
                     size="small"
                     checked={value ? true : false}
@@ -59,11 +59,10 @@ const InsuranceEditComponent = ({ id }) => {
                     Is Electronic
                   </span>
                 </div>
-                <span className="text-sm font-normal"></span>{" "}
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 31
                     </span>
                   </label>
@@ -77,7 +76,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 32a
                     </span>
                   </label>
@@ -91,7 +90,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 32b
                     </span>
                   </label>
@@ -105,7 +104,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 33a
                     </span>
                   </label>
@@ -119,7 +118,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 33b
                     </span>
                   </label>
@@ -133,7 +132,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Provider NPI
                     </span>
                   </label>
@@ -147,7 +146,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       TaxId
                     </span>
                   </label>
@@ -161,7 +160,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Main Taxonomy
                     </span>
                   </label>
@@ -179,7 +178,7 @@ const InsuranceEditComponent = ({ id }) => {
                       checked={value ? true : false}
                       onClick={() => setValue(!value)}
                     />
-                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                    <span className="text-[12px] font-medium text-gray-500 mx-3">
                       Active
                     </span>
                   </div>
@@ -189,7 +188,7 @@ const InsuranceEditComponent = ({ id }) => {
                       checked={value ? true : false}
                       onClick={() => setValue(!value)}
                     />
-                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                    <span className="text-[12px] font-medium text-gray-500 mx-3">
                       Is Fill Box-17
                     </span>
                   </div>
@@ -209,8 +208,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 32 Address
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 32 Address
                     </span>
                   </label>
                   <input
@@ -223,8 +222,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 32 City
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 32 City
                     </span>
                   </label>
                   <input
@@ -237,8 +236,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 32 State
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 32 State
                     </span>
                   </label>
                   <input
@@ -251,8 +250,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 32 Zip
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 32 Zip
                     </span>
                   </label>
                   <input
@@ -265,8 +264,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 33 Address
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 33 Address
                     </span>
                   </label>
                   <input
@@ -279,8 +278,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 33 City
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 33 City
                     </span>
                   </label>
                   <input
@@ -293,8 +292,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 33 State
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 33 State
                     </span>
                   </label>
                   <input
@@ -307,8 +306,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 33 Zip
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 33 Zip
                     </span>
                   </label>
                   <input
@@ -319,7 +318,7 @@ const InsuranceEditComponent = ({ id }) => {
                   />
                 </div>
               </div>
-              <div className="overflow-auto my-5">
+              <div className="overflow-auto my-8">
                 <table className=" overflow-y-hidden">
                   <tr className="text-sm font-normal gap-5">
                     <th className="font-medium">Tx Type</th>
@@ -436,10 +435,10 @@ const InsuranceEditComponent = ({ id }) => {
                 <input
                   type="submit"
                   value={"SAVE"}
-                  className="px-5  py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                  className="px-3  py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 />
                 <button
-                  className="px-5 ml-3 py-1 bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                  className="px-3 ml-3 py-1 bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
                   autoFocus
                 >
                   CANCEL

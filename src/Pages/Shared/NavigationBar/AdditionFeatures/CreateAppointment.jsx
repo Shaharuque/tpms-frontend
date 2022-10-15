@@ -88,6 +88,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
         bodyStyle={{ padding: "0" }}
         width={550}
         closable={false}
+        width={550}
         className="box rounded-xl"
         // onClose={handleClose}
         // aria-labelledby="responsive-dialog-title"

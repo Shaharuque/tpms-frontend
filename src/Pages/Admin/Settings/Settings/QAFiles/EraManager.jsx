@@ -17,9 +17,9 @@ const EraManager = () => {
 
   return (
     <div className="h-[100vh]">
-      <h1 className="text-lg my-2 text-orange-400">OA Files</h1>
-      <div className="flex flex-wrap items-center my-3">
-        <div className="w-1/2 md:w-[10%]">
+      <h1 className="text-lg mt-2 text-orange-400">OA Files</h1>
+      <div className="flex flex-wrap items-end mt-3">
+        <div className=" md:w-[10%]">
           <label className="label">
             <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
               File Type
@@ -30,16 +30,16 @@ const EraManager = () => {
               setFileType(e.target.value);
             }}
             name="fileType"
-            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+            className="input-border text-gray-600 rounded-sm font-bold text-[14px] ml-1 py-[1px] w-full focus:outline-none"
           >
-            <option value=""></option>
+            <option value="">Select</option>
             <option value="ERA">ERA</option>
             <option value="EDI">EDI</option>
           </select>
         </div>
         <button
           onClick={handleFileType}
-          className=" py-[5px] mt-8 ml-3  px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+          className=" py-[4px] ml-3  px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
         >
           GO
         </button>
@@ -51,7 +51,7 @@ const EraManager = () => {
             <select
               onChange={(e) => setService(e.target.value)}
               name="type"
-              className="input-border text-gray-600 rounded-sm mt-8 text-[14px] font-medium ml-1 py-[1px] w-1/2 md:w-[10%] focus:outline-none"
+              className="input-border text-gray-600 rounded-sm mt-8 text-[14px] font-bold ml-1 py-[1px] w-1/2 md:w-[10%] focus:outline-none"
             >
               <option value="process era">Process ERA</option>
               <option value="reviewed">Reviewed</option>

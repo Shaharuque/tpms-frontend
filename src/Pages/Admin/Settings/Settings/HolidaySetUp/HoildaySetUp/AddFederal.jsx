@@ -24,7 +24,7 @@ const AddFederal = ({ handleClose, open }) => {
         <div className="px-5 py-2 ">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
-              Create Holiday
+              Add Federal US holidays
             </h1>
             <IoCloseCircleOutline
               onClick={handleClose}

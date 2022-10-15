@@ -653,7 +653,7 @@ const PatientInformation = () => {
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 w-full focus:outline-none"
+                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium ml-1 w-full focus:outline-none"
                       {...register("group2")}
                     >
                       <option value="work">work</option>
@@ -665,7 +665,7 @@ const PatientInformation = () => {
                     onClick={() => {
                       handleEmailClick();
                     }}
-                    className="bg-secondary text-white p-[6px]"
+                    className="bg-secondary text-white p-[4px] mt-1"
                   >
                     <FaPlus />
                   </button>

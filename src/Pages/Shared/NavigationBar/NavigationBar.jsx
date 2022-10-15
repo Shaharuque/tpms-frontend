@@ -89,7 +89,7 @@ const TestNaviBar = ({ handle }) => {
               {!handle.active ? (
                 <button
                   onClick={handle.enter}
-                  className="  text-2xl font-bold text-secondary"
+                  className="  text-xl font-bold text-secondary"
                 >
                   <BiFullscreen />
                 </button>
@@ -299,14 +299,14 @@ const TestNaviBar = ({ handle }) => {
             {!handle.active ? (
               <button
                 onClick={handle.enter}
-                className="  text-lg font-bold text-secondary"
+                className="  text-xl font-bold text-secondary flex justify-center"
               >
                 <BiFullscreen />
               </button>
             ) : (
               <button
                 onClick={handle.exit}
-                className=" text-xl font-bold text-secondary"
+                className=" text-xl font-bold text-secondary flex justify-center"
               >
                 <BiExitFullscreen />
               </button>

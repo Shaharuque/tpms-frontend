@@ -54,7 +54,7 @@ const BusinessFiles = () => {
         return a.created > b.created ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "created" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Uploaded On",
@@ -96,7 +96,7 @@ const BusinessFiles = () => {
         return a.creator > b.creator ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "creator" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Actions",

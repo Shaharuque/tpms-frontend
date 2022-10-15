@@ -1,3 +1,4 @@
+import { DeleteOutlined } from "@ant-design/icons";
 import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -116,8 +117,8 @@ const HolidaySetup = () => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
-            <button onClick={handleClickOpen} className="text-rose-500 ">
-              <FiDelete />
+            <button className="text-rose-500 ">
+              <DeleteOutlined />
             </button>
           </div>
         );
@@ -170,7 +171,7 @@ const HolidaySetup = () => {
           <label htmlFor="pay-box" className="">
             <h1
               onClick={handleClickOpen}
-              className="px-2 text-sm font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
+              className="px-2 text-xs md:text-sm font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 text-center"
             >
               Add Time Off
             </h1>
@@ -182,7 +183,7 @@ const HolidaySetup = () => {
           <label htmlFor="pay-box" className="">
             <h1
               onClick={handleClickOpen2}
-              className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
+              className="px-2 text-xs md:text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 text-center"
             >
               Add Federal US holidays
             </h1>

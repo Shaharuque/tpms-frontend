@@ -1,3 +1,4 @@
+// Good practise of using textarea and focused input box
 import { Modal } from "antd";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -34,7 +35,7 @@ const AddTImeOff = ({ handleClose, open }) => {
           </div>
           <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 2xl:grid-cols-1 my-3 mr-2 gap-x-4 gap-y-4">
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 2xl:grid-cols-1 my-3 mr-2 gap-x-4 gap-y-2">
               <div>
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -42,7 +43,7 @@ const AddTImeOff = ({ handleClose, open }) => {
                   </span>
                 </label>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
+                  className="border border-gray-300 text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-teal-700 py-1 px-2"
                   type="date"
                   {...register("check_Date")}
                 />

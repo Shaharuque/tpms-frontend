@@ -435,7 +435,7 @@ const MPosting = () => {
               <div>
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    Selected date
+                    Deposit Date Range
                   </span>
                 </label>
                 <div className="ml-1 text-[14px]">
@@ -512,7 +512,7 @@ const MPosting = () => {
               <div>
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    Selected date
+                    Check Date Range
                   </span>
                 </label>
                 <div className="ml-1 text-[14px]">

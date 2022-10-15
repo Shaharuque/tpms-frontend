@@ -102,72 +102,32 @@ const CreatePatient = ({ handleClose }) => {
                 </select>
               </div>
             </div>
-            <div className=" grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2 gap-1">
-              <div className="flex">
-                <div>
-                  <label className="label">
-                    <span className="label-text font-medium items-center flex text-xs text-gray-600 text-left">
-                      Email Address
-                      <AiOutlineQuestionCircle className="text-sm" />
-                    </span>
-                  </label>
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2 gap-1">
+              <div>
+                <label className="label">
+                  <span className="label-text font-medium items-center flex text-xs text-gray-600 text-left">
+                    Email Address
+                    <AiOutlineQuestionCircle className="text-sm" />
+                  </span>
+                </label>
+                <div className="flex items-center">
                   <input
                     type="text"
                     name="email_Address"
                     className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
                     {...register("email_Address")}
                   />
+                  <div>
+                    <select
+                      className="border border-gray-300 rounded-sm px-2 py-[3px] text-sm "
+                      {...register("email")}
+                    >
+                      <option value=""></option>
+                      <option value="work">Work</option>
+                      <option value="home">Home</option>
+                    </select>
+                  </div>
                 </div>
-                <div>
-                  <select
-                    className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 mt-[34px] text-sm "
-                    {...register("gender")}
-                  >
-                    <option value=""></option>
-                    <option value="single">single</option>
-                    <option value="married">married</option>
-                  </select>
-                </div>
-              </div>
-              <div className="flex">
-                <div>
-                  <label className="label">
-                    <span className="label-text font-medium items-center flex text-xs text-gray-600 text-left">
-                      Phone Number
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    name="email_Address"
-                    className=" border-gray-300 border rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
-                    {...register("email_Address")}
-                  />
-                </div>
-                <div>
-                  <select
-                    className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 mt-[34px] text-sm "
-                    {...register("gender")}
-                  >
-                    <option value=""></option>
-                    <option value="single">single</option>
-                    <option value="married">married</option>
-                  </select>
-                </div>
-              </div>
-              <div className="flex ml-1 mt-1 items-center">
-                <input
-                  type="checkbox"
-                  // checked={value ? true : false}
-                  name="patient"
-                  // onClick={() => {
-                  //   setValue(!value);
-                  // }}
-                />
-                <span className="text-xs ml-1 text-gray-600 font-medium">
-                  Send me an email reminder
-                </span>
-              </div>
-              <div>
                 <div className="flex ml-1 mt-1 items-center">
                   <input
                     type="checkbox"
@@ -178,23 +138,64 @@ const CreatePatient = ({ handleClose }) => {
                     // }}
                   />
                   <span className="text-xs ml-1 text-gray-600 font-medium">
-                    Send me a text message
+                    Send me an email reminder
                   </span>
                 </div>
               </div>
-              <div></div>
-              <div className="flex ml-1 mt-1 items-center">
-                <input
-                  type="checkbox"
-                  // checked={value ? true : false}
-                  name="patient"
-                  // onClick={() => {
-                  //   setValue(!value);
-                  // }}
-                />
-                <span className="text-xs ml-1 text-gray-600 font-medium">
-                  Send me a voice message
-                </span>
+
+              <div>
+                <label className="label">
+                  <span className="label-text font-medium items-center flex text-xs text-gray-600 text-left">
+                    Phone Number
+                    <AiOutlineQuestionCircle className="text-sm" />
+                  </span>
+                </label>
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    name="phone_number"
+                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
+                    {...register("phone_number")}
+                  />
+                  <div>
+                    <select
+                      className="border border-gray-300 rounded-sm px-2 py-[3px] text-sm "
+                      {...register("phone")}
+                    >
+                      <option value=""></option>
+                      <option value="work">Work</option>
+                      <option value="home">Home</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex ml-1 mt-1 items-center">
+                    <input
+                      type="checkbox"
+                      // checked={value ? true : false}
+                      name="patient"
+                      // onClick={() => {
+                      //   setValue(!value);
+                      // }}
+                    />
+                    <span className="text-xs ml-1 text-gray-600 font-medium">
+                      Send me a text message
+                    </span>
+                  </div>
+                </div>
+                <div className="flex ml-1 mt-1 items-center">
+                  <input
+                    type="checkbox"
+                    // checked={value ? true : false}
+                    name="patient"
+                    // onClick={() => {
+                    //   setValue(!value);
+                    // }}
+                  />
+                  <span className="text-xs ml-1 text-gray-600 font-medium">
+                    Send me a voice message
+                  </span>
+                </div>
               </div>
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>

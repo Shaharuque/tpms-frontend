@@ -1,7 +1,7 @@
+import { Modal } from "antd";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { Modal } from "antd";
 export default function AddServicesActionModal({ handleClose, open }) {
   const { register, handleSubmit, reset } = useForm();
 
