@@ -9,7 +9,8 @@ import { Modal } from "antd";
 import AppoinmentMultiSelection from "../../../Shared/CustomComponents/AppoinmentMultiSelection";
 import "../../../Style/SingleCalendar.css";
 
-const CreateAppointment = ({ handleClose }) => {
+const CreateAppointment = ({ handleClose, clicked }) => {
+  console.log(clicked);
   const [billable, setBillable] = useState(true);
   const [recurrence, setRecurrence] = useState(false);
   const [daily, setDaily] = useState(false);
@@ -57,11 +58,12 @@ const CreateAppointment = ({ handleClose }) => {
   return (
     <div>
       <Modal
-        open={true} //aikhaney true na likey ekta state ana lagbey tar value 'true'
+        open={clicked} //aikhaney true na likey ekta state ana lagbey tar value 'true'
         centered
         footer={null}
         bodyStyle={{ padding: "0" }}
         closable={false}
+        width={550}
         className="box rounded-xl"
         // onClose={handleClose}
         // aria-labelledby="responsive-dialog-title"
@@ -224,7 +226,7 @@ const CreateAppointment = ({ handleClose }) => {
                     >
                       CLEAR
                     </button>
-                    <div modal-action>
+                    <div>
                       <button
                         onClick={() => setOpen(false)}
                         className="text-xs text-white hover:bg-teal-500 p-2"

@@ -5,9 +5,27 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 export default function ReferringProviderActionModal({
   handleClose,
   open,
-  row,
+  recordData,
 }) {
   const { register, handleSubmit, reset } = useForm();
+
+  React.useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        provider_first_name: recordData?.first_name,
+        provider_last_name: recordData?.last_name,
+        npi: recordData?.npi,
+        upin: recordData?.upin,
+      });
+    }, 0);
+  }, [
+    recordData?.first_name,
+    recordData?.last_name,
+    recordData?.npi,
+    recordData?.upin,
+    reset,
+  ]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -48,9 +66,9 @@ export default function ReferringProviderActionModal({
                 <input
                   type="text"
                   placeholder="Provider First Name"
-                  name="first_name"
+                  name="provider_first_name"
                   className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("first_name")}
+                  {...register("provider_first_name")}
                 />
               </div>
               <div>
@@ -61,10 +79,10 @@ export default function ReferringProviderActionModal({
                 </label>
                 <input
                   type="text"
-                  placeholder="Provider First Name"
-                  name="last_name"
+                  placeholder="Provider Last Name"
+                  name="provider_last_name"
                   className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("last_name")}
+                  {...register("provider_last_name")}
                 />
               </div>
               <div>

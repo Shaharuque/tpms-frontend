@@ -1,3 +1,4 @@
+// ->CreateServiceRules.jsx is the page where I tested How can editable data send to server side(Big Important)
 import { CssBaseline } from "@mui/material";
 import { Switch, Table } from "antd";
 import axios from "axios";

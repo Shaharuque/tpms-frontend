@@ -2,7 +2,12 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { Modal } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
-export default function PlaceOfServicesActionAddModal({ handleClose, open }) {
+export default function PlaceOfServicesActionAddModal({
+  handleClose,
+  open,
+  recordData,
+}) {
+  const { id, description } = recordData;
   const {
     register,
     handleSubmit,
@@ -19,10 +24,13 @@ export default function PlaceOfServicesActionAddModal({ handleClose, open }) {
   React.useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
-      reset({});
-    }, 500);
-  }, [reset]);
-  console.log(errors);
+      reset({
+        service_code: id,
+        place_of_service: description,
+      });
+    }, 100);
+  }, [reset, id, description]);
+  //console.log(errors);
 
   return (
     <div>
@@ -56,10 +64,10 @@ export default function PlaceOfServicesActionAddModal({ handleClose, open }) {
                   </span>
                 </label>
                 <input
-                  type="number"
-                  name="staff_number"
+                  type="text"
+                  name="place_of_service"
                   className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("staff_number")}
+                  {...register("place_of_service")}
                 />
               </div>
               <div className="mt-[-15px]">
@@ -70,9 +78,9 @@ export default function PlaceOfServicesActionAddModal({ handleClose, open }) {
                 </label>
                 <input
                   type="number"
-                  name="staff_number"
+                  name="service_code"
                   className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                  {...register("staff_number")}
+                  {...register("service_code")}
                 />
               </div>
             </div>

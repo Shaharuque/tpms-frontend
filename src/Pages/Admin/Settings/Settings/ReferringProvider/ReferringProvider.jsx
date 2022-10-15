@@ -9,9 +9,11 @@ const ReferringProvider = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [recordData, setRecordData] = useState();
 
-  const handleClickOpen2 = () => {
+  const handleClickOpen2 = (record) => {
     setOpenAddModal(true);
+    setRecordData(record);
   };
 
   const handleClose2 = () => {
@@ -158,12 +160,15 @@ const ReferringProvider = () => {
       dataIndex: "action",
       key: "action",
       width: 70,
-      render: () => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
             <div className="flex justify-center">
-              <button onClick={handleClickOpen2} className="text-secondary">
+              <button
+                onClick={() => handleClickOpen2(record)}
+                className="text-secondary"
+              >
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
@@ -187,10 +192,10 @@ const ReferringProvider = () => {
   };
   return (
     <div>
-      <div className="flex mb-2 items-center justify-between">
+      <div className="md:flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Referring Provider</h1>
 
-        <div className="flex items-center">
+        <div className=" md:flex items-center">
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
@@ -198,11 +203,11 @@ const ReferringProvider = () => {
                 onClick={handleClickOpen2}
                 className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
               >
-                Add Place of service
+                Add Referring Provider
               </button>
             </label>
           </div>
-          <div className="flex justify-end items-end my-2">
+          <div className="md:flex justify-end items-end my-2">
             <button
               onClick={clearFilters}
               className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
@@ -232,6 +237,7 @@ const ReferringProvider = () => {
         <ReferringProviderActionModal
           handleClose={handleClose2}
           open={openAddModal}
+          recordData={recordData}
         ></ReferringProviderActionModal>
       )}
     </div>

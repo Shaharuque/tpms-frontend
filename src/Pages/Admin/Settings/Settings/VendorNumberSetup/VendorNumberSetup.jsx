@@ -10,6 +10,7 @@ const VendorNumberSetup = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [tableOpen, setTableOpen] = useState(false);
+  const [recordData, setRecordData] = useState();
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -28,7 +29,13 @@ const VendorNumberSetup = () => {
         console.log(error);
       });
   }, []);
-  console.log(table);
+  //console.log(table);
+
+  const handleClickOpen = (record) => {
+    console.log(record);
+    setRecordData(record);
+    setOpen(true);
+  };
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
@@ -36,7 +43,7 @@ const VendorNumberSetup = () => {
       title: "Service",
       dataIndex: "sevice",
       key: "sevice",
-      width: 150,
+      width: 80,
       filters: [
         {
           text: `10/31/2021`,
@@ -61,19 +68,19 @@ const VendorNumberSetup = () => {
     },
 
     {
-      title: "Vendor No.",
+      title: "Vendor No",
       dataIndex: "vendor",
       key: "vendor",
       width: 50,
-      render: (_, vendor) => {
-        console.log("vendor : ", vendor);
+      render: (_, record) => {
+        //console.log("vendor : ", vendor);
         return (
           <div className="flex mt-1 justify-center items-center">
             <input
               name="cms"
-              className="page py-[3px]  focus:outline-none"
+              className="page py-[6px]  focus:outline-none text-center"
               type="text"
-              value={vendor.vendor}
+              defaultValue={record.vendor}
             ></input>
           </div>
         );
@@ -89,15 +96,15 @@ const VendorNumberSetup = () => {
       dataIndex: "service_code",
       key: "service_code",
       width: 50,
-      render: (_, service_code) => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className="flex mt-1 justify-center items-center">
             <input
               name="cms"
-              className="page py-[3px]  focus:outline-none"
+              className="page py-[6px]  focus:outline-none text-center"
               type="text"
-              value={service_code.service_code}
+              defaultValue={record.service_code}
             ></input>
           </div>
         );
@@ -114,12 +121,15 @@ const VendorNumberSetup = () => {
       dataIndex: "action",
       key: "action",
       width: 70,
-      render: () => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
             <div className="flex justify-center">
-              <button onClick={handleClickOpen} className="text-secondary">
+              <button
+                onClick={() => handleClickOpen(record)}
+                className="text-secondary"
+              >
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
@@ -140,9 +150,6 @@ const VendorNumberSetup = () => {
 
   const clearFilters = () => {
     setFilteredInfo({});
-  };
-  const handleClickOpen = () => {
-    setOpen(true);
   };
 
   const handleClose = () => {
@@ -194,7 +201,7 @@ const VendorNumberSetup = () => {
               <button
                 variant="outlined"
                 onClick={handleClickOpen}
-                className="px-5 mt-8 py-1 bg-gradient-to-r from-secondary
+                className="px-5 mt-2 md:mt-8 py-1 bg-gradient-to-r from-secondary
             to-primary hover:to-secondary text-white rounded-sm"
               >
                 Create New
@@ -205,17 +212,13 @@ const VendorNumberSetup = () => {
       </div>
       {tableOpen && (
         <div>
-          <div className="flex mb-2 items-center justify-between">
-            <h1 className="text-lg my-2 text-orange-400">Holiday</h1>
-
-            <div className="flex justify-end items-end my-2">
-              <button
-                onClick={clearFilters}
-                className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-              >
-                Clear filters
-              </button>
-            </div>
+          <div className="flex justify-end my-2">
+            <button
+              onClick={clearFilters}
+              className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+            >
+              Clear filters
+            </button>
           </div>
 
           <div>
@@ -247,6 +250,7 @@ const VendorNumberSetup = () => {
       {open && (
         <VendorNumberSetupActionModal
           open={open}
+          recordData={recordData}
           handleClose={handleClose}
         ></VendorNumberSetupActionModal>
       )}

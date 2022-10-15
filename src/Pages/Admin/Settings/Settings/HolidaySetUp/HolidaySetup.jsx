@@ -171,7 +171,7 @@ const HolidaySetup = () => {
           <label htmlFor="pay-box" className="">
             <h1
               onClick={handleClickOpen}
-              className="px-2 text-xs md:text-sm font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
+              className="px-2 text-xs md:text-sm font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 text-center"
             >
               Add Time Off
             </h1>
@@ -183,7 +183,7 @@ const HolidaySetup = () => {
           <label htmlFor="pay-box" className="">
             <h1
               onClick={handleClickOpen2}
-              className="px-2 text-xs md:text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
+              className="px-2 text-xs md:text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 text-center"
             >
               Add Federal US holidays
             </h1>

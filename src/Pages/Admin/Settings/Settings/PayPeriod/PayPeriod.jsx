@@ -27,10 +27,11 @@ const PayPeriod = () => {
   };
 
   const handleChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
+    //console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+  console.log(filteredInfo);
 
   const [table, setTable] = useState(false);
   useEffect(() => {
@@ -205,26 +206,41 @@ const PayPeriod = () => {
       <div className="flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Pay Period</h1>
 
-        <div className="flex items-center">
+        <div className="md:flex items-center">
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
               <h1
                 onClick={handleClickOpen2}
-                className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
+                className="px-2 text-xs py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 cursor-pointer text-center mb-2 md:mb-0"
               >
                 Create Pay Period
               </h1>
             </label>
           </div>
-          <div className="flex justify-end items-end my-2">
-            <button
-              onClick={clearFilters}
-              className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-            >
-              Clear filters
-            </button>
+
+          <div>
+            {/* <!-- The button to open calender view --> */}
+            <label htmlFor="pay-box" className="">
+              <h1
+                onClick={handleClickOpen2}
+                className="px-2 text-xs py-1 bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm mr-2 cursor-pointer"
+              >
+                Calender View
+              </h1>
+            </label>
           </div>
+          {/* Conditional rendering of clear filter button */}
+          {filteredInfo?.from_date?.length > 0 ? (
+            <div className="flex justify-end items-end my-2">
+              <button
+                onClick={clearFilters}
+                className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+              >
+                Clear filters
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
 
