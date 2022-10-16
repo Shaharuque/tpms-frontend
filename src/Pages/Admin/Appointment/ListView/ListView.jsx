@@ -537,7 +537,6 @@ const ListView = () => {
             >
               {!clicked && (
                 <>
-                  {" "}
                   <div className="text-[16px]  text-white font-semibold ">
                     Manage Sessions
                   </div>
@@ -551,67 +550,63 @@ const ListView = () => {
             {clicked && (
               <div>
                 <Fade>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center flex-wrap">
                     <h1 className="text-[20px]  text-white font-semibold ">
                       Manage Sessions
                     </h1>
-                    <div className="  flex justify-end gap-3">
-                      <div>
-                        <Switch
-                          color="default"
-                          defaultChecked
-                          size="small"
-                          onClick={handleBillable}
-                        />
-
-                        <label
-                          className="form-check-label inline-block ml-2 text-sm text-gray-100"
-                          htmlFor="flexSwitchCheckDefault"
-                        >
-                          {billable ? "Billable" : "Non-Billable"}
-                        </label>
-                      </div>
-                      <div>
-                        <button
-                          onClick={handleClose}
-                          className="text-white text-2xl font-light"
-                        >
-                          <MdOutlineCancel />
-                        </button>
-                      </div>
+                    <div>
+                      <button
+                        onClick={handleClose}
+                        className="text-white text-2xl font-light"
+                      >
+                        <MdOutlineCancel />
+                      </button>
                     </div>
                   </div>
-
-                  {/* List view or table view  */}
-
-                  <div
-                    className={
-                      listView
-                        ? "flex justify-end mr-[26px]"
-                        : "flex justify-end mr-[15px]"
-                    }
-                  >
+                  <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
                     <div>
                       <Switch
                         color="default"
                         defaultChecked
                         size="small"
-                        onClick={handleListView}
+                        onClick={handleBillable}
                       />
 
                       <label
-                        className="form-check-label inline-block ml-2 text-sm text-gray-100"
+                        className="form-check-label inline-block ml-2 text-base text-gray-100"
                         htmlFor="flexSwitchCheckDefault"
                       >
-                        {listView ? (
-                          <span className="">List View</span>
-                        ) : (
-                          "Card View"
-                        )}
+                        {billable ? "Billable" : "Non-Billable"}
                       </label>
                     </div>
-                  </div>
+                    {/* List view or table view  */}
 
+                    <div
+                      className={
+                        listView ? "flex justify-end " : "flex justify-end "
+                      }
+                    >
+                      <div>
+                        <Switch
+                          color="default"
+                          defaultChecked
+                          size="small"
+                          onClick={handleListView}
+                        />
+
+                        <label
+                          className="form-check-label inline-block ml-2 text-base text-gray-100"
+                          htmlFor="flexSwitchCheckDefault"
+                        >
+                          {listView ? (
+                            <span className="">List View</span>
+                          ) : (
+                            "Card View"
+                          )}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                   <form onSubmit={handleSubmit(onSubmit)}>
                     <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-7 gap-5 mb-2">
                       {billable && (
@@ -745,7 +740,7 @@ const ListView = () => {
                               </div>
                             </div>
                             <button
-                              className="font-regular mt-[40px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                              className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
                               type="submit"
                             >
                               Go
@@ -813,7 +808,7 @@ const ListView = () => {
                   <div className="my-5 flex flex-wrap items-center gap-2">
                     {filteredInfo?.Patients?.length > 0 && (
                       <div className=" ">
-                        <div className="flex mb-2 gap-1">
+                        <div className="flex flex-wrap mb-2 gap-1">
                           {filteredInfo?.Patients?.map((tag, index) => (
                             <div
                               className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
@@ -840,7 +835,7 @@ const ListView = () => {
                     )}
 
                     {filteredInfo?.Service_hrs?.length > 0 && (
-                      <div className="flex mb-2 gap-1">
+                      <div className="flex flex-wrap mb-2 gap-1">
                         {filteredInfo?.Service_hrs?.map((tag, index) => (
                           <div
                             className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
@@ -866,7 +861,7 @@ const ListView = () => {
                     )}
 
                     {filteredInfo?.Status?.length > 0 && (
-                      <div className="flex mb-2 gap-1">
+                      <div className="flex flex-wrap mb-2 gap-1">
                         {filteredInfo?.Status?.map((tag, index) => (
                           <div
                             className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
@@ -892,7 +887,7 @@ const ListView = () => {
                     )}
 
                     {filteredInfo?.pos?.length > 0 && (
-                      <div className="flex mb-2 gap-1">
+                      <div className="flex flex-wrap mb-2 gap-1">
                         {filteredInfo?.pos?.map((tag, index) => (
                           <div
                             className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
@@ -918,7 +913,7 @@ const ListView = () => {
                     )}
 
                     {filteredInfo?.Scheduled_Date?.length > 0 && (
-                      <div className="flex mb-2 gap-1">
+                      <div className="flex flex-wrap mb-2 gap-1">
                         {filteredInfo?.Scheduled_Date?.map((tag, index) => (
                           <div
                             className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"

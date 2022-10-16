@@ -135,7 +135,7 @@ const PayrollSetup = () => {
 
   return (
     <div className="h-[100vh]">
-      <div className="flex items-center justify-between gap-2 my-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           Payroll Setup
         </h1>
@@ -172,12 +172,14 @@ const PayrollSetup = () => {
 
       <div className="flex items-center flex-wrap gap-3">
         <BsArrow90DegRight className=" font-bold text-secondary" />
-        <button className=" py-[6px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
-          Select All
-        </button>
-        <button className=" py-[6px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
-          Unselect All
-        </button>
+        <div>
+          <button className=" py-[6px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
+            Select All
+          </button>
+          <button className=" py-[6px] ml-1 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
+            Unselect All
+          </button>
+        </div>
         <div className=" ">
           <select
             onChange={(e) => setSelect(e.target.value)}

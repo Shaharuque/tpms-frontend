@@ -84,7 +84,7 @@ const PayrollSetupModal = ({ handleClose, open }) => {
                   />
                 </div>
 
-                <div className="flex ml-1 mt-8 items-center">
+                <div className="flex ml-1 mt-1 items-center">
                   <input
                     type="checkbox"
                     name="service"
