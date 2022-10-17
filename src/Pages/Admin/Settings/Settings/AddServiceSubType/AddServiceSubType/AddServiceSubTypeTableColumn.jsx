@@ -1,36 +1,6 @@
 import AddServiceSubTypeTabActive from "./AddServiceSubTypeTabActive";
 import AddServiceSubTypeTabEdit from "./AddServiceSubTypeTabEdit";
 
-export const AddServiceSubTypeTabData = [
-  {
-    place_of_Service: "new one pos",
-  },
-  {
-    place_of_Service: "new pos",
-  },
-  {
-    place_of_Service: "Telehealth in Home",
-  },
-  {
-    place_of_Service: "Community Mental Health Center",
-  },
-  {
-    place_of_Service: "Telehealth",
-  },
-  {
-    place_of_Service: "Others",
-  },
-  {
-    place_of_Service: "Home",
-  },
-  {
-    place_of_Service: "Office",
-  },
-  {
-    place_of_Service: "School",
-  },
-];
-
 export const AddServiceSubTypeTabColumn = [
   {
     Header: () => {

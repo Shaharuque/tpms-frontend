@@ -9,7 +9,7 @@ import { Modal } from "antd";
 import AppoinmentMultiSelection from "../../../Shared/CustomComponents/AppoinmentMultiSelection";
 import "../../../Style/SingleCalendar.css";
 
-const CreateAppointment = ({ handleClose }) => {
+const CreateAppointment = ({ handleClose, clicked }) => {
   const [billable, setBillable] = useState(true);
   const [recurrence, setRecurrence] = useState(false);
   const [daily, setDaily] = useState(false);
@@ -26,20 +26,45 @@ const CreateAppointment = ({ handleClose }) => {
     "Saturday",
   ];
 
-  const month = date.toLocaleString("en-us", { month: "long" });
-  const currentDate = date.getDate();
-  const year = date.getFullYear();
+  // // testing single calendar
+  // const [date, setDate] = useState(new Date());
+  // const [openCalendar, setOpenCalendar] = useState(false);
+  // const changeDate = (date) => {
+  //   setDate(date);
+  // };
+  // console.log(date);
 
-  console.log(month, currentDate, year);
+  // const month = date ? date.getMonth() + 1 : null;
+  // const day = date ? date.getDate() : null;
+  // const year = date ? date.getFullYear() : null;
+
+  // const handleCancelDate = () => {
+  //   // setOpenCalendar(false);
+  //   setDate(null);
+  // };
+  const month = date ? date.toLocaleString("en-us", { month: "long" }) : null;
+  const currentDate = date ? date.getDate() : null;
+  const year = date ? date.getFullYear() : null;
+
+  const handleClearDate = () => {
+    setOpen(false);
+    setDate(null);
+  };
+
+  const handleCancelDate = () => {
+    setOpen(false);
+    setDate(new Date());
+  };
 
   React.useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        check_date: date.toLocaleDateString(),
+        check_date: date ? date.toLocaleDateString() : null,
       });
     }, 0);
-  }, [date.toLocaleDateString()]);
+    // }, [date.toLocaleDateString()]);
+  }, []);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -57,11 +82,13 @@ const CreateAppointment = ({ handleClose }) => {
   return (
     <div>
       <Modal
-        open={true} //aikhaney true na likey ekta state ana lagbey tar value 'true'
+        open={clicked} //aikhaney true na likey ekta state ana lagbey tar value 'true'
         centered
         footer={null}
         bodyStyle={{ padding: "0" }}
+        width={550}
         closable={false}
+        width={550}
         className="box rounded-xl"
         // onClose={handleClose}
         // aria-labelledby="responsive-dialog-title"
@@ -180,7 +207,7 @@ const CreateAppointment = ({ handleClose }) => {
                 name="check_date"
                 readOnly
                 onClick={() => setOpen(!open)}
-                value={date.toLocaleDateString()}
+                value={date ? date.toLocaleDateString() : "Select a Date"}
                 className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
                 {...register("check_date")}
               />
@@ -195,48 +222,57 @@ const CreateAppointment = ({ handleClose }) => {
                     padding: "0px",
                   }}
                 >
-                  <div className="grid lg:grid-cols-3">
-                    <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-tl-[5px]">
-                      <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
-                        <span className="text-2xl">{days[date.getDay()]}</span>
+                  <div className="grid grid-cols-3">
+                    {date ? (
+                      <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-l-[5px]">
+                        <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
+                          <span className="text-2xl">
+                            {days[date.getDay()]}
+                          </span>
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                          <h1 className="text-8xl font-medium">
+                            {currentDate}
+                          </h1>
+                          <h1 className="text-2xl font-medium">{month}</h1>
+                        </div>
+                        <div className="flex justify-center items-end">
+                          <h1 className="text-4xl font-medium mt-4">{year}</h1>
+                        </div>
                       </div>
-                      <div className="flex flex-col justify-center items-center">
-                        <h1 className="text-8xl">{currentDate}</h1>
-                        <h1>{month}</h1>
+                    ) : (
+                      <div className="bg-[#0AA7B8] text-white font-bold rounded-l-[5px]">
+                        <div className="w-full h-16 bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg"></div>
+                        <div className="text-center m-1 pt-8">
+                          <h1 className="text-3xl">Please Select a Date</h1>
+                        </div>
                       </div>
-                      <div className="flex justify-center items-end">
-                        <h1 className="text-3xl">{year}</h1>
+                    )}
+                    {/* single calendar */}
+                    <div className="col-span-2 w-[95%] my-0 mx-auto">
+                      <Calendar onChange={setDate} value={date} />
+                      <div className="flex justify-between rounded-b-[5px] bg-white py-1 rounded-br-[5px]">
+                        <button
+                          onClick={() => handleClearDate()}
+                          className="text-xs text-red-400"
+                        >
+                          CLEAR
+                        </button>
+                        <div>
+                          <button
+                            onClick={() => handleCancelDate()}
+                            className="text-xs text-[#0AA7B8]"
+                          >
+                            CANCEL
+                          </button>
+                          <button
+                            onClick={() => setOpen(false)}
+                            className="text-xs ml-2 text-[#0AA7B8]"
+                          >
+                            OK
+                          </button>
+                        </div>
                       </div>
-                    </div>
-
-                    <Calendar
-                      onChange={setDate}
-                      value={date}
-                      className="col-span-2"
-                    />
-                  </div>
-                  <div className="flex justify-between cursor-pointer bg-black rounded-b-[5px]">
-                    <button
-                      onClick={() => {
-                        setOpen(false);
-                      }}
-                      className="text-xs text-red-400 p-2 hover:text-white hover:bg-teal-500"
-                    >
-                      CLEAR
-                    </button>
-                    <div modal-action>
-                      <button
-                        onClick={() => setOpen(false)}
-                        className="text-xs text-white hover:bg-teal-500 p-2"
-                      >
-                        CANCEL
-                      </button>
-                      <button
-                        onClick={() => setOpen(false)}
-                        className="text-xs text-white hover:bg-teal-500 p-2"
-                      >
-                        OK
-                      </button>
                     </div>
                   </div>
                 </Modal>
@@ -436,7 +472,7 @@ const CreateAppointment = ({ handleClose }) => {
               </button>
 
               <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                className="py-[5px] px-3 text-xs font-normal bg-gradient-to-r from-red-700 to-red-400 hover:to-red-700 text-white rounded-sm"
                 autoFocus
                 onClick={handleClose}
               >

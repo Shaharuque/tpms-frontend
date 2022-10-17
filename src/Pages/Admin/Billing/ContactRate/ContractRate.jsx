@@ -309,7 +309,7 @@ const CoactiveractRate = () => {
   };
 
   return (
-    <div className="h-[100vh]">
+    <div className={!select ? "h-[100vh]" : ""}>
       <h1 className="text-lg text-orange-400">Contact Rate</h1>
       <div className="md:flex mb-2 mt-5 flex-wrap  items-center justify-between">
         <div className="flex items-center gap-3">

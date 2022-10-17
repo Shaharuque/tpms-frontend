@@ -45,48 +45,48 @@ const PayPeriodEnitModal = ({ handleClose, open }) => {
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-4 gap-y-4">
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
                     From Date
                   </span>
                 </label>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   type="date"
                   {...register("check_Date")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
                     End Date
                   </span>
                 </label>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   type="date"
                   {...register("check_Date")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
                     Check Date
                   </span>
                 </label>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   type="date"
                   {...register("check_Date")}
                 />
               </div>
               <div className="col-span-2">
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
                     After how many days staff can't submit time sheet?
                   </span>
                 </label>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-[14px] ml-1 font-medium w-full focus:outline-none"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   type="number"
                   {...register("time_sheet")}
                 />

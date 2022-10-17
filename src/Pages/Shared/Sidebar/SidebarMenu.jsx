@@ -49,7 +49,7 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
           transition={{ delay: 0.2 }}
           className={isHovering ? "ml-5 mr-5" : " mr-[10px] ml-[-4px]"}
           style={{
-            transition: "all .3s ease-out",
+            transition: "0.4s",
           }}
         >
           {items.subRoute.map((s, i) => (
@@ -68,10 +68,11 @@ const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6 }}
                 >
+                  {/* Ai particular part a change kora lagbey */}
                   <div
                     className={
                       isHovering
-                        ? "mr-2 opacity-0.5 ease-in text-[16px] font-medium "
+                        ? "mr-2 opacity-0.5 ease-in text-[16px] font-medium py-1"
                         : "mr-2 opacity-0 ease-out text-[16px]  font-medium hidden"
                     }
                   >

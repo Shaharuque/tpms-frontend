@@ -1,17 +1,31 @@
 import * as React from "react";
-import Dialog from "@mui/material/Dialog";
 import { useForm } from "react-hook-form";
+import { Modal } from "antd";
+import { IoCloseCircleOutline } from "react-icons/io5";
 export default function ReferringProviderActionModal({
   handleClose,
   open,
-  row,
+  recordData,
 }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
+  const { register, handleSubmit, reset } = useForm();
+
+  React.useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        provider_first_name: recordData?.first_name,
+        provider_last_name: recordData?.last_name,
+        npi: recordData?.npi,
+        upin: recordData?.upin,
+      });
+    }, 0);
+  }, [
+    recordData?.first_name,
+    recordData?.last_name,
+    recordData?.npi,
+    recordData?.upin,
     reset,
-  } = useForm();
+  ]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -19,87 +33,107 @@ export default function ReferringProviderActionModal({
   };
   return (
     <div>
-      <Dialog
+      <Modal
         // fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        centered
+        width={600}
+        footer={false}
+        closable={false}
+        bodyStyle={{ padding: "0" }}
+        className="box rounded-md"
       >
-        <div className="p-5 box">
-          {/* <h1>{row.original.place_of_Service}</h1> */}
-          <h1 className="text-lg  text-left text-orange-400">Edit Document</h1>
-          <div className="divider"></div>
+        <div className="px-5 py-2 ">
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg text-left text-orange-400 ">
+              Edit Document
+            </h1>
+            <IoCloseCircleOutline
+              onClick={handleClose}
+              className="text-gray-600 font-medium  text-2xl hover:text-primary"
+            />
+          </div>
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* <div className="flex items-center text-sm gap-5"> */}
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 mr-2 gap-5">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 mr-2 gap-3">
               <div>
                 <label className="label">
-                  <span className="text-sm">Provider First Name</span>
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
+                    Provider First Name
+                  </span>
                 </label>
                 <input
                   type="text"
                   placeholder="Provider First Name"
-                  name="first_name"
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("first_name")}
+                  name="provider_first_name"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  {...register("provider_first_name")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="text-sm">Provider Last Name</span>
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
+                    Provider Last Name
+                  </span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Provider First Name"
-                  name="last_name"
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("last_name")}
+                  placeholder="Provider Last Name"
+                  name="provider_last_name"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  {...register("provider_last_name")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="text-sm">NPI</span>
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
+                    NPI
+                  </span>
                 </label>
                 <input
                   type="number"
                   placeholder="NPI"
                   name="npi"
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   {...register("npi")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="text-sm">UPIN</span>
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
+                    UPIN
+                  </span>
                 </label>
                 <input
                   type="number"
                   placeholder="UPIN"
                   name="upin"
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   {...register("upin")}
                 />
               </div>
             </div>
-            <div className="divider"></div>
-            <div className="modal-action">
-              {/* <input type="submit" /> */}
-              <input
-                type="submit"
-                value={"SAVE"}
-                className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              />
+            <div className="bg-gray-200 py-[1px] mt-3"></div>
+            <div className=" flex items-end justify-end mt-2">
               <button
-                className="px-5  bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                type="submit"
+              >
+                Save
+              </button>
+
+              <button
+                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                 autoFocus
                 onClick={handleClose}
               >
-                CANCEL
+                Close
               </button>
             </div>
           </form>
         </div>
-      </Dialog>
+      </Modal>
     </div>
   );
 }

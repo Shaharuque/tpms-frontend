@@ -1,15 +1,155 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
-import { Checkbox, FormControlLabel } from "@mui/material";
-import { Switch } from "antd";
+import { Switch, Table } from "antd";
+import axios from "axios";
 
 const InsuranceEditComponent = ({ id }) => {
   const [value, setValue] = React.useState(false);
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
+
+  const [table, setTable] = useState(false);
+  useEffect(() => {
+    axios("../../../All_Fake_Api/Scrubing.json")
+      .then((response) => {
+        console.log("calling");
+        setTable(response?.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  console.log(table);
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+  };
+  // -------------------------------------------Table Data-----------------------------------
+  const columns = [
+    {
+      title: "Rule",
+      dataIndex: "rule",
+      key: "rule",
+      width: 100,
+      filters: [
+        {
+          text: `10/31/2021`,
+          value: "10/31/2021",
+        },
+        {
+          text: `11/31/2023`,
+          value: "11/31/2023",
+        },
+        {
+          text: "10/31/2025",
+          value: "10/31/2025",
+        },
+      ],
+      filteredValue: filteredInfo.rule || null,
+      onFilter: (value, record) => record.rule.includes(value),
+      sorter: (a, b) => {
+        return a.rule > b.rule ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "rule" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+      width: 100,
+      filters: [
+        {
+          text: `10/31/2021`,
+          value: "10/31/2021",
+        },
+        {
+          text: `11/31/2023`,
+          value: "11/31/2023",
+        },
+        {
+          text: "10/31/2025",
+          value: "10/31/2025",
+        },
+      ],
+      filteredValue: filteredInfo.description || null,
+      onFilter: (value, record) => record.description.includes(value),
+      sorter: (a, b) => {
+        return a.description > b.description ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "description" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+
+    {
+      title: "Active",
+      dataIndex: "action",
+      key: "action",
+      width: 70,
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" flex justify-center items-center">
+            <div className="flex items-center ">
+              <Switch
+                size="small"
+                checked={value ? true : false}
+                onClick={() => setValue(!value)}
+              />
+              <span className="text-[14px] font-medium text-gray-500 mx-3">
+                Active
+              </span>
+            </div>
+          </div>
+        );
+      },
+      sorter: (a, b) => {
+        return a.action > b.action ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "action" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      width: 70,
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" flex justify-center items-center">
+            <div className="flex items-center ">
+              <Switch
+                size="small"
+                checked={value ? true : false}
+                onClick={() => setValue(!value)}
+              />
+              <span className="text-[14px] font-medium text-gray-500 mx-3">
+                Active
+              </span>
+            </div>
+          </div>
+        );
+      },
+      sorter: (a, b) => {
+        return a.action > b.action ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "action" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+  ];
+
+  const handleChange = (pagination, filters, sorter) => {
+    console.log("Various parameters", pagination, filters, sorter);
+    setFilteredInfo(filters);
+    setSortedInfo(sorter);
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
   };
   return (
     <div>
@@ -30,7 +170,7 @@ const InsuranceEditComponent = ({ id }) => {
                 {/* name  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       CoPay Number {id}
                     </span>
                   </label>
@@ -49,7 +189,7 @@ const InsuranceEditComponent = ({ id }) => {
                 </span>  
               </label> */}
                 </div>
-                <div className="flex items-center ">
+                <div className="flex items-end ">
                   <Switch
                     size="small"
                     checked={value ? true : false}
@@ -59,11 +199,10 @@ const InsuranceEditComponent = ({ id }) => {
                     Is Electronic
                   </span>
                 </div>
-                <span className="text-sm font-normal"></span>{" "}
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 31
                     </span>
                   </label>
@@ -77,7 +216,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 32a
                     </span>
                   </label>
@@ -91,7 +230,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 32b
                     </span>
                   </label>
@@ -105,7 +244,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 33a
                     </span>
                   </label>
@@ -119,7 +258,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Cms1500 33b
                     </span>
                   </label>
@@ -133,7 +272,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Provider NPI
                     </span>
                   </label>
@@ -147,7 +286,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       TaxId
                     </span>
                   </label>
@@ -161,7 +300,7 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
                       Main Taxonomy
                     </span>
                   </label>
@@ -179,7 +318,7 @@ const InsuranceEditComponent = ({ id }) => {
                       checked={value ? true : false}
                       onClick={() => setValue(!value)}
                     />
-                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                    <span className="text-[12px] font-medium text-gray-500 mx-3">
                       Active
                     </span>
                   </div>
@@ -189,7 +328,7 @@ const InsuranceEditComponent = ({ id }) => {
                       checked={value ? true : false}
                       onClick={() => setValue(!value)}
                     />
-                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                    <span className="text-[12px] font-medium text-gray-500 mx-3">
                       Is Fill Box-17
                     </span>
                   </div>
@@ -209,8 +348,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 32 Address
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 32 Address
                     </span>
                   </label>
                   <input
@@ -223,8 +362,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 32 City
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 32 City
                     </span>
                   </label>
                   <input
@@ -237,8 +376,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 32 State
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 32 State
                     </span>
                   </label>
                   <input
@@ -251,8 +390,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 32 Zip
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 32 Zip
                     </span>
                   </label>
                   <input
@@ -265,8 +404,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 33 Address
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 33 Address
                     </span>
                   </label>
                   <input
@@ -279,8 +418,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 33 City
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 33 City
                     </span>
                   </label>
                   <input
@@ -293,8 +432,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 33 State
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 33 State
                     </span>
                   </label>
                   <input
@@ -307,8 +446,8 @@ const InsuranceEditComponent = ({ id }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                      Cms1500 33 Zip
+                    <span className="label-text text-[14px] py-[1px] font-medium text-[#9b9b9b] text-left">
+                      CMS1500 33 Zip
                     </span>
                   </label>
                   <input
@@ -319,116 +458,133 @@ const InsuranceEditComponent = ({ id }) => {
                   />
                 </div>
               </div>
-              <div className="overflow-auto my-5">
-                <table className=" overflow-y-hidden">
-                  <tr className="text-sm font-normal gap-5">
-                    <th className="font-medium">Tx Type</th>
-                    <th className="font-medium ">Box 24J</th>
-                    <th className="font-medium ">ID Qualifier</th>
-                  </tr>
-                  <tr>
-                    <td align="center w-36">
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        onClick={() => {
-                          setValue(!value);
-                        }}
-                        label="Behavioral therapy"
-                        className="text-sm"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        placeholder="Box 24J"
-                        name="behavioral_box_24J"
-                        className="input-border text-gray-600 rounded-sm py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                        {...register("behavioral_box_24J")}
-                      />
-                    </td>
-                    <td>
-                      <div className="ml-5 w-36">
-                        <select
-                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                          {...register("behavior_ID_Qualifier")}
-                        >
-                          <option value="1D">1D</option>
-                          <option value="Lu">Lu</option>
-                          <option value="Miss">Miss</option>
-                          <option value="Dr">Dr</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="center w-36">
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        onClick={() => {
-                          setValue(!value);
-                        }}
-                        label="Mental Health "
-                        className="text-sm item-left"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        placeholder="Box 24J"
-                        name="behavioral_box_24J"
-                        className="input-border text-gray-600 rounded-sm py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                        {...register("behavioral_box_24J")}
-                      />
-                    </td>
-                    <td>
-                      <div className="ml-5 w-36">
-                        <select
-                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                          {...register("behavior_ID_Qualifier")}
-                        >
-                          <option value="1D">1D</option>
-                          <option value="Lu">Lu</option>
-                          <option value="Miss">Miss</option>
-                          <option value="Dr">Dr</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="center w-36">
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        onClick={() => {
-                          setValue(!value);
-                        }}
-                        label="Physical Therapy"
-                        className="text-sm items-start"
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        placeholder="Box 24J"
-                        name="behavioral_box_24J"
-                        className="input-border text-gray-600 rounded-sm py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                        {...register("behavioral_box_24J")}
-                      />
-                    </td>
-                    <td>
-                      <div className="ml-5 w-36">
-                        <select
-                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                          {...register("behavior_ID_Qualifier")}
-                        >
-                          <option value="1D">1D</option>
-                          <option value="Lu">Lu</option>
-                          <option value="Miss">Miss</option>
-                          <option value="Dr">Dr</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
+              <div className="overflow-auto my-8">
+                <div className="other-box my-5">
+                  {/* <div className="">
+            <h1 className="text-sm font-medium"></h1>
+
+           
+            <h3 className="text-xs font-normal"></h3>
+            <h3 className="text-xs font-normal"></h3>
+            <h3 className="text-xs font-normal"></h3>
+            <h3 className="text-xs font-normal"></h3>
+          </div> */}
+                  <div className="flex items-center justify-around gap-2 mb-2 ">
+                    <h3 className="text-xs font-medium w-80">Tax Type</h3>
+                    <h3 className="text-xs font-medium w-80">Box 24J</h3>
+                    <h3 className="text-xs font-medium w-80">ID Qualifier</h3>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2 ">
+                    <h3 className="text-xs font-normal w-80">IF</h3>
+                    <input
+                      type="text"
+                      name="max_day"
+                      className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("max_day")}
+                    />
+                    <select
+                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("degree_level")}
+                    >
+                      <option value="Speech Therapist">Speech Therapist</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xs font-normal w-80">Mental Health</h3>
+                    <input
+                      type="text"
+                      name="max_day"
+                      className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("max_day")}
+                    />
+                    <select
+                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("degree_level")}
+                    >
+                      <option value="Speech Therapist">Speech Therapist</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xs font-normal w-80">
+                      Behavioral therapy
+                    </h3>
+                    <input
+                      type="text"
+                      name="max_day"
+                      className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("max_day")}
+                    />
+                    <select
+                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("degree_level")}
+                    >
+                      <option value="Speech Therapist">Speech Therapist</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xs font-normal w-80">MT</h3>
+                    <input
+                      type="text"
+                      name="max_day"
+                      className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("max_day")}
+                    />
+                    <select
+                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("degree_level")}
+                    >
+                      <option value="Speech Therapist">Speech Therapy</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xs font-normal w-80">MT</h3>
+                    <input
+                      type="text"
+                      name="max_day"
+                      className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("max_day")}
+                    />
+                    <select
+                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("degree_level")}
+                    >
+                      <option value="Speech Therapist">Speech Therapist</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xs font-normal w-80">
+                      Physical Therapy
+                    </h3>
+                    <input
+                      type="text"
+                      name="max_day"
+                      className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("max_day")}
+                    />
+                    <select
+                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+                      {...register("degree_level")}
+                    >
+                      <option value="Speech Therapist">Speech Therapist</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  {/* <div className="">
+            <h1 className="text-sm font-medium">Box 24J</h1>
+
+            <input
+              type="text"
+              name="max_day"
+                className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              {...register("max_day")}
+            />
+          </div> */}
+                </div>
               </div>
 
               {/* submit  */}
@@ -436,10 +592,10 @@ const InsuranceEditComponent = ({ id }) => {
                 <input
                   type="submit"
                   value={"SAVE"}
-                  className="px-5  py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                  className="px-3  py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                 />
                 <button
-                  className="px-5 ml-3 py-1 bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                  className="px-3 ml-3 py-1 bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
                   autoFocus
                 >
                   CANCEL
@@ -447,6 +603,40 @@ const InsuranceEditComponent = ({ id }) => {
               </div>
             </form>
           </motion.div>
+          <div className="bg-gray-200 py-[1px] my-3"></div>
+          <div className="px-2">
+            <div className="md:flex mb-2 items-center justify-between">
+              <h1 className="text-lg my-2 text-orange-400">Scrubbing Rules</h1>
+
+              <div className="md:flex justify-end items-end my-2">
+                <button
+                  onClick={clearFilters}
+                  className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                >
+                  Clear filters
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <Table
+                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                size="small"
+                bordered
+                className=" text-xs font-normal"
+                columns={columns}
+                dataSource={table}
+                scroll={{
+                  y: 650,
+                }}
+                onChange={handleChange}
+              />
+            </div>
+            <button className="px-3 my-2 py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </div>

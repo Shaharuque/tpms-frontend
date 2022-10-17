@@ -175,6 +175,7 @@ const LeaveTracking = () => {
       >
         Add Time Off
       </button>
+
       {timeOpen && (
         <motion.div
           initial={{ opacity: 0, y: 15 }}

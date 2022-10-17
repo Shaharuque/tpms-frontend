@@ -4,10 +4,12 @@ import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import axios from "axios";
 import { Table } from "antd";
+import { useForm } from "react-hook-form";
 
 const CredentialsToExpire = () => {
+  const { register, handleSubmit, reset } = useForm();
+  const [tableOpen, setTableOpen] = useState(false);
   const [VacationData, SetVacationData] = useState([]);
-  const [table, setTable] = useState(false);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
@@ -24,11 +26,21 @@ const CredentialsToExpire = () => {
 
   console.log(VacationData);
 
+  const onSubmit = (data) => {
+    console.log(data);
+    setTableOpen(true);
+    reset();
+  };
+
   // ---------------------------------Table Data-------------------------
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
+  };
+
+  const clearFilters = () => {
+    setFilteredInfo({});
   };
 
   const columns = [
@@ -37,30 +49,30 @@ const CredentialsToExpire = () => {
       dataIndex: "patient",
       key: "patient",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.patient || null,
       onFilter: (value, record) => record.patient.includes(value),
       sorter: (a, b) => {
@@ -85,30 +97,30 @@ const CredentialsToExpire = () => {
       dataIndex: "provider",
       key: "provider",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.provider || null,
       onFilter: (value, record) => record.provider.includes(value),
       sorter: (a, b) => {
@@ -133,30 +145,30 @@ const CredentialsToExpire = () => {
       dataIndex: "supervisor",
       key: "supervisor",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.supervisor || null,
       onFilter: (value, record) => record.supervisor.includes(value),
       sorter: (a, b) => {
@@ -179,7 +191,7 @@ const CredentialsToExpire = () => {
     },
   ];
   return (
-    <div className={table ? "" : "h-[100vh]"}>
+    <div className={tableOpen ? "" : "h-[100vh]"}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">Credentials Expired</h1>
         <div className="flex items-center gap-3">
@@ -192,37 +204,48 @@ const CredentialsToExpire = () => {
           </Link>
         </div>
       </div>
-      <div>
-        <h1 className="label-text text-base font-medium text-[#9b9b9b] text-left">
-          Select Interval
-        </h1>
-        <div className="flex item-center flex-wrap my-3">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-7 my-5 mr-2 gap-2">
           <div>
+            <label className="label">
+              <span className="label-text text-base text-gray-500 text-left">
+                Select Interval
+              </span>
+            </label>
             <select
-              name="type"
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium px-2 py-[6px] mx-1 text-xs focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none"
+              {...register("interval")}
             >
-              <option value="30 Days">30 Days</option>
-              <option value="60 Days">60 Days</option>
-              <option value="90 Days">90 Days</option>
+              <option value="name"> 30 Days </option>
+              <option value="name"> 60 Days </option>
+              <option value="name"> 90 Days </option>
             </select>
           </div>
+
           <button
-            onClick={() => setTable(true)}
-            className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="w-1/4 mt-7 ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            type="submit"
           >
             Go
           </button>
         </div>
-      </div>
-      {table && (
+      </form>
+      {tableOpen && (
         <div className="my-2">
-          <div className=" overflow-scroll">
+          <div className="flex justify-end items-center mr-2">
+            <button
+              onClick={clearFilters}
+              className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+            >
+              Clear filters
+            </button>
+          </div>
+          <div className=" overflow-scroll pt-3">
             <Table
               rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
               pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
               size="small"
-              className=" text-xs font-normal text-center"
+              className=" text-xs font-normal"
               columns={columns}
               dataSource={VacationData} //Which data chunk you want to show in table
               // For fixed header table at top

@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import axios from "axios";
-import { Table } from "antd";
+import { Dropdown, Space, Table } from "antd";
 import VacationAction from "./VacationAction/VacationAction";
 import PendingStatus from "./VacationAction/PendingStatus";
+import { BsThreeDots } from "react-icons/bs";
 
 const VacationPendingApproval = () => {
   const [VacationData, SetVacationData] = useState([]);
@@ -32,36 +33,40 @@ const VacationPendingApproval = () => {
     setSortedInfo(sorter);
   };
 
+  const clearFilters = () => {
+    setFilteredInfo({});
+  };
+
   const columns = [
     {
       title: "Staff Last Name",
       dataIndex: "patient",
       key: "patient",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.patient || null,
       onFilter: (value, record) => record.patient.includes(value),
       sorter: (a, b) => {
@@ -86,30 +91,30 @@ const VacationPendingApproval = () => {
       dataIndex: "provider",
       key: "provider",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.provider || null,
       onFilter: (value, record) => record.provider.includes(value),
       sorter: (a, b) => {
@@ -134,30 +139,30 @@ const VacationPendingApproval = () => {
       dataIndex: "Dos",
       key: "Dos",
       width: 80,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.Dos || null,
       onFilter: (value, record) => record.Dos.includes(value),
       sorter: (a, b) => {
@@ -182,30 +187,30 @@ const VacationPendingApproval = () => {
       dataIndex: "supervisor",
       key: "supervisor",
       width: 100,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
       filteredValue: filteredInfo.supervisor || null,
       onFilter: (value, record) => record.supervisor.includes(value),
       sorter: (a, b) => {
@@ -276,51 +281,24 @@ const VacationPendingApproval = () => {
     },
     {
       title: "Action",
-      dataIndex: "action",
-      key: "action",
+      dataIndex: "operation",
+      key: "operation",
       width: 60,
-      // filters: [
-      //   { text: "Celestine", value: "Celestine" },
-      //   { text: "Annaliese", value: "Annaliese" },
-      //   {
-      //     text: `Maude`,
-      //     value: "Maude",
-      //   },
-      //   {
-      //     text: `Molly`,
-      //     value: "Molly",
-      //   },
-      //   {
-      //     text: "Karla",
-      //     value: "Karla",
-      //   },
-      //   {
-      //     text: "Marcellus",
-      //     value: "Marcellus",
-      //   },
-      //   {
-      //     text: "Hilton",
-      //     value: "Hilton",
-      //   },
-      // ],
-      filteredValue: filteredInfo.action || null,
-      onFilter: (value, record) => record.action.includes(value),
-      sorter: (a, b) => {
-        return a.action > b.action ? -1 : 1;
-      },
-      sortOrder: sortedInfo.columnKey === "action" ? sortedInfo.order : null,
-
-      // render contains what we want to reflect as our data
-      // action, id, key=>each row data(object) property value can be accessed.
-      render: (_, { action, id, key }) => {
-        //console.log("tags : ", client_first_name, id, key);
-        return (
-          <div>
-            <VacationAction></VacationAction>
-          </div>
-        );
-      },
-      ellipsis: true,
+      render: (_, { id }) => (
+        <div className="flex justify-center">
+          <Dropdown
+            overlay={<VacationAction></VacationAction>}
+            trigger={["click"]}
+            overlayStyle={{ zIndex: "100" }}
+          >
+            <button onClick={(e) => e.preventDefault()}>
+              <Space>
+                <BsThreeDots />
+              </Space>
+            </button>
+          </Dropdown>
+        </div>
+      ),
     },
   ];
 
@@ -339,12 +317,20 @@ const VacationPendingApproval = () => {
         </div>
       </div>
       <div className="my-2">
-        <div className=" overflow-scroll">
+        <div className="flex justify-end items-center mr-2">
+          <button
+            onClick={clearFilters}
+            className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+          >
+            Clear filters
+          </button>
+        </div>
+        <div className=" overflow-scroll pt-3">
           <Table
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal text-center"
+            className=" text-xs font-normal"
             columns={columns}
             dataSource={VacationData} //Which data chunk you want to show in table
             // For fixed header table at top

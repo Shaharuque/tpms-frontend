@@ -12,7 +12,7 @@ const ContractRateAdd = () => {
     reset();
   };
   return (
-    <div className="h-[100vh]">
+    <div className="sm:h-[100vh]">
       <div>
         <div className="border">
           <motion.div
@@ -25,8 +25,8 @@ const ContractRateAdd = () => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex flex-wrap items-center gap-6 my-5">
-                <div className="w-[20%]">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7  mr-2 gap-6">
+                <div>
                   <label className="label">
                     <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Select Insurance
@@ -49,7 +49,7 @@ const ContractRateAdd = () => {
                   </label>
                   <input
                     type="file"
-                    className=" border bg-white rounded-sm ml-1  text-xs"
+                    className=" rounded-sm ml-1  text-xs"
                     {...register("fileName")}
                   />
                 </div>
@@ -263,14 +263,14 @@ const ContractRateAdd = () => {
                     <option value="name">EFT</option>
                   </select>
                 </div>
-                <div className="flex ml-1 gap-3">
+                <div className="flex items-end ml-1 gap-3">
                   <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
                     <input
                       type="checkbox"
                       name="checkedActive"
                       {...register("checkedActive")}
                     />
-                    <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                    <span className="text-[16px] ml-2 text-gray-700 gap-1 font-semibold">
                       Active
                     </span>
                   </div>
@@ -280,7 +280,7 @@ const ContractRateAdd = () => {
                       name="addAuth"
                       {...register("addAuth")}
                     />
-                    <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                    <span className="text-[16px] ml-2 text-gray-700 gap-1 font-semibold">
                       Add to auth
                     </span>
                   </div>
@@ -288,7 +288,7 @@ const ContractRateAdd = () => {
               </div>
 
               <div className="mb-3">
-                <div className=" flex items-end justify-start mt-2">
+                <div className=" flex items-end justify-start mt-6">
                   <button
                     className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                     type="submit"

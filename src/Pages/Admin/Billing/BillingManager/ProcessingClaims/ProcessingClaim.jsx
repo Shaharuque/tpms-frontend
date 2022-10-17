@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import { useForm } from "react-hook-form";
 import { BsArrowRight } from "react-icons/bs";
-import { motion } from "framer-motion";
+import { Calendar } from "react-calendar";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
@@ -12,11 +12,23 @@ const ProcessingClaim = () => {
   const [sortBy1, setSortBy1] = useState("");
   const [sortBy2, setSortBy2] = useState("");
   const [TData, setTData] = useState([]);
+  const [date, setDate] = useState(new Date());
+  const [openSingleCalendar, setOpenSingleCalendar] = useState(false);
+
+  const handleSingleClearDate = () => {
+    setOpenSingleCalendar(false);
+    setDate(null);
+  };
+
+  const handleSingleCancelDate = () => {
+    setOpenSingleCalendar(false);
+    setDate(new Date());
+  };
 
   // table
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [tableopen, settableopen] = useState(false);
+  const [tableOpen, setTableOpen] = useState(false);
   console.log(sortBy2);
 
   // calling fake db
@@ -288,7 +300,7 @@ const ProcessingClaim = () => {
   };
   //end outside click
   return (
-    <div className="h-[100vh]">
+    <div className={!tableOpen ? "h-[100vh]" : ""}>
       <h1 className="text-lg text-orange-400">Processing Claim(s)</h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -301,10 +313,39 @@ const ProcessingClaim = () => {
                   </span>
                 </label>
                 <input
+                  onClick={() => setOpenSingleCalendar(!openSingleCalendar)}
+                  value={date ? date.toLocaleDateString() : "Select a Date"}
                   className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                  type="date"
                   {...register("date")}
                 />
+                {/* single calendar */}
+                {openSingleCalendar && (
+                  <div className="col-span-2 w-[15%] rounded my-0 absolute z-10 shadow-lg p-1">
+                    <Calendar onChange={setDate} value={date} />
+                    <div className="flex justify-between bg-white p-1">
+                      <button
+                        onClick={() => handleSingleClearDate()}
+                        className="text-xs text-red-400"
+                      >
+                        CLEAR
+                      </button>
+                      <div>
+                        <button
+                          onClick={() => handleSingleCancelDate()}
+                          className="text-xs text-[#0AA7B8]"
+                        >
+                          CANCEL
+                        </button>
+                        <button
+                          onClick={() => setOpenSingleCalendar(false)}
+                          className="text-xs ml-2 text-[#0AA7B8]"
+                        >
+                          OK
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
               {/* go*/}
               <button
@@ -402,11 +443,7 @@ const ProcessingClaim = () => {
                           className="absolute z-10  2xl:ml-[20] shadow-xl"
                         >
                           {open && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 15 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.2 }}
-                            >
+                            <div>
                               <div>
                                 <DateRangePicker
                                   onChange={(item) =>
@@ -436,7 +473,7 @@ const ProcessingClaim = () => {
                                   Save
                                 </button>
                               </div>
-                            </motion.div>
+                            </div>
                           )}
                         </div>
                       </div>
@@ -529,11 +566,7 @@ const ProcessingClaim = () => {
                               className="absolute z-10  2xl:ml-[20] shadow-xl"
                             >
                               {open && (
-                                <motion.div
-                                  initial={{ opacity: 0, y: 15 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  transition={{ delay: 0.2 }}
-                                >
+                                <div>
                                   <div>
                                     <DateRangePicker
                                       onChange={(item) =>
@@ -563,7 +596,7 @@ const ProcessingClaim = () => {
                                       Save
                                     </button>
                                   </div>
-                                </motion.div>
+                                </div>
                               )}
                             </div>
                           </div>
@@ -595,7 +628,7 @@ const ProcessingClaim = () => {
                     className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
                     type="submit"
                     onClick={() => {
-                      settableopen(true);
+                      setTableOpen(true);
                     }}
                   >
                     Run
@@ -610,7 +643,7 @@ const ProcessingClaim = () => {
         </form>
       </div>
 
-      {tableopen && (
+      {tableOpen && (
         <div className="my-5">
           <div className="overflow-scroll">
             <>

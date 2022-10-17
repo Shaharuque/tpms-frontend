@@ -263,6 +263,7 @@ const Sidebar = ({ handle }) => {
             width: isHovering ? "240px" : "70px",
             // transition: isHovering ? "ease-in 0.5s" : "ease-out 0.3s",
           }}
+          // Have to do something with this className
           className="sidebar"
         >
           <div className="top-section">
@@ -289,7 +290,7 @@ const Sidebar = ({ handle }) => {
                     to={"#"}
                     key={index}
                     className=""
-                    activeClassName="active_sidebar"
+                    activeclassname="active_sidebar"
                   >
                     <SidebarMenu
                       items={items}
@@ -303,7 +304,7 @@ const Sidebar = ({ handle }) => {
                     to={items.path}
                     key={index}
                     className="link flex"
-                    activeClassName="active_sidebar"
+                    activeclassname="active_sidebar"
                     onClick={(_) => handleDropState("other")}
                   >
                     <div className="flex items-center">

@@ -1,16 +1,15 @@
-import { CssBaseline } from "@mui/material";
 import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { FiEdit } from "react-icons/fi";
-import AddServicesActionModal from "../AddServices/AddServices/AddServicesActionModal";
+import PayPeriodAdd from "./PayPeriod/PayPeriodAdd";
 import PayPeriodEnitModal from "./PayPeriod/PayPeriodEnitModal";
 
 const PayPeriod = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [openAddModal, setOpenAddModal] = useState(false);
 
   const handleClickOpen = () => {
     setOpenEditModal(true);
@@ -19,12 +18,20 @@ const PayPeriod = () => {
   const handleClose = () => {
     setOpenEditModal(false);
   };
+  const handleClickOpen2 = () => {
+    setOpenAddModal(true);
+  };
+
+  const handleClose2 = () => {
+    setOpenAddModal(false);
+  };
 
   const handleChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
+    //console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+  console.log(filteredInfo);
 
   const [table, setTable] = useState(false);
   useEffect(() => {
@@ -193,178 +200,51 @@ const PayPeriod = () => {
   const clearFilters = () => {
     setFilteredInfo({});
   };
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
-  };
 
   return (
     <div>
       <div className="flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Pay Period</h1>
 
-        <div>
-          {/* <!-- The button to open modal --> */}
-          <label htmlFor="pay-box" className="">
-            <h1 className="px-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-              Create Pay Period
-            </h1>
-          </label>
-
-          {/* <!-- Put this part before </body> tag --> */}
-          <input type="checkbox" id="pay-box" className="modal-toggle" />
-          <div className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box box">
-              <label
-                htmlFor="pay-box"
-                className="btn btn-sm btn-circle hover:bg-primary hover:text-white absolute right-2 top-2"
+        <div className="md:flex items-center">
+          <div>
+            {/* <!-- The button to open modal --> */}
+            <label htmlFor="pay-box" className="">
+              <h1
+                onClick={handleClickOpen2}
+                className="px-2 text-xs py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 cursor-pointer text-center mb-2 md:mb-0"
               >
-                ✕
-              </label>
-              <div>
-                <h1 className="text-lg  text-left text-orange-400">
-                  Create/Edit Pay Period
-                </h1>
-                <div className="divider"></div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="w-full text-sm">
-                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 mr-2 gap-5">
-                      <div>
-                        <label className="label">
-                          <span className="label-text text-xs text-gray-500 text-left">
-                            Select Pay Period length
-                          </span>
-                        </label>
-                        <select
-                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
-                          {...register("Length")}
-                        >
-                          <option value="Mr">Bi Weekly</option>
-                          <option value="Mrs">Yearly</option>
-                          <option value="Miss">Miss</option>
-                          <option value="Dr">Dr</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="label">
-                          <span className="label-text text-xs text-gray-500 text-left">
-                            Week Day
-                          </span>
-                        </label>
-                        <select
-                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
-                          {...register("week_day")}
-                        >
-                          <option value="Mr">Sunday</option>
-                          <option value="Mrs">Monday</option>
-                          <option value="Miss">Tuesday</option>
-                          <option value="Dr">Wednesday</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="label">
-                          <span className="label-text text-xs text-gray-500 text-left">
-                            Select Year
-                          </span>
-                        </label>
-                        <select
-                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
-                          {...register("year")}
-                        >
-                          <option value="Mr">2019</option>
-                          <option value="Mrs">2020</option>
-                          <option value="Miss">2021</option>
-                          <option value="Dr">2022</option>
-                        </select>
-                      </div>
-
-                      {/* End Date  */}
-                      <div>
-                        <label className="label">
-                          <span className="label-text text-xs text-gray-500 text-left">
-                            End Date
-                          </span>
-                        </label>
-                        <input
-                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
-                          type="date"
-                          {...register("date")}
-                        />
-                      </div>
-                      {/* staff_number  */}
-                      <div className="mt-[-15px]">
-                        <label className="label">
-                          <span className="label-text text-xs text-gray-500 text-left">
-                            After how many days staff can't submit time sheet?
-                          </span>
-                        </label>
-                        <input
-                          type="number"
-                          name="staff_number"
-                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
-                          {...register("staff_number")}
-                        />
-                      </div>
-                      <div>
-                        <label className="label">
-                          <span className="label-text text-xs text-gray-500 text-left">
-                            Check Date
-                          </span>
-                        </label>
-                        <select
-                          className="border rounded-sm px-2 py-1 mx-1 text-xs w-full"
-                          {...register("week_day")}
-                        >
-                          <option value="Mr">Sunday</option>
-                          <option value="Mrs">Monday</option>
-                          <option value="Miss">Tuesday</option>
-                          <option value="Dr">Wednesday</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="divider"></div>
-                  {/* submit box  */}
-
-                  {/* <input type="submit" /> */}
-
-                  <div className="modal-week_day">
-                    <input
-                      type="submit"
-                      value={"SAVE"}
-                      className=" py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                    ></input>
-                    <label
-                      htmlFor="pay-box"
-                      className="py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-                    >
-                      Close
-                    </label>
-                  </div>
-                </form>
-              </div>
-            </div>
+                Create Pay Period
+              </h1>
+            </label>
           </div>
+
+          <div>
+            {/* <!-- The button to open calender view --> */}
+            <label htmlFor="pay-box" className="">
+              <h1
+                onClick={handleClickOpen2}
+                className="px-2 text-xs py-1 bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm mr-2 cursor-pointer"
+              >
+                Calender View
+              </h1>
+            </label>
+          </div>
+          {/* Conditional rendering of clear filter button */}
+          {filteredInfo?.from_date?.length > 0 ? (
+            <div className="flex justify-end items-end my-2">
+              <button
+                onClick={clearFilters}
+                className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+              >
+                Clear filters
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
 
-      <CssBaseline />
       <div>
-        <div className="flex justify-end items-end my-2">
-          <button
-            onClick={clearFilters}
-            className="px-2  py-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-          >
-            Clear filters
-          </button>
-        </div>
         <Table
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
@@ -387,6 +267,12 @@ const PayPeriod = () => {
           handleClose={handleClose}
           open={openEditModal}
         ></PayPeriodEnitModal>
+      )}
+      {openAddModal && (
+        <PayPeriodAdd
+          handleClose={handleClose2}
+          open={openAddModal}
+        ></PayPeriodAdd>
       )}
     </div>
   );

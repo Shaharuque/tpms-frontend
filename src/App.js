@@ -137,6 +137,9 @@ import HolidaySetup from "./Pages/Admin/Settings/Settings/HolidaySetUp/HolidaySe
 import AddServiceSubType from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType";
 import AddInsurance from "./Pages/Admin/Settings/Settings/AddInsurance/AddInsurance";
 import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
+import UnBillableTimeSheet from "./Pages/Admin/Settings/Settings/UnBillableTimesheet/UnBillableTimeSheet";
+import AddServiceSubTypeTab from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType/AddServiceSubTypeTab";
+import CptCodeExclusion from "./Pages/Admin/Settings/Settings/CptCodeExclusion/CptCodeExclusion";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -205,9 +208,13 @@ function App() {
               path="billing/ar-followup-bucket"
               element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
-            <Route
+            {/* <Route
               path="billing/ar-followup-bucket-filter-types/1"
               element={<ProvideEscalation></ProvideEscalation>}
+            ></Route> */}
+            <Route
+              path="billing/ar-followup-bucket-filter-types/1"
+              element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
             <Route
               path="billing/ar-followup-bucket-filter-types/2"
@@ -559,9 +566,22 @@ function App() {
                 element={<AddCptCode></AddCptCode>}
               ></Route>
               <Route
+                path="cpt-code-exclusion"
+                element={<CptCodeExclusion></CptCodeExclusion>}
+              ></Route>
+              <Route
                 path="sub-activity-setup"
                 element={<AddServiceSubType></AddServiceSubType>}
-              ></Route>
+              >
+                <Route index element={<Navigate to="SubTypeTab" />} />
+
+                <Route
+                  // sub type
+                  path="SubTypeTab"
+                  element={<AddServiceSubTypeTab></AddServiceSubTypeTab>}
+                ></Route>
+              </Route>
+
               <Route
                 path="add-staff-type"
                 element={<AddStaffType></AddStaffType>}
@@ -590,6 +610,10 @@ function App() {
               <Route
                 path="unbillable-activity"
                 element={<UnbillableActivity></UnbillableActivity>}
+              ></Route>
+              <Route
+                path="unbillable-time-sheet"
+                element={<UnBillableTimeSheet></UnBillableTimeSheet>}
               ></Route>
               <Route
                 path="session-rule"

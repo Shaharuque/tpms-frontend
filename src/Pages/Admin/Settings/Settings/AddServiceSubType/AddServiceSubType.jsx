@@ -1,41 +1,29 @@
-import React, { useState } from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import AddServiceSubTypeTab from "./AddServiceSubType/AddServiceSubTypeTab";
+import React from "react";
+import { NavLink, Outlet } from "react-router-dom";
+import { Nav } from "rsuite";
 
 const AddServiceSubType = () => {
-  const [toggle, setToggle] = useState(1);
   return (
-    <Tabs>
-      <TabList className=" mb-5 ">
-        <div className="flex flex-wrap  border">
-          <Tab
-            onClick={() => setToggle(1)}
-            className={
-              toggle === 1
-                ? "py-2 px-6 active-tab  text-sm text-primary shadow-md"
-                : "py-2 px-6 text-sm tab-box"
+    <>
+      <div className="container width-fix  mx-auto ">
+        <Nav appearance="tabs" className=" mb-5">
+          <NavLink
+            className={(navinfo) =>
+              navinfo.isActive
+                ? "rs-nav-item rs-nav-item-active font-medium text-base"
+                : "rs-nav-item text-base font-medium"
             }
+            to={"SubTypeTab"}
           >
             Service/Activity Sub Types
-          </Tab>
-
-          {/* <Tab
-            onClick={() => setToggle(2)}
-            className={
-              toggle === 2
-                ? "py-2 px-6 active-tab  text-sm text-primary shadow-md"
-                : "py-2 px-6  text-sm tab-box"
-            }
-          >
-            Tab 2
-          </Tab> */}
-        </div>
-      </TabList>
-
-      <TabPanel>
-        <AddServiceSubTypeTab></AddServiceSubTypeTab>
-      </TabPanel>
-    </Tabs>
+            {/* <span className="bg-orange-400 badge text-white ml-2 rounded-full text-[10px]">
+            step-1
+          </span> */}
+          </NavLink>
+        </Nav>
+        <Outlet />
+      </div>
+    </>
   );
 };
 

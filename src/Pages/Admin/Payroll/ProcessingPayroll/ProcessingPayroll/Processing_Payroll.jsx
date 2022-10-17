@@ -1,64 +1,15 @@
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { MultiSelect } from "react-multi-select-component";
-import CustomMultiSelection from "../../../../Shared/CustomComponents/CustomMultiSelection";
-
-const options = [
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-  { label: "adf ", value: "grapes" },
-  { label: "sdfgf ", value: "mango" },
-];
+import GlobalMultiSelect from "../../../../Shared/CustomComponents/GlobalMultiSelect";
 
 const Processing_Payroll = () => {
   const [select, setSelect] = useState("");
-  const [value, setValue] = useState([]);
   const [tData, setTData] = useState([]);
   const [table, setTable] = useState(false);
-  // ----------------------------------------Multi-Select---------------------------------
-  // ***************
-  const datat = ["Eugenia", "Bryan", "Linda"].map((item) => ({
-    label: item,
-    value: item,
-  }));
 
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-
-  // multi selection jakir vai
-
-  const [selected, setSelected] = useState([]);
-
-  const customValueRenderer = (selected, _options) => {
-    // console.log("hi")
-    if (selected.length) {
-      if (selected.length > 3) return `All Selected ${selected.length}`;
-      return selected.map(({ label }) => label);
-    }
-
-    return "None selected";
-  };
-
-  const varselected = `All Selected ${options.length}`;
-  const handleNewField = (hasSelectAll, value) => {
-    setSelected(options);
-    console.log("selected", selected);
-  };
-
-  console.log("Appoinment Multi select data", selected);
 
   // Ant Table is starting
   useEffect(() => {
@@ -383,7 +334,7 @@ const Processing_Payroll = () => {
   return (
     <div className={!table ? "h-[100vh]" : ""}>
       <div className="my-5">
-        <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6  mr-2 gap-6">
+        <div className=" grid grid-cols-1 items-center md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6  mr-2 gap-6">
           <div>
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -410,35 +361,18 @@ const Processing_Payroll = () => {
               <option value="01-12-2021">01/12/2021-07/12/2021</option>
             </select>
           </div>
-          <div>
+          <div className="lg:mt-4 2xl:mt-0">
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                 Choose Staff to process
               </span>
             </label>
-
-            {/* <CustomMultiSelection
-              data={datat}
-              value={value}
-              setValue={setValue}
-            ></CustomMultiSelection> */}
             <>
-              <div className="parentSelection">
-                <div>
-                  <MultiSelect
-                    className="AppoinmentGlobal"
-                    options={options}
-                    value={selected}
-                    onChange={setSelected}
-                    labelledBy="Select"
-                    valueRenderer={customValueRenderer}
-                  />
-                </div>
-              </div>
+              <GlobalMultiSelect />
             </>
           </div>
           <button
-            className=" py-[5px] w-1/4 font-normal mt-8 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+            className=" py-[5px] w-1/4 font-normal mt-10 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
             type="submit"
             onClick={() => setTable(true)}
           >

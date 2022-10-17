@@ -92,15 +92,16 @@ const InsuranceSetup = () => {
     },
     {
       title: "Cms1500 32",
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "cms32",
+      key: "cms32",
       width: 60,
-      render: () => {
+      render: (_, { cms32 }) => {
         //console.log("tags : ", lock);
         return (
-          <div className="">
+          <div>
             <input
               name="cms"
+              defaultValue={cms32}
               className="page py-[3px]  focus:outline-none"
               onChange={inputHandle}
               type="text"
@@ -109,9 +110,9 @@ const InsuranceSetup = () => {
         );
       },
       sorter: (a, b) => {
-        return a.id > b.id ? -1 : 1;
+        return a.cms32 > b.cms32 ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "cms32" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -300,7 +301,10 @@ const InsuranceSetup = () => {
       </button>
 
       {insuranceEdit && (
-        <InsuranceEditComponent id={rowId}></InsuranceEditComponent>
+        <>
+          {" "}
+          <InsuranceEditComponent id={rowId}></InsuranceEditComponent>
+        </>
       )}
     </div>
   );

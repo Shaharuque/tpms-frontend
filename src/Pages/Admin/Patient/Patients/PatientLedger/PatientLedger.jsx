@@ -531,7 +531,7 @@ const PatientLedger = () => {
               <option value="name">EFT</option>
             </select>
           </div>
-          <div className="mt-[35px] flex sm:col-span-2">
+          <div className="mt-[35px] flex items-center sm:col-span-2">
             <div>
               <Switch
                 size="small"

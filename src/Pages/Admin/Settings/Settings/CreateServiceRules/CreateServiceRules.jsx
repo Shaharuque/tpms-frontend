@@ -1,3 +1,4 @@
+// ->CreateServiceRules.jsx is the page where I tested How can editable data send to server side(Big Important)
 import { CssBaseline } from "@mui/material";
 import { Switch, Table } from "antd";
 import axios from "axios";
@@ -25,6 +26,14 @@ const CreateServiceRules = () => {
         console.log(error);
       });
   }, []);
+
+  const [changed, setChanged] = useState(false);
+  const testing = (record) => {
+    console.log(record);
+    const rules = !record?.rules;
+    setChanged(rules);
+    console.log("rules changed by client", changed);
+  };
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
@@ -57,7 +66,7 @@ const CreateServiceRules = () => {
         return a.rule > b.rule ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "rule" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Description",
@@ -85,10 +94,10 @@ const CreateServiceRules = () => {
       },
       sortOrder:
         sortedInfo.columnKey === "description" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
-      title: "Rule",
+      title: "Run Rule",
       dataIndex: "rules",
       key: "rules",
       width: 80,
@@ -111,11 +120,14 @@ const CreateServiceRules = () => {
       dataIndex: "rules",
       key: "rules",
       width: 80,
-      render: (_, rules) => {
-        // console.log("tags : ", lock);
+      render: (_, record) => {
+        //console.log("tags : ", record);
         return (
           <div className="">
-            <CreateServiceComponent rule={rules.rules}></CreateServiceComponent>
+            <CreateServiceComponent
+              rule={record.rules}
+              id={record.id}
+            ></CreateServiceComponent>
           </div>
         );
       },
@@ -123,6 +135,27 @@ const CreateServiceRules = () => {
         return a.rules > b.rules ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "rules" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    // Testing how we can send the edited table row data to the backend
+    {
+      title: "Action",
+      key: "id",
+      width: 80,
+      // record contains each object inside of an array
+      render: (record) => {
+        // console.log("tags : ", lock);
+        return (
+          <div className="">
+            {/* <h1 onClick={() => testing(record.id)}>{record.rule}</h1> */}
+            <Switch
+              size="small"
+              defaultChecked={record?.rules}
+              onClick={() => testing(record)}
+            />
+          </div>
+        );
+      },
       ellipsis: true,
     },
   ];

@@ -4,12 +4,19 @@ import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { Table } from "antd";
 import axios from "axios";
+import SelectiveClientsModal from "./SelectiveClientsModal";
 const PatientStatement = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [select, setSelect] = useState("");
+  const [selected, setSelected] = useState(null);
   const [tactive, setTactive] = useState(false);
   const [tData, setTData] = useState([]);
+
+  const handleRelated = (e) => {
+    e.preventDefault();
+    setSelected(e.target.value);
+  };
+  console.log(selected);
 
   useEffect(() => {
     axios("../../../All_Fake_Api/PatientStatement.json").then((response) => {
@@ -17,7 +24,7 @@ const PatientStatement = () => {
     });
   }, []);
 
-  console.log(tData);
+  //console.log(tData);
 
   const column = [
     {
@@ -150,21 +157,20 @@ const PatientStatement = () => {
   return (
     <div className="h-[100vh]">
       <h1 className="text-lg text-orange-400">Statement</h1>
-      <div
-        className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 my-5 mr-2 gap-5"
-        s
-      >
+      <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 my-5 mr-2 gap-5">
         <div>
           <label className="label">
             <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-              Post By
+              Related to
             </span>
           </label>
           <select
-            onChange={(e) => setSelect(e.target.value)}
-            name="post"
+            defaultValue={selected}
+            onChange={(e) => handleRelated(e)}
+            name="related"
             className="input-border text-gray-600 rounded-sm  text-[14px] foactive-medium ml-1  w-full focus:outline-none"
           >
+            <option value={null}></option>
             <option value="all_client">All Client</option>
             <option value="selective_client">Selective Client</option>
             <option value="selective_private_payor">
@@ -176,7 +182,7 @@ const PatientStatement = () => {
           <div>
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                Selected date
+                Select date
               </span>
             </label>
             <div className="ml-1 text-[14px]">
@@ -276,6 +282,13 @@ const PatientStatement = () => {
             </>
           </div>
         </div>
+      )}
+
+      {/* Related to options basis modal is handling here */}
+      {selected === "selective_client" && (
+        <>
+          <SelectiveClientsModal></SelectiveClientsModal>
+        </>
       )}
     </div>
   );

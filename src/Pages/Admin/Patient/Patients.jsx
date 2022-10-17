@@ -473,8 +473,8 @@ const TableApi = () => {
           // <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
           <div className="my-5 flex flex-wrap items-center gap-2">
             {filteredInfo?.client_first_name?.length > 0 && (
-              <div className=" ">
-                <div className="flex mb-2 gap-1">
+              <div className="">
+                <div className="flex flex-wrap mb-2 gap-1">
                   {filteredInfo?.client_first_name?.map((tag, index) => (
                     <div
                       className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
@@ -500,7 +500,7 @@ const TableApi = () => {
               </div>
             )}
             {filteredInfo?.client_dob?.length > 0 && (
-              <div className="flex mb-2 gap-1">
+              <div className="flex flex-wrap mb-2 gap-1">
                 {filteredInfo?.client_dob?.map((tag, index) => (
                   <div
                     className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
@@ -525,7 +525,7 @@ const TableApi = () => {
               </div>
             )}
             {filteredInfo?.client_gender?.length > 0 && (
-              <div className="flex mb-2 gap-1">
+              <div className="flex flex-wrap mb-2 gap-1">
                 {filteredInfo?.client_gender?.map((tag, index) => (
                   <div
                     className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
@@ -550,7 +550,7 @@ const TableApi = () => {
               </div>
             )}
             {filteredInfo?.location?.length > 0 && (
-              <div className="flex mb-2 gap-1">
+              <div className="flex flex-wrap mb-2 gap-1">
                 {filteredInfo?.location?.map((tag, index) => (
                   <div
                     className="text-gray-700  shadow-sm font-medium  rounded-sm pl-1 bg-white flex items-center"
@@ -575,7 +575,7 @@ const TableApi = () => {
               </div>
             )}
             {filteredInfo?.insurance?.length > 0 && (
-              <div className="flex mb-2 gap-1">
+              <div className="flex flex-wrap mb-2 gap-1">
                 {filteredInfo?.insurance?.map((tag, index) => (
                   <div
                     className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"

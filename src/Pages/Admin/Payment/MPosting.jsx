@@ -407,7 +407,7 @@ const MPosting = () => {
   // console.log(sdate);
   return (
     // using conditional styling here
-    <div className={depositOpen ? "" : "h-[100vh]"}>
+    <div className={depositOpen ? "" : "sm:h-[100vh]"}>
       <div className="flex items-center flex-wrap justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           M-Posting
@@ -435,7 +435,7 @@ const MPosting = () => {
               <div>
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    Selected date
+                    Deposit Date Range
                   </span>
                 </label>
                 <div className="ml-1 text-[14px]">
@@ -512,7 +512,7 @@ const MPosting = () => {
               <div>
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    Selected date
+                    Check Date Range
                   </span>
                 </label>
                 <div className="ml-1 text-[14px]">

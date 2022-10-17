@@ -13,7 +13,7 @@ const NotFound = () => {
   return (
     <div>
       {/** */}
-      <div className="flex flex-col  lg:flex-row justify-center items-center gap-4">
+      <div className="flex flex-col my-20 lg:flex-row justify-center items-center gap-4">
         <div className="">
           <img src={Medicalgif} alt="" />
         </div>
@@ -22,7 +22,6 @@ const NotFound = () => {
             <img src={found} alt="" />
           </div>
           <div className="mt-[-40px] lg:mt-[-100px] text-center p-2 lg:p-0">
-            {" "}
             <h1 className="text-2xl font-extrabold  ">
               Oops! Page Not Found!!!!
             </h1>

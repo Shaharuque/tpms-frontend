@@ -1,11 +1,13 @@
 import * as React from "react";
-import Dialog from "@mui/material/Dialog";
 import { useForm } from "react-hook-form";
+import { Modal } from "antd";
+import { IoCloseCircleOutline } from "react-icons/io5";
 export default function PlaceOfServicesActionAddModal({
   handleClose,
   open,
-  row,
+  recordData,
 }) {
+  const { id, description } = recordData;
   const {
     register,
     handleSubmit,
@@ -18,76 +20,90 @@ export default function PlaceOfServicesActionAddModal({
     reset();
   };
 
-  console.log(row);
-
   // Editable value
   React.useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        place_of_service: `${row.original.place_of_Service}`,
-        place_service_code: `${row.original.service_code}`,
+        service_code: id,
+        place_of_service: description,
       });
-    }, 500);
-  }, [reset, row.original.place_of_Service, row.original.service_code]);
-  console.log(errors);
+    }, 100);
+  }, [reset, id, description]);
+  //console.log(errors);
 
   return (
     <div>
-      <Dialog
+      <Modal
         // fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+        centered
+        width={600}
+        footer={false}
+        closable={false}
+        bodyStyle={{ padding: "0" }}
+        className="box rounded-md"
       >
-        <div className="p-5 box">
-          {/* <h1>{row.original.place_of_Service}</h1> */}
-          <h1 className="text-lg  text-left text-orange-400">Edit Document</h1>
-          <div className="divider"></div>
+        <div className="px-5 py-2 ">
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg text-left text-orange-400 ">
+              Edit Document
+            </h1>
+            <IoCloseCircleOutline
+              onClick={handleClose}
+              className="text-gray-600 font-semibold  text-2xl hover:text-primary"
+            />
+          </div>
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex items-center text-sm gap-5">
-              <div>
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 my-3 mr-2 gap-x-4 gap-y-4">
+              <div className="mt-[-15px]">
                 <label className="label">
-                  <span className="text-sm">Place of Service</span>
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
+                    Place of Service
+                  </span>
                 </label>
                 <input
                   type="text"
                   name="place_of_service"
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
                   {...register("place_of_service")}
                 />
               </div>
-              <div>
+              <div className="mt-[-15px]">
                 <label className="label">
-                  <span className="text-sm">Place of Service Code</span>
+                  <span className="label-text text-xs text-gray-600 font-medium text-left">
+                    Place of Service Code
+                  </span>
                 </label>
                 <input
-                  type="text"
-                  name="place_service_code"
-                  className="border rounded-sm px-2 py-2 mx-1 text-xs w-full"
-                  {...register("place_service_code")}
+                  type="number"
+                  name="service_code"
+                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  {...register("service_code")}
                 />
               </div>
             </div>
-            <div className="divider"></div>
-            <div className="modal-action">
-              {/* <input type="submit" /> */}
-              <input
-                type="submit"
-                value={"SAVE"}
-                className="px-5  py-2 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              />
+            <div className="bg-gray-200 py-[1px] mt-3"></div>
+            <div className=" flex items-end justify-end mt-2">
               <button
-                className="px-5  bg-gradient-to-r from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
+                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                type="submit"
+              >
+                Save
+              </button>
+
+              <button
+                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
                 autoFocus
                 onClick={handleClose}
               >
-                CANCEL
+                Close
               </button>
             </div>
           </form>
         </div>
-      </Dialog>
+      </Modal>
     </div>
   );
 }
