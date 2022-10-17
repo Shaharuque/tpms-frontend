@@ -1,11 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useRowSelect, useSortBy, useTable } from "react-table";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import { ProviderColumn } from "./SchedulerTableData";
 import axios from "axios";
-import UseTable from "../../../../../Utilities/UseTable";
 import { useForm } from "react-hook-form";
 import { DateRangePicker } from "react-date-range";
 import { BsArrowRight } from "react-icons/bs";
