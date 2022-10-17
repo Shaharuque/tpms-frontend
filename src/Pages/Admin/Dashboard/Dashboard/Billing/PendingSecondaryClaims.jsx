@@ -7,12 +7,12 @@ import axios from "axios";
 import { Table } from "antd";
 
 const PendingSecondaryClaims = () => {
-  const { handleSubmit, register, reset } = useForm();
   const [pendingSecondaryClaimsData, setPendingSecondaryClaimsData] = useState(
     []
   );
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const { handleSubmit, register, reset } = useForm();
   const onSubmit = (data) => {
     // console.log(data);
     reset();
@@ -36,10 +36,6 @@ const PendingSecondaryClaims = () => {
     console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
-  };
-
-  const clearFilters = () => {
-    setFilteredInfo({});
   };
 
   const columns = [
@@ -588,6 +584,9 @@ const PendingSecondaryClaims = () => {
       console.log(selected, selectedRows, changeRows);
     },
   };
+  const clearFilters = () => {
+    setFilteredInfo({});
+  };
 
   return (
     <div className={!pendingSecondaryClaimsData ? "h-[100vh]" : ""}>
@@ -614,17 +613,18 @@ const PendingSecondaryClaims = () => {
         </div>
         <div className=" overflow-scroll pt-3">
           <Table
-            rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
             size="small"
+            bordered
             className=" text-xs font-normal"
             columns={columns}
-            dataSource={pendingSecondaryClaimsData} //Which data chunk you want to show in table
+            dataSource={pendingSecondaryClaimsData}
             rowSelection={{
               ...rowSelection,
             }}
             scroll={{
-              y: 750,
+              y: 650,
             }}
             onChange={handleChange}
           />
