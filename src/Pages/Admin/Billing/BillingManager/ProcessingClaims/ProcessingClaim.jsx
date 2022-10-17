@@ -300,7 +300,7 @@ const ProcessingClaim = () => {
   };
   //end outside click
   return (
-    <div className={!tableopen ? "h-[100vh]" : ""}>
+    <div className={!tableOpen ? "h-[100vh]" : ""}>
       <h1 className="text-lg text-orange-400">Processing Claim(s)</h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
