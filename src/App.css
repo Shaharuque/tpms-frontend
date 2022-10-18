@@ -79,3 +79,34 @@ main {
 input[type='checkbox'] {
   accent-color: teal;
 }
+
+/* ----------------------------------------------re-used custom classes ----------------------------- */
+
+.pms-button {
+  padding-left: 11px;
+  padding-right: 8px;
+  padding-top: 7px;
+  padding-bottom: 4px;
+  font-family: 'Roboto',
+    sans-serif;
+  font-size: 12px;
+  line-height: 17.6px !important;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  word-spacing: 0.2px;
+  background-color: #0aa7b8;
+  background-clip: border-box;
+  color: rgb(255, 255, 255);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 2px 2px 2px 0px #626d6e;
+  display: inline-block;
+  transition: ease-in-out 0.3s;
+}
+
+.pms-button:hover {
+  background-image: linear-gradient(141deg, #02818F 0%, #0aa7b8 100%);
+
+}
