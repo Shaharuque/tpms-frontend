@@ -140,7 +140,7 @@ import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
 import UnBillableTimeSheet from "./Pages/Admin/Settings/Settings/UnBillableTimesheet/UnBillableTimeSheet";
 import AddServiceSubTypeTab from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType/AddServiceSubTypeTab";
 import CptCodeExclusion from "./Pages/Admin/Settings/Settings/CptCodeExclusion/CptCodeExclusion";
-import FormTemplate1 from "./Pages/Admin/Forms/FormTemplate1";
+import FormTemplate1 from "./Pages/Admin/FormsTemplate/FormTemplate1";
 
 function App() {
   const handle = useFullScreenHandle();
