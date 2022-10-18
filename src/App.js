@@ -140,6 +140,7 @@ import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
 import UnBillableTimeSheet from "./Pages/Admin/Settings/Settings/UnBillableTimesheet/UnBillableTimeSheet";
 import AddServiceSubTypeTab from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType/AddServiceSubTypeTab";
 import CptCodeExclusion from "./Pages/Admin/Settings/Settings/CptCodeExclusion/CptCodeExclusion";
+import FormTemplate1 from "./Pages/Admin/Forms/FormTemplate1";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -149,6 +150,10 @@ function App() {
         <Routes>
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
           <Route
             path="/forget-password"
             element={<ForgetPassword></ForgetPassword>}

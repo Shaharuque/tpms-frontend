@@ -1,0 +1,765 @@
+import TextArea from "antd/lib/input/TextArea";
+import React, { useState, useRef } from "react";
+import Popup from "reactjs-popup";
+import SignaturePad from "react-signature-canvas";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import logo from "../../Assets/logo4.png";
+import "../../Style/form.css";
+
+const FormTemplate1 = () => {
+  const [imageURL, setImageURL] = useState(null); // create a state that will contain our image url
+
+  const sigCanvas = useRef({});
+
+  console.log(imageURL);
+  /* a function that uses the canvas ref to clear the canvas 
+  via a method given by react-signature-canvas */
+  const clear = () => sigCanvas.current.clear();
+
+  /* a function that uses the canvas ref to trim the canvas 
+  from white spaces via a method given by react-signature-canvas
+  then saves it in our state */
+  const save = () =>
+    setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
+
+  const { register, handleSubmit } = useForm();
+  const [notes, setNotes] = useState("");
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  return (
+    <div className="form-border 2xl:w-[70%] w-full mx-auto p-5">
+      <div>
+        <div className="flex items-center flex-wrap gap-3 justify-between">
+          <img src={logo} alt="" />
+          <div className="text-[16px] sm:mr-10 mr-0 ml-10 sm:ml-0">
+            <p className="my-1">
+              <span className="form-head">Mail: </span>demo@example.com
+            </p>
+            <p className="my-1">
+              <Link to={"#"}>
+                <span className="form-head">Email: </span>demo@example.com
+              </Link>
+            </p>
+            <p className="my-1">
+              <span className="form-head">Phone: </span> 000-000-0000
+            </p>
+            <p className="my-1">
+              <Link to={"#"}>
+                <span className="form-head">Fax: </span>000.000.0000
+              </Link>
+            </p>
+          </div>
+        </div>
+        <div className="form-title mb-5">
+          <h2>Supervision Form</h2>
+          <h1>SUPERVISION: REGISTERED BEHAVIOR TECHNICIAN</h1>
+          <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
+        </div>
+      </div>
+
+      {/* form heading part  */}
+
+      <div className="my-3">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <h1 className="form-inner-head my-4">Client Information:</h1>
+            <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
+              <div className=" form-input-border">
+                <div className="flex items-center">
+                  <span className="form-input-name ">Client Name:</span>
+
+                  <input
+                    type="text"
+                    name="client_name"
+                    className=" input-font focus:outline-none"
+                    {...register("client_name")}
+                  />
+                </div>
+              </div>
+              <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
+                <div className="form-input-border-date">
+                  <div className="flex items-center">
+                    <span className="form-input-name ">DOB:</span>
+
+                    <input
+                      type="date"
+                      name="dob"
+                      className=" input-font focus:outline-none"
+                      {...register("dob")}
+                    />
+                  </div>
+                </div>
+                <div className="form-input-border">
+                  <div className="flex items-center">
+                    <span className="form-input-name ">Age:</span>
+
+                    <input
+                      type="number"
+                      name="age"
+                      className=" input-font focus:outline-none"
+                      {...register("age")}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="form-input-border  ">
+                <div className="flex items-center">
+                  <span className="form-input-name ">Claims Diagnosis:</span>
+
+                  <input
+                    type="text"
+                    name="Diagnosis"
+                    className=" input-font focus:outline-none"
+                    {...register("Diagnosis")}
+                  />
+                </div>
+              </div>
+              <div className="form-input-border  ">
+                <div className="flex items-center">
+                  <span className="form-input-name ">Insured Id:</span>
+
+                  <input
+                    type="text"
+                    name="Insured"
+                    className=" input-font focus:outline-none"
+                    {...register("Insured")}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h1 className="form-inner-head my-4">
+              SUPERVISOR/SUPERVISEE INFORMATION:
+            </h1>
+            <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
+              <div className=" form-input-border">
+                <div className="flex items-center flex-wrap">
+                  <span className="form-input-name ">
+                    Supervisor's Name (BCBA/BCaBA):
+                  </span>
+
+                  <input
+                    type="text"
+                    name="client_name"
+                    className=" input-font focus:outline-none"
+                    {...register("client_name")}
+                  />
+                </div>
+              </div>
+              <div className="form-input-border  ">
+                <div className="flex items-center flex-wrap">
+                  <span className="form-input-name ">
+                    Registered Behavior Technician's Name:
+                  </span>
+
+                  <input
+                    type="text"
+                    name="Diagnosis"
+                    className=" input-font focus:outline-none"
+                    {...register("Diagnosis")}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h1 className="form-inner-head my-4">SUPERVISED SESSION DATE:</h1>
+            <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-3 2xl:grid-cols-3 ">
+              <div className="form-input-border-date">
+                <div className="flex items-center">
+                  <span className="form-input-name ">Session Date:</span>
+
+                  <input
+                    type="date"
+                    name="session_date"
+                    className=" input-font focus:outline-none"
+                    {...register("session_date")}
+                  />
+                </div>
+              </div>
+              <div className="form-input-border-date">
+                <div className="flex items-center">
+                  <span className="form-input-name ">Start Time:</span>
+
+                  <input
+                    type="time"
+                    name="time"
+                    className=" input-font focus:outline-none"
+                    {...register("time")}
+                  />
+                </div>
+              </div>
+              <div className="form-input-border-date">
+                <div className="flex items-center">
+                  <span className="form-input-name ">End Time:</span>
+
+                  <input
+                    type="time"
+                    name="end_time"
+                    className=" input-font focus:outline-none"
+                    {...register("end_time")}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h1 className="form-inner-head my-4">SUPERVISION PROVIDED</h1>
+            <div className="flex items-center">
+              <div className="flex ml-1 mt-1 items-center">
+                <input
+                  type="radio"
+                  name="patient"
+                  onClick={() => {
+                    // setValue(!value);
+                  }}
+                />
+                <span className="text-lg ml-1 text-gray-600 font-bold">
+                  In Person
+                </span>
+              </div>
+              <div className="flex ml-1 mt-1 items-center">
+                <input
+                  type="radio"
+                  name="patient"
+                  onClick={() => {
+                    // setValue(!value);
+                  }}
+                />
+                <span className="text-lg ml-1 text-gray-600 font-bold">
+                  Remote
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <h2 className="form-head flex items-center justify-center my-3">
+            RBT® TASK LIST ITEMS
+          </h2>
+
+          <div>
+            <>
+              <h1 className="text-rose-600 text-lg font-medium my-3">
+                Measurement
+              </h1>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input type="checkbox" name="a_1" className="mr-2" />
+                  A-1 Prepare for data collection
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input type="checkbox" name="a_2" className="mr-2" />
+                  A-2 Implement continuous measurement procedures (e.g.,
+                  frequency, duration)
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input type="checkbox" name="a_3" className="mr-2" />
+                  A-3 Implement discontinuous measurement procedures (e.g.,
+                  partial & whole interval, momentary time sampling)
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input type="checkbox" name="a_4" className="mr-2" />
+                  A-4 Implement permanent-product recording procedures
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input type="checkbox" name="a_5" className="mr-2" />
+                  A-5 Enter data and update graphs
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input type="checkbox" name="a_6" className="mr-2" />
+                  A-6 Describe behavior and environment in observable and
+                  measurable terms
+                </label>
+              </div>
+            </>
+            <>
+              <h1 className="text-rose-600 text-lg font-medium my-3">
+                Assessment
+              </h1>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="b_1"
+                  />
+                  B-1 Conduct preference assessments
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="b_2"
+                  />
+                  B-2 Assist with individualized assessment procedures (e.g.,
+                  curriculum-based, developmental, social skills)
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="b_3"
+                  />
+                  B-3 Assist with functional assessment procedures
+                </label>
+              </div>
+            </>
+            <>
+              <h1 className="text-rose-600 text-lg font-medium my-3">
+                Skill Acquisition
+              </h1>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_1"
+                  />
+                  C-1 Identify the essential components of a written skill
+                  acquisition plan
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_2"
+                  />
+                  C-2 Prepare for the session as required by the skill
+                  acquisition plan
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_3"
+                  />
+                  C-3 Use contingencies of reinforcement (e.g.,
+                  conditioned/unconditioned reinforcement,
+                  continuous/intermittent schedules).
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_4"
+                  />
+                  C-4 Implement discrete-trial teaching procedures
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_4"
+                  />
+                  C-5 Implement naturalistic teaching procedures (e.g.,
+                  incidental teaching)
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_6"
+                  />
+                  C-6 Implement task analyzed chaining procedures.
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_7"
+                  />
+                  C-7 Implement discrimination training
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_8"
+                  />
+                  C-8 Implement stimulus control transfer procedures
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_9"
+                  />
+                  C-9 Implement prompt and prompt fading procedures
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_10"
+                  />
+                  C-10 Implement generalization and maintenance procedures
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_11"
+                  />
+                  C-11 Implement shaping procedures
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="c_12"
+                  />
+                  C-12 Implement token economy procedures
+                </label>
+              </div>
+            </>
+            <>
+              <h1 className="text-rose-600 text-lg font-medium my-3">
+                Behavior Reduction
+              </h1>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="d_1"
+                  />
+                  D-1 Identify essential components of a written behavior
+                  reduction plan
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="d_2"
+                  />
+                  D-2 Describe common functions of behavior
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="d_3"
+                  />
+                  D-3 Implement interventions based on modification of
+                  antecedents such as motivating operations and discriminative
+                  stimuli
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="d_4"
+                  />
+                  D-4 Implement differential reinforcement procedures (e.g.,
+                  DRA, DRO).
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="d_5"
+                  />
+                  D-5 Implement extinction procedures
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="d_6"
+                  />
+                  D-6 Implement crisis/emergency procedures according to
+                  protocol
+                </label>
+              </div>
+            </>
+            <>
+              <h1 className="text-rose-600 text-lg font-medium my-3">
+                E-Documentation and Reporting
+              </h1>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="e_1"
+                  />
+                  E-1 Effectively communicate with a supervisor in an ongoing
+                  manner
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="e_2"
+                  />
+                  E-2 Actively seek clinical direction from supervisor in a
+                  timely manner
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="e_3"
+                  />
+                  E-3 Report other variables that might affect the client in a
+                  timely manner
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="e_4"
+                  />
+                  E-4 Generate objective session notes for service verification
+                  by describing what occurred during the sessions, in accordance
+                  with applicable legal, regulatory, and workplace requirements.
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="e_5"
+                  />
+                  E-5 Comply with applicable legal, regulatory, and workplace
+                  data collection, storage, transportation, and documentation
+                  requirements
+                </label>
+              </div>
+            </>
+            <>
+              <h1 className="text-rose-600 text-lg font-medium my-3">
+                Professional Conduct and Scope of Practice
+              </h1>
+
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="f_1"
+                  />
+                  F-1 Describe the BACB’s RBT supervision requirements and the
+                  role of RBTs in the service-delivery system.
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="f_2"
+                  />
+                  F-2 Respond appropriately to feedback and maintain or improve
+                  performance accordingly
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="f_3"
+                  />
+                  F-3 Communicate with stakeholders (e.g., family, caregivers,
+                  other professionals) as authorized
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="f_4"
+                  />
+                  F-4 Maintain professional boundaries (e.g., avoid dual
+                  relationships, conflicts of interest, social media contacts).
+                </label>
+              </div>
+              <div className="form-check text-[17px] my-1">
+                <label className="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    className="mr-3"
+                    name="f_5"
+                  />
+                  F-5 Maintain client dignity
+                </label>
+              </div>
+            </>
+          </div>
+
+          <div>
+            <h1 className="form-inner-head my-4">SUPERVISION OVERVIEW:</h1>
+
+            <div className="mt-3">
+              <TextArea
+                onChange={(e) => setNotes(e.target.value)}
+                maxLength={2}
+                rows={5}
+                placeholder=" Notes"
+                size="large"
+                className=""
+              />
+            </div>
+          </div>
+          <div>
+            <h1 className="form-inner-head my-4">FEEDBACK TO SUPERVISOR:</h1>
+
+            <div className="mt-3">
+              <TextArea
+                onChange={(e) => setNotes(e.target.value)}
+                maxLength={2}
+                rows={5}
+                placeholder=" Notes"
+                size="large"
+                className=""
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <h1>Signature Pad Example</h1>
+        <Popup
+          modal
+          trigger={<button>Open Signature Pad</button>}
+          closeOnDocumentClick={false}
+        >
+          {(close) => (
+            <>
+              <SignaturePad
+                ref={sigCanvas}
+                canvasProps={{
+                  className: "signatureCanvas",
+                }}
+              />
+              {/* Button to trigger save canvas image */}
+              <button onClick={save}>Save</button>
+              <button onClick={clear}>Clear</button>
+              <button onClick={close}>Close</button>
+            </>
+          )}
+        </Popup>
+        <br />
+        <br />
+        {/* if our we have a non-null image url we should 
+      show an image and pass our imageURL state to it*/}
+        {imageURL ? (
+          <img
+            src={imageURL}
+            alt="my signature"
+            style={{
+              display: "block",
+              margin: "0 auto",
+              border: "1px solid black",
+              width: "150px",
+            }}
+          />
+        ) : null}
+      </div>
+
+      <div className="flex items-center justify-between form-footer">
+        <div className="text-black">
+          Demo Institution{" "}
+          <span className=" font-normal">somewhere in america</span>
+        </div>
+        <div>
+          Phone: 000-000-0000, Email: demo@example.com, Fax: 000.000.0000,
+          example.com
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FormTemplate1;
