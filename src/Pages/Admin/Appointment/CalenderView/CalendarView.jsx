@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ProcessedEvent,
   Scheduler,
@@ -9,15 +9,19 @@ import { Button } from "@mui/material";
 import CustomEditor from "./CustomEditor";
 
 const CalendarView = () => {
+  const [data, setData] = useState([]);
   const fetchRemote = async (query) => {
     console.log("Query: ", query);
     /**Simulate fetchin remote data */
     return new Promise((res) => {
       setTimeout(() => {
+        setData(EVENTS);
         res(EVENTS);
       }, 3000);
     });
   };
+
+  console.log(data);
   const handleConfirm = async (event, action) => {
     console.log(event, action);
     if (action === "edit") {
@@ -54,15 +58,23 @@ const CalendarView = () => {
     });
   };
   return (
-    <div className="h-[100vh]">
+    <div>
       <Scheduler
         // events={EVENTS}
         remoteEvents={fetchRemote}
         view="month"
-        deletable={false}
+        dialogMaxWidth="lg"
         customEditor={(scheduler) => <CustomEditor scheduler={scheduler} />}
-        onConfirm={handleConfirm}
-        onDelete={handleDelete}
+        // viewerExtraComponent={(fields, event) => {
+        //   return (
+        //     <div>
+        //       <p>Useful to render custom fields...</p>
+        //       <p>Description: {event.description || "Nothing..."}</p>
+        //     </div>
+        //   );
+        // }}
+        // onConfirm={handleConfirm}
+        // onDelete={handleDelete}
         // fields={[
         //   {
         //     name: "user_id",

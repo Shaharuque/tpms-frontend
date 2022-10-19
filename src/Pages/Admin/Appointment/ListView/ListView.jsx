@@ -762,10 +762,7 @@ const ListView = () => {
             )}
           </div>
           {/* Multi date picker component called */}
-          <div
-            ref={refClose}
-            className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
-          >
+          <div ref={refClose} className="absolute z-10 lg:ml-[25%]  shadow-xl">
             {open && (
               <CustomDateRange
                 range={range}

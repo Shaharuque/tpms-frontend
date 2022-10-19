@@ -10,6 +10,7 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           editableDateInputs={true}
           moveRangeOnFirstSelection={false}
           ranges={range}
+          rangeColors={[]}
           months={2}
           direction="horizontal"
           className="border-2 border-gray-100"
