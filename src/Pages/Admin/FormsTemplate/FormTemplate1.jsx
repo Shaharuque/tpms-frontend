@@ -652,35 +652,6 @@ const FormTemplate1 = () => {
               </div>
             </>
           </div>
-
-          <div>
-            <h1 className="form-inner-head my-4">SUPERVISION OVERVIEW:</h1>
-
-            <div className="mt-3">
-              <TextArea
-                onChange={(e) => setNotes(e.target.value)}
-                maxLength={300}
-                rows={5}
-                placeholder=" Notes"
-                size="large"
-                className=""
-              />
-            </div>
-          </div>
-          <div>
-            <h1 className="form-inner-head my-4">FEEDBACK TO SUPERVISOR:</h1>
-
-            <div className="mt-3">
-              <TextArea
-                onChange={(e) => setNotes(e.target.value)}
-                maxLength={300}
-                rows={5}
-                placeholder=" Notes"
-                size="large"
-                className=""
-              />
-            </div>
-          </div>
         </form>
       </div>
 

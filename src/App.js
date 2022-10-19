@@ -142,6 +142,8 @@ import AddServiceSubTypeTab from "./Pages/Admin/Settings/Settings/AddServiceSubT
 import CptCodeExclusion from "./Pages/Admin/Settings/Settings/CptCodeExclusion/CptCodeExclusion";
 import FormTemplate1 from "./Pages/Admin/FormsTemplate/FormTemplate1";
 import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
+import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
+import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -159,6 +161,14 @@ function App() {
           <Route
             path="/form-direct-service"
             element={<DirectService></DirectService>}
+          ></Route>
+          <Route
+            path="/Parent-training-session"
+            element={<ParentTrainingSession></ParentTrainingSession>}
+          ></Route>
+          <Route
+            path="/BCBA-trainee"
+            element={<BCBATrainee></BCBATrainee>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route

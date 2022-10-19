@@ -15,6 +15,16 @@ const FormsBuilder = () => {
           DIRECT-SERVICE PARENT TRAINING NOTE
         </button>
       </Link>
+      <div className="my-2"></div>
+      <Link to={"/Parent-training-session"}>
+        <button className="pms-button">PARENT TRAINING SESSION NOTE</button>
+      </Link>
+      <div className="my-2"></div>
+      <Link to={"/BCBA-trainee"}>
+        <button className="pms-button">
+          BCBA TRAINEE SUPERVISION MONTHLY FORM
+        </button>
+      </Link>
     </div>
   );
 };
