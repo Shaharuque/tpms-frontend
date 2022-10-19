@@ -7,6 +7,7 @@ import { FiDownload } from "react-icons/fi";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { MultiSelect } from "react-multi-select-component";
 import { Link } from "react-router-dom";
+import GlobalMultiSelect from "../../../Shared/CustomComponents/GlobalMultiSelect";
 
 const options = [
   { label: "Ashu Soni", value: "Ashu Soni" },
@@ -51,6 +52,10 @@ const Timesheet = () => {
       });
   }, []);
   console.log(TimeSheetData);
+
+  const inputHandle = (e) => {
+    console.log(e.target.value);
+  };
 
   // ---------------------------------Table Data-------------------------
   const handleChange = (pagination, filters, sorter) => {
@@ -441,11 +446,14 @@ const Timesheet = () => {
       render: (_, { miles, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div className="flex justify-center">
+          <div>
             <input
+              name="cms"
               defaultValue={miles}
-              className="w-[60px] h-[28px] text-center border border-[#ced4da] focus:border-secondary"
-            />
+              className="page py-[3px] text-center focus:outline-none"
+              onChange={inputHandle}
+              type="text"
+            ></input>
           </div>
         );
       },
@@ -547,13 +555,19 @@ const Timesheet = () => {
               onChange={() => setActive(true)}
             >
               <option value="name"> Select Payroll Period(s) </option>
-              <option value="01/03/2022"> 01/03/2022 - 01/31/2022 </option>
-              <option value="02/01/2022"> 02/01/2022 - 02/28/2022 </option>
-              <option value="03/07/2022"> 03/07/2022 - 03/31/2022 </option>
-              <option value="05/02/2022"> 05/02/2022 - 05/31/2022 </option>
-              <option value="06/06/2022"> 06/06/2022 - 06/30/2022 </option>
-              <option value="07/04/2022"> 07/04/2022 - 07/31/2022 </option>
-              <option value="02/01/2022"> 02/01/2022 - 02/28/2022 </option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
+              <option value="01-12-2021">01/12/2021-07/12/2021</option>
             </select>
           </div>
 
@@ -566,16 +580,8 @@ const Timesheet = () => {
                   </span>
                 </label>
                 <>
-                  <div className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none">
-                    <div>
-                      <MultiSelect
-                        options={options}
-                        value={selected}
-                        onChange={setSelected}
-                        labelledBy="Select"
-                        valueRenderer={customValueRenderer}
-                      />
-                    </div>
+                  <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1">
+                    <GlobalMultiSelect />
                   </div>
                 </>
               </div>

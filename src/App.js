@@ -140,6 +140,8 @@ import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
 import UnBillableTimeSheet from "./Pages/Admin/Settings/Settings/UnBillableTimesheet/UnBillableTimeSheet";
 import AddServiceSubTypeTab from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType/AddServiceSubTypeTab";
 import CptCodeExclusion from "./Pages/Admin/Settings/Settings/CptCodeExclusion/CptCodeExclusion";
+import FormTemplate1 from "./Pages/Admin/FormsTemplate/FormTemplate1";
+import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -149,6 +151,16 @@ function App() {
         <Routes>
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
+          {/* ------------------------form--------------------------- */}
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
+          <Route
+            path="/form-direct-service"
+            element={<DirectService></DirectService>}
+          ></Route>
+          {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
             element={<ForgetPassword></ForgetPassword>}
