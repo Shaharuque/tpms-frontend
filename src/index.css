@@ -244,6 +244,7 @@ code {
 
 .rdrDefinedRangesWrapper {
   width: 100% !important;
+  padding-top: 50px !important;
 }
 
 .rdrDayNumber,
@@ -254,13 +255,13 @@ code {
 
 .rdrWeekDay {
   color: #000 !important;
-  font-size: 16px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
 }
 
 .rdrDayNumber,
 .rdrMonthAndYearPicker>select {
-  font-size: 14px !important;
+  font-size: 12px !important;
   font-weight: 500 !important;
 }
 
@@ -272,24 +273,62 @@ code {
 .rdrMonthName,
 .rdrMonthPicker,
 .rdrYearPicker {
-  font-size: 16px !important;
+  font-size: 14px !important;
 }
 
 .rdrStaticRangeLabel {
-  font-size: 16px !important;
+  font-size: 14px !important;
+  padding: 5px 10px !important;
+}
+
+.rdrMonth{
+  padding: 0 4px 0 8px !important;
+  width: 250px !important;
 }
 
 .width-fix {
   min-width: 100%
 }
 
-@media only screen and (max-width:450px) {
+@media only screen and (max-width:465px) {
   .rdrMonthAndYearPickers {
-    flex-direction: column !important;
+    /* flex-direction: column !important; */
   }
 
   .rdrWeekDay {
     font-size: 12px !important;
+  }
+
+  .rdrMonth {
+    padding: 0px !important;
+    width: 200px !important;
+  }
+
+  .rdrDateRangePickerWrapper,
+  .range-date-ok {
+    width: 90% !important;
+  }
+
+  .rdrNextPrevButton{
+    width: 15px !important;
+    margin: 0px !important;
+  }
+
+  .rdrMonthAndYearPickers select{
+    padding: 10px 20px 10px 0px !important;
+  }
+}
+
+@media only screen and (max-width:639px) {
+  .rdrMonths {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+
+  .rdrDateRangePickerWrapper,
+  .range-date-ok {
+    width: 80% !important;
   }
 }
 
@@ -302,21 +341,24 @@ code {
     flex-direction: row !important;
   }
 
-  .rdrDateRangePickerWrapper,
-  .rdrMonth,
+  /* .rdrDateRangePickerWrapper,
   .range-date-ok {
     width: 80% !important;
+  } */
+
+  .rdrMonth {
+    padding: 0px 2px !important;
   }
 
   .rdrMonthAndYearPickers {
     margin: 0 auto !important;
   }
 
-  .rdrMonths {
+  /* .rdrMonths {
     flex-direction: column !important;
     flex-wrap: wrap !important;
     align-items: center !important;
-  }
+  } */
 
   .rdrDateRangePickerWrapper {
     flex-direction: column-reverse;
@@ -336,6 +378,11 @@ code {
 
   .rdrStaticRanges {
     flex-direction: row !important;
+  }
+
+  .rdrDefinedRangesWrapper {
+    width: 100% !important;
+    padding-top: 0px !important;
   }
 }
 

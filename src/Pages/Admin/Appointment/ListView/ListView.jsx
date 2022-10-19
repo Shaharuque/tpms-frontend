@@ -11,7 +11,6 @@ import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import { BiSearchAlt } from "react-icons/bi";
 import ManageTableAction from "./ListView/ManageTableAction";
-import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
@@ -28,7 +27,7 @@ const ListView = () => {
   const [value, setValue] = useState([]);
 
   //Date Range Picker
-  const [open, setOpen] = useState(false);
+  const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -45,7 +44,7 @@ const ListView = () => {
         key: "selection",
       },
     ]);
-    setOpen(false);
+    setOpenCalendar(false);
   };
 
   // date range picker calendar
@@ -84,7 +83,7 @@ const ListView = () => {
   // Hide dropdown on outside click
   const hideOnClickOutside = (e) => {
     if (refClose.current && !refClose.current.contains(e.target)) {
-      setOpen(false);
+      setOpenCalendar(false);
     }
   };
   //end outside click
@@ -607,8 +606,8 @@ const ListView = () => {
                       </div>
                     </div>
                   </div>
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-7 gap-5 mb-2">
+                  <form onSubmit={handleSubmit(onSubmit)} className="relative">
+                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-5 mb-2">
                       {billable && (
                         <div>
                           <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
@@ -679,7 +678,7 @@ const ListView = () => {
                             {/* Date Range calender will be set here */}
                             <div className="ml-1">
                               <div
-                                onClick={() => setOpen(true)}
+                                onClick={() => setOpenCalendar(true)}
                                 className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
                               >
                                 <input
@@ -701,6 +700,7 @@ const ListView = () => {
                                   }
                                   readOnly
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                  {...register("end_date")}
                                 />
                               </div>
                             </div>
@@ -764,14 +764,14 @@ const ListView = () => {
           {/* Multi date picker component called */}
           <div
             ref={refClose}
-            className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
+            className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%] shadow-xl"
           >
-            {open && (
+            {openCalendar && (
               <CustomDateRange
                 range={range}
                 setRange={setRange}
                 handleCancelDate={handleCancelDate}
-                setOpen={setOpen}
+                setOpen={setOpenCalendar}
               ></CustomDateRange>
             )}
           </div>
