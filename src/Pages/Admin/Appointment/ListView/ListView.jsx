@@ -27,6 +27,24 @@ const ListView = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [value, setValue] = useState([]);
 
+  // Testing purpose->Implementing encrypt and decrypt formula for securing token
+  let CryptoJS = require("crypto-js");
+  let data = "0185543477";
+  // Encrypt
+  var ciphertext = CryptoJS.AES.encrypt(
+    JSON.stringify(data),
+    "my-secret-key@123"
+  ).toString();
+  console.log(ciphertext);
+  localStorage.setItem("secret", ciphertext);
+  const gatheredData = localStorage.getItem("secret");
+  console.log(gatheredData);
+
+  // Decrypt
+  var bytes = CryptoJS.AES.decrypt(ciphertext, "my-secret-key@123");
+  var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  console.log("decrypted data:", decryptedData);
+
   //Date Range Picker
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([

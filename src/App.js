@@ -151,16 +151,6 @@ function App() {
         <Routes>
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
-          {/* ------------------------form--------------------------- */}
-          <Route
-            path="/form-template"
-            element={<FormTemplate1></FormTemplate1>}
-          ></Route>
-          <Route
-            path="/form-direct-service"
-            element={<DirectService></DirectService>}
-          ></Route>
-          {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
             element={<ForgetPassword></ForgetPassword>}
@@ -173,6 +163,17 @@ function App() {
             path="/new-password"
             element={<NewPassSet></NewPassSet>}
           ></Route>
+
+          {/* ------------------------form--------------------------- */}
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
+          <Route
+            path="/form-direct-service"
+            element={<DirectService></DirectService>}
+          ></Route>
+          {/* ------------------------form End--------------------------- */}
 
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
