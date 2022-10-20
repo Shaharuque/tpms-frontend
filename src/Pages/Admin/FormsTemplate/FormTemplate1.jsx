@@ -34,6 +34,7 @@ const FormTemplate1 = () => {
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
     console.log(data);
+    console.log(notes);
   };
   return (
     <div className="form-border 2xl:w-[70%] w-full mx-auto p-5">
@@ -653,6 +654,34 @@ const FormTemplate1 = () => {
             </>
           </div>
         </form>
+      </div>
+      <div>
+        <h1 className="form-inner-head mt-4">SUPERVISION OVERVIEW:</h1>
+
+        <div className="mt-3">
+          <TextArea
+            onChange={(e) => setNotes(e.target.value)}
+            maxLength={300}
+            rows={5}
+            placeholder=" Notes"
+            size="large"
+            className=""
+          />
+        </div>
+      </div>
+      <div>
+        <h1 className="form-inner-head mt-4">FEEDBACK TO SUPERVISOR:</h1>
+
+        <div className="mt-3">
+          <TextArea
+            onChange={(e) => setNotes(e.target.value)}
+            maxLength={300}
+            rows={5}
+            placeholder=" Notes"
+            size="large"
+            className=""
+          />
+        </div>
       </div>
 
       <div>

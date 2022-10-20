@@ -25,6 +25,10 @@ const FormsBuilder = () => {
           BCBA TRAINEE SUPERVISION MONTHLY FORM
         </button>
       </Link>
+      <div className="my-2"></div>
+      <Link to={"/private-client"}>
+        <button className="pms-button">PRIVATE CLIENT INTAKE FORM</button>
+      </Link>
     </div>
   );
 };

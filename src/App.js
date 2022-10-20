@@ -144,6 +144,7 @@ import FormTemplate1 from "./Pages/Admin/FormsTemplate/FormTemplate1";
 import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
 import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
 import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
+import PrivateClient from "./Pages/Admin/FormsTemplate/PrivateClient";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -169,6 +170,10 @@ function App() {
           <Route
             path="/BCBA-trainee"
             element={<BCBATrainee></BCBATrainee>}
+          ></Route>
+          <Route
+            path="/private-client"
+            element={<PrivateClient></PrivateClient>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
