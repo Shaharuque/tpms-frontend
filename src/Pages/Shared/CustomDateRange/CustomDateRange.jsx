@@ -10,9 +10,10 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           editableDateInputs={true}
           moveRangeOnFirstSelection={false}
           ranges={range}
+          rangeColors={["#0AA1B2"]}
           months={2}
           direction="horizontal"
-          className="border-2 border-gray-100"
+          className="border-x-2 border-gray-100"
         />
       </div>
       <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
