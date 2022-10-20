@@ -30,11 +30,11 @@ const Events = [
     color: "purple",
   },
 ];
-const CalenderView = () => {
+const FullCalenderTest = () => {
   return (
     <div>
       <FullCalendar
-        initialView="dayGridMonth"
+        initialView="timeGridWeek"
         headerToolbar={{
           left: "prev,next today",
           center: "title",
@@ -47,4 +47,4 @@ const CalenderView = () => {
   );
 };
 
-export default CalenderView;
+export default FullCalenderTest;
