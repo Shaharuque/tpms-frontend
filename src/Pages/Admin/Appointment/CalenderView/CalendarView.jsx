@@ -53,51 +53,7 @@ const CalendarView = () => {
       }, 3000);
     });
   };
-  return (
-    <div className="h-[100vh]">
-      <Scheduler
-        // events={EVENTS}
-        remoteEvents={fetchRemote}
-        view="month"
-        deletable={false}
-        customEditor={(scheduler) => <CustomEditor scheduler={scheduler} />}
-        onConfirm={handleConfirm}
-        onDelete={handleDelete}
-        // fields={[
-        //   {
-        //     name: "user_id",
-        //     type: "select",
-        //     // Should provide options with type:"select"
-        //     options: [
-        //       { id: 1, text: "John", value: 1 },
-        //       { id: 2, text: "Mark", value: 2 },
-        //     ],
-        //     config: {
-        //       label: "User",
-        //       required: true,
-        //       errMsg: "Plz Select User",
-        //     },
-        //   },
-        //   {
-        //     name: "Description",
-        //     type: "input",
-        //     default: "Default Value...",
-        //     config: { label: "Details", multiline: true, rows: 4 },
-        //   },
-        //   {
-        //     name: "anotherdate",
-        //     type: "date",
-        //     config: {
-        //       label: "Other Date",
-        //       md: 6,
-        //       modalVariant: "dialog",
-        //       type: "datetime",
-        //     },
-        //   },
-        // ]}
-      />
-    </div>
-  );
+  return <div className="h-[100vh]"></div>;
 };
 
 export default CalendarView;
