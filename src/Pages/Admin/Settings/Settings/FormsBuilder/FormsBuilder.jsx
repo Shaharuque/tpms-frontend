@@ -29,6 +29,12 @@ const FormsBuilder = () => {
       <Link to={"/private-client"}>
         <button className="pms-button">PRIVATE CLIENT INTAKE FORM</button>
       </Link>
+      <div className="my-2"></div>
+      <Link to={"/outpatient-treatment-request"}>
+        <button className="pms-button">
+          OUTPATIENT TREATMENT REQUEST [OTR] FORM
+        </button>
+      </Link>
     </div>
   );
 };

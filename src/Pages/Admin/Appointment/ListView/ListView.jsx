@@ -764,9 +764,9 @@ const ListView = () => {
           {/* Multi date picker component called */}
           <div
             ref={refClose}
-            className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%] shadow-xl"
+            className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
           >
-            {openCalendar && ( 
+            {openCalendar && (
               <CustomDateRange
                 range={range}
                 setRange={setRange}

@@ -57,7 +57,7 @@ import KPIReportsPatient from "./Pages/Admin/Dashboard/Dashboard/TrendingReports
 import PaymentDeposits from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposits";
 // ###### APPOINTMENT
 import ListView from "./Pages/Admin/Appointment/ListView/ListView";
-import CalendarView from "./Pages/Admin/Appointment/CalenderView/CalendarView";
+// import CalendarView from "./Pages/Admin/Appointment/CalenderView/CalendarView";
 import RecurringSession from "./Pages/Admin/Appointment/RecurringSession/RecurringSession";
 import RecurringSessionEdit from "./Pages/Admin/Appointment/RecurringSession/RecurringSession/RecurringSessionEdit";
 import ProvideEscalation from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/ProvideEscalation";
@@ -145,6 +145,7 @@ import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
 import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
 import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
 import PrivateClient from "./Pages/Admin/FormsTemplate/PrivateClient";
+import OutpatientTreatmentRequest from "./Pages/Admin/FormsTemplate/OutpatientTreatmentRequest";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -174,6 +175,10 @@ function App() {
           <Route
             path="/private-client"
             element={<PrivateClient></PrivateClient>}
+          ></Route>
+          <Route
+            path="/outpatient-treatment-request"
+            element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
@@ -383,10 +388,10 @@ function App() {
               path="session-manage"
               element={<ListView></ListView>}
             ></Route>
-            <Route
+            {/* <Route
               path="calender-view"
               element={<CalendarView></CalendarView>}
-            ></Route>
+            ></Route> */}
             <Route
               path="recurring-session"
               element={<RecurringSession></RecurringSession>}

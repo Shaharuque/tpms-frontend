@@ -3,7 +3,7 @@ import { DateRangePicker } from "react-date-range";
 
 const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
   return (
-    <div>
+    <div className="">
       <div>
         <DateRangePicker
           onChange={(item) => setRange([item.selection])}
@@ -13,10 +13,10 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           rangeColors={["#0AA1B2"]}
           months={2}
           direction="horizontal"
-          className="border-x-2 border-gray-100"
+          className="border-gray-600 shadow-xl"
         />
       </div>
-      <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+      <div className="text-right bg-[#26818F] rounded-b-sm range-date-ok py-0 shadow-xl">
         <button
           className="px-4 m-1 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
           type="submit"

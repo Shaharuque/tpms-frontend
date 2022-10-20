@@ -342,6 +342,7 @@ code {
   .rdrDefinedRangesWrapper {
     width: 100% !important;
     padding-top: 0px !important;
+    border-right: none !important;
   }
 }
 /*  End Date Range Calendar   */
