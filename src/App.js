@@ -189,6 +189,17 @@ function App() {
             element={<NewPassSet></NewPassSet>}
           ></Route>
 
+          {/* ------------------------form--------------------------- */}
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
+          <Route
+            path="/form-direct-service"
+            element={<DirectService></DirectService>}
+          ></Route>
+          {/* ------------------------form End--------------------------- */}
+
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
           <Route
