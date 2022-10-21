@@ -259,6 +259,9 @@ code {
 .rdrMonthAndYearWrapper {
   height: 30px !important;
 }
+.rdrDayToday .rdrDayNumber span:after{
+  background: #0AA1B2 !important;
+}
 .rdrMonthName,
 .rdrMonthPicker,
 .rdrYearPicker {
