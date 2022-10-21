@@ -57,7 +57,7 @@ import KPIReportsPatient from "./Pages/Admin/Dashboard/Dashboard/TrendingReports
 import PaymentDeposits from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposits";
 // ###### APPOINTMENT
 import ListView from "./Pages/Admin/Appointment/ListView/ListView";
-// import CalendarView from "./Pages/Admin/Appointment/CalenderView/CalendarView";
+import CalendarView from "./Pages/Admin/Appointment/CalenderView/CalendarView";
 import RecurringSession from "./Pages/Admin/Appointment/RecurringSession/RecurringSession";
 import RecurringSessionEdit from "./Pages/Admin/Appointment/RecurringSession/RecurringSession/RecurringSessionEdit";
 import ProvideEscalation from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/ProvideEscalation";
@@ -193,6 +193,17 @@ function App() {
             path="/new-password"
             element={<NewPassSet></NewPassSet>}
           ></Route>
+
+          {/* ------------------------form--------------------------- */}
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
+          <Route
+            path="/form-direct-service"
+            element={<DirectService></DirectService>}
+          ></Route>
+          {/* ------------------------form End--------------------------- */}
 
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
@@ -388,10 +399,10 @@ function App() {
               path="session-manage"
               element={<ListView></ListView>}
             ></Route>
-            {/* <Route
+            <Route
               path="calender-view"
               element={<CalendarView></CalendarView>}
-            ></Route> */}
+            ></Route>
             <Route
               path="recurring-session"
               element={<RecurringSession></RecurringSession>}
