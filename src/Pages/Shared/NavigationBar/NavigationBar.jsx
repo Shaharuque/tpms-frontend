@@ -39,7 +39,6 @@ const TestNaviBar = ({ handle }) => {
   };
   const handlePatient = () => {
     setPatientClicked(!patientClicked);
-    console.log("hi sdusdushdu");
   };
 
   const handleSignOut = () => {
@@ -53,7 +52,7 @@ const TestNaviBar = ({ handle }) => {
       transition={{ delay: 0.4 }}
       className=" relative shadow-md rounded-3xl mr-[22px]"
     >
-      <div className="flex items-center justify-between bg-white rounded-3xl  p-2">
+      <div className="flex items-center justify-between bg-white rounded-3xl p-2">
         <div
           className="flex justify-center items-center gap-2 md:gap-4  font-medium cursor-pointer font-[Poppins] 
       text-gray-800 ml-2"
@@ -73,7 +72,13 @@ const TestNaviBar = ({ handle }) => {
           onClick={() => setOpen(!open)}
           className="text-3xl absolute right-3 top-[10px] cursor-pointer lg:hidden"
         >
-          <p className="">{open ? <AiOutlineClose /> : <FaBars />}</p>
+          <div className="mt-1">
+            {open ? (
+              <AiOutlineClose className="text-xl bg-black text-white rounded" />
+            ) : (
+              <FaBars className="text-xl " />
+            )}
+          </div>
         </div>
 
         {/* resposive tab $ phone  */}
@@ -116,7 +121,7 @@ const TestNaviBar = ({ handle }) => {
                   className="dropdown-content menu p-2 shadow-md drop-box rounded-sm bg-white w-52"
                 >
                   <button
-                    onClick={handlePatient}
+                    onClick={() => handlePatient()}
                     className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
                   >
                     <AiOutlinePlusCircle className="text-lg font-semibold" />
@@ -125,22 +130,23 @@ const TestNaviBar = ({ handle }) => {
 
                   <button className="text-[14px] text-secondary border px-[15px] py-1  rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2">
                     <AiOutlinePlusSquare className="text-lg font-semibold" />
-                    <div onClick={handleAppointment}>Create Appointment</div>
+                    <div onClick={() => handleAppointment()}>
+                      Create Appointment
+                    </div>
                   </button>
                 </div>
               </div>
               {clicked && (
-                <div>
-                  <CreateAppointment
-                    handleClose={handleAppointment}
-                    clicked={clicked}
-                  ></CreateAppointment>
-                </div>
+                <CreateAppointment
+                  handleClose={handleAppointment}
+                  clicked={clicked}
+                ></CreateAppointment>
               )}
               {patientClicked && (
-                <div>
-                  <CreatePatient handleClose={handlePatient}></CreatePatient>
-                </div>
+                <CreatePatient
+                  handleClose={handlePatient}
+                  patientClicked={patientClicked}
+                ></CreatePatient>
               )}
             </div>
             {/* end */}
@@ -349,7 +355,10 @@ const TestNaviBar = ({ handle }) => {
             )}
             {patientClicked && (
               <div>
-                <CreatePatient handleClose={handlePatient}></CreatePatient>
+                <CreatePatient
+                  handleClose={handlePatient}
+                  patientClicked={patientClicked}
+                ></CreatePatient>
               </div>
             )}
           </div>
