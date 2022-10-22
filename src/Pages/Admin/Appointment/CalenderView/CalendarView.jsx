@@ -25,8 +25,9 @@ const Events = [
     // this object will be "parsed" into an Event Object
     title: "The Title2", // a property!
     start: "2022-10-15T12:30:00", // a property!
-    end: "2022-10-16T14:00:00", // a property! ** see important note below about 'end' **
+    end: "2022-10-15T14:00:00", // a property! ** see important note below about 'end' **
     color: "green",
+    display: "background-inverse",
   },
   {
     // this object will be "parsed" into an Event Object
@@ -34,6 +35,7 @@ const Events = [
     start: "2022-10-15T15:30:00", // a property!
     end: "2022-10-15T18:00:00",
     color: "purple",
+    display: "background-inverse",
   },
 ];
 const CalenderView = () => {
@@ -52,18 +54,51 @@ const CalenderView = () => {
   // if (isLoading) {
   //   return <Loading></Loading>;
   // }
+  // let set = 0;
+  // const handleEventClick = () => {
+  //   console.log(set++);
+  // };
+
+  const handleDateSelect = (selectInfo) => {
+    console.log(selectInfo);
+    let title = prompt("Enter a title: ");
+    let calendarApi = selectInfo.view.calendar;
+    console.log(calendarApi);
+    calendarApi.unselect(); // clear date selection
+
+    if (title) {
+      calendarApi.addEvent({
+        title,
+        backgroundInverse: "teal",
+        start: "2022-10-15T12:30:00",
+        end: "2022-10-15T12:30:00",
+        // allDay: selectInfo.allDay,
+      });
+    }
+  };
   return (
     <div>
-      <FullCalendar
-        initialView="dayGridMonth"
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        events={Events}
-      />
+      <div className="flex items-center flex-wrap justify-between pb-4">
+        <h1 className="text-lg my-2 text-orange-500">Manage Appointment</h1>
+        <div className="flex items-center gap-3">
+          <button>filter, cal and print Button Here</button>
+        </div>
+      </div>
+      <div className="border border-[#089bab] rounded-2xl p-2">
+        <FullCalendar
+          initialView="dayGridMonth"
+          headerToolbar={{
+            left: "prevYear,prev,next,nextYear today",
+            center: "title",
+            right: "timeGridDay,timeGridWeek,dayGridMonth",
+          }}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          events={Events}
+          editable={true}
+          selectable={true}
+          select={handleDateSelect}
+        />
+      </div>
     </div>
   );
 };
