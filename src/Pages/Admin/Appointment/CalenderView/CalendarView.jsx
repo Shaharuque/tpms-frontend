@@ -1,103 +1,140 @@
-import React from "react";
-import {
-  ProcessedEvent,
-  Scheduler,
-  SchedulerHelpers,
-} from "@aldabil/react-scheduler";
-import { EVENTS } from "./events";
-import { Button } from "@mui/material";
-import CustomEditor from "./CustomEditor";
+import React, { useState } from "react";
+import FullCalendar from "@fullcalendar/react"; // must go before plugins
+import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import "./custom.css";
 
-const CalendarView = () => {
-  const fetchRemote = async (query) => {
-    console.log("Query: ", query);
-    /**Simulate fetchin remote data */
-    return new Promise((res) => {
-      setTimeout(() => {
-        res(EVENTS);
-      }, 3000);
-    });
-  };
-  const handleConfirm = async (event, action) => {
-    console.log(event, action);
-    if (action === "edit") {
-      /** PUT event to remote DB */
-    } else if (action === "create") {
-      /**POST event to remote DB */
-      EVENTS.push(...EVENTS, event);
-    }
-    /**
-     * Make sure to return 4 mandatory fields:
-     * event_id: string|number
-     * title: string
-     * start: Date|string
-     * end: Date|string
-     * ....extra other fields depend on your custom fields/editor properties
-     */
-    // Simulate http request: return added/edited event
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        res({
-          ...event,
-          event_id: event.event_id || Math.random(),
-        });
-      }, 3000);
-    });
+import "@fullcalendar/daygrid/main.css";
+import "@fullcalendar/timegrid/main.css";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../../Loading/Loading";
+import CustomModal from "./CustomModal";
+import CreateAppointment from "../../../Shared/NavigationBar/AdditionFeatures/CreateAppointment";
+
+const Events = [
+  {
+    // this object will be "parsed" into an Event Object
+    title: "Mrs.Shanarun", // a property!
+    start: "2022-10-12T12:30:00",
+    end: "2022-10-12T13:30:00",
+    // date: new Date(),
+    color: "red",
+    display: "background-inverse",
+  },
+  {
+    // this object will be "parsed" into an Event Object
+    title: "The Title2", // a property!
+    start: "2022-10-15T12:30:00", // a property!
+    end: "2022-10-15T14:00:00", // a property! ** see important note below about 'end' **
+    color: "green",
+    display: "background-inverse",
+  },
+  {
+    // this object will be "parsed" into an Event Object
+    title: "The Title3", // a property!
+    start: "2022-10-15T15:30:00", // a property!
+    end: "2022-10-15T18:00:00",
+    color: "purple",
+    display: "background-inverse",
+  },
+  {
+    // this object will be "parsed" into an Event Object
+    title: "The Title56", // a property!
+    start: "2022-10-21T11:30:00", // a property!
+    end: "2022-10-21T18:00:00",
+    color: "teal",
+    display: "background-inverse",
+  },
+];
+const CalenderView = () => {
+  const events = [];
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  const handleDelete = async (deletedId) => {
-    // Simulate http request: return the deleted id
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        res(deletedId);
-      }, 3000);
-    });
+  const createEvent = (selectInfo) => {
+    console.log(selectInfo);
+    setOpen(!open);
+    // console.log(selectInfo?.startStr);
+    // // const event = {
+    // //   id: 1, // You must use a custom id generator
+    // //   title: "new Event",
+    // //   // start: startDate,
+    // //   // allDay: endDate ? endDate : true, // If there's no end date, the event will be all day of start date
+    // //   start: "2022-10-21T15:30:00", // a property!
+    // //   end: "2022-10-21T18:00:00",
+    // //   color: "black",
+    // //   display: "background-inverse",
+    // let title = prompt("Enter a title: ");
+    // let time1 = prompt("Enter time1: ");
+    // let time2 = prompt("Enter time2: ");
+    // let startDate = selectInfo?.startStr;
+    // let calendarApi = selectInfo.view.calendar;
+    // console.log(calendarApi);
+    // calendarApi.unselect(); // clear date selection
+
+    // if (title) {
+    //   calendarApi.addEvent({
+    //     title,
+    //     color: "teal",
+    //     display: "background-inverse",
+    //     start: startDate + time1,
+    //     end: startDate + time2,
+    //     //allDay: selectInfo.allDay,
+    //   });
+    // }
+
+    //Events.push(event);
   };
+  console.log(Events);
+  // const {
+  //   isLoading,
+  //   data: calenderEvents,
+  //   refetch,
+  // } = useQuery(["availbleEvents"], () =>
+  //   // heruko site boshbey
+  //   fetch("http://localhost:8800/api/hotels/", {
+  //     method: "GET",
+  //   }).then((res) => res.json())
+  // );
+  // console.log(calenderEvents);
+
+  // if (isLoading) {
+  //   return <Loading></Loading>;
+  // }
   return (
-    <div className="h-[100vh]">
-      <Scheduler
-        // events={EVENTS}
-        remoteEvents={fetchRemote}
-        view="month"
-        deletable={false}
-        customEditor={(scheduler) => <CustomEditor scheduler={scheduler} />}
-        onConfirm={handleConfirm}
-        onDelete={handleDelete}
-        // fields={[
-        //   {
-        //     name: "user_id",
-        //     type: "select",
-        //     // Should provide options with type:"select"
-        //     options: [
-        //       { id: 1, text: "John", value: 1 },
-        //       { id: 2, text: "Mark", value: 2 },
-        //     ],
-        //     config: {
-        //       label: "User",
-        //       required: true,
-        //       errMsg: "Plz Select User",
-        //     },
-        //   },
-        //   {
-        //     name: "Description",
-        //     type: "input",
-        //     default: "Default Value...",
-        //     config: { label: "Details", multiline: true, rows: 4 },
-        //   },
-        //   {
-        //     name: "anotherdate",
-        //     type: "date",
-        //     config: {
-        //       label: "Other Date",
-        //       md: 6,
-        //       modalVariant: "dialog",
-        //       type: "datetime",
-        //     },
-        //   },
-        // ]}
-      />
+    <div>
+      <div className="flex items-center flex-wrap justify-between pb-4">
+        <h1 className="text-lg my-2 text-orange-500">Manage Appointment</h1>
+        <div className="flex items-center gap-3">
+          <button>filter, cal and print Button Here</button>
+        </div>
+      </div>
+      <div className="border border-[#089bab] rounded-2xl p-2">
+        <FullCalendar
+          initialView="dayGridMonth"
+          headerToolbar={{
+            left: "prevYear,prev,next,nextYear today",
+            center: "title",
+            right: "timeGridDay,timeGridWeek,dayGridMonth",
+          }}
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          events={Events}
+          editable={true}
+          selectable={true}
+          select={createEvent}
+        />
+        {open && (
+          <CreateAppointment
+            handleClose={handleClose}
+            clicked={open}
+          ></CreateAppointment>
+        )}
+      </div>
     </div>
   );
 };
 
-export default CalendarView;
+export default CalenderView;

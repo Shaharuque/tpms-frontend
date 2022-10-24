@@ -140,6 +140,13 @@ import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
 import UnBillableTimeSheet from "./Pages/Admin/Settings/Settings/UnBillableTimesheet/UnBillableTimeSheet";
 import AddServiceSubTypeTab from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType/AddServiceSubTypeTab";
 import CptCodeExclusion from "./Pages/Admin/Settings/Settings/CptCodeExclusion/CptCodeExclusion";
+import FormTemplate1 from "./Pages/Admin/FormsTemplate/FormTemplate1";
+import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
+import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
+import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
+import PrivateClient from "./Pages/Admin/FormsTemplate/PrivateClient";
+import JsonToHtml from "./Pages/Admin/FormsTemplate/JsonForm/JsonToHtml";
+import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -149,6 +156,33 @@ function App() {
         <Routes>
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
+          {/* ------------------------form--------------------------- */}
+          <Route path="/forms" element={<Form></Form>}></Route>
+          <Route
+            path="/form-demo-json"
+            element={<JsonToHtml></JsonToHtml>}
+          ></Route>
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
+          <Route
+            path="/form-direct-service"
+            element={<DirectService></DirectService>}
+          ></Route>
+          <Route
+            path="/Parent-training-session"
+            element={<ParentTrainingSession></ParentTrainingSession>}
+          ></Route>
+          <Route
+            path="/BCBA-trainee"
+            element={<BCBATrainee></BCBATrainee>}
+          ></Route>
+          <Route
+            path="/private-client"
+            element={<PrivateClient></PrivateClient>}
+          ></Route>
+          {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
             element={<ForgetPassword></ForgetPassword>}
@@ -161,6 +195,17 @@ function App() {
             path="/new-password"
             element={<NewPassSet></NewPassSet>}
           ></Route>
+
+          {/* ------------------------form--------------------------- */}
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
+          <Route
+            path="/form-direct-service"
+            element={<DirectService></DirectService>}
+          ></Route>
+          {/* ------------------------form End--------------------------- */}
 
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>

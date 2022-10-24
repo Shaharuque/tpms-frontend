@@ -405,7 +405,6 @@ const ArLedger = () => {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
           className="px-2"
           style={{
             transition: "all .3s ease-out",
@@ -413,7 +412,7 @@ const ArLedger = () => {
         >
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1 className="text-lg my-2 text-orange-500">AR Ledger</h1>
-            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-8  my-5 mr-2 gap-4">
+            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  my-5 mr-2 gap-4">
               {/* name  */}
               <div className="">
                 <label className="label">
@@ -539,34 +538,36 @@ const ArLedger = () => {
                       <option value="name"> Abcd </option>
                     </select>
                   </div>
-                  {/* CPT Code  */}
-                  <div>
-                    <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        CPT Code
-                      </span>
-                    </label>
-                    <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                      {...register("CPT_Code")}
-                    >
-                      <option value="name">EFT</option>
-                    </select>
-                  </div>
-
-                  {/*Aging Status  */}
-                  <div>
-                    <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        Aging Status
-                      </span>
-                    </label>
-                    <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                      {...register("aging_status")}
-                    >
-                      <option value="name">EFT</option>
-                    </select>
+                  <div className="flex gap-3">
+                    {" "}
+                    {/* CPT Code  */}
+                    <div>
+                      <label className="label">
+                        <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                          CPT Code
+                        </span>
+                      </label>
+                      <select
+                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                        {...register("CPT_Code")}
+                      >
+                        <option value="name">EFT</option>
+                      </select>
+                    </div>
+                    {/*Aging Status  */}
+                    <div>
+                      <label className="label">
+                        <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                          Aging Status
+                        </span>
+                      </label>
+                      <select
+                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                        {...register("aging_status")}
+                      >
+                        <option value="name">EFT</option>
+                      </select>
+                    </div>
                   </div>
                   <div className="flex items-center">
                     <div className="flex mt-8 items-center ">
@@ -575,7 +576,7 @@ const ArLedger = () => {
                         checked={value ? true : false}
                         onClick={() => setValue(!value)}
                       />
-                      <span className="text-[14px] font-medium text-gray-500 mx-3">
+                      <span className="text-[14px] font-medium text-gray-500 mx-1">
                         Zero Paid
                       </span>
                     </div>

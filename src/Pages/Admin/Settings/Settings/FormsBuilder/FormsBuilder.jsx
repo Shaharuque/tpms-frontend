@@ -1,9 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const FormsBuilder = () => {
   return (
     <div>
-      <h1>from builder</h1>
+      <Link to={"/forms"}>
+        <button className="pms-button">Forms</button>
+      </Link>
     </div>
   );
 };
