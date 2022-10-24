@@ -218,102 +218,83 @@ code {
 
 }
 
-/* date range picker calendar   */
+/*  Start Date Range Calendar   */
 .rdrSelected,
 .rdrInRange {
   background: #0AA1B2 !important;
   border: #000;
 }
-
 .rdrStartEdge,
 .rdrEndEdge {
   background-color: #0AA1B2 !important;
 }
-
 .rdrDateDisplayWrapper {
   display: none !important;
 }
-
 .rdrDateDisplayWrapper {
   background-color: #fff !important;
 }
-
 .rdrInputRanges {
   display: none !important;
 }
-
 .rdrDefinedRangesWrapper {
   width: 100% !important;
   padding-top: 50px !important;
 }
-
 .rdrDayNumber,
 .rdrStaticRangeLabel,
 .rdrDay {
   color: #0AA1B2 !important;
 }
-
 .rdrWeekDay {
   color: #000 !important;
   font-size: 14px !important;
   font-weight: 600 !important;
 }
-
 .rdrDayNumber,
 .rdrMonthAndYearPicker>select {
   font-size: 12px !important;
   font-weight: 500 !important;
 }
-
 .rdrMonthAndYearWrapper {
   height: 30px !important;
-  /* padding-top: 0px !important; */
 }
-
+.rdrDayToday .rdrDayNumber span:after{
+  background: #0AA1B2 !important;
+}
 .rdrMonthName,
 .rdrMonthPicker,
 .rdrYearPicker {
   font-size: 14px !important;
 }
-
 .rdrStaticRangeLabel {
   font-size: 14px !important;
   padding: 5px 10px !important;
 }
-
 .rdrMonth{
   padding: 0 4px 0 8px !important;
   width: 250px !important;
 }
-
 .width-fix {
-  min-width: 100%
+  min-width: 100%;
 }
 
 @media only screen and (max-width:465px) {
-  .rdrMonthAndYearPickers {
-    /* flex-direction: column !important; */
-  }
-
   .rdrWeekDay {
     font-size: 12px !important;
   }
-
   .rdrMonth {
     padding: 0px !important;
     width: 200px !important;
   }
-
   .rdrDateRangePickerWrapper,
   .range-date-ok {
     width: 90% !important;
   }
-
   .rdrNextPrevButton{
     width: 15px !important;
     margin: 0px !important;
   }
-
   .rdrMonthAndYearPickers select{
     padding: 10px 20px 10px 0px !important;
   }
@@ -325,7 +306,6 @@ code {
     flex-wrap: wrap !important;
     align-items: center !important;
   }
-
   .rdrDateRangePickerWrapper,
   .range-date-ok {
     width: 80% !important;
@@ -336,34 +316,18 @@ code {
   .rdrDateRangePickerWrapper {
     flex-direction: column-reverse;
   }
-
   .rdrStaticRanges {
     flex-direction: row !important;
   }
-
-  /* .rdrDateRangePickerWrapper,
-  .range-date-ok {
-    width: 80% !important;
-  } */
-
   .rdrMonth {
     padding: 0px 2px !important;
   }
-
   .rdrMonthAndYearPickers {
     margin: 0 auto !important;
   }
-
-  /* .rdrMonths {
-    flex-direction: column !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-  } */
-
   .rdrDateRangePickerWrapper {
     flex-direction: column-reverse;
   }
-
   .rdrStaticRanges {
     flex-direction: row !important;
     flex-wrap: wrap !important;
@@ -375,17 +339,16 @@ code {
   .rdrDateRangePickerWrapper {
     flex-direction: column-reverse !important;
   }
-
   .rdrStaticRanges {
     flex-direction: row !important;
   }
-
   .rdrDefinedRangesWrapper {
     width: 100% !important;
     padding-top: 0px !important;
+    border-right: none !important;
   }
 }
-
+/*  End Date Range Calendar   */
 
 .rmsc .dropdown-content {
   position: absolute !important;

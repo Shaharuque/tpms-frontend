@@ -145,8 +145,10 @@ import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
 import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
 import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
 import PrivateClient from "./Pages/Admin/FormsTemplate/PrivateClient";
+import OutpatientTreatmentRequest from "./Pages/Admin/FormsTemplate/OutpatientTreatmentRequest";
 import JsonToHtml from "./Pages/Admin/FormsTemplate/JsonForm/JsonToHtml";
 import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
+import ClinicTreatment from "./Pages/Admin/FormsTemplate/ClinicTreatment";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -181,6 +183,14 @@ function App() {
           <Route
             path="/private-client"
             element={<PrivateClient></PrivateClient>}
+          ></Route>
+          <Route
+            path="/outpatient-treatment-request"
+            element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
+          ></Route>
+          <Route
+            path="/clinic-treatment"
+            element={<ClinicTreatment></ClinicTreatment>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route

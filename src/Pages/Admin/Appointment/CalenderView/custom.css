@@ -2,10 +2,11 @@
   --blue: #1E88E5;
   --yellow: #FBC02D;
   --green: #4CAF50;
+  --filter-btn: linear-gradient(to right, rgba(216, 74, 69, 1) 0%, rgba(242, 99, 97, 1) 100%);
+  --print-btn: linear-gradient(to right, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%);
 }
 
-override day number color and size
-.fc-day-number {
+override day number color and size .fc-day-number {
   font-size: 1.5em;
   color: #5c005c;
 }
@@ -16,12 +17,12 @@ override day number color and size
   color: #00b294;
 }
 
-/* / Header Button / */
+/* Header Button */
 .fc .fc-button-group button,
 .fc .fc-button-group .fc-button-active,
 .fc .fc-button-primary {
-    border-color: #fff !important;
-    text-transform: capitalize !important;
+  border-color: #fff !important;
+  text-transform: capitalize !important;
 }
 
 .fc .fc-button-primary:disabled {
@@ -29,11 +30,15 @@ override day number color and size
   text-transform: capitalize;
 }
 
-.fc-next-button, .fc-prev-button, .fc-timeGridWeek-button {
+.fc-next-button,
+.fc-prev-button,
+.fc-timeGridWeek-button {
   background: var(--green) !important;
 }
 
-.fc-prevYear-button, .fc-nextYear-button, .fc-dayGridMonth-button {
+.fc-prevYear-button,
+.fc-nextYear-button,
+.fc-dayGridMonth-button {
   background: var(--blue) !important;
 }
 
@@ -45,10 +50,30 @@ override day number color and size
   background: var(--yellow) !important;
 }
 
-.fc-toolbar-title{
+/* Header Title */
+.fc-toolbar-title {
   color: #495057;
 }
 
-.fc .fc-col-header-cell-cushion{
+/* Weeks Name */
+.fc .fc-col-header-cell-cushion {
   color: #74788D;
+}
+
+/* filter, calendar and print button */
+.cal-manage-btn {
+  color: #fff;
+  padding: 7px 8px;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.filter-btn {
+  background: var(--filter-btn);
+  border-color: #d84a45;
+}
+
+.print-btn {
+  background: var(--print-btn);
+  border-color: #089bab;
 }
