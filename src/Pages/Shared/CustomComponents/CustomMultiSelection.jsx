@@ -1,10 +1,57 @@
+// import React, {useState } from "react";
+// import { MdImportantDevices } from "react-icons/md";
+// import { MultiSelect } from "react-multi-select-component";
+// import  "./CustomMultiSelect.css"  
+
+// const CustomMultiSelection = () => {
+//   const options = [
+//     { label: "Grapes ", value: "grapes" },
+//     { label: "Masfgngo ", value: "mafgngo" },
+//     { label: "Gradfgpdes ", value: "grfgapes" },
+//     { label: "Mango ", value: "mango" },
+//     { label: "Strawberry ", value: "strawberry" },
+//   ];
+//   const [selected, setSelected] = useState([]);
+
+//   const customValueRenderer = (selected, _options) => {
+//       if(selected.length){
+//         if(selected.length > 3) return `All Selected ${selected.length}`
+//         return selected.map(({ label }) => label)
+//       }
+//       return  "None selected";
+//     };
+
+//     console.log("Multi Select data",selected)
+//   return (
+
+// <MultiSelect
+//     // styles={{
+//     //   // Fixes the overlapping problem of the component
+//     //   menu: provided => ({ ...provided, zIndex: 99999999 })
+//     // }}
+//     // style={{
+//     //   zIndex:99999
+//     //   }}
+//       className="Global"
+//       options={options}
+//       value={selected}
+//       onChange={setSelected}
+//       labelledBy="Select"
+//       valueRenderer={customValueRenderer}
+//     />
+
+//   );
+// };
+
+// export default CustomMultiSelection;
+
 import React from "react";
 import { CheckPicker, Checkbox, Button } from "rsuite";
 
 const CustomMultiSelection = ({ data, setValue, value }) => {
   const footerStyles = {
-    padding: "10px 2px",
-    borderTop: "1px solid #e5e5e5",
+    // padding: "10px 2px",
+    borderTop: "1px solid rgb(229, 229, 229)",
   };
 
   const footerButtonStyle = {
@@ -15,7 +62,6 @@ const CustomMultiSelection = ({ data, setValue, value }) => {
 
   const allValue = data.map((item) => item.value);
   const picker = React.useRef();
-  //   const [value, setValue] = React.useState([]);
   const handleChange = (value) => {
     setValue(value);
   };
@@ -43,7 +89,7 @@ const CustomMultiSelection = ({ data, setValue, value }) => {
               Select All
             </Checkbox>
 
-            <Button
+            {/* <Button
               style={footerButtonStyle}
               appearance="primary"
               size="sm"
@@ -52,7 +98,7 @@ const CustomMultiSelection = ({ data, setValue, value }) => {
               }}
             >
               Ok
-            </Button>
+            </Button> */}
           </div>
         )}
       />

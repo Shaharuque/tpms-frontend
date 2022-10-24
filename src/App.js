@@ -1,62 +1,13 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Sidebar from "./Pages/Components/Sidebar.jsx";
-import Staffs from "./Pages/Pages/Staffs.jsx";
-import Report from "./Pages/Pages/Report.jsx";
-import Settings from "./Pages/Pages/Settings.jsx";
-import BillingManager from "./Pages/Pages/BillingManager";
-import ArLedger from "./Pages/Pages/ArLedger";
-import ContractRate from "./Pages/Pages/ContractRate";
-import PatientStatement from "./Pages/Pages/PatientStatement";
 import ERemittance from "./Pages/Pages/ERemittance";
-import MPosting from "./Pages/Pages/MPosting";
-import ProcessingPayroll from "./Pages/Pages/ProcessingPayroll";
-import Timesheet from "./Pages/Pages/Timesheet";
-import NameLocation from "./Pages/Pages/Settings/NameLocation";
-import AddInsurance from "./Pages/Pages/Settings/AddInsurance";
-import AddTreatments from "./Pages/Pages/Settings/AddTreatments";
-import AddServices from "./Pages/Pages/Settings/AddServices";
-import AddCptCode from "./Pages/Pages/Settings/AddCptCode";
-import AddServiceSubType from "./Pages/Pages/Settings/AddServiceSubType";
-import AddStaffType from "./Pages/Pages/Settings/AddStaffType";
-import ReferringProvider from "./Pages/Pages/Settings/ReferringProvider";
-import PlaceOfServices from "./Pages/Pages/Settings/PlaceOfServices";
-import EraManager from "./Pages/Pages/Settings/EraManager";
-import VendorNumberSetup from "./Pages/Pages/Settings/VendorNumberSetup";
-import HolidaySetup from "./Pages/Pages/Settings/HolidaySetup";
-import PayPeriod from "./Pages/Pages/Settings/PayPeriod";
-import Logo from "./Pages/Pages/Settings/Logo";
-import UnbillableActivity from "./Pages/Pages/Settings/UnbillableActivity";
-import CreateServiceRules from "./Pages/Pages/Settings/CreateServiceRules";
-import FormsBuilder from "./Pages/Pages/Settings/FormsBuilder";
-import FormAndLibrary from "./Pages/Pages/Settings/FormAndLibrary";
-import BusinessFiles from "./Pages/Pages/Settings/BusinessFiles";
-import DataImport from "./Pages/Pages/Settings/DataImport";
-import TpmsMeet from "./Pages/Pages/Settings/TpmsMeet";
-import InsuranceSetup from "./Pages/Pages/Settings/InsuranceSetup";
-import MPostingEditAdd from "./Pages/Pages/MPosting/MPostingEditAdd";
-import MDepositApply from "./Pages/Pages/MPosting/MDepositApply";
-import ContractRateEditAdd from "./Pages/Pages/ContractRate/ContractRateEditAdd";
-import StaffInformation from "./Pages/Pages/Staffs/StaffInformation";
-import Bio from "./Pages/Pages/Staffs/Bio";
-import ContactDetails from "./Pages/Pages/Staffs/ContactDetails";
-import Credentials from "./Pages/Pages/Staffs/Credentials";
-import DepartmentSupervisor from "./Pages/Pages/Staffs/DepartmentSupervisor";
-import PayrollSetup from "./Pages/Pages/Staffs/PayrollSetup";
-import OtherSetup from "./Pages/Pages/Staffs/OtherSetup";
-import LeaveTracking from "./Pages/Pages/Staffs/LeaveTracking";
-import InsuranceExclusion from "./Pages/Pages/Staffs/InsuranceExclusion";
-import ServiceSubTypeExclusions from "./Pages/Pages/Staffs/ServiceSubTypeExclusions";
-import PatientExclusion from "./Pages/Pages/Staffs/PatientExclusion";
-import StaffPortal from "./Pages/Pages/Staffs/StaffPortal";
+import ContractRateEditAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
 //For testing purpose
-import MainBase from "./Testing/Table_React/MainBase";
-import BatchingClaims from "./Pages/Pages/BillingManager/BatchingClaims";
-import ManageClaims from "./Pages/Pages/BillingManager/ManageClaims";
-import ProcessingClaim from "./Pages/Pages/BillingManager/ProcessingClaim";
-import PayrollSubmission from "./Pages/Pages/Payroll/PayrollSubmission";
-import CreateStaff from "./Pages/Pages/Staffs/CreateStaff";
+import BatchingClaims from "./Pages/Admin/Billing/BillingManager/BatchingClaims/BatchingClaims";
+import ManageClaims from "./Pages/Admin/Billing/BillingManager/ManageClaims/ManageClaims";
+import ProcessingClaim from "./Pages/Admin/Billing/BillingManager/ProcessingClaims/ProcessingClaim";
+import CreateStaff from "./Pages/Admin/Staff/AddStaff/CreateStaff";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
@@ -65,7 +16,6 @@ import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/
 import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
 import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
 import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
-import ContactInfo from "./Pages/Pages/User/Biographic/ContactInfo/ContactInfo";
 import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
 import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
 import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
@@ -117,6 +67,7 @@ import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/Paym
 import AddDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/AddDeposit";
 import EditDeposit from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/EditDeposit";
 import DepositDetails from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/DepositDetails";
+// ###### Patient
 import Patients from "./Pages/Admin/Patient/Patients";
 import PatientsInfo from "./Pages/Admin/Patient/Patients/PatientsInfo";
 import PatientInformation from "./Pages/Admin/Patient/Patients/PatientInfo/PatientInformation";
@@ -125,8 +76,77 @@ import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AddA
 import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
+// ###### Not Found
 import NotFound from "./NoPageFound/NotFound";
-// ######
+//Testing
+import CustomSearch from "./Testing/CustomSearch/CustomSearch";
+import AntTableTest from "./Testing/AntTableTest/AntTableTest";
+import TableApi from "./Testing/AntTableTest/TableApi/TableApi";
+import SingleDetails from "./Testing/AntTableTest/TableApi/SingleDetails";
+// ###### Staff
+import Staffs from "./Pages/Admin/Staff/Staffs";
+import StaffInformation from "./Pages/Admin/Staff/Staffs/StaffInformation";
+import Bio from "./Pages/Admin/Staff/Staffs/StaffBio/Bio";
+import ContactDetails from "./Pages/Admin/Staff/Staffs/ContactInfo/ContactDetails";
+import Credentials from "./Pages/Admin/Staff/Staffs/Credential/Credentials";
+import DepartmentSupervisor from "./Pages/Admin/Staff/Staffs/DepartmentSupervisor/DepartmentSupervisor";
+import PayrollSetup from "./Pages/Admin/Staff/Staffs/PayrollSetup/PayrollSetup";
+import OtherSetup from "./Pages/Admin/Staff/Staffs/OtherSetUp/OtherSetup";
+import LeaveTracking from "./Pages/Admin/Staff/Staffs/LeaveTracking/LeaveTracking";
+import InsuranceExclusion from "./Pages/Admin/Staff/Staffs/InsuranceExclusion/InsuranceExclusion";
+import StaffPortal from "./Pages/Admin/Staff/Staffs/StaffPortal/StaffPortal";
+import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeExclusion/ServiceSubTypeExclusions";
+import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
+import TestingTable from "./Testing/AntTableTest/TestingTable";
+import BillingManager from "./Pages/Admin/Billing/BillingManager/BillingManager";
+import ArLedger from "./Pages/Admin/Billing/ARLeadger/ArLedger";
+import ContractRate from "./Pages/Admin/Billing/ContactRate/ContractRate";
+import PatientStatement from "./Pages/Admin/Billing/PatientStatement/PatientStatement";
+import Sidebar from "./Pages/Shared/Sidebar/Sidebar";
+import AddAuthorization from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AddAuthorization";
+import ContractRateAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateAdd";
+import MPosting from "./Pages/Admin/Payment/MPosting";
+import MPostingEditAdd from "./Pages/Admin/Payment/MPosting/MPostingEditAdd";
+import MDepositApply from "./Pages/Admin/Payment/MPosting/MDepositApply";
+import Report from "./Pages/Admin/Report/Report";
+import Timesheet from "./Pages/Admin/Payroll/TimeSheet/Timesheet";
+import ProcessingPayroll from "./Pages/Admin/Payroll/ProcessingPayroll/ProcessingPayroll";
+import Processing_Payroll from "./Pages/Admin/Payroll/ProcessingPayroll/ProcessingPayroll/Processing_Payroll";
+import PayrollSubmission from "./Pages/Admin/Payroll/ProcessingPayroll/PayrollSubmission/PayrollSubmission";
+import ProcessedPayroll from "./Pages/Admin/Payroll/ProcessingPayroll/ProcessedPayroll/ProcessedPayroll";
+import Settings from "./Pages/Admin/Settings/Settings";
+import NameLocation from "./Pages/Admin/Settings/Settings/NameLocation/NameLocation";
+import InsuranceSetup from "./Pages/Admin/Settings/Settings/InsuranceSetUp/InsuranceSetup";
+import AddTreatments from "./Pages/Admin/Settings/Settings/AddTreatment/AddTreatments";
+import AddServices from "./Pages/Admin/Settings/Settings/AddServices/AddServices";
+import AddCptCode from "./Pages/Admin/Settings/Settings/AddCptCode/AddCptCode";
+import AddStaffType from "./Pages/Admin/Settings/Settings/AddStaffType/AddStaffType";
+import ReferringProvider from "./Pages/Admin/Settings/Settings/ReferringProvider/ReferringProvider";
+import PlaceOfServices from "./Pages/Admin/Settings/Settings/PlaceOfService/PlaceOfServices";
+import VendorNumberSetup from "./Pages/Admin/Settings/Settings/VendorNumberSetup/VendorNumberSetup";
+import PayPeriod from "./Pages/Admin/Settings/Settings/PayPeriod/PayPeriod";
+import UnbillableActivity from "./Pages/Admin/Settings/Settings/UnbillableActivity/UnbillableActivity";
+import CreateServiceRules from "./Pages/Admin/Settings/Settings/CreateServiceRules/CreateServiceRules";
+import FormAndLibrary from "./Pages/Admin/Settings/Settings/FormAndLIbrary/FormAndLibrary";
+import TpmsMeet from "./Pages/Admin/Settings/Settings/TPMSMeet/TpmsMeet";
+import BusinessFiles from "./Pages/Admin/Settings/Settings/BusinessFiles/BusinessFiles";
+import DataImport from "./Pages/Admin/Settings/Settings/DataImport/DataImport";
+import FormsBuilder from "./Pages/Admin/Settings/Settings/FormsBuilder/FormsBuilder";
+import Logo from "./Pages/Admin/Settings/Settings/Logo/Logo";
+import HolidaySetup from "./Pages/Admin/Settings/Settings/HolidaySetUp/HolidaySetup";
+import AddServiceSubType from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType";
+import AddInsurance from "./Pages/Admin/Settings/Settings/AddInsurance/AddInsurance";
+import EraManager from "./Pages/Admin/Settings/Settings/QAFiles/EraManager";
+import UnBillableTimeSheet from "./Pages/Admin/Settings/Settings/UnBillableTimesheet/UnBillableTimeSheet";
+import AddServiceSubTypeTab from "./Pages/Admin/Settings/Settings/AddServiceSubType/AddServiceSubType/AddServiceSubTypeTab";
+import CptCodeExclusion from "./Pages/Admin/Settings/Settings/CptCodeExclusion/CptCodeExclusion";
+import FormTemplate1 from "./Pages/Admin/FormsTemplate/FormTemplate1";
+import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
+import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
+import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
+import PrivateClient from "./Pages/Admin/FormsTemplate/PrivateClient";
+import JsonToHtml from "./Pages/Admin/FormsTemplate/JsonForm/JsonToHtml";
+import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -134,7 +154,35 @@ function App() {
     <div className="app-body">
       <FullScreen handle={handle}>
         <Routes>
+          {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
+          {/* ------------------------form--------------------------- */}
+          <Route path="/forms" element={<Form></Form>}></Route>
+          <Route
+            path="/form-demo-json"
+            element={<JsonToHtml></JsonToHtml>}
+          ></Route>
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
+          <Route
+            path="/form-direct-service"
+            element={<DirectService></DirectService>}
+          ></Route>
+          <Route
+            path="/Parent-training-session"
+            element={<ParentTrainingSession></ParentTrainingSession>}
+          ></Route>
+          <Route
+            path="/BCBA-trainee"
+            element={<BCBATrainee></BCBATrainee>}
+          ></Route>
+          <Route
+            path="/private-client"
+            element={<PrivateClient></PrivateClient>}
+          ></Route>
+          {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
             element={<ForgetPassword></ForgetPassword>}
@@ -148,8 +196,36 @@ function App() {
             element={<NewPassSet></NewPassSet>}
           ></Route>
 
+          {/* ------------------------form--------------------------- */}
+          <Route
+            path="/form-template"
+            element={<FormTemplate1></FormTemplate1>}
+          ></Route>
+          <Route
+            path="/form-direct-service"
+            element={<DirectService></DirectService>}
+          ></Route>
+          {/* ------------------------form End--------------------------- */}
+
           {/*Testing */}
-          <Route path="/table" element={<MainBase></MainBase>}></Route>
+          <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
+          <Route
+            path="/auth-table"
+            element={<CustomSearch></CustomSearch>}
+          ></Route>
+          <Route path="test" element={<AntTableTest></AntTableTest>}></Route>
+          {/* <Route path="expandTable" element={<ExpendedTable></ExpendedTable>} /> */}
+          <Route path="table-api" element={<TableApi></TableApi>}></Route>
+          <Route
+            path="/details/:id"
+            element={<SingleDetails></SingleDetails>}
+          ></Route>
+          <Route
+            path="/testing"
+            element={<TestingTable></TestingTable>}
+          ></Route>
+          {/* Testing End */}
+
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
             <Route
               path="report-export-view"
@@ -177,9 +253,13 @@ function App() {
               path="billing/ar-followup-bucket"
               element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
-            <Route
+            {/* <Route
               path="billing/ar-followup-bucket-filter-types/1"
               element={<ProvideEscalation></ProvideEscalation>}
+            ></Route> */}
+            <Route
+              path="billing/ar-followup-bucket-filter-types/1"
+              element={<ArFollowupBucket></ArFollowupBucket>}
             ></Route>
             <Route
               path="billing/ar-followup-bucket-filter-types/2"
@@ -330,13 +410,13 @@ function App() {
               element={<RecurringSession></RecurringSession>}
             ></Route>
             <Route
-              path="recurring-session-edit"
+              path="recurring-session-edit/:id"
               element={<RecurringSessionEdit></RecurringSessionEdit>}
             ></Route>
             {/* ----------------------------------Appointment End----------------------------------------------- */}
             {/* PATIENT  */}
             <Route path="patient-List" element={<Patients></Patients>}></Route>
-            <Route path="patient/:id" element={<PatientsInfo></PatientsInfo>}>
+            <Route path="patient" element={<PatientsInfo></PatientsInfo>}>
               {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
               <Route
                 path="patient-info/:id"
@@ -364,8 +444,8 @@ function App() {
               ></Route>
             </Route>
             <Route
-              path="authorization-Edit"
-              element={<AuthorizationEdit></AuthorizationEdit>}
+              path="authorization-add"
+              element={<AddAuthorization></AddAuthorization>}
             ></Route>
             <Route
               path="authorization-Edit/:id"
@@ -378,46 +458,50 @@ function App() {
               path="create-staff/staff"
               element={<CreateStaff></CreateStaff>}
             ></Route>
+            <Route
+              path="create-staff/officeStaff"
+              element={<CreateStaff></CreateStaff>}
+            ></Route>
             <Route path="staff" element={<StaffInformation></StaffInformation>}>
-              <Route path="staffs-biographic" element={<Bio></Bio>}></Route>
+              <Route path="staffs-biographic/:id" element={<Bio></Bio>}></Route>
               <Route
-                path="staffs-contact-details"
+                path="staffs-contact-details/:id"
                 element={<ContactDetails></ContactDetails>}
               ></Route>
               <Route
-                path="staffs-credentials"
+                path="staffs-credentials/:id"
                 element={<Credentials></Credentials>}
               ></Route>
               <Route
-                path="staffs-department"
+                path="staffs-department/:id"
                 element={<DepartmentSupervisor></DepartmentSupervisor>}
               ></Route>
               <Route
-                path="staffs-payroll"
+                path="staffs-payroll/:id"
                 element={<PayrollSetup></PayrollSetup>}
               ></Route>
               <Route
-                path="staffs-other-setup"
+                path="staffs-other-setup/:id"
                 element={<OtherSetup></OtherSetup>}
               ></Route>
               <Route
-                path="staffs-leave-tracking"
+                path="staffs-leave-tracking/:id"
                 element={<LeaveTracking></LeaveTracking>}
               ></Route>
               <Route
-                path="staffs-payor-exclusion"
+                path="staffs-payor-exclusion/:id"
                 element={<InsuranceExclusion></InsuranceExclusion>}
               ></Route>
               <Route
-                path="staffs-sub-activity-exclusion"
+                path="staffs-sub-activity-exclusion/:id"
                 element={<ServiceSubTypeExclusions></ServiceSubTypeExclusions>}
               ></Route>
               <Route
-                path="staffs-client-exclusion"
+                path="staffs-client-exclusion/:id"
                 element={<PatientExclusion></PatientExclusion>}
               ></Route>
               <Route
-                path="staffs-portal"
+                path="staffs-portal/:id"
                 element={<StaffPortal></StaffPortal>}
               ></Route>
             </Route>
@@ -448,8 +532,8 @@ function App() {
               element={<ContractRate></ContractRate>}
             ></Route>
             <Route
-              path="billing/rate-list-add-edit"
-              element={<ContractRateEditAdd></ContractRateEditAdd>}
+              path="billing/rate-list-add"
+              element={<ContractRateAdd></ContractRateAdd>}
             ></Route>
             <Route
               path="billing/rate-list-add-edit/:id"
@@ -487,7 +571,7 @@ function App() {
               <Route index element={<Navigate to="process-payroll" />} />
               <Route
                 path="process-payroll"
-                element={<PayrollSubmission />}
+                element={<Processing_Payroll />}
               ></Route>
               <Route
                 path="submit-payroll"
@@ -495,7 +579,7 @@ function App() {
               ></Route>
               <Route
                 path="completed-payroll"
-                element={<PayrollSubmission />}
+                element={<ProcessedPayroll />}
               ></Route>
             </Route>
             <Route path="timesheet" element={<Timesheet></Timesheet>}></Route>
@@ -527,9 +611,22 @@ function App() {
                 element={<AddCptCode></AddCptCode>}
               ></Route>
               <Route
+                path="cpt-code-exclusion"
+                element={<CptCodeExclusion></CptCodeExclusion>}
+              ></Route>
+              <Route
                 path="sub-activity-setup"
                 element={<AddServiceSubType></AddServiceSubType>}
-              ></Route>
+              >
+                <Route index element={<Navigate to="SubTypeTab" />} />
+
+                <Route
+                  // sub type
+                  path="SubTypeTab"
+                  element={<AddServiceSubTypeTab></AddServiceSubTypeTab>}
+                ></Route>
+              </Route>
+
               <Route
                 path="add-staff-type"
                 element={<AddStaffType></AddStaffType>}
@@ -558,6 +655,10 @@ function App() {
               <Route
                 path="unbillable-activity"
                 element={<UnbillableActivity></UnbillableActivity>}
+              ></Route>
+              <Route
+                path="unbillable-time-sheet"
+                element={<UnBillableTimeSheet></UnBillableTimeSheet>}
               ></Route>
               <Route
                 path="session-rule"
@@ -619,7 +720,7 @@ function App() {
             ></Route>
           </Route>
           {/* No Page Found */}
-          <Route path='*' element={<NotFound></NotFound>}></Route>
+          <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
       </FullScreen>
     </div>

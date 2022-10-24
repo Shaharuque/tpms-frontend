@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRowSelect, useSortBy, useTable } from "react-table";
 import { Link } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
@@ -10,17 +10,81 @@ import {
   PaymentDepositsColumn,
 } from "./TrendingReportsTableData";
 import UseTable from "../../../../../Utilities/UseTable";
-import { DateRangePicker } from "rsuite";
+import { DateRangePicker } from "react-date-range";
+import axios from "axios";
+import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
+import { BsArrowRight } from "react-icons/bs";
 
 const PaymentDeposits = () => {
-  const { handleSubmit, register, reset } = useForm();
+  const [filteredInfo, setFilteredInfo] = useState({});
+  const [sortedInfo, setSortedInfo] = useState({});
+  const { ref, visible, setVisible } = useOutsideAlerter(false);
+  // --------------- Form -------------------
+  const { handleSubmit, register, reset } = useForm({
+    defaultValues: {
+      filters: [],
+    },
+  });
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
     reset();
   };
+
+  const handleOpenCalendar = (e) => {
+    e.preventDefault();
+    setVisible(!visible);
+  };
+
+  //Date Range Picker
+  const [open, setOpen] = useState(false);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+
+  const handleCancelDate = () => {
+    setRange([
+      {
+        startDate: new Date(),
+        endDate: null,
+        key: "selection",
+      },
+    ]);
+    setVisible(false);
+  };
+
+  // date range picker calendar
+  const startDate = range ? range[0]?.startDate : null;
+  const endDate = range ? range[0]?.endDate : null;
+  const startMonth = startDate
+    ? startDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const endMonth = endDate
+    ? endDate.toLocaleString("en-us", { month: "short" })
+    : null;
+  const startDay = startDate ? startDate.getDate() : null;
+  const endDay = endDate ? endDate.getDate() : null;
+  const startYear = startDate
+    ? startDate.getFullYear().toString().slice(2, 4)
+    : null;
+  const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+  //End Date Range Picker
+
   const handleSortBy = (e) => {};
 
-  const data = useMemo(() => [...PaymentDepositsData], []);
+  const [paymentDepositData, setPaymentDepositData] = useState([]);
+
+  // fake api call
+  useEffect(() => {
+    axios("../../All_Fake_Api/PaymentDeposit.json").then((response) => {
+      setPaymentDepositData(response?.data);
+    });
+  }, []);
+
+  const data = useMemo(() => [...paymentDepositData], [paymentDepositData]);
   const columns = useMemo(() => [...PaymentDepositsColumn], []);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy, useRowSelect, (hooks) => {
@@ -43,8 +107,9 @@ const PaymentDeposits = () => {
         ];
       });
     });
+
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-600">Cash-Posting</h1>
         <div className="flex items-center gap-3">
@@ -61,32 +126,68 @@ const PaymentDeposits = () => {
         <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 my-3 mr-2 gap-x-2 gap-y-1">
           <div>
             <label className="label">
-              <span className="label-text text-xs  font-medium text-gray-600 text-left">
-                Deposit Date Range
+              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                Date
               </span>
             </label>
-            <div>
-              <DateRangePicker
-                onChange={(date) => {
-                  console.log(date);
-                }}
-                placeholder="Select Date"
-              />
+            <div className="ml-1 text-[14px]">
+              <div
+                className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full"
+                onClick={handleOpenCalendar}
+              >
+                <input
+                  value={
+                    startDate
+                      ? `${startMonth} ${startDay}, ${startYear}`
+                      : "Start Date"
+                  }
+                  readOnly
+                  className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                  {...register("startDate")}
+                />
+                <BsArrowRight className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"></BsArrowRight>
+                <input
+                  value={
+                    endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
+                  }
+                  readOnly
+                  className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                  {...register("endDate")}
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <label className="label">
-              <span className="label-text text-xs  font-medium text-gray-600 text-left">
-                Check Date Range
-              </span>
-            </label>
-            <div>
-              <DateRangePicker
-                onChange={(date) => {
-                  console.log(date);
-                }}
-                placeholder="Select Date"
-              />
+            <div ref={ref} className="absolute z-10  2xl:ml-[20] shadow-xl">
+              {visible && (
+                <div>
+                  <div>
+                    <DateRangePicker
+                      onChange={(item) => setRange([item.selection])}
+                      editableDateInputs={true}
+                      moveRangeOnFirstSelection={false}
+                      ranges={range}
+                      months={2}
+                      direction="horizontal"
+                      className="border-2 border-gray-100"
+                    />
+                  </div>
+                  <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+                    <button
+                      className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                      type="submit"
+                      onClick={handleCancelDate}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className="px-4 m-2 text-secondary border border-white bg-white rounded"
+                      type="submit"
+                      onClick={() => setVisible(false)}
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div>

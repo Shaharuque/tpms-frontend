@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useMemo, useState } from "react";
 import { useSortBy, useTable } from "react-table";
 import UseTable from "../../../../../Utilities/UseTable";
-import ERAActionModal from "../../../../Pages/Settings/QAFile/ERAActionModal";
+import ERAActionModal from "../../../../Admin/Settings/Settings/QAFiles/QAFile/ERAActionModal";
 import DownloadTableData, {
   DownloadTableDataColumn,
 } from "./DownloadTableData";

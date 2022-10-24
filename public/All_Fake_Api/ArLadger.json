@@ -1,5 +1,6 @@
-[{
-    "patient": "Duncan Mully",
+[
+  {
+    "patient": "Duncan ",
     "provider": "THRULIFE EXTRA STRENGTH HEADACHE RELIEF",
     "Dos": 51,
     "CPT": 1,
@@ -12,7 +13,8 @@
     "insurance_name": "Casper, Emmerich and Moen",
     "claim_no": "716",
     "nt": 1
-  }, {
+  },
+  {
     "patient": "Jesse Adolf",
     "provider": "LBEL EFFET PARFAIT MINERAL NATURAL SKIN EFFECT MOUSSE FOUNDATION SPF 16",
     "Dos": 98,
@@ -26,7 +28,8 @@
     "insurance_name": "Nader LLC",
     "claim_no": "34899",
     "nt": 2
-  }, {
+  },
+  {
     "patient": "Mollie Deetlefs",
     "provider": "Therapeutic T Plus",
     "Dos": 3,
@@ -40,7 +43,8 @@
     "insurance_name": "Schultz-Schamberger",
     "claim_no": "2",
     "nt": 3
-  }, {
+  },
+  {
     "patient": "Alvie Scutter",
     "provider": "Depo-Testosterone",
     "Dos": 52,
@@ -54,7 +58,8 @@
     "insurance_name": "Ward LLC",
     "claim_no": "8386",
     "nt": 4
-  }, {
+  },
+  {
     "patient": "Ora Writer",
     "provider": "Sulfamethoxazole and Trimethoprim",
     "Dos": 16,
@@ -68,7 +73,8 @@
     "insurance_name": "Baumbach, Cassin and Johns",
     "claim_no": "1080",
     "nt": 5
-  }, {
+  },
+  {
     "patient": "Misha Kenryd",
     "provider": "Haunted Halloween Antibacterial Hand",
     "Dos": 91,
@@ -82,7 +88,8 @@
     "insurance_name": "Dickens-Jacobson",
     "claim_no": "10727",
     "nt": 6
-  }, {
+  },
+  {
     "patient": "Nye Reddy",
     "provider": "Azithromycin",
     "Dos": 65,
@@ -96,7 +103,8 @@
     "insurance_name": "Maggio LLC",
     "claim_no": "36",
     "nt": 7
-  }, {
+  },
+  {
     "patient": "Reena Spain",
     "provider": "Dr G Whitening REFORMER by EGF",
     "Dos": 43,
@@ -110,7 +118,8 @@
     "insurance_name": "Jenkins-Ledner",
     "claim_no": "74",
     "nt": 8
-  }, {
+  },
+  {
     "patient": "Ellary Dungay",
     "provider": "Benztropine Mesylate",
     "Dos": 77,
@@ -124,7 +133,8 @@
     "insurance_name": "Crona-Schaefer",
     "claim_no": "6",
     "nt": 9
-  }, {
+  },
+  {
     "patient": "Clywd Pitrasso",
     "provider": "Captopril",
     "Dos": 26,
@@ -138,7 +148,8 @@
     "insurance_name": "Champlin, Price and Hahn",
     "claim_no": "69423",
     "nt": 10
-  }, {
+  },
+  {
     "patient": "Duffy Greaser",
     "provider": "Throat Care",
     "Dos": 33,
@@ -152,7 +163,8 @@
     "insurance_name": "Osinski-Pfannerstill",
     "claim_no": "87041",
     "nt": 11
-  }, {
+  },
+  {
     "patient": "Annmaria Dudmesh",
     "provider": "Readi-Cat2 Mochaccino Smoothie",
     "Dos": 28,
@@ -166,7 +178,8 @@
     "insurance_name": "Marquardt, McGlynn and Stracke",
     "claim_no": "063",
     "nt": 12
-  }, {
+  },
+  {
     "patient": "Dion Wagstaffe",
     "provider": "Salicylic Acid",
     "Dos": 69,
@@ -180,7 +193,8 @@
     "insurance_name": "Dibbert Inc",
     "claim_no": "2310",
     "nt": 13
-  }, {
+  },
+  {
     "patient": "Galina Van Niekerk",
     "provider": "DESONIDE",
     "Dos": 89,
@@ -194,7 +208,8 @@
     "insurance_name": "Zemlak LLC",
     "claim_no": "837",
     "nt": 14
-  }, {
+  },
+  {
     "patient": "Richmond Mingus",
     "provider": "Sandostatin",
     "Dos": 20,
@@ -208,7 +223,8 @@
     "insurance_name": "Auer LLC",
     "claim_no": "3085",
     "nt": 15
-  }, {
+  },
+  {
     "patient": "Mariellen Francie",
     "provider": "Oxcarbazepine",
     "Dos": 13,
@@ -222,7 +238,8 @@
     "insurance_name": "Fadel Group",
     "claim_no": "392",
     "nt": 16
-  }, {
+  },
+  {
     "patient": "Harriot Davies",
     "provider": "StretchEasy Formula",
     "Dos": 37,
@@ -236,7 +253,8 @@
     "insurance_name": "Quitzon-Kuhic",
     "claim_no": "69",
     "nt": 17
-  }, {
+  },
+  {
     "patient": "Reggie Kording",
     "provider": "promethazine hydrochloride",
     "Dos": 21,
@@ -250,7 +268,8 @@
     "insurance_name": "Blick-Anderson",
     "claim_no": "9",
     "nt": 18
-  }, {
+  },
+  {
     "patient": "Babbette Duggan",
     "provider": "RoC Multi correxion",
     "Dos": 75,
@@ -264,7 +283,8 @@
     "insurance_name": "Goyette Group",
     "claim_no": "4900",
     "nt": 19
-  }, {
+  },
+  {
     "patient": "Jobi Vokes",
     "provider": "Teflaro",
     "Dos": 57,
@@ -278,7 +298,8 @@
     "insurance_name": "Zboncak-Brekke",
     "claim_no": "29427",
     "nt": 20
-  }, {
+  },
+  {
     "patient": "Davy Prandoni",
     "provider": "Lymph Detox Plus",
     "Dos": 85,
@@ -292,7 +313,8 @@
     "insurance_name": "Howell, Deckow and Dicki",
     "claim_no": "833",
     "nt": 21
-  }, {
+  },
+  {
     "patient": "Vikki Jado",
     "provider": "MIRAPEX",
     "Dos": 100,
@@ -306,7 +328,8 @@
     "insurance_name": "McGlynn-Walsh",
     "claim_no": "84",
     "nt": 22
-  }, {
+  },
+  {
     "patient": "Bettye Wickett",
     "provider": "Chlorthalidone",
     "Dos": 60,
@@ -320,7 +343,8 @@
     "insurance_name": "Bergnaum-Kiehn",
     "claim_no": "0028",
     "nt": 23
-  }, {
+  },
+  {
     "patient": "Karin Simukov",
     "provider": "Rozerem",
     "Dos": 76,
@@ -334,7 +358,8 @@
     "insurance_name": "Bechtelar Inc",
     "claim_no": "84",
     "nt": 24
-  }, {
+  },
+  {
     "patient": "Terry Turle",
     "provider": "Metoclopramide",
     "Dos": 84,
@@ -348,7 +373,8 @@
     "insurance_name": "Aufderhar, Keebler and Hegmann",
     "claim_no": "6",
     "nt": 25
-  }, {
+  },
+  {
     "patient": "Padraic Weine",
     "provider": "Methylphenidate Hydrochloride",
     "Dos": 5,
@@ -362,7 +388,8 @@
     "insurance_name": "Harris-Parisian",
     "claim_no": "6266",
     "nt": 26
-  }, {
+  },
+  {
     "patient": "Tabby Woollard",
     "provider": "La Prairie Switzerland",
     "Dos": 98,
@@ -376,7 +403,8 @@
     "insurance_name": "Koss, Roob and Bauch",
     "claim_no": "26",
     "nt": 27
-  }, {
+  },
+  {
     "patient": "Shurlock Tax",
     "provider": "Shopko Moisture SPF 15 Lip Balm",
     "Dos": 76,
@@ -390,7 +418,8 @@
     "insurance_name": "Lubowitz-Marquardt",
     "claim_no": "4",
     "nt": 28
-  }, {
+  },
+  {
     "patient": "Marven Cosgrive",
     "provider": "equate nicotine",
     "Dos": 54,
@@ -404,7 +433,8 @@
     "insurance_name": "Lehner Inc",
     "claim_no": "897",
     "nt": 29
-  }, {
+  },
+  {
     "patient": "Callie McCord",
     "provider": "Honey Bee hymenoptera venom Venomil Maintenance",
     "Dos": 85,
@@ -418,7 +448,8 @@
     "insurance_name": "Strosin-Shanahan",
     "claim_no": "634",
     "nt": 30
-  }, {
+  },
+  {
     "patient": "Barbee Mourgue",
     "provider": "PAXIL",
     "Dos": 22,
@@ -432,7 +463,8 @@
     "insurance_name": "Gerlach Group",
     "claim_no": "00",
     "nt": 31
-  }, {
+  },
+  {
     "patient": "Doloritas Westall",
     "provider": "Tamsulosin Hydrochloride",
     "Dos": 10,
@@ -446,7 +478,8 @@
     "insurance_name": "Gislason-Stehr",
     "claim_no": "1",
     "nt": 32
-  }, {
+  },
+  {
     "patient": "Matilde Riddick",
     "provider": "Triamcinolone Acetonide",
     "Dos": 44,
@@ -460,7 +493,8 @@
     "insurance_name": "Kling, Sawayn and Hessel",
     "claim_no": "23",
     "nt": 33
-  }, {
+  },
+  {
     "patient": "Junia Frostdicke",
     "provider": "Amoxicillin and Clavulanate Potassium",
     "Dos": 69,
@@ -474,7 +508,8 @@
     "insurance_name": "Wiza-Howell",
     "claim_no": "1062",
     "nt": 34
-  }, {
+  },
+  {
     "patient": "Carola Rollinshaw",
     "provider": "Topcare infants pain relief",
     "Dos": 80,
@@ -488,7 +523,8 @@
     "insurance_name": "Olson, Thompson and Rohan",
     "claim_no": "77179",
     "nt": 35
-  }, {
+  },
+  {
     "patient": "Trumann Crampsy",
     "provider": "Day Time Cold Multi-Symptom Cool Blast",
     "Dos": 51,
@@ -502,7 +538,8 @@
     "insurance_name": "Runte-Kuhlman",
     "claim_no": "13015",
     "nt": 36
-  }, {
+  },
+  {
     "patient": "Daron Lovelock",
     "provider": "Potassium Chloride",
     "Dos": 23,
@@ -516,7 +553,8 @@
     "insurance_name": "Bergstrom-Padberg",
     "claim_no": "11",
     "nt": 37
-  }, {
+  },
+  {
     "patient": "Caryl Bumpass",
     "provider": "Sheer Cover Shade Adapting Mineral Foundation",
     "Dos": 95,
@@ -530,7 +568,8 @@
     "insurance_name": "Rath-Lang",
     "claim_no": "91",
     "nt": 38
-  }, {
+  },
+  {
     "patient": "Darleen Atrill",
     "provider": "Pleo Poly M",
     "Dos": 13,
@@ -544,7 +583,8 @@
     "insurance_name": "Beatty, Hilll and Wiegand",
     "claim_no": "8",
     "nt": 39
-  }, {
+  },
+  {
     "patient": "Theda Dewan",
     "provider": "Alprazolam",
     "Dos": 11,
@@ -558,7 +598,8 @@
     "insurance_name": "Grimes LLC",
     "claim_no": "4810",
     "nt": 40
-  }, {
+  },
+  {
     "patient": "Germaine Clowser",
     "provider": "Film Coated Ibuprofen",
     "Dos": 7,
@@ -572,7 +613,8 @@
     "insurance_name": "Boyle-Luettgen",
     "claim_no": "7",
     "nt": 41
-  }, {
+  },
+  {
     "patient": "Dominique McComas",
     "provider": "Neutrogena Oil Free Moisture",
     "Dos": 75,
@@ -586,7 +628,8 @@
     "insurance_name": "Lesch, Conn and Bartoletti",
     "claim_no": "61",
     "nt": 42
-  }, {
+  },
+  {
     "patient": "Francklin Waugh",
     "provider": "Famotidine",
     "Dos": 79,
@@ -600,7 +643,8 @@
     "insurance_name": "Goldner and Sons",
     "claim_no": "1376",
     "nt": 43
-  }, {
+  },
+  {
     "patient": "Garvin Skittreal",
     "provider": "Amethyst Rosa Clear Skin",
     "Dos": 30,
@@ -614,7 +658,8 @@
     "insurance_name": "Rempel Inc",
     "claim_no": "9405",
     "nt": 44
-  }, {
+  },
+  {
     "patient": "Kristel Ledekker",
     "provider": "IBU",
     "Dos": 85,
@@ -628,7 +673,8 @@
     "insurance_name": "Doyle, Runte and Gusikowski",
     "claim_no": "7",
     "nt": 45
-  }, {
+  },
+  {
     "patient": "Brewster Rameaux",
     "provider": "ATORVASTATIN CALCIUM",
     "Dos": 22,
@@ -642,7 +688,8 @@
     "insurance_name": "Schimmel-Maggio",
     "claim_no": "781",
     "nt": 46
-  }, {
+  },
+  {
     "patient": "Susanna Skermer",
     "provider": "EndoPure Estro",
     "Dos": 43,
@@ -656,7 +703,8 @@
     "insurance_name": "Harris, Tillman and Yundt",
     "claim_no": "37167",
     "nt": 47
-  }, {
+  },
+  {
     "patient": "Bellina Thiese",
     "provider": "Guaifenesin",
     "Dos": 95,
@@ -670,7 +718,8 @@
     "insurance_name": "Ferry-Farrell",
     "claim_no": "970",
     "nt": 48
-  }, {
+  },
+  {
     "patient": "Teodora Crumly",
     "provider": "True Natural broad sptectum spf 50",
     "Dos": 52,
@@ -684,7 +733,8 @@
     "insurance_name": "Baumbach LLC",
     "claim_no": "45663",
     "nt": 49
-  }, {
+  },
+  {
     "patient": "Wyatt Lanktree",
     "provider": "Oxytocin",
     "Dos": 84,
@@ -698,7 +748,8 @@
     "insurance_name": "Gleason-Marvin",
     "claim_no": "37",
     "nt": 50
-  }, {
+  },
+  {
     "patient": "Louise Woliter",
     "provider": "Trazodone Hydrochloride",
     "Dos": 33,
@@ -712,7 +763,8 @@
     "insurance_name": "Runolfsdottir-Cormier",
     "claim_no": "32",
     "nt": 51
-  }, {
+  },
+  {
     "patient": "Emmi Theodoris",
     "provider": "Hydrochlorothiazide",
     "Dos": 96,
@@ -726,7 +778,8 @@
     "insurance_name": "Boyer Group",
     "claim_no": "2313",
     "nt": 52
-  }, {
+  },
+  {
     "patient": "Liuka Softley",
     "provider": "Donepezil hydrochloride",
     "Dos": 7,
@@ -740,7 +793,8 @@
     "insurance_name": "Boyer Group",
     "claim_no": "610",
     "nt": 53
-  }, {
+  },
+  {
     "patient": "Nicolais Lowther",
     "provider": "Kay",
     "Dos": 61,
@@ -754,7 +808,8 @@
     "insurance_name": "Hudson-Kuhn",
     "claim_no": "7330",
     "nt": 54
-  }, {
+  },
+  {
     "patient": "Sheffy Elsley",
     "provider": "Plum Smooth Plumb Numb Gelee",
     "Dos": 95,
@@ -768,7 +823,8 @@
     "insurance_name": "McGlynn and Sons",
     "claim_no": "11",
     "nt": 55
-  }, {
+  },
+  {
     "patient": "Everett Loreit",
     "provider": "Ibuprofen",
     "Dos": 47,
@@ -782,7 +838,8 @@
     "insurance_name": "Kreiger Inc",
     "claim_no": "5",
     "nt": 56
-  }, {
+  },
+  {
     "patient": "Aldous Purveys",
     "provider": "Enchanted Forest Hand Sanitizer",
     "Dos": 2,
@@ -796,7 +853,8 @@
     "insurance_name": "Strosin Group",
     "claim_no": "25",
     "nt": 57
-  }, {
+  },
+  {
     "patient": "Layla Pietranek",
     "provider": "Propranolol Hydrochloride",
     "Dos": 31,
@@ -810,7 +868,8 @@
     "insurance_name": "Runte-McKenzie",
     "claim_no": "5",
     "nt": 58
-  }, {
+  },
+  {
     "patient": "Diannne Westhofer",
     "provider": "SUGAR FREE GREEN TEA WITH ECHINACEA COUGH SUPPRESSANT THROAT DROPS",
     "Dos": 23,
@@ -824,7 +883,8 @@
     "insurance_name": "O'Hara, Carter and Zieme",
     "claim_no": "30531",
     "nt": 59
-  }, {
+  },
+  {
     "patient": "Maximo Blagbrough",
     "provider": "Lisinopril",
     "Dos": 60,
@@ -838,7 +898,8 @@
     "insurance_name": "Donnelly-Flatley",
     "claim_no": "4",
     "nt": 60
-  }, {
+  },
+  {
     "patient": "Row Thorn",
     "provider": "Ben E. Keith",
     "Dos": 36,
@@ -852,7 +913,8 @@
     "insurance_name": "Hansen-Thompson",
     "claim_no": "26362",
     "nt": 61
-  }, {
+  },
+  {
     "patient": "Abagail Reneke",
     "provider": "Hydrocodone Bitartrate and Acetaminophen",
     "Dos": 41,
@@ -866,7 +928,8 @@
     "insurance_name": "McGlynn-Leannon",
     "claim_no": "824",
     "nt": 62
-  }, {
+  },
+  {
     "patient": "Maxim Bilton",
     "provider": "Orenitram",
     "Dos": 90,
@@ -880,7 +943,8 @@
     "insurance_name": "Leuschke, Shields and Spinka",
     "claim_no": "5569",
     "nt": 63
-  }, {
+  },
+  {
     "patient": "Yehudit Pape",
     "provider": "URSODIOL",
     "Dos": 42,
@@ -894,7 +958,8 @@
     "insurance_name": "Schamberger Inc",
     "claim_no": "612",
     "nt": 64
-  }, {
+  },
+  {
     "patient": "Goldi Eary",
     "provider": "Atenolol",
     "Dos": 11,
@@ -908,7 +973,8 @@
     "insurance_name": "Schamberger-Labadie",
     "claim_no": "979",
     "nt": 65
-  }, {
+  },
+  {
     "patient": "Aloise Harcourt",
     "provider": "Stemphylium",
     "Dos": 59,
@@ -922,7 +988,8 @@
     "insurance_name": "Nitzsche-Gottlieb",
     "claim_no": "06320",
     "nt": 66
-  }, {
+  },
+  {
     "patient": "Vern Meriott",
     "provider": "SyCircue",
     "Dos": 5,
@@ -936,7 +1003,8 @@
     "insurance_name": "Kerluke, Anderson and Sanford",
     "claim_no": "2",
     "nt": 67
-  }, {
+  },
+  {
     "patient": "Nevin Walliker",
     "provider": "Pleo Fort",
     "Dos": 5,
@@ -950,7 +1018,8 @@
     "insurance_name": "Kerluke, Waters and Blick",
     "claim_no": "98",
     "nt": 68
-  }, {
+  },
+  {
     "patient": "Elianore Deathridge",
     "provider": "Lidocaine",
     "Dos": 39,
@@ -964,7 +1033,8 @@
     "insurance_name": "Stark-Wyman",
     "claim_no": "46",
     "nt": 69
-  }, {
+  },
+  {
     "patient": "Wilone Dennington",
     "provider": "Appbutamone-D",
     "Dos": 88,
@@ -978,7 +1048,8 @@
     "insurance_name": "O'Hara-Spencer",
     "claim_no": "7119",
     "nt": 70
-  }, {
+  },
+  {
     "patient": "Dagny Tailour",
     "provider": "Heparin Lock Flush",
     "Dos": 47,
@@ -992,7 +1063,8 @@
     "insurance_name": "Parisian-Schimmel",
     "claim_no": "218",
     "nt": 71
-  }, {
+  },
+  {
     "patient": "Grace O' Molan",
     "provider": "RETROVIR",
     "Dos": 13,
@@ -1006,7 +1078,8 @@
     "insurance_name": "McCullough LLC",
     "claim_no": "83",
     "nt": 72
-  }, {
+  },
+  {
     "patient": "Happy Barrar",
     "provider": "Handful Sanitizer",
     "Dos": 74,
@@ -1020,7 +1093,8 @@
     "insurance_name": "Ebert, Bode and Heathcote",
     "claim_no": "5",
     "nt": 73
-  }, {
+  },
+  {
     "patient": "Chad Airlie",
     "provider": "Zaroxolyn",
     "Dos": 29,
@@ -1034,7 +1108,8 @@
     "insurance_name": "Streich and Sons",
     "claim_no": "99936",
     "nt": 74
-  }, {
+  },
+  {
     "patient": "Parnell Licari",
     "provider": "Viscum Crataegus",
     "Dos": 17,
@@ -1048,7 +1123,8 @@
     "insurance_name": "Leuschke and Sons",
     "claim_no": "81719",
     "nt": 75
-  }, {
+  },
+  {
     "patient": "Avery Cockroft",
     "provider": "Aspirin",
     "Dos": 26,
@@ -1062,7 +1138,8 @@
     "insurance_name": "Walter-Jerde",
     "claim_no": "41",
     "nt": 76
-  }, {
+  },
+  {
     "patient": "Merline Gowdridge",
     "provider": "Molds, Rusts and Smuts, Rhizopus nigricans",
     "Dos": 30,
@@ -1076,7 +1153,8 @@
     "insurance_name": "Hahn-Runolfsson",
     "claim_no": "166",
     "nt": 77
-  }, {
+  },
+  {
     "patient": "Cesya Chrystie",
     "provider": "Fluoxetine",
     "Dos": 37,
@@ -1090,7 +1168,8 @@
     "insurance_name": "Keeling-Mosciski",
     "claim_no": "4015",
     "nt": 78
-  }, {
+  },
+  {
     "patient": "Frankie Gibbe",
     "provider": "ARIXTRA",
     "Dos": 3,
@@ -1104,7 +1183,8 @@
     "insurance_name": "Kuhlman, Kirlin and Schumm",
     "claim_no": "6",
     "nt": 79
-  }, {
+  },
+  {
     "patient": "Luise Worsom",
     "provider": "Ibuprofen",
     "Dos": 67,
@@ -1118,7 +1198,8 @@
     "insurance_name": "Dooley-Doyle",
     "claim_no": "94",
     "nt": 80
-  }, {
+  },
+  {
     "patient": "Minda Anfusso",
     "provider": "Minocycline Hydrochloride",
     "Dos": 90,
@@ -1132,7 +1213,8 @@
     "insurance_name": "McLaughlin, Corkery and Balistreri",
     "claim_no": "46146",
     "nt": 81
-  }, {
+  },
+  {
     "patient": "Mavis Askham",
     "provider": "Captopril and Hydrochlorothiazide",
     "Dos": 86,
@@ -1146,7 +1228,8 @@
     "insurance_name": "Hills, Reynolds and Robel",
     "claim_no": "567",
     "nt": 82
-  }, {
+  },
+  {
     "patient": "Leilah Sneath",
     "provider": "Ceftriaxone",
     "Dos": 12,
@@ -1160,7 +1243,8 @@
     "insurance_name": "Bauch and Sons",
     "claim_no": "88511",
     "nt": 83
-  }, {
+  },
+  {
     "patient": "Caspar Osbaldeston",
     "provider": "HOME 360",
     "Dos": 52,
@@ -1174,7 +1258,8 @@
     "insurance_name": "Schimmel and Sons",
     "claim_no": "2428",
     "nt": 84
-  }, {
+  },
+  {
     "patient": "Dana Matterson",
     "provider": "Hydrochlorothiazide",
     "Dos": 68,
@@ -1188,7 +1273,8 @@
     "insurance_name": "Predovic LLC",
     "claim_no": "20",
     "nt": 85
-  }, {
+  },
+  {
     "patient": "Valencia Vamplew",
     "provider": "Lamotrigine",
     "Dos": 26,
@@ -1202,7 +1288,8 @@
     "insurance_name": "Yost-Hagenes",
     "claim_no": "1502",
     "nt": 86
-  }, {
+  },
+  {
     "patient": "Charmane Meaney",
     "provider": "Nystatin",
     "Dos": 57,
@@ -1216,7 +1303,8 @@
     "insurance_name": "Cummerata, Carter and Parker",
     "claim_no": "3833",
     "nt": 87
-  }, {
+  },
+  {
     "patient": "Alison Halwood",
     "provider": "Nasal Decongestant PE",
     "Dos": 87,
@@ -1230,7 +1318,8 @@
     "insurance_name": "Lesch and Sons",
     "claim_no": "61",
     "nt": 88
-  }, {
+  },
+  {
     "patient": "Nefen Meadowcroft",
     "provider": "Box Elder",
     "Dos": 4,
@@ -1244,7 +1333,8 @@
     "insurance_name": "Halvorson-Christiansen",
     "claim_no": "990",
     "nt": 89
-  }, {
+  },
+  {
     "patient": "Hamid Kleisle",
     "provider": "Cefdinir",
     "Dos": 100,
@@ -1258,7 +1348,8 @@
     "insurance_name": "Durgan-Parker",
     "claim_no": "45849",
     "nt": 90
-  }, {
+  },
+  {
     "patient": "Bentlee Mauditt",
     "provider": "up and up eye itch relief",
     "Dos": 81,
@@ -1272,7 +1363,8 @@
     "insurance_name": "Abshire, Price and Mohr",
     "claim_no": "552",
     "nt": 91
-  }, {
+  },
+  {
     "patient": "Wanids Phillipps",
     "provider": "sunmark ibuprofen",
     "Dos": 33,
@@ -1286,7 +1378,8 @@
     "insurance_name": "Hartmann Inc",
     "claim_no": "6237",
     "nt": 92
-  }, {
+  },
+  {
     "patient": "Sibel Simnett",
     "provider": "Optimal Diet Plan",
     "Dos": 90,
@@ -1300,7 +1393,8 @@
     "insurance_name": "Torp Inc",
     "claim_no": "5",
     "nt": 93
-  }, {
+  },
+  {
     "patient": "Quinn Demelt",
     "provider": "COUMADIN",
     "Dos": 3,
@@ -1314,7 +1408,8 @@
     "insurance_name": "Herman LLC",
     "claim_no": "4214",
     "nt": 94
-  }, {
+  },
+  {
     "patient": "Fons Raynor",
     "provider": "Jungle Screen SPF 30",
     "Dos": 36,
@@ -1328,7 +1423,8 @@
     "insurance_name": "Purdy-Maggio",
     "claim_no": "5085",
     "nt": 95
-  }, {
+  },
+  {
     "patient": "Christi Tollett",
     "provider": "ARANESP",
     "Dos": 1,
@@ -1342,7 +1438,8 @@
     "insurance_name": "Daugherty-Wintheiser",
     "claim_no": "3",
     "nt": 96
-  }, {
+  },
+  {
     "patient": "Rolland Decaze",
     "provider": "OxyContin",
     "Dos": 79,
@@ -1356,7 +1453,8 @@
     "insurance_name": "Larkin-Spinka",
     "claim_no": "17",
     "nt": 97
-  }, {
+  },
+  {
     "patient": "Noby Khalid",
     "provider": "equaline anti itch",
     "Dos": 88,
@@ -1370,7 +1468,8 @@
     "insurance_name": "Harber, Block and Padberg",
     "claim_no": "50",
     "nt": 98
-  }, {
+  },
+  {
     "patient": "Urbanus Roullier",
     "provider": "hydrocortisone acetate pramoxine hcl",
     "Dos": 24,
@@ -1378,13 +1477,14 @@
     "unit": "1399931423",
     "date_billed": "12/10/2021",
     "allwd": "Volkswagen",
-    "adj": "Diomedea irrorata",
+    "adj": "Diomedea irrota",
     "paid": "Fecund Jelly Lichen",
     "balance": "$8.46",
     "insurance_name": "Koelpin LLC",
-    "claim_no": "7988",
+    "claim_no": "43534545",
     "nt": 99
-  }, {
+  },
+  {
     "patient": "Claudio Mochan",
     "provider": "JALYN",
     "Dos": 23,
@@ -1398,4 +1498,5 @@
     "insurance_name": "Hansen-Bauch",
     "claim_no": "3",
     "nt": 100
-  }]
+  }
+]

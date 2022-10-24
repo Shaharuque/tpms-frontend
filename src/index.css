@@ -3,10 +3,88 @@
 @tailwind utilities;
 
 
-.fullscreen {
-  /*overflow-x: auto;*/
-  background: #edf6f7;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  /* font-family: 'Poppins',
+ sans-serif; */
+  font-family: 'Roboto',
+    sans-serif;
 }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.fullscreen {
+  overflow: auto;
+  /* background: #edf6f7; */
+  background: white;
+}
+
+/* down arrow animation */
+.arrow {
+  color: white;
+  font-size: 18px;
+
+}
+
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+}
+
+/* -----------------------------------------input form --------------------------------------- */
+
+.input-border {
+  border-bottom: 1px solid rgba(9, 162, 179, 0.498);
+  font-size: 14px;
+  color: #4b5563;
+  border-radius: 0.125rem;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.label-font {
+  font-size: 15px;
+  color: #9b9b9b;
+  font-weight: 500;
+  text-align: left;
+}
+
+
+/* -----------------------------------------input form --------------------------------------- */
+
+
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(11px);
+  }
+
+  60% {
+    transform: translateY(11px);
+  }
+}
+
+/* end */
 
 .rs-calendar-table-cell {
   display: table-cell;
@@ -42,6 +120,7 @@
 
 .rs-nav-tabs.rs-nav-horizontal .rs-nav-item.rs-nav-item-active {
   border-bottom-width: 0;
+
 }
 
 .rs-nav-tabs.rs-nav-horizontal>.rs-nav-item,
@@ -103,24 +182,6 @@
   z-index: 999;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-
-body {
-  margin: 0;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
-  font-family: 'Poppins',
-    sans-serif;
-
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 @media only screen and (max-width: 600px) {
   .rs-nav-justified {
@@ -136,7 +197,8 @@ code {
 /* scrolling  */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -146,10 +208,193 @@ code {
 ::-webkit-scrollbar-thumb {
   background-color: #8e8e93;
   border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #089bab;
 
+}
+
+/* date range picker calendar   */
+.rdrSelected,
+.rdrInRange {
+  background: #0AA1B2 !important;
+  border: #000;
+}
+
+.rdrStartEdge,
+.rdrEndEdge {
+  background-color: #0AA1B2 !important;
+}
+
+.rdrDateDisplayWrapper {
+  display: none !important;
+}
+
+.rdrDateDisplayWrapper {
+  background-color: #fff !important;
+}
+
+.rdrInputRanges {
+  display: none !important;
+}
+
+.rdrDefinedRangesWrapper {
+  width: 100% !important;
+  padding-top: 50px !important;
+}
+
+.rdrDayNumber,
+.rdrStaticRangeLabel,
+.rdrDay {
+  color: #0AA1B2 !important;
+}
+
+.rdrWeekDay {
+  color: #000 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.rdrDayNumber,
+.rdrMonthAndYearPicker>select {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.rdrMonthAndYearWrapper {
+  height: 30px !important;
+  /* padding-top: 0px !important; */
+}
+
+.rdrMonthName,
+.rdrMonthPicker,
+.rdrYearPicker {
+  font-size: 14px !important;
+}
+
+.rdrStaticRangeLabel {
+  font-size: 14px !important;
+  padding: 5px 10px !important;
+}
+
+.rdrMonth{
+  padding: 0 4px 0 8px !important;
+  width: 250px !important;
+}
+
+.width-fix {
+  min-width: 100%
+}
+
+@media only screen and (max-width:465px) {
+  .rdrMonthAndYearPickers {
+    /* flex-direction: column !important; */
+  }
+
+  .rdrWeekDay {
+    font-size: 12px !important;
+  }
+
+  .rdrMonth {
+    padding: 0px !important;
+    width: 200px !important;
+  }
+
+  .rdrDateRangePickerWrapper,
+  .range-date-ok {
+    width: 90% !important;
+  }
+
+  .rdrNextPrevButton{
+    width: 15px !important;
+    margin: 0px !important;
+  }
+
+  .rdrMonthAndYearPickers select{
+    padding: 10px 20px 10px 0px !important;
+  }
+}
+
+@media only screen and (max-width:639px) {
+  .rdrMonths {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+
+  .rdrDateRangePickerWrapper,
+  .range-date-ok {
+    width: 80% !important;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .rdrDateRangePickerWrapper {
+    flex-direction: column-reverse;
+  }
+
+  .rdrStaticRanges {
+    flex-direction: row !important;
+  }
+
+  /* .rdrDateRangePickerWrapper,
+  .range-date-ok {
+    width: 80% !important;
+  } */
+
+  .rdrMonth {
+    padding: 0px 2px !important;
+  }
+
+  .rdrMonthAndYearPickers {
+    margin: 0 auto !important;
+  }
+
+  /* .rdrMonths {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  } */
+
+  .rdrDateRangePickerWrapper {
+    flex-direction: column-reverse;
+  }
+
+  .rdrStaticRanges {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}
+
+@media only screen and (max-width:1023px) {
+  .rdrDateRangePickerWrapper {
+    flex-direction: column-reverse !important;
+  }
+
+  .rdrStaticRanges {
+    flex-direction: row !important;
+  }
+
+  .rdrDefinedRangesWrapper {
+    width: 100% !important;
+    padding-top: 0px !important;
+  }
+}
+
+
+.rmsc .dropdown-content {
+  position: absolute !important;
+  z-index: 13000 !important;
+  top: 100% !important;
+  width: 100% !important;
+  padding-top: 8px !important;
+}
+
+.widthfix {
+  min-width: 100% !important;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DatePicker from "react-multi-date-picker";
 import SimpleFileUpload from "react-simple-file-upload";
 
 const ERemittance = () => {

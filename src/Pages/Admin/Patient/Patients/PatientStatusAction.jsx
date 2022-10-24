@@ -4,12 +4,12 @@ import { Toggle } from "rsuite";
 import CheckIcon from "@rsuite/icons/Check";
 import CloseIcon from "@rsuite/icons/Close";
 
-const PatientStatusAction = ({ row }) => {
-  const status = row?.original?.is_active_client;
+const PatientStatusAction = ({ status }) => {
   const [value, setValue] = useState(status);
+  console.log(status);
 
   return (
-    <div>
+    <div className="flex justify-center">
       <Toggle
         checkedChildren={<CheckIcon />}
         unCheckedChildren={<CloseIcon />}

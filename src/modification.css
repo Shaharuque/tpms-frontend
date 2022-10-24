@@ -1,15 +1,12 @@
 
-
-
 .rs-btn-primary {
     color: #fff;
     color: var(--rs-btn-primary-text);
     background: linear-gradient(to right, rgba(13, 181, 200, 1) 0%, rgba(8, 155, 171, 1) 100%) !important;
     background-color: "#70931b" !important;
     border: none;
+    
 }
-
-
 
 .rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
     color: #fff;
@@ -20,11 +17,9 @@
     box-shadow: none;
 }
 
-
 svg.rs-picker-toggle-caret.rs-icon {
     margin: 0;
 }
-
 
 .rs-nav-tabs.rs-nav-horizontal .rs-nav-bar {
     border-top: 2px solid #e4e4f0 !important;
@@ -37,6 +32,8 @@ svg.rs-picker-toggle-caret.rs-icon {
     width: 100%;
     border-radius: 2px;
    height: 31px;
+   border: none;
+   border-bottom: 3px solid white;
 }
 
 /* picked date align */
@@ -47,7 +44,7 @@ svg.rs-picker-toggle-caret.rs-icon {
     display: inline-block;
     outline: none;
     cursor: pointer;
-    color: #575757;
+    color: #f1efef;
     border: 1px solid #e5e5ea;
     /* padding-left: 44px; */
 }
@@ -112,7 +109,8 @@ svg.rs-picker-toggle-caret.rs-icon {
 }
 
 .badge {
-  
-    text-transform: capitalize;    
-
+    text-transform: capitalize;
+    background: #09aab9;
+    /* box-shadow: rgb(0 0 0 / 10%) 0px 0px 5px 0px, rgb(0 0 0 / 10%) 0px 0px 1px 0px; */
+    box-shadow: rgb(9 169 185 / 80%) 0px 4px 8px -2px, rgb(9 30 66 / 8%) 0px 0px 0px 1px;
 }

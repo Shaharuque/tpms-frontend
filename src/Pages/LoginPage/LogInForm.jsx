@@ -65,7 +65,7 @@ const LogInForm = () => {
         backgroundPosition: "fixed",
       }}
     >
-      <div className="px-7 sm:px-16 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute login-form">
+      <div className="z-10 px-7 sm:px-16 py-7 sm:py-11 bg-white m-4 sm:m-5 shadow-xl border-8 border-secondary rounded-[35px] absolute login-form">
         <div className="">
           <div div className="">
             <img src={logo} alt="TPMS-logo" className="mx-auto mb-3" />
@@ -99,15 +99,15 @@ const LogInForm = () => {
                 />
               </div>
 
-              <label className="label">
+              <label>
                 <span className="label-text-alt">
                   {errors.email?.type === "required" && (
-                    <p className=" text-xs text-red-500">
+                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
                       {errors.email.message}
                     </p>
                   )}
                   {errors.email?.type === "pattern" && (
-                    <p className=" text-xs text-red-500">
+                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
                       {errors.email.message}
                     </p>
                   )}
@@ -146,15 +146,15 @@ const LogInForm = () => {
                 />
               </div>
 
-              <label className="label">
+              <label>
                 <span className="label-text-alt">
                   {errors.password?.type === "required" && (
-                    <p className=" text-xs text-red-500">
+                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
                       {errors.password.message}
                     </p>
                   )}
                   {errors.password?.type === "minLength" && (
-                    <p className=" text-xs text-red-500">
+                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
                       {errors.password.message}
                     </p>
                   )}

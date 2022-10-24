@@ -1,5 +1,5 @@
 import { FaUser, FaUserFriends, FaBoxOpen } from "react-icons/fa";
-import { TbBuildingHospital } from "react-icons/tb";
+import { TbBuildingHospital, TbFileTime } from "react-icons/tb";
 import { BiRename, BiLinkAlt, BiFolderOpen } from "react-icons/bi";
 import {
   BsHouseDoor,
@@ -253,7 +253,12 @@ export const setting = [
     icon: <FiLayers />,
   },
   {
-    link: "sub-activity-setup",
+    link: "cpt-code-exclusion",
+    name: "CPT Code Exclusion(S)",
+    icon: <FiLayers />,
+  },
+  {
+    link: "sub-activity-setup/SubTypeTab",
     name: "Add Service Sub-Type",
     icon: <RiSendPlaneLine />,
   },
@@ -296,6 +301,11 @@ export const setting = [
     link: "unbillable-activity",
     name: "Unbillable Activity",
     icon: <BiFolderOpen />,
+  },
+  {
+    link: "unbillable-time-sheet",
+    name: "Unbillable TimeSheet                        ",
+    icon: <TbFileTime />,
   },
   {
     link: "session-rule",

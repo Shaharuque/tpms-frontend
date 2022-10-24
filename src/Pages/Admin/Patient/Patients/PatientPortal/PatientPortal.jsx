@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { GoAlert } from "react-icons/go";
+import { FcCancel } from "react-icons/fc";
 
 const PatientPortal = () => {
   const { id } = useParams();
@@ -8,6 +10,7 @@ const PatientPortal = () => {
   const [billing, setBilling] = useState(false);
   const [pay, setPay] = useState(false);
   const [email, setEmail] = useState("");
+  const [display, setDisplay] = useState(true);
   console.log(email);
   return (
     <div className="h-[100vh]">
@@ -78,6 +81,21 @@ const PatientPortal = () => {
               <option value="rome">amrrrrrrrrro@aamm.com</option>
             </select>
           </div>
+          {display && (
+            <div className="text-red-500 red-box  border border-gray-300 rounded-sm px-3 font-medium py-[10px]  text-xs w-full flex justify-between items-center gap-2">
+              <span className="flex items-center gap-2">
+                <GoAlert className="text-red-500" /> Patient portal access need
+                to be initiated
+              </span>
+              <span
+                onClick={() => {
+                  setDisplay(false);
+                }}
+              >
+                <FcCancel />
+              </span>
+            </div>
+          )}
           <button className=" py-[5px] mt-2 px-3  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
             Send Invitation
           </button>
