@@ -145,6 +145,8 @@ import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
 import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
 import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
 import PrivateClient from "./Pages/Admin/FormsTemplate/PrivateClient";
+import JsonToHtml from "./Pages/Admin/FormsTemplate/JsonForm/JsonToHtml";
+import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -155,6 +157,11 @@ function App() {
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
           {/* ------------------------form--------------------------- */}
+          <Route path="/forms" element={<Form></Form>}></Route>
+          <Route
+            path="/form-demo-json"
+            element={<JsonToHtml></JsonToHtml>}
+          ></Route>
           <Route
             path="/form-template"
             element={<FormTemplate1></FormTemplate1>}

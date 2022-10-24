@@ -1,10 +1,34 @@
 import TextArea from "antd/lib/input/TextArea";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
+import { FaSignature } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/logo4.png";
+import SignatureModal from "./SignatureManage/SignatureModal";
 
 const PrivateClient = () => {
+  const [caregiverSignature, setCaregiverSignature] = useState(false);
+  const [providerSignature, setProviderSignature] = useState(false);
+  const [ProviderImageURL, setProviderImageURL] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
+  console.log("ProviderImageURL", ProviderImageURL);
+  console.log("imageURL", imageURL);
+  const [file, setFile] = useState();
+
+  console.log("file", file);
+
+  const handleSignatureProvider = () => {
+    setProviderSignature(true);
+  };
+  const handleSignatureCaregiver = () => {
+    setCaregiverSignature(true);
+  };
+  const handleSignatureClose = () => {
+    setCaregiverSignature(false);
+    setProviderSignature(false);
+  };
+
   const { register, handleSubmit } = useForm();
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
@@ -1247,13 +1271,312 @@ const PrivateClient = () => {
               <div className="mt-3">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
-                  maxLength={300}
+                  maxLength={1000}
                   rows={2}
                   placeholder=" Notes"
                   size="large"
-                  className="      "
+                  className=""
                 />
               </div>
+            </div>
+            <div>
+              <span className="form-input-name text-[#207ac7] w-full">
+                What do you like most about yourself?
+              </span>
+              <div className="mt-3">
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={1000}
+                  rows={2}
+                  placeholder=" Notes"
+                  size="large"
+                  className=""
+                />
+              </div>
+            </div>
+            <div>
+              <span className="form-input-name text-[#207ac7] w-full">
+                What are effective coping strategies that you have learned?
+              </span>
+              <div className="mt-3">
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={1000}
+                  rows={2}
+                  placeholder=" Notes"
+                  size="large"
+                  className=""
+                />
+              </div>
+            </div>
+            <div>
+              <span className="form-input-name text-[#207ac7] w-full">
+                What are your goals for therapy?
+              </span>
+              <div className="mt-3">
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={1000}
+                  rows={2}
+                  placeholder=" Notes"
+                  size="large"
+                  className=""
+                />
+              </div>
+            </div>
+            <div className="my-5">
+              <h1 className="form-sub-header border border-blue-700 py-1">
+                SERVICES BEING PROVIDED TO CONSUMER (PLEASE CHECK ALL THAT
+                APPLY)
+              </h1>
+              <div className=" grid grid-cols-2 items-center md:grid-cols-4 lg:grid-cols-4 2xl:grid-cols-4">
+                <div className="flex items-center justify-center border border-blue-700 py-2">
+                  <input
+                    type="checkbox"
+                    name="checkedActive"
+                    {...register("checkedActive")}
+                  />
+                  <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                    Diagnostic Assessment
+                  </span>
+                </div>
+
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Nursing Assessment & Care
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Psychiatric Treatment
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Psychological Testing
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Medication Administration
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Community Support Individual
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Individual Outpatient Services
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Family Outpatient Services
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Group Outpatient Services
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Intensive Family Intervention
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Crisis Stabilization
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Structured Activity Supports
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Psychical Assessment
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Behavior Assistant
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Other
+                    </span>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-center border border-blue-700 py-2">
+                    <input
+                      type="checkbox"
+                      name="checkedActive"
+                      {...register("checkedActive")}
+                    />
+                    <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                      Other
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="flex flex-wrap gap-2 items-center justify-between my-5">
+              <button
+                className="flex items-center text-lg hover:underline hover:text-rose-800 font-medium gap-1 text-[#207ac7]"
+                onClick={handleSignatureProvider}
+              >
+                Provider Signature
+                <FaSignature className="text-lg" />
+              </button>
+              <button
+                className="flex items-center text-lg hover:underline hover:text-rose-800 font-medium gap-1 text-[#207ac7]"
+                onClick={handleSignatureCaregiver}
+              >
+                Caregiver Signature
+                <FaSignature className="text-lg" />
+              </button>
+            </div>
+            {caregiverSignature && (
+              <SignatureModal
+                handleSignatureClose={handleSignatureClose}
+                open={caregiverSignature}
+                setImageURL={setImageURL}
+                setFile={setFile}
+              ></SignatureModal>
+            )}
+
+            {providerSignature && (
+              <SignatureModal
+                handleSignatureClose={handleSignatureClose}
+                open={providerSignature}
+                setImageURL={setProviderImageURL}
+                setFile={setFile}
+              ></SignatureModal>
+            )}
+            <div className="flex items-center justify-between my-12">
+              <button className=" bg-purple-900 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
+                <AiFillCloud /> Save
+              </button>
+              <button className=" bg-cyan-900 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
+                <AiOutlinePrinter /> Print
+              </button>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 items-center justify-between form-footer">
+            <div className="text-black">
+              Demo Institution{" "}
+              <span className=" font-normal">somewhere in america</span>
+            </div>
+            <div>
+              Phone: 000-000-0000, Email: demo@example.com, Fax: 000.000.0000,
+              example.com
             </div>
           </div>
         </form>
