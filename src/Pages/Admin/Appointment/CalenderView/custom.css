@@ -2,22 +2,21 @@
   --blue: #1E88E5;
   --yellow: #FBC02D;
   --green: #4CAF50;
-  --filter-btn: linear-gradient(to right, rgba(216, 74, 69, 1) 0%, rgba(242, 99, 97, 1) 100%);
-  --print-btn: linear-gradient(to right, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%);
 }
 
-override day number color and size .fc-day-number {
+/* override day number color and size  */
+.fc-day-number {
   font-size: 1.5em;
   color: #5c005c;
 }
 
-/* override day title color and size  */
+/* / override day title color and size /  */
 .fc-day-header {
   font-size: 1.5em;
   color: #00b294;
 }
 
-/* Header Button */
+/* / / Header Button / /  */
 .fc .fc-button-group button,
 .fc .fc-button-group .fc-button-active,
 .fc .fc-button-primary {
@@ -50,30 +49,24 @@ override day number color and size .fc-day-number {
   background: var(--yellow) !important;
 }
 
-/* Header Title */
 .fc-toolbar-title {
   color: #495057;
 }
 
-/* Weeks Name */
 .fc .fc-col-header-cell-cushion {
   color: #74788D;
 }
 
-/* filter, calendar and print button */
-.cal-manage-btn {
-  color: #fff;
-  padding: 7px 8px;
-  border-radius: 2px;
-  font-size: 12px;
+.fc-daygrid-block-event .fc-event-time,
+.fc-daygrid-block-event .fc-event-title {
+  color: black;
 }
 
-.filter-btn {
-  background: var(--filter-btn);
-  border-color: #d84a45;
+.fc-v-event .fc-event-title {
+  color: black;
 }
 
-.print-btn {
-  background: var(--print-btn);
-  border-color: #089bab;
+.fc-timegrid-event .fc-event-time {
+  color: black;
+  font-weight: 700;
 }
