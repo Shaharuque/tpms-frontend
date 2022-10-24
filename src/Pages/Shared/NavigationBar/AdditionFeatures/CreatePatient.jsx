@@ -1,10 +1,12 @@
 import { Dialog } from "@mui/material";
+import { Modal } from "antd";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const CreatePatient = ({ handleClose }) => {
+const CreatePatient = ({ handleClose, patientClicked }) => {
+  console.log(patientClicked);
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
@@ -12,12 +14,16 @@ const CreatePatient = ({ handleClose }) => {
   };
   return (
     <div>
-      <Dialog
-        open={handleClose}
-        // onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
+      <Modal
+        open={patientClicked} //aikhaney true na likey ekta state ana lagbey tar value 'true'
+        centered
+        footer={null}
+        bodyStyle={{ padding: "0" }}
+        width={500}
+        closable={false}
+        className="box rounded-xl"
       >
-        <div className="px-5 py-2 box sm:w-[500px]">
+        <div className="px-5 py-2">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400">
               Create Patient
@@ -217,7 +223,7 @@ const CreatePatient = ({ handleClose }) => {
             </div>
           </form>
         </div>
-      </Dialog>
+      </Modal>
       <hr />
     </div>
   );

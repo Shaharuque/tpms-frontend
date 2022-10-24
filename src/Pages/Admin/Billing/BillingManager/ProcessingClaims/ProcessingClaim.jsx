@@ -438,10 +438,7 @@ const ProcessingClaim = () => {
                             />
                           </div>
                         </div>
-                        <div
-                          ref={refClose}
-                          className="absolute z-10  2xl:ml-[20] shadow-xl"
-                        >
+                        <div ref={refClose} className="absolute z-10 shadow-xl">
                           {open && (
                             <div>
                               <div>
@@ -563,7 +560,7 @@ const ProcessingClaim = () => {
                             </div>
                             <div
                               ref={refClose}
-                              className="absolute z-10  2xl:ml-[20] shadow-xl"
+                              className="absolute z-10 shadow-xl"
                             >
                               {open && (
                                 <div>

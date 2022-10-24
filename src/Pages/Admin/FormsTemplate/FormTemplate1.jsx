@@ -1,32 +1,40 @@
 import TextArea from "antd/lib/input/TextArea";
-import React, { useState, useRef } from "react";
-import Popup from "reactjs-popup";
-import SignaturePad from "react-signature-canvas";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/logo4.png";
 import "../../Style/form.css";
+import SignatureModal from "./SignatureManage/SignatureModal";
+import { FaSignature } from "react-icons/fa";
+import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
 
 const FormTemplate1 = () => {
-  const [imageURL, setImageURL] = useState(null); // create a state that will contain our image url
+  const [caregiverSignature, setCaregiverSignature] = useState(false);
+  const [providerSignature, setProviderSignature] = useState(false);
+  const [ProviderImageURL, setProviderImageURL] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
+  console.log("ProviderImageURL", ProviderImageURL);
+  console.log("imageURL", imageURL);
+  const [file, setFile] = useState();
 
-  const sigCanvas = useRef({});
+  console.log("file", file);
 
-  console.log(imageURL);
-  /* a function that uses the canvas ref to clear the canvas 
-  via a method given by react-signature-canvas */
-  const clear = () => sigCanvas.current.clear();
-
-  /* a function that uses the canvas ref to trim the canvas 
-  from white spaces via a method given by react-signature-canvas
-  then saves it in our state */
-  const save = () =>
-    setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
+  const handleSignatureProvider = () => {
+    setProviderSignature(true);
+  };
+  const handleSignatureCaregiver = () => {
+    setCaregiverSignature(true);
+  };
+  const handleSignatureClose = () => {
+    setCaregiverSignature(false);
+    setProviderSignature(false);
+  };
 
   const { register, handleSubmit } = useForm();
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
     console.log(data);
+    console.log(notes);
   };
   return (
     <div className="form-border 2xl:w-[70%] w-full mx-auto p-5">
@@ -294,8 +302,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="b_1"
                   />
                   B-1 Conduct preference assessments
@@ -305,8 +312,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="b_2"
                   />
                   B-2 Assist with individualized assessment procedures (e.g.,
@@ -317,8 +323,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="b_3"
                   />
                   B-3 Assist with functional assessment procedures
@@ -333,8 +338,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_1"
                   />
                   C-1 Identify the essential components of a written skill
@@ -345,8 +349,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_2"
                   />
                   C-2 Prepare for the session as required by the skill
@@ -357,8 +360,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_3"
                   />
                   C-3 Use contingencies of reinforcement (e.g.,
@@ -370,8 +372,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_4"
                   />
                   C-4 Implement discrete-trial teaching procedures
@@ -381,8 +382,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_4"
                   />
                   C-5 Implement naturalistic teaching procedures (e.g.,
@@ -393,8 +393,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_6"
                   />
                   C-6 Implement task analyzed chaining procedures.
@@ -404,8 +403,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_7"
                   />
                   C-7 Implement discrimination training
@@ -415,8 +413,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_8"
                   />
                   C-8 Implement stimulus control transfer procedures
@@ -426,8 +423,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_9"
                   />
                   C-9 Implement prompt and prompt fading procedures
@@ -437,8 +433,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_10"
                   />
                   C-10 Implement generalization and maintenance procedures
@@ -448,8 +443,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_11"
                   />
                   C-11 Implement shaping procedures
@@ -459,8 +453,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="c_12"
                   />
                   C-12 Implement token economy procedures
@@ -475,8 +468,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="d_1"
                   />
                   D-1 Identify essential components of a written behavior
@@ -487,8 +479,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="d_2"
                   />
                   D-2 Describe common functions of behavior
@@ -498,8 +489,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="d_3"
                   />
                   D-3 Implement interventions based on modification of
@@ -511,8 +501,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="d_4"
                   />
                   D-4 Implement differential reinforcement procedures (e.g.,
@@ -523,8 +512,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="d_5"
                   />
                   D-5 Implement extinction procedures
@@ -534,8 +522,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="d_6"
                   />
                   D-6 Implement crisis/emergency procedures according to
@@ -551,8 +538,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="e_1"
                   />
                   E-1 Effectively communicate with a supervisor in an ongoing
@@ -563,8 +549,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="e_2"
                   />
                   E-2 Actively seek clinical direction from supervisor in a
@@ -575,8 +560,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="e_3"
                   />
                   E-3 Report other variables that might affect the client in a
@@ -587,8 +571,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="e_4"
                   />
                   E-4 Generate objective session notes for service verification
@@ -600,8 +583,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="e_5"
                   />
                   E-5 Comply with applicable legal, regulatory, and workplace
@@ -619,8 +601,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="f_1"
                   />
                   F-1 Describe the BACB’s RBT supervision requirements and the
@@ -631,8 +612,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="f_2"
                   />
                   F-2 Respond appropriately to feedback and maintain or improve
@@ -643,8 +623,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="f_3"
                   />
                   F-3 Communicate with stakeholders (e.g., family, caregivers,
@@ -655,8 +634,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="f_4"
                   />
                   F-4 Maintain professional boundaries (e.g., avoid dual
@@ -667,8 +645,7 @@ const FormTemplate1 = () => {
                 <label className="form-check-label">
                   <input
                     type="checkbox"
-                    class="form-check-input"
-                    className="mr-3"
+                    className="mx-3 form-check-input"
                     name="f_5"
                   />
                   F-5 Maintain client dignity
@@ -676,79 +653,82 @@ const FormTemplate1 = () => {
               </div>
             </>
           </div>
-
-          <div>
-            <h1 className="form-inner-head my-4">SUPERVISION OVERVIEW:</h1>
-
-            <div className="mt-3">
-              <TextArea
-                onChange={(e) => setNotes(e.target.value)}
-                maxLength={2}
-                rows={5}
-                placeholder=" Notes"
-                size="large"
-                className=""
-              />
-            </div>
-          </div>
-          <div>
-            <h1 className="form-inner-head my-4">FEEDBACK TO SUPERVISOR:</h1>
-
-            <div className="mt-3">
-              <TextArea
-                onChange={(e) => setNotes(e.target.value)}
-                maxLength={2}
-                rows={5}
-                placeholder=" Notes"
-                size="large"
-                className=""
-              />
-            </div>
-          </div>
         </form>
+      </div>
+      <div>
+        <h1 className="form-inner-head mt-4">SUPERVISION OVERVIEW:</h1>
+
+        <div className="mt-3">
+          <TextArea
+            onChange={(e) => setNotes(e.target.value)}
+            maxLength={300}
+            rows={5}
+            placeholder=" Notes"
+            size="large"
+            className=""
+          />
+        </div>
+      </div>
+      <div>
+        <h1 className="form-inner-head mt-4">FEEDBACK TO SUPERVISOR:</h1>
+
+        <div className="mt-3">
+          <TextArea
+            onChange={(e) => setNotes(e.target.value)}
+            maxLength={300}
+            rows={5}
+            placeholder=" Notes"
+            size="large"
+            className=""
+          />
+        </div>
       </div>
 
       <div>
-        <h1>Signature Pad Example</h1>
-        <Popup
-          modal
-          trigger={<button>Open Signature Pad</button>}
-          closeOnDocumentClick={false}
-        >
-          {(close) => (
-            <>
-              <SignaturePad
-                ref={sigCanvas}
-                canvasProps={{
-                  className: "signatureCanvas",
-                }}
-              />
-              {/* Button to trigger save canvas image */}
-              <button onClick={save}>Save</button>
-              <button onClick={clear}>Clear</button>
-              <button onClick={close}>Close</button>
-            </>
-          )}
-        </Popup>
-        <br />
-        <br />
-        {/* if our we have a non-null image url we should 
-      show an image and pass our imageURL state to it*/}
-        {imageURL ? (
-          <img
-            src={imageURL}
-            alt="my signature"
-            style={{
-              display: "block",
-              margin: "0 auto",
-              border: "1px solid black",
-              width: "150px",
-            }}
-          />
-        ) : null}
+        <div className="flex flex-wrap gap-2 items-center justify-between my-5">
+          <button
+            className="flex items-center text-lg hover:underline hover:text-rose-800 font-medium gap-1 text-[#207ac7]"
+            onClick={handleSignatureProvider}
+          >
+            Provider Signature
+            <FaSignature className="text-lg" />
+          </button>
+          <button
+            className="flex items-center text-lg hover:underline hover:text-rose-800 font-medium gap-1 text-[#207ac7]"
+            onClick={handleSignatureCaregiver}
+          >
+            Caregiver Signature
+            <FaSignature className="text-lg" />
+          </button>
+        </div>
+        {caregiverSignature && (
+          <SignatureModal
+            handleSignatureClose={handleSignatureClose}
+            open={caregiverSignature}
+            setImageURL={setImageURL}
+            setFile={setFile}
+          ></SignatureModal>
+        )}
+
+        {providerSignature && (
+          <SignatureModal
+            handleSignatureClose={handleSignatureClose}
+            open={providerSignature}
+            setImageURL={setProviderImageURL}
+            setFile={setFile}
+          ></SignatureModal>
+        )}
+        <div className="flex items-center justify-between my-12">
+          <button className=" bg-purple-900 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
+            <AiFillCloud /> Save
+          </button>
+          <button className=" bg-cyan-900 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
+            <AiOutlinePrinter /> Print
+          </button>
+        </div>
       </div>
 
-      <div className="flex items-center justify-between form-footer">
+      <div className="flex flex-wrap gap-2 items-center justify-between form-footer">
         <div className="text-black">
           Demo Institution{" "}
           <span className=" font-normal">somewhere in america</span>
