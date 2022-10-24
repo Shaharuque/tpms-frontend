@@ -2,6 +2,8 @@
   --blue: #1E88E5;
   --yellow: #FBC02D;
   --green: #4CAF50;
+  --filter-btn: linear-gradient(to right, rgba(216, 74, 69, 1) 0%, rgba(242, 99, 97, 1) 100%);
+  --print-btn: linear-gradient(to right, rgba(8, 155, 171, 1) 0%, rgba(13, 181, 200, 1) 100%);
 }
 
 override day number color and size
@@ -45,11 +47,31 @@ override day number color and size
   background: var(--yellow) !important;
 }
 
+/* Header Title */
 .fc-toolbar-title{
   color: #495057;
 }
 
+/* Weeks Name */
 .fc .fc-col-header-cell-cushion{
   color: #74788D;
+}
+
+/* filter, calendar and print button */
+.cal-manage-btn{
+  color: #fff;
+  padding: 7px 8px;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.filter-btn{
+  background: var(--filter-btn);
+  border-color: #d84a45;
+}
+
+.print-btn{
+  background: var(--print-btn);
+  border-color: #089bab;
 }
 
