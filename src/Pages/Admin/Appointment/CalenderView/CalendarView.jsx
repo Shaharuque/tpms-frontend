@@ -52,14 +52,19 @@ const CalenderView = () => {
   const events = [];
   const [selectedDate, setSelectedDate] = useState();
   const [open, setOpen] = useState(false);
+  const [eventId,setEventId]=useState()
   const handleClose = () => {
     setOpen(false);
   };
 
+  // For creating new event
   const createEvent = (selectInfo) => {
     console.log(selectInfo);
     setOpen(!open);
     setSelectedDate(selectInfo?.startStr);
+    if(eventId){
+      setEventId(null)
+    }
     // // const event = {
     // //   id: 1, // You must use a custom id generator
     // //   title: "new Event",
@@ -92,8 +97,12 @@ const CalenderView = () => {
   };
   //console.log(Events);
 
-  const showEvent = () => {
-    alert("Clicked");
+  // for showing clicked event details basedon id using same CustomModal.jsx
+  const showEventDetails = (id) => {
+    console.log("Clicked event id", id);
+    setEventId(id)
+    setSelectedDate()
+    setOpen(!open);
   };
 
   const {
@@ -134,7 +143,12 @@ const CalenderView = () => {
           editable={true}
           selectable={true}
           select={createEvent}
-          eventClick={showEvent}
+          eventClick={(arg) => {   
+            console.log(arg.event.extendedProps._id)
+            showEventDetails(arg.event.extendedProps._id)   //jei event a click korbo tar id showEvent func a pass[callback method] 
+          }
+          }
+          // eventClick={()=>showEvent(arg)}
           displayEventTime={true}
           eventTimeFormat={{
             hour: "numeric",
@@ -142,14 +156,15 @@ const CalenderView = () => {
             meridiem: "short",
           }}
         />
-        {open && (
+        {open ? (
           <CustomModal
             selectedDate={selectedDate}
             handleClose={handleClose}
             clicked={open}
+            eventId={eventId ? eventId : null}
             refetch={refetch}
           ></CustomModal>
-        )}
+        ):null}
       </div>
     </div>
   );
