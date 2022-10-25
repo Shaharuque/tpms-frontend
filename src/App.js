@@ -145,8 +145,11 @@ import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
 import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
 import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
 import PrivateClient from "./Pages/Admin/FormsTemplate/PrivateClient";
+import OutpatientTreatmentRequest from "./Pages/Admin/FormsTemplate/OutpatientTreatmentRequest";
 import JsonToHtml from "./Pages/Admin/FormsTemplate/JsonForm/JsonToHtml";
 import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
+import ClinicTreatment from "./Pages/Admin/FormsTemplate/ClinicTreatment";
+import AntDate from "./Testing/AntDatePicker/AntDate";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -182,6 +185,14 @@ function App() {
             path="/private-client"
             element={<PrivateClient></PrivateClient>}
           ></Route>
+          <Route
+            path="/outpatient-treatment-request"
+            element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
+          ></Route>
+          <Route
+            path="/clinic-treatment"
+            element={<ClinicTreatment></ClinicTreatment>}
+          ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
@@ -209,12 +220,7 @@ function App() {
 
           {/*Testing */}
           <Route path="/search" element={<CustomSearch></CustomSearch>}></Route>
-          <Route
-            path="/auth-table"
-            element={<CustomSearch></CustomSearch>}
-          ></Route>
           <Route path="test" element={<AntTableTest></AntTableTest>}></Route>
-          {/* <Route path="expandTable" element={<ExpendedTable></ExpendedTable>} /> */}
           <Route path="table-api" element={<TableApi></TableApi>}></Route>
           <Route
             path="/details/:id"
@@ -224,6 +230,7 @@ function App() {
             path="/testing"
             element={<TestingTable></TestingTable>}
           ></Route>
+          <Route path="/test-date" element={<AntDate></AntDate>}></Route>
           {/* Testing End */}
 
           <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>

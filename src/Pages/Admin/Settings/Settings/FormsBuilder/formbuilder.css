@@ -1,0 +1,108 @@
+.form-control {
+    display: flex;
+    flex-direction: inherit ;
+}
+
+.form-wrap.form-builder .btn-group>.btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+    border-radius: 0;
+    display: none;
+}
+
+/* .form-wrap.form-builder .frmb li.form-field {
+    position: relative;
+    padding: 6px;
+    clear: both;
+    margin-left: 0;
+    margin-bottom: 3px;
+    background-color: #1813130d !important;
+    transition: background-color 250ms ease-in-out,margin-top 400ms;
+} */
+
+/* button none */
+
+.form-wrap.form-builder .form-actions {
+    display: none !important;
+    /* float: right; */
+    /* margin-top: 5px; */
+}
+
+
+.form-wrap.form-builder .frmb li.form-field {
+    position: relative;
+    padding: 6px;
+    clear: both;
+    margin-left: 0;
+    margin-bottom: 3px;
+    background-color: #1813130d !important ;
+    transition: background-color 250ms ease-in-out,margin-top 400ms;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
+    margin: 0px 0px 10px 0px !important;
+}
+
+
+
+.form-wrap.form-builder .frmb-control li {
+    cursor: move;
+    list-style: none;
+    margin: 0 0 -1px 0;
+    padding: 10px;
+    text-align: left;
+    background: #f3f3f3 !important;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px !important;
+    margin: 1px 2px 8px 2px !important;
+}
+
+div#frmb-1666084882193-cb-wrap {
+    position: unset !important;
+    inset: unset !important;
+}
+
+@media (max-width: 481px){ 
+.form-wrap.form-builder .cb-wrap {
+    width: 50px !important;
+}
+}
+
+.btnstyle{
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px;
+    background: #f3f3f3;
+    border: 2px solid #00a2b1;
+}
+
+button.btn-xs.btn.btn-warning.selected {
+    background: red;
+    color: white;
+ }
+
+button.btn-xs.btn.btn-default {
+    background: green;
+    color: white;
+    margin: 0 6px 2px 1px;
+}
+
+
+.rendered-form .btn, .rendered-form .form-control {
+    background-image: none;
+    background: whitesmoke !important;
+    box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px 0px, rgb(0 0 0 / 6%) 0px 1px 2px 0px !important;
+}
+
+.rendered-form .radio-group.formbuilder-radio[label]{
+    background-color: orange !important;
+}
+
+/* .formbuilder-radio [label] {
+    background: orange !important;
+    font-size: 20px !important;
+} */
+
+
+
+.radio-group {
+    color: black;
+}

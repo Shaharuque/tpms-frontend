@@ -50,7 +50,6 @@ const CreateAppointment = ({ handleClose, clicked }) => {
     setOpen(false);
     setDate(null);
   };
-
   const handleCancelDate = () => {
     setOpen(false);
     setDate(new Date());

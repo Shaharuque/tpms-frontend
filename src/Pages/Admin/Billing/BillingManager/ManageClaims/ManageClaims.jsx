@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Table } from "antd";
+import { Dropdown, Space, Table } from "antd";
 import { BsThreeDots } from "react-icons/bs";
+import ManageTableAction from "../../../Appointment/ListView/ListView/ManageTableAction";
+import ManageClaimsTableAction from "./ManageClaimAction/ManageClaimsTableAction";
 
 const ManageClaims = () => {
   const [active, setActive] = useState(false);
@@ -153,16 +155,32 @@ const ManageClaims = () => {
       sortOrder: sortedInfo.columnKey === "M2" ? sortedInfo.order : null,
       ellipsis: true,
 
-      render: (_, { id }) => {
-        //console.log("tags : ", lock);
-        return (
-          <div className="flex justify-center text-teal-700">
-            <div>
-              <BsThreeDots />
-            </div>
-          </div>
-        );
-      },
+      // render: (_, { id }) => {
+      //   //console.log("tags : ", lock);
+      //   return (
+      //     <div className="flex justify-center text-teal-700">
+      //       <div>
+      //         <BsThreeDots />
+      //       </div>
+      //     </div>
+      //   );
+      // },
+
+      render: (_, { id }) => (
+        <div className="flex justify-center">
+          <Dropdown
+            overlay={<ManageClaimsTableAction></ManageClaimsTableAction>}
+            trigger={["click"]}
+            overlayStyle={{ zIndex: "100" }}
+          >
+            <button onClick={(e) => e.preventDefault()}>
+              <Space>
+                <BsThreeDots />
+              </Space>
+            </button>
+          </Dropdown>
+        </div>
+      ),
     },
   ];
 
