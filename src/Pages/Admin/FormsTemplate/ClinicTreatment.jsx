@@ -692,7 +692,9 @@ const ClinicTreatment = () => {
               5. Overall Response to Treatment
               <span className="text-rose-500">(check all that apply)</span>:
             </span>
-            <span></span>
+            <div className="text-rose-500 font-regular text-lg">
+              Client responded positively to ABA therapy today exhibited by:
+            </div>
             <div className=" flex items-center flex-wrap gap-x-1 gap-y-2  my-2">
               <div className="flex ml-1  mr-2 items-center ">
                 <input

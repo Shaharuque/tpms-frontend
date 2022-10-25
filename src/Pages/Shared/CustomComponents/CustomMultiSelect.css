@@ -25,6 +25,7 @@
   width: 100% !important;
   border-radius: 0px !important;
   /* border-radius: var(--rmsc-radius); */
+  border: 0px solid var(--rmsc-border) !important;
 }
 
 .Global .dropdown-container:focus-within {
