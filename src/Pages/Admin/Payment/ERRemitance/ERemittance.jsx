@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+import CustomFileUploader from "../../../Shared/CustomComponents/CustomFileUploader";
+
+const ERemittance = () => {
+  const [file, setFile] = useState("");
+  const [file2, setFile2] = useState("");
+
+  console.log(file);
+  console.log(file2);
+
+  return (
+    <div className="h-[100vh]">
+      <h1 className="text-lg mb-5 text-orange-400">E-Remittance</h1>
+      <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3  gap-x-6 gap-y-2 ">
+        <div className="mx-auto">
+          <CustomFileUploader
+            signatureUpload={file}
+            setSignatureUpload={setFile}
+          ></CustomFileUploader>
+        </div>
+        <div className="mx-auto">
+          <button className="pms-button">Import ERA</button>
+        </div>
+        <div className="mx-auto">
+          <CustomFileUploader
+            signatureUpload={file2}
+            setSignatureUpload={setFile2}
+          ></CustomFileUploader>
+        </div>
+
+        <div className="mx-auto">
+          <h4>Billed Amount :</h4>
+          <h4>Amount Denied :</h4>
+        </div>
+        <div className="mx-auto">
+          <h4>Adjusted Amount :</h4>
+          <h4>Net Payable :</h4>
+        </div>
+        <div className="mx-auto">
+          <h4>Pat Res Amount :</h4>
+          <h4>Total Check Amount :</h4>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ERemittance;

@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import ERemittance from "./Pages/Pages/ERemittance";
 import ContractRateEditAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
 //For testing purpose
@@ -150,6 +149,7 @@ import JsonToHtml from "./Pages/Admin/FormsTemplate/JsonForm/JsonToHtml";
 import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
 import ClinicTreatment from "./Pages/Admin/FormsTemplate/ClinicTreatment";
 import AntDate from "./Testing/AntDatePicker/AntDate";
+import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 
 function App() {
   const handle = useFullScreenHandle();
