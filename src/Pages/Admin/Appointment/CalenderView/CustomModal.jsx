@@ -1,395 +1,160 @@
-import { Dialog, Switch } from "@mui/material";
-import { Modal } from "antd";
-import React, { useEffect, useState } from "react";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import React from "react";
 import { useForm } from "react-hook-form";
-import AppoinmentMultiSelection from "../../../Shared/CustomComponents/AppoinmentMultiSelection";
+import { Modal, Switch } from "antd";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
-const CustomModal = ({ handleClose, open, patient_id }) => {
-  const [tableData, setTableData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [billable, setBillable] = useState(true);
-  const [recurrence, setRecurrence] = useState(false);
-  const [daily, setDaily] = useState(false);
-  // const [open, setOpen] = useState(false);
-  const [date, setDate] = useState(new Date());
+const CustomModal = ({ handleClose, clicked }) => {
   const { register, handleSubmit, reset } = useForm();
-
   React.useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        check_date: date ? date.toLocaleDateString() : null,
+        // check_date: date ? date.toLocaleDateString() : null,
       });
     }, 0);
     // }, [date.toLocaleDateString()]);
-  }, []);
+  }, [reset]);
 
   const onSubmit = (data) => {
     console.log(data);
-    reset();
+    const title = "Me Co: Si Du";
+    const start = data?.from_date + "T" + data?.from_time;
+    const end = data?.from_date + "T" + data?.to_time;
+    console.log(start, end);
+    const final = { title, ...data, start, end };
+    console.log(JSON.stringify(final));
+    if (data) {
+      //sending product to DB through API
+      fetch("http://localhost:8800/api/scheduler/", {
+        method: "POST",
+        body: JSON.stringify(final),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((err) => console.log(err));
+    }
+    // reset();
   };
-
-  // --------------------------------------------------Multi-Select-------------------------------
-  const [value, setValue] = useState([]);
-  const data = ["Eugenia", "Bryan", "Linda", "Eugenia", "Bryan", "Linda"].map(
-    (item) => ({
-      label: item,
-      value: item,
-    })
-  );
-
-  // //   fetch data
-  // useEffect(() => {
-  //   setLoading(true);
-  //   fetch("../../../All_Fake_Api/PatientAuthorization.json")
-  //     .then((res) => res.json())
-  //     .then((d) => {
-  //       setTableData(d);
-  //       setLoading(false);
-  //     });
-  // }, []);
-  // console.log(tableData, "tableData");
-
   return (
     <div>
-      <div>
-        <Modal
-          open={open} //aikhaney true na likey ekta state ana lagbey tar value 'true'
-          centered
-          footer={null}
-          bodyStyle={{ padding: "0" }}
-          width={550}
-          closable={false}
-          className="box rounded-xl"
-          // onClose={handleClose}
-          // aria-labelledby="responsive-dialog-title"
-        >
-          <div className="px-5 py-2">
-            <div className="flex items-center justify-between">
-              <h1 className="text-lg text-left text-orange-400 ">
-                Add Appointment
-              </h1>
-              <IoCloseCircleOutline
-                onClick={handleClose}
-                className="text-gray-600 text-2xl hover:text-primary"
-              />
-            </div>
+      <Modal
+        open={clicked} //aikhaney true na likey ekta state ana lagbey tar value 'true'
+        centered
+        footer={null}
+        bodyStyle={{ padding: "0" }}
+        width={500}
+        closable={false}
+        className="box rounded-xl"
+        // onClose={handleClose}
+        // aria-labelledby="responsive-dialog-title"
+      >
+        <div className="px-5 py-2">
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg text-left text-orange-400 ">
+              Add Appointment
+            </h1>
+            <IoCloseCircleOutline
+              onClick={handleClose}
+              className="text-gray-600 text-2xl hover:text-primary"
+            />
+          </div>
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
 
-            <div className="bg-gray-200 py-[1px] mt-3"></div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1">
-                <span className="text-xs ml-1 text-gray-600 font-medium">
-                  Active Patient
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1 md:gap-2">
+              <label className="label">
+                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                  Patient Name
                 </span>
-                <div className="col-span-2">
-                  <Switch
-                    defaultChecked
-                    size="small"
-                    onClick={() => {
-                      setBillable(!billable);
-                    }}
-                  />
-                  <label
-                    className="form-check-label inline-block font-medium ml-2 text-xs text-gray-600"
-                    htmlFor="flesmwitchCheckDefault"
-                  >
-                    {billable ? "Billable" : "Non-Billable"}
-                  </label>
-                </div>
-
-                <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Patient Name
-                  </span>
-                </label>
-                <select
-                  className="border border-gray-300  col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
-                  {...register("patients")}
-                >
-                  <option value=""></option>
-                  <option value="single">single</option>
-                  <option value="married">married</option>
-                </select>
-                <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Auth
-                  </span>
-                </label>
-                <select
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
-                  {...register("Auth")}
-                >
-                  <option value=""></option>
-                  <option value="single">single</option>
-                  <option value="married">married</option>
-                </select>
-                <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Service
-                  </span>
-                </label>
-                <select
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
-                  {...register("service")}
-                >
-                  <option value=""></option>
-                  <option value="single">single</option>
-                  <option value="married">married</option>
-                </select>
-                <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Provider Name
-                  </span>
-                </label>
-                {billable ? (
-                  <select
-                    className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
-                    {...register("provider")}
-                  >
-                    <option value=""></option>
-                    <option value="single">single</option>
-                    <option value="married">married</option>
-                  </select>
-                ) : (
-                  <div className="col-span-2 ml-1">
-                    <AppoinmentMultiSelection />
-                  </div>
-                )}
-                <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    POS
-                  </span>
-                </label>
-                <select
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
-                  {...register("pos")}
-                >
-                  <option value=""></option>
-                  <option value="single">single</option>
-                  <option value="married">married</option>
-                </select>
-                {/* calender */}
-                <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    From Date
-                  </span>
-                </label>
-                <input
-                  name="check_date"
-                  readOnly
-                  // onClick={() => setOpen(!open)}
-                  value={date ? date.toLocaleDateString() : "Select a Date"}
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
-                  {...register("check_date")}
-                />
-
-                {/* Custom Calender End */}
-                {/* <label className="label">
-                <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
+              </label>
+              <select
+                className="border border-gray-300  col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full"
+                {...register("patient")}
+              >
+                <option value=""></option>
+                <option value="Duck duck">Duck duck</option>
+                <option value="Ashni Soni">Ashni Soni</option>
+              </select>
+              <label className="label">
+                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                  Auth
+                </span>
+              </label>
+              <select
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full"
+                {...register("auth")}
+              >
+                <option value=""></option>
+                <option value="Cigna Authorization">Cigna Authorization</option>
+                <option value="Baffa Authorization">Baffa Authorization</option>
+              </select>
+              <label className="label">
+                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                  Provider
+                </span>
+              </label>
+              <select
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full"
+                {...register("provider")}
+              >
+                <option value=""></option>
+                <option value="Max Auto">Max Auto</option>
+                <option value="Gomex twin">Gomex twin</option>
+              </select>
+              <label className="label">
+                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
                   From Date
                 </span>
               </label>
               <input
-                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[3px] mx-1 text-[12px] w-full"
                 type="date"
-                {...register("check_Date")}
-              /> */}
-                <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    From Time
-                  </span>
-                </label>
-                <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-3  gap-1">
-                  <input
-                    className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                    type="time"
-                    {...register("to_time")}
-                  />
-                  <div className="text-xs text-gray-600 mx-auto mt-2">
-                    To Time
-                  </div>
-                  <input
-                    className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                    type="time"
-                    {...register("from_time")}
-                  />
-                </div>
-                <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Status
-                  </span>
-                </label>
-                <select
-                  className="border border-gray-300 rounded-sm px-2 col-span-2 py-[1px] mx-1 text-xs w-full"
-                  {...register("status")}
-                >
-                  <option value=""></option>
-                  <option value="single">single</option>
-                  <option value="married">married</option>
-                </select>
-              </div>
+                {...register("from_date")}
+              />
 
-              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5 mr-2 gap-1">
-                <div className="">
-                  <Switch
-                    size="small"
-                    onClick={() => {
-                      setRecurrence(!recurrence);
-                    }}
-                  />
-                  <label
-                    className="form-check-label  font-medium inline-block ml-2 text-xs text-gray-600"
-                    htmlFor="flesmwitchCheckDefault"
-                  >
-                    Recurrence Pattern?
-                  </label>
-                </div>
-                <div>
-                  {recurrence && (
-                    <input
-                      className="border border-gray-300 col-span-2 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
-                      type="date"
-                      {...register("check_Date")}
-                    />
-                  )}
-                </div>
-                {recurrence && (
-                  <>
-                    <div>
-                      <Switch
-                        size="small"
-                        onClick={() => {
-                          setDaily(!daily);
-                        }}
-                      />
-                      <label
-                        className="form-check-label font-medium inline-block ml-2 text-xs text-gray-600"
-                        htmlFor="flesmwitchCheckDefault"
-                      >
-                        Daily
-                      </label>
-                    </div>
-                    {daily && (
-                      <div className=" grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-1">
-                        <div className="flex ml-1 mt-1 items-center">
-                          <input
-                            type="checkbox"
-                            // checked={value ? true : false}
-                            name="patient"
-                            // onClick={() => {
-                            //   setValue(!value);
-                            // }}
-                          />
-                          <span className="text-xs ml-1 text-gray-600 font-normal">
-                            SU
-                          </span>
-                        </div>
-                        <div className="flex ml-1 mt-1 items-center">
-                          <input
-                            type="checkbox"
-                            // checked={value ? true : false}
-                            name="patient"
-                            // onClick={() => {
-                            //   setValue(!value);
-                            // }}
-                          />
-                          <span className="text-xs ml-1 text-gray-600 font-normal">
-                            MO
-                          </span>
-                        </div>
-                        <div className="flex ml-1 mt-1 items-center">
-                          <input
-                            type="checkbox"
-                            // checked={value ? true : false}
-                            name="patient"
-                            // onClick={() => {
-                            //   setValue(!value);
-                            // }}
-                          />
-                          <span className="text-xs ml-1 text-gray-600 font-normal">
-                            TU
-                          </span>
-                        </div>
-                        <div className="flex ml-1 mt-1 items-center">
-                          <input
-                            type="checkbox"
-                            // checked={value ? true : false}
-                            name="patient"
-                            // onClick={() => {
-                            //   setValue(!value);
-                            // }}
-                          />
-                          <span className="text-xs ml-1 text-gray-600 font-normal">
-                            WE
-                          </span>
-                        </div>
-                        <div className="flex ml-1 mt-1 items-center">
-                          <input
-                            type="checkbox"
-                            // checked={value ? true : false}
-                            name="patient"
-                            // onClick={() => {
-                            //   setValue(!value);
-                            // }}
-                          />
-                          <span className="text-xs ml-1 text-gray-600 font-normal">
-                            TH
-                          </span>
-                        </div>
-                        <div className="flex ml-1 mt-1 items-center">
-                          <input
-                            type="checkbox"
-                            // checked={value ? true : false}
-                            name="patient"
-                            // onClick={() => {
-                            //   setValue(!value);
-                            // }}
-                          />
-                          <span className="text-xs ml-1 text-gray-600 font-normal">
-                            FR
-                          </span>
-                        </div>
-                        <div className="flex ml-1 mt-1 items-center">
-                          <input
-                            type="checkbox"
-                            // checked={value ? true : false}
-                            name="patient"
-                            // onClick={() => {
-                            //   setValue(!value);
-                            // }}
-                          />
-                          <span className="text-xs ml-1 text-gray-600 font-normal">
-                            SA
-                          </span>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
+              <label className="label">
+                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                  From
+                </span>
+              </label>
+              <input
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[3px] mx-1 text-[12px] w-full"
+                type="time"
+                {...register("from_time")}
+              />
 
-              <div className="bg-gray-200 py-[1px] mt-3"></div>
-              <div className=" flex items-end justify-end mt-2">
+              <label className="label">
+                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                  To
+                </span>
+              </label>
+              <input
+                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[3px] mx-1 text-[12px] w-full"
+                type="time"
+                {...register("to_time")}
+              />
+
+              <div className="flex justify-start  mt-2">
                 <button
-                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                  className=" py-[5px] font-normal px-3 mr-1 text-[12px]  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                   type="submit"
                 >
                   Add Appointment
                 </button>
-
                 <button
-                  className="py-[5px] px-3 text-xs font-normal bg-gradient-to-r from-red-700 to-red-400 hover:to-red-700 text-white rounded-sm"
+                  className="py-[5px] px-3 text-[12px] font-normal bg-gradient-to-r from-red-700 to-red-400 hover:to-red-700 text-white rounded-sm"
                   autoFocus
                   onClick={handleClose}
                 >
                   Close
                 </button>
               </div>
-            </form>
-          </div>
-        </Modal>
-      </div>
+            </div>
+          </form>
+        </div>
+      </Modal>
     </div>
   );
 };

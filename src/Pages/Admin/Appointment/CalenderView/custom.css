@@ -52,3 +52,14 @@ override day number color and size
 .fc .fc-col-header-cell-cushion{
   color: #74788D;
 }
+
+.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title{
+  color: black;
+}
+.fc-v-event .fc-event-title  {
+    color:black;
+}
+.fc-timegrid-event .fc-event-time {
+   color:black;
+   font-weight: 700;
+}

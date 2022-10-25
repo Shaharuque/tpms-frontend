@@ -41,8 +41,8 @@ const Events = [
   {
     // this object will be "parsed" into an Event Object
     title: "The Title56", // a property!
-    start: "2022-10-21T11:30:00", // a property!
-    end: "2022-10-21T18:00:00",
+    start: "Oct 2022 FridayT11:30:00", // a property!
+    end: "Oct 2022 FridayT18:00:00",
     color: "teal",
     display: "background-inverse",
   },
@@ -89,21 +89,25 @@ const CalenderView = () => {
     //Events.push(event);
   };
   console.log(Events);
-  // const {
-  //   isLoading,
-  //   data: calenderEvents,
-  //   refetch,
-  // } = useQuery(["availbleEvents"], () =>
-  //   // heruko site boshbey
-  //   fetch("http://localhost:8800/api/hotels/", {
-  //     method: "GET",
-  //   }).then((res) => res.json())
-  // );
-  // console.log(calenderEvents);
+  const {
+    isLoading,
+    data: calenderEvents,
+    refetch,
+  } = useQuery(["availbleEvents"], () =>
+    // heruko site boshbey
+    fetch("http://localhost:8800/api/scheduler/", {
+      method: "GET",
+    }).then((res) => res.json())
+  );
+  console.log(calenderEvents?.events);
 
-  // if (isLoading) {
-  //   return <Loading></Loading>;
-  // }
+  const showEvent = () => {
+    alert("Clicked");
+  };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div>
       <div className="flex items-center flex-wrap justify-between pb-4">
@@ -121,16 +125,21 @@ const CalenderView = () => {
             right: "timeGridDay,timeGridWeek,dayGridMonth",
           }}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          events={Events}
+          // events={calenderEvents?.events}
+          initialEvents={calenderEvents}
           editable={true}
           selectable={true}
           select={createEvent}
+          eventClick={showEvent}
+          displayEventTime={true}
+          eventTimeFormat={{
+            hour: "numeric",
+            minute: "2-digit",
+            meridiem: "short",
+          }}
         />
         {open && (
-          <CreateAppointment
-            handleClose={handleClose}
-            clicked={open}
-          ></CreateAppointment>
+          <CustomModal handleClose={handleClose} clicked={open}></CustomModal>
         )}
       </div>
     </div>
