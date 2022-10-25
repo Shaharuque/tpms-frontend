@@ -2,38 +2,53 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Modal, Switch } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import axios from "axios";
 
-const CustomModal = ({ handleClose, clicked }) => {
+const CustomModal = ({ selectedDate, handleClose, clicked, refetch }) => {
   const { register, handleSubmit, reset } = useForm();
   React.useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
         // check_date: date ? date.toLocaleDateString() : null,
+        from_date: selectedDate,
       });
     }, 0);
-    // }, [date.toLocaleDateString()]);
-  }, [reset]);
+  }, [reset, selectedDate]);
 
   const onSubmit = (data) => {
-    console.log(data);
-    const title = "Me Co: Si Du";
+    //console.log(data);
+    const title = "Jo Co: Fa Aa";
+    const color = "#FEE9A6";
+    const display = "background-inverse";
     const start = data?.from_date + "T" + data?.from_time;
     const end = data?.from_date + "T" + data?.to_time;
-    console.log(start, end);
-    const final = { title, ...data, start, end };
-    console.log(JSON.stringify(final));
-    if (data) {
+    //console.log(start, end);
+    const final = { title, ...data, start, end, color, display };
+    // console.log(JSON.stringify(final));
+    if (final) {
       //sending product to DB through API
-      fetch("http://localhost:8800/api/scheduler/", {
+
+      // axios POST request
+      const options = {
+        url: "http://localhost:8800/api/scheduler/",
         method: "POST",
-        body: JSON.stringify(final),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("Success:", data);
-        })
-        .catch((err) => console.log(err));
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+        data: final,
+      };
+
+      axios(options).then((response) => {
+        console.log(response);
+
+        if (response?.status === 200) {
+          console.log("SUCCESS");
+          refetch();
+          handleClose();
+        }
+      });
     }
     // reset();
   };
@@ -111,6 +126,7 @@ const CustomModal = ({ handleClose, clicked }) => {
               <input
                 className="border border-gray-300 col-span-2 rounded-sm px-2 py-[3px] mx-1 text-[12px] w-full"
                 type="date"
+                disabled="disabled"
                 {...register("from_date")}
               />
 

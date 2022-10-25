@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../../Loading/Loading";
 import CustomModal from "./CustomModal";
 import CreateAppointment from "../../../Shared/NavigationBar/AdditionFeatures/CreateAppointment";
+import axios from "axios";
 
 const Events = [
   {
@@ -49,6 +50,7 @@ const Events = [
 ];
 const CalenderView = () => {
   const events = [];
+  const [selectedDate, setSelectedDate] = useState();
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -57,7 +59,7 @@ const CalenderView = () => {
   const createEvent = (selectInfo) => {
     console.log(selectInfo);
     setOpen(!open);
-    // console.log(selectInfo?.startStr);
+    setSelectedDate(selectInfo?.startStr);
     // // const event = {
     // //   id: 1, // You must use a custom id generator
     // //   title: "new Event",
@@ -88,7 +90,12 @@ const CalenderView = () => {
 
     //Events.push(event);
   };
-  console.log(Events);
+  //console.log(Events);
+
+  const showEvent = () => {
+    alert("Clicked");
+  };
+
   const {
     isLoading,
     data: calenderEvents,
@@ -99,11 +106,7 @@ const CalenderView = () => {
       method: "GET",
     }).then((res) => res.json())
   );
-  console.log(calenderEvents?.events);
-
-  const showEvent = () => {
-    alert("Clicked");
-  };
+  console.log(calenderEvents);
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -125,8 +128,9 @@ const CalenderView = () => {
             right: "timeGridDay,timeGridWeek,dayGridMonth",
           }}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          // events={calenderEvents?.events}
-          initialEvents={calenderEvents}
+          events={calenderEvents?.events}
+          //events={allData}
+          // initialEvents={allData}
           editable={true}
           selectable={true}
           select={createEvent}
@@ -139,7 +143,12 @@ const CalenderView = () => {
           }}
         />
         {open && (
-          <CustomModal handleClose={handleClose} clicked={open}></CustomModal>
+          <CustomModal
+            selectedDate={selectedDate}
+            handleClose={handleClose}
+            clicked={open}
+            refetch={refetch}
+          ></CustomModal>
         )}
       </div>
     </div>
