@@ -151,7 +151,7 @@ const ClinicTreatment = () => {
           <div>
             <span className="form-input-name ml-1 text-[#207ac7] w-full">
               1. Signs/Symptoms Observed{" "}
-              <span className="ros">(check all that apply)</span>:
+              <span className="text-rose-500">(check all that apply)</span>:
             </span>
             <div className=" flex items-center flex-wrap gap-x-1  my-2">
               <div className="flex ml-1  mr-2 items-center ">
@@ -267,7 +267,7 @@ const ClinicTreatment = () => {
           <div>
             <span className="form-input-name ml-1 text-[#207ac7] w-full">
               2. Goals for Session
-              <span className="ros">
+              <span className="text-rose-500">
                 (check all that apply, at least one modification must be
                 checked)
               </span>
@@ -411,10 +411,10 @@ const ClinicTreatment = () => {
               <br />
             </div>
           </div>
-          <div>
+          <div className="my-5">
             <span className="form-input-name ml-1 text-[#207ac7] w-full">
               3. Targeted Domains
-              <span className="ros">(check all that apply)</span>:
+              <span className="text-rose-500">(check all that apply)</span>:
             </span>
             <div className=" flex items-center flex-wrap gap-x-1 gap-y-2  my-2">
               <div className="flex ml-1  mr-2 items-center ">
@@ -544,10 +544,10 @@ const ClinicTreatment = () => {
               <br />
             </div>
           </div>
-          <div>
+          <div className="my-5">
             <span className="form-input-name ml-1 text-[#207ac7] w-full">
               4. ABT/RBT’s Techniques Utilized
-              <span className="ros">(check all that apply)</span>:
+              <span className="text-rose-500">(check all that apply)</span>:
             </span>
             <div className=" flex items-center flex-wrap gap-x-1 gap-y-2  my-2">
               <div className="flex ml-1  mr-2 items-center ">
@@ -685,6 +685,85 @@ const ClinicTreatment = () => {
                 </span>
               </div>
               <br />
+            </div>
+          </div>
+          <div className="my-5">
+            <span className="form-input-name ml-1 text-[#207ac7] w-full">
+              5. Overall Response to Treatment
+              <span className="text-rose-500">(check all that apply)</span>:
+            </span>
+            <span></span>
+            <div className=" flex items-center flex-wrap gap-x-1 gap-y-2  my-2">
+              <div className="flex ml-1  mr-2 items-center ">
+                <input
+                  type="checkbox"
+                  name="checkedActive"
+                  {...register("checkedActive")}
+                />
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                  Absence of Problem Behavior
+                </span>
+              </div>
+              <div className="flex ml-1  mr-2 items-center ">
+                <input
+                  type="checkbox"
+                  name="checkedActive"
+                  {...register("checkedActive")}
+                />
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                  Decrease of Problem Behavior
+                </span>
+              </div>
+              <div className="flex ml-1  mr-2 items-center ">
+                <input
+                  type="checkbox"
+                  name="checkedActive"
+                  {...register("checkedActive")}
+                />
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                  Mastery of Targets
+                </span>
+              </div>
+              <div className="flex ml-1  mr-2 items-center ">
+                <input
+                  type="checkbox"
+                  name="checkedActive"
+                  {...register("checkedActive")}
+                />
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                  Mastery of Goals
+                </span>
+              </div>
+              <div className="flex ml-1  mr-2 items-center ">
+                <input
+                  type="checkbox"
+                  name="checkedActive"
+                  {...register("checkedActive")}
+                />
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                  Maintenance of Mastered Goals
+                </span>
+              </div>
+              <div className="flex ml-1  mr-2 items-center ">
+                <input
+                  type="checkbox"
+                  name="checkedActive"
+                  {...register("checkedActive")}
+                />
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                  Rapid Progress Toward Goals
+                </span>
+              </div>
+              <div className="flex ml-1  mr-2 items-center ">
+                <input
+                  type="checkbox"
+                  name="checkedActive"
+                  {...register("checkedActive")}
+                />
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                  Steady Progress towards Goals
+                </span>
+              </div>
             </div>
           </div>
         </form>
