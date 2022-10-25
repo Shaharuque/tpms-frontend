@@ -11,6 +11,7 @@ import Loading from "../../../../Loading/Loading";
 import { Link } from "react-router-dom";
 import CreateAppointment from "../../../Shared/NavigationBar/AdditionFeatures/CreateAppointment";
 import googleCalendar from "../../../Assets/google-calendar.png";
+import CustomModal from "./CustomModal";
 
 const Events = [
   {
@@ -154,115 +155,25 @@ const CalenderView = () => {
     //Events.push(event);
   };
   console.log(Events);
-  // const {
-  //   isLoading,
-  //   data: calenderEvents,
-  //   refetch,
-  // } = useQuery(["availbleEvents"], () =>
-  //   // heruko site boshbey
-  //   fetch("http://localhost:8800/api/hotels/", {
-  //     method: "GET",
-  //   }).then((res) => res.json())
-  // );
-  // console.log(calenderEvents);
+  const {
+    isLoading,
+    data: calenderEvents,
+    refetch,
+  } = useQuery(["availbleEvents"], () =>
+    // heruko site boshbey
+    fetch("http://localhost:8800/api/scheduler/", {
+      method: "GET",
+    }).then((res) => res.json())
+  );
+  console.log(calenderEvents?.events);
+
+  const showEvent = () => {
+    alert("Clicked");
+  };
 
   // if (isLoading) {
   //   return <Loading></Loading>;
   // }
-  // let set = 0;
-  // const handleEventClick = () => {
-  //   console.log(set++);
-  // };
-
-  const handleDateSelect = (selectInfo) => {
-    console.log(selectInfo);
-    let title = prompt("Enter a title: ");
-    let calendarApi = selectInfo.view.calendar;
-    console.log(calendarApi);
-    calendarApi.unselect(); // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        title,
-        backgroundInverse: "teal",
-        start: "2022-10-15T12:30:00",
-        // end: "2022-10-15T12:30:00",
-        // allDay: selectInfo.allDay,
-        display: "background-inverse",
-      });
-    }
-  };
-
-  // const createEvent = (selectInfo) => {
-  //   console.log(selectInfo);
-  //   setOpen(!open);
-  //   // console.log(selectInfo?.startStr);
-  //   // // const event = {
-  //   // //   id: 1, // You must use a custom id generator
-  //   // //   title: "new Event",
-  //   // //   // start: startDate,
-  //   // //   // allDay: endDate ? endDate : true, // If there's no end date, the event will be all day of start date
-  //   // //   start: "2022-10-21T15:30:00", // a property!
-  //   // //   end: "2022-10-21T18:00:00",
-  //   // //   color: "black",
-  //   // //   display: "background-inverse",
-  //   // let title = prompt("Enter a title: ");
-  //   // let time1 = prompt("Enter time1: ");
-  //   // let time2 = prompt("Enter time2: ");
-  //   // let startDate = selectInfo?.startStr;
-  //   // let calendarApi = selectInfo.view.calendar;
-  //   // console.log(calendarApi);
-  //   // calendarApi.unselect(); // clear date selection
-
-  //   // if (title) {
-  //   //   calendarApi.addEvent({
-  //   //     title,
-  //   //     color: "teal",
-  //   //     display: "background-inverse",
-  //   //     start: startDate + time1,
-  //   //     end: startDate + time2,
-  //   //     //allDay: selectInfo.allDay,
-  //   //   });
-  //   // }
-
-  //   //Events.push(event);
-  // };
-  // console.log(Events);
-  // const {
-  //   isLoading,
-  //   data: calenderEvents,
-  //   refetch,
-  // } = useQuery(["availbleEvents"], () =>
-  //   // heruko site boshbey
-  //   fetch("http://localhost:8800/api/hotels/", {
-  //     method: "GET",
-  //   }).then((res) => res.json())
-  // );
-  // console.log(calenderEvents);
-
-  // if (isLoading) {
-  //   return <Loading></Loading>;
-  // }
-
-  // showing particular date
-  // const handleDateClick = (arg) => {
-  //   console.log(arg);
-  // };
-
-  //delete particular event
-  // const handleEventClick = (clickInfo) => {
-  //   if (
-  //     alert(
-  //       `Are you sure you want to delete the event '${clickInfo.event.title}'`
-  //     )
-  //   ) {
-  //     clickInfo.event.remove();
-  //   }
-  // };
-
-  const handleUpdateEventSelect = (changeInfo) => {
-    console.log(changeInfo?.event?._def?.title);
-  };
   return (
     <div>
       <div className="flex items-center flex-wrap justify-between pb-4">
@@ -288,7 +199,8 @@ const CalenderView = () => {
             right: "timeGridDay,timeGridWeek,dayGridMonth",
           }}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          // events={calenderEvents?.events}
+          // events={calenderEvents?.// events={calenderEvents?.events}
+
           initialEvents={Events}
           editable={true}
           selectable={true}
@@ -302,10 +214,7 @@ const CalenderView = () => {
           }}
         />
         {open && (
-          <CreateAppointment
-            handleClose={handleClose}
-            clicked={open}
-          ></CreateAppointment>
+          <CustomModal handleClose={handleClose} clicked={open}></CustomModal>
         )}
       </div>
     </div>
