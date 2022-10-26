@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import ERemittance from "./Pages/Pages/ERemittance";
 import ContractRateEditAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
 //For testing purpose
@@ -145,7 +144,12 @@ import DirectService from "./Pages/Admin/FormsTemplate/DirectService";
 import ParentTrainingSession from "./Pages/Admin/FormsTemplate/ParentTrainingSession";
 import BCBATrainee from "./Pages/Admin/FormsTemplate/BCBATrainee";
 import PrivateClient from "./Pages/Admin/FormsTemplate/PrivateClient";
+import OutpatientTreatmentRequest from "./Pages/Admin/FormsTemplate/OutpatientTreatmentRequest";
+import JsonToHtml from "./Pages/Admin/FormsTemplate/JsonForm/JsonToHtml";
+import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
+import ClinicTreatment from "./Pages/Admin/FormsTemplate/ClinicTreatment";
 import AntDate from "./Testing/AntDatePicker/AntDate";
+import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -156,6 +160,11 @@ function App() {
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
           {/* ------------------------form--------------------------- */}
+          <Route path="/forms" element={<Form></Form>}></Route>
+          <Route
+            path="/form-demo-json"
+            element={<JsonToHtml></JsonToHtml>}
+          ></Route>
           <Route
             path="/form-template"
             element={<FormTemplate1></FormTemplate1>}
@@ -175,6 +184,14 @@ function App() {
           <Route
             path="/private-client"
             element={<PrivateClient></PrivateClient>}
+          ></Route>
+          <Route
+            path="/outpatient-treatment-request"
+            element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
+          ></Route>
+          <Route
+            path="/clinic-treatment"
+            element={<ClinicTreatment></ClinicTreatment>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route

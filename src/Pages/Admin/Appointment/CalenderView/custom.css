@@ -4,24 +4,24 @@
   --green: #4CAF50;
 }
 
-override day number color and size
+/* override day number color and size  */
 .fc-day-number {
   font-size: 1.5em;
   color: #5c005c;
 }
 
-/* override day title color and size  */
+/* / override day title color and size /  */
 .fc-day-header {
   font-size: 1.5em;
   color: #00b294;
 }
 
-/* / Header Button / */
+/* / / Header Button / /  */
 .fc .fc-button-group button,
 .fc .fc-button-group .fc-button-active,
 .fc .fc-button-primary {
-    border-color: #fff !important;
-    text-transform: capitalize !important;
+  border-color: #fff !important;
+  text-transform: capitalize !important;
 }
 
 .fc .fc-button-primary:disabled {
@@ -29,11 +29,15 @@ override day number color and size
   text-transform: capitalize;
 }
 
-.fc-next-button, .fc-prev-button, .fc-timeGridWeek-button {
+.fc-next-button,
+.fc-prev-button,
+.fc-timeGridWeek-button {
   background: var(--green) !important;
 }
 
-.fc-prevYear-button, .fc-nextYear-button, .fc-dayGridMonth-button {
+.fc-prevYear-button,
+.fc-nextYear-button,
+.fc-dayGridMonth-button {
   background: var(--blue) !important;
 }
 
@@ -45,21 +49,35 @@ override day number color and size
   background: var(--yellow) !important;
 }
 
-.fc-toolbar-title{
+.fc-toolbar-title {
   color: #495057;
 }
 
-.fc .fc-col-header-cell-cushion{
+.fc .fc-col-header-cell-cushion {
   color: #74788D;
 }
 
-.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title{
+.fc-daygrid-block-event .fc-event-time,
+.fc-daygrid-block-event .fc-event-title {
   color: black;
 }
-.fc-v-event .fc-event-title  {
-    color:black;
+
+.fc-v-event .fc-event-title {
+  color: black;
 }
+
 .fc-timegrid-event .fc-event-time {
-   color:black;
-   font-weight: 700;
+  color: black;
+  font-weight: 700;
 }
+@media only screen and (max-width: 500px){
+    .fc .fc-toolbar{
+        display: inline-block;
+        float: none !important;
+        
+    }
+    .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+    margin-left: 0px;
+}
+}
+
