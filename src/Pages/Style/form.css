@@ -106,3 +106,14 @@
     border-color: #777777;
     box-shadow: 0px -2px 3px -1px #aaaaaa;
 }
+
+.form-textarea{
+    margin: 15px 0px 0px;
+}
+
+.form-textarea > textarea{
+    width: 100%;
+    border: 2px solid #207ac7;
+    padding: 10px;
+    font-size: 16px;
+}

@@ -1,9 +1,11 @@
 import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
+import { Switch } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const AddInsurance = () => {
+  const [active, setActive] = useState(false);
   const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState("");
 
@@ -229,13 +231,18 @@ const AddInsurance = () => {
             </div>
             <div className="flex justify-start items-end my-2 md:my-0">
               <div className="flex justify-center ml-1 items-center">
-                <input
+                {/* <input
                   type="checkbox"
                   // checked={value ? true : false}
                   name="patient"
                   // onClick={() => {
                   //   setValue(!value);
                   // }}
+                /> */}
+                      <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
                 />
                 <span className="font-medium ml-1 text-gray-600 text-[14px]">
                   Regional Center

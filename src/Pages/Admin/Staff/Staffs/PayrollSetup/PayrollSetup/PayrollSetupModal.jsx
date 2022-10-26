@@ -1,9 +1,13 @@
-import { Modal } from "antd";
+import { Modal, Switch } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const PayrollSetupModal = ({ handleClose, open }) => {
+  const [active, setActive] = useState(false);
+
+
+
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
 
@@ -85,13 +89,18 @@ const PayrollSetupModal = ({ handleClose, open }) => {
                 </div>
 
                 <div className="flex ml-1 mt-1 items-center">
-                  <input
+                  {/* <input
                     type="checkbox"
                     name="service"
                     onClick={() => {
                       setValue(!value);
                     }}
-                  />
+                  /> */}
+                  <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                   <span className="text-xs ml-1  text-gray-600 font-normal">
                     Apply to All Service
                   </span>

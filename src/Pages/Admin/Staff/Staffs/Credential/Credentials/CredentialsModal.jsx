@@ -1,10 +1,14 @@
-import { Dialog } from "@mui/material";
+import { Dialog, Switch } from "@mui/material";
 import { Modal } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const CredentialsModal = ({ handleClose, open, name }) => {
+  const [active, setActive] = useState(false);
+
+
+
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
 
@@ -92,13 +96,19 @@ const CredentialsModal = ({ handleClose, open, name }) => {
                   />
                 </div>
                 <div className="flex ml-1 mt-1 items-center">
-                  <input
+                  {/* <input
                     type="checkbox"
                     name="patient"
                     onClick={() => {
                       setValue(!value);
                     }}
-                  />
+                  /> */}
+                 <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
+                  
                   <span className="text-xs ml-1 text-gray-600 font-normal">
                     Credential Not Applicable
                   </span>

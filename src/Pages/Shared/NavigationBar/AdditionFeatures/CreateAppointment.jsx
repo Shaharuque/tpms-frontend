@@ -50,7 +50,6 @@ const CreateAppointment = ({ handleClose, clicked }) => {
     setOpen(false);
     setDate(null);
   };
-
   const handleCancelDate = () => {
     setOpen(false);
     setDate(new Date());
@@ -322,7 +321,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               </select>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5 mr-2 gap-1">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5  mr-2 gap-1">
               <div className="">
                 <Switch
                   size="small"
