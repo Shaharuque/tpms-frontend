@@ -694,7 +694,7 @@ const PatientInformation = () => {
                     onClick={() => {
                       handleEmailClick();
                     }}
-                    className="bg-secondary text-white p-[6px] mt-1"
+                    className="bg-secondary text-white p-[6px] "
                   >
                     <FaPlus />
                   </button>

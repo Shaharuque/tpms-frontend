@@ -659,7 +659,7 @@ const ListView = () => {
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-[3px] border-[#FFFFFF] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                                className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
                                 {...register("place_of_service")}
                               >
                                 <option value="" className="text-black">
@@ -720,19 +720,6 @@ const ListView = () => {
                                   className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
                                   {...register("end_date")}
                                 />
-                                <div
-                                  ref={refClose}
-                                  className="absolute  md:mr-[5%] lg:mr-[10%] xl:mr-[27%] 2xl:mr-[35%] mt-[370px]"
-                                >
-                                  {openCalendar && (
-                                    <CustomDateRange
-                                      range={range}
-                                      setRange={setRange}
-                                      handleCancelDate={handleCancelDate}
-                                      setOpen={setOpenCalendar}
-                                    ></CustomDateRange>
-                                  )}
-                                </div>
                               </div>
                             </div>
                           </div>
@@ -746,7 +733,7 @@ const ListView = () => {
                               </label>
                               <div>
                                 <select
-                                  className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                  className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
                                   {...register("Status")}
                                 >
                                   <option value="" className="text-black">
@@ -793,6 +780,19 @@ const ListView = () => {
             )}
           </div>
           {/* Multi date picker component called */}
+          <div
+            ref={refClose}
+            className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
+          >
+            {openCalendar && (
+              <CustomDateRange
+                range={range}
+                setRange={setRange}
+                handleCancelDate={handleCancelDate}
+                setOpen={setOpenCalendar}
+              ></CustomDateRange>
+            )}
+          </div>
         </div>
 
         {table && (

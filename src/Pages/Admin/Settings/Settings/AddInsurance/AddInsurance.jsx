@@ -103,54 +103,54 @@ const AddInsurance = () => {
             {/* name  */}
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Name
                 </span>
               </label>
               <input
                 type="text"
                 name="name"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("name")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Address
                 </span>
               </label>
               <input
                 type="text"
                 name="Address"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("Address")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   City
                 </span>
               </label>
               <input
                 type="text"
                 name="city"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("city")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   State
                 </span>
               </label>
               <div>
                 <select
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1  w-full focus:outline-none"
                   {...register("state")}
                 >
                   <option value="Today">Today's follow up</option>
@@ -164,68 +164,68 @@ const AddInsurance = () => {
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Zip
                 </span>
               </label>
               <input
                 type="text"
                 name="zip"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("zip")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Contract1
                 </span>
               </label>
               <input
                 type="text"
                 name="contract1"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("contract1")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Contract2
                 </span>
               </label>
               <input
                 type="text"
                 name="contract2"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("contract2")}
               />
             </div>
             {/* Address  */}
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Phone1
                 </span>
               </label>
               <input
                 type="text"
                 name="phone1"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("phone1")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Phone2
                 </span>
               </label>
               <input
                 type="text"
                 name="phone2"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("phone2")}
               />
             </div>
@@ -244,34 +244,34 @@ const AddInsurance = () => {
                   checked={active ? true : false}
                   onClick={() => setActive(!active)}
                 />
-                <span className="font-medium ml-1 text-gray-600 text-[14px]">
+                <span className="font-medium ml-1 text-gray-600 text-[16px]">
                   Regional Center
                 </span>
               </div>
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Billing abreviation(3 char)
                 </span>
               </label>
               <input
                 type="text"
                 name="billing observation"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("billing_observation")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[14px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                   Electronic Insurance ID
                 </span>
               </label>
               <input
                 type="text"
                 name="Electronic_"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                 {...register("phone2")}
               />
             </div>
