@@ -151,6 +151,7 @@ import ClinicTreatment from "./Pages/Admin/FormsTemplate/ClinicTreatment";
 import AntDate from "./Testing/AntDatePicker/AntDate";
 import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
+import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -230,6 +231,10 @@ function App() {
           <Route
             path="/testing"
             element={<TestingTable></TestingTable>}
+          ></Route>
+          <Route
+            path="/search-box"
+            element={<AntTableSearchBox></AntTableSearchBox>}
           ></Route>
           <Route path="/test-date" element={<AntDate></AntDate>}></Route>
           {/* Testing End */}
