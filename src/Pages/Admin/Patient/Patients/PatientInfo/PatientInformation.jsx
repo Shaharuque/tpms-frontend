@@ -165,6 +165,7 @@ const PatientInformation = () => {
   if (loading) {
     return <Loading></Loading>;
   }
+
   const SameasPatientBtn = () => {
     setLocation(true);
     setValue("GuaratorStreet", getValues("Street"));

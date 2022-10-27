@@ -150,6 +150,7 @@ import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
 import ClinicTreatment from "./Pages/Admin/FormsTemplate/ClinicTreatment";
 import AntDate from "./Testing/AntDatePicker/AntDate";
 import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
+import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -262,7 +263,7 @@ function App() {
             ></Route>
             {/* <Route
               path="billing/ar-followup-bucket-filter-types/1"
-              element={<ProvideEscalation></ProvideEscalation>}
+              element={<ProvideEscalation></ProvideEscalation>} 
             ></Route> */}
             <Route
               path="billing/ar-followup-bucket-filter-types/1"
@@ -595,6 +596,10 @@ function App() {
             <Route path="report" element={<Report></Report>}></Route>
             {/* ----------------------------------Report End----------------------------------------------- */}
             {/* settings routes  */}
+            <Route
+              path="form-builder-create"
+              element={<FormBuilderCreate></FormBuilderCreate>}
+            ></Route>
             <Route path="settings" element={<Settings></Settings>}>
               <Route index element={<NameLocation></NameLocation>}></Route>
               <Route
