@@ -625,7 +625,7 @@ const ListView = () => {
                     </div>
                   </div>
                   <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-5 mb-2">
+                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
                       {billable && (
                         <div>
                           <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
@@ -773,6 +773,28 @@ const ListView = () => {
                           Go
                         </button>
                       )}
+                      {table && (
+                        <>
+                          <div className="  ">
+                            <div className="px-2 py-2 w-full mr-2 mt-[35px] bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
+                              <input
+                                placeholder="Search here..."
+                                onChange={(e) => globalFilter(e.target.value)}
+                                className="focus:outline-none"
+                              />
+                              <label>
+                                <BiSearchAlt />
+                              </label>
+                            </div>
+                          </div>
+                          <button
+                            onClick={clearFilters}
+                            className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                          >
+                            Clear filters
+                          </button>
+                        </>
+                      )}
                     </div>
                   </form>
                 </Fade>
@@ -799,25 +821,6 @@ const ListView = () => {
           <>
             {listView && (
               <div className="my-5">
-                <div className=" lg:flex justify-end mb-3">
-                  <div className="px-2 w-52 mr-2 bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center mt-2">
-                    <input
-                      placeholder="Search here..."
-                      onChange={(e) => globalFilter(e.target.value)}
-                      className="focus:outline-none"
-                    />
-                    <label>
-                      <BiSearchAlt />
-                    </label>
-                  </div>
-
-                  <button
-                    onClick={clearFilters}
-                    className="px-2 py-2 mt-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-                  >
-                    Clear filters
-                  </button>
-                </div>
                 {filteredInfo?.Patients?.length > 0 ||
                 filteredInfo?.Service_hrs?.length > 0 ||
                 filteredInfo?.pos?.length > 0 ||
