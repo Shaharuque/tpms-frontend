@@ -61,9 +61,9 @@ const ClinicTreatment = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" grid grid-cols-1 items-center md:grid-cols-4 lg:grid-cols-4 2xl:grid-cols-4 gap-4">
             <div className="">
-              <span className="form-input-name ml-1 text-[#207ac7] w-full">
+              <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
                 Client Full Name :
-              </span>
+              </h1>
               <input
                 type="text"
                 className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
@@ -71,9 +71,9 @@ const ClinicTreatment = () => {
               />
             </div>
             <div className="">
-              <span className="form-input-name ml-1 text-[#207ac7] w-full">
+              <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
                 Date
-              </span>
+              </h1>
               <input
                 type="date"
                 className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
@@ -81,9 +81,9 @@ const ClinicTreatment = () => {
               />
             </div>
             <div className="">
-              <span className="form-input-name ml-1 text-[#207ac7] w-full">
+              <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
                 Start Time
-              </span>
+              </h1>
               <input
                 type="time"
                 className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
@@ -91,9 +91,9 @@ const ClinicTreatment = () => {
               />
             </div>
             <div className="">
-              <span className="form-input-name ml-1 text-[#207ac7] w-full">
+              <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
                 End Time
-              </span>
+              </h1>
               <input
                 type="time"
                 className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
@@ -102,9 +102,9 @@ const ClinicTreatment = () => {
             </div>
           </div>
           <div className="my-3">
-            <span className="form-input-name ml-1 text-[#207ac7] w-full">
+            <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
               Setting :
-            </span>
+            </h1>
             <div className="flex items-center">
               <div className="flex ml-1  mr-2 items-center ">
                 <input
@@ -112,7 +112,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[15px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[15px] ml-1 text-gray-700 gap-1 font-medium">
                   Home
                 </span>
               </div>
@@ -122,7 +122,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[15px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[15px] ml-1 text-gray-700 gap-1 font-medium">
                   Community
                 </span>
               </div>
@@ -132,7 +132,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[15px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[15px] ml-1 text-gray-700 gap-1 font-medium">
                   Clinic/Office
                 </span>
               </div>
@@ -142,17 +142,17 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[15px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[15px] ml-1 text-gray-700 gap-1 font-medium">
                   School
                 </span>
               </div>
             </div>
           </div>
           <div>
-            <span className="form-input-name ml-1 text-[#207ac7] w-full">
+            <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
               1. Signs/Symptoms Observed{" "}
               <span className="text-rose-500">(check all that apply)</span>:
-            </span>
+            </h1>
             <div className=" flex items-center flex-wrap gap-x-1  my-2">
               <div className="flex ml-1  mr-2 items-center ">
                 <input
@@ -160,7 +160,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Rec. Language Impairment
                 </span>
               </div>
@@ -170,7 +170,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Exp Language Impairment
                 </span>
               </div>
@@ -180,7 +180,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Social Skills Deficits
                 </span>
               </div>
@@ -190,7 +190,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Repetitive Behaviors
                 </span>
               </div>
@@ -200,7 +200,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Restricted Interests
                 </span>
               </div>
@@ -210,7 +210,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Hyper/Hypo-reactivity to sensory input
                 </span>
               </div>
@@ -220,7 +220,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Insistence on sameness
                 </span>
               </div>
@@ -231,7 +231,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Harm to self or others* *Was an Incident Report filled out
                   within 24 hours?
                 </span>
@@ -265,14 +265,14 @@ const ClinicTreatment = () => {
             </div>
           </div>
           <div>
-            <span className="form-input-name ml-1 text-[#207ac7] w-full">
+            <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
               2. Goals for Session
               <span className="text-rose-500">
                 (check all that apply, at least one modification must be
                 checked)
               </span>
               :
-            </span>
+            </h1>
             <div className=" flex items-center flex-wrap gap-x-1 gap-y-2  my-2">
               <div className="flex ml-1  mr-2 items-center ">
                 <input
@@ -280,7 +280,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Build rapport with client/family/tech
                 </span>
               </div>
@@ -290,7 +290,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify acquisition goal, teaching technique, and/or procedure
                 </span>
               </div>
@@ -300,7 +300,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify any component of Behavior Intervention Plan
                 </span>
               </div>
@@ -310,7 +310,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify parent goal, teaching technique, and/or procedure
                 </span>
               </div>
@@ -320,7 +320,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify Reinforcement Schedule
                 </span>
               </div>
@@ -330,7 +330,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify maintenance goal and/or procedure
                 </span>
               </div>
@@ -340,7 +340,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Baseline/Mastery/Generalization Probes to modify goals,
                   teaching technique, and/or procedure
                 </span>
@@ -352,7 +352,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Model teaching to technician
                 </span>
               </div>
@@ -363,7 +363,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Parent Training
                 </span>
               </div>
@@ -374,7 +374,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Assessment of Skills
                   <span className="text-rose-500">
                     (standardized or curriculum-based)
@@ -388,7 +388,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Inter-observer agreement (IOA) data collection
                 </span>
               </div>
@@ -399,7 +399,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] flex  ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] flex  ml-1 text-gray-700 gap-1 font-medium">
                   Other- Describe:
                   <input
                     type="text"
@@ -412,10 +412,10 @@ const ClinicTreatment = () => {
             </div>
           </div>
           <div className="my-5">
-            <span className="form-input-name ml-1 text-[#207ac7] w-full">
+            <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
               3. Targeted Domains
               <span className="text-rose-500">(check all that apply)</span>:
-            </span>
+            </h1>
             <div className=" flex items-center flex-wrap gap-x-1 gap-y-2  my-2">
               <div className="flex ml-1  mr-2 items-center ">
                 <input
@@ -423,7 +423,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Language/Communication
                 </span>
               </div>
@@ -433,7 +433,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify acquisition goal, teaching technique, and/or procedure
                 </span>
               </div>
@@ -443,7 +443,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify any component of Behavior Intervention Plan
                 </span>
               </div>
@@ -453,7 +453,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Social Skills
                 </span>
               </div>
@@ -463,7 +463,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Play Skills
                 </span>
               </div>
@@ -473,7 +473,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Adaptive Skills
                 </span>
               </div>
@@ -483,7 +483,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Baseline/Mastery/Generalization Probes to modify goals,
                   teaching technique, and/or procedure
                 </span>
@@ -495,7 +495,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Executive Functioning Skills{" "}
                   <span className="text-rose-500">
                     (self-management, organization, tolerance, and inhibition)
@@ -509,7 +509,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Safety
                 </span>
               </div>
@@ -520,7 +520,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Disruptive Behavior
                 </span>
               </div>
@@ -532,7 +532,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] flex  ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] flex  ml-1 text-gray-700 gap-1 font-medium">
                   Other- Describe:
                   <input
                     type="text"
@@ -545,10 +545,10 @@ const ClinicTreatment = () => {
             </div>
           </div>
           <div className="my-5">
-            <span className="form-input-name ml-1 text-[#207ac7] w-full">
+            <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
               4. ABT/RBT’s Techniques Utilized
               <span className="text-rose-500">(check all that apply)</span>:
-            </span>
+            </h1>
             <div className=" flex items-center flex-wrap gap-x-1 gap-y-2  my-2">
               <div className="flex ml-1  mr-2 items-center ">
                 <input
@@ -556,7 +556,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Discrete Trial (DTT)
                 </span>
               </div>
@@ -566,7 +566,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Natural Environment Teaching (NET)
                 </span>
               </div>
@@ -576,7 +576,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Verbal Behavior (VB)
                 </span>
               </div>
@@ -586,7 +586,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify parent goal, teaching technique, and/or procedure
                 </span>
               </div>
@@ -596,7 +596,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify Reinforcement Schedule
                 </span>
               </div>
@@ -606,7 +606,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Modify maintenance goal and/or procedure
                 </span>
               </div>
@@ -616,7 +616,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Baseline/Mastery/Generalization Probes to modify goals,
                   teaching technique, and/or procedure
                 </span>
@@ -628,7 +628,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Model teaching to technician
                 </span>
               </div>
@@ -639,7 +639,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Parent Training
                 </span>
               </div>
@@ -650,7 +650,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Assessment of Skills
                   <span className="text-rose-500">
                     (standardized or curriculum-based)
@@ -664,7 +664,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Inter-observer agreement (IOA) data collection
                 </span>
               </div>
@@ -675,7 +675,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] flex  ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] flex  ml-1 text-gray-700 gap-1 font-medium">
                   Other- Describe:
                   <input
                     type="text"
@@ -688,10 +688,10 @@ const ClinicTreatment = () => {
             </div>
           </div>
           <div className="my-5">
-            <span className="form-input-name ml-1 text-[#207ac7] w-full">
+            <h1 className="form-input-name my-5 ml-1 text-[#207ac7] w-full">
               5. Overall Response to Treatment
               <span className="text-rose-500">(check all that apply)</span>:
-            </span>
+            </h1>
             <div className="text-rose-500 font-regular text-lg">
               Client responded positively to ABA therapy today exhibited by:
             </div>
@@ -702,7 +702,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Absence of Problem Behavior
                 </span>
               </div>
@@ -712,7 +712,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Decrease of Problem Behavior
                 </span>
               </div>
@@ -722,7 +722,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Mastery of Targets
                 </span>
               </div>
@@ -732,7 +732,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Mastery of Goals
                 </span>
               </div>
@@ -742,7 +742,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Maintenance of Mastered Goals
                 </span>
               </div>
@@ -752,7 +752,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Rapid Progress Toward Goals
                 </span>
               </div>
@@ -762,7 +762,7 @@ const ClinicTreatment = () => {
                   name="checkedActive"
                   {...register("checkedActive")}
                 />
-                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-semibold">
+                <span className="text-[16px] ml-1 text-gray-700 gap-1 font-medium">
                   Steady Progress towards Goals
                 </span>
               </div>
