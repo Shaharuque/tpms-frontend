@@ -14,6 +14,7 @@ import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideCl
 // import Calendar from "react-calendar";
 // import "./SingleCalendar.css";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
+import { Switch } from "antd";
 
 const PatientInformation = () => {
   const [voiceMsg, setVoiceMsg] = useState(false);
@@ -182,8 +183,13 @@ const PatientInformation = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
-            <input
+            {/* <input
               type="checkbox"
+              name="checkedActive"
+              {...register("checkedActive")}
+            /> */}
+            <Switch
+              size="small"
               name="checkedActive"
               {...register("checkedActive")}
             />

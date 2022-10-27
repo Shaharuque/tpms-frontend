@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import { memo } from "react";
-import { Toggle } from "rsuite";
-import CheckIcon from "@rsuite/icons/Check";
-import CloseIcon from "@rsuite/icons/Close";
+import { Switch } from "antd";
 
 const PatientStatusAction = ({ status }) => {
-  const [value, setValue] = useState(status);
-  console.log(status);
+  let changedStatus;
+  if (status === "true") {
+    changedStatus = 1;
+  } else if (status === "false") {
+    changedStatus = 0;
+  }
+  const [value, setValue] = useState(changedStatus);
+  console.log(changedStatus);
 
   return (
-    <div className="flex justify-center">
-      <Toggle
-        checkedChildren={<CheckIcon />}
-        unCheckedChildren={<CloseIcon />}
+    <div className="flex ">
+      <Switch
+        size="small"
         checked={value ? true : false}
-        size="sm"
-        onClick={() => {
-          setValue(!value);
-        }}
+        onClick={() => setValue(!value)}
       />
+      {!value ? (
+        <h1 className="ml-1">In-Active</h1>
+      ) : (
+        <h1 className="ml-1">Active</h1>
+      )}
     </div>
   );
 };
