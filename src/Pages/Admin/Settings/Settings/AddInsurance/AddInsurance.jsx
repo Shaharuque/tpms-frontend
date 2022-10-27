@@ -53,7 +53,7 @@ const AddInsurance = () => {
                   {item.key}
                   {item.title}
                 </option>
-              ))}{" "}
+              ))}
           </select>
           <br />
           <button className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">

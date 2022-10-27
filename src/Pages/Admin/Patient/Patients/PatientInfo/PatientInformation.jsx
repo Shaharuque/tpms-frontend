@@ -14,6 +14,7 @@ import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideCl
 import { Switch } from "antd";
 // import Calendar from "react-calendar";
 // import "./SingleCalendar.css";
+import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 
 const PatientInformation = () => {
   const [active, setActive] = useState(false);
@@ -26,6 +27,11 @@ const PatientInformation = () => {
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
+
+  //file uploaded issue
+  const [signatureUpload, setSignatureUpload] = useState("");
+  console.log("setSignatureUpload = = =", signatureUpload);
+  // file uploaded added
 
   // calender hide
   const { register, handleSubmit, reset, setValue, getValues } = useForm();
@@ -161,6 +167,7 @@ const PatientInformation = () => {
   if (loading) {
     return <Loading></Loading>;
   }
+
   const SameasPatientBtn = () => {
     setLocation(true);
     setValue("GuaratorStreet", getValues("Street"));
@@ -1025,11 +1032,11 @@ const PatientInformation = () => {
             </div>
 
             <div className="ml-2 mt-[12px] ">
-              <SimpleFileUpload
-                apiKey={`b7deee9a71131791da71b4a74e6169c2`}
-                onSuccess={setFile}
-              />
-              <p className="mt-3 text-sm ml-[15px]">Upload Signature</p>
+              <CustomFileUploader
+                signatureUpload={signatureUpload}
+                setSignatureUpload={setSignatureUpload}
+              ></CustomFileUploader>
+              <p className="mt-3 text-sm ">Upload Signature</p>
             </div>
           </div>
           <div className="mb-5">
