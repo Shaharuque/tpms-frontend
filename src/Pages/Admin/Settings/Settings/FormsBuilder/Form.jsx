@@ -44,6 +44,10 @@ const Form = () => {
         <Link to={"/clinic-treatment"}>
           <button className="pms-button">Clinic Treatment</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/soap"}>
+          <button className="pms-button">Soap</button>
+        </Link>
       </div>
     </div>
   );

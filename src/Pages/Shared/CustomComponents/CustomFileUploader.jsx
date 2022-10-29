@@ -36,7 +36,7 @@ const CustomFileUploader = ({ setSignatureUpload }) => {
 
   const handleFileChange = ({ fileList: newFileList }) =>
     setFileList(newFileList);
-  setSignatureUpload(fileList[0]?.name);
+  setSignatureUpload(fileList[0]?.thumbUrl);
   const uploadButton = (
     <div className="">
       <PlusOutlined />

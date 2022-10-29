@@ -151,6 +151,7 @@ import ClinicTreatment from "./Pages/Admin/FormsTemplate/ClinicTreatment";
 import AntDate from "./Testing/AntDatePicker/AntDate";
 import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
+import Soap from "./Pages/Admin/FormsTemplate/Soap";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -190,6 +191,7 @@ function App() {
             path="/outpatient-treatment-request"
             element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
           ></Route>
+          <Route path="/soap" element={<Soap></Soap>}></Route>
           <Route
             path="/clinic-treatment"
             element={<ClinicTreatment></ClinicTreatment>}
