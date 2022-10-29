@@ -49,8 +49,8 @@ export default function VendorNumberSetupActionModal({
               />
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="w-full font-semibold">
-                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-5">
+              <div className="w-full">
+                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-5 ">
                   <div>
                     <label className="label">
                       <span className="label-text text-sm text-gray-500 text-left">
