@@ -293,6 +293,7 @@ const OutpatientTreatmentRequest = () => {
                   </div>
                 </div>
               </div>
+              
             </div>
           </form>
         </div>
