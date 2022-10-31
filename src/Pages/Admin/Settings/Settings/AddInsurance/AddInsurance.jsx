@@ -10,9 +10,9 @@ import { useForm } from "react-hook-form";
 const AddInsurance = () => {
   const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
-  const [chk, setchk] = useState(false);
-  const [multi, setmulti] = useState([]);
-  const [newdata, setnewdata] = useState({ value: "coconut" });
+  // const [chk, setchk] = useState(false);
+  // const [multi, setmulti] = useState([]);
+  // const [newdata, setnewdata] = useState({ value: "coconut" });
 
   // testing space............
   useEffect(() => {
@@ -25,7 +25,6 @@ const AddInsurance = () => {
         console.log(error);
       });
   }, []);
-  const arr1 = [];
   // console.log(arr1);
 
   // -------------------------
