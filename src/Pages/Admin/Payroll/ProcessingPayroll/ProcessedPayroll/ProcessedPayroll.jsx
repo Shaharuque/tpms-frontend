@@ -366,7 +366,7 @@ const ProcessedPayroll = () => {
             <>
               <div className="lg:mt-4 2xl:mt-0">
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text mb-1  text-[17px] font-medium text-[#9b9b9b] text-left">
                     Choose Staff to process
                   </span>
                 </label>
@@ -375,7 +375,7 @@ const ProcessedPayroll = () => {
                 </>
               </div>
               <button
-                className=" py-[5px] w-1/4 font-normal mt-10 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                className=" py-[5px] w-1/4 font-normal mt-[35px] mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
                 type="submit"
                 onClick={() => setTable(true)}
               >

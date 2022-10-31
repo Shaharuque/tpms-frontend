@@ -47,7 +47,7 @@ code {
   border-bottom: 1px solid rgba(9, 162, 179, 0.498);
   font-size: 14px;
   color: #4b5563;
-  border-radius: 0.125rem;
+  border-radius: 0;
   font-weight: 500;
   margin-left: 4px;
 }
@@ -178,7 +178,7 @@ code {
 }
 
 .zfixed {
-  z-index: 999;
+  z-index: 1;
 }
 
 

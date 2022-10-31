@@ -389,13 +389,18 @@ const AuthorizationEdit = () => {
               </div>
               <div className="mt-[30px]">
                 <div className="flex ml-1 mt-1 items-center">
-                  <input
+                  {/* <input
                     type="checkbox"
                     name="patient"
                     onClick={() => {
                       setValue(!value);
                     }}
-                  />
+                  /> */}
+                        <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                   <span className="text-[14px] ml-1 text-gray-600 font-medium">
                     In Network
                   </span>

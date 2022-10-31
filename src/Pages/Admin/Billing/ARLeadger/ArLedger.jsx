@@ -7,6 +7,7 @@ import { DateRangePicker } from "react-date-range";
 import { Switch, Table, Typography } from "antd";
 import { Link } from "react-router-dom";
 import PatientLedgerAction from "../../Patient/Patients/PatientLedger/PatientLedger/PatientLedgerAction";
+import GlobalMultiSelect from "../../../Shared/CustomComponents/GlobalMultiSelect";
 const ArLedger = () => {
   const [select, setSelect] = useState("");
   const [table, setTable] = useState(false);
@@ -453,6 +454,16 @@ const ArLedger = () => {
                 </>
               ) : (
                 <>
+                  <div className="lg:mt-4 2xl:mt-0">
+                    <label className="label">
+                      <span className="label-text mb-[1px] text-[17px] font-medium text-[#9b9b9b] text-left">
+                        Choose Staff to process
+                      </span>
+                    </label>
+                    <>
+                      <GlobalMultiSelect />
+                    </>
+                  </div>
                   <div>
                     <label className="label">
                       <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">

@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import ERemittance from "./Pages/Pages/ERemittance";
 import ContractRateEditAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateEditAdd";
 import LogIn from "./Pages/LoginPage/LogIn";
 //For testing purpose
@@ -150,6 +149,11 @@ import JsonToHtml from "./Pages/Admin/FormsTemplate/JsonForm/JsonToHtml";
 import Form from "./Pages/Admin/Settings/Settings/FormsBuilder/Form";
 import ClinicTreatment from "./Pages/Admin/FormsTemplate/ClinicTreatment";
 import AntDate from "./Testing/AntDatePicker/AntDate";
+import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
+import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
+import FBA from "./Pages/Admin/FormsTemplate/FBA";
+import SOAP from "./Pages/Admin/FormsTemplate/SOAP";
+import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -189,10 +193,17 @@ function App() {
             path="/outpatient-treatment-request"
             element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
           ></Route>
+          <Route path="/soap" element={<SOAP></SOAP>}></Route>
           <Route
             path="/clinic-treatment"
             element={<ClinicTreatment></ClinicTreatment>}
           ></Route>
+          <Route path="/FBA" element={<FBA></FBA>}></Route>
+          <Route
+            path="/BCBATraineeUSF"
+            element={<BCBATraineeUSR></BCBATraineeUSR>}
+          ></Route>
+          <Route path="/SOAP" element={<SOAP></SOAP>}></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
@@ -262,7 +273,7 @@ function App() {
             ></Route>
             {/* <Route
               path="billing/ar-followup-bucket-filter-types/1"
-              element={<ProvideEscalation></ProvideEscalation>}
+              element={<ProvideEscalation></ProvideEscalation>} 
             ></Route> */}
             <Route
               path="billing/ar-followup-bucket-filter-types/1"
@@ -595,6 +606,10 @@ function App() {
             <Route path="report" element={<Report></Report>}></Route>
             {/* ----------------------------------Report End----------------------------------------------- */}
             {/* settings routes  */}
+            <Route
+              path="form-builder-create"
+              element={<FormBuilderCreate></FormBuilderCreate>}
+            ></Route>
             <Route path="settings" element={<Settings></Settings>}>
               <Route index element={<NameLocation></NameLocation>}></Route>
               <Route

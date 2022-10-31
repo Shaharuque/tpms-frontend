@@ -58,7 +58,11 @@ const AppoinmentMultiSelection = () => {
         </div>
         <div>
           <div className="btnCustom">
-            <Button type="primary" onClick={() => handleNewField()}>
+            <Button
+              className="pms-button"
+              type="primary"
+              onClick={() => handleNewField()}
+            >
               Seelct All
             </Button>
           </div>

@@ -357,7 +357,7 @@ const AuthorizationAntdTable = () => {
               expandedRowRender,
             }}
             scroll={{
-              y: 650,
+              y: 850,
             }}
             expandedRowKeys={expandedRowKeys}
             onExpand={onTableRowExpand}

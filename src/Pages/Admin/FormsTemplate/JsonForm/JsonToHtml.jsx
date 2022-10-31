@@ -30,6 +30,7 @@ const JsonToHtml = () => {
   };
 
   const { register, handleSubmit } = useForm();
+  const [test, setTest] = useState("");
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
     console.log(data);
@@ -186,7 +187,7 @@ const JsonToHtml = () => {
 
       switch (block.type) {
         case "header":
-          convertedHtml += `<h1 className="form-inner-head">${block.label}</h1>`;
+          convertedHtml += `<h1  className="form-inner-head">${block.label}</h1>`;
           break;
 
         case "button":
@@ -213,8 +214,8 @@ const JsonToHtml = () => {
           convertedHtml += `<div className="mt-3">
        <label for="w3review">Review of W3Schools:</label>
 
-<textarea id="w3review" name="w3review" rows="4" className="border" cols="50">
-</textarea>
+<textarea id="w3review" onChange=((e)=>setTest(e)) name="w3review" rows="4" className="border" cols="50">
+</textarea>                  
               </div>`;
           break;
 
