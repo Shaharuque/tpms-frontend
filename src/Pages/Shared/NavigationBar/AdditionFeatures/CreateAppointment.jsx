@@ -1,4 +1,4 @@
-import { Switch } from "antd";
+import { Switch, TimePicker } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -16,6 +16,11 @@ const CreateAppointment = ({ handleClose, clicked }) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const { register, handleSubmit, reset } = useForm();
+
+  const onChange = (time, timeString) => {
+    console.log(time, timeString);
+  };
+
   const days = [
     "Sunday",
     "Monday",
@@ -50,7 +55,6 @@ const CreateAppointment = ({ handleClose, clicked }) => {
     setOpen(false);
     setDate(null);
   };
-
   const handleCancelDate = () => {
     setOpen(false);
     setDate(new Date());
@@ -106,9 +110,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
           <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1 md:gap-2">
-              <span className="text-[12px] ml-1 text-gray-600 font-medium">
-                Active Patient
-              </span>
+              <span className="modal-label-name ml-1">Active Patient</span>
               <div className="col-span-2 ml-1">
                 <Switch
                   defaultChecked
@@ -126,12 +128,10 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               </div>
 
               <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                  Patient Name
-                </span>
+                <span className="modal-label-name">Patient Name</span>
               </label>
               <select
-                className="border border-gray-300  col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full"
+                className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("patients")}
               >
                 <option value=""></option>
@@ -139,12 +139,10 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                  Auth
-                </span>
+                <span className="modal-label-name">Auth</span>
               </label>
               <select
-                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full"
+                className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("Auth")}
               >
                 <option value=""></option>
@@ -152,12 +150,10 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                  Service
-                </span>
+                <span className="modal-label-name">Service</span>
               </label>
               <select
-                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full"
+                className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("service")}
               >
                 <option value=""></option>
@@ -165,13 +161,11 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 <option value="married">married</option>
               </select>
               <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                  Provider Name
-                </span>
+                <span className="modal-label-name">Provider Name</span>
               </label>
               {billable ? (
                 <select
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full"
+                  className="col-span-2 modal-input-field ml-1 w-full"
                   {...register("provider")}
                 >
                   <option value=""></option>
@@ -184,12 +178,10 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 </div>
               )}
               <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                  POS
-                </span>
+                <span className="modal-label-name">POS</span>
               </label>
               <select
-                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full"
+                className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("pos")}
               >
                 <option value=""></option>
@@ -198,16 +190,14 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               </select>
               {/* calender */}
               <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                  From Date
-                </span>
+                <span className="modal-label-name">From Date</span>
               </label>
               <input
                 name="check_date"
                 readOnly
                 onClick={() => setOpen(!open)}
                 value={date ? date.toLocaleDateString() : "Select a Date"}
-                className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-[12px] w-full"
+                className="col-span-2 modal-input-field ml-1 w-full px-2"
                 {...register("check_date")}
               />
 
@@ -278,7 +268,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               )}
               {/* Custom Calender End */}
               {/* <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                <span className="modal-label-name">
                   From Date
                 </span>
               </label>
@@ -288,32 +278,28 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 {...register("check_Date")}
               /> */}
               <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                  From Time
-                </span>
+                <span className="modal-label-name">From Time</span>
               </label>
-              <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-3  gap-1">
-                <input
-                  className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-[12px] w-full"
-                  type="time"
-                  {...register("to_time")}
+              <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-3 pl-1 gap-1">
+                <TimePicker
+                  className="modal-input-field"
+                  use12Hours
+                  format="h:mm A"
+                  onChange={onChange}
                 />
-                <div className="text-[12px] text-gray-600 mx-auto mt-2 font-bold">
-                  To Time
-                </div>
-                <input
-                  className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-[12px] w-full"
-                  type="time"
-                  {...register("from_time")}
+                <div className="modal-label-name mt-2 mx-auto">To Time</div>
+                <TimePicker
+                  className="modal-input-field"
+                  use12Hours
+                  format="h:mm A"
+                  onChange={onChange}
                 />
               </div>
               <label className="label">
-                <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                  Status
-                </span>
+                <span className="modal-label-name">Status</span>
               </label>
               <select
-                className="border border-gray-300 rounded-sm px-2 col-span-2 py-[1px] mx-1 text-[12px] w-full"
+                className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("status")}
               >
                 <option value=""></option>
@@ -322,7 +308,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               </select>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5 mr-2 gap-1">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5  mr-2 gap-1">
               <div className="">
                 <Switch
                   size="small"
@@ -331,7 +317,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                   }}
                 />
                 <label
-                  className="form-check-label  font-medium inline-block ml-2 text-[12px] text-gray-600"
+                  className="modal-label-name ml-2"
                   htmlFor="flesmwitchCheckDefault"
                 >
                   Recurrence Pattern?
@@ -340,7 +326,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               <div>
                 {recurrence && (
                   <input
-                    className="border border-gray-300 col-span-2 rounded-sm px-2 py-[3px] mx-1 text-[12px] w-full"
+                    className="px-2 modal-input-field ml-1 w-full"
                     type="date"
                     {...register("check_Date")}
                   />
@@ -356,7 +342,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                       }}
                     />
                     <label
-                      className="form-check-label font-medium inline-block ml-2 text-[12px] text-gray-600"
+                      className="modal-label-name ml-2 "
                       htmlFor="flesmwitchCheckDefault"
                     >
                       Daily
@@ -463,18 +449,11 @@ const CreateAppointment = ({ handleClose, clicked }) => {
 
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
-              <button
-                className=" py-[5px] font-normal px-3 mr-1 text-[12px]  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                type="submit"
-              >
+              <button className=" pms-button mr-2" type="submit">
                 Add Appointment
               </button>
 
-              <button
-                className="py-[5px] px-3 text-[12px] font-normal bg-gradient-to-r from-red-700 to-red-400 hover:to-red-700 text-white rounded-sm"
-                autoFocus
-                onClick={handleClose}
-              >
+              <button className="pms-close-button" onClick={handleClose}>
                 Close
               </button>
             </div>

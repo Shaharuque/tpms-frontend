@@ -66,7 +66,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Name
                     </span>
                   </label>
@@ -81,7 +81,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Address
                     </span>
                   </label>
@@ -96,7 +96,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Address 2
                     </span>
                   </label>
@@ -111,7 +111,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       City
                     </span>
                   </label>
@@ -125,7 +125,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 {/* state  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       State
                     </span>
                   </label>
@@ -143,7 +143,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Zip
                     </span>
                   </label>
@@ -158,7 +158,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Phone
                     </span>
                   </label>
@@ -173,7 +173,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Short Code
                     </span>
                   </label>
@@ -188,7 +188,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Email
                     </span>
                   </label>
@@ -203,7 +203,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       EIN
                     </span>
                   </label>
@@ -218,7 +218,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       NPI
                     </span>
                   </label>
@@ -233,7 +233,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Taxonomy
                     </span>
                   </label>
@@ -248,7 +248,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Contact Person
                     </span>
                   </label>
@@ -263,7 +263,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Service Area Miles
                     </span>
                   </label>
@@ -278,7 +278,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       SFTP Username
                     </span>
                   </label>
@@ -294,7 +294,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       SFTP Password
                     </span>
                   </label>
@@ -308,7 +308,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 {/* Default POS  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Default POS
                     </span>
                   </label>
@@ -325,7 +325,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                 {/* Default Timezone:  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Default Timezone:
                     </span>
                   </label>

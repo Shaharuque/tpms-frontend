@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { GoAlert } from "react-icons/go";
 import { FcCancel } from "react-icons/fc";
+import { Switch } from "antd";
 
 const PatientPortal = () => {
+  const [active, setActive] = useState(false);
+
+
+
   const { id } = useParams();
   console.log("patient Portal", id);
   const [secure, setSecure] = useState(false);
@@ -24,37 +29,52 @@ const PatientPortal = () => {
           </p>
           <div className="my-3">
             <div className="flex items-center mb-1">
-              <input
+              {/* <input
                 type="checkbox"
                 name="patient"
                 onClick={() => {
                   setSecure(!secure);
                 }}
-              />
+              /> */}
+                    <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
               <span className="text-xs ml-1 text-gray-700 font-medium">
                 Text message ok
               </span>
             </div>
             <div className="flex items-center mb-1">
-              <input
+              {/* <input
                 type="checkbox"
                 name="patient"
                 onClick={() => {
                   setBilling(!billing);
                 }}
-              />
+              /> */}
+                    <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
               <span className="text-xs ml-1 text-gray-700 font-medium">
                 Access billing documents
               </span>
             </div>
             <div className="flex items-center mb-1">
-              <input
+              {/* <input
                 type="checkbox"
                 name="patient"
                 onClick={() => {
                   setPay(!pay);
                 }}
-              />
+              /> */}
+                    <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
               <span className="text-xs ml-1 text-gray-700 font-medium">
                 Pay a balance with credit card using Stripe
               </span>

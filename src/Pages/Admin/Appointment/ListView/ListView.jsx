@@ -625,7 +625,7 @@ const ListView = () => {
                     </div>
                   </div>
                   <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-5 mb-2">
+                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
                       {billable && (
                         <div>
                           <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
@@ -659,7 +659,7 @@ const ListView = () => {
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                                className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
                                 {...register("place_of_service")}
                               >
                                 <option value="" className="text-black">
@@ -697,7 +697,7 @@ const ListView = () => {
                             <div className="ml-1">
                               <div
                                 onClick={() => setOpenCalendar(true)}
-                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
+                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
                               >
                                 <input
                                   value={
@@ -733,7 +733,7 @@ const ListView = () => {
                               </label>
                               <div>
                                 <select
-                                  className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                  className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
                                   {...register("Status")}
                                 >
                                   <option value="" className="text-black">
@@ -773,6 +773,28 @@ const ListView = () => {
                           Go
                         </button>
                       )}
+                      {table && (
+                        <>
+                          <div className="  ">
+                            <div className="px-2 py-2 w-full mr-2 mt-[35px] bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
+                              <input
+                                placeholder="Search here..."
+                                onChange={(e) => globalFilter(e.target.value)}
+                                className="focus:outline-none"
+                              />
+                              <label>
+                                <BiSearchAlt />
+                              </label>
+                            </div>
+                          </div>
+                          <button
+                            onClick={clearFilters}
+                            className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                          >
+                            Clear filters
+                          </button>
+                        </>
+                      )}
                     </div>
                   </form>
                 </Fade>
@@ -782,7 +804,7 @@ const ListView = () => {
           {/* Multi date picker component called */}
           <div
             ref={refClose}
-            className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%] shadow-xl"
+            className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
           >
             {openCalendar && (
               <CustomDateRange
@@ -799,25 +821,6 @@ const ListView = () => {
           <>
             {listView && (
               <div className="my-5">
-                <div className=" lg:flex justify-end mb-3">
-                  <div className="px-2 w-52 mr-2 bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center mt-2">
-                    <input
-                      placeholder="Search here..."
-                      onChange={(e) => globalFilter(e.target.value)}
-                      className="focus:outline-none"
-                    />
-                    <label>
-                      <BiSearchAlt />
-                    </label>
-                  </div>
-
-                  <button
-                    onClick={clearFilters}
-                    className="px-2 py-2 mt-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-                  >
-                    Clear filters
-                  </button>
-                </div>
                 {filteredInfo?.Patients?.length > 0 ||
                 filteredInfo?.Service_hrs?.length > 0 ||
                 filteredInfo?.pos?.length > 0 ||

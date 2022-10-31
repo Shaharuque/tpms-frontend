@@ -1,11 +1,11 @@
-import { Dialog } from "@mui/material";
-import { Modal } from "antd";
-import React from "react";
+import { Modal, Switch } from "antd";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const CreatePatient = ({ handleClose, patientClicked }) => {
+  const [active, setActive] = useState(false);
   console.log(patientClicked);
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
@@ -21,7 +21,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
         bodyStyle={{ padding: "0" }}
         width={500}
         closable={false}
-        className="box rounded-xl"
+        className="box rounded-xl "
       >
         <div className="px-5 py-2">
           <div className="flex items-center justify-between">
@@ -37,27 +37,27 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mb-1 mr-2 gap-1">
               <div>
                 <label className="label">
-                  <span className="label-text font-medium text-xs  text-gray-600 text-left">
+                  <span className="modal-label-name">
                     First Name<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="first_name"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1  text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("first_name")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text font-medium text-xs text-gray-600 text-left">
+                  <span className="modal-label-name">
                     Last Name<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="last_name"
-                  className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className=" modal-input-field ml-1 w-full"
                   {...register("last_name")}
                 />
               </div>
@@ -65,13 +65,13 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-1 mr-2 gap-1">
               <div>
                 <label className="label">
-                  <span className="label-text font-medium text-xs text-gray-600 text-left">
+                  <span className="modal-label-name">
                     DOB<span className="text-red-500">*</span>
                   </span>
                 </label>
 
                 <input
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                  className=" modal-input-field ml-1 w-full"
                   name="dob"
                   type="date"
                   {...register("dob")}
@@ -79,12 +79,12 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text font-medium text-xs text-gray-600 text-left">
+                  <span className="modal-label-name">
                     Gender<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <select
-                  className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                  className=" modal-input-field ml-1 w-full"
                   {...register("gender")}
                 >
                   <option value=""></option>
@@ -94,12 +94,12 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text font-medium text-xs text-gray-600 text-left">
+                  <span className="modal-label-name">
                     POS<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <select
-                  className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-sm w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("pos")}
                 >
                   <option value=""></option>
@@ -108,10 +108,10 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                 </select>
               </div>
             </div>
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2 gap-1">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2  gap-1">
               <div>
                 <label className="label">
-                  <span className="label-text font-medium items-center flex text-xs text-gray-600 text-left">
+                  <span className="modal-label-name flex items-center gap-1">
                     Email Address
                     <AiOutlineQuestionCircle className="text-sm" />
                   </span>
@@ -120,12 +120,12 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   <input
                     type="text"
                     name="email_Address"
-                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
+                    className="modal-input-field ml-1 w-3/4"
                     {...register("email_Address")}
                   />
                   <div>
                     <select
-                      className="border border-gray-300 rounded-sm px-2 py-[3px] text-sm "
+                      className="modal-input-field ml-1 w-full"
                       {...register("email")}
                     >
                       <option value=""></option>
@@ -134,7 +134,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     </select>
                   </div>
                 </div>
-                <div className="flex ml-1 mt-1 items-center">
+                <div className="flex ml-1 mt-2 items-center">
                   <input
                     type="checkbox"
                     // checked={value ? true : false}
@@ -142,7 +142,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     // onClick={() => {
                     //   setValue(!value);
                     // }}
-                  />
+                  />{" "}
                   <span className="text-xs ml-1 text-gray-600 font-medium">
                     Send me an email reminder
                   </span>
@@ -151,7 +151,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
 
               <div>
                 <label className="label">
-                  <span className="label-text font-medium items-center flex text-xs text-gray-600 text-left">
+                  <span className="modal-label-name flex items-center gap-1">
                     Phone Number
                     <AiOutlineQuestionCircle className="text-sm" />
                   </span>
@@ -160,12 +160,12 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   <input
                     type="text"
                     name="phone_number"
-                    className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-3/4"
+                    className="modal-input-field ml-1 w-3/4"
                     {...register("phone_number")}
                   />
                   <div>
                     <select
-                      className="border border-gray-300 rounded-sm px-2 py-[3px] text-sm "
+                      className="modal-input-field ml-1 w-full"
                       {...register("phone")}
                     >
                       <option value=""></option>
@@ -175,7 +175,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   </div>
                 </div>
                 <div>
-                  <div className="flex ml-1 mt-1 items-center">
+                  <div className="flex ml-1 mt-2 items-center">
                     <input
                       type="checkbox"
                       // checked={value ? true : false}
@@ -183,7 +183,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                       // onClick={() => {
                       //   setValue(!value);
                       // }}
-                    />
+                    />{" "}
                     <span className="text-xs ml-1 text-gray-600 font-medium">
                       Send me a text message
                     </span>
@@ -198,6 +198,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     //   setValue(!value);
                     // }}
                   />
+
                   <span className="text-xs ml-1 text-gray-600 font-medium">
                     Send me a voice message
                   </span>
@@ -205,19 +206,13 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
               </div>
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>
+
             <div className=" flex items-end justify-end mt-2">
-              <button
-                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                type="submit"
-              >
+              <button className=" pms-button mr-2" type="submit">
                 Create & Continue
               </button>
 
-              <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                autoFocus
-                onClick={handleClose}
-              >
+              <button className="pms-close-button" onClick={handleClose}>
                 Close
               </button>
             </div>

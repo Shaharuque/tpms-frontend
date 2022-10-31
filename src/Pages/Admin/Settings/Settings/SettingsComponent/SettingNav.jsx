@@ -10,7 +10,9 @@ const SettingNav = ({ s }) => {
         to={link}
       >
         <span className="text-2xl ml-2 ">{icon}</span>
-        <h1 className="text-sm font-medium">{name}</h1>
+        <h1 className="text-sm lg:text-[10px] xl:text-[14px] font-medium">
+          {name}
+        </h1>
       </CustomLink>
     </div>
   );

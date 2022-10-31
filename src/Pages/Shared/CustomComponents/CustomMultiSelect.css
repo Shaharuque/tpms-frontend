@@ -25,10 +25,11 @@
   width: 100% !important;
   border-radius: 0px !important;
   /* border-radius: var(--rmsc-radius); */
+  border: 0px solid var(--rmsc-border) !important;
 }
 
 .Global .dropdown-container:focus-within {
-  border-bottom: 3px solid rgb(251, 251, 251) !important;
+  /* border-bottom: 3px solid rgb(251, 251, 251) !important; */
   box-shadow: #00a1b100 0 0 0 0px !important;
 
 }

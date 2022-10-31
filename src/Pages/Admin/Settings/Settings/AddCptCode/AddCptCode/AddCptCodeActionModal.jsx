@@ -42,12 +42,10 @@ export default function AddCptCodeActionModal({ handleClose, open }) {
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 mr-2 gap-5">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Tx Type
-                  </span>
+                  <span className="modal-label-name">Tx Type</span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("tx_type")}
                 >
                   <option value="Mr">Behavioral therapy</option>
@@ -58,33 +56,24 @@ export default function AddCptCodeActionModal({ handleClose, open }) {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Cpt Code
-                  </span>
+                  <span className="modal-label-name">Cpt Code</span>
                 </label>
                 <input
                   type="number"
                   placeholder="Cpt Code"
                   name="cpt_code"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("cpt_code")}
                 />
               </div>
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
-              <button
-                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                type="submit"
-              >
+              <button className=" pms-button mr-2" type="submit">
                 Save
               </button>
 
-              <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                autoFocus
-                onClick={handleClose}
-              >
+              <button className="pms-close-button" onClick={handleClose}>
                 Close
               </button>
             </div>

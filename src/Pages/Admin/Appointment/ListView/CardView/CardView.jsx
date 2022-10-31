@@ -69,7 +69,7 @@ const CardView = ({ data }) => {
   return (
     <div className="border shadow-md pt-3 z-0 card rounded-md bg-white">
       <div className="px-5">
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-5 mb-2">
+        <div className=" grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-5 mb-2">
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
@@ -151,7 +151,7 @@ const CardView = ({ data }) => {
             Patient Details
           </h1>
           <div>
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 ">
               <div className="col-span-2 px-5 py-4">
                 <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-2">
                   <div>
