@@ -116,7 +116,7 @@ const MPostingEditAdd = () => {
                   <input
                     type="number"
                     name="check"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("check")}
                   />
                 </div>
@@ -145,7 +145,7 @@ const MPostingEditAdd = () => {
                   <input
                     type="number"
                     name="amount"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("amount")}
                   />
                 </div>
@@ -162,7 +162,7 @@ const MPostingEditAdd = () => {
                     type="number"
                     readOnly
                     name="unallocated_amount"
-                    className="input-border bg-slate-200 text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border bg-slate-200 text-gray-600 rounded-sm  py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("unallocated_amount")}
                   />
                 </div>
@@ -186,7 +186,7 @@ const MPostingEditAdd = () => {
                     </span>
                   </label>
                   <TextArea
-                    maxLength={2}
+                    maxLength={2000}
                     rows={7}
                     placeholder=" Notes"
                     size="large"

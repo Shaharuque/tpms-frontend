@@ -13,7 +13,7 @@ const GlobalMultiSelect = () => {
             value: "mafgngo"
         },
         {
-            label: "Gradfgpdes ",
+            label: "Gradfgpdes",
             value: "grfgapes"
         },
         {
@@ -24,6 +24,7 @@ const GlobalMultiSelect = () => {
             value: "strawberry"
         },
     ];
+    
     const [selected, setSelected] = useState([]);
 
     const customValueRenderer = (selected, _options) => {

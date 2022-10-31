@@ -39,14 +39,12 @@ const AddDocuments = ({ handleClose, open }) => {
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-semibold text-left">
-                    Description
-                  </span>
+                  <span className="modal-label-name">Description</span>
                 </label>
                 <input
                   type="text"
                   name="description"
-                  className="border-secondary border-b-2 rounded-sm py-[5px] mx-1 text-xs w-full focus:outline-none"
+                  className="modal-input-field ml-1 w-full"
                   {...register("description")}
                 />
               </div>
@@ -54,22 +52,18 @@ const AddDocuments = ({ handleClose, open }) => {
               <div>
                 {" "}
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-semibold text-left">
-                    Expiry Date
-                  </span>
+                  <span className="modal-label-name">Expiry Date</span>
                 </label>
                 <input
                   type="date"
                   // className="border border-gray-300 rounded-sm py-[4px] mx-1 text-xs w-full"
-                  className="border-secondary border-b-2 rounded-sm py-[4px] mx-1 text-xs w-full focus:outline-none"
+                  className="modal-input-field ml-1 w-full"
                   {...register("expiry_Date")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-semibold text-left">
-                    Upload File
-                  </span>
+                  <span className="modal-label-name">Upload File</span>
                 </label>
                 <input
                   type="file"
@@ -80,18 +74,11 @@ const AddDocuments = ({ handleClose, open }) => {
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
-              <button
-                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                type="submit"
-              >
+              <button className=" pms-button mr-2" type="submit">
                 Save
               </button>
 
-              <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                autoFocus
-                onClick={handleClose}
-              >
+              <button className="pms-close-button" onClick={handleClose}>
                 Close
               </button>
             </div>

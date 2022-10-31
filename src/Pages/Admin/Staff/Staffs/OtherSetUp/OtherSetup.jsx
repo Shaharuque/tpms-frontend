@@ -1,7 +1,12 @@
+import { Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const OtherSetup = () => {
+  const [active, setActive] = useState(false);
+
+
+
   const [note, setNote] = useState("");
 
   const { register, handleSubmit, reset } = useForm();
@@ -222,73 +227,103 @@ const OtherSetup = () => {
         </div>
         <div>
           <div className="flex ml-1 mt-1 items-center">
-            <input
+            {/* <input
               type="checkbox"
               name="service"
               // onClick={() => {
               //   setValue(!value);
               // }}
-            />
+            /> */}
+            <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Is eligible for paid time off
             </span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
-            <input
+            {/* <input
               type="checkbox"
               name="service"
               // onClick={() => {
               //   setValue(!value);
               // }}
-            />
+            /> */}
+            <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Exempt Staff
             </span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
-            <input
+            {/* <input
               type="checkbox"
               name="service"
               // onClick={() => {
               //   setValue(!value);
               // }}
-            />
+            /> */}
+            <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Gets paid holidays
             </span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
-            <input
+            {/* <input
               type="checkbox"
               name="service"
               // onClick={() => {
               //   setValue(!value);
               // }}
-            />
+            /> */}
+            <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Is Parttime
             </span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
-            <input
+            {/* <input
               type="checkbox"
               name="service"
               // onClick={() => {
               //   setValue(!value);
               // }}
-            />
+            /> */}
+            <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Is Contractor
             </span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
-            <input
+            {/* <input
               type="checkbox"
               name="service"
               // onClick={() => {
               //   setValue(!value);
               // }}
-            />
+            /> */}
+            <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Prevent Provider Render Without Notes(for catalyst users)
             </span>

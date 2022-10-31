@@ -262,6 +262,19 @@ const PayPeriod = () => {
           onChange={handleChange}
         />
       </div>
+      <div>
+        <div className="flex my-5">
+          <select className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0">
+            <option value="" className="text-black">
+              Select
+            </option>
+            <option value="Today" className="text-black">
+              bulk delete
+            </option>
+          </select>
+          <button className="bg-[#34A7B8] px-2 text-white rounded">Go</button>
+        </div>
+      </div>
       {openEditModal && (
         <PayPeriodEnitModal
           handleClose={handleClose}
