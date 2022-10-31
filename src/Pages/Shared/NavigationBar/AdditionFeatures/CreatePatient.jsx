@@ -1,10 +1,11 @@
-import { Modal } from "antd";
-import React from "react";
+import { Modal, Switch } from "antd";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const CreatePatient = ({ handleClose, patientClicked }) => {
+  const [active, setActive] = useState(false);
   console.log(patientClicked);
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
@@ -107,7 +108,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                 </select>
               </div>
             </div>
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2 gap-1">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2  gap-1">
               <div>
                 <label className="label">
                   <span className="modal-label-name flex items-center gap-1">
@@ -141,7 +142,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     // onClick={() => {
                     //   setValue(!value);
                     // }}
-                  />
+                  />{" "}
                   <span className="text-xs ml-1 text-gray-600 font-medium">
                     Send me an email reminder
                   </span>
@@ -182,7 +183,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                       // onClick={() => {
                       //   setValue(!value);
                       // }}
-                    />
+                    />{" "}
                     <span className="text-xs ml-1 text-gray-600 font-medium">
                       Send me a text message
                     </span>
@@ -197,6 +198,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     //   setValue(!value);
                     // }}
                   />
+
                   <span className="text-xs ml-1 text-gray-600 font-medium">
                     Send me a voice message
                   </span>

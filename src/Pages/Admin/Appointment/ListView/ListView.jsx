@@ -659,7 +659,7 @@ const ListView = () => {
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                                className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
                                 {...register("place_of_service")}
                               >
                                 <option value="" className="text-black">
@@ -697,7 +697,7 @@ const ListView = () => {
                             <div className="ml-1">
                               <div
                                 onClick={() => setOpenCalendar(true)}
-                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
+                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
                               >
                                 <input
                                   value={
@@ -733,7 +733,7 @@ const ListView = () => {
                               </label>
                               <div>
                                 <select
-                                  className="bg-transparent border-b-[3px] border-[#e5e5e5] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                  className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
                                   {...register("Status")}
                                 >
                                   <option value="" className="text-black">

@@ -1,10 +1,12 @@
-import { Dialog } from "@mui/material";
+import { Dialog, Switch } from "@mui/material";
 import { Modal } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const CredentialsModal = ({ handleClose, open, name }) => {
+  const [active, setActive] = useState(false);
+
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
 

@@ -10,7 +10,7 @@ import { CheckBox } from "../../../../Pages/Settings/SettingComponents/CheckBox"
 import axios from "axios";
 import { FiDownload } from "react-icons/fi";
 import UseTable from "../../../../../Utilities/UseTable";
-import { Table } from "antd";
+import { Switch, Table } from "antd";
 import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { DateRangePicker } from "react-date-range";
@@ -19,6 +19,10 @@ import "react-date-range/dist/theme/default.css";
 import { BiSearchAlt } from "react-icons/bi";
 
 const ArFollowupBucket = () => {
+  const [active, setActive] = useState(false);
+
+
+
   const [select, setSelect] = useState("");
   const [tableOpen, setTableOpen] = useState(false);
   const [flowUpData, SetFlowUpData] = useState([]);
@@ -652,7 +656,7 @@ const ArFollowupBucket = () => {
           </div>
           <div className="flex items-center ">
             <div className="flex  mt-8 items-center">
-              <input
+              {/* <input
                 type="checkbox"
                 // checked={value ? true : false}
                 name="patient"
@@ -660,7 +664,14 @@ const ArFollowupBucket = () => {
                 //   setValue(!value);
                 // }}
                 className="text-[14px] text-gray-600 font-medium"
-              />
+              /> */}
+
+               <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
+
               <span className="text-[14px] ml-1 text-gray-600 font-medium">
                 Zero Paid
               </span>

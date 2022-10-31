@@ -11,11 +11,13 @@ import { getpatientsDetails } from "../../../../../features/Patient_redux/patien
 import Loading from "../../../../../Loading/Loading";
 import TextArea from "antd/lib/input/TextArea";
 import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
+import { Switch } from "antd";
 // import Calendar from "react-calendar";
 // import "./SingleCalendar.css";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 
 const PatientInformation = () => {
+  const [active, setActive] = useState(false);
   const [voiceMsg, setVoiceMsg] = useState(false);
   const [textMsg, setTextMsg] = useState(false);
   const [appointment, setAppointment] = useState(false);
@@ -183,11 +185,16 @@ const PatientInformation = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
-            <input
+            {/* <input
               type="checkbox"
               name="checkedActive"
               {...register("checkedActive")}
-            />
+            /> */}
+                  <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
             <span className="text-[15px] ml-1 text-gray-700 gap-1 font-semibold">
               Active Patient
             </span>
@@ -510,26 +517,36 @@ const PatientInformation = () => {
                 </div>
                 <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
                   <div className="flex items-center">
-                    <input
+                    {/* <input
                       type="checkbox"
                       name="patient"
                       onClick={() => {
                         setVoiceMsg(!voiceMsg);
                       }}
-                    />
+                    /> */}
+                    <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Voice message ok
                     </span>
                   </div>
 
                   <div className="flex items-center">
-                    <input
+                    {/* <input
                       type="checkbox"
                       name="patient"
                       onClick={() => {
                         setTextMsg(!textMsg);
                       }}
-                    />
+                    /> */}
+                    <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Text message ok
                     </span>
@@ -537,13 +554,18 @@ const PatientInformation = () => {
                 </div>
 
                 <div className="flex ml-1 mt-1 items-center">
-                  <input
+                  {/* <input
                     type="checkbox"
                     name="patient"
                     onClick={() => {
                       setAppointment(!appointment);
                     }}
-                  />
+                  /> */}
+                  <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                   <span className="text-xs ml-1 text-gray-700 font-normal">
                     Send text/voice appointment reminders
                   </span>
@@ -592,26 +614,36 @@ const PatientInformation = () => {
                   </div>
                   <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
                     <div className="flex items-center">
-                      <input
+                      {/* <input
                         type="checkbox"
                         name="patient"
                         onClick={() => {
                           setVoiceMsg(!voiceMsg);
                         }}
-                      />
+                      /> */}
+                      <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                       <span className="text-xs ml-1 text-gray-700 font-normal">
                         Voice message ok
                       </span>
                     </div>
 
                     <div className="flex items-center">
-                      <input
+                      {/* <input
                         type="checkbox"
                         name="patient"
                         onClick={() => {
                           setTextMsg(!textMsg);
                         }}
-                      />
+                      /> */}
+                      <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                       <span className="text-xs ml-1 text-gray-700 font-normal">
                         Text message ok
                       </span>
@@ -619,13 +651,18 @@ const PatientInformation = () => {
                   </div>
 
                   <div className="flex ml-1 mt-1 items-center">
-                    <input
+                    {/* <input
                       type="checkbox"
                       name="patient"
                       onClick={() => {
                         setAppointment(!appointment);
                       }}
-                    />
+                    /> */}
+                    <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Send text/voice appointment reminders
                     </span>
@@ -664,32 +701,42 @@ const PatientInformation = () => {
                     onClick={() => {
                       handleEmailClick();
                     }}
-                    className="bg-secondary text-white p-[6px] mt-1"
+                    className="bg-secondary text-white p-[6px] "
                   >
                     <FaPlus />
                   </button>
                 </div>
                 <div className="flex ml-1 mt-1 items-center">
-                  <input
+                  {/* <input
                     type="checkbox"
                     name="patient"
                     onClick={() => {
                       setEmail(!email);
                     }}
-                  />
+                  /> */}
+                  <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Email OK
                   </span>
                 </div>
 
                 <div className="flex ml-1 mt-1 items-center">
-                  <input
+                  {/* <input
                     type="checkbox"
                     name="patient"
                     onClick={() => {
                       setEmailSend(!emailSend);
                     }}
-                  />
+                  /> */}
+                  <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Send email appointment reminders
                   </span>
@@ -733,13 +780,18 @@ const PatientInformation = () => {
                   </div>
                   <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
                     <div className="">
-                      <input
+                      {/* <input
                         type="checkbox"
                         name="patient"
                         onClick={() => {
                           setEmail(!email);
                         }}
-                      />
+                      /> */}
+                      <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                       <span className="text-xs ml-1 text-gray-700 font-normal">
                         Email OK
                       </span>
@@ -747,13 +799,18 @@ const PatientInformation = () => {
                   </div>
 
                   <div className="flex ml-1 mt-1 items-center">
-                    <input
+                    {/* <input
                       type="checkbox"
                       name="patient"
                       onClick={() => {
                         setEmailSend(!emailSend);
                       }}
-                    />
+                    /> */}
+                    <Switch
+                  size="small"
+                  checked={active ? true : false}
+                  onClick={() => setActive(!active)}
+                />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Send email appointment reminders
                     </span>
