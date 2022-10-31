@@ -1,6 +1,7 @@
 import { Modal } from "antd";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 const BusinessDocAddModal = ({ open, handleAddDocClose }) => {
   const { register, handleSubmit, reset } = useForm();
@@ -19,30 +20,32 @@ const BusinessDocAddModal = ({ open, handleAddDocClose }) => {
         className="box rounded-xl"
       >
         <div className="p-2">
-          <h1 className="text-lg text-left text-orange-400">Add Document</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg text-left text-orange-400 ">Add Document</h1>
+            <IoCloseCircleOutline
+              onClick={handleAddDocClose}
+              className="text-gray-600 text-2xl hover:text-primary"
+            />
+          </div>
           <div className="divider mt-0"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center gap-3 text-sm">
               <div>
                 <label className="label">
-                  <span className="label-text text-sm text-gray-600 text-left font-bold">
-                    Description
-                  </span>
+                  <span className="modal-label-name">Description</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Description"
                   name="description"
-                  className="border rounded-sm px-2 py-1 mx-1 text-sm w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("description")}
                 />
               </div>
 
               <div>
                 <label className="label">
-                  <span className="label-text text-sm text-gray-600 text-left font-bold">
-                    Upload File
-                  </span>
+                  <span className="modal-label-name">Upload File</span>
                 </label>
                 <input
                   type="file"
@@ -52,20 +55,13 @@ const BusinessDocAddModal = ({ open, handleAddDocClose }) => {
               </div>
             </div>
             <div className="divider mb-0"></div>
-            <div className="flex justify-end">
-              {/* <input type="submit" /> */}
-              <button
-                className=" py-[5px] px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                type="submit"
-              >
+            <div className=" flex items-end justify-end mt-2">
+              <button className=" pms-button mr-2" type="submit">
                 Upload
               </button>
-              <button
-                className="py-[5px] px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-                autoFocus
-                onClick={handleAddDocClose}
-              >
-                CANCEL
+
+              <button className="pms-close-button" onClick={handleAddDocClose}>
+                Cancel
               </button>
             </div>
           </form>

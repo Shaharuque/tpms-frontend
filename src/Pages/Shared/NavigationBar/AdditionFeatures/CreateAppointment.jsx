@@ -453,11 +453,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 Add Appointment
               </button>
 
-              <button
-                className="pms-close-button"
-                autoFocus
-                onClick={handleClose}
-              >
+              <button className="pms-close-button" onClick={handleClose}>
                 Close
               </button>
             </div>

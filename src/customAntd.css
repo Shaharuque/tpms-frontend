@@ -9080,13 +9080,13 @@ a.ant-btn-sm {
 
 .ant-picker:hover,
 .ant-picker-focused {
-  border-color: #40a9ff;
+  border-color: #08979c;
   border-right-width: 1px;
 }
 
 .ant-picker-focused {
-  border-color: #40a9ff;
-  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  border-color: #08979c;
+  box-shadow: 0 0 0 1px #00a7b6;
   border-right-width: 1px;
   outline: 0;
 }
@@ -23462,7 +23462,7 @@ textarea.ant-input-affix-wrapper {
 }
 
 .ant-input:hover {
-  border-color: #40a9ff;
+  border-color: #08979c;
   border-right-width: 1px;
 }
 
@@ -23473,8 +23473,8 @@ textarea.ant-input-affix-wrapper {
 
 .ant-input:focus,
 .ant-input-focused {
-  border-color: #40a9ff;
-  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  border-color: #00a7b6;
+  box-shadow: 0 0 0 1px #00a7b6;
   border-right-width: 1px;
   outline: 0;
 }

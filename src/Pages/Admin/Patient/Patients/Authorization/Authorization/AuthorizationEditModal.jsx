@@ -50,13 +50,13 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                 <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
                   <div>
                     <label className="label">
-                      <span className="label-text flex items-center text-xs text-gray-600 font-medium text-left">
+                      <span className="modal-label-name">
                         Service
                         <span className="text-red-500">*</span>
                       </span>
                     </label>
                     <select
-                      className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("service")}
                     >
                       <option value="single">single</option>
@@ -65,13 +65,13 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text flex items-center text-xs text-gray-600 font-medium text-left">
+                      <span className="modal-label-name">
                         Service Sub-Type
                         <span className="text-red-500">*</span>
                       </span>
                     </label>
                     <select
-                      className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("service_sub_type")}
                     >
                       <option value="single">single</option>
@@ -80,13 +80,13 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text flex items-center text-xs text-gray-600 font-medium text-left">
+                      <span className="modal-label-name">
                         CPT Code
                         <span className="text-red-500">*</span>
                       </span>
                     </label>
                     <select
-                      className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("cpt_code")}
                     >
                       <option value="single">single</option>
@@ -96,53 +96,45 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                   <div className="flex gap-2">
                     <div>
                       <label className="label">
-                        <span className="label-text text-xs text-gray-600 font-medium text-left">
-                          M1
-                        </span>
+                        <span className="modal-label-name">M1</span>
                       </label>
                       <input
                         type="text"
                         name="m1"
-                        className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
+                        className="modal-input-field ml-1 w-full"
                         {...register("m1")}
                       />
                     </div>
                     <div>
                       <label className="label">
-                        <span className="label-text text-xs text-gray-600 font-medium text-left">
-                          M2
-                        </span>
+                        <span className="modal-label-name">M2</span>
                       </label>
                       <input
                         type="text"
                         name="m2"
-                        className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
+                        className="modal-input-field ml-1 w-full"
                         {...register("m2")}
                       />
                     </div>
                     <div>
                       <label className="label">
-                        <span className="label-text text-xs text-gray-600 font-medium text-left">
-                          M3
-                        </span>
+                        <span className="modal-label-name">M3</span>
                       </label>
                       <input
                         type="text"
                         name="m3"
-                        className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
+                        className="modal-input-field ml-1 w-full"
                         {...register("m3")}
                       />
                     </div>
                     <div>
                       <label className="label">
-                        <span className="label-text text-xs text-gray-600 font-medium text-left">
-                          M4
-                        </span>
+                        <span className="modal-label-name">M4</span>
                       </label>
                       <input
                         type="text"
                         name="m4"
-                        className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
+                        className="modal-input-field ml-1 w-full"
                         {...register("m4")}
                       />
                     </div>
@@ -150,13 +142,13 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                   <div className="flex gap-2">
                     <div>
                       <label className="label">
-                        <span className="label-text flex items-center text-xs text-gray-600 font-medium text-left">
+                        <span className="modal-label-name">
                           Billed Per
                           <span className="text-red-500">*</span>
                         </span>
                       </label>
                       <select
-                        className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                        className="modal-input-field ml-1 w-full"
                         {...register("per_unit")}
                       >
                         <option value="single">single</option>
@@ -165,7 +157,7 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                     </div>
                     <div className="mt-[32px]">
                       <select
-                        className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                        className="modal-input-field ml-1 w-full"
                         {...register("minute")}
                       >
                         <option value="single"></option>
@@ -176,21 +168,19 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                   </div>
                   <div className="w-1/2">
                     <label className="label">
-                      <span className="label-text text-xs text-gray-600 font-medium text-left">
-                        Rate
-                      </span>
+                      <span className="modal-label-name">Rate</span>
                     </label>
                     <input
                       type="text"
                       name="rate"
-                      className="border border-gray-300 rounded-sm px-2 py-[3.5px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("rate")}
                     />
                   </div>
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text flex items-center text-xs text-gray-600 font-medium text-left">
+                    <span className="modal-label-name">
                       Maximum Frequency allowed
                       <span className="text-red-500">*</span>
                     </span>
@@ -312,15 +302,13 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 font-medium text-left">
-                      Notes
-                    </span>
+                    <span className="modal-label-name">Notes</span>
                   </label>
 
-                  <div className="mt-3">
+                  <div>
                     <TextArea
                       onChange={(e) => setNotes(e.target.value)}
-                      maxLength={2}
+                      maxLength={1002}
                       rows={5}
                       placeholder=" Notes"
                       size="large"
@@ -329,18 +317,11 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                 </div>
                 <div className="bg-gray-200 py-[1px] mt-3"></div>
                 <div className=" flex items-end justify-end mt-2">
-                  <button
-                    className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                    type="submit"
-                  >
+                  <button className=" pms-button mr-2" type="submit">
                     Save
                   </button>
 
-                  <button
-                    className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                    autoFocus
-                    onClick={handleClose}
-                  >
+                  <button className="pms-close-button" onClick={handleClose}>
                     Close
                   </button>
                 </div>

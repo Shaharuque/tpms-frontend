@@ -70,14 +70,6 @@ const Report = () => {
   //end outside click
   return (
     <div className="h-[100vh]">
-      <span className="modal-label-name">Patient Name</span>
-      {/* <select className="border border-gray-300  col-span-2 rounded-sm px-2 py-[1px] mx-1 text-[12px] w-full">
-        <option value=""></option>
-        <option value="single">single</option>
-        <option value="married">married</option>
-      </select> */}
-      <input type="text" className="modal-input-field w-1/4" />
-
       <form onSubmit={handlePlaceOrder}>
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 my-3 mr-2 gap-x-6 gap-y-1 ">
           <div>

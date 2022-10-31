@@ -175,5 +175,23 @@ input[type='checkbox'] {
   border-color: #c1c1c1;
   border-width: 1px;
   border-radius: 4px;
+  padding: 0 5px;
+}
 
+textarea:focus,
+input:focus {
+  outline-color: #0AA7B8;
+}
+
+select:focus {
+  outline-color: #0AA7B8;
+}
+
+/* ---------------------------------------Modal Box----------------------------- */
+
+.box {
+  border-top: 10px solid #0AA7B8;
+  border-bottom: 10px solid #0AA7B8;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 0px #737676;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { Modal } from "antd";
+import { Modal, TimePicker } from "antd";
 
 const EditSession = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
@@ -10,6 +10,9 @@ const EditSession = ({ handleClose, open }) => {
     e.preventDefault();
     console.log(data);
     reset();
+  };
+  const onChange = (time, timeString) => {
+    console.log(time, timeString);
   };
   //   console.log(editableRow);
   useEffect(() => {
@@ -43,12 +46,10 @@ const EditSession = ({ handleClose, open }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1">
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Patient Name
-                  </span>
+                  <span className="modal-label-name">Patient Name</span>
                 </label>
                 <select
-                  className="border border-gray-300  col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
+                  className="col-span-2 modal-input-field ml-1 w-full"
                   {...register("patients")}
                 >
                   <option value=""></option>
@@ -56,12 +57,10 @@ const EditSession = ({ handleClose, open }) => {
                   <option value="married">married</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Auth
-                  </span>
+                  <span className="modal-label-name">Auth</span>
                 </label>
                 <select
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
+                  className="col-span-2 modal-input-field ml-1 w-full"
                   {...register("Auth")}
                 >
                   <option value=""></option>
@@ -69,12 +68,10 @@ const EditSession = ({ handleClose, open }) => {
                   <option value="married">married</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Service
-                  </span>
+                  <span className="modal-label-name">Service</span>
                 </label>
                 <select
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
+                  className="col-span-2 modal-input-field ml-1 w-full"
                   {...register("service")}
                 >
                   <option value=""></option>
@@ -82,12 +79,10 @@ const EditSession = ({ handleClose, open }) => {
                   <option value="married">married</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Provider Name
-                  </span>
+                  <span className="modal-label-name">Provider Name</span>
                 </label>
                 <select
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
+                  className="col-span-2 modal-input-field ml-1 w-full"
                   {...register("provider")}
                 >
                   <option value=""></option>
@@ -95,12 +90,10 @@ const EditSession = ({ handleClose, open }) => {
                   <option value="married">married</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    POS
-                  </span>
+                  <span className="modal-label-name">POS</span>
                 </label>
                 <select
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[1px] mx-1 text-xs w-full"
+                  className="col-span-2 modal-input-field ml-1 w-full"
                   {...register("pos")}
                 >
                   <option value=""></option>
@@ -108,42 +101,36 @@ const EditSession = ({ handleClose, open }) => {
                   <option value="married">married</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    From Date
-                  </span>
+                  <span className="modal-label-name">From Date</span>
                 </label>
                 <input
-                  className="border border-gray-300 col-span-2 rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
+                  className="col-span-2 modal-input-field ml-1 w-full"
                   type="date"
                   {...register("check_Date")}
                 />
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    From Time
-                  </span>
+                  <span className="modal-label-name">From Time</span>
                 </label>
-                <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-3  gap-1">
-                  <input
-                    className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                    type="time"
-                    {...register("to_time")}
+                <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-3 pl-1 gap-1">
+                  <TimePicker
+                    className="modal-input-field"
+                    use12Hours
+                    format="h:mm A"
+                    onChange={onChange}
                   />
-                  <div className="text-xs text-gray-600 mx-auto mt-2">
-                    To Time
-                  </div>
-                  <input
-                    className="border border-gray-300  rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
-                    type="time"
-                    {...register("from_time")}
+                  <div className="modal-label-name mt-2 mx-auto">To Time</div>
+                  <TimePicker
+                    className="modal-input-field"
+                    use12Hours
+                    format="h:mm A"
+                    onChange={onChange}
                   />
                 </div>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-xs text-gray-600 text-left">
-                    Status
-                  </span>
+                  <span className="modal-label-name">Status</span>
                 </label>
                 <select
-                  className="border border-gray-300 rounded-sm px-2 col-span-2 py-[1px] mx-1 text-xs w-full"
+                  className="col-span-2 modal-input-field ml-1 w-full"
                   {...register("status")}
                 >
                   <option value=""></option>
@@ -154,19 +141,11 @@ const EditSession = ({ handleClose, open }) => {
 
               <div className="bg-gray-200 py-[1px] mt-3"></div>
               <div className=" flex items-end justify-end mt-2">
-                <button
-                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                  type="submit"
-                >
+                <button className=" pms-button mr-2" type="submit">
                   Save Changes
                 </button>
 
-                <button
-                  onClick={handleClose}
-                  type="button"
-                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                  autoFocus
-                >
+                <button className="pms-close-button" onClick={handleClose}>
                   Close
                 </button>
               </div>
