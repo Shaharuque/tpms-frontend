@@ -214,7 +214,7 @@ const ContractRateAdd = () => {
                   <input
                     type="number"
                     name="contract_rate"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  py-[1px] text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("contract_rate")}
                   />
                 </div>
@@ -229,7 +229,7 @@ const ContractRateAdd = () => {
                   <input
                     type="number"
                     name="billing_rate"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  py-[1px] text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("billing_rate")}
                   />
                 </div>
@@ -244,7 +244,7 @@ const ContractRateAdd = () => {
                   <input
                     type="number"
                     name="increase"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("increase")}
                   />
                 </div>
@@ -270,7 +270,7 @@ const ContractRateAdd = () => {
                       name="checkedActive"
                       {...register("checkedActive")}
                     />
-                    <span className="text-[16px] ml-2 text-gray-700 gap-1 font-semibold">
+                    <span className="text-[16px] ml-2 text-gray-700 gap-1 font-medium">
                       Active
                     </span>
                   </div>
@@ -280,7 +280,7 @@ const ContractRateAdd = () => {
                       name="addAuth"
                       {...register("addAuth")}
                     />
-                    <span className="text-[16px] ml-2 text-gray-700 gap-1 font-semibold">
+                    <span className="text-[16px] ml-2 text-gray-700 gap-1  font-medium">
                       Add to auth
                     </span>
                   </div>
