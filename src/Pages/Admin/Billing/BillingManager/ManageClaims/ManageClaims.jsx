@@ -158,7 +158,7 @@ const ManageClaims = () => {
       // render: (_, { id }) => {
       //   //console.log("tags : ", lock);
       //   return (
-      //     <div className="flex justify-center text-teal-700">
+      //     <div className="flex justify-center text-teal-070">
       //       <div>
       //         <BsThreeDots />
       //       </div>
@@ -189,6 +189,8 @@ const ManageClaims = () => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+
+  //
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
