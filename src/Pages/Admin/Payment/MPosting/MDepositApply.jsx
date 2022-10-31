@@ -372,7 +372,7 @@ const MDepositApply = () => {
             <select
               onChange={(e) => setSelect(e.target.value)}
               name="post"
-              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 w-full focus:outline-none"
             >
               <option value="claim_no">Claim No</option>
               <option value="patient">Patient</option>
@@ -382,7 +382,7 @@ const MDepositApply = () => {
           {select === "claim_no" ? (
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[17px] font-medium py-[1px] text-[#9b9b9b] text-left">
                   Claim No.
                 </span>
               </label>
@@ -402,7 +402,7 @@ const MDepositApply = () => {
                   </span>
                 </label>
                 <select
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 w-full focus:outline-none"
                   {...register("patient")}
                 >
                   <option value="Mr">Mr</option>

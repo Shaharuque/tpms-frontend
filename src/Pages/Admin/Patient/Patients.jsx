@@ -230,7 +230,24 @@ const TableApi = () => {
           text: "Hector Moses",
           value: "Hector Moses",
         },
+        {
+          text: `Minnie`,
+          value: "Minnie",
+        },
+        {
+          text: "Donald",
+          value: "Donald",
+        },
+        {
+          text: "Burke Beard",
+          value: "Burke Beard",
+        },
+        {
+          text: "Hector Moses",
+          value: "Hector Moses",
+        },
       ],
+
       filteredValue: filteredInfo.client_first_name || null,
       onFilter: (value, record) => record.client_first_name.includes(value),
       sorter: (a, b) => {
@@ -640,7 +657,7 @@ const TableApi = () => {
         {/* {openEditModal && (
           <PatientAuthorizationsTableModal
             patient_id={patientId}
-            handleClose={handleClose}
+            handleClose={handleClose}           
             open={openEditModal}
           ></PatientAuthorizationsTableModal>
         )} */}
