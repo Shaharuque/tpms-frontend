@@ -7,7 +7,7 @@ import "../../Style/form.css";
 import SignatureModal from "./SignatureManage/SignatureModal";
 import { FaSignature } from "react-icons/fa";
 import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
-const SOAP = () => {
+const Soap = () => {
   const [caregiverSignature, setCaregiverSignature] = useState(false);
   const [providerSignature, setProviderSignature] = useState(false);
   const [ProviderImageURL, setProviderImageURL] = useState(null);
@@ -593,4 +593,4 @@ const SOAP = () => {
   );
 };
 
-export default SOAP;
+export default Soap;

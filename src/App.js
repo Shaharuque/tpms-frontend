@@ -152,7 +152,7 @@ import AntDate from "./Testing/AntDatePicker/AntDate";
 import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
-// import SOAP from "./Pages/Admin/FormsTemplate/SOAP";
+import Soap from "./Pages/Admin/FormsTemplate/Soap";
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
 
@@ -194,7 +194,6 @@ function App() {
             path="/outpatient-treatment-request"
             element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
           ></Route>
-          {/* <Route path="/soap" element={<SOAP></SOAP>}></Route> */}
           <Route
             path="/clinic-treatment"
             element={<ClinicTreatment></ClinicTreatment>}
@@ -204,7 +203,7 @@ function App() {
             path="/BCBATraineeUSF"
             element={<BCBATraineeUSR></BCBATraineeUSR>}
           ></Route>
-          {/* <Route path="/SOAP" element={<SOAP></SOAP>}></Route> */}
+          <Route path="/soap" element={<Soap></Soap>}></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
