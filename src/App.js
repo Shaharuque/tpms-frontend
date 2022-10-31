@@ -152,8 +152,8 @@ import AntDate from "./Testing/AntDatePicker/AntDate";
 import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
-import Soap from "./Pages/Admin/FormsTemplate/Soap";
-
+// import Soap from "./Pages/Admin/FormsTemplate/Soap";
+// djasd
 function App() {
   const handle = useFullScreenHandle();
   return (
@@ -192,7 +192,7 @@ function App() {
             path="/outpatient-treatment-request"
             element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
           ></Route>
-          <Route path="/soap" element={<Soap></Soap>}></Route>
+          {/* <Route path="/soap" element={<Soap></Soap>}></Route> */}
           <Route
             path="/clinic-treatment"
             element={<ClinicTreatment></ClinicTreatment>}
