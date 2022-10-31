@@ -118,10 +118,10 @@ const AntTableTest = () => {
 
   //For getting unique value
   function getUnique(array) {
-    var uniqueArray = [];
+    let uniqueArray = [];
 
     // Loop through array values
-    for (var value of array) {
+    for (let value of array) {
       if (uniqueArray.indexOf(value) === -1) {
         uniqueArray.push(value);
       }
@@ -179,6 +179,21 @@ const AntTableTest = () => {
     for (let x of resultArray) {
       console.log(x);
       newArray.push({ text: x, value: x });
+    }
+    console.log(newArray);
+    return newArray;
+  };
+
+  const posSearch = () => {
+    let posArray = data?.map((d) => d?.pos);
+    //console.log(patientArray);
+    const resultArray = getUnique(posArray);
+    console.log(resultArray);
+    // return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      console.log(x);
+      newArray.push({ text: x.charAt(0).toUpperCase() + x.slice(1), value: x });
     }
     console.log(newArray);
     return newArray;
@@ -410,20 +425,7 @@ const AntTableTest = () => {
           </>
         );
       },
-      filters: [
-        {
-          text: "telehealth",
-          value: "telehealth",
-        },
-        {
-          text: "School",
-          value: "School",
-        },
-        {
-          text: "Office",
-          value: "office",
-        },
-      ],
+      filters: posSearch(),
       filteredValue: filteredInfo.pos || null,
       onFilter: (value, record) => record.pos.includes(value),
       //   sorter is for sorting asc or dsc purpose
