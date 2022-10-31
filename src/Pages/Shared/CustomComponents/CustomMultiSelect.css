@@ -29,7 +29,7 @@
 }
 
 .Global .dropdown-container:focus-within {
-  border-bottom: 3px solid rgb(251, 251, 251) !important;
+  /* border-bottom: 3px solid rgb(251, 251, 251) !important; */
   box-shadow: #00a1b100 0 0 0 0px !important;
 
 }
