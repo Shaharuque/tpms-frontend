@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
-import { Fade } from "react-reveal";
+// import { Fade } from "react-reveal";
 import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
@@ -566,7 +566,7 @@ const ListView = () => {
             {/* Upper div */}
             {clicked && (
               <div>
-                <Fade>
+              
                   <div className="flex justify-between items-center flex-wrap">
                     <h1 className="text-[20px]  text-white font-semibold ">
                       Manage Sessions
@@ -797,7 +797,7 @@ const ListView = () => {
                       )}
                     </div>
                   </form>
-                </Fade>
+              
               </div>
             )}
           </div>
