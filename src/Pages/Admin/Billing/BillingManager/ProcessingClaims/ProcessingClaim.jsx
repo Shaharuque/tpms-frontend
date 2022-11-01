@@ -320,27 +320,29 @@ const ProcessingClaim = () => {
                 />
                 {/* single calendar */}
                 {openSingleCalendar && (
-                  <div className="col-span-2 w-[15%] rounded my-0 absolute z-10 shadow-lg p-1">
+                  <div className="col-span-2 w-[60%] xl:w-[20%] md:w-[28%] mt-1 rounded my-0 absolute z-10 bg-white single-date p-1">
                     <Calendar onChange={setDate} value={date} />
+                    <div className="bg-gray-200 py-[1px] my-1 "></div>
                     <div className="flex justify-between bg-white p-1">
                       <button
                         onClick={() => handleSingleClearDate()}
-                        className="text-xs text-red-400"
+                        className="pms-clear-button"
                       >
                         CLEAR
                       </button>
                       <div>
                         <button
-                          onClick={() => handleSingleCancelDate()}
-                          className="text-xs text-[#0AA7B8]"
-                        >
-                          CANCEL
-                        </button>
-                        <button
                           onClick={() => setOpenSingleCalendar(false)}
-                          className="text-xs ml-2 text-[#0AA7B8]"
+                          className=" pms-button mr-2"
+                          type="submit"
                         >
                           OK
+                        </button>
+                        <button
+                          className="pms-close-button"
+                          onClick={() => handleSingleCancelDate()}
+                        >
+                          Close
                         </button>
                       </div>
                     </div>

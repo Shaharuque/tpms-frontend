@@ -24,6 +24,7 @@ const PatientStatement = () => {
   const handleRelated = (e) => {
     e.preventDefault();
     setSelected(e.target.value);
+    setOpenEditModal(true);
   };
   console.log(selected);
 
