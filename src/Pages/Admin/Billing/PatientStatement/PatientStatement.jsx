@@ -5,12 +5,21 @@ import { motion } from "framer-motion";
 import { Table } from "antd";
 import axios from "axios";
 import SelectiveClientsModal from "./SelectiveClientsModal";
+import SelectClient from "./PatientStatement/SelectClient";
 const PatientStatement = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [selected, setSelected] = useState(null);
   const [tactive, setTactive] = useState(false);
   const [tData, setTData] = useState([]);
+
+  const [openEditModal, setOpenEditModal] = useState(false);
+
+  const handleAuthClick = (id) => {
+    console.log(id);
+    //setOpenEditModal(true);
+    // setModalOpen(true);
+  };
 
   const handleRelated = (e) => {
     e.preventDefault();
@@ -253,6 +262,7 @@ const PatientStatement = () => {
             </div>
           </div>
         </div>
+        {selected && <SelectClient></SelectClient>}
         {/* submit  */}
         <button
           className=" mt-8 py-1 w-1/4 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
@@ -287,7 +297,7 @@ const PatientStatement = () => {
       {/* Related to options basis modal is handling here */}
       {selected === "selective_client" && (
         <>
-          <SelectiveClientsModal></SelectiveClientsModal>
+          <SelectClient></SelectClient>
         </>
       )}
     </div>

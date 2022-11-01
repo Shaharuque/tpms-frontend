@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
-import Loading from "../../../../Loading/Loading";
 //Ant Design modal used here[to solve table data filtering issue]
 import { Modal } from "antd";
+import Loading from "../../../../../Loading/Loading";
 
 const SelectClient = ({ patient_id, handleClose, modalOpen, setModalOpen }) => {
   const [tableData, setTableData] = useState([]);
@@ -211,7 +211,10 @@ const SelectClient = ({ patient_id, handleClose, modalOpen, setModalOpen }) => {
                 All Authorizations
               </h1>
 
-              <IoCloseCircleOutline className="text-gray-600 font-semibold  text-2xl hover:text-primary " />
+              <IoCloseCircleOutline
+                onClick={() => setModalOpen(false)}
+                className="text-gray-600 font-semibold  text-2xl hover:text-primary "
+              />
             </div>
             <div className="bg-gray-200 py-[1px] mt-3 "></div>
             <div className="flex items-center justify-between gap-2 my-2">
