@@ -7,6 +7,7 @@ import "./LoginPage.css";
 // import Swal from "sweetalert2";
 import SmallLoader from "../../Loading/SmallLoader";
 import { GoAlert } from "react-icons/go";
+import axios from "axios";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
@@ -14,6 +15,7 @@ const LogInForm = () => {
   // const Swal = require("sweetalert2");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  let CryptoJS = require("crypto-js");
 
   const {
     register,
@@ -21,33 +23,38 @@ const LogInForm = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = (formdata) => {
+    console.log(formdata);
     setLoading(true);
-    fetch("https://ovh.therapypms.com/api/v1/admin/login", {
+
+    // axios POST request
+    const options = {
+      url: "https://app.therapypms.com/api/v1/admin/login",
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
       },
-      body: JSON.stringify(data), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
-    })
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((result) => {
-        setLoading(false);
-        //console.log(result);
-        if (result.account_type === "admin") {
-          localStorage.setItem("admin", result.access_token);
-          localStorage.setItem("type", result.account_type);
-          navigate("/admin"); //admin panel a redirect
-        } else if (result.account_type === "patient") {
-          navigate("/patient"); //patient panel a redirect
-          localStorage.setItem("type", "patient");
-        } else {
-          setMessage("Invalid Credentials");
-        }
-      });
+      data: JSON.stringify(formdata), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
+    };
+    axios(options).then((response) => {
+      console.log(response.data);
+      // Encrypt the token
+      let ciphertextToken = CryptoJS.AES.encrypt(
+        JSON.stringify(response?.data?.access_token),
+        "tpm422"
+      ).toString();
+      if (response?.data?.account_type === "admin") {
+        localStorage.setItem("adminToken", ciphertextToken);
+        localStorage.setItem("type", response?.data?.account_type);
+        navigate("/admin"); //admin panel a redirect
+      } else if (response?.data?.account_type === "patient") {
+        navigate("/patient"); //patient panel a redirect
+        localStorage.setItem("type", "patient");
+      } else {
+        setMessage("Invalid Credentials");
+      }
+    });
     reset();
   };
 

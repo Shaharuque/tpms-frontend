@@ -41,7 +41,7 @@
 
 
 
-.form-wrap.form-builder .frmb-control li {
+/* .form-wrap.form-builder .frmb-control li {
     cursor: move;
     list-style: none;
     margin: 0 0 -1px 0;
@@ -55,7 +55,7 @@
     overflow: hidden;
     box-shadow: rgb(0 0 0 / 10%) 0px 4px 6px -1px, rgb(0 0 0 / 6%) 0px 2px 4px -1px !important;
     margin: 1px 2px 8px 2px !important;
-}
+} */
 
 div#frmb-1666084882193-cb-wrap {
     position: unset !important;

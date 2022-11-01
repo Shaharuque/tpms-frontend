@@ -16,6 +16,7 @@ import { Switch } from "antd";
 // import "./SingleCalendar.css";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 
+
 const PatientInformation = () => {
   const [active, setActive] = useState(false);
   const [voiceMsg, setVoiceMsg] = useState(false);

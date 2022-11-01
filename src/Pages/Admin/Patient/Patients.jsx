@@ -395,10 +395,7 @@ const TableApi = () => {
       width: 80,
       filters: [
         { text: "6780496111", value: "6780496111" },
-        {
-          text: "1261739329",
-          value: "1261739329",
-        },
+        { text: "1261739329", value: "1261739329" },
         { text: "5614267557", value: "5614267557" },
         { text: "8136767092", value: "8136767092" },
         { text: "813676700092", value: "813676700092" },
@@ -419,7 +416,7 @@ const TableApi = () => {
       title: "Auth",
       key: "id",
       dataIndex: "id",
-      width: 40,
+      width: 50,
       render: (_, { id }) => {
         return (
           <div className="flex justify-center">
@@ -439,14 +436,28 @@ const TableApi = () => {
       title: "Status",
       key: "status",
       dataIndex: "status",
-      width: 60,
+      width: 100,
+      filters: [
+        { text: "Active", value: "true" }, //antd table filtering working on string type value so from backend I need true/false boolean value to string format
+        { text: "In-Active", value: "false" },
+      ],
       render: (_, { status }) => {
         //console.log("Status : ", Status);
-        return <PatientStatusAction status={status}></PatientStatusAction>;
+        return (
+          <div className="flex justify-center">
+            <PatientStatusAction status={status}></PatientStatusAction>
+          </div>
+        );
       },
-      filters: [],
-      filteredValue: filteredInfo.Status || null,
-      onFilter: (value, record) => record.Status.includes(value),
+      filteredValue: filteredInfo.status || null,
+      onFilter: (value, record) => {
+        return record.status.includes(value);
+      },
+      //   sorter is for sorting asc or dsc purpose
+      sorter: (a, b) => {
+        return a.status > b.status ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
     },
   ];
   return (
