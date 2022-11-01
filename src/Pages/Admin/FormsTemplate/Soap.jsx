@@ -81,7 +81,6 @@ const SOAP = () => {
                 <div className="date">
                   <label className="text-lg font-bold">DOS:</label>{" "}
                   <input type="date" {...register("dos")} />
-                  
                 </div>
               </div>
               <div class=" flex justify-between mb-3">
@@ -96,11 +95,11 @@ const SOAP = () => {
                 </div>
                 <div class="date">
                   <label className="text-lg font-bold">Start Time:</label>{" "}
-                  <input type="time" {...register("start_time")}/>
+                  <input type="time" {...register("start_time")} />
                 </div>
                 <div class="date">
                   <label className="text-lg font-bold">End Time:</label>{" "}
-                  <input type="time" {...register("end_time")}/>
+                  <input type="time" {...register("end_time")} />
                 </div>
               </div>
               <div>
@@ -202,7 +201,7 @@ const SOAP = () => {
                           </label>
                         </span>
 
-                        <input type="time" {...register("start_time_1")}/>
+                        <input type="time" {...register("start_time_1")} />
                       </div>
                       <div class="flex gap-3">
                         <span>
@@ -214,7 +213,7 @@ const SOAP = () => {
                           </label>
                         </span>
 
-                        <input type="time" {...register("end_time_1")}/>
+                        <input type="time" {...register("end_time_1")} />
                       </div>
                     </td>
                   </tr>
@@ -402,7 +401,9 @@ const SOAP = () => {
                             placeholder=" Notes..."
                             size="large"
                             className=""
-                            {...register(" what_notable_maladaptive_behaviors_were_observed")}
+                            {...register(
+                              " what_notable_maladaptive_behaviors_were_observed"
+                            )}
                           />
                         </div>
                       </div>
