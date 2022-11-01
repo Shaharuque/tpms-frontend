@@ -195,3 +195,12 @@ select:focus {
   border-radius: 5px;
   box-shadow: 2px 2px 2px 0px #737676;
 }
+
+/* ---------------------------------------Single Calender----------------------------- */
+
+.single-date {
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: #c1c1c1;
+  box-shadow: 2px 2px 2px 0px #8d8e8e;
+}
