@@ -21,6 +21,7 @@ const AddInsurance = () => {
   // const [newdata, setnewdata] = useState({ value: "coconut" });
 
   //Getting All Insurance using react query get request
+  const ip = "admin/ac/setting/get/all/insurance";
   const {
     isLoading,
     isError,
@@ -28,7 +29,7 @@ const AddInsurance = () => {
     data: insurance,
     refetch,
   } = useQuery(["allInsurance"], () => {
-    fetchData("admin/ac/setting/get/all/insurance");
+    fetchData(ip);
   });
 
   console.log(insurance);
