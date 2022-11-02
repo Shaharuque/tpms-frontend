@@ -204,3 +204,21 @@ select:focus {
   border-color: #c1c1c1;
   box-shadow: 2px 2px 2px 0px #8d8e8e;
 }
+
+/* -----------------------------------------input form --------------------------------------- */
+
+.input-border {
+  border-bottom: 1px solid rgba(9, 162, 179, 0.498);
+  font-size: 14px;
+  color: #4b5563;
+  border-radius: 0;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.label-font {
+  font-size: 15px;
+  color: #9b9b9b;
+  font-weight: 500;
+  text-align: left;
+}

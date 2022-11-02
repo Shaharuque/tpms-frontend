@@ -56,6 +56,18 @@ const Form = () => {
             BCBA TRAINEE UNIQUE SUPERVISION FORM
           </button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/MonthlySupervisionNote"}>
+          <button className="pms-button">MONTHLY SUPERVISION NOTE</button>
+        </Link> 
+        <div className="my-2"></div>
+        <Link to={"/DiagnosisSessionForm"}>
+          <button className="pms-button">DIAGNOSIS SESSION FORM</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/DischargeSummary"}>
+          <button className="pms-button">Discharge Summary</button>
+        </Link>
       </div>
     </div>
   );

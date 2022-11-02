@@ -153,6 +153,9 @@ import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
+import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
+import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
+import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
 import RequireAuth from "./Authorization/RequireAuth";
 
@@ -202,6 +205,18 @@ function App() {
           <Route
             path="/BCBATraineeUSF"
             element={<BCBATraineeUSR></BCBATraineeUSR>}
+          ></Route>
+          <Route
+            path="/MonthlySupervisionNote"
+            element={<MonthlySupervisionNote></MonthlySupervisionNote>}
+          ></Route>
+          <Route
+            path="/DiagnosisSessionForm"
+            element={<DiagnosisSessionForm></DiagnosisSessionForm>}
+          ></Route>
+          <Route
+            path="/DischargeSummary"
+            element={<DischargeSummary></DischargeSummary>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
