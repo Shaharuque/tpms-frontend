@@ -4,19 +4,34 @@ import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { Table } from "antd";
 import axios from "axios";
-import SelectiveClientsModal from "./SelectiveClientsModal";
+import SelectClient from "./PatientStatement/SelectClient";
+import SelectPayoor from "./PatientStatement/SelectPayoor";
 const PatientStatement = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [selected, setSelected] = useState(null);
   const [tactive, setTactive] = useState(false);
   const [tData, setTData] = useState([]);
+  const [selectClient, setSelectClient] = useState(false);
+  const [selectPayor, setSelectPayor] = useState(false);
+  const handleClose = () => {
+    setSelectClient(false);
+    setSelectPayor(false);
+  };
 
   const handleRelated = (e) => {
     e.preventDefault();
     setSelected(e.target.value);
   };
   console.log(selected);
+
+  const handleSubmit = () => {
+    if (selected === "selective_client") {
+      setSelectClient(true);
+    } else {
+      setSelectPayor(true);
+    }
+  };
 
   useEffect(() => {
     axios("../../../All_Fake_Api/PatientStatement.json").then((response) => {
@@ -257,7 +272,7 @@ const PatientStatement = () => {
         <button
           className=" mt-8 py-1 w-1/4 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
           type="submit"
-          onClick={() => setTactive(true)}
+          onClick={handleSubmit}
         >
           View
         </button>
@@ -285,10 +300,17 @@ const PatientStatement = () => {
       )}
 
       {/* Related to options basis modal is handling here */}
-      {selected === "selective_client" && (
-        <>
-          <SelectiveClientsModal></SelectiveClientsModal>
-        </>
+      {selectClient && (
+        <SelectClient
+          open={selectClient}
+          handleClose={handleClose}
+        ></SelectClient>
+      )}
+      {selectPayor && (
+        <SelectPayoor
+          open={selectPayor}
+          handleClose={handleClose}
+        ></SelectPayoor>
       )}
     </div>
   );

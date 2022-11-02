@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const Testing = () => {
   const [tableData, setTableData] = useState(null);
-
+  //For testing purpose
   ////axios part(get)
   // const response =async()=>await axios.get(`https://ovh.therapypms.com/api/v1/admin/ac/patient`,{
   //   headers:headers

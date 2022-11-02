@@ -366,7 +366,7 @@ const ProcessedPayroll = () => {
             <>
               <div className="lg:mt-4 2xl:mt-0">
                 <label className="label">
-                  <span className="label-text mb-2  text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text mb-1  text-[17px] font-medium text-[#9b9b9b] text-left">
                     Choose Staff to process
                   </span>
                 </label>

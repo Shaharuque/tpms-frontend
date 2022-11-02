@@ -238,7 +238,7 @@ const Staffs = () => {
   };
 
   return (
-    <div className="h-[100vh]">
+    <div className={StafData ?'' :"h-[100vh]"}>
       <div className="flex items-center flex-wrap justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           Staffs

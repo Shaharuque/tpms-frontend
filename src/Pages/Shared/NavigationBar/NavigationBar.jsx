@@ -42,6 +42,8 @@ const TestNaviBar = ({ handle }) => {
   };
 
   const handleSignOut = () => {
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("type");
     navigate("/");
   };
 

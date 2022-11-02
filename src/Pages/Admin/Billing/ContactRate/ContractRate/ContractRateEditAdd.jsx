@@ -120,7 +120,6 @@ const ContractRateEditAdd = () => {
                 <div className="flex justify-between gap-2">
                   {/* m1 #  */}
                   <div>
-                    {" "}
                     <label className="label">
                       <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         M1
@@ -135,7 +134,6 @@ const ContractRateEditAdd = () => {
                   </div>
                   {/* m1 #  */}
                   <div>
-                    {" "}
                     <label className="label">
                       <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         M2
@@ -151,7 +149,6 @@ const ContractRateEditAdd = () => {
 
                   {/* m3 #  */}
                   <div>
-                    {" "}
                     <label className="label">
                       <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         M3
@@ -166,7 +163,6 @@ const ContractRateEditAdd = () => {
                   </div>
                   {/* m4 #  */}
                   <div>
-                    {" "}
                     <label className="label">
                       <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                         M4
@@ -210,7 +206,6 @@ const ContractRateEditAdd = () => {
                 </div>
                 {/* Contract Rate */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Contract Rate
@@ -219,13 +214,12 @@ const ContractRateEditAdd = () => {
                   <input
                     type="number"
                     name="contract_rate"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border text-gray-600  py-[1px] rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("contract_rate")}
                   />
                 </div>
                 {/* Billing Rate */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       Billing Rate
@@ -234,13 +228,12 @@ const ContractRateEditAdd = () => {
                   <input
                     type="number"
                     name="billing_rate"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  py-[1px] text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("billing_rate")}
                   />
                 </div>
                 {/* % Increase */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
                       % Increase
@@ -249,7 +242,7 @@ const ContractRateEditAdd = () => {
                   <input
                     type="number"
                     name="increase"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border text-gray-600 rounded-sm  py-[1px] text-[14px] font-medium ml-1  w-full focus:outline-none"
                     {...register("increase")}
                   />
                 </div>

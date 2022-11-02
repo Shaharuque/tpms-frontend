@@ -342,8 +342,6 @@ const RecurringSession = () => {
     { label: "maria", value: "strawberry" },
   ];
 
-  
-
   return (
     <div className={!table ? "h-[100vh]" : ""}>
       <div className="cursor-pointer">
@@ -366,77 +364,71 @@ const RecurringSession = () => {
           {/* Upper div */}
           {clicked && (
             <div>
-            
-                <div className="flex justify-between items-center">
-                  <h1 className="text-[20px]  text-white font-semibold ">
-                    Recurring Session
-                  </h1>
-                  <div className="  flex justify-end gap-3">
-                    <div>
-                      <button
-                        onClick={handleClose}
-                        className="text-white text-2xl font-light"
-                      >
-                        <MdOutlineCancel />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-9 my-5 mr-2 gap-x-3">
-                    <div>
-                      <label className="label">
-                        <span className="text-[16px] mb-2 ml-1 text-gray-100">
-                          Select Any
-                        </span>
-                      </label>
-                      <select
-                        className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm font-normal mx-1 text-[14px] w-full focus:outline-none"
-                        onChange={(e) => setSelect(e.target.value)}
-                        name="type"
-                      >
-                        <option value="all" className="text-black">
-                          All
-                        </option>
-                        <option value="Patients" className="text-black">
-                          Patients
-                        </option>
-                        <option value="Provider" className="text-black">
-                          Provider
-                        </option>
-                      </select>
-                    </div>
-                    {select === "Patients" ? (
-                      <div>
-                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                          Patients
-                        </h1>
-                        <CustomMultiSelection
-                          options={rc}
-                        ></CustomMultiSelection>
-                      </div>
-                    ) : select === "Provider" ? (
-                      <div className="w-full">
-                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                          Provider
-                        </h1>
-                        <CustomMultiSelection
-                        
-                        ></CustomMultiSelection>
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+              <div className="flex justify-between items-center">
+                <h1 className="text-[20px]  text-white font-semibold ">
+                  Recurring Session
+                </h1>
+                <div className="  flex justify-end gap-3">
+                  <div>
                     <button
-                      className="font-regular mt-[50px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
-                      type="submit"
+                      onClick={handleClose}
+                      className="text-white text-2xl font-light"
                     >
-                      Go
+                      <MdOutlineCancel />
                     </button>
                   </div>
-                </form>
-         
+                </div>
+              </div>
+
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 my-5 mr-2 gap-x-3">
+                  <div>
+                    <label className="label">
+                      <span className="text-[16px] mb-2 ml-1 text-gray-100">
+                        Select Any
+                      </span>
+                    </label>
+                    <select
+                      className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm font-normal mx-1 text-[14px] w-full focus:outline-none"
+                      onChange={(e) => setSelect(e.target.value)}
+                      name="type"
+                    >
+                      <option value="all" className="text-black">
+                        All
+                      </option>
+                      <option value="Patients" className="text-black">
+                        Patients
+                      </option>
+                      <option value="Provider" className="text-black">
+                        Provider
+                      </option>
+                    </select>
+                  </div>
+                  {select === "Patients" ? (
+                    <div className="w-full">
+                      <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
+                        Patients
+                      </h1>
+                      <CustomMultiSelection></CustomMultiSelection>
+                    </div>
+                  ) : select === "Provider" ? (
+                    <div className="w-full">
+                      <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
+                        Provider
+                      </h1>
+                      <CustomMultiSelection></CustomMultiSelection>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  <button
+                    className="font-regular mt-[50px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                    type="submit"
+                  >
+                    Go
+                  </button>
+                </div>
+              </form>
             </div>
           )}
         </div>

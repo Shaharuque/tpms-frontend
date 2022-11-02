@@ -152,9 +152,12 @@ import AntDate from "./Testing/AntDatePicker/AntDate";
 import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
-// import SOAP from "./Pages/Admin/FormsTemplate/SOAP";
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
-import Soap from "./Pages/Admin/FormsTemplate/Soap";
+import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
+import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
+import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
+import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
+import RequireAuth from "./Authorization/RequireAuth";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -194,7 +197,6 @@ function App() {
             path="/outpatient-treatment-request"
             element={<OutpatientTreatmentRequest></OutpatientTreatmentRequest>}
           ></Route>
-          {/* <Route path="/soap" element={<SOAP></SOAP>}></Route> */}
           <Route
             path="/clinic-treatment"
             element={<ClinicTreatment></ClinicTreatment>}
@@ -204,7 +206,18 @@ function App() {
             path="/BCBATraineeUSF"
             element={<BCBATraineeUSR></BCBATraineeUSR>}
           ></Route>
-          <Route path="/SOAP" element={<Soap></Soap>}></Route>
+          <Route
+            path="/MonthlySupervisionNote"
+            element={<MonthlySupervisionNote></MonthlySupervisionNote>}
+          ></Route>
+          <Route
+            path="/DiagnosisSessionForm"
+            element={<DiagnosisSessionForm></DiagnosisSessionForm>}
+          ></Route>
+          <Route
+            path="/DischargeSummary"
+            element={<DischargeSummary></DischargeSummary>}
+          ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
@@ -242,10 +255,21 @@ function App() {
             path="/testing"
             element={<TestingTable></TestingTable>}
           ></Route>
+          <Route
+            path="/search-box"
+            element={<AntTableSearchBox></AntTableSearchBox>}
+          ></Route>
           <Route path="/test-date" element={<AntDate></AntDate>}></Route>
           {/* Testing End */}
 
-          <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+          <Route
+            path="/admin"
+            element={
+              <RequireAuth>
+                <Sidebar handle={handle}></Sidebar>
+              </RequireAuth>
+            }
+          >
             <Route
               path="report-export-view"
               element={<DownloadView></DownloadView>}
