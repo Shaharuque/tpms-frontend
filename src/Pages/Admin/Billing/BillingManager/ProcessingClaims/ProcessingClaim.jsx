@@ -320,9 +320,9 @@ const ProcessingClaim = () => {
                 />
                 {/* single calendar */}
                 {openSingleCalendar && (
-                  <div className="col-span-2 w-[60%] xl:w-[20%] md:w-[28%] mt-1 rounded my-0 absolute z-10 bg-white single-date p-1">
+                  <div className="col-span-2 w-[60%] xl:w-[20%] md:w-[25%] mt-1 rounded my-0 absolute z-10 bg-white single-date p-1">
                     <Calendar onChange={setDate} value={date} />
-                    <div className="bg-gray-200 py-[1px] my-1 "></div>
+                    <div className="bg-gray-200 py-[1px] "></div>
                     <div className="flex justify-between bg-white p-1">
                       <button
                         onClick={() => handleSingleClearDate()}

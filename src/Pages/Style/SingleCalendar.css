@@ -6,7 +6,7 @@
   /* border-radius: 0px 5px 0px 0px; */
   /* box-shadow: 0 30px 40px 0 rgb(16 36 94 / 20%); */
   background-color: white;
-  height: 300px;
+  height: 270px;
 }
 
 /* week days */
@@ -18,7 +18,7 @@ abbr[title] {
   text-transform: capitalize;
 }
 
-.react-calendar__tile abbr{
+.react-calendar__tile abbr {
   font-size: 14px;
 }
 
@@ -222,9 +222,11 @@ abbr[title] {
   abbr[title] {
     font-size: 14px;
   }
+
   .react-calendar__month-view {
     padding: 1px;
   }
+
   .react-calendar__month-view__weekdays__weekday {
     padding: 0.4em;
   }
@@ -234,6 +236,7 @@ abbr[title] {
   abbr[title] {
     font-size: 12px;
   }
+
   .react-calendar__month-view__weekdays__weekday {
     padding: 0.2em;
   }
