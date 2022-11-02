@@ -10,7 +10,7 @@ if (gatheredData) {
   console.log("decrypted data:", decryptedData);
 }
 
-export const ip = "https://app.therapypms.com";
+export const baseIp = "https://app.therapypms.com/api/v1";
 
 export const headers = {
   Accept: "application/json",
