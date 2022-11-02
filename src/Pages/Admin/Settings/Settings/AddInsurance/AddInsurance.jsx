@@ -27,7 +27,6 @@ const AddInsurance = () => {
         console.log(error);
       });
   }, []);
-  const arr1 = [];
   // console.log(arr1);
 
   // -------------------------

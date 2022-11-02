@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
-import { Fade } from "react-reveal";
+// import { Fade } from "react-reveal";
 import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
@@ -24,7 +24,7 @@ const ListView = () => {
   const [listView, setListView] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [value, setValue] = useState([]);
+
 
   // Testing purpose->Implementing encrypt and decrypt formula for securing token
   let CryptoJS = require("crypto-js");
@@ -531,16 +531,16 @@ const ListView = () => {
   }, [startDate, reset]);
 
   // ----------------------------------------Multi-Select---------------------------------
-  // ***************
-  const datat = ["Eugenia", "Bryan", "Linda"].map((item) => ({
-    label: item,
-    value: item,
-  }));
+  // *************
 
-  const datatf = ["demo", "pos", "minda"].map((item) => ({
-    label: item,
-    value: item,
-  }));
+
+  const opt = [
+    { label: "tera ", value: "grapes", id:3 },
+    { label: "tpms ", value: "mafgngo", id:1  },
+    { label: "code ", value: "grfgapes", id:4  },
+    { label: "Mango ", value: "mango", id:8 },  
+    { label: "dfa ", value: "strawberry", id:9 },
+  ];
 
   return (
     // For responsive view point
@@ -566,7 +566,7 @@ const ListView = () => {
             {/* Upper div */}
             {clicked && (
               <div>
-                <Fade>
+              
                   <div className="flex justify-between items-center flex-wrap">
                     <h1 className="text-[20px]  text-white font-semibold ">
                       Manage Sessions
@@ -631,22 +631,14 @@ const ListView = () => {
                           <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                             Clients
                           </h1>
-                          <CustomMultiSelection
-                            data={datat}
-                            value={value}
-                            setValue={setValue}
-                          ></CustomMultiSelection>
+                          <CustomMultiSelection></CustomMultiSelection>
                         </div>
                       )}
                       <div className="w-full">
                         <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                           Provider
                         </h1>
-                        <CustomMultiSelection
-                          data={datatf}
-                          value={value}
-                          setValue={setValue}
-                        ></CustomMultiSelection>
+                        <CustomMultiSelection options={opt} ></CustomMultiSelection>
                       </div>
 
                       {billable ? (
@@ -797,7 +789,7 @@ const ListView = () => {
                       )}
                     </div>
                   </form>
-                </Fade>
+              
               </div>
             )}
           </div>
