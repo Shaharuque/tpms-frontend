@@ -135,7 +135,7 @@ const FormBuilderCreate = () => {
           <button className="pms-button mr-3" onClick={cleardata}>
             Clear
           </button>
-          <button className="pms-button" onClick={showdata}>
+          <button className="pms-button" onClick={showdata}> 
             Show data
           </button>
         </div>
