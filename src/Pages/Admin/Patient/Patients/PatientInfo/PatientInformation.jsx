@@ -190,11 +190,11 @@ const PatientInformation = () => {
               name="checkedActive"
               {...register("checkedActive")}
             /> */}
-                  <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+            <Switch
+              size="small"
+              checked={active ? true : false}
+              onClick={() => setActive(!active)}
+            />
             <span className="text-[15px] ml-1 text-gray-700 gap-1 font-semibold">
               Active Patient
             </span>
@@ -330,7 +330,7 @@ const PatientInformation = () => {
             <div className="">
               <>
                 <label className="label">
-                  <span className="label-text flex items-center label-font  ">
+                  <span className="label-text flex items-center label-font">
                     Address
                     <AiOutlineQuestionCircle className="text-sm" />
                     <span className="text-red-500">*</span>
@@ -525,10 +525,10 @@ const PatientInformation = () => {
                       }}
                     /> */}
                     <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                      size="small"
+                      checked={active ? true : false}
+                      onClick={() => setActive(!active)}
+                    />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Voice message ok
                     </span>
@@ -543,10 +543,10 @@ const PatientInformation = () => {
                       }}
                     /> */}
                     <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                      size="small"
+                      checked={active ? true : false}
+                      onClick={() => setActive(!active)}
+                    />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Text message ok
                     </span>
@@ -562,10 +562,10 @@ const PatientInformation = () => {
                     }}
                   /> */}
                   <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                    size="small"
+                    checked={active ? true : false}
+                    onClick={() => setActive(!active)}
+                  />
                   <span className="text-xs ml-1 text-gray-700 font-normal">
                     Send text/voice appointment reminders
                   </span>
@@ -622,10 +622,10 @@ const PatientInformation = () => {
                         }}
                       /> */}
                       <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                        size="small"
+                        checked={active ? true : false}
+                        onClick={() => setActive(!active)}
+                      />
                       <span className="text-xs ml-1 text-gray-700 font-normal">
                         Voice message ok
                       </span>
@@ -640,10 +640,10 @@ const PatientInformation = () => {
                         }}
                       /> */}
                       <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                        size="small"
+                        checked={active ? true : false}
+                        onClick={() => setActive(!active)}
+                      />
                       <span className="text-xs ml-1 text-gray-700 font-normal">
                         Text message ok
                       </span>
@@ -659,10 +659,10 @@ const PatientInformation = () => {
                       }}
                     /> */}
                     <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                      size="small"
+                      checked={active ? true : false}
+                      onClick={() => setActive(!active)}
+                    />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Send text/voice appointment reminders
                     </span>
@@ -715,10 +715,10 @@ const PatientInformation = () => {
                     }}
                   /> */}
                   <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                    size="small"
+                    checked={active ? true : false}
+                    onClick={() => setActive(!active)}
+                  />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Email OK
                   </span>
@@ -733,10 +733,10 @@ const PatientInformation = () => {
                     }}
                   /> */}
                   <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                    size="small"
+                    checked={active ? true : false}
+                    onClick={() => setActive(!active)}
+                  />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Send email appointment reminders
                   </span>
@@ -788,10 +788,10 @@ const PatientInformation = () => {
                         }}
                       /> */}
                       <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                        size="small"
+                        checked={active ? true : false}
+                        onClick={() => setActive(!active)}
+                      />
                       <span className="text-xs ml-1 text-gray-700 font-normal">
                         Email OK
                       </span>
@@ -807,10 +807,10 @@ const PatientInformation = () => {
                       }}
                     /> */}
                     <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                      size="small"
+                      checked={active ? true : false}
+                      onClick={() => setActive(!active)}
+                    />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Send email appointment reminders
                     </span>

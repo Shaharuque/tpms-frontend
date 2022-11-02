@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Table, Modal } from "antd";
 
-const SelectClient = ({ handleClose, open }) => {
+const SelectPayoor = ({ handleClose, open }) => {
   const [tableData, settableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -22,7 +22,7 @@ const SelectClient = ({ handleClose, open }) => {
   console.log("table");
   const column = [
     {
-      title: "first_name",
+      title: "Payor",
       dataIndex: "first_name",
       key: "first_name",
       width: 100,
@@ -34,57 +34,6 @@ const SelectClient = ({ handleClose, open }) => {
       },
       sortOrder:
         sortedInfo.columnKey === "first_name" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      index: 2,
-      title: "last_name",
-      dataIndex: "last_name",
-      key: "last_name",
-      width: 100,
-      filters: [
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.last_name || null,
-      onFilter: (value, record) => record.last_name.includes(value),
-      //   sorter is for sorting asc or dsc purgurantore
-      sorter: (a, b) => {
-        return a.last_name > b.last_name ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "last_name" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "DOB",
-      key: "dob",
-      dataIndex: "dob",
-      width: 80,
-      filters: [{}],
-      filteredValue: filteredInfo.dob || null,
-      onFilter: (value, record) => record.dob.includes(value),
-      //   sorter is for sorting asc or dsc purgurantore
-      sorter: (a, b) => {
-        return a.dob > b.dob ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "dob" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "gurantor",
-      key: "gurantor",
-      dataIndex: "gurantor",
-      width: 80,
-      filters: [{}],
-      filteredValue: filteredInfo.gurantor || null,
-      onFilter: (value, record) => record.gurantor.includes(value),
-      //   sorter is for sorting asc or dsc purgurantore
-      sorter: (a, b) => {
-        return a.gurantor > b.gurantor ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "gurantor" ? sortedInfo.order : null,
       ellipsis: true,
     },
   ];
@@ -122,7 +71,7 @@ const SelectClient = ({ handleClose, open }) => {
           centered
           footer={false}
           closable={false}
-          width={600}
+          width={400}
           bodyStyle={{ padding: "0" }}
         >
           <div className="px-5 py-2 box">
@@ -181,4 +130,4 @@ const SelectClient = ({ handleClose, open }) => {
   );
 };
 
-export default SelectClient;
+export default SelectPayoor;
