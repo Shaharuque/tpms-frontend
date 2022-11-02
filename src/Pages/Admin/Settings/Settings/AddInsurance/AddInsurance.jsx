@@ -20,17 +20,15 @@ const AddInsurance = () => {
   // const [multi, setmulti] = useState([]);
   // const [newdata, setnewdata] = useState({ value: "coconut" });
 
-  //Getting All Insurance using react query get request
-  const ip = "admin/ac/setting/get/all/insurance";
+  //Getting All Insurance using react query get request(GET req)
+  const endPoint = "admin/ac/setting/get/all/insurance";
   const {
     isLoading,
     isError,
     error,
     data: insurance,
     refetch,
-  } = useQuery(["allInsurance"], () => {
-    fetchData(ip);
-  });
+  } = useQuery(["allInsurance"], () => fetchData(endPoint));
 
   console.log(insurance);
 
