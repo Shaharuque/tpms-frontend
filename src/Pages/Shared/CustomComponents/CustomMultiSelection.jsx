@@ -3,14 +3,17 @@ import { MdImportantDevices } from "react-icons/md";
 import { MultiSelect } from "react-multi-select-component";
 import './ListviewMultiselect.css'
 
-const CustomMultiSelection = () => {
-  const options = [
-    { label: "Grapes ", value: "grapes" },
-    { label: "Masfgngo ", value: "mafgngo" },
-    { label: "Gradfgpdes ", value: "grfgapes" },
-    { label: "Mango ", value: "mango" },
-    { label: "Strawberry ", value: "strawberry" },
+const CustomMultiSelection = (props) => {
+  console.log('props dtaa receve', props.options)
+
+  const dataoptions = [
+    { label: "Grapes ", value: "grapes", id: 2  },
+    { label: "Masfgngo ", value: "mafgngo", id: 6},
+    { label: "Gradfgpdes ", value: "grfgapes", id: 7  },
+    { label: "Mango ", value: "mango", id: 9},
+    { label: "Strawberry ", value: "strawberry", id: 12},
   ];
+
   const [selected, setSelected] = useState([]);
 
   const customValueRenderer = (selected, _options) => {
@@ -21,19 +24,13 @@ const CustomMultiSelection = () => {
       return  "None selected";
     };
 
-    console.log("Multi Select data",selected)
+    const getId = selected.map((item, index)=>(item.id))
+    console.log("Multi Select data",getId)
   return (
 
 <MultiSelect
-    // styles={{
-    //   // Fixes the overlapping problem of the component
-    //   menu: provided => ({ ...provided, zIndex: 99999999 })
-    // }}
-    // style={{
-    //   zIndex:99999
-    //   }}
       className="listview"
-      options={options}
+      options={props.options || dataoptions}
       value={selected}
       onChange={setSelected}
       labelledBy="Select"

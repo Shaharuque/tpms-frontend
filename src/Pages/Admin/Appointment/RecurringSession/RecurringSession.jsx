@@ -334,24 +334,15 @@ const RecurringSession = () => {
   // console.log(selectedFlatRows);
 
   // -----------------------------------------------Multi-Select-------------------------------
-  const [value, setValue] = useState([]);
-  const PatientsData = [
-    "Eugenia",
-    "Bryan",
-    "Linda",
-    "Nancy",
-    "Lloyd",
-    "Alice",
-    "Julia",
-    "Albert",
-  ].map((item) => ({ label: item, value: item }));
+  const rc = [
+    { label: "tofayel ", value: "grapes" },
+    { label: "jakir", value: "mafgngo" },
+    { label: "amin", value: "grfgapes" },
+    { label: "yakub ", value: "mango" },
+    { label: "maria", value: "strawberry" },
+  ];
 
-  const ProviderData = ["demo", "pos", "minda"].map((item) => ({
-    label: item,
-    value: item,
-  }));
-
-  console.log(value);
+  
 
   return (
     <div className={!table ? "h-[100vh]" : ""}>
@@ -375,7 +366,7 @@ const RecurringSession = () => {
           {/* Upper div */}
           {clicked && (
             <div>
-              <Fade>
+            
                 <div className="flex justify-between items-center">
                   <h1 className="text-[20px]  text-white font-semibold ">
                     Recurring Session
@@ -422,9 +413,7 @@ const RecurringSession = () => {
                           Patients
                         </h1>
                         <CustomMultiSelection
-                          data={PatientsData}
-                          value={value}
-                          setValue={setValue}
+                          options={rc}
                         ></CustomMultiSelection>
                       </div>
                     ) : select === "Provider" ? (
@@ -433,9 +422,7 @@ const RecurringSession = () => {
                           Provider
                         </h1>
                         <CustomMultiSelection
-                          data={ProviderData}
-                          value={value}
-                          setValue={setValue}
+                        
                         ></CustomMultiSelection>
                       </div>
                     ) : (
@@ -449,7 +436,7 @@ const RecurringSession = () => {
                     </button>
                   </div>
                 </form>
-              </Fade>
+         
             </div>
           )}
         </div>
