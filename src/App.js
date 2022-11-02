@@ -157,6 +157,7 @@ import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisi
 import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
 import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
+import RequireAuth from "./Authorization/RequireAuth";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -261,7 +262,14 @@ function App() {
           <Route path="/test-date" element={<AntDate></AntDate>}></Route>
           {/* Testing End */}
 
-          <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+          <Route
+            path="/admin"
+            element={
+              <RequireAuth>
+                <Sidebar handle={handle}></Sidebar>
+              </RequireAuth>
+            }
+          >
             <Route
               path="report-export-view"
               element={<DownloadView></DownloadView>}
