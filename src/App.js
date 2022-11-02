@@ -154,6 +154,9 @@ import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/Form
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
 import SOAP from "./Pages/Admin/FormsTemplate/SOAP";
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
+import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
+import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
+import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -209,6 +212,18 @@ function App() {
             path="/SOAP"
             element={<SOAP></SOAP>}
           ></Route>
+          <Route
+            path="/MonthlySupervisionNote"
+            element={<MonthlySupervisionNote></MonthlySupervisionNote>}
+          ></Route>
+           <Route
+           path="/DiagnosisSessionForm"
+           element={<DiagnosisSessionForm></DiagnosisSessionForm>}
+           ></Route>
+            <Route
+           path="/DischargeSummary"
+           element={<DischargeSummary></DischargeSummary>}
+           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
