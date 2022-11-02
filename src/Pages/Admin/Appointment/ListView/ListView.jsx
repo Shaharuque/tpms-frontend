@@ -16,6 +16,7 @@ import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
+import CryptoJS from "crypto-js";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -27,7 +28,7 @@ const ListView = () => {
   const [value, setValue] = useState([]);
 
   // Testing purpose->Implementing encrypt and decrypt formula for securing token
-  let CryptoJS = require("crypto-js");
+  // let CryptoJS = require("crypto-js");
   let data = "0185543477";
   // Encrypt
   var ciphertext = CryptoJS.AES.encrypt(
@@ -37,10 +38,10 @@ const ListView = () => {
   console.log(ciphertext);
   localStorage.setItem("secret", ciphertext);
   const gatheredData = localStorage.getItem("secret");
-  console.log(gatheredData);
+  console.log("gathered data from local storage", gatheredData);
 
   // Decrypt
-  var bytes = CryptoJS.AES.decrypt(ciphertext, "my-secret-key@123");
+  var bytes = CryptoJS.AES.decrypt(gatheredData, "my-secret-key@123");
   var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   console.log("decrypted data:", decryptedData);
 

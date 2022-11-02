@@ -8,14 +8,15 @@ import "./LoginPage.css";
 import SmallLoader from "../../Loading/SmallLoader";
 import { GoAlert } from "react-icons/go";
 import axios from "axios";
+import CryptoJS from "crypto-js";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
   const navigate = useNavigate();
-  // const Swal = require("sweetalert2");
+  //const Swal = require("sweetalert2");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  let CryptoJS = require("crypto-js");
+  // let CryptoJS = require("crypto-js");
 
   const {
     register,
@@ -55,7 +56,6 @@ const LogInForm = () => {
         setMessage("Invalid Credentials");
       }
     });
-    reset();
   };
 
   const forgetPass = () => {

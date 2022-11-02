@@ -154,6 +154,7 @@ import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/Form
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
+import RequireAuth from "./Authorization/RequireAuth";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -246,7 +247,14 @@ function App() {
           <Route path="/test-date" element={<AntDate></AntDate>}></Route>
           {/* Testing End */}
 
-          <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+          <Route
+            path="/admin"
+            element={
+              <RequireAuth>
+                <Sidebar handle={handle}></Sidebar>
+              </RequireAuth>
+            }
+          >
             <Route
               path="report-export-view"
               element={<DownloadView></DownloadView>}

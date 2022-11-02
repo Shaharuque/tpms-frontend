@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, Space, Table } from "antd";
+import { Table } from "antd";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
 import { FaRegAddressCard } from "react-icons/fa";
 import PatientAuthorizationsTableModal from "./Patients/PatientAuthorizationsTableModal";
 import PatientStatusAction from "./Patients/PatientStatusAction";
-import { TiDelete, TiDeleteOutline } from "react-icons/ti";
 
 const TableApi = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -16,7 +15,6 @@ const TableApi = () => {
   const [items, setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
   const [page, setpage] = useState(2);
-  const [openEditModal, setOpenEditModal] = useState(false);
   const [patientId, setPatientId] = useState();
   const [data, setData] = useState([]);
   //For ANTd Modal
@@ -26,39 +24,85 @@ const TableApi = () => {
   console.log(serachText);
 
   const navigate = useNavigate();
-  //console.log(row);
-  const handleClose = () => {
-    setOpenEditModal(false);
-  };
 
   //Auth click event handler
   const handleAuthClick = (id) => {
     console.log(id);
-    //setOpenEditModal(true);
     setModalOpen(true);
     setPatientId(id);
   };
 
-  //getting data from public folder(fakedata)
-  // fakeApi call
-  useEffect(() => {
-    axios("../../All_Fake_Api/Patients.json")
-      .then((response) => {
-        console.log("calling");
-        setData(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // Dynamic column multi value filtering
+  //For getting unique value
+  function getUnique(array) {
+    let uniqueArray = [];
 
-  console.log(data);
+    // Loop through array values
+    for (let value of array) {
+      if (uniqueArray.indexOf(value) === -1) {
+        uniqueArray.push(value);
+      }
+    }
+    return uniqueArray;
+  }
+  //this funtion to get dynamic filter value-text
+  const patientSearch = () => {
+    let patientArray = items?.map((d) => d?.client_full_name);
+    const resultArray = getUnique(patientArray);
+    //return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      newArray.push({ text: x, value: x });
+    }
+    return newArray;
+  };
+  const contactInfoSearch = () => {
+    let phoneNumberArray = items?.map((d) => d?.phone_number);
+    const resultArray = getUnique(phoneNumberArray);
+    // return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      newArray.push({ text: x, value: x });
+    }
+    return newArray;
+  };
+  const dobSearch = () => {
+    let dobArray = items?.map((d) => d?.client_dob);
+    const resultArray = getUnique(dobArray);
+    // return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      newArray.push({ text: x, value: x });
+    }
+    return newArray;
+  };
+  const genderSearch = () => {
+    let genderArray = items?.map((d) => d?.client_gender);
+    const resultArray = getUnique(genderArray);
+    // return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      newArray.push({ text: x, value: x });
+    }
+    return newArray;
+  };
+  const posSearch = () => {
+    let locationArray = items?.map((d) => d?.location);
+    const resultArray = getUnique(locationArray);
+    // return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      newArray.push({ text: x, value: x });
+    }
+    return newArray;
+  };
+  //-----column multi filtering code end------
 
   const globalFilter = (value) => {
     //console.log(value);
     const filteredData = data?.filter(
       (each) =>
-        each?.client_first_name?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.client_full_name?.toLowerCase().includes(value.toLowerCase()) ||
         each?.client_gender?.toLowerCase().includes(value.toLowerCase()) ||
         each?.client_dob?.toLowerCase().includes(value.toLowerCase()) ||
         each?.location?.toLowerCase().includes(value.toLowerCase()) ||
@@ -77,46 +121,45 @@ const TableApi = () => {
         });
     }
   };
-  //console.log(data);
   // END
 
-  // get data from API + data fetch from api while scrolling[Important]
-  // useEffect(() => {
-  //   const getComments = async () => {
-  //     const res = await axios({
-  //       method: "get",
-  //       url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
-  //       headers: headers,
-  //     });
-  //     // const result = await res.json();
-  //     const data = res.data?.clients?.data;
-  //     //console.log(data)
-  //     setItems(data);
-  //   };
-  //   getComments();
-  // }, []);
+  //get data from API + data fetch from api while scrolling[Important]
+  useEffect(() => {
+    const getPatientsData = async () => {
+      const res = await axios({
+        method: "get",
+        url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=1`,
+        headers: headers,
+      });
+      // const result = await res.json();
+      const data = res.data?.clients?.data;
+      //console.log(data)
+      setItems(data);
+    };
+    getPatientsData();
+  }, []);
 
-  // const fetchComments = async () => {
-  //   const res = await axios({
-  //     method: "get",
-  //     url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
-  //     headers: headers,
-  //   });
-  //   const data = res.data?.clients?.data;
-  //   console.log(data);
-  //   return data;
-  // };
+  const fetchPatients = async () => {
+    const res = await axios({
+      method: "get",
+      url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
+      headers: headers,
+    });
+    const data = res.data?.clients?.data;
+    console.log(data);
+    return data;
+  };
 
-  // const fetchData = async () => {
-  //   const commentsFormServer = await fetchComments();
-  //   console.log(commentsFormServer);
-  //   setItems([...items, ...commentsFormServer]);
-  //   if (commentsFormServer.length === 0) {
-  //     sethasMore(false);
-  //   }
-  //   setpage(page + 1);
-  // };
-  //console.log(items)
+  const fetchData = async () => {
+    const patientsFromServer = await fetchPatients();
+    console.log(patientsFromServer);
+    setItems([...items, ...patientsFromServer]);
+    if (patientsFromServer.length === 0) {
+      sethasMore(false);
+    }
+    setpage(page + 1);
+  };
+  console.log(items);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -127,11 +170,11 @@ const TableApi = () => {
   //Individual filtering [tagging feature]
   const deleteFirstNameTag = (tag) => {
     console.log(tag);
-    const client_first_name_array = filteredInfo?.client_first_name?.filter(
+    const client_full_name_array = filteredInfo?.client_full_name?.filter(
       (item) => item !== tag
     );
     setFilteredInfo({
-      client_first_name: client_first_name_array,
+      client_full_name: client_full_name_array,
       client_gender: filteredInfo?.client_gender,
       client_dob: filteredInfo?.client_dob,
       location: filteredInfo?.location,
@@ -144,7 +187,7 @@ const TableApi = () => {
       (item) => item !== tag
     );
     setFilteredInfo({
-      client_first_name: filteredInfo?.client_first_name,
+      client_full_name: filteredInfo?.client_full_name,
       client_gender: filteredInfo?.client_gender,
       client_dob: client_dob_array,
       location: filteredInfo?.location,
@@ -157,7 +200,7 @@ const TableApi = () => {
       (item) => item !== tag
     );
     setFilteredInfo({
-      client_first_name: filteredInfo?.client_first_name,
+      client_full_name: filteredInfo?.client_full_name,
       client_gender: client_gender_array,
       client_dob: filteredInfo?.client_dob,
       location: filteredInfo?.location,
@@ -170,7 +213,7 @@ const TableApi = () => {
       (item) => item !== tag
     );
     setFilteredInfo({
-      client_first_name: filteredInfo?.client_first_name,
+      client_full_name: filteredInfo?.client_full_name,
       client_gender: filteredInfo?.client_gender,
       client_dob: filteredInfo?.client_dob,
       location: location_array,
@@ -183,7 +226,7 @@ const TableApi = () => {
       (item) => item !== tag
     );
     setFilteredInfo({
-      client_first_name: filteredInfo?.client_first_name,
+      client_full_name: filteredInfo?.client_full_name,
       client_gender: filteredInfo?.client_gender,
       client_dob: filteredInfo?.client_dob,
       location: filteredInfo?.location,
@@ -204,69 +247,30 @@ const TableApi = () => {
   const columns = [
     {
       title: "Patient",
-      dataIndex: "client_first_name",
-      key: "client_first_name",
+      dataIndex: "client_full_name",
+      key: "client_full_name",
       width: 100,
-      filters: [
-        { text: "Milissent", value: "Milissent" },
-        { text: "Timmy", value: "Timmy" },
-        {
-          text: `Jamey`,
-          value: "Jamey",
-        },
-        {
-          text: `Minnie`,
-          value: "Minnie",
-        },
-        {
-          text: "Donald",
-          value: "Donald",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-        {
-          text: `Minnie`,
-          value: "Minnie",
-        },
-        {
-          text: "Donald",
-          value: "Donald",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-      ],
+      filters: patientSearch(),
 
-      filteredValue: filteredInfo.client_first_name || null,
-      onFilter: (value, record) => record.client_first_name.includes(value),
+      filteredValue: filteredInfo.client_full_name || null,
+      onFilter: (value, record) => record.client_full_name.includes(value),
       sorter: (a, b) => {
-        return a.client_first_name > b.client_first_name ? -1 : 1;
+        return a.client_full_name > b.client_full_name ? -1 : 1;
       },
       sortOrder:
-        sortedInfo.columnKey === "client_first_name" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "client_full_name" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
-      // client_first_name, id, key=>each row data(object) property value can be accessed.
-      render: (_, { client_first_name, id, key }) => {
-        //console.log("tags : ", client_first_name, id, key);
+      // client_full_name, id, key=>each row data(object) property value can be accessed.
+      render: (_, { client_full_name, id, key }) => {
+        //console.log("tags : ", client_full_name, id, key);
         return (
           <div>
             <button
               onClick={() => patientDetails(id)}
               className="text-secondary"
             >
-              {client_first_name}
+              {client_full_name}
             </button>
           </div>
         );
@@ -278,29 +282,16 @@ const TableApi = () => {
       dataIndex: "phone_number",
       key: "phone_number",
       width: 100,
-      // filters: [
-      //   {
-      //     text: "(940)-234-0329",
-      //     value: "(940)-234-0329",
-      //   },
-      //   {
-      //     text: "(124)-996-5455",
-      //     value: "(124)-996-5455",
-      //   },
-      //   {
-      //     text: "(972)-202-5007",
-      //     value: "(972)-202-5007",
-      //   },
-      // ],
-      // filteredValue: filteredInfo.phone_number || null,
-      // onFilter: (value, record) => record.phone_number.includes(value),
+      filters: contactInfoSearch(),
+      filteredValue: filteredInfo.phone_number || null,
+      onFilter: (value, record) => record.phone_number.includes(value),
       sorter: (a, b) => {
         return a.phone_number > b.phone_number ? -1 : 1;
       },
       sortOrder:
         sortedInfo.columnKey === "phone_number" ? sortedInfo.order : null,
 
-      // render contains what we want to reflect as our data
+      //render contains what we want to reflect as our data
       render: (_, { phone_number }) => {
         return (
           <div>
@@ -315,16 +306,7 @@ const TableApi = () => {
       dataIndex: "client_dob",
       key: "client_dob",
       width: 80,
-      filters: [
-        {
-          text: `1986-08-28`,
-          value: "1986-08-28",
-        },
-        {
-          text: "2021-04-06",
-          value: "2021-04-06",
-        },
-      ],
+      filters: dobSearch(),
       filteredValue: filteredInfo.client_dob || null,
       onFilter: (value, record) => record.client_dob.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -340,16 +322,7 @@ const TableApi = () => {
       dataIndex: "client_gender",
       key: "client_gender",
       width: 80,
-      filters: [
-        {
-          text: `Male`,
-          value: "Male",
-        },
-        {
-          text: "Female",
-          value: "Female",
-        },
-      ],
+      filters: genderSearch(),
       filteredValue: filteredInfo.client_gender || null,
       onFilter: (value, record) => record.client_gender.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -364,21 +337,8 @@ const TableApi = () => {
       title: "POS",
       dataIndex: "location",
       key: "location",
-      width: 120,
-      filters: [
-        {
-          text: `Main Office`,
-          value: "Main Office",
-        },
-        {
-          text: "Telehealth",
-          value: "Telehealth",
-        },
-        {
-          text: "Home",
-          value: "Home",
-        },
-      ],
+      width: 80,
+      filters: posSearch(),
       filteredValue: filteredInfo.location || null,
       onFilter: (value, record) => record.location.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -461,16 +421,7 @@ const TableApi = () => {
     },
   ];
   return (
-    <div
-      className={
-        filteredInfo?.client_first_name ||
-        filteredInfo?.client_dob ||
-        filteredInfo?.client_gender ||
-        filteredInfo?.location
-          ? "h-[100vh]"
-          : ""
-      }
-    >
+    <div>
       <>
         <div className="flex items-center flex-wrap justify-between gap-2 my-2">
           <h1 className="text-lg text-orange-500 text-left font-semibold ">
@@ -493,17 +444,17 @@ const TableApi = () => {
         </div>
 
         {/* filtering tag showing part */}
-        {filteredInfo?.client_first_name?.length > 0 ||
+        {filteredInfo?.client_full_name?.length > 0 ||
         filteredInfo?.client_dob?.length > 0 ||
         filteredInfo?.client_gender?.length > 0 ||
         filteredInfo?.location?.length > 0 ||
         filteredInfo?.insurance?.length > 0 ? (
           // <div className="border border-secondary bg-gray-100 flex mb-4 text-xs ">
           <div className="my-5 flex flex-wrap items-center gap-2">
-            {filteredInfo?.client_first_name?.length > 0 && (
+            {filteredInfo?.client_full_name?.length > 0 && (
               <div className="">
                 <div className="flex flex-wrap mb-2 gap-1">
-                  {filteredInfo?.client_first_name?.map((tag, index) => (
+                  {filteredInfo?.client_full_name?.map((tag, index) => (
                     <div
                       className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
                       key={index}
@@ -630,41 +581,27 @@ const TableApi = () => {
           </div>
         ) : // </div>
         null}
-        {/* <InfiniteScroll
+        <InfiniteScroll
           dataLength={items.length} //items is basically all data here
           next={fetchData}
           hasMore={hasMore}
           loader={<ShimmerTableTet></ShimmerTableTet>}
-          // loader={<h1 className="text-teal-800 font-bold text-center">Loading...</h1>}
-        > */}
-
-        {/* className=" overflow-scroll" used for responsive scrolling But if you use InfiniteScroll don't need overflow-scroll class */}
-        <div className=" overflow-scroll">
+        >
           <Table
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
             className=" text-xs font-normal"
             columns={columns}
-            dataSource={data} //Which data chunk you want to show in table
+            dataSource={items} //Which data chunk you want to show in table
             // For fixed header table at top
             onChange={handleChange}
           />
-        </div>
-        {/* </InfiniteScroll> */}
+        </InfiniteScroll>
 
-        {/* PatientAuthorizationTableModal component render and particular patient id also passed to the PatientAuthorizationTableModal component*/}
-        {/* {openEditModal && (
-          <PatientAuthorizationsTableModal
-            patient_id={patientId}
-            handleClose={handleClose}           
-            open={openEditModal}
-          ></PatientAuthorizationsTableModal>
-        )} */}
         {modalOpen && (
           <PatientAuthorizationsTableModal
             patient_id={patientId}
-            handleClose={handleClose}
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
           ></PatientAuthorizationsTableModal>
