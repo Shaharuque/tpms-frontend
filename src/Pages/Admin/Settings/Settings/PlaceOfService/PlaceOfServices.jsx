@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import { headers } from "../../../../../Misc/BaseClient";
 import PlaceOfServicesActionAddModal from "./PlaceOfServices/PlaceOfServicesActionAddModal";
 
 const PlaceOfServices = () => {
@@ -10,6 +11,47 @@ const PlaceOfServices = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
   const [recordData, setRecordData] = useState();
+  const [items, setItems] = useState([]);
+  const [hasMore, sethasMore] = useState(true);
+  const [page, setpage] = useState(2);
+
+  //get data from API + data fetch from api while scrolling[Important]
+  useEffect(() => {
+    const getPatientsData = async () => {
+      const res = await axios({
+        method: "get",
+        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos`,
+        headers: headers,
+      });
+      // const result = await res.json();
+      const data = res.data?.clients?.data;
+      //console.log(data)
+      setItems(data);
+    };
+    getPatientsData();
+  }, []);
+
+  const fetchPatients = async () => {
+    const res = await axios({
+      method: "get",
+      url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+      headers: headers,
+    });
+    const data = res?.data;
+    console.log(data);
+    return data;
+  };
+
+  const fetchData = async () => {
+    const patientsFromServer = await fetchPatients();
+    console.log(patientsFromServer);
+    setItems([...items, ...patientsFromServer]);
+    if (patientsFromServer.length === 0) {
+      sethasMore(false);
+    }
+    setpage(page + 1);
+  };
+  console.log(items);
 
   const handleClickOpen2 = (record) => {
     setOpenAddModal(true);
@@ -38,7 +80,6 @@ const PlaceOfServices = () => {
         //console.log(error);
       });
   }, []);
-  console.log(table);
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [

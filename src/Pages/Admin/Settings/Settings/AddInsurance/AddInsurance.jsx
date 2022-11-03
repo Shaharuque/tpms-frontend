@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Loading from "../../../../../Loading/Loading";
 import { headers } from "../../../../../Misc/BaseClient";
-import fetchData from "../../../../../Misc/Helper";
+import { fetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 
 const AddInsurance = () => {

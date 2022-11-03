@@ -16,7 +16,7 @@ import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
-import CryptoJS from "crypto-js";
+import { headers } from "../../../../Misc/BaseClient";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -25,26 +25,40 @@ const ListView = () => {
   const [listView, setListView] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [patients, setPatients] = useState();
+  const [patientId, setPatientId] = useState();
+  const [fromDate, setFromDate] = useState();
+  const [toDate, setToDate] = useState();
 
+  //get data from API + data fetch from api while scrolling[Important]
+  useEffect(() => {
+    const getPatientsData = async () => {
+      const res = await axios({
+        method: "GET",
+        url: `https://app.therapypms.com/api/v1/admin/ac/patient/names`,
+        headers: headers,
+      });
+      const data = res?.data?.clients;
+      // console.log(data);
+      setPatients(data);
+    };
+    getPatientsData();
+  }, []);
 
-  // Testing purpose->Implementing encrypt and decrypt formula for securing token
-  // let CryptoJS = require("crypto-js");
-  let data = "0185543477";
-  // Encrypt
-  var ciphertext = CryptoJS.AES.encrypt(
-    JSON.stringify(data),
-    "my-secret-key@123"
-  ).toString();
-  console.log(ciphertext);
-  localStorage.setItem("secret", ciphertext);
-  const gatheredData = localStorage.getItem("secret");
-  console.log("gathered data from local storage", gatheredData);
+  const receivedData = (data) => {
+    console.log(data);
+  };
+  console.log(patientId);
 
-  // Decrypt
-  var bytes = CryptoJS.AES.decrypt(gatheredData, "my-secret-key@123");
-  var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-  console.log("decrypted data:", decryptedData);
+  //provider names API
 
+  //Date converter function [yy-mm-dd]
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
   //Date Range Picker
   const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
@@ -81,6 +95,18 @@ const ListView = () => {
     ? startDate.getFullYear().toString().slice(2, 4)
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+
+  // console.log("start date-->", startDate);
+  // console.log("end date-->", endDate);
+
+  // console.log(convert("Jan 31, 23"));
+  // if (startDate) {
+  //   const from_date = convert(startDate);
+  // }
+  // if (endDate) {
+  //   const to_date = convert(endDate);
+  // }
+  // console.log(fromDate, toDate);
   //End Date Range Picker
 
   //test design
@@ -116,16 +142,6 @@ const ListView = () => {
     setListView(!listView);
   };
 
-  // calling fake db
-  // useEffect(() => {
-  //   axios("../All_Fake_Api/Fakedb.json")
-  //     .then((response) => {
-  //       setTData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
   useEffect(() => {
     fetch("../All_Fake_Api/Fakedb.json")
       .then((res) => res.json())
@@ -515,32 +531,91 @@ const ListView = () => {
       filters: [],
     },
   });
-  const onSubmit = (data) => {
-    // setSubmitted(data);
-    console.log(data);
+  const onSubmit = async (data) => {
+    const from_date = convert(data?.start_date);
+    const to_date = convert(data?.end_date);
+    console.log(from_date, to_date);
+    let product = {
+      client_id: patientId,
+      from_date: "2022-01-01",
+      to_date: "2022-12-31",
+    };
+    console.log(product);
     setTable(true);
-    reset();
+    if (product) {
+      // POST request using fetch with async/await
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: headers,
+      //   body: product,
+      // };
+      // const response = await fetch(
+      //   "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
+      //   requestOptions
+      // );
+      // const data = await response.json();
+      // console.log(data);
+      console.log(product);
+      fetch("https://app.therapypms.com/api/v1/admin/ac/get-appoinments", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(product),
+      }).then(async (response) => {
+        if (!response.ok) {
+          const validation = await response.json();
+          console.log(validation.errors);
+        } else {
+          console.log(response?.data);
+        }
+      });
+    }
+    // axios POST request
+    // const options = {
+    //   url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
+    //   method: "POST",
+    //   headers: headers,
+    //   data: {
+    //     client_id: patientId,
+    //     provider_id: "",
+    //     from_date: "2022-10-01",
+    //     to_date: "2022-10-30",
+    //   },
+    // };
+
+    // axios(options).then((response) => {
+    //   console.log(response);
+    // });
   };
 
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        start_date: startDate && `${startMonth} ${startDay}, ${startYear}`,
+        start_date: startDate ? `${startMonth} ${startDay}, ${startYear}` : "",
+        end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : "",
       });
     }, 0);
-  }, [startDate, reset]);
+  }, [
+    startDate,
+    startMonth,
+    startDay,
+    startYear,
+    endDate,
+    endMonth,
+    endDay,
+    endYear,
+    reset,
+  ]);
 
   // ----------------------------------------Multi-Select---------------------------------
   // *************
 
-
   const opt = [
-    { label: "tera ", value: "grapes", id:3 },
-    { label: "tpms ", value: "mafgngo", id:1  },
-    { label: "code ", value: "grfgapes", id:4  },
-    { label: "Mango ", value: "mango", id:8 },  
-    { label: "dfa ", value: "strawberry", id:9 },
+    { label: "tera ", value: "grapes", id: 3 },
+    { label: "tpms ", value: "mafgngo", id: 1 },
+    { label: "code ", value: "grfgapes", id: 4 },
+    { label: "Mango ", value: "mango", id: 8 },
+    { label: "dfa ", value: "strawberry", id: 9 },
   ];
 
   return (
@@ -567,230 +642,231 @@ const ListView = () => {
             {/* Upper div */}
             {clicked && (
               <div>
-              
-                  <div className="flex justify-between items-center flex-wrap">
-                    <h1 className="text-[20px]  text-white font-semibold ">
-                      Manage Sessions
-                    </h1>
-                    <div>
-                      <button
-                        onClick={handleClose}
-                        className="text-white text-2xl font-light"
-                      >
-                        <MdOutlineCancel />
-                      </button>
-                    </div>
+                <div className="flex justify-between items-center flex-wrap">
+                  <h1 className="text-[20px]  text-white font-semibold ">
+                    Manage Sessions
+                  </h1>
+                  <div>
+                    <button
+                      onClick={handleClose}
+                      className="text-white text-2xl font-light"
+                    >
+                      <MdOutlineCancel />
+                    </button>
                   </div>
-                  <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
+                </div>
+                <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
+                  <div>
+                    <Switch
+                      color="default"
+                      defaultChecked
+                      size="small"
+                      onClick={handleBillable}
+                    />
+
+                    <label
+                      className="form-check-label inline-block ml-2 text-base text-gray-100"
+                      htmlFor="flexSwitchCheckDefault"
+                    >
+                      {billable ? "Billable" : "Non-Billable"}
+                    </label>
+                  </div>
+                  {/* List view or table view  */}
+
+                  <div
+                    className={
+                      listView ? "flex justify-end " : "flex justify-end "
+                    }
+                  >
                     <div>
                       <Switch
                         color="default"
                         defaultChecked
                         size="small"
-                        onClick={handleBillable}
+                        onClick={handleListView}
                       />
 
                       <label
                         className="form-check-label inline-block ml-2 text-base text-gray-100"
                         htmlFor="flexSwitchCheckDefault"
                       >
-                        {billable ? "Billable" : "Non-Billable"}
+                        {listView ? (
+                          <span className="">List View</span>
+                        ) : (
+                          "Card View"
+                        )}
                       </label>
                     </div>
-                    {/* List view or table view  */}
-
-                    <div
-                      className={
-                        listView ? "flex justify-end " : "flex justify-end "
-                      }
-                    >
-                      <div>
-                        <Switch
-                          color="default"
-                          defaultChecked
-                          size="small"
-                          onClick={handleListView}
-                        />
-
-                        <label
-                          className="form-check-label inline-block ml-2 text-base text-gray-100"
-                          htmlFor="flexSwitchCheckDefault"
-                        >
-                          {listView ? (
-                            <span className="">List View</span>
-                          ) : (
-                            "Card View"
-                          )}
-                        </label>
-                      </div>
-                    </div>
                   </div>
-                  <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
-                      {billable && (
-                        <div>
-                          <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                            Clients
-                          </h1>
-                          <CustomMultiSelection></CustomMultiSelection>
-                        </div>
-                      )}
-                      <div className="w-full">
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="relative">
+                  <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
+                    {billable && (
+                      <div>
                         <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                          Provider
+                          Clients
                         </h1>
-                        <CustomMultiSelection options={opt} ></CustomMultiSelection>
+                        <CustomMultiSelection
+                          patients={patients}
+                          setPatientId={setPatientId}
+                          receivedData={receivedData}
+                        ></CustomMultiSelection>
                       </div>
+                    )}
+                    <div className="w-full">
+                      <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
+                        Provider
+                      </h1>
+                      <CustomMultiSelection
+                        options={opt}
+                      ></CustomMultiSelection>
+                    </div>
 
-                      {billable ? (
-                        <>
+                    {billable ? (
+                      <>
+                        <div>
+                          <label className="label">
+                            <span className="label-text text-[16px] text-gray-100 text-left">
+                              Place of Services
+                            </span>
+                          </label>
+                          <div>
+                            <select
+                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                              {...register("place_of_service")}
+                            >
+                              <option value="" className="text-black">
+                                Select
+                              </option>
+                              <option value="follow up" className="text-black">
+                                Today's follow up
+                              </option>
+                              <option value="cat" className="text-black">
+                                Lost 7 days
+                              </option>
+                              <option value="15" className="text-black">
+                                Lost 15 days
+                              </option>
+                              <option value="15" className="text-black">
+                                Lost 30 days
+                              </option>
+                              <option value="15" className="text-black">
+                                30 days & over
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="label">
+                            <span className="label-text text-[16px] text-gray-100 text-left">
+                              Selected date
+                            </span>
+                          </label>
+                          {/* Date Range calender will be set here */}
+                          <div className="ml-1">
+                            <div
+                              onClick={() => setOpenCalendar(true)}
+                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
+                            >
+                              <input
+                                value={
+                                  startDate
+                                    ? `${startMonth} ${startDay}, ${startYear}`
+                                    : "Start Date"
+                                }
+                                readOnly
+                                className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                {...register("start_date")}
+                              />
+                              <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
+                              <input
+                                value={
+                                  endDate
+                                    ? `${endMonth} ${endDay}, ${endYear}`
+                                    : "End Date"
+                                }
+                                readOnly
+                                className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                {...register("end_date")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-5">
                           <div>
                             <label className="label">
                               <span className="label-text text-[16px] text-gray-100 text-left">
-                                Place of Services
+                                Status
                               </span>
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
-                                {...register("place_of_service")}
+                                className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                {...register("Status")}
                               >
                                 <option value="" className="text-black">
                                   Select
                                 </option>
-                                <option
-                                  value="follow up"
-                                  className="text-black"
-                                >
+                                <option value="Today" className="text-black">
                                   Today's follow up
                                 </option>
-                                <option value="cat" className="text-black">
+                                <option className="text-black" value="UK">
                                   Lost 7 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   Lost 15 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   Lost 30 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   30 days & over
                                 </option>
                               </select>
                             </div>
                           </div>
-
-                          <div>
-                            <label className="label">
-                              <span className="label-text text-[16px] text-gray-100 text-left">
-                                Selected date
-                              </span>
-                            </label>
-                            {/* Date Range calender will be set here */}
-                            <div className="ml-1">
-                              <div
-                                onClick={() => setOpenCalendar(true)}
-                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
-                              >
-                                <input
-                                  value={
-                                    startDate
-                                      ? `${startMonth} ${startDay}, ${startYear}`
-                                      : "Start Date"
-                                  }
-                                  readOnly
-                                  className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
-                                  {...register("start_date")}
-                                />
-                                <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
-                                <input
-                                  value={
-                                    endDate
-                                      ? `${endMonth} ${endDay}, ${endYear}`
-                                      : "End Date"
-                                  }
-                                  readOnly
-                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
-                                  {...register("end_date")}
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex gap-5">
-                            <div>
-                              <label className="label">
-                                <span className="label-text text-[16px] text-gray-100 text-left">
-                                  Status
-                                </span>
-                              </label>
-                              <div>
-                                <select
-                                  className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
-                                  {...register("Status")}
-                                >
-                                  <option value="" className="text-black">
-                                    Select
-                                  </option>
-                                  <option value="Today" className="text-black">
-                                    Today's follow up
-                                  </option>
-                                  <option className="text-black" value="UK">
-                                    Lost 7 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    Lost 15 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    Lost 30 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    30 days & over
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                            <button
-                              className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
-                              type="submit"
-                            >
-                              Go
-                            </button>
-                          </div>
-                        </>
-                      ) : (
-                        <button
-                          className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
-                          type="submit"
-                        >
-                          Go
-                        </button>
-                      )}
-                      {table && (
-                        <>
-                          <div className="  ">
-                            <div className="px-2 py-2 w-full mr-2 mt-[35px] bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
-                              <input
-                                placeholder="Search here..."
-                                onChange={(e) => globalFilter(e.target.value)}
-                                className="focus:outline-none"
-                              />
-                              <label>
-                                <BiSearchAlt />
-                              </label>
-                            </div>
-                          </div>
                           <button
-                            onClick={clearFilters}
-                            className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                            className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                            type="submit"
                           >
-                            Clear filters
+                            Go
                           </button>
-                        </>
-                      )}
-                    </div>
-                  </form>
-              
+                        </div>
+                      </>
+                    ) : (
+                      <button
+                        className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                        type="submit"
+                      >
+                        Go
+                      </button>
+                    )}
+                    {table && (
+                      <>
+                        <div className="  ">
+                          <div className="px-2 py-2 w-full mr-2 mt-[35px] bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
+                            <input
+                              placeholder="Search here..."
+                              onChange={(e) => globalFilter(e.target.value)}
+                              className="focus:outline-none"
+                            />
+                            <label>
+                              <BiSearchAlt />
+                            </label>
+                          </div>
+                        </div>
+                        <button
+                          onClick={clearFilters}
+                          className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                        >
+                          Clear filters
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </form>
               </div>
             )}
           </div>
