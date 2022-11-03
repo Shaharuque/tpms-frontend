@@ -1,14 +1,74 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm} from "react-hook-form";
 import { Switch } from "antd";
+import { useEffect } from "react";
 
-const InsuranceDetails = () => {
+const InsuranceDetails = (props) => {
+  if(props.ViewDetailData || null){
+    console.log('data receve with props')
+    console.log("props check",props)
+
+   
+  }
+ 
+  const ViewDetailData = props.ViewDetailData;
   const [active, setActive] = useState(false);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log("formsubmit", data);
   };
+
+  useEffect(() => {
+      // you can do async server request and fill up form
+      // setTimeout(() => {
+
+      //   // if(ViewDetailData?.all_insurance_detail){
+         
+      //   // }
+
+      //   if(ViewDetailData?.selected_insurance_details === 'success'){
+      //     console.log("check da 2", ViewDetailData?.selected_insurance_details)
+        
+      //   }else{
+
+      //     console.log("check data settime out target", ViewDetailData?.all_insurance_detail )
+      //     reset({
+      //       payor_name: ViewDetailData?.all_insurance_details?.name
+      //     });
+          
+      //   }
+      // },
+      //  0);
+
+      if(ViewDetailData?.selected_insurance_details === 'success'){
+      reset({
+      
+        payor_name: ViewDetailData?.selected_insurance_details?.payor_name,
+        address: ViewDetailData?.selected_insurance_details?.address,
+        city: ViewDetailData?.selected_insurance_details?.city,
+        state: ViewDetailData?.selected_insurance_details?.state,
+        zip: ViewDetailData?.selected_insurance_details?.zip,
+        contact_one: ViewDetailData?.selected_insurance_details?.contact_one,
+        contact_two: ViewDetailData?.selected_insurance_details?.contact_two,
+        phone_one: ViewDetailData?.selected_insurance_details?.phone_one,
+        phone_two: ViewDetailData?.selected_insurance_details?.phone_two,
+        billing_aber: ViewDetailData?.selected_insurance_details?.billing_aber,
+        ele_payor_id: ViewDetailData?.selected_insurance_details?.ele_payor_id,
+      });
+    }else{
+
+          console.log("check data settime out target", ViewDetailData?.all_insurance_detail )
+          reset({
+            payor_name: ViewDetailData?.all_insurance_details?.name
+          });
+        }
+
+
+
+    }, [ViewDetailData?.all_insurance_details?.name, ViewDetailData?.selected_insurance_details?.payor_name]);
+    // console.log('data receve', ViewDetailData.status)
+
   return (
     <div className="border p-5">
       <h1 className="text-lg text-orange-500 my-1">Insurance Details</h1>
@@ -25,7 +85,7 @@ const InsuranceDetails = () => {
               type="text"
               name="name"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("name")}
+              {...register("payor_name")}
             />
           </div>
           {/* Address  */}
@@ -39,7 +99,7 @@ const InsuranceDetails = () => {
               type="text"
               name="Address"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("Address")}
+              {...register("address")}
             />
           </div>
           {/* Address  */}
@@ -100,7 +160,7 @@ const InsuranceDetails = () => {
               type="text"
               name="contract1"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("contract1")}
+              {...register("contact_one")}
             />
           </div>
           <div>
@@ -113,7 +173,7 @@ const InsuranceDetails = () => {
               type="text"
               name="contract2"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("contract2")}
+              {...register("contact_two")}
             />
           </div>
           {/* Address  */}
@@ -127,7 +187,7 @@ const InsuranceDetails = () => {
               type="text"
               name="phone1"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("phone1")}
+              {...register("phone_one")}
             />
           </div>
           <div>
@@ -140,7 +200,7 @@ const InsuranceDetails = () => {
               type="text"
               name="phone2"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("phone2")}
+              {...register("phone_two")}
             />
           </div>
           <div className="flex justify-start items-end my-2 md:my-0">
@@ -173,7 +233,7 @@ const InsuranceDetails = () => {
               type="text"
               name="billing observation"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("billing_observation")}
+              {...register("billing_aber")}
             />
           </div>
           <div>
@@ -186,7 +246,7 @@ const InsuranceDetails = () => {
               type="text"
               name="Electronic_"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("phone2")}
+              {...register("ele_payor_id")}
             />
           </div>
         </div>
