@@ -536,39 +536,38 @@ const ListView = () => {
     const to_date = convert(data?.end_date);
     console.log(from_date, to_date);
     let product = {
-      client_id: patientId,
+      client_id: [134],
       from_date: "2022-01-01",
       to_date: "2022-12-31",
     };
     console.log(product);
+    console.log("product json", JSON.stringify(product));
     setTable(true);
-    if (product) {
-      // POST request using fetch with async/await
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: headers,
-      //   body: product,
-      // };
-      // const response = await fetch(
-      //   "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
-      //   requestOptions
-      // );
-      // const data = await response.json();
-      // console.log(data);
-      console.log(product);
-      fetch("https://app.therapypms.com/api/v1/admin/ac/get-appoinments", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(product),
-      }).then(async (response) => {
-        if (!response.ok) {
-          const validation = await response.json();
-          console.log(validation.errors);
-        } else {
-          console.log(response?.data);
-        }
-      });
-    }
+    // POST request using fetch with async/await
+    const requestOptions = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(product),
+    };
+    const response = await fetch(
+      "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
+      requestOptions
+    );
+    const result = await response.json();
+    console.log(result);
+    // console.log(product);
+    // fetch("https://app.therapypms.com/api/v1/admin/ac/get-appoinments", {
+    //   method: "POST",
+    //   headers: headers,
+    //   body: JSON.stringify(product),
+    // }).then(async (response) => {
+    //   if (!response.ok) {
+    //     const validation = await response.json();
+    //     console.log(validation.errors);
+    //   } else {
+    //     console.log(response);
+    //   }
+    // });
     // axios POST request
     // const options = {
     //   url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",

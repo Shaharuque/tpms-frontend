@@ -3,7 +3,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { headers } from "../../../../../Misc/BaseClient";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import PlaceOfServicesActionAddModal from "./PlaceOfServices/PlaceOfServicesActionAddModal";
 
 const PlaceOfServices = () => {
@@ -20,26 +22,25 @@ const PlaceOfServices = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "get",
-        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos`,
+        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=1`,
         headers: headers,
       });
       // const result = await res.json();
-      const data = res.data?.clients?.data;
-      //console.log(data)
-      setItems(data);
+      const result = res?.data?.pos_data?.data;
+      //console.log(result);
+      setItems(result);
     };
     getPatientsData();
   }, []);
 
   const fetchPatients = async () => {
     const res = await axios({
-      method: "get",
+      method: "GET",
       url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
       headers: headers,
     });
-    const data = res?.data;
-    console.log(data);
-    return data;
+    const result = res?.data?.pos_data?.data;
+    return result;
   };
 
   const fetchData = async () => {
@@ -52,6 +53,20 @@ const PlaceOfServices = () => {
     setpage(page + 1);
   };
   console.log(items);
+
+  //get data from API + data fetch from api while scrolling[Important]
+  // useEffect(() => {
+  //   fetch("https://app.therapypms.com/api/v1/admin/ac/setting/get/pos", {
+  //     method: "GET",
+  //     headers: headers,
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log("Success:", data);
+  //     });
+  // }, []);
 
   const handleClickOpen2 = (record) => {
     setOpenAddModal(true);
@@ -85,8 +100,8 @@ const PlaceOfServices = () => {
   const columns = [
     {
       title: "Place of Service",
-      dataIndex: "date",
-      key: "date",
+      dataIndex: "pos_name",
+      key: "pos_name",
       width: 100,
       filters: [
         {
@@ -102,22 +117,22 @@ const PlaceOfServices = () => {
           value: "10/31/2025",
         },
       ],
-      render: (_, { date }) => {
+      render: (_, { pos_name }) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{date}</div>;
+        return <div className=" text-secondary">{pos_name}</div>;
       },
-      filteredValue: filteredInfo.date || null,
-      onFilter: (value, record) => record.date.includes(value),
+      filteredValue: filteredInfo.pos_name || null,
+      onFilter: (value, record) => record.pos_name.includes(value),
       sorter: (a, b) => {
-        return a.date > b.date ? -1 : 1;
+        return a.pos_name > b.pos_name ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "pos_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Place of Service Code",
-      dataIndex: "description",
-      key: "description",
+      dataIndex: "pos_code",
+      key: "pos_code",
       width: 150,
       filters: [
         {
@@ -133,13 +148,12 @@ const PlaceOfServices = () => {
           value: "10/31/2025",
         },
       ],
-      filteredValue: filteredInfo.description || null,
-      onFilter: (value, record) => record.description.includes(value),
+      filteredValue: filteredInfo.pos_code || null,
+      onFilter: (value, record) => record.pos_code.includes(value),
       sorter: (a, b) => {
-        return a.description > b.description ? -1 : 1;
+        return a.pos_code > b.pos_code ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "description" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "pos_code" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -206,19 +220,26 @@ const PlaceOfServices = () => {
         </div>
       </div>
       <div>
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-          size="small"
-          bordered
-          className=" text-xs font-normal"
-          columns={columns}
-          dataSource={table}
-          scroll={{
-            y: 650,
-          }}
-          onChange={handleChange}
-        />
+        <InfiniteScroll
+          dataLength={items.length} //items is basically all data here
+          next={fetchData}
+          hasMore={hasMore}
+          loader={<ShimmerTableTet></ShimmerTableTet>}
+        >
+          <Table
+            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+            size="small"
+            bordered
+            className=" text-xs font-normal"
+            columns={columns}
+            dataSource={items}
+            scroll={{
+              y: 650,
+            }}
+            onChange={handleChange}
+          />
+        </InfiniteScroll>
       </div>
 
       {openAddModal && (
