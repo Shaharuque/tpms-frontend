@@ -11,6 +11,7 @@ import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
+import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
 
 const PatientLedger = () => {
   const { id } = useParams();
@@ -358,8 +359,16 @@ const PatientLedger = () => {
     setTable(true);
   };
 
+  //Date converter function [yy-mm-dd]
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+
   //Date Range Picker
-  const [open, setOpen] = useState(false);
+  const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -376,6 +385,7 @@ const PatientLedger = () => {
         key: "selection",
       },
     ]);
+    setOpenCalendar(false);
   };
 
   // date range picker calendar
@@ -393,7 +403,12 @@ const PatientLedger = () => {
     ? startDate.getFullYear().toString().slice(2, 4)
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
-  //End Date Range Picker
+
+  //test design
+  const [clicked, setClicked] = useState(false);
+  const clickHandler = () => {
+    setClicked(true);
+  };
 
   // Hide calendar on outside click
   const refClose = useRef(null);
@@ -404,7 +419,7 @@ const PatientLedger = () => {
   // Hide dropdown on outside click
   const hideOnClickOutside = (e) => {
     if (refClose.current && !refClose.current.contains(e.target)) {
-      setOpen(false);
+      setOpenCalendar(false);
     }
   };
   //end outside click
@@ -436,10 +451,7 @@ const PatientLedger = () => {
               </span>
             </label>
             <div className="ml-1">
-              <div
-                onClick={() => setOpen(true)}
-                className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full"
-              >
+              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                 <input
                   value={
                     startDate
@@ -447,54 +459,37 @@ const PatientLedger = () => {
                       : "Start Date"
                   }
                   readOnly
+                  onClick={() => setOpenCalendar(true)}
                   className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                 />
-                <BsArrowRight className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"></BsArrowRight>
+                <BsArrowRight
+                  onClick={() => setOpenCalendar(true)}
+                  className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
+                ></BsArrowRight>
                 <input
                   value={
                     endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
                   }
                   readOnly
+                  onClick={() => setOpenCalendar(true)}
                   className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                 />
               </div>
-            </div>
-            <div ref={refClose} className="absolute z-10  shadow-xl">
-              {open && (
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <div>
-                    <DateRangePicker
-                      onChange={(item) => setRange([item.selection])}
-                      editableDateInputs={true}
-                      moveRangeOnFirstSelection={false}
-                      ranges={range}
-                      months={2}
-                      direction="horizontal"
-                      className="border-2 border-gray-100"
-                    />
-                  </div>
-                  <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                    <button
-                      className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                      type="submit"
-                      onClick={handleCancelDate}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                      type="submit"
-                      onClick={() => setOpen(false)}
-                    >
-                      Save
-                    </button>
-                  </div>
-                </motion.div>
-              )}
+
+              {/* Multi date picker component called */}
+              <div
+                ref={refClose}
+                className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
+              >
+                {openCalendar && (
+                  <CustomDateRange
+                    range={range}
+                    setRange={setRange}
+                    handleCancelDate={handleCancelDate}
+                    setOpen={setOpenCalendar}
+                  ></CustomDateRange>
+                )}
+              </div>
             </div>
           </div>
 

@@ -8,7 +8,7 @@ import AuthorizationEditTable from "./AuthorizationEditTable";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import { Switch } from "antd";
 import { BsArrowRight } from "react-icons/bs";
-import { DateRangePicker } from "react-date-range";
+import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
@@ -42,8 +42,16 @@ const AuthorizationEdit = () => {
     console.log(notes);
   };
 
+  //Date converter function [yy-mm-dd]
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+
   //Date Range Picker
-  const [open, setOpen] = useState(false);
+  const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -60,6 +68,7 @@ const AuthorizationEdit = () => {
         key: "selection",
       },
     ]);
+    setOpenCalendar(false);
   };
 
   // date range picker calendar
@@ -77,7 +86,12 @@ const AuthorizationEdit = () => {
     ? startDate.getFullYear().toString().slice(2, 4)
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
-  //End Date Range Picker
+
+  //test design
+  const [clicked, setClicked] = useState(false);
+  const clickHandler = () => {
+    setClicked(true);
+  };
 
   // Hide calendar on outside click
   const refClose = useRef(null);
@@ -88,7 +102,7 @@ const AuthorizationEdit = () => {
   // Hide dropdown on outside click
   const hideOnClickOutside = (e) => {
     if (refClose.current && !refClose.current.contains(e.target)) {
-      setOpen(false);
+      setOpenCalendar(false);
     }
   };
   //end outside click
@@ -202,11 +216,11 @@ const AuthorizationEdit = () => {
                         : "Start Date"
                     }
                     readOnly
-                    onClick={() => setOpen((open) => !open)}
+                    onClick={() => setOpenCalendar(true)}
                     className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                   />
                   <BsArrowRight
-                    onClick={() => setOpen((open) => !open)}
+                    onClick={() => setOpenCalendar(true)}
                     className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
                   ></BsArrowRight>
                   <input
@@ -214,45 +228,23 @@ const AuthorizationEdit = () => {
                       endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
                     }
                     readOnly
-                    onClick={() => setOpen((open) => !open)}
+                    onClick={() => setOpenCalendar(true)}
                     className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                   />
                 </div>
-                <div ref={refClose} className="absolute z-10  shadow-xl">
-                  {open && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <div>
-                        <DateRangePicker
-                          onChange={(item) => setRange([item.selection])}
-                          editableDateInputs={true}
-                          moveRangeOnFirstSelection={false}
-                          ranges={range}
-                          months={2}
-                          direction="horizontal"
-                          className="border-2 border-gray-100"
-                        />
-                      </div>
-                      <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                        <button
-                          className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                          type="submit"
-                          onClick={handleCancelDate}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                          type="submit"
-                          onClick={() => setOpen(false)}
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </motion.div>
+
+                {/* Multi date picker component called */}
+                <div
+                  ref={refClose}
+                  className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
+                >
+                  {openCalendar && (
+                    <CustomDateRange
+                      range={range}
+                      setRange={setRange}
+                      handleCancelDate={handleCancelDate}
+                      setOpen={setOpenCalendar}
+                    ></CustomDateRange>
                   )}
                 </div>
               </div>
@@ -396,11 +388,11 @@ const AuthorizationEdit = () => {
                       setValue(!value);
                     }}
                   /> */}
-                        <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                  <Switch
+                    size="small"
+                    checked={active ? true : false}
+                    onClick={() => setActive(!active)}
+                  />
                   <span className="text-[14px] ml-1 text-gray-600 font-medium">
                     In Network
                   </span>
