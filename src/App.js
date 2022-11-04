@@ -265,7 +265,7 @@ function App() {
           <Route
             path="/admin"
             element={
-              <RequireAuth>
+              <RequireAuth>                      
                 <Sidebar handle={handle}></Sidebar>
               </RequireAuth>
             }

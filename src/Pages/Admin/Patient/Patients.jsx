@@ -421,7 +421,17 @@ const TableApi = () => {
     },
   ];
   return (
-    <div>
+    <div
+      className={
+        filteredInfo?.client_full_name?.length > 0 ||
+        filteredInfo?.client_dob?.length > 0 ||
+        filteredInfo?.client_gender?.length > 0 ||
+        filteredInfo?.location?.length > 0 ||
+        filteredInfo?.insurance?.length > 0
+          ? "h-[100vh]"
+          : ""
+      }
+    >
       <>
         <div className="flex items-center flex-wrap justify-between gap-2 my-2">
           <h1 className="text-lg text-orange-500 text-left font-semibold ">

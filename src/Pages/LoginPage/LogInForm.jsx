@@ -24,9 +24,12 @@ const LogInForm = () => {
     formState: { errors },
     reset,
   } = useForm();
+
+  const from = "/admin";
   const onSubmit = (formdata) => {
     console.log(formdata);
     setLoading(true);
+    reset();
 
     // axios POST request
     const options = {
@@ -53,7 +56,7 @@ const LogInForm = () => {
         navigate("/patient"); //patient panel a redirect
         localStorage.setItem("type", "patient");
       } else {
-        setMessage("Invalid Credentials");
+        setMessage(response.data.message);
       }
     });
   };
@@ -79,8 +82,19 @@ const LogInForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 {message ? (
-                  <div className="text-red-500 red-box  border border-gray-300 rounded-md px-3 font-medium py-[10px] mx-1 text-xs w-full flex items-center gap-2">
-                    <GoAlert className=" text-red-500" /> {message}
+                  <div className="text-red-500 red-box  border border-gray-300 rounded-md px-3 font-medium py-[10px] mx-1 text-xs w-full flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <GoAlert className=" text-red-500" /> {message}
+                    </div>
+                    <button
+                      onClick={() => {
+                        console.log("hi yh");
+                        setLoading(false);
+                        setMessage(false);
+                      }}
+                    >
+                      X
+                    </button>
                   </div>
                 ) : null}
                 <label className="label">

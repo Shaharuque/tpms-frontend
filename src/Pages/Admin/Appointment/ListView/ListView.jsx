@@ -26,7 +26,6 @@ const ListView = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
-
   // Testing purpose->Implementing encrypt and decrypt formula for securing token
   // let CryptoJS = require("crypto-js");
   let data = "0185543477";
@@ -534,13 +533,12 @@ const ListView = () => {
   // ----------------------------------------Multi-Select---------------------------------
   // *************
 
-
   const opt = [
-    { label: "tera ", value: "grapes", id:3 },
-    { label: "tpms ", value: "mafgngo", id:1  },
-    { label: "code ", value: "grfgapes", id:4  },
-    { label: "Mango ", value: "mango", id:8 },  
-    { label: "dfa ", value: "strawberry", id:9 },
+    { label: "tera ", value: "grapes", id: 3 },
+    { label: "tpms ", value: "mafgngo", id: 1 },
+    { label: "code ", value: "grfgapes", id: 4 },
+    { label: "Mango ", value: "mango", id: 8 },
+    { label: "dfa ", value: "strawberry", id: 9 },
   ];
 
   return (
@@ -567,230 +565,227 @@ const ListView = () => {
             {/* Upper div */}
             {clicked && (
               <div>
-              
-                  <div className="flex justify-between items-center flex-wrap">
-                    <h1 className="text-[20px]  text-white font-semibold ">
-                      Manage Sessions
-                    </h1>
-                    <div>
-                      <button
-                        onClick={handleClose}
-                        className="text-white text-2xl font-light"
-                      >
-                        <MdOutlineCancel />
-                      </button>
-                    </div>
+                <div className="flex justify-between items-center flex-wrap">
+                  <h1 className="text-[20px]  text-white font-semibold ">
+                    Manage Sessions
+                  </h1>
+                  <div>
+                    <button
+                      onClick={handleClose}
+                      className="text-white text-2xl font-light"
+                    >
+                      <MdOutlineCancel />
+                    </button>
                   </div>
-                  <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
+                </div>
+                <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
+                  <div>
+                    <Switch
+                      color="default"
+                      defaultChecked
+                      size="small"
+                      onClick={handleBillable}
+                    />
+
+                    <label
+                      className="form-check-label inline-block ml-2 text-base text-gray-100"
+                      htmlFor="flexSwitchCheckDefault"
+                    >
+                      {billable ? "Billable" : "Non-Billable"}
+                    </label>
+                  </div>
+                  {/* List view or table view  */}
+
+                  <div
+                    className={
+                      listView ? "flex justify-end " : "flex justify-end "
+                    }
+                  >
                     <div>
                       <Switch
                         color="default"
                         defaultChecked
                         size="small"
-                        onClick={handleBillable}
+                        onClick={handleListView}
                       />
 
                       <label
                         className="form-check-label inline-block ml-2 text-base text-gray-100"
                         htmlFor="flexSwitchCheckDefault"
                       >
-                        {billable ? "Billable" : "Non-Billable"}
+                        {listView ? (
+                          <span className="">List View</span>
+                        ) : (
+                          "Card View"
+                        )}
                       </label>
                     </div>
-                    {/* List view or table view  */}
-
-                    <div
-                      className={
-                        listView ? "flex justify-end " : "flex justify-end "
-                      }
-                    >
-                      <div>
-                        <Switch
-                          color="default"
-                          defaultChecked
-                          size="small"
-                          onClick={handleListView}
-                        />
-
-                        <label
-                          className="form-check-label inline-block ml-2 text-base text-gray-100"
-                          htmlFor="flexSwitchCheckDefault"
-                        >
-                          {listView ? (
-                            <span className="">List View</span>
-                          ) : (
-                            "Card View"
-                          )}
-                        </label>
-                      </div>
-                    </div>
                   </div>
-                  <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
-                      {billable && (
-                        <div>
-                          <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                            Clients
-                          </h1>
-                          <CustomMultiSelection></CustomMultiSelection>
-                        </div>
-                      )}
-                      <div className="w-full">
-                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                          Provider
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="relative">
+                  <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
+                    {billable && (
+                      <div>
+                        <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
+                          Clients
                         </h1>
-                        <CustomMultiSelection options={opt} ></CustomMultiSelection>
+                        <CustomMultiSelection></CustomMultiSelection>
                       </div>
+                    )}
+                    <div className="w-full">
+                      <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
+                        Provider
+                      </h1>
+                      <CustomMultiSelection
+                        options={opt}
+                      ></CustomMultiSelection>
+                    </div>
 
-                      {billable ? (
-                        <>
+                    {billable ? (
+                      <>
+                        <div>
+                          <label className="label">
+                            <span className="label-text text-[16px] text-gray-100 text-left">
+                              Place of Services
+                            </span>
+                          </label>
+                          <div>
+                            <select
+                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                              {...register("place_of_service")}
+                            >
+                              <option value="" className="text-black">
+                                Select
+                              </option>
+                              <option value="follow up" className="text-black">
+                                Today's follow up
+                              </option>
+                              <option value="cat" className="text-black">
+                                Lost 7 days
+                              </option>
+                              <option value="15" className="text-black">
+                                Lost 15 days
+                              </option>
+                              <option value="15" className="text-black">
+                                Lost 30 days
+                              </option>
+                              <option value="15" className="text-black">
+                                30 days & over
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="label">
+                            <span className="label-text text-[16px] text-gray-100 text-left">
+                              Selected date
+                            </span>
+                          </label>
+                          {/* Date Range calender will be set here */}
+                          <div className="ml-1">
+                            <div
+                              onClick={() => setOpenCalendar(true)}
+                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
+                            >
+                              <input
+                                value={
+                                  startDate
+                                    ? `${startMonth} ${startDay}, ${startYear}`
+                                    : "Start Date"
+                                }
+                                readOnly
+                                className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                {...register("start_date")}
+                              />
+                              <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
+                              <input
+                                value={
+                                  endDate
+                                    ? `${endMonth} ${endDay}, ${endYear}`
+                                    : "End Date"
+                                }
+                                readOnly
+                                className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                {...register("end_date")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-5">
                           <div>
                             <label className="label">
                               <span className="label-text text-[16px] text-gray-100 text-left">
-                                Place of Services
+                                Status
                               </span>
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
-                                {...register("place_of_service")}
+                                className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                {...register("Status")}
                               >
                                 <option value="" className="text-black">
                                   Select
                                 </option>
-                                <option
-                                  value="follow up"
-                                  className="text-black"
-                                >
+                                <option value="Today" className="text-black">
                                   Today's follow up
                                 </option>
-                                <option value="cat" className="text-black">
+                                <option className="text-black" value="UK">
                                   Lost 7 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   Lost 15 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   Lost 30 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   30 days & over
                                 </option>
                               </select>
                             </div>
                           </div>
-
-                          <div>
-                            <label className="label">
-                              <span className="label-text text-[16px] text-gray-100 text-left">
-                                Selected date
-                              </span>
-                            </label>
-                            {/* Date Range calender will be set here */}
-                            <div className="ml-1">
-                              <div
-                                onClick={() => setOpenCalendar(true)}
-                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
-                              >
-                                <input
-                                  value={
-                                    startDate
-                                      ? `${startMonth} ${startDay}, ${startYear}`
-                                      : "Start Date"
-                                  }
-                                  readOnly
-                                  className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
-                                  {...register("start_date")}
-                                />
-                                <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
-                                <input
-                                  value={
-                                    endDate
-                                      ? `${endMonth} ${endDay}, ${endYear}`
-                                      : "End Date"
-                                  }
-                                  readOnly
-                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
-                                  {...register("end_date")}
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex gap-5">
-                            <div>
-                              <label className="label">
-                                <span className="label-text text-[16px] text-gray-100 text-left">
-                                  Status
-                                </span>
-                              </label>
-                              <div>
-                                <select
-                                  className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
-                                  {...register("Status")}
-                                >
-                                  <option value="" className="text-black">
-                                    Select
-                                  </option>
-                                  <option value="Today" className="text-black">
-                                    Today's follow up
-                                  </option>
-                                  <option className="text-black" value="UK">
-                                    Lost 7 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    Lost 15 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    Lost 30 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    30 days & over
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                            <button
-                              className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
-                              type="submit"
-                            >
-                              Go
-                            </button>
-                          </div>
-                        </>
-                      ) : (
-                        <button
-                          className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
-                          type="submit"
-                        >
-                          Go
-                        </button>
-                      )}
-                      {table && (
-                        <>
-                          <div className="  ">
-                            <div className="px-2 py-2 w-full mr-2 mt-[35px] bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
-                              <input
-                                placeholder="Search here..."
-                                onChange={(e) => globalFilter(e.target.value)}
-                                className="focus:outline-none"
-                              />
-                              <label>
-                                <BiSearchAlt />
-                              </label>
-                            </div>
-                          </div>
                           <button
-                            onClick={clearFilters}
-                            className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                            className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                            type="submit"
                           >
-                            Clear filters
+                            Go
                           </button>
-                        </>
-                      )}
-                    </div>
-                  </form>
-              
+                        </div>
+                      </>
+                    ) : (
+                      <button
+                        className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                        type="submit"
+                      >
+                        Go
+                      </button>
+                    )}
+                    {table && (
+                      <>
+                        <div className="  ">
+                          <div className="px-2 py-2 w-full mr-2 mt-[35px] bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
+                            <input
+                              placeholder="Search here..."
+                              onChange={(e) => globalFilter(e.target.value)}
+                              className="focus:outline-none"
+                            />
+                            <label>
+                              <BiSearchAlt />
+                            </label>
+                          </div>
+                        </div>
+                        <button
+                          onClick={clearFilters}
+                          className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                        >
+                          Clear filters
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </form>
               </div>
             )}
           </div>
