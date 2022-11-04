@@ -59,7 +59,7 @@ const Form = () => {
         <div className="my-2"></div>
         <Link to={"/MonthlySupervisionNote"}>
           <button className="pms-button">MONTHLY SUPERVISION NOTE</button>
-        </Link> 
+        </Link>
         <div className="my-2"></div>
         <Link to={"/DiagnosisSessionForm"}>
           <button className="pms-button">DIAGNOSIS SESSION FORM</button>

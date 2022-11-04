@@ -361,7 +361,7 @@ const PatientInformation = () => {
                     {...register("City")}
                   />
                 </div>
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
+                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
                   <div>
                     <select
                       className="input-border input-font  w-full focus:outline-none"
@@ -446,7 +446,7 @@ const PatientInformation = () => {
                   </motion.div>
                 ))}
 
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
+                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
                   <div>
                     <label className="label">
                       <span className="label-text label-font">
@@ -487,7 +487,7 @@ const PatientInformation = () => {
                 <label className="label">
                   <span className="label-text label-font">Phone</span>
                 </label>
-                <div className="flex flex-wrap gap-1 items-center gap-x-4 ">
+                <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
                   <div>
                     <input
                       type="text"
@@ -586,7 +586,7 @@ const PatientInformation = () => {
                   <label className="label">
                     <span className="label-text label-font">Phone</span>
                   </label>
-                  <div className="flex flex-wrap gap-1 items-center gap-x-4 ">
+                  <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
                     <div>
                       <input
                         type="text"
@@ -752,7 +752,7 @@ const PatientInformation = () => {
                   <label className="label">
                     <span className="label-text label-font">Email</span>
                   </label>
-                  <div className="flex flex-wrap items-center gap-x-4 ">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                     <div>
                       <input
                         type="text"
@@ -773,7 +773,7 @@ const PatientInformation = () => {
                     </div>
                     <button
                       onClick={() => EmailHandleRemove(index)}
-                      className="bg-red-500 text-white p-[6px]"
+                      className="bg-red-500 text-white p-[6px] "
                     >
                       <RiDeleteBin6Line />
                     </button>
@@ -1023,12 +1023,7 @@ const PatientInformation = () => {
 
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2 gap-x-3 gap-y-1">
             <div className="mt-3">
-              <TextArea
-                maxLength={2}
-                rows={7}
-                placeholder=" Notes"
-                size="large"
-              />
+              <TextArea rows={7} placeholder=" Notes" size="large" />
             </div>
 
             <div className="ml-2 mt-[12px] ">

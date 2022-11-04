@@ -39,86 +39,6 @@ const PatientStatement = () => {
     });
   }, []);
 
-  //console.log(tData);
-
-  const column = [
-    {
-      title: "first_name",
-      dataIndex: "first_name",
-      key: "first_name",
-      width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.first_name || null,
-      onFilter: (value, record) => record.first_name.includes(value),
-      sorter: (a, b) => {
-        return a.first_name > b.first_name ? -1 : 1;
-      },
-      sortOrder:
-        sortedInfo.columnKey === "first_name" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      index: 2,
-      title: "last_name",
-      dataIndex: "last_name",
-      key: "last_name",
-      width: 100,
-      filters: [
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.last_name || null,
-      onFilter: (value, record) => record.last_name.includes(value),
-      //   sorter is for sorting asc or dsc purgurantore
-      sorter: (a, b) => {
-        return a.last_name > b.last_name ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "last_name" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "DOB",
-      key: "dob",
-      dataIndex: "dob",
-      width: 80,
-      filters: [{}],
-      filteredValue: filteredInfo.dob || null,
-      onFilter: (value, record) => record.dob.includes(value),
-      //   sorter is for sorting asc or dsc purgurantore
-      sorter: (a, b) => {
-        return a.dob > b.dob ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "dob" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "gurantor",
-      key: "gurantor",
-      dataIndex: "gurantor",
-      width: 80,
-      filters: [{}],
-      filteredValue: filteredInfo.gurantor || null,
-      onFilter: (value, record) => record.gurantor.includes(value),
-      //   sorter is for sorting asc or dsc purgurantore
-      sorter: (a, b) => {
-        return a.gurantor > b.gurantor ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "gurantor" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-  ];
-
-  const clearFilters = () => {
-    setFilteredInfo({});
-  };
-  const handleChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
-    setFilteredInfo(filters);
-    setSortedInfo(sorter);
-  };
-
   //Date Range Picker
   const [open, setOpen] = useState(false);
   const [range, setRange] = useState([
@@ -277,27 +197,6 @@ const PatientStatement = () => {
           View
         </button>
       </div>
-      {tactive && (
-        <div className="my-5">
-          <div className="overflow-scroll">
-            <>
-              <Table
-                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                size="small"
-                bordered
-                className=" text-xs font-normal"
-                columns={column}
-                dataSource={tData}
-                scroll={{
-                  y: 650,
-                }}
-                onChange={handleChange}
-              />
-            </>
-          </div>
-        </div>
-      )}
 
       {/* Related to options basis modal is handling here */}
       {selectClient && (

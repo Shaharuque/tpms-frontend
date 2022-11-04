@@ -7,7 +7,7 @@ export default function PlaceOfServicesActionAddModal({
   open,
   recordData,
 }) {
-  const { id, description } = recordData;
+  const { id, pos_code, pos_name } = recordData;
   const {
     register,
     handleSubmit,
@@ -25,11 +25,11 @@ export default function PlaceOfServicesActionAddModal({
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        service_code: id,
-        place_of_service: description,
+        service_code: pos_code,
+        place_of_service: pos_name ? pos_name : null,
       });
     }, 100);
-  }, [reset, id, description]);
+  }, [reset, id, pos_name]);
   //console.log(errors);
 
   return (
