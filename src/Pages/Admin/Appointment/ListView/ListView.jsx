@@ -16,7 +16,7 @@ import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
-import CryptoJS from "crypto-js";
+import { headers } from "../../../../Misc/BaseClient";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -25,25 +25,40 @@ const ListView = () => {
   const [listView, setListView] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [patients, setPatients] = useState();
+  const [patientId, setPatientId] = useState();
+  const [fromDate, setFromDate] = useState();
+  const [toDate, setToDate] = useState();
 
-  // Testing purpose->Implementing encrypt and decrypt formula for securing token
-  // let CryptoJS = require("crypto-js");
-  let data = "0185543477";
-  // Encrypt
-  var ciphertext = CryptoJS.AES.encrypt(
-    JSON.stringify(data),
-    "my-secret-key@123"
-  ).toString();
-  console.log(ciphertext);
-  localStorage.setItem("secret", ciphertext);
-  const gatheredData = localStorage.getItem("secret");
-  console.log("gathered data from local storage", gatheredData);
+  //get data from API + data fetch from api while scrolling[Important]
+  useEffect(() => {
+    const getPatientsData = async () => {
+      const res = await axios({
+        method: "GET",
+        url: `https://app.therapypms.com/api/v1/admin/ac/patient/names`,
+        headers: headers,
+      });
+      const data = res?.data?.clients;
+      // console.log(data);
+      setPatients(data);
+    };
+    getPatientsData();
+  }, []);
 
-  // Decrypt
-  var bytes = CryptoJS.AES.decrypt(gatheredData, "my-secret-key@123");
-  var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-  console.log("decrypted data:", decryptedData);
+  const receivedData = (data) => {
+    console.log(data);
+  };
+  console.log(patientId);
 
+  //provider names API
+
+  //Date converter function [yy-mm-dd]
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
   //Date Range Picker
   const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
@@ -80,6 +95,18 @@ const ListView = () => {
     ? startDate.getFullYear().toString().slice(2, 4)
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+
+  // console.log("start date-->", startDate);
+  // console.log("end date-->", endDate);
+
+  // console.log(convert("Jan 31, 23"));
+  // if (startDate) {
+  //   const from_date = convert(startDate);
+  // }
+  // if (endDate) {
+  //   const to_date = convert(endDate);
+  // }
+  // console.log(fromDate, toDate);
   //End Date Range Picker
 
   //test design
@@ -115,16 +142,6 @@ const ListView = () => {
     setListView(!listView);
   };
 
-  // calling fake db
-  // useEffect(() => {
-  //   axios("../All_Fake_Api/Fakedb.json")
-  //     .then((response) => {
-  //       setTData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
   useEffect(() => {
     fetch("../All_Fake_Api/Fakedb.json")
       .then((res) => res.json())
@@ -514,21 +531,80 @@ const ListView = () => {
       filters: [],
     },
   });
-  const onSubmit = (data) => {
-    // setSubmitted(data);
-    console.log(data);
+  const onSubmit = async (data) => {
+    const from_date = convert(data?.start_date);
+    const to_date = convert(data?.end_date);
+    console.log(from_date, to_date);
+    let product = {
+      client_id: [134],
+      from_date: "2022-01-01",
+      to_date: "2022-12-31",
+    };
+    console.log(product);
+    console.log("product json", JSON.stringify(product));
     setTable(true);
-    reset();
+    // POST request using fetch with async/await
+    const requestOptions = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(product),
+    };
+    const response = await fetch(
+      "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
+      requestOptions
+    );
+    const result = await response.json();
+    console.log(result);
+    // console.log(product);
+    // fetch("https://app.therapypms.com/api/v1/admin/ac/get-appoinments", {
+    //   method: "POST",
+    //   headers: headers,
+    //   body: JSON.stringify(product),
+    // }).then(async (response) => {
+    //   if (!response.ok) {
+    //     const validation = await response.json();
+    //     console.log(validation.errors);
+    //   } else {
+    //     console.log(response);
+    //   }
+    // });
+    // axios POST request
+    // const options = {
+    //   url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
+    //   method: "POST",
+    //   headers: headers,
+    //   data: {
+    //     client_id: patientId,
+    //     provider_id: "",
+    //     from_date: "2022-10-01",
+    //     to_date: "2022-10-30",
+    //   },
+    // };
+
+    // axios(options).then((response) => {
+    //   console.log(response);
+    // });
   };
 
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        start_date: startDate && `${startMonth} ${startDay}, ${startYear}`,
+        start_date: startDate ? `${startMonth} ${startDay}, ${startYear}` : "",
+        end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : "",
       });
     }, 0);
-  }, [startDate, reset]);
+  }, [
+    startDate,
+    startMonth,
+    startDay,
+    startYear,
+    endDate,
+    endMonth,
+    endDay,
+    endYear,
+    reset,
+  ]);
 
   // ----------------------------------------Multi-Select---------------------------------
   // *************
@@ -626,14 +702,18 @@ const ListView = () => {
                   <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
                     {billable && (
                       <div>
-                        <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
+                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                           Clients
                         </h1>
-                        <CustomMultiSelection></CustomMultiSelection>
+                        <CustomMultiSelection
+                          patients={patients}
+                          setPatientId={setPatientId}
+                          receivedData={receivedData}
+                        ></CustomMultiSelection>
                       </div>
                     )}
                     <div className="w-full">
-                      <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
+                      <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                         Provider
                       </h1>
                       <CustomMultiSelection

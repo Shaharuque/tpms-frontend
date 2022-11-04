@@ -7,10 +7,10 @@ const gatheredData = localStorage.getItem("adminToken")
 if (gatheredData) {
   let bytes = CryptoJS.AES.decrypt(gatheredData, "tpm422");
   decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-  console.log("decrypted data:", decryptedData);
+  //console.log("decrypted data:", decryptedData);
 }
 
-export const ip = "https://app.therapypms.com";
+export const baseIp = "https://app.therapypms.com/api/v1";
 
 export const headers = {
   Accept: "application/json",

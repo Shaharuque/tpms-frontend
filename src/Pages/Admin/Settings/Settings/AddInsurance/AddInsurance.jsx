@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Loading from "../../../../../Loading/Loading";
 import { headers } from "../../../../../Misc/BaseClient";
-import fetchData from "../../../../../Misc/Helper";
+import { fetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 
 const AddInsurance = () => {
@@ -20,16 +20,15 @@ const AddInsurance = () => {
   // const [multi, setmulti] = useState([]);
   // const [newdata, setnewdata] = useState({ value: "coconut" });
 
-  //Getting All Insurance using react query get request
+  //Getting All Insurance using react query get request(GET req)
+  const endPoint = "admin/ac/setting/get/all/insurance";
   const {
     isLoading,
     isError,
     error,
     data: insurance,
     refetch,
-  } = useQuery(["allInsurance"], () => {
-    fetchData("admin/ac/setting/get/all/insurance");
-  });
+  } = useQuery(["allInsurance"], () => fetchData(endPoint));
 
   console.log(insurance);
 
