@@ -63,8 +63,9 @@ const PatientInformation = () => {
 
   // Address + icon Click Handeler
   const handleClick = () => {
-    setAddressRendomValue((current) => [...current, Math.random()]);
+    setAddressRendomValue((current) => [...current, Math.ceil(Math.random())]);
   };
+
   // Phone + icon click handeler
   const handlePhoneClick = () => {
     setPhoneRendomValue((current) => [...current, Math.random()]);
@@ -140,6 +141,8 @@ const PatientInformation = () => {
     console.log(formData);
     console.log(file);
   };
+
+  console.log("---", addressRendomValue)
 
   ///relation value handle
   const settingRelation = (e) => {
@@ -406,7 +409,7 @@ const PatientInformation = () => {
                       <input
                         type="text"
                         className="input-border input-font py-[1px] w-full focus:outline-none"
-                        {...register("Permanent_Street")}
+                        {...register(`Permanent_Street_`)}
                       />
                       <div // onClick={() => setOpen(false)}
                         onClick={() => {
@@ -420,9 +423,9 @@ const PatientInformation = () => {
                     <div className="mb-2">
                       <input
                         type="text"
-                        placeholder="adfaljdfasd"
+                        placeholder="more city"
                         className="input-border input-font py-[1px] w-full focus:outline-none"
-                        {...register("more_City")}
+                        {...register(`more_City_`)}
                       />
                     </div>
                     <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
