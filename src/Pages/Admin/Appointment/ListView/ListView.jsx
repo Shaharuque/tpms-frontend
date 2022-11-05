@@ -1145,9 +1145,9 @@ const ListView = () => {
                     rowSelection={{
                       ...rowSelection,
                     }}
-                    scroll={{
-                      y: 650,
-                    }}
+                    // scroll={{
+                    //   y: 650,
+                    // }}
                     onChange={handleChange}
                   />
                 </InfiniteScroll>
