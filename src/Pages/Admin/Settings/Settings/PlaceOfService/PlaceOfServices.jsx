@@ -234,9 +234,6 @@ const PlaceOfServices = () => {
             className=" text-xs font-normal"
             columns={columns}
             dataSource={items}
-            scroll={{
-              y: 650,
-            }}
             onChange={handleChange}
           />
         </InfiniteScroll>
