@@ -1024,7 +1024,7 @@ const PatientInformation = () => {
           <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-1 mr-2 gap-x-3 gap-y-1">
             <div className="mt-3">
               <TextArea rows={7} placeholder=" Notes" size="large" />
-            </div>    
+            </div>
 
             <div className="ml-2 mt-[12px] ">
               <CustomFileUploader
@@ -1044,7 +1044,7 @@ const PatientInformation = () => {
             </button>
           </div>
         </form>
-      </div>           
+      </div>
     </div>
   );
 };

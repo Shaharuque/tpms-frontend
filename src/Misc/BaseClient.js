@@ -13,6 +13,7 @@ if (gatheredData) {
 export const baseIp = "https://app.therapypms.com/api/v1";
 
 export const headers = {
+  "Content-Type": "application/json",
   Accept: "application/json",
   Authorization: decryptedData,
 };

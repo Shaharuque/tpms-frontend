@@ -247,6 +247,8 @@ const PlaceOfServices = () => {
           handleClose={handleClose2}
           open={openAddModal}
           recordData={recordData}
+          items={items}
+          setItems={setItems}
         ></PlaceOfServicesActionAddModal>
       )}
     </div>
