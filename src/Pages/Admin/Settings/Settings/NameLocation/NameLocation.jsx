@@ -16,7 +16,7 @@ const NameLocation = () => {
 
   //response from async action
   const data = useSelector((state) => state.settingInfo); //After action dispatched response can be received here
-  console.log("settings data", data);
+  // console.log("settings data", data);
 
   //Some Important data showing below
   const loading = data?.loading;
@@ -45,6 +45,8 @@ const NameLocation = () => {
     setTable32Open(!table32Open);
     setbox33Open(false);
   };
+
+  console.log("box_no_33", box_no_33);
 
   return (
     <div className="p-2 ">
