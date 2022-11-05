@@ -18,7 +18,7 @@ const Form = (item) => {
       setTimeout(() => {
         reset(
           {
-            zone_name: item?.item[0]?.zone_name,
+            zone_name: item?.item[0]?.zone_name || "Main Zone",
             city: item?.item[0]?.city,
             facility_name_two: item?.item[0]?.facility_name_two,
             address: item?.item[0]?.address,
@@ -70,6 +70,7 @@ const Form = (item) => {
               name="zone_name"
               className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               {...register("zone_name")}
+              disabled
             />
           </div>
           {/* address 1 */}
