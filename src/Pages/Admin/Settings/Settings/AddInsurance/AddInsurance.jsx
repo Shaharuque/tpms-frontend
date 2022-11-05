@@ -3,56 +3,50 @@ import {
   DoubleLeftOutlined,
   ConsoleSqlOutlined,
 } from "@ant-design/icons";
-import { useQuery } from "@tanstack/react-query";
-import { Switch } from "antd";
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import Loading from "../../../../../Loading/Loading";
-import { headers } from "../../../../../Misc/BaseClient";
-import { fetchData } from "../../../../../Misc/Helper";
+import fetchData, { PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 
 const AddInsurance = () => {
-  const [TransferData, setTransferData] = useState([]);
+  // const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
-  // const [chk, setchk] = useState(false);
-  // const [multi, setmulti] = useState([]);
-  // const [newdata, setnewdata] = useState({ value: "coconut" });
+  const [facilityselectedkeys, setfacilityselectedkeys] = useState();
+  const [insuranceApiData, setinsuranceApiData] = useState(null);
+  const [treatmentApiData, settreatmentApiData] = useState(null);
+  const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
+  const [passAllInsurance, setpassAllInsurance] = useState(null);
 
-  //Getting All Insurance using react query get request(GET req)
-  const endPoint = "admin/ac/setting/get/all/insurance";
-  const {
-    isLoading,
-    isError,
-    error,
-    data: insurance,
-    refetch,
-  } = useQuery(["allInsurance"], () => fetchData(endPoint));
+  useEffect(() => {
+    const dynamicApi = async () => {
+      const GetInsurance = await fetchData(
+        "admin/ac/setting/get/all/insurance"
+      );
+      const Selectedtreatment = await fetchData(
+        "admin/ac/setting/get/selected/treatment"
+      );
+      setinsuranceApiData(GetInsurance);
+      settreatmentApiData(Selectedtreatment);
+    };
+    dynamicApi();
+  }, []);
 
-  console.log(insurance);
-
-  if (isLoading) {
+  if (!insuranceApiData && !treatmentApiData) {
     return <Loading></Loading>;
   }
-  if (isError) {
-    return <div>Error! {error.message}</div>;
-  }
-  // testing space............
-  // useEffect(() => {
-  //   axios("../../../All_Fake_Api/Transfer.json")
-  //     .then((response) => {
-  //       // console.log("chkd ata", response?.data)
-  //       setTransferData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  // const arr1 = [];
-  // console.log(arr1);
 
-  // -------------------------
+  // const options = {
+  //   url: "https://app.therapypms.com/api/v1/admin/login",
+  //   method: "POST",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json;charset=UTF-8",
+  //   },
+  //   data: JSON.stringify(formdata), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
+  // };
+  // axios(options).then((response) => {
+  //   console.log(response.data);
 
   const handleAdding = (e) => {
     let target = e.target;
@@ -61,12 +55,7 @@ const AddInsurance = () => {
       target.selectedOptions,
       (option) => option.value * 1
     );
-    // console.log("data value", value)
     setSelectedKeys(value);
-    // setchk(false)
-    // setmulti({
-    //   [name]: value,
-    // });
   };
 
   const handleRemoving = (e) => {
@@ -74,7 +63,7 @@ const AddInsurance = () => {
       e.target.selectedOptions,
       (option) => option.value * 1
     );
-    setSelectedKeys(value);
+    setfacilityselectedkeys(value);
   };
 
   const handleSelectedValue = () => {
@@ -82,23 +71,45 @@ const AddInsurance = () => {
   };
 
   const handleRemoveValue = (e) => {
-    console.log("Remove  button click get data", selectedKeys);
+    console.log("Remove  button click get data", facilityselectedkeys);
   };
 
-  const InsuranceView = () => {
+  const InsuranceView = async () => {
     if (selectedKeys.length > 1) {
       alert("select just one value");
       return setSelectedKeys([0]);
     }
-    console.log(" insurance  click get data", selectedKeys);
+    console.log('data selectedkeys', selectedKeys )
+
+    const body = {
+      insurance_id : selectedKeys
+      // insurance_id: 219,
+    };
+    const fetchpostTest = await PostfetchData('admin/ac/setting/get/all/insurance/details',body);
+    console.log("fetchpostTest", fetchpostTest);
+       setpassAllInsurance(fetchpostTest);
+      setpassSelectedInsurance({});
+      // setpassSelectedInsurance(response?.data);
+
   };
 
-  const FacilityInsurance = () => {
-    if (selectedKeys.length > 1) {
+  const FacilityInsurance = async () => {
+    if (facilityselectedkeys.length > 1) {
       alert("select just one value");
-      return setSelectedKeys([0]);
+      return setfacilityselectedkeys([0]);
     }
-    console.log(" FacilityInsurance  get data", selectedKeys);
+    // console.log('data facilaty', facilityselectedkeys )
+
+    const body = {
+      // insurance_id : facilityselectedkeys
+      insurance_id: 1531,
+    };
+  
+    const fetchpostTestt = await PostfetchData('admin/ac/setting/get/selected/insurance/details',body);
+       setpassSelectedInsurance(fetchpostTestt);
+      console.log("facilaty axios",fetchpostTestt);
+      setpassAllInsurance({});
+    
   };
 
   return (
@@ -114,29 +125,14 @@ const AddInsurance = () => {
             // className="h-40"
             onChange={(e) => {
               handleAdding(e);
+              // console.log("handlechange data check", e.target.value)
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {TransferData.length > 0 &&
-              TransferData.map((item, index) => (
-                // <option
-                //   className="px-2 text-sm"
-                //   onClick={(e) => arr1.push(item)}
-                //   // onClick={(e) => console.log(e.target.title)}
-                //   value={item.id}
-                // >
-                //   {item.key}
-                //   {item.title}
-                // </option>
-                <option
-                  key={item.id}
-                  className="px-2 text-sm"
-                  //   onClick={(e) => arr1.push(item)}
-                  // onClick={(e) => console.log(e.target.title)}
-                  value={item.id}
-                >
-                  {item.id}
-                  {item.title}
+            {insuranceApiData?.data?.all_insurance.length > 0 &&
+              insuranceApiData?.data?.all_insurance.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
+                  {item.payor_name}
                 </option>
               ))}
           </select>
@@ -182,11 +178,10 @@ const AddInsurance = () => {
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {/* calling same api  */}
-            {TransferData.length > 0 &&
-              TransferData.map((item, index) => (
+            {treatmentApiData?.data?.selected_treatment.length > 0 &&
+              treatmentApiData?.data?.selected_treatment.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.id}
-                  {item.title}
+                  {item.treatment_name}
                 </option>
               ))}
           </select>
@@ -202,7 +197,13 @@ const AddInsurance = () => {
           </button>
         </div>
       </div>
-      <InsuranceDetails></InsuranceDetails>
+      {(passAllInsurance?.status === "success" || passSelectedInsurance?.status === "success") && (
+        
+        <InsuranceDetails
+          AllInsurance={passAllInsurance}
+          SelectedInsurance={passSelectedInsurance}
+        ></InsuranceDetails>
+      )}
     </div>
   );
 };

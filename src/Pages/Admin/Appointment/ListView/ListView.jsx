@@ -17,6 +17,8 @@ import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
 import { headers } from "../../../../Misc/BaseClient";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ShimmerTableTet from "../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -26,11 +28,15 @@ const ListView = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [patients, setPatients] = useState();
+  const [stuffs, setStuffs] = useState();
   const [patientId, setPatientId] = useState();
-  const [fromDate, setFromDate] = useState();
-  const [toDate, setToDate] = useState();
+  const [stuffsId, setStuffsId] = useState();
+  const [formData, setFromData] = useState();
+  const [items, setItems] = useState([]);
+  const [hasMore, sethasMore] = useState(true);
+  const [page, setpage] = useState(2);
 
-  //get data from API + data fetch from api while scrolling[Important]
+  //Clients multi select data from server
   useEffect(() => {
     const getPatientsData = async () => {
       const res = await axios({
@@ -44,11 +50,25 @@ const ListView = () => {
     };
     getPatientsData();
   }, []);
+  //Provider multi select data from server
+  useEffect(() => {
+    const getProviderData = async () => {
+      const res = await axios({
+        method: "GET",
+        url: `https://app.therapypms.com/api/v1/admin/ac/staff/names`,
+        headers: headers,
+      });
+      const data = res?.data?.staff_names;
+      setStuffs(data);
+    };
+    getProviderData();
+  }, []);
+  console.log("stuffs", stuffs);
 
   const receivedData = (data) => {
     console.log(data);
   };
-  console.log(patientId);
+  //console.log(patientId);
 
   //provider names API
 
@@ -96,17 +116,6 @@ const ListView = () => {
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
 
-  // console.log("start date-->", startDate);
-  // console.log("end date-->", endDate);
-
-  // console.log(convert("Jan 31, 23"));
-  // if (startDate) {
-  //   const from_date = convert(startDate);
-  // }
-  // if (endDate) {
-  //   const to_date = convert(endDate);
-  // }
-  // console.log(fromDate, toDate);
   //End Date Range Picker
 
   //test design
@@ -148,24 +157,53 @@ const ListView = () => {
       .then((data) => setTData(data));
   }, []);
 
+  //console.log(items);
+
+  //By Infinite scrolling new page called and data will be load
+  //get data from API + data fetch from api while scrolling[Important]
+  const fetchPatients = async () => {
+    let manageSessionData = [];
+    await axios({
+      url: `https://app.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
+      method: "POST",
+      headers: headers,
+      data: formData,
+    }).then((response) => {
+      manageSessionData = response?.data?.appointments?.data;
+    });
+    console.log(manageSessionData);
+    return manageSessionData;
+  };
+
+  const fetchData = async () => {
+    const patientsFromServer = await fetchPatients();
+    console.log(patientsFromServer);
+    setItems([...items, ...patientsFromServer]);
+    if (patientsFromServer?.length === 0) {
+      sethasMore(false);
+    }
+    setpage(page + 1);
+  };
+  console.log(items);
+
   // -----------------------------------------Table Data-----------------------------------
   const columns = [
     {
       title: "Lock",
-      key: "lock",
-      dataIndex: "lock",
+      key: "is_locked",
+      dataIndex: "is_locked",
       width: 40,
       // render contains what we want to reflect as our data
-      render: (_, { lock }) => {
+      render: (_, { is_locked }) => {
         //console.log("tags : ", lock);
         return (
           <div className="flex justify-center">
-            {lock === true && (
+            {is_locked === 0 && (
               <button>
-                <AiFillUnlock className=" text-lg font-medium text-green-600" />
+                <AiFillUnlock className=" text-lg font-medium text-[#309BAB]" />
               </button>
             )}
-            {lock === false && (
+            {is_locked === 1 && (
               <button>
                 <AiFillLock className="text-lg font-medium  text-red-600" />
               </button>
@@ -176,17 +214,17 @@ const ListView = () => {
     },
     {
       title: "Patients",
-      dataIndex: "Patients",
-      key: "Patients",
+      dataIndex: "client_full_name",
+      key: "client_full_name",
       width: 150,
       filters: [
         {
-          text: `Vernon`,
-          value: "Vernon",
+          text: `Aasiya Baig`,
+          value: "Aasiya  Baig",
         },
         {
           text: `Aileen Newman`,
-          value: "Aileen Newman",
+          value: "Aasiya  Farha",
         },
         {
           text: "Donovan",
@@ -201,16 +239,24 @@ const ListView = () => {
           value: "Hector Moses",
         },
       ],
-      render: (_, { Patients }) => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{Patients}</div>;
+        return (
+          <div className=" text-secondary">
+            {record?.app_client?.client_full_name}
+          </div>
+        );
       },
-      filteredValue: filteredInfo.Patients || null,
-      onFilter: (value, record) => record.Patients.includes(value),
+      filteredValue: filteredInfo.client_full_name || null,
+      onFilter: (value, record) =>
+        record?.app_client?.client_full_name?.includes(value),
       sorter: (a, b) => {
-        return a.Patients > b.Patients ? -1 : 1;
+        return a.app_client?.client_full_name > b.app_client?.client_full_name
+          ? -1
+          : 1;
       },
-      sortOrder: sortedInfo.columnKey === "Patients" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "client_full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -220,8 +266,8 @@ const ListView = () => {
       width: 150,
       filters: [
         {
-          text: `Amet`,
-          value: "Amet",
+          text: `assisment BCaBA`,
+          value: "assisment BCaBA",
         },
         {
           text: "Malesuada",
@@ -232,14 +278,71 @@ const ListView = () => {
           value: "Nunc Ut LLC",
         },
       ],
-      filteredValue: filteredInfo.Service_hrs || null,
-      onFilter: (value, record) => record.Service_hrs.includes(value),
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-secondary">
+            {record?.app_client_auth_act?.activity_name}
+          </div>
+        );
+      },
+      filteredValue: filteredInfo.activity_name || null,
+      onFilter: (value, record) =>
+        record?.app_client_auth_act?.activity_name?.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.Service_hrs > b.Service_hrs ? -1 : 1; //sorting problem solved using this logic
+        return a.app_client_auth_act?.activity_name >
+          b.app_client_auth_act?.activity_name
+          ? -1
+          : 1; //sorting problem solved using this logic
       },
       sortOrder:
         sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Provider",
+      dataIndex: "provider_full_name",
+      key: "provider_full_name",
+      width: 150,
+      filters: [
+        {
+          text: `Andrew  Flintoff`,
+          value: "Andrew  Flintoff",
+        },
+        {
+          text: `Aileen Newman`,
+          value: "Aasiya  Farha",
+        },
+        {
+          text: "Donovan",
+          value: "Donovan",
+        },
+        {
+          text: "Burke Beard",
+          value: "Burke Beard",
+        },
+        {
+          text: "Hector Moses",
+          value: "Hector Moses",
+        },
+      ],
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-secondary">
+            {record?.app_provider?.full_name}
+          </div>
+        );
+      },
+      filteredValue: filteredInfo.provider_full_name || null,
+      onFilter: (value, record) =>
+        record?.app_provider?.full_name?.includes(value),
+      sorter: (a, b) => {
+        return a.app_provider?.full_name > b.app_provider?.full_name ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "provider_full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -286,8 +389,8 @@ const ListView = () => {
     },
     {
       title: "Scheduled Date",
-      dataIndex: "Scheduled_Date",
-      key: "Scheduled_Date",
+      dataIndex: "schedule_date",
+      key: "schedule_date",
       width: 100,
       filters: [
         {
@@ -299,14 +402,20 @@ const ListView = () => {
           value: "Dec 30, 2021",
         },
       ],
-      filteredValue: filteredInfo.Scheduled_Date || null,
-      onFilter: (value, record) => record.Scheduled_Date.includes(value),
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-black text-center">{record?.schedule_date}</div>
+        );
+      },
+      filteredValue: filteredInfo.schedule_date || null,
+      onFilter: (value, record) => record.schedule_date.includes(value),
       sorter: (a, b) => {
-        return a.Scheduled_Date > b.Scheduled_Date ? -1 : 1;
-        // a.Scheduled_Date - b.Scheduled_Date
+        return a.schedule_date > b.schedule_date ? -1 : 1;
+        // a.schedule_date - b.schedule_date
       },
       sortOrder:
-        sortedInfo.columnKey === "Scheduled_Date" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "schedule_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -337,32 +446,47 @@ const ListView = () => {
     },
     {
       title: "Status",
-      key: "Status",
-      dataIndex: "Status",
+      key: "status",
+      dataIndex: "status",
       width: 100,
       sorter: (a, b) => {
-        return a.Status > b.Status ? -1 : 1;
-        // a.Status - b.Status,
+        return a.status > b.status ? -1 : 1;
+        // a.status - b.status,
       },
-      sortOrder: sortedInfo.columnKey === "Status" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
       ellipsis: true,
-      render: (_, { Status }) => {
-        //console.log("Status : ", Status);
+      render: (_, { status }) => {
+        //console.log("status : ", status);
         return (
           <div className="flex justify-center">
-            {Status === "Scheduled" && (
+            {status === "Scheduled" && (
               <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
-                {Status}
+                {status}
               </button>
             )}
-            {Status === "Rendered" && (
+            {status === "Rendered" && (
               <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {Status}
+                {status}
               </button>
             )}
-            {Status === "hold" && (
+            {status === "Hold" && (
               <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {Status}
+                {status}
+              </button>
+            )}
+            {status === "No Show" && (
+              <button className="bg-blue-700 text-white text-[10px] py-[2px]  rounded w-14">
+                {status}
+              </button>
+            )}
+            {status === "Cancelled by Client" && (
+              <button className="bg-black text-white text-[10px] py-[2px]  rounded w-14">
+                {status}
+              </button>
+            )}
+            {status === "Cancelled by Provider" && (
+              <button className="bg-yellow-700 text-white text-[10px] py-[2px]  rounded w-28">
+                {status}
               </button>
             )}
           </div>
@@ -382,8 +506,8 @@ const ListView = () => {
           value: "Scheduled",
         },
       ],
-      filteredValue: filteredInfo.Status || null,
-      onFilter: (value, record) => record.Status.includes(value),
+      filteredValue: filteredInfo.status || null,
+      onFilter: (value, record) => record.status.includes(value),
     },
     {
       title: "Action",
@@ -437,8 +561,8 @@ const ListView = () => {
         each?.Patients?.toLowerCase().includes(value.toLowerCase()) ||
         each?.Service_hrs?.toLowerCase().includes(value.toLowerCase()) ||
         each?.pos?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.Scheduled_Date?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.Status?.toLowerCase().includes(value)
+        each?.schedule_date?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.status?.toLowerCase().includes(value)
     );
     setTData(filteredData);
 
@@ -467,9 +591,9 @@ const ListView = () => {
     setFilteredInfo({
       Patients: patients_array,
       Service_hrs: filteredInfo?.Service_hrs,
-      Status: filteredInfo?.Status,
+      status: filteredInfo?.status,
       pos: filteredInfo?.pos,
-      Scheduled_Date: filteredInfo?.Scheduled_Date,
+      schedule_date: filteredInfo?.schedule_date,
     });
   };
 
@@ -481,21 +605,21 @@ const ListView = () => {
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: Service_hrs_array,
-      Status: filteredInfo?.Status,
+      status: filteredInfo?.status,
       pos: filteredInfo?.pos,
-      Scheduled_Date: filteredInfo?.Scheduled_Date,
+      schedule_date: filteredInfo?.schedule_date,
     });
   };
 
-  const deleteStatusTag = (tag) => {
+  const deletestatusTag = (tag) => {
     console.log(tag);
-    const status_array = filteredInfo?.Status?.filter((item) => item !== tag);
+    const status_array = filteredInfo?.status?.filter((item) => item !== tag);
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: filteredInfo?.Service_hrs,
-      Status: status_array,
+      status: status_array,
       pos: filteredInfo?.pos,
-      Scheduled_Date: filteredInfo?.Scheduled_Date,
+      schedule_date: filteredInfo?.schedule_date,
     });
   };
 
@@ -505,23 +629,23 @@ const ListView = () => {
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: filteredInfo?.Service_hrs,
-      Status: filteredInfo?.Status,
+      status: filteredInfo?.status,
       pos: pos_array,
-      Scheduled_Date: filteredInfo?.Scheduled_Date,
+      schedule_date: filteredInfo?.schedule_date,
     });
   };
 
   const deleteScheduleTag = (tag) => {
     console.log(tag);
-    const schedule_array = filteredInfo?.Scheduled_Date?.filter(
+    const schedule_array = filteredInfo?.schedule_date?.filter(
       (item) => item !== tag
     );
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: filteredInfo?.Service_hrs,
-      Status: filteredInfo?.Status,
+      status: filteredInfo?.status,
       pos: filteredInfo?.pos,
-      Scheduled_Date: schedule_array,
+      schedule_date: schedule_array,
     });
   };
 
@@ -534,56 +658,32 @@ const ListView = () => {
   const onSubmit = async (data) => {
     const from_date = convert(data?.start_date);
     const to_date = convert(data?.end_date);
-    console.log(from_date, to_date);
-    let product = {
-      client_id: [134],
-      from_date: "2022-01-01",
-      to_date: "2022-12-31",
+    //console.log(from_date, to_date);
+    const payLoad = {
+      client_id: patientId,
+      provider_id: "",
+      pos: "",
+      status: "",
+      from_date: from_date,
+      to_date: to_date,
     };
-    console.log(product);
-    console.log("product json", JSON.stringify(product));
-    setTable(true);
-    // POST request using fetch with async/await
-    const requestOptions = {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(product),
-    };
-    const response = await fetch(
-      "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
-      requestOptions
-    );
-    const result = await response.json();
-    console.log(result);
-    // console.log(product);
-    // fetch("https://app.therapypms.com/api/v1/admin/ac/get-appoinments", {
-    //   method: "POST",
-    //   headers: headers,
-    //   body: JSON.stringify(product),
-    // }).then(async (response) => {
-    //   if (!response.ok) {
-    //     const validation = await response.json();
-    //     console.log(validation.errors);
-    //   } else {
-    //     console.log(response);
-    //   }
-    // });
-    // axios POST request
-    // const options = {
-    //   url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
-    //   method: "POST",
-    //   headers: headers,
-    //   data: {
-    //     client_id: patientId,
-    //     provider_id: "",
-    //     from_date: "2022-10-01",
-    //     to_date: "2022-10-30",
-    //   },
-    // };
+    setFromData(payLoad);
+    if (payLoad) {
+      const fetchManageSessions = {
+        url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
+        method: "POST",
+        mode: 'no-cors',
+        headers: headers,
+        data: payLoad,
+      };
 
-    // axios(options).then((response) => {
-    //   console.log(response);
-    // });
+      axios(fetchManageSessions).then((response) => {
+        console.log("list data", response?.data?.appointments);
+        const manageSessionData = response?.data?.appointments?.data;
+        setItems(manageSessionData);
+      });
+    }
+    setTable(true);
   };
 
   useEffect(() => {
@@ -717,7 +817,8 @@ const ListView = () => {
                         Provider
                       </h1>
                       <CustomMultiSelection
-                        options={opt}
+                        stuffs={stuffs}
+                        setStuffsId={setStuffsId}
                       ></CustomMultiSelection>
                     </div>
 
@@ -797,13 +898,13 @@ const ListView = () => {
                           <div>
                             <label className="label">
                               <span className="label-text text-[16px] text-gray-100 text-left">
-                                Status
+                                status
                               </span>
                             </label>
                             <div>
                               <select
                                 className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
-                                {...register("Status")}
+                                {...register("status")}
                               >
                                 <option value="" className="text-black">
                                   Select
@@ -892,8 +993,8 @@ const ListView = () => {
                 {filteredInfo?.Patients?.length > 0 ||
                 filteredInfo?.Service_hrs?.length > 0 ||
                 filteredInfo?.pos?.length > 0 ||
-                filteredInfo?.Status?.length > 0 ||
-                filteredInfo?.Scheduled_Date?.length > 0 ? (
+                filteredInfo?.status?.length > 0 ||
+                filteredInfo?.schedule_date?.length > 0 ? (
                   <div className="my-5 flex flex-wrap items-center gap-2">
                     {filteredInfo?.Patients?.length > 0 && (
                       <div className=" ">
@@ -949,23 +1050,23 @@ const ListView = () => {
                       </div>
                     )}
 
-                    {filteredInfo?.Status?.length > 0 && (
+                    {filteredInfo?.status?.length > 0 && (
                       <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.Status?.map((tag, index) => (
+                        {filteredInfo?.status?.map((tag, index) => (
                           <div
                             className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
                             key={index}
                           >
                             <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
                               <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Status:
+                                status:
                               </span>
                               {tag}
                             </div>
                             <div>
                               <div
                                 className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deleteStatusTag(tag)}
+                                onClick={() => deletestatusTag(tag)}
                               >
                                 X
                               </div>
@@ -1001,16 +1102,16 @@ const ListView = () => {
                       </div>
                     )}
 
-                    {filteredInfo?.Scheduled_Date?.length > 0 && (
+                    {filteredInfo?.schedule_date?.length > 0 && (
                       <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.Scheduled_Date?.map((tag, index) => (
+                        {filteredInfo?.schedule_date?.map((tag, index) => (
                           <div
                             className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
                             key={index}
                           >
                             <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
                               <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Scheduled_Date:
+                                schedule_date:
                               </span>
                               {tag}
                             </div>
@@ -1028,27 +1129,29 @@ const ListView = () => {
                     )}
                   </div>
                 ) : null}
-
-                <div className="overflow-scroll">
-                  <>
-                    <Table
-                      pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                      rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                      size="small"
-                      bordered
-                      className=" text-xs font-normal"
-                      columns={columns}
-                      dataSource={TData}
-                      rowSelection={{
-                        ...rowSelection,
-                      }}
-                      scroll={{
-                        y: 650,
-                      }}
-                      onChange={handleChange}
-                    />
-                  </>
-                </div>
+                <InfiniteScroll
+                  dataLength={items.length} //items is basically all data here
+                  next={fetchData}
+                  hasMore={hasMore}
+                  loader={<ShimmerTableTet></ShimmerTableTet>}
+                >
+                  <Table
+                    pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                    rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                    size="small"
+                    bordered
+                    className=" text-xs font-normal"
+                    columns={columns}
+                    dataSource={items}
+                    rowSelection={{
+                      ...rowSelection,
+                    }}
+                    // scroll={{
+                    //   y: 650,
+                    // }}
+                    onChange={handleChange}
+                  />
+                </InfiniteScroll>
               </div>
             )}
             {!listView && (
