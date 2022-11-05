@@ -60,7 +60,7 @@ export default function PlaceOfServicesActionAddModal({
         if (res.data.status === "success") {
           console.log("Successfully Updated");
           //After updating data(post req) to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
-          console.log(res?.data);
+          // console.log(res?.data);
 
           handleClose();
         }

@@ -22,7 +22,7 @@ const PlaceOfServices = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "get",
-        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=1`,
+        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos`,
         headers: headers,
       });
       // const result = await res.json();
