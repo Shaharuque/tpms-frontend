@@ -77,37 +77,37 @@ const StaffInformation = () => {
               className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
               to={`staffs-biographic/${id}`}
             >
-              <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+              <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                 <MdPersonSearch className=" text-2xl" /> Bio's
               </h1>
             </CustomLink>
 
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-contact-details/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <IoIosContact className=" text-2xl" /> Contact Info
                 </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-credentials/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <BiIdCard className=" text-2xl" /> Credentials
                 </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-department/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <MdOutlineSupervisorAccount className=" text-2xl" />{" "}
                   Department Supervisor(S)
                 </h1>
@@ -115,40 +115,40 @@ const StaffInformation = () => {
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-payroll/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <GiReceiveMoney className=" text-2xl" /> Payroll Setup
                 </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-other-setup/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <IoSettingsSharp className=" text-2xl" /> Other Setup
                 </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-leave-tracking/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <MdOutlineWorkOff className=" text-2xl" /> Leave Tracking
                 </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-payor-exclusion/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <MdOutlineSavings className=" text-2xl" /> Insurance
                   Exclusion(S)
                 </h1>
@@ -156,10 +156,10 @@ const StaffInformation = () => {
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-sub-activity-exclusion/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <RiUserUnfollowLine className=" text-2xl" /> Service Sub-Type
                   Exclusions
                 </h1>
@@ -167,20 +167,20 @@ const StaffInformation = () => {
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-client-exclusion/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <FaUserTimes className=" text-2xl" /> Patient Exclusion
                 </h1>
               </CustomLink>
             </div>
             <div className="text-xs text-secondary font-normal patient-nav mb-2">
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+                className="flex gap-1 pb-1 clink items-center"
                 to={`staffs-portal/${id}`}
               >
-                <h1 className="ml-1 font-medium mt-1 flex items-center text-[14px] gap-1 ">
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <RiUserFill className=" text-2xl" /> Staff Portal
                 </h1>
               </CustomLink>

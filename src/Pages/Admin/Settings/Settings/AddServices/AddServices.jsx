@@ -146,7 +146,7 @@ const AddServices = () => {
             <label htmlFor="pay-box" className="">
               <button
                 onClick={handleClickOpen}
-                className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
+                className=" pms-button mr-2"
               >
                 Add new Service
               </button>
