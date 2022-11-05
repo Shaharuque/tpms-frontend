@@ -49,7 +49,7 @@ const TestNaviBar = ({ handle }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -15 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
       className=" relative shadow-md rounded-3xl mr-[22px]"
@@ -124,7 +124,8 @@ const TestNaviBar = ({ handle }) => {
                 >
                   <button
                     onClick={() => handlePatient()}
-                    className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
+                    // className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
+                    className="text-[14px] text-secondary  px-[20px] py-1 mb-2 rounded-sm  hover:text-white hover:bg-[#757A7AC8] flex items-center font-semibold gap-2"
                   >
                     <AiOutlinePlusCircle className="text-lg font-semibold" />
                     <div>Create Patient</div>
@@ -298,9 +299,8 @@ const TestNaviBar = ({ handle }) => {
         )}
 
         <div
-          className={`lg:flex lg:items-center gap-10  lg:pt-0 pt-10 lg:pb-0 pb-10 absolute lg:static bg-white lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${
-            open ? "top-24 " : "top-[-490px]"
-          }`}
+          className={`lg:flex lg:items-center gap-10  lg:pt-0 pt-10 lg:pb-0 pb-10 absolute lg:static bg-white lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${open ? "top-24 " : "top-[-490px]"
+            }`}
         >
           {/*Full screen showing code */}
           <div>
@@ -331,17 +331,18 @@ const TestNaviBar = ({ handle }) => {
               </label>
               <div
                 tabIndex={0}
-                className="dropdown-content menu mt-5 p-2 shadow-md drop-box rounded-sm bg-white w-52"
+                className="dropdown-content menu mt-[-2px] p-2 shadow-md border drop-box rounded-sm bg-white w-52"
               >
                 <button
                   onClick={handlePatient}
-                  className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
+                  className="text-[14px] text-secondary  px-[20px] py-2  rounded-sm  hover:text-white hover:bg-[#34D8EB] flex items-center font-semibold gap-2"
                 >
                   <AiOutlineUserAdd className="text-lg font-bold " />
                   <div>Create Patient</div>
                 </button>
 
-                <button className="text-[14px] text-secondary border px-[15px] py-1  rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2">
+                <button className="text-[14px] text-secondary  px-[15px] py-2  rounded-sm  hover:text-white hover:bg-[#34D8EB] flex items-center font-semibold gap-2">
+
                   <AiOutlineIdcard className="text-lg font-bold" />
                   <div onClick={handleAppointment}>Create Appointment</div>
                 </button>
@@ -503,7 +504,7 @@ const TestNaviBar = ({ handle }) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </motion.div >
   );
 };
 

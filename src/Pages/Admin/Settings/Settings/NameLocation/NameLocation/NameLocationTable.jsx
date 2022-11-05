@@ -13,7 +13,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
     // reset();
   };
 
@@ -366,6 +366,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                       type="time"
                       name="mon_start_time"
                       // value={time?.mon_end_time}
+                      format="h:mm A"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                       {...register("mon_start_time")}
                     />
@@ -374,6 +375,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     <input
                       type="time"
                       name="mon_end_time"
+                      format="h:mm A"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                       {...register("mon_end_time")}
                     />
