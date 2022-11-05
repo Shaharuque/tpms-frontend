@@ -265,7 +265,7 @@ const TableApi = () => {
       render: (_, { client_full_name, id, key }) => {
         //console.log("tags : ", client_full_name, id, key);
         return (
-          <div>
+          <div className="flex justify-start">
             <button
               onClick={() => patientDetails(id)}
               className="text-secondary"
@@ -275,7 +275,7 @@ const TableApi = () => {
           </div>
         );
       },
-      ellipsis: true,
+      // ellipsis: true,
     },
     {
       title: "Contact Info",
@@ -294,7 +294,7 @@ const TableApi = () => {
       //render contains what we want to reflect as our data
       render: (_, { phone_number }) => {
         return (
-          <div>
+          <div className="flex justify-end">
             <h1>{phone_number ? phone_number : "No Data"}</h1>
           </div>
         );
@@ -307,6 +307,14 @@ const TableApi = () => {
       key: "client_dob",
       width: 80,
       filters: dobSearch(),
+      //render contains what we want to reflect as our data
+      render: (_, { client_dob }) => {
+        return (
+          <div className="flex justify-end">
+            <h1>{client_dob ? client_dob : "No Data"}</h1>
+          </div>
+        );
+      },
       filteredValue: filteredInfo.client_dob || null,
       onFilter: (value, record) => record.client_dob.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -394,18 +402,20 @@ const TableApi = () => {
     },
     {
       title: "Status",
-      key: "status",
-      dataIndex: "status",
+      key: "is_active_client",
+      dataIndex: "is_active_client",
       width: 100,
       filters: [
         { text: "Active", value: "true" }, //antd table filtering working on string type value so from backend I need true/false boolean value to string format
         { text: "In-Active", value: "false" },
       ],
-      render: (_, { status }) => {
+      render: (_, { is_active_client }) => {
         //console.log("Status : ", Status);
         return (
           <div className="flex justify-center">
-            <PatientStatusAction status={status}></PatientStatusAction>
+            <PatientStatusAction
+              status={is_active_client}
+            ></PatientStatusAction>
           </div>
         );
       },

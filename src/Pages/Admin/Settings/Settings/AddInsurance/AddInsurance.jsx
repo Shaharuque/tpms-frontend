@@ -79,18 +79,20 @@ const AddInsurance = () => {
       alert("select just one value");
       return setSelectedKeys([0]);
     }
-    console.log('data selectedkeys', selectedKeys )
+    console.log("data selectedkeys", selectedKeys);
 
     const body = {
-      insurance_id : selectedKeys
+      insurance_id: selectedKeys,
       // insurance_id: 219,
     };
-    const fetchpostTest = await PostfetchData('admin/ac/setting/get/all/insurance/details',body);
+    const fetchpostTest = await PostfetchData(
+      "admin/ac/setting/get/all/insurance/details",
+      body
+    );
     console.log("fetchpostTest", fetchpostTest);
-       setpassAllInsurance(fetchpostTest);
-      setpassSelectedInsurance({});
-      // setpassSelectedInsurance(response?.data);
-
+    setpassAllInsurance(fetchpostTest);
+    setpassSelectedInsurance({});
+    // setpassSelectedInsurance(response?.data);
   };
 
   const FacilityInsurance = async () => {
@@ -104,12 +106,14 @@ const AddInsurance = () => {
       // insurance_id : facilityselectedkeys
       insurance_id: 1531,
     };
-  
-    const fetchpostTestt = await PostfetchData('admin/ac/setting/get/selected/insurance/details',body);
-       setpassSelectedInsurance(fetchpostTestt);
-      console.log("facilaty axios",fetchpostTestt);
-      setpassAllInsurance({});
-    
+
+    const fetchpostTestt = await PostfetchData(
+      "admin/ac/setting/get/selected/insurance/details",
+      body
+    );
+    setpassSelectedInsurance(fetchpostTestt);
+    console.log("facilaty axios", fetchpostTestt);
+    setpassAllInsurance({});
   };
 
   return (
@@ -197,8 +201,8 @@ const AddInsurance = () => {
           </button>
         </div>
       </div>
-      {(passAllInsurance?.status === "success" || passSelectedInsurance?.status === "success") && (
-        
+      {(passAllInsurance?.status === "success" ||
+        passSelectedInsurance?.status === "success") && (
         <InsuranceDetails
           AllInsurance={passAllInsurance}
           SelectedInsurance={passSelectedInsurance}
