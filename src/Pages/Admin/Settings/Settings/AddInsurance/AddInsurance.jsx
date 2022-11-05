@@ -16,41 +16,6 @@ import InsuranceDetails from "./InsuranceDetails";
 const AddInsurance = () => {
   const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
-  // const [chk, setchk] = useState(false);
-  // const [multi, setmulti] = useState([]);
-  // const [newdata, setnewdata] = useState({ value: "coconut" });
-
-  //Getting All Insurance using react query get request(GET req)
-  const endPoint = "admin/ac/setting/get/all/insurance";
-  const {
-    isLoading,
-    isError,
-    error,
-    data: insurance,
-    refetch,
-  } = useQuery(["allInsurance"], () => fetchData(endPoint));
-
-  console.log(insurance);
-
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
-  if (isError) {
-    return <div>Error! {error.message}</div>;
-  }
-  // testing space............
-  // useEffect(() => {
-  //   axios("../../../All_Fake_Api/Transfer.json")
-  //     .then((response) => {
-  //       // console.log("chkd ata", response?.data)
-  //       setTransferData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  // const arr1 = [];
-  // console.log(arr1);
 
   // -------------------------
 
