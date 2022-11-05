@@ -11,20 +11,11 @@ const fetchData = async (endPoint) => {
   return response;
 };
 
+export const  PostfetchData = async (endPoint, payload) => {
+  const response =  await axios.post(`${baseIp}/${endPoint}`, payload, {headers: headers })
+  return response.data;
+ };
 
-
-
-export const PostfetchData =(endPoint , x ) => {
-  
- const options = {
-  url: `${baseIp}${endPoint}`,
-  method: "POST",
-  headers: headers,
-  data: x,
-}; 
-
-return options;
-};
 
 
 export default fetchData;

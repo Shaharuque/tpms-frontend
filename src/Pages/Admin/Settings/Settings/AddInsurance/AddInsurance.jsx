@@ -3,13 +3,9 @@ import {
   DoubleLeftOutlined,
   ConsoleSqlOutlined,
 } from "@ant-design/icons";
-import { useQuery } from "@tanstack/react-query";
-import { Switch } from "antd";
-import axios from "axios";
+
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import Loading from "../../../../../Loading/Loading";
-import { baseIp, headers } from "../../../../../Misc/BaseClient";
 import fetchData, { PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 
@@ -21,46 +17,6 @@ const AddInsurance = () => {
   const [treatmentApiData, settreatmentApiData] = useState(null);
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
-  // const [chk, setchk] = useState(false);
-  // const [multi, setmulti] = useState([]);
-  // const [newdata, setnewdata] = useState({ value: "coconut" });
-
-  //Getting All Insurance using react query get request(GET req)
-  // const endPoint = "admin/ac/setting/get/all/insurance";
-  // const treatmentEndpoint = "admin/ac/setting/get/all/insurance/treatment";
-  // // treatment
-  // const {
-  //   isLoading,
-  //   isError,
-  //   error,
-  //   data: insurance,
-  //   refetch,
-  // } = useQuery(["allInsurance"], () => fetchData(endPoint));
-  // console.log("add insurance page data",insurance?.data?.all_insurance);
-
-  // if (isLoading) {
-  //   return <Loading></Loading>;
-  // }
-  // if (isError) {
-  //   return <div>Error! {error.message}</div>;
-  // }
-  // testing space............
-  // useEffect(() => {
-  //   axios("../../../All_Fake_Api/Transfer.json")
-  //     .then((response) => {
-  //       // console.log("chkd ata", response?.data)
-  //       setTransferData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  // const arr1 = [];
-  // console.log(arr1);
-
-  // -------------------------
-
-  // testing endpoit calling by useeffect
 
   useEffect(() => {
     const dynamicApi = async () => {
@@ -80,16 +36,6 @@ const AddInsurance = () => {
     return <Loading></Loading>;
   }
 
-  // useEffect(() => {
-  //   axios.get(`https://app.therapypms.com/api/v1/admin/ac/setting/get/selected/treatment`, {
-  //     headers: headers,
-  //   }).then((response)=>{
-  //     console.log("treatment api response", response?.data )
-  //   }).catch((error) => {
-  //           console.log(error);
-  //   });
-
-  // }, []);
   // const options = {
   //   url: "https://app.therapypms.com/api/v1/admin/login",
   //   method: "POST",
@@ -109,12 +55,7 @@ const AddInsurance = () => {
       target.selectedOptions,
       (option) => option.value * 1
     );
-    // console.log("data value", value)
     setSelectedKeys(value);
-    // setchk(false)
-    // setmulti({
-    //   [name]: value,
-    // });
   };
 
   const handleRemoving = (e) => {
@@ -133,52 +74,42 @@ const AddInsurance = () => {
     console.log("Remove  button click get data", facilityselectedkeys);
   };
 
-  const InsuranceView = () => {
+  const InsuranceView = async () => {
     if (selectedKeys.length > 1) {
       alert("select just one value");
       return setSelectedKeys([0]);
     }
+    console.log('data selectedkeys', selectedKeys )
 
     const body = {
-      // insurance_id : selectedKeys
-      insurance_id: 219,
+      insurance_id : selectedKeys
+      // insurance_id: 219,
     };
-    const options = {
-      url: `${baseIp}/${"admin/ac/setting/get/all/insurance/details"}`,
-      method: "POST",
-      headers: headers,
-      data: body,
-    };
-    axios(options).then((response) => {
-      
-      setpassAllInsurance(response?.data);
+    const fetchpostTest = await PostfetchData('admin/ac/setting/get/all/insurance/details',body);
+    console.log("fetchpostTest", fetchpostTest);
+       setpassAllInsurance(fetchpostTest);
+      setpassSelectedInsurance({});
       // setpassSelectedInsurance(response?.data);
-    });
-   
+
   };
 
-
-  const FacilityInsurance = () => {
+  const FacilityInsurance = async () => {
     if (facilityselectedkeys.length > 1) {
       alert("select just one value");
       return setfacilityselectedkeys([0]);
     }
+    // console.log('data facilaty', facilityselectedkeys )
 
     const body = {
-      // insurance_id : selectedKeys
+      // insurance_id : facilityselectedkeys
       insurance_id: 1531,
     };
-    const options = {
-      url: `${baseIp}/${"admin/ac/setting/get/selected/insurance/details"}`,
-      method: "POST",
-      headers: headers,
-      data: body,
-    };
-    axios(options).then((response) => {
-      
-      setpassSelectedInsurance(response?.data);
-    });
-    console.log(" FacilityInsurance  get data", facilityselectedkeys);
+  
+    const fetchpostTestt = await PostfetchData('admin/ac/setting/get/selected/insurance/details',body);
+       setpassSelectedInsurance(fetchpostTestt);
+      console.log("facilaty axios",fetchpostTestt);
+      setpassAllInsurance({});
+    
   };
 
   return (
@@ -194,38 +125,13 @@ const AddInsurance = () => {
             // className="h-40"
             onChange={(e) => {
               handleAdding(e);
+              // console.log("handlechange data check", e.target.value)
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {/* {TransferData.length > 0 &&
-              TransferData.map((item, index) => (
-                <option
-                  key={item.id}
-                  className="px-2 text-sm"
-                  value={item.id}>
-                  {item.id}
-                  {item.title}
-                </option>
-              ))} */}
-
             {insuranceApiData?.data?.all_insurance.length > 0 &&
               insuranceApiData?.data?.all_insurance.map((item, index) => (
-                // <option
-                //   className="px-2 text-sm"
-                //   onClick={(e) => arr1.push(item)}
-                //   // onClick={(e) => console.log(e.target.title)}
-                //   value={item.id}
-                // >
-                //   {item.key}
-                //   {item.title}
-                // </option>
-                <option
-                  key={item.id}
-                  className="px-2 text-sm"
-                  //   onClick={(e) => arr1.push(item)}
-                  // onClick={(e) => console.log(e.target.title)}
-                  value={item.id}
-                >
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.payor_name}
                 </option>
               ))}
@@ -291,19 +197,13 @@ const AddInsurance = () => {
           </button>
         </div>
       </div>
-      {passSelectedInsurance?.status === "success" && (
+      {(passAllInsurance?.status === "success" || passSelectedInsurance?.status === "success") && (
+        
         <InsuranceDetails
-        viewtesting={passAllInsurance}
-          ViewDetailData={passSelectedInsurance}
+          AllInsurance={passAllInsurance}
+          SelectedInsurance={passSelectedInsurance}
         ></InsuranceDetails>
       )}
-
-{/* {     passAllInsurance?.status === "success" && (
-        <InsuranceDetails
-          // ViewDetailData={passSelectedInsurance}
-        ></InsuranceDetails>
-      )} */}
-
     </div>
   );
 };
