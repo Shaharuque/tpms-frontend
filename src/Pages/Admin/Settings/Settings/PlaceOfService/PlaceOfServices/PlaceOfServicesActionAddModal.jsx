@@ -10,6 +10,8 @@ export default function PlaceOfServicesActionAddModal({
   recordData,
   items,
   setItems,
+  fetchData,
+  hasMore,
 }) {
   const { id, pos_code, pos_name } = recordData;
   console.log(id);
@@ -61,7 +63,19 @@ export default function PlaceOfServicesActionAddModal({
           console.log("Successfully Updated");
           //After updating data(post req) to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
           // console.log(res?.data);
-
+          // const getPatientsData = async () => {
+          //   const res = await axios({
+          //     method: "get",
+          //     url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=1`,
+          //     headers: headers,
+          //   });
+          //   // const result = await res.json();
+          //   const result = res?.data?.pos_data?.data;
+          //   //console.log(result);
+          //   setItems(result);
+          // };
+          // getPatientsData();
+          setItems(items);
           handleClose();
         }
       } catch (error) {
