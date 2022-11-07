@@ -9,30 +9,31 @@ import Loading from "../../../../../Loading/Loading";
 import fetchData, { PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 
+//
 const AddInsurance = () => {
   // const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
-  const [insuranceApiData, setinsuranceApiData] = useState(null);
-  const [treatmentApiData, settreatmentApiData] = useState(null);
+  const [AllinsuranceApiData, setAllinsuranceApiData] = useState(null);
+  const [SelectedinsuranceApiData, setSelectedinsuranceApiData] = useState(null);
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
 
   useEffect(() => {
-    const dynamicApi = async () => {
-      const GetInsurance = await fetchData(
+    const InsuranceApi = async () => {
+      const GetAllInsuranceData = await fetchData(
         "admin/ac/setting/get/all/insurance"
       );
-      const Selectedtreatment = await fetchData(
+      const GetFacilitySelectedData = await fetchData(
         "admin/ac/setting/get/selected/treatment"
       );
-      setinsuranceApiData(GetInsurance);
-      settreatmentApiData(Selectedtreatment);
+      setAllinsuranceApiData(GetAllInsuranceData);
+      setSelectedinsuranceApiData(GetFacilitySelectedData);
     };
-    dynamicApi();
+    InsuranceApi();
   }, []);
 
-  if (!insuranceApiData && !treatmentApiData) {
+  if (!AllinsuranceApiData && !SelectedinsuranceApiData) {
     return <Loading></Loading>;
   }
 
@@ -129,8 +130,8 @@ const AddInsurance = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {insuranceApiData?.data?.all_insurance.length > 0 &&
-              insuranceApiData?.data?.all_insurance.map((item, index) => (
+            {AllinsuranceApiData?.data?.all_insurance.length > 0 &&
+              AllinsuranceApiData?.data?.all_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.payor_name}
                 </option>
@@ -178,8 +179,8 @@ const AddInsurance = () => {
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {/* calling same api  */}
-            {treatmentApiData?.data?.selected_treatment.length > 0 &&
-              treatmentApiData?.data?.selected_treatment.map((item, index) => (
+            {SelectedinsuranceApiData?.data?.selected_treatment.length > 0 &&
+              SelectedinsuranceApiData?.data?.selected_treatment.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.treatment_name}
                 </option>
