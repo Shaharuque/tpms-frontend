@@ -3,9 +3,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
-import InfiniteScroll from "react-infinite-scroll-component";
+import ReactPaginate from "react-paginate";
 import { headers } from "../../../../../Misc/BaseClient";
-import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import PlaceOfServicesActionAddModal from "./PlaceOfServices/PlaceOfServicesActionAddModal";
 
 const PlaceOfServices = () => {
@@ -14,44 +13,50 @@ const PlaceOfServices = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [recordData, setRecordData] = useState();
   const [items, setItems] = useState([]);
-  const [hasMore, sethasMore] = useState(true);
-  const [page, setpage] = useState(2);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState();
 
   //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
-    const getPatientsData = async () => {
+    const getPatientsData = async (page = 1) => {
       const res = await axios({
         method: "get",
-        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos`,
+        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
         headers: headers,
       });
       // const result = await res.json();
       const result = res?.data?.pos_data?.data;
       //console.log(result);
       setItems(result);
+      setTotalPage(res?.data?.pos_data?.last_page);
     };
-    getPatientsData();
-  }, []);
+    getPatientsData(page);
+  }, [page]);
 
-  const fetchPatients = async () => {
-    const res = await axios({
-      method: "GET",
-      url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
-      headers: headers,
-    });
-    const result = res?.data?.pos_data?.data;
-    return result;
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
   };
 
-  const fetchData = async () => {
-    const patientsFromServer = await fetchPatients();
-    console.log(patientsFromServer);
-    setItems([...items, ...patientsFromServer]);
-    if (patientsFromServer.length === 0) {
-      sethasMore(false);
-    }
-    setpage(page + 1);
-  };
+  // const fetchPatients = async () => {
+  //   const res = await axios({
+  //     method: "GET",
+  //     url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+  //     headers: headers,
+  //   });
+  //   const result = res?.data?.pos_data?.data;
+  //   return result;
+  // };
+
+  // const fetchData = async () => {
+  //   const patientsFromServer = await fetchPatients();
+  //   console.log(patientsFromServer);
+  //   setItems([...items, ...patientsFromServer]);
+  //   if (patientsFromServer.length === 0) {
+  //     sethasMore(false);
+  //   }
+  //   setpage(page + 1);
+  // };
   console.log(items);
 
   //get data from API + data fetch from api while scrolling[Important]
@@ -217,23 +222,28 @@ const PlaceOfServices = () => {
         </div>
       </div>
       <div>
-        <InfiniteScroll
-          dataLength={items.length} //items is basically all data here
-          next={fetchData}
-          hasMore={hasMore}
-          loader={<ShimmerTableTet></ShimmerTableTet>}
-        >
-          <Table
-            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-            rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-            size="small"
-            bordered
-            className=" text-xs font-normal"
-            columns={columns}
-            dataSource={items}
-            onChange={handleChange}
-          />
-        </InfiniteScroll>
+        <Table
+          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+          size="small"
+          bordered
+          className=" text-xs font-normal"
+          columns={columns}
+          dataSource={items}
+          onChange={handleChange}
+        />
+        <ReactPaginate
+          previousLabel={"<"}
+          nextLabel={">"}
+          pageCount={totalPage}
+          marginPagesDisplayed={1}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagination_Link"}
+          nextLinkClassName={"pagination_Link"}
+          activeClassName={"pagination_Link-active"}
+          disabledClassName={"pagination_Link-disabled"}
+        ></ReactPaginate>
       </div>
 
       {openAddModal && (
@@ -243,8 +253,8 @@ const PlaceOfServices = () => {
           recordData={recordData}
           items={items}
           setItems={setItems}
-          fetchData={fetchData}
-          hasMore={hasMore}
+          page={page}
+          setTotalPage={setTotalPage}
         ></PlaceOfServicesActionAddModal>
       )}
     </div>
