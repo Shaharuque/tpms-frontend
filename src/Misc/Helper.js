@@ -3,7 +3,7 @@
 import axios from "axios";
 import { baseIp, headers } from "./BaseClient";
 
-const fetchData = async (endPoint) => {
+export const fetchData = async (endPoint) => {
   console.log(`helper function call ${baseIp}${endPoint}`);
   const response = await axios.get(`${baseIp}/${endPoint}`, {
     headers: headers,
@@ -11,11 +11,11 @@ const fetchData = async (endPoint) => {
   return response;
 };
 
-export const  PostfetchData = async (endPoint, payload) => {
-  const response =  await axios.post(`${baseIp}/${endPoint}`, payload, {headers: headers })
+export const PostfetchData = async (endPoint, payload) => {
+  const response = await axios.post(`${baseIp}/${endPoint}`, payload, {
+    headers: headers,
+  });
   return response.data;
- };
+};
 
-
-
-export default fetchData;
+// export default fetchData;

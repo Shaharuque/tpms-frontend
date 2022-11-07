@@ -158,6 +158,7 @@ import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionFo
 import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
 import RequireAuth from "./Authorization/RequireAuth";
+import InfiniteScrollTest from "./Testing/ApiTesting/InfiniteScrollTest";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -260,6 +261,10 @@ function App() {
             element={<AntTableSearchBox></AntTableSearchBox>}
           ></Route>
           <Route path="/test-date" element={<AntDate></AntDate>}></Route>
+          <Route
+            path="/test-scroll"
+            element={<InfiniteScrollTest></InfiniteScrollTest>}
+          ></Route>
           {/* Testing End */}
 
           <Route

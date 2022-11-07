@@ -201,10 +201,7 @@ const PlaceOfServices = () => {
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
-              <button
-                onClick={handleClickOpen2}
-                className=" pms-button mr-2"
-              >
+              <button onClick={handleClickOpen2} className=" pms-button mr-2">
                 Add Place of Service
               </button>
             </label>
@@ -246,6 +243,8 @@ const PlaceOfServices = () => {
           recordData={recordData}
           items={items}
           setItems={setItems}
+          fetchData={fetchData}
+          hasMore={hasMore}
         ></PlaceOfServicesActionAddModal>
       )}
     </div>
