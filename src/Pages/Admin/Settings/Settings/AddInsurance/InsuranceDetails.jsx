@@ -19,7 +19,7 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
   useEffect(() => {
     setTimeout(() => {
       reset({
-        payor_name: Ass ? Aa?.id : Sstatus && Ss?.payor_name,
+        payor_name: Ass ? Aa?.name : Sstatus && Ss?.payor_name,
         address: Ass ? Aa?.address : Sstatus && Ss?.address,
         city: Ass ? Aa?.city : Sstatus && Ss?.city,
         state: Ass ? Aa?.state : Sstatus && Ss?.state,
@@ -33,10 +33,30 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
       });
     }, 0);
   }, [
-    Aa?.address,Aa?.billing_aber,Aa?.city,Aa?.contact_one,Aa?.contact_two,
-    Aa?.ele_payor_id,Aa?.id,Aa?.phone_one,Aa?.phone_two,Aa?.state,Aa?.zip,Ass,Ss?.address,
-    Ss?.billing_aber,Ss?.city,Ss?.contact_one,Ss?.contact_two,Ss?.ele_payor_id,Ss?.payor_name,
-    Ss?.phone_one,Ss?.phone_two,Ss?.state,Ss?.zip,Sstatus,
+    Aa?.address,
+    Aa?.billing_aber,
+    Aa?.city,
+    Aa?.contact_one,
+    Aa?.contact_two,
+    Aa?.ele_payor_id,
+    Aa?.name,
+    Aa?.phone_one,
+    Aa?.phone_two,
+    Aa?.state,
+    Aa?.zip,
+    Ass,
+    Ss?.address,
+    Ss?.billing_aber,
+    Ss?.city,
+    Ss?.contact_one,
+    Ss?.contact_two,
+    Ss?.ele_payor_id,
+    Ss?.payor_name,
+    Ss?.phone_one,
+    Ss?.phone_two,
+    Ss?.state,
+    Ss?.zip,
+    Sstatus,
     reset,
   ]);
 

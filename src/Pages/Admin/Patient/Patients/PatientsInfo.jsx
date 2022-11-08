@@ -55,7 +55,7 @@ const PatientsInfo = () => {
 
           <div className="text-xs text-secondary font-normal patient-nav mt-2 mb-1">
             <CustomLink
-              className="flex gap-1  hover:text-white pb-1 hover:bg-primary items-center"
+              className="flex gap-1 pb-1 clink items-center"
               to={`patient-info/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
@@ -66,7 +66,7 @@ const PatientsInfo = () => {
 
           <div className="text-xs  text-secondary font-normal patient-nav mb-1">
             <CustomLink
-              className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+              className="flex gap-1 pb-1 clink items-center"
               to={`patient-authorization/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
@@ -77,7 +77,7 @@ const PatientsInfo = () => {
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink
-              className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+              className="flex gap-1 pb-1 clink items-center"
               to={`patient-document/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
@@ -87,7 +87,7 @@ const PatientsInfo = () => {
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink
-              className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+              className="flex gap-1 pb-1 clink items-center"
               to={`patient-portal/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
@@ -97,7 +97,7 @@ const PatientsInfo = () => {
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink
-              className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center"
+              className="flex gap-1 pb-1 clink items-center"
               to={`patient-ledger/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
