@@ -3,11 +3,11 @@ import {
   DoubleLeftOutlined,
   ConsoleSqlOutlined,
 } from "@ant-design/icons";
-
 import React, { useEffect, useState } from "react";
 import Loading from "../../../../../Loading/Loading";
 import fetchData, { PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
+
 
 //
 const AddInsurance = () => {
@@ -18,6 +18,8 @@ const AddInsurance = () => {
   const [SelectedinsuranceApiData, setSelectedinsuranceApiData] = useState(null);
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
+  
+
 
   useEffect(() => {
     const InsuranceApi = async () => {
