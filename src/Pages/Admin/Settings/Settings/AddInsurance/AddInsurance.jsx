@@ -1,59 +1,42 @@
-import {
-  DoubleRightOutlined,
-  DoubleLeftOutlined,
-  ConsoleSqlOutlined,
-} from "@ant-design/icons";
-import { useQuery } from "@tanstack/react-query";
-import { Switch } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Loading from "../../../../../Loading/Loading";
-import { headers } from "../../../../../Misc/BaseClient";
-import { fetchData } from "../../../../../Misc/Helper";
+import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 
 const AddInsurance = () => {
-  const [TransferData, setTransferData] = useState([]);
+  // const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
-  // const [chk, setchk] = useState(false);
-  // const [multi, setmulti] = useState([]);
-  // const [newdata, setnewdata] = useState({ value: "coconut" });
+  const [facilityselectedkeys, setfacilityselectedkeys] = useState();
+  const [insuranceApiData, setinsuranceApiData] = useState(null);
+  const [selectedInsurance, setselectedInsurance] = useState(null);
+  const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
+  const [passAllInsurance, setpassAllInsurance] = useState(null);
 
-  //Getting All Insurance using react query get request(GET req)
-  const endPoint = "admin/ac/setting/get/all/insurance";
-  const {
-    isLoading,
-    isError,
-    error,
-    data: insurance,
-    refetch,
-  } = useQuery(["allInsurance"], () => fetchData(endPoint));
+  //multiple get api will be called together to increase performance
+  //parallel API calling
+  const fetchWithPromiseAll = async () => {
+    const GetInsurancePromise = fetchData("admin/ac/setting/get/all/insurance");
+    const SelectedInsurancePromise = fetchData(
+      "admin/ac/setting/get/selected/insurance"
+    );
+    const [GetInsurance, SelectedInsurance] = await Promise.all([
+      GetInsurancePromise,
+      SelectedInsurancePromise,
+    ]);
+    setinsuranceApiData(GetInsurance);
+    setselectedInsurance(SelectedInsurance);
+  };
 
-  console.log(insurance);
+  useEffect(() => {
+    fetchWithPromiseAll();
+  }, []);
 
-  if (isLoading) {
+  console.log(insuranceApiData, selectedInsurance);
+
+  if (!insuranceApiData && !selectedInsurance) {
     return <Loading></Loading>;
   }
-  if (isError) {
-    return <div>Error! {error.message}</div>;
-  }
-  // testing space............
-  // useEffect(() => {
-  //   axios("../../../All_Fake_Api/Transfer.json")
-  //     .then((response) => {
-  //       // console.log("chkd ata", response?.data)
-  //       setTransferData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  // const arr1 = [];
-  // console.log(arr1);
-
-  // -------------------------
-
   const handleAdding = (e) => {
     let target = e.target;
     // let name = target.name;
@@ -61,12 +44,7 @@ const AddInsurance = () => {
       target.selectedOptions,
       (option) => option.value * 1
     );
-    // console.log("data value", value)
     setSelectedKeys(value);
-    // setchk(false)
-    // setmulti({
-    //   [name]: value,
-    // });
   };
 
   const handleRemoving = (e) => {
@@ -74,7 +52,7 @@ const AddInsurance = () => {
       e.target.selectedOptions,
       (option) => option.value * 1
     );
-    setSelectedKeys(value);
+    setfacilityselectedkeys(value);
   };
 
   const handleSelectedValue = () => {
@@ -82,23 +60,48 @@ const AddInsurance = () => {
   };
 
   const handleRemoveValue = (e) => {
-    console.log("Remove  button click get data", selectedKeys);
+    console.log("Remove  button click get data", facilityselectedkeys);
   };
 
-  const InsuranceView = () => {
+  const InsuranceView = async () => {
     if (selectedKeys.length > 1) {
       alert("select just one value");
       return setSelectedKeys([0]);
     }
-    console.log(" insurance  click get data", selectedKeys);
+    console.log("data selectedkeys", selectedKeys);
+
+    const body = {
+      insurance_id: selectedKeys,
+      // insurance_id: 219,
+    };
+    const fetchpostTest = await PostfetchData(
+      "admin/ac/setting/get/all/insurance/details",
+      body
+    );
+    console.log("fetchpostTest", fetchpostTest);
+    setpassAllInsurance(fetchpostTest);
+    setpassSelectedInsurance({});
+    // setpassSelectedInsurance(response?.data);
   };
 
-  const FacilityInsurance = () => {
-    if (selectedKeys.length > 1) {
+  const FacilityInsurance = async () => {
+    if (facilityselectedkeys.length > 1) {
       alert("select just one value");
-      return setSelectedKeys([0]);
+      return setfacilityselectedkeys([0]);
     }
-    console.log(" FacilityInsurance  get data", selectedKeys);
+    // console.log('data facilaty', facilityselectedkeys )
+
+    const body = {
+      insurance_id: facilityselectedkeys,
+    };
+
+    const fetchpostTestt = await PostfetchData(
+      "admin/ac/setting/get/selected/insurance/details",
+      body
+    );
+    setpassSelectedInsurance(fetchpostTestt);
+    console.log("facilaty axios", fetchpostTestt);
+    setpassAllInsurance({});
   };
 
   return (
@@ -114,29 +117,14 @@ const AddInsurance = () => {
             // className="h-40"
             onChange={(e) => {
               handleAdding(e);
+              // console.log("handlechange data check", e.target.value)
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {TransferData.length > 0 &&
-              TransferData.map((item, index) => (
-                // <option
-                //   className="px-2 text-sm"
-                //   onClick={(e) => arr1.push(item)}
-                //   // onClick={(e) => console.log(e.target.title)}
-                //   value={item.id}
-                // >
-                //   {item.key}
-                //   {item.title}
-                // </option>
-                <option
-                  key={item.id}
-                  className="px-2 text-sm"
-                  //   onClick={(e) => arr1.push(item)}
-                  // onClick={(e) => console.log(e.target.title)}
-                  value={item.id}
-                >
-                  {item.id}
-                  {item.title}
+            {insuranceApiData?.data?.all_insurance.length > 0 &&
+              insuranceApiData?.data?.all_insurance.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
+                  {item.payor_name}
                 </option>
               ))}
           </select>
@@ -145,29 +133,34 @@ const AddInsurance = () => {
             onClick={() => {
               InsuranceView();
             }}
-            className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="pms-button"
           >
             View Details
           </button>
         </div>
-        <div className=" flex flex-col items-center justify-center my-4">
-          <button
+        <div className=" flex flex-col items-center justify-center my-4 gap-2">
+          <button // onClick={handleAddItems}
             onClick={() => handleSelectedValue()}
-            className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md mb-2 flex"
+            className="pms-button w-24"
           >
-            Add
-            <DoubleRightOutlined className="ml-2" />
+            <div className="flex item-center justify-center">
+              ADD
+              <HiOutlineArrowRight className="ml-2 text-base" />
+            </div>
           </button>
           <button
             onClick={(e) => {
               handleRemoveValue(e);
             }}
-            className="px-2 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md flex"
+            className="pms-close-button w-24"
           >
-            <DoubleLeftOutlined className="mr-2" />
-            Remove
+            <div className="flex item-center justify-center">
+              <HiOutlineArrowLeft className="mr-2 text-base" />
+              REMOVE
+            </div>
           </button>
         </div>
+
         <div>
           <h1 className="text-sm text-gray-700 my-2">
             Facility Selected Insurance
@@ -182,27 +175,31 @@ const AddInsurance = () => {
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {/* calling same api  */}
-            {TransferData.length > 0 &&
-              TransferData.map((item, index) => (
+            {selectedInsurance?.data?.selected_insurance?.length > 0 &&
+              selectedInsurance?.data?.selected_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.id}
-                  {item.title}
+                  {item.payor_name}
                 </option>
               ))}
           </select>
-          {/* </FormControl> */}
           <br />
           <button
             onClick={() => {
               FacilityInsurance();
             }}
-            className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="pms-button"
           >
             View Details
           </button>
         </div>
       </div>
-      <InsuranceDetails></InsuranceDetails>
+      {(passAllInsurance?.status === "success" ||
+        passSelectedInsurance?.status === "success") && (
+        <InsuranceDetails
+          AllInsurance={passAllInsurance}
+          SelectedInsurance={passSelectedInsurance}
+        ></InsuranceDetails>
+      )}
     </div>
   );
 };

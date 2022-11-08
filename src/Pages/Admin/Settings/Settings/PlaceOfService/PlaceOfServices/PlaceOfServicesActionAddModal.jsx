@@ -2,12 +2,21 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { Modal } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import axios from "axios";
+import { headers } from "../../../../../../Misc/BaseClient";
+import "../../../../../Style/Pagination.css";
+
 export default function PlaceOfServicesActionAddModal({
   handleClose,
   open,
   recordData,
+  items,
+  setItems,
+  setTotalPage,
+  page,
 }) {
   const { id, pos_code, pos_name } = recordData;
+  console.log(id);
   const {
     register,
     handleSubmit,
@@ -15,9 +24,80 @@ export default function PlaceOfServicesActionAddModal({
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (FormData) => {
+    console.log(FormData);
+    //create new pos [post req]
+    if (FormData && !id) {
+      try {
+        let res = await axios({
+          method: "post",
+          url: "https://app.therapypms.com/api/v1/admin/ac/setting/create/pos",
+          headers: headers,
+          data: FormData,
+        });
+
+        // console.log(res.data);
+        if (res.data.status === "success") {
+          console.log("Successfully Inserted");
+          //After posting data to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
+          // setItems([...items, res?.data?.pos_data]);
+          const getPatientsData = async (page = 1) => {
+            const res = await axios({
+              method: "get",
+              url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+              headers: headers,
+            });
+            // const result = await res.json();
+            const result = res?.data?.pos_data?.data;
+            //console.log(result);
+            setItems(result);
+            setTotalPage(res?.data?.pos_data?.last_page);
+          };
+          getPatientsData(page);
+          handleClose();
+        }
+      } catch (error) {
+        console.log(error.response.data.message); // this is the main part. Use the response property from the error object
+      }
+    }
+    //Update the pos if any pos clicked
+    else {
+      const payload = {
+        pos_id: id,
+        pos_name: FormData?.pos_name,
+        pos_code: FormData?.pos_code,
+      };
+      try {
+        let res = await axios({
+          method: "post",
+          url: "https://app.therapypms.com/api/v1/admin/ac/setting/update/pos",
+          headers: headers,
+          data: payload,
+        });
+
+        // console.log(res.data);
+        if (res.data.status === "success") {
+          console.log("Successfully Updated");
+          //for showing updated data in real time
+          const getPatientsData = async (page = 1) => {
+            const res = await axios({
+              method: "get",
+              url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+              headers: headers,
+            });
+            // const result = await res.json();
+            const result = res?.data?.pos_data?.data;
+            //console.log(result);
+            setItems(result);
+            setTotalPage(res?.data?.pos_data?.last_page);
+          };
+          getPatientsData(page);
+          handleClose();
+        }
+      } catch (error) {
+        console.log(error.response.data.message); // this is the main part. Use the response property from the error object
+      }
+    }
   };
 
   // Editable value
@@ -25,11 +105,11 @@ export default function PlaceOfServicesActionAddModal({
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        service_code: pos_code,
-        place_of_service: pos_name ? pos_name : null,
+        pos_code: pos_code,
+        pos_name: pos_name ? pos_name : null,
       });
     }, 100);
-  }, [reset, id, pos_name]);
+  }, [reset, pos_name, pos_code]);
   //console.log(errors);
 
   return (
@@ -63,9 +143,10 @@ export default function PlaceOfServicesActionAddModal({
                 </label>
                 <input
                   type="text"
-                  name="place_of_service"
+                  name="pos_name"
                   className="modal-input-field ml-1 w-full"
-                  {...register("place_of_service")}
+                  {...register("pos_name")}
+                  required
                 />
               </div>
               <div className="mt-[-15px]">
@@ -76,9 +157,10 @@ export default function PlaceOfServicesActionAddModal({
                 </label>
                 <input
                   type="number"
-                  name="service_code"
+                  name="pos_code"
                   className="modal-input-field ml-1 w-full"
-                  {...register("service_code")}
+                  {...register("pos_code")}
+                  required
                 />
               </div>
             </div>

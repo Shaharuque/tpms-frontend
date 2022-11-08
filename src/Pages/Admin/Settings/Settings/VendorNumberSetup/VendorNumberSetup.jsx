@@ -201,8 +201,7 @@ const VendorNumberSetup = () => {
               <button
                 variant="outlined"
                 onClick={handleClickOpen}
-                className="px-5 mt-2 md:mt-8 py-1 bg-gradient-to-r from-secondary
-            to-primary hover:to-secondary text-white rounded-sm"
+                className="px-5 mt-[26px] pms-button rounded-sm"
               >
                 Create New
               </button>

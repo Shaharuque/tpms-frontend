@@ -235,7 +235,7 @@ const Report = () => {
           )}
           <div>
             <input
-              className="hover:shadow-lg rounded-md bg-secondary text-white py-2 text-xs px-3 mt-7"
+              className="pms-button mt-[26px]"
               type="submit"
               value="Export"
             />

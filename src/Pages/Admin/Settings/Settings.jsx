@@ -16,13 +16,8 @@ const Settings = () => {
           initial={{ opacity: 0, x: -25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
-          className=" p-2 setting-nav rounded-md"
+          className=" p-2 my-2 setting-nav shadow-md rounded-md"
         >
-          <div className="">
-            <h1 className=" text-base bg-secondary p-2 px-3 text-white mb-0">
-              Facility Setup
-            </h1>
-          </div>
           {setting.map((s, i) => (
             <SettingNav key={i} s={s}></SettingNav>
           ))}

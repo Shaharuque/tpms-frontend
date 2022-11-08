@@ -144,10 +144,7 @@ const AddCptCode = () => {
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
-              <button
-                onClick={handleClickOpen}
-                className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
-              >
+              <button onClick={handleClickOpen} className="pms-button">
                 Add Place of service
               </button>
             </label>
@@ -158,10 +155,7 @@ const AddCptCode = () => {
         <h1 className="text-lg my-2 text-orange-400">Services</h1>
 
         <div className="flex justify-end items-end my-2">
-          <button
-            onClick={clearFilters}
-            className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-          >
+          <button onClick={clearFilters} className="pms-clear-button border">
             Clear filters
           </button>
         </div>

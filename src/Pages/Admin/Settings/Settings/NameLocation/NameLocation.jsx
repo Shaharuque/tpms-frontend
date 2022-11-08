@@ -16,6 +16,7 @@ const NameLocation = () => {
 
   //response from async action
   const data = useSelector((state) => state.settingInfo); //After action dispatched response can be received here
+  // console.log("settings data", data);
 
   //Some Important data showing below
   const loading = data?.loading;
@@ -29,7 +30,7 @@ const NameLocation = () => {
   //getsettings action is dispatched [api calling]
   useEffect(() => {
     dispatch(getsettings());
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return <Loading></Loading>;
@@ -45,14 +46,15 @@ const NameLocation = () => {
     setbox33Open(false);
   };
 
+  console.log("box_no_33", box_no_33);
+
   return (
-    <div className="p-2 ">
-      <h1 className="text-orange-500">Facility Setup</h1>
+    <div className="px-2  ">
       <NameLocationTable
         box33Open={box33Open}
         handleTableOpen={handleTableOpen}
         time={working_hours}
-        data={box_no_33}
+        box_no_33={box_no_33}
       ></NameLocationTable>
       <NameLocationTable32
         data={box_no_32}

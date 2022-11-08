@@ -1,18 +1,29 @@
 ## Input:
+
 className="modal-label-name"
 className="col-span-2 modal-input-field ml-1 w-full"
 className="modal-input-field ml-1 w-full"
 
 ## Time Picker:
+
 <TimePicker className="modal-input-field" use12Hours format="h:mm A" onChange={onChange} />
 
 ## Button:
-<div className=" flex items-end justify-end mt-2">
-    <button className=" pms-button mr-2" type="submit">
-        Save
-    </button>
 
+<div className=" flex items-end justify-end mt-2">
+    <button className="pms-button mr-2" type="submit"> 
+        Save
+    </button>     
+                                       
     <button className="pms-close-button" onClick={handleClose}>
         Close
     </button>
 </div>
+
+### Divider
+
+ <div className="bg-gray-200 py-[1px] mt-3"></div>
+
+### clear filter
+
+<button onClick={clearFilters} className="pms-clear-button border">

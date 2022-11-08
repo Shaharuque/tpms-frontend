@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Switch } from "antd";
 
-const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
+const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
+  console.log("box33 data", box_no_33);
   const [value, setValue] = useState(true);
 
   // console.log(time);
@@ -12,33 +13,33 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
     // reset();
   };
 
   // Editable value
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     reset({
-  //       facility_name: data?.facility_name,
-  //       address: data?.address,
-  //       address_two: data?.address_two,
-  //       city: data?.city,
-  //       zip: data?.zip,
-  //       phone_one: data?.phone_one,
-  //       short_code: data?.short_code,
-  //       email: data?.email,
-  //       ein: data?.ein,
-  //       npi: data?.npi,
-  //       taxonomy_code: data?.taxonomy_code,
-  //       contact_person: data?.contact_person,
-  //       service_area_miles: data?.service_area_miles,
-  //       ftp_username: data?.ftp_username,
-  //       ftp_password: data?.ftp_password,
-  //       // mon_end_time: time?.mon_end_time,
-  //     });
-  //   }, 0);
-  // }, [data?.address, time?.mon_end_time]);
+  useEffect(() => {
+    setTimeout(() => {
+      reset({
+        facility_name: box_no_33?.facility_name,
+        address: box_no_33?.address,
+        address_two: box_no_33?.address_two,
+        city: box_no_33?.city,
+        zip: box_no_33?.zip,
+        phone_one: box_no_33?.phone_one,
+        short_code: box_no_33?.short_code,
+        email: box_no_33?.email,
+        ein: box_no_33?.ein,
+        npi: box_no_33?.npi,
+        taxonomy_code: box_no_33?.taxonomy_code,
+        contact_person: box_no_33?.contact_person,
+        service_area_miles: box_no_33?.service_area_miles,
+        ftp_username: box_no_33?.ftp_username,
+        ftp_password: box_no_33?.ftp_password,
+        // mon_end_time: time?.mon_end_time,
+      });
+    }, 0);
+  }, [box_no_33, time?.mon_end_time, reset]);
 
   return (
     <div>
@@ -61,7 +62,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-5 mr-2 gap-6">
+              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 my-5 mr-2 gap-6">
                 {/* name  */}
                 <div>
                   {" "}
@@ -365,6 +366,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                       type="time"
                       name="mon_start_time"
                       // value={time?.mon_end_time}
+                      format="h:mm A"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                       {...register("mon_start_time")}
                     />
@@ -373,6 +375,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
                     <input
                       type="time"
                       name="mon_end_time"
+                      format="h:mm A"
                       className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                       {...register("mon_end_time")}
                     />
@@ -483,11 +486,7 @@ const NameLocationTable = ({ data, time, box33Open, handleTableOpen }) => {
               </div>
 
               {/* submit  */}
-              <input
-                className=" px-3 py-1 rounded-md text-sm font-normal bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
-                type="submit"
-                value={"Save"}
-              />
+              <input className="pms-button" type="submit" value={"Save"} />
             </form>
           </motion.div>
         </div>

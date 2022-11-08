@@ -18,7 +18,7 @@ const Form = (item) => {
       setTimeout(() => {
         reset(
           {
-            zone_name: item?.item[0]?.zone_name,
+            zone_name: item?.item[0]?.zone_name || "Main Zone",
             city: item?.item[0]?.city,
             facility_name_two: item?.item[0]?.facility_name_two,
             address: item?.item[0]?.address,
@@ -70,6 +70,7 @@ const Form = (item) => {
               name="zone_name"
               className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
               {...register("zone_name")}
+              disabled
             />
           </div>
           {/* address 1 */}
@@ -206,11 +207,7 @@ const Form = (item) => {
         )}
 
         {/* submit  */}
-        <input
-          className=" mt-20 px-3 py-1 rounded-md text-sm font-normal bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
-          type="submit"
-          value={"Save"}
-        />
+        <input className="pms-button my-2" type="submit" value={"Save"} />
       </form>
     </div>
   );
