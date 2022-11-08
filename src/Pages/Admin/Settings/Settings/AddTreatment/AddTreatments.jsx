@@ -14,20 +14,41 @@ const AddTreatments = () => {
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
 
+  //multiple get api will be called together to increase performance
+  //parallel API calling
+  const fetchWithPromiseAll = async () => {
+    const GetTreatmentPromise = fetchData("admin/ac/setting/get/all/treatment");
+    const SelectedTreatmentPromise = fetchData(
+      "admin/ac/setting/get/selected/treatment"
+    );
+    const [GetTreatments, SelectedTreatments] = await Promise.all([
+      GetTreatmentPromise,
+      SelectedTreatmentPromise,
+    ]);
+    setAllTreatmentData(GetTreatments);
+    setSelectedTreatmentData(SelectedTreatments);
+  };
+
   useEffect(() => {
-    const treatmentsApiCalling = async () => {
-      const getAllTreatments = await fetchData(
-        "admin/ac/setting/get/all/treatment"
-      );
-      const getSelectedTreatments = await fetchData(
-        "admin/ac/setting/get/selected/treatment"
-      );
-      // console.log(getSelectedTreatments);
-      setAllTreatmentData(getAllTreatments);
-      setSelectedTreatmentData(getSelectedTreatments);
-    };
-    treatmentsApiCalling();
+    fetchWithPromiseAll();
   }, []);
+
+  console.log(allTreatmentData, selectedTreatmentData);
+
+  // useEffect(() => {
+  //   const treatmentsApiCalling = async () => {
+  //     const getAllTreatments = await fetchData(
+  //       "admin/ac/setting/get/all/treatment"
+  //     );
+  //     const getSelectedTreatments = await fetchData(
+  //       "admin/ac/setting/get/selected/treatment"
+  //     );
+  //     // console.log(getSelectedTreatments);
+  //     setAllTreatmentData(getAllTreatments);
+  //     setSelectedTreatmentData(getSelectedTreatments);
+  //   };
+  //   treatmentsApiCalling();
+  // }, []);
 
   if (!allTreatmentData && !selectedTreatmentData) {
     return <Loading></Loading>;
@@ -58,48 +79,6 @@ const AddTreatments = () => {
   const handleRemoveValue = (e) => {
     console.log("Remove  button click get data", facilityselectedkeys);
   };
-
-  // const InsuranceView = async () => {
-  //   if (selectedKeys.length > 1) {
-  //     alert("select just one value");
-  //     return setSelectedKeys([0]);
-  //   }
-  //   console.log("data selectedkeys", selectedKeys);
-
-  //   const body = {
-  //     insurance_id: selectedKeys,
-  //     // insurance_id: 219,
-  //   };
-  //   const fetchpostTest = await PostfetchData(
-  //     "admin/ac/setting/get/all/insurance/details",
-  //     body
-  //   );
-  //   console.log("fetchpostTest", fetchpostTest);
-  //   setpassAllInsurance(fetchpostTest);
-  //   setpassSelectedInsurance({});
-  //   // setpassSelectedInsurance(response?.data);
-  // };
-
-  // const FacilityInsurance = async () => {
-  //   if (facilityselectedkeys.length > 1) {
-  //     alert("select just one value");
-  //     return setfacilityselectedkeys([0]);
-  //   }
-  //   // console.log('data facilaty', facilityselectedkeys )
-
-  //   const body = {
-  //     // insurance_id : facilityselectedkeys
-  //     insurance_id: 1531,
-  //   };
-
-  //   const fetchpostTestt = await PostfetchData(
-  //     "admin/ac/setting/get/selected/insurance/details",
-  //     body
-  //   );
-  //   setpassSelectedInsurance(fetchpostTestt);
-  //   console.log("facilaty axios", fetchpostTestt);
-  //   setpassAllInsurance({});
-  // };
 
   return (
     <div>
