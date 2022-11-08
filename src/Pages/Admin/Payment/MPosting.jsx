@@ -414,14 +414,11 @@ const MPosting = () => {
         </h1>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={clearFilters}
-            className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
-          >
+          <button onClick={clearFilters} className="pms-clear-button ">
             Clear filters
           </button>
           <Link to={"/admin/billing/deposit-add"}>
-            <button className="px-2 py-2 text-xs  flex items-center  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
+            <button className="px-2 py-2 text-xs  flex items-center  pms-button">
               <BsPlus className="text-lg" />
               Add Deposit
             </button>
@@ -487,6 +484,7 @@ const MPosting = () => {
                           className="border-2 border-gray-100"
                         />
                       </div>
+
                       <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
                         <button
                           className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
@@ -634,19 +632,12 @@ const MPosting = () => {
               />
             </div>
             <div className=" flex items-end justify-start gap-2 mt-8">
-              <button
-                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                type="submit"
-              >
+              <button className="pms-button mr-2" type="submit">
                 Save
               </button>
 
-              <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                autoFocus
-              >
-                Cancel
-              </button>
+              <button className="pms-close-button">Close</button>
+
               <div className="flex items-center ">
                 <Switch
                   size="small"

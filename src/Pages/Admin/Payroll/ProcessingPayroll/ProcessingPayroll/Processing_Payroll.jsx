@@ -361,7 +361,7 @@ const Processing_Payroll = () => {
               <option value="01-12-2021">01/12/2021-07/12/2021</option>
             </select>
           </div>
-          <div className="">
+          <div className="mt-[2px]">
             <label className="label">
               <span className="label-text mb-[1px] text-[17px] font-medium text-[#9b9b9b] text-left">
                 Choose Staff to process
@@ -371,8 +371,9 @@ const Processing_Payroll = () => {
               <GlobalMultiSelect />
             </>
           </div>
+
           <button
-            className=" py-[5px] w-1/4 font-normal mt-[35px] mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+            className="pms-button w-1/4 mt-[25px]"
             type="submit"
             onClick={() => setTable(true)}
           >

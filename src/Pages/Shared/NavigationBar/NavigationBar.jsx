@@ -308,7 +308,7 @@ const TestNaviBar = ({ handle }) => {
           <div>
             <Dropdown
               overlay={
-                <div className="border w-auto md:w-[25rem] p-2 shadow-md  rounded-sm bg-white">
+                <div className="border w-auto md:w-[25rem] p-2 shadow-lg  rounded-sm bg-white">
                   <div className="card-body">
                     <h4 className=" text-center ">Latest Changes</h4>
                     <hr />
