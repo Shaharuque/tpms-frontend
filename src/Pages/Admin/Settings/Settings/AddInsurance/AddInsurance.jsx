@@ -1,8 +1,4 @@
-import {
-  DoubleRightOutlined,
-  DoubleLeftOutlined,
-  ConsoleSqlOutlined,
-} from "@ant-design/icons";
+import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
 
 import React, { useEffect, useState } from "react";
 import Loading from "../../../../../Loading/Loading";
@@ -14,40 +10,34 @@ const AddInsurance = () => {
   const [selectedKeys, setSelectedKeys] = useState();
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
   const [insuranceApiData, setinsuranceApiData] = useState(null);
-  const [treatmentApiData, settreatmentApiData] = useState(null);
+  const [selectedInsurance, setselectedInsurance] = useState(null);
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
 
+  //multiple get api will be called together to increase performance
+  //parallel API calling
+  const fetchWithPromiseAll = async () => {
+    const GetInsurancePromise = fetchData("admin/ac/setting/get/all/insurance");
+    const SelectedtreatmentPromise = fetchData(
+      "admin/ac/setting/get/selected/insurance"
+    );
+    const [GetInsurance, Selectedtreatment] = await Promise.all([
+      GetInsurancePromise,
+      SelectedtreatmentPromise,
+    ]);
+    setinsuranceApiData(GetInsurance);
+    setselectedInsurance(Selectedtreatment);
+  };
+
   useEffect(() => {
-    const dynamicApi = async () => {
-      const GetInsurance = await fetchData(
-        "admin/ac/setting/get/all/insurance"
-      );
-      const Selectedtreatment = await fetchData(
-        "admin/ac/setting/get/selected/treatment"
-      );
-      setinsuranceApiData(GetInsurance);
-      settreatmentApiData(Selectedtreatment);
-    };
-    dynamicApi();
+    fetchWithPromiseAll();
   }, []);
 
-  if (!insuranceApiData && !treatmentApiData) {
+  console.log(insuranceApiData, selectedInsurance);
+
+  if (!insuranceApiData && !selectedInsurance) {
     return <Loading></Loading>;
   }
-
-  // const options = {
-  //   url: "https://app.therapypms.com/api/v1/admin/login",
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json;charset=UTF-8",
-  //   },
-  //   data: JSON.stringify(formdata), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
-  // };
-  // axios(options).then((response) => {
-  //   console.log(response.data);
-
   const handleAdding = (e) => {
     let target = e.target;
     // let name = target.name;
@@ -103,8 +93,7 @@ const AddInsurance = () => {
     // console.log('data facilaty', facilityselectedkeys )
 
     const body = {
-      // insurance_id : facilityselectedkeys
-      insurance_id: 1531,
+      insurance_id: facilityselectedkeys,
     };
 
     const fetchpostTestt = await PostfetchData(
@@ -182,14 +171,13 @@ const AddInsurance = () => {
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {/* calling same api  */}
-            {treatmentApiData?.data?.selected_treatment?.length > 0 &&
-              treatmentApiData?.data?.selected_treatment.map((item, index) => (
+            {selectedInsurance?.data?.selected_insurance?.length > 0 &&
+              selectedInsurance?.data?.selected_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.treatment_name}
+                  {item.payor_name}
                 </option>
               ))}
           </select>
-          {/* </FormControl> */}
           <br />
           <button
             onClick={() => {

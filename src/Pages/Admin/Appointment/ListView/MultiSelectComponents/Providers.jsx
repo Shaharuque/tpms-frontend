@@ -1,28 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
-import "./ListviewMultiselect.css";
+import "./MultiSelectCSS/multiSelect.css";
 
-const CustomMultiSelection = ({
-  patients,
-  setPatientId,
-  stuffs,
-  setStuffsId,
-}) => {
+const Providers = ({ stuffs, setStuffsId }) => {
   const [selected, setSelected] = useState([]);
-
-  const patientDataProcess = () => {
-    let processedData = [];
-    if (patients) {
-      for (let x of patients) {
-        processedData.push({
-          label: x?.client_full_name,
-          value: x?.client_full_name,
-          id: x?.id,
-        });
-      }
-    }
-    return processedData;
-  };
 
   const stuffDataProcess = () => {
     let processedData = [];
@@ -38,9 +19,7 @@ const CustomMultiSelection = ({
     return processedData;
   };
 
-  const dataoptions = patientDataProcess();
   const dataOptionsStuff = stuffDataProcess();
-  console.log(dataoptions);
   console.log(dataOptionsStuff);
 
   const customValueRenderer = (selected, _options) => {
@@ -52,30 +31,20 @@ const CustomMultiSelection = ({
   };
 
   // const getId = selected.map((item) => item.id);
-  // console.log("selected clients", getId);
+  // console.log("selected Providers", getId);
 
   useEffect(() => {
-    const getClientsId = async () => {
+    const getProvidersId = async () => {
       const getId = selected.map((item) => item.id);
-      setPatientId(getId);
+      setStuffsId(getId);
     };
-    getClientsId();
-  }, [selected, setPatientId]);
-
-  // useEffect(() => {
-  //   const getClientsId = async () => {
-  //     const getId = selected.map((item) => item.id);
-  //     if (getId) {
-  //       receivedData(getId);
-  //     }
-  //   };
-  //   getClientsId();
-  // }, [selected, receivedData]);
+    getProvidersId();
+  }, [selected, setStuffsId]);
 
   return (
     <MultiSelect
       className="listview"
-      options={dataoptions}
+      options={dataOptionsStuff}
       value={selected}
       onChange={setSelected}
       labelledBy="Select"
@@ -84,4 +53,4 @@ const CustomMultiSelection = ({
   );
 };
 
-export default CustomMultiSelection;
+export default Providers;

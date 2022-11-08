@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
-import "./ListviewMultiselect.css";
+import "./MultiSelectCSS/multiSelect.css";
 
-const CustomMultiSelection = ({
-  patients,
-  setPatientId,
-  stuffs,
-  setStuffsId,
-}) => {
+const Clients = ({ patients, setPatientId }) => {
   const [selected, setSelected] = useState([]);
 
   const patientDataProcess = () => {
@@ -24,24 +19,7 @@ const CustomMultiSelection = ({
     return processedData;
   };
 
-  const stuffDataProcess = () => {
-    let processedData = [];
-    if (stuffs) {
-      for (let x of stuffs) {
-        processedData.push({
-          label: x?.full_name,
-          value: x?.full_name,
-          id: x?.id,
-        });
-      }
-    }
-    return processedData;
-  };
-
   const dataoptions = patientDataProcess();
-  const dataOptionsStuff = stuffDataProcess();
-  console.log(dataoptions);
-  console.log(dataOptionsStuff);
 
   const customValueRenderer = (selected, _options) => {
     if (selected.length) {
@@ -61,6 +39,8 @@ const CustomMultiSelection = ({
     };
     getClientsId();
   }, [selected, setPatientId]);
+
+  console.log(selected);
 
   // useEffect(() => {
   //   const getClientsId = async () => {
@@ -84,4 +64,4 @@ const CustomMultiSelection = ({
   );
 };
 
-export default CustomMultiSelection;
+export default Clients;

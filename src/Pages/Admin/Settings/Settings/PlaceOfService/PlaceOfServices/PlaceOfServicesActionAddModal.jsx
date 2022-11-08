@@ -78,6 +78,7 @@ export default function PlaceOfServicesActionAddModal({
         // console.log(res.data);
         if (res.data.status === "success") {
           console.log("Successfully Updated");
+          //for showing updated data in real time
           const getPatientsData = async (page = 1) => {
             const res = await axios({
               method: "get",

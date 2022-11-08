@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
+import Loading from "../../../../../Loading/Loading";
 import { headers } from "../../../../../Misc/BaseClient";
 import PlaceOfServicesActionAddModal from "./PlaceOfServices/PlaceOfServicesActionAddModal";
 
@@ -26,7 +27,6 @@ const PlaceOfServices = () => {
       });
       // const result = await res.json();
       const result = res?.data?.pos_data?.data;
-      //console.log(result);
       setItems(result);
       setTotalPage(res?.data?.pos_data?.last_page);
     };
@@ -59,20 +59,6 @@ const PlaceOfServices = () => {
   // };
   console.log(items);
 
-  //get data from API + data fetch from api while scrolling[Important]
-  // useEffect(() => {
-  //   fetch("https://app.therapypms.com/api/v1/admin/ac/setting/get/pos", {
-  //     method: "GET",
-  //     headers: headers,
-  //   })
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log("Success:", data);
-  //     });
-  // }, []);
-
   const handleClickOpen2 = (record) => {
     setOpenAddModal(true);
     setRecordData(record);
@@ -88,18 +74,6 @@ const PlaceOfServices = () => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
-
-  const [table, setTable] = useState([]);
-  useEffect(() => {
-    axios("../../../All_Fake_Api/Holiday.json")
-      .then((response) => {
-        //console.log("calling");
-        setTable(response?.data);
-      })
-      .catch((error) => {
-        //console.log(error);
-      });
-  }, []);
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
@@ -233,8 +207,8 @@ const PlaceOfServices = () => {
           onChange={handleChange}
         />
         <ReactPaginate
-          previousLabel={"<"}
-          nextLabel={">"}
+          previousLabel={"<<"}
+          nextLabel={">>"}
           pageCount={totalPage}
           marginPagesDisplayed={1}
           onPageChange={handlePageClick}
