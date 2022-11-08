@@ -18,15 +18,15 @@ const AddInsurance = () => {
   //parallel API calling
   const fetchWithPromiseAll = async () => {
     const GetInsurancePromise = fetchData("admin/ac/setting/get/all/insurance");
-    const SelectedtreatmentPromise = fetchData(
+    const SelectedInsurancePromise = fetchData(
       "admin/ac/setting/get/selected/insurance"
     );
-    const [GetInsurance, Selectedtreatment] = await Promise.all([
+    const [GetInsurance, SelectedInsurance] = await Promise.all([
       GetInsurancePromise,
-      SelectedtreatmentPromise,
+      SelectedInsurancePromise,
     ]);
     setinsuranceApiData(GetInsurance);
-    setselectedInsurance(Selectedtreatment);
+    setselectedInsurance(SelectedInsurance);
   };
 
   useEffect(() => {
