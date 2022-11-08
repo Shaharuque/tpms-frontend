@@ -486,11 +486,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
               </div>
 
               {/* submit  */}
-              <input
-                className=" px-3 py-1 rounded-md text-sm font-normal bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
-                type="submit"
-                value={"Save"}
-              />
+              <input className="pms-button" type="submit" value={"Save"} />
             </form>
           </motion.div>
         </div>

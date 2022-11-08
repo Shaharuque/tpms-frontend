@@ -4,12 +4,16 @@ import { Modal } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import axios from "axios";
 import { headers } from "../../../../../../Misc/BaseClient";
+import "../../../../../Style/Pagination.css";
+
 export default function PlaceOfServicesActionAddModal({
   handleClose,
   open,
   recordData,
   items,
   setItems,
+  setTotalPage,
+  page,
 }) {
   const { id, pos_code, pos_name } = recordData;
   console.log(id);
@@ -36,13 +40,28 @@ export default function PlaceOfServicesActionAddModal({
         if (res.data.status === "success") {
           console.log("Successfully Inserted");
           //After posting data to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
-          setItems([...items, res?.data?.pos_data]);
+          // setItems([...items, res?.data?.pos_data]);
+          const getPatientsData = async (page = 1) => {
+            const res = await axios({
+              method: "get",
+              url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+              headers: headers,
+            });
+            // const result = await res.json();
+            const result = res?.data?.pos_data?.data;
+            //console.log(result);
+            setItems(result);
+            setTotalPage(res?.data?.pos_data?.last_page);
+          };
+          getPatientsData(page);
           handleClose();
         }
       } catch (error) {
         console.log(error.response.data.message); // this is the main part. Use the response property from the error object
       }
-    } else {
+    }
+    //Update the pos if any pos clicked
+    else {
       const payload = {
         pos_id: id,
         pos_name: FormData?.pos_name,
@@ -59,9 +78,20 @@ export default function PlaceOfServicesActionAddModal({
         // console.log(res.data);
         if (res.data.status === "success") {
           console.log("Successfully Updated");
-          //After updating data(post req) to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
-          console.log(res?.data);
-
+          //for showing updated data in real time
+          const getPatientsData = async (page = 1) => {
+            const res = await axios({
+              method: "get",
+              url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+              headers: headers,
+            });
+            // const result = await res.json();
+            const result = res?.data?.pos_data?.data;
+            //console.log(result);
+            setItems(result);
+            setTotalPage(res?.data?.pos_data?.last_page);
+          };
+          getPatientsData(page);
           handleClose();
         }
       } catch (error) {

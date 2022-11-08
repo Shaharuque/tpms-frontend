@@ -205,15 +205,11 @@ const PayPeriod = () => {
     <div>
       <div className="flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Pay Period</h1>
-
         <div className="md:flex items-center">
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
-              <h1
-                onClick={handleClickOpen2}
-                className="px-2 text-xs py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 cursor-pointer text-center mb-2 md:mb-0"
-              >
+              <h1 onClick={handleClickOpen2} className="pms-button mr-2">
                 Create Pay Period
               </h1>
             </label>
@@ -222,10 +218,7 @@ const PayPeriod = () => {
           <div>
             {/* <!-- The button to open calender view --> */}
             <label htmlFor="pay-box" className="">
-              <h1
-                onClick={handleClickOpen2}
-                className="px-2 text-xs py-1 bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm mr-2 cursor-pointer"
-              >
+              <h1 onClick={handleClickOpen2} className="pms-close-button">
                 Calender View
               </h1>
             </label>

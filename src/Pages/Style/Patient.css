@@ -2,10 +2,18 @@
     border: 1px solid red;
 }
 
-.patient-nav {
+/* .patient-nav {
     border: 1px solid #09A2B3;
-}
+} */
 
 .active-nav {
     background-color: aqua;
+}
+
+
+
+.clink:hover {
+    background-color: #e9f0f1d3;
+    border-radius: 2px;
+    box-shadow: 0px 1px 2px -1px #2b2b2b;
 }

@@ -44,19 +44,16 @@ const Logo = () => {
               </div>
             </div>
           </div>
-          <div className="lg:mt-5">
+          <div className="lg:mt-5 xl:mt-[38px]">
             {/* <input type="submit" /> */}
             <input
               type="submit"
               value={"Upload"}
-              className=" py-[5px] mt-7 px-3  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className="pms-button mr-2"
             ></input>
-            <label
-              htmlFor="pay-box"
-              className="py-[5px] mt-7 px-3 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-            >
+            <button htmlFor="pay-box" className="pms-close-button">
               Delete
-            </label>
+            </button>
           </div>
         </div>
       </form>

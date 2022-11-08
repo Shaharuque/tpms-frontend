@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 
-const InfiniteScroll = () => {
-  const LIMIT = 2;
+const InfiniteScrollTest = () => {
+  const LIMIT = 20;
 
   const fetchRepositories = async (page) => {
     const response = await fetch(
@@ -37,4 +37,4 @@ const InfiniteScroll = () => {
   );
 };
 
-export default InfiniteScroll;
+export default InfiniteScrollTest;

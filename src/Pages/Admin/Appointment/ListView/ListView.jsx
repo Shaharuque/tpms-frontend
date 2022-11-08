@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useState, useRef } from "react";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
-import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 // import { Fade } from "react-reveal";
@@ -19,6 +18,8 @@ import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
 import { headers } from "../../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import Clients from "./MultiSelectComponents/Clients";
+import Providers from "./MultiSelectComponents/Providers";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -50,6 +51,9 @@ const ListView = () => {
     };
     getPatientsData();
   }, []);
+  // console.log("patients", patients);
+  console.log("selected clients", patientId);
+
   //Provider multi select data from server
   useEffect(() => {
     const getProviderData = async () => {
@@ -63,12 +67,12 @@ const ListView = () => {
     };
     getProviderData();
   }, []);
-  console.log("stuffs", stuffs);
+  // console.log("stuffs", stuffs);
+  console.log("selected stuffs", stuffsId);
 
   const receivedData = (data) => {
     console.log(data);
   };
-  //console.log(patientId);
 
   //provider names API
 
@@ -661,7 +665,7 @@ const ListView = () => {
     //console.log(from_date, to_date);
     const payLoad = {
       client_id: patientId,
-      provider_id: "",
+      // provider_id: stuffsId,
       pos: "",
       status: "",
       from_date: from_date,
@@ -672,7 +676,7 @@ const ListView = () => {
       const fetchManageSessions = {
         url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
         method: "POST",
-        mode: 'no-cors',
+        mode: "no-cors",
         headers: headers,
         data: payLoad,
       };
@@ -805,21 +809,21 @@ const ListView = () => {
                         <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                           Clients
                         </h1>
-                        <CustomMultiSelection
+                        <Clients
                           patients={patients}
                           setPatientId={setPatientId}
                           receivedData={receivedData}
-                        ></CustomMultiSelection>
+                        ></Clients>
                       </div>
                     )}
                     <div className="w-full">
                       <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
                         Provider
                       </h1>
-                      <CustomMultiSelection
+                      <Providers
                         stuffs={stuffs}
                         setStuffsId={setStuffsId}
-                      ></CustomMultiSelection>
+                      ></Providers>
                     </div>
 
                     {billable ? (
