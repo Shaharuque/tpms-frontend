@@ -18,7 +18,6 @@ const Settings = () => {
           transition={{ delay: 0.6 }}
           className=" p-2 my-2 setting-nav shadow-md rounded-md"
         >
-
           {setting.map((s, i) => (
             <SettingNav key={i} s={s}></SettingNav>
           ))}

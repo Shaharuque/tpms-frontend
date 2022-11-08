@@ -18,14 +18,14 @@ const Add = () => {
       <div className="  p-2  border drop-box rounded-sm bg-white w-52">
         <button
           onClick={handlePatient}
-          className="text-[14px] text-secondary  px-[20px] py-2  rounded-sm clink flex items-center font-semibold gap-2"
+          className="text-[14px] text-secondary  pl-[15px] w-full py-2  rounded-sm clink flex items-center justify-start font-medium gap-2"
         >
-          <AiOutlineUserAdd className="text-lg font-bold " />
+          <AiOutlineUserAdd className="text-xl font-bold " />
           <div>Create Patient</div>
         </button>
 
-        <button className="text-[14px] text-secondary  px-[15px] py-2  rounded-sm clink flex items-center font-semibold gap-2">
-          <AiOutlineIdcard className="text-lg font-bold" />
+        <button className="text-[14px] text-secondary  px-[15px] w-full py-2  rounded-sm clink flex items-center font-medium gap-2">
+          <AiOutlineIdcard className="text-xl font-bold" />
           <div onClick={handleAppointment}>Create Appointment</div>
         </button>
       </div>

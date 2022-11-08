@@ -672,7 +672,7 @@ const ListView = () => {
       const fetchManageSessions = {
         url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
         method: "POST",
-        mode: 'no-cors',
+        mode: "no-cors",
         headers: headers,
         data: payLoad,
       };

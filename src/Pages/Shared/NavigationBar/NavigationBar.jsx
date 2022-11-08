@@ -104,6 +104,7 @@ const TestNaviBar = ({ handle }) => {
               trigger={["click"]}
               placement="bottomLeft"
               overlayStyle={{ zIndex: "100" }}
+              arrow
             >
               <button onClick={(e) => e.preventDefault()}>
                 <Space>
@@ -137,6 +138,7 @@ const TestNaviBar = ({ handle }) => {
                     </div>
                   </div>
                 }
+                arrow
                 trigger={["click"]}
                 placement="bottomLeft"
                 overlayStyle={{ zIndex: "100" }}
@@ -289,8 +291,9 @@ const TestNaviBar = ({ handle }) => {
           <Dropdown
             overlay={<Add></Add>}
             trigger={["click"]}
-            placement="bottom"
+            placement="bottomRight"
             overlayStyle={{ zIndex: "100" }}
+            arrow
           >
             <button onClick={(e) => e.preventDefault()}>
               <Space>
@@ -324,9 +327,10 @@ const TestNaviBar = ({ handle }) => {
                   </div>
                 </div>
               }
+              arrow
               trigger={["click"]}
               overlayStyle={{ zIndex: "100" }}
-              placement="bottom"
+              placement="bottomRight"
             >
               <button onClick={(e) => e.preventDefault()}>
                 <Space>
