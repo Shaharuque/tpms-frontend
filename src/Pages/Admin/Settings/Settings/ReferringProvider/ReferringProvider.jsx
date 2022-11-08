@@ -199,19 +199,13 @@ const ReferringProvider = () => {
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
-              <button
-                onClick={handleClickOpen2}
-                className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2"
-              >
+              <button onClick={handleClickOpen2} className="pms-button mr-2">
                 Add Referring Provider
               </button>
             </label>
           </div>
-          <div className="md:flex justify-end items-end my-2">
-            <button
-              onClick={clearFilters}
-              className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-            >
+          <div className="md:flex justify-end items-end my-2 border">
+            <button onClick={clearFilters} className="pms-clear-button">
               Clear filters
             </button>
           </div>

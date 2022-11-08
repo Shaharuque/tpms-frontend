@@ -13,7 +13,7 @@ import { RiFileDamageFill } from "react-icons/ri";
 
 const PatientsInfo = () => {
   // Great parent component
-  // 
+  //
   const { id } = useParams();
   // console.log(id);
   localStorage.setItem("p_key", id);
@@ -41,7 +41,7 @@ const PatientsInfo = () => {
           initial={{ opacity: 0, x: -25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
-          className=" p-2 setting-nav rounded-md"
+          className=" my-2 p-2  setting-nav shadow-md rounded-lg "
         >
           <div className="">
             <div className="">

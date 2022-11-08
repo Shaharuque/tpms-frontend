@@ -1,6 +1,5 @@
-import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
-
 import React, { useEffect, useState } from "react";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 
@@ -131,28 +130,32 @@ const AddTreatments = () => {
             // onClick={() => {
             //   InsuranceView();
             // }}
-            className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="pms-button"
           >
             View Details
           </button>
         </div>
 
-        <div className=" flex flex-col items-center justify-center my-4">
-          <button
+        <div className=" flex flex-col items-center justify-center my-4 gap-2">
+          <button // onClick={handleAddItems}
             onClick={() => handleSelectedValue()}
-            className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md mb-2 flex"
+            className="pms-button w-24"
           >
-            ADD
-            <DoubleRightOutlined className="ml-2" />
+            <div className="flex item-center justify-center">
+              ADD
+              <HiOutlineArrowRight className="ml-2 text-base" />
+            </div>
           </button>
           <button
             onClick={(e) => {
               handleRemoveValue(e);
             }}
-            className="px-2 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md flex"
+            className="pms-close-button w-24"
           >
-            <DoubleLeftOutlined className="mr-2" />
-            REMOVE
+            <div className="flex item-center justify-center">
+              <HiOutlineArrowLeft className="mr-2 text-base" />
+              REMOVE
+            </div>
           </button>
         </div>
 
@@ -189,7 +192,7 @@ const AddTreatments = () => {
             // onClick={() => {
             //   FacilityInsurance();
             // }}
-            className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="pms-button"
           >
             View Details
           </button>

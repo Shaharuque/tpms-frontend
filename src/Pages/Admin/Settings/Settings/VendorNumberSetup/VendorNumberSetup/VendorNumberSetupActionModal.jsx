@@ -50,7 +50,7 @@ export default function VendorNumberSetupActionModal({
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="w-full font-semibold">
-                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-2">
+                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-x-2 gap-y-2">
                   <div>
                     <label className="label">
                       <span className="modal-label-name">Service</span>
@@ -95,7 +95,7 @@ export default function VendorNumberSetupActionModal({
                   </div>
 
                   {/* staff_number  */}
-                  <div className="mt-[-15px]">
+                  <div className="">
                     {" "}
                     <label className="label">
                       <span className="modal-label-name">Vendor No</span>
@@ -107,7 +107,7 @@ export default function VendorNumberSetupActionModal({
                       {...register("vendor_no")}
                     />
                   </div>
-                  <div className="mt-[-15px]">
+                  <div className="">
                     {" "}
                     <label className="label">
                       <span className="modal-label-name">Service Code</span>
