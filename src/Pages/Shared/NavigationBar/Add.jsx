@@ -14,8 +14,8 @@ const Add = () => {
     setPatientClicked(!patientClicked);
   };
   return (
-    <>
-      <div className="  p-2  border drop-box rounded-sm bg-white w-52">
+    <div>
+      <div className="  p-2 border shadow-md rounded-sm bg-white w-52">
         <button
           onClick={handlePatient}
           className="text-[14px] text-secondary  pl-[15px] w-full py-2  rounded-sm clink flex items-center justify-start font-medium gap-2"
@@ -45,7 +45,7 @@ const Add = () => {
           ></CreatePatient>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
