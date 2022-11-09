@@ -341,9 +341,7 @@ const CoactiveractRate = () => {
         </div>
 
         <Link to={"/admin/billing/rate-list-add"}>
-          <button className="px-5 py-2 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
-            + Add Rate
-          </button>
+          <button className="pms-button">+ Add Rate</button>
         </Link>
       </div>
       {select && (

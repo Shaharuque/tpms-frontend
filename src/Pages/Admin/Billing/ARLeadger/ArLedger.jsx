@@ -592,10 +592,7 @@ const ArLedger = () => {
                       </span>
                     </div>
                     {/* submit  */}
-                    <button
-                      className="px-5 mt-8 py-1  text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                      type="submit"
-                    >
+                    <button className="mt-8 pms-button" type="submit">
                       View
                     </button>
                   </div>
@@ -703,9 +700,7 @@ const ArLedger = () => {
                 <option value="Date_Range">Provider</option>
               </select>
             </div>
-            <button className="  px-3 ml-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-              Go
-            </button>
+            <button className=" pms-button ml-3">Go</button>
           </div>
         </div>
       )}

@@ -321,7 +321,7 @@ const ProcessingClaim = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
-            <div className="flex gap-2 ">
+            <div className="flex gap-3 ">
               <div className="w-3/4">
                 <label className="label">
                   <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -366,10 +366,7 @@ const ProcessingClaim = () => {
                 )}
               </div>
               {/* go*/}
-              <button
-                onClick={handleGO}
-                className=" mt-8 w-12 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              >
+              <button onClick={handleGO} className=" mt-8 w-12 pms-button">
                 Go
               </button>
             </div>
@@ -597,7 +594,7 @@ const ProcessingClaim = () => {
                 {/* submit  */}
                 <div className="gap-2 flex">
                   <button
-                    className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                    className=" pms-button w-16 mt-8"
                     type="submit"
                     onClick={() => {
                       setTableOpen(true);
@@ -605,9 +602,7 @@ const ProcessingClaim = () => {
                   >
                     Run
                   </button>
-                  <button className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
-                    Cancel
-                  </button>
+                  <button className="pms-close-button w-16 mt-8">Cancel</button>
                 </div>
               </>
             )}

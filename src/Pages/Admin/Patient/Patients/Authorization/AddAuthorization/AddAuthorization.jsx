@@ -6,7 +6,6 @@ import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { Switch } from "antd";
 import { BsArrowRight } from "react-icons/bs";
-import { DateRangePicker } from "react-date-range";
 import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
 
 const AddAuthorization = () => {
@@ -455,21 +454,15 @@ const AddAuthorization = () => {
               ></textarea>
             </div>
           </div>
-          {/* submit  */}
-          <button
-            className=" py-[5px] font-normal px-3 mr-1 text-xs ml-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-            type="submit"
-          >
-            Save
-          </button>
+          <div className=" flex items-end justify-start mt-2">
+            <button className="pms-button mr-2" type="submit">
+              Save
+            </button>
 
-          <button
-            className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-            autoFocus
-            onClick={handleClose}
-          >
-            Close
-          </button>
+            <button className="pms-close-button" onClick={handleClose}>
+              Close
+            </button>
+          </div>
         </form>
       </motion.div>
     </div>

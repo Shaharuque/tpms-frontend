@@ -540,9 +540,7 @@ const PatientLedger = () => {
 
             <div>
               {/* submit  */}
-              <button className="py-[5px]  px-3 text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
-                View
-              </button>
+              <button className="pms-button">View</button>
             </div>
           </div>
         </div>

@@ -4,9 +4,6 @@ import { useForm } from "react-hook-form";
 
 const OtherSetup = () => {
   const [active, setActive] = useState(false);
-
-
-
   const [note, setNote] = useState("");
 
   const { register, handleSubmit, reset } = useForm();
@@ -235,10 +232,10 @@ const OtherSetup = () => {
               // }}
             /> */}
             <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              size="small"
+              checked={active ? true : false}
+              onClick={() => setActive(!active)}
+            />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Is eligible for paid time off
             </span>
@@ -252,10 +249,10 @@ const OtherSetup = () => {
               // }}
             /> */}
             <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              size="small"
+              checked={active ? true : false}
+              onClick={() => setActive(!active)}
+            />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Exempt Staff
             </span>
@@ -269,10 +266,10 @@ const OtherSetup = () => {
               // }}
             /> */}
             <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              size="small"
+              checked={active ? true : false}
+              onClick={() => setActive(!active)}
+            />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Gets paid holidays
             </span>
@@ -286,10 +283,10 @@ const OtherSetup = () => {
               // }}
             /> */}
             <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              size="small"
+              checked={active ? true : false}
+              onClick={() => setActive(!active)}
+            />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Is Parttime
             </span>
@@ -303,10 +300,10 @@ const OtherSetup = () => {
               // }}
             /> */}
             <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              size="small"
+              checked={active ? true : false}
+              onClick={() => setActive(!active)}
+            />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Is Contractor
             </span>
@@ -320,16 +317,16 @@ const OtherSetup = () => {
               // }}
             /> */}
             <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              size="small"
+              checked={active ? true : false}
+              onClick={() => setActive(!active)}
+            />
             <span className="text-xs ml-1  text-gray-600 font-normal">
               Prevent Provider Render Without Notes(for catalyst users)
             </span>
           </div>
         </div>
-        <div className="other-box my-5">
+        <div className="other-box ml-2 my-5">
           {/* <div className="">
             <h1 className="text-sm font-medium"></h1>
 
@@ -451,11 +448,8 @@ const OtherSetup = () => {
             />
           </div> */}
         </div>
-        <div className="mt-10">
-          <button
-            className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            type="submit"
-          >
+        <div className="mt-10 ml-2">
+          <button className=" pms-button" type="submit">
             Save
           </button>
         </div>

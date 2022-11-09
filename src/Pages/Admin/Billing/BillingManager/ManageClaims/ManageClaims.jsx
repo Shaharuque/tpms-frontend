@@ -299,15 +299,10 @@ const ManageClaims = () => {
             )}
             {/* submit  */}
             <div className="flex gap-2">
-              <button
-                className=" py-2 px-5 mt-8 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                type="submit"
-              >
+              <button className="mt-8 pms-button" type="submit">
                 Get Claim(s)
               </button>
-              <button className="font-normal  py-2 mt-8 px-3 text-xs bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
-                Cancel
-              </button>
+              <button className="pms-close-button mt-8">Cancel</button>
             </div>
           </div>
         </form>

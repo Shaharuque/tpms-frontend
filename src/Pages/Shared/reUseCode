@@ -26,4 +26,4 @@ className="modal-input-field ml-1 w-full"
 
 ### clear filter
 
-<button onClick={clearFilters} className="pms-clear-button border">
+<button onClick={clearFilters} className="pms-clear-button">

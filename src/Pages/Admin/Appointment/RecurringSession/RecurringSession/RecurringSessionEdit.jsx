@@ -211,18 +211,11 @@ const RecurringSessionEdit = () => {
           <div className="divider"></div>
           {/* submit  */}
           <div className="mt-4">
-            <button
-              className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              type="submit"
-            >
+            <button className=" pms-button mr-2" type="submit">
               Save
             </button>
             <Link to={"/admin/recurring-session"}>
-              <button
-                className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-                autoFocus
-                onClick={reset}
-              >
+              <button className="pms-close-button" autoFocus onClick={reset}>
                 CANCEL
               </button>
             </Link>

@@ -32,9 +32,9 @@ const MPostingEditAdd = () => {
           </h1>
           <Link
             to={"/admin/m-posting"}
-            className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="  flex items-center pms-button justify-center"
           >
-            <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
+            <IoCaretBackCircleOutline className="mr-1 text-lg" /> Back
           </Link>
         </div>
         <div className="border">
@@ -185,32 +185,20 @@ const MPostingEditAdd = () => {
                       Amount
                     </span>
                   </label>
-                  <TextArea
-                    maxLength={2000}
-                    rows={7}
-                    placeholder=" Notes"
-                    size="large"
-                  />
+                  <TextArea rows={5} placeholder=" Notes" size="large" />
                 </div>
 
                 <div>{/* <textarea ref={register} /> */}</div>
               </div>
 
-              <div className="mb-5">
-                <div className=" flex items-end justify-start mt-2">
-                  <button
-                    className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                    type="submit"
-                  >
+              <div className="mb-5 flex justify-start">
+                <div className=" flex items-end justify-end mt-2">
+                  <button className="pms-button mr-2" type="submit">
                     Save
                   </button>
 
-                  <button
-                    className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                    autoFocus
-                    onClick={onCancel}
-                  >
-                    Cancel
+                  <button className="pms-close-button" onClick={onCancel}>
+                    Close
                   </button>
                 </div>
               </div>

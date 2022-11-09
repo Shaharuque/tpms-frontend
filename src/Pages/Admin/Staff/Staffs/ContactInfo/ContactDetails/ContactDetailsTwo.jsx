@@ -171,11 +171,8 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                     />
                   </div>
                 </div>
-                <div className="my-3 ml-1">
-                  <button
-                    className=" py-[5px]  px-4  text-sm font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                    type="submit"
-                  >
+                <div className="my-3">
+                  <button className=" pms-button" type="submit">
                     Save Emergency Contact
                   </button>
                 </div>

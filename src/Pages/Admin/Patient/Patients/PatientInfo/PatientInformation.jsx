@@ -142,7 +142,7 @@ const PatientInformation = () => {
     console.log(file);
   };
 
-  console.log("---", addressRendomValue)
+  console.log("---", addressRendomValue);
 
   ///relation value handle
   const settingRelation = (e) => {
@@ -1039,10 +1039,7 @@ const PatientInformation = () => {
           </div>
           <div className="mb-5">
             {/* submit  */}
-            <button
-              className=" py-[5px] mt-7 px-3 my-1 text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-              type="submit"
-            >
+            <button className="pms-button my-3" type="submit">
               Save Patient
             </button>
           </div>

@@ -47,10 +47,7 @@ const DepartmentSupervisor = () => {
             </div>
           )}
         </div>
-        <button
-          className=" py-[5px] mt-3 px-3 ml-1 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-          type="submit"
-        >
+        <button className="pms-button" type="submit">
           Save
         </button>
       </form>

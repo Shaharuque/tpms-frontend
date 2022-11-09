@@ -289,15 +289,12 @@ const ContractRateAdd = () => {
 
               <div className="mb-3">
                 <div className=" flex items-end justify-start mt-6">
-                  <button
-                    className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                    type="submit"
-                  >
+                  <button className=" pms-button mr-3" type="submit">
                     Save
                   </button>
 
                   <button
-                    className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                    className="pms-close-button "
                     autoFocus
                     onClick={onCancel}
                   >
