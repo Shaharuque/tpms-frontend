@@ -361,7 +361,7 @@ const Processing_Payroll = () => {
               <option value="01-12-2021">01/12/2021-07/12/2021</option>
             </select>
           </div>
-          <div className="lg:mt-4 2xl:mt-0">
+          <div className="md:mt-2 lg:mt-4 2xl:mt-0">
             <label className="label">
               <span className="label-text mb-[1px] text-[17px] font-medium text-[#9b9b9b] text-left">
                 Choose Staff to process

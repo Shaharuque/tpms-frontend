@@ -14,6 +14,7 @@ export default function PlaceOfServicesActionAddModal({
   setItems,
   setTotalPage,
   page,
+  cacheData
 }) {
   const { id, pos_code, pos_name } = recordData;
   console.log(id);
@@ -39,6 +40,8 @@ export default function PlaceOfServicesActionAddModal({
         // console.log(res.data);
         if (res.data.status === "success") {
           console.log("Successfully Inserted");
+          alert("data insertt")
+
           //After posting data to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
           // setItems([...items, res?.data?.pos_data]);
           const getPatientsData = async (page = 1) => {
@@ -50,7 +53,9 @@ export default function PlaceOfServicesActionAddModal({
             // const result = await res.json();
             const result = res?.data?.pos_data?.data;
             //console.log(result);
+            
             setItems(result);
+            // cacheData[`user-${page}`] = result
             setTotalPage(res?.data?.pos_data?.last_page);
           };
           getPatientsData(page);
@@ -89,6 +94,7 @@ export default function PlaceOfServicesActionAddModal({
             const result = res?.data?.pos_data?.data;
             //console.log(result);
             setItems(result);
+            // cacheData[`user-${page}`] = result
             setTotalPage(res?.data?.pos_data?.last_page);
           };
           getPatientsData(page);

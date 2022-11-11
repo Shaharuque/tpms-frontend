@@ -1,6 +1,5 @@
-import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
-
 import React, { useEffect, useState } from "react";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 
@@ -15,20 +14,41 @@ const AddTreatments = () => {
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
 
+  //multiple get api will be called together to increase performance
+  //parallel API calling[Important]
+  const fetchWithPromiseAll = async () => {
+    const GetTreatmentPromise = fetchData("admin/ac/setting/get/all/treatment");
+    const SelectedTreatmentPromise = fetchData(
+      "admin/ac/setting/get/selected/treatment"
+    );
+    const [GetTreatments, SelectedTreatments] = await Promise.all([
+      GetTreatmentPromise,
+      SelectedTreatmentPromise,
+    ]);
+    setAllTreatmentData(GetTreatments);
+    setSelectedTreatmentData(SelectedTreatments);
+  };
+
   useEffect(() => {
-    const treatmentsApiCalling = async () => {
-      const getAllTreatments = await fetchData(
-        "admin/ac/setting/get/all/treatment"
-      );
-      const getSelectedTreatments = await fetchData(
-        "admin/ac/setting/get/selected/treatment"
-      );
-      // console.log(getSelectedTreatments);
-      setAllTreatmentData(getAllTreatments);
-      setSelectedTreatmentData(getSelectedTreatments);
-    };
-    treatmentsApiCalling();
+    fetchWithPromiseAll();
   }, []);
+
+  console.log(allTreatmentData, selectedTreatmentData);
+
+  // useEffect(() => {
+  //   const treatmentsApiCalling = async () => {
+  //     const getAllTreatments = await fetchData(
+  //       "admin/ac/setting/get/all/treatment"
+  //     );
+  //     const getSelectedTreatments = await fetchData(
+  //       "admin/ac/setting/get/selected/treatment"
+  //     );
+  //     // console.log(getSelectedTreatments);
+  //     setAllTreatmentData(getAllTreatments);
+  //     setSelectedTreatmentData(getSelectedTreatments);
+  //   };
+  //   treatmentsApiCalling();
+  // }, []);
 
   if (!allTreatmentData && !selectedTreatmentData) {
     return <Loading></Loading>;
@@ -60,48 +80,6 @@ const AddTreatments = () => {
     console.log("Remove  button click get data", facilityselectedkeys);
   };
 
-  // const InsuranceView = async () => {
-  //   if (selectedKeys.length > 1) {
-  //     alert("select just one value");
-  //     return setSelectedKeys([0]);
-  //   }
-  //   console.log("data selectedkeys", selectedKeys);
-
-  //   const body = {
-  //     insurance_id: selectedKeys,
-  //     // insurance_id: 219,
-  //   };
-  //   const fetchpostTest = await PostfetchData(
-  //     "admin/ac/setting/get/all/insurance/details",
-  //     body
-  //   );
-  //   console.log("fetchpostTest", fetchpostTest);
-  //   setpassAllInsurance(fetchpostTest);
-  //   setpassSelectedInsurance({});
-  //   // setpassSelectedInsurance(response?.data);
-  // };
-
-  // const FacilityInsurance = async () => {
-  //   if (facilityselectedkeys.length > 1) {
-  //     alert("select just one value");
-  //     return setfacilityselectedkeys([0]);
-  //   }
-  //   // console.log('data facilaty', facilityselectedkeys )
-
-  //   const body = {
-  //     // insurance_id : facilityselectedkeys
-  //     insurance_id: 1531,
-  //   };
-
-  //   const fetchpostTestt = await PostfetchData(
-  //     "admin/ac/setting/get/selected/insurance/details",
-  //     body
-  //   );
-  //   setpassSelectedInsurance(fetchpostTestt);
-  //   console.log("facilaty axios", fetchpostTestt);
-  //   setpassAllInsurance({});
-  // };
-
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
@@ -131,28 +109,32 @@ const AddTreatments = () => {
             // onClick={() => {
             //   InsuranceView();
             // }}
-            className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="pms-button"
           >
             View Details
           </button>
         </div>
 
-        <div className=" flex flex-col items-center justify-center my-4">
-          <button
+        <div className=" flex flex-col items-center justify-center my-4 gap-2">
+          <button // onClick={handleAddItems}
             onClick={() => handleSelectedValue()}
-            className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md mb-2 flex"
+            className="pms-button w-24"
           >
-            ADD
-            <DoubleRightOutlined className="ml-2" />
+            <div className="flex item-center justify-center">
+              ADD
+              <HiOutlineArrowRight className="ml-2 text-base" />
+            </div>
           </button>
           <button
             onClick={(e) => {
               handleRemoveValue(e);
             }}
-            className="px-2 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md flex"
+            className="pms-close-button w-24"
           >
-            <DoubleLeftOutlined className="mr-2" />
-            REMOVE
+            <div className="flex item-center justify-center">
+              <HiOutlineArrowLeft className="mr-2 text-base" />
+              REMOVE
+            </div>
           </button>
         </div>
 
@@ -189,7 +171,7 @@ const AddTreatments = () => {
             // onClick={() => {
             //   FacilityInsurance();
             // }}
-            className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="pms-button"
           >
             View Details
           </button>

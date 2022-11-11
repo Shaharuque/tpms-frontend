@@ -1,6 +1,5 @@
-import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
-
 import React, { useEffect, useState } from "react";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
@@ -20,13 +19,15 @@ const AddInsurance = () => {
   //parallel API calling
   const fetchWithPromiseAll = async () => {
     const GetInsurancePromise = fetchData("admin/ac/setting/get/all/insurance");
-    const SelectedtreatmentPromise = fetchData("admin/ac/setting/get/selected/insurance");
-    const [GetInsurance, Selectedtreatment] = await Promise.all([
+    const SelectedInsurancePromise = fetchData(
+      "admin/ac/setting/get/selected/insurance"
+    );
+    const [GetInsurance, SelectedInsurance] = await Promise.all([
       GetInsurancePromise,
-      SelectedtreatmentPromise,
+      SelectedInsurancePromise,
     ]);
     setinsuranceApiData(GetInsurance);
-    setselectedInsurance(Selectedtreatment);
+    setselectedInsurance(SelectedInsurance);
   };
 
   useEffect(() => {
@@ -134,29 +135,34 @@ const AddInsurance = () => {
             onClick={() => {
               InsuranceView();
             }}
-            className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="pms-button"
           >
             View Details
           </button>
         </div>
-        <div className=" flex flex-col items-center justify-center my-4">
-          <button
+        <div className=" flex flex-col items-center justify-center my-4 gap-2">
+          <button // onClick={handleAddItems}
             onClick={() => handleSelectedValue()}
-            className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md mb-2 flex"
+            className="pms-button w-24"
           >
-            Add
-            <DoubleRightOutlined className="ml-2" />
+            <div className="flex item-center justify-center">
+              ADD
+              <HiOutlineArrowRight className="ml-2 text-base" />
+            </div>
           </button>
           <button
             onClick={(e) => {
               handleRemoveValue(e);
             }}
-            className="px-2 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md flex"
+            className="pms-close-button w-24"
           >
-            <DoubleLeftOutlined className="mr-2" />
-            Remove
+            <div className="flex item-center justify-center">
+              <HiOutlineArrowLeft className="mr-2 text-base" />
+              REMOVE
+            </div>
           </button>
         </div>
+
         <div>
           <h1 className="text-sm text-gray-700 my-2">
             Facility Selected Insurance
@@ -183,7 +189,7 @@ const AddInsurance = () => {
             onClick={() => {
               FacilityInsurance();
             }}
-            className="px-5  mr-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className="pms-button"
           >
             View Details
           </button>

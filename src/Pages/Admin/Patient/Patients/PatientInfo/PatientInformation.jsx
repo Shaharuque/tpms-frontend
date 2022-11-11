@@ -50,7 +50,7 @@ const PatientInformation = () => {
   // const changeDate = (date) => {
   //   setDate(date);
   // };
-  // console.log(date);
+  // console.log(date); 
 
   // const month = date ? date.getMonth() + 1 : null;
   // const day = date ? date.getDate() : null;

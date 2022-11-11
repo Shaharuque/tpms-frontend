@@ -29,7 +29,7 @@ export default function BusinessActionModal({ handleClose, open }) {
               className="text-gray-600 text-2xl hover:text-primary"
             />
           </div>
-          <div className="divider mt-0"></div>
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center gap-3 text-sm">
               <div>
@@ -56,7 +56,7 @@ export default function BusinessActionModal({ handleClose, open }) {
                 />
               </div>
             </div>
-            <div className="divider mb-0"></div>
+            <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
               <button className=" pms-button mr-2" type="submit">
                 Upload

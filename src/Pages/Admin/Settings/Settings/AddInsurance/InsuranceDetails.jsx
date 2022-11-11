@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Switch } from "antd";
-import { useEffect } from "react";
+import { useEffect } from "react";  
 
 const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
   const [active, setActive] = useState(false);
@@ -10,6 +10,8 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
   const onSubmit = (data) => {
     console.log("formsubmit", data);
   };
+
+  console.log('props all insurance',AllInsurance)
 
   const Ass = AllInsurance?.status === "success";
   const Aa = AllInsurance?.all_insurance_details;

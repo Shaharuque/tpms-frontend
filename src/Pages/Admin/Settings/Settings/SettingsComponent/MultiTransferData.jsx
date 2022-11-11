@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { DoubleRightOutlined, DoubleLeftOutlined } from "@ant-design/icons";
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 
 const MultiTransferData = ({ name1, name2 }) => {
   const [TransferData, setTransferData] = useState([]);
@@ -46,17 +47,21 @@ const MultiTransferData = ({ name1, name2 }) => {
               ))}
           </select>
         </div>
-        <div className=" flex flex-col items-center justify-center my-4">
+        <div className=" flex flex-col items-center justify-center gap-2 my-4">
           <button // onClick={handleAddItems}
             onClick={() => setSelectedKeys(arr1)}
-            className="px-2 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md mb-2 flex"
+            className="pms-button w-24"
           >
-            Add
-            <DoubleRightOutlined className="ml-2" />
+            <div className="flex item-center justify-center">
+              ADD
+              <HiOutlineArrowRight className="ml-2 text-base" />
+            </div>
           </button>
-          <button className="px-2 mx-3 text-sm py-1 bg-gradient-to-r from-red-700 to-red-500  hover:to-red-700 text-white rounded-md flex">
-            <DoubleLeftOutlined className="mr-2" />
-            Remove
+          <button className="pms-close-button w-24">
+            <div className="flex item-center justify-center">
+              <HiOutlineArrowLeft className="mr-2 text-base" />
+              REMOVE
+            </div>
           </button>
         </div>
         <div>

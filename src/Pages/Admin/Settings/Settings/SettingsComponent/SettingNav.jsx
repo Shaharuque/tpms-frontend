@@ -4,7 +4,7 @@ import CustomLink from "../../../../Pages/Shared/CustomLink";
 const SettingNav = ({ s }) => {
   const { name, link, icon } = s;
   return (
-    <div className="   ">
+    <div className="">
       <CustomLink
         className="flex gap-1 py-1 clink text-secondary  items-center"
         to={link}
