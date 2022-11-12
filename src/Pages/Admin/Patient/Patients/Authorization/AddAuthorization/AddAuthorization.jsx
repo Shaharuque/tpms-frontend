@@ -6,7 +6,6 @@ import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
 import { Switch } from "antd";
 import { BsArrowRight } from "react-icons/bs";
-import { DateRangePicker } from "react-date-range";
 import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
 
 const AddAuthorization = () => {
@@ -130,26 +129,26 @@ const AddAuthorization = () => {
           <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-6 gap-y-3">
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                <span className=" label-font">
                   Description<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="description"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font py-[1px] w-full focus:outline-none"
                 {...register("description")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                <span className=" label-font">
                   Insurance
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                className="input-border input-font  w-full focus:outline-none"
                 {...register("insurance")}
               >
                 <option value="single">single</option>
@@ -158,13 +157,13 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                <span className=" label-font">
                   Tx Type
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                className="input-border input-font  w-full focus:outline-none"
                 {...register("tx_type")}
               >
                 <option value="single">single</option>
@@ -173,13 +172,13 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                <span className=" label-font">
                   SUPV. Provider
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                className="input-border input-font  w-full focus:outline-none"
                 {...register("sup_provider")}
               >
                 <option value="single">single</option>
@@ -189,9 +188,7 @@ const AddAuthorization = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                  Selected date
-                </span>
+                <span className=" label-font">Selected date</span>
               </label>
               <div className="ml-1">
                 <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
@@ -238,40 +235,40 @@ const AddAuthorization = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                <span className=" label-font">
                   Authorization Number<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="authorization_number"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font py-[1px] w-full focus:outline-none"
                 {...register("authorization_number")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                <span className=" label-font">
                   UCI / Insurance ID<span className="text-red-500">*</span>
                 </span>
               </label>
               <input
                 type="text"
                 name="uci_id"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font py-[1px] w-full focus:outline-none"
                 {...register("uci_id")}
               />
             </div>
 
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                <span className=" label-font">
                   COB
                   <span className="text-red-500">*</span>
                 </span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                className="input-border input-font  w-full focus:outline-none"
                 {...register("cob")}
               >
                 <option value="single">single</option>
@@ -281,9 +278,7 @@ const AddAuthorization = () => {
 
             <div className="">
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                  Upload Authorization
-                </span>
+                <span className=" label-font">Upload Authorization</span>
               </label>
               <input
                 type="file"
@@ -295,28 +290,26 @@ const AddAuthorization = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className=" label-font">
                     Diagnosis1<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font py-[1px] w-full focus:outline-none"
                   {...register("diagnosis1")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    Diagnosis2
-                  </span>
+                  <span className=" label-font">Diagnosis2</span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis2"
                   // className="border border-gray-300 rounded-sm py-[5px] mx-2 text-xs w-full"
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font py-[1px] w-full focus:outline-none"
                   {...register("diagnosis2")}
                 />
               </div>
@@ -325,27 +318,25 @@ const AddAuthorization = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className=" label-font">
                     Diagnosis3<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis3"
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font py-[1px] w-full focus:outline-none"
                   {...register("diagnosis3")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    Diagnosis4
-                  </span>
+                  <span className=" label-font">Diagnosis4</span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis4"
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font py-[1px] w-full focus:outline-none"
                   {...register("diagnosis4")}
                 />
               </div>
@@ -354,14 +345,12 @@ const AddAuthorization = () => {
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    Deductible
-                  </span>
+                  <span className=" label-font">Deductible</span>
                 </label>
                 <input
                   type="text"
                   name="diagnosis1"
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font py-[1px] w-full focus:outline-none"
                   {...register("deductible")}
                 />
               </div>
@@ -383,40 +372,34 @@ const AddAuthorization = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                  CoPay
-                </span>
+                <span className=" label-font">CoPay</span>
               </label>
               <input
                 type="text"
                 name="copay"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font py-[1px] w-full focus:outline-none"
                 {...register("copay")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                  CMS 4 (Insured Name)
-                </span>
+                <span className=" label-font">CMS 4 (Insured Name)</span>
               </label>
               <input
                 type="text"
                 name="cms4"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font py-[1px] w-full focus:outline-none"
                 {...register("cms4")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                  CMS 11 (Group No)
-                </span>
+                <span className=" label-font">CMS 11 (Group No)</span>
               </label>
               <input
                 type="text"
                 name="cms11"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font py-[1px] w-full focus:outline-none"
                 {...register("cms11")}
               />
             </div>
@@ -444,9 +427,7 @@ const AddAuthorization = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                  Notes
-                </span>
+                <span className=" label-font">Notes</span>
               </label>
               <textarea
                 onChange={(e) => setNotes(e.target.value)}
@@ -455,21 +436,15 @@ const AddAuthorization = () => {
               ></textarea>
             </div>
           </div>
-          {/* submit  */}
-          <button
-            className=" py-[5px] font-normal px-3 mr-1 text-xs ml-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-            type="submit"
-          >
-            Save
-          </button>
+          <div className=" flex items-end justify-start mt-2">
+            <button className="pms-button mr-2" type="submit">
+              Save
+            </button>
 
-          <button
-            className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-            autoFocus
-            onClick={handleClose}
-          >
-            Close
-          </button>
+            <button className="pms-close-button" onClick={handleClose}>
+              Close
+            </button>
+          </div>
         </form>
       </motion.div>
     </div>

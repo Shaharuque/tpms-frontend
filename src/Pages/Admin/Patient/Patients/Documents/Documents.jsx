@@ -168,7 +168,7 @@ const Documents = () => {
       <div className="my-10">
         <button
           onClick={handleClickOpen}
-          className="px-3 mb-5 text-xs font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm flex items-center"
+          className="pms-button flex item-center gap-2"
         >
           <HiPlus /> Add New Data
         </button>

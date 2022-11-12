@@ -141,15 +141,12 @@ const PayrollSetup = () => {
         </h1>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={clearFilters}
-            className="px-2  py-1 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
-          >
+          <button onClick={clearFilters} className="pms-clear-button border">
             Clear filters
           </button>
           <button
             onClick={handleClickOpen}
-            className="px-3 py-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+            className="pms-button"
             type="submit"
           >
             + Add Payroll
@@ -173,12 +170,8 @@ const PayrollSetup = () => {
       <div className="flex items-center flex-wrap gap-3">
         <BsArrow90DegRight className=" font-bold text-secondary" />
         <div>
-          <button className=" py-[6px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
-            Select All
-          </button>
-          <button className=" py-[6px] ml-1 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
-            Unselect All
-          </button>
+          <button className=" pms-button mr-3">Select All</button>
+          <button className=" pms-button">Unselect All</button>
         </div>
         <div className=" ">
           <select

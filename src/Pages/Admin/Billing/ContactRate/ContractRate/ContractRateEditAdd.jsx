@@ -33,12 +33,10 @@ const ContractRateEditAdd = () => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7  mr-2 gap-6">
                 <div className="">
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Select Insurance
-                    </span>
+                    <span className=" label-font">Select Insurance</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("insurance")}
                   >
                     <option value="name"> Payor </option>
@@ -48,9 +46,7 @@ const ContractRateEditAdd = () => {
                 {/* File  */}
                 <div className=" ">
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      File
-                    </span>
+                    <span className=" label-font">File</span>
                   </label>
                   <input
                     type="file"
@@ -65,12 +61,10 @@ const ContractRateEditAdd = () => {
                 {/* name  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Select Tx type
-                    </span>
+                    <span className=" label-font">Select Tx type</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("tx_type")}
                   >
                     <option value="name"> abcd </option>
@@ -78,12 +72,10 @@ const ContractRateEditAdd = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Service
-                    </span>
+                    <span className=" label-font">Service</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("service")}
                   >
                     <option value="name"> abcd </option>
@@ -92,12 +84,10 @@ const ContractRateEditAdd = () => {
                 {/* Service Sub-Type  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Service Sub-Type
-                    </span>
+                    <span className=" label-font">Service Sub-Type</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("service_sub_type")}
                   >
                     <option value="name">EFT</option>
@@ -106,12 +96,10 @@ const ContractRateEditAdd = () => {
                 {/* CPT Code  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      CPT Code
-                    </span>
+                    <span className=" label-font">CPT Code</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("CPT_Code")}
                   >
                     <option value="name">EFT</option>
@@ -121,28 +109,24 @@ const ContractRateEditAdd = () => {
                   {/* m1 #  */}
                   <div>
                     <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        M1
-                      </span>
+                      <span className=" label-font">M1</span>
                     </label>
                     <input
                       type="number"
                       name="m1"
-                      className="input-border py-[1px] text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                      className="input-border py-[1px] input-font w-full focus:outline-none"
                       {...register("m1")}
                     />
                   </div>
                   {/* m1 #  */}
                   <div>
                     <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        M2
-                      </span>
+                      <span className=" label-font">M2</span>
                     </label>
                     <input
                       type="number"
                       name="m2"
-                      className="input-border py-[1px] text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                      className="input-border py-[1px] input-font w-full focus:outline-none"
                       {...register("21")}
                     />
                   </div>
@@ -150,28 +134,24 @@ const ContractRateEditAdd = () => {
                   {/* m3 #  */}
                   <div>
                     <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        M3
-                      </span>
+                      <span className=" label-font">M3</span>
                     </label>
                     <input
                       type="number"
                       name="m3"
-                      className="input-border text-gray-600 py-[1px] rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                      className="input-border py-[1px] input-font w-full focus:outline-none"
                       {...register("m3")}
                     />
                   </div>
                   {/* m4 #  */}
                   <div>
                     <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        M4
-                      </span>
+                      <span className=" label-font">M4</span>
                     </label>
                     <input
                       type="number"
                       name="m4"
-                      className="input-border text-gray-600 rounded-sm py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                      className="input-border py-[1px] input-font w-full focus:outline-none"
                       {...register("m4")}
                     />
                   </div>
@@ -179,12 +159,10 @@ const ContractRateEditAdd = () => {
                 {/* Rate Type  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Rate Type
-                    </span>
+                    <span className=" label-font">Rate Type</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("rate_type")}
                   >
                     <option value="name">EFT</option>
@@ -193,12 +171,10 @@ const ContractRateEditAdd = () => {
                 {/* Rate Per  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Rate Per
-                    </span>
+                    <span className=" label-font">Rate Per</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("rate_Per")}
                   >
                     <option value="name">EFT</option>
@@ -207,42 +183,36 @@ const ContractRateEditAdd = () => {
                 {/* Contract Rate */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Contract Rate
-                    </span>
+                    <span className=" label-font">Contract Rate</span>
                   </label>
                   <input
                     type="number"
                     name="contract_rate"
-                    className="input-border text-gray-600  py-[1px] rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border py-[1px] input-font w-full focus:outline-none"
                     {...register("contract_rate")}
                   />
                 </div>
                 {/* Billing Rate */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Billing Rate
-                    </span>
+                    <span className=" label-font">Billing Rate</span>
                   </label>
                   <input
                     type="number"
                     name="billing_rate"
-                    className="input-border text-gray-600 rounded-sm  py-[1px] text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border py-[1px] input-font w-full focus:outline-none"
                     {...register("billing_rate")}
                   />
                 </div>
                 {/* % Increase */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      % Increase
-                    </span>
+                    <span className=" label-font">% Increase</span>
                   </label>
                   <input
                     type="number"
                     name="increase"
-                    className="input-border text-gray-600 rounded-sm  py-[1px] text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border py-[1px] input-font w-full focus:outline-none"
                     {...register("increase")}
                   />
                 </div>
@@ -250,12 +220,10 @@ const ContractRateEditAdd = () => {
                 {/* Degree Level  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Degree Level
-                    </span>
+                    <span className=" label-font">Degree Level</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("degree_level")}
                   >
                     <option value="name">EFT</option>
@@ -285,17 +253,14 @@ const ContractRateEditAdd = () => {
                 </div>
               </div>
 
-              <div className="mb-3">
+              <div className="my-3">
                 <div className=" flex items-end justify-start mt-2">
-                  <button
-                    className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                    type="submit"
-                  >
+                  <button className="pms-button mr-3" type="submit">
                     Save
                   </button>
 
                   <button
-                    className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                    className="pms-close-button"
                     autoFocus
                     onClick={onCancel}
                   >

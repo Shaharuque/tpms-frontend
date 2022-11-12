@@ -4742,7 +4742,7 @@ li:last-child>.ant-breadcrumb-separator {
   position: absolute;
   top: -9999px;
   left: -9999px;
-  z-index: 1050;
+  z-index: 1000;
   display: block;
 }
 
@@ -4856,7 +4856,7 @@ li:last-child>.ant-breadcrumb-separator {
 }
 
 .ant-dropdown-placement-bottomRight>.ant-dropdown-arrow {
-  right: 16px;
+  right: 5px;
 }
 
 .ant-dropdown-menu {

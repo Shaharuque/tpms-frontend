@@ -7,8 +7,6 @@ import { Switch } from "antd";
 const PatientPortal = () => {
   const [active, setActive] = useState(false);
 
-
-
   const { id } = useParams();
   console.log("patient Portal", id);
   const [secure, setSecure] = useState(false);
@@ -36,11 +34,11 @@ const PatientPortal = () => {
                   setSecure(!secure);
                 }}
               /> */}
-                    <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              <Switch
+                size="small"
+                checked={active ? true : false}
+                onClick={() => setActive(!active)}
+              />
               <span className="text-xs ml-1 text-gray-700 font-medium">
                 Text message ok
               </span>
@@ -53,11 +51,11 @@ const PatientPortal = () => {
                   setBilling(!billing);
                 }}
               /> */}
-                    <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              <Switch
+                size="small"
+                checked={active ? true : false}
+                onClick={() => setActive(!active)}
+              />
               <span className="text-xs ml-1 text-gray-700 font-medium">
                 Access billing documents
               </span>
@@ -70,20 +68,18 @@ const PatientPortal = () => {
                   setPay(!pay);
                 }}
               /> */}
-                    <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              <Switch
+                size="small"
+                checked={active ? true : false}
+                onClick={() => setActive(!active)}
+              />
               <span className="text-xs ml-1 text-gray-700 font-medium">
                 Pay a balance with credit card using Stripe
               </span>
             </div>
           </div>
 
-          <button className=" py-[5px] mt-2 px-3  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-            Save Features
-          </button>
+          <button className="pms-button my-3">Save Features</button>
         </div>
         <div>
           <h1 className="text-xl text-gray-600 font-semibold mb-2">
@@ -116,9 +112,7 @@ const PatientPortal = () => {
               </span>
             </div>
           )}
-          <button className=" py-[5px] mt-2 px-3  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md">
-            Send Invitation
-          </button>
+          <button className=" pms-button my-2">Send Invitation</button>
         </div>
       </div>
       <div className="divider"></div>

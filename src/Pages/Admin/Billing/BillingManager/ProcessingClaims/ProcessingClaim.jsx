@@ -321,17 +321,17 @@ const ProcessingClaim = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
-            <div className="flex gap-2 ">
+            <div className="flex gap-3">
               <div className="w-3/4">
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className=" label-font">
                     To Date<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   onClick={() => setOpenSingleCalendar(!openSingleCalendar)}
                   value={date ? date.toLocaleDateString() : "Select a Date"}
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font w-full focus:outline-none"
                   {...register("date")}
                 />
                 {/* single calendar */}
@@ -366,10 +366,7 @@ const ProcessingClaim = () => {
                 )}
               </div>
               {/* go*/}
-              <button
-                onClick={handleGO}
-                className=" mt-8 w-12 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              >
+              <button onClick={handleGO} className=" mt-8 w-12 pms-button">
                 Go
               </button>
             </div>
@@ -379,14 +376,14 @@ const ProcessingClaim = () => {
                 {/* insurance  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className=" label-font">
                       Insurance<span className="text-red-500">*</span>
                     </span>
                   </label>
                   <select
                     onChange={(e) => setInsuranceSelect(e.target.value)}
                     name="type"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                   >
                     <option value="all">All</option>
                     <option value="patient">Patient</option>
@@ -396,14 +393,14 @@ const ProcessingClaim = () => {
                 {/* Sort By  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className=" label-font">
                       Sort By<span className="text-red-500">*</span>
                     </span>
                   </label>
                   <select
                     onChange={(e) => setSortBy1(e.target.value)}
                     name="type"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                   >
                     <option value="Patient">Patient(s)</option>
                     <option value="Tx Providers">Tx Providers</option>
@@ -424,9 +421,7 @@ const ProcessingClaim = () => {
                     {sortBy1 === "Date Range" ? (
                       <div>
                         <label className="label">
-                          <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                            {sortBy1}
-                          </span>
+                          <span className=" label-font">{sortBy1}</span>
                         </label>
                         <div className="ml-1">
                           <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
@@ -475,14 +470,12 @@ const ProcessingClaim = () => {
                     ) : (
                       <div>
                         <label className="label">
-                          <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                            {sortBy1}
-                          </span>
+                          <span className=" label-font">{sortBy1}</span>
                         </label>
                         <select
                           // onChange={(e) => setInsuranceSelect(e.target.value)}
                           name="type"
-                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                          className="input-border input-font w-full focus:outline-none"
                         >
                           <option value="all">All</option>
                           <option value="patient">Patient</option>
@@ -494,14 +487,14 @@ const ProcessingClaim = () => {
                     {/* Sort By  */}
                     <div>
                       <label className="label">
-                        <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                        <span className=" label-font">
                           Sort By<span className="text-red-500">*</span>
                         </span>
                       </label>
                       <select
                         onChange={(e) => setSortBy2(e.target.value)}
                         name="type"
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                        className="input-border input-font w-full focus:outline-none"
                       >
                         <option value="Patient">Patient(s)</option>
                         <option value="Tx Providers">Tx Providers</option>
@@ -524,9 +517,7 @@ const ProcessingClaim = () => {
                         {sortBy2 === "Date Range" ? (
                           <div>
                             <label className="label">
-                              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                                {sortBy2}
-                              </span>
+                              <span className=" label-font">{sortBy2}</span>
                             </label>
                             <div className="ml-1">
                               <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
@@ -575,14 +566,12 @@ const ProcessingClaim = () => {
                         ) : (
                           <div>
                             <label className="label">
-                              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                                {sortBy2}
-                              </span>
+                              <span className=" label-font">{sortBy2}</span>
                             </label>
                             <select
                               // onChange={(e) => setInsuranceSelect(e.target.value)}
                               name="type"
-                              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                              className="input-border input-font w-full focus:outline-none"
                             >
                               <option value="all">All</option>
                               <option value="patient">Patient</option>
@@ -597,7 +586,7 @@ const ProcessingClaim = () => {
                 {/* submit  */}
                 <div className="gap-2 flex">
                   <button
-                    className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                    className=" pms-button w-16 mt-8"
                     type="submit"
                     onClick={() => {
                       setTableOpen(true);
@@ -605,9 +594,7 @@ const ProcessingClaim = () => {
                   >
                     Run
                   </button>
-                  <button className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
-                    Cancel
-                  </button>
+                  <button className="pms-close-button w-16 mt-8">Cancel</button>
                 </div>
               </>
             )}

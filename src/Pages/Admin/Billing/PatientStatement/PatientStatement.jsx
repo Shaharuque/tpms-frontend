@@ -190,7 +190,7 @@ const PatientStatement = () => {
         </div>
         {/* submit  */}
         <button
-          className=" mt-8 py-1 w-1/4 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+          className=" mt-8 pms-button w-16"
           type="submit"
           onClick={handleSubmit}
         >

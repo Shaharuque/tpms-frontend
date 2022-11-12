@@ -176,17 +176,11 @@ const Qualification = ({ name, handleQualification, qualificationOpen }) => {
               </div>
             </div>
             <div className="my-4 ml-2">
-              <button
-                className=" py-[6px] mr-2 px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                onClick={handleClickOpen}
-              >
+              <button className="pms-button mr-2" onClick={handleClickOpen}>
                 Add Qualification
               </button>
 
-              <button
-                onClick={clearFilters}
-                className="px-2  py-[5px] bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
-              >
+              <button onClick={clearFilters} className="pms-clear-button">
                 Clear filters
               </button>
             </div>
