@@ -417,14 +417,12 @@ const ArLedger = () => {
               {/* name  */}
               <div className="">
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    Sort by
-                  </span>
+                  <span className=" label-font">Sort by</span>
                 </label>
                 <select
                   onChange={(e) => setSelect(e.target.value)}
                   name="post"
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                  className="input-border input-font w-full focus:outline-none"
                 >
                   <option value="patient">Patient</option>
                   <option value="claim_no">Claim No</option>
@@ -441,7 +439,7 @@ const ArLedger = () => {
                     <input
                       type="number"
                       name="check"
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                      className="input-border input-font w-full focus:outline-none"
                       {...register("client_code")}
                     />
                   </div>
@@ -466,9 +464,7 @@ const ArLedger = () => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        Selected date
-                      </span>
+                      <span className=" label-font">Selected date</span>
                     </label>
                     <div className="ml-1 text-[14px]">
                       <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
@@ -538,12 +534,10 @@ const ArLedger = () => {
 
                   <div>
                     <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        Patient
-                      </span>
+                      <span className=" label-font">Patient</span>
                     </label>
                     <select
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                      className="input-border input-font w-full focus:outline-none"
                       {...register("patient")}
                     >
                       <option value="name"> Abcd </option>
@@ -554,12 +548,10 @@ const ArLedger = () => {
                     {/* CPT Code  */}
                     <div>
                       <label className="label">
-                        <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                          CPT Code
-                        </span>
+                        <span className=" label-font">CPT Code</span>
                       </label>
                       <select
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                        className="input-border input-font w-full focus:outline-none"
                         {...register("CPT_Code")}
                       >
                         <option value="name">EFT</option>
@@ -568,12 +560,10 @@ const ArLedger = () => {
                     {/*Aging Status  */}
                     <div>
                       <label className="label">
-                        <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                          Aging Status
-                        </span>
+                        <span className=" label-font">Aging Status</span>
                       </label>
                       <select
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                        className="input-border input-font w-full focus:outline-none"
                         {...register("aging_status")}
                       >
                         <option value="name">EFT</option>

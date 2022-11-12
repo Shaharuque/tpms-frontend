@@ -52,12 +52,10 @@ const MPostingEditAdd = () => {
                 {/* name  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Select Payee type
-                    </span>
+                    <span className=" label-font">Select Payee type</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("payee_type")}
                   >
                     <option value="name"> Payor </option>
@@ -66,12 +64,10 @@ const MPostingEditAdd = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Payee
-                    </span>
+                    <span className=" label-font">Payee</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("payee")}
                   >
                     <option value="name"> abcd </option>
@@ -81,12 +77,10 @@ const MPostingEditAdd = () => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Deposit Date
-                    </span>
+                    <span className=" label-font">Deposit Date</span>
                   </label>
                   <input
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     type="date"
                     {...register("deposit_Date")}
                   />
@@ -94,12 +88,10 @@ const MPostingEditAdd = () => {
                 {/* Payment Method  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Payment Method
-                    </span>
+                    <span className=" label-font">Payment Method</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("payment_method")}
                   >
                     <option value="name">EFT</option>
@@ -109,14 +101,12 @@ const MPostingEditAdd = () => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Check #
-                    </span>
+                    <span className=" label-font">Check #</span>
                   </label>
                   <input
                     type="number"
                     name="check"
-                    className="input-border text-gray-600 rounded-sm  py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("check")}
                   />
                 </div>
@@ -124,12 +114,10 @@ const MPostingEditAdd = () => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Check Date
-                    </span>
+                    <span className=" label-font">Check Date</span>
                   </label>
                   <input
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     type="date"
                     {...register("check_Date")}
                   />
@@ -138,40 +126,33 @@ const MPostingEditAdd = () => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Amount
-                    </span>
+                    <span className=" label-font">Amount</span>
                   </label>
                   <input
                     type="number"
                     name="amount"
-                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("amount")}
                   />
                 </div>
 
                 {/* Unallocated Amount  */}
                 <div>
-                  {" "}
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Unallocated Amount
-                    </span>
+                    <span className=" label-font">Unallocated Amount</span>
                   </label>
                   <input
                     type="number"
                     readOnly
                     name="unallocated_amount"
-                    className="input-border bg-slate-200 text-gray-600 rounded-sm  py-[1px]  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none bg-slate-300"
                     {...register("unallocated_amount")}
                   />
                 </div>
                 {/* File  */}
                 <div className=" ">
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      File
-                    </span>
+                    <span className=" label-font">File</span>
                   </label>
                   <input
                     type="file"
@@ -181,9 +162,7 @@ const MPostingEditAdd = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Amount
-                    </span>
+                    <span className=" label-font">Amount</span>
                   </label>
                   <TextArea rows={5} placeholder=" Notes" size="large" />
                 </div>

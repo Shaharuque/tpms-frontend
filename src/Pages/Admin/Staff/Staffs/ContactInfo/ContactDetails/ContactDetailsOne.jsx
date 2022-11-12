@@ -37,52 +37,44 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                 {/* name  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Address1
-                    </span>
+                    <span className="label-font">Address1</span>
                   </label>
                   <input
                     type="text"
                     name="address1"
-                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("address1")}
                   />
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Address2
-                    </span>
+                    <span className="label-font">Address2</span>
                   </label>
                   <input
                     type="text"
                     name="address2"
-                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("address2")}
                   />
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      City
-                    </span>
+                    <span className="label-font">City</span>
                   </label>
                   <input
                     type="text"
                     name="city"
-                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("city")}
                   />
                 </div>
 
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      State
-                    </span>
+                    <span className="label-font">State</span>
                   </label>
                   <select
-                    className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("state")}
                   >
                     <option value="Speech Therapist">Speech Therapist</option>
@@ -92,54 +84,46 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
 
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Zip
-                    </span>
+                    <span className="label-font">Zip</span>
                   </label>
                   <input
                     type="text"
                     name="zip"
-                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("zip")}
                   />
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Mobile
-                    </span>
+                    <span className="label-font">Mobile</span>
                   </label>
                   <input
                     type="text"
                     name="mobile"
-                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("mobile")}
                   />
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Fax
-                    </span>
+                    <span className="label-font">Fax</span>
                   </label>
                   <input
                     type="text"
                     name="fax"
-                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("fax")}
                   />
                 </div>
 
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Main Phone
-                    </span>
+                    <span className="label-font">Main Phone</span>
                   </label>
                   <input
                     type="text"
                     name="main_phone"
-                    className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                     {...register("main_phone")}
                   />
                 </div>
@@ -147,9 +131,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Notes
-                    </span>
+                    <span className="label-font">Notes</span>
                   </label>
                   <TextArea
                     rows={4}

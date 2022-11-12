@@ -29,142 +29,120 @@ const OtherSetup = () => {
           {/* name  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Max Hours For Day
-              </span>
+              <span className=" label-font">Max Hours For Day</span>
             </label>
             <input
               type="text"
               name="max_day"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("max_day")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Max Hours For Week
-              </span>
+              <span className=" label-font">Max Hours For Week</span>
             </label>
             <input
               type="text"
               name="max_week"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("max_week")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                ADP Employee Id
-              </span>
+              <span className=" label-font">ADP Employee Id</span>
             </label>
             <input
               type="text"
               name="employ_id"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("employ_id")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Provider Level
-              </span>
+              <span className=" label-font">Provider Level</span>
             </label>
             <input
               type="text"
               name="provider_lvl"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("provider_lvl")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Custom2
-              </span>
+              <span className=" label-font">Custom2</span>
             </label>
             <input
               type="text"
               name="Custom2"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("Custom2")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Custom3
-              </span>
+              <span className=" label-font">Custom3</span>
             </label>
             <input
               type="text"
               name="Custom3"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("Custom3")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Custom4
-              </span>
+              <span className=" label-font">Custom4</span>
             </label>
             <input
               type="text"
               name="Custom4"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("Custom4")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Custom5
-              </span>
+              <span className=" label-font">Custom5</span>
             </label>
             <input
               type="text"
               name="Custom5"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("Custom5")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Custom6
-              </span>
+              <span className=" label-font">Custom6</span>
             </label>
             <input
               type="text"
               name="Custom6"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("Custom6")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Highest Degree
-              </span>
+              <span className=" label-font">Highest Degree</span>
             </label>
             <input
               type="text"
               name="highest_degree"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("highest_degree")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Degree Level
-              </span>
+              <span className=" label-font">Degree Level</span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -173,47 +151,39 @@ const OtherSetup = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                External Software Id
-              </span>
+              <span className=" label-font">External Software Id</span>
             </label>
             <input
               type="text"
               name="software_id"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("software_id")}
             />
           </div>
 
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Signature Valid From
-              </span>
+              <span className=" label-font">Signature Valid From</span>
             </label>
             <input
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               type="date"
               {...register("valid_from")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Signature Valid To
-              </span>
+              <span className=" label-font">Signature Valid To</span>
             </label>
             <input
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               type="date"
               {...register("valid_to")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Upload File
-              </span>
+              <span className=" label-font">Upload File</span>
             </label>
             <input
               type="file"
@@ -236,7 +206,7 @@ const OtherSetup = () => {
               checked={active ? true : false}
               onClick={() => setActive(!active)}
             />
-            <span className="text-xs ml-1  text-gray-600 font-normal">
+            <span className="text-sm ml-2  text-gray-600 font-medium">
               Is eligible for paid time off
             </span>
           </div>
@@ -253,7 +223,7 @@ const OtherSetup = () => {
               checked={active ? true : false}
               onClick={() => setActive(!active)}
             />
-            <span className="text-xs ml-1  text-gray-600 font-normal">
+            <span className="text-sm ml-2  text-gray-600 font-medium">
               Exempt Staff
             </span>
           </div>
@@ -270,7 +240,7 @@ const OtherSetup = () => {
               checked={active ? true : false}
               onClick={() => setActive(!active)}
             />
-            <span className="text-xs ml-1  text-gray-600 font-normal">
+            <span className="text-sm ml-2  text-gray-600 font-medium">
               Gets paid holidays
             </span>
           </div>
@@ -287,7 +257,7 @@ const OtherSetup = () => {
               checked={active ? true : false}
               onClick={() => setActive(!active)}
             />
-            <span className="text-xs ml-1  text-gray-600 font-normal">
+            <span className="text-sm ml-2  text-gray-600 font-medium">
               Is Parttime
             </span>
           </div>
@@ -304,7 +274,7 @@ const OtherSetup = () => {
               checked={active ? true : false}
               onClick={() => setActive(!active)}
             />
-            <span className="text-xs ml-1  text-gray-600 font-normal">
+            <span className="text-sm ml-2  text-gray-600 font-medium">
               Is Contractor
             </span>
           </div>
@@ -321,7 +291,7 @@ const OtherSetup = () => {
               checked={active ? true : false}
               onClick={() => setActive(!active)}
             />
-            <span className="text-xs ml-1  text-gray-600 font-normal">
+            <span className="text-sm ml-2  text-gray-600 font-medium">
               Prevent Provider Render Without Notes(for catalyst users)
             </span>
           </div>
@@ -337,20 +307,20 @@ const OtherSetup = () => {
             <h3 className="text-xs font-normal"></h3>
           </div> */}
           <div className="flex items-center justify-around gap-2 mb-2 ">
-            <h3 className="text-xs font-medium w-80">Tax Type</h3>
-            <h3 className="text-xs font-medium w-80">Box 24J</h3>
-            <h3 className="text-xs font-medium w-80">ID Qualifier</h3>
+            <h3 className="text-sm font-medium w-80">Tax Type</h3>
+            <h3 className="text-sm font-medium w-80">Box 24J</h3>
+            <h3 className="text-sm font-medium w-80">ID Qualifier</h3>
           </div>
           <div className="flex items-center gap-2 mb-2 ">
             <h3 className="text-xs font-normal w-80">IF</h3>
             <input
               type="text"
               name="max_day"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -362,11 +332,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -378,11 +348,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -394,11 +364,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapy</option>
@@ -410,11 +380,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -426,11 +396,11 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-              className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("max_day")}
             />
             <select
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border input-font w-full focus:outline-none"
               {...register("degree_level")}
             >
               <option value="Speech Therapist">Speech Therapist</option>
@@ -443,7 +413,7 @@ const OtherSetup = () => {
             <input
               type="text"
               name="max_day"
-                className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
+               className="input-border input-font w-full focus:outline-none"
               {...register("max_day")}
             />
           </div> */}

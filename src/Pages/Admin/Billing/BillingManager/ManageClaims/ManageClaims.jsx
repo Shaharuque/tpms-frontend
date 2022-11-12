@@ -219,14 +219,12 @@ const ManageClaims = () => {
             {/* Sort By  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Sort By
-                </span>
+                <span className=" label-font">Sort By</span>
               </label>
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
               >
                 <option value="all">Batch</option>
                 <option value="Tx Providers">Tx Providers</option>
@@ -246,14 +244,12 @@ const ManageClaims = () => {
                 {" "}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      {sortBy}
-                    </span>
+                    <span className=" label-font">{sortBy}</span>
                   </label>
                   <select
                     // onChange={(e) => setInsuranceSelect(e.target.value)}
                     name="type"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none "
+                    className="input-border input-font w-full focus:outline-none"
                   >
                     <option value="all">All</option>
                     <option value="patient">Patient</option>
@@ -263,14 +259,12 @@ const ManageClaims = () => {
                 {/* Sort By  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Sort By
-                    </span>
+                    <span className=" label-font">Sort By</span>
                   </label>
                   <select
                     onChange={handleSort_By}
                     name="type"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none "
+                    className="input-border input-font w-full focus:outline-none"
                   >
                     <option value="all">All</option>
                     <option value="patient">Patient</option>
@@ -281,13 +275,11 @@ const ManageClaims = () => {
                 {nextActive && (
                   <div>
                     <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        {sort_By}
-                      </span>
+                      <span className=" label-font">{sort_By}</span>
                     </label>
                     <select
                       name="type"
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none "
+                      className="input-border input-font w-full focus:outline-none"
                     >
                       <option value="all">All</option>
                       <option value="patient">Patient</option>

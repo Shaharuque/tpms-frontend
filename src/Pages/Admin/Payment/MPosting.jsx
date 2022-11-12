@@ -431,9 +431,7 @@ const MPosting = () => {
             <div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    Deposit Date Range
-                  </span>
+                  <span className=" label-font">Deposit Date Range</span>
                 </label>
                 <div className="ml-1 text-[14px]">
                   <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
@@ -509,9 +507,7 @@ const MPosting = () => {
             <div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    Check Date Range
-                  </span>
+                  <span className=" label-font">Check Date Range</span>
                 </label>
                 <div className="ml-1 text-[14px]">
                   <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
@@ -586,12 +582,10 @@ const MPosting = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Payee type
-                </span>
+                <span className=" label-font">Payee type</span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("Pay_type")}
               >
                 <option value="Mr">Mr</option>
@@ -603,12 +597,10 @@ const MPosting = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Payee Name
-                </span>
+                <span className=" label-font">Payee Name</span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("payee_name")}
               >
                 <option value="Mr">Mr</option>
@@ -620,14 +612,12 @@ const MPosting = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Check No.
-                </span>
+                <span className=" label-font">Check No.</span>
               </label>
               <input
                 type="number"
                 name="check_no"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("check_no")}
               />
             </div>
