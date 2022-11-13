@@ -29204,7 +29204,7 @@ textarea.ant-mentions {
   position: relative;
   padding: 16px 16px;
   overflow-wrap: break-word;
-  /* text-align: center; */
+  text-align: center;
 }
 
 .ant-table-cell-ellipsis {
