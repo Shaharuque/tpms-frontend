@@ -199,6 +199,10 @@ const ProcessingClaim = () => {
         return a.Rate > b.Rate ? -1 : 1;
         // a.Pos - b.Pos,
       },
+      render: (_, { Rate }) => {
+        //console.log("tags : ", lock);
+        return <div className="flex justify-end">{Rate}</div>;
+      },
       sortOrder: sortedInfo.columnKey === "Rate" ? sortedInfo.order : null,
       ellipsis: true,
     },
