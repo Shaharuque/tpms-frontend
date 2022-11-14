@@ -8,7 +8,7 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    console.log("formsubmit", data);
+    console.log("formsubmit data check", data);
   };
 
   console.log('props all insurance',AllInsurance)
@@ -238,7 +238,7 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
         {
           //  !SelectedInsurance?.selected_insurance_details === null &&
 
-          SelectedInsurance?.status == "success" && (
+          SelectedInsurance?.status === "success" && (
             <div>
               <button
                 className=" py-[5px] mt-7 px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"

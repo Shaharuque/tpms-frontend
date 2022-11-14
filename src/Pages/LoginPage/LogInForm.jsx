@@ -48,9 +48,9 @@ const LogInForm = () => {
         JSON.stringify(response?.data?.access_token),
         "tpm422"
       ).toString();
-      if (response?.data?.account_type === "admin") {
+      if (response?.data.account_type === "admin") {
         localStorage.setItem("adminToken", ciphertextToken);
-        localStorage.setItem("type", response?.data?.account_type);
+        localStorage.setItem("type", response.data.account_type);
         navigate("/admin"); //admin panel a redirect
       } else if (response?.data?.account_type === "patient") {
         navigate("/patient"); //patient panel a redirect

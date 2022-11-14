@@ -13,6 +13,9 @@ const RequireAuth = ({ children }) => {
   //     return <Navigate to="/admin"></Navigate>;
   //   }
 
+  console.log("token", token);
+  console.log("what is token", !token);
+
   if (!token) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
