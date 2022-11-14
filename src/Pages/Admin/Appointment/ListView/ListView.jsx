@@ -1134,7 +1134,7 @@ const ListView = () => {
                   </div>
                 ) : null}
                 <InfiniteScroll
-                  dataLength={items.length} //items is basically all data here
+                  dataLength={items?.length} //items is basically all data here
                   next={fetchData}
                   hasMore={hasMore}
                   loader={<ShimmerTableTet></ShimmerTableTet>}

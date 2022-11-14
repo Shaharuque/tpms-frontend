@@ -15,7 +15,7 @@ const AddTreatments = () => {
   const [passAllInsurance, setpassAllInsurance] = useState(null);
 
   //multiple get api will be called together to increase performance
-  //parallel API calling
+  //parallel API calling[Important]
   const fetchWithPromiseAll = async () => {
     const GetTreatmentPromise = fetchData("admin/ac/setting/get/all/treatment");
     const SelectedTreatmentPromise = fetchData(
