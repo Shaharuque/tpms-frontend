@@ -670,7 +670,7 @@ const MPosting = () => {
       {/* Deposit Details table */}
       {depositOpen && <DepositDetailsTable />}
 
-      {/* <div>
+      {/* <div>          
         <MDepositDetailsTable></MDepositDetailsTable>
       </div> */}
     </div>

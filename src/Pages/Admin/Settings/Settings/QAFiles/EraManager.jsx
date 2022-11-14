@@ -19,7 +19,7 @@ const EraManager = () => {
     <div className="h-[100vh]">
       <h1 className="text-lg mt-2 text-orange-400">OA Files</h1>
       <div className="flex flex-wrap items-end mt-3">
-        <div className=" md:w-[10%]">
+        <div>
           <label className="label">
             <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
               File Type

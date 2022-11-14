@@ -90,7 +90,7 @@ const AddServiceSubTypeTab = () => {
       title: "Active",
       dataIndex: "action",
       key: "action",
-      width: 70,
+      width: 100,
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -118,7 +118,7 @@ const AddServiceSubTypeTab = () => {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      width: 70,
+      width: 100,
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
