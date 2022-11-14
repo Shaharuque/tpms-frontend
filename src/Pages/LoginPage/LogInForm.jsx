@@ -9,6 +9,8 @@ import SmallLoader from "../../Loading/SmallLoader";
 import { GoAlert } from "react-icons/go";
 import axios from "axios";
 import CryptoJS from "crypto-js";
+import { useDispatch, useSelector } from "react-redux";
+import { storeEmail } from "../../features/login_redux/loginSlice";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
@@ -17,6 +19,10 @@ const LogInForm = () => {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   // let CryptoJS = require("crypto-js");
+  const dispatch = useDispatch();
+
+  const email = useSelector((state) => state.emailInfo.email);
+  console.log("email stored in redux:", email);
 
   const {
     register,
@@ -25,7 +31,6 @@ const LogInForm = () => {
     reset,
   } = useForm();
 
-  const from = "/admin";
   const onSubmit = (formdata) => {
     console.log(formdata);
     setLoading(true);
@@ -48,7 +53,12 @@ const LogInForm = () => {
         JSON.stringify(response?.data?.access_token),
         "tpm422"
       ).toString();
-      if (response?.data?.account_type === "admin") {
+
+      if (
+        response?.data?.account_type === "admin" &&
+        response?.data?.status === "success"
+      ) {
+        dispatch(storeEmail(response?.data?.user?.email));
         localStorage.setItem("adminToken", ciphertextToken);
         localStorage.setItem("type", response?.data?.account_type);
         navigate("/admin"); //admin panel a redirect
@@ -57,6 +67,7 @@ const LogInForm = () => {
         localStorage.setItem("type", "patient");
       } else {
         setMessage(response.data.message);
+        navigate("/");
       }
     });
   };
@@ -88,7 +99,6 @@ const LogInForm = () => {
                     </div>
                     <button
                       onClick={() => {
-                        console.log("hi yh");
                         setLoading(false);
                         setMessage(false);
                       }}

@@ -105,7 +105,7 @@ const PatientInformation = () => {
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
-  // console.log("patient details", patient_details);
+  console.log("patient details", data);
 
   useEffect(() => {
     // action dispatched
@@ -142,7 +142,7 @@ const PatientInformation = () => {
     console.log(file);
   };
 
-  console.log("---", addressRendomValue)
+  console.log("---", addressRendomValue);
 
   ///relation value handle
   const settingRelation = (e) => {

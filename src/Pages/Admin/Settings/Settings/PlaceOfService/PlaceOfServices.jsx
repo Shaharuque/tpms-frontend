@@ -19,7 +19,7 @@ const PlaceOfServices = () => {
 
   //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
-    const getPatientsData = async (page = 1) => {
+    const getPatientsData = async (page) => {
       const res = await axios({
         method: "get",
         url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
@@ -34,7 +34,7 @@ const PlaceOfServices = () => {
   }, [page]);
 
   const handlePageClick = ({ selected: selectedPage }) => {
-    console.log("selected page", selectedPage);
+    console.log("selected page", typeof selectedPage);
     setPage(selectedPage + 1);
   };
 
@@ -209,7 +209,7 @@ const PlaceOfServices = () => {
         <ReactPaginate
           previousLabel={"<<"}
           nextLabel={">>"}
-          pageCount={totalPage}
+          pageCount={Number(totalPage)}
           marginPagesDisplayed={1}
           onPageChange={handlePageClick}
           containerClassName={"pagination"}

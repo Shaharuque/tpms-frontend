@@ -159,6 +159,7 @@ import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
 import RequireAuth from "./Authorization/RequireAuth";
 import InfiniteScrollTest from "./Testing/ApiTesting/InfiniteScrollTest";
+import QueryTesting from "./Testing/ApiTesting/QueryTesting";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -265,7 +266,11 @@ function App() {
             path="/test-scroll"
             element={<InfiniteScrollTest></InfiniteScrollTest>}
           ></Route>
-          {/* Testing End */}
+          <Route
+            path="/queryTest"
+            element={<QueryTesting></QueryTesting>}
+          ></Route>
+          {/*--------- Testing End ------------*/}
 
           <Route
             path="/admin"
