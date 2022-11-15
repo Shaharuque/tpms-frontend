@@ -4,7 +4,7 @@ import { headers } from "../../Misc/BaseClient";
 
 //async action(getAdmins) to fetch admins data list depending on page_ad
 export const getsettings = createAsyncThunk(
-  "patients/getsettings",
+  "settings/getsettings",
   async () => {
     //onno api thik e kaj kortesey
     const response = await axios.get(

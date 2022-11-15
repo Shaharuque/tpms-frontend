@@ -3,14 +3,46 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import ReactPaginate from "react-paginate";
+import Loading from "../../../../../Loading/Loading";
+import { headers } from "../../../../../Misc/BaseClient";
 import AddCptCodeActionModal from "./AddCptCode/AddCptCodeActionModal";
 
 const AddCptCode = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [recordData, setRecordData] = useState();
+  const [items, setItems] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
 
-  const handleClickOpen = () => {
+  useEffect(() => {
+    const getPatientsData = async (page) => {
+      const res = await axios({
+        method: "get",
+        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/cpt/code?page=${page}`,
+        headers: headers,
+      });
+      // const result = await res.json();
+      const result = res?.data?.cpt_codes?.data;
+      // console.log(result?.data?.cpt_codes?.data);
+      setItems(result);
+      setTotalPage(res?.data?.cpt_codes?.last_page);
+    };
+    getPatientsData(page);
+  }, [page]);
+
+  console.log(totalPage);
+
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
+  };
+
+  const handleClickOpen = (record) => {
+    console.log(record);
+    setRecordData(record);
     setOpenAddModal(true);
   };
 
@@ -24,18 +56,9 @@ const AddCptCode = () => {
     setSortedInfo(sorter);
   };
 
-  const [table, setTable] = useState(false);
-  useEffect(() => {
-    axios("../../../All_Fake_Api/Cpt.json")
-      .then((response) => {
-        console.log("calling");
-        setTable(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  console.log(table);
+  if (!items) {
+    return <Loading></Loading>;
+  }
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
@@ -46,24 +69,29 @@ const AddCptCode = () => {
       width: 100,
       filters: [
         {
-          text: `10/31/2021`,
-          value: "10/31/2021",
+          text: `Mental Health`,
+          value: "Mental Health",
         },
         {
-          text: `11/31/2023`,
-          value: "11/31/2023",
+          text: `Physical Therapy`,
+          value: "Physical Therapy",
         },
         {
-          text: "10/31/2025",
-          value: "10/31/2025",
+          text: "Speech Therapy",
+          value: "Speech Therapy",
         },
       ],
-      render: (_, { tx_type }) => {
+      render: (_, { treatment }) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{tx_type}</div>;
+        return (
+          <div className=" text-secondary">
+            {treatment?.treatment_name ? treatment?.treatment_name : "Not Set"}
+          </div>
+        );
       },
       filteredValue: filteredInfo.tx_type || null,
-      onFilter: (value, record) => record.tx_type.includes(value),
+      onFilter: (value, record) =>
+        record.treatment?.treatment_name.includes(value),
       sorter: (a, b) => {
         return a.tx_type > b.tx_type ? -1 : 1;
       },
@@ -72,29 +100,29 @@ const AddCptCode = () => {
     },
     {
       title: "Cpt Code",
-      dataIndex: "cpt",
-      key: "cpt",
+      dataIndex: "cpt_code",
+      key: "cpt_code",
       width: 100,
       filters: [
         {
-          text: `10/31/2021`,
-          value: "10/31/2021",
+          text: `001`,
+          value: "001",
         },
         {
-          text: `11/31/2023`,
-          value: "11/31/2023",
+          text: `97153`,
+          value: "97153",
         },
         {
-          text: "10/31/2025",
-          value: "10/31/2025",
+          text: "97156",
+          value: "97156",
         },
       ],
-      filteredValue: filteredInfo.cpt || null,
-      onFilter: (value, record) => record.cpt.includes(value),
+      filteredValue: filteredInfo.cpt_code || null,
+      onFilter: (value, record) => record.cpt_code.includes(value),
       sorter: (a, b) => {
-        return a.cpt > b.cpt ? -1 : 1;
+        return a.cpt_code > b.cpt_code ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "cpt" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "cpt_code" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -103,12 +131,14 @@ const AddCptCode = () => {
       dataIndex: "action",
       key: "action",
       width: 70,
-      render: () => {
-        //console.log("tags : ", lock);
+      render: (_, record) => {
         return (
           <div className=" flex justify-center items-center">
             <div className="flex justify-center">
-              <button onClick={handleClickOpen} className="text-secondary">
+              <button
+                onClick={() => handleClickOpen(record)}
+                className="text-secondary"
+              >
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
@@ -145,7 +175,7 @@ const AddCptCode = () => {
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
               <button onClick={handleClickOpen} className="pms-button">
-                Add Place of service
+                Add new Cpt code
               </button>
             </label>
           </div>
@@ -153,7 +183,6 @@ const AddCptCode = () => {
       </div>
       <div className="flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Services</h1>
-
         <div className="flex justify-end items-end my-2">
           <button onClick={clearFilters} className="pms-clear-button border">
             Clear filters
@@ -168,18 +197,37 @@ const AddCptCode = () => {
           bordered
           className=" text-xs font-normal"
           columns={columns}
-          dataSource={table}
+          dataSource={items}
           scroll={{
             y: 650,
           }}
           onChange={handleChange}
         />
+        {totalPage > 0 && (
+          <ReactPaginate
+            previousLabel={"<<"}
+            nextLabel={">>"}
+            pageCount={Number(totalPage)}
+            marginPagesDisplayed={1}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination_Link"}
+            nextLinkClassName={"pagination_Link"}
+            activeClassName={"pagination_Link-active"}
+            disabledClassName={"pagination_Link-disabled"}
+          ></ReactPaginate>
+        )}
       </div>
 
       {openAddModal && (
         <AddCptCodeActionModal
           handleClose={handleClose}
           open={openAddModal}
+          record={recordData}
+          items={items}
+          setItems={setItems}
+          page={page}
+          setTotalPage={setTotalPage}
         ></AddCptCodeActionModal>
       )}
     </div>
