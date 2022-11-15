@@ -21,7 +21,7 @@ const AddCptCode = () => {
     const getPatientsData = async (page) => {
       const res = await axios({
         method: "get",
-        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/cpt/code?page=${page}`,
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/cpt/code?page=${page}`,
         headers: headers,
       });
       // const result = await res.json();

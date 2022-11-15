@@ -58,7 +58,7 @@ export const getpatientsDetails = createAsyncThunk(
   async (id) => {
     //onno api thik e kaj kortesey
     const response = await axios.get(
-      `https://app.therapypms.com/api/v1/admin/ac/patient/info/${id}`,
+      `https://ovh.therapypms.com/api/v1/admin/ac/patient/info/${id}`,
       {
         headers: headers,
       }

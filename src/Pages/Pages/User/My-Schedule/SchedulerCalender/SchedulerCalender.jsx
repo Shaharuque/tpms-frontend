@@ -24,7 +24,7 @@ function SchedulerCalender() {
           </button>
           <button>
             <img
-              src="https://ovh.therapypms.com/assets/dashboard/images/google.png"
+              src="https://app.therapypms.com/assets/dashboard/images/google.png"
               alt="google calendar"
               style={{ width: "33px" }}
             />

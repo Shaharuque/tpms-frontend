@@ -42,7 +42,7 @@ const ListView = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "GET",
-        url: `https://app.therapypms.com/api/v1/admin/ac/patient/names`,
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient/names`,
         headers: headers,
       });
       const data = res?.data?.clients;
@@ -59,7 +59,7 @@ const ListView = () => {
     const getProviderData = async () => {
       const res = await axios({
         method: "GET",
-        url: `https://app.therapypms.com/api/v1/admin/ac/staff/names`,
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/staff/names`,
         headers: headers,
       });
       const data = res?.data?.staff_names;
@@ -168,7 +168,7 @@ const ListView = () => {
   const fetchPatients = async () => {
     let manageSessionData = [];
     await axios({
-      url: `https://app.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
+      url: `https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
       method: "POST",
       headers: headers,
       data: formData,
@@ -674,7 +674,7 @@ const ListView = () => {
     setFromData(payLoad);
     if (payLoad) {
       const fetchManageSessions = {
-        url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
+        url: "https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments",
         method: "POST",
         mode: "no-cors",
         headers: headers,
