@@ -138,6 +138,7 @@ const PlaceOfServices = () => {
       sortOrder: sortedInfo.columnKey === "pos_code" ? sortedInfo.order : null,
       ellipsis: true,
     },
+
     {
       title: "Action",
       dataIndex: "action",
