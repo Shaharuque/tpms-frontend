@@ -44,12 +44,10 @@ const RecurringSessionEdit = () => {
             {/* name  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Patient Name
-                </span>
+                <span className=" label-font">Patient Name</span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("patient_name")}
               >
                 <option value="Mr">Mr</option>
@@ -60,12 +58,10 @@ const RecurringSessionEdit = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Auth
-                </span>
+                <span className=" label-font">Auth</span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("Auth")}
               >
                 <option value="Mr">Mr</option>
@@ -76,12 +72,10 @@ const RecurringSessionEdit = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Service
-                </span>
+                <span className=" label-font">Service</span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("Service")}
               >
                 <option value="Mr">Mr</option>
@@ -92,12 +86,10 @@ const RecurringSessionEdit = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Provider Name
-                </span>
+                <span className=" label-font">Provider Name</span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("Provider_name")}
               >
                 <option value="Mr">Mr</option>
@@ -108,12 +100,10 @@ const RecurringSessionEdit = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  POS
-                </span>
+                <span className=" label-font">POS</span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("Pos")}
               >
                 <option value="Mr">Mr</option>
@@ -125,24 +115,20 @@ const RecurringSessionEdit = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  From Date
-                </span>
+                <span className=" label-font">From Date</span>
               </label>
               <input
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 type="date"
                 {...register("from_Date")}
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  To Date
-                </span>
+                <span className=" label-font">To Date</span>
               </label>
               <input
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 type="date"
                 {...register("To_Date")}
               />
@@ -151,38 +137,31 @@ const RecurringSessionEdit = () => {
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  gap-3">
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    From Time
-                  </span>
+                  <span className=" label-font">From Time</span>
                 </label>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font w-full focus:outline-none"
                   type="time"
                   {...register("from_time")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                    To Time
-                  </span>
+                  <span className=" label-font">To Time</span>
                 </label>
                 <input
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font w-full focus:outline-none"
                   type="time"
                   {...register("To_time")}
                 />
               </div>
             </div>
-
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Status
-                </span>
+                <span className=" label-font">Status</span>
               </label>
               <select
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
                 {...register("Status")}
               >
                 <option value="Rendered">Rendered</option>
@@ -194,35 +173,21 @@ const RecurringSessionEdit = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Office Notes
-                </span>
+                <span className=" label-font">Office Notes</span>
               </label>
               <div className="">
-                <TextArea
-                  maxLength={2}
-                  rows={4}
-                  placeholder=" Notes"
-                  size="large"
-                />
+                <TextArea rows={4} placeholder=" Notes" size="large" />
               </div>
             </div>
           </div>
           <div className="divider"></div>
           {/* submit  */}
           <div className="mt-4">
-            <button
-              className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              type="submit"
-            >
+            <button className=" pms-button mr-2" type="submit">
               Save
             </button>
             <Link to={"/admin/recurring-session"}>
-              <button
-                className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-                autoFocus
-                onClick={reset}
-              >
+              <button className="pms-close-button" autoFocus onClick={reset}>
                 CANCEL
               </button>
             </Link>

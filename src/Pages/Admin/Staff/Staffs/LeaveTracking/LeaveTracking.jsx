@@ -149,10 +149,7 @@ const LeaveTracking = () => {
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           Leaves
         </h1>
-        <button
-          onClick={clearFilters}
-          className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
-        >
+        <button onClick={clearFilters} className="pms-clear-button">
           Clear filters
         </button>
       </div>
@@ -169,10 +166,7 @@ const LeaveTracking = () => {
           onChange={handleChange}
         />
       </div>
-      <button
-        onClick={() => setTimeOpen(true)}
-        className="px-3 flex items-center py-1 bg-gradient-to-r from-secondary to-primary text-xs font-thin hover:to-secondary text-white rounded-sm"
-      >
+      <button onClick={() => setTimeOpen(true)} className="pms-button">
         Add Time Off
       </button>
 
@@ -188,9 +182,7 @@ const LeaveTracking = () => {
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                    Description
-                  </span>
+                  <span className="modal-label-name">Description</span>
                 </label>
                 <TextArea
                   rows={4}
@@ -201,9 +193,7 @@ const LeaveTracking = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                    Date
-                  </span>
+                  <span className="modal-label-name">Date</span>
                 </label>
                 <input
                   type="date"
@@ -213,14 +203,11 @@ const LeaveTracking = () => {
                 />
               </div>
               <div className="mt-8">
-                <button
-                  className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                  type="submit"
-                >
+                <button className="mr-2 pms-button" type="submit">
                   Save
                 </button>
                 <button
-                  className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                  className="pms-close-button"
                   autoFocus
                   onClick={() => setTimeOpen(false)}
                 >

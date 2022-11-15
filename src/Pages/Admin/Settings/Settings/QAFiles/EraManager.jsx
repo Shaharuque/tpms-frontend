@@ -18,8 +18,8 @@ const EraManager = () => {
   return (
     <div className="h-[100vh]">
       <h1 className="text-lg mt-2 text-orange-400">OA Files</h1>
-      <div className="flex flex-wrap items-end mt-3">
-        <div className=" md:w-[10%]">
+      <div className="flex flex-wrap items-end mt-3 gap-2">
+        <div>
           <label className="label">
             <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
               File Type
@@ -37,10 +37,7 @@ const EraManager = () => {
             <option value="EDI">EDI</option>
           </select>
         </div>
-        <button
-          onClick={handleFileType}
-          className=" py-[4px] ml-3  px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-        >
+        <button onClick={handleFileType} className="pms-input-button">
           GO
         </button>
       </div>

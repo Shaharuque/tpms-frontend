@@ -5,16 +5,8 @@ import { useForm } from "react-hook-form";
 import { FcCheckmark } from "react-icons/fc";
 import { FiDownload } from "react-icons/fi";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
-import { MultiSelect } from "react-multi-select-component";
 import { Link } from "react-router-dom";
 import GlobalMultiSelect from "../../../Shared/CustomComponents/GlobalMultiSelect";
-
-const options = [
-  { label: "Ashu Soni", value: "Ashu Soni" },
-  { label: "Cliff Jensen", value: "Cliff Jensen" },
-  { label: "Kay Suzane", value: "Kay Suzane" },
-  { label: "Andrew Haviva", value: "Andrew Haviva" },
-];
 
 const Timesheet = () => {
   const [tableOpen, setTableOpen] = useState(false);
@@ -580,7 +572,7 @@ const Timesheet = () => {
                   </span>
                 </label>
                 <>
-                  <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1">
+                  <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 mt-1">
                     <GlobalMultiSelect />
                   </div>
                 </>
@@ -603,13 +595,7 @@ const Timesheet = () => {
               </div>
             </>
           )}
-
-          <button
-            className="w-1/4 mt-2 md:mt-7 md:ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            type="submit"
-          >
-            Go
-          </button>
+          <button className="pms-input-button w-1/4 mt-2 md:mt-7">Go</button>
         </div>
       </form>
       {tableOpen && (

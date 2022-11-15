@@ -128,7 +128,7 @@ const TableApi = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "get",
-        url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=1`,
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
         headers: headers,
       });
       // const result = await res.json();
@@ -142,7 +142,7 @@ const TableApi = () => {
   const fetchPatients = async () => {
     const res = await axios({
       method: "get",
-      url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
+      url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
       headers: headers,
     });
     const data = res.data?.clients?.data;
@@ -265,7 +265,7 @@ const TableApi = () => {
       render: (_, { client_full_name, id, key }) => {
         //console.log("tags : ", client_full_name, id, key);
         return (
-          <div className="flex justify-start">
+          <div className="">
             <button
               onClick={() => patientDetails(id)}
               className="text-secondary"
@@ -294,7 +294,7 @@ const TableApi = () => {
       //render contains what we want to reflect as our data
       render: (_, { phone_number }) => {
         return (
-          <div className="flex justify-end">
+          <div>
             <h1>{phone_number ? phone_number : "No Data"}</h1>
           </div>
         );
@@ -310,7 +310,7 @@ const TableApi = () => {
       //render contains what we want to reflect as our data
       render: (_, { client_dob }) => {
         return (
-          <div className="flex justify-end">
+          <div>
             <h1>{client_dob ? client_dob : "No Data"}</h1>
           </div>
         );

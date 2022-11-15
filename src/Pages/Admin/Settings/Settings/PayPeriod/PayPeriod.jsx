@@ -265,7 +265,7 @@ const PayPeriod = () => {
               bulk delete
             </option>
           </select>
-          <button className="bg-[#34A7B8] px-2 text-white rounded">Go</button>
+          <button className="pms-input-button">Go</button>
         </div>
       </div>
       {openEditModal && (

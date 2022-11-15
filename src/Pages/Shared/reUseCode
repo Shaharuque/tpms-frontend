@@ -26,4 +26,21 @@ className="modal-input-field ml-1 w-full"
 
 ### clear filter
 
-<button onClick={clearFilters} className="pms-clear-button border">
+<button onClick={clearFilters} className="pms-clear-button">
+
+### input-name
+
+className="input-border input-font w-full focus:outline-none"
+className=" label-font"
+
+### ANtd-table important data:
+
+.ant-table-thead>tr>th,
+.ant-table-tbody>tr>td,
+.ant-table tfoot>tr>th,
+.ant-table tfoot>tr>td {
+position: relative;
+padding: 16px 16px;
+overflow-wrap: break-word;
+text-align: center;
+}
