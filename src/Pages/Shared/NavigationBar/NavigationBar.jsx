@@ -23,15 +23,19 @@ import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { Dropdown, Space } from "antd";
 import Add from "./Add";
 import { Margin } from "@mui/icons-material";
+import { storeEmail } from "../../../features/login_redux/loginSlice";
+import { useDispatch } from "react-redux";
 
 // i am using alakaja
 const TestNaviBar = ({ handle }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSignOut = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("type");
+    dispatch(storeEmail());
     navigate("/");
   };
 
@@ -293,7 +297,6 @@ const TestNaviBar = ({ handle }) => {
             trigger={["click"]}
             placement="bottomRight"
             overlayStyle={{ zIndex: "100", marginTop: "-50px" }}
-            arrow
           >
             <button onClick={(e) => e.preventDefault()}>
               <Space>
@@ -327,7 +330,6 @@ const TestNaviBar = ({ handle }) => {
                   </div>
                 </div>
               }
-              arrow
               trigger={["click"]}
               overlayStyle={{ zIndex: "100", marginTop: "-40px" }}
               placement="bottomRight"

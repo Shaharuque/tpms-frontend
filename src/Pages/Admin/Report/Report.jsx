@@ -178,7 +178,7 @@ const Report = () => {
                   </div>
                   <div
                     ref={refClose}
-                    className="absolute z-10  2xl:ml-[20] shadow-xl"
+                    className="absolute z-10 md:ml-[-300px] ml-0  shadow-xl"
                   >
                     {open && (
                       <motion.div

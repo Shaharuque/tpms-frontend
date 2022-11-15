@@ -8,7 +8,7 @@ if (gatheredData) {
   //console.log("decrypted data:", decryptedData);
 }
 
-export const baseIp = "https://app.therapypms.com/api/v1";
+export const baseIp = "https://ovh.therapypms.com/api/v1";
 
 export const headers = {
   "Content-Type": "application/json",

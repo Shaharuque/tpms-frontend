@@ -621,7 +621,7 @@ const MPosting = () => {
                 {...register("check_no")}
               />
             </div>
-            <div className=" flex items-end justify-start gap-2 mt-8">
+            <div className=" flex items-end justify-start mb-10 gap-2 mt-8">
               <button className="pms-button mr-2" type="submit">
                 Save
               </button>
@@ -670,7 +670,7 @@ const MPosting = () => {
       {/* Deposit Details table */}
       {depositOpen && <DepositDetailsTable />}
 
-      {/* <div>
+      {/* <div>          
         <MDepositDetailsTable></MDepositDetailsTable>
       </div> */}
     </div>

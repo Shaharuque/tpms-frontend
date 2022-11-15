@@ -29013,7 +29013,7 @@ textarea.ant-mentions {
 .ant-table.ant-table-small .ant-table-tbody>tr>td,
 .ant-table.ant-table-small tfoot>tr>th,
 .ant-table.ant-table-small tfoot>tr>td {
-  padding: 1px 6px 10px;
+  padding: 4px 6px;
   background-color: white;
   border: 1px solid #EDF6F7;
 
@@ -29025,7 +29025,6 @@ textarea.ant-mentions {
   background-color: #0AA7B8;
   border: 1px solid #CED4DA;
   color: white;
-
 }
 
 .ant-table.ant-table-small .ant-table-filter-trigger {
