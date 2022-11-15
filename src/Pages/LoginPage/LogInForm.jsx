@@ -38,7 +38,7 @@ const LogInForm = () => {
 
     // axios POST request
     const options = {
-      url: "https://app.therapypms.com/api/v1/admin/login",
+      url: "https://ovh.therapypms.com/api/v1/admin/login",
       method: "POST",
       headers: {
         Accept: "application/json",

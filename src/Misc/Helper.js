@@ -4,7 +4,7 @@ import axios from "axios";
 import { baseIp, headers } from "./BaseClient";
 
 export const fetchData = async (endPoint) => {
-  console.log(`helper function call ${baseIp}${endPoint}`);
+  console.log(`helper function call ${baseIp}/${endPoint}`);
   const response = await axios.get(`${baseIp}/${endPoint}`, {
     headers: headers,
   });

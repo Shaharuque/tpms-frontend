@@ -128,7 +128,7 @@ const TableApi = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "get",
-        url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=1`,
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
         headers: headers,
       });
       // const result = await res.json();
@@ -142,7 +142,7 @@ const TableApi = () => {
   const fetchPatients = async () => {
     const res = await axios({
       method: "get",
-      url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
+      url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
       headers: headers,
     });
     const data = res.data?.clients?.data;

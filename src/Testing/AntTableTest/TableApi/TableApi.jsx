@@ -33,7 +33,7 @@ const TableApi = () => {
     const getComments = async () => {
       const res = await axios({
         method: "get",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
+        url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=1`,
         headers: headers,
       });
       // const result = await res.json();
@@ -48,7 +48,7 @@ const TableApi = () => {
   const fetchComments = async () => {
     const res = await axios({
       method: "get",
-      url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
+      url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
       headers: headers,
     });
     const data = res.data?.clients?.data;

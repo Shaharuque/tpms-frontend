@@ -1,10 +1,9 @@
 //This code is almost good for infinite scroling in React table
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Loading from '../../Loading/Loading';
-import { headers } from '../../Misc/BaseClient';
-import Table from './Table';
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Loading from "../../Loading/Loading";
+import { headers } from "../../Misc/BaseClient";
+import Table from "./Table";
 
 const MainBase = () => {
   const [items, setItems] = useState([]);
@@ -17,7 +16,7 @@ const MainBase = () => {
     const getComments = async () => {
       const res = await axios({
         method: "get",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
+        url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=1`,
         headers: headers,
       });
       // const result = await res.json();
@@ -32,7 +31,7 @@ const MainBase = () => {
   const fetchComments = async () => {
     const res = await axios({
       method: "get",
-      url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
+      url: `https://app.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
       headers: headers,
     });
     const data = res.data?.clients?.data;
@@ -42,7 +41,7 @@ const MainBase = () => {
 
   const fetchData = async () => {
     const commentsFormServer = await fetchComments();
-    console.log(commentsFormServer)
+    console.log(commentsFormServer);
 
     setItems([...items, ...commentsFormServer]);
 
@@ -52,23 +51,23 @@ const MainBase = () => {
     setpage(page + 1);
   };
   //console.log(items)
-  console.log(page)
+  console.log(page);
 
   //columns
   const columns = React.useMemo(
     () => [
       {
         Header: "Name",
-        accessor: "client_full_name"
+        accessor: "client_full_name",
       },
       {
         Header: "DOB",
-        accessor: "client_dob"
+        accessor: "client_dob",
       },
       {
         Header: "Phone Number",
-        accessor: "phone_number"
-      }
+        accessor: "phone_number",
+      },
     ],
     []
   );
@@ -76,12 +75,17 @@ const MainBase = () => {
   const data = React.useMemo(() => items, [items]);
 
   if (!items) {
-    return <h1>Loading</h1>
+    return <h1>Loading</h1>;
   }
   return (
     <div>
       <h1>Hi From testing table</h1>
-      <Table  columns={columns} data={data} update={fetchData} hasMore={hasMore} />
+      <Table
+        columns={columns}
+        data={data}
+        update={fetchData}
+        hasMore={hasMore}
+      />
     </div>
   );
 };
