@@ -1,11 +1,12 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
+import { headers } from "../../../../../Misc/BaseClient";
 import InsuranceDetails from "./InsuranceDetails";
+import Swal from "sweetalert2";
 
-
-//
 const AddInsurance = () => {
   // const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
@@ -14,6 +15,7 @@ const AddInsurance = () => {
   const [selectedInsurance, setselectedInsurance] = useState(null);
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
+  const [addedData, setaddedData] = useState(false);
 
   //multiple get api will be called together to increase performance
   //parallel API calling
@@ -32,13 +34,19 @@ const AddInsurance = () => {
 
   useEffect(() => {
     fetchWithPromiseAll();
-  }, []);
+    setaddedData(false);
+  }, [addedData]);
 
-  console.log(insuranceApiData, selectedInsurance);
+  // console.log(insuranceApiData, selectedInsurance);
 
   if (!insuranceApiData && !selectedInsurance) {
     return <Loading></Loading>;
   }
+
+  if (addedData) {
+    return <Loading></Loading>;
+  }
+
   const handleAdding = (e) => {
     let target = e.target;
     // let name = target.name;
@@ -57,12 +65,62 @@ const AddInsurance = () => {
     setfacilityselectedkeys(value);
   };
 
-  const handleSelectedValue = () => {
-    console.log("add button click get data", selectedKeys);
+  const handleSelectedValue = async () => {
+    console.log("add button click get data adding", selectedKeys);
+    const body = {
+      insurance_ids: selectedKeys,
+    };
+    const AddingInsuranceData = await PostfetchData(
+      "admin/ac/setting/add/insurance",
+      body
+    );
+    console.log("add data func check", AddingInsuranceData);
+
+    // const response = await axios.post('https://app.therapypms.com/api/v1/admin/ac/setting/add/insurance',body, {
+    //   headers: headers
+    // });
+    // console.log('data add', response)
+
+    if (AddingInsuranceData.status === "success") {
+      console.log("data added");
+      // alert("data added");
+      // Swal.fire(
+      //   'Data Added Succesfully!',
+      //   'You clicked the button!',
+      //   'success'
+      // )
+      setaddedData(true);
+    }
   };
 
-  const handleRemoveValue = (e) => {
+  const handleRemoveValue = async() => {
     console.log("Remove  button click get data", facilityselectedkeys);
+    // console.log("add button click get data adding", selectedKeys);
+    // = {
+    //   insurance_ids: facilityselectedkeys,
+    // };
+
+    const body = {
+      "selected_insurance_ids" : facilityselectedkeys 
+    }
+    const RemoveSelectedData = await PostfetchData(
+      "admin/ac/setting/remove/insurance",
+      body
+    );
+    console.log("remove data func check", RemoveSelectedData);
+
+    // const response = await axios.post('https://app.therapypms.com/api/v1/admin/ac/setting/add/insurance',body, {
+    //   headers: headers
+    // });
+    // console.log('data add', response)
+
+    if (RemoveSelectedData.status === "success") {
+      console.log(RemoveSelectedData);
+      alert(RemoveSelectedData.message);
+      setaddedData(true);
+    }else{
+      alert('another space use')
+    }
   };
 
   const InsuranceView = async () => {
@@ -96,13 +154,12 @@ const AddInsurance = () => {
     const body = {
       insurance_id: facilityselectedkeys,
     };
-
     const fetchpostTestt = await PostfetchData(
       "admin/ac/setting/get/selected/insurance/details",
       body
     );
     setpassSelectedInsurance(fetchpostTestt);
-    console.log("facilaty axios", fetchpostTestt);
+    // console.log("facilaty axios", fetchpostTestt);
     setpassAllInsurance({});
   };
 

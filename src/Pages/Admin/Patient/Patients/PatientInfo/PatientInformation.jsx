@@ -105,7 +105,7 @@ const PatientInformation = () => {
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
-  // console.log("patient details", patient_details);
+  console.log("patient details", data);
 
   useEffect(() => {
     // action dispatched
@@ -142,7 +142,7 @@ const PatientInformation = () => {
     console.log(file);
   };
 
-  console.log("---", addressRendomValue)
+  console.log("---", addressRendomValue);
 
   ///relation value handle
   const settingRelation = (e) => {
@@ -206,7 +206,7 @@ const PatientInformation = () => {
             {/* name  */}
             <div>
               <label className="label">
-                <span className="label-text label-font">
+                <span className=" label-font">
                   First Name<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -219,7 +219,7 @@ const PatientInformation = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text label-font">Middle Name</span>
+                <span className=" label-font">Middle Name</span>
               </label>
               <input
                 type="text"
@@ -230,7 +230,7 @@ const PatientInformation = () => {
             </div>
             <div>
               <label className="label">
-                <span className="label-text label-font">
+                <span className=" label-font">
                   Last Name<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -244,7 +244,7 @@ const PatientInformation = () => {
             {/* DOB */}
             <div>
               <label className="label">
-                <span className="label-text label-font">
+                <span className=" label-font">
                   Date of Birth<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -282,7 +282,7 @@ const PatientInformation = () => {
             {/* gender */}
             <div className=" ">
               <label className="label">
-                <span className="label-text label-font">
+                <span className=" label-font">
                   Gender<span className="text-red-500">*</span>
                 </span>
               </label>
@@ -299,7 +299,7 @@ const PatientInformation = () => {
             {/* RelationShip */}
             <div>
               <label className="label">
-                <span className="label-text flex items-center label-font  ">
+                <span className=" flex items-center label-font  ">
                   RelationShip
                   <AiOutlineQuestionCircle className="text-sm" />
                   <span className="text-red-500">*</span>
@@ -333,7 +333,7 @@ const PatientInformation = () => {
             <div className="">
               <>
                 <label className="label">
-                  <span className="label-text flex items-center label-font">
+                  <span className=" flex items-center label-font">
                     Address
                     <AiOutlineQuestionCircle className="text-sm" />
                     <span className="text-red-500">*</span>
@@ -399,7 +399,7 @@ const PatientInformation = () => {
                   >
                     {/*  */}
                     <label className="label">
-                      <span className="label-text flex items-center label-font ">
+                      <span className=" flex items-center label-font ">
                         Address
                         <AiOutlineQuestionCircle className="text-sm" />
                         <span className="text-red-500">*</span>
@@ -452,7 +452,7 @@ const PatientInformation = () => {
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
                   <div>
                     <label className="label">
-                      <span className="label-text label-font">
+                      <span className=" label-font">
                         POS<span className="text-red-500">*</span>
                       </span>
                     </label>
@@ -467,7 +467,7 @@ const PatientInformation = () => {
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text label-font">
+                      <span className=" label-font">
                         Region<span className="text-red-500">*</span>
                       </span>
                     </label>
@@ -488,7 +488,7 @@ const PatientInformation = () => {
             <div className=" lg:mx-auto md:mx-0">
               <>
                 <label className="label">
-                  <span className="label-text label-font">Phone</span>
+                  <span className=" label-font">Phone</span>
                 </label>
                 <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
                   <div>
@@ -587,7 +587,7 @@ const PatientInformation = () => {
                   transition={{ delay: 0.2 }}
                 >
                   <label className="label">
-                    <span className="label-text label-font">Phone</span>
+                    <span className=" label-font">Phone</span>
                   </label>
                   <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
                     <div>
@@ -679,7 +679,7 @@ const PatientInformation = () => {
             <div className=" lg:mx-auto md:mx-0">
               <>
                 <label className="label">
-                  <span className="label-text label-font">Email</span>
+                  <span className=" label-font">Email</span>
                 </label>
                 <div className="flex flex-wrap items-center gap-x-4 ">
                   <div>
@@ -753,7 +753,7 @@ const PatientInformation = () => {
                   transition={{ delay: 0.2 }}
                 >
                   <label className="label">
-                    <span className="label-text label-font">Email</span>
+                    <span className=" label-font">Email</span>
                   </label>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                     <div>
@@ -825,14 +825,14 @@ const PatientInformation = () => {
 
           <>
             <label className="label">
-              <span className="label-text text-[16px] text-gray-700 text-left font-bold mt-2">
+              <span className=" text-[16px] text-gray-700 text-left font-bold mt-2">
                 About Patient
               </span>
             </label>
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  2xl:grid-cols-5 mb-1 mr-2 gap-x-6 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="label-text label-font">
+                  <span className=" label-font">
                     Race &amp; Ethnicity Details
                   </span>
                 </label>
@@ -846,9 +846,7 @@ const PatientInformation = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text label-font">
-                    Preferred Language
-                  </span>
+                  <span className=" label-font">Preferred Language</span>
                 </label>
                 <select
                   className="input-border input-font py-[1px] w-full focus:outline-none"
@@ -860,7 +858,7 @@ const PatientInformation = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text label-font">Date First Seen</span>
+                  <span className=" label-font">Date First Seen</span>
                 </label>
                 <input
                   className="input-border input-font py-[1px] w-full focus:outline-none"
@@ -870,7 +868,7 @@ const PatientInformation = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text label-font">Referred By</span>
+                  <span className=" label-font">Referred By</span>
                 </label>
                 <select
                   className="input-border input-font py-[1px] w-full focus:outline-none"
@@ -882,7 +880,7 @@ const PatientInformation = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text label-font">Assignment</span>
+                  <span className=" label-font">Assignment</span>
                 </label>
                 <select
                   className="input-border input-font py-[1px] w-full focus:outline-none"
@@ -930,7 +928,7 @@ const PatientInformation = () => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text label-font">First Name</span>
+                    <span className=" label-font">First Name</span>
                   </label>
                   <input
                     type="text"
@@ -942,7 +940,7 @@ const PatientInformation = () => {
 
                 <div>
                   <label className="label">
-                    <span className="label-text label-font">Last Name</span>
+                    <span className=" label-font">Last Name</span>
                   </label>
                   <input
                     type="text"
@@ -955,7 +953,7 @@ const PatientInformation = () => {
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text label-font">Check Date</span>
+                    <span className=" label-font">Check Date</span>
                   </label>
                   <input
                     className="input-border input-font  w-full focus:outline-none"
@@ -969,7 +967,7 @@ const PatientInformation = () => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text label-font">Address</span>
+                    <span className=" label-font">Address</span>
                   </label>
                   <div className="mb-2">
                     <input
@@ -1039,10 +1037,7 @@ const PatientInformation = () => {
           </div>
           <div className="mb-5">
             {/* submit  */}
-            <button
-              className=" py-[5px] mt-7 px-3 my-1 text-xs font-medium bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-              type="submit"
-            >
+            <button className="pms-button my-3" type="submit">
               Save Patient
             </button>
           </div>

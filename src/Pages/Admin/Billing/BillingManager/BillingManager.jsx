@@ -12,7 +12,7 @@ const BillingManager = () => {
               navinfo.isActive
                 ? "rs-nav-item rs-nav-item-active font-normal text-xs"
                 : "rs-nav-item text-xs font-normal"
-            }
+            } 
             to={"proces-Clims"}
           >
             Processing Claim(s)

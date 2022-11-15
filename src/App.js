@@ -22,9 +22,6 @@ import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
 import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
 import NewPassSet from "./Pages/LoginPage/NewPassSet";
 import ManageSessions from "./Pages/Pages/User/ManageSessions";
-import Profile from "./Pages/Pages/Shared/Profile/Profile";
-import ProfileInformation from "./Pages/Pages/Shared/Profile/ProfileInformation";
-import PasswordChange from "./Pages/Pages/Shared/Profile/PasswordChange";
 import ContractContainer from "./Pages/Pages/User/Biographic/ContactInfo/ContractContainer";
 // --------new start with folder structure ------------------------------------------------------------------------------------------------
 
@@ -159,6 +156,9 @@ import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
 import RequireAuth from "./Authorization/RequireAuth";
 import InfiniteScrollTest from "./Testing/ApiTesting/InfiniteScrollTest";
+import ProfileInformation from "./Pages/Shared/Profile/ProfileInformation";
+import PasswordChange from "./Pages/Shared/Profile/PasswordChange";
+import Profile from "./Pages/Shared/Profile/Profile";
 import QueryTesting from "./Testing/ApiTesting/QueryTesting";
 
 function App() {
@@ -266,12 +266,11 @@ function App() {
             path="/test-scroll"
             element={<InfiniteScrollTest></InfiniteScrollTest>}
           ></Route>
-
           <Route
             path="/queryTest"
             element={<QueryTesting></QueryTesting>}
           ></Route>
-          {/* Testing End */}
+          {/*--------- Testing End ------------*/}
 
           <Route
             path="/admin"

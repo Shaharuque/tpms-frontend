@@ -1,12 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { headers } from "../../Misc/BaseClient";
 
-const AddModal = ({ newData, setNewData}) => {
-
-
-  
+const AddModal = ({ setRefresh }) => {
   const {
     register,
     handleSubmit,
@@ -27,13 +24,9 @@ const AddModal = ({ newData, setNewData}) => {
       // console.log(res.data);
       if (res.data.status === "success") {
         console.log("Successfully Inserted");
-        setNewData(FormData)
-       
-        // setdatahit(true)
-        // console.log('datahit modal', datahit)
-
         //After posting data to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
         // setItems([...items, res?.data?.pos_data]);
+        setRefresh(true);
       }
     } catch (error) {
       console.log(error.response.data.message); // this is the main part. Use the response property from the error object
@@ -78,9 +71,6 @@ const AddModal = ({ newData, setNewData}) => {
       </form>
     </div>
   );
-
-
 };
-
 
 export default AddModal;

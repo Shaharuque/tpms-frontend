@@ -83,7 +83,7 @@ const CredentialsModal = ({ handleClose, open, name }) => {
                     {...register("fileName")}
                   />
                 </div>
-                <div className="flex ml-1 mt-1 items-center">
+                <div className="flex ml-1 mt-1 gap-2 items-center">
                   <input
                     type="checkbox"
                     name="patient"

@@ -16,10 +16,7 @@ const QueryTesting = () => {
   const [patientId, setPatientId] = useState();
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
-
-  const [datahit, setdatahit] = useState(false)
-
-
+  const [refresh, setRefresh] = useState(false);
   //   async function fetchPosts(page = 1) {
   //     const response = await axios.get(
   //       `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?${page}`,
@@ -65,8 +62,6 @@ const QueryTesting = () => {
   //   console.log("all the pos data", pos?.pages);
 
   //get data from API + data fetch from api while scrolling[Important]
-
-  const [newData, setNewData] = useState([]);
   useEffect(() => {
     const getPatientsData = async () => {
       const res = await axios({
@@ -80,12 +75,7 @@ const QueryTesting = () => {
       setItems(data);
     };
     getPatientsData();
-    // if(datahit === true){
-    //   getPatientsData();
-    // }
-
-
-  },[]);
+  }, []);
 
   const fetchPatients = async () => {
     const res = await axios({
@@ -108,16 +98,8 @@ const QueryTesting = () => {
     setpage(page + 1);
   };
   console.log(items);
+  console.log(refresh);
 
-  // const Datavalidation = (x) => {
-  //   if(x=== true){
-  //     setdatahit(x)
-     
-  //   }
-   
-  // }
-
-  console.log("modal hit data ",datahit)
   return (
     <div>
       <div>
@@ -132,25 +114,17 @@ const QueryTesting = () => {
         dataLength={items?.length} //items is basically all data here
         next={fetchData}
         hasMore={hasMore}
+        refreshFunction={refresh ? fetchData : null}
         loader={<ShimmerTableTet></ShimmerTableTet>}
-        endMessage={
-          <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-
-        inverse={true}
-
-        refreshFunction={datahit === true}
-        
       >
-          {open && <AddModal setNewData={setNewData} newData={newData} ></AddModal>}
         <ul>
           {items?.map((p) => (
             <li>{p?.pos_code}</li>
           ))}
         </ul>
       </InfiniteScroll>
+
+      {open && <AddModal setRefresh={setRefresh}></AddModal>}
     </div>
   );
 };

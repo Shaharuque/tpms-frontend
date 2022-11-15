@@ -22,15 +22,20 @@ import { Link, useNavigate } from "react-router-dom";
 import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { Dropdown, Space } from "antd";
 import Add from "./Add";
+import { Margin } from "@mui/icons-material";
+import { storeEmail } from "../../../features/login_redux/loginSlice";
+import { useDispatch } from "react-redux";
 
 // i am using alakaja
 const TestNaviBar = ({ handle }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSignOut = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("type");
+    dispatch(storeEmail());
     navigate("/");
   };
 
@@ -104,7 +109,6 @@ const TestNaviBar = ({ handle }) => {
               trigger={["click"]}
               placement="bottomLeft"
               overlayStyle={{ zIndex: "100" }}
-              arrow
             >
               <button onClick={(e) => e.preventDefault()}>
                 <Space>
@@ -138,7 +142,6 @@ const TestNaviBar = ({ handle }) => {
                     </div>
                   </div>
                 }
-                arrow
                 trigger={["click"]}
                 placement="bottomLeft"
                 overlayStyle={{ zIndex: "100" }}
@@ -289,10 +292,11 @@ const TestNaviBar = ({ handle }) => {
 
           {/* adding  */}
           <Dropdown
+            overlayClassName=""
             overlay={<Add></Add>}
             trigger={["click"]}
             placement="bottomRight"
-            overlayStyle={{ zIndex: "100" }}
+            overlayStyle={{ zIndex: "100", marginTop: "-50px" }}
             arrow
           >
             <button onClick={(e) => e.preventDefault()}>
@@ -309,7 +313,7 @@ const TestNaviBar = ({ handle }) => {
           <div>
             <Dropdown
               overlay={
-                <div className="border w-auto md:w-[25rem] p-2 shadow-md drop-box rounded-sm bg-white">
+                <div className="border w-auto md:w-[25rem] p-2 shadow-lg  rounded-sm bg-white">
                   <div className="card-body">
                     <h4 className=" text-center ">Latest Changes</h4>
                     <hr />
@@ -329,7 +333,7 @@ const TestNaviBar = ({ handle }) => {
               }
               arrow
               trigger={["click"]}
-              overlayStyle={{ zIndex: "100" }}
+              overlayStyle={{ zIndex: "100", marginTop: "-40px" }}
               placement="bottomRight"
             >
               <button onClick={(e) => e.preventDefault()}>
