@@ -104,20 +104,23 @@ const NameLocationTableAddButton = ({ register, setAdd }) => {
 
         {/* NPI */}
         <div>
-          <label className="label">
-            <span className="label-font">NPI</span>
-          </label>
           <div className="mb-2 flex items-center gap-2">
-            <input
-              type="number"
-              placeholder="ABC Behavioral Therapy Center"
-              name="NPI"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("NPI")}
-            />
+            <div>
+              <label className="label">
+                <span className="label-font">NPI</span>
+              </label>
+              <input
+                type="text"
+                placeholder="1234"
+                name="npi"
+                className="input-border input-font w-full focus:outline-none"
+                {...register("npi")}
+              />
+            </div>
+
             <div
               onClick={() => setAdd(false)}
-              className="bg-red-500 text-white p-[6px]"
+              className="bg-rose-600 text-white mt-[26px] p-[6px]"
             >
               <RiDeleteBin6Line />
             </div>

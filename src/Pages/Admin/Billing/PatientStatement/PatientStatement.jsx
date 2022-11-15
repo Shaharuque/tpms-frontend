@@ -190,7 +190,7 @@ const PatientStatement = () => {
         </div>
         {/* submit  */}
         <button
-          className=" mt-8 pms-button w-16"
+          className=" mt-[26px] pms-input-button w-16"
           type="submit"
           onClick={handleSubmit}
         >

@@ -570,7 +570,7 @@ const ArLedger = () => {
                       </select>
                     </div>
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2">
                     <div className="flex mt-8 items-center ">
                       <Switch
                         size="small"
@@ -582,7 +582,10 @@ const ArLedger = () => {
                       </span>
                     </div>
                     {/* submit  */}
-                    <button className="mt-8 pms-button" type="submit">
+                    <button
+                      className=" mt-[26px]  pms-input-button"
+                      type="submit"
+                    >
                       View
                     </button>
                   </div>

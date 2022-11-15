@@ -526,7 +526,7 @@ const PatientLedger = () => {
               <option value="name">EFT</option>
             </select>
           </div>
-          <div className="mt-[35px] flex items-center sm:col-span-2">
+          <div className="mt-[26px] flex items-center sm:col-span-2">
             <div>
               <Switch
                 size="small"
@@ -540,7 +540,7 @@ const PatientLedger = () => {
 
             <div>
               {/* submit  */}
-              <button className="pms-button">View</button>
+              <button className="pms-input-button ">View</button>
             </div>
           </div>
         </div>

@@ -154,20 +154,23 @@ const Form = (item) => {
 
           {/* NPI */}
           <div>
-            <label className="label">
-              <span className="label-font">NPI</span>
-            </label>
             <div className="mb-2 flex items-center gap-2">
-              <input
-                type="text"
-                placeholder="1234"
-                name="npi"
-                className="input-border input-font w-full focus:outline-none"
-                {...register("npi")}
-              />
+              <div>
+                <label className="label">
+                  <span className="label-font">NPI</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="1234"
+                  name="npi"
+                  className="input-border input-font w-full focus:outline-none"
+                  {...register("npi")}
+                />
+              </div>
+
               <div
                 onClick={handleAdd}
-                className="bg-secondary text-white p-[6px]"
+                className="bg-secondary text-white  mt-[26px] p-[6px]"
               >
                 <FaPlus />
               </div>

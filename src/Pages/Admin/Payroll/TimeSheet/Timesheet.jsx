@@ -572,7 +572,7 @@ const Timesheet = () => {
                   </span>
                 </label>
                 <>
-                  <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1">
+                  <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 mt-1">
                     <GlobalMultiSelect />
                   </div>
                 </>
@@ -595,7 +595,7 @@ const Timesheet = () => {
               </div>
             </>
           )}
-          <button className="pms-button w-1/4 mt-2 md:mt-7">Go</button>
+          <button className="pms-input-button w-1/4 mt-2 md:mt-7">Go</button>
         </div>
       </form>
       {tableOpen && (
