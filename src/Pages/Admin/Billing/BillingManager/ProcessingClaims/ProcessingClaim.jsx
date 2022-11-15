@@ -370,7 +370,10 @@ const ProcessingClaim = () => {
                 )}
               </div>
               {/* go*/}
-              <button onClick={handleGO} className=" mt-8 w-12 pms-button">
+              <button
+                onClick={handleGO}
+                className=" mt-[26px] w-12 pms-input-button"
+              >
                 Go
               </button>
             </div>
@@ -588,9 +591,9 @@ const ProcessingClaim = () => {
                   </>
                 )}
                 {/* submit  */}
-                <div className="gap-2 flex">
+                <div className="gap-2 mb-10 flex">
                   <button
-                    className=" pms-button w-16 mt-8"
+                    className="mt-8 w-12 pms-input-button"
                     type="submit"
                     onClick={() => {
                       setTableOpen(true);

@@ -297,7 +297,6 @@ const TestNaviBar = ({ handle }) => {
             trigger={["click"]}
             placement="bottomRight"
             overlayStyle={{ zIndex: "100", marginTop: "-50px" }}
-            arrow
           >
             <button onClick={(e) => e.preventDefault()}>
               <Space>
@@ -331,7 +330,6 @@ const TestNaviBar = ({ handle }) => {
                   </div>
                 </div>
               }
-              arrow
               trigger={["click"]}
               overlayStyle={{ zIndex: "100", marginTop: "-40px" }}
               placement="bottomRight"

@@ -806,9 +806,12 @@ const ListView = () => {
                   <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
                     {billable && (
                       <div>
-                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                          Clients
-                        </h1>
+                        <label className="label">
+                          <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                            Clients
+                          </span>
+                        </label>
+
                         <Clients
                           patients={patients}
                           setPatientId={setPatientId}
@@ -817,9 +820,12 @@ const ListView = () => {
                       </div>
                     )}
                     <div className="w-full">
-                      <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                        Provider
-                      </h1>
+                      <label className="label">
+                        <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                          Provider
+                        </span>
+                      </label>
+
                       <Providers
                         stuffs={stuffs}
                         setStuffsId={setStuffsId}
@@ -836,7 +842,7 @@ const ListView = () => {
                           </label>
                           <div>
                             <select
-                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white   px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
                               {...register("place_of_service")}
                             >
                               <option value="" className="text-black">
@@ -863,15 +869,15 @@ const ListView = () => {
 
                         <div>
                           <label className="label">
-                            <span className="label-text text-[16px] text-gray-100 text-left">
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
                               Selected date
                             </span>
                           </label>
                           {/* Date Range calender will be set here */}
-                          <div className="ml-1">
+                          <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
+                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[3px] mx-1 text-[14px] w-full"
                             >
                               <input
                                 value={
@@ -901,13 +907,13 @@ const ListView = () => {
                         <div className="flex gap-5">
                           <div>
                             <label className="label">
-                              <span className="label-text text-[16px] text-gray-100 text-left">
+                              <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
                                 status
                               </span>
                             </label>
                             <div>
                               <select
-                                className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                className="bg-transparent border-b-[3px] border-[#ffffff] px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
                                 {...register("status")}
                               >
                                 <option value="" className="text-black">

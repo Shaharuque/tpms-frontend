@@ -290,7 +290,7 @@ const ManageClaims = () => {
               </>
             )}
             {/* submit  */}
-            <div className="flex gap-2">
+            <div className="flex mb-10 gap-2">
               <button className="mt-8 pms-button" type="submit">
                 Get Claim(s)
               </button>

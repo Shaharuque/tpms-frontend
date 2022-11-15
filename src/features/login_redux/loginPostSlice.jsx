@@ -5,7 +5,7 @@ import { headers } from "../../Misc/BaseClient";
 const postLoginData = createAsyncThunk("login/postLoginData", async (data) => {
   const config = {
     method: "post",
-    url: "https://app.therapypms.com/api/v1/admin/login",
+    url: "https://ovh.therapypms.com/api/v1/admin/login",
     headers: headers,
     data: data,
   };

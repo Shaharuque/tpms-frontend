@@ -201,7 +201,7 @@ const VendorNumberSetup = () => {
               <button
                 variant="outlined"
                 onClick={handleClickOpen}
-                className="px-5 mt-[26px] pms-button rounded-sm"
+                className="pms-input-button mt-[30px]"
               >
                 Create New
               </button>
