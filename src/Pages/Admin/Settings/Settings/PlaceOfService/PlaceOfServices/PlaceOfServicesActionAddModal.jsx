@@ -31,7 +31,7 @@ export default function PlaceOfServicesActionAddModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://app.therapypms.com/api/v1/admin/ac/setting/create/pos",
+          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/create/pos",
           headers: headers,
           data: FormData,
         });
@@ -44,7 +44,7 @@ export default function PlaceOfServicesActionAddModal({
           const getPatientsData = async (page = 1) => {
             const res = await axios({
               method: "get",
-              url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+              url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
               headers: headers,
             });
             // const result = await res.json();
@@ -70,7 +70,7 @@ export default function PlaceOfServicesActionAddModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://app.therapypms.com/api/v1/admin/ac/setting/update/pos",
+          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/update/pos",
           headers: headers,
           data: payload,
         });
@@ -82,7 +82,7 @@ export default function PlaceOfServicesActionAddModal({
           const getPatientsData = async (page = 1) => {
             const res = await axios({
               method: "get",
-              url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+              url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
               headers: headers,
             });
             // const result = await res.json();
