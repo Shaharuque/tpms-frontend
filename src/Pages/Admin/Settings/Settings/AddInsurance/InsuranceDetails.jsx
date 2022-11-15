@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Switch } from "antd";
-import { useEffect } from "react";  
+import { useEffect } from "react";
 import { PostfetchData } from "../../../../../Misc/Helper";
 
 const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
@@ -13,20 +13,19 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
   const onSubmit = async (data) => {
     console.log("formsubmit data check", data);
     const body = data;
-    const SelelctedInsuranceUpdate =  await PostfetchData(
+    const SelelctedInsuranceUpdate = await PostfetchData(
       "admin/ac/setting/selected/insurance/details/update",
       body
     );
-    console.log('selected insurance update', SelelctedInsuranceUpdate)
-   
-    if(SelelctedInsuranceUpdate.status === 'success'){
-      alert("insurance details updated")
-    }
+    console.log("selected insurance update", SelelctedInsuranceUpdate);
 
+    if (SelelctedInsuranceUpdate.status === "success") {
+      alert("insurance details updated");
+    }
   };
 
   // console.log('props all insurance',AllInsurance)
-  console.log('props selected insurance',SelectedInsurance)
+  console.log("props selected insurance", SelectedInsurance);
 
   const Ass = AllInsurance?.status === "success";
   const Aa = AllInsurance?.all_insurance_details;
@@ -50,7 +49,35 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
         f_edit_id: Ass ? Aa?.id : Sstatus && Ss?.id,
       });
     }, 0);
-  }, [Aa?.address, Aa?.billing_aber, Aa?.city, Aa?.contact_one, Aa?.contact_two, Aa?.ele_payor_id, Aa?.id, Aa?.name, Aa?.phone_one, Aa?.phone_two, Aa?.state, Aa?.zip, Ass, Ss?.address, Ss?.billing_aber, Ss?.city, Ss?.contact_one, Ss?.contact_two, Ss?.ele_payor_id, Ss?.id, Ss?.payor_name, Ss?.phone_one, Ss?.phone_two, Ss?.state, Ss?.zip, Sstatus, reset]);
+  }, [
+    Aa?.address,
+    Aa?.billing_aber,
+    Aa?.city,
+    Aa?.contact_one,
+    Aa?.contact_two,
+    Aa?.ele_payor_id,
+    Aa?.id,
+    Aa?.name,
+    Aa?.phone_one,
+    Aa?.phone_two,
+    Aa?.state,
+    Aa?.zip,
+    Ass,
+    Ss?.address,
+    Ss?.billing_aber,
+    Ss?.city,
+    Ss?.contact_one,
+    Ss?.contact_two,
+    Ss?.ele_payor_id,
+    Ss?.id,
+    Ss?.payor_name,
+    Ss?.phone_one,
+    Ss?.phone_two,
+    Ss?.state,
+    Ss?.zip,
+    Sstatus,
+    reset,
+  ]);
 
   return (
     <div className="border p-5">
@@ -65,7 +92,7 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
               </span>
             </label>
             <input
-            disabled
+              disabled
               type="text"
               name="name"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
@@ -225,14 +252,13 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
               {...register("ele_payor_id")}
             />
             {/* database id */}
-              <input
+            <input
               hidden
               type="text"
               name="f_edit_id"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
               {...register("f_edit_id")}
             />
-
           </div>
         </div>
         {

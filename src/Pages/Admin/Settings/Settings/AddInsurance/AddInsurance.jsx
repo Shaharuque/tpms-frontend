@@ -1,11 +1,8 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
-import { headers } from "../../../../../Misc/BaseClient";
 import InsuranceDetails from "./InsuranceDetails";
-import Swal from "sweetalert2";
 
 const AddInsurance = () => {
   // const [TransferData, setTransferData] = useState([]);
@@ -17,8 +14,8 @@ const AddInsurance = () => {
   const [passAllInsurance, setpassAllInsurance] = useState(null);
   const [addedData, setaddedData] = useState(false);
 
-  //multiple get api will be called together to increase performance
-  //parallel API calling
+  // multiple get api will be called together to increase performance
+  // parallel API calling
   const fetchWithPromiseAll = async () => {
     const GetInsurancePromise = fetchData("admin/ac/setting/get/all/insurance");
     const SelectedInsurancePromise = fetchData(
@@ -75,51 +72,27 @@ const AddInsurance = () => {
       body
     );
     console.log("add data func check", AddingInsuranceData);
-
-    // const response = await axios.post('https://app.therapypms.com/api/v1/admin/ac/setting/add/insurance',body, {
-    //   headers: headers
-    // });
-    // console.log('data add', response)
-
     if (AddingInsuranceData.status === "success") {
-      console.log("data added");
-      // alert("data added");
-      // Swal.fire(
-      //   'Data Added Succesfully!',
-      //   'You clicked the button!',
-      //   'success'
-      // )
+      alert('data added')
       setaddedData(true);
     }
   };
 
-  const handleRemoveValue = async() => {
+  const handleRemoveValue = async () => {
     console.log("Remove  button click get data", facilityselectedkeys);
-    // console.log("add button click get data adding", selectedKeys);
-    // = {
-    //   insurance_ids: facilityselectedkeys,
-    // };
-
     const body = {
-      "selected_insurance_ids" : facilityselectedkeys 
-    }
+      selected_insurance_ids: facilityselectedkeys,
+    };
     const RemoveSelectedData = await PostfetchData(
       "admin/ac/setting/remove/insurance",
       body
     );
-    console.log("remove data func check", RemoveSelectedData);
-
-    // const response = await axios.post('https://app.therapypms.com/api/v1/admin/ac/setting/add/insurance',body, {
-    //   headers: headers
-    // });
-    // console.log('data add', response)
-
     if (RemoveSelectedData.status === "success") {
       console.log(RemoveSelectedData);
-      alert(RemoveSelectedData.message);
+      alert("data remove ");
       setaddedData(true);
-    }else{
-      alert('another space use')
+    } else {
+      alert("another space use");
     }
   };
 
@@ -132,7 +105,6 @@ const AddInsurance = () => {
 
     const body = {
       insurance_id: selectedKeys,
-      // insurance_id: 0,
     };
     const fetchpostTest = await PostfetchData(
       "admin/ac/setting/get/all/insurance/details",
@@ -141,7 +113,6 @@ const AddInsurance = () => {
     console.log("fetchpostTest", fetchpostTest);
     setpassAllInsurance(fetchpostTest);
     setpassSelectedInsurance({});
-    // setpassSelectedInsurance(response?.data);
   };
 
   const FacilityInsurance = async () => {
@@ -149,7 +120,6 @@ const AddInsurance = () => {
       alert("select just one value");
       return setfacilityselectedkeys([0]);
     }
-    // console.log('data facilaty', facilityselectedkeys )
 
     const body = {
       insurance_id: facilityselectedkeys,
@@ -159,7 +129,6 @@ const AddInsurance = () => {
       body
     );
     setpassSelectedInsurance(fetchpostTestt);
-    // console.log("facilaty axios", fetchpostTestt);
     setpassAllInsurance({});
   };
 
@@ -169,24 +138,24 @@ const AddInsurance = () => {
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
 
-          {/* new code added */}
+     
           <select
             multiple={true}
             id="countries_multiple"
-            // className="h-40"
+           
             onChange={(e) => {
               handleAdding(e);
-              // console.log("handlechange data check", e.target.value)
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {insuranceApiData?.data?.all_insurance.length > 0 &&
               insuranceApiData?.data?.all_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.payor_name}
+                  {item.payor_name}{" "}
                 </option>
-              ))}
+              ))}{" "}
           </select>
+          
           <br />
           <button
             onClick={() => {
@@ -198,7 +167,7 @@ const AddInsurance = () => {
           </button>
         </div>
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
-          <button // onClick={handleAddItems}
+          <button
             onClick={() => handleSelectedValue()}
             className="pms-button w-24"
           >
@@ -237,9 +206,9 @@ const AddInsurance = () => {
             {selectedInsurance?.data?.selected_insurance?.length > 0 &&
               selectedInsurance?.data?.selected_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.payor_name}
+                  {item.payor_name}{" "}
                 </option>
-              ))}
+              ))}{" "}
           </select>
           <br />
           <button
@@ -258,7 +227,7 @@ const AddInsurance = () => {
           AllInsurance={passAllInsurance}
           SelectedInsurance={passSelectedInsurance}
         ></InsuranceDetails>
-      )}
+      )}{" "}
     </div>
   );
 };
