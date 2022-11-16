@@ -160,6 +160,7 @@ import ProfileInformation from "./Pages/Shared/Profile/ProfileInformation";
 import PasswordChange from "./Pages/Shared/Profile/PasswordChange";
 import Profile from "./Pages/Shared/Profile/Profile";
 import QueryTesting from "./Testing/ApiTesting/QueryTesting";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -779,6 +780,8 @@ function App() {
           {/* No Page Found */}
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
+        {/* react toast show korar jnno */}
+        <ToastContainer />
       </FullScreen>
     </div>
   );

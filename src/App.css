@@ -1,5 +1,6 @@
 /* @import 'antd/dist/antd.css'; */
 @import "./customAntd.css";
+@import "./customToastify.css";
 
 * {
   margin: 0;
