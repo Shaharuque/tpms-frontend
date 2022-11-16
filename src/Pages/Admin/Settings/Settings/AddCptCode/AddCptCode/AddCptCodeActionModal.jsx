@@ -26,10 +26,12 @@ export default function AddCptCodeActionModal({
   //getting all the selected treatment data
   useEffect(() => {
     fetchData("admin/ac/setting/get/selected/treatment").then((res) => {
-      setSelectedTreatments(res?.data?.selected_treatment);
+      const result = res?.data?.selected_treatment;
+      if (result?.length !== 0) {
+        setSelectedTreatments(result);
+      }
     });
   }, []);
-
   console.log(selectedTreatments);
 
   const { register, handleSubmit, reset } = useForm();
@@ -64,7 +66,7 @@ export default function AddCptCodeActionModal({
           handleClose();
         }
       } catch (error) {
-        console.log(error.response.data.message); // this is the main part. Use the response property from the error object
+        console.log(error?.res?.data?.message); // this is the main part. Use the response property from the error object
       }
     }
     // reset();

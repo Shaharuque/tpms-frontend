@@ -2,53 +2,70 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { headers } from "../../Misc/BaseClient";
 
-const postLoginData = createAsyncThunk("login/postLoginData", async (data) => {
-  const config = {
-    method: "post",
-    url: "https://ovh.therapypms.com/api/v1/admin/login",
-    headers: headers,
-    data: data,
-  };
-
-  const response = await axios(config)
-    .then(function (response) {
-      console.log(response?.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  return response.data;
-});
+export const postLoginData = createAsyncThunk(
+  "login/postLoginData",
+  async (formData) => {
+    try {
+      const response = await fetch(
+        "https://ovh.therapypms.com/api/v1/admin/login",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+      let data = await response.json();
+      console.log("response", data);
+      if (response.status === 200) {
+        localStorage.setItem("adminToken", data?.access_token);
+        return data;
+      }
+    } catch (e) {
+      console.log("Error", e.response.data);
+    }
+  }
+);
 
 const initialState = {
-  loading: false,
-  responseDetails: {},
-  error: "",
+  isloading: false,
+  result: {},
+  iserror: "",
 };
 
 const loginPostSlice = createSlice({
   name: "login",
   initialState,
 
-  reducers: {},
+  reducers: {
+    clearState: (state) => {
+      state.isloading = false;
+      state.iserror = {};
+      return state;
+    },
+  },
   //async action creator
   extraReducers: (builder) => {
     builder.addCase(postLoginData.pending, (state) => {
-      state.loading = true;
-      state.error = {};
+      state.isloading = true;
+      state.iserror = {};
     });
     builder.addCase(postLoginData.fulfilled, (state, action) => {
-      state.loading = false;
-      state.error = {};
-      state.settingDetails = action.payload;
+      state.isloading = false;
+      state.iserror = {};
+      state.result = action.payload;
     });
     builder.addCase(postLoginData.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error;
-      state.settingDetails = "";
+      state.isloading = false;
+      state.iserror = action.error;
+      state.result = "";
     });
   },
 });
+
+export const loginReducer = loginPostSlice.reducer; //sliceName.reducer
 
 // const initialState = {};
 

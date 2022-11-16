@@ -1,4 +1,3 @@
-
 import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -17,7 +16,7 @@ const PlaceOfServices = () => {
   const [recordData, setRecordData] = useState();
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState();
+  const [totalPage, setTotalPage] = useState(0);
 
   //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
@@ -225,7 +224,7 @@ const PlaceOfServices = () => {
 
       {openAddModal && (
         <PlaceOfServicesActionAddModal
-        cacheData={cacheData}
+          cacheData={cacheData}
           handleClose={handleClose2}
           open={openAddModal}
           recordData={recordData}

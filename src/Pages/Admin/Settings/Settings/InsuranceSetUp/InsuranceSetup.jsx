@@ -3,6 +3,7 @@ import { BiPencil } from "react-icons/bi";
 import axios from "axios";
 import { Table, Switch } from "antd";
 import InsuranceEditComponent from "./InsuranceSetup/InsuranceEditComponent";
+import InsuranceModal from "./InsuranceSetup/InsuranceModal";
 
 const InsuranceSetup = () => {
   const [insuranceData, setInsuranceData] = useState();
@@ -11,6 +12,15 @@ const InsuranceSetup = () => {
   const [checkSwitch, setCheckSwitch] = useState(false);
   const [rowId, setRowId] = useState("");
   const [insuranceEdit, setInsuranceEdit] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+
+  // const editHandler = () => {
+  //   setOpenEdit(true);
+  // };
+
+  const handleClose = () => {
+    setOpenEdit(false);
+  };
 
   // Ant Table is starting
   useEffect(() => {
@@ -253,8 +263,9 @@ const InsuranceSetup = () => {
             <div>
               <BiPencil
                 onClick={() => {
-                  setRowId(id);
-                  setInsuranceEdit(true);
+                  // setRowId(id);
+                  // setInsuranceEdit(true);
+                  setOpenEdit(true);
                 }}
               />
             </div>
@@ -296,11 +307,20 @@ const InsuranceSetup = () => {
         }}
         onChange={handleChange}
       />
-      <button className="pms-button">Save Payer Setup</button>
+      <button className="pms-button my-5">Save Payer Setup</button>
 
-      {insuranceEdit && (
+      {/* {insuranceEdit && (         
         <>
-          <InsuranceEditComponent id={rowId}></InsuranceEditComponent>
+          <InsuranceEditComponent id={rowId}></InsuranceEditComponent
+        </>
+      )} */}
+      {/* <InsuranceEditComponent id={rowId}></InsuranceEditComponent> */}
+      {openEdit && (
+        <>
+          <InsuranceModal
+            handleClose={handleClose}
+            open={openEdit}
+          ></InsuranceModal>
         </>
       )}
     </div>

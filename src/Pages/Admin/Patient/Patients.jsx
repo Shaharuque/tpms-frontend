@@ -62,7 +62,9 @@ const TableApi = () => {
     // return filterData;
     let newArray = [];
     for (let x of resultArray) {
-      newArray.push({ text: x, value: x });
+      if (x !== null) {
+        newArray.push({ text: x, value: x });
+      }
     }
     return newArray;
   };
