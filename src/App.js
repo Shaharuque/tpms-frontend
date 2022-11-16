@@ -163,6 +163,7 @@ import QueryTesting from "./Testing/ApiTesting/QueryTesting";
 import EmailAndSms from "./Pages/Admin/Settings/Settings/EmailAndSMS/EmailAndSms";
 import EmailSetting from "./Pages/Admin/Settings/Settings/EmailAndSMS/EmailSetting/EmailSetting";
 import SmsSetting from "./Pages/Admin/Settings/Settings/EmailAndSMS/SmsSetting/SmsSetting";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -796,6 +797,8 @@ function App() {
           {/* No Page Found */}
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
+        {/* react toast show korar jnno */}
+        <ToastContainer />
       </FullScreen>
     </div>
   );

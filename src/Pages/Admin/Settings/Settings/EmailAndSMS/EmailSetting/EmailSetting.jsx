@@ -111,7 +111,7 @@ const EmailSetting = () => {
       dataIndex: "content",
       key: "content",
       width: 180,
-      ellipsis: true,
+      ellipsis: false,
       filters: [],
       render: (_, record) => {
         //console.log("tags : ", lock);

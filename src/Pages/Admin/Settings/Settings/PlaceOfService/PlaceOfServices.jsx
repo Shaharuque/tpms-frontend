@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
-import Loading from "../../../../../Loading/Loading";
 import { headers } from "../../../../../Misc/BaseClient";
 import PlaceOfServicesActionAddModal from "./PlaceOfServices/PlaceOfServicesActionAddModal";
+
+var cacheData = {};
 
 const PlaceOfServices = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -15,7 +16,7 @@ const PlaceOfServices = () => {
   const [recordData, setRecordData] = useState();
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState();
+  const [totalPage, setTotalPage] = useState(0);
 
   //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
@@ -28,6 +29,7 @@ const PlaceOfServices = () => {
       // const result = await res.json();
       const result = res?.data?.pos_data?.data;
       setItems(result);
+      // cacheData[`user-${page}`] = result;
       setTotalPage(res?.data?.pos_data?.last_page);
     };
     getPatientsData(page);
@@ -57,13 +59,13 @@ const PlaceOfServices = () => {
   //   }
   //   setpage(page + 1);
   // };
-  console.log(items);
+  // console.log(items);
 
   const handleClickOpen2 = (record) => {
     setOpenAddModal(true);
     setRecordData(record);
   };
-  console.log(recordData);
+  // console.log(recordData);
 
   const handleClose2 = () => {
     setOpenAddModal(false);
@@ -222,6 +224,7 @@ const PlaceOfServices = () => {
 
       {openAddModal && (
         <PlaceOfServicesActionAddModal
+          cacheData={cacheData}
           handleClose={handleClose2}
           open={openAddModal}
           recordData={recordData}
