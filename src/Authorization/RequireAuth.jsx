@@ -10,7 +10,7 @@ const RequireAuth = ({ children }) => {
   let location = useLocation();
 
   const email = useSelector((state) => state.emailInfo.email);
-  console.log("email stored in redux redirect auth:", email);
+  // console.log("email stored in redux redirect auth:", email);
 
   //user k jokhn call kortesey tokhn tar status hobey loading so loading state a ekta spinner return korey diley ar reload ar sathey sathey log in page a niye jabey na
   //   if (token) {

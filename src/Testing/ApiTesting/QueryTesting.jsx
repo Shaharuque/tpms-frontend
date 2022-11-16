@@ -66,7 +66,7 @@ const QueryTesting = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "get",
-        url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=1`,
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=1`,
         headers: headers,
       });
       // const result = await res.json();
@@ -80,7 +80,7 @@ const QueryTesting = () => {
   const fetchPatients = async () => {
     const res = await axios({
       method: "get",
-      url: `https://app.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+      url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
       headers: headers,
     });
     const data = res?.data?.pos_data?.data;
