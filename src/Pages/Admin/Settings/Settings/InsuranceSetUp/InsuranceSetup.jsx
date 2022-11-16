@@ -307,13 +307,14 @@ const InsuranceSetup = () => {
         }}
         onChange={handleChange}
       />
-      <button className="pms-button">Save Payer Setup</button>
+      <button className="pms-button my-5">Save Payer Setup</button>
 
-      {/* {insuranceEdit && (
+      {/* {insuranceEdit && (         
         <>
-          <InsuranceEditComponent id={rowId}></InsuranceEditComponent>
+          <InsuranceEditComponent id={rowId}></InsuranceEditComponent
         </>
       )} */}
+      {/* <InsuranceEditComponent id={rowId}></InsuranceEditComponent> */}
       {openEdit && (
         <>
           <InsuranceModal
