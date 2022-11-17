@@ -7,14 +7,22 @@ import { baseIp, headers } from "./BaseClient";
 export const fetchData = async (endPoint) => {
   console.log(`helper function call ${baseIp}/${endPoint}`);
   const response = await axios.get(`${baseIp}/${endPoint}`, {
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: localStorage.getItem("adminToken") || null,
+    },
   });
   return response;
 };
 
 export const PostfetchData = async (endPoint, payload) => {
   const response = await axios.post(`${baseIp}/${endPoint}`, payload, {
-    headers: headers,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: localStorage.getItem("adminToken") || null,
+    },
   });
   return response.data;
 };
@@ -33,7 +41,7 @@ export const PostfetchData = async (endPoint, payload) => {
 //   return axios.post('https://ovh.therapypms.com/api/v1/admin/ac/setting/cpt/code/exclusion/get', payload, {
 //     headers: headers,
 //   })
-   
+
 //   }
 
 //   export const useAddSuperHeroData = (url,payload) => {
@@ -48,8 +56,5 @@ export const PostfetchData = async (endPoint, payload) => {
 //         onError : Error
 //     })
 // }
-
-
-
 
 // export default fetchData;

@@ -24,7 +24,11 @@ const PlaceOfServices = () => {
       const res = await axios({
         method: "get",
         url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: localStorage.getItem("adminToken") || null,
+        },
       });
       // const result = await res.json();
       const result = res?.data?.pos_data?.data;
