@@ -45,6 +45,8 @@ const CptCodeExclusion = () => {
       (option) => option.value * 1
     );
     setcptSelectedKey(value)
+    setexcludedCptSelectedKey()
+   
   };
 
 
@@ -54,6 +56,8 @@ const CptCodeExclusion = () => {
       (option) => option.value * 1
     );
     setexcludedCptSelectedKey(value);
+    setcptSelectedKey()
+
   };
 
 
@@ -61,31 +65,42 @@ const CptCodeExclusion = () => {
 
   const handleSelectedValue = async(e) =>{
     console.log("selected vlaue",cptSelectedKeys)
-    const body = {
-      "cpt_id" : cptSelectedKeys
-  };
-    const AddingCptCode = await PostfetchData(
-      "admin/ac/setting/cpt/code/exclusion/add",
-      body
-    );
-    console.log("add data func check", AddingCptCode);
-    if (AddingCptCode.status === "success") {
+    if( cptSelectedKeys && cptSelectedKeys.length > 0){
+
+      const body = {
+        "cpt_id" : cptSelectedKeys
+    };
+      const AddingCptCode = await PostfetchData(
+        "admin/ac/setting/cpt/code/exclusion/add",
+        body
+      );
+      console.log("add data func check", AddingCptCode);
+      if (AddingCptCode.status === "success") {
+        Swal.fire({
+          icon: 'success',
+          title: 'Added',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setchangeData(true)
+      }
+    }else{
       Swal.fire({
-        icon: 'success',
-        title: 'Added',
+        icon: 'error',
+        title: 'Selected Cpt Codes',
         showConfirmButton: false,
         timer: 1500
       })
-      setchangeData(true)
     }
+  
 
   }
 
   const handleRemoveValue = async(e) =>{
     console.log("remove vlaue",excludedCptSelectedKeys)
     console.log("excluded cpt", excludedCptCode)
+
  if( excludedCptSelectedKeys && excludedCptSelectedKeys.length > 0){
-  
   const body = {"exclude_cpt_id" : excludedCptSelectedKeys};
   const RemoveCptCode = await PostfetchData(
     "admin/ac/setting/cpt/code/exclusion/remove",
@@ -102,15 +117,21 @@ const CptCodeExclusion = () => {
     setchangeData(true)
   }
  }else{
-    alert('proper data selct')
+  Swal.fire({
+    icon: 'error',
+    title: 'Selected Excluded Cpt Codes',
+    showConfirmButton: false,
+    timer: 1500
+  })
  }
    
 
 
   }
 
-  console.log('cptdata', cptCode)
-  console.log('excluded cpt', excludedCptCode)
+  // console.log('cptdata', cptCode)
+  // console.log('excluded cpt', excludedCptCode)
+  // console.log("selected vlaue",cptSelectedKeys)
 
   return (
     <div>
@@ -141,6 +162,7 @@ const CptCodeExclusion = () => {
           <button
             onClick={(e) => handleSelectedValue(e)}
             className="pms-button w-24"
+            disabled={excludedCptSelectedKeys?.length > 0 && cptSelectedKeys === undefined }
           >
             <div className="flex item-center justify-center">
               ADD
@@ -151,6 +173,7 @@ const CptCodeExclusion = () => {
             onClick={(e) => {
               handleRemoveValue(e);
             }}
+            disabled={cptSelectedKeys?.length > 0}
             className="pms-close-button w-24"
           >
             <div className="flex item-center justify-center">
