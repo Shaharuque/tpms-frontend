@@ -1,13 +1,58 @@
 import { Modal } from "antd";
+import axios from "axios";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-export default function AddServicesActionModal({ handleClose, open }) {
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { fetchData } from "../../../../../../features/Settings_redux/settingFeaturesSlice";
+import { headers } from "../../../../../../Misc/BaseClient";
+export default function AddServicesActionModal({ handleClose, open, page }) {
+  const dispatch = useDispatch();
+  const endPoint = "admin/ac/setting/service/all";
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (FormData) => {
+    console.log(FormData);
+    if (FormData) {
+      try {
+        let res = await axios({
+          method: "post",
+          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/service/create",
+          headers: headers,
+          data: FormData,
+        });
+
+        // console.log(res.data);
+        if (res?.data?.status === "success") {
+          toast.success("Successfully Inserted", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          dispatch(fetchData({ endPoint, page }));
+          handleClose();
+        }
+      } catch (error) {
+        toast.warning(error, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log(error?.res?.data?.message); // this is the main part. Use the response property from the error object
+      }
+    }
+    // reset();
   };
   return (
     <div>
@@ -41,10 +86,10 @@ export default function AddServicesActionModal({ handleClose, open }) {
                 </label>
                 <select
                   className="modal-input-field ml-1 w-full"
-                  {...register("tx_type")}
+                  {...register("facility_treatment_id")}
                 >
-                  <option value="Mr">Behavioral therapy</option>
-                  <option value="Mrs">Physical Therapy</option>
+                  <option value={20}>Behavioral therapy</option>
+                  <option value={30}>Mental Therapy</option>
                   <option value="Miss">Mental Health</option>
                 </select>
               </div>
@@ -54,10 +99,10 @@ export default function AddServicesActionModal({ handleClose, open }) {
                 </label>
                 <select
                   className="modal-input-field ml-1 w-full"
-                  {...register("service_type")}
+                  {...register("type")}
                 >
-                  <option value="Mr">Billable</option>
-                  <option value="Mrs">Unbillable</option>
+                  <option value="1">Billable</option>
+                  <option value="0">Unbillable</option>
                 </select>
               </div>
 
@@ -66,7 +111,7 @@ export default function AddServicesActionModal({ handleClose, open }) {
                   <span className="modal-label-name">Service</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Service"
                   name="service"
                   className="modal-input-field ml-1 w-full"
@@ -75,28 +120,21 @@ export default function AddServicesActionModal({ handleClose, open }) {
               </div>
               <div>
                 <label className="label">
-                  <span className="modal-label-name">Billed Per</span>
+                  <span className="modal-label-name">Description</span>
                 </label>
-                <select
+                <input
                   className="modal-input-field ml-1 w-full"
-                  {...register("billed_per")}
-                >
-                  <option value="Mr">Behavioral therapy</option>
-                  <option value="Mrs">Physical Therapy</option>
-                  <option value="Miss">Mental Health</option>
-                </select>
+                  {...register("description")}
+                ></input>
               </div>
               <div>
                 <label className="label">
                   <span className="modal-label-name">Duration</span>
                 </label>
-                <select
+                <input
                   className="modal-input-field ml-1 w-full"
                   {...register("duration")}
-                >
-                  <option value="Mr">5min</option>
-                  <option value="Mrs">10min</option>
-                </select>
+                ></input>
               </div>
 
               <div>
@@ -108,7 +146,7 @@ export default function AddServicesActionModal({ handleClose, open }) {
                   placeholder="Cpt Code"
                   name="Mileage"
                   className="modal-input-field ml-1 w-full"
-                  {...register("Mileage")}
+                  {...register("mileage")}
                 />
               </div>
             </div>
