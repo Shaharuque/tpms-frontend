@@ -2,10 +2,16 @@ import { Switch, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
+import EmailSettingModal from "./EmailSettingModal";
 
 const EmailSetting = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [openEdit, setOpenEdit] = useState(false);
+
+  const handleClose = () => {
+    setOpenEdit(false);
+  };
 
   const [table, setTable] = useState(false);
   useEffect(() => {
@@ -117,10 +123,15 @@ const EmailSetting = () => {
         //console.log("tags : ", lock);
         return (
           <div className="flex  items-center justify-between flex-wrap">
-            <div className="flex flex-wrap items-start justify-start">
+            <div className="flex text-left gap-2 flex-wrap items-start justify-start">
               {record.content}
+              <AiFillEye
+                onClick={() => {
+                  setOpenEdit(true);
+                }}
+                className=" text-base text-secondary"
+              />
             </div>
-            <AiFillEye className=" text-base text-secondary" />
           </div>
         );
       },
@@ -188,6 +199,14 @@ const EmailSetting = () => {
           onChange={handleChange}
         />
       </div>
+      {openEdit && (
+        <>
+          <EmailSettingModal
+            handleClose={handleClose}
+            open={openEdit}
+          ></EmailSettingModal>
+        </>
+      )}
     </div>
   );
 };
