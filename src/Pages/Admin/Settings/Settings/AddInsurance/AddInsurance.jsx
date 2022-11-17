@@ -142,7 +142,6 @@ const AddInsurance = () => {
           <select
             multiple={true}
             id="countries_multiple"
-           
             onChange={(e) => {
               handleAdding(e);
             }}

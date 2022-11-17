@@ -43,7 +43,11 @@ const ListView = () => {
       const res = await axios({
         method: "GET",
         url: `https://ovh.therapypms.com/api/v1/admin/ac/patient/names`,
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: localStorage.getItem("adminToken") || null,
+        },
       });
       const data = res?.data?.clients;
       // console.log(data);
@@ -60,7 +64,11 @@ const ListView = () => {
       const res = await axios({
         method: "GET",
         url: `https://ovh.therapypms.com/api/v1/admin/ac/staff/names`,
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: localStorage.getItem("adminToken") || null,
+        },
       });
       const data = res?.data?.staff_names;
       setStuffs(data);
@@ -170,7 +178,11 @@ const ListView = () => {
     await axios({
       url: `https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
       method: "POST",
-      headers: headers,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: localStorage.getItem("adminToken") || null,
+      },
       data: formData,
     }).then((response) => {
       manageSessionData = response?.data?.appointments?.data;
@@ -265,8 +277,8 @@ const ListView = () => {
     },
     {
       title: "Service & Hrs",
-      dataIndex: "Service_hrs",
-      key: "Service_hrs",
+      dataIndex: "activity_name",
+      key: "activity_name",
       width: 150,
       filters: [
         {
@@ -676,8 +688,11 @@ const ListView = () => {
       const fetchManageSessions = {
         url: "https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments",
         method: "POST",
-        mode: "no-cors",
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: localStorage.getItem("adminToken") || null,
+        },
         data: payLoad,
       };
 

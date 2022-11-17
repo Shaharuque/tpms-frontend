@@ -60,7 +60,11 @@ export const getpatientsDetails = createAsyncThunk(
     const response = await axios.get(
       `https://ovh.therapypms.com/api/v1/admin/ac/patient/info/${id}`,
       {
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: localStorage.getItem("adminToken") || null,
+        },
       }
     );
     return response.data;

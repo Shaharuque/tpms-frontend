@@ -35,7 +35,11 @@ export default function PlaceOfServicesActionAddModal({
         let res = await axios({
           method: "post",
           url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/create/pos",
-          headers: headers,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("adminToken") || null,
+          },
           data: FormData,
         });
 
@@ -70,7 +74,11 @@ export default function PlaceOfServicesActionAddModal({
             const res = await axios({
               method: "get",
               url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
-              headers: headers,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: localStorage.getItem("adminToken") || null,
+              },
             });
             // const result = await res.json();
             const result = res?.data?.pos_data?.data;
@@ -98,7 +106,11 @@ export default function PlaceOfServicesActionAddModal({
         let res = await axios({
           method: "post",
           url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/update/pos",
-          headers: headers,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("adminToken") || null,
+          },
           data: payload,
         });
 
@@ -121,7 +133,11 @@ export default function PlaceOfServicesActionAddModal({
             const res = await axios({
               method: "get",
               url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
-              headers: headers,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: localStorage.getItem("adminToken") || null,
+              },
             });
             // const result = await res.json();
             const result = res?.data?.pos_data?.data;
