@@ -10,7 +10,11 @@ export const getsettings = createAsyncThunk(
     const response = await axios.get(
       `https://ovh.therapypms.com/api/v1/admin/ac/get/setting/name/location`,
       {
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: localStorage.getItem("adminToken") || null,
+        },
       }
     );
     return response.data;

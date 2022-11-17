@@ -43,7 +43,11 @@ export default function AddCptCodeActionModal({
         let res = await axios({
           method: "post",
           url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/cpt/code/create",
-          headers: headers,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("adminToken") || null,
+          },
           data: FormData,
         });
 
@@ -55,7 +59,11 @@ export default function AddCptCodeActionModal({
             const res = await axios({
               method: "get",
               url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/cpt/code?page=${page}`,
-              headers: headers,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: localStorage.getItem("adminToken") || null,
+              },
             });
             const result = res?.data?.cpt_codes?.data;
             //console.log(result);
