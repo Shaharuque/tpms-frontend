@@ -5,6 +5,8 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import axios from "axios";
 import { headers } from "../../../../../../Misc/BaseClient";
 import "../../../../../Style/Pagination.css";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 export default function PlaceOfServicesActionAddModal({
   handleClose,
@@ -14,6 +16,7 @@ export default function PlaceOfServicesActionAddModal({
   setItems,
   setTotalPage,
   page,
+  cacheData,
 }) {
   const { id, pos_code, pos_name } = recordData;
   console.log(id);
@@ -32,25 +35,57 @@ export default function PlaceOfServicesActionAddModal({
         let res = await axios({
           method: "post",
           url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/create/pos",
-          headers: headers,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("adminToken") || null,
+          },
           data: FormData,
         });
 
         // console.log(res.data);
         if (res.data.status === "success") {
           console.log("Successfully Inserted");
+          // Swal.fire({
+          //   title: "Successfully Added Place of Service",
+
+          //   showClass: {
+          //     popup: "animate__animated animate__fadeInDown",
+          //   },
+          //   hideClass: {
+          //     popup: "animate__animated animate__fadeOutUp",
+          //   },
+          // });
+          // toastify
+          toast.success("Successfully Added Place of Service", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+
           //After posting data to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
           // setItems([...items, res?.data?.pos_data]);
           const getPatientsData = async (page = 1) => {
             const res = await axios({
               method: "get",
               url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
-              headers: headers,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: localStorage.getItem("adminToken") || null,
+              },
             });
             // const result = await res.json();
             const result = res?.data?.pos_data?.data;
             //console.log(result);
+
             setItems(result);
+            // cacheData[`user-${page}`] = result
             setTotalPage(res?.data?.pos_data?.last_page);
           };
           getPatientsData(page);
@@ -71,24 +106,44 @@ export default function PlaceOfServicesActionAddModal({
         let res = await axios({
           method: "post",
           url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/update/pos",
-          headers: headers,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: localStorage.getItem("adminToken") || null,
+          },
           data: payload,
         });
 
         // console.log(res.data);
         if (res.data.status === "success") {
           console.log("Successfully Updated");
+          // success toast
+          toast.success("Successfully Updated Place of Service", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
           //for showing updated data in real time
           const getPatientsData = async (page = 1) => {
             const res = await axios({
               method: "get",
               url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
-              headers: headers,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: localStorage.getItem("adminToken") || null,
+              },
             });
             // const result = await res.json();
             const result = res?.data?.pos_data?.data;
             //console.log(result);
             setItems(result);
+            // cacheData[`user-${page}`] = result
             setTotalPage(res?.data?.pos_data?.last_page);
           };
           getPatientsData(page);

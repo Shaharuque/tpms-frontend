@@ -1,5 +1,6 @@
 /* @import 'antd/dist/antd.css'; */
 @import "./customAntd.css";
+@import "./customToastify.css";
 
 * {
   margin: 0;
@@ -240,4 +241,12 @@ select:focus {
   color: #9b9b9b;
   font-weight: 500;
   text-align: left;
+}
+
+/* ---------------------------- email setting --------------- */
+
+.email-setting {
+  line-height: 27.5px !important;
+  letter-spacing: 0.4px;
+  word-spacing: 0.4px;
 }

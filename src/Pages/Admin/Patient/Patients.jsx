@@ -62,7 +62,9 @@ const TableApi = () => {
     // return filterData;
     let newArray = [];
     for (let x of resultArray) {
-      newArray.push({ text: x, value: x });
+      if (x !== null) {
+        newArray.push({ text: x, value: x });
+      }
     }
     return newArray;
   };
@@ -129,7 +131,11 @@ const TableApi = () => {
       const res = await axios({
         method: "get",
         url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=1`,
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: localStorage.getItem("adminToken") || null, //directly access token from local storage
+        },
       });
       // const result = await res.json();
       const data = res.data?.clients?.data;
@@ -138,12 +144,17 @@ const TableApi = () => {
     };
     getPatientsData();
   }, []);
+  console.log("headers from patients", headers);
 
   const fetchPatients = async () => {
     const res = await axios({
       method: "get",
       url: `https://ovh.therapypms.com/api/v1/admin/ac/patient?page=${page}`,
-      headers: headers,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: localStorage.getItem("adminToken") || null,
+      },
     });
     const data = res.data?.clients?.data;
     console.log(data);

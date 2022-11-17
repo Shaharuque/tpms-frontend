@@ -1,14 +1,47 @@
-import { Table } from "antd";
+import { Pagination, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import ReactPaginate from "react-paginate";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../../../../../features/Settings_redux/settingFeaturesSlice";
+import Loading from "../../../../../Loading/Loading";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddServicesActionModal from "./AddServices/AddServicesActionModal";
 
 const AddServices = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [items, setItems] = useState([]);
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const endPoint = "admin/ac/setting/service/all";
+
+  const allService = useSelector((state) => state?.settingFeatureInfo);
+  console.log(allService);
+  const data = allService?.result?.services?.data
+    ? allService?.result?.services?.data
+    : [];
+  const totalPage = allService?.result?.services?.last_page
+    ? allService?.result?.services?.last_page
+    : 0;
+  console.log(data);
+
+  useEffect(() => {
+    // For sending multiple parameter to createAsync Thunk we need to pass it as object
+    dispatch(fetchData({ endPoint, page }));
+  }, [page]);
+
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
+  };
+
+  if (allService?.loading) {
+    return <ShimmerTableTet></ShimmerTableTet>;
+  }
 
   const handleClickOpen = () => {
     setOpenAddModal(true);
@@ -24,19 +57,6 @@ const AddServices = () => {
     setSortedInfo(sorter);
   };
 
-  const [table, setTable] = useState(false);
-  useEffect(() => {
-    axios("../../../All_Fake_Api/Cpt.json")
-      .then((response) => {
-        console.log("calling");
-        setTable(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  console.log(table);
-
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
     {
@@ -46,24 +66,25 @@ const AddServices = () => {
       width: 100,
       filters: [
         {
-          text: `10/31/2021`,
-          value: "10/31/2021",
+          text: `Mental Health`,
+          value: "Mental Health",
         },
         {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
+          text: `Speech Therapy`,
+          value: "Speech Therapy",
         },
       ],
-      render: (_, { tx_type }) => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{tx_type}</div>;
+        return (
+          <div className="text-secondary flex justify-start">
+            {record?.treatment_type?.treatment_name}
+          </div>
+        );
       },
       filteredValue: filteredInfo.tx_type || null,
-      onFilter: (value, record) => record.tx_type.includes(value),
+      onFilter: (value, record) =>
+        record?.treatment_type?.treatment_name?.includes(value),
       sorter: (a, b) => {
         return a.tx_type > b.tx_type ? -1 : 1;
       },
@@ -71,30 +92,31 @@ const AddServices = () => {
       ellipsis: true,
     },
     {
-      title: "Cpt Code",
-      dataIndex: "cpt",
-      key: "cpt",
+      title: "Service",
+      dataIndex: "description",
+      key: "description",
       width: 100,
       filters: [
         {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
+          text: `Inspection Assessment`,
+          value: "Inspection Assessment",
         },
       ],
-      filteredValue: filteredInfo.cpt || null,
-      onFilter: (value, record) => record.cpt.includes(value),
-      sorter: (a, b) => {
-        return a.cpt > b.cpt ? -1 : 1;
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-secondary flex justify-start">
+            <h1>{record?.description}</h1>
+          </div>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "cpt" ? sortedInfo.order : null,
+      filteredValue: filteredInfo.description || null,
+      onFilter: (value, record) => record.description.includes(value),
+      sorter: (a, b) => {
+        return a.description > b.description ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "description" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -168,18 +190,34 @@ const AddServices = () => {
           bordered
           className=" text-xs font-normal"
           columns={columns}
-          dataSource={table}
+          dataSource={data}
           scroll={{
             y: 650,
           }}
           onChange={handleChange}
         />
+
+        {totalPage > 0 && (
+          <ReactPaginate
+            previousLabel={"<<"}
+            nextLabel={">>"}
+            pageCount={Number(totalPage)}
+            marginPagesDisplayed={1}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination_Link"}
+            nextLinkClassName={"pagination_Link"}
+            activeClassName={"pagination_Link-active"}
+            disabledClassName={"pagination_Link-disabled"}
+          ></ReactPaginate>
+        )}
       </div>
 
       {openAddModal && (
         <AddServicesActionModal
           handleClose={handleClose}
           open={openAddModal}
+          page={page}
         ></AddServicesActionModal>
       )}
     </div>

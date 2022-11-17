@@ -12,9 +12,10 @@ const AddInsurance = () => {
   const [selectedInsurance, setselectedInsurance] = useState(null);
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
+  const [addedData, setaddedData] = useState(false);
 
-  //multiple get api will be called together to increase performance
-  //parallel API calling
+  // multiple get api will be called together to increase performance
+  // parallel API calling
   const fetchWithPromiseAll = async () => {
     const GetInsurancePromise = fetchData("admin/ac/setting/get/all/insurance");
     const SelectedInsurancePromise = fetchData(
@@ -30,13 +31,19 @@ const AddInsurance = () => {
 
   useEffect(() => {
     fetchWithPromiseAll();
-  }, []);
+    setaddedData(false);
+  }, [addedData]);
 
-  console.log(insuranceApiData, selectedInsurance);
+  // console.log(insuranceApiData, selectedInsurance);
 
   if (!insuranceApiData && !selectedInsurance) {
     return <Loading></Loading>;
   }
+
+  if (addedData) {
+    return <Loading></Loading>;
+  }
+
   const handleAdding = (e) => {
     let target = e.target;
     // let name = target.name;
@@ -55,12 +62,38 @@ const AddInsurance = () => {
     setfacilityselectedkeys(value);
   };
 
-  const handleSelectedValue = () => {
-    console.log("add button click get data", selectedKeys);
+  const handleSelectedValue = async () => {
+    console.log("add button click get data adding", selectedKeys);
+    const body = {
+      insurance_ids: selectedKeys,
+    };
+    const AddingInsuranceData = await PostfetchData(
+      "admin/ac/setting/add/insurance",
+      body
+    );
+    console.log("add data func check", AddingInsuranceData);
+    if (AddingInsuranceData.status === "success") {
+      alert('data added')
+      setaddedData(true);
+    }
   };
 
-  const handleRemoveValue = (e) => {
+  const handleRemoveValue = async () => {
     console.log("Remove  button click get data", facilityselectedkeys);
+    const body = {
+      selected_insurance_ids: facilityselectedkeys,
+    };
+    const RemoveSelectedData = await PostfetchData(
+      "admin/ac/setting/remove/insurance",
+      body
+    );
+    if (RemoveSelectedData.status === "success") {
+      console.log(RemoveSelectedData);
+      alert("data remove ");
+      setaddedData(true);
+    } else {
+      alert("another space use");
+    }
   };
 
   const InsuranceView = async () => {
@@ -72,7 +105,6 @@ const AddInsurance = () => {
 
     const body = {
       insurance_id: selectedKeys,
-      // insurance_id: 219,
     };
     const fetchpostTest = await PostfetchData(
       "admin/ac/setting/get/all/insurance/details",
@@ -81,7 +113,6 @@ const AddInsurance = () => {
     console.log("fetchpostTest", fetchpostTest);
     setpassAllInsurance(fetchpostTest);
     setpassSelectedInsurance({});
-    // setpassSelectedInsurance(response?.data);
   };
 
   const FacilityInsurance = async () => {
@@ -89,18 +120,15 @@ const AddInsurance = () => {
       alert("select just one value");
       return setfacilityselectedkeys([0]);
     }
-    // console.log('data facilaty', facilityselectedkeys )
 
     const body = {
       insurance_id: facilityselectedkeys,
     };
-
     const fetchpostTestt = await PostfetchData(
       "admin/ac/setting/get/selected/insurance/details",
       body
     );
     setpassSelectedInsurance(fetchpostTestt);
-    console.log("facilaty axios", fetchpostTestt);
     setpassAllInsurance({});
   };
 
@@ -110,24 +138,23 @@ const AddInsurance = () => {
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
 
-          {/* new code added */}
+     
           <select
             multiple={true}
             id="countries_multiple"
-            // className="h-40"
             onChange={(e) => {
               handleAdding(e);
-              // console.log("handlechange data check", e.target.value)
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {insuranceApiData?.data?.all_insurance.length > 0 &&
               insuranceApiData?.data?.all_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.payor_name}
+                  {item.payor_name}{" "}
                 </option>
-              ))}
+              ))}{" "}
           </select>
+          
           <br />
           <button
             onClick={() => {
@@ -139,7 +166,7 @@ const AddInsurance = () => {
           </button>
         </div>
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
-          <button // onClick={handleAddItems}
+          <button
             onClick={() => handleSelectedValue()}
             className="pms-button w-24"
           >
@@ -178,9 +205,9 @@ const AddInsurance = () => {
             {selectedInsurance?.data?.selected_insurance?.length > 0 &&
               selectedInsurance?.data?.selected_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.payor_name}
+                  {item.payor_name}{" "}
                 </option>
-              ))}
+              ))}{" "}
           </select>
           <br />
           <button
@@ -199,7 +226,7 @@ const AddInsurance = () => {
           AllInsurance={passAllInsurance}
           SelectedInsurance={passSelectedInsurance}
         ></InsuranceDetails>
-      )}
+      )}{" "}
     </div>
   );
 };

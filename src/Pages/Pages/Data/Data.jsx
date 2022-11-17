@@ -342,6 +342,11 @@ export const setting = [
     name: "TPMS Meet",
     icon: <TbArrowsRightLeft />,
   },
+  {
+    link: "sms-email-setting/email-setting",
+    name: "SMS/Email Setting",
+    icon: <TbArrowsRightLeft />,
+  },
 ];
 
 export const patient_info = [

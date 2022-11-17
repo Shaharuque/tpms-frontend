@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Loading from "../../../../../Loading/Loading";
-import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
+import { fetchData} from "../../../../../Misc/Helper";
 
 // import InsuranceDetails from "./InsuranceDetails";
 
@@ -11,8 +11,7 @@ const AddTreatments = () => {
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
   const [allTreatmentData, setAllTreatmentData] = useState(null);
   const [selectedTreatmentData, setSelectedTreatmentData] = useState(null);
-  const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
-  const [passAllInsurance, setpassAllInsurance] = useState(null);
+
 
   //multiple get api will be called together to increase performance
   //parallel API calling[Important]
@@ -34,22 +33,6 @@ const AddTreatments = () => {
   }, []);
 
   console.log(allTreatmentData, selectedTreatmentData);
-
-  // useEffect(() => {
-  //   const treatmentsApiCalling = async () => {
-  //     const getAllTreatments = await fetchData(
-  //       "admin/ac/setting/get/all/treatment"
-  //     );
-  //     const getSelectedTreatments = await fetchData(
-  //       "admin/ac/setting/get/selected/treatment"
-  //     );
-  //     // console.log(getSelectedTreatments);
-  //     setAllTreatmentData(getAllTreatments);
-  //     setSelectedTreatmentData(getSelectedTreatments);
-  //   };
-  //   treatmentsApiCalling();
-  // }, []);
-
   if (!allTreatmentData && !selectedTreatmentData) {
     return <Loading></Loading>;
   }
@@ -93,7 +76,6 @@ const AddTreatments = () => {
             // className="h-40"
             onChange={(e) => {
               handleAdding(e);
-              // console.log("handlechange data check", e.target.value)
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
@@ -106,9 +88,6 @@ const AddTreatments = () => {
           </select>
           <br />
           <button
-            // onClick={() => {
-            //   InsuranceView();
-            // }}
             className="pms-button"
           >
             View Details

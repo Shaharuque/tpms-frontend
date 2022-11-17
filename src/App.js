@@ -160,6 +160,10 @@ import ProfileInformation from "./Pages/Shared/Profile/ProfileInformation";
 import PasswordChange from "./Pages/Shared/Profile/PasswordChange";
 import Profile from "./Pages/Shared/Profile/Profile";
 import QueryTesting from "./Testing/ApiTesting/QueryTesting";
+import EmailAndSms from "./Pages/Admin/Settings/Settings/EmailAndSMS/EmailAndSms";
+import EmailSetting from "./Pages/Admin/Settings/Settings/EmailAndSMS/EmailSetting/EmailSetting";
+import SmsSetting from "./Pages/Admin/Settings/Settings/EmailAndSMS/SmsSetting/SmsSetting";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -742,6 +746,20 @@ function App() {
                 element={<DataImport></DataImport>}
               ></Route>
               <Route path="meet-lists" element={<TpmsMeet></TpmsMeet>}></Route>
+              <Route
+                path="sms-email-setting"
+                element={<EmailAndSms></EmailAndSms>}
+              >
+                <Route index element={<Navigate to="email-setting" />} />
+                <Route
+                  path="email-setting"
+                  element={<EmailSetting></EmailSetting>}
+                ></Route>
+                <Route
+                  path="sms-setting"
+                  element={<SmsSetting></SmsSetting>}
+                ></Route>
+              </Route>
             </Route>
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
@@ -779,6 +797,8 @@ function App() {
           {/* No Page Found */}
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
+        {/* react toast show korar jnno */}
+        <ToastContainer />
       </FullScreen>
     </div>
   );
