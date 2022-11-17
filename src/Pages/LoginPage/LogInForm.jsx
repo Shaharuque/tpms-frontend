@@ -12,7 +12,8 @@ import CryptoJS from "crypto-js";
 import { useDispatch, useSelector } from "react-redux";
 import { storeEmail } from "../../features/login_redux/loginSlice";
 
-const LogInForm = () => {
+const LogInForm = ({ from }) => {
+  console.log("state from loginForm", from?.from?.pathname);
   const [value, setValue] = useState(false);
   const navigate = useNavigate();
   //const Swal = require("sweetalert2");
@@ -48,26 +49,32 @@ const LogInForm = () => {
     };
     axios(options).then((response) => {
       console.log(response.data);
-      // Encrypt the token
-      let ciphertextToken = CryptoJS.AES.encrypt(
-        JSON.stringify(response?.data?.access_token),
-        "tpm422"
-      ).toString();
+      // // Encrypt the token
+      // let ciphertextToken = CryptoJS.AES.encrypt(
+      //   JSON.stringify(response?.data?.access_token),
+      //   "tpm422"
+      // ).toString();
 
       if (
         response?.data?.account_type === "admin" &&
         response?.data?.status === "success"
       ) {
         dispatch(storeEmail(response?.data?.user?.email));
-        localStorage.setItem("adminToken", ciphertextToken);
+        localStorage.setItem("adminToken", response?.data?.access_token);
         localStorage.setItem("type", response.data.account_type);
         navigate("/admin"); //admin panel a redirect
+        if (from !== null) {
+          console.log("loging from navigation to", from?.from?.pathname);
+          navigate(`${from?.from?.pathname}`);
+        } else {
+          console.log("login from navigation to default");
+          navigate("/admin"); //admin panel a redirect
+        }
       } else if (response?.data?.account_type === "patient") {
         navigate("/patient"); //patient panel a redirect
         localStorage.setItem("type", "patient");
       } else {
         setMessage(response.data.message);
-        navigate("/");
       }
     });
   };
