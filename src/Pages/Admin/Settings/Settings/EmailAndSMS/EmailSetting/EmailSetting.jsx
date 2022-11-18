@@ -8,6 +8,7 @@ const EmailSetting = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openEdit, setOpenEdit] = useState(false);
+  const [isReadMore, setIsReadMore] = useState(true);
 
   const handleClose = () => {
     setOpenEdit(false);
@@ -121,10 +122,20 @@ const EmailSetting = () => {
       filters: [],
       render: (_, record) => {
         //console.log("tags : ", lock);
+
+        const toggleReadMore = () => {
+          setIsReadMore(!isReadMore);
+        };
         return (
           <div className="flex  items-center justify-between flex-wrap">
             <div className="flex text-left gap-2 flex-wrap items-start justify-start">
-              {record.content}
+              <p className="text">
+                {isReadMore ? record.content.slice(0, 150) : record.content}
+                <span onClick={toggleReadMore} className="read-or-hide">
+                  {isReadMore ? "...read more" : " show less"}
+                </span>
+              </p>
+
               <AiFillEye
                 onClick={() => {
                   setOpenEdit(true);
