@@ -31,7 +31,7 @@
 }
 
 .listview .gray {
-    color: #fff;
+    color: #fff !important;
 }
 
 .listview .dropdown-heading .dropdown-heading-value {

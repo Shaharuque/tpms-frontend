@@ -164,6 +164,9 @@ import EmailAndSms from "./Pages/Admin/Settings/Settings/EmailAndSMS/EmailAndSms
 import EmailSetting from "./Pages/Admin/Settings/Settings/EmailAndSMS/EmailSetting/EmailSetting";
 import SmsSetting from "./Pages/Admin/Settings/Settings/EmailAndSMS/SmsSetting/SmsSetting";
 import { ToastContainer } from "react-toastify";
+import SecBillingManager from "./Pages/Admin/Billing/SecBillingManager/SecBillingManager";
+import ManageSecondaryClaims from "./Pages/Admin/Billing/SecBillingManager/ManageSecondaryClaims/ManageSecondaryClaims";
+import PendingSecondaryClaim from "./Pages/Admin/Billing/SecBillingManager/PendingSecondaryClaim/PendingSecondaryClaim";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -581,6 +584,23 @@ function App() {
               <Route
                 path="Manage-claims"
                 element={<ManageClaims></ManageClaims>}
+              ></Route>
+            </Route>
+            <Route
+              path="submit-secondary-billing"
+              element={<SecBillingManager></SecBillingManager>}
+            >
+              <Route
+                index
+                element={<Navigate to="pending-secondary-Claims" />}
+              />
+              <Route
+                path="pending-secondary-Claims"
+                element={<PendingSecondaryClaim></PendingSecondaryClaim>}
+              ></Route>
+              <Route
+                path="manage-secondary-claims"
+                element={<ManageSecondaryClaims></ManageSecondaryClaims>}
               ></Route>
             </Route>
             <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>
