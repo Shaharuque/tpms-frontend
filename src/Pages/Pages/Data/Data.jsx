@@ -314,7 +314,7 @@ export const setting = [
   },
   {
     link: "file-manager",
-    name: "QA File",
+    name: "OA File",
     icon: <BsFolder2Open />,
   },
   {

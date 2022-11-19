@@ -31,7 +31,7 @@ const SecBillingManager = () => {
           >
             Manage Secondary claim(s)
             <span className="bg-orange-400 badge text-white ml-2 text-[10px] rounded-full">
-              step-3
+              step-2
             </span>
           </NavLink>
         </Nav>

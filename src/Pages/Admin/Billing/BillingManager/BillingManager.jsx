@@ -12,7 +12,7 @@ const BillingManager = () => {
               navinfo.isActive
                 ? "rs-nav-item rs-nav-item-active font-normal text-xs"
                 : "rs-nav-item text-xs font-normal"
-            } 
+            }
             to={"proces-Clims"}
           >
             Processing Claim(s)
@@ -45,7 +45,7 @@ const BillingManager = () => {
           >
             Manage claim(s)
             <span className="bg-orange-400 badge text-white ml-2 text-[10px] rounded-full">
-              step-3
+              step-2
             </span>
           </NavLink>
         </Nav>

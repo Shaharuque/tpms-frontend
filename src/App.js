@@ -167,6 +167,10 @@ import { ToastContainer } from "react-toastify";
 import SecBillingManager from "./Pages/Admin/Billing/SecBillingManager/SecBillingManager";
 import ManageSecondaryClaims from "./Pages/Admin/Billing/SecBillingManager/ManageSecondaryClaims/ManageSecondaryClaims";
 import PendingSecondaryClaim from "./Pages/Admin/Billing/SecBillingManager/PendingSecondaryClaim/PendingSecondaryClaim";
+import ERAFiles from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/ERAFiles";
+import Files277 from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/Files277";
+import Files999 from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/Files999";
+import EDIStatusFiles from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/EDIStatusFiles";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -745,10 +749,16 @@ function App() {
                 path="session-rule"
                 element={<CreateServiceRules></CreateServiceRules>}
               ></Route>
-              <Route
-                path="file-manager"
-                element={<EraManager></EraManager>}
-              ></Route>
+              <Route path="file-manager" element={<EraManager></EraManager>}>
+                <Route index element={<Navigate to="era-files" />} />
+                <Route path="era-files" element={<ERAFiles></ERAFiles>}></Route>
+                <Route path="file-277" element={<Files277></Files277>}></Route>
+                <Route path="file-999" element={<Files999></Files999>}></Route>
+                <Route
+                  path="edi-status-files"
+                  element={<EDIStatusFiles></EDIStatusFiles>}
+                ></Route>
+              </Route>
               <Route
                 path="froms-builder"
                 element={<FormsBuilder></FormsBuilder>}
