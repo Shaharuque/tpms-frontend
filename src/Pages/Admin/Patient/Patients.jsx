@@ -8,8 +8,11 @@ import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/Shi
 import { FaRegAddressCard } from "react-icons/fa";
 import PatientAuthorizationsTableModal from "./Patients/PatientAuthorizationsTableModal";
 import PatientStatusAction from "./Patients/PatientStatusAction";
+import useToken from "../../../CustomHooks/useToken";
 
 const TableApi = () => {
+  //get token
+  const { token } = useToken();
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [items, setItems] = useState([]);
@@ -134,7 +137,7 @@ const TableApi = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: localStorage.getItem("adminToken") || null, //directly access token from local storage
+          Authorization: token ? token : null, //directly access token from custom hook useToken
         },
       });
       // const result = await res.json();
@@ -153,7 +156,7 @@ const TableApi = () => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: localStorage.getItem("adminToken") || null,
+        Authorization: token ? token : null,
       },
     });
     const data = res.data?.clients?.data;

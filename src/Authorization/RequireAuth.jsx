@@ -7,11 +7,10 @@ const RequireAuth = ({ children }) => {
   let location = useLocation();
   console.log("location", location);
 
-  const email = useSelector((state) => state.emailInfo.email);
+  //const email = useSelector((state) => state.emailInfo.email);
   // console.log("email stored in redux redirect auth:", email);
 
   //if logged in user email not found after loging to account then it will redirect to login page
-  //this solution pertially solved the problem not a good approach
   if (!token) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them

@@ -49,18 +49,15 @@ const LogInForm = ({ from }) => {
     };
     axios(options).then((response) => {
       console.log(response.data);
-      // // Encrypt the token
-      // let ciphertextToken = CryptoJS.AES.encrypt(
-      //   JSON.stringify(response?.data?.access_token),
-      //   "tpm422"
-      // ).toString();
+      // Encrypt the token
+      let ciphertextToken = CryptoJS.AES.encrypt(
+        JSON.stringify(response?.data?.access_token),
+        "tpm422"
+      ).toString();
 
-      if (
-        response?.data?.account_type === "admin" &&
-        response?.data?.status === "success"
-      ) {
+      if (response?.data?.account_type === "admin") {
         dispatch(storeEmail(response?.data?.user?.email));
-        localStorage.setItem("adminToken", response?.data?.access_token);
+        localStorage.setItem("adminToken", ciphertextToken);
         localStorage.setItem("type", response.data.account_type);
         navigate("/admin"); //admin panel a redirect
         if (from !== null) {

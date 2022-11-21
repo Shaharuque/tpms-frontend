@@ -3,7 +3,6 @@ import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
-// import { Fade } from "react-reveal";
 import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
@@ -15,13 +14,14 @@ import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
-import { headers } from "../../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import Clients from "./MultiSelectComponents/Clients";
 import Providers from "./MultiSelectComponents/Providers";
+import useToken from "../../../../CustomHooks/useToken";
 
 const ListView = () => {
+  const { token } = useToken();
   const [billable, setBillable] = useState("billable");
   const [table, setTable] = useState(false);
   const [TData, setTData] = useState([]);
@@ -46,7 +46,7 @@ const ListView = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: localStorage.getItem("adminToken") || null,
+          Authorization: token || null,
         },
       });
       const data = res?.data?.clients;
@@ -67,7 +67,7 @@ const ListView = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: localStorage.getItem("adminToken") || null,
+          Authorization: token || null,
         },
       });
       const data = res?.data?.staff_names;
@@ -181,7 +181,7 @@ const ListView = () => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: localStorage.getItem("adminToken") || null,
+        Authorization: token || null,
       },
       data: formData,
     }).then((response) => {
@@ -691,7 +691,7 @@ const ListView = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: localStorage.getItem("adminToken") || null,
+          Authorization: token || null,
         },
         data: payLoad,
       };

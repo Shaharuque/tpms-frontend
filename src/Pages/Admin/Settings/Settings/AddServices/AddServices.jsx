@@ -1,12 +1,11 @@
-import { Pagination, Table } from "antd";
-import axios from "axios";
+import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
+import useToken from "../../../../../CustomHooks/useToken";
 import { fetchData } from "../../../../../features/Settings_redux/settingFeaturesSlice";
-import Loading from "../../../../../Loading/Loading";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddServicesActionModal from "./AddServices/AddServicesActionModal";
 
@@ -14,12 +13,12 @@ const AddServices = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+  const { token } = useToken();
   const endPoint = "admin/ac/setting/service/all";
 
-  const allService = useSelector((state) => state?.settingFeatureInfo);
+  const allService = useSelector((state) => state?.serviceInfo);
   console.log(allService);
   const data = allService?.result?.services?.data
     ? allService?.result?.services?.data
@@ -31,17 +30,13 @@ const AddServices = () => {
 
   useEffect(() => {
     // For sending multiple parameter to createAsync Thunk we need to pass it as object
-    dispatch(fetchData({ endPoint, page }));
-  }, [page]);
+    dispatch(fetchData({ endPoint, page, token }));
+  }, [page, dispatch, token]);
 
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
   };
-
-  if (allService?.loading) {
-    return <ShimmerTableTet></ShimmerTableTet>;
-  }
 
   const handleClickOpen = () => {
     setOpenAddModal(true);
@@ -183,19 +178,25 @@ const AddServices = () => {
         </div>
       </div>
       <div>
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-          size="small"
-          bordered
-          className=" text-xs font-normal"
-          columns={columns}
-          dataSource={data}
-          scroll={{
-            y: 650,
-          }}
-          onChange={handleChange}
-        />
+        <>
+          {allService?.loading ? (
+            <ShimmerTableTet></ShimmerTableTet>
+          ) : (
+            <Table
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+              size="small"
+              bordered
+              className=" text-xs font-normal"
+              columns={columns}
+              dataSource={data}
+              scroll={{
+                y: 650,
+              }}
+              onChange={handleChange}
+            />
+          )}
+        </>
 
         {totalPage > 0 && (
           <ReactPaginate
@@ -218,6 +219,7 @@ const AddServices = () => {
           handleClose={handleClose}
           open={openAddModal}
           page={page}
+          token={token}
         ></AddServicesActionModal>
       )}
     </div>

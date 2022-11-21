@@ -1,154 +1,145 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import Swal from "sweetalert2";
+import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
-import { PostfetchData, QueryPost, useAddSuperHeroData } from "../../../../../Misc/Helper";
-import MultiTransferData from "../SettingsComponent/MultiTransferData";
+import {
+  PostfetchData,
+  QueryPost,
+  useAddSuperHeroData,
+} from "../../../../../Misc/Helper";
 
 const AddStaffType = () => {
   // QueryPost('https://ovh.therapypms.com/api/v1/admin/ac/setting/cpt/code/exclusion/get', mutate)
-//   const {mutate} = useAddSuperHeroData();
-// console.log('query data', mutate)
-// mutate();
-  
+  //   const {mutate} = useAddSuperHeroData();
+  // console.log('query data', mutate)
+  // mutate();
 
+  const { token } = useToken();
+  const [staffType, setstaffType] = useState();
+  const [selectedStaffType, setselectedStaffType] = useState([]);
+  const [staffSelectedKeys, setStaffSelectedKeys] = useState();
+  const [facilitySelectedKeys, setfacilitySelectedKeys] = useState();
+  const [changeData, setchangeData] = useState(false);
 
-const [staffType, setstaffType] = useState()
-const [selectedStaffType, setselectedStaffType] = useState([])
-const [staffSelectedKeys, setStaffSelectedKeys] = useState();
-const [facilitySelectedKeys, setfacilitySelectedKeys] = useState();
-const [changeData, setchangeData] = useState(false)
-
-
-const fetchWithPromiseAll = async() =>{
-   const Getcptdata = await PostfetchData(
-  "admin/ac/setting/staff/type/all"
-);
- const GetExcludedCptCodes = await PostfetchData(
-  "admin/ac/setting/staff/type/selected"
-);
-  setstaffType(Getcptdata)
-  setselectedStaffType(GetExcludedCptCodes)
-}
-
-useEffect(() => {
-  fetchWithPromiseAll();
-  setchangeData(false)
-}, [changeData]);
-
-// console.log("cpt code", staffType?.cpt_code_exclusion)
-// console.log("excluded code", selectedStaffType)
-
-if (!staffType) {
-  return <Loading></Loading>;
-}
-
-const handleAdding = (e) => {
-  let target = e.target;
-  // let name = target.name;
-  let value = Array.from(
-    target.selectedOptions,
-    (option) => option.value * 1
-  );
-  setStaffSelectedKeys(value)
-  setfacilitySelectedKeys()
- 
-};
-
-
-const handleRemoving = (e) => {
-  let value = Array.from(
-    e.target.selectedOptions,
-    (option) => option.value * 1
-  );
-  setfacilitySelectedKeys(value);
-  setStaffSelectedKeys()
-
-};
-
-
-
-
-const handleSelectedValue = async(e) =>{
-  console.log("selected vlaue",staffSelectedKeys)
-  if( staffSelectedKeys && staffSelectedKeys.length > 0){
-
-    const body = {
-      "staff_type_id" : staffSelectedKeys
+  const fetchWithPromiseAll = async () => {
+    const Getcptdata = await PostfetchData({
+      endPoint: "admin/ac/setting/staff/type/all",
+      token,
+    });
+    const GetExcludedCptCodes = await PostfetchData({
+      endPoint: "admin/ac/setting/staff/type/selected",
+      token,
+    });
+    setstaffType(Getcptdata);
+    setselectedStaffType(GetExcludedCptCodes);
   };
-    const AddingCptCode = await PostfetchData(
-      "admin/ac/setting/staff/type/add",
-      body
-    );
-    console.log("add data func check", AddingCptCode);
-    if (AddingCptCode.status === "success") {
-      Swal.fire({
-        icon: 'success',
-        title: AddingCptCode.message,
-        showConfirmButton: false,
-        timer: 1500
-      })
-      setchangeData(true)
-    }
-  }else{
-    Swal.fire({
-      icon: 'error',
-      title: 'Please Select Staff Type',
-      showConfirmButton: false,
-      timer: 1500
-    })
+
+  useEffect(() => {
+    fetchWithPromiseAll();
+    setchangeData(false);
+  }, [changeData]);
+
+  // console.log("cpt code", staffType?.cpt_code_exclusion)
+  // console.log("excluded code", selectedStaffType)
+
+  if (!staffType) {
+    return <Loading></Loading>;
   }
 
+  const handleAdding = (e) => {
+    let target = e.target;
+    // let name = target.name;
+    let value = Array.from(
+      target.selectedOptions,
+      (option) => option.value * 1
+    );
+    setStaffSelectedKeys(value);
+    setfacilitySelectedKeys();
+  };
 
-}
+  const handleRemoving = (e) => {
+    let value = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value * 1
+    );
+    setfacilitySelectedKeys(value);
+    setStaffSelectedKeys();
+  };
 
-const handleRemoveValue = async(e) =>{
-  console.log("remove vlaue",facilitySelectedKeys)
-  // console.log("excluded cpt", selectedStaffType)
+  const handleSelectedValue = async (e) => {
+    console.log("selected vlaue", staffSelectedKeys);
+    if (staffSelectedKeys && staffSelectedKeys.length > 0) {
+      const body = {
+        staff_type_id: staffSelectedKeys,
+      };
+      const AddingCptCode = await PostfetchData({
+        endPoint: "admin/ac/setting/staff/type/add",
 
-if( facilitySelectedKeys && facilitySelectedKeys.length > 0){
-const body = {"assign_type_id" : facilitySelectedKeys};
-const RemoveCptCode = await PostfetchData(
-  "admin/ac/setting/staff/type/remove",
-  body
-);
-console.log("add data func check", RemoveCptCode);
-if (RemoveCptCode?.status === "success") {
-  Swal.fire({
-    icon: 'success',
-    title: RemoveCptCode.message,
-    showConfirmButton: false,
-    timer: 1500
-  })
-  setchangeData(true)
-}
-}else{
-Swal.fire({
-  icon: 'error',
-  title: 'Selected Staff Types',
-  showConfirmButton: false,
-  timer: 1500
-})
-}
- 
+        payload: body,
+        token,
+      });
+      console.log("add data func check", AddingCptCode);
+      if (AddingCptCode.status === "success") {
+        Swal.fire({
+          icon: "success",
+          title: AddingCptCode.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setchangeData(true);
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Please Select Staff Type",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
 
+  const handleRemoveValue = async (e) => {
+    console.log("remove vlaue", facilitySelectedKeys);
+    // console.log("excluded cpt", selectedStaffType)
 
-}
+    if (facilitySelectedKeys && facilitySelectedKeys.length > 0) {
+      const body = { assign_type_id: facilitySelectedKeys };
+      const RemoveCptCode = await PostfetchData({
+        endPoint: "admin/ac/setting/staff/type/remove",
+        payload: body,
+        token,
+      });
+      console.log("add data func check", RemoveCptCode);
+      if (RemoveCptCode?.status === "success") {
+        Swal.fire({
+          icon: "success",
+          title: RemoveCptCode.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setchangeData(true);
+      }
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Selected Staff Types",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
 
-// console.log('cptdata', staffType)
-// console.log('excluded cpt', selectedStaffType)
-// console.log("selected vlaue",staffSelectedKeys)
-
-
+  // console.log('cptdata', staffType)
+  // console.log('excluded cpt', selectedStaffType)
+  // console.log("selected vlaue",staffSelectedKeys)
 
   return (
-  
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Staff Types</h1>
 
-     
           <select
             multiple={true}
             id="countries_multiple"
@@ -164,14 +155,17 @@ Swal.fire({
                 </option>
               ))}
           </select>
-          
+
           <br />
         </div>
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
           <button
             onClick={(e) => handleSelectedValue(e)}
             className="pms-button w-24"
-            disabled={facilitySelectedKeys?.length > 0 && staffSelectedKeys === undefined }
+            disabled={
+              facilitySelectedKeys?.length > 0 &&
+              staffSelectedKeys === undefined
+            }
           >
             <div className="flex item-center justify-center">
               ADD
@@ -194,18 +188,18 @@ Swal.fire({
 
         <div>
           <h1 className="text-sm text-gray-700 my-2">
-          Facility Selected Staff Types
+            Facility Selected Staff Types
           </h1>
           <select
             multiple
-            id="countries_multiple" 
+            id="countries_multiple"
             // className="h-40"
             onChange={(e) => {
               handleRemoving(e);
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-         {selectedStaffType?.selected_staff_type?.length > 0 &&
+            {selectedStaffType?.selected_staff_type?.length > 0 &&
               selectedStaffType?.selected_staff_type.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.type_name}
