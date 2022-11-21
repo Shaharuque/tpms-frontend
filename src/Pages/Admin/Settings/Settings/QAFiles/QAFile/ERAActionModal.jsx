@@ -2,6 +2,7 @@ import { Dialog } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 const ERAActionModal = ({ handleClose, open, row }) => {
   const [password, setPassword] = useState(false);
@@ -29,7 +30,16 @@ const ERAActionModal = ({ handleClose, open, row }) => {
         aria-labelledby="responsive-dialog-title"
       >
         <div className="p-5 box">
-          <h1 className="text-lg  text-left text-orange-400">Export Report</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg  text-left text-orange-400">
+              Export Report
+            </h1>
+            <IoCloseCircleOutline
+              onClick={handleClose}
+              className="text-gray-600 text-2xl hover:text-primary"
+            />
+          </div>
+
           <div className="bg-gray-200 py-[1px] mt-3"></div>
           <h1 className=" text-sm py-1 text-gray-600 font-medium">
             You can encrypt your file with password to prevent unauthorized
@@ -84,7 +94,7 @@ const ERAActionModal = ({ handleClose, open, row }) => {
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
               <button
-                className=" py-[5px] font-medium px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+                className=" pms-button mr-2"
                 type="submit"
                 onClick={handleClose}
               >
@@ -92,7 +102,7 @@ const ERAActionModal = ({ handleClose, open, row }) => {
               </button>
 
               <button
-                className=" py-[5px]  px-3  text-xs font-medium bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
+                className="pms-close-button"
                 autoFocus
                 onClick={handleClose}
               >

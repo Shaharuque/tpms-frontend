@@ -857,7 +857,7 @@ const ListView = () => {
                           </label>
                           <div>
                             <select
-                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white   px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white   px-1 py-[5px] font-normal mx-1 text-[14px] w-full focus:outline-none"
                               {...register("place_of_service")}
                             >
                               <option value="" className="text-black">

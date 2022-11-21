@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import React from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import logo from "../../../../../Assets/favicon.png";
+import logo from "../../../../../Assets/setting.png";
 import tpmsLogo from "../../../../../Assets/logo.png";
 import {
   TiSocialFacebook,
@@ -35,14 +35,14 @@ const EmailSettingModal = ({ handleClose, open }) => {
             />
           </div>
 
-          <div className=" overflow-scroll h-[500px]">
+          <div className=" overflow-scroll h-[600px]">
             <h1 className="mx-3 mt-4 text-2xl font-normal text-center bg-slate-200 pb-8 pt-6">
               Hi, qahaf shaa
             </h1>
-            <div className="w-[100px] h-[100px] z-20 p-4 mx-auto border bg-white  rounded-full mt-[-10px]">
+            <div className="w-[150px] h-[150px] z-20 p-4 mx-auto  rounded-full mt-[-50px]">
               <img src={logo} alt="" />
             </div>
-            <div className="bg-gradient-to-r z-0 from-indigo-900 via-blue-500 to-indigo-900 py-24 mt-[-40px] mx-3"></div>
+            <div className="bg-gradient-to-r z-0 from-indigo-900 via-blue-500 to-indigo-900 py-24 mt-[-55px] mx-3"></div>
             <div className="border p-4 mx-auto mt-[-120px] bg-white rounded-xl mb-5 w-[90%]">
               <h2 className="mt-5 text-center mb-2 text-3xl font-normal">
                 Appointment Reminder

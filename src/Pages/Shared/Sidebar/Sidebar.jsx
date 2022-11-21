@@ -87,7 +87,12 @@ const menuItem = [
     subRoute: [
       {
         path: "/admin/submit-billing",
-        name: "Billing Manager",
+        name: "Primary Billing Manager",
+        icon: <FaHornbill />,
+      },
+      {
+        path: "/admin/submit-secondary-billing",
+        name: "Sec. Billing Manager",
         icon: <FaHornbill />,
       },
       {
@@ -260,7 +265,7 @@ const Sidebar = ({ handle }) => {
       >
         <div
           style={{
-            width: isHovering ? "240px" : "70px",
+            width: isHovering ? "280px" : "70px",
             // transition: isHovering ? "ease-in 0.5s" : "ease-out 0.3s",
           }}
           // Have to do something with this className

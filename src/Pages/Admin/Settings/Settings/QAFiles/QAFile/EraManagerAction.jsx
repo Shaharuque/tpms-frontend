@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsEyeFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import ERAActionModal from "./ERAActionModal";
 
 const EraManagerAction = ({ row }) => {
+  const [modal, setModal] = useState(false);
+
+  const handleModal = () => {
+    setModal(!modal);
+  };
+
+  // const handleClose=()=>{
+
+  // }
   return (
     <div className="flex justify-center">
-      <Link to={"/"}>
-        <BsEyeFill className="text-primary" />
-      </Link>
+      <BsEyeFill onClick={handleModal} className="text-primary" />
+
+      {ERAActionModal && (
+        <ERAActionModal open={modal} handleClose={handleModal}></ERAActionModal>
+      )}
     </div>
   );
 };

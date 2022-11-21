@@ -50,7 +50,7 @@ const PatientInformation = () => {
   // const changeDate = (date) => {
   //   setDate(date);
   // };
-  // console.log(date); 
+  // console.log(date);
 
   // const month = date ? date.getMonth() + 1 : null;
   // const day = date ? date.getDate() : null;
@@ -350,7 +350,7 @@ const PatientInformation = () => {
                   />
                   <button // onClick={() => setOpen(true)}
                     onClick={handleClick}
-                    className="bg-secondary text-white p-[6px]"
+                    className="bg-secondary text-white p-[4px]"
                   >
                     <FaPlus />
                   </button>
@@ -415,7 +415,7 @@ const PatientInformation = () => {
                         onClick={() => {
                           addressHandleRemove(index);
                         }}
-                        className="bg-red-500 text-white p-[6px]"
+                        className="bg-red-500 text-white p-[4px]"
                       >
                         <RiDeleteBin6Line />
                       </div>
@@ -513,7 +513,7 @@ const PatientInformation = () => {
                     onClick={() => {
                       handlePhoneClick();
                     }}
-                    className="bg-secondary text-white p-[6px]"
+                    className="bg-secondary text-white p-[4px]"
                   >
                     <FaPlus />
                   </button>
@@ -610,7 +610,7 @@ const PatientInformation = () => {
                     </div>
                     <button
                       onClick={() => phoneHandleRemove(index)}
-                      className="bg-red-500 text-white p-[6px]"
+                      className="bg-red-500 text-white p-[4px]"
                     >
                       <RiDeleteBin6Line />
                     </button>
@@ -657,7 +657,7 @@ const PatientInformation = () => {
                     {/* <input
                       type="checkbox"
                       name="patient"
-                      onClick={() => {
+                      onClick={() => {  
                         setAppointment(!appointment);
                       }}
                     /> */}
@@ -681,18 +681,18 @@ const PatientInformation = () => {
                 <label className="label">
                   <span className=" label-font">Email</span>
                 </label>
-                <div className="flex flex-wrap items-center gap-x-4 ">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   <div>
                     <input
                       type="text"
                       name="email"
-                      className="input-border input-font py-[1px] w-full focus:outline-none"
+                      className="input-border input-font w-full focus:outline-none"
                       {...register("email")}
                     />
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium ml-1 w-full focus:outline-none"
+                      className="input-border input-font w-full focus:outline-none"
                       {...register("group2")}
                     >
                       <option value="work">work</option>
@@ -704,7 +704,7 @@ const PatientInformation = () => {
                     onClick={() => {
                       handleEmailClick();
                     }}
-                    className="bg-secondary text-white p-[6px] "
+                    className="bg-secondary text-white p-[4px] "
                   >
                     <FaPlus />
                   </button>
@@ -776,7 +776,7 @@ const PatientInformation = () => {
                     </div>
                     <button
                       onClick={() => EmailHandleRemove(index)}
-                      className="bg-red-500 text-white p-[6px] "
+                      className="bg-red-500 text-white p-[4px] "
                     >
                       <RiDeleteBin6Line />
                     </button>
