@@ -8,6 +8,7 @@ export const loginSlice = createSlice({
   name: "email",
   initialState,
   reducers: {
+    // storeEmail is a action which take state and action as parameter and depends on those parameters some logic is executed
     storeEmail: (state, action) => {
       state.email = action.payload;
     },
