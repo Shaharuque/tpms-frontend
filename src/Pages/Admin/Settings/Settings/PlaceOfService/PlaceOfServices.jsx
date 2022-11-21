@@ -2,6 +2,7 @@ import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import { BiLeftArrow } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import useToken from "../../../../../CustomHooks/useToken";
@@ -217,7 +218,7 @@ const PlaceOfServices = () => {
         </div>
       </div>
       <div>
-        <>
+        <div className=" overflow-scroll">
           {pos?.loading ? (
             <ShimmerTableTet></ShimmerTableTet>
           ) : (
@@ -232,21 +233,23 @@ const PlaceOfServices = () => {
               onChange={handleChange}
             />
           )}
-        </>
+        </div>
 
         {totalPage > 0 && (
-          <ReactPaginate
-            previousLabel={"<<"}
-            nextLabel={">>"}
-            pageCount={Number(totalPage)}
-            marginPagesDisplayed={1}
-            onPageChange={handlePageClick}
-            containerClassName={"pagination"}
-            previousLinkClassName={"pagination_Link"}
-            nextLinkClassName={"pagination_Link"}
-            activeClassName={"pagination_Link-active"}
-            disabledClassName={"pagination_Link-disabled"}
-          ></ReactPaginate>
+          <div className="flex items-center justify-center">
+            <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              pageCount={Number(totalPage)}
+              marginPagesDisplayed={1}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              previousLinkClassName={"pagination_Link"}
+              nextLinkClassName={"pagination_Link"}
+              activeClassName={"pagination_Link-active"}
+              disabledClassName={"pagination_Link-disabled"}
+            ></ReactPaginate>
+          </div>
         )}
       </div>
 
