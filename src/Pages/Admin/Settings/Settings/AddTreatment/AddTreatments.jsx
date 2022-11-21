@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
-import { fetchData} from "../../../../../Misc/Helper";
+import { fetchData } from "../../../../../Misc/Helper";
 
 // import InsuranceDetails from "./InsuranceDetails";
 
 const AddTreatments = () => {
+  const { token } = useToken();
   // const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
   const [allTreatmentData, setAllTreatmentData] = useState(null);
   const [selectedTreatmentData, setSelectedTreatmentData] = useState(null);
 
-
   //multiple get api will be called together to increase performance
   //parallel API calling[Important]
   const fetchWithPromiseAll = async () => {
-    const GetTreatmentPromise = fetchData("admin/ac/setting/get/all/treatment");
+    const GetTreatmentPromise = fetchData(
+      "admin/ac/setting/get/all/treatment",
+      token
+    );
     const SelectedTreatmentPromise = fetchData(
-      "admin/ac/setting/get/selected/treatment"
+      "admin/ac/setting/get/selected/treatment",
+      token
     );
     const [GetTreatments, SelectedTreatments] = await Promise.all([
       GetTreatmentPromise,
@@ -87,11 +92,7 @@ const AddTreatments = () => {
               ))}
           </select>
           <br />
-          <button
-            className="pms-button"
-          >
-            View Details
-          </button>
+          <button className="pms-button">View Details</button>
         </div>
 
         <div className=" flex flex-col items-center justify-center my-4 gap-2">

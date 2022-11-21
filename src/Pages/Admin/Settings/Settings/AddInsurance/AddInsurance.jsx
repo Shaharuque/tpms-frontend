@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 
 const AddInsurance = () => {
+  const { token } = useToken();
+  ///console.log("token from custom hook", token);
   // const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
@@ -17,9 +20,13 @@ const AddInsurance = () => {
   // multiple get api will be called together to increase performance
   // parallel API calling
   const fetchWithPromiseAll = async () => {
-    const GetInsurancePromise = fetchData("admin/ac/setting/get/all/insurance");
+    const GetInsurancePromise = fetchData(
+      "admin/ac/setting/get/all/insurance",
+      token
+    );
     const SelectedInsurancePromise = fetchData(
-      "admin/ac/setting/get/selected/insurance"
+      "admin/ac/setting/get/selected/insurance",
+      token
     );
     const [GetInsurance, SelectedInsurance] = await Promise.all([
       GetInsurancePromise,
@@ -67,13 +74,14 @@ const AddInsurance = () => {
     const body = {
       insurance_ids: selectedKeys,
     };
-    const AddingInsuranceData = await PostfetchData(
-      "admin/ac/setting/add/insurance",
-      body
-    );
+    const AddingInsuranceData = await PostfetchData({
+      endPoint: "admin/ac/setting/add/insurance",
+      payload: body,
+      token,
+    });
     console.log("add data func check", AddingInsuranceData);
     if (AddingInsuranceData.status === "success") {
-      alert('data added')
+      alert("data added");
       setaddedData(true);
     }
   };
@@ -83,10 +91,11 @@ const AddInsurance = () => {
     const body = {
       selected_insurance_ids: facilityselectedkeys,
     };
-    const RemoveSelectedData = await PostfetchData(
-      "admin/ac/setting/remove/insurance",
-      body
-    );
+    const RemoveSelectedData = await PostfetchData({
+      endPoint: "admin/ac/setting/remove/insurance",
+      payload: body,
+      token,
+    });
     if (RemoveSelectedData.status === "success") {
       console.log(RemoveSelectedData);
       alert("data remove ");
@@ -103,13 +112,15 @@ const AddInsurance = () => {
     }
     console.log("data selectedkeys", selectedKeys);
 
+    //body always send to backend as object and json.stringify
     const body = {
       insurance_id: selectedKeys,
     };
-    const fetchpostTest = await PostfetchData(
-      "admin/ac/setting/get/all/insurance/details",
-      body
-    );
+    const fetchpostTest = await PostfetchData({
+      endPoint: "admin/ac/setting/get/all/insurance/details",
+      payload: body,
+      token,
+    });
     console.log("fetchpostTest", fetchpostTest);
     setpassAllInsurance(fetchpostTest);
     setpassSelectedInsurance({});
@@ -124,10 +135,11 @@ const AddInsurance = () => {
     const body = {
       insurance_id: facilityselectedkeys,
     };
-    const fetchpostTestt = await PostfetchData(
-      "admin/ac/setting/get/selected/insurance/details",
-      body
-    );
+    const fetchpostTestt = await PostfetchData({
+      endPoint: "admin/ac/setting/get/selected/insurance/details",
+      payload: body,
+      token,
+    });
     setpassSelectedInsurance(fetchpostTestt);
     setpassAllInsurance({});
   };
@@ -138,7 +150,6 @@ const AddInsurance = () => {
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
 
-     
           <select
             multiple={true}
             id="countries_multiple"
@@ -154,7 +165,7 @@ const AddInsurance = () => {
                 </option>
               ))}{" "}
           </select>
-          
+
           <br />
           <button
             onClick={() => {

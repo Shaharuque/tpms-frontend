@@ -7,19 +7,28 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { fetchData } from "../../../../../../features/Settings_redux/settingFeaturesSlice";
 import { headers } from "../../../../../../Misc/BaseClient";
-export default function AddServicesActionModal({ handleClose, open, page }) {
+export default function AddServicesActionModal({
+  handleClose,
+  open,
+  page,
+  token,
+}) {
   const dispatch = useDispatch();
   const endPoint = "admin/ac/setting/service/all";
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, record } = useForm();
 
   const onSubmit = async (FormData) => {
     console.log(FormData);
-    if (FormData) {
+    if (FormData && !record) {
       try {
         let res = await axios({
           method: "post",
           url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/service/create",
-          headers: headers,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token || null,
+          },
           data: FormData,
         });
 
@@ -35,11 +44,24 @@ export default function AddServicesActionModal({ handleClose, open, page }) {
             progress: undefined,
             theme: "dark",
           });
-          dispatch(fetchData({ endPoint, page }));
+          dispatch(fetchData({ endPoint, page, token }));
           handleClose();
         }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
       } catch (error) {
-        toast.warning(error, {
+        toast.warning(error?.message, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -49,7 +71,7 @@ export default function AddServicesActionModal({ handleClose, open, page }) {
           progress: undefined,
           theme: "dark",
         });
-        console.log(error?.res?.data?.message); // this is the main part. Use the response property from the error object
+        console.log(error?.message); // this is the main part. Use the response property from the error object
       }
     }
     // reset();

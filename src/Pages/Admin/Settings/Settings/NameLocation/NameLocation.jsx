@@ -5,11 +5,12 @@ import NameLocationTable32 from "./NameLocation/NameLocationTable32";
 import { useDispatch, useSelector } from "react-redux";
 import { getsettings } from "../../../../../features/Settings_redux/settingSlice";
 import Loading from "../../../../../Loading/Loading";
+import useToken from "../../../../../CustomHooks/useToken";
 
 const NameLocation = () => {
   const [box33Open, setbox33Open] = useState(true); //Here: box33=>NameLocationTable
   const [table32Open, setTable32Open] = useState(false); //Here: table32=>NameLocationTable32
-  const [test, setTest] = useState({});
+  const { token } = useToken();
   // Parent
   //Redux works will be done here
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const NameLocation = () => {
 
   //getsettings action is dispatched [api calling]
   useEffect(() => {
-    dispatch(getsettings());
+    dispatch(getsettings(token));
   }, [dispatch]);
 
   if (loading) {

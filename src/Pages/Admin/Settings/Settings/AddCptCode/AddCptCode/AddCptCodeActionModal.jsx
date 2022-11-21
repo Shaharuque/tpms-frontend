@@ -7,25 +7,29 @@ import { useEffect } from "react";
 import { fetchData } from "../../../../../../Misc/Helper";
 import axios from "axios";
 import { headers } from "../../../../../../Misc/BaseClient";
+import { useDispatch } from "react-redux";
+import { fetchCpt } from "../../../../../../features/Settings_redux/cptCodeSlice";
 export default function AddCptCodeActionModal({
   handleClose,
   open,
   record,
-  setItems,
   page,
-  setTotalPage,
+  token,
+  endPoint,
 }) {
   const [txName, setTxName] = useState("");
   const [selectedTreatments, setSelectedTreatments] = useState([]);
   const { id, cpt_code, treatment } = record;
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setTxName(treatment?.treatment_name);
   }, [treatment?.treatment_name]);
   //console.log(treatment);
 
-  //getting all the selected treatment data
+  //getting all the selected treatment data for Tx type selection purpose
   useEffect(() => {
-    fetchData("admin/ac/setting/get/selected/treatment").then((res) => {
+    fetchData("admin/ac/setting/get/selected/treatment", token).then((res) => {
       const result = res?.data?.selected_treatment;
       if (result?.length !== 0) {
         setSelectedTreatments(result);
@@ -46,7 +50,7 @@ export default function AddCptCodeActionModal({
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: localStorage.getItem("adminToken") || null,
+            Authorization: token || null,
           },
           data: FormData,
         });
@@ -54,23 +58,7 @@ export default function AddCptCodeActionModal({
         // console.log(res.data);
         if (res.data.status === "success") {
           console.log("Successfully Inserted");
-
-          const getCptCodes = async (page = 1) => {
-            const res = await axios({
-              method: "get",
-              url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/cpt/code?page=${page}`,
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: localStorage.getItem("adminToken") || null,
-              },
-            });
-            const result = res?.data?.cpt_codes?.data;
-            //console.log(result);
-            setItems(result);
-            setTotalPage(res?.data?.cpt_codes?.last_page);
-          };
-          getCptCodes(page);
+          dispatch(fetchCpt({ endPoint, page, token }));
           handleClose();
         }
       } catch (error) {

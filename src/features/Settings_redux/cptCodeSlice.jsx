@@ -3,10 +3,10 @@ import axios from "axios";
 import { baseIp } from "../../Misc/BaseClient";
 
 //async action(getAdmins) to fetch admins data list depending on page_ad
-export const fetchData = createAsyncThunk(
-  "settings/fetchData",
+export const fetchCpt = createAsyncThunk(
+  "settings/fetchCpt",
   async ({ endPoint, page, token }) => {
-    console.log(endPoint, page);
+    console.log(token);
     //onno api thik e kaj kortesey
     const response = await axios.get(`${baseIp}/${endPoint}?page=${page}`, {
       headers: {
@@ -21,32 +21,32 @@ export const fetchData = createAsyncThunk(
 
 const initialState = {
   loading: false,
-  result: {},
+  cptData: {},
   error: {},
 };
 
-const settingFeaturesSlice = createSlice({
+const cptCodeSlice = createSlice({
   name: "settings",
   initialState,
 
   reducers: {},
   //async action creator
   extraReducers: (builder) => {
-    builder.addCase(fetchData.pending, (state) => {
+    builder.addCase(fetchCpt.pending, (state) => {
       state.loading = true;
       state.error = {};
     });
-    builder.addCase(fetchData.fulfilled, (state, action) => {
+    builder.addCase(fetchCpt.fulfilled, (state, action) => {
       state.loading = false;
       state.error = {};
-      state.result = action.payload;
+      state.cptData = action.payload;
     });
-    builder.addCase(fetchData.rejected, (state, action) => {
+    builder.addCase(fetchCpt.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
-      state.result = "";
+      state.cptData = "";
     });
   },
 });
 
-export const settingReducer = settingFeaturesSlice.reducer; //sliceName.reducer
+export const cptReducer = cptCodeSlice.reducer; //sliceName.reducer

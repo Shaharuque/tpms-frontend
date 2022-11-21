@@ -15,8 +15,10 @@ import { Switch } from "antd";
 // import Calendar from "react-calendar";
 // import "./SingleCalendar.css";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
+import useToken from "../../../../../CustomHooks/useToken";
 
 const PatientInformation = () => {
+  const { token } = useToken();
   const [active, setActive] = useState(false);
   const [voiceMsg, setVoiceMsg] = useState(false);
   const [textMsg, setTextMsg] = useState(false);
@@ -109,8 +111,8 @@ const PatientInformation = () => {
 
   useEffect(() => {
     // action dispatched
-    dispatch(getpatientsDetails(id));
-  }, [id, dispatch]);
+    dispatch(getpatientsDetails({ id, token }));
+  }, [id, dispatch, token]);
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -130,7 +132,7 @@ const PatientInformation = () => {
         checkedActive: patient_details?.is_active_client,
       });
     }, 0);
-  }, [patient_details?.client_first_name, patient_details?.is_active_client]);
+  }, [patient_details, reset]);
 
   const onSubmit = (data) => {
     console.log(data);
