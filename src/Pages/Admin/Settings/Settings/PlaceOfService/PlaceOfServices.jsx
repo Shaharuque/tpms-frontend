@@ -240,6 +240,8 @@ const PlaceOfServices = () => {
             <ReactPaginate
               previousLabel={"<"}
               nextLabel={">"}
+              // previousLabel={"🡰"}
+              // nextLabel={"🡲"}
               pageCount={Number(totalPage)}
               marginPagesDisplayed={1}
               onPageChange={handlePageClick}
