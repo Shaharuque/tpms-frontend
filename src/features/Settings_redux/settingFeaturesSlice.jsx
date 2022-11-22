@@ -3,8 +3,8 @@ import axios from "axios";
 import { baseIp } from "../../Misc/BaseClient";
 
 //async action(getAdmins) to fetch admins data list depending on page_ad
-export const fetchData = createAsyncThunk(
-  "settings/fetchData",
+export const fetchServices = createAsyncThunk(
+  "settings/fetchServices",
   async ({ endPoint, page, token }) => {
     console.log(endPoint, page);
     //onno api thik e kaj kortesey
@@ -25,23 +25,23 @@ const initialState = {
   error: {},
 };
 
-const settingFeaturesSlice = createSlice({
+const serviceSlice = createSlice({
   name: "settings",
   initialState,
 
   reducers: {},
   //async action creator
   extraReducers: (builder) => {
-    builder.addCase(fetchData.pending, (state) => {
+    builder.addCase(fetchServices.pending, (state) => {
       state.loading = true;
       state.error = {};
     });
-    builder.addCase(fetchData.fulfilled, (state, action) => {
+    builder.addCase(fetchServices.fulfilled, (state, action) => {
       state.loading = false;
       state.error = {};
       state.result = action.payload;
     });
-    builder.addCase(fetchData.rejected, (state, action) => {
+    builder.addCase(fetchServices.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
       state.result = "";
@@ -49,4 +49,4 @@ const settingFeaturesSlice = createSlice({
   },
 });
 
-export const settingReducer = settingFeaturesSlice.reducer; //sliceName.reducer
+export const serviceReducer = serviceSlice.reducer; //sliceName.reducer

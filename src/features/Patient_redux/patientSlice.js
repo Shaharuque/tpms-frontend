@@ -34,7 +34,7 @@ const patientSlice = createSlice({
   initialState,
 
   reducers: {},
-  //async action creator
+  //reducer function
   extraReducers: (builder) => {
     builder.addCase(getpatients.pending, (state) => {
       state.loading = true;

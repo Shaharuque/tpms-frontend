@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseIp } from "../../Misc/BaseClient";
 
-//async action(getAdmins) to fetch admins data list depending on page_ad
+//async action(getAdmins) creator to fetch admins data list depending on page_ad
 export const fetchCpt = createAsyncThunk(
   "settings/fetchCpt",
   async ({ endPoint, page, token }) => {
@@ -30,8 +30,9 @@ const cptCodeSlice = createSlice({
   initialState,
 
   reducers: {},
-  //async action creator
+
   extraReducers: (builder) => {
+    //reducer function
     builder.addCase(fetchCpt.pending, (state) => {
       state.loading = true;
       state.error = {};

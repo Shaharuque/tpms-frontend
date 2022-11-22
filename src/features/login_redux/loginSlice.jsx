@@ -4,7 +4,7 @@ const initialState = {
   email: {},
 };
 
-export const loginSlice = createSlice({
+const loginSlice = createSlice({
   name: "email",
   initialState,
   reducers: {

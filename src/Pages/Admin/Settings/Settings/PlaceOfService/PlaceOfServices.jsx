@@ -236,10 +236,10 @@ const PlaceOfServices = () => {
         </div>
 
         {totalPage > 0 && (
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-start">
             <ReactPaginate
-              previousLabel={"<"}
-              nextLabel={">"}
+              previousLabel={"<<"}
+              nextLabel={">>"}
               pageCount={Number(totalPage)}
               marginPagesDisplayed={1}
               onPageChange={handlePageClick}
