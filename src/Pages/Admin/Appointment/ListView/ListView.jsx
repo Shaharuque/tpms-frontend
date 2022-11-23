@@ -857,7 +857,7 @@ const ListView = () => {
                           </label>
                           <div>
                             <select
-                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white   px-1 py-[5px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white py-[4px]  px-1  font-medium  text-[14px] w-full focus:outline-none"
                               {...register("place_of_service")}
                             >
                               <option value="" className="text-black">
@@ -884,7 +884,7 @@ const ListView = () => {
 
                         <div>
                           <label className="label">
-                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                            <span className="label-text  text-[16px] text-gray-100 text-left">
                               Selected date
                             </span>
                           </label>
@@ -892,7 +892,7 @@ const ListView = () => {
                           <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[3px] mx-1 text-[14px] w-full"
+                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px]  text-[14px] w-full"
                             >
                               <input
                                 value={
@@ -901,7 +901,7 @@ const ListView = () => {
                                     : "Start Date"
                                 }
                                 readOnly
-                                className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                className="focus:outline-none py-[1px] font-medium text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 {...register("start_date")}
                               />
                               <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
@@ -912,7 +912,7 @@ const ListView = () => {
                                     : "End Date"
                                 }
                                 readOnly
-                                className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                className="focus:outline-none font-medium text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 {...register("end_date")}
                               />
                             </div>
@@ -922,13 +922,13 @@ const ListView = () => {
                         <div className="flex gap-5">
                           <div>
                             <label className="label">
-                              <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              <span className="label-text text-[16px] text-gray-100 text-left">
                                 status
                               </span>
                             </label>
                             <div>
                               <select
-                                className="bg-transparent border-b-[3px] border-[#ffffff] px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                className="bg-transparent border-b-[3px] border-[#ffffff] px-1 py-[4px] font-medium text-white  text-[14px] w-full focus:outline-none"
                                 {...register("status")}
                               >
                                 <option value="" className="text-black">
@@ -953,7 +953,7 @@ const ListView = () => {
                             </div>
                           </div>
                           <button
-                            className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                            className=" mb-3 mt-[35px] sm:w-1/4 pms-white-button"
                             type="submit"
                           >
                             Go
@@ -962,7 +962,7 @@ const ListView = () => {
                       </>
                     ) : (
                       <button
-                        className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                        className=" mb-3 mt-[35px] sm:w-1/4 pms-white-button"
                         type="submit"
                       >
                         Go
@@ -984,7 +984,7 @@ const ListView = () => {
                         </div>
                         <button
                           onClick={clearFilters}
-                          className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                          className="mb-2 mt-[35px]  w-1/3 px-1  bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
                         >
                           Clear filters
                         </button>

@@ -124,7 +124,7 @@ const TestNaviBar = ({ handle }) => {
             <div className="md:mb-3">
               <Dropdown
                 overlay={
-                  <div className="  w-[15rem] md:w-[22rem] lg:w-[15rem] mt-1 p-1 shadow-md drop-box rounded-sm bg-white  ">
+                  <div className="nav-box w-[15rem] md:w-[22rem] lg:w-[15rem] mt-1 p-1 shadow-md drop-box rounded-sm bg-white  ">
                     <div className="card-body">
                       <h4 className=" text-center ">Latest Changes</h4>
                       <hr />
@@ -266,6 +266,8 @@ const TestNaviBar = ({ handle }) => {
           </motion.div>
         )}
 
+        {/* large lg,xl,2xl....... device  */}
+
         <div
           className={`lg:flex lg:items-center gap-10  lg:pt-0 pt-10 lg:pb-0 pb-10 absolute lg:static bg-white lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${
             open ? "top-24 " : "top-[-490px]"
@@ -312,7 +314,7 @@ const TestNaviBar = ({ handle }) => {
           <div>
             <Dropdown
               overlay={
-                <div className="border w-auto md:w-[25rem] p-2 shadow-lg  rounded-sm bg-white">
+                <div className="border nav-box w-auto md:w-[25rem] p-2 shadow-lg  rounded-sm bg-white">
                   <div className="card-body">
                     <h4 className=" text-center ">Latest Changes</h4>
                     <hr />
