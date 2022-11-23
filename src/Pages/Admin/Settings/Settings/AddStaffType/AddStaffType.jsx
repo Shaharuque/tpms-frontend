@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { storeEmail } from "../../../../../features/login_redux/loginSlice";
 import Loading from "../../../../../Loading/Loading";
 import { PostfetchData, QueryPost, useAddSuperHeroData } from "../../../../../Misc/Helper";
 import MultiTransferData from "../SettingsComponent/MultiTransferData";
@@ -18,7 +20,14 @@ const [selectedStaffType, setselectedStaffType] = useState([])
 const [staffSelectedKeys, setStaffSelectedKeys] = useState();
 const [facilitySelectedKeys, setfacilitySelectedKeys] = useState();
 const [changeData, setchangeData] = useState(false)
+const dispatch = useDispatch();
 
+const result = useSelector(state=>state?.emailInfo?.email)
+useEffect(()=>{
+   dispatch(storeEmail('jakir@gmail.com'))
+})
+
+console.log("redux data store",result);
 
 const fetchWithPromiseAll = async() =>{
    const Getcptdata = await PostfetchData(
@@ -133,6 +142,8 @@ Swal.fire({
 
 
 }
+
+
 
 // console.log('cptdata', staffType)
 // console.log('excluded cpt', selectedStaffType)

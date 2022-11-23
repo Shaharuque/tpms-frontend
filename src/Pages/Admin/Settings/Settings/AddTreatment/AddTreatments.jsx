@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import { useSelector } from "react-redux";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData} from "../../../../../Misc/Helper";
 
@@ -11,6 +12,10 @@ const AddTreatments = () => {
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
   const [allTreatmentData, setAllTreatmentData] = useState(null);
   const [selectedTreatmentData, setSelectedTreatmentData] = useState(null);
+
+
+  const result = useSelector(state=>state?.emailInfo?.email)
+  console.log("redux data store add tretment",result);
 
 
   //multiple get api will be called together to increase performance

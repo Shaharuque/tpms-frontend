@@ -74,7 +74,7 @@ const ListView = () => {
       setStuffs(data);
     };
     getProviderData();
-  }, []);
+}, []);
   // console.log("stuffs", stuffs);
   console.log("selected stuffs", stuffsId);
 
@@ -200,7 +200,14 @@ const ListView = () => {
     }
     setpage(page + 1);
   };
-  console.log(items);
+  console.log("all data",items);
+  // const lookup = items.reduce((a, e) => {
+  //   a[e.id] = ++a[e.id] || 0;
+  //   return a;
+  // }, {});
+  
+  // console.log("finding duplicate data",items.filter(e => lookup[e.id]));
+
 
   // -----------------------------------------Table Data-----------------------------------
   const columns = [
@@ -700,6 +707,15 @@ const ListView = () => {
         console.log("list data", response?.data?.appointments);
         const manageSessionData = response?.data?.appointments?.data;
         setItems(manageSessionData);
+
+        // unique data checking
+      //   function getUniqueListBy(arr, key) {
+      //     return [...new Map(arr.map(item => [item[key], item])).values()]
+      // }
+      // const arr1 = getUniqueListBy(items, 'id')
+      // console.log("Unique by place")
+      // console.log("duplicate remove",JSON.stringify(arr1))
+      // setItems(arr1)
       });
     }
     setTable(true);
@@ -728,13 +744,7 @@ const ListView = () => {
   // ----------------------------------------Multi-Select---------------------------------
   // *************
 
-  const opt = [
-    { label: "tera ", value: "grapes", id: 3 },
-    { label: "tpms ", value: "mafgngo", id: 1 },
-    { label: "code ", value: "grfgapes", id: 4 },
-    { label: "Mango ", value: "mango", id: 8 },
-    { label: "dfa ", value: "strawberry", id: 9 },
-  ];
+
 
   return (
     // For responsive view point
