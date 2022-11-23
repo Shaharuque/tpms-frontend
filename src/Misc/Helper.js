@@ -4,24 +4,25 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { baseIp, headers } from "./BaseClient";
 
-export const fetchData = async (endPoint) => {
+export const fetchData = async (endPoint, token) => {
   console.log(`helper function call ${baseIp}/${endPoint}`);
   const response = await axios.get(`${baseIp}/${endPoint}`, {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: localStorage.getItem("adminToken") || null,
+      Authorization: token || null,
     },
   });
   return response;
 };
 
-export const PostfetchData = async (endPoint, payload) => {
+export const PostfetchData = async ({ endPoint, payload, token }) => {
+  console.log(endPoint, payload, token);
   const response = await axios.post(`${baseIp}/${endPoint}`, payload, {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: localStorage.getItem("adminToken") || null,
+      Authorization: token || null,
     },
   });
   return response.data;

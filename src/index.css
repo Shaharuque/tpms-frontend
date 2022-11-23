@@ -41,7 +41,7 @@ code {
   animation: bounce 2s infinite;
 }
 
-  
+
 
 
 /* -----------------------------------------input form --------------------------------------- */
@@ -370,4 +370,9 @@ code {
 
 .widthfix {
   min-width: 100% !important;
+}
+
+.rmsc .item-renderer {
+  display: flex;
+  align-items: center !important;
 }

@@ -157,9 +157,11 @@ const RecurringSession = () => {
         return (
           <>
             {pos === "telehealth" ? (
-              <div className="flex items-center gap-2 ">
-                Telehealth
-                <BsFillCameraVideoFill className="text-green-500" />
+              <div className=" flex items-center justify-center">
+                <div className="flex mx-auto items-center gap-2 ">
+                  Telehealth
+                  <BsFillCameraVideoFill className="text-green-500" />
+                </div>
               </div>
             ) : (
               <div>{pos}</div>
@@ -422,7 +424,7 @@ const RecurringSession = () => {
                     <></>
                   )}
                   <button
-                    className="font-regular mt-[50px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                    className="font-regular mt-[45px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
                     type="submit"
                   >
                     Go
@@ -448,7 +450,7 @@ const RecurringSession = () => {
               Clear Filters
             </button>
           </div>
-          <div className=" overflow-scroll">
+          <div className="overflow-scroll">
             <Table
               rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
               pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey

@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import TextArea from "antd/lib/input/TextArea";
+import RecurringSessionModal from "./RecurringSessionModal";
 
 const RecurringSessionEdit = () => {
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
   const { id } = useParams();
   console.log(id);
   const { register, handleSubmit, reset } = useForm();
@@ -134,7 +142,7 @@ const RecurringSessionEdit = () => {
               />
             </div>
 
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  gap-3">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 ">
               <div>
                 <label className="label">
                   <span className=" label-font">From Time</span>
@@ -183,7 +191,11 @@ const RecurringSessionEdit = () => {
           <div className="divider"></div>
           {/* submit  */}
           <div className="mt-4">
-            <button className=" pms-button mr-2" type="submit">
+            <button
+              onClick={handleClickOpen}
+              className=" pms-button mr-2"
+              type="submit"
+            >
               Save
             </button>
             <Link to={"/admin/recurring-session"}>
@@ -194,6 +206,12 @@ const RecurringSessionEdit = () => {
           </div>
         </form>
       </motion.div>
+      {openEditModal && (
+        <RecurringSessionModal
+          handleClose={handleClose}
+          open={openEditModal}
+        ></RecurringSessionModal>
+      )}
     </div>
   );
 };

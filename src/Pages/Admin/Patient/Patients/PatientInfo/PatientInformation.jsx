@@ -15,8 +15,10 @@ import { Switch } from "antd";
 // import Calendar from "react-calendar";
 // import "./SingleCalendar.css";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
+import useToken from "../../../../../CustomHooks/useToken";
 
 const PatientInformation = () => {
+  const { token } = useToken();
   const [active, setActive] = useState(false);
   const [voiceMsg, setVoiceMsg] = useState(false);
   const [textMsg, setTextMsg] = useState(false);
@@ -50,7 +52,7 @@ const PatientInformation = () => {
   // const changeDate = (date) => {
   //   setDate(date);
   // };
-  // console.log(date); 
+  // console.log(date);
 
   // const month = date ? date.getMonth() + 1 : null;
   // const day = date ? date.getDate() : null;
@@ -109,8 +111,8 @@ const PatientInformation = () => {
 
   useEffect(() => {
     // action dispatched
-    dispatch(getpatientsDetails(id));
-  }, [id, dispatch]);
+    dispatch(getpatientsDetails({ id, token }));
+  }, [id, dispatch, token]);
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -130,7 +132,7 @@ const PatientInformation = () => {
         checkedActive: patient_details?.is_active_client,
       });
     }, 0);
-  }, [patient_details?.client_first_name, patient_details?.is_active_client]);
+  }, [patient_details, reset]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -350,7 +352,7 @@ const PatientInformation = () => {
                   />
                   <button // onClick={() => setOpen(true)}
                     onClick={handleClick}
-                    className="bg-secondary text-white p-[6px]"
+                    className="bg-secondary text-white p-[4px]"
                   >
                     <FaPlus />
                   </button>
@@ -415,7 +417,7 @@ const PatientInformation = () => {
                         onClick={() => {
                           addressHandleRemove(index);
                         }}
-                        className="bg-red-500 text-white p-[6px]"
+                        className="bg-red-500 text-white p-[4px]"
                       >
                         <RiDeleteBin6Line />
                       </div>
@@ -513,7 +515,7 @@ const PatientInformation = () => {
                     onClick={() => {
                       handlePhoneClick();
                     }}
-                    className="bg-secondary text-white p-[6px]"
+                    className="bg-secondary text-white p-[4px]"
                   >
                     <FaPlus />
                   </button>
@@ -610,7 +612,7 @@ const PatientInformation = () => {
                     </div>
                     <button
                       onClick={() => phoneHandleRemove(index)}
-                      className="bg-red-500 text-white p-[6px]"
+                      className="bg-red-500 text-white p-[4px]"
                     >
                       <RiDeleteBin6Line />
                     </button>
@@ -657,7 +659,7 @@ const PatientInformation = () => {
                     {/* <input
                       type="checkbox"
                       name="patient"
-                      onClick={() => {
+                      onClick={() => {  
                         setAppointment(!appointment);
                       }}
                     /> */}
@@ -681,18 +683,18 @@ const PatientInformation = () => {
                 <label className="label">
                   <span className=" label-font">Email</span>
                 </label>
-                <div className="flex flex-wrap items-center gap-x-4 ">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   <div>
                     <input
                       type="text"
                       name="email"
-                      className="input-border input-font py-[1px] w-full focus:outline-none"
+                      className="input-border input-font w-full focus:outline-none"
                       {...register("email")}
                     />
                   </div>
                   <div>
                     <select
-                      className="input-border text-gray-600 rounded-sm text-[14px] font-medium ml-1 w-full focus:outline-none"
+                      className="input-border input-font w-full focus:outline-none"
                       {...register("group2")}
                     >
                       <option value="work">work</option>
@@ -704,7 +706,7 @@ const PatientInformation = () => {
                     onClick={() => {
                       handleEmailClick();
                     }}
-                    className="bg-secondary text-white p-[6px] "
+                    className="bg-secondary text-white p-[4px] "
                   >
                     <FaPlus />
                   </button>
@@ -776,7 +778,7 @@ const PatientInformation = () => {
                     </div>
                     <button
                       onClick={() => EmailHandleRemove(index)}
-                      className="bg-red-500 text-white p-[6px] "
+                      className="bg-red-500 text-white p-[4px] "
                     >
                       <RiDeleteBin6Line />
                     </button>

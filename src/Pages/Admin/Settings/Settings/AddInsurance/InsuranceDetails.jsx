@@ -3,20 +3,23 @@ import { useForm } from "react-hook-form";
 import { Switch } from "antd";
 import { useEffect } from "react";
 import { PostfetchData } from "../../../../../Misc/Helper";
+import useToken from "../../../../../CustomHooks/useToken";
 
 const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
   const [active, setActive] = useState(false);
   const [loading, setloading] = useState(true);
+  const { token } = useToken();
 
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
     console.log("formsubmit data check", data);
     const body = data;
-    const SelelctedInsuranceUpdate = await PostfetchData(
-      "admin/ac/setting/selected/insurance/details/update",
-      body
-    );
+    const SelelctedInsuranceUpdate = await PostfetchData({
+      endPoint: "admin/ac/setting/selected/insurance/details/update",
+      payload: body,
+      token,
+    });
     console.log("selected insurance update", SelelctedInsuranceUpdate);
 
     if (SelelctedInsuranceUpdate.status === "success") {

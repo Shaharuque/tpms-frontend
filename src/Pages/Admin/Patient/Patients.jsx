@@ -8,8 +8,11 @@ import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/Shi
 import { FaRegAddressCard } from "react-icons/fa";
 import PatientAuthorizationsTableModal from "./Patients/PatientAuthorizationsTableModal";
 import PatientStatusAction from "./Patients/PatientStatusAction";
+import useToken from "../../../CustomHooks/useToken";
 
 const TableApi = () => {
+  //get token
+  const { token } = useToken();
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [items, setItems] = useState([]);
@@ -74,7 +77,9 @@ const TableApi = () => {
     // return filterData;
     let newArray = [];
     for (let x of resultArray) {
-      newArray.push({ text: x, value: x });
+      if (x !== null) {
+        newArray.push({ text: x, value: x });
+      }
     }
     return newArray;
   };
@@ -84,7 +89,9 @@ const TableApi = () => {
     // return filterData;
     let newArray = [];
     for (let x of resultArray) {
-      newArray.push({ text: x, value: x });
+      if (x !== null) {
+        newArray.push({ text: x, value: x });
+      }
     }
     return newArray;
   };
@@ -94,7 +101,10 @@ const TableApi = () => {
     // return filterData;
     let newArray = [];
     for (let x of resultArray) {
-      newArray.push({ text: x, value: x });
+      // console.log(x);
+      if (x !== null) {
+        newArray.push({ text: x, value: x });
+      }
     }
     return newArray;
   };
@@ -134,7 +144,7 @@ const TableApi = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: localStorage.getItem("adminToken") || null, //directly access token from local storage
+          Authorization: token ? token : null, //directly access token from custom hook useToken
         },
       });
       // const result = await res.json();
@@ -153,7 +163,7 @@ const TableApi = () => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: localStorage.getItem("adminToken") || null,
+        Authorization: token ? token : null,
       },
     });
     const data = res.data?.clients?.data;
@@ -294,22 +304,31 @@ const TableApi = () => {
       key: "phone_number",
       width: 100,
       filters: contactInfoSearch(),
+      //render contains what we want to reflect as our data
+      render: (_, { phone_number }) => {
+        return (
+          <div>
+            <h1>
+              {phone_number ? (
+                phone_number
+              ) : (
+                <h1 className="text-red-600">No Data</h1>
+              )}
+            </h1>
+          </div>
+        );
+      },
       filteredValue: filteredInfo.phone_number || null,
-      onFilter: (value, record) => record.phone_number.includes(value),
+      onFilter: (value, record) => {
+        if (record?.phone_number !== null) {
+          return record.phone_number.includes(value);
+        }
+      },
       sorter: (a, b) => {
         return a.phone_number > b.phone_number ? -1 : 1;
       },
       sortOrder:
         sortedInfo.columnKey === "phone_number" ? sortedInfo.order : null,
-
-      //render contains what we want to reflect as our data
-      render: (_, { phone_number }) => {
-        return (
-          <div>
-            <h1>{phone_number ? phone_number : "No Data"}</h1>
-          </div>
-        );
-      },
       ellipsis: true,
     },
     {
@@ -322,12 +341,22 @@ const TableApi = () => {
       render: (_, { client_dob }) => {
         return (
           <div>
-            <h1>{client_dob ? client_dob : "No Data"}</h1>
+            <h1>
+              {client_dob ? (
+                client_dob
+              ) : (
+                <h1 className="text-red-600">No Data</h1>
+              )}
+            </h1>
           </div>
         );
       },
       filteredValue: filteredInfo.client_dob || null,
-      onFilter: (value, record) => record.client_dob.includes(value),
+      onFilter: (value, record) => {
+        if (record?.client_dob !== null) {
+          return record.client_dob.includes(value);
+        }
+      },
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
         return a.client_dob > b.client_dob ? -1 : 1; //sorting problem solved using this logic
@@ -358,8 +387,22 @@ const TableApi = () => {
       key: "location",
       width: 80,
       filters: posSearch(),
+      render: (_, { location }) => {
+        return (
+          <div>
+            <h1>
+              {location ? location : <h1 className="text-red-600">No Data</h1>}
+            </h1>
+          </div>
+        );
+      },
       filteredValue: filteredInfo.location || null,
-      onFilter: (value, record) => record.location.includes(value),
+      onFilter: (value, record) => {
+        // console.log(value);
+        if (record?.location !== null) {
+          return record.location.includes(value);
+        }
+      },
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
         return a.location > b.location ? -1 : 1; //sorting problem solved using this logic

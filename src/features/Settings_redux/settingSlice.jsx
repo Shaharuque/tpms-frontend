@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { headers } from "../../Misc/BaseClient";
 
 //async action(getAdmins) to fetch admins data list depending on page_ad
 export const getsettings = createAsyncThunk(
   "settings/getsettings",
-  async () => {
+  async (token) => {
     //onno api thik e kaj kortesey
     const response = await axios.get(
       `https://ovh.therapypms.com/api/v1/admin/ac/get/setting/name/location`,
@@ -13,7 +12,7 @@ export const getsettings = createAsyncThunk(
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: localStorage.getItem("adminToken") || null,
+          Authorization: token,
         },
       }
     );

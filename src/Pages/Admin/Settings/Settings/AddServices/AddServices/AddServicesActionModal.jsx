@@ -1,25 +1,76 @@
 import { Modal } from "antd";
 import axios from "axios";
 import * as React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { fetchData } from "../../../../../../features/Settings_redux/settingFeaturesSlice";
-import { headers } from "../../../../../../Misc/BaseClient";
-export default function AddServicesActionModal({ handleClose, open, page }) {
+import { fetchServices } from "../../../../../../features/Settings_redux/settingFeaturesSlice";
+import { fetchData } from "../../../../../../Misc/Helper";
+
+export default function AddServicesActionModal({
+  record,
+  handleClose,
+  open,
+  page,
+  token,
+}) {
+  console.log(record);
+  const { id, type, treatment_type, duration, mileage, service, description } =
+    record;
   const dispatch = useDispatch();
   const endPoint = "admin/ac/setting/service/all";
   const { register, handleSubmit, reset } = useForm();
+  const [selectedTreatments, setSelectedTreatments] = useState([]);
+
+  //getting all the selected treatment data for Tx type selection purpose
+  useEffect(() => {
+    fetchData("admin/ac/setting/get/selected/treatment", token).then((res) => {
+      const result = res?.data?.selected_treatment;
+      if (result?.length !== 0) {
+        setSelectedTreatments(result);
+      }
+    });
+  }, [token]);
+  console.log(selectedTreatments);
+
+  // Editable value
+  useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        facility_treatment_id: treatment_type?.id ? treatment_type?.id : null,
+        service: service || null,
+        description: description || null,
+        mileage: mileage || null,
+        duration: duration || null,
+        type: type,
+      });
+    }, 0);
+  }, [
+    reset,
+    service,
+    description,
+    mileage,
+    duration,
+    type,
+    treatment_type?.treatment_name,
+  ]);
 
   const onSubmit = async (FormData) => {
     console.log(FormData);
-    if (FormData) {
+    if (FormData && !id) {
       try {
         let res = await axios({
           method: "post",
           url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/service/create",
-          headers: headers,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token || null,
+          },
           data: FormData,
         });
 
@@ -35,11 +86,24 @@ export default function AddServicesActionModal({ handleClose, open, page }) {
             progress: undefined,
             theme: "dark",
           });
-          dispatch(fetchData({ endPoint, page }));
+          dispatch(fetchServices({ endPoint, page, token }));
           handleClose();
         }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
       } catch (error) {
-        toast.warning(error, {
+        toast.warning(error?.message, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -49,8 +113,10 @@ export default function AddServicesActionModal({ handleClose, open, page }) {
           progress: undefined,
           theme: "dark",
         });
-        console.log(error?.res?.data?.message); // this is the main part. Use the response property from the error object
+        console.log(error?.message); // this is the main part. Use the response property from the error object
       }
+    } else {
+      console.log("else part is hitted");
     }
     // reset();
   };
@@ -86,11 +152,20 @@ export default function AddServicesActionModal({ handleClose, open, page }) {
                 </label>
                 <select
                   className="modal-input-field ml-1 w-full"
+                  defaultValue={treatment_type?.treatment_name}
                   {...register("facility_treatment_id")}
                 >
-                  <option value={20}>Behavioral therapy</option>
-                  <option value={30}>Mental Therapy</option>
-                  <option value="Miss">Mental Health</option>
+                  <option value={null}>Select Treatment</option>
+                  {selectedTreatments?.map((treatment) => {
+                    return (
+                      <option
+                        key={treatment?.treatment_id}
+                        value={treatment?.id}
+                      >
+                        {treatment?.treatment_name}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
               <div>
@@ -101,8 +176,8 @@ export default function AddServicesActionModal({ handleClose, open, page }) {
                   className="modal-input-field ml-1 w-full"
                   {...register("type")}
                 >
-                  <option value="1">Billable</option>
-                  <option value="0">Unbillable</option>
+                  <option value={0}>UnBillable</option>
+                  <option value={1}>Billable</option>
                 </select>
               </div>
 
