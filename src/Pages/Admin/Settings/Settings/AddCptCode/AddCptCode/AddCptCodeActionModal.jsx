@@ -119,10 +119,10 @@ export default function AddCptCodeActionModal({
                   <option value="Occupational Therapy">
                     Occupational Therapy
                   </option> */}
-                  {selectedTreatments?.map((each) => {
+                  {selectedTreatments?.map((treatment) => {
                     return (
-                      <option key={each?.id} value={each?.id}>
-                        {each?.treatment_name}
+                      <option key={treatment?.id} value={treatment?.id}>
+                        {treatment?.treatment_name}
                       </option>
                     );
                   })}
