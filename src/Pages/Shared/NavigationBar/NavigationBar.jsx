@@ -367,7 +367,7 @@ const TestNaviBar = ({ handle }) => {
             </label>
             <div
               tabIndex={0}
-              className="dropdown-content menu mt-3 shadow-lg shadow-red-600"
+              className="dropdown-content menu nav-box  shadow-lg shadow-red-600"
             >
               <ScheduleExport></ScheduleExport>
             </div>
@@ -375,7 +375,7 @@ const TestNaviBar = ({ handle }) => {
           {/* admin part  */}
           <div className="dropdown md:dropdown-end">
             <label tabIndex={0}>
-              <label className="flex gap-2 items-center cursor-pointer">
+              <label className="flex gap-2 items-center cursor-pointer ">
                 <div className="w-8 mr-1 rounded-full">
                   <img className="avatar rounded-full" src={admin} alt="pic" />
                 </div>
@@ -389,9 +389,9 @@ const TestNaviBar = ({ handle }) => {
             </label>
             <div
               tabIndex={0}
-              className="dropdown-content menu mt-2  w-auto md:w-[18rem] sm:w-56 "
+              className="dropdown-content menu  nav-box  w-auto md:w-[18rem] sm:w-56 "
             >
-              <div className="bg-gradient-to-r from-primary to-secondary rounded-t-xl p-4 flex justify-between">
+              <div className="bg-gradient-to-r  from-primary to-secondary rounded-t-xl p-4 flex justify-between">
                 <div className="w-8 mr-1 rounded-full">
                   <img className="avatar rounded-full" src={admin} alt="pic" />
                 </div>

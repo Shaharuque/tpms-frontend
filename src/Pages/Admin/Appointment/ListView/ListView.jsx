@@ -744,7 +744,7 @@ const ListView = () => {
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
             <div
               onClick={clickHandler}
-              className="  flex items-center justify-between"
+              className="flex items-center justify-between"
             >
               {!clicked && (
                 <>
@@ -761,7 +761,7 @@ const ListView = () => {
             {clicked && (
               <div>
                 <div className="flex justify-between items-center flex-wrap">
-                  <h1 className="text-[20px]  text-white font-semibold ">
+                  <h1 className="text-[20px] text-white font-semibold ">
                     Manage Sessions
                   </h1>
                   <div>
@@ -773,7 +773,7 @@ const ListView = () => {
                     </button>
                   </div>
                 </div>
-                <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
+                <div className="flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
                   <div>
                     <Switch
                       color="default"
