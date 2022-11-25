@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseIp } from "../../Misc/BaseClient";
 
-//async action(getAdmins) to fetch admins data list depending on page_ad
+//async thunk(fetchPOS) to fetch pos data list depending on page_ad
 export const fetchPOS = createAsyncThunk(
   "settings/fetchPOS",
   async ({ endPoint, page, token }) => {
@@ -31,7 +31,7 @@ const posSlice = createSlice({
   initialState,
 
   reducers: {},
-  //async action creator
+  //In redux-toolkit when async thunk function returns a promise and redux toolkit gets that promise, it will autometically dispatch 3 action(promise.pending,promise.fullfilled,promise.rejected) by himself, extraReducers will listen to those actions and update state.
   extraReducers: (builder) => {
     builder.addCase(fetchPOS.pending, (state) => {
       state.loading = true;

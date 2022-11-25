@@ -7,7 +7,7 @@ export const fetchCpt = createAsyncThunk(
   "settings/fetchCpt",
   async ({ endPoint, page, token }) => {
     console.log(token);
-    //onno api thik e kaj kortesey
+
     const response = await axios.get(`${baseIp}/${endPoint}?page=${page}`, {
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export const fetchCpt = createAsyncThunk(
 
 const initialState = {
   loading: false,
-  cptData: {},
+  cptData: {}, //This initial type determination is very very important it can be object type or array to hold lots of data
   error: {},
 };
 

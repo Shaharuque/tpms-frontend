@@ -114,9 +114,20 @@ export default function PlaceOfServicesActionAddModal({
         console.log(res);
         if (res.data.status === "success") {
           console.log("Successfully Updated");
+          toast.success("Successfully Updated", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
           //for showing updated data in real time
           dispatch(fetchPOS({ page, endPoint, token }));
           handleClose();
+        } else {
+          toast.error("Having issue to update", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
         }
       } catch (error) {
         console.log(error.response.data.message); // this is the main part. Use the response property from the error object
