@@ -751,9 +751,16 @@ const ListView = () => {
                   <div className="text-[16px]  text-white font-semibold ">
                     Manage Sessions
                   </div>
-                  <div className="arrow bounce">
+                  {/* <div className="arrow bounce">
                     <AiOutlineDown />
-                  </div>
+                  </div> */}
+                  {/* <lord-icon
+                    src="https://cdn.lordicon.com/rxufjlal.json"
+                    trigger="hover"
+                    colors="primary:#121331"
+                    state="hover-1"
+                    style="width:250px;height:250px"
+                  ></lord-icon> */}
                 </>
               )}
             </div>
@@ -917,6 +924,21 @@ const ListView = () => {
                               />
                             </div>
                           </div>
+                          {/* Multi date picker component called */}
+                          <div
+                            ref={refClose}
+                            className="mt-2 xl:ml-0 lg:ml-0 md:ml-[-30px]"
+                            // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
+                          >
+                            {openCalendar && (
+                              <CustomDateRange
+                                range={range}
+                                setRange={setRange}
+                                handleCancelDate={handleCancelDate}
+                                setOpen={setOpenCalendar}
+                              ></CustomDateRange>
+                            )}
+                          </div>
                         </div>
 
                         <div className="flex gap-5">
@@ -993,20 +1015,6 @@ const ListView = () => {
                   </div>
                 </form>
               </div>
-            )}
-          </div>
-          {/* Multi date picker component called */}
-          <div
-            ref={refClose}
-            className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
-          >
-            {openCalendar && (
-              <CustomDateRange
-                range={range}
-                setRange={setRange}
-                handleCancelDate={handleCancelDate}
-                setOpen={setOpenCalendar}
-              ></CustomDateRange>
             )}
           </div>
         </div>

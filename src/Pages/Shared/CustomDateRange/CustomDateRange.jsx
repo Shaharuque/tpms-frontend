@@ -3,7 +3,7 @@ import { DateRangePicker } from "react-date-range";
 
 const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
   return (
-    <div className="p-2 bg-red-500">
+    <div className="absolute z-10 shadow-xl">
       <div>
         <DateRangePicker
           onChange={(item) => setRange([item.selection])}

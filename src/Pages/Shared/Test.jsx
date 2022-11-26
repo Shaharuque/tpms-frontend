@@ -91,7 +91,8 @@ const Test = () => {
         <div>
           <div
             ref={refClose}
-            className="absolute z-10 date-range-box  shadow-xl"
+            // className="absolute z-10 shadow-xl"
+            // className="date-range-box"
           >
             <CustomDateRange
               range={range}

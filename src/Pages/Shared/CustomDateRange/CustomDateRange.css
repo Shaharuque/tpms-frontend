@@ -1,5 +1,6 @@
 .date-range-box {
     background-color: blue;
+    position: absolute;
 }
 
 @media (min-width:320px) {
@@ -35,6 +36,7 @@
 
     /* big landscape tablets, laptops, and desktops */
     /* For desktop: */
+
 
 }
 
