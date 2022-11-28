@@ -36,7 +36,7 @@ className=" label-font"
 ### ANtd-table important data:
 
 .ant-table-thead>tr>th,
-.ant-table-tbody>tr>td,
+.ant-table-tbody>tr>td,  
 .ant-table tfoot>tr>th,
 .ant-table tfoot>tr>td {
 position: relative;
