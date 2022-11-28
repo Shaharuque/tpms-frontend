@@ -21,9 +21,10 @@ export const fetchPOS = createAsyncThunk(
 
 const initialState = {
   loading: false,
+  isError: false,
   posData: {},
   posCreate: {},
-  error: {},
+  error: "",
 };
 
 const posSlice = createSlice({
@@ -35,15 +36,18 @@ const posSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchPOS.pending, (state) => {
       state.loading = true;
-      state.error = {};
+      state.isError = false;
+      state.error = "";
     });
     builder.addCase(fetchPOS.fulfilled, (state, action) => {
       state.loading = false;
-      state.error = {};
+      state.isError = false;
+      state.error = "";
       state.posData = action.payload;
     });
     builder.addCase(fetchPOS.rejected, (state, action) => {
       state.loading = false;
+      state.isError = true;
       state.error = action.error;
       state.posData = "";
     });

@@ -4,6 +4,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
 import { fetchCpt } from "../../../../../features/Settings_redux/cptCodeSlice";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
@@ -26,7 +27,7 @@ const AddCptCode = () => {
   const totalPage = allCpt?.cptData?.cpt_codes?.last_page
     ? allCpt?.cptData?.cpt_codes?.last_page
     : 0;
-  console.log("loading", allCpt);
+  console.log("server response", allCpt);
 
   useEffect(() => {
     dispatch(fetchCpt({ endPoint, page, token }));
@@ -54,6 +55,10 @@ const AddCptCode = () => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+
+  // if (allCpt?.isError) {
+  //   return toast.error("Something went wrong");
+  // }
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [

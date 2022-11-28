@@ -21,8 +21,9 @@ export const fetchCpt = createAsyncThunk(
 
 const initialState = {
   loading: false,
+  isError: false,
   cptData: {}, //This initial type determination is very very important it can be object type or array to hold lots of data
-  error: {},
+  error: "",
 };
 
 const cptCodeSlice = createSlice({
@@ -35,17 +36,20 @@ const cptCodeSlice = createSlice({
     //reducer function
     builder.addCase(fetchCpt.pending, (state) => {
       state.loading = true;
-      state.error = {};
+      state.isError = false;
+      state.error = "";
     });
     builder.addCase(fetchCpt.fulfilled, (state, action) => {
       state.loading = false;
-      state.error = {};
+      state.error = "";
+      state.isError = false;
       state.cptData = action.payload;
     });
     builder.addCase(fetchCpt.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
-      state.cptData = "";
+      state.isError = true;
+      state.cptData = {};
     });
   },
 });
