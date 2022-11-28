@@ -303,7 +303,14 @@ const TestNaviBar = ({ handle }) => {
             <button onClick={(e) => e.preventDefault()}>
               <Space>
                 <button className=" text-xl mt-[3px] font-bold text-secondary">
-                  <AiOutlinePlus />
+                  {/* <AiOutlinePlus /> */}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mecwbjnp.json"
+                    trigger="hover"
+                    style={{ height: "25px", fontWidth: 700 }}
+                    colors="primary:#02818F"
+                    state="hover-1"
+                  ></lord-icon>
                 </button>
               </Space>
             </button>
@@ -340,6 +347,13 @@ const TestNaviBar = ({ handle }) => {
                 <Space>
                   <div>
                     <button className="flex  text-2xl text-secondary mt-1">
+                      {/* <lord-icon
+                        src="https://cdn.lordicon.com/msetysan.json"
+                        trigger="hover"
+                        style={{ height: "55px" }}
+                        colors="primary:#02818F"
+                        state="hover-1"
+                      ></lord-icon> */}
                       <AiOutlineNotification />
                       <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
                         8

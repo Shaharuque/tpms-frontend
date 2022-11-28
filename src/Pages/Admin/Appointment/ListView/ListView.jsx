@@ -19,6 +19,11 @@ import ShimmerTableTet from "../../../Pages/Settings/SettingComponents/ShimmerTa
 import Clients from "./MultiSelectComponents/Clients";
 import Providers from "./MultiSelectComponents/Providers";
 import useToken from "../../../../CustomHooks/useToken";
+import lottie from "lottie-web";
+import { defineElement } from "lord-icon-element";
+
+// define "lord-icon" custom element with default properties
+defineElement(lottie.loadAnimation);
 
 const ListView = () => {
   const { token } = useToken();
@@ -751,16 +756,14 @@ const ListView = () => {
                   <div className="text-[16px]  text-white font-semibold ">
                     Manage Sessions
                   </div>
-                  {/* <div className="arrow bounce">
-                    <AiOutlineDown />
-                  </div> */}
-                  {/* <lord-icon
+                  <lord-icon
                     src="https://cdn.lordicon.com/rxufjlal.json"
-                    trigger="hover"
-                    colors="primary:#121331"
+                    trigger="loop"
+                    style={{ height: "25px" }}
+                    colors="primary:#fff"
                     state="hover-1"
-                    style="width:250px;height:250px"
-                  ></lord-icon> */}
+                    // style="width:250px;height:250px"
+                  ></lord-icon>
                 </>
               )}
             </div>
@@ -925,19 +928,22 @@ const ListView = () => {
                             </div>
                           </div>
                           {/* Multi date picker component called */}
-                          <div
-                            ref={refClose}
-                            className="mt-2 xl:ml-0 lg:ml-0 md:ml-[-30px]"
-                            // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
-                          >
-                            {openCalendar && (
-                              <CustomDateRange
-                                range={range}
-                                setRange={setRange}
-                                handleCancelDate={handleCancelDate}
-                                setOpen={setOpenCalendar}
-                              ></CustomDateRange>
-                            )}
+                          <div>
+                            <div
+                              ref={refClose}
+                              // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
+                              className="absolute mt-2 z-10 sm:ml-[-290px]"
+                              // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
+                            >
+                              {openCalendar && (
+                                <CustomDateRange
+                                  range={range}
+                                  setRange={setRange}
+                                  handleCancelDate={handleCancelDate}
+                                  setOpen={setOpenCalendar}
+                                ></CustomDateRange>
+                              )}
+                            </div>
                           </div>
                         </div>
 
