@@ -413,7 +413,7 @@ const ArLedger = () => {
         >
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1 className="text-lg my-2 text-orange-500">AR Ledger</h1>
-            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  my-5 mr-2 gap-4">
+            <div className=" flex items-center gap-4 flex-wrap">
               {/* name  */}
               <div className="">
                 <label className="label">
@@ -432,9 +432,7 @@ const ArLedger = () => {
                 <>
                   <div className="">
                     <label className="label">
-                      <span className="label-text text-[17px] py-[1px] font-medium text-[#9b9b9b] text-left">
-                        Claim No
-                      </span>
+                      <span className=" label-font">Claim No</span>
                     </label>
                     <input
                       type="number"
@@ -452,22 +450,22 @@ const ArLedger = () => {
                 </>
               ) : (
                 <>
-                  <div className="lg:mt-4 2xl:mt-0">
+                  <div>
                     <label className="label">
-                      <span className="label-text mb-[1px] text-[17px] font-medium text-[#9b9b9b] text-left">
+                      <span className=" label-font">
                         Choose Staff to process
                       </span>
                     </label>
-                    <>
+                    <div className="py-[2px]">
                       <GlobalMultiSelect />
-                    </>
+                    </div>
                   </div>
-                  <div>
+                  <div className="w-[250px]">
                     <label className="label">
                       <span className=" label-font">Selected date</span>
                     </label>
                     <div className="ml-1 text-[14px]">
-                      <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                      <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 ">
                         <input
                           value={
                             startDate
@@ -496,7 +494,7 @@ const ArLedger = () => {
                     </div>
                     <div
                       ref={refClose}
-                      className="absolute z-10  2xl:ml-[20] shadow-xl"
+                      className="absolute z-10 2xl:ml-[20] shadow-xl"
                     >
                       {open && (
                         <div>

@@ -10,8 +10,8 @@ const SecBillingManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"pending-secondary-Claims"}
           >
@@ -24,8 +24,8 @@ const SecBillingManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"manage-secondary-claims"}
           >

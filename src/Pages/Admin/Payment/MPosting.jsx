@@ -427,13 +427,13 @@ const MPosting = () => {
       </div>
       <div>
         <form className="my-10" onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-6  mr-2 gap-6">
+          <div className=" flex items-center gap-4 flex-wrap">
             <div>
-              <div>
+              <div className="w-[250px]">
                 <label className="label">
                   <span className=" label-font">Deposit Date Range</span>
                 </label>
-                <div className="ml-1 text-[14px]">
+                <div className="ml-1 text-[14px] ">
                   <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                     <input
                       value={
@@ -505,7 +505,7 @@ const MPosting = () => {
               </div>
             </div>
             <div>
-              <div>
+              <div className="w-[250px]">
                 <label className="label">
                   <span className=" label-font">Check Date Range</span>
                 </label>

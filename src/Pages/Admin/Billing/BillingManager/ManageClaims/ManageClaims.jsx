@@ -214,8 +214,7 @@ const ManageClaims = () => {
 
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
-            {" "}
+          <div className=" flex items-center gap-4 flex-wrap">
             {/* Sort By  */}
             <div>
               <label className="label">
