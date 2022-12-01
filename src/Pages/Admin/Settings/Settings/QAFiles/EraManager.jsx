@@ -39,8 +39,8 @@ const EraManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"era-files"}
           >
@@ -50,8 +50,8 @@ const EraManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"file-277"}
           >
@@ -60,8 +60,8 @@ const EraManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"file-999"}
           >
@@ -70,8 +70,8 @@ const EraManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"edi-status-files"}
           >

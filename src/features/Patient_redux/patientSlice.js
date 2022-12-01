@@ -6,12 +6,16 @@ import { headers } from "../../Misc/BaseClient";
 //Action creator to fetch admins data list depending on page_ad
 export const getpatients = createAsyncThunk(
   "patients/getpatients",
-  async () => {
+  async (token) => {
     //onno api thik e kaj kortesey
     const response = await axios.get(
       `https://ovh.therapypms.com/api/v1/admin/ac/patient`,
       {
-        headers: headers,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token || null,
+        },
       }
     );
     return response.data;
@@ -30,7 +34,7 @@ const patientSlice = createSlice({
   initialState,
 
   reducers: {},
-  //async action creator
+  //reducer function which listen to the action and update state
   extraReducers: (builder) => {
     builder.addCase(getpatients.pending, (state) => {
       state.loading = true;
@@ -52,18 +56,17 @@ const patientSlice = createSlice({
 export const patientDataReducer = patientSlice.reducer; //sliceName.reducer
 
 //----------------------------------------//
-//async action create (Patient Details)
+//async action create=>thunk function (Patient Details)
 export const getpatientsDetails = createAsyncThunk(
   "patients/getpatientsDetails",
-  async (id) => {
-    //onno api thik e kaj kortesey
+  async ({ id, token }) => {
     const response = await axios.get(
       `https://ovh.therapypms.com/api/v1/admin/ac/patient/info/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: localStorage.getItem("adminToken") || null,
+          Authorization: token || null,
         },
       }
     );

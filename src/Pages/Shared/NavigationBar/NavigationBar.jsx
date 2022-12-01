@@ -124,7 +124,7 @@ const TestNaviBar = ({ handle }) => {
             <div className="md:mb-3">
               <Dropdown
                 overlay={
-                  <div className="  w-[15rem] md:w-[22rem] lg:w-[15rem] mt-1 p-1 shadow-md drop-box rounded-sm bg-white  ">
+                  <div className="nav-box w-[15rem] md:w-[22rem] lg:w-[15rem] mt-1 p-1 shadow-md drop-box rounded-sm bg-white  ">
                     <div className="card-body">
                       <h4 className=" text-center ">Latest Changes</h4>
                       <hr />
@@ -266,6 +266,8 @@ const TestNaviBar = ({ handle }) => {
           </motion.div>
         )}
 
+        {/* large lg,xl,2xl....... device  */}
+
         <div
           className={`lg:flex lg:items-center gap-10  lg:pt-0 pt-10 lg:pb-0 pb-10 absolute lg:static bg-white lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 mr-3 transition-all duration-500 ease-in ${
             open ? "top-24 " : "top-[-490px]"
@@ -301,7 +303,14 @@ const TestNaviBar = ({ handle }) => {
             <button onClick={(e) => e.preventDefault()}>
               <Space>
                 <button className=" text-xl mt-[3px] font-bold text-secondary">
-                  <AiOutlinePlus />
+                  {/* <AiOutlinePlus /> */}
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mecwbjnp.json"
+                    trigger="hover"
+                    style={{ height: "25px", fontWidth: 700 }}
+                    colors="primary:#02818F"
+                    state="hover-1"
+                  ></lord-icon>
                 </button>
               </Space>
             </button>
@@ -312,7 +321,7 @@ const TestNaviBar = ({ handle }) => {
           <div>
             <Dropdown
               overlay={
-                <div className="border w-auto md:w-[25rem] p-2 shadow-lg  rounded-sm bg-white">
+                <div className="border nav-box w-auto md:w-[25rem] p-2 shadow-lg  rounded-sm bg-white">
                   <div className="card-body">
                     <h4 className=" text-center ">Latest Changes</h4>
                     <hr />
@@ -338,6 +347,13 @@ const TestNaviBar = ({ handle }) => {
                 <Space>
                   <div>
                     <button className="flex  text-2xl text-secondary mt-1">
+                      {/* <lord-icon
+                        src="https://cdn.lordicon.com/msetysan.json"
+                        trigger="hover"
+                        style={{ height: "55px" }}
+                        colors="primary:#02818F"
+                        state="hover-1"
+                      ></lord-icon> */}
                       <AiOutlineNotification />
                       <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
                         8
@@ -365,7 +381,7 @@ const TestNaviBar = ({ handle }) => {
             </label>
             <div
               tabIndex={0}
-              className="dropdown-content menu mt-3 shadow-lg shadow-red-600"
+              className="dropdown-content menu nav-box  shadow-lg shadow-red-600"
             >
               <ScheduleExport></ScheduleExport>
             </div>
@@ -373,7 +389,7 @@ const TestNaviBar = ({ handle }) => {
           {/* admin part  */}
           <div className="dropdown md:dropdown-end">
             <label tabIndex={0}>
-              <label className="flex gap-2 items-center cursor-pointer">
+              <label className="flex gap-2 items-center cursor-pointer ">
                 <div className="w-8 mr-1 rounded-full">
                   <img className="avatar rounded-full" src={admin} alt="pic" />
                 </div>
@@ -387,9 +403,9 @@ const TestNaviBar = ({ handle }) => {
             </label>
             <div
               tabIndex={0}
-              className="dropdown-content menu mt-2  w-auto md:w-[18rem] sm:w-56 "
+              className="dropdown-content menu  nav-box mt-[6px] w-auto md:w-[18rem] sm:w-56 "
             >
-              <div className="bg-gradient-to-r from-primary to-secondary rounded-t-xl p-4 flex justify-between">
+              <div className="bg-gradient-to-r  from-primary to-secondary rounded-t-xl p-4 flex justify-between">
                 <div className="w-8 mr-1 rounded-full">
                   <img className="avatar rounded-full" src={admin} alt="pic" />
                 </div>

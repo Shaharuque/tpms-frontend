@@ -171,6 +171,7 @@ import ERAFiles from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/ERAFiles";
 import Files277 from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/Files277";
 import Files999 from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/Files999";
 import EDIStatusFiles from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/EDIStatusFiles";
+import Test from "./Pages/Shared/Test";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -181,6 +182,7 @@ function App() {
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
           {/* ------------------------form--------------------------- */}
+          <Route path="/test" element={<Test></Test>}></Route>
           <Route path="/forms" element={<Form></Form>}></Route>
           <Route
             path="/form-demo-json"

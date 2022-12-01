@@ -7,25 +7,25 @@ import { useEffect } from "react";
 import { fetchData } from "../../../../../../Misc/Helper";
 import axios from "axios";
 import { headers } from "../../../../../../Misc/BaseClient";
+import { useDispatch } from "react-redux";
+import { fetchCpt } from "../../../../../../features/Settings_redux/cptCodeSlice";
+import { toast } from "react-toastify";
 export default function AddCptCodeActionModal({
   handleClose,
   open,
   record,
-  setItems,
   page,
-  setTotalPage,
+  token,
+  endPoint,
 }) {
-  const [txName, setTxName] = useState("");
   const [selectedTreatments, setSelectedTreatments] = useState([]);
-  const { id, cpt_code, treatment } = record;
-  useEffect(() => {
-    setTxName(treatment?.treatment_name);
-  }, [treatment?.treatment_name]);
-  //console.log(treatment);
+  const { id, cpt_code, treatment, facility_treatment_id } = record;
+  console.log("record", record);
+  const dispatch = useDispatch();
 
-  //getting all the selected treatment data
+  //getting all the selected treatment data for Tx type selection purpose
   useEffect(() => {
-    fetchData("admin/ac/setting/get/selected/treatment").then((res) => {
+    fetchData("admin/ac/setting/get/selected/treatment", token).then((res) => {
       const result = res?.data?.selected_treatment;
       if (result?.length !== 0) {
         setSelectedTreatments(result);
@@ -46,7 +46,7 @@ export default function AddCptCodeActionModal({
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: localStorage.getItem("adminToken") || null,
+            Authorization: token || null,
           },
           data: FormData,
         });
@@ -54,24 +54,19 @@ export default function AddCptCodeActionModal({
         // console.log(res.data);
         if (res.data.status === "success") {
           console.log("Successfully Inserted");
-
-          const getCptCodes = async (page = 1) => {
-            const res = await axios({
-              method: "get",
-              url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/cpt/code?page=${page}`,
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: localStorage.getItem("adminToken") || null,
-              },
-            });
-            const result = res?.data?.cpt_codes?.data;
-            //console.log(result);
-            setItems(result);
-            setTotalPage(res?.data?.cpt_codes?.last_page);
-          };
-          getCptCodes(page);
+          toast.success("Successfully Inserted", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
+          dispatch(fetchCpt({ endPoint, page, token }));
           handleClose();
+        } else {
+          toast.error("Cpt Code Already Exist", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
         }
       } catch (error) {
         console.log(error?.res?.data?.message); // this is the main part. Use the response property from the error object
@@ -86,7 +81,7 @@ export default function AddCptCodeActionModal({
     setTimeout(() => {
       reset({
         cpt_code: cpt_code,
-        // facility_treatment_id: txName ? txName : null,
+        facility_treatment_id: facility_treatment_id,
       });
     }, 100);
   }, [reset, cpt_code]);
@@ -126,18 +121,25 @@ export default function AddCptCodeActionModal({
                   name="facility_treatment_id"
                   {...register("facility_treatment_id")}
                 >
-                  {/* <option value="Behavioral therapy">Behavioral therapy</option>
-                  <option value="Speech Therapy">Speech Therapy</option>
-                  <option value="Occupational Therapy">
-                    Occupational Therapy
-                  </option> */}
-                  {selectedTreatments?.map((each) => {
-                    return (
-                      <option key={each?.id} value={each?.id}>
-                        {each?.treatment_name}
-                      </option>
-                    );
-                  })}
+                  {record.treatment?.treatment_name ? (
+                    <option value={facility_treatment_id}>
+                      {record.treatment?.treatment_name}
+                    </option>
+                  ) : (
+                    <option>Select Treatment</option>
+                  )}
+                  {selectedTreatments
+                    ?.filter(
+                      (item) =>
+                        item.treatment_name !== record.treatment?.treatment_name
+                    )
+                    ?.map((treatment) => {
+                      return (
+                        <option key={treatment?.id} value={treatment?.id}>
+                          {treatment?.treatment_name}
+                        </option>
+                      );
+                    })}
                 </select>
               </div>
 

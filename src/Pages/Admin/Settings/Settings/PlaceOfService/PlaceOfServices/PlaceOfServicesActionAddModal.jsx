@@ -7,19 +7,25 @@ import { headers } from "../../../../../../Misc/BaseClient";
 import "../../../../../Style/Pagination.css";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPOS } from "../../../../../../features/Settings_redux/placeOfServiceSlice";
 
 export default function PlaceOfServicesActionAddModal({
   handleClose,
   open,
   recordData,
-  items,
-  setItems,
-  setTotalPage,
   page,
-  cacheData,
+  token,
+  endPoint,
 }) {
   const { id, pos_code, pos_name } = recordData;
   console.log(id);
+
+  const dispatch = useDispatch();
+  const createEndpoint = "admin/ac/setting/create/pos";
+
+  const posCreated = useSelector((state) => state?.posCreated);
+  console.log(posCreated);
   const {
     register,
     handleSubmit,
@@ -27,10 +33,10 @@ export default function PlaceOfServicesActionAddModal({
     reset,
   } = useForm();
 
-  const onSubmit = async (FormData) => {
-    console.log(FormData);
+  const onSubmit = async (formData) => {
+    console.log(formData);
     //create new pos [post req]
-    if (FormData && !id) {
+    if (formData && !id) {
       try {
         let res = await axios({
           method: "post",
@@ -38,26 +44,14 @@ export default function PlaceOfServicesActionAddModal({
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: localStorage.getItem("adminToken") || null,
+            Authorization: token || null,
           },
-          data: FormData,
+          data: formData,
         });
 
         // console.log(res.data);
-        if (res.data.status === "success") {
-          console.log("Successfully Inserted");
-          // Swal.fire({
-          //   title: "Successfully Added Place of Service",
-
-          //   showClass: {
-          //     popup: "animate__animated animate__fadeInDown",
-          //   },
-          //   hideClass: {
-          //     popup: "animate__animated animate__fadeOutUp",
-          //   },
-          // });
-          // toastify
-          toast.success("Successfully Added Place of Service", {
+        if (res?.data?.status === "success") {
+          toast.success("Successfully Inserted", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -67,40 +61,43 @@ export default function PlaceOfServicesActionAddModal({
             progress: undefined,
             theme: "dark",
           });
-
-          //After posting data to database successfully we will append the responsed date with the existing table data using spread operator concept it will reduce the api calling problem
-          // setItems([...items, res?.data?.pos_data]);
-          const getPatientsData = async (page = 1) => {
-            const res = await axios({
-              method: "get",
-              url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: localStorage.getItem("adminToken") || null,
-              },
-            });
-            // const result = await res.json();
-            const result = res?.data?.pos_data?.data;
-            //console.log(result);
-
-            setItems(result);
-            // cacheData[`user-${page}`] = result
-            setTotalPage(res?.data?.pos_data?.last_page);
-          };
-          getPatientsData(page);
+          dispatch(fetchPOS({ endPoint, page, token }));
           handleClose();
         }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
       } catch (error) {
-        console.log(error.response.data.message); // this is the main part. Use the response property from the error object
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log(error?.message); // this is the main part. Use the response property from the error object
       }
     }
+
     //Update the pos if any pos clicked
     else {
       const payload = {
         pos_id: id,
-        pos_name: FormData?.pos_name,
-        pos_code: FormData?.pos_code,
+        pos_name: formData?.pos_name,
+        pos_code: formData?.pos_code,
       };
       try {
         let res = await axios({
@@ -109,45 +106,28 @@ export default function PlaceOfServicesActionAddModal({
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: localStorage.getItem("adminToken") || null,
+            Authorization: token || null,
           },
           data: payload,
         });
 
-        // console.log(res.data);
+        console.log(res);
         if (res.data.status === "success") {
           console.log("Successfully Updated");
-          // success toast
-          toast.success("Successfully Updated Place of Service", {
+          toast.success("Successfully Updated", {
             position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
+            autoClose: 5000,
             theme: "dark",
           });
           //for showing updated data in real time
-          const getPatientsData = async (page = 1) => {
-            const res = await axios({
-              method: "get",
-              url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                Authorization: localStorage.getItem("adminToken") || null,
-              },
-            });
-            // const result = await res.json();
-            const result = res?.data?.pos_data?.data;
-            //console.log(result);
-            setItems(result);
-            // cacheData[`user-${page}`] = result
-            setTotalPage(res?.data?.pos_data?.last_page);
-          };
-          getPatientsData(page);
+          dispatch(fetchPOS({ page, endPoint, token }));
           handleClose();
+        } else {
+          toast.error("Having issue to update", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
         }
       } catch (error) {
         console.log(error.response.data.message); // this is the main part. Use the response property from the error object

@@ -1,11 +1,12 @@
 import { Table } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
-import Loading from "../../../../../Loading/Loading";
-import { headers } from "../../../../../Misc/BaseClient";
+import { useDispatch, useSelector } from "react-redux";
+import useToken from "../../../../../CustomHooks/useToken";
+import { fetchCpt } from "../../../../../features/Settings_redux/cptCodeSlice";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddCptCodeActionModal from "./AddCptCode/AddCptCodeActionModal";
 
 const AddCptCode = () => {
@@ -13,29 +14,23 @@ const AddCptCode = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
   const [recordData, setRecordData] = useState();
-  const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(0);
+  const dispatch = useDispatch();
+  const endPoint = "admin/ac/setting/get/cpt/code";
+
+  const { token } = useToken();
+  const allCpt = useSelector((state) => state?.cptInfo);
+  const data = allCpt?.cptData?.cpt_codes?.data
+    ? allCpt?.cptData?.cpt_codes?.data
+    : [];
+  const totalPage = allCpt?.cptData?.cpt_codes?.last_page
+    ? allCpt?.cptData?.cpt_codes?.last_page
+    : 0;
+  console.log("loading", allCpt);
 
   useEffect(() => {
-    const getPatientsData = async (page) => {
-      const res = await axios({
-        method: "get",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/setting/get/cpt/code?page=${page}`,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: localStorage.getItem("adminToken") || null,
-        },
-      });
-      // const result = await res.json();
-      const result = res?.data?.cpt_codes?.data;
-      // console.log(result?.data?.cpt_codes?.data);
-      setItems(result);
-      setTotalPage(res?.data?.cpt_codes?.last_page);
-    };
-    getPatientsData(page);
-  }, [page]);
+    dispatch(fetchCpt({ endPoint, page, token }));
+  }, [page, dispatch, token]);
 
   console.log(totalPage);
 
@@ -59,10 +54,6 @@ const AddCptCode = () => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
-
-  if (!items) {
-    return <Loading></Loading>;
-  }
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
@@ -194,19 +185,26 @@ const AddCptCode = () => {
         </div>
       </div>
       <div>
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-          size="small"
-          bordered
-          className=" text-xs font-normal"
-          columns={columns}
-          dataSource={items}
-          scroll={{
-            y: 650,
-          }}
-          onChange={handleChange}
-        />
+        <>
+          {allCpt?.loading ? (
+            <ShimmerTableTet></ShimmerTableTet>
+          ) : (
+            <Table
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+              size="small"
+              bordered
+              className=" text-xs font-normal"
+              columns={columns}
+              dataSource={data}
+              scroll={{
+                y: 650,
+              }}
+              onChange={handleChange}
+            />
+          )}
+        </>
+
         {totalPage > 0 && (
           <ReactPaginate
             previousLabel={"<<"}
@@ -228,10 +226,9 @@ const AddCptCode = () => {
           handleClose={handleClose}
           open={openAddModal}
           record={recordData}
-          items={items}
-          setItems={setItems}
           page={page}
-          setTotalPage={setTotalPage}
+          token={token}
+          endPoint={endPoint}
         ></AddCptCodeActionModal>
       )}
     </div>

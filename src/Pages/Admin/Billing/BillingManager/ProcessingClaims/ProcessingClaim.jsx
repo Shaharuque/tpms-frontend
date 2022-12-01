@@ -324,7 +324,8 @@ const ProcessingClaim = () => {
       <h1 className="text-lg text-orange-400">Processing Claim(s)</h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
+          <div className=" flex items-center gap-4 flex-wrap">
+            {/* <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-6 2xl:grid-cols-7  mr-2 gap-6"> */}
             <div className="flex gap-3">
               <div className="w-3/4">
                 <label className="label">
@@ -407,7 +408,7 @@ const ProcessingClaim = () => {
                   <select
                     onChange={(e) => setSortBy1(e.target.value)}
                     name="type"
-                    className="input-border input-font w-full focus:outline-none"
+                    className="input-border input-font  focus:outline-none"
                   >
                     <option value="Patient">Patient(s)</option>
                     <option value="Tx Providers">Tx Providers</option>
