@@ -403,7 +403,7 @@ const TestNaviBar = ({ handle }) => {
             </label>
             <div
               tabIndex={0}
-              className="dropdown-content menu  nav-box  w-auto md:w-[18rem] sm:w-56 "
+              className="dropdown-content menu  nav-box mt-[6px] w-auto md:w-[18rem] sm:w-56 "
             >
               <div className="bg-gradient-to-r  from-primary to-secondary rounded-t-xl p-4 flex justify-between">
                 <div className="w-8 mr-1 rounded-full">
