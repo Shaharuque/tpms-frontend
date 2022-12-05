@@ -23,7 +23,7 @@ const ParentTrainingSession = () => {
     setProviderSignature(true);
   };
   const handleSignatureCaregiver = () => {
-    setCaregiverSignature(true);
+    setCaregiverSignature(true); 
   };
   const handleSignatureClose = () => {
     setCaregiverSignature(false);
