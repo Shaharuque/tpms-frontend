@@ -146,6 +146,7 @@ const DirectService = () => {
                 Check the box to the left of one or more goals that apply to
                 this session
               </p>
+
               <div className="flex  items-center ">
                 <div className="form-input-border ">
                   <input

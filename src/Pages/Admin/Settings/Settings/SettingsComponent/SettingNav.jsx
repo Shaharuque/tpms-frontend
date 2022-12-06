@@ -10,7 +10,7 @@ const SettingNav = ({ s }) => {
         to={link}
       >
         <span className="text-2xl ml-2 ">{icon}</span>
-        <h1 className="ml-1 font-medium  flex items-center text-[15px] gap-1 ">
+        <h1 className="ml-1 font-medium  flex items-center text-[14px] 2xl:text-[15px] gap-1 ">
           {/* <h1 className="text-sm lg:text-[10px] xl:text-[14px] font-medium"> */}
           {name}
         </h1>

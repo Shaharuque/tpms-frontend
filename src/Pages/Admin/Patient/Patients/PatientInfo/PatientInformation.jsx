@@ -16,6 +16,8 @@ import { Switch } from "antd";
 // import "./SingleCalendar.css";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 import useToken from "../../../../../CustomHooks/useToken";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const PatientInformation = () => {
   const { token } = useToken();
@@ -29,7 +31,9 @@ const PatientInformation = () => {
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
+  const [phone, setPhone] = useState();
 
+  console.log("phone :", phone);
   //file uploaded issue
   const [signatureUpload, setSignatureUpload] = useState("");
   console.log("setSignatureUpload = = =", signatureUpload);
@@ -494,12 +498,20 @@ const PatientInformation = () => {
                 </label>
                 <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
                   <div>
-                    <input
+                    <PhoneInput
+                      country={"us"}
+                      value={phone}
+                      onChange={(e) => {
+                        console.log(e);
+                        setPhone(e);
+                      }}
+                    />
+                    {/* <input
                       type="text"
                       name="phone"
                       className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full py-[1px] ml-1 focus:outline-none"
                       {...register("phone")}
-                    />
+                    /> */}
                   </div>
                   <div>
                     <select
