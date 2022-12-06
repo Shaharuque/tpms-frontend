@@ -16,7 +16,7 @@ const AddModal = ({ setRefresh }) => {
     try {
       let res = await axios({
         method: "post",
-        url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/create/pos",
+        url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/create/pos",
         headers: headers,
         data: FormData,
       });

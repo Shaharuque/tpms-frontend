@@ -1,26 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import "antd/dist/antd.css";
 import { Button, Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableTesting from "./ManageTableTesting";
+import useToken from "../../CustomHooks/useToken";
 
 const TestingTable = () => {
+  const { token } = useToken();
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [allData, setAllData] = useState([]);
+  const [testData, setTestData] = useState();
   //const [open, setOpen] = useState(false);
 
   //   fetch data
-  React.useEffect(() => {
-    fetch("../All_Fake_Api/Fakedb.json")
+  // React.useEffect(() => {
+  //   fetch("../All_Fake_Api/Fakedb.json")
+  //     .then((res) => res.json())
+  //     .then((d) => {
+  //       setAllData(d);
+  //       // setLoading2(false)
+  //     });
+  // }, []);
+  const formData = {
+    client_id: [
+      107, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 141, 142,
+      143, 144, 145, 146, 147, 148, 150, 151, 152, 153, 154, 155, 156, 157, 159,
+      181, 182, 271, 319, 653, 665, 738, 1504, 1586, 1593, 1830, 1911, 1913,
+      1967, 1988, 2125, 2454, 2459, 2461, 2469, 2470, 2476, 2483, 2486, 2487,
+      2490, 2500, 2501, 2510, 2516, 2517, 2518, 2519, 2520, 2521, 2522, 2523,
+      2524, 2525, 2526, 2527, 2528, 2529, 2530, 2531, 2532, 2533, 2534, 2535,
+      2536, 2537, 2538, 2539, 2540, 2541, 2542, 2545, 2546, 2547, 2548, 2549,
+      2550, 2551, 2552, 2553, 2554, 2555, 2556, 2557, 2558, 2559, 2560, 2561,
+      2562, 2563, 2564,
+    ],
+    from_date: "2022-11-01",
+    to_date: "2022-12-31",
+  };
+  useEffect(() => {
+    fetch("https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token || null,
+      },
+      body: JSON.stringify(formData),
+    })
       .then((res) => res.json())
-      .then((d) => {
-        setAllData(d);
-        // setLoading2(false)
-      });
+      .then((data) => setTestData(data?.appointments));
   }, []);
 
+  console.log(testData);
   console.log(allData);
 
   const handleChange = (pagination, filters, sorter) => {
@@ -41,7 +73,7 @@ const TestingTable = () => {
       width: 50,
       // render contains what we want to reflect as our data
       render: (_, { lock }) => {
-        console.log("tags : ", lock);
+        //console.log("tags : ", lock);
         return (
           <div>
             {lock === true && (
@@ -57,9 +89,9 @@ const TestingTable = () => {
       },
     },
     {
-      title: "Patients",
-      dataIndex: "Patients",
-      key: "Patients",
+      title: "id",
+      dataIndex: "id",
+      key: "id",
       width: 200,
       filters: [
         {
@@ -83,12 +115,12 @@ const TestingTable = () => {
           value: "Hector Moses",
         },
       ],
-      filteredValue: filteredInfo.Patients || null,
-      onFilter: (value, record) => record.Patients.includes(value),
+      filteredValue: filteredInfo.id || null,
+      onFilter: (value, record) => record.id.includes(value),
       sorter: (a, b) => {
-        return a.Patients > b.Patients ? -1 : 1;
+        return a.id > b.id ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "Patients" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -122,7 +154,7 @@ const TestingTable = () => {
       dataIndex: "pos",
       width: 100,
       render: (_, { pos }) => {
-        console.log("pos : ", pos);
+        //console.log("pos : ", pos);
         return (
           <>
             {pos === "telehealth" ? (
@@ -211,26 +243,26 @@ const TestingTable = () => {
     },
     {
       title: "Status",
-      key: "Status",
-      dataIndex: "Status",
+      key: "status",
+      dataIndex: "status",
       width: 100,
-      render: (_, { Status }) => {
-        //console.log("Status : ", Status);
+      render: (_, { status }) => {
+        //console.log("status : ", status);
         return (
           <div>
-            {Status === "Scheduled" && (
+            {status === "Scheduled" && (
               <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
+                {status}
               </button>
             )}
-            {Status === "Rendered" && (
+            {status === "Rendered" && (
               <button className="bg-green-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
+                {status}
               </button>
             )}
-            {Status === "hold" && (
+            {status === "hold" && (
               <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded-lg">
-                {Status}
+                {status}
               </button>
             )}
           </div>
@@ -250,8 +282,8 @@ const TestingTable = () => {
           value: "Scheduled",
         },
       ],
-      filteredValue: filteredInfo.Status || null,
-      onFilter: (value, record) => record.Status.includes(value),
+      filteredValue: filteredInfo.status || null,
+      onFilter: (value, record) => record.status.includes(value),
     },
     {
       title: "Action",
@@ -295,12 +327,13 @@ const TestingTable = () => {
           <Button onClick={clearFilters}>Clear filters</Button>
         </Space>
         <Table
+          rowKey={(record) => record.id}
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           size="small"
           bordered
           className=" text-xs font-normal mt-5"
           columns={columns}
-          dataSource={allData}
+          dataSource={testData}
           rowSelection={{
             ...rowSelection,
           }}

@@ -40,7 +40,7 @@ export default function PlaceOfServicesActionAddModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/create/pos",
+          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/create/pos",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -102,7 +102,7 @@ export default function PlaceOfServicesActionAddModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/update/pos",
+          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/update/pos",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",

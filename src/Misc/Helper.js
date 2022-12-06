@@ -39,7 +39,7 @@ export const PostfetchData = async ({ endPoint, payload, token }) => {
 // }
 
 // export const QueryPost = (url, payload) => {
-//   return axios.post('https://ovh.therapypms.com/api/v1/admin/ac/setting/cpt/code/exclusion/get', payload, {
+//   return axios.post('https://test-prod.therapypms.com/api/v1/admin/ac/setting/cpt/code/exclusion/get', payload, {
 //     headers: headers,
 //   })
 
