@@ -173,12 +173,21 @@
     }
 
     .setting-nav {
-        width: 17%;
+        /* width: 18%; */
+        width: 18%;
+    }
+
+    .setting-body {
+        width: 82%;
+    }
+
+    /* .setting-nav {
+        width: 15%;
     }
 
     .setting-body {
         width: 83%;
-    }
+    } */
 
     .data-box {
         width: 30%;

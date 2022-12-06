@@ -428,7 +428,8 @@ const PatientLedger = () => {
     <div className={table ? "" : "h-[100vh]"}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-lg mt-2 text-orange-500">Patient Ar Ledger</h1>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-5 mr-2 gap-4">
+        {/* <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-5 mr-2 gap-4"> */}
+        <div className=" flex flex-wrap items-center gap-2">
           <div>
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -440,7 +441,7 @@ const PatientLedger = () => {
               {...register("patient")}
             >
               <option value="name"> </option>
-              <option value="name"> Abcd </option>
+              <option value="name"> Abcgfdgfdgdrtdrtfd </option>
               <option value="name"> abcd </option>
             </select>
           </div>

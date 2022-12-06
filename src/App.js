@@ -171,6 +171,10 @@ import ERAFiles from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/ERAFiles";
 import Files277 from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/Files277";
 import Files999 from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/Files999";
 import EDIStatusFiles from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/EDIStatusFiles";
+import Test from "./Pages/Shared/Test";
+import IntakeForm from "./Pages/Admin/Settings/Settings/IntakeForm/IntakeForm";
+import StructureOfProcess from "./Pages/Admin/Settings/Settings/StructureOfProcess/StructureOfProcess";
+import AppIdTracking from "./Pages/Admin/Settings/Settings/AppIdTracking/AppIdTracking";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -181,6 +185,7 @@ function App() {
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
           {/* ------------------------form--------------------------- */}
+          <Route path="/test" element={<Test></Test>}></Route>
           <Route path="/forms" element={<Form></Form>}></Route>
           <Route
             path="/form-demo-json"
@@ -790,6 +795,18 @@ function App() {
                   element={<SmsSetting></SmsSetting>}
                 ></Route>
               </Route>
+              <Route
+                path="intake-form"
+                element={<IntakeForm></IntakeForm>}
+              ></Route>
+              <Route
+                path="structure-of-process"
+                element={<StructureOfProcess></StructureOfProcess>}
+              ></Route>
+              <Route
+                path="app-id-tracking"
+                element={<AppIdTracking></AppIdTracking>}
+              ></Route>
             </Route>
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>

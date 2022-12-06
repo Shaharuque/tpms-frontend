@@ -11,7 +11,7 @@ import {
 } from "../../../../../Misc/Helper";
 
 const AddStaffType = () => {
-  // QueryPost('https://ovh.therapypms.com/api/v1/admin/ac/setting/cpt/code/exclusion/get', mutate)
+  // QueryPost('https://test-prod.therapypms.com/api/v1/admin/ac/setting/cpt/code/exclusion/get', mutate)
   //   const {mutate} = useAddSuperHeroData();
   // console.log('query data', mutate)
   // mutate();

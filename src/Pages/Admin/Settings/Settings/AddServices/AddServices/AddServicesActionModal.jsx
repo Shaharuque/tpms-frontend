@@ -41,11 +41,11 @@ export default function AddServicesActionModal({
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        facility_treatment_id: treatment_type?.id ? treatment_type?.id : null,
-        service: service || null,
-        description: description || null,
-        mileage: mileage || null,
-        duration: duration || null,
+        facility_treatment_id: treatment_type?.id,
+        service: service,
+        description: description,
+        mileage: mileage,
+        duration: duration,
         type: type,
       });
     }, 0);
@@ -65,11 +65,11 @@ export default function AddServicesActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/service/create",
+          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/service/create",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: token || null,
+            Authorization: token,
           },
           data: FormData,
         });
@@ -150,22 +150,35 @@ export default function AddServicesActionModal({
                 <label className="label">
                   <span className="modal-label-name">Tx Type</span>
                 </label>
+                {/* Dynamic option showed and select new option feature */}
                 <select
                   className="modal-input-field ml-1 w-full"
                   defaultValue={treatment_type?.treatment_name}
                   {...register("facility_treatment_id")}
                 >
-                  <option value={null}>Select Treatment</option>
-                  {selectedTreatments?.map((treatment) => {
-                    return (
-                      <option
-                        key={treatment?.treatment_id}
-                        value={treatment?.id}
-                      >
-                        {treatment?.treatment_name}
-                      </option>
-                    );
-                  })}
+                  {record.treatment_type?.treatment_name ? (
+                    <option value={record.treatment_type?.id}>
+                      {record.treatment_type?.treatment_name}
+                    </option>
+                  ) : (
+                    <option>Select Treatment</option>
+                  )}
+                  {selectedTreatments
+                    ?.filter(
+                      (item) =>
+                        item.treatment_name !==
+                        record.treatment_type?.treatment_name
+                    )
+                    .map((treatment) => {
+                      return (
+                        <option
+                          key={treatment?.treatment_id}
+                          value={treatment?.id}
+                        >
+                          {treatment?.treatment_name}
+                        </option>
+                      );
+                    })}
                 </select>
               </div>
               <div>

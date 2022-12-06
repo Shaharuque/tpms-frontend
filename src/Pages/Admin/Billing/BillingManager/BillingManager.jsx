@@ -10,8 +10,8 @@ const BillingManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"proces-Clims"}
           >
@@ -24,8 +24,8 @@ const BillingManager = () => {
           {/* <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"Batching-climbs"}
           >
@@ -38,8 +38,8 @@ const BillingManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-xs"
-                : "rs-nav-item text-xs font-normal"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"Manage-claims"}
           >

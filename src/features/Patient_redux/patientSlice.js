@@ -9,7 +9,7 @@ export const getpatients = createAsyncThunk(
   async (token) => {
     //onno api thik e kaj kortesey
     const response = await axios.get(
-      `https://ovh.therapypms.com/api/v1/admin/ac/patient`,
+      `https://test-prod.therapypms.com/api/v1/admin/ac/patient`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const patientSlice = createSlice({
   initialState,
 
   reducers: {},
-  //reducer function
+  //reducer function which listen to the action and update state
   extraReducers: (builder) => {
     builder.addCase(getpatients.pending, (state) => {
       state.loading = true;
@@ -56,13 +56,12 @@ const patientSlice = createSlice({
 export const patientDataReducer = patientSlice.reducer; //sliceName.reducer
 
 //----------------------------------------//
-//async action create (Patient Details)
+//async action create=>thunk function (Patient Details)
 export const getpatientsDetails = createAsyncThunk(
   "patients/getpatientsDetails",
   async ({ id, token }) => {
-    //onno api thik e kaj kortesey
     const response = await axios.get(
-      `https://ovh.therapypms.com/api/v1/admin/ac/patient/info/${id}`,
+      `https://test-prod.therapypms.com/api/v1/admin/ac/patient/info/${id}`,
       {
         headers: {
           "Content-Type": "application/json",

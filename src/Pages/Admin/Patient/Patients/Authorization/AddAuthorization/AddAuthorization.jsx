@@ -16,6 +16,7 @@ const AddAuthorization = () => {
   const { register, handleSubmit, reset } = useForm();
   const [active, setActive] = useState(false);
   const [placeHolder, setPlaceHolder] = useState(true);
+  const [auth, setAuth] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -54,6 +55,7 @@ const AddAuthorization = () => {
     ]);
     setOpenCalendar(false);
   };
+  console.log(auth);
 
   // date range picker calendar
   const startDate = range ? range[0]?.startDate : null;
@@ -113,12 +115,24 @@ const AddAuthorization = () => {
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-lg font-medium mx-1">Add Auth</h1>
-        <Link to={`/admin/patient/patient-authorization/${patientId}`}>
-          <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs font-medium  hover:to-secondary text-white rounded-md">
-            <IoCaretBackCircleOutline className="mr-1 text-sm" />
-            Back
-          </button>
-        </Link>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center ">
+            <Switch
+              size="small"
+              checked={auth ? true : false}
+              onClick={() => setAuth(!auth)}
+            />
+            <span className="text-[14px] font-medium text-gray-500 mx-3">
+              Auth Not Required
+            </span>
+          </div>
+          <Link to={`/admin/patient/patient-authorization/${patientId}`}>
+            <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs font-medium  hover:to-secondary text-white rounded-md">
+              <IoCaretBackCircleOutline className="mr-1 text-sm" />
+              Back
+            </button>
+          </Link>
+        </div>
       </div>
       <motion.div
         initial={{ opacity: 0, y: 15 }}
@@ -239,12 +253,24 @@ const AddAuthorization = () => {
                   Authorization Number<span className="text-red-500">*</span>
                 </span>
               </label>
-              <input
-                type="text"
-                name="authorization_number"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("authorization_number")}
-              />
+              {auth ? (
+                <div
+                  type="text"
+                  readOnly
+                  name="authorization_number"
+                  className="input-border bg-slate-100 input-font py-[1px] w-full focus:outline-none"
+                  // {...register("authorization_number")}
+                >
+                  N/A
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  name="authorization_number"
+                  className="input-border input-font py-[1px] w-full focus:outline-none"
+                  {...register("authorization_number")}
+                />
+              )}
             </div>
             <div>
               <label className="label">

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseIp } from "../../Misc/BaseClient";
 
-//async action(getAdmins) to fetch admins data list depending on page_ad
+//async thunk(fetchPOS) to fetch pos data list depending on page_ad
 export const fetchPOS = createAsyncThunk(
   "settings/fetchPOS",
   async ({ endPoint, page, token }) => {
@@ -21,9 +21,10 @@ export const fetchPOS = createAsyncThunk(
 
 const initialState = {
   loading: false,
+  isError: false,
   posData: {},
   posCreate: {},
-  error: {},
+  error: "",
 };
 
 const posSlice = createSlice({
@@ -31,19 +32,22 @@ const posSlice = createSlice({
   initialState,
 
   reducers: {},
-  //async action creator
+  //In redux-toolkit when async thunk function returns a promise and redux toolkit gets that promise, it will autometically dispatch 3 action(promise.pending,promise.fullfilled,promise.rejected) by himself, extraReducers will listen to those actions and update state.
   extraReducers: (builder) => {
     builder.addCase(fetchPOS.pending, (state) => {
       state.loading = true;
-      state.error = {};
+      state.isError = false;
+      state.error = "";
     });
     builder.addCase(fetchPOS.fulfilled, (state, action) => {
       state.loading = false;
-      state.error = {};
+      state.isError = false;
+      state.error = "";
       state.posData = action.payload;
     });
     builder.addCase(fetchPOS.rejected, (state, action) => {
       state.loading = false;
+      state.isError = true;
       state.error = action.error;
       state.posData = "";
     });
@@ -59,7 +63,7 @@ export const createPos = createAsyncThunk(
     try {
       const response = await axios({
         method: "post",
-        url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/create/pos",
+        url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/create/pos",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

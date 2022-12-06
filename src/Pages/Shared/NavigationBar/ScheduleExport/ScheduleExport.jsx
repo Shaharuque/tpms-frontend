@@ -11,7 +11,7 @@ const ScheduleExport = () => {
   };
 
   return (
-    <div>
+    <div className="nav-box">
       <div
         className="absolute z-10 bg-white w-[15rem] sm:w-[18rem] shadow-md rounded-lg
        mt-2 lg:right-[-20px] md:right-[-280px] sm:right-[-280px]  "

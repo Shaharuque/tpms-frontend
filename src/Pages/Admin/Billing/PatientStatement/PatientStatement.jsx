@@ -92,7 +92,7 @@ const PatientStatement = () => {
   return (
     <div className="h-[100vh]">
       <h1 className="text-lg text-orange-400">Statement</h1>
-      <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 my-5 mr-2 gap-5">
+      <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5  2xl:grid-cols-7 my-5 mr-2 gap-4">
         <div>
           <label className="label">
             <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">

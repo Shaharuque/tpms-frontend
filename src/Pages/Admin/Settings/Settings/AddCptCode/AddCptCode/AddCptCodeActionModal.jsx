@@ -9,6 +9,7 @@ import axios from "axios";
 import { headers } from "../../../../../../Misc/BaseClient";
 import { useDispatch } from "react-redux";
 import { fetchCpt } from "../../../../../../features/Settings_redux/cptCodeSlice";
+import { toast } from "react-toastify";
 export default function AddCptCodeActionModal({
   handleClose,
   open,
@@ -17,15 +18,10 @@ export default function AddCptCodeActionModal({
   token,
   endPoint,
 }) {
-  const [txName, setTxName] = useState("");
   const [selectedTreatments, setSelectedTreatments] = useState([]);
-  const { id, cpt_code, treatment } = record;
+  const { id, cpt_code, treatment, facility_treatment_id } = record;
+  console.log("record", record);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setTxName(treatment?.treatment_name);
-  }, [treatment?.treatment_name]);
-  //console.log(treatment);
 
   //getting all the selected treatment data for Tx type selection purpose
   useEffect(() => {
@@ -46,7 +42,7 @@ export default function AddCptCodeActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/cpt/code/create",
+          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/cpt/code/create",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -58,8 +54,19 @@ export default function AddCptCodeActionModal({
         // console.log(res.data);
         if (res.data.status === "success") {
           console.log("Successfully Inserted");
+          toast.success("Successfully Inserted", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
           dispatch(fetchCpt({ endPoint, page, token }));
           handleClose();
+        } else {
+          toast.error("Cpt Code Already Exist", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
         }
       } catch (error) {
         console.log(error?.res?.data?.message); // this is the main part. Use the response property from the error object
@@ -74,7 +81,7 @@ export default function AddCptCodeActionModal({
     setTimeout(() => {
       reset({
         cpt_code: cpt_code,
-        // facility_treatment_id: txName ? txName : null,
+        facility_treatment_id: facility_treatment_id,
       });
     }, 100);
   }, [reset, cpt_code]);
@@ -114,18 +121,25 @@ export default function AddCptCodeActionModal({
                   name="facility_treatment_id"
                   {...register("facility_treatment_id")}
                 >
-                  {/* <option value="Behavioral therapy">Behavioral therapy</option>
-                  <option value="Speech Therapy">Speech Therapy</option>
-                  <option value="Occupational Therapy">
-                    Occupational Therapy
-                  </option> */}
-                  {selectedTreatments?.map((treatment) => {
-                    return (
-                      <option key={treatment?.id} value={treatment?.id}>
-                        {treatment?.treatment_name}
-                      </option>
-                    );
-                  })}
+                  {record.treatment?.treatment_name ? (
+                    <option value={facility_treatment_id}>
+                      {record.treatment?.treatment_name}
+                    </option>
+                  ) : (
+                    <option>Select Treatment</option>
+                  )}
+                  {selectedTreatments
+                    ?.filter(
+                      (item) =>
+                        item.treatment_name !== record.treatment?.treatment_name
+                    )
+                    ?.map((treatment) => {
+                      return (
+                        <option key={treatment?.id} value={treatment?.id}>
+                          {treatment?.treatment_name}
+                        </option>
+                      );
+                    })}
                 </select>
               </div>
 
