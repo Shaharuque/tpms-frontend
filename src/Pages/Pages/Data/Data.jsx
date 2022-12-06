@@ -1,4 +1,4 @@
-import { FaUser, FaUserFriends, FaBoxOpen } from "react-icons/fa";
+import { FaUser, FaUserFriends, FaBoxOpen, FaWpforms } from "react-icons/fa";
 import { TbBuildingHospital, TbFileTime } from "react-icons/tb";
 import { BiRename, BiLinkAlt, BiFolderOpen } from "react-icons/bi";
 import {
@@ -7,7 +7,7 @@ import {
   BsFileEarmark,
   BsFolder2Open,
 } from "react-icons/bs";
-import { MdOutlinePayment } from "react-icons/md";
+import { MdOutlinePayment, MdTrackChanges } from "react-icons/md";
 import { ImUsers } from "react-icons/im";
 import { TbArrowsRightLeft } from "react-icons/tb";
 import { AiOutlineUserAdd, AiOutlineUser, AiOutlineFile } from "react-icons/ai";
@@ -17,6 +17,7 @@ import {
   RiSendPlaneLine,
 } from "react-icons/ri";
 import { FiLayers, FiAnchor } from "react-icons/fi";
+import { VscServerProcess } from "react-icons/vsc";
 
 // ***********************************************************************
 // ******************************DashBoard Data***************************
@@ -304,7 +305,7 @@ export const setting = [
   },
   {
     link: "unbillable-time-sheet",
-    name: "Unbillable TimeSheet                        ",
+    name: "Unbillable TimeSheet ",
     icon: <TbFileTime />,
   },
   {
@@ -346,6 +347,21 @@ export const setting = [
     link: "sms-email-setting/email-setting",
     name: "SMS/Email Setting",
     icon: <TbArrowsRightLeft />,
+  },
+  {
+    link: "intake-form",
+    name: "Intake Form",
+    icon: <FaWpforms />,
+  },
+  {
+    link: "structure-of-process",
+    name: "Structure of process",
+    icon: <VscServerProcess />,
+  },
+  {
+    link: "app-id-tracking",
+    name: "App id tracking",
+    icon: <MdTrackChanges />,
   },
 ];
 

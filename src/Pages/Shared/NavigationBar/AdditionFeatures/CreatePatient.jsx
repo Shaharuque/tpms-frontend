@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const CreatePatient = ({ handleClose, patientClicked }) => {
   const [active, setActive] = useState(false);
+  const [phone, setPhone] = useState();
   console.log(patientClicked);
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
@@ -28,10 +31,26 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
             <h1 className="text-lg text-left text-orange-400">
               Create Patient
             </h1>
-            <IoCloseCircleOutline
-              onClick={handleClose}
-              className="text-gray-500 text-2xl hover:text-primary"
-            />
+            <div className="flex item-center gap-2">
+              <div className="flex items-center gap-2">
+                <Switch
+                  color="default"
+                  defaultChecked
+                  size="small"
+                  // onClick={handleBillable}
+                />
+                <label
+                  className="form-check-label inline-block mt-[2px] text-sm"
+                  htmlFor="flexSwitchCheckDefault"
+                >
+                  Email invaitation
+                </label>
+              </div>
+              <IoCloseCircleOutline
+                onClick={handleClose}
+                className="text-gray-500 text-2xl hover:text-primary"
+              />
+            </div>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mb-1 mr-2 gap-1">
@@ -163,6 +182,16 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     className="modal-input-field ml-1 w-3/4"
                     {...register("phone_number")}
                   />
+                  {/* <div>
+                    <PhoneInput
+                      country={"us"}
+                      value={phone}
+                      onChange={(e) => {
+                        console.log(e);
+                        setPhone(e);
+                      }}
+                    />
+                  </div> */}
                   <div>
                     <select
                       className="modal-input-field ml-1 w-full"
@@ -188,20 +217,6 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                       Send me a text message
                     </span>
                   </div>
-                </div>
-                <div className="flex ml-1 mt-1 items-center">
-                  <input
-                    type="checkbox"
-                    // checked={value ? true : false}
-                    name="patient"
-                    // onClick={() => {
-                    //   setValue(!value);
-                    // }}
-                  />
-
-                  <span className="text-xs ml-1 text-gray-600 font-medium">
-                    Send me a voice message
-                  </span>
                 </div>
               </div>
             </div>
