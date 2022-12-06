@@ -185,11 +185,11 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   {/* <div>
                     <PhoneInput
                       country={"us"}
-                      value={phone}
+                      value={phone}  
                       onChange={(e) => {
                         console.log(e);
                         setPhone(e);
-                      }}
+                      }}       
                     />
                   </div> */}
                   <div>
