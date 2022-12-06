@@ -499,6 +499,7 @@ const PatientInformation = () => {
                 <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
                   <div>
                     <PhoneInput
+                      className="PatientinformationInput"
                       country={"us"}
                       value={phone}
                       onChange={(e) => {
