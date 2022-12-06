@@ -38,7 +38,6 @@ const IntakeForm = () => {
         </div>
       </div>
       <div>
-        {" "}
         <div className="text-green-500 green-box my-3 border border-gray-300 rounded-sm px-3 font-medium py-[10px]  text-xs w-full flex justify-between items-center gap-2">
           <span className="flex items-center gap-6">
             Download Intake Form.
