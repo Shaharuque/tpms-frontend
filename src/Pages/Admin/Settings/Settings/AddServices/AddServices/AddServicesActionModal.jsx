@@ -65,7 +65,7 @@ export default function AddServicesActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/service/create",
+          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/service/create",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
