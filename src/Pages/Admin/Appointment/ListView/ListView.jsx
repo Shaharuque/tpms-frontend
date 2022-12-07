@@ -19,6 +19,11 @@ import ShimmerTableTet from "../../../Pages/Settings/SettingComponents/ShimmerTa
 import Clients from "./MultiSelectComponents/Clients";
 import Providers from "./MultiSelectComponents/Providers";
 import useToken from "../../../../CustomHooks/useToken";
+import lottie from "lottie-web";
+import { defineElement } from "lord-icon-element";
+
+// define "lord-icon" custom element with default properties
+defineElement(lottie.loadAnimation);
 
 const ListView = () => {
   const { token } = useToken();
@@ -42,7 +47,7 @@ const ListView = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "GET",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/patient/names`,
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient/names`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -63,7 +68,7 @@ const ListView = () => {
     const getProviderData = async () => {
       const res = await axios({
         method: "GET",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/staff/names`,
+        url: `https://ovh.therapypms.com/api/v1/admin/ac/staff/names`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -74,7 +79,7 @@ const ListView = () => {
       setStuffs(data);
     };
     getProviderData();
-}, []);
+  }, []);
   // console.log("stuffs", stuffs);
   console.log("selected stuffs", stuffsId);
 
@@ -176,7 +181,7 @@ const ListView = () => {
   const fetchPatients = async () => {
     let manageSessionData = [];
     await axios({
-      url: `https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
+      url: `https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -200,14 +205,7 @@ const ListView = () => {
     }
     setpage(page + 1);
   };
-  console.log("all data",items);
-  // const lookup = items.reduce((a, e) => {
-  //   a[e.id] = ++a[e.id] || 0;
-  //   return a;
-  // }, {});
-  
-  // console.log("finding duplicate data",items.filter(e => lookup[e.id]));
-
+  console.log(items);
 
   // -----------------------------------------Table Data-----------------------------------
   const columns = [
@@ -693,7 +691,7 @@ const ListView = () => {
     setFromData(payLoad);
     if (payLoad) {
       const fetchManageSessions = {
-        url: "https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments",
+        url: "https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -707,15 +705,6 @@ const ListView = () => {
         console.log("list data", response?.data?.appointments);
         const manageSessionData = response?.data?.appointments?.data;
         setItems(manageSessionData);
-
-        // unique data checking
-      //   function getUniqueListBy(arr, key) {
-      //     return [...new Map(arr.map(item => [item[key], item])).values()]
-      // }
-      // const arr1 = getUniqueListBy(items, 'id')
-      // console.log("Unique by place")
-      // console.log("duplicate remove",JSON.stringify(arr1))
-      // setItems(arr1)
       });
     }
     setTable(true);
@@ -744,7 +733,13 @@ const ListView = () => {
   // ----------------------------------------Multi-Select---------------------------------
   // *************
 
-
+  const opt = [
+    { label: "tera ", value: "grapes", id: 3 },
+    { label: "tpms ", value: "mafgngo", id: 1 },
+    { label: "code ", value: "grfgapes", id: 4 },
+    { label: "Mango ", value: "mango", id: 8 },
+    { label: "dfa ", value: "strawberry", id: 9 },
+  ];
 
   return (
     // For responsive view point
@@ -754,16 +749,21 @@ const ListView = () => {
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
             <div
               onClick={clickHandler}
-              className="  flex items-center justify-between"
+              className="flex items-center justify-between"
             >
               {!clicked && (
                 <>
                   <div className="text-[16px]  text-white font-semibold ">
                     Manage Sessions
                   </div>
-                  <div className="arrow bounce">
-                    <AiOutlineDown />
-                  </div>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/rxufjlal.json"
+                    trigger="loop"
+                    style={{ height: "25px" }}
+                    colors="primary:#fff"
+                    state="hover-1"
+                    // style="width:250px;height:250px"
+                  ></lord-icon>
                 </>
               )}
             </div>
@@ -771,7 +771,7 @@ const ListView = () => {
             {clicked && (
               <div>
                 <div className="flex justify-between items-center flex-wrap">
-                  <h1 className="text-[20px]  text-white font-semibold ">
+                  <h1 className="text-[20px] text-white font-semibold ">
                     Manage Sessions
                   </h1>
                   <div>
@@ -783,7 +783,7 @@ const ListView = () => {
                     </button>
                   </div>
                 </div>
-                <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
+                <div className="flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
                   <div>
                     <Switch
                       color="default"
@@ -867,7 +867,7 @@ const ListView = () => {
                           </label>
                           <div>
                             <select
-                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white   px-1 py-[5px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white py-[4px]  px-1  font-medium  text-[14px] w-full focus:outline-none"
                               {...register("place_of_service")}
                             >
                               <option value="" className="text-black">
@@ -894,7 +894,7 @@ const ListView = () => {
 
                         <div>
                           <label className="label">
-                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                            <span className="label-text  text-[16px] text-gray-100 text-left">
                               Selected date
                             </span>
                           </label>
@@ -902,7 +902,7 @@ const ListView = () => {
                           <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[3px] mx-1 text-[14px] w-full"
+                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px]  text-[14px] w-full"
                             >
                               <input
                                 value={
@@ -911,7 +911,7 @@ const ListView = () => {
                                     : "Start Date"
                                 }
                                 readOnly
-                                className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                className="focus:outline-none py-[1px] font-medium text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 {...register("start_date")}
                               />
                               <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
@@ -922,9 +922,27 @@ const ListView = () => {
                                     : "End Date"
                                 }
                                 readOnly
-                                className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                className="focus:outline-none font-medium text-center bg-transparent text-white w-1/3 cursor-pointer"
                                 {...register("end_date")}
                               />
+                            </div>
+                          </div>
+                          {/* Multi date picker component called */}
+                          <div>
+                            <div
+                              ref={refClose}
+                              // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
+                              className="absolute mt-2 z-10 sm:ml-[-290px]"
+                              // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
+                            >
+                              {openCalendar && (
+                                <CustomDateRange
+                                  range={range}
+                                  setRange={setRange}
+                                  handleCancelDate={handleCancelDate}
+                                  setOpen={setOpenCalendar}
+                                ></CustomDateRange>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -932,13 +950,13 @@ const ListView = () => {
                         <div className="flex gap-5">
                           <div>
                             <label className="label">
-                              <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              <span className="label-text text-[16px] text-gray-100 text-left">
                                 status
                               </span>
                             </label>
                             <div>
                               <select
-                                className="bg-transparent border-b-[3px] border-[#ffffff] px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                className="bg-transparent border-b-[3px] border-[#ffffff] px-1 py-[4px] font-medium text-white  text-[14px] w-full focus:outline-none"
                                 {...register("status")}
                               >
                                 <option value="" className="text-black">
@@ -963,7 +981,7 @@ const ListView = () => {
                             </div>
                           </div>
                           <button
-                            className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                            className=" mb-3 mt-[35px] sm:w-1/4 pms-white-button"
                             type="submit"
                           >
                             Go
@@ -972,7 +990,7 @@ const ListView = () => {
                       </>
                     ) : (
                       <button
-                        className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                        className=" mb-3 mt-[35px] sm:w-1/4 pms-white-button"
                         type="submit"
                       >
                         Go
@@ -994,7 +1012,7 @@ const ListView = () => {
                         </div>
                         <button
                           onClick={clearFilters}
-                          className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                          className="mb-2 mt-[35px]  w-1/3 px-1  bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
                         >
                           Clear filters
                         </button>
@@ -1003,20 +1021,6 @@ const ListView = () => {
                   </div>
                 </form>
               </div>
-            )}
-          </div>
-          {/* Multi date picker component called */}
-          <div
-            ref={refClose}
-            className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
-          >
-            {openCalendar && (
-              <CustomDateRange
-                range={range}
-                setRange={setRange}
-                handleCancelDate={handleCancelDate}
-                setOpen={setOpenCalendar}
-              ></CustomDateRange>
             )}
           </div>
         </div>

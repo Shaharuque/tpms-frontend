@@ -168,7 +168,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                 </div>
               </div>
 
-              <div>
+              <div className="">
                 <label className="label">
                   <span className="modal-label-name flex items-center gap-1">
                     Phone Number
@@ -182,14 +182,14 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     className="modal-input-field ml-1 w-3/4"
                     {...register("phone_number")}
                   /> */}
-                  <div className="ModalPhoneInput">
+                  <div className="ModalPhoneInput ml-1">
                     <PhoneInput
                       country={"us"}
-                      value={phone}  
+                      value={phone}
                       onChange={(e) => {
                         console.log(e);
                         setPhone(e);
-                      }}       
+                      }}
                     />
                   </div>
                   <div>
