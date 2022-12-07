@@ -380,24 +380,24 @@ code {
 
 /* phone component customize */
 
-.PatientinformationInput.react-tel-input .form-control{
-  border: none ;
-  border-bottom: 1px solid rgb(128 209 216) ;
+.PatientinformationInput.react-tel-input .form-control {
+  border: none;
+  border-bottom: 1px solid rgb(128 209 216);
   width: 100%;
   height: 100%;
   border-radius: 0px;
 }
 
-.PatientinformationInput.react-tel-input .form-control:focus{
+.PatientinformationInput.react-tel-input .form-control:focus {
   box-shadow: 0 0 0 1px #fafafa;
-  
+
 }
 
-.ModalPhoneInput .react-tel-input  .form-control{
+.ModalPhoneInput .react-tel-input .form-control {
   width: 100%;
   height: 32px;
 }
 
-.ModalPhoneInput .react-tel-input  .form-control:focus{
+.ModalPhoneInput .react-tel-input .form-control:focus {
   box-shadow: 0 0 0 1px #00a3b2;
 }

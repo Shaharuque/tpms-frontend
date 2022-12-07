@@ -31,12 +31,11 @@ const PatientInformation = () => {
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
-  const [phone, setPhone] = useState();
 
-  console.log("phone :", phone);
+  // console.log("phone :", phone);
   //file uploaded issue
   const [signatureUpload, setSignatureUpload] = useState("");
-  console.log("setSignatureUpload = = =", signatureUpload);
+  // console.log("setSignatureUpload = = =", signatureUpload);
   // file uploaded added
 
   // calender hide
@@ -84,7 +83,7 @@ const PatientInformation = () => {
 
   // address icon delete handeler
   const addressHandleRemove = (index) => {
-    // console.log(index);
+    console.log(index);
     const list = [...addressRendomValue];
     list.splice(index, 1);
     setAddressRendomValue(list);
@@ -105,13 +104,15 @@ const PatientInformation = () => {
   };
   // Patient Information
   const { id } = useParams();
-  // console.log("patient Info", id);
+  console.log("patient Info", id);
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
   console.log("patient details", data);
+  console.log("hone number", patient_details?.phone_number);
+  const [phone, setPhone] = useState(patient_details?.phone_number);
 
   useEffect(() => {
     // action dispatched
@@ -139,20 +140,20 @@ const PatientInformation = () => {
   }, [patient_details, reset]);
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const is_client_active = data?.checkedActive ? 1 : 0;
     const formData = {
       is_client_active,
     };
-    console.log(formData);
-    console.log(file);
+    // console.log(formData);
+    // console.log(file);
   };
 
-  console.log("---", addressRendomValue);
+  // console.log("---", addressRendomValue);
 
   ///relation value handle
   const settingRelation = (e) => {
-    //console.log("selected option", e.target.value);
+    console.log("selected option", e.target.value);
     //const relation = e.target.value;
     if (e.target.value === "Self") {
       setGuarantor(false);
@@ -161,14 +162,14 @@ const PatientInformation = () => {
     //setRelation(relation);
     setRelation(e.target.value);
   };
-  // console.log(relation);
+  console.log(relation);
   //Guarentor handler code
   const handleChange = (event) => {
     if (event.target.checked) {
-      console.log("✅ Checkbox is checked");
+      // console.log("✅ Checkbox is checked");
       setGuarantor(true);
     } else {
-      console.log("⛔️ Checkbox is NOT checked");
+      // console.log("⛔️ Checkbox is NOT checked");
       setGuarantor(false);
     }
   };
@@ -183,10 +184,10 @@ const PatientInformation = () => {
     setValue("GuaratorCity", getValues("City"));
     setValue("GuratorCountry", getValues("country"));
     setValue("GuratorZip", getValues("zip"));
-    console.log("getvalue street", getValues("Street"));
-    console.log("getvalue city", getValues("City"));
-    console.log("getvalue country", getValues("country"));
-    console.log("getvalue zip", getValues("zip"));
+    // console.log("getvalue street", getValues("Street"));
+    // console.log("getvalue city", getValues("City"));
+    // console.log("getvalue country", getValues("country"));
+    // console.log("getvalue zip", getValues("zip"));
   };
 
   return (
@@ -496,23 +497,17 @@ const PatientInformation = () => {
                 <label className="label">
                   <span className=" label-font">Phone</span>
                 </label>
-                <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
-                  <div>
+                <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
+                  <div className="w-[180px] ml-1">
                     <PhoneInput
                       className="PatientinformationInput"
                       country={"us"}
                       value={phone}
                       onChange={(e) => {
-                        console.log(e);
+                        // console.log(e);
                         setPhone(e);
                       }}
                     />
-                    {/* <input
-                      type="text"
-                      name="phone"
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full py-[1px] ml-1 focus:outline-none"
-                      {...register("phone")}
-                    /> */}
                   </div>
                   <div>
                     <select
@@ -533,45 +528,8 @@ const PatientInformation = () => {
                     <FaPlus />
                   </button>
                 </div>
-                <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
-                  <div className="flex items-center">
-                    {/* <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {
-                        setVoiceMsg(!voiceMsg);
-                      }}
-                    /> */}
-                    <Switch
-                      size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
-                    />
-                    <span className="text-xs ml-1 text-gray-700 font-normal">
-                      Voice message ok
-                    </span>
-                  </div>
 
-                  <div className="flex items-center">
-                    {/* <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {
-                        setTextMsg(!textMsg);
-                      }}
-                    /> */}
-                    <Switch
-                      size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
-                    />
-                    <span className="text-xs ml-1 text-gray-700 font-normal">
-                      Text message ok
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex ml-1 mt-1 items-center">
+                <div className="flex ml-1 mt-2 items-center">
                   {/* <input
                     type="checkbox"
                     name="patient"
@@ -584,8 +542,8 @@ const PatientInformation = () => {
                     checked={active ? true : false}
                     onClick={() => setActive(!active)}
                   />
-                  <span className="text-xs ml-1 text-gray-700 font-normal">
-                    Send text/voice appointment reminders
+                  <span className="text-xs ml-1 text-gray-700 font-medium">
+                    SMS Appointment Reminders
                   </span>
                 </div>
               </>
@@ -604,13 +562,16 @@ const PatientInformation = () => {
                   <label className="label">
                     <span className=" label-font">Phone</span>
                   </label>
-                  <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
-                    <div>
-                      <input
-                        type="text"
-                        name="phone"
-                        className="input-border text-gray-600 rounded-sm  text-[14px] py-[1px] font-medium w-full ml-1 focus:outline-none"
-                        {...register("phone")}
+                  <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
+                    <div className="w-[180px] ml-1">
+                      <PhoneInput
+                        className="PatientinformationInput"
+                        country={"us"}
+                        value={phone}
+                        onChange={(e) => {
+                          // console.log(e);
+                          setPhone(e);
+                        }}
                       />
                     </div>
                     <div>
@@ -630,59 +591,22 @@ const PatientInformation = () => {
                       <RiDeleteBin6Line />
                     </button>
                   </div>
-                  <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
-                    <div className="flex items-center">
-                      {/* <input
-                        type="checkbox"
-                        name="patient"
-                        onClick={() => {
-                          setVoiceMsg(!voiceMsg);
-                        }}
-                      /> */}
-                      <Switch
-                        size="small"
-                        checked={active ? true : false}
-                        onClick={() => setActive(!active)}
-                      />
-                      <span className="text-xs ml-1 text-gray-700 font-normal">
-                        Voice message ok
-                      </span>
-                    </div>
 
-                    <div className="flex items-center">
-                      {/* <input
-                        type="checkbox"
-                        name="patient"
-                        onClick={() => {
-                          setTextMsg(!textMsg);
-                        }}
-                      /> */}
-                      <Switch
-                        size="small"
-                        checked={active ? true : false}
-                        onClick={() => setActive(!active)}
-                      />
-                      <span className="text-xs ml-1 text-gray-700 font-normal">
-                        Text message ok
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex ml-1 mt-1 items-center">
-                    {/* <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {  
-                        setAppointment(!appointment);
-                      }}
-                    /> */}
+                  <div className="flex ml-1 mt-2 items-center">
+                    {/* <input          
+                    type="checkbox" 
+                    name="patient"
+                    onClick={() => {
+                      setAppointment(!appointment);
+                    }}
+                  /> */}
                     <Switch
                       size="small"
                       checked={active ? true : false}
                       onClick={() => setActive(!active)}
                     />
-                    <span className="text-xs ml-1 text-gray-700 font-normal">
-                      Send text/voice appointment reminders
+                    <span className="text-xs ml-1 text-gray-700 font-medium">
+                      SMS Appointment Reminders
                     </span>
                   </div>
                 </motion.div>

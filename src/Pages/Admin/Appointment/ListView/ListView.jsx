@@ -47,7 +47,7 @@ const ListView = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "GET",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient/names`,
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/patient/names`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -68,7 +68,7 @@ const ListView = () => {
     const getProviderData = async () => {
       const res = await axios({
         method: "GET",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/staff/names`,
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/staff/names`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -181,7 +181,7 @@ const ListView = () => {
   const fetchPatients = async () => {
     let manageSessionData = [];
     await axios({
-      url: `https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
+      url: `https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -691,7 +691,7 @@ const ListView = () => {
     setFromData(payLoad);
     if (payLoad) {
       const fetchManageSessions = {
-        url: "https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments",
+        url: "https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
