@@ -1,8 +1,12 @@
 .setting-nav-child {
-    border: 1px solid #09A2B3;
+    /* border: 1px solid #09A2B3; */
     border-left-width: 2px;
     border-right-width: 2px;
     transition: all 0.3s;
+}
+
+.setting-nav {
+    border: 0.1px solid #c2c2c28e;
 }
 
 .setting-nav-child:hover {
@@ -20,10 +24,7 @@
 
 }
 
-.box {
-    border-top: 10px solid #0AA7B8;
-    border-bottom: 10px solid #0AA7B8;
-}
+
 
 .edit-box {
     border-top: 5px solid #0AA7B8;
@@ -146,11 +147,12 @@
     }
 
     .setting-nav {
-        width: 15%;
+        /* width: 18%; */
+        width: 20%;
     }
 
     .setting-body {
-        width: 85%;
+        width: 80%;
     }
 
     .data-box {
@@ -171,11 +173,11 @@
     }
 
     .setting-nav {
-        width: 15%;
+        width: 17%;
     }
 
     .setting-body {
-        width: 85%;
+        width: 83%;
     }
 
     .data-box {

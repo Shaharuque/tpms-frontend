@@ -178,7 +178,7 @@ const Report = () => {
                   </div>
                   <div
                     ref={refClose}
-                    className="absolute z-10  2xl:ml-[20] shadow-xl"
+                    className="absolute z-10 md:ml-[-300px] ml-0  shadow-xl"
                   >
                     {open && (
                       <motion.div
@@ -235,7 +235,7 @@ const Report = () => {
           )}
           <div>
             <input
-              className="hover:shadow-lg rounded-md bg-secondary text-white py-2 text-xs px-3 mt-7"
+              className="pms-button mt-[26px]"
               type="submit"
               value="Export"
             />

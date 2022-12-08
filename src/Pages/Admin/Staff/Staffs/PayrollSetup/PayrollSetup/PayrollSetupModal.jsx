@@ -1,12 +1,10 @@
-import { Modal, Switch } from "antd";
+import { Modal } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const PayrollSetupModal = ({ handleClose, open }) => {
   const [active, setActive] = useState(false);
-
-
 
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
@@ -48,12 +46,10 @@ const PayrollSetupModal = ({ handleClose, open }) => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      Service
-                    </span>
+                    <span className="modal-label-name">Service</span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="modal-input-field ml-1 w-full"
                     {...register(`service`)}
                   >
                     <option value="Speech Therapist">Speech Therapist</option>
@@ -63,63 +59,47 @@ const PayrollSetupModal = ({ handleClose, open }) => {
 
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      Hourly Rate
-                    </span>
+                    <span className="modal-label-name">Hourly Rate</span>
                   </label>
                   <input
                     type="text"
                     name="hourly_rate"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="modal-input-field ml-1 w-full"
                     {...register("hourly_rate")}
                   />
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
+                    <span className="modal-label-name">
                       Milage Rate (cents/mile)
                     </span>
                   </label>
                   <input
                     type="text"
                     name="milage_Rate"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    className="modal-input-field ml-1 w-full"
                     {...register("milage_rate")}
                   />
                 </div>
 
-                <div className="flex ml-1 mt-1 items-center">
-                  {/* <input
+                <div className="flex ml-1 mt-8 gap-2 items-center">
+                  <input
                     type="checkbox"
                     name="service"
                     onClick={() => {
                       setValue(!value);
                     }}
-                  /> */}
-                  <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
-                  <span className="text-xs ml-1  text-gray-600 font-normal">
-                    Apply to All Service
-                  </span>
+                  />
+                  <span className="modal-label-name">Apply to All Service</span>
                 </div>
               </div>
               <div className="bg-gray-200 py-[1px] mt-3"></div>
               <div className=" flex items-end justify-end mt-2">
-                <button
-                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                  type="submit"
-                >
+                <button className=" pms-button mr-2" type="submit">
                   Save
                 </button>
 
-                <button
-                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                  autoFocus
-                  onClick={handleClose}
-                >
+                <button className="pms-close-button" onClick={handleClose}>
                   Close
                 </button>
               </div>

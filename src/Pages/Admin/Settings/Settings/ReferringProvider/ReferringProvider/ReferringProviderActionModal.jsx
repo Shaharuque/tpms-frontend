@@ -59,75 +59,60 @@ export default function ReferringProviderActionModal({
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5 mr-2 gap-3">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Provider First Name
-                  </span>
+                  <span className="modal-label-name">Provider First Name</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Provider First Name"
                   name="provider_first_name"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("provider_first_name")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Provider Last Name
-                  </span>
+                  <span className="modal-label-name">Provider Last Name</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Provider Last Name"
                   name="provider_last_name"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("provider_last_name")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    NPI
-                  </span>
+                  <span className="modal-label-name">NPI</span>
                 </label>
                 <input
                   type="number"
                   placeholder="NPI"
                   name="npi"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("npi")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    UPIN
-                  </span>
+                  <span className="modal-label-name">UPIN</span>
                 </label>
                 <input
                   type="number"
                   placeholder="UPIN"
                   name="upin"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("upin")}
                 />
               </div>
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
-              <button
-                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                type="submit"
-              >
+              <button className=" pms-button mr-2" type="submit">
                 Save
               </button>
 
-              <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                autoFocus
-                onClick={handleClose}
-              >
+              <button className="pms-close-button" onClick={handleClose}>
                 Close
               </button>
             </div>

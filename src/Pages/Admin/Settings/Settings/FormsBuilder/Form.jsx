@@ -18,7 +18,7 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/Parent-training-session"}>
-          <button className="pms-button">PARENT TRAINING SESSION NOTE</button>
+          <button className="pms-button">PARENT TRAINING SESSION NOTE</button>  
         </Link>
         <div className="my-2"></div>
         <Link to={"/BCBA-trainee"}>
@@ -45,21 +45,21 @@ const Form = () => {
           <button className="pms-button">Clinic Treatment</button>
         </Link>
         <div className="my-2"></div>
+        <div className="my-2"></div>
         <Link to={"/FBA"}>
           <button className="pms-button">FBA</button>
         </Link>
         <div className="my-2"></div>
-        <Link to={"/SOAP"}>
-          <button className="pms-button">SOAP</button>
-        </Link>
         <div className="my-2"></div>
         <Link to={"/BCBATraineeUSF"}>
-          <button className="pms-button">BCBA TRAINEE UNIQUE SUPERVISION FORM</button>
+          <button className="pms-button">
+            BCBA TRAINEE UNIQUE SUPERVISION FORM
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/MonthlySupervisionNote"}>
           <button className="pms-button">MONTHLY SUPERVISION NOTE</button>
-        </Link> 
+        </Link>
         <div className="my-2"></div>
         <Link to={"/DiagnosisSessionForm"}>
           <button className="pms-button">DIAGNOSIS SESSION FORM</button>
@@ -129,6 +129,10 @@ const Form = () => {
         <div className="my-2"></div>
         <Link to={"/Supervision-Assessment"}>
           <button className="pms-button">SESSION NOTES 2</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Structure-Of-Process"}>
+          <button className="pms-button">Structure-Of-Process</button>
         </Link>
       </div>
     </div>

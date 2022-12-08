@@ -1,108 +1,86 @@
-// import React, {useState } from "react";
-// import { MdImportantDevices } from "react-icons/md";
-// import { MultiSelect } from "react-multi-select-component";
-// import  "./CustomMultiSelect.css"  
+import React, { useEffect, useState } from "react";
+import { MultiSelect } from "react-multi-select-component";
+import "./ListviewMultiselect.css";
 
-// const CustomMultiSelection = () => {
-//   const options = [
-//     { label: "Grapes ", value: "grapes" },
-//     { label: "Masfgngo ", value: "mafgngo" },
-//     { label: "Gradfgpdes ", value: "grfgapes" },
-//     { label: "Mango ", value: "mango" },
-//     { label: "Strawberry ", value: "strawberry" },
-//   ];
-//   const [selected, setSelected] = useState([]);
+const CustomMultiSelection = ({
+  patients,
+  setPatientId,
+  stuffs,
+  setStuffsId,
+}) => {
+  const [selected, setSelected] = useState([]);
 
-//   const customValueRenderer = (selected, _options) => {
-//       if(selected.length){
-//         if(selected.length > 3) return `All Selected ${selected.length}`
-//         return selected.map(({ label }) => label)
-//       }
-//       return  "None selected";
-//     };
-
-//     console.log("Multi Select data",selected)
-//   return (
-
-// <MultiSelect
-//     // styles={{
-//     //   // Fixes the overlapping problem of the component
-//     //   menu: provided => ({ ...provided, zIndex: 99999999 })
-//     // }}
-//     // style={{
-//     //   zIndex:99999
-//     //   }}
-//       className="Global"
-//       options={options}
-//       value={selected}
-//       onChange={setSelected}
-//       labelledBy="Select"
-//       valueRenderer={customValueRenderer}
-//     />
-
-//   );
-// };
-
-// export default CustomMultiSelection;
-
-import React from "react";
-import { CheckPicker, Checkbox, Button } from "rsuite";
-
-const CustomMultiSelection = ({ data, setValue, value }) => {
-  const footerStyles = {
-    // padding: "10px 2px",
-    borderTop: "1px solid rgb(229, 229, 229)",
+  const patientDataProcess = () => {
+    let processedData = [];
+    if (patients) {
+      for (let x of patients) {
+        processedData.push({
+          label: x?.client_full_name,
+          value: x?.client_full_name,
+          id: x?.id,
+        });
+      }
+    }
+    return processedData;
   };
 
-  const footerButtonStyle = {
-    float: "right",
-    marginRight: 10,
-    marginTop: 2,
+  const stuffDataProcess = () => {
+    let processedData = [];
+    if (stuffs) {
+      for (let x of stuffs) {
+        processedData.push({
+          label: x?.full_name,
+          value: x?.full_name,
+          id: x?.id,
+        });
+      }
+    }
+    return processedData;
   };
 
-  const allValue = data.map((item) => item.value);
-  const picker = React.useRef();
-  const handleChange = (value) => {
-    setValue(value);
+  const dataoptions = patientDataProcess();
+  const dataOptionsStuff = stuffDataProcess();
+  console.log(dataoptions);
+  console.log(dataOptionsStuff);
+
+  const customValueRenderer = (selected, _options) => {
+    if (selected.length) {
+      if (selected.length > 3) return `All Selected ${selected.length}`;
+      return selected.map(({ label }) => label);
+    }
+    return "None selected";
   };
-  const handleCheckAll = (value, checked) => {
-    setValue(checked ? allValue : []);
-  };
+
+  // const getId = selected.map((item) => item.id);
+  // console.log("selected clients", getId);
+
+  useEffect(() => {
+    const getClientsId = async () => {
+      const getId = selected.map((item) => item.id);
+      setPatientId(getId);
+    };
+    getClientsId();
+  }, [selected, setPatientId]);
+
+  // useEffect(() => {
+  //   const getClientsId = async () => {
+  //     const getId = selected.map((item) => item.id);
+  //     if (getId) {
+  //       receivedData(getId);
+  //     }
+  //   };
+  //   getClientsId();
+  // }, [selected, receivedData]);
+
   return (
-    <div>
-      <CheckPicker
-        data={data}
-        placeholder="Select"
-        ref={picker}
-        // style={{ width: 224 }}
-        style={{ width: 150 }}
-        value={value}
-        onChange={handleChange}
-        renderExtraFooter={() => (
-          <div style={footerStyles}>
-            <Checkbox
-              inline
-              indeterminate={value.length > 0 && value.length < allValue.length}
-              checked={value.length === allValue.length}
-              onChange={handleCheckAll}
-            >
-              Select All
-            </Checkbox>
-
-            {/* <Button
-              style={footerButtonStyle}
-              appearance="primary"
-              size="sm"
-              onClick={() => {
-                picker.current.close();
-              }}
-            >
-              Ok
-            </Button> */}
-          </div>
-        )}
-      />
-    </div>
+    <MultiSelect
+      className="listview"
+      options={dataoptions}
+      value={selected}
+      onChange={setSelected}
+      labelledBy="Select"
+      valueRenderer={customValueRenderer}
+    />
   );
 };
 

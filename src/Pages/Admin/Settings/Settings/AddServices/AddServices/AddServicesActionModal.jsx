@@ -37,12 +37,10 @@ export default function AddServicesActionModal({ handleClose, open }) {
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ls-3 my-5 mr-2 gap-5">
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Tx Type
-                  </span>
+                  <span className="modal-label-name">Tx Type</span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("tx_type")}
                 >
                   <option value="Mr">Behavioral therapy</option>
@@ -52,12 +50,10 @@ export default function AddServicesActionModal({ handleClose, open }) {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Service Type
-                  </span>
+                  <span className="modal-label-name">Service Type</span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("service_type")}
                 >
                   <option value="Mr">Billable</option>
@@ -67,26 +63,22 @@ export default function AddServicesActionModal({ handleClose, open }) {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Service
-                  </span>
+                  <span className="modal-label-name">Service</span>
                 </label>
                 <input
                   type="number"
                   placeholder="Service"
                   name="service"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("service")}
                 />
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Billed Per
-                  </span>
+                  <span className="modal-label-name">Billed Per</span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("billed_per")}
                 >
                   <option value="Mr">Behavioral therapy</option>
@@ -96,12 +88,10 @@ export default function AddServicesActionModal({ handleClose, open }) {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Duration
-                  </span>
+                  <span className="modal-label-name">Duration</span>
                 </label>
                 <select
-                  className="border rounded-sm px-2 py-[2px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("duration")}
                 >
                   <option value="Mr">5min</option>
@@ -111,33 +101,24 @@ export default function AddServicesActionModal({ handleClose, open }) {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-xs text-gray-600 font-medium text-left">
-                    Mileage
-                  </span>
+                  <span className="modal-label-name">Mileage</span>
                 </label>
                 <input
                   type="number"
                   placeholder="Cpt Code"
                   name="Mileage"
-                  className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("Mileage")}
                 />
               </div>
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
-              <button
-                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                type="submit"
-              >
+              <button className=" pms-button mr-2" type="submit">
                 Save
               </button>
 
-              <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                autoFocus
-                onClick={handleClose}
-              >
+              <button className="pms-close-button" onClick={handleClose}>
                 Close
               </button>
             </div>

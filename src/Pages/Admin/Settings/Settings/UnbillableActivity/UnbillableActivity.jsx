@@ -380,11 +380,11 @@ const UnbillableActivity = () => {
         }}
         onChange={handleChange}
       />
-      <div className="flex items-center">
+      <div className="flex items-center gap-2 my-3">
         <select
           // onChange={(e) => setService(e.target.value)}
           name="type"
-          className="input-border text-gray-600 rounded-sm mt-8 text-[14px] font-medium ml-1 py-[1px] w-1/2 md:w-[15%] focus:outline-none"
+          className="input-border input-font mt-[7px] focus:outline-none w-1/2 md:w-[15%]"
         >
           <option value="process era">Process ERA</option>
           <option value="reviewed">Reviewed</option>
@@ -393,7 +393,7 @@ const UnbillableActivity = () => {
 
         <button
           // onClick={submitHandle}
-          className="px-3 mt-7 ml-4 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+          className="pms-input-button"
         >
           Save
         </button>

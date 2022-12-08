@@ -1,10 +1,9 @@
 import React, { memo, useEffect, useState, useRef } from "react";
 import { Switch } from "@mui/material";
 import { useForm } from "react-hook-form";
-import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
-import { Fade } from "react-reveal";
+// import { Fade } from "react-reveal";
 import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
@@ -16,6 +15,11 @@ import "react-date-range/dist/theme/default.css";
 import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
+import { headers } from "../../../../Misc/BaseClient";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ShimmerTableTet from "../../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import Clients from "./MultiSelectComponents/Clients";
+import Providers from "./MultiSelectComponents/Providers";
 
 const ListView = () => {
   const [billable, setBillable] = useState("billable");
@@ -24,26 +28,61 @@ const ListView = () => {
   const [listView, setListView] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [value, setValue] = useState([]);
+  const [patients, setPatients] = useState();
+  const [stuffs, setStuffs] = useState();
+  const [patientId, setPatientId] = useState();
+  const [stuffsId, setStuffsId] = useState();
+  const [formData, setFromData] = useState();
+  const [items, setItems] = useState([]);
+  const [hasMore, sethasMore] = useState(true);
+  const [page, setpage] = useState(2);
 
-  // Testing purpose->Implementing encrypt and decrypt formula for securing token
-  let CryptoJS = require("crypto-js");
-  let data = "0185543477";
-  // Encrypt
-  var ciphertext = CryptoJS.AES.encrypt(
-    JSON.stringify(data),
-    "my-secret-key@123"
-  ).toString();
-  console.log(ciphertext);
-  localStorage.setItem("secret", ciphertext);
-  const gatheredData = localStorage.getItem("secret");
-  console.log(gatheredData);
+  //Clients multi select data from server
+  useEffect(() => {
+    const getPatientsData = async () => {
+      const res = await axios({
+        method: "GET",
+        url: `https://app.therapypms.com/api/v1/admin/ac/patient/names`,
+        headers: headers,
+      });
+      const data = res?.data?.clients;
+      // console.log(data);
+      setPatients(data);
+    };
+    getPatientsData();
+  }, []);
+  // console.log("patients", patients);
+  console.log("selected clients", patientId);
 
-  // Decrypt
-  var bytes = CryptoJS.AES.decrypt(ciphertext, "my-secret-key@123");
-  var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-  console.log("decrypted data:", decryptedData);
+  //Provider multi select data from server
+  useEffect(() => {
+    const getProviderData = async () => {
+      const res = await axios({
+        method: "GET",
+        url: `https://app.therapypms.com/api/v1/admin/ac/staff/names`,
+        headers: headers,
+      });
+      const data = res?.data?.staff_names;
+      setStuffs(data);
+    };
+    getProviderData();
+  }, []);
+  // console.log("stuffs", stuffs);
+  console.log("selected stuffs", stuffsId);
 
+  const receivedData = (data) => {
+    console.log(data);
+  };
+
+  //provider names API
+
+  //Date converter function [yy-mm-dd]
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
   //Date Range Picker
   const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
@@ -80,6 +119,7 @@ const ListView = () => {
     ? startDate.getFullYear().toString().slice(2, 4)
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
+
   //End Date Range Picker
 
   //test design
@@ -115,40 +155,59 @@ const ListView = () => {
     setListView(!listView);
   };
 
-  // calling fake db
-  // useEffect(() => {
-  //   axios("../All_Fake_Api/Fakedb.json")
-  //     .then((response) => {
-  //       setTData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
   useEffect(() => {
     fetch("../All_Fake_Api/Fakedb.json")
       .then((res) => res.json())
       .then((data) => setTData(data));
   }, []);
 
+  //console.log(items);
+
+  //By Infinite scrolling new page called and data will be load
+  //get data from API + data fetch from api while scrolling[Important]
+  const fetchPatients = async () => {
+    let manageSessionData = [];
+    await axios({
+      url: `https://app.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
+      method: "POST",
+      headers: headers,
+      data: formData,
+    }).then((response) => {
+      manageSessionData = response?.data?.appointments?.data;
+    });
+    console.log(manageSessionData);
+    return manageSessionData;
+  };
+
+  const fetchData = async () => {
+    const patientsFromServer = await fetchPatients();
+    console.log(patientsFromServer);
+    setItems([...items, ...patientsFromServer]);
+    if (patientsFromServer?.length === 0) {
+      sethasMore(false);
+    }
+    setpage(page + 1);
+  };
+  console.log(items);
+
   // -----------------------------------------Table Data-----------------------------------
   const columns = [
     {
       title: "Lock",
-      key: "lock",
-      dataIndex: "lock",
+      key: "is_locked",
+      dataIndex: "is_locked",
       width: 40,
       // render contains what we want to reflect as our data
-      render: (_, { lock }) => {
+      render: (_, { is_locked }) => {
         //console.log("tags : ", lock);
         return (
           <div className="flex justify-center">
-            {lock === true && (
+            {is_locked === 0 && (
               <button>
-                <AiFillUnlock className=" text-lg font-medium text-green-600" />
+                <AiFillUnlock className=" text-lg font-medium text-[#309BAB]" />
               </button>
             )}
-            {lock === false && (
+            {is_locked === 1 && (
               <button>
                 <AiFillLock className="text-lg font-medium  text-red-600" />
               </button>
@@ -159,17 +218,17 @@ const ListView = () => {
     },
     {
       title: "Patients",
-      dataIndex: "Patients",
-      key: "Patients",
+      dataIndex: "client_full_name",
+      key: "client_full_name",
       width: 150,
       filters: [
         {
-          text: `Vernon`,
-          value: "Vernon",
+          text: `Aasiya Baig`,
+          value: "Aasiya  Baig",
         },
         {
           text: `Aileen Newman`,
-          value: "Aileen Newman",
+          value: "Aasiya  Farha",
         },
         {
           text: "Donovan",
@@ -184,16 +243,24 @@ const ListView = () => {
           value: "Hector Moses",
         },
       ],
-      render: (_, { Patients }) => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{Patients}</div>;
+        return (
+          <div className=" text-secondary">
+            {record?.app_client?.client_full_name}
+          </div>
+        );
       },
-      filteredValue: filteredInfo.Patients || null,
-      onFilter: (value, record) => record.Patients.includes(value),
+      filteredValue: filteredInfo.client_full_name || null,
+      onFilter: (value, record) =>
+        record?.app_client?.client_full_name?.includes(value),
       sorter: (a, b) => {
-        return a.Patients > b.Patients ? -1 : 1;
+        return a.app_client?.client_full_name > b.app_client?.client_full_name
+          ? -1
+          : 1;
       },
-      sortOrder: sortedInfo.columnKey === "Patients" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "client_full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -203,8 +270,8 @@ const ListView = () => {
       width: 150,
       filters: [
         {
-          text: `Amet`,
-          value: "Amet",
+          text: `assisment BCaBA`,
+          value: "assisment BCaBA",
         },
         {
           text: "Malesuada",
@@ -215,14 +282,71 @@ const ListView = () => {
           value: "Nunc Ut LLC",
         },
       ],
-      filteredValue: filteredInfo.Service_hrs || null,
-      onFilter: (value, record) => record.Service_hrs.includes(value),
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-secondary">
+            {record?.app_client_auth_act?.activity_name}
+          </div>
+        );
+      },
+      filteredValue: filteredInfo.activity_name || null,
+      onFilter: (value, record) =>
+        record?.app_client_auth_act?.activity_name?.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.Service_hrs > b.Service_hrs ? -1 : 1; //sorting problem solved using this logic
+        return a.app_client_auth_act?.activity_name >
+          b.app_client_auth_act?.activity_name
+          ? -1
+          : 1; //sorting problem solved using this logic
       },
       sortOrder:
         sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Provider",
+      dataIndex: "provider_full_name",
+      key: "provider_full_name",
+      width: 150,
+      filters: [
+        {
+          text: `Andrew  Flintoff`,
+          value: "Andrew  Flintoff",
+        },
+        {
+          text: `Aileen Newman`,
+          value: "Aasiya  Farha",
+        },
+        {
+          text: "Donovan",
+          value: "Donovan",
+        },
+        {
+          text: "Burke Beard",
+          value: "Burke Beard",
+        },
+        {
+          text: "Hector Moses",
+          value: "Hector Moses",
+        },
+      ],
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-secondary">
+            {record?.app_provider?.full_name}
+          </div>
+        );
+      },
+      filteredValue: filteredInfo.provider_full_name || null,
+      onFilter: (value, record) =>
+        record?.app_provider?.full_name?.includes(value),
+      sorter: (a, b) => {
+        return a.app_provider?.full_name > b.app_provider?.full_name ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "provider_full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -269,8 +393,8 @@ const ListView = () => {
     },
     {
       title: "Scheduled Date",
-      dataIndex: "Scheduled_Date",
-      key: "Scheduled_Date",
+      dataIndex: "schedule_date",
+      key: "schedule_date",
       width: 100,
       filters: [
         {
@@ -282,14 +406,20 @@ const ListView = () => {
           value: "Dec 30, 2021",
         },
       ],
-      filteredValue: filteredInfo.Scheduled_Date || null,
-      onFilter: (value, record) => record.Scheduled_Date.includes(value),
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-black text-center">{record?.schedule_date}</div>
+        );
+      },
+      filteredValue: filteredInfo.schedule_date || null,
+      onFilter: (value, record) => record.schedule_date.includes(value),
       sorter: (a, b) => {
-        return a.Scheduled_Date > b.Scheduled_Date ? -1 : 1;
-        // a.Scheduled_Date - b.Scheduled_Date
+        return a.schedule_date > b.schedule_date ? -1 : 1;
+        // a.schedule_date - b.schedule_date
       },
       sortOrder:
-        sortedInfo.columnKey === "Scheduled_Date" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "schedule_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -320,32 +450,47 @@ const ListView = () => {
     },
     {
       title: "Status",
-      key: "Status",
-      dataIndex: "Status",
+      key: "status",
+      dataIndex: "status",
       width: 100,
       sorter: (a, b) => {
-        return a.Status > b.Status ? -1 : 1;
-        // a.Status - b.Status,
+        return a.status > b.status ? -1 : 1;
+        // a.status - b.status,
       },
-      sortOrder: sortedInfo.columnKey === "Status" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
       ellipsis: true,
-      render: (_, { Status }) => {
-        //console.log("Status : ", Status);
+      render: (_, { status }) => {
+        //console.log("status : ", status);
         return (
           <div className="flex justify-center">
-            {Status === "Scheduled" && (
+            {status === "Scheduled" && (
               <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
-                {Status}
+                {status}
               </button>
             )}
-            {Status === "Rendered" && (
+            {status === "Rendered" && (
               <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {Status}
+                {status}
               </button>
             )}
-            {Status === "hold" && (
+            {status === "Hold" && (
               <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {Status}
+                {status}
+              </button>
+            )}
+            {status === "No Show" && (
+              <button className="bg-blue-700 text-white text-[10px] py-[2px]  rounded w-14">
+                {status}
+              </button>
+            )}
+            {status === "Cancelled by Client" && (
+              <button className="bg-black text-white text-[10px] py-[2px]  rounded w-14">
+                {status}
+              </button>
+            )}
+            {status === "Cancelled by Provider" && (
+              <button className="bg-yellow-700 text-white text-[10px] py-[2px]  rounded w-28">
+                {status}
               </button>
             )}
           </div>
@@ -365,8 +510,8 @@ const ListView = () => {
           value: "Scheduled",
         },
       ],
-      filteredValue: filteredInfo.Status || null,
-      onFilter: (value, record) => record.Status.includes(value),
+      filteredValue: filteredInfo.status || null,
+      onFilter: (value, record) => record.status.includes(value),
     },
     {
       title: "Action",
@@ -420,8 +565,8 @@ const ListView = () => {
         each?.Patients?.toLowerCase().includes(value.toLowerCase()) ||
         each?.Service_hrs?.toLowerCase().includes(value.toLowerCase()) ||
         each?.pos?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.Scheduled_Date?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.Status?.toLowerCase().includes(value)
+        each?.schedule_date?.toLowerCase().includes(value.toLowerCase()) ||
+        each?.status?.toLowerCase().includes(value)
     );
     setTData(filteredData);
 
@@ -450,9 +595,9 @@ const ListView = () => {
     setFilteredInfo({
       Patients: patients_array,
       Service_hrs: filteredInfo?.Service_hrs,
-      Status: filteredInfo?.Status,
+      status: filteredInfo?.status,
       pos: filteredInfo?.pos,
-      Scheduled_Date: filteredInfo?.Scheduled_Date,
+      schedule_date: filteredInfo?.schedule_date,
     });
   };
 
@@ -464,21 +609,21 @@ const ListView = () => {
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: Service_hrs_array,
-      Status: filteredInfo?.Status,
+      status: filteredInfo?.status,
       pos: filteredInfo?.pos,
-      Scheduled_Date: filteredInfo?.Scheduled_Date,
+      schedule_date: filteredInfo?.schedule_date,
     });
   };
 
-  const deleteStatusTag = (tag) => {
+  const deletestatusTag = (tag) => {
     console.log(tag);
-    const status_array = filteredInfo?.Status?.filter((item) => item !== tag);
+    const status_array = filteredInfo?.status?.filter((item) => item !== tag);
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: filteredInfo?.Service_hrs,
-      Status: status_array,
+      status: status_array,
       pos: filteredInfo?.pos,
-      Scheduled_Date: filteredInfo?.Scheduled_Date,
+      schedule_date: filteredInfo?.schedule_date,
     });
   };
 
@@ -488,23 +633,23 @@ const ListView = () => {
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: filteredInfo?.Service_hrs,
-      Status: filteredInfo?.Status,
+      status: filteredInfo?.status,
       pos: pos_array,
-      Scheduled_Date: filteredInfo?.Scheduled_Date,
+      schedule_date: filteredInfo?.schedule_date,
     });
   };
 
   const deleteScheduleTag = (tag) => {
     console.log(tag);
-    const schedule_array = filteredInfo?.Scheduled_Date?.filter(
+    const schedule_array = filteredInfo?.schedule_date?.filter(
       (item) => item !== tag
     );
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: filteredInfo?.Service_hrs,
-      Status: filteredInfo?.Status,
+      status: filteredInfo?.status,
       pos: filteredInfo?.pos,
-      Scheduled_Date: schedule_array,
+      schedule_date: schedule_array,
     });
   };
 
@@ -514,33 +659,67 @@ const ListView = () => {
       filters: [],
     },
   });
-  const onSubmit = (data) => {
-    // setSubmitted(data);
-    console.log(data);
+  const onSubmit = async (data) => {
+    const from_date = convert(data?.start_date);
+    const to_date = convert(data?.end_date);
+    //console.log(from_date, to_date);
+    const payLoad = {
+      client_id: patientId,
+      // provider_id: stuffsId,
+      pos: "",
+      status: "",
+      from_date: from_date,
+      to_date: to_date,
+    };
+    setFromData(payLoad);
+    if (payLoad) {
+      const fetchManageSessions = {
+        url: "https://app.therapypms.com/api/v1/admin/ac/get-appoinments",
+        method: "POST",
+        mode: "no-cors",
+        headers: headers,
+        data: payLoad,
+      };
+
+      axios(fetchManageSessions).then((response) => {
+        console.log("list data", response?.data?.appointments);
+        const manageSessionData = response?.data?.appointments?.data;
+        setItems(manageSessionData);
+      });
+    }
     setTable(true);
-    reset();
   };
 
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        start_date: startDate && `${startMonth} ${startDay}, ${startYear}`,
+        start_date: startDate ? `${startMonth} ${startDay}, ${startYear}` : "",
+        end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : "",
       });
     }, 0);
-  }, [startDate, reset]);
+  }, [
+    startDate,
+    startMonth,
+    startDay,
+    startYear,
+    endDate,
+    endMonth,
+    endDay,
+    endYear,
+    reset,
+  ]);
 
   // ----------------------------------------Multi-Select---------------------------------
-  // ***************
-  const datat = ["Eugenia", "Bryan", "Linda"].map((item) => ({
-    label: item,
-    value: item,
-  }));
+  // *************
 
-  const datatf = ["demo", "pos", "minda"].map((item) => ({
-    label: item,
-    value: item,
-  }));
+  const opt = [
+    { label: "tera ", value: "grapes", id: 3 },
+    { label: "tpms ", value: "mafgngo", id: 1 },
+    { label: "code ", value: "grfgapes", id: 4 },
+    { label: "Mango ", value: "mango", id: 8 },
+    { label: "dfa ", value: "strawberry", id: 9 },
+  ];
 
   return (
     // For responsive view point
@@ -566,216 +745,238 @@ const ListView = () => {
             {/* Upper div */}
             {clicked && (
               <div>
-                <Fade>
-                  <div className="flex justify-between items-center flex-wrap">
-                    <h1 className="text-[20px]  text-white font-semibold ">
-                      Manage Sessions
-                    </h1>
-                    <div>
-                      <button
-                        onClick={handleClose}
-                        className="text-white text-2xl font-light"
-                      >
-                        <MdOutlineCancel />
-                      </button>
-                    </div>
+                <div className="flex justify-between items-center flex-wrap">
+                  <h1 className="text-[20px]  text-white font-semibold ">
+                    Manage Sessions
+                  </h1>
+                  <div>
+                    <button
+                      onClick={handleClose}
+                      className="text-white text-2xl font-light"
+                    >
+                      <MdOutlineCancel />
+                    </button>
                   </div>
-                  <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
+                </div>
+                <div className="  flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
+                  <div>
+                    <Switch
+                      color="default"
+                      defaultChecked
+                      size="small"
+                      onClick={handleBillable}
+                    />
+
+                    <label
+                      className="form-check-label inline-block ml-2 text-base text-gray-100"
+                      htmlFor="flexSwitchCheckDefault"
+                    >
+                      {billable ? "Billable" : "Non-Billable"}
+                    </label>
+                  </div>
+                  {/* List view or table view  */}
+
+                  <div
+                    className={
+                      listView ? "flex justify-end " : "flex justify-end "
+                    }
+                  >
                     <div>
                       <Switch
                         color="default"
                         defaultChecked
                         size="small"
-                        onClick={handleBillable}
+                        onClick={handleListView}
                       />
 
                       <label
                         className="form-check-label inline-block ml-2 text-base text-gray-100"
                         htmlFor="flexSwitchCheckDefault"
                       >
-                        {billable ? "Billable" : "Non-Billable"}
+                        {listView ? (
+                          <span className="">List View</span>
+                        ) : (
+                          "Card View"
+                        )}
                       </label>
                     </div>
-                    {/* List view or table view  */}
-
-                    <div
-                      className={
-                        listView ? "flex justify-end " : "flex justify-end "
-                      }
-                    >
-                      <div>
-                        <Switch
-                          color="default"
-                          defaultChecked
-                          size="small"
-                          onClick={handleListView}
-                        />
-
-                        <label
-                          className="form-check-label inline-block ml-2 text-base text-gray-100"
-                          htmlFor="flexSwitchCheckDefault"
-                        >
-                          {listView ? (
-                            <span className="">List View</span>
-                          ) : (
-                            "Card View"
-                          )}
-                        </label>
-                      </div>
-                    </div>
                   </div>
-                  <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-5 mb-2">
-                      {billable && (
-                        <div>
-                          <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)} className="relative">
+                  <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
+                    {billable && (
+                      <div>
+                        <label className="label">
+                          <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
                             Clients
-                          </h1>
-                          <CustomMultiSelection
-                            data={datat}
-                            value={value}
-                            setValue={setValue}
-                          ></CustomMultiSelection>
-                        </div>
-                      )}
-                      <div className="w-full">
-                        <h1 className="text-[16px] mb-2 ml-1 mt-2 text-gray-100">
-                          Provider
-                        </h1>
-                        <CustomMultiSelection
-                          data={datatf}
-                          value={value}
-                          setValue={setValue}
-                        ></CustomMultiSelection>
-                      </div>
+                          </span>
+                        </label>
 
-                      {billable ? (
-                        <>
+                        <Clients
+                          patients={patients}
+                          setPatientId={setPatientId}
+                          receivedData={receivedData}
+                        ></Clients>
+                      </div>
+                    )}
+                    <div className="w-full">
+                      <label className="label">
+                        <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                          Provider
+                        </span>
+                      </label>
+
+                      <Providers
+                        stuffs={stuffs}
+                        setStuffsId={setStuffsId}
+                      ></Providers>
+                    </div>
+
+                    {billable ? (
+                      <>
+                        <div>
+                          <label className="label">
+                            <span className="label-text text-[16px] text-gray-100 text-left">
+                              Place of Services
+                            </span>
+                          </label>
+                          <div>
+                            <select
+                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white   px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
+                              {...register("place_of_service")}
+                            >
+                              <option value="" className="text-black">
+                                Select
+                              </option>
+                              <option value="follow up" className="text-black">
+                                Today's follow up
+                              </option>
+                              <option value="cat" className="text-black">
+                                Lost 7 days
+                              </option>
+                              <option value="15" className="text-black">
+                                Lost 15 days
+                              </option>
+                              <option value="15" className="text-black">
+                                Lost 30 days
+                              </option>
+                              <option value="15" className="text-black">
+                                30 days & over
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="label">
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              Selected date
+                            </span>
+                          </label>
+                          {/* Date Range calender will be set here */}
+                          <div className="">
+                            <div
+                              onClick={() => setOpenCalendar(true)}
+                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[3px] mx-1 text-[14px] w-full"
+                            >
+                              <input
+                                value={
+                                  startDate
+                                    ? `${startMonth} ${startDay}, ${startYear}`
+                                    : "Start Date"
+                                }
+                                readOnly
+                                className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                {...register("start_date")}
+                              />
+                              <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
+                              <input
+                                value={
+                                  endDate
+                                    ? `${endMonth} ${endDay}, ${endYear}`
+                                    : "End Date"
+                                }
+                                readOnly
+                                className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                {...register("end_date")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-5">
                           <div>
                             <label className="label">
-                              <span className="label-text text-[16px] text-gray-100 text-left">
-                                Place of Services
+                              <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                                status
                               </span>
                             </label>
                             <div>
                               <select
-                                className=" bg-transparent border-b-[3px] border-[#ffffff] text-white  rounded-sm px-1 py-[4px] font-normal mx-1 text-[14px] w-full focus:outline-none"
-                                {...register("place_of_service")}
+                                className="bg-transparent border-b-[3px] border-[#ffffff] px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
+                                {...register("status")}
                               >
                                 <option value="" className="text-black">
                                   Select
                                 </option>
-                                <option
-                                  value="follow up"
-                                  className="text-black"
-                                >
+                                <option value="Today" className="text-black">
                                   Today's follow up
                                 </option>
-                                <option value="cat" className="text-black">
+                                <option className="text-black" value="UK">
                                   Lost 7 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   Lost 15 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   Lost 30 days
                                 </option>
-                                <option value="15" className="text-black">
+                                <option className="text-black" value="15">
                                   30 days & over
                                 </option>
                               </select>
                             </div>
                           </div>
-
-                          <div>
-                            <label className="label">
-                              <span className="label-text text-[16px] text-gray-100 text-left">
-                                Selected date
-                              </span>
+                          <button
+                            className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                            type="submit"
+                          >
+                            Go
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <button
+                        className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
+                        type="submit"
+                      >
+                        Go
+                      </button>
+                    )}
+                    {table && (
+                      <>
+                        <div className="  ">
+                          <div className="px-2 py-2 w-full mr-2 mt-[35px] bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
+                            <input
+                              placeholder="Search here..."
+                              onChange={(e) => globalFilter(e.target.value)}
+                              className="focus:outline-none"
+                            />
+                            <label>
+                              <BiSearchAlt />
                             </label>
-                            {/* Date Range calender will be set here */}
-                            <div className="ml-1">
-                              <div
-                                onClick={() => setOpenCalendar(true)}
-                                className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] mx-1 text-[14px] w-full"
-                              >
-                                <input
-                                  value={
-                                    startDate
-                                      ? `${startMonth} ${startDay}, ${startYear}`
-                                      : "Start Date"
-                                  }
-                                  readOnly
-                                  className="focus:outline-none py-[1px] font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
-                                  {...register("start_date")}
-                                />
-                                <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
-                                <input
-                                  value={
-                                    endDate
-                                      ? `${endMonth} ${endDay}, ${endYear}`
-                                      : "End Date"
-                                  }
-                                  readOnly
-                                  className="focus:outline-none font-normal text-center bg-transparent text-white w-1/3 cursor-pointer"
-                                  {...register("end_date")}
-                                />
-                              </div>
-                            </div>
                           </div>
-
-                          <div className="flex gap-5">
-                            <div>
-                              <label className="label">
-                                <span className="label-text text-[16px] text-gray-100 text-left">
-                                  Status
-                                </span>
-                              </label>
-                              <div>
-                                <select
-                                  className="bg-transparent border-b-[3px] border-[#ffffff] rounded-sm px-1 py-[4px] font-normal text-white mx-1 text-[14px] w-full focus:outline-none"
-                                  {...register("Status")}
-                                >
-                                  <option value="" className="text-black">
-                                    Select
-                                  </option>
-                                  <option value="Today" className="text-black">
-                                    Today's follow up
-                                  </option>
-                                  <option className="text-black" value="UK">
-                                    Lost 7 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    Lost 15 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    Lost 30 days
-                                  </option>
-                                  <option className="text-black" value="15">
-                                    30 days & over
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                            <button
-                              className="font-regular mt-[40px] sm:w-1/4 px-1 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
-                              type="submit"
-                            >
-                              Go
-                            </button>
-                          </div>
-                        </>
-                      ) : (
+                        </div>
                         <button
-                          className="font-regular mt-[40px] sm:w-1/4 text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
-                          type="submit"
+                          onClick={clearFilters}
+                          className="px-2 w-1/2 py-2 mt-8 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
                         >
-                          Go
+                          Clear filters
                         </button>
-                      )}
-                    </div>
-                  </form>
-                </Fade>
+                      </>
+                    )}
+                  </div>
+                </form>
               </div>
             )}
           </div>
@@ -799,30 +1000,11 @@ const ListView = () => {
           <>
             {listView && (
               <div className="my-5">
-                <div className=" lg:flex justify-end mb-3">
-                  <div className="px-2 w-52 mr-2 bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center mt-2">
-                    <input
-                      placeholder="Search here..."
-                      onChange={(e) => globalFilter(e.target.value)}
-                      className="focus:outline-none"
-                    />
-                    <label>
-                      <BiSearchAlt />
-                    </label>
-                  </div>
-
-                  <button
-                    onClick={clearFilters}
-                    className="px-2 py-2 mt-2 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-                  >
-                    Clear filters
-                  </button>
-                </div>
                 {filteredInfo?.Patients?.length > 0 ||
                 filteredInfo?.Service_hrs?.length > 0 ||
                 filteredInfo?.pos?.length > 0 ||
-                filteredInfo?.Status?.length > 0 ||
-                filteredInfo?.Scheduled_Date?.length > 0 ? (
+                filteredInfo?.status?.length > 0 ||
+                filteredInfo?.schedule_date?.length > 0 ? (
                   <div className="my-5 flex flex-wrap items-center gap-2">
                     {filteredInfo?.Patients?.length > 0 && (
                       <div className=" ">
@@ -878,23 +1060,23 @@ const ListView = () => {
                       </div>
                     )}
 
-                    {filteredInfo?.Status?.length > 0 && (
+                    {filteredInfo?.status?.length > 0 && (
                       <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.Status?.map((tag, index) => (
+                        {filteredInfo?.status?.map((tag, index) => (
                           <div
                             className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
                             key={index}
                           >
                             <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
                               <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Status:
+                                status:
                               </span>
                               {tag}
                             </div>
                             <div>
                               <div
                                 className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deleteStatusTag(tag)}
+                                onClick={() => deletestatusTag(tag)}
                               >
                                 X
                               </div>
@@ -930,16 +1112,16 @@ const ListView = () => {
                       </div>
                     )}
 
-                    {filteredInfo?.Scheduled_Date?.length > 0 && (
+                    {filteredInfo?.schedule_date?.length > 0 && (
                       <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.Scheduled_Date?.map((tag, index) => (
+                        {filteredInfo?.schedule_date?.map((tag, index) => (
                           <div
                             className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
                             key={index}
                           >
                             <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
                               <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Scheduled_Date:
+                                schedule_date:
                               </span>
                               {tag}
                             </div>
@@ -957,27 +1139,29 @@ const ListView = () => {
                     )}
                   </div>
                 ) : null}
-
-                <div className="overflow-scroll">
-                  <>
-                    <Table
-                      pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                      rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                      size="small"
-                      bordered
-                      className=" text-xs font-normal"
-                      columns={columns}
-                      dataSource={TData}
-                      rowSelection={{
-                        ...rowSelection,
-                      }}
-                      scroll={{
-                        y: 650,
-                      }}
-                      onChange={handleChange}
-                    />
-                  </>
-                </div>
+                <InfiniteScroll
+                  dataLength={items?.length} //items is basically all data here
+                  next={fetchData}
+                  hasMore={hasMore}
+                  loader={<ShimmerTableTet></ShimmerTableTet>}
+                >
+                  <Table
+                    pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                    rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                    size="small"
+                    bordered
+                    className=" text-xs font-normal"
+                    columns={columns}
+                    dataSource={items}
+                    rowSelection={{
+                      ...rowSelection,
+                    }}
+                    // scroll={{
+                    //   y: 650,
+                    // }}
+                    onChange={handleChange}
+                  />
+                </InfiniteScroll>
               </div>
             )}
             {!listView && (

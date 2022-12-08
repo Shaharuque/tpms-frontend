@@ -17,45 +17,34 @@ const PasswordChange = () => {
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-3 gap-y-1">
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
-                New Password
-              </span>
+              <span className="pms-input-name">New Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               name="new_password"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="modal-input-field ml-1 w-full"
               {...register("new_password")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
-                Confirm Password
-              </span>
+              <span className="pms-input-name">Confirm Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               name="confirm_password"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="modal-input-field ml-1 w-full"
               {...register("confirm_password")}
             />
           </div>
         </div>
-        <div className="mt-10">
-          <button
-            className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            type="submit"
-          >
+        <div className=" flex items-end ml-1 mt-2">
+          <button className="pms-button mr-2" type="submit">
             Save
           </button>
 
-          <button
-            className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-            autoFocus
-            onClick={reset}
-          >
-            CANCEL
+          <button className="pms-close-button" onClick={reset}>
+            Close
           </button>
         </div>
       </form>

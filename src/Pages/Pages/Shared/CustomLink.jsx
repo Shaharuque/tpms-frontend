@@ -11,6 +11,7 @@ function CustomLink({ children, to, ...props }) {
         style={{
           color: match ? "#fff" : "",
           backgroundColor: match ? "#09A2B3" : "",
+          borderRadius: match ? "2px" : "0",
 
           //   tex  rm: match ? "capitalize" : "none",
           //    0rddfc textTransform: match ? "capitalize" : "none",

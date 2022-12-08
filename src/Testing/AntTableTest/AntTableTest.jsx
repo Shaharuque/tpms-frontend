@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import "antd/dist/antd.css";
 // import "./antDesign.css";
 import { Button, Dropdown, Space, Table, Badge } from "antd";
@@ -8,6 +8,7 @@ import { TiDelete } from "react-icons/ti";
 // import ManageTableAction from "../../Pages/Admin/Appointment/ListView/ListView/ManageTableAction";
 import { Link, useNavigate } from "react-router-dom";
 import ManageTableTesting from "./ManageTableTesting";
+import axios from "axios";
 //data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
 const data = [
   {
@@ -103,7 +104,100 @@ const AntTableTest = () => {
   //const [open, setOpen] = useState(false);
   //row expand code related
   const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
+  const [testData, setTestData] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8800/api/patients/all-patient")
+      .then((response) => {
+        console.log(response.data);
+        setTestData(response.data);
+      });
+  }, []);
+
+  //For getting unique value
+  function getUnique(array) {
+    let uniqueArray = [];
+
+    // Loop through array values
+    for (let value of array) {
+      if (uniqueArray.indexOf(value) === -1) {
+        uniqueArray.push(value);
+      }
+    }
+    return uniqueArray;
+  }
+  //this funtion to get dynamic filter value-text
+  const patientSearch = () => {
+    // const filterData = [
+    //   {
+    //     text: `Vernon`,
+    //     value: "Vernon",
+    //   },
+    //   {
+    //     text: `Aileen Newman`,
+    //     value: "Aileen Newman",
+    //   },
+    //   {
+    //     text: "Donovan",
+    //     value: "Donovan",
+    //   },
+    //   {
+    //     text: "Burke Beard",
+    //     value: "Burke Beard",
+    //   },
+    //   {
+    //     text: "Hector Moses",
+    //     value: "Hector Moses",
+    //   },
+    // ];
+    // return filterData.map((country) => {
+    //   return <option value={country.text}>{country.value}</option>;
+    // });
+
+    let patientArray = data?.map((d) => d?.Patients);
+    //console.log(patientArray);
+    const resultArray = getUnique(patientArray);
+    console.log(resultArray);
+    // return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      console.log(x);
+      newArray.push({ text: x, value: x });
+    }
+    console.log(newArray);
+    return newArray;
+  };
+  const serviceSearch = () => {
+    let serviceArray = data?.map((d) => d?.Service_hrs);
+    //console.log(patientArray);
+    const resultArray = getUnique(serviceArray);
+    console.log(resultArray);
+    // return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      console.log(x);
+      newArray.push({ text: x, value: x });
+    }
+    console.log(newArray);
+    return newArray;
+  };
+
+  const posSearch = () => {
+    let posArray = data?.map((d) => d?.pos);
+    //console.log(patientArray);
+    const resultArray = getUnique(posArray);
+    console.log(resultArray);
+    // return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      console.log(x);
+      newArray.push({ text: x.charAt(0).toUpperCase() + x.slice(1), value: x });
+    }
+    console.log(newArray);
+    return newArray;
+  };
 
   //expendable row ar data jeita expand korley show korbey
   const expandedRowRender = () => {
@@ -161,7 +255,7 @@ const AntTableTest = () => {
 
   //   fetch data
   React.useEffect(() => {
-    fetch("All_Fake_Api/Fakedb.json")
+    fetch("http://localhost:8800/api/patients/all-patient")
       .then((res) => res.json())
       .then((d) => {
         setAllData(d);
@@ -260,28 +354,7 @@ const AntTableTest = () => {
       title: "Patients",
       dataIndex: "Patients",
       key: "Patients",
-      filters: [
-        {
-          text: `Vernon`,
-          value: "Vernon",
-        },
-        {
-          text: `Aileen Newman`,
-          value: "Aileen Newman",
-        },
-        {
-          text: "Donovan",
-          value: "Donovan",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-      ],
+      filters: patientSearch(),
       filteredValue: filteredInfo.Patients || null,
       onFilter: (value, record) => record.Patients.includes(value),
       sorter: (a, b) => {
@@ -292,7 +365,7 @@ const AntTableTest = () => {
       // render contains what we want to reflect as our data
       //key, Patients, Service_hrs=>these are the property of table object so we will pass these and can use these dynamically..
       render: (_, { id, Patients, Service_hrs }) => {
-        console.log("patient_name : ", Patients);
+        //console.log("patient_name : ", Patients);
         return (
           <div>
             <h1
@@ -322,18 +395,7 @@ const AntTableTest = () => {
       title: "Service & Hrs",
       dataIndex: "Service_hrs",
       key: "Service_hrs",
-      filters: [
-        {
-          text: "Eget Magna Corp.",
-          value: "Eget Magna Corp.",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-        { text: "At Industries", value: "At Industries" },
-        { text: "Amet Ultricies PC", value: "Amet Ultricies PC" },
-      ],
+      filters: serviceSearch(),
       filteredValue: filteredInfo.Service_hrs || null,
       onFilter: (value, record) => record.Service_hrs.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -363,20 +425,7 @@ const AntTableTest = () => {
           </>
         );
       },
-      filters: [
-        {
-          text: "telehealth",
-          value: "telehealth",
-        },
-        {
-          text: "School",
-          value: "School",
-        },
-        {
-          text: "Office",
-          value: "office",
-        },
-      ],
+      filters: posSearch(),
       filteredValue: filteredInfo.pos || null,
       onFilter: (value, record) => record.pos.includes(value),
       //   sorter is for sorting asc or dsc purpose

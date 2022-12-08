@@ -165,7 +165,7 @@ const BusinessFiles = () => {
           onClick={() => {
             setOpen(!open);
           }}
-          className="px-2 mb-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded flex items-center"
+          className="pms-button flex items-center gap-2"
         >
           <HiPlus /> Add Documents
         </button>

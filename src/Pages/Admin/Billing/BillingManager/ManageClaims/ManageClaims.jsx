@@ -158,7 +158,7 @@ const ManageClaims = () => {
       // render: (_, { id }) => {
       //   //console.log("tags : ", lock);
       //   return (
-      //     <div className="flex justify-center text-teal-700">
+      //     <div className="flex justify-center text-teal-070">
       //       <div>
       //         <BsThreeDots />
       //       </div>
@@ -190,6 +190,8 @@ const ManageClaims = () => {
     setSortedInfo(sorter);
   };
 
+  //
+
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(
@@ -217,14 +219,12 @@ const ManageClaims = () => {
             {/* Sort By  */}
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                  Sort By
-                </span>
+                <span className=" label-font">Sort By</span>
               </label>
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                className="input-border input-font w-full focus:outline-none"
               >
                 <option value="all">Batch</option>
                 <option value="Tx Providers">Tx Providers</option>
@@ -244,14 +244,12 @@ const ManageClaims = () => {
                 {" "}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      {sortBy}
-                    </span>
+                    <span className=" label-font">{sortBy}</span>
                   </label>
                   <select
                     // onChange={(e) => setInsuranceSelect(e.target.value)}
                     name="type"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none "
+                    className="input-border input-font w-full focus:outline-none"
                   >
                     <option value="all">All</option>
                     <option value="patient">Patient</option>
@@ -261,14 +259,12 @@ const ManageClaims = () => {
                 {/* Sort By  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Sort By
-                    </span>
+                    <span className=" label-font">Sort By</span>
                   </label>
                   <select
                     onChange={handleSort_By}
                     name="type"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none "
+                    className="input-border input-font w-full focus:outline-none"
                   >
                     <option value="all">All</option>
                     <option value="patient">Patient</option>
@@ -279,13 +275,11 @@ const ManageClaims = () => {
                 {nextActive && (
                   <div>
                     <label className="label">
-                      <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                        {sort_By}
-                      </span>
+                      <span className=" label-font">{sort_By}</span>
                     </label>
                     <select
                       name="type"
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none "
+                      className="input-border input-font w-full focus:outline-none"
                     >
                       <option value="all">All</option>
                       <option value="patient">Patient</option>
@@ -296,16 +290,11 @@ const ManageClaims = () => {
               </>
             )}
             {/* submit  */}
-            <div className="flex gap-2">
-              <button
-                className=" py-2 px-5 mt-8 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                type="submit"
-              >
+            <div className="flex mb-10 gap-2">
+              <button className="mt-8 pms-button" type="submit">
                 Get Claim(s)
               </button>
-              <button className="font-normal  py-2 mt-8 px-3 text-xs bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
-                Cancel
-              </button>
+              <button className="pms-close-button mt-8">Cancel</button>
             </div>
           </div>
         </form>

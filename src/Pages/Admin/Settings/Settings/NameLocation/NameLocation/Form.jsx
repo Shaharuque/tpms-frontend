@@ -18,7 +18,7 @@ const Form = (item) => {
       setTimeout(() => {
         reset(
           {
-            zone_name: item?.item[0]?.zone_name,
+            zone_name: item?.item[0]?.zone_name || "Main Zone",
             city: item?.item[0]?.city,
             facility_name_two: item?.item[0]?.facility_name_two,
             address: item?.item[0]?.address,
@@ -56,75 +56,66 @@ const Form = (item) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-2">
+        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-5 mr-2 gap-3">
           {/* name  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                Region Name
-              </span>
+              <span className="label-font">Region Name</span>
             </label>
             <input
               type="text"
               placeholder="Main Zone"
               name="zone_name"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border input-font w-full focus:outline-none"
               {...register("zone_name")}
+              disabled
             />
           </div>
           {/* address 1 */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                Facility Name
-              </span>
+              <span className="label-font">Facility Name</span>
             </label>
             <input
               type="text"
               placeholder="ABC Behavioral Therapy Center"
               name="facility_name_two"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border input-font w-full focus:outline-none"
               {...register("facility_name_two")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                Address
-              </span>
+              <span className="label-font">Address</span>
             </label>
             <input
               type="text"
               placeholder="ABC Behavioral Therapy Center"
               name="address"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border input-font w-full focus:outline-none"
               {...register("address")}
             />
           </div>
           {/* city  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                City
-              </span>
+              <span className="label-font">City</span>
             </label>
             <input
               type="text"
               placeholder="New Jersy"
               name="city"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border input-font w-full focus:outline-none"
               {...register("city")}
             />
           </div>
           {/* state  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                State
-              </span>
+              <span className="label-font">State</span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border input-font w-full focus:outline-none"
               name="state"
               {...register("state")}
             >
@@ -137,52 +128,49 @@ const Form = (item) => {
           {/* Zip  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                Zip
-              </span>
+              <span className="label-font">Zip</span>
             </label>
             <input
               type="text"
               placeholder="ABC Behavioral Therapy Center"
               name="zip"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border input-font w-full focus:outline-none"
               {...register("zip")}
             />
           </div>
           {/* phone  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                Phone
-              </span>
+              <span className="label-font">Phone</span>
             </label>
             <input
               type="text"
               placeholder="ABC Behavioral Therapy Center"
               name="phone_one"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="input-border input-font w-full focus:outline-none"
               {...register("phone_one")}
             />
           </div>
 
           {/* NPI */}
           <div>
-            <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                NPI
-              </span>
-            </label>
             <div className="mb-2 flex items-center gap-2">
-              <input
-                type="text"
-                placeholder="1234"
-                name="npi"
-                className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                {...register("npi")}
-              />
+              <div>
+                <label className="label">
+                  <span className="label-font">NPI</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="1234"
+                  name="npi"
+                  className="input-border input-font w-full focus:outline-none"
+                  {...register("npi")}
+                />
+              </div>
+
               <div
                 onClick={handleAdd}
-                className="bg-secondary text-white p-[6px]"
+                className="bg-secondary text-white  mt-[26px] p-[6px]"
               >
                 <FaPlus />
               </div>
@@ -206,11 +194,7 @@ const Form = (item) => {
         )}
 
         {/* submit  */}
-        <input
-          className=" mt-20 px-3 py-1 rounded-md text-sm font-normal bg-gradient-to-r from-secondary to-primary my-5 hover:to-secondary text-white "
-          type="submit"
-          value={"Save"}
-        />
+        <input className="pms-button my-2" type="submit" value={"Save"} />
       </form>
     </div>
   );

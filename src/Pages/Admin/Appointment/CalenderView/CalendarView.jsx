@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import CustomModal from "./CustomModal";
 import "./custom.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 import { useQuery } from "@tanstack/react-query";
+import googleCalendar from "../../../Assets/google-calendar.png";
 import Loading from "../../../../Loading/Loading";
 import { Link } from "react-router-dom";
-import CreateAppointment from "../../../Shared/NavigationBar/AdditionFeatures/CreateAppointment";
-import googleCalendar from "../../../Assets/google-calendar.png";
-import CustomModal from "./CustomModal";
 
 const Events = [
   {
@@ -115,15 +114,21 @@ const Events = [
 ];
 const CalenderView = () => {
   const events = [];
+  const [selectedDate, setSelectedDate] = useState();
   const [open, setOpen] = useState(false);
+  const [eventId, setEventId] = useState();
   const handleClose = () => {
     setOpen(false);
   };
 
+  // For creating new event
   const createEvent = (selectInfo) => {
     console.log(selectInfo);
     setOpen(!open);
-    // console.log(selectInfo?.startStr);
+    setSelectedDate(selectInfo?.startStr);
+    if (eventId) {
+      setEventId(null);
+    }
     // // const event = {
     // //   id: 1, // You must use a custom id generator
     // //   title: "new Event",
@@ -154,7 +159,16 @@ const CalenderView = () => {
 
     //Events.push(event);
   };
-  console.log(Events);
+  //console.log(Events);
+
+  // for showing clicked event details basedon id using same CustomModal.jsx
+  const showEventDetails = (id) => {
+    console.log("Clicked event id", id);
+    setEventId(id);
+    setSelectedDate();
+    setOpen(!open);
+  };
+
   const {
     isLoading,
     data: calenderEvents,
@@ -165,29 +179,29 @@ const CalenderView = () => {
       method: "GET",
     }).then((res) => res.json())
   );
-  console.log(calenderEvents?.events);
+  console.log(calenderEvents);
 
-  const showEvent = () => {
-    alert("Clicked");
-  };
-
-  // if (isLoading) {
-  //   return <Loading></Loading>;
-  // }
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div>
-      <div className="flex items-center flex-wrap justify-between pb-4">
+      <div className="flex items-center flex-wrap md:justify-between pb-4">
         <h1 className="text-lg my-2 text-orange-500">Manage Appointment</h1>
-        <div className="flex items-center gap-1">
-          <button className="cal-manage-btn filter-btn">Filter</button>
+        <div className="flex items-center justify-end">
+          <button className="py-[5px] px-3 text-[12px] font-normal bg-gradient-to-r from-red-700 to-red-400 hover:to-red-700 text-white rounded-sm">
+            Filter
+          </button>
           <Link to="/admin">
             <img
               src={googleCalendar}
               alt="Google Calendar"
-              style={{ width: "40px" }}
+              style={{ width: "32px" }}
             />
           </Link>
-          <button className="cal-manage-btn print-btn">Print</button>
+          <button className=" py-[5px] font-normal px-3 mr-1 text-[12px]  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
+            Print
+          </button>
         </div>
       </div>
       <div className="border border-[#089bab] rounded-2xl p-2">
@@ -199,13 +213,17 @@ const CalenderView = () => {
             right: "timeGridDay,timeGridWeek,dayGridMonth",
           }}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          // events={calenderEvents?.// events={calenderEvents?.events}
-
-          initialEvents={Events}
+          events={calenderEvents?.events}
+          //events={allData}
+          // initialEvents={allData}
           editable={true}
           selectable={true}
           select={createEvent}
-          // eventClick={() => {}}
+          eventClick={(arg) => {
+            console.log(arg.event.extendedProps._id);
+            showEventDetails(arg.event.extendedProps._id); //jei event a click korbo tar id showEvent func a pass[callback method]
+          }}
+          // eventClick={()=>showEvent(arg)}
           displayEventTime={true}
           eventTimeFormat={{
             hour: "numeric",
@@ -213,9 +231,15 @@ const CalenderView = () => {
             meridiem: "short",
           }}
         />
-        {open && (
-          <CustomModal handleClose={handleClose} clicked={open}></CustomModal>
-        )}
+        {open ? (
+          <CustomModal
+            selectedDate={selectedDate}
+            handleClose={handleClose}
+            clicked={open}
+            eventId={eventId ? eventId : null}
+            refetch={refetch}
+          ></CustomModal>
+        ) : null}
       </div>
     </div>
   );

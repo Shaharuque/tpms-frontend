@@ -39,12 +39,10 @@ const SessionAddNote = ({ handleClose, open }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="label">
-                  <span className="label-text flex items-center text-xs text-gray-600 text-left">
-                    Patient Name
-                  </span>
+                  <span className="modal-label-name">Patient Name</span>
                 </label>
                 <select
-                  className="border border-gray-300 rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                  className="modal-input-field ml-1 w-full"
                   {...register("service")}
                 >
                   <option value=""></option>
@@ -54,18 +52,11 @@ const SessionAddNote = ({ handleClose, open }) => {
               </div>
               <div className="bg-gray-200 py-[1px] mt-3"></div>
               <div className=" flex items-end justify-end mt-2">
-                <button
-                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                  type="submit"
-                >
+                <button className=" pms-button mr-2" type="submit">
                   Go
                 </button>
 
-                <button
-                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                  autoFocus
-                  onClick={handleClose}
-                >
+                <button className="pms-close-button" onClick={handleClose}>
                   Close
                 </button>
               </div>

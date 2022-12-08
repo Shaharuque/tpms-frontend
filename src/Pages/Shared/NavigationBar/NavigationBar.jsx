@@ -10,12 +10,8 @@ import {
   AiOutlinePlus,
   AiOutlineNotification,
   AiOutlineClose,
-  AiOutlinePlusCircle,
-  AiOutlinePlusSquare,
   AiOutlineFileAdd,
   AiFillUnlock,
-  AiOutlineIdcard,
-  AiOutlineUserAdd,
 } from "react-icons/ai";
 import { VscSignOut } from "react-icons/vsc";
 import { FaBars } from "react-icons/fa";
@@ -24,30 +20,28 @@ import company from "../../Assets/company.png";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import ScheduleExport from "./ScheduleExport/ScheduleExport";
-import CreatePatient from "./AdditionFeatures/CreatePatient";
-import CreateAppointment from "./AdditionFeatures/CreateAppointment";
+import { Dropdown, Space } from "antd";
+import Add from "./Add";
+import { Margin } from "@mui/icons-material";
+import { storeEmail } from "../../../features/login_redux/loginSlice";
+import { useDispatch } from "react-redux";
 
 // i am using alakaja
 const TestNaviBar = ({ handle }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [clicked, setClicked] = useState(false);
-  const [patientClicked, setPatientClicked] = useState(false);
-
-  const handleAppointment = () => {
-    setClicked(!clicked);
-  };
-  const handlePatient = () => {
-    setPatientClicked(!patientClicked);
-  };
+  const dispatch = useDispatch();
 
   const handleSignOut = () => {
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("type");
+    dispatch(storeEmail());
     navigate("/");
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -15 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
       className=" relative shadow-md rounded-3xl mr-[22px]"
@@ -109,85 +103,62 @@ const TestNaviBar = ({ handle }) => {
             </div>
 
             {/* adding  */}
-            <div>
-              <div className="dropdown sm:dropdown-start">
-                <label tabIndex={0}>
-                  <button className=" text-xl my-3 font-bold text-secondary">
+            {/* adding  */}
+            <Dropdown
+              overlay={<Add></Add>}
+              trigger={["click"]}
+              placement="bottomLeft"
+              overlayStyle={{ zIndex: "100" }}
+            >
+              <button onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <button className=" text-xl mt-[3px] font-bold text-secondary">
                     <AiOutlinePlus />
                   </button>
-                </label>
-                <div
-                  tabIndex={0}
-                  className="dropdown-content menu p-2 shadow-md drop-box rounded-sm bg-white w-52"
-                >
-                  <button
-                    onClick={() => handlePatient()}
-                    className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
-                  >
-                    <AiOutlinePlusCircle className="text-lg font-semibold" />
-                    <div>Create Patient</div>
-                  </button>
-
-                  <button className="text-[14px] text-secondary border px-[15px] py-1  rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2">
-                    <AiOutlinePlusSquare className="text-lg font-semibold" />
-                    <div onClick={() => handleAppointment()}>
-                      Create Appointment
-                    </div>
-                  </button>
-                </div>
-              </div>
-              {clicked && (
-                <CreateAppointment
-                  handleClose={handleAppointment}
-                  clicked={clicked}
-                ></CreateAppointment>
-              )}
-              {patientClicked && (
-                <CreatePatient
-                  handleClose={handlePatient}
-                  patientClicked={patientClicked}
-                ></CreatePatient>
-              )}
-            </div>
+                </Space>
+              </button>
+            </Dropdown>
             {/* end */}
             {/* notify*/}
+
             <div className="md:mb-3">
-              <div className="dropdown sm:dropdown-start">
-                <div className="">
-                  <label tabIndex="0" className="">
-                    <div className="relative">
-                      <div>
-                        <button className="  text-2xl text-secondary mt-1">
-                          <AiOutlineNotification />
+              <Dropdown
+                overlay={
+                  <div className="  w-[15rem] md:w-[22rem] lg:w-[15rem] mt-1 p-1 shadow-md drop-box rounded-sm bg-white  ">
+                    <div className="card-body">
+                      <h4 className=" text-center ">Latest Changes</h4>
+                      <hr />
+                      <span className="text-info text-xs">
+                        <span className="badge badge-primary mr-2">new </span>
+                        Latest changes NewTelehealth Video Session. Video
+                        Session feature for Telehealth For Telehealth, video
+                        session feature is added. You can...
+                      </span>
+                      <div className="card-actions">
+                        <button className="btn btn-primary btn-block">
+                          View cart
                         </button>
-                        <span className=" absolute top-0 h-4 right-[-8px]  bg-red-700 text-white badge-xs rounded-full">
-                          8
-                        </span>
                       </div>
                     </div>
-                  </label>
-                </div>
-                <div
-                  tabIndex="0"
-                  className=" dropdown-content w-[15rem] md:w-[22rem] lg:w-[15rem] mt-1 p-1 shadow-md drop-box rounded-sm bg-white  "
-                >
-                  <div className="card-body">
-                    <h4 className=" text-center ">Latest Changes</h4>
-                    <hr />
-                    <span className="text-info text-xs">
-                      <span className="badge badge-primary mr-2">new </span>
-                      Latest changes NewTelehealth Video Session. Video Session
-                      feature for Telehealth For Telehealth, video session
-                      feature is added. You can...
-                    </span>
-                    <div className="card-actions">
-                      <button className="btn btn-primary btn-block">
-                        View cart
+                  </div>
+                }
+                trigger={["click"]}
+                placement="bottomLeft"
+                overlayStyle={{ zIndex: "100" }}
+              >
+                <button onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    <div>
+                      <button className=" flex text-2xl text-secondary mt-1">
+                        <AiOutlineNotification />
+                        <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
+                          8
+                        </h1>
                       </button>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </Space>
+                </button>
+              </Dropdown>
             </div>
             {/* message  */}
             <div>
@@ -320,89 +291,64 @@ const TestNaviBar = ({ handle }) => {
           </div>
 
           {/* adding  */}
-          <div>
-            <div className="dropdown md:dropdown-end">
-              <label tabIndex={0}>
+          <Dropdown
+            overlayClassName=""
+            overlay={<Add></Add>}
+            trigger={["click"]}
+            placement="bottomRight"
+            overlayStyle={{ zIndex: "100", marginTop: "-50px" }}
+          >
+            <button onClick={(e) => e.preventDefault()}>
+              <Space>
                 <button className=" text-xl mt-[3px] font-bold text-secondary">
                   <AiOutlinePlus />
                 </button>
-              </label>
-              <div
-                tabIndex={0}
-                className="dropdown-content menu mt-5 p-2 shadow-md drop-box rounded-sm bg-white w-52"
-              >
-                <button
-                  onClick={handlePatient}
-                  className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2"
-                >
-                  <AiOutlineUserAdd className="text-lg font-bold " />
-                  <div>Create Patient</div>
-                </button>
-
-                <button className="text-[14px] text-secondary border px-[15px] py-1  rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2">
-                  <AiOutlineIdcard className="text-lg font-bold" />
-                  <div onClick={handleAppointment}>Create Appointment</div>
-                </button>
-              </div>
-            </div>
-            {clicked && (
-              <div>
-                <CreateAppointment
-                  handleClose={handleAppointment}
-                  clicked={clicked}
-                ></CreateAppointment>
-              </div>
-            )}
-            {patientClicked && (
-              <div>
-                <CreatePatient
-                  handleClose={handlePatient}
-                  patientClicked={patientClicked}
-                ></CreatePatient>
-              </div>
-            )}
-          </div>
+              </Space>
+            </button>
+          </Dropdown>
           {/* end */}
-
           {/* notify*/}
-          <div className="">
-            <div className="dropdown md:dropdown-end">
-              <div className="">
-                <label tabIndex="0" className="">
-                  <div className="relative">
-                    <div>
-                      <button className="  text-2xl text-secondary mt-1">
-                        <AiOutlineNotification />
+
+          <div>
+            <Dropdown
+              overlay={
+                <div className="border w-auto md:w-[25rem] p-2 shadow-lg  rounded-sm bg-white">
+                  <div className="card-body">
+                    <h4 className=" text-center ">Latest Changes</h4>
+                    <hr />
+                    <span className="text-info text-xs">
+                      <span className="badge badge-primary mr-2">new </span>
+                      Latest changes NewTelehealth Video Session. Video Session
+                      feature for Telehealth For Telehealth, video session
+                      feature is added. You can...
+                    </span>
+                    <div className="card-actions">
+                      <button className="btn btn-primary btn-block">
+                        View cart
                       </button>
-                      <span className=" absolute top-0 h-4 right-[-8px]  bg-red-700 text-white badge-xs rounded-full">
-                        8
-                      </span>
                     </div>
                   </div>
-                </label>
-              </div>
-              <div
-                tabIndex="0"
-                className=" dropdown-content w-auto md:w-[25rem] mt-4 p-2 shadow-md drop-box rounded-sm bg-white  "
-              >
-                <div className="card-body">
-                  <h4 className=" text-center ">Latest Changes</h4>
-                  <hr />
-                  <span className="text-info text-xs">
-                    <span className="badge badge-primary mr-2">new </span>
-                    Latest changes NewTelehealth Video Session. Video Session
-                    feature for Telehealth For Telehealth, video session feature
-                    is added. You can...
-                  </span>
-                  <div className="card-actions">
-                    <button className="btn btn-primary btn-block">
-                      View cart
+                </div>
+              }
+              trigger={["click"]}
+              overlayStyle={{ zIndex: "100", marginTop: "-40px" }}
+              placement="bottomRight"
+            >
+              <button onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <div>
+                    <button className="flex  text-2xl text-secondary mt-1">
+                      <AiOutlineNotification />
+                      <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
+                        8
+                      </h1>
                     </button>
                   </div>
-                </div>
-              </div>
-            </div>
+                </Space>
+              </button>
+            </Dropdown>
           </div>
+
           {/* message  */}
           <div>
             <button className="  text-2xl font-bold text-secondary md:mt-[2px] flex items-center">

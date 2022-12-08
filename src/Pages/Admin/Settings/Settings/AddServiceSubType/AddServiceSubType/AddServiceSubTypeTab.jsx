@@ -90,7 +90,7 @@ const AddServiceSubTypeTab = () => {
       title: "Active",
       dataIndex: "action",
       key: "action",
-      width: 70,
+      width: 100,
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -118,7 +118,7 @@ const AddServiceSubTypeTab = () => {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      width: 70,
+      width: 100,
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -210,10 +210,7 @@ const AddServiceSubTypeTab = () => {
       {service && (
         <div>
           <div className="md:flex justify-end items-end my-2">
-            <button
-              onClick={clearFilters}
-              className="px-2  py-1 bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-            >
+            <button onClick={clearFilters} className="pms-clear-button border">
               Clear filters
             </button>
           </div>
@@ -235,10 +232,7 @@ const AddServiceSubTypeTab = () => {
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
-              <button
-                onClick={handleClickOpen}
-                className="px-5 text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              >
+              <button onClick={handleClickOpen} className="pms-button my-2">
                 Add Place of Service
               </button>
             </label>

@@ -7,7 +7,7 @@
     "client_gender": "Female",
     "location": "Home",
     "insurance": "6780496111",
-    "status": true
+    "status": "true"
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "client_gender": "Male",
     "location": "Telehealth",
     "insurance": "1261739329",
-    "status": false
+    "status": "false"
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "client_gender": "Female",
     "location": "CLARINS HydraQuench Normal to Combination Skin Broad Spectrum SPF 15 Sunscreen",
     "insurance": "5614267557",
-    "status": true
+    "status": "true"
   },
   {
     "id": 4,
@@ -37,7 +37,7 @@
     "client_gender": "Male",
     "location": "Lisinopril",
     "insurance": "8136767092",
-    "status": false
+    "status": "false"
   },
   {
     "id": 5,
@@ -47,7 +47,7 @@
     "client_gender": "Male",
     "location": "LEVONEST",
     "insurance": "0966426290",
-    "status": true
+    "status": "true"
   },
   {
     "id": 6,
@@ -57,7 +57,7 @@
     "client_gender": "Male",
     "location": "Exelon",
     "insurance": "4200822997",
-    "status": true
+    "status": "true"
   },
   {
     "id": 7,
@@ -67,7 +67,7 @@
     "client_gender": "Aclient_gender",
     "location": "TRISPEC PSE Cough Suppressant Expectorant Nasal Decongestant GRAPE Flavor",
     "insurance": "0188749179",
-    "status": true
+    "status": "true"
   },
   {
     "id": 8,
@@ -77,7 +77,7 @@
     "client_gender": "Female",
     "location": "DAUNORUBICIN HYDROCHLORIDE",
     "insurance": "0566547406",
-    "status": true
+    "status": "true"
   },
   {
     "id": 9,
@@ -87,7 +87,7 @@
     "client_gender": "Female",
     "location": "amlodipine besylate and atorvastatin calcium",
     "insurance": "9057050838",
-    "status": false
+    "status": "false"
   },
   {
     "id": 10,
@@ -97,7 +97,7 @@
     "client_gender": "Non-binary",
     "location": "HAND SANITIZING",
     "insurance": "9324574930",
-    "status": false
+    "status": "false"
   },
   {
     "id": 11,
@@ -107,7 +107,7 @@
     "client_gender": "Male",
     "location": "Oxygen",
     "insurance": "5254302941",
-    "status": true
+    "status": "true"
   },
   {
     "id": 12,
@@ -117,7 +117,7 @@
     "client_gender": "Female",
     "location": "Ciclopirox",
     "insurance": "0234590084",
-    "status": true
+    "status": "true"
   },
   {
     "id": 13,
@@ -127,7 +127,7 @@
     "client_gender": "Male",
     "location": "ibuprofen pm",
     "insurance": "9676935077",
-    "status": true
+    "status": "true"
   },
   {
     "id": 14,
@@ -137,7 +137,7 @@
     "client_gender": "Male",
     "location": "Metoclopramide",
     "insurance": "5608835506",
-    "status": true
+    "status": "true"
   },
   {
     "id": 15,
@@ -147,7 +147,7 @@
     "client_gender": "Female",
     "location": "Tinted Isopropyl Alcohol",
     "insurance": "7538509402",
-    "status": true
+    "status": "true"
   },
   {
     "id": 16,
@@ -157,7 +157,7 @@
     "client_gender": "Male",
     "location": "RUE21 Peppermint Twist Antibacterial Hand Sanitizer",
     "insurance": "7571411203",
-    "status": true
+    "status": "true"
   },
   {
     "id": 17,
@@ -167,7 +167,7 @@
     "client_gender": "Biclient_gender",
     "location": "Topcare Mucus Relief",
     "insurance": "2220583147",
-    "status": false
+    "status": "false"
   },
   {
     "id": 18,
@@ -177,7 +177,7 @@
     "client_gender": "Male",
     "location": "Suboxone",
     "insurance": "0892523530",
-    "status": true
+    "status": "true"
   },
   {
     "id": 19,
@@ -187,7 +187,7 @@
     "client_gender": "Female",
     "location": "Childrens Chewable Pain Reliever",
     "insurance": "1197180001",
-    "status": true
+    "status": "true"
   },
   {
     "id": 20,
@@ -197,7 +197,7 @@
     "client_gender": "Aclient_gender",
     "location": "Lisinopril",
     "insurance": "4875226616",
-    "status": true
+    "status": "true"
   },
   {
     "id": 21,
@@ -207,7 +207,7 @@
     "client_gender": "Male",
     "location": "Metformin Hydrochloride",
     "insurance": "0461972921",
-    "status": true
+    "status": "true"
   },
   {
     "id": 22,
@@ -217,7 +217,7 @@
     "client_gender": "Female",
     "location": "CELEBREX",
     "insurance": "7989113694",
-    "status": false
+    "status": "false"
   },
   {
     "id": 23,
@@ -227,7 +227,7 @@
     "client_gender": "Male",
     "location": "Secura EPC Skin Care Starter Kit",
     "insurance": "9492574403",
-    "status": true
+    "status": "true"
   },
   {
     "id": 24,
@@ -237,7 +237,7 @@
     "client_gender": "Female",
     "location": "Ocean Potion Instant Dry 30 Mist Water Sport Sunscreen",
     "insurance": "6441383365",
-    "status": true
+    "status": "true"
   },
   {
     "id": 25,
@@ -247,7 +247,7 @@
     "client_gender": "Male",
     "location": "No7 Men Protect and Perfect Intense Moisturiser",
     "insurance": "5113951897",
-    "status": true
+    "status": "true"
   },
   {
     "id": 26,
@@ -257,7 +257,7 @@
     "client_gender": "Male",
     "location": "Diarrhea Vomiting",
     "insurance": "4394697123",
-    "status": true
+    "status": "true"
   },
   {
     "id": 27,
@@ -267,7 +267,7 @@
     "client_gender": "Male",
     "location": "Aspirin",
     "insurance": "5119965830",
-    "status": false
+    "status": "false"
   },
   {
     "id": 28,
@@ -277,7 +277,7 @@
     "client_gender": "Male",
     "location": "FLUCONAZOLE",
     "insurance": "9386707489",
-    "status": true
+    "status": "true"
   },
   {
     "id": 29,
@@ -287,7 +287,7 @@
     "client_gender": "Female",
     "location": "Finasteride",
     "insurance": "4934146458",
-    "status": true
+    "status": "true"
   },
   {
     "id": 30,
@@ -297,6 +297,6 @@
     "client_gender": "Male",
     "location": "Bac Stop",
     "insurance": "2358038245",
-    "status": true
+    "status": "true"
   }
 ]

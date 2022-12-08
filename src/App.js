@@ -22,9 +22,6 @@ import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
 import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
 import NewPassSet from "./Pages/LoginPage/NewPassSet";
 import ManageSessions from "./Pages/Pages/User/ManageSessions";
-import Profile from "./Pages/Pages/Shared/Profile/Profile";
-import ProfileInformation from "./Pages/Pages/Shared/Profile/ProfileInformation";
-import PasswordChange from "./Pages/Pages/Shared/Profile/PasswordChange";
 import ContractContainer from "./Pages/Pages/User/Biographic/ContactInfo/ContractContainer";
 // --------new start with folder structure ------------------------------------------------------------------------------------------------
 
@@ -152,7 +149,6 @@ import AntDate from "./Testing/AntDatePicker/AntDate";
 import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
-import SOAP from "./Pages/Admin/FormsTemplate/SOAP";
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
 import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
@@ -171,6 +167,14 @@ import SmallSoap from "./Pages/Admin/FormsTemplate/SmallSoap";
 import UniqueSupervisionForm from "./Pages/Admin/FormsTemplate/UniqueSupervisionForm";
 import ManagementModificationForm from "./Pages/Admin/FormsTemplate/ManagementModificationForm";
 import SupervisionAssessment from "./Pages/Admin/FormsTemplate/SupervisionAssessment";
+import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
+import RequireAuth from "./Authorization/RequireAuth";
+import InfiniteScrollTest from "./Testing/ApiTesting/InfiniteScrollTest";
+import ProfileInformation from "./Pages/Shared/Profile/ProfileInformation";
+import PasswordChange from "./Pages/Shared/Profile/PasswordChange";
+import Profile from "./Pages/Shared/Profile/Profile";
+import QueryTesting from "./Testing/ApiTesting/QueryTesting";
+import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 
 
 
@@ -216,17 +220,10 @@ function App() {
             path="/clinic-treatment"
             element={<ClinicTreatment></ClinicTreatment>}
           ></Route>
+          <Route path="/FBA" element={<FBA></FBA>}></Route>
           <Route
-            path="/FBA"
-            element={<FBA></FBA>}
-          ></Route>
-           <Route
             path="/BCBATraineeUSF"
             element={<BCBATraineeUSR></BCBATraineeUSR>}
-          ></Route>
-          <Route
-            path="/SOAP"
-            element={<SOAP></SOAP>}
           ></Route>
           <Route
             path="/MonthlySupervisionNote"
@@ -296,7 +293,10 @@ function App() {
            path="/Supervision-Assessment"
            element={<SupervisionAssessment></SupervisionAssessment>}
            ></Route>
-           
+            <Route
+           path="/Structure-Of-Process"
+           element={<StructureofProcess></StructureofProcess>}
+           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
@@ -334,10 +334,29 @@ function App() {
             path="/testing"
             element={<TestingTable></TestingTable>}
           ></Route>
+          <Route
+            path="/search-box"
+            element={<AntTableSearchBox></AntTableSearchBox>}
+          ></Route>
           <Route path="/test-date" element={<AntDate></AntDate>}></Route>
-          {/* Testing End */}
+          <Route
+            path="/test-scroll"
+            element={<InfiniteScrollTest></InfiniteScrollTest>}
+          ></Route>
+          <Route
+            path="/queryTest"
+            element={<QueryTesting></QueryTesting>}
+          ></Route>
+          {/*--------- Testing End ------------*/}
 
-          <Route path="/admin" element={<Sidebar handle={handle}></Sidebar>}>
+          <Route
+            path="/admin"
+            element={
+              <RequireAuth>
+                <Sidebar handle={handle}></Sidebar>
+              </RequireAuth>
+            }
+          >
             <Route
               path="report-export-view"
               element={<DownloadView></DownloadView>}

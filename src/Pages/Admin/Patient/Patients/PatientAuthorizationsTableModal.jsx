@@ -8,7 +8,6 @@ import { Modal } from "antd";
 
 const PatientAuthorizationsTableModal = ({
   patient_id,
-  handleClose,
   modalOpen,
   setModalOpen,
 }) => {

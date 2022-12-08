@@ -296,13 +296,10 @@ const InsuranceSetup = () => {
         }}
         onChange={handleChange}
       />
-      <button className="p-2 bg-[#33A4B5] mt-3 rounded text-white">
-        Save Payer Setup
-      </button>
+      <button className="pms-button">Save Payer Setup</button>
 
       {insuranceEdit && (
         <>
-          {" "}
           <InsuranceEditComponent id={rowId}></InsuranceEditComponent>
         </>
       )}

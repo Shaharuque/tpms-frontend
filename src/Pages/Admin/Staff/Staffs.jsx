@@ -238,25 +238,20 @@ const Staffs = () => {
   };
 
   return (
-    <div className="h-[100vh]">
+    <div className={StafData ? "h-[100vh]" : "h-[100vh]"}>
       <div className="flex items-center flex-wrap justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           Staffs
         </h1>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={clearFilters}
-            className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-          >
+          <button onClick={clearFilters} className="pms-clear-button border">
             Clear filters
           </button>
 
           <div className="dropdown sm:dropdown-end ">
             <label tabIndex={0}>
-              <h1 className="px-5 py-2 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
-                Add Staff
-              </h1>
+              <h1 className="pms-button">Add Staff</h1>
             </label>
             <div
               tabIndex={0}

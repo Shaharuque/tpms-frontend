@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import person from "../../../Assets/user.png";
+import person from "../../Assets/user.png";
 import { motion } from "framer-motion";
 
 const ProfileInformation = () => {
@@ -43,51 +43,43 @@ const ProfileInformation = () => {
         <div className=" grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-3 gap-y-1">
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
-                First Name
-              </span>
+              <span className="pms-input-name">First Name</span>
             </label>
             <input
               type="text"
               name="first_name"
-              className="border border-gray-300 rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="modal-input-field ml-1 w-full"
               {...register("first_name")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
-                Last Name
-              </span>
+              <span className="pms-input-name">Last Name</span>
             </label>
             <input
               type="text"
               name="last_name"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="modal-input-field ml-1 w-full"
               {...register("last_name")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
-                City
-              </span>
+              <span className="pms-input-name">City</span>
             </label>
             <input
               type="text"
               name="city"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="modal-input-field ml-1 w-full"
               {...register("city")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                Country
-              </span>
+              <span className="pms-input-name">Country</span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="modal-input-field ml-1 w-full"
               {...register("country")}
             >
               <option value=""></option>
@@ -98,12 +90,10 @@ const ProfileInformation = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-500 text-left">
-                State
-              </span>
+              <span className="pms-input-name">State</span>
             </label>
             <select
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="modal-input-field ml-1 w-full"
               {...register("state")}
             >
               <option value=""></option>
@@ -114,22 +104,18 @@ const ProfileInformation = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
-                Zip Code
-              </span>
+              <span className="pms-input-name">Zip Code</span>
             </label>
             <input
               type="text"
               name="zip_code"
-              className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+              className="modal-input-field ml-1 w-full"
               {...register("zip_code")}
             />
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs text-gray-600 text-left">
-                Gender
-              </span>
+              <span className="pms-input-name">Gender</span>
             </label>
             <div className="flex items-center">
               <div className="flex ml-1 mt-1 items-center">
@@ -159,19 +145,12 @@ const ProfileInformation = () => {
             </div>
           </div>
         </div>
-        <div className="mt-10">
-          <button
-            className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            type="submit"
-          >
+        <div className="mt-10 my-1 ml-1">
+          <button className="pms-button mr-2" type="submit">
             Save
           </button>
 
-          <button
-            className=" py-[5px]  px-4 ml-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md"
-            autoFocus
-            onClick={reset}
-          >
+          <button className="pms-close-button" autoFocus onClick={reset}>
             CANCEL
           </button>
         </div>

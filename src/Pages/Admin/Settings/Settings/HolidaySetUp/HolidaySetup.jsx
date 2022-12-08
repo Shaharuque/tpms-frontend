@@ -169,10 +169,7 @@ const HolidaySetup = () => {
         <div>
           {/* <!-- The button to open modal --> */}
           <label htmlFor="pay-box" className="">
-            <h1
-              onClick={handleClickOpen}
-              className="px-2 text-xs md:text-sm font-normal py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 text-center"
-            >
+            <h1 onClick={handleClickOpen} className="pms-button">
               Add Time Off
             </h1>
           </label>
@@ -181,10 +178,7 @@ const HolidaySetup = () => {
         <div>
           {/* <!-- The button to open modal --> */}
           <label htmlFor="pay-box" className="">
-            <h1
-              onClick={handleClickOpen2}
-              className="px-2 text-xs md:text-sm py-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm mr-2 text-center"
-            >
+            <h1 onClick={handleClickOpen2} className="pms-button">
               Add Federal US holidays
             </h1>
           </label>

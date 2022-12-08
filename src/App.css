@@ -6,8 +6,6 @@
   padding: 0;
   text-decoration: none;
   line-height: inherit !important;
-
-
 }
 
 main {
@@ -72,7 +70,7 @@ main {
 }
 
 .active_sidebar {
-  background: #fff !important;
+  /* background: #fff !important; */
   color: #02818F !important;
 }
 
@@ -101,6 +99,7 @@ input[type='checkbox'] {
   box-shadow: 2px 2px 2px 0px #626d6e;
   display: inline-block;
   transition: ease-in-out 0.3s;
+  border: 1px solid #0AA7B8;
 }
 
 .pms-button:hover {
@@ -126,6 +125,7 @@ input[type='checkbox'] {
   box-shadow: 2px 2px 2px 0px #626d6e;
   display: inline-block;
   transition: ease-in-out 0.3s;
+  border: 0.5px solid #b91c1c;
 }
 
 .pms-close-button:hover {
@@ -134,10 +134,11 @@ input[type='checkbox'] {
 }
 
 .pms-clear-button {
-  padding-left: 11px;
+  padding: 5px 4px;
+  /* padding-left: 11px;
   padding-right: 8px;
   padding-top: 6px;
-  padding-bottom: 4px;
+  padding-bottom: 4px; */
   font-family: 'Roboto',
     sans-serif;
   font-size: 12px;
@@ -145,17 +146,98 @@ input[type='checkbox'] {
   text-transform: capitalize;
   letter-spacing: 1px;
   word-spacing: 0.2px;
-  background-color: #fff;
+
   background-clip: border-box;
   color: #0aa7b8;
   border-radius: 5px;
-  border: 1px solid #02818F;
+  border: 0.5px solid #c1c1c1;
   box-shadow: 2px 2px 2px 0px #626d6e;
   display: inline-block;
   transition: ease-in-out 0.1s;
 }
 
 .pms-clear-button:hover {
-  background-image: linear-gradient(141deg, #02818F 0%, #0aa7b8 100%);
+  background-image: linear-gradient(141deg, #b91c1c 0%, #b91c1c 100%);
   color: #fff;
+  border: 0.5px solid #b91c1c;
+}
+
+.pms-input-button {
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  padding: 4px 12px;
+  background-color: #0aa7b8;
+  box-shadow: 2px 2px 2px 0px #626d6e;
+  border-radius: 5px;
+}
+
+.pms-input-button:hover {
+  background-image: linear-gradient(141deg, #02818F 0%, #0aa7b8 100%);
+}
+
+/* ---------------------------------------Modal Input----------------------------- */
+
+.modal-label-name {
+  color: rgba(54, 54, 54, 0.85);
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0px;
+  word-spacing: 1px;
+  box-shadow: none;
+}
+
+.modal-input-field {
+  height: 32px;
+  font-size: 14px;
+  border-color: #c1c1c1;
+  border-width: 1px;
+  border-radius: 4px;
+  padding: 0 5px;
+}
+
+textarea:focus,
+input:focus {
+  outline-color: #0AA7B8;
+}
+
+select:focus {
+  outline-color: #0AA7B8;
+}
+
+/* ---------------------------------------Modal Box----------------------------- */
+
+.box {
+  border-top: 10px solid #0AA7B8;
+  border-bottom: 10px solid #0AA7B8;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 0px #737676;
+}
+
+/* ---------------------------------------Single Calender----------------------------- */
+
+.single-date {
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: #c1c1c1;
+  box-shadow: 2px 2px 2px 0px #8d8e8e;
+}
+
+/* -----------------------------------------input form --------------------------------------- */
+
+.input-border {
+  border-bottom: 1px solid rgba(9, 162, 179, 0.498);
+  font-size: 14px;
+  color: #4b5563;
+  border-radius: 0;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.label-font {
+  font-size: 15px;
+  color: #9b9b9b;
+  font-weight: 500;
+  text-align: left;
 }

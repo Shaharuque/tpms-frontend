@@ -1,4 +1,3 @@
-import { Dialog, Switch } from "@mui/material";
 import { Modal } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -6,8 +5,6 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 
 const CredentialsModal = ({ handleClose, open, name }) => {
   const [active, setActive] = useState(false);
-
-
 
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
@@ -44,12 +41,10 @@ const CredentialsModal = ({ handleClose, open, name }) => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      Credential
-                    </span>
+                    <span className="modal-label-name">Credential</span>
                   </label>
                   <select
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="modal-input-field ml-1 w-full"
                     {...register("credential")}
                   >
                     <option value="Speech Therapist">Speech Therapist</option>
@@ -58,36 +53,29 @@ const CredentialsModal = ({ handleClose, open, name }) => {
                 </div>
 
                 <div>
-                  {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      Date Issued
-                    </span>
+                    <span className="modal-label-name">Date Issued</span>
                   </label>
                   <input
                     type="date"
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="modal-input-field ml-1 w-full"
                     {...register("date_issue")}
                   />
                 </div>
                 <div>
                   {" "}
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      Expiry Date
-                    </span>
+                    <span className="modal-label-name">Expiry Date</span>
                   </label>
                   <input
                     type="date"
-                    className="border rounded-sm px-2 py-[4px] mx-1 text-xs w-full"
+                    className="modal-input-field ml-1 w-full"
                     {...register("expiry_Date")}
                   />
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-xs text-gray-600 text-left">
-                      Upload File
-                    </span>
+                    <span className="modal-label-name">Upload File</span>
                   </label>
                   <input
                     type="file"
@@ -95,39 +83,26 @@ const CredentialsModal = ({ handleClose, open, name }) => {
                     {...register("fileName")}
                   />
                 </div>
-                <div className="flex ml-1 mt-1 items-center">
-                  {/* <input
+                <div className="flex ml-1 mt-1 gap-2 items-center">
+                  <input
                     type="checkbox"
                     name="patient"
                     onClick={() => {
                       setValue(!value);
                     }}
-                  /> */}
-                 <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
-                  
-                  <span className="text-xs ml-1 text-gray-600 font-normal">
+                  />
+                  <span className="modal-label-name">
                     Credential Not Applicable
                   </span>
                 </div>
               </div>
               <div className="bg-gray-200 py-[1px] mt-3"></div>
               <div className=" flex items-end justify-end mt-2">
-                <button
-                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                  type="submit"
-                >
+                <button className=" pms-button mr-2" type="submit">
                   Save
                 </button>
 
-                <button
-                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                  autoFocus
-                  onClick={handleClose}
-                >
+                <button className="pms-close-button" onClick={handleClose}>
                   Close
                 </button>
               </div>

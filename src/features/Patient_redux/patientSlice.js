@@ -2,31 +2,34 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { headers } from "../../Misc/BaseClient";
 
-
 //async action(getAdmins) to fetch admins data list depending on page_ad
 //Action creator to fetch admins data list depending on page_ad
-export const getpatients = createAsyncThunk("patients/getpatients", async () => {
-  //onno api thik e kaj kortesey
-  const response = await axios.get(`https://ovh.therapypms.com/api/v1/admin/ac/patient`,{
-    headers:headers
-  });
-  return response.data;
-});
+export const getpatients = createAsyncThunk(
+  "patients/getpatients",
+  async () => {
+    //onno api thik e kaj kortesey
+    const response = await axios.get(
+      `https://ovh.therapypms.com/api/v1/admin/ac/patient`,
+      {
+        headers: headers,
+      }
+    );
+    return response.data;
+  }
+);
 
 const initialState = {
   loading: false,
   patient: [],
-  patientDetails:[],
-  error: ''
-}
+  patientDetails: [],
+  error: "",
+};
 
 const patientSlice = createSlice({
-  name: 'patients',
+  name: "patients",
   initialState,
-  
-  reducers: {
 
-  },
+  reducers: {},
   //async action creator
   extraReducers: (builder) => {
     builder.addCase(getpatients.pending, (state) => {
@@ -41,31 +44,34 @@ const patientSlice = createSlice({
     builder.addCase(getpatients.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
-      state.patient= "";
+      state.patient = "";
     });
   },
-})
+});
 
 export const patientDataReducer = patientSlice.reducer; //sliceName.reducer
 
 //----------------------------------------//
 //async action create (Patient Details)
-export const getpatientsDetails = createAsyncThunk("patients/getpatientsDetails", async (id) => {
-  //onno api thik e kaj kortesey
-  const response = await axios.get(`https://ovh.therapypms.com/api/v1/admin/ac/patient/info/${id}`,{
-    headers:headers
-  });
-  return response.data;
-});
-
+export const getpatientsDetails = createAsyncThunk(
+  "patients/getpatientsDetails",
+  async (id) => {
+    //onno api thik e kaj kortesey
+    const response = await axios.get(
+      `https://app.therapypms.com/api/v1/admin/ac/patient/info/${id}`,
+      {
+        headers: headers,
+      }
+    );
+    return response.data;
+  }
+);
 
 const patientDetailstSlice = createSlice({
-  name: 'patients',
+  name: "patients",
   initialState,
-  
-  reducers: {
 
-  },
+  reducers: {},
   //async action creator
   extraReducers: (builder) => {
     builder.addCase(getpatientsDetails.pending, (state) => {
@@ -80,9 +86,9 @@ const patientDetailstSlice = createSlice({
     builder.addCase(getpatientsDetails.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
-      state.patientDetails= "";
+      state.patientDetails = "";
     });
   },
-})
+});
 
 export const patientDetailsReducer = patientDetailstSlice.reducer; //sliceName.reducer

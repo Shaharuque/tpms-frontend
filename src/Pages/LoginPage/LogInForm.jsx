@@ -7,13 +7,22 @@ import "./LoginPage.css";
 // import Swal from "sweetalert2";
 import SmallLoader from "../../Loading/SmallLoader";
 import { GoAlert } from "react-icons/go";
+import axios from "axios";
+import CryptoJS from "crypto-js";
+import { useDispatch, useSelector } from "react-redux";
+import { storeEmail } from "../../features/login_redux/loginSlice";
 
 const LogInForm = () => {
   const [value, setValue] = useState(false);
   const navigate = useNavigate();
-  // const Swal = require("sweetalert2");
+  //const Swal = require("sweetalert2");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  // let CryptoJS = require("crypto-js");
+  const dispatch = useDispatch();
+
+  const email = useSelector((state) => state.emailInfo.email);
+  console.log("email stored in redux:", email);
 
   const {
     register,
@@ -21,34 +30,46 @@ const LogInForm = () => {
     formState: { errors },
     reset,
   } = useForm();
-  const onSubmit = (data) => {
+
+  const onSubmit = (formdata) => {
+    console.log(formdata);
     setLoading(true);
-    fetch("https://ovh.therapypms.com/api/v1/admin/login", {
+    reset();
+
+    // axios POST request
+    const options = {
+      url: "https://app.therapypms.com/api/v1/admin/login",
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
       },
-      body: JSON.stringify(data), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
-    })
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((result) => {
-        setLoading(false);
-        //console.log(result);
-        if (result.account_type === "admin") {
-          localStorage.setItem("admin", result.access_token);
-          localStorage.setItem("type", result.account_type);
-          navigate("/admin"); //admin panel a redirect
-        } else if (result.account_type === "patient") {
-          navigate("/patient"); //patient panel a redirect
-          localStorage.setItem("type", "patient");
-        } else {
-          setMessage("Invalid Credentials");
-        }
-      });
-    reset();
+      data: JSON.stringify(formdata), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
+    };
+    axios(options).then((response) => {
+      console.log(response.data);
+      // Encrypt the token
+      let ciphertextToken = CryptoJS.AES.encrypt(
+        JSON.stringify(response?.data?.access_token),
+        "tpm422"
+      ).toString();
+
+      if (
+        response?.data?.account_type === "admin" &&
+        response?.data?.status === "success"
+      ) {
+        dispatch(storeEmail(response?.data?.user?.email));
+        localStorage.setItem("adminToken", ciphertextToken);
+        localStorage.setItem("type", response?.data?.account_type);
+        navigate("/admin"); //admin panel a redirect
+      } else if (response?.data?.account_type === "patient") {
+        navigate("/patient"); //patient panel a redirect
+        localStorage.setItem("type", "patient");
+      } else {
+        setMessage(response.data.message);
+        navigate("/");
+      }
+    });
   };
 
   const forgetPass = () => {
@@ -72,8 +93,18 @@ const LogInForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 {message ? (
-                  <div className="text-red-500 red-box  border border-gray-300 rounded-md px-3 font-medium py-[10px] mx-1 text-xs w-full flex items-center gap-2">
-                    <GoAlert className=" text-red-500" /> {message}
+                  <div className="text-red-500 red-box  border border-gray-300 rounded-md px-3 font-medium py-[10px] mx-1 text-xs w-full flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <GoAlert className=" text-red-500" /> {message}
+                    </div>
+                    <button
+                      onClick={() => {
+                        setLoading(false);
+                        setMessage(false);
+                      }}
+                    >
+                      X
+                    </button>
                   </div>
                 ) : null}
                 <label className="label">

@@ -5,6 +5,7 @@ import { DateRangePicker } from "react-date-range";
 import { useForm } from "react-hook-form";
 import { BsArrowRight } from "react-icons/bs";
 import { Calendar } from "react-calendar";
+import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
@@ -198,6 +199,10 @@ const ProcessingClaim = () => {
         return a.Rate > b.Rate ? -1 : 1;
         // a.Pos - b.Pos,
       },
+      render: (_, { Rate }) => {
+        //console.log("tags : ", lock);
+        return <div className="flex justify-end">{Rate}</div>;
+      },
       sortOrder: sortedInfo.columnKey === "Rate" ? sortedInfo.order : null,
       ellipsis: true,
     },
@@ -249,8 +254,16 @@ const ProcessingClaim = () => {
     reset();
   };
 
+  //Date converter function [yy-mm-dd]
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+
   //Date Range Picker
-  const [open, setOpen] = useState(false);
+  const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -267,6 +280,7 @@ const ProcessingClaim = () => {
         key: "selection",
       },
     ]);
+    setOpenCalendar(false);
   };
 
   // date range picker calendar
@@ -284,7 +298,12 @@ const ProcessingClaim = () => {
     ? startDate.getFullYear().toString().slice(2, 4)
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
-  //End Date Range Picker
+
+  //test design
+  const [clicked, setClicked] = useState(false);
+  const clickHandler = () => {
+    setClicked(true);
+  };
 
   // Hide calendar on outside click
   const refClose = useRef(null);
@@ -295,9 +314,10 @@ const ProcessingClaim = () => {
   // Hide dropdown on outside click
   const hideOnClickOutside = (e) => {
     if (refClose.current && !refClose.current.contains(e.target)) {
-      setOpen(false);
+      setOpenCalendar(false);
     }
   };
+  //end outside click
   //end outside click
   return (
     <div className={!tableOpen ? "h-[100vh]" : ""}>
@@ -305,42 +325,44 @@ const ProcessingClaim = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
-            <div className="flex gap-2 ">
+            <div className="flex gap-3">
               <div className="w-3/4">
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className=" label-font">
                     To Date<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   onClick={() => setOpenSingleCalendar(!openSingleCalendar)}
                   value={date ? date.toLocaleDateString() : "Select a Date"}
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                  className="input-border input-font w-full focus:outline-none"
                   {...register("date")}
                 />
                 {/* single calendar */}
                 {openSingleCalendar && (
-                  <div className="col-span-2 w-[15%] rounded my-0 absolute z-10 shadow-lg p-1">
+                  <div className="col-span-2 w-[60%] xl:w-[20%] md:w-[25%] mt-1 rounded my-0 absolute z-10 bg-white single-date p-1">
                     <Calendar onChange={setDate} value={date} />
+                    <div className="bg-gray-200 py-[1px] "></div>
                     <div className="flex justify-between bg-white p-1">
                       <button
                         onClick={() => handleSingleClearDate()}
-                        className="text-xs text-red-400"
+                        className="pms-clear-button"
                       >
                         CLEAR
                       </button>
                       <div>
                         <button
-                          onClick={() => handleSingleCancelDate()}
-                          className="text-xs text-[#0AA7B8]"
-                        >
-                          CANCEL
-                        </button>
-                        <button
                           onClick={() => setOpenSingleCalendar(false)}
-                          className="text-xs ml-2 text-[#0AA7B8]"
+                          className=" pms-button mr-2"
+                          type="submit"
                         >
                           OK
+                        </button>
+                        <button
+                          className="pms-close-button"
+                          onClick={() => handleSingleCancelDate()}
+                        >
+                          Close
                         </button>
                       </div>
                     </div>
@@ -350,7 +372,7 @@ const ProcessingClaim = () => {
               {/* go*/}
               <button
                 onClick={handleGO}
-                className=" mt-8 w-12 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                className=" mt-[26px] w-12 pms-input-button"
               >
                 Go
               </button>
@@ -361,14 +383,14 @@ const ProcessingClaim = () => {
                 {/* insurance  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className=" label-font">
                       Insurance<span className="text-red-500">*</span>
                     </span>
                   </label>
                   <select
                     onChange={(e) => setInsuranceSelect(e.target.value)}
                     name="type"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                   >
                     <option value="all">All</option>
                     <option value="patient">Patient</option>
@@ -378,14 +400,14 @@ const ProcessingClaim = () => {
                 {/* Sort By  */}
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className=" label-font">
                       Sort By<span className="text-red-500">*</span>
                     </span>
                   </label>
                   <select
                     onChange={(e) => setSortBy1(e.target.value)}
                     name="type"
-                    className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                    className="input-border input-font w-full focus:outline-none"
                   >
                     <option value="Patient">Patient(s)</option>
                     <option value="Tx Providers">Tx Providers</option>
@@ -406,12 +428,10 @@ const ProcessingClaim = () => {
                     {sortBy1 === "Date Range" ? (
                       <div>
                         <label className="label">
-                          <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                            {sortBy1}
-                          </span>
+                          <span className=" label-font">{sortBy1}</span>
                         </label>
-                        <div className="ml-1 text-[14px]">
-                          <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                        <div className="ml-1">
+                          <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                             <input
                               value={
                                 startDate
@@ -419,11 +439,11 @@ const ProcessingClaim = () => {
                                   : "Start Date"
                               }
                               readOnly
-                              onClick={() => setOpen((open) => !open)}
+                              onClick={() => setOpenCalendar(true)}
                               className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                             />
                             <BsArrowRight
-                              onClick={() => setOpen((open) => !open)}
+                              onClick={() => setOpenCalendar(true)}
                               className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
                             ></BsArrowRight>
                             <input
@@ -433,58 +453,36 @@ const ProcessingClaim = () => {
                                   : "End Date"
                               }
                               readOnly
-                              onClick={() => setOpen((open) => !open)}
+                              onClick={() => setOpenCalendar(true)}
                               className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                             />
                           </div>
-                        </div>
-                        <div ref={refClose} className="absolute z-10 shadow-xl">
-                          {open && (
-                            <div>
-                              <div>
-                                <DateRangePicker
-                                  onChange={(item) =>
-                                    setRange([item.selection])
-                                  }
-                                  editableDateInputs={true}
-                                  moveRangeOnFirstSelection={false}
-                                  ranges={range}
-                                  months={2}
-                                  direction="horizontal"
-                                  className="border-2 border-gray-100"
-                                />
-                              </div>
-                              <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                                <button
-                                  className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                                  type="submit"
-                                  onClick={handleCancelDate}
-                                >
-                                  Cancel
-                                </button>
-                                <button
-                                  className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                                  type="submit"
-                                  onClick={() => setOpen(false)}
-                                >
-                                  Save
-                                </button>
-                              </div>
-                            </div>
-                          )}
+
+                          {/* Multi date picker component called */}
+                          <div
+                            ref={refClose}
+                            className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
+                          >
+                            {openCalendar && (
+                              <CustomDateRange
+                                range={range}
+                                setRange={setRange}
+                                handleCancelDate={handleCancelDate}
+                                setOpen={setOpenCalendar}
+                              ></CustomDateRange>
+                            )}
+                          </div>
                         </div>
                       </div>
                     ) : (
                       <div>
                         <label className="label">
-                          <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                            {sortBy1}
-                          </span>
+                          <span className=" label-font">{sortBy1}</span>
                         </label>
                         <select
                           // onChange={(e) => setInsuranceSelect(e.target.value)}
                           name="type"
-                          className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                          className="input-border input-font w-full focus:outline-none"
                         >
                           <option value="all">All</option>
                           <option value="patient">Patient</option>
@@ -496,14 +494,14 @@ const ProcessingClaim = () => {
                     {/* Sort By  */}
                     <div>
                       <label className="label">
-                        <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                        <span className=" label-font">
                           Sort By<span className="text-red-500">*</span>
                         </span>
                       </label>
                       <select
                         onChange={(e) => setSortBy2(e.target.value)}
                         name="type"
-                        className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                        className="input-border input-font w-full focus:outline-none"
                       >
                         <option value="Patient">Patient(s)</option>
                         <option value="Tx Providers">Tx Providers</option>
@@ -526,12 +524,10 @@ const ProcessingClaim = () => {
                         {sortBy2 === "Date Range" ? (
                           <div>
                             <label className="label">
-                              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                                {sortBy2}
-                              </span>
+                              <span className=" label-font">{sortBy2}</span>
                             </label>
-                            <div className="ml-1 text-[14px]">
-                              <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                            <div className="ml-1">
+                              <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                                 <input
                                   value={
                                     startDate
@@ -539,11 +535,11 @@ const ProcessingClaim = () => {
                                       : "Start Date"
                                   }
                                   readOnly
-                                  onClick={() => setOpen((open) => !open)}
+                                  onClick={() => setOpenCalendar(true)}
                                   className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                                 />
                                 <BsArrowRight
-                                  onClick={() => setOpen((open) => !open)}
+                                  onClick={() => setOpenCalendar(true)}
                                   className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
                                 ></BsArrowRight>
                                 <input
@@ -553,61 +549,36 @@ const ProcessingClaim = () => {
                                       : "End Date"
                                   }
                                   readOnly
-                                  onClick={() => setOpen((open) => !open)}
+                                  onClick={() => setOpenCalendar(true)}
                                   className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                                 />
                               </div>
-                            </div>
-                            <div
-                              ref={refClose}
-                              className="absolute z-10 shadow-xl"
-                            >
-                              {open && (
-                                <div>
-                                  <div>
-                                    <DateRangePicker
-                                      onChange={(item) =>
-                                        setRange([item.selection])
-                                      }
-                                      editableDateInputs={true}
-                                      moveRangeOnFirstSelection={false}
-                                      ranges={range}
-                                      months={2}
-                                      direction="horizontal"
-                                      className="border-2 border-gray-100"
-                                    />
-                                  </div>
-                                  <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                                    <button
-                                      className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                                      type="submit"
-                                      onClick={handleCancelDate}
-                                    >
-                                      Cancel
-                                    </button>
-                                    <button
-                                      className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                                      type="submit"
-                                      onClick={() => setOpen(false)}
-                                    >
-                                      Save
-                                    </button>
-                                  </div>
-                                </div>
-                              )}
+
+                              {/* Multi date picker component called */}
+                              <div
+                                ref={refClose}
+                                className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
+                              >
+                                {openCalendar && (
+                                  <CustomDateRange
+                                    range={range}
+                                    setRange={setRange}
+                                    handleCancelDate={handleCancelDate}
+                                    setOpen={setOpenCalendar}
+                                  ></CustomDateRange>
+                                )}
+                              </div>
                             </div>
                           </div>
                         ) : (
                           <div>
                             <label className="label">
-                              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                                {sortBy2}
-                              </span>
+                              <span className=" label-font">{sortBy2}</span>
                             </label>
                             <select
                               // onChange={(e) => setInsuranceSelect(e.target.value)}
                               name="type"
-                              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
+                              className="input-border input-font w-full focus:outline-none"
                             >
                               <option value="all">All</option>
                               <option value="patient">Patient</option>
@@ -620,9 +591,9 @@ const ProcessingClaim = () => {
                   </>
                 )}
                 {/* submit  */}
-                <div className="gap-2 flex">
+                <div className="gap-2 mb-10 flex">
                   <button
-                    className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+                    className="mt-8 w-12 pms-input-button"
                     type="submit"
                     onClick={() => {
                       setTableOpen(true);
@@ -630,9 +601,7 @@ const ProcessingClaim = () => {
                   >
                     Run
                   </button>
-                  <button className=" py-1 mt-8 w-16 text-sm bg-gradient-to-r from-red-600 to-red-400  hover:to-red-600 text-white rounded-md">
-                    Cancel
-                  </button>
+                  <button className="pms-close-button w-16 mt-8">Cancel</button>
                 </div>
               </>
             )}

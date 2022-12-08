@@ -50,15 +50,13 @@ export default function VendorNumberSetupActionModal({
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="w-full font-semibold">
-                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-5">
+                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-x-2 gap-y-2">
                   <div>
                     <label className="label">
-                      <span className="label-text text-sm text-gray-500 text-left">
-                        Service
-                      </span>
+                      <span className="modal-label-name">Service</span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("Length")}
                     >
                       <option value="Mr">Bi Weekly</option>
@@ -69,12 +67,10 @@ export default function VendorNumberSetupActionModal({
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-sm text-gray-500 text-left">
-                        Tx Type
-                      </span>
+                      <span className="modal-label-name">Tx Type</span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("week_day")}
                     >
                       <option value="Mr">Sunday</option>
@@ -85,12 +81,10 @@ export default function VendorNumberSetupActionModal({
                   </div>
                   <div>
                     <label className="label">
-                      <span className="label-text text-sm text-gray-500 text-left">
-                        Regional Center
-                      </span>
+                      <span className="modal-label-name">Regional Center</span>
                     </label>
                     <select
-                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("year")}
                     >
                       <option value="Mr">2019</option>
@@ -101,31 +95,27 @@ export default function VendorNumberSetupActionModal({
                   </div>
 
                   {/* staff_number  */}
-                  <div className="mt-[-15px]">
+                  <div className="">
                     {" "}
                     <label className="label">
-                      <span className="label-text text-sm text-gray-500 text-left">
-                        Vendor No
-                      </span>
+                      <span className="modal-label-name">Vendor No</span>
                     </label>
                     <input
                       type="number"
                       name="vendor_no"
-                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("vendor_no")}
                     />
                   </div>
-                  <div className="mt-[-15px]">
+                  <div className="">
                     {" "}
                     <label className="label">
-                      <span className="label-text text-sm text-gray-500 text-left">
-                        Service Code
-                      </span>
+                      <span className="modal-label-name">Service Code</span>
                     </label>
                     <input
                       type="number"
                       name="service_no"
-                      className="border rounded-sm px-2 py-[3px] mx-1 text-xs w-full"
+                      className="modal-input-field ml-1 w-full"
                       {...register("service_no")}
                     />
                   </div>
@@ -133,18 +123,11 @@ export default function VendorNumberSetupActionModal({
               </div>
               <div className="bg-gray-200 py-[1px] mt-3"></div>
               <div className=" flex items-end justify-end mt-2">
-                <button
-                  className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-                  type="submit"
-                >
+                <button className=" pms-button mr-2" type="submit">
                   Save
                 </button>
 
-                <button
-                  className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                  autoFocus
-                  onClick={handleClose}
-                >
+                <button className="pms-close-button" onClick={handleClose}>
                   Close
                 </button>
               </div>
