@@ -386,6 +386,7 @@ code {
   width: 100%;
   height: 100%;
   border-radius: 0px;
+  padding: 1px 0;
 }
 
 .PatientinformationInput.react-tel-input .form-control:focus {

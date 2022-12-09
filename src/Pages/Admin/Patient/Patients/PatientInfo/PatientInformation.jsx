@@ -596,7 +596,7 @@ const PatientInformation = () => {
                     {/* <input          
                     type="checkbox" 
                     name="patient"
-                    onClick={() => {
+                    onClick={() => {   
                       setAppointment(!appointment);
                     }}
                   /> */}

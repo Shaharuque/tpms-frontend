@@ -10,6 +10,7 @@ import { MdPersonSearch } from "react-icons/md";
 import { BsFillFileEarmarkLock2Fill } from "react-icons/bs";
 import { TbReport } from "react-icons/tb";
 import { RiFileDamageFill } from "react-icons/ri";
+import { TiDocumentAdd } from "react-icons/ti";
 
 const PatientsInfo = () => {
   // Great parent component
@@ -67,6 +68,17 @@ const PatientsInfo = () => {
           <div className="text-xs  text-secondary font-normal patient-nav mb-1">
             <CustomLink
               className="flex gap-1 pb-1 clink items-center"
+              to={`patient-vob/${id}`}
+            >
+              <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <TiDocumentAdd className=" text-2xl" /> VOB
+              </h1>
+            </CustomLink>
+          </div>
+
+          <div className="text-xs  text-secondary font-normal patient-nav mb-1">
+            <CustomLink
+              className="flex gap-1 pb-1 clink items-center"
               to={`patient-authorization/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
@@ -75,6 +87,7 @@ const PatientsInfo = () => {
               </h1>
             </CustomLink>
           </div>
+
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink
               className="flex gap-1 pb-1 clink items-center"
