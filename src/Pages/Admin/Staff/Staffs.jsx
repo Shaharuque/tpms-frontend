@@ -33,7 +33,7 @@ const Staffs = () => {
       title: "Name",
       dataIndex: "Name",
       key: "Name",
-      width: 200,
+      width: 150,
       filters: [
         {
           text: `Jamey`,
@@ -131,7 +131,6 @@ const Staffs = () => {
       },
       ellipsis: true,
     },
-
     {
       title: "Email",
       dataIndex: "Email",
@@ -184,7 +183,6 @@ const Staffs = () => {
       sortOrder: sortedInfo.columnKey === "Language" ? sortedInfo.order : null,
       ellipsis: true,
     },
-
     {
       title: "Scheduled",
       dataIndex: "id",
@@ -218,7 +216,7 @@ const Staffs = () => {
       title: "Status",
       key: "Status",
       dataIndex: "Status",
-      width: 70,
+      width: 120,
       render: (_, { Status }) => {
         //console.log("Status : ", Status);
         return <PatientStatusAction status={Status}></PatientStatusAction>;
@@ -243,13 +241,12 @@ const Staffs = () => {
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           Staffs
         </h1>
-
         <div className="flex items-center gap-2">
           <button onClick={clearFilters} className="pms-clear-button border">
             Clear filters
           </button>
 
-          <div className="dropdown sm:dropdown-end ">
+          <div className="dropdown sm:dropdown-end">
             <label tabIndex={0}>
               <h1 className="pms-button">Add Staff</h1>
             </label>
@@ -268,6 +265,7 @@ const Staffs = () => {
                   </div>
                 </button>
               </Link>
+
               <Link to={"/admin/create-staff/officeStaff"}>
                 <button className="text-[14px] text-secondary border px-12 py-1 mx-auto rounded-sm border-secondary hover:text-white hover:bg-secondary flex items-center font-semibold gap-2">
                   <div className="flex items-center">

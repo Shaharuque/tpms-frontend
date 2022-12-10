@@ -572,7 +572,7 @@ const Timesheet = () => {
                   </span>
                 </label>
                 <>
-                  <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 mt-1">
+                  <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 ">
                     <GlobalMultiSelect />
                   </div>
                 </>
