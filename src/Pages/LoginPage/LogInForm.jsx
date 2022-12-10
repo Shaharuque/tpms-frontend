@@ -10,7 +10,7 @@ import { GoAlert } from "react-icons/go";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 import { useDispatch, useSelector } from "react-redux";
-import { storeEmail } from "../../features/login_redux/loginSlice";
+import { userLoggedIn } from "../../features/login_redux/loginSlice";
 
 const LogInForm = ({ from }) => {
   console.log("state from loginForm", from?.from?.pathname);
@@ -22,8 +22,8 @@ const LogInForm = ({ from }) => {
   // let CryptoJS = require("crypto-js");
   const dispatch = useDispatch();
 
-  const email = useSelector((state) => state.emailInfo.email);
-  console.log("email stored in redux:", email);
+  const { accessToken, user } = useSelector((state) => state.authInfo);
+  console.log("result from redux store:", accessToken);
 
   const {
     register,
@@ -56,10 +56,17 @@ const LogInForm = ({ from }) => {
       ).toString();
 
       if (response?.data?.account_type === "admin") {
-        dispatch(storeEmail(response?.data?.user?.email));
+        dispatch(
+          userLoggedIn({
+            accessToken: response?.data?.access_token,
+            user: response?.data?.user,
+          })
+        );
         localStorage.setItem("adminToken", ciphertextToken);
-        localStorage.setItem("type", response.data.account_type);
-        navigate("/admin"); //admin panel a redirect
+        localStorage.setItem("type", response?.data?.account_type);
+        localStorage.setItem("user", JSON.stringify(response?.data?.user));
+        // navigate("/admin"); //admin panel a redirect
+
         if (from !== null) {
           console.log("loging from navigation to", from?.from?.pathname);
           navigate(`${from?.from?.pathname}`);

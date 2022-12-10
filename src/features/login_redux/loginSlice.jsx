@@ -1,21 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  email: {},
+  accessToken: undefined,
+  user: undefined,
 };
 
 const loginSlice = createSlice({
-  name: "email",
+  name: "authentication",
   initialState,
   reducers: {
-    // storeEmail is a action which take state and action as parameter and depends on those parameters some logic is executed
-    storeEmail: (state, action) => {
-      state.email = action.payload;
+    userLoggedIn: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.user = action.payload.user;
+    },
+    userLoggedOut: (state, action) => {
+      state.accessToken = undefined;
+      state.user = undefined;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { storeEmail } = loginSlice.actions;
+export const { userLoggedIn, userLoggedOut } = loginSlice.actions;
 
-export const emailDetailsReducer = loginSlice.reducer; //sliceName.reducer
+export const authReducer = loginSlice.reducer; //sliceName.reducer

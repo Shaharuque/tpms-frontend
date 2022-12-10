@@ -22,8 +22,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { Dropdown, Space } from "antd";
 import Add from "./Add";
-import { Margin } from "@mui/icons-material";
-import { storeEmail } from "../../../features/login_redux/loginSlice";
+import { userLoggedOut } from "../../../features/login_redux/loginSlice";
 import { useDispatch } from "react-redux";
 
 // i am using alakaja
@@ -35,7 +34,8 @@ const TestNaviBar = ({ handle }) => {
   const handleSignOut = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("type");
-    dispatch(storeEmail());
+    localStorage.removeItem("users");
+    dispatch(userLoggedOut());
     navigate("/");
   };
 

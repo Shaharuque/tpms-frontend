@@ -6,15 +6,19 @@ import {
 import { settingDataReducer } from "../features/Settings_redux/settingSlice";
 import { serviceReducer } from "../features/Settings_redux/settingFeaturesSlice";
 import { cptReducer } from "../features/Settings_redux/cptCodeSlice";
-import { emailDetailsReducer } from "../features/login_redux/loginSlice";
 import { loginReducer } from "../features/login_redux/loginPostSlice";
 import {
   createPosReducer,
   posReducer,
 } from "../features/Settings_redux/placeOfServiceSlice";
+import { authReducer } from "../features/login_redux/loginSlice";
+import { apiSlice } from "../features/api/apiSlice";
 
 export const store = configureStore({
   reducer: {
+    // Add the generated reducer as a specific top-level slice(RTK query)
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    //async thunk reducers
     patientData: patientDataReducer,
     patientInfo: patientDetailsReducer,
     settingInfo: settingDataReducer,
@@ -23,6 +27,11 @@ export const store = configureStore({
     posInfo: posReducer,
     posCreated: createPosReducer,
     loginInfo: loginReducer,
-    emailInfo: emailDetailsReducer,
+    //normal reducers
+    authInfo: authReducer,
   },
+  // Adding the api middleware enables caching, invalidation, polling,
+  // and other useful features of `rtk-query`.
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
