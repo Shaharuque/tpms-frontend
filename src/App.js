@@ -175,9 +175,12 @@ import Test from "./Pages/Shared/Test";
 import IntakeForm from "./Pages/Admin/Settings/Settings/IntakeForm/IntakeForm";
 import StructureOfProcess from "./Pages/Admin/Settings/Settings/StructureOfProcess/StructureOfProcess";
 import AppIdTracking from "./Pages/Admin/Settings/Settings/AppIdTracking/AppIdTracking";
+import { usePersistStore } from "./CustomHooks/usePersistStore";
 
 function App() {
   const handle = useFullScreenHandle();
+  //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
+  const auth = usePersistStore();
   return (
     <div className="app-body">
       <FullScreen handle={handle}>

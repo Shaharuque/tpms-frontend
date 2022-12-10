@@ -17,7 +17,7 @@ export const fetchData = async (endPoint, token) => {
 };
 
 export const PostfetchData = async ({ endPoint, payload, token }) => {
-  console.log(endPoint, payload, token);
+  console.log(endPoint, payload);
   const response = await axios.post(`${baseIp}/${endPoint}`, payload, {
     headers: {
       "Content-Type": "application/json",
