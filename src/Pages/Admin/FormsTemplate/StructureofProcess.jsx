@@ -93,7 +93,7 @@ const StructureofProcess = () => {
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
-                            {...register("date_setting_1")}
+                            {...register("Practice_Name")}
                           />
                         </div>
                       </td>
@@ -102,7 +102,7 @@ const StructureofProcess = () => {
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
-                            {...register("antecedent_1")}
+                            {...register("npi")}
                           />
                         </div>
                       </td>
@@ -111,7 +111,7 @@ const StructureofProcess = () => {
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
-                            {...register("behavior_1")}
+                            {...register("tax_id")}
                           />
                         </div>
                       </td>
@@ -120,7 +120,7 @@ const StructureofProcess = () => {
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
-                            {...register("consequence_1")}
+                            {...register("practice_address")}
                           />
                         </div>
                       </td>
@@ -129,7 +129,7 @@ const StructureofProcess = () => {
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
-                            {...register("consequence_1")}
+                            {...register("billing_address")}
                           />
                         </div>
                       </td>
@@ -151,159 +151,18 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                            <h5 className="font-bold text-lg text-center">Speciality</h5>
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td
+                          colspan="2"
+                          class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                        >
                           <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("Speciality")}
                             />
                           </div>
                         </td>
@@ -311,20 +170,262 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                            <h5 className="font-bold text-lg text-center"># of Provider ‘s BCBA & BCaBA</h5>
                           </div>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <div className="flex items-center mr-4">
+                              <label
+                                for="inline-2-radio"
+                                className="ml-2 form-input-name"
+                              >
+                                BCBA
+                              </label>
+                              <input
+                                type="text"
+                                className=" border-2 border-black "
+                                {...register("bcba")}
+                              />
+                            </div>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                            <div className="flex items-center mr-4">
+                              <label
+                                for="inline-2-radio"
+                                className="ml-2 form-input-name"
+                              >
+                                BCaBA
+                              </label>
+                              <input
+                                type="text"
+                                className=" border-2 border-black"
+                                {...register("bcaba")}
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>{" "}
+                      <tr class="border-b border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <h5 className="font-bold text-lg text-center">Average Patient / Month</h5>
+                          </div>
+                        </td>
+                        <td
+                          colspan="2"
+                          class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                        >
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("Average_Patient_Month")}
                             />
+                          </div>
+                        </td>
+                      </tr>{" "}
+                      <tr class="border-b border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <h5 className="font-bold text-lg text-center">Average Hrs / Quarter</h5>
+                          </div>
+                        </td>
+                        <td
+                          colspan="2"
+                          class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                        >
+                          <div>
+                            <input
+                              type="text"
+                              className=" w-full border-none focus:outline-none "
+                              {...register("Average_Hrs_Quarter")}
+                            />
+                          </div>
+                        </td>
+                      </tr>{" "}
+                      <tr class="border-b border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <h5 className="font-bold text-lg text-center">Average Billing / Quarter</h5>
+                          </div>
+                        </td>
+                        <td
+                          colspan="2"
+                          class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                        >
+                          <div>
+                            <input
+                              type="text"
+                              className=" w-full border-none focus:outline-none "
+                              {...register("Average_Billing_Quarter")}
+                            />
+                          </div>
+                        </td>
+                      </tr>{" "}
+                      <tr class="border-b border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <h5 className="font-bold text-lg text-center">Average Billing / Quarter</h5>
+                          </div>
+                        </td>
+                        <td
+                          colspan="2"
+                          class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                        >
+                          <div>
+                            <input
+                              type="text"
+                              className=" w-full border-none focus:outline-none "
+                              {...register("Average_Collection_Quarter")}
+                            />
+                          </div>
+                        </td>
+                      </tr>{" "}
+                      <tr class="border-b border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <h5 className="font-bold text-lg text-center">Patient Statement</h5>
+
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                         
+                          <div className="flex items-center justify-center  mr-4">
+                            <input
+                              id="inline-radio"
+                              type="radio"
+                              value=""
+                              name="inline-radio-group"
+                              className="w-4 h-4"
+                              {...register("Patient_Statement_yes")}
+                            />
+                            <label
+                              for="inline-radio"
+                              className="ml-2  form-input-name "
+                            >
+                              yes
+                            </label>
+                          </div>
+                        
+                        </div>
+                         
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <div className="flex items-center justify-center  mr-4">
+                            <input
+                              id="inline-radio"
+                              type="radio"
+                              value=""
+                              name="inline-radio-group"
+                              className="w-4 h-4"
+                              {...register("Patient_Statement_no")}
+                            />
+                            <label
+                              for="inline-radio"
+                              className="ml-2  form-input-name "
+                            >
+                              no
+                            </label>
+                          </div>
+                          </div>
+                        </td>
+                      </tr>{" "}
+                      <tr class="border-b border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <h5 className="font-bold text-lg text-center">Patient Statement Sent To</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <div className="flex items-center justify-center  mr-4">
+                            <input
+                              id="inline-radio"
+                              type="checkbox"
+                              value=""
+                              name="inline-radio-group"
+                              className="w-4 h-4"
+                              {...register("payment_statement_family")}
+                            />
+                            <label
+                              for="inline-radio"
+                              className="ml-2  form-input-name "
+                            >
+                              Family
+                            </label>
+                          </div>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <div className="flex items-center justify-center  mr-4">
+                            <input
+                              id="inline-radio"
+                              type="checkbox"
+                              value=""
+                              name="inline-radio-group"
+                              className="w-4 h-4"
+                              {...register("payment_statement_provider")}
+                            />
+                            <label
+                              for="inline-radio"
+                              className="ml-2  form-input-name "
+                            >
+                              Provider
+                            </label>
+                          </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="border-b border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <h5 className="font-bold text-lg text-center">Types of Payers</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <div className="flex items-center justify-center  mr-4">
+                            <input
+                              id="inline-radio"
+                              type="checkbox"
+                              value=""
+                              name="inline-radio-group"
+                              className="w-4 h-4"
+                              {...register("Types_of_Payers_commercial")}
+                            />
+                            <label
+                              for="inline-radio"
+                              className="ml-2  form-input-name "
+                            >
+                              Commercial
+                            </label>
+                          </div>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <div className="flex items-center justify-center  mr-4">
+                            <input
+                              id="inline-radio"
+                              type="checkbox"
+                              value=""
+                              name="inline-radio-group"
+                              className="w-4 h-4"
+                              {...register("Types_of_Payers_Regional")}
+                            />
+                            <label
+                              for="inline-radio"
+                              className="ml-2  form-input-name "
+                            >
+                             Regional Centers
+                            </label>
+                          </div>
                           </div>
                         </td>
                       </tr>
@@ -337,181 +438,177 @@ const StructureofProcess = () => {
                   <table class="min-w-full border-2 border-blue-600 ">
                     <tbody>
                       <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                          <h5 className="text-wrap font-bold text-center">Billing / Co-ordination</h5>
+                           
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td colspan="2" class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("billing")}
                             />
                           </div>
                         </td>
                       </tr>{" "}
                       <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                          <h5 className="text-wrap font-bold text-center">Rejections / Account receivable & Follow up</h5>
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td colspan="2" class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("rejections")}
                             />
                           </div>
                         </td>
                       </tr>{" "}
                       <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                          <h5 className="text-wrap font-bold text-center">Payment posting & Denials</h5>
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td colspan="2" class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("Payment_posting_Denials")}
                             />
                           </div>
                         </td>
                       </tr>{" "}
                       <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                          <h5 className="text-wrap font-bold text-center">Patient invoice</h5>
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td colspan="2" class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("Patient_invoice")}
                             />
                           </div>
                         </td>
                       </tr>{" "}
                       <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                          <h5 className="text-wrap font-bold text-center">Point of Contact @ Provider Side</h5>
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td colspan="2" class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("Pint_of_contact")}
                             />
                           </div>
                         </td>
                       </tr>{" "}
                       <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                           <h5 className="text-wrap font-bold text-center">Frequency of Client Meeting</h5>
                           </div>
                         </td>
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                          <div className="flex items-center justify-center">
                             <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              id="inline-radio"
+                              type="checkbox"
+                              value=""
+                              name="inline-radio-group"
+                              className="w-4 h-4"
+                              {...register("weekly")}
+                            />
+                            <label
+                              for="inline-radio"
+                              className="ml-2  form-input-name"
+                            >
+                             weekly
+                            </label>
+                          </div>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                          <div className="flex items-center justify-center  mr-4">
+                            <input
+                              id="inline-radio"
+                              type="checkbox"
+                              value=""
+                              name="inline-radio-group"
+                              className="w-4 h-4"
+                              {...register("monthly")}
+                            />
+                            <label
+                              for="inline-radio"
+                              className="ml-2  form-input-name "
+                            >
+                             Monthly
+                            </label>
+                          </div>
+                          </div>
+                        </td>
+                      </tr>{" "}
+                      <tr class="border-b border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                          <div>
+                          <h5 className="text-wrap font-bold text-center">Practice Effective From</h5>
+                          </div>
+                        </td>
+                        <td colSpan={"2"} class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
+                            <input
+                              type="date"
+                              className=" border-none focus:outline-none"
+                              {...register("Practice_Effective_From")}
                             />
                           </div>
                         </td>
                       </tr>{" "}
                       <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                          <h5 className="text-wrap font-bold text-center">Software Used</h5>
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td colSpan={"2"} class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("Software_Used")}
                             />
                           </div>
                         </td>
                       </tr>{" "}
                       <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td class="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
                           <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
-                            />
+                          <h5 className="text-wrap font-bold text-center">Software Login details</h5>
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <td colSpan={"2"} class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
                             <input
                               type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              className="w-full border-none focus:outline-none"
+                              {...register("Software_Login_details")}
                             />
                           </div>
                         </td>
@@ -531,25 +628,26 @@ const StructureofProcess = () => {
                           scope="col"
                           class=" font-bold text-white px-2 py-3 border-r border-blue-400"
                         >
-                          Practice Name
+                         SI#
                         </th>
                         <th
                           scope="col"
                           class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                         >
-                          NPI (Box # 33 )
+                         Provider Name
                         </th>
                         <th
                           scope="col"
                           class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                         >
-                          Tax id /Emp#
+                         Qualification
+As per NPPES
                         </th>
                         <th
                           scope="col"
                           class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                         >
-                          Practice Address ( BOX# 32 )
+                          NPI
                         </th>
                       </tr>
                     </thead>
@@ -557,10 +655,15 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">1</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_1")}
                             />
                           </div>
                         </td>
@@ -569,7 +672,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_1")}
                             />
                           </div>
                         </td>
@@ -578,16 +681,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
+                              {...register("npi_1")}
                             />
                           </div>
                         </td>
@@ -595,10 +689,15 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">2</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_2")}
                             />
                           </div>
                         </td>
@@ -607,7 +706,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_2")}
                             />
                           </div>
                         </td>
@@ -616,16 +715,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
+                              {...register("npi_2")}
                             />
                           </div>
                         </td>
@@ -633,10 +723,15 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">3</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_3")}
                             />
                           </div>
                         </td>
@@ -645,7 +740,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_3")}
                             />
                           </div>
                         </td>
@@ -654,16 +749,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
+                              {...register("npi_3")}
                             />
                           </div>
                         </td>
@@ -671,10 +757,15 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">4</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_4")}
                             />
                           </div>
                         </td>
@@ -683,7 +774,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_4")}
                             />
                           </div>
                         </td>
@@ -692,16 +783,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
+                              {...register("npi_4")}
                             />
                           </div>
                         </td>
@@ -709,10 +791,15 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">5</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_5")}
                             />
                           </div>
                         </td>
@@ -721,7 +808,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_5")}
                             />
                           </div>
                         </td>
@@ -730,16 +817,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
+                              {...register("npi_5")}
                             />
                           </div>
                         </td>
@@ -747,10 +825,15 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">6</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_6")}
                             />
                           </div>
                         </td>
@@ -759,16 +842,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none"
-                              {...register("behavior_1")}
+                              {...register("qualification_6")}
                             />
                           </div>
                         </td>
@@ -777,7 +851,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
+                              {...register("npi_6")}
                             />
                           </div>
                         </td>
@@ -787,7 +861,7 @@ const StructureofProcess = () => {
                 </div>
               </div>
               <div>
-                <div class="overflow-x-auto">
+              <div class="overflow-x-auto">
                   <table class="min-w-full border-2 border-blue-600 ">
                     <thead class="border-b bg-blue-600">
                       <tr>
@@ -795,25 +869,26 @@ const StructureofProcess = () => {
                           scope="col"
                           class=" font-bold text-white px-2 py-3 border-r border-blue-400"
                         >
-                          Practice Name
+                         SI#
                         </th>
                         <th
                           scope="col"
                           class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                         >
-                          NPI (Box # 33 )
+                         Provider Name
                         </th>
                         <th
                           scope="col"
                           class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                         >
-                          Tax id /Emp#
+                         Qualification
+As per NPPES
                         </th>
                         <th
                           scope="col"
                           class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                         >
-                          Practice Address ( BOX# 32 )
+                          NPI
                         </th>
                       </tr>
                     </thead>
@@ -821,10 +896,15 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">1</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_1.1")}
                             />
                           </div>
                         </td>
@@ -833,7 +913,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_1.1")}
                             />
                           </div>
                         </td>
@@ -842,16 +922,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
+                              {...register("npi_1.1")}
                             />
                           </div>
                         </td>
@@ -859,10 +930,15 @@ const StructureofProcess = () => {
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">2</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_2.2")}
                             />
                           </div>
                         </td>
@@ -871,7 +947,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_2.2")}
                             />
                           </div>
                         </td>
@@ -880,27 +956,23 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
+                              {...register("npi_2.2")}
                             />
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
+                      </tr>
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">3</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_3.3")}
                             />
                           </div>
                         </td>
@@ -909,7 +981,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_3.3")}
                             />
                           </div>
                         </td>
@@ -918,27 +990,23 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
+                              {...register("npi_3.3")}
                             />
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
+                      </tr>
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">4</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_4.4")}
                             />
                           </div>
                         </td>
@@ -947,7 +1015,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_4.4")}
                             />
                           </div>
                         </td>
@@ -956,27 +1024,23 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
+                              {...register("npi_4.4")}
                             />
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
+                      </tr>
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">5</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_5.5")}
                             />
                           </div>
                         </td>
@@ -985,7 +1049,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_5.5")}
                             />
                           </div>
                         </td>
@@ -994,27 +1058,23 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
+                              {...register("npi_5.5")}
                             />
                           </div>
                         </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
-                            />
-                          </div>
-                        </td>
-                      </tr>{" "}
+                      </tr>
                       <tr class="border-b border-2 border-blue-600 ">
                         <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                           <div>
+                            <h5 className="font-bold text-center">6</h5>
+                          </div>
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                          <div>
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("date_setting_1")}
+                              {...register("provider_name_6.6")}
                             />
                           </div>
                         </td>
@@ -1023,7 +1083,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("antecedent_1")}
+                              {...register("qualification_6.6")}
                             />
                           </div>
                         </td>
@@ -1032,16 +1092,7 @@ const StructureofProcess = () => {
                             <input
                               type="text"
                               className=" w-full border-none focus:outline-none "
-                              {...register("behavior_1")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div>
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              {...register("consequence_1")}
+                              {...register("npi_6.6")}
                             />
                           </div>
                         </td>
@@ -1052,41 +1103,42 @@ const StructureofProcess = () => {
               </div>
             </div>
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name  text-blue-700">
+                Billing:-
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
-                  placeholder="Enter Description of Tasks Completed..."
+                  placeholder="..."
                   size="large"
                   className=""
-                  {...register("description_task_complete")}
+                  {...register("billing_area")}
                 />
               </div>
             </div>
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name  text-blue-700">
+              ACCOUNTS RECEIVABLE & FOLLOW UP / REJECTIONS:-
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
-                  placeholder="Enter Description of Tasks Completed..."
+                  placeholder="..."
                   size="large"
                   className=""
-                  {...register("description_task_complete")}
+                  {...register("  ACCOUNTS_RECEIVABLE_area")}
                 />
               </div>
             </div>
             <div>
-              <h1 className="form-inner-head my-2 text-center">
-                ANECDOTAL REPORT
-              </h1>
+            <div className="form-title mb-5">
+            <h1>INSURANCE SPECIFICATIONS</h1>
+            <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
+          </div>
               <div class="overflow-x-auto">
                 <table class="min-w-full border-2 border-blue-600 ">
                   <thead class="border-b bg-blue-600">
@@ -1095,37 +1147,37 @@ const StructureofProcess = () => {
                         scope="col"
                         class=" font-bold text-white px-2 py-3 border-r border-blue-400"
                       >
-                        Practice Name
+                        Insurance Name
                       </th>
                       <th
                         scope="col"
                         class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                       >
-                        NPI (Box # 33 )
+                        Provider Credential status
                       </th>
                       <th
                         scope="col"
                         class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                       >
-                        Tax id /Emp#
+                       ERA / EFT Yes / No
                       </th>
                       <th
                         scope="col"
                         class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                       >
-                        Practice Address ( BOX# 32 )
+                        Payer Id
                       </th>
                       <th
                         scope="col"
                         class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                       >
-                        Billing Address (Box # 33 )
+                        	TFL/ Appeal Limit
                       </th>
                       <th
                         scope="col"
                         class=" font-bold text-white px-2 py-3 border-r border-2 border-blue-400"
                       >
-                        Billing Address (Box # 33 )
+                        Mailing Address & Fax#
                       </th>
                     </tr>
                   </thead>
@@ -1720,7 +1772,8 @@ const StructureofProcess = () => {
                 <h1>PAYMENT POSTING</h1>
                 <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
               </div>
-              <div className="flex flex-wrap justify-center mt-4 mb-4">
+               <h5 className="font-bold text-blue-700 text-lg">REMITTANCE MODE:-</h5>
+              <div className="flex flex-wrap mt-4 mb-4">
                 <div className="flex items-center  mr-4">
                   <input
                     id="inline-radio"
@@ -1807,72 +1860,72 @@ const StructureofProcess = () => {
               </div>
             </div>
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name text-blue-700">
+              HOW TO POST AN ERA:-
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
-                  placeholder="Enter Description of Tasks Completed..."
+                  placeholder="..."
                   size="large"
                   className=""
-                  {...register("description_task_complete")}
+                  {...register("HOW_TO_POST_AN_Era")}
                 />
               </div>
             </div>{" "}
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name text-blue-700">
+              HOW TO POST AN EOB:-
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
-                  placeholder="Enter Description of Tasks Completed..."
+                  placeholder="..."
                   size="large"
                   className=""
-                  {...register("description_task_complete")}
+                  {...register("HOW_TO_POST_AN_EOB")}
                 />
               </div>
             </div>{" "}
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name text-blue-700">
+              AUTHORIZATION REQUEST / UPLOADING THE AUTH IN MEDISOFT & BENEFITS:-
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
-                  placeholder="Enter Description of Tasks Completed..."
+                  placeholder="..."
                   size="large"
                   className=""
-                  {...register("description_task_complete")}
+                  {...register("AUTHORIZATION_REQUEST")}
                 />
               </div>
             </div>{" "}
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name text-blue-700">
+              COMMONLY USED REPORTS:-
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
-                  placeholder="Enter Description of Tasks Completed..."
+                  placeholder="..."
                   size="large"
                   className=""
-                  {...register("description_task_complete")}
+                  {...register("COMMONLY_USED")}
                 />
               </div>
             </div>
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed -
+              <span className="form-input-name text-blue-700">
+              BILLING FLOW CHART:-
               </span>
               <div>
                 <img
@@ -1883,7 +1936,7 @@ const StructureofProcess = () => {
               </div>
             </div>
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">SOP SOURCE</span>
+              <span className="form-input-name text-blue-700">SOP SOURCE</span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <div class="flex justify-center">
                   <div class=" xl:w-full">
@@ -1915,8 +1968,8 @@ const StructureofProcess = () => {
               </div>
             </div>
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name text-blue-700">
+              UPDATES:-
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
@@ -1930,98 +1983,22 @@ const StructureofProcess = () => {
                 />
               </div>
             </div>
-            <div className="border-2 border-blue-600 px-2">
-              <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
-                <div class="flex items-center mr-4">
-                  <input
-                    id="inline-radio"
-                    type="checkbox"
-                    value=""
-                    name="inline-radio-group"
-                    class="w-4 h-4"
-                    {...register("client")}
-                  />
-                  <label for="inline-radio" class="ml-2 form-input-name">
-                    Client
-                  </label>
-                </div>
-                <div class="flex items-center mr-4">
-                  <input
-                    id="inline-radio"
-                    type="checkbox"
-                    value=""
-                    name="inline-radio-group"
-                    class="w-4 h-4"
-                    {...register("therapist")}
-                  />
-                  <label for="inline-radio" class="ml-2 form-input-name">
-                    Therapist
-                  </label>
-                </div>
-                <div class="flex items-center mr-4">
-                  <input
-                    id="inline-2-radio"
-                    type="checkbox"
-                    value=""
-                    name="inline-radio-group"
-                    class="w-4 h-4"
-                    {...register("rendering_provider")}
-                  />
-                  <label for="inline-2-radio" class="ml-2 form-input-name">
-                    Rendering Provider
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div className=" flex  flex-wrap justify-between mt-10">
-              <div>
-                <button
-                  className="flex items-center text-lg hover:underline hover:text-rose-800 mx-auto font-medium gap-1 text-[#207ac7]"
-                  onClick={handleSignatureProvider}
-                >
-                  Provider Signature
-                  <FaSignature className="text-lg" />
-                </button>
-              </div>
-
-              <div>
-                <button
-                  className="flex items-center text-lg hover:underline hover:text-rose-800 mx-auto font-medium gap-1 text-[#207ac7]"
-                  onClick={handleSignatureProvider}
-                >
-                  Caregiver Signature <FaSignature className="text-lg" />
-                </button>
-              </div>
-            </div>
-            <div className="flex items-center justify-between my-12">
-              <button className=" bg-purple-900 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
-                <AiFillCloud /> Save
+           
+           
+            
+              <button className=" bg-blue-700 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
+                 Submit
               </button>
-              <button className=" bg-cyan-900 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
-                <AiOutlinePrinter /> Print
-              </button>
-            </div>
+             
+          
           </div>
         </form>
 
-        {providerSignature && (
-          <SignatureModal
-            handleSignatureClose={handleSignatureClose}
-            open={providerSignature}
-            setImageURL={setProviderImageURL}
-            setFile={setFile}
-          ></SignatureModal>
-        )}
+       
 
-        <div className="flex flex-wrap gap-2 items-center justify-between form-footer">
-          <div className="text-black">
-            Demo Institution{" "}
-            <span className=" font-normal">somewhere in america</span>
-          </div>
-          <div>
-            Phone: 000-000-0000, Email: demo@example.com, Fax: 000.000.0000,
-            example.com
-          </div>
+        <div className="p-3 border mt-2 shadow-lg">
+          <p >123 Town Square Place Suite13, Jersey City, NJ 07310</p>
+          <p><span className="text-blue-700">Phone: 201-479-9876, Fax: 213-895-4889, www.amromed.com </span>Copy of State License (If applicable)</p>
         </div>
       </div>
     </div>
