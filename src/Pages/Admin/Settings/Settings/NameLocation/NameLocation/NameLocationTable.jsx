@@ -483,7 +483,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
               </div>
 
               {/* submit  */}
-              <input className="pms-button" type="submit" value={"Save"} />
+              <input className="pms-button mb-3" type="submit" value={"Save"} />
             </form>
           </motion.div>
         </div>

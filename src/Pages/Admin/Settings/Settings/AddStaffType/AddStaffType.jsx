@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
-import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
-import {
-  PostfetchData,
-  QueryPost,
-  useAddSuperHeroData,
-} from "../../../../../Misc/Helper";
+import { PostfetchData } from "../../../../../Misc/Helper";
 
 const AddStaffType = () => {
   // QueryPost('https://test-prod.therapypms.com/api/v1/admin/ac/setting/cpt/code/exclusion/get', mutate)
