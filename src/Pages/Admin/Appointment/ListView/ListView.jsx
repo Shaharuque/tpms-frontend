@@ -828,7 +828,7 @@ const ListView = () => {
                   </div>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                  <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
+                  <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 2xl:grid-cols-7 gap-2 mb-2">
                     {billable && (
                       <div>
                         <label className="label">
@@ -1003,7 +1003,7 @@ const ListView = () => {
                             <input
                               placeholder="Search here..."
                               onChange={(e) => globalFilter(e.target.value)}
-                              className="focus:outline-none"
+                              className="focus:outline-none w-full"
                             />
                             <label>
                               <BiSearchAlt />
