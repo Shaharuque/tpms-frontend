@@ -13,7 +13,7 @@ const IntakeForm = () => {
   // console.log(file);
   return (
     <>
-      <div className="flex items-center gap-1">
+      <div className="flex flex-wrap items-center gap-1">
         <div className=" ">
           <label className="label">
             <span className=" label-font">Browse Intake Form</span>

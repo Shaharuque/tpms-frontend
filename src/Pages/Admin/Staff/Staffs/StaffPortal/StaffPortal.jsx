@@ -7,8 +7,6 @@ import { Switch } from "antd";
 const StaffPortal = () => {
   const [active, setActive] = useState(false);
 
-
-
   const { id } = useParams();
   console.log("patient Portal", id);
   const [secure, setSecure] = useState(false);
@@ -45,10 +43,10 @@ const StaffPortal = () => {
                     }}
                   /> */}
                   <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                    size="small"
+                    checked={active ? true : false}
+                    onClick={() => setActive(!active)}
+                  />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Use secure messaging
                   </span>
@@ -62,10 +60,10 @@ const StaffPortal = () => {
                     }}
                   /> */}
                   <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                    size="small"
+                    checked={active ? true : false}
+                    onClick={() => setActive(!active)}
+                  />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Access billing documents
                   </span>
@@ -79,10 +77,10 @@ const StaffPortal = () => {
                     }}
                   /> */}
                   <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+                    size="small"
+                    checked={active ? true : false}
+                    onClick={() => setActive(!active)}
+                  />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Pay a balance with credit card using Stripe
                   </span>
@@ -102,13 +100,13 @@ const StaffPortal = () => {
                 user. Remember that anyone who has access to this link can
                 change the password for relavent user.
               </p>
-              <div className="my-3 flex item-center gap-2">
+              <div className="my-3 flex flex-wrap item-center gap-2">
                 <h1 className="text-sm my-1 text-red-500">
                   Link Expiration Date
                 </h1>
                 <input
                   onChange={handleDate}
-                  className="border rounded-sm px-2 mx-1 text-xs w-1/4"
+                  className="border rounded-sm px-2 sm:mx-1 text-xs sm:w-1/4"
                   type="date"
                 />
                 <button className="py-[5px] px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary hover:to-secondary text-white ">

@@ -828,7 +828,7 @@ const ListView = () => {
                   </div>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                  <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 2xl:grid-cols-7 gap-2 mb-2">
+                  <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 2xl:grid-cols-8 gap-2 mb-2">
                     {billable && (
                       <div>
                         <label className="label">

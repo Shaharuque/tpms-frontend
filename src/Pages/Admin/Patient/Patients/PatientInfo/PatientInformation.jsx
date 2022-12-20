@@ -864,7 +864,8 @@ const PatientInformation = () => {
               transition={{ delay: 0.2 }}
             >
               <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1">
+              {/* <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1"> */}
+              <div className="flex gap-4 items-center">
                 <div>
                   <label className="label">
                     <span className=" label-font">First Name</span>
@@ -900,10 +901,10 @@ const PatientInformation = () => {
                     {...register("guarantor_check_Date")}
                   />
                 </div>
-              </div>
+                {/* </div> */}
 
-              {/* ---------------------------------*/}
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1">
+                {/* ---------------------------------*/}
+                {/* <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1"> */}
                 <div>
                   <label className="label">
                     <span className=" label-font">Address</span>
@@ -912,13 +913,14 @@ const PatientInformation = () => {
                     <input
                       type="text"
                       placeholder="Street"
-                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
+                      className="input-border input-font py-1  w-full focus:outline-none"
                       {...register(checkLocation ? "GuaratorStreet" : "null")}
                     />
                   </div>
                 </div>
 
-                <div className="my-auto text-xs bg-secondary text-white ml-1 py-1 mb-2 text-center w-full rounded-md">
+                {/* <div className="my-auto text-xs bg-secondary text-white ml-1 py-1 mb-2 text-center w-full rounded-md"> */}
+                <div className="pms-button mt-[17px]">
                   <button
                     onClick={() => {
                       SameasPatientBtn();
