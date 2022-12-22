@@ -163,10 +163,9 @@ const EmailSetting = () => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
-            <div className="flex items-center flex-wrap ">
+            <div className="flex items-center gap-4 flex-wrap ">
               <Switch
                 size="small"
-                className="mr-3"
                 // checked={value ? true : false}
                 // onClick={() => setValue(!value)}
               />

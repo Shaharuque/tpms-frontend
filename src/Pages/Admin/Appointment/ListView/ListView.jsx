@@ -21,6 +21,7 @@ import Providers from "./MultiSelectComponents/Providers";
 import useToken from "../../../../CustomHooks/useToken";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
+import DateRangePickersTest from "../../../Shared/CustomDateRange/DateRangePicker/DateRangePickersTest";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -891,7 +892,6 @@ const ListView = () => {
                             </select>
                           </div>
                         </div>
-
                         <div>
                           <label className="label">
                             <span className="label-text  text-[16px] text-gray-100 text-left">
@@ -899,7 +899,7 @@ const ListView = () => {
                             </span>
                           </label>
                           {/* Date Range calender will be set here */}
-                          <div className="">
+                          {/* <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
                               className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px]  text-[14px] w-full"
@@ -926,9 +926,9 @@ const ListView = () => {
                                 {...register("end_date")}
                               />
                             </div>
-                          </div>
+                          </div> */}
                           {/* Multi date picker component called */}
-                          <div>
+                          {/* <div>
                             <div
                               ref={refClose}
                               // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
@@ -944,9 +944,10 @@ const ListView = () => {
                                 ></CustomDateRange>
                               )}
                             </div>
-                          </div>
+                          </div> */}
+                          <DateRangePickersTest></DateRangePickersTest>
                         </div>
-
+                        -+
                         <div className="flex gap-5">
                           <div>
                             <label className="label">

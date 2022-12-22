@@ -388,6 +388,8 @@ const PatientLedger = () => {
     setOpenCalendar(false);
   };
 
+  // date year range
+
   // date range picker calendar
   const startDate = range ? range[0]?.startDate : null;
   const endDate = range ? range[0]?.endDate : null;
