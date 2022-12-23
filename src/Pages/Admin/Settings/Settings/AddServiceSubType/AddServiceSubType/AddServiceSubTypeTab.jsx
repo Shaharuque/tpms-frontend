@@ -1,4 +1,3 @@
-//Main
 import { Switch, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -6,6 +5,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import useToken from "../../../../../../CustomHooks/useToken";
 import { useSelectedTreatmentsQuery } from "../../../../../../features/Settings_redux/selectedTreatmentsApi";
+import Loading from "../../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../../Misc/Helper";
 import AddServiceSubTypeTabEditModal from "./AddServiceSubTypeTabEditModal";
 
@@ -26,14 +26,14 @@ const AddServiceSubTypeTab = () => {
   const [table, setTable] = useState(false);
 
   // //getting selected treatments using rtk query
-  // const {
-  //   data: s_treatments,
-  //   isLoading,
-  //   isSuccess,
-  //   error: apiError,
-  // } = useSelectedTreatmentsQuery();
+  const {
+    data: s_treatments,
+    isLoading,
+    isSuccess,
+    error: apiError,
+  } = useSelectedTreatmentsQuery();
 
-  // console.log("rtkQuery selected treatments", s_treatments);
+  console.log("rtkQuery selected treatments", s_treatments);
 
   //getting all the selected treatment data for Tx type selection purpose
   useEffect(() => {
@@ -49,19 +49,25 @@ const AddServiceSubTypeTab = () => {
   console.log(selectedTreatments);
 
   useEffect(() => {
-    PostfetchData({
-      endPoint: "admin/ac/setting/sub-activity-treatment-billable-type",
-      token,
-      payload: { treatment_id: txType },
-    }).then((res) => {
-      const result = res?.bill_type;
-      console.log(result);
-      if (result?.length !== 0) {
-        setBillType(result);
-      } else {
-        setErrorType("Noting Found");
+    const billType = () => {
+      //tyType and txType==='Select' na hoy tahley e api tey hit korbey otherwise na
+      if (txType && txType !== "Select") {
+        PostfetchData({
+          endPoint: "admin/ac/setting/sub-activity-treatment-billable-type",
+          token,
+          payload: { treatment_id: txType },
+        }).then((res) => {
+          const result = res?.bill_type;
+          console.log(result);
+          if (result?.length !== 0) {
+            setBillType(result);
+          } else {
+            setErrorType("Noting Found");
+          }
+        });
       }
-    });
+    };
+    billType();
   }, [txType, token]);
   console.log(billType);
 
@@ -91,21 +97,45 @@ const AddServiceSubTypeTab = () => {
   };
 
   //calling data
-  useEffect(() => {
-    const options = {
-      url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/sub-activity-service-get",
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=UTF-8",
-        Authorization: token,
-      },
-      data: { treatment_id: txType, bill_type: type },
-    };
+  // useEffect(() => {
+  //   const options = {
+  //     url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/sub-activity-service-get",
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json;charset=UTF-8",
+  //       Authorization: token,
+  //     },
+  //     data: { treatment_id: txType, bill_type: type },
+  //   };
 
-    axios(options).then((response) => {
-      setTable(response?.data?.services);
-    });
+  //   axios(options).then((response) => {
+  //     setTable(response?.data?.services);
+  //   });
+  // }, [txType, type, token]);
+
+  useEffect(() => {
+    const getServiceSubType = async () => {
+      let res;
+      //if type is not selected then api will not be called
+      if (type) {
+        res = await axios({
+          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/sub-activity-service-get",
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            Authorization: token,
+          },
+          data: { treatment_id: txType, bill_type: type },
+        });
+      }
+      // const result = await res.json();
+      const data = res?.data;
+      console.log("testing using conditionally api calling", data);
+      setTable(res?.data?.services);
+    };
+    getServiceSubType();
   }, [txType, type, token]);
 
   let content = null;
