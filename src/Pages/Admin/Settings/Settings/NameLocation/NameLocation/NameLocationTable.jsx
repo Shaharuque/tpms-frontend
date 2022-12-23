@@ -65,7 +65,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 my-5 mr-2 gap-6">
                 {/* name  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Name
@@ -80,7 +79,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* address 1 */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Address
@@ -95,7 +93,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* address_two */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Address 2
@@ -110,7 +107,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* city  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       City
@@ -142,7 +138,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* Zip  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Zip
@@ -157,7 +152,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* phone  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Phone
@@ -172,7 +166,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* short code  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Short Code
@@ -187,7 +180,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* email  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Email
@@ -202,7 +194,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* EIN */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       EIN
@@ -217,7 +208,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* NPI */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       NPI
@@ -232,7 +222,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* taxonomy */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Taxonomy
@@ -247,7 +236,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* Contact person name  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Contact Person
@@ -262,7 +250,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* Service Area Miles */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       Service Area Miles
@@ -277,7 +264,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* SFTP Username */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       SFTP Username
@@ -293,7 +279,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 </div>
                 {/* password  */}
                 <div>
-                  {" "}
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                       SFTP Password
@@ -349,6 +334,18 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     />
                     <span className="text-[14px] font-medium text-gray-500 mx-3">
                       Combo Code
+                    </span>
+                  </div>
+                </div>
+                <div className="md:mx-auto mt-10 items-start">
+                  <div>
+                    <Switch
+                      size="small"
+                      checked={value ? true : false}
+                      onClick={() => setValue(!value)}
+                    />
+                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                      Email Reminders
                     </span>
                   </div>
                 </div>
@@ -486,7 +483,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
               </div>
 
               {/* submit  */}
-              <input className="pms-button" type="submit" value={"Save"} />
+              <input className="pms-button mb-3" type="submit" value={"Save"} />
             </form>
           </motion.div>
         </div>

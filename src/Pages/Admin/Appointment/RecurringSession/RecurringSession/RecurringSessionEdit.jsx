@@ -48,7 +48,7 @@ const RecurringSessionEdit = () => {
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 my-3 mr-2 gap-6">
+          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7 my-3 mr-2 gap-6">
             {/* name  */}
             <div>
               <label className="label">
@@ -178,8 +178,8 @@ const RecurringSessionEdit = () => {
                 <option value="No Show">No Show</option>
               </select>
             </div>
-
-            <div>
+            {/* <div></div> */}
+            <div className="md:col-span-2">
               <label className="label">
                 <span className=" label-font">Office Notes</span>
               </label>

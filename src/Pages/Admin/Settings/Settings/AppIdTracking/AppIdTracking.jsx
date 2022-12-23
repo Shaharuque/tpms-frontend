@@ -7,15 +7,14 @@ const AppIdTracking = () => {
   };
   return (
     <div className="p-2">
-      <h1 className="text-[17px] mb-2 text-orange-300 font-semibold">
+      <h1 className="text-[17px] mb-2 text-orange-400 font-semibold">
         Track Appointment with Appointment ID
       </h1>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center flex-wrap gap-4">
         <div className=" ">
           <label className="label">
             <span className=" label-font">Appointment ID</span>
           </label>
-
           <input
             type="text"
             name="middle_name"
@@ -26,7 +25,7 @@ const AppIdTracking = () => {
         <div className="">
           <div className=" flex items-end justify-start gap-3 mt-6">
             <button className=" pms-button " type="submit">
-              Upload
+              Find
             </button>
           </div>
           {/* submit  */}

@@ -32,7 +32,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
               }}
             >
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 my-3 mr-2 gap-x-4 gap-y-1">
+                <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-5 my-3 mr-2 gap-x-4 gap-y-1">
                   {/* name  */}
                   <div>
                     <label className="label">

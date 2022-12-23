@@ -28,7 +28,7 @@ const Logo = () => {
               <div>
                 <div className="my-3">
                   <input
-                    className="form-control text-sm border border-gray-300 w-[100px] lg:w-full "
+                    className="form-control text-sm border border-gray-300 w-[100px] lg:w-full"
                     type="file"
                     id="formFile"
                     onChange={handleChange}

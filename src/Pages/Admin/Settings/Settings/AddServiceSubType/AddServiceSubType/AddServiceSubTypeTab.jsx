@@ -260,9 +260,10 @@ const AddServiceSubTypeTab = () => {
   return (
     <div>
       <div className="">
-        <h1 className="text-lg my-3 text-orange-400">Place of Service</h1>
+        <h1 className="text-lg my-3 text-orange-400">Service Sub Types </h1>
       </div>
-      <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 my-3 mr-2 gap-x-3 gap-y-1 ">
+      {/* <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 my-3 mr-2 gap-x-3 gap-y-1 "> */}
+      <div className="flex flex-wrap items-center gap-2">
         <div>
           <label className="label">
             <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">

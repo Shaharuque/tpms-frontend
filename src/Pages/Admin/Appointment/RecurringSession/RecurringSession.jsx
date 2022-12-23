@@ -357,9 +357,14 @@ const RecurringSession = () => {
                 <div className="text-[16px]  text-white font-semibold ">
                   Recurring Session
                 </div>
-                <div className="arrow bounce">
-                  <AiOutlineDown />
-                </div>
+                <lord-icon
+                  src="https://cdn.lordicon.com/rxufjlal.json"
+                  trigger="loop"
+                  style={{ height: "25px" }}
+                  colors="primary:#fff"
+                  state="hover-1"
+                  // style="width:250px;height:250px"
+                ></lord-icon>
               </>
             )}
           </div>

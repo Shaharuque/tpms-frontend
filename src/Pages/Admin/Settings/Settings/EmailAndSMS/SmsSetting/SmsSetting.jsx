@@ -135,18 +135,19 @@ const SmsSetting = () => {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      width: 60,
+      width: 80,
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
-            <div className="flex items-center ">
+            <div className="flex flex-wrap items-center gap-1">
               <Switch
                 size="small"
+                className="mr-3"
                 // checked={value ? true : false}
                 // onClick={() => setValue(!value)}
               />
-              <span className="text-[14px] font-medium text-gray-500 mx-3">
+              <span className="text-[14px] font-medium text-gray-500 ">
                 Active
               </span>
             </div>

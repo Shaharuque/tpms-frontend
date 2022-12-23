@@ -97,8 +97,8 @@ const TpmsMeet = () => {
 
   return (
     <div className="p-2 overflow-y-hidden">
-      <div className="md:flex mb-2 flex-wrap  items-center justify-between">
-        <h1 className="text-sm">Meet Lists</h1>
+      <div className="md:flex mb-2 flex-wrap gap-2 items-center justify-between">
+        <h1 className="text-base">Meet Lists</h1>
         <button className="flex items-center gap-2 pms-button">
           <BsCalendar2PlusFill className="text-[18px]" /> Create New Meet
         </button>

@@ -175,6 +175,7 @@ import Test from "./Pages/Shared/Test";
 import IntakeForm from "./Pages/Admin/Settings/Settings/IntakeForm/IntakeForm";
 import StructureOfProcess from "./Pages/Admin/Settings/Settings/StructureOfProcess/StructureOfProcess";
 import AppIdTracking from "./Pages/Admin/Settings/Settings/AppIdTracking/AppIdTracking";
+import VOB from "./Pages/Admin/Patient/Patients/VOB/VOB";
 import { usePersistStore } from "./CustomHooks/usePersistStore";
 
 function App() {
@@ -502,6 +503,7 @@ function App() {
                 path="patient-authorization"
                 element={<Authorization></Authorization>}
               ></Route>
+              <Route path="patient-vob/:id" element={<VOB></VOB>}></Route>
               <Route
                 path="patient-document/:id"
                 element={<Documents></Documents>}
