@@ -22,11 +22,9 @@ import "react-phone-input-2/lib/style.css";
 const PatientInformation = () => {
   const { token } = useToken();
   const [active, setActive] = useState(false);
-  const [voiceMsg, setVoiceMsg] = useState(false);
-  const [textMsg, setTextMsg] = useState(false);
   const [appointment, setAppointment] = useState(false);
   const [email, setEmail] = useState(false);
-  const [emailSend, setEmailSend] = useState(false);
+  const [emailReminder, setEmailReminder] = useState(false);
   const [Guarantor, setGuarantor] = useState(false);
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
@@ -539,8 +537,8 @@ const PatientInformation = () => {
                   /> */}
                   <Switch
                     size="small"
-                    checked={active ? true : false}
-                    onClick={() => setActive(!active)}
+                    checked={appointment ? true : false}
+                    onClick={() => setAppointment(!appointment)}
                   />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     SMS Appointment Reminders
@@ -602,8 +600,8 @@ const PatientInformation = () => {
                   /> */}
                     <Switch
                       size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
+                      checked={appointment ? true : false}
+                      onClick={() => setAppointment(!appointment)}
                     />
                     <span className="text-xs ml-1 text-gray-700 font-medium">
                       SMS Appointment Reminders
@@ -658,8 +656,8 @@ const PatientInformation = () => {
                   /> */}
                   <Switch
                     size="small"
-                    checked={active ? true : false}
-                    onClick={() => setActive(!active)}
+                    checked={email ? true : false}
+                    onClick={() => setEmail(!email)}
                   />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Email OK
@@ -676,8 +674,8 @@ const PatientInformation = () => {
                   /> */}
                   <Switch
                     size="small"
-                    checked={active ? true : false}
-                    onClick={() => setActive(!active)}
+                    checked={emailReminder ? true : false}
+                    onClick={() => setEmailReminder(!emailReminder)}
                   />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Send email appointment reminders
@@ -731,8 +729,8 @@ const PatientInformation = () => {
                       /> */}
                       <Switch
                         size="small"
-                        checked={active ? true : false}
-                        onClick={() => setActive(!active)}
+                        checked={email ? true : false}
+                        onClick={() => setEmail(!email)}
                       />
                       <span className="text-xs ml-1 text-gray-700 font-normal">
                         Email OK
@@ -750,8 +748,8 @@ const PatientInformation = () => {
                     /> */}
                     <Switch
                       size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
+                      checked={emailReminder ? true : false}
+                      onClick={() => setEmailReminder(!emailReminder)}
                     />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Send email appointment reminders

@@ -899,10 +899,10 @@ const ListView = () => {
                             </span>
                           </label>
                           {/* Date Range calender will be set here */}
-                          {/* <div className="">
+                          <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px]  text-[14px] w-full"
+                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text [14px] w-full"
                             >
                               <input
                                 value={
@@ -926,9 +926,9 @@ const ListView = () => {
                                 {...register("end_date")}
                               />
                             </div>
-                          </div> */}
+                          </div>
                           {/* Multi date picker component called */}
-                          {/* <div>
+                          <div>
                             <div
                               ref={refClose}
                               // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
@@ -944,10 +944,8 @@ const ListView = () => {
                                 ></CustomDateRange>
                               )}
                             </div>
-                          </div> */}
-                          <DateRangePickersTest></DateRangePickersTest>
+                          </div>
                         </div>
-                        -+
                         <div className="flex gap-5">
                           <div>
                             <label className="label">
