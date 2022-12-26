@@ -3,11 +3,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import useToken from "../../../../../../CustomHooks/useToken";
 import { fetchServiceSubType } from "../../../../../../features/Settings_redux/selectedServiceSubTypesApi";
 import Loading from "../../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../../Misc/Helper";
+import ShimmerTableTet from "../../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddServiceSubTypeTabEditModal from "./AddServiceSubTypeTabEditModal";
 
 const AddServiceSubTypeTab = () => {
@@ -33,6 +35,9 @@ const AddServiceSubTypeTab = () => {
     useSelector((state) => state.getServiceSubTypes) || {};
   const tableData = serviceSubTypes?.sub_activity?.data || [];
   console.log(serviceSubTypes);
+  const totalPage = serviceSubTypes?.sub_activity?.last_page
+    ? serviceSubTypes?.sub_activity?.last_page
+    : 0;
 
   //getting all the selected treatment data for Tx type selection purpose
   useEffect(() => {
@@ -339,30 +344,53 @@ const AddServiceSubTypeTab = () => {
               Clear filters
             </button>
           </div>
-          {loading ? (
-            <Loading></Loading>
-          ) : (
-            <div>
-              <Table
-                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                size="small"
-                bordered
-                className=" text-xs font-normal"
-                columns={columns}
-                dataSource={tableData}
-                scroll={{
-                  y: 650,
-                }}
-                onChange={handleChange}
-              />
+          <div>
+            <div className="overflow-scroll">
+              {loading ? (
+                <ShimmerTableTet></ShimmerTableTet>
+              ) : (
+                <div>
+                  <Table
+                    pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                    rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                    size="small"
+                    bordered
+                    className=" text-xs font-normal"
+                    columns={columns}
+                    dataSource={tableData}
+                    scroll={{
+                      y: 650,
+                    }}
+                    onChange={handleChange}
+                  />
+                </div>
+              )}
             </div>
-          )}
+            {/* If multiple-page found then show pagination otherwise not */}
+            {totalPage > 1 && (
+              <div className="flex items-center justify-start">
+                <ReactPaginate
+                  previousLabel={"<"}
+                  nextLabel={">"}
+                  // previousLabel={"🡰"}
+                  // nextLabel={"🡲"}
+                  pageCount={Number(totalPage)}
+                  marginPagesDisplayed={1}
+                  onPageChange={handlePageClick}
+                  containerClassName={"pagination"}
+                  previousLinkClassName={"pagination_Link"}
+                  nextLinkClassName={"pagination_Link"}
+                  activeClassName={"pagination_Link-active"}
+                  disabledClassName={"pagination_Link-disabled"}
+                ></ReactPaginate>
+              </div>
+            )}
+          </div>
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
               <button onClick={handleClickOpen} className="pms-button my-2">
-                Add Place of Service
+                Add Service Sub Type
               </button>
             </label>
           </div>
@@ -373,6 +401,7 @@ const AddServiceSubTypeTab = () => {
               row={recordData}
               txType={txType}
               serviceId={serviceId}
+              billAbleId={type}
               subActivityEndPoint={subActivityEndPoint}
               page={page}
             ></AddServiceSubTypeTabEditModal>
