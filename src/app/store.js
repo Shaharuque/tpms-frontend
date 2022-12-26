@@ -13,11 +13,12 @@ import {
 } from "../features/Settings_redux/placeOfServiceSlice";
 import { authReducer } from "../features/login_redux/loginSlice";
 import { apiSlice } from "../features/api/apiSlice";
+import { serviceSubTypeReducer } from "../features/Settings_redux/selectedServiceSubTypesApi";
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice(RTK query)
-    [apiSlice.reducerPath]: apiSlice.reducer,
+    // [apiSlice.reducerPath]: apiSlice.reducer,
     //async thunk reducers
     patientData: patientDataReducer,
     patientInfo: patientDetailsReducer,
@@ -26,12 +27,13 @@ export const store = configureStore({
     cptInfo: cptReducer,
     posInfo: posReducer,
     posCreated: createPosReducer,
+    getServiceSubTypes: serviceSubTypeReducer,
     loginInfo: loginReducer,
     //normal reducers
     authInfo: authReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware().concat(apiSlice.middleware),
 });

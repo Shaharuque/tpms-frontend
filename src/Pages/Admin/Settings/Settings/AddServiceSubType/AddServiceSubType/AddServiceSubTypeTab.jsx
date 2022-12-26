@@ -1,11 +1,12 @@
-//Main
 import { Switch, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import useToken from "../../../../../../CustomHooks/useToken";
-import { useSelectedTreatmentsQuery } from "../../../../../../features/Settings_redux/selectedTreatmentsApi";
+import { fetchServiceSubType } from "../../../../../../features/Settings_redux/selectedServiceSubTypesApi";
+import Loading from "../../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../../Misc/Helper";
 import AddServiceSubTypeTabEditModal from "./AddServiceSubTypeTabEditModal";
 
@@ -14,7 +15,6 @@ const AddServiceSubTypeTab = () => {
   const [txType, setTxType] = useState("");
   const [type, setType] = useState("");
   const [value, setValue] = useState(true);
-  const [service, setService] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -24,49 +24,64 @@ const AddServiceSubTypeTab = () => {
   const [error, setError] = useState("");
   const [errorType, setErrorType] = useState("");
   const [table, setTable] = useState(false);
+  const [services, setServices] = useState([]);
+  const [serviceId, setServiceId] = useState(false);
+  const [page, setPage] = useState(1);
 
-  // //getting selected treatments using rtk query
-  // const {
-  //   data: s_treatments,
-  //   isLoading,
-  //   isSuccess,
-  //   error: apiError,
-  // } = useSelectedTreatmentsQuery();
-
-  // console.log("rtkQuery selected treatments", s_treatments);
+  const dispatch = useDispatch();
+  const { serviceSubTypes, loading } =
+    useSelector((state) => state.getServiceSubTypes) || {};
+  const tableData = serviceSubTypes?.sub_activity?.data || [];
+  console.log(serviceSubTypes);
 
   //getting all the selected treatment data for Tx type selection purpose
   useEffect(() => {
-    fetchData("admin/ac/setting/get/selected/treatment", token).then((res) => {
-      const result = res?.data?.selected_treatment;
-      if (result?.length !== 0) {
-        setSelectedTreatments(result);
-      } else {
-        setError("Please Add Treatment");
-      }
-    });
+    const getAllTreatments = async () => {
+      let response;
+      response = await axios({
+        url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/subactivity/treatment/get/all",
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "treatmentSelect-Type": "application/json;charset=UTF-8",
+          Authorization: token,
+        },
+      });
+      // const result = await res.json();
+      const data = response?.data?.treatment_data;
+      console.log("all treatments", data);
+      setSelectedTreatments(data);
+    };
+    getAllTreatments();
   }, [token]);
-  console.log(selectedTreatments);
+  //console.log(selectedTreatments);
 
   useEffect(() => {
-    PostfetchData({
-      endPoint: "admin/ac/setting/sub-activity-treatment-billable-type",
-      token,
-      payload: { treatment_id: txType },
-    }).then((res) => {
-      const result = res?.bill_type;
-      console.log(result);
-      if (result?.length !== 0) {
-        setBillType(result);
-      } else {
-        setErrorType("Noting Found");
+    const billType = () => {
+      //tyType and txType==='Select' na hoy tahley e api tey hit korbey otherwise na
+      if (txType && txType !== "Select") {
+        PostfetchData({
+          endPoint: "admin/ac/setting/subactivity/billable/type",
+          token,
+          payload: { treatment_id: txType },
+        }).then((res) => {
+          const result = res?.bill_type;
+          console.log(result);
+          if (result?.length !== 0) {
+            setBillType(result);
+          } else {
+            setErrorType("Noting Found");
+          }
+        });
       }
-    });
+    };
+    billType();
   }, [txType, token]);
-  console.log(billType);
+  //console.log(billType);
 
   const handleClickOpen = (record) => {
     setOpenEditModal(true);
+    console.log(record);
     setRecordData(record);
   };
 
@@ -77,47 +92,91 @@ const AddServiceSubTypeTab = () => {
   const handleTxType = (e) => {
     setTxType(e.target.value);
     setType("");
+    setServiceId("");
   };
-  console.log(txType);
 
   const handleTypeChange = (e) => {
     setType(e.target.value);
   };
-  console.log(type);
 
-  const serviceHandleOnchange = (e) => {
+  const serviceOnchange = (e) => {
     console.log(e.target.value);
-    setService(!service);
+    setServiceId(e.target.value);
   };
 
-  //calling data
   useEffect(() => {
-    const options = {
-      url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/sub-activity-service-get",
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=UTF-8",
-        Authorization: token,
-      },
-      data: { treatment_id: txType, bill_type: type },
+    const getServices = async () => {
+      let res;
+      //if type is not selected then api will not be called
+      if (type) {
+        res = await axios({
+          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/subactivity/service",
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "treatmentSelect-Type": "application/json;charset=UTF-8",
+            Authorization: token,
+          },
+          data: { treatment_id: txType, billable_type: type },
+        });
+      }
+      // const result = await res.json();
+      const data = res?.data?.bill_type;
+      console.log("conditionally api calling to get services", data);
+      // setTable(data);
+      setServices(data);
     };
-
-    axios(options).then((response) => {
-      setTable(response?.data?.services);
-    });
+    getServices();
   }, [txType, type, token]);
 
-  let content = null;
+  //Getting sub activity table data
+  const subActivityEndPoint = "admin/ac/setting/subactivity/get/data";
+  useEffect(() => {
+    if (txType && serviceId) {
+      dispatch(
+        fetchServiceSubType({
+          endPoint: subActivityEndPoint,
+          page,
+          token,
+          data: { treatment_id: txType, service_id: serviceId },
+        })
+      );
+    }
+  }, [txType, serviceId, dispatch, page, token]);
+
+  // Controlling pagination
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", typeof selectedPage);
+    setPage(selectedPage + 1);
+  };
+
+  let treatmentSelect = null;
   if (selectedTreatments?.length === 0) {
-    content = <div className="text-red-700">Select Treatments</div>;
+    treatmentSelect = <div className="text-red-700">Select Treatments</div>;
   } else if (selectedTreatments?.length > 0) {
-    content = (
+    treatmentSelect = (
       <>
         {selectedTreatments?.map((treatment) => {
           return (
             <option key={treatment?.id} value={treatment?.id}>
               {treatment?.treatment_name}
+            </option>
+          );
+        })}
+      </>
+    );
+  }
+
+  let serviceSelect = null;
+  if (services?.length === 0) {
+    serviceSelect = <div className="text-red-700">Select Treatments</div>;
+  } else if (services?.length > 0) {
+    serviceSelect = (
+      <>
+        {services?.map((service) => {
+          return (
+            <option key={service?.id} value={service?.id}>
+              {service?.description}
             </option>
           );
         })}
@@ -137,30 +196,14 @@ const AddServiceSubTypeTab = () => {
   const columns = [
     {
       title: "Description",
-      dataIndex: "description",
-      key: "description",
+      dataIndex: "sub_activity",
+      key: "sub_activity",
       width: 100,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      filteredValue: filteredInfo.description || null,
-      onFilter: (value, record) => record.description.includes(value),
       sorter: (a, b) => {
-        return a.description > b.description ? -1 : 1;
+        return a.sub_activity > b.sub_activity ? -1 : 1;
       },
       sortOrder:
-        sortedInfo.columnKey === "description" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "sub_activity" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -246,7 +289,7 @@ const AddServiceSubTypeTab = () => {
             className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
           >
             <option>Select</option>
-            {content}
+            {treatmentSelect}
           </select>
         </div>
         {/* type */}
@@ -280,39 +323,41 @@ const AddServiceSubTypeTab = () => {
               </span>
             </label>
             <select
-              onChange={(e) => serviceHandleOnchange(e)}
+              onChange={(e) => serviceOnchange(e)}
               className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
             >
               <option value="Select Tx type">Select Tx type</option>
-              <option value="Behavior Therapy">Behavior Therapy</option>
-              <option value="Mental Health">Mental Health</option>
-              <option value="Physical Therapy">Physical Therapy</option>
+              {serviceSelect}
             </select>
           </div>
         )}
       </div>
-      {service && (
+      {serviceId && (
         <div>
           <div className="md:flex justify-end items-end my-2">
             <button onClick={clearFilters} className="pms-clear-button border">
               Clear filters
             </button>
           </div>
-          <div>
-            <Table
-              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-              rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-              size="small"
-              bordered
-              className=" text-xs font-normal"
-              columns={columns}
-              dataSource={table}
-              scroll={{
-                y: 650,
-              }}
-              onChange={handleChange}
-            />
-          </div>
+          {loading ? (
+            <Loading></Loading>
+          ) : (
+            <div>
+              <Table
+                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                size="small"
+                bordered
+                className=" text-xs font-normal"
+                columns={columns}
+                dataSource={tableData}
+                scroll={{
+                  y: 650,
+                }}
+                onChange={handleChange}
+              />
+            </div>
+          )}
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">
@@ -326,6 +371,10 @@ const AddServiceSubTypeTab = () => {
               handleClose={handleClose}
               open={openEditModal}
               row={recordData}
+              txType={txType}
+              serviceId={serviceId}
+              subActivityEndPoint={subActivityEndPoint}
+              page={page}
             ></AddServiceSubTypeTabEditModal>
           )}
         </div>
