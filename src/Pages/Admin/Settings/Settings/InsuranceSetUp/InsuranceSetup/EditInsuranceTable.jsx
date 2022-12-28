@@ -81,12 +81,12 @@ const EditInsuranceTable = () => {
       title: "Active",
       dataIndex: "action",
       key: "action",
-      width: 70,
+      width: 100,
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
-            <div className="flex items-center ">
+            <div className="flex items-center  gap-3">
               <Switch
                 size="small"
                 checked={value ? true : false}
@@ -109,12 +109,12 @@ const EditInsuranceTable = () => {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      width: 70,
+      width: 100,
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
-            <div className="flex items-center ">
+            <div className="flex items-center gap-3">
               <Switch
                 size="small"
                 checked={value ? true : false}
@@ -149,7 +149,7 @@ const EditInsuranceTable = () => {
       <h1 className="my-5 text-base font-medium text-orange-400">
         Scrubbing Rules
       </h1>
-      <div>
+      <div className=" overflow-scroll">
         <Table
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key

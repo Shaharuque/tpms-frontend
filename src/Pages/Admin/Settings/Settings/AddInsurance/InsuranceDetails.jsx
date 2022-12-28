@@ -86,7 +86,7 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
     <div className="border p-5">
       <h1 className="text-lg text-orange-500 my-1">Insurance Details</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-4 gap-y-2">
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 my-3 mr-2 gap-x-4 gap-y-2">
           {/* name  */}
           <div>
             <label className="label">
@@ -217,19 +217,8 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
               {...register("phone_two")}
             />
           </div>
-          <div className="flex justify-start items-end my-2 md:my-0">
-            <div className="flex justify-center ml-1 items-center">
-              <Switch
-                size="small"
-                checked={active ? true : false}
-                onClick={() => setActive(!active)}
-              />
-              <span className="font-medium ml-1 text-gray-600 text-[16px]">
-                Regional Center
-              </span>
-            </div>
-          </div>
-          <div>
+
+          <div className=" md:col-span-2 2xl:col-span-1 lg:col-span-2 ">
             <label className="label">
               <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
                 Billing abreviation(3 char)
@@ -263,21 +252,28 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
               {...register("f_edit_id")}
             />
           </div>
+          <div className="flex justify-start items-end my-2 md:my-0">
+            <div className="flex justify-center ml-1 items-center">
+              <Switch
+                size="small"
+                checked={active ? true : false}
+                onClick={() => setActive(!active)}
+              />
+              <span className="font-medium ml-1 text-gray-600 text-[16px]">
+                Regional Center
+              </span>
+            </div>
+          </div>
         </div>
         {
           //  !SelectedInsurance?.selected_insurance_details === null &&
 
           SelectedInsurance?.status === "success" && (
-            <div>
-              <button
-                className=" py-[5px] mt-7 px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-                type="submit"
-              >
+            <div className="mt-10">
+              <button className=" pms-button mr-3" type="submit">
                 Save
               </button>
-              <button className="py-[5px] mt-7 ml-2 px-3 text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-md">
-                Delete
-              </button>
+              <button className="pms-close-button">Delete</button>
             </div>
           )
         }
