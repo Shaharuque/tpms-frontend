@@ -18,25 +18,24 @@ import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUp
 import useToken from "../../../../../CustomHooks/useToken";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import GuarantorInfo from "./GuarantorInfo/GuarantorInfo";
+import AboutPatient from "./AboutPatient/AboutPatient";
 
 const PatientInformation = () => {
   const { token } = useToken();
   const [active, setActive] = useState(false);
-  const [voiceMsg, setVoiceMsg] = useState(false);
-  const [textMsg, setTextMsg] = useState(false);
   const [appointment, setAppointment] = useState(false);
   const [email, setEmail] = useState(false);
-  const [emailSend, setEmailSend] = useState(false);
+  const [emailReminder, setEmailReminder] = useState(false);
   const [Guarantor, setGuarantor] = useState(false);
   const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
-  const [phone, setPhone] = useState();
 
-  console.log("phone :", phone);
+  // console.log("phone :", phone);
   //file uploaded issue
   const [signatureUpload, setSignatureUpload] = useState("");
-  console.log("setSignatureUpload = = =", signatureUpload);
+  // console.log("setSignatureUpload = = =", signatureUpload);
   // file uploaded added
 
   // calender hide
@@ -84,7 +83,7 @@ const PatientInformation = () => {
 
   // address icon delete handeler
   const addressHandleRemove = (index) => {
-    // console.log(index);
+    console.log(index);
     const list = [...addressRendomValue];
     list.splice(index, 1);
     setAddressRendomValue(list);
@@ -105,13 +104,15 @@ const PatientInformation = () => {
   };
   // Patient Information
   const { id } = useParams();
-  // console.log("patient Info", id);
+  console.log("patient Info", id);
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
   console.log("patient details", data);
+  console.log("hone number", patient_details?.phone_number);
+  const [phone, setPhone] = useState(patient_details?.phone_number);
 
   useEffect(() => {
     // action dispatched
@@ -144,15 +145,15 @@ const PatientInformation = () => {
     const formData = {
       is_client_active,
     };
-    console.log(formData);
-    console.log(file);
+    // console.log(formData);
+    // console.log(file);
   };
 
-  console.log("---", addressRendomValue);
+  // console.log("---", addressRendomValue);
 
   ///relation value handle
   const settingRelation = (e) => {
-    //console.log("selected option", e.target.value);
+    console.log("selected option", e.target.value);
     //const relation = e.target.value;
     if (e.target.value === "Self") {
       setGuarantor(false);
@@ -161,14 +162,14 @@ const PatientInformation = () => {
     //setRelation(relation);
     setRelation(e.target.value);
   };
-  // console.log(relation);
+  console.log(relation);
   //Guarentor handler code
   const handleChange = (event) => {
     if (event.target.checked) {
-      console.log("✅ Checkbox is checked");
+      // console.log("✅ Checkbox is checked");
       setGuarantor(true);
     } else {
-      console.log("⛔️ Checkbox is NOT checked");
+      // console.log("⛔️ Checkbox is NOT checked");
       setGuarantor(false);
     }
   };
@@ -183,10 +184,10 @@ const PatientInformation = () => {
     setValue("GuaratorCity", getValues("City"));
     setValue("GuratorCountry", getValues("country"));
     setValue("GuratorZip", getValues("zip"));
-    console.log("getvalue street", getValues("Street"));
-    console.log("getvalue city", getValues("City"));
-    console.log("getvalue country", getValues("country"));
-    console.log("getvalue zip", getValues("zip"));
+    // console.log("getvalue street", getValues("Street"));
+    // console.log("getvalue city", getValues("City"));
+    // console.log("getvalue country", getValues("country"));
+    // console.log("getvalue zip", getValues("zip"));
   };
 
   return (
@@ -496,22 +497,17 @@ const PatientInformation = () => {
                 <label className="label">
                   <span className=" label-font">Phone</span>
                 </label>
-                <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
-                  <div>
+                <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
+                  <div className="w-[180px] ml-1">
                     <PhoneInput
+                      className="PatientinformationInput"
                       country={"us"}
                       value={phone}
                       onChange={(e) => {
-                        console.log(e);
+                        // console.log(e);
                         setPhone(e);
                       }}
                     />
-                    {/* <input
-                      type="text"
-                      name="phone"
-                      className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full py-[1px] ml-1 focus:outline-none"
-                      {...register("phone")}
-                    /> */}
                   </div>
                   <div>
                     <select
@@ -532,45 +528,8 @@ const PatientInformation = () => {
                     <FaPlus />
                   </button>
                 </div>
-                <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
-                  <div className="flex items-center">
-                    {/* <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {
-                        setVoiceMsg(!voiceMsg);
-                      }}
-                    /> */}
-                    <Switch
-                      size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
-                    />
-                    <span className="text-xs ml-1 text-gray-700 font-normal">
-                      Voice message ok
-                    </span>
-                  </div>
 
-                  <div className="flex items-center">
-                    {/* <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {
-                        setTextMsg(!textMsg);
-                      }}
-                    /> */}
-                    <Switch
-                      size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
-                    />
-                    <span className="text-xs ml-1 text-gray-700 font-normal">
-                      Text message ok
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex ml-1 mt-1 items-center">
+                <div className="flex ml-1 mt-2 items-center">
                   {/* <input
                     type="checkbox"
                     name="patient"
@@ -580,11 +539,11 @@ const PatientInformation = () => {
                   /> */}
                   <Switch
                     size="small"
-                    checked={active ? true : false}
-                    onClick={() => setActive(!active)}
+                    checked={appointment ? true : false}
+                    onClick={() => setAppointment(!appointment)}
                   />
-                  <span className="text-xs ml-1 text-gray-700 font-normal">
-                    Send text/voice appointment reminders
+                  <span className="text-xs ml-1 text-gray-700 font-medium">
+                    SMS Appointment Reminders
                   </span>
                 </div>
               </>
@@ -603,13 +562,16 @@ const PatientInformation = () => {
                   <label className="label">
                     <span className=" label-font">Phone</span>
                   </label>
-                  <div className="flex flex-wrap gap-1 items-center gap-x-4 gap-y-2">
-                    <div>
-                      <input
-                        type="text"
-                        name="phone"
-                        className="input-border text-gray-600 rounded-sm  text-[14px] py-[1px] font-medium w-full ml-1 focus:outline-none"
-                        {...register("phone")}
+                  <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
+                    <div className="w-[180px] ml-1">
+                      <PhoneInput
+                        className="PatientinformationInput"
+                        country={"us"}
+                        value={phone}
+                        onChange={(e) => {
+                          // console.log(e);
+                          setPhone(e);
+                        }}
                       />
                     </div>
                     <div>
@@ -629,59 +591,22 @@ const PatientInformation = () => {
                       <RiDeleteBin6Line />
                     </button>
                   </div>
-                  <div className="flex ml-1 mt-2 items-center gap-2 flex-wrap ">
-                    <div className="flex items-center">
-                      {/* <input
-                        type="checkbox"
-                        name="patient"
-                        onClick={() => {
-                          setVoiceMsg(!voiceMsg);
-                        }}
-                      /> */}
-                      <Switch
-                        size="small"
-                        checked={active ? true : false}
-                        onClick={() => setActive(!active)}
-                      />
-                      <span className="text-xs ml-1 text-gray-700 font-normal">
-                        Voice message ok
-                      </span>
-                    </div>
 
-                    <div className="flex items-center">
-                      {/* <input
-                        type="checkbox"
-                        name="patient"
-                        onClick={() => {
-                          setTextMsg(!textMsg);
-                        }}
-                      /> */}
-                      <Switch
-                        size="small"
-                        checked={active ? true : false}
-                        onClick={() => setActive(!active)}
-                      />
-                      <span className="text-xs ml-1 text-gray-700 font-normal">
-                        Text message ok
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex ml-1 mt-1 items-center">
-                    {/* <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {  
-                        setAppointment(!appointment);
-                      }}
-                    /> */}
+                  <div className="flex ml-1 mt-2 items-center">
+                    {/* <input          
+                    type="checkbox" 
+                    name="patient"
+                    onClick={() => {   
+                      setAppointment(!appointment);
+                    }}
+                  /> */}
                     <Switch
                       size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
+                      checked={appointment ? true : false}
+                      onClick={() => setAppointment(!appointment)}
                     />
-                    <span className="text-xs ml-1 text-gray-700 font-normal">
-                      Send text/voice appointment reminders
+                    <span className="text-xs ml-1 text-gray-700 font-medium">
+                      SMS Appointment Reminders
                     </span>
                   </div>
                 </motion.div>
@@ -733,8 +658,8 @@ const PatientInformation = () => {
                   /> */}
                   <Switch
                     size="small"
-                    checked={active ? true : false}
-                    onClick={() => setActive(!active)}
+                    checked={email ? true : false}
+                    onClick={() => setEmail(!email)}
                   />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Email OK
@@ -751,8 +676,8 @@ const PatientInformation = () => {
                   /> */}
                   <Switch
                     size="small"
-                    checked={active ? true : false}
-                    onClick={() => setActive(!active)}
+                    checked={emailReminder ? true : false}
+                    onClick={() => setEmailReminder(!emailReminder)}
                   />
                   <span className="text-xs ml-1 text-gray-700 font-medium">
                     Send email appointment reminders
@@ -806,8 +731,8 @@ const PatientInformation = () => {
                       /> */}
                       <Switch
                         size="small"
-                        checked={active ? true : false}
-                        onClick={() => setActive(!active)}
+                        checked={email ? true : false}
+                        onClick={() => setEmail(!email)}
                       />
                       <span className="text-xs ml-1 text-gray-700 font-normal">
                         Email OK
@@ -825,8 +750,8 @@ const PatientInformation = () => {
                     /> */}
                     <Switch
                       size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
+                      checked={emailReminder ? true : false}
+                      onClick={() => setEmailReminder(!emailReminder)}
                     />
                     <span className="text-xs ml-1 text-gray-700 font-normal">
                       Send email appointment reminders
@@ -837,75 +762,7 @@ const PatientInformation = () => {
             </div>
           </div>
 
-          <>
-            <label className="label">
-              <span className=" text-[16px] text-gray-700 text-left font-bold mt-2">
-                About Patient
-              </span>
-            </label>
-            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  2xl:grid-cols-5 mb-1 mr-2 gap-x-6 gap-y-1">
-              <div>
-                <label className="label">
-                  <span className=" label-font">
-                    Race &amp; Ethnicity Details
-                  </span>
-                </label>
-                <select
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("race_details")}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div>
-                <label className="label">
-                  <span className=" label-font">Preferred Language</span>
-                </label>
-                <select
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("language")}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div>
-                <label className="label">
-                  <span className=" label-font">Date First Seen</span>
-                </label>
-                <input
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  type="date"
-                  {...register("first_date")}
-                />
-              </div>
-              <div>
-                <label className="label">
-                  <span className=" label-font">Referred By</span>
-                </label>
-                <select
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("referred_by")}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div>
-                <label className="label">
-                  <span className=" label-font">Assignment</span>
-                </label>
-                <select
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("assignment")}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-            </div>
-          </>
+          <AboutPatient register={register}></AboutPatient>
 
           <div className="divider"></div>
 
@@ -921,7 +778,7 @@ const PatientInformation = () => {
               //   setGuarantor(!Guarantor);
               // }}
             />
-            <span className="text-xs ml-1 text-gray-700 font-normal">
+            <span className="text-sm ml-1 text-gray-700 font-medium">
               Is Guarantor Available?
             </span>
           </div>
@@ -938,101 +795,12 @@ const PatientInformation = () => {
               }}
               transition={{ delay: 0.2 }}
             >
-              <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1">
-                <div>
-                  <label className="label">
-                    <span className=" label-font">First Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="guarantor_first_name"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("guarantor_first_name")}
-                  />
-                </div>
-
-                <div>
-                  <label className="label">
-                    <span className=" label-font">Last Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="guarantor_last_name"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("guarantor_last_name")}
-                  />
-                </div>
-                {/* DOB */}
-                <div>
-                  {" "}
-                  <label className="label">
-                    <span className=" label-font">Check Date</span>
-                  </label>
-                  <input
-                    className="input-border input-font  w-full focus:outline-none"
-                    type="date"
-                    {...register("guarantor_check_Date")}
-                  />
-                </div>
-              </div>
-
-              {/* ---------------------------------*/}
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1">
-                <div>
-                  <label className="label">
-                    <span className=" label-font">Address</span>
-                  </label>
-                  <div className="mb-2">
-                    <input
-                      type="text"
-                      placeholder="Street"
-                      className="input-border text-gray-600 rounded-sm  text-[16px] font-medium w-full ml-1 focus:outline-none"
-                      {...register(checkLocation ? "GuaratorStreet" : "null")}
-                    />
-                  </div>
-                </div>
-
-                <div className="my-auto text-xs bg-secondary text-white ml-1 py-1 mb-2 text-center w-full rounded-md">
-                  <button
-                    onClick={() => {
-                      SameasPatientBtn();
-                    }}
-                  >
-                    Same as patient address
-                  </button>
-                </div>
-              </div>
-
-              {/* --------------------------- */}
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1">
-                <div className="mb-2">
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    defaultValue={hook?.City}
-                    {...register(checkLocation ? "GuaratorCity" : "dj")}
-                  />
-                </div>
-                <div>
-                  <select
-                    className="input-border input-font  w-full focus:outline-none"
-                    {...register(checkLocation ? "GuratorCountry" : "null")}
-                  >
-                    <option value="NY">NY</option>
-                    <option value="UK">UK</option>
-                  </select>
-                </div>
-                <div className="mb-2">
-                  <input
-                    type="text"
-                    placeholder="Zip"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register(checkLocation ? "GuratorZip" : "dj")}
-                  />
-                </div>
-              </div>
+              <GuarantorInfo
+                register={register}
+                checkLocation={checkLocation}
+                SameasPatientBtn={SameasPatientBtn}
+                hook={hook}
+              ></GuarantorInfo>
             </motion.div>
           )}
 

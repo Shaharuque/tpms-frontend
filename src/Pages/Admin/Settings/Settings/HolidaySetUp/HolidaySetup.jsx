@@ -165,7 +165,7 @@ const HolidaySetup = () => {
         />
       </div>
 
-      <div className="flex mt-5 items-center justify-between">
+      <div className="flex mt-5 flex-wrap gap-3 items-center justify-between">
         <div>
           {/* <!-- The button to open modal --> */}
           <label htmlFor="pay-box" className="">

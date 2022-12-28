@@ -10,11 +10,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ContextWrapper from "./Pages/Pages/User/My-Schedule/CalendarContext/ContextWrapper";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

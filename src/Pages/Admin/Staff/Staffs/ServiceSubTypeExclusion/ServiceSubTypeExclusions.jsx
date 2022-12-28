@@ -90,7 +90,7 @@ const ServiceSubTypeExclusions = () => {
         <div className="flex justify-center items-center">
           <button
             onClick={() => setSelectedKeys(arr1)}
-            className=" py-[5px] font-normal px-3 my-auto  text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+            className="pms-button my-2"
             type="submit"
           >
             Exclude Selected Service Sub-Type

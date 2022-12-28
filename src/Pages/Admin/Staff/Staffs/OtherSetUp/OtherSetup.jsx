@@ -25,7 +25,7 @@ const OtherSetup = () => {
     <div className="md:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Other Setup</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-2 gap-y-1">
+        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-4 gap-y-2">
           {/* name  */}
           <div>
             <label className="label">
@@ -187,12 +187,12 @@ const OtherSetup = () => {
             </label>
             <input
               type="file"
-              className=" px-2 py-[5px] mx-1 text-xs w-full"
+              className=" px-2 text-xs w-full"
               {...register("fileName")}
             />
           </div>
         </div>
-        <div>
+        <div className="my-5">
           <div className="flex ml-1 mt-1 items-center">
             {/* <input
               type="checkbox"

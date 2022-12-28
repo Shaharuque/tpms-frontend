@@ -393,7 +393,7 @@ const UnBillableTimeSheet = () => {
       //     value: "Karla",
       //   },
       //   {
-      //     text: "Marcellus",
+      //     text: "Marcellus",]-
       //     value: "Marcellus",
       //   },
       //   {
@@ -467,11 +467,11 @@ const UnBillableTimeSheet = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 items-end my-5 mr-2 gap-4">
+        <div className="flex items-center my-5 mr-2 gap-4">
           <div>
             <select
               name="type"
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm text-[14px] mt-1 font-medium w-full ml-1 py-1 focus:outline-none"
             >
               <option value="name"> Select Any Action </option>
               <option value="Save Changes"> Save Changes </option>
@@ -479,10 +479,7 @@ const UnBillableTimeSheet = () => {
               <option value="Submit Timesheet"> Submit Timesheet </option>
             </select>
           </div>
-          <button
-            className="w-1/4 py-1 px-2 md:ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-            type="submit"
-          >
+          <button className="pms-button" type="submit">
             Ok
           </button>
         </div>

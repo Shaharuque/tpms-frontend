@@ -13,7 +13,7 @@ const IntakeForm = () => {
   // console.log(file);
   return (
     <>
-      <div className="flex items-center gap-1">
+      <div className="flex flex-wrap items-center gap-1">
         <div className=" ">
           <label className="label">
             <span className=" label-font">Browse Intake Form</span>
@@ -38,7 +38,6 @@ const IntakeForm = () => {
         </div>
       </div>
       <div>
-        {" "}
         <div className="text-green-500 green-box my-3 border border-gray-300 rounded-sm px-3 font-medium py-[10px]  text-xs w-full flex justify-between items-center gap-2">
           <span className="flex items-center gap-6">
             Download Intake Form.

@@ -21,6 +21,7 @@ import Providers from "./MultiSelectComponents/Providers";
 import useToken from "../../../../CustomHooks/useToken";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
+import DateRangePickersTest from "../../../Shared/CustomDateRange/DateRangePicker/DateRangePickersTest";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -47,7 +48,7 @@ const ListView = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "GET",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/patient/names`,
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/patient/names`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -68,7 +69,7 @@ const ListView = () => {
     const getProviderData = async () => {
       const res = await axios({
         method: "GET",
-        url: `https://ovh.therapypms.com/api/v1/admin/ac/staff/names`,
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/staff/names`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -181,7 +182,7 @@ const ListView = () => {
   const fetchPatients = async () => {
     let manageSessionData = [];
     await axios({
-      url: `https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
+      url: `https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -691,7 +692,7 @@ const ListView = () => {
     setFromData(payLoad);
     if (payLoad) {
       const fetchManageSessions = {
-        url: "https://ovh.therapypms.com/api/v1/admin/ac/get-appoinments",
+        url: "https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -828,7 +829,7 @@ const ListView = () => {
                   </div>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                  <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-7 gap-2 mb-2">
+                  <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 2xl:grid-cols-8 gap-2 mb-2">
                     {billable && (
                       <div>
                         <label className="label">
@@ -891,7 +892,6 @@ const ListView = () => {
                             </select>
                           </div>
                         </div>
-
                         <div>
                           <label className="label">
                             <span className="label-text  text-[16px] text-gray-100 text-left">
@@ -902,7 +902,7 @@ const ListView = () => {
                           <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px]  text-[14px] w-full"
+                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text [14px] w-full"
                             >
                               <input
                                 value={
@@ -933,7 +933,6 @@ const ListView = () => {
                               ref={refClose}
                               // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
                               className="absolute mt-2 z-10 sm:ml-[-290px]"
-                              // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
                             >
                               {openCalendar && (
                                 <CustomDateRange
@@ -946,7 +945,6 @@ const ListView = () => {
                             </div>
                           </div>
                         </div>
-
                         <div className="flex gap-5">
                           <div>
                             <label className="label">
@@ -1003,7 +1001,7 @@ const ListView = () => {
                             <input
                               placeholder="Search here..."
                               onChange={(e) => globalFilter(e.target.value)}
-                              className="focus:outline-none"
+                              className="focus:outline-none w-full"
                             />
                             <label>
                               <BiSearchAlt />

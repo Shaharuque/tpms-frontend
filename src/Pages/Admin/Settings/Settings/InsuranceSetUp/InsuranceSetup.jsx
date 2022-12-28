@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BiPencil } from "react-icons/bi";
 import axios from "axios";
 import { Table, Switch } from "antd";
-import InsuranceEditComponent from "./InsuranceSetup/InsuranceEditComponent";
 import InsuranceModal from "./InsuranceSetup/InsuranceModal";
 
 const InsuranceSetup = () => {

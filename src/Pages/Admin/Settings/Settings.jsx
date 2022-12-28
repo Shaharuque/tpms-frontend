@@ -26,7 +26,7 @@ const Settings = () => {
           initial={{ opacity: 0, x: 25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
-          className=" m-2 p-2  setting-body shadow-md rounded-lg "
+          className=" sm:m-2 sm:p-2  setting-body shadow-md rounded-lg "
         >
           <Outlet />
         </motion.div>

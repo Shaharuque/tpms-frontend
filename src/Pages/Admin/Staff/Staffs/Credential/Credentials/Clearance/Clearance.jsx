@@ -177,11 +177,14 @@ const Clearance = ({ handleClearence, clearenceOpen, name }) => {
               </div>
             </div>
             <div className="my-4 ml-2">
-              <button className="pms-button mr-2" onClick={handleClickOpen}>
+              <button
+                className="pms-button mr-2 mt-2"
+                onClick={handleClickOpen}
+              >
                 Add Clearance
               </button>
 
-              <button onClick={clearFilters} className="pms-clear-button">
+              <button onClick={clearFilters} className="pms-clear-button  mt-2">
                 Clear filters
               </button>
             </div>

@@ -165,7 +165,7 @@ const VendorNumberSetup = () => {
       <h1 className="text-lg my-2 text-orange-400">Vendor Number Setup</h1>
       <div className="flex flex-wrap items-center">
         <div className="w-full text-sm">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 my-3 mr-2 gap-x-6 gap-y-3 ">
+          <div className="flex flex-wrap items-center my-3 mr-2 gap-x-6 gap-y-3 ">
             <div>
               <label className="label">
                 <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">

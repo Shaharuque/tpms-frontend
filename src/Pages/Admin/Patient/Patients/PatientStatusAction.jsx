@@ -13,7 +13,7 @@ const PatientStatusAction = ({ status }) => {
   console.log(value);
 
   return (
-    <div className="flex ">
+    <div className="flex items-center justify-center">
       <Switch
         size="small"
         checked={status ? true : false}

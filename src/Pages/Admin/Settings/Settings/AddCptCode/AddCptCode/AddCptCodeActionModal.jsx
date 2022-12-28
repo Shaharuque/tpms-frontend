@@ -42,7 +42,7 @@ export default function AddCptCodeActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://ovh.therapypms.com/api/v1/admin/ac/setting/cpt/code/create",
+          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/cpt/code/create",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",

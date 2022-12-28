@@ -1,7 +1,24 @@
 import React from "react";
 import { DateRangePicker } from "react-date-range";
 
+// date range year
+
 const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
+  const handleLastYearClick = () => {
+    const startDate = new Date(this.state.startDate);
+    startDate.setFullYear(startDate.getFullYear() - 1);
+    const endDate = new Date(this.state.endDate);
+    endDate.setFullYear(endDate.getFullYear() - 1);
+    this.setState({ startDate, endDate, customRangeLabel: "Last Year" });
+  };
+
+  const handleNextYearClick = () => {
+    const startDate = new Date(this.state.startDate);
+    startDate.setFullYear(startDate.getFullYear() + 1);
+    const endDate = new Date(this.state.endDate);
+    endDate.setFullYear(endDate.getFullYear() + 1);
+    this.setState({ startDate, endDate, customRangeLabel: "Next Year" });
+  };
   return (
     <div className="absolute z-10 shadow-xl">
       <div>

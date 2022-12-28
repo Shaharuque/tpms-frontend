@@ -7,7 +7,7 @@ export const postLoginData = createAsyncThunk(
   async (formData) => {
     try {
       const response = await fetch(
-        "https://ovh.therapypms.com/api/v1/admin/login",
+        "https://test-prod.therapypms.com/api/v1/admin/login",
         {
           method: "POST",
           headers: {

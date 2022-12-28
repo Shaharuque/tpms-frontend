@@ -146,7 +146,7 @@ const AddInsurance = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
+      <div className="ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
 
@@ -233,10 +233,12 @@ const AddInsurance = () => {
       </div>
       {(passAllInsurance?.status === "success" ||
         passSelectedInsurance?.status === "success") && (
-        <InsuranceDetails
-          AllInsurance={passAllInsurance}
-          SelectedInsurance={passSelectedInsurance}
-        ></InsuranceDetails>
+        <div className="m-2">
+          <InsuranceDetails
+            AllInsurance={passAllInsurance}
+            SelectedInsurance={passSelectedInsurance}
+          ></InsuranceDetails>
+        </div>
       )}{" "}
     </div>
   );

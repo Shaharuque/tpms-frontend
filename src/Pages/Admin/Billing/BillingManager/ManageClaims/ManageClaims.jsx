@@ -50,7 +50,7 @@ const ManageClaims = () => {
   const columns = [
     {
       title: "Claim",
-      dataIndex: "claim",
+      dataIndex: "claim",            
       key: "claim",
       width: 50,
       render: (_, { claim }) => {

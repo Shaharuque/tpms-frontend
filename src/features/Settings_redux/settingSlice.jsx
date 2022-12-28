@@ -7,7 +7,7 @@ export const getsettings = createAsyncThunk(
   async (token) => {
     //onno api thik e kaj kortesey
     const response = await axios.get(
-      `https://ovh.therapypms.com/api/v1/admin/ac/get/setting/name/location`,
+      `https://test-prod.therapypms.com/api/v1/admin/ac/get/setting/name/location`,
       {
         headers: {
           "Content-Type": "application/json",
