@@ -119,7 +119,7 @@ const AddServices = () => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-secondary flex justify-start">
-            <h1>{record?.type ? "Billable" : "Not set"}</h1>
+            <h1>{record?.type ? "Billable" : "UnBillable"}</h1>
           </div>
         );
       },
