@@ -18,6 +18,8 @@ import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUp
 import useToken from "../../../../../CustomHooks/useToken";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import GuarantorInfo from "./GuarantorInfo/GuarantorInfo";
+import AboutPatient from "./AboutPatient/AboutPatient";
 
 const PatientInformation = () => {
   const { token } = useToken();
@@ -138,7 +140,7 @@ const PatientInformation = () => {
   }, [patient_details, reset]);
 
   const onSubmit = (data) => {
-    // console.log(data);
+    console.log(data);
     const is_client_active = data?.checkedActive ? 1 : 0;
     const formData = {
       is_client_active,
@@ -760,75 +762,7 @@ const PatientInformation = () => {
             </div>
           </div>
 
-          <>
-            <label className="label">
-              <span className=" text-[16px] text-gray-700 text-left font-bold mt-2">
-                About Patient
-              </span>
-            </label>
-            <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  2xl:grid-cols-5 mb-1 mr-2 gap-x-6 gap-y-1">
-              <div>
-                <label className="label">
-                  <span className=" label-font">
-                    Race &amp; Ethnicity Details
-                  </span>
-                </label>
-                <select
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("race_details")}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div>
-                <label className="label">
-                  <span className=" label-font">Preferred Language</span>
-                </label>
-                <select
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("language")}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div>
-                <label className="label">
-                  <span className=" label-font">Date First Seen</span>
-                </label>
-                <input
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  type="date"
-                  {...register("first_date")}
-                />
-              </div>
-              <div>
-                <label className="label">
-                  <span className=" label-font">Referred By</span>
-                </label>
-                <select
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("referred_by")}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div>
-                <label className="label">
-                  <span className=" label-font">Assignment</span>
-                </label>
-                <select
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("assignment")}
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-            </div>
-          </>
+          <AboutPatient register={register}></AboutPatient>
 
           <div className="divider"></div>
 
@@ -844,7 +778,7 @@ const PatientInformation = () => {
               //   setGuarantor(!Guarantor);
               // }}
             />
-            <span className="text-xs ml-1 text-gray-700 font-normal">
+            <span className="text-sm ml-1 text-gray-700 font-medium">
               Is Guarantor Available?
             </span>
           </div>
@@ -861,103 +795,12 @@ const PatientInformation = () => {
               }}
               transition={{ delay: 0.2 }}
             >
-              <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
-              {/* <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1"> */}
-              <div className="flex gap-4 items-center">
-                <div>
-                  <label className="label">
-                    <span className=" label-font">First Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="guarantor_first_name"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("guarantor_first_name")}
-                  />
-                </div>
-
-                <div>
-                  <label className="label">
-                    <span className=" label-font">Last Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="guarantor_last_name"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("guarantor_last_name")}
-                  />
-                </div>
-                {/* DOB */}
-                <div>
-                  {" "}
-                  <label className="label">
-                    <span className=" label-font">Check Date</span>
-                  </label>
-                  <input
-                    className="input-border input-font  w-full focus:outline-none"
-                    type="date"
-                    {...register("guarantor_check_Date")}
-                  />
-                </div>
-                {/* </div> */}
-
-                {/* ---------------------------------*/}
-                {/* <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1"> */}
-                <div>
-                  <label className="label">
-                    <span className=" label-font">Address</span>
-                  </label>
-                  <div className="mb-2">
-                    <input
-                      type="text"
-                      placeholder="Street"
-                      className="input-border input-font py-1  w-full focus:outline-none"
-                      {...register(checkLocation ? "GuaratorStreet" : "null")}
-                    />
-                  </div>
-                </div>
-
-                {/* <div className="my-auto text-xs bg-secondary text-white ml-1 py-1 mb-2 text-center w-full rounded-md"> */}
-                <div className="pms-button mt-[17px]">
-                  <button
-                    onClick={() => {
-                      SameasPatientBtn();
-                    }}
-                  >
-                    Same as patient address
-                  </button>
-                </div>
-              </div>
-
-              {/* --------------------------- */}
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-6 my-1 mr-2 gap-x-6 gap-y-1">
-                <div className="mb-2">
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    defaultValue={hook?.City}
-                    {...register(checkLocation ? "GuaratorCity" : "dj")}
-                  />
-                </div>
-                <div>
-                  <select
-                    className="input-border input-font  w-full focus:outline-none"
-                    {...register(checkLocation ? "GuratorCountry" : "null")}
-                  >
-                    <option value="NY">NY</option>
-                    <option value="UK">UK</option>
-                  </select>
-                </div>
-                <div className="mb-2">
-                  <input
-                    type="text"
-                    placeholder="Zip"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register(checkLocation ? "GuratorZip" : "dj")}
-                  />
-                </div>
-              </div>
+              <GuarantorInfo
+                register={register}
+                checkLocation={checkLocation}
+                SameasPatientBtn={SameasPatientBtn}
+                hook={hook}
+              ></GuarantorInfo>
             </motion.div>
           )}
 
