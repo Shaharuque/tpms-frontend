@@ -933,7 +933,6 @@ const ListView = () => {
                               ref={refClose}
                               // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
                               className="absolute mt-2 z-10 sm:ml-[-290px]"
-                              // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
                             >
                               {openCalendar && (
                                 <CustomDateRange

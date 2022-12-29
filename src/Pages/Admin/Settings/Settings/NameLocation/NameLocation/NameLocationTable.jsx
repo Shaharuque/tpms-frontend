@@ -62,7 +62,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 my-5 mr-2 gap-6">
+              <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 my-5 mr-2 gap-6">
                 {/* name  */}
                 <div>
                   <label className="label">
@@ -325,7 +325,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     <option value="Dr">Dr</option>
                   </select>
                 </div>
-                <div className="md:mx-auto mt-10 items-start">
+                <div className=" xl:mt-10 2xl:mt-0 items-start">
                   <div>
                     <Switch
                       size="small"
@@ -337,7 +337,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     </span>
                   </div>
                 </div>
-                <div className="md:mx-auto mt-10 items-start">
+                <div className=" xl:mt-10 2xl:mt-0 items-start">
                   <div>
                     <Switch
                       size="small"
@@ -358,7 +358,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 <h1 className="">Select Working Hours</h1>
                 <div className=" my-5 mr-2 gap-5">
                   <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-20">Monday</h5>
+                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                      Monday
+                    </h5>
                     <input
                       type="time"
                       name="mon_start_time"
@@ -378,7 +380,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-20">Tuesday</h5>
+                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                      Tuesday
+                    </h5>
                     <input
                       type="time"
                       name="tus_start"
@@ -395,7 +399,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-20">Wednesday</h5>
+                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                      Wednesday
+                    </h5>
                     <input
                       type="time"
                       name="wed_start"
@@ -412,7 +418,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-20">Thursday</h5>
+                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                      Thursday
+                    </h5>
                     <input
                       type="time"
                       name="thur_start"
@@ -429,7 +437,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-20">Friday</h5>
+                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                      Friday
+                    </h5>
                     <input
                       type="time"
                       name="fri_start"
@@ -446,7 +456,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-20">Saturday</h5>
+                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                      Saturday
+                    </h5>
                     <input
                       type="time"
                       name="sat_start"
@@ -463,7 +475,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     />
                   </div>
                   <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-20">Sunday</h5>
+                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                      Sunday
+                    </h5>
                     <input
                       type="time"
                       name="sun_start"

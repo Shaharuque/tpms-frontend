@@ -50,7 +50,7 @@ const NameLocation = () => {
   console.log("box_no_33", box_no_33);
 
   return (
-    <div className="px-2  ">
+    <div className="px-2  mb-2">
       <NameLocationTable
         box33Open={box33Open}
         handleTableOpen={handleTableOpen}
