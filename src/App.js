@@ -177,6 +177,7 @@ import StructureOfProcess from "./Pages/Admin/Settings/Settings/StructureOfProce
 import AppIdTracking from "./Pages/Admin/Settings/Settings/AppIdTracking/AppIdTracking";
 import VOB from "./Pages/Admin/Patient/Patients/VOB/VOB";
 import { usePersistStore } from "./CustomHooks/usePersistStore";
+import SuperAdmin from "./Pages/SuperAdmin/SuperAdmin";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -292,6 +293,75 @@ function App() {
           ></Route>
           {/*--------- Testing End ------------*/}
 
+          {/* Super Admin Pannel */}
+          <Route path="/super-admin" element={<SuperAdmin></SuperAdmin>}>
+            <Route index element={<NameLocation></NameLocation>}></Route>
+            <Route
+              path="add-insurance"
+              element={<AddInsurance></AddInsurance>}
+            ></Route>
+            <Route
+              path="insurance-setup"
+              element={<InsuranceSetup></InsuranceSetup>}
+            ></Route>
+            <Route
+              path="add-treatment"
+              element={<AddTreatments></AddTreatments>}
+            ></Route>
+            <Route
+              path="services"
+              element={<AddServices></AddServices>}
+            ></Route>
+            <Route path="cpt-code" element={<AddCptCode></AddCptCode>}></Route>
+            <Route
+              path="cpt-code-exclusion"
+              element={<CptCodeExclusion></CptCodeExclusion>}
+            ></Route>
+            <Route
+              path="sub-activity-setup"
+              element={<AddServiceSubType></AddServiceSubType>}
+            >
+              <Route index element={<Navigate to="SubTypeTab" />} />
+
+              <Route
+                path="SubTypeTab"
+                element={<AddServiceSubTypeTab></AddServiceSubTypeTab>}
+              ></Route>
+            </Route>
+
+            <Route
+              path="add-staff-type"
+              element={<AddStaffType></AddStaffType>}
+            ></Route>
+            <Route
+              path="rendering-provider"
+              element={<ReferringProvider></ReferringProvider>}
+            ></Route>
+            <Route
+              path="pos"
+              element={<PlaceOfServices></PlaceOfServices>}
+            ></Route>
+            <Route
+              path="vendor-number"
+              element={<VendorNumberSetup></VendorNumberSetup>}
+            ></Route>
+            <Route
+              path="holiday-setup"
+              element={<HolidaySetup></HolidaySetup>}
+            ></Route>
+            <Route path="pay-period" element={<PayPeriod></PayPeriod>}></Route>
+            <Route path="logo" element={<Logo></Logo>}></Route>
+            <Route
+              path="unbillable-activity"
+              element={<UnbillableActivity></UnbillableActivity>}
+            ></Route>
+            <Route
+              path="unbillable-time-sheet"
+              element={<UnBillableTimeSheet></UnBillableTimeSheet>}
+            ></Route>
+          </Route>
+          {/*  */}
+          {/* Admin Pannel */}
           <Route
             path="/admin"
             element={
@@ -816,7 +886,7 @@ function App() {
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
 
-          {/* user */}
+          {/* User Pannel */}
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ManageSessions />}></Route>
             <Route path="calender" element={<SchedulerCalender />}></Route>
@@ -836,7 +906,7 @@ function App() {
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>
           </Route>
 
-          {/* Patient-Portal start */}
+          {/* Patient-Portal Pannel */}
           <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<MySchedule />}></Route>
             <Route path="calender" element={<MyCalender></MyCalender>}></Route>
