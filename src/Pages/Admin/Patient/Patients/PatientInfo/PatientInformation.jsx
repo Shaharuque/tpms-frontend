@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm, Controller } from "react-hook-form";
 import SimpleFileUpload from "react-simple-file-upload";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa";
@@ -28,16 +28,43 @@ import DynamicPhone from "./PhoneAddress/DynamicPhone";
 import PrimaryPhone from "./PhoneAddress/PrimaryPhone";
 import BasicInfo from "./BasicInfo";
 import TestingFrom from "./TestingFrom";
-
 const PatientInformation = () => {
   const testingobj = {
     City: "mirpur",
     Street: "usa",
     address: [
-      { street: "djlasjdiad", city: "sflsdf38akdj", country: "NY" },
-      { street: "heilo", city: "dmd", country: "NY" },
-      { street: "h45fglo", city: "dlfd", country: "UK" },
-      { street: "435234o", city: "ld", country: "UK" },
+      {
+        street: "djlasjdiad",
+        city: "sflsdf38akdj",
+        country: "NY",
+        status: false,
+        number: 452434724582049,
+        zip: 555,
+      },
+      {
+        street: "heilo",
+        city: "dmd",
+        country: "NY",
+        status: true,
+        number: 452434724582049,
+        zip: 73563,
+      },
+      {
+        street: "h45fglo",
+        city: "dlfd",
+        country: "UK",
+        status: false,
+        number: 893839,
+        zip: 4545,
+      },
+      {
+        street: "435234o",
+        city: "ld",
+        country: "UK",
+        status: true,
+        number: 4794724582049,
+        zip: 4523,
+      },
     ],
     assignment: "male",
     checkedActive: 1,
@@ -89,15 +116,16 @@ const PatientInformation = () => {
   // testing form
   console.log("resetData", restData);
 
-  const { register, control, handleSubmit, reset, watch, setValue, getValues } =
+  const { register, control, handleSubmit, reset, setValue, getValues } =
     useForm({
       defaultValues: {
-        test: [{ street: "Bill", city: "dhaka", country: "Luo", zip: "" }],
+        address: testingobj.address,
       },
+      mode: "onBlur",
     });
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "test",
+    name: "address",
   });
 
   // calender hide
@@ -300,7 +328,12 @@ const PatientInformation = () => {
             {/* address  */}
             <div className="">
               <>
-                <PrimaryAddress rg={register} btnclick={handleClick} />
+                <PrimaryAddress
+                  append={append}
+                  rg={register}
+
+                  // btnclick={handleClick}
+                />
 
                 {/* {obj?.length > 0 &&
                   obj.map((item, index) => (
@@ -317,6 +350,18 @@ const PatientInformation = () => {
                       }}
                     />
                   ))} */}
+
+                <DynamicAddress
+                  adData={{
+                    Controller,
+                    fields,
+                    register,
+                    remove,
+                    control,
+                    setPhone,
+                    phone,
+                  }}
+                />
 
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
                   <div>
@@ -366,6 +411,8 @@ const PatientInformation = () => {
                   setActive,
                   active,
                   register,
+                  Controller,
+                  control,
                 }}
               />
               {phoneRendomValue.map((x, index) => (

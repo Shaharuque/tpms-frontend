@@ -11,6 +11,8 @@ const PrimaryPhone = ({ adData }) => {
     setPhone,
     phone,
     register,
+    Controller,
+    control,
   } = adData;
   return (
     <>
@@ -22,12 +24,34 @@ const PrimaryPhone = ({ adData }) => {
           <PhoneInput
             className="PatientinformationInput"
             country={"us"}
+            {...register("phoneinput")}
             value={phone}
             onChange={(e) => {
               // //console.log(e);
               setPhone(e);
             }}
+            // inputProps={{ ...register("phoneinput") }}
           />
+
+          {/* <Controller
+            control={control}
+            name="extra"
+            rules={{ required: true }}
+            render={({ field: { ref, ...field } }) => (
+              <PhoneInput
+                {...field}
+                inputExtraProps={{
+                  ref,
+                  required: true,
+                  autoFocus: true,
+                }}
+                country={"in"}
+                onlyCountries={["in"]}
+                countryCodeEditable={false}
+                specialLabel={"Player Mobile Number"}
+              />
+            )}
+          /> */}
         </div>
         <div>
           <select

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa";
 
-const PrimaryAddress = ({ btnclick, rg }) => {
+const PrimaryAddress = ({ btnclick, rg, append }) => {
   //   //console.log(rg);
   //   const { register } = useForm({
   //     defaultValues: {
@@ -31,7 +31,8 @@ const PrimaryAddress = ({ btnclick, rg }) => {
           {...rg("Street")}
         />
         <button // onClick={() => setOpen(true)}
-          onClick={btnclick}
+          // onClick={btnclick}
+          onClick={() => append()}
           className="bg-secondary text-white p-[4px]"
         >
           <FaPlus />
