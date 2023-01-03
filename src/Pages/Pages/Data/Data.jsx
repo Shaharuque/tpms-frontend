@@ -364,6 +364,148 @@ export const setting = [
     icon: <MdTrackChanges />,
   },
 ];
+export const SuperAdmin = [
+  {
+    link: "/super-admin",
+    name: "Provider Access",
+    icon: <BiRename />,
+  },
+  {
+    link: "admin-access",
+    name: "Admin Access",
+    icon: <AiOutlineUserAdd />,
+  },
+  {
+    link: "payor",
+    name: "Payor",
+    icon: <RiSettingsFill />,
+  },
+  {
+    link: "Companies-and-facilities",
+    name: "Companies And Facilities",
+    icon: <RiHospitalLine />,
+  },
+  {
+    link: "company-level-CSV-Report",
+    name: "Company Level CSV Report",
+    icon: <FiLayers />,
+  },
+  {
+    link: "user-page-permission",
+    name: "User Page Permission",
+    icon: <FiLayers />,
+  },
+  {
+    link: "cpt-code-exclusion",
+    name: "CPT Code Exclusion(S)",
+    icon: <FiLayers />,
+  },
+  {
+    link: "sub-activity-setup/SubTypeTab",
+    name: "Add Service Sub-Type",
+    icon: <RiSendPlaneLine />,
+  },
+  {
+    link: "add-staff-type",
+    name: "Add Staff Type",
+    icon: <AiOutlineUserAdd />,
+  },
+  {
+    link: "rendering-provider",
+    name: "Referring Provider",
+    icon: <AiOutlineUser />,
+  },
+  {
+    link: "pos",
+    name: "Place of Service",
+    icon: <BsHouseDoor />,
+  },
+  {
+    link: "vendor-number",
+    name: "Vendor Number Setup",
+    icon: <FaBoxOpen />,
+  },
+  {
+    link: "holiday-setup",
+    name: "Holiday Setup",
+    icon: <FiAnchor />,
+  },
+  {
+    link: "pay-period",
+    name: "Pay Period",
+    icon: <MdOutlinePayment />,
+  },
+  {
+    link: "logo",
+    name: "Logo",
+    icon: <BiLinkAlt />,
+  },
+  {
+    link: "unbillable-activity",
+    name: "Unbillable Activity",
+    icon: <BiFolderOpen />,
+  },
+  {
+    link: "unbillable-time-sheet",
+    name: "Unbillable TimeSheet ",
+    icon: <TbFileTime />,
+  },
+  {
+    link: "session-rule",
+    name: "Create Service Rules",
+    icon: <AiOutlineFile />,
+  },
+  {
+    link: "file-manager",
+    name: "OA File",
+    icon: <BsFolder2Open />,
+  },
+  {
+    link: "froms-builder",
+    name: "Forms Builder",
+    icon: <BsFileEarmarkMedical />,
+  },
+  {
+    link: "notes-forms",
+    name: "Forms & Library",
+    icon: <BsFileEarmarkMedical />,
+  },
+  {
+    link: "business-documents",
+    name: "Business Files",
+    icon: <BsFileEarmark />,
+  },
+  {
+    link: "data-export",
+    name: "Data Import",
+    icon: <TbArrowsRightLeft />,
+  },
+  {
+    link: "meet-lists",
+    name: "TPMS Meet",
+    icon: <TbArrowsRightLeft />,
+  },
+  {
+    link: "sms-email-setting/email-setting",
+    name: "SMS/Email Setting",
+    icon: <TbArrowsRightLeft />,
+  },
+  {
+    link: "intake-form",
+    name: "Intake Form",
+    icon: <FaWpforms />,
+  },
+  {
+    link: "structure-of-process",
+    name: "Structure of process",
+    icon: <VscServerProcess />,
+  },
+  {
+    link: "app-id-tracking",
+    name: "App id tracking",
+    icon: <MdTrackChanges />,
+  },
+];
 
 export const patient_info = [
   {

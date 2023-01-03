@@ -177,7 +177,24 @@ import StructureOfProcess from "./Pages/Admin/Settings/Settings/StructureOfProce
 import AppIdTracking from "./Pages/Admin/Settings/Settings/AppIdTracking/AppIdTracking";
 import VOB from "./Pages/Admin/Patient/Patients/VOB/VOB";
 import { usePersistStore } from "./CustomHooks/usePersistStore";
+//super admin routes
 import SuperAdmin from "./Pages/SuperAdmin/SuperAdmin";
+import ProviderAccess from "./Pages/SuperAdmin/Components/ProviderAccess/ProviderAccess";
+import AdminAccess from "./Pages/SuperAdmin/Components/AdminAccess/AdminAccess";
+import Payor from "./Pages/SuperAdmin/Components/Payor/Payor";
+import CompaniesAndFacilities from "./Pages/SuperAdmin/Components/CompaniesAndFacilities/CompaniesAndFacilities";
+import CompanyLevelCSVReport from "./Pages/SuperAdmin/Components/CompanyLevelCSVReport/CompanyLevelCSVReport";
+import UserPagePermission from "./Pages/SuperAdmin/Components/UserPagePermission/UserPagePermission";
+import AddViewstothefacility from "./Pages/SuperAdmin/Components/AddViewstothefacility/AddViewstothefacility";
+import ManageCredential from "./Pages/SuperAdmin/Components/ManageCredential/ManageCredential";
+import BulkUpload from "./Pages/SuperAdmin/Components/BulkUpload/BulkUpload";
+import AllAccountsReportExecution from "./Pages/SuperAdmin/Components/AllAccountsReportExecution/AllAccountsReportExecution";
+import DuplicateManageClaimsReport from "./Pages/SuperAdmin/Components/DuplicateManageClaimsReport/DuplicateManageClaimsReport";
+import MissingBilledSessionsUnderAppointment from "./Pages/SuperAdmin/Components/MissingBilledSessionsUnderAppointment/MissingBilledSessionsUnderAppointment";
+import CreateDepositApplyWithNoCheck from "./Pages/SuperAdmin/Components/CreateDepositApplyWithNoCheck/CreateDepositApplyWithNoCheck";
+import InsuranceDetails from "./Pages/SuperAdmin/Components/InsuranceDetails/InsuranceDetails";
+import SMSEmailSettings from "./Pages/SuperAdmin/Components/SMSEmailSettings/SMSEmailSettings";
+import BlockUnblockAdmins from "./Pages/SuperAdmin/Components/BlockUnblockAdmins/BlockUnblockAdmins";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -293,73 +310,80 @@ function App() {
           ></Route>
           {/*--------- Testing End ------------*/}
 
-          {/* Super Admin Pannel */}
+          {/* Super Admin Panel */}
           <Route path="/super-admin" element={<SuperAdmin></SuperAdmin>}>
-            <Route index element={<NameLocation></NameLocation>}></Route>
+            <Route index element={<ProviderAccess></ProviderAccess>}></Route>
             <Route
-              path="add-insurance"
-              element={<AddInsurance></AddInsurance>}
+              path="admin-access"
+              element={<AdminAccess></AdminAccess>}
+            ></Route>
+            <Route path="payor" element={<Payor></Payor>}></Route>
+            <Route
+              path="Companies-and-facilities"
+              element={<CompaniesAndFacilities></CompaniesAndFacilities>}
             ></Route>
             <Route
-              path="insurance-setup"
-              element={<InsuranceSetup></InsuranceSetup>}
+              path="company-level-CSV-Report"
+              element={<CompanyLevelCSVReport></CompanyLevelCSVReport>}
             ></Route>
             <Route
-              path="add-treatment"
-              element={<AddTreatments></AddTreatments>}
+              path="user-page-permission"
+              element={<UserPagePermission></UserPagePermission>}
             ></Route>
             <Route
-              path="services"
-              element={<AddServices></AddServices>}
-            ></Route>
-            <Route path="cpt-code" element={<AddCptCode></AddCptCode>}></Route>
-            <Route
-              path="cpt-code-exclusion"
-              element={<CptCodeExclusion></CptCodeExclusion>}
+              path="Add-views-to-the-facility"
+              element={<AddViewstothefacility></AddViewstothefacility>}
             ></Route>
             <Route
-              path="sub-activity-setup"
-              element={<AddServiceSubType></AddServiceSubType>}
-            >
-              <Route index element={<Navigate to="SubTypeTab" />} />
-
-              <Route
-                path="SubTypeTab"
-                element={<AddServiceSubTypeTab></AddServiceSubTypeTab>}
-              ></Route>
-            </Route>
-
-            <Route
-              path="add-staff-type"
-              element={<AddStaffType></AddStaffType>}
+              path="manage-credential"
+              element={<ManageCredential></ManageCredential>}
             ></Route>
             <Route
-              path="rendering-provider"
-              element={<ReferringProvider></ReferringProvider>}
+              path="bulk-upload"
+              element={<BulkUpload></BulkUpload>}
             ></Route>
             <Route
-              path="pos"
-              element={<PlaceOfServices></PlaceOfServices>}
+              path="billerlog-user"
+              element={<AddViewstothefacility></AddViewstothefacility>}
             ></Route>
             <Route
-              path="vendor-number"
-              element={<VendorNumberSetup></VendorNumberSetup>}
+              path="All-accounts-report-execution"
+              element={
+                <AllAccountsReportExecution></AllAccountsReportExecution>
+              }
             ></Route>
             <Route
-              path="holiday-setup"
-              element={<HolidaySetup></HolidaySetup>}
-            ></Route>
-            <Route path="pay-period" element={<PayPeriod></PayPeriod>}></Route>
-            <Route path="logo" element={<Logo></Logo>}></Route>
-            <Route
-              path="unbillable-activity"
-              element={<UnbillableActivity></UnbillableActivity>}
+              path="duplicate-manage-claims-report"
+              element={
+                <DuplicateManageClaimsReport></DuplicateManageClaimsReport>
+              }
             ></Route>
             <Route
-              path="unbillable-time-sheet"
-              element={<UnBillableTimeSheet></UnBillableTimeSheet>}
+              path="missing-billed-sessions-under-appointment"
+              element={
+                <MissingBilledSessionsUnderAppointment></MissingBilledSessionsUnderAppointment>
+              }
+            ></Route>
+            <Route
+              path="create-deposit-apply-with-no-check"
+              element={
+                <CreateDepositApplyWithNoCheck></CreateDepositApplyWithNoCheck>
+              }
+            ></Route>
+            <Route
+              path="insurance-details"
+              element={<InsuranceDetails></InsuranceDetails>}
+            ></Route>
+            <Route
+              path="sms-email-settings"
+              element={<SMSEmailSettings></SMSEmailSettings>}
+            ></Route>
+            <Route
+              path="blocked-admins-settings"
+              element={<BlockUnblockAdmins></BlockUnblockAdmins>}
             ></Route>
           </Route>
+
           {/*  */}
           {/* Admin Pannel */}
           <Route
