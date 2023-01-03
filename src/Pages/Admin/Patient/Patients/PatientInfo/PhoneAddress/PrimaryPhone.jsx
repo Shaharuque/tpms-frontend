@@ -1,19 +1,8 @@
-import { Switch } from "antd";
 import React from "react";
 import { FaPlus } from "react-icons/fa";
-import PhoneInput from "react-phone-input-2";
 
 const PrimaryPhone = ({ adData }) => {
-  const {
-    handlePhoneClick,
-    appointment,
-    setAppointment,
-    setPhone,
-    phone,
-    register,
-    Controller,
-    control,
-  } = adData;
+  const { handlePhoneClick, phoneAppend, register, primaryPhone } = adData;
   return (
     <>
       <label className="label">
@@ -21,7 +10,8 @@ const PrimaryPhone = ({ adData }) => {
       </label>
       <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
         <div className="w-[180px] ml-1">
-          <PhoneInput
+          {/* package input field */}
+          {/* <PhoneInput
             className="PatientinformationInput"
             country={"us"}
             {...register("phoneinput")}
@@ -31,27 +21,14 @@ const PrimaryPhone = ({ adData }) => {
               setPhone(e);
             }}
             // inputProps={{ ...register("phoneinput") }}
-          />
-
-          {/* <Controller
-            control={control}
-            name="extra"
-            rules={{ required: true }}
-            render={({ field: { ref, ...field } }) => (
-              <PhoneInput
-                {...field}
-                inputExtraProps={{
-                  ref,
-                  required: true,
-                  autoFocus: true,
-                }}
-                country={"in"}
-                onlyCountries={["in"]}
-                countryCodeEditable={false}
-                specialLabel={"Player Mobile Number"}
-              />
-            )}
           /> */}
+          <input
+            type="text"
+            placeholder="Phone"
+            defaultValue={primaryPhone}
+            className="input-border input-font py-[1px] w-full focus:outline-none"
+            {...register("phone_number")}
+          />
         </div>
         <div>
           <select
@@ -63,10 +40,8 @@ const PrimaryPhone = ({ adData }) => {
             <option value="family">family</option>
           </select>
         </div>
-        <button // onClick={() => setPhoneOpen(true)}
-          onClick={() => {
-            handlePhoneClick();
-          }}
+        <button
+          onClick={() => phoneAppend()}
           className="bg-secondary text-white p-[4px]"
         >
           <FaPlus />
@@ -74,18 +49,22 @@ const PrimaryPhone = ({ adData }) => {
       </div>
 
       <div className="flex ml-1 mt-2 items-center">
-        {/* <input
-                    type="checkbox"
-                    name="patient"
-                    onClick={() => {
-                      setAppointment(!appointment);
-                    }}
-                  /> */}
-        <Switch
+        {/* custom toggle  */}
+        <label class="inline-flex relative items-center mb-5 cursor-pointer">
+          <input
+            type="checkbox"
+            {...register("phonecheck")}
+            defaultChecked={true}
+            class="sr-only peer"
+          />
+          <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+        </label>
+        {/* antd switch code */}
+        {/* <Switch
           size="small"
           checked={appointment ? true : false}
           onClick={() => setAppointment(!appointment)}
-        />
+        /> */}
         <span className="text-xs ml-1 text-gray-700 font-medium">
           SMS Appointment Reminders
         </span>

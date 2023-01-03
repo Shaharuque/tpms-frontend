@@ -1,4 +1,5 @@
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const DynamicAddress = ({ adData }) => {
   const { fields, register, remove } = adData;
@@ -24,12 +25,12 @@ const DynamicAddress = ({ adData }) => {
                 })}
                 defaultValue={field.street}
               />
-              {/* 
-              <div className="bg-red-500 text-white p-[4px]">
-                onClick={}
+              <button
+                onClick={() => remove(index)}
+                className="bg-red-500 text-white p-[4px] "
+              >
                 <RiDeleteBin6Line />
-              </div> */}
-              <button onClick={() => remove(index)}>delete</button>
+              </button>
             </div>
             <div className="mb-2">
               <input
