@@ -195,6 +195,7 @@ import CreateDepositApplyWithNoCheck from "./Pages/SuperAdmin/Components/CreateD
 import InsuranceDetails from "./Pages/SuperAdmin/Components/InsuranceDetails/InsuranceDetails";
 import SMSEmailSettings from "./Pages/SuperAdmin/Components/SMSEmailSettings/SMSEmailSettings";
 import BlockUnblockAdmins from "./Pages/SuperAdmin/Components/BlockUnblockAdmins/BlockUnblockAdmins";
+import BillerlogUser from "./Pages/SuperAdmin/Components/BillerlogUser/BillerlogUser";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -344,7 +345,7 @@ function App() {
             ></Route>
             <Route
               path="billerlog-user"
-              element={<AddViewstothefacility></AddViewstothefacility>}
+              element={<BillerlogUser></BillerlogUser>}
             ></Route>
             <Route
               path="All-accounts-report-execution"

@@ -1,0 +1,10 @@
+.super-admin-nav {
+    transition: 0.1s ease-in;
+    color: #EFF7F8;
+}
+
+.super-admin-nav:hover {
+    border-bottom: 1px solid white;
+    color: white;
+    transition: 0.5s;
+}

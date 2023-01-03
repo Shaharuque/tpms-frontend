@@ -12,7 +12,7 @@ const SuperAdminRoutes = () => {
           initial={{ opacity: 0, x: -25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
-          className=" p-2 my-2 setting-nav shadow-md rounded-md"
+          className=" p-2 my-2 lg:mr-2 setting-nav shadow-md rounded-md"
         >
           {SuperAdmin.map((s, i) => (
             <SettingNav key={i} s={s}></SettingNav>
@@ -22,7 +22,7 @@ const SuperAdminRoutes = () => {
           initial={{ opacity: 0, x: 25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
-          className=" sm:m-2 sm:p-2  setting-body shadow-md rounded-lg "
+          className=" sm:my-2 p-2 my-1 setting-body shadow-md rounded-lg "
         >
           <Outlet />
         </motion.div>
