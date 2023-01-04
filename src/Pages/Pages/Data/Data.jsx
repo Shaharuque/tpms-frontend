@@ -364,6 +364,93 @@ export const setting = [
     icon: <MdTrackChanges />,
   },
 ];
+export const SuperAdmin = [
+  {
+    link: "/super-admin",
+    name: "Provider Access",
+    icon: <BiRename />,
+  },
+  {
+    link: "admin-access",
+    name: "Admin Access",
+    icon: <AiOutlineUserAdd />,
+  },
+  {
+    link: "payor",
+    name: "Payor",
+    icon: <RiSettingsFill />,
+  },
+  {
+    link: "Companies-and-facilities",
+    name: "Companies And Facilities",
+    icon: <RiHospitalLine />,
+  },
+  {
+    link: "company-level-CSV-Report",
+    name: "Company Level CSV Report",
+    icon: <FiLayers />,
+  },
+  {
+    link: "user-page-permission",
+    name: "User Page Permission",
+    icon: <FiLayers />,
+  },
+  {
+    link: "Add-views-to-the-facility",
+    name: "Add Views to the facility",
+    icon: <FiLayers />,
+  },
+  {
+    link: "manage-credential",
+    name: "Manage Credential",
+    icon: <RiSendPlaneLine />,
+  },
+  {
+    link: "bulk-upload",
+    name: "Bulk Upload",
+    icon: <AiOutlineUserAdd />,
+  },
+  {
+    link: "billerlog-user",
+    name: "Biller log User",
+    icon: <AiOutlineUser />,
+  },
+  {
+    link: "All-accounts-report-execution",
+    name: "All Accounts Report Execution",
+    icon: <BsHouseDoor />,
+  },
+  {
+    link: "duplicate-manage-claims-report",
+    name: "Duplicate Manage Claims Report",
+    icon: <FaBoxOpen />,
+  },
+  {
+    link: "missing-billed-sessions-under-appointment",
+    name: "Missing Billed Sessions Under Appointment",
+    icon: <FiAnchor />,
+  },
+  {
+    link: "create-deposit-apply-with-no-check",
+    name: "Create Deposit Apply With NoCheck",
+    icon: <MdOutlinePayment />,
+  },
+  {
+    link: "insurance-details",
+    name: "Insurance Details",
+    icon: <BiLinkAlt />,
+  },
+  {
+    link: "sms-email-settings",
+    name: "SMS Email Settings",
+    icon: <BiFolderOpen />,
+  },
+  {
+    link: "blocked-admins-settings",
+    name: "Block Unblock Admins",
+    icon: <TbFileTime />,
+  },
+];
 
 export const patient_info = [
   {

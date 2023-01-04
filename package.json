@@ -32,6 +32,7 @@
     "dayjs": "^1.11.5",
     "formBuilder": "^3.0.2",
     "framer-motion": "^6.3.12",
+    "hamburger-react": "^2.5.0",
     "html-react-parser": "^3.0.4",
     "jquery": "^3.6.1",
     "jquery-ui-sortable": "1.0.0",
