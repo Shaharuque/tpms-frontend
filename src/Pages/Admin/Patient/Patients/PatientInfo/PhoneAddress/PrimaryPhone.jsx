@@ -2,7 +2,7 @@ import React from "react";
 import { FaPlus } from "react-icons/fa";
 
 const PrimaryPhone = ({ adData }) => {
-  const { handlePhoneClick, phoneAppend, register, primaryPhone } = adData;
+  const { phoneAppend, register, primaryPhone } = adData;
   return (
     <>
       <label className="label">

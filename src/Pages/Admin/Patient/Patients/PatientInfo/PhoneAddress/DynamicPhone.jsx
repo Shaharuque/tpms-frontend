@@ -1,7 +1,5 @@
-import { Switch } from "antd";
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import PhoneInput from "react-phone-input-2";
 
 const DynamicPhone = ({ adData }) => {
   const { phoneFields, phoneRemove, register } = adData;
