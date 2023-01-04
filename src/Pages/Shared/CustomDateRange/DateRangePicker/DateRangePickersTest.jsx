@@ -61,8 +61,9 @@ const DateRangePickersTest = () => {
     <div>
       <h2>REact js Jquery testing </h2>
       <div id="reportrange">
-        <i class="fa fa-calendar"></i>&nbsp;
-        <input type="text" name="datetimes" /> <i class="fa fa-caret-down"></i>
+        <i className="fa fa-calendar"></i>&nbsp;
+        <input type="text" name="datetimes" />{" "}
+        <i className="fa fa-caret-down"></i>
       </div>
     </div>
   );

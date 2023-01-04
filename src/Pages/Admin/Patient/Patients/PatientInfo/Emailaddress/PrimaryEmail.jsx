@@ -10,7 +10,7 @@ const PrimaryEmail = ({ adData }) => {
           <label className="label">
             <span className=" label-font">Email New</span>
           </label>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
             <div>
               <input
                 type="text"
@@ -46,14 +46,14 @@ const PrimaryEmail = ({ adData }) => {
               onClick={() => setActive(!active)}
             /> */}
 
-            <label class="inline-flex relative items-center  cursor-pointer">
+            <label className="inline-flex relative items-center  cursor-pointer">
               <input
                 type="checkbox"
                 {...register("email_ok")}
                 defaultChecked={false}
-                class="sr-only peer"
+                className="sr-only peer"
               />
-              <div class="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+              <div className="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
             </label>
 
             <span className="text-xs ml-1 text-gray-700 font-medium">
@@ -62,14 +62,14 @@ const PrimaryEmail = ({ adData }) => {
           </div>
 
           <div className="flex ml-1 mt-1 items-center">
-            <label class="inline-flex relative items-center cursor-pointer">
+            <label className="inline-flex relative items-center cursor-pointer">
               <input
                 type="checkbox"
                 {...register("send_mail")}
                 defaultChecked={true}
-                class="sr-only peer"
+                className="sr-only peer"
               />
-              <div class="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+              <div className="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
             </label>
             <span className="text-xs ml-1 text-gray-700 font-medium">
               Send email appointment reminders

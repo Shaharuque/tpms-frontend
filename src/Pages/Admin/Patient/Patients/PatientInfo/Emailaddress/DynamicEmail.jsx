@@ -12,7 +12,7 @@ const DynamicEmail = ({ adData }) => {
             <label className="label">
               <span className=" label-font">Email</span>
             </label>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
               <div>
                 <input
                   type="text"
@@ -41,16 +41,16 @@ const DynamicEmail = ({ adData }) => {
             </div>
             <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
               <div className="">
-                <label class="inline-flex relative items-center cursor-pointer">
+                <label className="inline-flex relative items-center cursor-pointer">
                   <input
                     type="checkbox"
                     {...register(`Email.${index}.checked`, {
                       // valueAsNumber: true,
                     })}
                     defaultChecked={field.checked}
-                    class="sr-only peer"
+                    className="sr-only peer"
                   />
-                  <div class="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+                  <div className="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
                 </label>
                 {/* <Switch
            size="small"
@@ -70,14 +70,14 @@ const DynamicEmail = ({ adData }) => {
          onClick={() => setActive(!active)}
        /> */}
               {/* custom tooggel */}
-              <label class="inline-flex relative items-center  cursor-pointer">
+              <label className="inline-flex relative items-center  cursor-pointer">
                 <input
                   type="checkbox"
                   {...register(`Email.${index}.sendMail`)}
                   defaultChecked={field.sendMail}
-                  class="sr-only peer"
+                  className="sr-only peer"
                 />
-                <div class="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+                <div className="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
               </label>
               <span className="text-xs ml-1 text-gray-700 font-normal">
                 Send email appointment reminders

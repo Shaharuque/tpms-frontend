@@ -335,7 +335,8 @@ const ProcessedPayroll = () => {
   return (
     <div className={!table ? "h-[100vh]" : ""}>
       <div className="my-5">
-        <div className=" grid grid-cols-1 items-center md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6  mr-2 gap-6">
+        <div className=" flex items-center gap-2 flex-wrap">
+          {/* <div className=" grid grid-cols-1 items-center md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6  mr-2 gap-6"> */}
           <div>
             <label className="label">
               <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
@@ -376,7 +377,7 @@ const ProcessedPayroll = () => {
               </div>
 
               <button
-                className="pms-button w-1/4 mt-[35px]"
+                className="pms-button mt-[35px]"
                 type="submit"
                 onClick={() => setTable(true)}
               >

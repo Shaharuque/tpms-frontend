@@ -8,3 +8,11 @@
     color: white;
     transition: 0.5s;
 }
+
+.table-striped-rows tr:nth-child(2n) td {
+    background-color: #fbfbfb !important;
+}
+
+.table-striped-rows thead {
+    background-color: #f1f1f1 !important;
+}
