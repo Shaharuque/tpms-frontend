@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm, Controller } from "react-hook-form";
 import SimpleFileUpload from "react-simple-file-upload";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa";
@@ -28,16 +28,53 @@ import DynamicPhone from "./PhoneAddress/DynamicPhone";
 import PrimaryPhone from "./PhoneAddress/PrimaryPhone";
 import BasicInfo from "./BasicInfo";
 import TestingFrom from "./TestingFrom";
-
 const PatientInformation = () => {
   const testingobj = {
     City: "mirpur",
     Street: "usa",
     address: [
-      { street: "djlasjdiad", city: "sflsdf38akdj", country: "NY" },
-      { street: "heilo", city: "dmd", country: "NY" },
-      { street: "h45fglo", city: "dlfd", country: "UK" },
-      { street: "435234o", city: "ld", country: "UK" },
+      {
+        street: "djlasjdiad",
+        city: "sflsdf38akdj",
+        country: "NY",
+        status: false,
+
+        zip: 555,
+      },
+      {
+        street: "heilo",
+        city: "dmd",
+        country: "NY",
+        status: true,
+
+        zip: 73563,
+      },
+      {
+        street: "h45fglo",
+        city: "dlfd",
+        country: "UK",
+        status: false,
+
+        zip: 4545,
+      },
+      {
+        street: "435234o",
+        city: "ld",
+        country: "UK",
+        status: true,
+
+        zip: 4523,
+      },
+    ],
+    allNumber: [
+      {
+        number: 54,
+        checked: true,
+      },
+      {
+        number: 53,
+        checked: false,
+      },
     ],
     assignment: "male",
     checkedActive: 1,
@@ -49,6 +86,23 @@ const PatientInformation = () => {
     first_name: "cbvxdfg",
     fruit: "Male",
     gender: "Male",
+    allEmail: [
+      {
+        email: "najirkhan@gmail.com",
+        checked: true,
+        sendMail: false,
+      },
+      {
+        email: "lawla@gmail.com",
+        checked: true,
+        sendMail: true,
+      },
+      {
+        email: "hello@gmail.com",
+        checked: true,
+        sendMail: false,
+      },
+    ],
     group: "work",
     group2: "work",
     language: "male",
@@ -63,10 +117,6 @@ const PatientInformation = () => {
     region: "work",
     zip: "500",
   };
-
-  const [obj, setobj] = useState(testingobj.address);
-
-  const [restData, setRestData] = useState({});
 
   const { token } = useToken();
   const [active, setActive] = useState(false);
@@ -87,29 +137,43 @@ const PatientInformation = () => {
   // file uploaded added
 
   // testing form
-  console.log("resetData", restData);
 
-  const { register, control, handleSubmit, reset, watch, setValue, getValues } =
+  const { register, control, handleSubmit, reset, setValue, getValues } =
     useForm({
       defaultValues: {
-        test: [{ street: "Bill", city: "dhaka", country: "Luo", zip: "" }],
+        address: testingobj.address,
+        number: testingobj.allNumber,
+        Email: testingobj.allEmail,
       },
     });
+
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "test",
+    name: "address",
+    // name: "number",
   });
 
-  // calender hide
-  // const { register, handleSubmit, reset, setValue, getValues } = useForm();
-  const [hook, setHook] = useState("");
+  const {
+    fields: phoneFields,
+    append: phoneAppend,
+    remove: phoneRemove,
+  } = useFieldArray({
+    control,
+    // name: "address",
+    name: "number",
+  });
 
-  // Address state
-  const [addressRendomValue, setAddressRendomValue] = useState([]);
-  // phone state
-  const [phoneRendomValue, setPhoneRendomValue] = useState([]);
-  // Email State
-  const [emailRendomValue, setEmailRendomValue] = useState([]);
+  const {
+    fields: emailFields,
+    append: emailAppend,
+    remove: emailRemove,
+  } = useFieldArray({
+    control,
+    // name: "address",
+    name: "Email",
+  });
+
+  const [hook, setHook] = useState("");
 
   // // testing single calendar
   // const [date, setDate] = useState(new Date());
@@ -128,55 +192,6 @@ const PatientInformation = () => {
   //   setDate(null);
   // };
 
-  // Address + icon Click Handeler
-
-  const handleClick = () => {
-    // setAddressRendomValue((current) => [...current, Math.ceil(Math.random())]);
-    // testingobj.address.push({ street: "", city: "", country: "", zip: "" });
-    // //console.log("push", testingobj.address);
-    //console.log(obj);
-    setobj([...obj, { street: "", city: "", country: "", zip: "" }]);
-  };
-
-  // Phone + icon click handeler
-  const handlePhoneClick = () => {
-    setPhoneRendomValue((current) => [...current, Math.random()]);
-  };
-
-  // email + icon click handeler
-  const handleEmailClick = () => {
-    setEmailRendomValue((current) => [...current, Math.random()]);
-  };
-
-  // address icon delete handeler
-  const addressHandleRemove = (x) => {
-    //console.log("findindex", x);
-    // const list = [...addressRendomValue];
-    // const deltedData = obj.splice(index, 1);
-    // //console.log(deltedData);
-    // setobj(deltedData)
-    // setRestData("");
-    // updated code
-    // const deleteData = obj.filter((item, index) => index !== x);
-    // //console.log("deletedata", deleteData);
-    // setobj(deleteData);
-    //console.log("deleteData", deleteData);
-    // //console.log("obj", obj);
-  };
-
-  // Phone icon delete handeler
-  const phoneHandleRemove = (index) => {
-    const list = [...phoneRendomValue];
-    list.splice(index, 1);
-    setPhoneRendomValue(list);
-  };
-
-  // email icon delete handeler
-  const EmailHandleRemove = (index) => {
-    const list = [...emailRendomValue];
-    list.splice(index, 1);
-    setEmailRendomValue(list);
-  };
   // Patient Information
   const { id } = useParams();
   //console.log("patient Info", id);
@@ -185,10 +200,8 @@ const PatientInformation = () => {
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
-  //console.log("patient details", data);
-  //console.log("hone number", patient_details?.phone_number);
-  const [phone, setPhone] = useState(patient_details?.phone_number);
-
+  const primaryPhone = patient_details?.phone_number;
+  const primaryEmail = patient_details?.email;
   useEffect(() => {
     // action dispatched
     dispatch(getpatientsDetails({ id, token }));
@@ -205,8 +218,8 @@ const PatientInformation = () => {
         last_name: patient_details?.client_last_name,
         dob: patient_details?.client_dob,
         // dob: date ? `${month}/${day}/${year}` : null,
-        email: patient_details?.email,
-        phone: patient_details?.phone_number,
+        // email: patient_details?.email,
+        // phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
         checkedActive: patient_details?.is_active_client,
@@ -279,154 +292,106 @@ const PatientInformation = () => {
               register,
             }}
           />
-          {/* testing form */}
-          {/* {testingobj?.address.map((item, index) => (
-            <TestingFrom
-              adData={{
-                fields,
-                register,
-                remove,
-                append,
-                restData,
-                setRestData,
-                index,
-                reset,
-                item,
-              }}
-            />
-          ))} */}
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
             {/* address  */}
-            <div className="">
-              <>
-                <PrimaryAddress rg={register} btnclick={handleClick} />
+            <div>
+              <PrimaryAddress append={append} rg={register} />
 
-                {/* {obj?.length > 0 &&
-                  obj.map((item, index) => (
-                    <DynamicAddress
-                      adData={{
-                        restData,
-                        setRestData,
-                        addressRendomValue,
-                        index,
-                        reset,
-                        item,
-                        addressHandleRemove,
-                        register,
-                      }}
-                    />
-                  ))} */}
+              <DynamicAddress
+                adData={{
+                  fields,
+                  register,
+                  remove,
+                }}
+              />
 
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
-                  <div>
-                    <label className="label">
-                      <span className=" label-font">
-                        POS<span className="text-red-500">*</span>
-                      </span>
-                    </label>
-                    <select
-                      className="input-border input-font py-[1px] w-full focus:outline-none"
-                      {...register("pos")}
-                    >
-                      <option value="work">work</option>
-                      <option value="home">home</option>
-                      <option value="family">family</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="label">
-                      <span className=" label-font">
-                        Region<span className="text-red-500">*</span>
-                      </span>
-                    </label>
-                    <select
-                      className="input-border input-font py-[1px] w-full focus:outline-none"
-                      {...register("region")}
-                    >
-                      <option value="work">work</option>
-                      <option value="home">home</option>
-                      <option value="family">family</option>
-                    </select>
-                  </div>
+              <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
+                <div>
+                  <label className="label">
+                    <span className=" label-font">
+                      POS<span className="text-red-500">*</span>
+                    </span>
+                  </label>
+                  <select
+                    className="input-border input-font py-[1px] w-full focus:outline-none"
+                    {...register("pos")}
+                  >
+                    <option value="work">work</option>
+                    <option value="home">home</option>
+                    <option value="family">family</option>
+                  </select>
                 </div>
-              </>
+                <div>
+                  <label className="label">
+                    <span className=" label-font">
+                      Region<span className="text-red-500">*</span>
+                    </span>
+                  </label>
+                  <select
+                    className="input-border input-font py-[1px] w-full focus:outline-none"
+                    {...register("region")}
+                  >
+                    <option value="work">work</option>
+                    <option value="home">home</option>
+                    <option value="family">family</option>
+                  </select>
+                </div>
+              </div>
             </div>
-
             {/* phone  */}
             <div className=" lg:mx-auto md:mx-0">
               <PrimaryPhone
                 adData={{
-                  handlePhoneClick,
-                  appointment,
-                  setAppointment,
-                  setPhone,
-                  phone,
-                  reset,
-                  setActive,
-                  active,
+                  phoneAppend,
                   register,
+                  primaryPhone,
                 }}
               />
-              {phoneRendomValue.map((x, index) => (
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    y: 15,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <DynamicPhone
-                    adData={{
-                      phoneHandleRemove,
-                      appointment,
-                      setAppointment,
-                      setPhone,
-                      phone,
-                      index,
-                      reset,
-                      setActive,
-                      active,
-                      register,
-                    }}
-                  />
-                </motion.div>
-              ))}
-            </div>
 
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 15,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{ delay: 0.2 }}
+              >
+                <DynamicPhone
+                  adData={{
+                    phoneFields,
+                    phoneRemove,
+                    register,
+                  }}
+                />
+              </motion.div>
+            </div>
             {/* Email  */}
             <div className=" lg:mx-auto md:mx-0">
               <PrimaryEmail
                 adData={{
-                  handleEmailClick,
-                  reset,
-                  setActive,
-                  active,
+                  emailAppend,
                   register,
+                  primaryEmail,
                 }}
               />
-              {emailRendomValue.map((x, index) => (
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <DynamicEmail
-                    adData={{
-                      EmailHandleRemove,
-                      index,
-                      reset,
-                      setActive,
-                      active,
-                      register,
-                    }}
-                  />
-                </motion.div>
-              ))}
+
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <DynamicEmail
+                  adData={{
+                    register,
+                    emailFields,
+                    emailRemove,
+                  }}
+                />
+              </motion.div>
             </div>
           </div>
 

@@ -1,9 +1,8 @@
-import { Switch } from "antd";
 import React from "react";
 import { FaPlus } from "react-icons/fa";
 
 const PrimaryEmail = ({ adData }) => {
-  const { handleEmailClick, setActive, active, register } = adData;
+  const { emailAppend, register, primaryEmail } = adData;
   return (
     <>
       <div className=" lg:mx-auto md:mx-0">
@@ -18,6 +17,7 @@ const PrimaryEmail = ({ adData }) => {
                 name="email"
                 className="input-border input-font w-full focus:outline-none"
                 {...register("email")}
+                defaultValue={primaryEmail}
               />
             </div>
             <div>
@@ -32,7 +32,7 @@ const PrimaryEmail = ({ adData }) => {
             </div>
             <button
               onClick={() => {
-                handleEmailClick();
+                emailAppend();
               }}
               className="bg-secondary text-white p-[4px] "
             >
@@ -40,29 +40,37 @@ const PrimaryEmail = ({ adData }) => {
             </button>
           </div>
           <div className="flex ml-1 mt-1 items-center">
-            <Switch
+            {/* <Switch
               size="small"
               checked={active ? true : false}
               onClick={() => setActive(!active)}
-            />
+            /> */}
+
+            <label class="inline-flex relative items-center mb-5 cursor-pointer">
+              <input
+                type="checkbox"
+                {...register("email_ok")}
+                defaultChecked={false}
+                class="sr-only peer"
+              />
+              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            </label>
+
             <span className="text-xs ml-1 text-gray-700 font-medium">
               Email OK
             </span>
           </div>
 
           <div className="flex ml-1 mt-1 items-center">
-            {/* <input
-                    type="checkbox"
-                    name="patient"
-                    onClick={() => {
-                      setEmailSend(!emailSend);
-                    }}
-                  /> */}
-            <Switch
-              size="small"
-              checked={active ? true : false}
-              onClick={() => setActive(!active)}
-            />
+            <label class="inline-flex relative items-center mb-5 cursor-pointer">
+              <input
+                type="checkbox"
+                {...register("send_mail")}
+                defaultChecked={true}
+                class="sr-only peer"
+              />
+              <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+            </label>
             <span className="text-xs ml-1 text-gray-700 font-medium">
               Send email appointment reminders
             </span>
