@@ -2,9 +2,15 @@ import React from "react";
 import { useState } from "react";
 import { Sling as Hamburger } from "hamburger-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const SuperAdminNav = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const logout = () => {
+    console.log("clicked");
+    navigate("/");
+  };
   return (
     <>
       <div
@@ -17,7 +23,9 @@ const SuperAdminNav = () => {
         {/* this part only visible in large device */}
         <div className="flex items-center h-4 gap-3 sm:text-sm text-base tracking-wide font-medium text-white mt-[-200px] md:mt-0 px-5">
           <div>Welcome</div>|<button className="super-admin-nav">Home</button>|
-          <button className="super-admin-nav">Log Out</button>
+          <button onClick={() => logout()} className="super-admin-nav">
+            Log Out
+          </button>
         </div>
         {/* this part only visible in medium and small device */}
         <div className="md:hidden ml-[-78px]">
@@ -53,7 +61,9 @@ const SuperAdminNav = () => {
                 <button className="super-admin-nav my-2">Home</button>
               </div>
               <div>
-                <button className="super-admin-nav">Log Out</button>
+                <button onClick={() => logout()} className="super-admin-nav">
+                  Log Out
+                </button>
               </div>
             </div>
           </div>
