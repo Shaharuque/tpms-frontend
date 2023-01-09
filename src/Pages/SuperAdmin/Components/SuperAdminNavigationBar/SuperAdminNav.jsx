@@ -9,18 +9,21 @@ const SuperAdminNav = () => {
     <>
       <div
         className="bg-secondary rounded-xl sm:rounded-3xl py-3 flex items-center 
-     justify-between"
+     justify-between s-navbar"
       >
         <div className=" font-medium sm:text-lg lg:px-5 px-3 text-lg text-white tracking-wide">
           Administration
         </div>
         {/* this part only visible in large device */}
-        <div className="flex items-center h-4 gap-3 sm:text-sm text-base tracking-wide font-medium text-white mt-[-200px] md:mt-0 px-5">
-          <div>Welcome</div>|<button className="super-admin-nav">Home</button>|
-          <button className="super-admin-nav">Log Out</button>
+        <div className="hidden md:block">
+          <div className="flex items-center h-4 gap-3 sm:text-sm text-base tracking-wide font-medium text-white md:mt-0 px-5">
+            <div>Welcome</div>|<button className="super-admin-nav">Home</button>
+            |<button className="super-admin-nav">Log Out</button>
+          </div>
         </div>
+
         {/* this part only visible in medium and small device */}
-        <div className="md:hidden ml-[-78px]">
+        <div className="md:hidden">
           <Hamburger
             duration={0.8}
             rounded

@@ -364,7 +364,7 @@ export const setting = [
     icon: <MdTrackChanges />,
   },
 ];
-export const SuperAdmin = [
+export const SuperAdminRoute = [
   {
     link: "/super-admin",
     name: "Provider Access",

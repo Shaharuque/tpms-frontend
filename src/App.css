@@ -25,6 +25,27 @@ main {
   -moz-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
 }
 
+.superAdmin-sidebar {
+  box-shadow: -1px 0px 4px 3px rgba(0, 0, 0, 0.85);
+}
+
+.s-top-section {
+  display: flex;
+  height: 80px;
+  /* background-color: #b91c1c; */
+  align-items: center;
+  padding: 20px 15px;
+  margin-bottom: 10px;
+}
+
+.sidebar-text {
+  /* transform: translatex(-46px); */
+}
+
+/* .sidebar-text:hover {
+  opacity: 1;
+} */
+
 .top-section {
   display: flex;
   height: 80px;
