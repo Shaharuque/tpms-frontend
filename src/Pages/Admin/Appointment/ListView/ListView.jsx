@@ -734,14 +734,6 @@ const ListView = () => {
   // ----------------------------------------Multi-Select---------------------------------
   // *************
 
-  const opt = [
-    { label: "tera ", value: "grapes", id: 3 },
-    { label: "tpms ", value: "mafgngo", id: 1 },
-    { label: "code ", value: "grfgapes", id: 4 },
-    { label: "Mango ", value: "mango", id: 8 },
-    { label: "dfa ", value: "strawberry", id: 9 },
-  ];
-
   return (
     // For responsive view point
     <div className={!table ? "h-[100vh]" : ""}>
