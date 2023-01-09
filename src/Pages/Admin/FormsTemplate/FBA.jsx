@@ -61,31 +61,33 @@ const FBA = () => {
             </div>
           </div>
           <div className="form-title mb-5">
-            <h1>FBA TEMPLATE <br /> BEHAVIOR ASSESSMENT SERVICE PLAN</h1>
+            <h1>
+              FBA TEMPLATE <br /> BEHAVIOR ASSESSMENT SERVICE PLAN
+            </h1>
             <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
           </div>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {" "}
           <div>
-            <div class="overflow-x-auto">
-              <table class="min-w-full border-2 border-blue-600 ">
-                {/* <thead class="border-b">
+            <div className="overflow-x-auto">
+              <table className="min-w-full border-2 border-blue-600 ">
+                {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                 <tbody>
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -102,8 +104,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -121,9 +123,9 @@ const FBA = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -140,8 +142,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -160,9 +162,9 @@ const FBA = () => {
                     </td>
                   </tr>
 
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -179,8 +181,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -198,9 +200,9 @@ const FBA = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -217,8 +219,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3 mb-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3 mb-3">
                         <span>
                           <label
                             for="rec_name"
@@ -234,7 +236,7 @@ const FBA = () => {
                           {...register("name")}
                         />
                       </div>
-                      <div class="flex gap-3 mb-3">
+                      <div className="flex gap-3 mb-3">
                         <span>
                           <label
                             for="rec_name"
@@ -250,7 +252,7 @@ const FBA = () => {
                           {...register("bacb_certificate")}
                         />
                       </div>
-                      <div class="flex gap-3">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -269,9 +271,9 @@ const FBA = () => {
                     </td>
                   </tr>
 
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap ">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -290,9 +292,9 @@ const FBA = () => {
                     </td>
                   </tr>
 
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -309,8 +311,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3 mb-2">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3 mb-2">
                         <span>
                           <label
                             for="rec_name"
@@ -327,7 +329,7 @@ const FBA = () => {
                         />
                       </div>
 
-                      <div class="flex gap-3">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -346,9 +348,9 @@ const FBA = () => {
                     </td>
                   </tr>
 
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -365,8 +367,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -388,36 +390,35 @@ const FBA = () => {
               </table>
             </div>
 
-            <div class="flex mt-4 mb-4">
-              <div class="flex items-center mr-4">
+            <div className="flex mt-4 mb-4">
+              <div className="flex items-center mr-4">
                 <input
                   id="inline-radio"
                   type="radio"
                   value=""
                   name="inline-radio-group"
-                  class="w-4 h-4"
-
+                  className="w-4 h-4"
                   {...register("initial_assessment")}
                 />
                 <label
                   for="inline-radio"
-                  class="ml-2 text-sm font-medium text-black dark:text-black"
+                  className="ml-2 text-sm font-medium text-black dark:text-black"
                 >
                   Initial Assessment
                 </label>
               </div>
-              <div class="flex items-center mr-4">
+              <div className="flex items-center mr-4">
                 <input
                   id="inline-2-radio"
                   type="radio"
                   value=""
                   name="inline-radio-group"
-                  class="w-4 h-4"
+                  className="w-4 h-4"
                   {...register("reassessment")}
                 />
                 <label
                   for="inline-2-radio"
-                  class="ml-2 text-sm font-medium text-black dark:text-black"
+                  className="ml-2 text-sm font-medium text-black dark:text-black"
                 >
                   Reassessment
                 </label>
@@ -444,24 +445,24 @@ const FBA = () => {
 
             <div>
               <h1 className="form-inner-head my-2">DOCUMENTS REVIEWED:</h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -478,8 +479,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -506,39 +507,39 @@ const FBA = () => {
               <h1 className="form-inner-head my-2 text-center">
                 ANECDOTAL REPORT
               </h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  <thead className="border-b">
                     <tr>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-blue-600"
                       >
                         Date/Setting
                       </th>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Antecedent
                       </th>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Behavior
                       </th>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Consequence
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -547,7 +548,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -556,7 +557,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -565,7 +566,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -575,8 +576,8 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -585,7 +586,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -594,7 +595,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -603,7 +604,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -613,8 +614,8 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -623,7 +624,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -632,7 +633,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -641,7 +642,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -651,7 +652,6 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    
                   </tbody>
                 </table>
               </div>
@@ -664,39 +664,39 @@ const FBA = () => {
               <h1 className="form-inner-head my-2 mt-3 text-start">
                 MEDICATION
               </h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  <thead className="border-b">
                     <tr>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-blue-600"
                       >
                         Medication Name
                       </th>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Dosage
                       </th>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Purpose
                       </th>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Side Effects
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -705,7 +705,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -714,7 +714,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -723,7 +723,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -733,8 +733,8 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -743,7 +743,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -752,7 +752,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -761,7 +761,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -771,8 +771,8 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -781,7 +781,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -790,7 +790,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -799,7 +799,7 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
                         <div>
                           <input
                             type="text"
@@ -809,7 +809,6 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                   
                   </tbody>
                 </table>
               </div>
@@ -822,27 +821,27 @@ const FBA = () => {
               <h1 className="form-inner-head my-2 mt-3 text-start">
                 PROCEDURAL CHECKLIST
               </h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  <thead className="border-b">
                     <tr>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-blue-600"
                       >
                         Behavior Targeted for Reduction
                       </th>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Function
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600">
                         <div>
                           <input
                             type="text"
@@ -851,8 +850,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-3/5">
-                        <div class="flex gap-3 mb-5">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-3/5">
+                        <div className="flex gap-3 mb-5">
                           <span>
                             <label
                               for="rec_name"
@@ -869,7 +868,7 @@ const FBA = () => {
                           />
                         </div>
 
-                        <div class="flex gap-3 mb-5">
+                        <div className="flex gap-3 mb-5">
                           <span>
                             <label
                               for="rec_name"
@@ -885,7 +884,7 @@ const FBA = () => {
                             {...register("baseline")}
                           />
                         </div>
-                        <div class="flex gap-3 mb-5">
+                        <div className="flex gap-3 mb-5">
                           <span>
                             <label
                               for="rec_name"
@@ -901,7 +900,7 @@ const FBA = () => {
                             {...register("intensity")}
                           />
                         </div>
-                        <div class="flex gap-3">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -928,24 +927,24 @@ const FBA = () => {
               <h1 className="form-inner-head my-2">
                 ASSESSMENTS CONDUCTED/FUNCTION
               </h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -962,8 +961,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex flex-col gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex flex-col gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -991,24 +990,24 @@ const FBA = () => {
               <h1 className="form-inner-head my-2">
                 FAMILY/CAREGIVER INVOLVEMENT
               </h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1025,8 +1024,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex  gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex  gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1043,8 +1042,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex  gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex  gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1101,24 +1100,24 @@ const FBA = () => {
 
             <div>
               <h1 className="form-inner-head my-2">SKILLS ACQUISITION GOALS</h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1135,8 +1134,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex flex-col  gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex flex-col  gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1153,8 +1152,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex flex-col  gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex flex-col  gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1172,9 +1171,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1191,8 +1190,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex flex-col  gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex flex-col  gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1209,8 +1208,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex flex-col  gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex flex-col  gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1235,24 +1234,24 @@ const FBA = () => {
 
             <div>
               <h1 className="form-inner-head my-2">INSTRUCTIONAL GOALS</h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1263,8 +1262,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex flex-col  gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex flex-col  gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1275,8 +1274,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap ">
-                        <div class="flex flex-col  gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap ">
+                        <div className="flex flex-col  gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1288,9 +1287,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex  gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex  gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1298,8 +1297,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1307,8 +1306,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap w-4/5">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap w-4/5">
+                        <div className="flex   gap-2">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1318,9 +1317,9 @@ const FBA = () => {
                       </td>
                     </tr>
 
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex  gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex  gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1331,8 +1330,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1343,8 +1342,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1355,8 +1354,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>{" "}
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1367,8 +1366,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>{" "}
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1379,8 +1378,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>{" "}
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1391,8 +1390,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>{" "}
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <span>
                             <label
                               for="rec_name"
@@ -1404,9 +1403,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex  gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex  gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1414,8 +1413,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1423,8 +1422,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1432,8 +1431,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>{" "}
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1441,8 +1440,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>{" "}
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1450,8 +1449,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>{" "}
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1459,8 +1458,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>{" "}
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex   gap-2">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex   gap-2">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1497,24 +1496,24 @@ const FBA = () => {
             </div>
 
             <div>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1525,8 +1524,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1535,9 +1534,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1548,8 +1547,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1558,9 +1557,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1571,8 +1570,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1581,9 +1580,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1594,8 +1593,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1611,24 +1610,24 @@ const FBA = () => {
 
             <div className="mt-4">
               <h1 className="form-inner-head my-2">RISK ASSESSMENT</h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1639,8 +1638,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1652,9 +1651,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1662,8 +1661,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1672,9 +1671,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1685,8 +1684,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1698,9 +1697,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1708,8 +1707,8 @@ const FBA = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1727,24 +1726,24 @@ const FBA = () => {
               <h1 className="form-inner-head my-2">
                 MAINTAINING AND TRANSFERRING PROGRESS TO ALL RELEVANT SETTINGS
               </h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1755,8 +1754,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1765,9 +1764,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -1778,8 +1777,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -1793,64 +1792,64 @@ const FBA = () => {
               </div>
             </div>
 
-            <div class="overflow-x-auto mt-4">
-              <table class="min-w-full border-2 border-blue-600 ">
-                <thead class="border-b">
+            <div className="overflow-x-auto mt-4">
+              <table className="min-w-full border-2 border-blue-600 ">
+                <thead className="border-b">
                   <tr>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Phase:
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Action Steps
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Criteria
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Time Frame
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Service Reduction Behavior Analyst
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r  border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r  border-2 border-blue-600"
                     >
                       Service Reduction Behavior Assistant
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Next Level of Care of Transition Notes
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Description
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -1861,8 +1860,8 @@ const FBA = () => {
                         </span>
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1870,8 +1869,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1879,8 +1878,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1888,8 +1887,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1897,8 +1896,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1906,8 +1905,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1915,8 +1914,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1925,9 +1924,9 @@ const FBA = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -1938,8 +1937,8 @@ const FBA = () => {
                         </span>
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1947,8 +1946,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1956,8 +1955,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1965,8 +1964,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1974,8 +1973,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1983,8 +1982,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -1992,8 +1991,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2002,9 +2001,9 @@ const FBA = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -2015,8 +2014,8 @@ const FBA = () => {
                         </span>
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2024,8 +2023,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2033,8 +2032,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2042,8 +2041,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2051,8 +2050,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2060,8 +2059,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2069,8 +2068,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2079,9 +2078,9 @@ const FBA = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -2092,8 +2091,8 @@ const FBA = () => {
                         </span>
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2101,8 +2100,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2110,8 +2109,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2119,8 +2118,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2128,8 +2127,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2137,8 +2136,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2146,8 +2145,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-l border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2156,31 +2155,30 @@ const FBA = () => {
                       </div>
                     </td>
                   </tr>
-                 
                 </tbody>
               </table>
             </div>
 
             <div className="mt-4">
               <h1 className="form-inner-head my-2">CRISIS PLAN</h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
                 
               </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2191,8 +2189,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -2201,9 +2199,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2214,8 +2212,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -2233,28 +2231,28 @@ const FBA = () => {
               <h1 className="form-inner-head my-2">
                 PLEASE CHECK BOXES AS APPLICABLE:
               </h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
                                         <tr>
                                             <th
                                                 scope="col"
-                                                class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                                                className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                                             >
                                                 Services
                                             </th>
                                             <th
                                                 scope="col"
-                                                class="text-lg font-bold text-gray-900 px-2 py-3 border-r"
+                                                className="text-lg font-bold text-gray-900 px-2 py-3 border-r"
                                             >
                                                 Hours per week/Month
                                             </th>
                                         </tr>
                                     </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2266,77 +2264,77 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        {/* <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        {/* <div className="flex gap-3">
                                                     <input
                                                         type="text"
                                                         className=" w-full border-none focus:outline-none "
                                                     />
                                                 </div> */}
-                        <div class="flex mb-1">
-                          <div class="flex items-center mr-4">
+                        <div className="flex mb-1">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register("yes")}
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               Yes
                             </label>
                           </div>
-                          <div class="flex items-center mr-4">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register("no")}
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               No
                             </label>
                           </div>
 
-                          <div class="flex items-center mr-4">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-2-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register("recipient-declined_na")}
                             />
                             <label
                               for="inline-2-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               Recipient Declined N/A, provider is the prescriber
                             </label>
                           </div>
                         </div>
-                        <div class="flex">
-                          <div class="flex items-center mr-4">
+                        <div className="flex">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-2-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register("recipient_ino_medications")}
                             />
                             <label
                               for="inline-2-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               N/A recipient is not on medications
                             </label>
@@ -2344,9 +2342,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2357,53 +2355,53 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex">
-                          <div class="flex items-center mr-4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register("yes_1")}
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               Yes
                             </label>
                           </div>
-                          <div class="flex items-center mr-4">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register("no_1")}
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               No
                             </label>
                           </div>
 
-                          <div class="flex items-center mr-4">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-2-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register(" recipient_declined")}
                             />
                             <label
                               for="inline-2-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               Recipient Declined
                             </label>
@@ -2411,9 +2409,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2425,53 +2423,53 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex">
-                          <div class="flex items-center mr-4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register(" yes_2")}
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               Yes
                             </label>
                           </div>
-                          <div class="flex items-center mr-4">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register("no_2")}
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               No
                             </label>
                           </div>
 
-                          <div class="flex items-center mr-4">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-2-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register("idn_contact")}
                             />
                             <label
                               for="inline-2-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               N/A, I did not contact P.C.P.
                             </label>
@@ -2479,9 +2477,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2493,53 +2491,53 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex">
-                          <div class="flex items-center mr-4">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register(" yes_3")}
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               Yes
                             </label>
                           </div>
-                          <div class="flex items-center mr-4">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register(" no_3")}
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               No
                             </label>
                           </div>
 
-                          <div class="flex items-center mr-4">
+                          <div className="flex items-center mr-4">
                             <input
                               id="inline-2-radio"
                               type="radio"
                               value=""
                               name="inline-radio-group"
-                              class="w-4 h-4"
+                              className="w-4 h-4"
                               {...register(" na")}
                             />
                             <label
                               for="inline-2-radio"
-                              class="ml-2 text-sm font-medium text-black dark:text-black"
+                              className="ml-2 text-sm font-medium text-black dark:text-black"
                             >
                               N/A
                             </label>
@@ -2547,9 +2545,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2560,8 +2558,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -2580,28 +2578,28 @@ const FBA = () => {
                 SUMMARY AND RECOMMENDATIONS
               </h1>
               <h1 className="form-inner-head my-2">RATIONALE/JUSTIFICATION:</h1>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  <thead className="border-b">
                     <tr>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Services
                       </th>
                       <th
                         scope="col"
-                        class="text-lg font-bold text-gray-900 px-2 py-3 border-r"
+                        className="text-lg font-bold text-gray-900 px-2 py-3 border-r"
                       >
                         Hours per week/Month
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2612,8 +2610,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -2622,9 +2620,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2635,8 +2633,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -2645,9 +2643,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2658,8 +2656,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -2673,52 +2671,52 @@ const FBA = () => {
               </div>
             </div>
 
-            <div class="overflow-x-auto mt-4">
-              <table class="min-w-full border-2 border-blue-600 ">
-                <thead class="border-b">
+            <div className="overflow-x-auto mt-4">
+              <table className="min-w-full border-2 border-blue-600 ">
+                <thead className="border-b">
                   <tr>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Service Provider
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r"
                     >
                       Monday
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Tuesday
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r"
                     >
                       Wednesday
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                     >
                       Thursday
                     </th>
                     <th
                       scope="col"
-                      class="text-lg font-bold text-gray-900 px-2 py-3 border-r"
+                      className="text-lg font-bold text-gray-900 px-2 py-3 border-r"
                     >
                       Friday
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -2729,8 +2727,8 @@ const FBA = () => {
                         </span>
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2738,8 +2736,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2747,8 +2745,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2756,8 +2754,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2765,8 +2763,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2776,9 +2774,9 @@ const FBA = () => {
                     </td>
                   </tr>
 
-                  <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                  <tr className="border-b border-2 border-blue-600 ">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
@@ -2789,8 +2787,8 @@ const FBA = () => {
                         </span>
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2798,8 +2796,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2807,8 +2805,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2816,8 +2814,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2825,8 +2823,8 @@ const FBA = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <div class="flex gap-3">
+                    <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <div className="flex gap-3">
                         <input
                           type="text"
                           className=" w-full border-none focus:outline-none "
@@ -2835,8 +2833,6 @@ const FBA = () => {
                       </div>
                     </td>
                   </tr>
-
-                  
                 </tbody>
               </table>
             </div>
@@ -2915,23 +2911,23 @@ const FBA = () => {
             </p>
 
             <div className="mt-4">
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
               <tr>
                
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   First
                 </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                <th scope="col" className="text-sm font-medium text-gray-900 px-2 py-3 border-r">
                   Last
                 </th>
              </tr>
             </thead> */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2942,8 +2938,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -2952,9 +2948,9 @@ const FBA = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex gap-3">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex gap-3">
                           <span>
                             <label
                               for="rec_name"
@@ -2965,8 +2961,8 @@ const FBA = () => {
                           </span>
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                        <div class="flex gap-3">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div className="flex gap-3">
                           <input
                             type="text"
                             className=" w-full border-none focus:outline-none "
@@ -2979,10 +2975,8 @@ const FBA = () => {
                 </table>
               </div>
             </div>
-           <button type="submit">save</button>
+            <button type="submit">save</button>
           </div>
-        
-        
         </form>
         <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
           <div className=" flex items-center justify-center my-12">

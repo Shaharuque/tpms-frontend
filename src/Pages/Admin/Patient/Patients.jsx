@@ -665,7 +665,7 @@ const TableApi = () => {
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal"
+            className="table-striped-rows text-xs font-normal"
             columns={columns}
             dataSource={items} //Which data chunk you want to show in table
             // For fixed header table at top

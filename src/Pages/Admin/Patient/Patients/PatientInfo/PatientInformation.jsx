@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm, Controller } from "react-hook-form";
 import SimpleFileUpload from "react-simple-file-upload";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa";
@@ -20,8 +20,104 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import GuarantorInfo from "./GuarantorInfo/GuarantorInfo";
 import AboutPatient from "./AboutPatient/AboutPatient";
-
+import PrimaryAddress from "./PatientAddress/PrimaryAddress";
+import DynamicAddress from "./PatientAddress/DynamicAddress";
+import DynamicEmail from "./Emailaddress/DynamicEmail";
+import PrimaryEmail from "./Emailaddress/PrimaryEmail";
+import DynamicPhone from "./PhoneAddress/DynamicPhone";
+import PrimaryPhone from "./PhoneAddress/PrimaryPhone";
+import BasicInfo from "./BasicInfo";
+import TestingFrom from "./TestingFrom";
 const PatientInformation = () => {
+  const testingobj = {
+    City: "mirpur",
+    Street: "usa",
+    address: [
+      {
+        street: "djlasjdiad",
+        city: "sflsdf38akdj",
+        country: "NY",
+        status: false,
+
+        zip: 555,
+      },
+      {
+        street: "heilo",
+        city: "dmd",
+        country: "NY",
+        status: true,
+
+        zip: 73563,
+      },
+      {
+        street: "h45fglo",
+        city: "dlfd",
+        country: "UK",
+        status: false,
+
+        zip: 4545,
+      },
+      {
+        street: "435234o",
+        city: "ld",
+        country: "UK",
+        status: true,
+
+        zip: 4523,
+      },
+    ],
+    allNumber: [
+      {
+        number: 54,
+        checked: true,
+      },
+      {
+        number: 53,
+        checked: false,
+      },
+    ],
+    assignment: "male",
+    checkedActive: 1,
+    client_dob: "",
+    country: "NY",
+    dob: "2021-08-05",
+    email: "testdfv@sdf.dsf",
+    first_date: "",
+    first_name: "cbvxdfg",
+    fruit: "Male",
+    gender: "Male",
+    allEmail: [
+      {
+        email: "najirkhan@gmail.com",
+        checked: true,
+        sendMail: false,
+      },
+      {
+        email: "lawla@gmail.com",
+        checked: true,
+        sendMail: true,
+      },
+      {
+        email: "hello@gmail.com",
+        checked: true,
+        sendMail: false,
+      },
+    ],
+    group: "work",
+    group2: "work",
+    language: "male",
+    last_name: "sdgsdg",
+    middle_name: null,
+    more_zip0: "34",
+    more_zip1: "45234",
+    phone: "+14353464363",
+    pos: "work",
+    race_details: "male",
+    referred_by: "male",
+    region: "work",
+    zip: "500",
+  };
+
   const { token } = useToken();
   const [active, setActive] = useState(false);
   const [appointment, setAppointment] = useState(false);
@@ -32,22 +128,52 @@ const PatientInformation = () => {
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
 
-  // console.log("phone :", phone);
+  // //console.log("obj data", obj);
+
+  // //console.log("phone :", phone);
   //file uploaded issue
   const [signatureUpload, setSignatureUpload] = useState("");
-  // console.log("setSignatureUpload = = =", signatureUpload);
+  // //console.log("setSignatureUpload = = =", signatureUpload);
   // file uploaded added
 
-  // calender hide
-  const { register, handleSubmit, reset, setValue, getValues } = useForm();
-  const [hook, setHook] = useState("");
+  // testing form
 
-  // Address state
-  const [addressRendomValue, setAddressRendomValue] = useState([]);
-  // phone state
-  const [phoneRendomValue, setPhoneRendomValue] = useState([]);
-  // Email State
-  const [emailRendomValue, setEmailRendomValue] = useState([]);
+  const { register, control, handleSubmit, reset, setValue, getValues } =
+    useForm({
+      defaultValues: {
+        address: testingobj.address,
+        number: testingobj.allNumber,
+        Email: testingobj.allEmail,
+      },
+    });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "address",
+    // name: "number",
+  });
+
+  const {
+    fields: phoneFields,
+    append: phoneAppend,
+    remove: phoneRemove,
+  } = useFieldArray({
+    control,
+    // name: "address",
+    name: "number",
+  });
+
+  const {
+    fields: emailFields,
+    append: emailAppend,
+    remove: emailRemove,
+  } = useFieldArray({
+    control,
+    // name: "address",
+    name: "Email",
+  });
+
+  const [hook, setHook] = useState("");
 
   // // testing single calendar
   // const [date, setDate] = useState(new Date());
@@ -55,7 +181,7 @@ const PatientInformation = () => {
   // const changeDate = (date) => {
   //   setDate(date);
   // };
-  // console.log(date);
+  // //console.log(date);
 
   // const month = date ? date.getMonth() + 1 : null;
   // const day = date ? date.getDate() : null;
@@ -66,54 +192,16 @@ const PatientInformation = () => {
   //   setDate(null);
   // };
 
-  // Address + icon Click Handeler
-  const handleClick = () => {
-    setAddressRendomValue((current) => [...current, Math.ceil(Math.random())]);
-  };
-
-  // Phone + icon click handeler
-  const handlePhoneClick = () => {
-    setPhoneRendomValue((current) => [...current, Math.random()]);
-  };
-
-  // email + icon click handeler
-  const handleEmailClick = () => {
-    setEmailRendomValue((current) => [...current, Math.random()]);
-  };
-
-  // address icon delete handeler
-  const addressHandleRemove = (index) => {
-    console.log(index);
-    const list = [...addressRendomValue];
-    list.splice(index, 1);
-    setAddressRendomValue(list);
-  };
-
-  // Phone icon delete handeler
-  const phoneHandleRemove = (index) => {
-    const list = [...phoneRendomValue];
-    list.splice(index, 1);
-    setPhoneRendomValue(list);
-  };
-
-  // email icon delete handeler
-  const EmailHandleRemove = (index) => {
-    const list = [...emailRendomValue];
-    list.splice(index, 1);
-    setEmailRendomValue(list);
-  };
   // Patient Information
   const { id } = useParams();
-  console.log("patient Info", id);
+  //console.log("patient Info", id);
   const dispatch = useDispatch();
 
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
-  console.log("patient details", data);
-  console.log("hone number", patient_details?.phone_number);
-  const [phone, setPhone] = useState(patient_details?.phone_number);
-
+  const primaryPhone = patient_details?.phone_number;
+  const primaryEmail = patient_details?.email;
   useEffect(() => {
     // action dispatched
     dispatch(getpatientsDetails({ id, token }));
@@ -130,8 +218,8 @@ const PatientInformation = () => {
         last_name: patient_details?.client_last_name,
         dob: patient_details?.client_dob,
         // dob: date ? `${month}/${day}/${year}` : null,
-        email: patient_details?.email,
-        phone: patient_details?.phone_number,
+        // email: patient_details?.email,
+        // phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
         checkedActive: patient_details?.is_active_client,
@@ -145,31 +233,32 @@ const PatientInformation = () => {
     const formData = {
       is_client_active,
     };
-    // console.log(formData);
-    // console.log(file);
+    console.log(formData);
+    // //console.log(file);
   };
 
-  // console.log("---", addressRendomValue);
+  // //console.log("---", addressRendomValue);
 
   ///relation value handle
   const settingRelation = (e) => {
-    console.log("selected option", e.target.value);
+    // //console.log("selected option", e.target.value);
     //const relation = e.target.value;
     if (e.target.value === "Self") {
       setGuarantor(false);
       document.getElementById("checkbox").checked = false;
     }
+
     //setRelation(relation);
     setRelation(e.target.value);
   };
-  console.log(relation);
+
   //Guarentor handler code
   const handleChange = (event) => {
     if (event.target.checked) {
-      // console.log("✅ Checkbox is checked");
+      // //console.log("✅ Checkbox is checked");
       setGuarantor(true);
     } else {
-      // console.log("⛔️ Checkbox is NOT checked");
+      // //console.log("⛔️ Checkbox is NOT checked");
       setGuarantor(false);
     }
   };
@@ -184,581 +273,125 @@ const PatientInformation = () => {
     setValue("GuaratorCity", getValues("City"));
     setValue("GuratorCountry", getValues("country"));
     setValue("GuratorZip", getValues("zip"));
-    // console.log("getvalue street", getValues("Street"));
-    // console.log("getvalue city", getValues("City"));
-    // console.log("getvalue country", getValues("country"));
-    // console.log("getvalue zip", getValues("zip"));
+    // //console.log("getvalue street", getValues("Street"));
+    // //console.log("getvalue city", getValues("City"));
+    // //console.log("getvalue country", getValues("country"));
+    // //console.log("getvalue zip", getValues("zip"));
   };
 
+  // console.log("obj", obj);
   return (
     <div>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
-            {/* <input
-              type="checkbox"
-              name="checkedActive"
-              {...register("checkedActive")}
-            /> */}
-            <Switch
-              size="small"
-              checked={active ? true : false}
-              onClick={() => setActive(!active)}
-            />
-            <span className="text-[15px] ml-1 text-gray-700 gap-1 font-semibold">
-              Active Patient
-            </span>
-          </div>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-3 mr-2 gap-x-6 gap-y-1 ">
-            {/* name  */}
-            <div>
-              <label className="label">
-                <span className=" label-font">
-                  First Name<span className="text-red-500">*</span>
-                </span>
-              </label>
-              <input
-                type="text"
-                name="first_name"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("first_name")}
-              />
-            </div>
-            <div>
-              <label className="label">
-                <span className=" label-font">Middle Name</span>
-              </label>
-              <input
-                type="text"
-                name="middle_name"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("middle_name")}
-              />
-            </div>
-            <div>
-              <label className="label">
-                <span className=" label-font">
-                  Last Name<span className="text-red-500">*</span>
-                </span>
-              </label>
-              <input
-                type="text"
-                name="last_name"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("last_name")}
-              />
-            </div>
-            {/* DOB */}
-            <div>
-              <label className="label">
-                <span className=" label-font">
-                  Date of Birth<span className="text-red-500">*</span>
-                </span>
-              </label>
-              <input
-                className="input-border input-font  w-full focus:outline-none"
-                type="date"
-                {...register("client_dob")}
-              />
-              {/* <div ref={ref}>
-                <input
-                           className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none pb-[0.8px]"
-                  // value={`${month}/${day}/${year}`}
-                  name="dob"
-                  readOnly
-                  onClick={() =>
-                    setOpenCalendar((openCalendar) => !openCalendar)
-                  }
-                  {...register("dob")}
-                />                                                 
-                {openCalendar && (
-                  <div className="absolute z-10 rounded">
-                    <Calendar onChange={changeDate}></Calendar>
-                    <div className="bg-white py-2 text-right rounded-b-[5px]">
-                      <button
-                        onClick={handleCancelDate}
-                        className=" text-white py-1 mr-1 rounded px-2 bg-[#0AA7B8] hover:bg-red-700 hover:border-red-700"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div> */}
-            </div>
-            {/* gender */}
-            <div className=" ">
-              <label className="label">
-                <span className=" label-font">
-                  Gender<span className="text-red-500">*</span>
-                </span>
-              </label>
-              <select
-                className="input-border input-font  w-full focus:outline-none"
-                name="gender"
-                {...register("gender")}
-              >
-                {/*api thekey gathered data jemon thakbey value thik same bhabey assign kortey hobey */}
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-            </div>
-            {/* RelationShip */}
-            <div>
-              <label className="label">
-                <span className=" flex items-center label-font  ">
-                  RelationShip
-                  <AiOutlineQuestionCircle className="text-sm" />
-                  <span className="text-red-500">*</span>
-                </span>
-              </label>
-              <select
-                onChange={settingRelation}
-                className="input-border input-font  w-full focus:outline-none"
-              >
-                <option value="Self">Self</option>
-                <option value="Spouse">Spouse</option>
-                <option value="Other">Other</option>
-                <option value="Child">Child</option>
-                <option value="Grandfather or Grandmother">
-                  Grandfather or Grandmother
-                </option>
-                <option value="Grandson or Granddaughter">
-                  Grandson or Granddaughter
-                </option>
-                <option value="Nephew or Niece">Nephew or Niece</option>
-                <option value="Adopter Child">Adopter Child</option>
-                <option value="Foster Child">Foster Child</option>
-                <option value="Stepson">Stepson</option>
-                <option value="Ward">Ward</option>
-                <option value="Stepdaughter">Stepdaughter</option>
-              </select>
-            </div>
-          </div>
-          <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
+          <BasicInfo
+            adData={{
+              setActive,
+              active,
+              settingRelation,
+              register,
+            }}
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
             {/* address  */}
-            <div className="">
-              <>
-                <label className="label">
-                  <span className=" flex items-center label-font">
-                    Address
-                    <AiOutlineQuestionCircle className="text-sm" />
-                    <span className="text-red-500">*</span>
-                  </span>
-                </label>
-                <div className="mb-2 flex items-center gap-2">
-                  <input
-                    type="text"
-                    placeholder="Street"
-                    id="streetval"
-                    defaultValue={"America"}
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("Street")}
-                  />
-                  <button // onClick={() => setOpen(true)}
-                    onClick={handleClick}
-                    className="bg-secondary text-white p-[4px]"
-                  >
-                    <FaPlus />
-                  </button>
-                </div>
-                <div className="mb-2">
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    defaultValue={"Buffalo"}
-                    {...register("City")}
-                  />
-                </div>
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
-                  <div>
-                    <select
-                      className="input-border input-font  w-full focus:outline-none"
-                      defaultValue={"NY"}
-                      {...register("country")}
-                    >
-                      <option value="NY">NY</option>
-                      <option value="UK">UK</option>
-                    </select>
-                  </div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Zip"
-                      className="input-border input-font py-[1px] w-full focus:outline-none"
-                      {...register("zip")}
-                    />
-                  </div>
-                </div>
+            <div>
+              <PrimaryAddress append={append} rg={register} />
 
-                {addressRendomValue.map((x, index) => (
-                  <motion.div
-                    initial={{
-                      opacity: 0,
-                      y: 15,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    {/*  */}
-                    <label className="label">
-                      <span className=" flex items-center label-font ">
-                        Address
-                        <AiOutlineQuestionCircle className="text-sm" />
-                        <span className="text-red-500">*</span>
-                      </span>
-                    </label>
-                    <div className="mb-2 flex items-center gap-2">
-                      <input
-                        type="text"
-                        className="input-border input-font py-[1px] w-full focus:outline-none"
-                        {...register(`Permanent_Street_`)}
-                      />
-                      <div // onClick={() => setOpen(false)}
-                        onClick={() => {
-                          addressHandleRemove(index);
-                        }}
-                        className="bg-red-500 text-white p-[4px]"
-                      >
-                        <RiDeleteBin6Line />
-                      </div>
-                    </div>
-                    <div className="mb-2">
-                      <input
-                        type="text"
-                        placeholder="more city"
-                        className="input-border input-font py-[1px] w-full focus:outline-none"
-                        {...register(`more_City_`)}
-                      />
-                    </div>
-                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-1">
-                      <div>
-                        <select
-                          className="input-border input-font  w-full focus:outline-none"
-                          {...register("more_Country")}
-                        >
-                          <option value="NY">NY</option>
-                          <option value="UK">UK</option>
-                        </select>
-                      </div>
-                      <div>
-                        <input
-                          type="text"
-                          className="input-border input-font py-[1px] w-full focus:outline-none"
-                          {...register("more_zip")}
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+              <DynamicAddress
+                adData={{
+                  fields,
+                  register,
+                  remove,
+                }}
+              />
 
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
-                  <div>
-                    <label className="label">
-                      <span className=" label-font">
-                        POS<span className="text-red-500">*</span>
-                      </span>
-                    </label>
-                    <select
-                      className="input-border input-font py-[1px] w-full focus:outline-none"
-                      {...register("pos")}
-                    >
-                      <option value="work">work</option>
-                      <option value="home">home</option>
-                      <option value="family">family</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="label">
-                      <span className=" label-font">
-                        Region<span className="text-red-500">*</span>
-                      </span>
-                    </label>
-                    <select
-                      className="input-border input-font py-[1px] w-full focus:outline-none"
-                      {...register("region")}
-                    >
-                      <option value="work">work</option>
-                      <option value="home">home</option>
-                      <option value="family">family</option>
-                    </select>
-                  </div>
+              <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
+                <div>
+                  <label className="label">
+                    <span className=" label-font">
+                      POS<span className="text-red-500">*</span>
+                    </span>
+                  </label>
+                  <select
+                    className="input-border input-font py-[1px] w-full focus:outline-none"
+                    {...register("pos")}
+                  >
+                    <option value="work">work</option>
+                    <option value="home">home</option>
+                    <option value="family">family</option>
+                  </select>
                 </div>
-              </>
+                <div>
+                  <label className="label">
+                    <span className=" label-font">
+                      Region<span className="text-red-500">*</span>
+                    </span>
+                  </label>
+                  <select
+                    className="input-border input-font py-[1px] w-full focus:outline-none"
+                    {...register("region")}
+                  >
+                    <option value="work">work</option>
+                    <option value="home">home</option>
+                    <option value="family">family</option>
+                  </select>
+                </div>
+              </div>
             </div>
-
             {/* phone  */}
             <div className=" lg:mx-auto md:mx-0">
-              <>
-                <label className="label">
-                  <span className=" label-font">Phone</span>
-                </label>
-                <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
-                  <div className="w-[180px] ml-1">
-                    <PhoneInput
-                      className="PatientinformationInput"
-                      country={"us"}
-                      value={phone}
-                      onChange={(e) => {
-                        // console.log(e);
-                        setPhone(e);
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <select
-                      className="input-border input-font  w-full focus:outline-none"
-                      {...register("group")}
-                    >
-                      <option value="work">work</option>
-                      <option value="home">home</option>
-                      <option value="family">family</option>
-                    </select>
-                  </div>
-                  <button // onClick={() => setPhoneOpen(true)}
-                    onClick={() => {
-                      handlePhoneClick();
-                    }}
-                    className="bg-secondary text-white p-[4px]"
-                  >
-                    <FaPlus />
-                  </button>
-                </div>
+              <PrimaryPhone
+                adData={{
+                  phoneAppend,
+                  register,
+                  primaryPhone,
+                }}
+              />
 
-                <div className="flex ml-1 mt-2 items-center">
-                  {/* <input
-                    type="checkbox"
-                    name="patient"
-                    onClick={() => {
-                      setAppointment(!appointment);
-                    }}
-                  /> */}
-                  <Switch
-                    size="small"
-                    checked={appointment ? true : false}
-                    onClick={() => setAppointment(!appointment)}
-                  />
-                  <span className="text-xs ml-1 text-gray-700 font-medium">
-                    SMS Appointment Reminders
-                  </span>
-                </div>
-              </>
-              {phoneRendomValue.map((x, index) => (
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    y: 15,
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 15,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{ delay: 0.2 }}
+              >
+                <DynamicPhone
+                  adData={{
+                    phoneFields,
+                    phoneRemove,
+                    register,
                   }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <label className="label">
-                    <span className=" label-font">Phone</span>
-                  </label>
-                  <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
-                    <div className="w-[180px] ml-1">
-                      <PhoneInput
-                        className="PatientinformationInput"
-                        country={"us"}
-                        value={phone}
-                        onChange={(e) => {
-                          // console.log(e);
-                          setPhone(e);
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <select
-                        className="input-border input-font  w-full focus:outline-none"
-                        {...register("group")}
-                      >
-                        <option value="work">work</option>
-                        <option value="home">home</option>
-                        <option value="family">family</option>
-                      </select>
-                    </div>
-                    <button
-                      onClick={() => phoneHandleRemove(index)}
-                      className="bg-red-500 text-white p-[4px]"
-                    >
-                      <RiDeleteBin6Line />
-                    </button>
-                  </div>
-
-                  <div className="flex ml-1 mt-2 items-center">
-                    {/* <input          
-                    type="checkbox" 
-                    name="patient"
-                    onClick={() => {   
-                      setAppointment(!appointment);
-                    }}
-                  /> */}
-                    <Switch
-                      size="small"
-                      checked={appointment ? true : false}
-                      onClick={() => setAppointment(!appointment)}
-                    />
-                    <span className="text-xs ml-1 text-gray-700 font-medium">
-                      SMS Appointment Reminders
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
+                />
+              </motion.div>
             </div>
-
-            {/*  */}
             {/* Email  */}
             <div className=" lg:mx-auto md:mx-0">
-              <>
-                <label className="label">
-                  <span className=" label-font">Email</span>
-                </label>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                  <div>
-                    <input
-                      type="text"
-                      name="email"
-                      className="input-border input-font w-full focus:outline-none"
-                      {...register("email")}
-                    />
-                  </div>
-                  <div>
-                    <select
-                      className="input-border input-font w-full focus:outline-none"
-                      {...register("group2")}
-                    >
-                      <option value="work">work</option>
-                      <option value="home">home</option>
-                      <option value="family">family</option>
-                    </select>
-                  </div>
-                  <button
-                    onClick={() => {
-                      handleEmailClick();
-                    }}
-                    className="bg-secondary text-white p-[4px] "
-                  >
-                    <FaPlus />
-                  </button>
-                </div>
-                <div className="flex ml-1 mt-1 items-center">
-                  {/* <input
-                    type="checkbox"
-                    name="patient"
-                    onClick={() => {
-                      setEmail(!email);
-                    }}
-                  /> */}
-                  <Switch
-                    size="small"
-                    checked={email ? true : false}
-                    onClick={() => setEmail(!email)}
-                  />
-                  <span className="text-xs ml-1 text-gray-700 font-medium">
-                    Email OK
-                  </span>
-                </div>
+              <PrimaryEmail
+                adData={{
+                  emailAppend,
+                  register,
+                  primaryEmail,
+                }}
+              />
 
-                <div className="flex ml-1 mt-1 items-center">
-                  {/* <input
-                    type="checkbox"
-                    name="patient"
-                    onClick={() => {
-                      setEmailSend(!emailSend);
-                    }}
-                  /> */}
-                  <Switch
-                    size="small"
-                    checked={emailReminder ? true : false}
-                    onClick={() => setEmailReminder(!emailReminder)}
-                  />
-                  <span className="text-xs ml-1 text-gray-700 font-medium">
-                    Send email appointment reminders
-                  </span>
-                </div>
-              </>
-
-              {emailRendomValue.map((x, index) => (
-                <motion.div
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <label className="label">
-                    <span className=" label-font">Email</span>
-                  </label>
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                    <div>
-                      <input
-                        type="text"
-                        name="email"
-                        className="input-border input-font py-[1px] w-full focus:outline-none"
-                        {...register("email")}
-                      />
-                    </div>
-                    <div>
-                      <select
-                        className="input-border input-font w-full focus:outline-none"
-                        {...register("group2")}
-                      >
-                        <option value="work">work</option>
-                        <option value="home">home</option>
-                        <option value="family">family</option>
-                      </select>
-                    </div>
-                    <button
-                      onClick={() => EmailHandleRemove(index)}
-                      className="bg-red-500 text-white p-[4px] "
-                    >
-                      <RiDeleteBin6Line />
-                    </button>
-                  </div>
-                  <div className="flex ml-1 mt-2 items-center gap-1 flex-wrap ">
-                    <div className="">
-                      {/* <input
-                        type="checkbox"
-                        name="patient"
-                        onClick={() => {
-                          setEmail(!email);
-                        }}
-                      /> */}
-                      <Switch
-                        size="small"
-                        checked={email ? true : false}
-                        onClick={() => setEmail(!email)}
-                      />
-                      <span className="text-xs ml-1 text-gray-700 font-normal">
-                        Email OK
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex ml-1 mt-1 items-center">
-                    {/* <input
-                      type="checkbox"
-                      name="patient"
-                      onClick={() => {
-                        setEmailSend(!emailSend);
-                      }}
-                    /> */}
-                    <Switch
-                      size="small"
-                      checked={emailReminder ? true : false}
-                      onClick={() => setEmailReminder(!emailReminder)}
-                    />
-                    <span className="text-xs ml-1 text-gray-700 font-normal">
-                      Send email appointment reminders
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <DynamicEmail
+                  adData={{
+                    register,
+                    emailFields,
+                    emailRemove,
+                  }}
+                />
+              </motion.div>
             </div>
           </div>
 

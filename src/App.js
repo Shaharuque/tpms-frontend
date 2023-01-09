@@ -177,6 +177,25 @@ import StructureOfProcess from "./Pages/Admin/Settings/Settings/StructureOfProce
 import AppIdTracking from "./Pages/Admin/Settings/Settings/AppIdTracking/AppIdTracking";
 import VOB from "./Pages/Admin/Patient/Patients/VOB/VOB";
 import { usePersistStore } from "./CustomHooks/usePersistStore";
+//super admin routes
+import SuperAdmin from "./Pages/SuperAdmin/SuperAdmin";
+import ProviderAccess from "./Pages/SuperAdmin/Components/ProviderAccess/ProviderAccess";
+import AdminAccess from "./Pages/SuperAdmin/Components/AdminAccess/AdminAccess";
+import Payor from "./Pages/SuperAdmin/Components/Payor/Payor";
+import CompaniesAndFacilities from "./Pages/SuperAdmin/Components/CompaniesAndFacilities/CompaniesAndFacilities";
+import CompanyLevelCSVReport from "./Pages/SuperAdmin/Components/CompanyLevelCSVReport/CompanyLevelCSVReport";
+import UserPagePermission from "./Pages/SuperAdmin/Components/UserPagePermission/UserPagePermission";
+import AddViewstothefacility from "./Pages/SuperAdmin/Components/AddViewstothefacility/AddViewstothefacility";
+import ManageCredential from "./Pages/SuperAdmin/Components/ManageCredential/ManageCredential";
+import BulkUpload from "./Pages/SuperAdmin/Components/BulkUpload/BulkUpload";
+import AllAccountsReportExecution from "./Pages/SuperAdmin/Components/AllAccountsReportExecution/AllAccountsReportExecution";
+import DuplicateManageClaimsReport from "./Pages/SuperAdmin/Components/DuplicateManageClaimsReport/DuplicateManageClaimsReport";
+import MissingBilledSessionsUnderAppointment from "./Pages/SuperAdmin/Components/MissingBilledSessionsUnderAppointment/MissingBilledSessionsUnderAppointment";
+import CreateDepositApplyWithNoCheck from "./Pages/SuperAdmin/Components/CreateDepositApplyWithNoCheck/CreateDepositApplyWithNoCheck";
+import InsuranceDetails from "./Pages/SuperAdmin/Components/InsuranceDetails/InsuranceDetails";
+import SMSEmailSettings from "./Pages/SuperAdmin/Components/SMSEmailSettings/SMSEmailSettings";
+import BlockUnblockAdmins from "./Pages/SuperAdmin/Components/BlockUnblockAdmins/BlockUnblockAdmins";
+import BillerlogUser from "./Pages/SuperAdmin/Components/BillerlogUser/BillerlogUser";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -292,6 +311,82 @@ function App() {
           ></Route>
           {/*--------- Testing End ------------*/}
 
+          {/* Super Admin Panel */}
+          <Route path="/super-admin" element={<SuperAdmin></SuperAdmin>}>
+            <Route index element={<ProviderAccess></ProviderAccess>}></Route>
+            <Route
+              path="admin-access"
+              element={<AdminAccess></AdminAccess>}
+            ></Route>
+            <Route path="payor" element={<Payor></Payor>}></Route>
+            <Route
+              path="Companies-and-facilities"
+              element={<CompaniesAndFacilities></CompaniesAndFacilities>}
+            ></Route>
+            <Route
+              path="company-level-CSV-Report"
+              element={<CompanyLevelCSVReport></CompanyLevelCSVReport>}
+            ></Route>
+            <Route
+              path="user-page-permission"
+              element={<UserPagePermission></UserPagePermission>}
+            ></Route>
+            <Route
+              path="Add-views-to-the-facility"
+              element={<AddViewstothefacility></AddViewstothefacility>}
+            ></Route>
+            <Route
+              path="manage-credential"
+              element={<ManageCredential></ManageCredential>}
+            ></Route>
+            <Route
+              path="bulk-upload"
+              element={<BulkUpload></BulkUpload>}
+            ></Route>
+            <Route
+              path="billerlog-user"
+              element={<BillerlogUser></BillerlogUser>}
+            ></Route>
+            <Route
+              path="All-accounts-report-execution"
+              element={
+                <AllAccountsReportExecution></AllAccountsReportExecution>
+              }
+            ></Route>
+            <Route
+              path="duplicate-manage-claims-report"
+              element={
+                <DuplicateManageClaimsReport></DuplicateManageClaimsReport>
+              }
+            ></Route>
+            <Route
+              path="missing-billed-sessions-under-appointment"
+              element={
+                <MissingBilledSessionsUnderAppointment></MissingBilledSessionsUnderAppointment>
+              }
+            ></Route>
+            <Route
+              path="create-deposit-apply-with-no-check"
+              element={
+                <CreateDepositApplyWithNoCheck></CreateDepositApplyWithNoCheck>
+              }
+            ></Route>
+            <Route
+              path="insurance-details"
+              element={<InsuranceDetails></InsuranceDetails>}
+            ></Route>
+            <Route
+              path="sms-email-settings"
+              element={<SMSEmailSettings></SMSEmailSettings>}
+            ></Route>
+            <Route
+              path="blocked-admins-settings"
+              element={<BlockUnblockAdmins></BlockUnblockAdmins>}
+            ></Route>
+          </Route>
+
+          {/*  */}
+          {/* Admin Pannel */}
           <Route
             path="/admin"
             element={
@@ -816,7 +911,7 @@ function App() {
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
 
-          {/* user */}
+          {/* User Pannel */}
           <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ManageSessions />}></Route>
             <Route path="calender" element={<SchedulerCalender />}></Route>
@@ -836,7 +931,7 @@ function App() {
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>
           </Route>
 
-          {/* Patient-Portal start */}
+          {/* Patient-Portal Pannel */}
           <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<MySchedule />}></Route>
             <Route path="calender" element={<MyCalender></MyCalender>}></Route>
