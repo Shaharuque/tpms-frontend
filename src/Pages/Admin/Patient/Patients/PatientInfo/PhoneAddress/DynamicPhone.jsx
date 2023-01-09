@@ -13,7 +13,7 @@ const DynamicPhone = ({ adData }) => {
               <span className=" label-font">Phone</span>
             </label>
             <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
-              <div className="w-[180px] ml-1">
+              <div className=" ml-1">
                 <input
                   type="text"
                   placeholder="Phone"
@@ -44,16 +44,16 @@ const DynamicPhone = ({ adData }) => {
 
             <div className="flex ml-1 mt-2 items-center">
               {/* custom toggle  */}
-              <label class="inline-flex relative items-center cursor-pointer">
+              <label className="inline-flex relative items-center cursor-pointer">
                 <input
                   type="checkbox"
                   defaultChecked={field.checked}
                   {...register(`number.${index}.checked`, {
                     // required: true
                   })}
-                  class="sr-only peer"
+                  className="sr-only peer"
                 />
-                <div class="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+                <div className="w-[30px] h-[17px] bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-[13px] after:w-[13px] after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
               </label>
 
               <span className="text-xs ml-1 text-gray-700 font-medium">

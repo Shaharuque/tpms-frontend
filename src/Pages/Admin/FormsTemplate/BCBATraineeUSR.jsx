@@ -69,31 +69,31 @@ const BCBATraineeUSR = () => {
           {" "}
           <div>
             <div>
-              <div class="overflow-x-auto">
-                <table class="min-w-full border-2 border-blue-600 ">
-                  {/* <thead class="border-b">
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  {/* <thead className="border-b">
                     <tr>
                       <th
                         scope="col"
-                        class="text-sm font-medium text-gray-900 px-2 py-3 border-r border-blue-600"
+                        className="text-sm font-medium text-gray-900 px-2 py-3 border-r border-blue-600"
                       >
                         Date/Setting
                       </th>
                       <th
                         scope="col"
-                        class="text-sm font-medium text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-sm font-medium text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Antecedent
                       </th>
                       <th
                         scope="col"
-                        class="text-sm font-medium text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-sm font-medium text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Behavior
                       </th>
                       <th
                         scope="col"
-                        class="text-sm font-medium text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
+                        className="text-sm font-medium text-gray-900 px-2 py-3 border-r border-2 border-blue-600"
                       >
                         Consequence
                       </th>
@@ -102,9 +102,9 @@ const BCBATraineeUSR = () => {
                  
                   */}
                   <tbody>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-lg text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-lg text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -121,8 +121,8 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-lg text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-lg text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -139,8 +139,8 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -157,14 +157,14 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
                               className=" font-bold text-base text-blue-600"
                             >
-                             Restricted Hours:
+                              Restricted Hours:
                             </label>
                           </span>
 
@@ -176,9 +176,9 @@ const BCBATraineeUSR = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -195,8 +195,8 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -213,15 +213,14 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
                               className=" font-bold text-base text-blue-600"
                             >
-                              	
-                                Credential Pursuing:
+                              Credential Pursuing:
                             </label>
                           </span>
 
@@ -232,8 +231,8 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -251,9 +250,9 @@ const BCBATraineeUSR = () => {
                         </div>
                       </td>
                     </tr>
-                    <tr class="border-b border-2 border-blue-600 ">
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -270,8 +269,8 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -288,8 +287,8 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -306,8 +305,8 @@ const BCBATraineeUSR = () => {
                           />
                         </div>
                       </td>
-                      <td class="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
-                        <div class="flex flex-col">
+                      <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex flex-col">
                           <span>
                             <label
                               for="rec_name"
@@ -325,58 +324,57 @@ const BCBATraineeUSR = () => {
                         </div>
                       </td>
                     </tr>
-                   
                   </tbody>
                 </table>
               </div>
             </div>
             <div>
               <h1 className="form-inner-head my-2">TYPE OF SUPERVISION:</h1>
-              <div class="flex mt-4 mb-4">
-                <div class="flex items-center mr-4">
+              <div className="flex mt-4 mb-4">
+                <div className="flex items-center mr-4">
                   <input
                     id="inline-radio"
                     type="checkbox"
                     value=""
                     name="inline-radio-group"
-                    class="w-4 h-4"
+                    className="w-4 h-4"
                     {...register("in_person")}
                   />
                   <label
                     for="inline-radio"
-                    class="ml-2 text-sm font-medium text-black dark:text-black"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
                     In Person
                   </label>
                 </div>
-                <div class="flex items-center mr-4">
+                <div className="flex items-center mr-4">
                   <input
                     id="inline-radio"
                     type="checkbox"
                     value=""
                     name="inline-radio-group"
-                    class="w-4 h-4"
+                    className="w-4 h-4"
                     {...register("telehealth")}
                   />
                   <label
                     for="inline-radio"
-                    class="ml-2 text-sm font-medium text-black dark:text-black"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
                     Telehealth
                   </label>
                 </div>
-                <div class="flex items-center mr-4">
+                <div className="flex items-center mr-4">
                   <input
                     id="inline-2-radio"
                     type="checkbox"
                     value=""
                     name="inline-radio-group"
-                    class="w-4 h-4"
+                    className="w-4 h-4"
                     {...register("group_meeting")}
                   />
                   <label
                     for="inline-2-radio"
-                    class="ml-2 text-sm font-medium text-black dark:text-black"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
                     Group Meeting
                   </label>
@@ -401,647 +399,652 @@ const BCBATraineeUSR = () => {
                 </strong>
               </p>
 
-              
-                <div>
-                  <p className=" text-lg  font-normal my-2">
-                    Arrives on time for supervision:
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
+                  Arrives on time for supervision:
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-                <div>
-                  <p className=" text-lg  font-normal my-2">
-                  Maintains professional and courteous interactions with: Clients/consumers Other service providers/ Coworkers:
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s_1")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni_1")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u_1")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na_1")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+              </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
+                  Maintains professional and courteous interactions with:
+                  Clients/consumers Other service providers/ Coworkers:
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s_1")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni_1")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u_1")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na_1")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-                <div>
-                  <p className=" text-lg  font-normal my-2">
-                  Maintains appropriate attire & demeanor Initiates professional self-improvement:
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s_2")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni_2")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u_2")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na_2")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+              </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
+                  Maintains appropriate attire & demeanor Initiates professional
+                  self-improvement:
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s_2")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni_2")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u_2")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na_2")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-                <div>
-                  <p className=" text-lg  font-normal my-2">
+              </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
                   Accepts supervisory feedback appropriately:
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s_3")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni_3")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u_3")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na_3")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s_3")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni_3")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u_3")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na_3")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-                <div>
-                  <p className=" text-lg  font-normal my-2">
+              </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
                   Seeks supervision appropriately/ asks questions when needed:
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s_4")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni_4")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u_4")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na_4")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s_4")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni_4")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u_4")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na_4")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-                <div>
-                  <p className=" text-lg  font-normal my-2">
+              </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
                   Timely submission of tasks assigned:
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s_5")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni_5")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u_5")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na_5")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s_5")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni_5")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u_5")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na_5")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-                <div>
-                  <p className=" text-lg  font-normal my-2">
+              </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
                   Communicates effectively:
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s_6")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni_6")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u_6")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na_6")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s_6")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni_6")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u_6")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na_6")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-                <div>
-                  <p className=" text-lg  font-normal my-2">
-                  Demonstrates appropriate sensitivity to nonbehavioral providers <span className="text-sm text-red-600">(teachers, other healthcare providers, caregivers etc)</span> :
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s_7")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni_7")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u_7")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na_7")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+              </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
+                  Demonstrates appropriate sensitivity to nonbehavioral
+                  providers{" "}
+                  <span className="text-sm text-red-600">
+                    (teachers, other healthcare providers, caregivers etc)
+                  </span>{" "}
+                  :
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s_7")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni_7")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u_7")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na_7")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-                <div>
-                  <p className=" text-lg  font-normal my-2">
+              </div>
+              <div>
+                <p className=" text-lg  font-normal my-2">
                   Acquisition of target behavior-analytic skills:
-                  </p>
-                  <div class="flex mb-4">
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("s_8")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        S
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register("ni_8")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        NI
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" u_8")}
-                      />
-                      <label
-                        for="inline-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        U
-                      </label>
-                    </div>
-                    <div class="flex items-center mr-4">
-                      <input
-                        id="inline-2-radio"
-                        type="radio"
-                        value=""
-                        name="inline-radio-group"
-                        class="w-4 h-4"
-                        {...register(" na_8")}
-                      />
-                      <label
-                        for="inline-2-radio"
-                        class="ml-2 text-sm font-medium text-black dark:text-black"
-                      >
-                        N/A
-                      </label>
-                    </div>
+                </p>
+                <div className="flex mb-4">
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("s_8")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      S
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register("ni_8")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      NI
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" u_8")}
+                    />
+                    <label
+                      for="inline-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      U
+                    </label>
+                  </div>
+                  <div className="flex items-center mr-4">
+                    <input
+                      id="inline-2-radio"
+                      type="radio"
+                      value=""
+                      name="inline-radio-group"
+                      className="w-4 h-4"
+                      {...register(" na_8")}
+                    />
+                    <label
+                      for="inline-2-radio"
+                      className="ml-2 text-sm font-medium text-black dark:text-black"
+                    >
+                      N/A
+                    </label>
                   </div>
                 </div>
-           
+              </div>
             </div>
             <div>
               <h1 className="form-inner-head my-2">
