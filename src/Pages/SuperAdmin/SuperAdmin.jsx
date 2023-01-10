@@ -24,6 +24,7 @@ const SuperAdmin = () => {
   return (
     <>
       <div className="flex items-center bg-[#EFF7F8]">
+        {/* //super admin side bar code  */}
         <div
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
@@ -50,7 +51,7 @@ const SuperAdmin = () => {
                 </>
               )}
             </div>
-            <div>
+            <div className="">
               {SuperAdminRoute.map((s, i) => (
                 <SUperAdminSideBar
                   i={i}
@@ -61,6 +62,8 @@ const SuperAdmin = () => {
             </div>
           </div>
         </div>
+
+        {/* //super admin side bar code end  */}
 
         <div className="slide w-full">
           <div className="ml-[98px] mt-3 mb-4 mr-[22px] ">
