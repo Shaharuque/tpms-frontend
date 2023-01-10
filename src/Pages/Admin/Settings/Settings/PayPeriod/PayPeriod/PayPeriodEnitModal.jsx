@@ -30,7 +30,6 @@ const PayPeriodEnitModal = ({ handleClose, open, editRecord, token }) => {
         token: token,
       });
     }
-    reset();
   };
   console.log(isSuccess, data);
   useEffect(() => {

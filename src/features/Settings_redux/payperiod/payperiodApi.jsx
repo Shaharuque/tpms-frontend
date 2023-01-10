@@ -32,7 +32,33 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //update payperiod
     updatePayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/admin/ac/setting/pay/period/update`,
+        url: `admin/ac/setting/pay/period/update`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(data),
+      }),
+      invalidatesTags: ["Payperiods"],
+    }),
+    //bulkdelete payperiod
+    bulkDeletePayperiod: builder.mutation({
+      query: ({ token, data }) => ({
+        url: `admin/ac/setting/pay/period/delete/bulk`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(data),
+      }),
+      invalidatesTags: ["Payperiods"],
+    }),
+    //single payperiod delete
+    deletePayperiod: builder.mutation({
+      query: ({ token, data }) => ({
+        url: `admin/ac/setting/pay/period/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -49,4 +75,6 @@ export const {
   usePayperiodsQuery,
   useAddPayperiodMutation,
   useUpdatePayperiodMutation,
+  useBulkDeletePayperiodMutation,
+  useDeletePayperiodMutation,
 } = payPeriodApi;
