@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const PayorExistingTable = () => {
+  const [show, setShow] = useState(true);
   const [existingPayor, setExistingPayor] = useState("");
   console.log(existingPayor);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -227,7 +228,7 @@ const PayorExistingTable = () => {
       ellipsis: true,
     },
     {
-      title: "Action",
+      title: "PlanMedicare",
       dataIndex: "action",
       key: "action",
       width: 70,
@@ -251,7 +252,7 @@ const PayorExistingTable = () => {
       ellipsis: true,
     },
     {
-      title: "Action",
+      title: "PlanMedicaid",
       dataIndex: "action",
       key: "action",
       width: 70,
@@ -276,7 +277,7 @@ const PayorExistingTable = () => {
     },
 
     {
-      title: "Plan Group",
+      title: "PlanChampus",
       dataIndex: "PlanGroup",
       key: "PlanGroup",
       width: 70,
@@ -301,7 +302,7 @@ const PayorExistingTable = () => {
     },
 
     {
-      title: "Plan FECA",
+      title: "PlanChampVA",
       dataIndex: "PlanFECA",
       key: "PlanFECA",
       width: 70,
@@ -326,7 +327,57 @@ const PayorExistingTable = () => {
     },
 
     {
-      title: "plan Other",
+      title: "PlanGroupHeal",
+      dataIndex: "planOther",
+      key: "planOther",
+      width: 70,
+      render: (_, record) => {
+        console.log(record.plan);
+        //console.log("tags : ", lock);
+        return (
+          <div className=" flex justify-center items-center">
+            <input
+              defaultChecked={record.plan}
+              type="checkbox"
+              name="plan_champus"
+            />
+          </div>
+        );
+      },
+      sorter: (a, b) => {
+        return a.planOther > b.planOther ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "planOther" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+
+    {
+      title: "PlanFECA",
+      dataIndex: "planOther",
+      key: "planOther",
+      width: 70,
+      render: (_, record) => {
+        console.log(record.plan);
+        //console.log("tags : ", lock);
+        return (
+          <div className=" flex justify-center items-center">
+            <input
+              defaultChecked={record.plan}
+              type="checkbox"
+              name="plan_champus"
+            />
+          </div>
+        );
+      },
+      sorter: (a, b) => {
+        return a.planOther > b.planOther ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "planOther" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+
+    {
+      title: "PlanOther",
       dataIndex: "planOther",
       key: "planOther",
       width: 70,
@@ -357,7 +408,7 @@ const PayorExistingTable = () => {
 
   return (
     <>
-      <div className="flex items-center flex-wrap gap-2">
+      <div className="flex items-center flex-wrap gap-2 my-5">
         <label className="label">
           <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
             Name
@@ -368,7 +419,7 @@ const PayorExistingTable = () => {
             onChange={(e) => {
               setExistingPayor(e.target.value);
             }}
-            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-1  w-full focus:outline-none"
+            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[6px]  w-full focus:outline-none"
           >
             <option value="volvo">Volvo XC90</option>
             <option value="saab">Saab 95</option>
@@ -376,9 +427,12 @@ const PayorExistingTable = () => {
             <option value="audi">Audi TT</option>
           </select>
         </form>
-        <button className="pms-button my-3 mx-1">Show/Hide Payor</button>
+        <button onClick={() => setShow(!show)} className="pms-button my-3 mx-1">
+          Show/Hide Payor
+        </button>
       </div>
-      <div>
+
+      {show && (
         <div>
           <Table
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
@@ -394,7 +448,7 @@ const PayorExistingTable = () => {
             onChange={handleChange}
           />
         </div>
-      </div>
+      )}
     </>
   );
 };

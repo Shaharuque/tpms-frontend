@@ -10,12 +10,21 @@
 }
 
 .table-striped-rows tr:nth-child(2n) td {
-    background-color: #fbfbfb !important;
+    background-color: #f7f7f7 !important;
 }
 
 .table-striped-rows thead {
-    background-color: #f1f1f1 !important;
+    background-color: white !important;
 }
+
+.s-navbar {
+    box-shadow: 0px 4px 5px -1px rgba(36, 36, 36, 0.85);
+}
+
+.s-main {
+    box-shadow: 0px 3px 5px -1px #bababa;
+}
+
 
 /* //sidebar  */
 
