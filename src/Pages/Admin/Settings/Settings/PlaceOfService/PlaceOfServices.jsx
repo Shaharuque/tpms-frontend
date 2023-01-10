@@ -22,12 +22,12 @@ const PlaceOfServices = () => {
   const endPoint = "admin/ac/setting/get/pos";
 
   const pos = useSelector((state) => state?.posInfo);
-  console.log(pos);
+  console.log("--pos", pos);
   const data = pos?.posData?.pos_data?.data ? pos?.posData?.pos_data?.data : [];
   const totalPage = pos?.posData?.pos_data?.last_page
     ? pos?.posData?.pos_data?.last_page
     : 0;
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     // For sending multiple parameter to createAsync Thunk we need to pass it as object
