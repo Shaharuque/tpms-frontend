@@ -2,9 +2,15 @@ import React from "react";
 import { useState } from "react";
 import { Sling as Hamburger } from "hamburger-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const SuperAdminNav = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const logout = () => {
+    console.log("clicked");
+    navigate("/");
+  };
   return (
     <>
       <div
@@ -56,7 +62,9 @@ const SuperAdminNav = () => {
                 <button className="super-admin-nav my-2">Home</button>
               </div>
               <div>
-                <button className="super-admin-nav">Log Out</button>
+                <button onClick={() => logout()} className="super-admin-nav">
+                  Log Out
+                </button>
               </div>
             </div>
           </div>

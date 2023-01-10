@@ -2,13 +2,23 @@ import { Modal } from "antd";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useAddPayperiodMutation } from "../../../../../../features/Settings_redux/payperiod/payperiodApi";
 
-const PayPeriodAdd = ({ handleClose, open }) => {
+const PayPeriodAdd = ({ handleClose, open, token }) => {
   const { register, handleSubmit, reset } = useForm();
+  //calling payperiod add api
+  const [addPayperiod, { data: successData, isLoading, isSuccess }] =
+    useAddPayperiodMutation();
   const onSubmit = (data) => {
     console.log(data);
-    reset();
+    addPayperiod({
+      token,
+      data,
+    });
+    // reset();
   };
+
+  console.log(successData, isSuccess);
   return (
     <div>
       <Modal
@@ -42,12 +52,14 @@ const PayPeriodAdd = ({ handleClose, open }) => {
                 </label>
                 <select
                   className="modal-input-field ml-1 w-full"
-                  {...register("length")}
+                  {...register("period_length")}
                 >
-                  <option value="Mr">Sunday</option>
-                  <option value="Mrs">Monday</option>
-                  <option value="Miss">Tuesday</option>
-                  <option value="Dr">Wednesday</option>
+                  <option value={1}>Weekly</option>
+                  <option value={4}>Bi-Weekly</option>
+                  <option value={2}>From 1st & 15th Every Month</option>
+                  <option value={5}>From 5th & 20th Every Month</option>
+                  <option value={6}>From 5th & 20th Every Month</option>
+                  <option value={3}>Monthly</option>
                 </select>
               </div>
               <div>
@@ -56,12 +68,15 @@ const PayPeriodAdd = ({ handleClose, open }) => {
                 </label>
                 <select
                   className="modal-input-field ml-1 w-full"
-                  {...register("weekdays")}
+                  {...register("week_day_name")}
                 >
-                  <option value="Mr">Sunday</option>
-                  <option value="Mrs">Monday</option>
-                  <option value="Miss">Tuesday</option>
-                  <option value="Dr">Wednesday</option>
+                  <option value="Sunday">Sunday</option>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
                 </select>
               </div>
               <div>
@@ -72,10 +87,11 @@ const PayPeriodAdd = ({ handleClose, open }) => {
                   className="modal-input-field ml-1 w-full"
                   {...register("year")}
                 >
-                  <option value="Mr">Sunday</option>
-                  <option value="Mrs">Monday</option>
-                  <option value="Miss">Tuesday</option>
-                  <option value="Dr">Wednesday</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
                 </select>
               </div>
               <div>
@@ -85,7 +101,7 @@ const PayPeriodAdd = ({ handleClose, open }) => {
                 <input
                   className="modal-input-field ml-1 w-full"
                   type="date"
-                  {...register("date")}
+                  {...register("end_date")}
                 ></input>
               </div>
               <div className="mt-4">
@@ -94,12 +110,15 @@ const PayPeriodAdd = ({ handleClose, open }) => {
                 </label>
                 <select
                   className="modal-input-field ml-1 w-full"
-                  {...register("year")}
+                  {...register("check_date")}
                 >
-                  <option value="Mr">Sunday</option>
-                  <option value="Mrs">Monday</option>
-                  <option value="Miss">Tuesday</option>
-                  <option value="Dr">Wednesday</option>
+                  <option value="Sunday">Sunday</option>
+                  <option value="Monday">Monday</option>
+                  <option value="Tuesday">Tuesday</option>
+                  <option value="Wednesday">Wednesday</option>
+                  <option value="Thursday">Thursday</option>
+                  <option value="Friday">Friday</option>
+                  <option value="Saturday">Saturday</option>
                 </select>
               </div>
 
@@ -111,8 +130,8 @@ const PayPeriodAdd = ({ handleClose, open }) => {
                 </label>
                 <input
                   className="modal-input-field ml-1 w-full"
-                  type="date"
-                  {...register("sheet")}
+                  type="number"
+                  {...register("time_sheet")}
                 ></input>
               </div>
             </div>
