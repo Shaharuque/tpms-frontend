@@ -2,10 +2,14 @@ import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
+import { MdDeleteOutline } from "react-icons/md";
 import ReactPaginate from "react-paginate";
 import useToken from "../../../../../CustomHooks/useToken";
-import { usePayperiodsQuery } from "../../../../../features/Settings_redux/payperiod/payperiodApi";
-import Loading from "../../../../../Loading/Loading";
+import {
+  useBulkDeletePayperiodMutation,
+  useDeletePayperiodMutation,
+  usePayperiodsQuery,
+} from "../../../../../features/Settings_redux/payperiod/payperiodApi";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import PayPeriodAdd from "./PayPeriod/PayPeriodAdd";
 import PayPeriodEnitModal from "./PayPeriod/PayPeriodEnitModal";
@@ -21,13 +25,21 @@ const PayPeriod = () => {
   const [page, setPage] = useState(1);
   const { token } = useToken();
 
-  // all payperiods data
+  // all payperiods data api
   const {
     data: payperiods,
     isSuccess,
     isLoading,
   } = usePayperiodsQuery({ token: token, page: page });
   console.log(isSuccess, payperiods);
+
+  //bulk delete api
+  const [bulkDeletePayperiod, { isSuccess: bulkDeleteSuccess }] =
+    useBulkDeletePayperiodMutation();
+
+  //delete payperiod api
+  const [deletePayperiod, { data: deleteResponse, isSuccess: deleteSuccess }] =
+    useDeletePayperiodMutation();
 
   let totalPage = payperiods?.pos_data?.last_page
     ? payperiods?.pos_data?.last_page
@@ -74,24 +86,32 @@ const PayPeriod = () => {
   //get rows to be deleted
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      // console.log(
-      //   `selectedRowKeys: ${selectedRowKeys}`,
-      //   "selectedRows: ",
-      //   selectedRows
-      // );
       setPayPeriodsId(selectedRowKeys);
     },
   };
 
-  console.log(payPeriodsId);
-  const handleBulkDelete = () => {
-    if (payPeriodsId?.length !== 0 && bulkChecking === "bulk_Delete") {
+  const handleDelete = (id) => {
+    if (id) {
+      deletePayperiod({
+        token,
+        data: {
+          id: id,
+        },
+      });
     }
   };
 
-  // if (isLoading) {
-  //   return <Loading></Loading>;
-  // }
+  const handleBulkDelete = () => {
+    if (payPeriodsId?.length !== 0 && bulkChecking === "bulk_Delete") {
+      bulkDeletePayperiod({
+        token: token,
+        data: {
+          ids: payPeriodsId,
+        },
+      });
+    }
+  };
+  console.log(deleteResponse, deleteSuccess);
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
@@ -237,6 +257,9 @@ const PayPeriod = () => {
             >
               <FiEdit />
             </button>
+            <button onClick={() => handleDelete(record.id)} className="ml-3">
+              <MdDeleteOutline className="text-red-700 text-[15px]" />
+            </button>
           </div>
         );
       },
@@ -313,59 +336,43 @@ const PayPeriod = () => {
         </div>
 
         {totalPage > 0 && (
-          <div className="flex items-center justify-start">
-            <ReactPaginate
-              previousLabel={"<"}
-              nextLabel={">"}
-              // previousLabel={"🡰"}
-              // nextLabel={"🡲"}
-              pageCount={Number(totalPage)}
-              marginPagesDisplayed={1}
-              onPageChange={handlePageClick}
-              containerClassName={"pagination"}
-              previousLinkClassName={"pagination_Link"}
-              nextLinkClassName={"pagination_Link"}
-              activeClassName={"pagination_Link-active"}
-              disabledClassName={"pagination_Link-disabled"}
-            ></ReactPaginate>
+          <div className="flex flex-row-reverse justify-between">
+            <div className="flex items-center justify-start">
+              <ReactPaginate
+                previousLabel={"<"}
+                nextLabel={">"}
+                // previousLabel={"🡰"}
+                // nextLabel={"🡲"}
+                pageCount={Number(totalPage)}
+                marginPagesDisplayed={1}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                previousLinkClassName={"pagination_Link"}
+                nextLinkClassName={"pagination_Link"}
+                activeClassName={"pagination_Link-active"}
+                disabledClassName={"pagination_Link-disabled"}
+              ></ReactPaginate>
+            </div>
+            <div className="flex my-5">
+              <select
+                onChange={(e) => setBulkChecking(e.target.value)}
+                className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
+              >
+                <option value="select" className="text-black">
+                  Select
+                </option>
+                <option value="bulk_Delete" className="text-black">
+                  bulk delete
+                </option>
+              </select>
+              <button onClick={handleBulkDelete} className="pms-input-button">
+                Go
+              </button>
+            </div>
           </div>
         )}
       </div>
 
-      {/* <div>
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-          size="small"
-          bordered
-          className=" text-xs font-normal"
-          columns={columns}
-          dataSource={payperiods?.pos_data?.data}
-          rowSelection={{
-            ...rowSelection,
-          }}
-          scroll={{
-            y: 650,
-          }}
-          onChange={handleChange}
-        />
-      </div> */}
-      <div>
-        <div className="flex my-5">
-          <select
-            onChange={(e) => setBulkChecking(e.target.value)}
-            className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
-          >
-            <option value="select" className="text-black">
-              Select
-            </option>
-            <option value="bulk_Delete" className="text-black">
-              bulk delete
-            </option>
-          </select>
-          <button className="pms-input-button">Go</button>
-        </div>
-      </div>
       {openEditModal && (
         <PayPeriodEnitModal
           handleClose={handleClose}
