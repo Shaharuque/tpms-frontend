@@ -158,6 +158,10 @@ const ExitingFacilities = ({ exitingFacilities, handleExitingFacilities }) => {
           value: "10/31/2025",
         },
       ],
+      render: (_, { phone }) => {
+        //console.log("tags : ", lock);
+        return <div>{phone}</div>;
+      },
       filteredValue: filteredInfo.phone || null,
       onFilter: (value, record) => record.phone.includes(value),
       sorter: (a, b) => {
@@ -189,13 +193,13 @@ const ExitingFacilities = ({ exitingFacilities, handleExitingFacilities }) => {
     },
   ];
   return (
-    <div className="h-[100vh]">
+    <div>
       <h2
         onClick={() => {
           handleExitingFacilities();
           console.log(exitingFacilities);
         }}
-        className=" mt-4 text-sm font-medium px-2 py-2 text-white bg-secondary rounded-sm"
+        className=" mt-4 text-xs font-normal px-2 py-2 text-white bg-secondary rounded-sm"
       >
         Exiting Facilities
       </h2>

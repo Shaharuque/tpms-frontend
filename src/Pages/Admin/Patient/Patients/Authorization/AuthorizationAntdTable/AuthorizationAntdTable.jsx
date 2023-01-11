@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { GiPlainCircle } from "react-icons/gi";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
 import SelectContactRate from "../Authorization/SelectContactRate";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import AuthorizationEditTable from "../AddAuthorization/AuthorizationEditTable";
-import useToken from "../../../../../../CustomHooks/useToken";
-import { fetchData, PostfetchData } from "../../../../../../Misc/Helper";
 //data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
 
 const AuthorizationAntdTable = () => {
@@ -21,90 +19,19 @@ const AuthorizationAntdTable = () => {
   //row expand code related
   const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
   //const [open, setOpen] = useState(false);
-  const { token } = useToken();
+
   const navigate = useNavigate();
 
-  const { id } = useParams();
-
   const editAuth = (id) => {
-    // console.log(id);
-
+    console.log(id);
     navigate(`/admin/authorization-Edit/${id}`);
   };
-  const body = {
-    client_id: id,
-  };
-  // console.log("boyd", body);
-
-  const authorizationpetinedata = async () => {
-    // const body = {
-    //   client_id: dynamicid,
-    // };
-    // const authapidata = await PostfetchData(
-    //   "/admin/ac/patient/authorization",
-    //   body,
-    //   token
-    // );
-
-    // console.log("main api dtaa", authapidata);
-
-    const body = {
-      client_id: id,
-    };
-    const authapidata = await PostfetchData({
-      endPoint: "admin/ac/patient/authorization",
-      payload: body,
-      token,
-    });
-
-    setAuthData(authapidata?.client_authorization?.data);
-    console.log("api data ", authapidata?.client_authorization?.data);
-  };
-
-  useEffect(() => {
-    authorizationpetinedata();
-  }, []);
-
-  // fetch datamain api
-
-  // const [changeData, setchangeData] = useState(false);
-
-  // const fetchWithPromiseAll = async () => {
-  //   const Getcptdata = await PostfetchData({
-  //     endPoint: "admin/ac/setting/staff/type/all",
-  //     token,
-  //   });
-  //   const GetExcludedCptCodes = await PostfetchData({
-  //     endPoint: "admin/ac/setting/staff/type/selected",
-  //     token,
-  //   });
-  //   setstaffType(Getcptdata);
-  //   setselectedStaffType(GetExcludedCptCodes);
-  // };
-
-  // useEffect(() => {
-  //   fetchWithPromiseAll();
-  //   setchangeData(false);
-  // }, [changeData]);
-
-  //  data main table
-  // useEffect(() => {
-  //   fetch("../../../All_Fake_Api/Authorization.json")
-  //     .then((res) => res.json())
-  //     .then((d) => {
-  //       setAuthData(d);
-  //     });
-  // }, []);
 
   //expendable row ar data jeita expand korley show korbey
-  // nested data
-  console.log("auth data act", authData[1]?.auth_act);
   const expandedRowRender = () => {
     return (
       <div className="ml-[-40px] my-2">
-        {authData.map((item, index) => (
-          <AuthorizationEditTable db={item?.auth_act} />
-        ))}
+        <AuthorizationEditTable></AuthorizationEditTable>
       </div>
     );
   };
@@ -114,13 +41,22 @@ const AuthorizationAntdTable = () => {
     setSelectContact(false);
   };
 
-  // console.log("authData", authData[0]?.auth_act);
+  // fetch data
+  useEffect(() => {
+    fetch("../../../All_Fake_Api/Authorization.json")
+      .then((res) => res.json())
+      .then((d) => {
+        setAuthData(d);
+      });
+  }, []);
+
+  // console.log("authData", authData);
 
   const columns = [
     {
       title: "Description",
-      dataIndex: "authorization_name",
-      key: "authorization_name",
+      dataIndex: "description",
+      key: "description",
       width: 120,
       filters: [
         {
