@@ -51,7 +51,7 @@ const SuperAdmin = () => {
                 </>
               )}
             </div>
-            <div className=" overflow-y-scroll max-h-screen">
+            <div className=" overflow-y-scroll max-h-screen pb-24">
               {SuperAdminRoute.map((s, i) => (
                 <SUperAdminSideBar
                   i={i}
