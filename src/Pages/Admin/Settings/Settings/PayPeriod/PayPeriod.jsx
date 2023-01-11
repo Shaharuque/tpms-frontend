@@ -34,8 +34,10 @@ const PayPeriod = () => {
   console.log(isSuccess, payperiods);
 
   //bulk delete api
-  const [bulkDeletePayperiod, { isSuccess: bulkDeleteSuccess }] =
-    useBulkDeletePayperiodMutation();
+  const [
+    bulkDeletePayperiod,
+    { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError },
+  ] = useBulkDeletePayperiodMutation();
 
   //delete payperiod api
   const [deletePayperiod, { data: deleteResponse, isSuccess: deleteSuccess }] =
@@ -101,9 +103,10 @@ const PayPeriod = () => {
       alert("delete succesfully");
     }
   };
+  console.log(deleteResponse, deleteSuccess);
 
   const handleBulkDelete = () => {
-    if (payPeriodsId?.length !== 0 && bulkChecking === "bulk_Delete") {
+    if (payPeriodsId?.length !== 0 && bulkChecking === "Bulk Delete") {
       bulkDeletePayperiod({
         token: token,
         data: {
@@ -112,7 +115,22 @@ const PayPeriod = () => {
       });
     }
   };
-  console.log(deleteResponse, deleteSuccess);
+
+  useEffect(() => {
+    if (bulkDeleteSuccess) {
+      toast.success("Deleted Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (bulkDeleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [bulkDeleteSuccess, bulkDeleteError]);
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
@@ -357,12 +375,12 @@ const PayPeriod = () => {
             <div className="flex my-5">
               <select
                 onChange={(e) => setBulkChecking(e.target.value)}
-                className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
+                className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] mx-1 text-[14px] w-32 focus:outline-none z-0 font-bold"
               >
                 <option value="select" className="text-black">
                   Select
                 </option>
-                <option value="bulk_Delete" className="text-black">
+                <option value="Bulk Delete" className="text-black">
                   bulk delete
                 </option>
               </select>

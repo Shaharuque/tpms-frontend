@@ -2,6 +2,7 @@ import { Modal } from "antd";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 import { useUpdatePayperiodMutation } from "../../../../../../features/Settings_redux/payperiod/payperiodApi";
 
 const PayPeriodEnitModal = ({ handleClose, open, editRecord, token }) => {
@@ -13,7 +14,10 @@ const PayPeriodEnitModal = ({ handleClose, open, editRecord, token }) => {
     return result;
   };
   //update payperiod
-  const [updatePayperiod, { data, isSuccess }] = useUpdatePayperiodMutation();
+  const [
+    updatePayperiod,
+    { data, isSuccess: updateSuccess, isError: updateError },
+  ] = useUpdatePayperiodMutation();
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
@@ -31,13 +35,25 @@ const PayPeriodEnitModal = ({ handleClose, open, editRecord, token }) => {
       });
     }
   };
-  console.log(isSuccess, data);
+  console.log(updateSuccess, data);
   useEffect(() => {
-    if (isSuccess) {
+    if (updateSuccess) {
       handleClose();
+      toast.success("Successfully Updated", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (updateError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
     }
-  }, [isSuccess, handleClose]);
-  //   console.log(editableRow);
+    //handleClose dependency tey na dileo choley cuz aita change hoy na
+  }, [updateSuccess, updateError]);
+
   useEffect(() => {
     setTimeout(() => {
       reset({
