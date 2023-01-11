@@ -381,7 +381,7 @@ const PayPeriod = () => {
                   Select
                 </option>
                 <option value="Bulk Delete" className="text-black">
-                  bulk delete
+                  Bulk Delete
                 </option>
               </select>
               <button onClick={handleBulkDelete} className="pms-input-button">
