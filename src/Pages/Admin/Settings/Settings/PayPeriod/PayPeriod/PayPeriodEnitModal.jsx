@@ -21,13 +21,14 @@ const PayPeriodEnitModal = ({ handleClose, open, editRecord, token }) => {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
+    console.log("normal data", data);
     const payload = {
-      period_edit_id: editRecord?.id,
       start_date: data?.start_date,
       end_date: data?.end_date,
       check_date: data?.check_date,
       time_sheet: data?.time_sheet,
     };
+    console.log("modified data", payload);
     if (payload) {
       updatePayperiod({
         data: payload,
