@@ -1,6 +1,6 @@
 import { Modal, Switch } from "antd";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import PhoneInput from "react-phone-input-2";
@@ -10,7 +10,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
   const [active, setActive] = useState(false);
   const [phone, setPhone] = useState();
   console.log(patientClicked);
-  const { register, handleSubmit, reset } = useForm();
+  const { register, control, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -145,7 +145,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   <div>
                     <select
                       className="modal-input-field ml-1 w-full"
-                      {...register("email")}
+                      {...register("email_type")}
                     >
                       <option value=""></option>
                       <option value="work">Work</option>
@@ -183,19 +183,41 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     {...register("phone_number")}
                   /> */}
                   <div className="ModalPhoneInput ml-1">
-                    <PhoneInput
+                    {/* <PhoneInput
                       country={"us"}
+                      onlyCountries={["us"]}
                       value={phone}
                       onChange={(e) => {
+                        //
                         console.log(e);
                         setPhone(e);
                       }}
+                    /> */}
+
+                    <Controller
+                      control={control}
+                      name="phone"
+                      rules={{ required: true }}
+                      render={({ field: { ref, ...field } }) => (
+                        <PhoneInput
+                          {...field}
+                          inputExtraProps={{
+                            ref,
+                            required: true,
+                            autoFocus: true,
+                          }}
+                          country={"us"}
+                          onlyCountries={["us"]}
+                          countryCodeEditable={false}
+                          specialLabel={"Player Mobile Number"}
+                        />
+                      )}
                     />
                   </div>
                   <div>
                     <select
                       className="modal-input-field ml-1 w-full"
-                      {...register("phone")}
+                      {...register("phone_type")}
                     >
                       <option value=""></option>
                       <option value="work">Work</option>

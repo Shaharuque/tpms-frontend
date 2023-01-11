@@ -98,6 +98,7 @@ const PayPeriod = () => {
           id: id,
         },
       });
+      alert("delete succesfully");
     }
   };
 
