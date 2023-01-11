@@ -1,24 +1,53 @@
 import { Modal } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 import { useAddPayperiodMutation } from "../../../../../../features/Settings_redux/payperiod/payperiodApi";
 
 const PayPeriodAdd = ({ handleClose, open, token }) => {
   const { register, handleSubmit, reset } = useForm();
   //calling payperiod add api
-  const [addPayperiod, { data: successData, isLoading, isSuccess }] =
-    useAddPayperiodMutation();
+  const [
+    addPayperiod,
+    {
+      data: successData,
+      isLoading,
+      isSuccess: addSuccess,
+      isError: errorOccured,
+    },
+  ] = useAddPayperiodMutation();
+
   const onSubmit = (data) => {
     console.log(data);
-    addPayperiod({
-      token,
-      data,
-    });
-    // reset();
+    if (data) {
+      addPayperiod({
+        token,
+        data,
+      });
+    }
+    reset();
   };
+  // console.log(successData, addSuccess);
 
-  console.log(successData, isSuccess);
+  useEffect(() => {
+    if (addSuccess) {
+      handleClose();
+      toast.success("Successfully Added", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (errorOccured) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+    //handleClose dependency tey na dileo choley cuz aita change hoy na
+  }, [addSuccess, errorOccured]);
+
   return (
     <div>
       <Modal
