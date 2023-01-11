@@ -86,6 +86,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                 <label className="label">
                   <span className="modal-label-name">
                     DOB<span className="text-red-500">*</span>
+                    {/* d       */}
                   </span>
                 </label>
 
