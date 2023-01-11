@@ -78,7 +78,8 @@ const LogInForm = ({ from }) => {
         navigate("/patient"); //patient panel a redirect
         localStorage.setItem("type", "patient");
       } else {
-        setMessage(response.data.message);
+        // setMessage(response.data.message);
+        navigate("/super-admin");
       }
     });
   };

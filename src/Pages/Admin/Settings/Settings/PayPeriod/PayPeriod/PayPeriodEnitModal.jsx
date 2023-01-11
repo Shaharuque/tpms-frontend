@@ -2,22 +2,75 @@ import { Modal } from "antd";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
+import { useUpdatePayperiodMutation } from "../../../../../../features/Settings_redux/payperiod/payperiodApi";
 
-const PayPeriodEnitModal = ({ handleClose, open }) => {
+const PayPeriodEnitModal = ({ handleClose, open, editRecord, token }) => {
+  console.log(editRecord);
+  //Date converter function
+  const sampleFunction = (date) => {
+    const [year, month, day] = date.split("-");
+    const result = [month, day, year].join("/");
+    return result;
+  };
+  //update payperiod
+  const [
+    updatePayperiod,
+    { data, isSuccess: updateSuccess, isError: updateError },
+  ] = useUpdatePayperiodMutation();
+
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    const payload = {
+      period_edit_id: editRecord?.id,
+      start_date: data?.start_date,
+      end_date: data?.end_date,
+      check_date: data?.check_date,
+      time_sheet: data?.time_sheet,
+    };
+    if (payload) {
+      updatePayperiod({
+        data: payload,
+        token: token,
+      });
+    }
   };
-  //   console.log(editableRow);
+  console.log(updateSuccess, data);
+  useEffect(() => {
+    if (updateSuccess) {
+      handleClose();
+      toast.success("Successfully Updated", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (updateError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+    //handleClose dependency tey na dileo choley cuz aita change hoy na
+  }, [updateSuccess, updateError]);
+
   useEffect(() => {
     setTimeout(() => {
       reset({
-        // description: `${row.original.description}`,
-        // expiry_Date: `${row.original.upload_date}`,
+        id: editRecord?.id,
+        start_date: editRecord?.start_date,
+        end_date: editRecord?.end_date,
+        check_date: editRecord?.check_date,
+        time_sheet: editRecord?.time_sheet,
       });
     }, 500);
-  }, [reset]);
+  }, [
+    reset,
+    editRecord?.start_date,
+    editRecord?.end_date,
+    editRecord?.check_date,
+    editRecord?.time_sheet,
+  ]);
   return (
     <div>
       <Modal
@@ -50,7 +103,7 @@ const PayPeriodEnitModal = ({ handleClose, open }) => {
                 <input
                   className="modal-input-field ml-1 w-full"
                   type="date"
-                  {...register("check_Date")}
+                  {...register("start_date")}
                 />
               </div>
               <div>
@@ -60,7 +113,7 @@ const PayPeriodEnitModal = ({ handleClose, open }) => {
                 <input
                   className="modal-input-field ml-1 w-full"
                   type="date"
-                  {...register("check_Date")}
+                  {...register("end_date")}
                 />
               </div>
               <div>
@@ -70,7 +123,7 @@ const PayPeriodEnitModal = ({ handleClose, open }) => {
                 <input
                   className="modal-input-field ml-1 w-full"
                   type="date"
-                  {...register("check_Date")}
+                  {...register("check_date")}
                 />
               </div>
               <div className="col-span-2">

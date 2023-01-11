@@ -10,10 +10,15 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
   const [active, setActive] = useState(false);
   const [phone, setPhone] = useState();
   console.log(patientClicked);
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    reset();
+    // reset();
   };
   return (
     <div>
@@ -22,7 +27,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
         centered
         footer={null}
         bodyStyle={{ padding: "0" }}
-        width={500}
+        width={600}
         closable={false}
         className="box rounded-xl "
       >
@@ -43,7 +48,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   className="form-check-label inline-block mt-[2px] text-sm"
                   htmlFor="flexSwitchCheckDefault"
                 >
-                  Email invaitation
+                  first_name invaitation
                 </label>
               </div>
               <IoCloseCircleOutline
@@ -62,11 +67,25 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                 </label>
                 <input
                   type="text"
-                  name="first_name"
+                  name="client_first_name"
                   className="modal-input-field ml-1 w-full"
-                  {...register("first_name")}
+                  {...register("client_first_name", {
+                    required: {
+                      value: true,
+                      message: "First name is required",
+                    },
+                  })}
                 />
+
+                <div className="label-text-alt m-1">
+                  {errors.client_first_name?.type === "required" && (
+                    <p className=" pl-1 text-red-500">
+                      {errors.client_first_name.message}
+                    </p>
+                  )}
+                </div>
               </div>
+              {/* client_last_name */}
               <div>
                 <label className="label">
                   <span className="modal-label-name">
@@ -75,10 +94,22 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                 </label>
                 <input
                   type="text"
-                  name="last_name"
+                  name="client_last_name"
                   className=" modal-input-field ml-1 w-full"
-                  {...register("last_name")}
+                  {...register("client_last_name", {
+                    required: {
+                      value: true,
+                      message: "Last Name is required",
+                    },
+                  })}
                 />
+                <div className="label-text-alt m-1">
+                  {errors.client_last_name?.type === "required" && (
+                    <p className=" pl-1 text-red-500">
+                      {errors.client_last_name.message}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-1 mr-2 gap-1">
@@ -91,10 +122,22 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
 
                 <input
                   className=" modal-input-field ml-1 w-full"
-                  name="dob"
+                  name="client_dob"
                   type="date"
-                  {...register("dob")}
+                  {...register("client_dob", {
+                    required: {
+                      value: true,
+                      message: "Date of Birth is required",
+                    },
+                  })}
                 />
+                <div className="label-text-alt m-1">
+                  {errors.client_dob?.type === "required" && (
+                    <p className=" pl-1 text-red-500">
+                      {errors.client_dob.message}
+                    </p>
+                  )}
+                </div>
               </div>
               <div>
                 <label className="label">
@@ -104,12 +147,24 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                 </label>
                 <select
                   className=" modal-input-field ml-1 w-full"
-                  {...register("gender")}
+                  {...register("client_gender", {
+                    required: {
+                      value: true,
+                      message: "Gender is required",
+                    },
+                  })}
                 >
                   <option value=""></option>
                   <option value="single">single</option>
                   <option value="married">married</option>
                 </select>
+                <div className="label-text-alt m-1">
+                  {errors.client_gender?.type === "required" && (
+                    <p className=" pl-1 text-red-500">
+                      {errors.client_gender.message}
+                    </p>
+                  )}
+                </div>
               </div>
               <div>
                 <label className="label">
@@ -131,37 +186,61 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
               <div>
                 <label className="label">
                   <span className="modal-label-name flex items-center gap-1">
-                    Email Address
+                    email Address
                     <AiOutlineQuestionCircle className="text-sm" />
                   </span>
                 </label>
                 <div className="flex items-center">
-                  <input
-                    type="text"
-                    name="email_Address"
-                    className="modal-input-field ml-1 w-3/4"
-                    {...register("email_Address")}
-                  />
-                  <div>
-                    <select
-                      className="modal-input-field ml-1 w-full"
-                      {...register("email")}
-                    >
-                      <option value=""></option>
-                      <option value="work">Work</option>
-                      <option value="home">Home</option>
-                    </select>
-                  </div>
+                  <>
+                    <input
+                      type="text"
+                      name="email"
+                      className="modal-input-field ml-1 w-3/4"
+                      {...register("email", {
+                        required: {
+                          value: true,
+                          message: "Email is required",
+                        },
+                      })}
+                    />
+                  </>
+
+                  <>
+                    <div>
+                      <select
+                        className="modal-input-field ml-1 w-full"
+                        {...register("email_type", {
+                          required: {
+                            value: true,
+                            message: "Email type is required",
+                          },
+                        })}
+                      >
+                        <option value=""></option>
+                        <option value="work">Work</option>
+                        <option value="home">Home</option>
+                      </select>
+                    </div>
+                  </>
+                </div>
+                <div className="label-text-alt m-1">
+                  {errors.email?.type === "required" && (
+                    <p className=" pl-1 text-red-500">{errors.email.message}</p>
+                  )}
+                </div>
+                <div className="label-text-alt m-1">
+                  {errors.email_type?.type === "required" && (
+                    <p className=" pl-1 text-red-500">
+                      {errors.email_type.message}
+                    </p>
+                  )}
                 </div>
                 <div className="flex ml-1 mt-2 items-center">
                   <input
                     type="checkbox"
-                    // checked={value ? true : false}
                     name="patient"
-                    // onClick={() => {
-                    //   setValue(!value);
-                    // }}
-                  />{" "}
+                    {...register("email_reminder")}
+                  />
                   <span className="text-xs ml-1 text-gray-600 font-medium">
                     Send me an email reminder
                   </span>
@@ -195,7 +274,12 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   <div>
                     <select
                       className="modal-input-field ml-1 w-full"
-                      {...register("phone")}
+                      {...register("phone_type", {
+                        required: {
+                          value: true,
+                          message: "Phone Type is required",
+                        },
+                      })}
                     >
                       <option value=""></option>
                       <option value="work">Work</option>
@@ -203,15 +287,24 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     </select>
                   </div>
                 </div>
+                <div className="label-text-alt m-1">
+                  {phone === "" && (
+                    <p className=" pl-1 text-red-500">Phone is required</p>
+                  )}
+                </div>
+                <div className="label-text-alt m-1">
+                  {errors.phone_type?.type === "required" && (
+                    <p className=" pl-1 text-red-500">
+                      {errors.phone_type.message}
+                    </p>
+                  )}
+                </div>
                 <div>
                   <div className="flex ml-1 mt-2 items-center">
                     <input
                       type="checkbox"
-                      // checked={value ? true : false}
                       name="patient"
-                      // onClick={() => {
-                      //   setValue(!value);
-                      // }}
+                      {...register("is_send_sms")}
                     />{" "}
                     <span className="text-xs ml-1 text-gray-600 font-medium">
                       Send me a text message

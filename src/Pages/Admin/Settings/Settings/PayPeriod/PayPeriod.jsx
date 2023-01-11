@@ -2,16 +2,63 @@ import { Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
+import { MdDeleteOutline } from "react-icons/md";
+import ReactPaginate from "react-paginate";
+import { toast } from "react-toastify";
+import useToken from "../../../../../CustomHooks/useToken";
+import {
+  useBulkDeletePayperiodMutation,
+  useDeletePayperiodMutation,
+  usePayperiodsQuery,
+} from "../../../../../features/Settings_redux/payperiod/payperiodApi";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import PayPeriodAdd from "./PayPeriod/PayPeriodAdd";
 import PayPeriodEnitModal from "./PayPeriod/PayPeriodEnitModal";
 
 const PayPeriod = () => {
+  const [editRecord, setEditRecord] = useState();
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [bulkChecking, setBulkChecking] = useState(null);
+  const [payPeriodsId, setPayPeriodsId] = useState([]);
+  const [page, setPage] = useState(1);
+  const { token } = useToken();
 
-  const handleClickOpen = () => {
+  // all payperiods data api
+  const {
+    data: payperiods,
+    isSuccess,
+    isLoading,
+  } = usePayperiodsQuery({ token: token, page: page });
+  console.log(isSuccess, payperiods);
+
+  //bulk delete api
+  const [
+    bulkDeletePayperiod,
+    { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError },
+  ] = useBulkDeletePayperiodMutation();
+
+  //delete payperiod api
+  const [deletePayperiod, { data: deleteResponse, isSuccess: deleteSuccess }] =
+    useDeletePayperiodMutation();
+
+  let totalPage = payperiods?.pos_data?.last_page
+    ? payperiods?.pos_data?.last_page
+    : 0;
+
+  console.log(totalPage);
+
+  //Date converter function
+  const sampleFunction = (date) => {
+    const [year, month, day] = date.split("-");
+    const result = [month, day, year].join("/");
+    return result;
+  };
+
+  const handleClickOpen = (record) => {
+    setEditRecord(record);
     setOpenEditModal(true);
   };
 
@@ -33,30 +80,69 @@ const PayPeriod = () => {
   };
   console.log(filteredInfo);
 
-  const [table, setTable] = useState(false);
-  useEffect(() => {
-    axios("../../../All_Fake_Api/PayPeriod.json")
-      .then((response) => {
-        console.log("calling");
-        setTable(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
+  //handle page
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
+  };
+
+  //get rows to be deleted
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      setPayPeriodsId(selectedRowKeys);
+    },
+  };
+
+  const handleDelete = (id) => {
+    if (id) {
+      deletePayperiod({
+        token,
+        data: {
+          id: id,
+        },
       });
-  }, []);
-  console.log(table);
+    }
+  };
+  console.log(deleteResponse, deleteSuccess);
+
+  const handleBulkDelete = () => {
+    if (payPeriodsId?.length !== 0 && bulkChecking === "Bulk Delete") {
+      bulkDeletePayperiod({
+        token: token,
+        data: {
+          ids: payPeriodsId,
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (bulkDeleteSuccess) {
+      toast.success("Deleted Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (bulkDeleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [bulkDeleteSuccess, bulkDeleteError]);
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
     {
       title: "From date",
-      dataIndex: "from_date",
-      key: "from_date",
-      width: 150,
+      dataIndex: "start_date",
+      key: "start_date",
+      width: 80,
       filters: [
         {
-          text: `10/31/2021`,
-          value: "10/31/2021",
+          text: "01/03/2022",
+          value: "2022-01-03",
         },
         {
           text: `11/31/2023`,
@@ -67,27 +153,29 @@ const PayPeriod = () => {
           value: "10/31/2025",
         },
       ],
-      render: (_, { from_date }) => {
+      render: (_, { start_date }) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{from_date}</div>;
+        let convertedDate = sampleFunction(start_date);
+        return <div className=" text-secondary">{convertedDate}</div>;
       },
-      filteredValue: filteredInfo.from_date || null,
-      onFilter: (value, record) => record.from_date.includes(value),
+      filteredValue: filteredInfo.start_date || null,
+      onFilter: (value, record) => record.start_date.includes(value),
       sorter: (a, b) => {
-        return a.from_date > b.from_date ? -1 : 1;
+        return a.start_date > b.start_date ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "from_date" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "start_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "To Data",
-      dataIndex: "to_date",
-      key: "to_date",
+      dataIndex: "show_end_date",
+      key: "show_end_date",
       width: 100,
       filters: [
         {
-          text: `10/31/2021`,
-          value: "10/31/2021",
+          text: `01/31/2022`,
+          value: "01/31/2022",
         },
         {
           text: `11/31/2023`,
@@ -98,18 +186,19 @@ const PayPeriod = () => {
           value: "10/31/2025",
         },
       ],
-      filteredValue: filteredInfo.to_date || null,
-      onFilter: (value, record) => record.to_date.includes(value),
+      filteredValue: filteredInfo.show_end_date || null,
+      onFilter: (value, record) => record.show_end_date.includes(value),
       sorter: (a, b) => {
-        return a.to_date > b.to_date ? -1 : 1;
+        return a.show_end_date > b.show_end_date ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "to_date" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "show_end_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: "Last Date",
-      dataIndex: "last_date",
-      key: "last_date",
+      title: "Last Date To Submit Timesheets ",
+      dataIndex: "time_sheet_date",
+      key: "time_sheet_date",
       width: 100,
       filters: [
         {
@@ -125,38 +214,51 @@ const PayPeriod = () => {
           value: "10/31/2025",
         },
       ],
-      filteredValue: filteredInfo.last_date || null,
-      onFilter: (value, record) => record.last_date.includes(value),
-      sorter: (a, b) => {
-        return a.last_date > b.last_date ? -1 : 1;
+      render: (_, { time_sheet_date }) => {
+        //console.log("tags : ", lock);
+        let convertedDate = sampleFunction(time_sheet_date);
+        return <div className=" text-black">{convertedDate}</div>;
       },
-      sortOrder: sortedInfo.columnKey === "last_date" ? sortedInfo.order : null,
+      filteredValue: filteredInfo.time_sheet_date || null,
+      onFilter: (value, record) => record.time_sheet_date.includes(value),
+      sorter: (a, b) => {
+        return a.time_sheet_date > b.time_sheet_date ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "time_sheet_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Check Date",
-      dataIndex: "week_day",
-      key: "week_day",
+      dataIndex: "check_date",
+      key: "check_date",
       width: 70,
-      filteredValue: filteredInfo.week_day || null,
-      onFilter: (value, record) => record.week_day.includes(value),
-      sorter: (a, b) => {
-        return a.week_day > b.week_day ? -1 : 1;
+      render: (_, { check_date }) => {
+        //console.log("tags : ", lock);
+        let convertedDate = sampleFunction(check_date);
+        return <div className=" text-black">{convertedDate}</div>;
       },
-      sortOrder: sortedInfo.columnKey === "week_day" ? sortedInfo.order : null,
+      filteredValue: filteredInfo.check_date || null,
+      onFilter: (value, record) => record.check_date.includes(value),
+      sorter: (a, b) => {
+        return a.check_date > b.check_date ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "check_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Week Date",
-      dataIndex: "week_day",
-      key: "week_day",
+      dataIndex: "week_day_name",
+      key: "week_day_name",
       width: 70,
-      filteredValue: filteredInfo.week_day || null,
-      onFilter: (value, record) => record.week_day.includes(value),
+      filteredValue: filteredInfo.week_day_name || null,
+      onFilter: (value, record) => record.week_day_name.includes(value),
       sorter: (a, b) => {
-        return a.week_day > b.week_day ? -1 : 1;
+        return a.week_day_name > b.week_day_name ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "week_day" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "week_day_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -164,12 +266,18 @@ const PayPeriod = () => {
       dataIndex: "action",
       key: "action",
       width: 70,
-      render: () => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
-            <button onClick={handleClickOpen} className="text-secondary ">
+            <button
+              onClick={() => handleClickOpen(record)}
+              className="text-secondary "
+            >
               <FiEdit />
+            </button>
+            <button onClick={() => handleDelete(record.id)} className="ml-3">
+              <MdDeleteOutline className="text-red-700 text-[15px]" />
             </button>
           </div>
         );
@@ -182,21 +290,6 @@ const PayPeriod = () => {
     },
   ];
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
-    },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows);
-    },
-  };
   const clearFilters = () => {
     setFilteredInfo({});
   };
@@ -238,46 +331,80 @@ const PayPeriod = () => {
       </div>
 
       <div>
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-          size="small"
-          bordered
-          className=" text-xs font-normal"
-          columns={columns}
-          dataSource={table}
-          rowSelection={{
-            ...rowSelection,
-          }}
-          scroll={{
-            y: 650,
-          }}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <div className="flex my-5">
-          <select className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0">
-            <option value="" className="text-black">
-              Select
-            </option>
-            <option value="Today" className="text-black">
-              bulk delete
-            </option>
-          </select>
-          <button className="pms-input-button">Go</button>
+        <div className=" overflow-scroll">
+          {!isLoading ? (
+            <Table
+              pagination={false}
+              rowKey={(record) => record.id}
+              size="small"
+              bordered
+              className=" text-xs font-normal"
+              columns={columns}
+              dataSource={payperiods?.pos_data?.data}
+              rowSelection={{
+                ...rowSelection,
+              }}
+              scroll={{
+                y: 650,
+              }}
+              onChange={handleChange}
+            />
+          ) : (
+            <ShimmerTableTet></ShimmerTableTet>
+          )}
         </div>
+
+        {totalPage > 0 && (
+          <div className="flex flex-row-reverse justify-between">
+            <div className="flex items-center justify-start">
+              <ReactPaginate
+                previousLabel={"<"}
+                nextLabel={">"}
+                // previousLabel={"🡰"}
+                // nextLabel={"🡲"}
+                pageCount={Number(totalPage)}
+                marginPagesDisplayed={1}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                previousLinkClassName={"pagination_Link"}
+                nextLinkClassName={"pagination_Link"}
+                activeClassName={"pagination_Link-active"}
+                disabledClassName={"pagination_Link-disabled"}
+              ></ReactPaginate>
+            </div>
+            <div className="flex my-5">
+              <select
+                onChange={(e) => setBulkChecking(e.target.value)}
+                className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] mx-1 text-[14px] w-32 focus:outline-none z-0 font-bold"
+              >
+                <option value="select" className="text-black">
+                  Select
+                </option>
+                <option value="Bulk Delete" className="text-black">
+                  bulk delete
+                </option>
+              </select>
+              <button onClick={handleBulkDelete} className="pms-input-button">
+                Go
+              </button>
+            </div>
+          </div>
+        )}
       </div>
+
       {openEditModal && (
         <PayPeriodEnitModal
           handleClose={handleClose}
           open={openEditModal}
+          editRecord={editRecord}
+          token={token}
         ></PayPeriodEnitModal>
       )}
       {openAddModal && (
         <PayPeriodAdd
           handleClose={handleClose2}
           open={openAddModal}
+          token={token}
         ></PayPeriodAdd>
       )}
     </div>

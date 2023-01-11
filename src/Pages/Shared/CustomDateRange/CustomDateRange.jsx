@@ -1,24 +1,25 @@
 import React from "react";
-import { DateRangePicker } from "react-date-range";
+import { DateRangePicker, defaultStaticRanges } from "react-date-range";
+// important
+import {
+  // addDays,
+  // endOfDay,
+  // startOfDay,
+  // startOfMonth,
+  // endOfMonth,
+  // addMonths,
+  // startOfWeek,
+  // endOfWeek,
+  // differenceInCalendarDays,
+  addYears,
+  endOfYear,
+  isSameDay,
+  startOfYear,
+} from "date-fns";
 
 // date range year
 
 const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
-  const handleLastYearClick = () => {
-    const startDate = new Date(this.state.startDate);
-    startDate.setFullYear(startDate.getFullYear() - 1);
-    const endDate = new Date(this.state.endDate);
-    endDate.setFullYear(endDate.getFullYear() - 1);
-    this.setState({ startDate, endDate, customRangeLabel: "Last Year" });
-  };
-
-  const handleNextYearClick = () => {
-    const startDate = new Date(this.state.startDate);
-    startDate.setFullYear(startDate.getFullYear() + 1);
-    const endDate = new Date(this.state.endDate);
-    endDate.setFullYear(endDate.getFullYear() + 1);
-    this.setState({ startDate, endDate, customRangeLabel: "Next Year" });
-  };
   return (
     <div className="absolute z-10 shadow-xl">
       <div>
@@ -31,6 +32,37 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           months={2}
           direction="horizontal"
           className="border-gray-600 shadow-xl"
+          staticRanges={[
+            ...defaultStaticRanges,
+            {
+              label: "Last year",
+              range: () => ({
+                startDate: startOfYear(addYears(new Date(), -1)),
+                endDate: endOfYear(addYears(new Date(), -1)),
+              }),
+              isSelected(range) {
+                const definedRange = this.range();
+                return (
+                  isSameDay(range.startDate, definedRange.startDate) &&
+                  isSameDay(range.endDate, definedRange.endDate)
+                );
+              },
+            },
+            {
+              label: "This year",
+              range: () => ({
+                startDate: startOfYear(new Date()),
+                endDate: endOfYear(new Date()),
+              }),
+              isSelected(range) {
+                const definedRange = this.range();
+                return (
+                  isSameDay(range.startDate, definedRange.startDate) &&
+                  isSameDay(range.endDate, definedRange.endDate)
+                );
+              },
+            },
+          ]}
         />
       </div>
       <div className="text-right bg-[#26818F] rounded-b-sm range-date-ok py-0 shadow-xl">

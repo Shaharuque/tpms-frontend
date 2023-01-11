@@ -18,7 +18,7 @@ import { serviceSubTypeReducer } from "../features/Settings_redux/selectedServic
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice(RTK query)
-    // [apiSlice.reducerPath]: apiSlice.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
     //async thunk reducers
     patientData: patientDataReducer,
     patientInfo: patientDetailsReducer,
@@ -34,6 +34,6 @@ export const store = configureStore({
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(apiSlice.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
 });
