@@ -66,28 +66,30 @@ const AddNewFacilities = ({ register, setNote }) => {
             {...register("Facility_Email")}
           />
         </div>
-        <div className="flex items-center gap-2 ">
-          <div className="w-full">
-            <label className="label">
-              <span className="label-font">Office Start Time</span>
-            </label>
-            <input
-              type="text"
-              name="start_time"
-              className="input-border  input-font w-full focus:outline-none py-[1px]"
-              {...register("start_time")}
-            />
-          </div>
-          <div className="w-full">
-            <label className="label">
-              <span className="label-font">Office End Time</span>
-            </label>
-            <input
-              type="text"
-              name="main_contact_person"
-              className="input-border  input-font w-full focus:outline-none py-[1px]"
-              {...register("main_contact_person")}
-            />
+        <div className="sm:col-span-2 lg:col-span-1">
+          <div className="flex items-center sm:flex-nowrap flex-wrap gap-2 ">
+            <div className="w-full">
+              <label className="label">
+                <span className="label-font">Office Start Time</span>
+              </label>
+              <input
+                type="text"
+                name="start_time"
+                className="input-border  input-font w-full focus:outline-none py-[1px]"
+                {...register("start_time")}
+              />
+            </div>
+            <div className="w-full">
+              <label className="label">
+                <span className="label-font">Office End Time</span>
+              </label>
+              <input
+                type="text"
+                name="main_contact_person"
+                className="input-border  input-font w-full focus:outline-none py-[1px]"
+                {...register("main_contact_person")}
+              />
+            </div>
           </div>
         </div>
         <div>
@@ -130,11 +132,9 @@ const AddNewFacilities = ({ register, setNote }) => {
             {...register("service_aria_miles")}
           />
         </div>
-        <div>
+        <div className="">
           <label className="label">
-            <span className="label-font">
-              Virtual Number For SMS<span className="text-rose-500">*</span>
-            </span>
+            <span className="label-font">Virtual Number For SMS</span>
           </label>
           <input
             type="text"
@@ -175,7 +175,7 @@ const AddNewFacilities = ({ register, setNote }) => {
             <span className="modal-label-name">Is Credential Facility</span>
           </label>
         </div>
-        <div className="mt-3">
+        <div className="sm:col-span-2 lg:col-span-1">
           <label className="label">
             <span className="label-font">Submit time sheet message</span>
           </label>
