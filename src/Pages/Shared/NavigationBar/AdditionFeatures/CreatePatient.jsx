@@ -1,12 +1,15 @@
 import { Modal, Switch } from "antd";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import useToken from "../../../../CustomHooks/useToken";
+import { PostfetchData } from "../../../../Misc/Helper";
 
 const CreatePatient = ({ handleClose, patientClicked }) => {
+  const { token } = useToken();
   const [active, setActive] = useState(false);
   const [phone, setPhone] = useState();
   console.log(patientClicked);
@@ -14,11 +17,33 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    // reset();
+  const onSubmit = async (data) => {
+    // console.log(data);
+    const payload = {
+      client_first_name: data?.client_first_name,
+      client_last_name: data?.client_last_name,
+      client_dob: data?.client_dob,
+      client_gender: data?.client_gender,
+      location: data?.pos,
+      email_type: data?.email_type,
+      email_reminder: Number(data?.email_reminder),
+      phone_number: `+${data?.phone}`,
+      phone_type: data?.phone_type,
+      is_send_sms: Number(data?.is_send_sms),
+    };
+    const CreatePatientApi = await PostfetchData({
+      endPoint: "admin/ac/patient/create",
+      payload: payload,
+      token,
+    });
+    console.log("add data ", CreatePatientApi);
+    // if (AddingInsuranceData.status === "success") {
+    //   alert("data added");
+    //   setaddedData(true);
+    // }
   };
   return (
     <div>
@@ -155,8 +180,8 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   })}
                 >
                   <option value=""></option>
-                  <option value="single">single</option>
-                  <option value="married">married</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
                 <div className="label-text-alt m-1">
                   {errors.client_gender?.type === "required" && (
@@ -177,8 +202,9 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   {...register("pos")}
                 >
                   <option value=""></option>
-                  <option value="single">single</option>
-                  <option value="married">married</option>
+                  <option value="Main Office">Main Office</option>
+                  <option value="Telehealth">Telehealth</option>
+                  <option value="Home">Home</option>
                 </select>
               </div>
             </div>
@@ -217,8 +243,8 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                         })}
                       >
                         <option value=""></option>
-                        <option value="work">Work</option>
-                        <option value="home">Home</option>
+                        <option value="Work">Work</option>
+                        <option value="Home">Home</option>
                       </select>
                     </div>
                   </>
@@ -262,13 +288,24 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     {...register("phone_number")}
                   /> */}
                   <div className="ModalPhoneInput ml-1">
-                    <PhoneInput
-                      country={"us"}
-                      value={phone}
-                      onChange={(e) => {
-                        console.log(e);
-                        setPhone(e);
-                      }}
+                    <Controller
+                      control={control}
+                      name="phone"
+                      rules={{ required: true }}
+                      render={({ field: { ref, ...field } }) => (
+                        <PhoneInput
+                          {...field}
+                          inputExtraProps={{
+                            ref,
+                            required: true,
+                            autoFocus: true,
+                          }}
+                          country={"us"}
+                          onlyCountries={["us"]}
+                          countryCodeEditable={false}
+                          specialLabel={"Player Mobile Number"}
+                        />
+                      )}
                     />
                   </div>
                   <div>
@@ -282,8 +319,8 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                       })}
                     >
                       <option value=""></option>
-                      <option value="work">Work</option>
-                      <option value="home">Home</option>
+                      <option value="Work">Work</option>
+                      <option value="Home">Home</option>
                     </select>
                   </div>
                 </div>

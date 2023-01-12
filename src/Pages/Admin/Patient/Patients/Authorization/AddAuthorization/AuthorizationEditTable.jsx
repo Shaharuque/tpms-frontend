@@ -5,20 +5,23 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 
-const AuthorizationEditTable = () => {
+const AuthorizationEditTable = ({ db }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
-  const [authEditData, setAuthEditData] = useState([]);
+  const [authEditData, setAuthEditData] = useState(db);
 
   //   fetch data
-  React.useEffect(() => {
-    fetch("../../../All_Fake_Api/AuthorizationEdit.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setAuthEditData(d);
-        // setLoading2(false);
-      });
-  }, []);
+  // React.useEffect(() => {
+  //   fetch("../../../All_Fake_Api/AuthorizationEdit.json")
+  //     .then((res) => res.json())
+  //     .then((d) => {
+  //       setAuthEditData(d);
+  //       // setLoading2(false);
+  //     });
+  // }, []);
+
+  // console.log("db auth edit", authEditData);
+  // console.log("fek", authEditData);
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -34,8 +37,8 @@ const AuthorizationEditTable = () => {
   const columns = [
     {
       title: "Service",
-      dataIndex: "service",
-      key: "service",
+      dataIndex: "activity_name",
+      key: "activity_name",
       width: 100,
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1; //sorting problem solved using this logic
@@ -156,7 +159,7 @@ const AuthorizationEditTable = () => {
             size="small"
             className=" text-xs font-normal "
             columns={columns}
-            dataSource={authEditData}
+            dataSource={db}
             onChange={handleChange}
           />
         </div>
