@@ -678,6 +678,7 @@ const ListView = () => {
     },
   });
   const onSubmit = async (data) => {
+    console.log("form-data", data);
     const from_date = convert(data?.start_date);
     const to_date = convert(data?.end_date);
     //console.log(from_date, to_date);
