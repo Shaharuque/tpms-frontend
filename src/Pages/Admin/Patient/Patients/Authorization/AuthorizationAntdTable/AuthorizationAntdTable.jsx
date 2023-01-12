@@ -50,13 +50,12 @@ const AuthorizationAntdTable = () => {
   }, []);
 
   //expendable row ar data jeita expand korley show korbey
-  // nested data
   console.log("auth data end", authData);
   const expandedRowRender = (record) => {
     // console.log("record", record);
     return (
       <div className="ml-[-40px] my-2">
-        <AuthorizationEditTable db={record?.auth_act} />
+        <AuthorizationEditTable nestedData={record?.auth_act} />
       </div>
     );
   };
@@ -363,7 +362,7 @@ const AuthorizationAntdTable = () => {
               pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
               rowKey={(record) => record.id} //record is kind of whole one data object and here we are
               size="small"
-              className=" text-xs font-normal table-striped-rows text-xs font-normal"
+              className=" text-xs font-normal table-striped-rows"
               columns={columns}
               dataSource={authData}
               expandable={{

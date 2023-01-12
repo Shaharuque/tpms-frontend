@@ -5,23 +5,10 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 
-const AuthorizationEditTable = ({ db }) => {
+const AuthorizationEditTable = ({ nestedData }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
-  const [authEditData, setAuthEditData] = useState(db);
-
-  //   fetch data
-  // React.useEffect(() => {
-  //   fetch("../../../All_Fake_Api/AuthorizationEdit.json")
-  //     .then((res) => res.json())
-  //     .then((d) => {
-  //       setAuthEditData(d);
-  //       // setLoading2(false);
-  //     });
-  // }, []);
-
-  // console.log("db auth edit", authEditData);
-  // console.log("fek", authEditData);
+  const [authEditData, setAuthEditData] = useState(nestedData);
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -155,11 +142,12 @@ const AuthorizationEditTable = ({ db }) => {
       <>
         <div className=" overflow-scroll py-2 px-2">
           <Table
+            rowKey={(record) => record.id}
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
             className=" text-xs font-normal "
             columns={columns}
-            dataSource={db}
+            dataSource={nestedData}
             onChange={handleChange}
           />
         </div>

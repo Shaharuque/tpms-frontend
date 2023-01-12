@@ -10,14 +10,12 @@ import { Switch } from "antd";
 import { BsArrowRight } from "react-icons/bs";
 import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
 import useToken from "../../../../../../CustomHooks/useToken";
-import { fetchData } from "../../../../../../Misc/Helper";
 import axios from "axios";
-import { baseIp } from "../../../../../../Misc/BaseClient";
 import Loading from "../../../../../../Loading/Loading";
 
 const AuthorizationEdit = ({ editdata }) => {
   const { id } = useParams();
-  // console.log("description id ", id);
+  console.log("description id ", id);
   const patientId = localStorage.getItem("p_key");
   // console.log(patientId);
   const [value, setValue] = useState(false);
@@ -27,6 +25,8 @@ const AuthorizationEdit = ({ editdata }) => {
   const [active, setActive] = useState(false);
   const [placeHolder, setPlaceHolder] = useState(true);
   const [authEditData, setauthEditData] = useState([]);
+  const [startD, setStartD] = useState(null);
+  const [endD, setEndD] = useState(null);
   const { token } = useToken();
   const dbId = parseInt(id);
 
@@ -47,45 +47,31 @@ const AuthorizationEdit = ({ editdata }) => {
     setauthEditData(response?.data?.client_authorization_info);
   };
 
-  // calling api edit
+  // Calling Api
   useEffect(() => {
     editApiCall();
   }, []);
+  console.log(authEditData);
+  // Api Data Destructring
+  let selectedDate = authEditData?.selected_date || null;
+  const {
+    description,
+    authorization_name,
+    authorization_number,
+    uci_id,
+    treatment_type,
+  } = authEditData || {};
 
-  console.log(active);
   const handleClose = () => {
     setOpenEditModal(false);
   };
-
-  console.log("edit data", editdata);
-  useEffect(() => {
-    // you can do async server request and fill up form
-    setTimeout(() => {
-      reset({
-        first_name: `bill`,
-        middle_name: "luo",
-      });
-    }, 600);
-  }, [reset]);
-
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(notes);
-  };
-
-  //Date converter function [yy-mm-dd]
-  function convert(str) {
-    let date = new Date(str),
-      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-      day = ("0" + date.getDate()).slice(-2);
-    return [date.getFullYear(), mnth, day].join("-");
-  }
 
   //Date Range Picker
   const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
+      // startDate: new Date(),
+      startDate: null,
       endDate: null,
       key: "selection",
     },
@@ -102,9 +88,10 @@ const AuthorizationEdit = ({ editdata }) => {
     setOpenCalendar(false);
   };
 
-  // date range picker calendar
+  // date range picker Start Date and End Date Modifer Part
   const startDate = range ? range[0]?.startDate : null;
   const endDate = range ? range[0]?.endDate : null;
+  console.log("calender date", startDate, endDate);
   const startMonth = startDate
     ? startDate.toLocaleString("en-us", { month: "short" })
     : null;
@@ -118,11 +105,42 @@ const AuthorizationEdit = ({ editdata }) => {
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
 
-  //test design
-  const [clicked, setClicked] = useState(false);
-  const clickHandler = () => {
-    setClicked(true);
+  //Date spliter function
+  const SingleDate = (x) => {
+    const singlyValue = x.split("-", 2);
+    return {
+      first: singlyValue[0],
+      last: singlyValue[1],
+    };
   };
+  //Date to String Date converter function
+  const convertToString = (param) => {
+    let splitedData = param.split("/");
+    console.log(splitedData);
+    const monthNumber = splitedData[0];
+
+    const date = new Date();
+    date.setMonth(monthNumber - 1);
+
+    const createDate = date.toLocaleString("en-US", { month: "short" });
+    const newDate = `${createDate} ${splitedData[1]}, ${splitedData[2]}`;
+    return newDate;
+  };
+  //String Date to [yy-mm-dd] converter function
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+  useEffect(() => {
+    if (selectedDate !== null) {
+      let result = SingleDate(selectedDate);
+      setStartD(convertToString(result?.first));
+      setEndD(convertToString(result?.last));
+    }
+  }, [selectedDate]);
+  console.log(startD, endD);
 
   // Hide calendar on outside click
   const refClose = useRef(null);
@@ -137,18 +155,27 @@ const AuthorizationEdit = ({ editdata }) => {
     }
   };
   //end outside click
-  // show api data
-  console.log("auth api resp", authEditData);
 
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        start_date: authEditData?.end_date ? authEditData?.end_date : startDate,
-        // end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : "",
+        description: description || null,
+        tx_type: treatment_type || null,
+        authorization_number: authorization_number || null,
+        uci_id: uci_id || null,
+        start_date: startDate
+          ? `${startMonth} ${startDay}, ${startYear}`
+          : startD,
+        end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : endD,
       });
     }, 0);
-  }, [authEditData?.end_date, reset, startDate]);
+  }, [startD, endD, reset, startDate, endDate]);
+
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log(notes);
+  };
 
   return (
     <div className="">
@@ -259,7 +286,7 @@ const AuthorizationEdit = ({ editdata }) => {
                         value={
                           startDate
                             ? `${startMonth} ${startDay}, ${startYear}`
-                            : "Start Date"
+                            : `${startD}`
                         }
                         readOnly
                         onClick={() => setOpenCalendar(true)}
@@ -275,11 +302,11 @@ const AuthorizationEdit = ({ editdata }) => {
                         value={
                           endDate
                             ? `${endMonth} ${endDay}, ${endYear}`
-                            : `${authEditData?.selected_date}`
+                            : `${endD}`
                         }
                         readOnly
                         onClick={() => setOpenCalendar(true)}
-                        {...register("endData")}
+                        {...register("end_date")}
                         className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                       />
                     </div>
@@ -560,7 +587,7 @@ const AuthorizationEdit = ({ editdata }) => {
 
           {authEditData?.auth_act && authEditData?.auth_act.length > 0 ? (
             <AuthorizationEditTable
-              db={authEditData?.auth_act}
+              nestedData={authEditData?.auth_act}
             ></AuthorizationEditTable>
           ) : (
             <Loading />
