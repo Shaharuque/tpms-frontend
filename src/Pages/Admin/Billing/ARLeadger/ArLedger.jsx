@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { BsArrowRight, BsFileEarmarkPlusFill } from "react-icons/bs";
+import { RiArrowLeftRightLine } from "react-icons/ri";
 import { DateRangePicker } from "react-date-range";
 import { Switch, Table, Typography } from "antd";
 import { Link } from "react-router-dom";
@@ -460,12 +461,12 @@ const ArLedger = () => {
                       <GlobalMultiSelect />
                     </div>
                   </div>
-                  <div className="w-[250px]">
+                  <div className="w-[220px]">
                     <label className="label">
                       <span className=" label-font">Selected date</span>
                     </label>
                     <div className="ml-1 text-[14px]">
-                      <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 ">
+                      <div className="flex  items-center justify-around text-gray-600 input-border px-1 ">
                         <input
                           value={
                             startDate
@@ -474,12 +475,14 @@ const ArLedger = () => {
                           }
                           readOnly
                           onClick={() => setOpen((open) => !open)}
-                          className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                          className="focus:outline-none w-1/3 font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent  cursor-pointer"
                         />
-                        <BsArrowRight
+
+                        <RiArrowLeftRightLine
                           onClick={() => setOpen((open) => !open)}
-                          className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                        ></BsArrowRight>
+                          className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium"
+                        ></RiArrowLeftRightLine>
+
                         <input
                           value={
                             endDate
@@ -488,13 +491,13 @@ const ArLedger = () => {
                           }
                           readOnly
                           onClick={() => setOpen((open) => !open)}
-                          className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                          className="focus:outline-none w-1/3 font-medium text-center bg-transparent text-[14px] text-gray-600  cursor-pointer"
                         />
                       </div>
                     </div>
                     <div
                       ref={refClose}
-                      className="absolute z-10 2xl:ml-[20] shadow-xl"
+                      className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
                     >
                       {open && (
                         <div>
@@ -506,7 +509,7 @@ const ArLedger = () => {
                               ranges={range}
                               months={2}
                               direction="horizontal"
-                              className="border-2 border-gray-100"
+                              className="border-2 border-gray-100 p-2 sm:p-0 bg-white"
                             />
                           </div>
                           <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
