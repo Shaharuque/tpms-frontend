@@ -12,6 +12,7 @@ import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRan
 import useToken from "../../../../../../CustomHooks/useToken";
 import axios from "axios";
 import Loading from "../../../../../../Loading/Loading";
+import { RiArrowLeftRightLine } from "react-icons/ri";
 
 const AuthorizationEdit = ({ editdata }) => {
   const { id } = useParams();
@@ -293,10 +294,10 @@ const AuthorizationEdit = ({ editdata }) => {
                         {...register("start_date")}
                         className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                       />
-                      <BsArrowRight
+                      <RiArrowLeftRightLine
                         onClick={() => setOpenCalendar(true)}
-                        className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                      ></BsArrowRight>
+                        className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium"
+                      ></RiArrowLeftRightLine>
                       <input
                         // defaultValue={"5-10-2034"}
                         value={
