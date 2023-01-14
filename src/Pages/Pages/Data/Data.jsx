@@ -366,7 +366,7 @@ export const setting = [
 ];
 export const SuperAdminRoute = [
   {
-    link: "/super-admin",
+    link: "provider-access",
     name: "Provider Access",
     icon: <BiRename />,
   },

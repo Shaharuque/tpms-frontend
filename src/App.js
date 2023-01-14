@@ -196,6 +196,17 @@ import InsuranceDetails from "./Pages/SuperAdmin/Components/InsuranceDetails/Ins
 import SMSEmailSettings from "./Pages/SuperAdmin/Components/SMSEmailSettings/SMSEmailSettings";
 import BlockUnblockAdmins from "./Pages/SuperAdmin/Components/BlockUnblockAdmins/BlockUnblockAdmins";
 import BillerlogUser from "./Pages/SuperAdmin/Components/BillerlogUser/BillerlogUser";
+import Facility from "./Pages/SuperAdmin/Components/ProviderAccess/Components/Facility/Facility";
+import CreateUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/CreateUser/CreateUser";
+import DeleteUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/DeleteUser/DeleteUser";
+import UnlockUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/UnlockUser/UnlockUser";
+import SwitchUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/SwitchUser/SwitchUser";
+import Welcome from "./Pages/SuperAdmin/Components/Welcome";
+import PageAccess from "./Pages/SuperAdmin/Components/AdminAccess/Components/PageAccess/PageAccess";
+import AdminCreateUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminCreateUser/AdminCreateUser";
+import AdminDeleteUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminDeleteUser/AdminDeleteUser";
+import AdminUnlockUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminUnlockUser/AdminUnlockUser";
+import AdminSwitchUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminSwitchUser/AdminSwitchUser";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -313,11 +324,53 @@ function App() {
 
           {/* Super Admin Panel */}
           <Route path="/super-admin" element={<SuperAdmin></SuperAdmin>}>
-            <Route index element={<ProviderAccess></ProviderAccess>}></Route>
+            <Route index element={<Welcome></Welcome>}></Route>
             <Route
-              path="admin-access"
-              element={<AdminAccess></AdminAccess>}
-            ></Route>
+              path="provider-access"
+              element={<ProviderAccess></ProviderAccess>}
+            >
+              <Route index element={<Navigate to="facility" />} />
+              <Route path="facility" element={<Facility></Facility>}></Route>
+              <Route
+                path="create-user"
+                element={<CreateUser></CreateUser>}
+              ></Route>
+              <Route
+                path="delete-user"
+                element={<DeleteUser></DeleteUser>}
+              ></Route>
+              <Route
+                path="unlock-user"
+                element={<UnlockUser></UnlockUser>}
+              ></Route>
+              <Route
+                path="switch-user"
+                element={<SwitchUser></SwitchUser>}
+              ></Route>
+            </Route>
+            <Route path="admin-access" element={<AdminAccess></AdminAccess>}>
+              <Route index element={<Navigate to="page-access" />} />
+              <Route
+                path="page-access"
+                element={<PageAccess></PageAccess>}
+              ></Route>
+              <Route
+                path="admin-create-user"
+                element={<AdminCreateUser></AdminCreateUser>}
+              ></Route>
+              <Route
+                path="admin-delete-user"
+                element={<AdminDeleteUser></AdminDeleteUser>}
+              ></Route>
+              <Route
+                path="admin-unlock-user"
+                element={<AdminUnlockUser></AdminUnlockUser>}
+              ></Route>
+              <Route
+                path="admin-switch-user"
+                element={<AdminSwitchUser></AdminSwitchUser>}
+              ></Route>
+            </Route>
             <Route path="payor" element={<Payor></Payor>}></Route>
             <Route
               path="Companies-and-facilities"
