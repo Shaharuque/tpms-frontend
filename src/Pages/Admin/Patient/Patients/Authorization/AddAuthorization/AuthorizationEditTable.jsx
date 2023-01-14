@@ -5,20 +5,10 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 
-const AuthorizationEditTable = () => {
+const AuthorizationEditTable = ({ nestedData }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
-  const [authEditData, setAuthEditData] = useState([]);
-
-  //   fetch data
-  React.useEffect(() => {
-    fetch("../../../All_Fake_Api/AuthorizationEdit.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setAuthEditData(d);
-        // setLoading2(false);
-      });
-  }, []);
+  const [authEditData, setAuthEditData] = useState(nestedData);
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -34,8 +24,8 @@ const AuthorizationEditTable = () => {
   const columns = [
     {
       title: "Service",
-      dataIndex: "service",
-      key: "service",
+      dataIndex: "activity_name",
+      key: "activity_name",
       width: 100,
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1; //sorting problem solved using this logic
@@ -152,11 +142,12 @@ const AuthorizationEditTable = () => {
       <>
         <div className=" overflow-scroll py-2 px-2">
           <Table
+            rowKey={(record) => record.id}
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
             className=" text-xs font-normal "
             columns={columns}
-            dataSource={authEditData}
+            dataSource={nestedData}
             onChange={handleChange}
           />
         </div>

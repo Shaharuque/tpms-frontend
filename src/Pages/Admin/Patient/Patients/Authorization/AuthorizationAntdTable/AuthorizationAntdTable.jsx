@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { GiPlainCircle } from "react-icons/gi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
 import SelectContactRate from "../Authorization/SelectContactRate";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import AuthorizationEditTable from "../AddAuthorization/AuthorizationEditTable";
+import useToken from "../../../../../../CustomHooks/useToken";
+import { fetchData, PostfetchData } from "../../../../../../Misc/Helper";
+import AuthorizationEdit from "../AddAuthorization/AuthorizationEdit";
+import Loading from "../../../../../../Loading/Loading";
 //data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
 
 const AuthorizationAntdTable = () => {
@@ -19,19 +23,39 @@ const AuthorizationAntdTable = () => {
   //row expand code related
   const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
   //const [open, setOpen] = useState(false);
-
+  const { token } = useToken();
   const navigate = useNavigate();
-
-  const editAuth = (id) => {
-    console.log(id);
-    navigate(`/admin/authorization-Edit/${id}`);
+  const { id } = useParams();
+  const editAuth = (record) => {
+    console.log("editdata edit", record);
+    navigate(`/admin/authorization-Edit/${record?.id}`);
   };
 
+  const authorizationpetinedata = async () => {
+    const body = {
+      client_id: id,
+    };
+    const authapidata = await PostfetchData({
+      endPoint: "admin/ac/patient/authorization",
+      payload: body,
+      token,
+    });
+
+    setAuthData(authapidata?.client_authorization?.data);
+    // console.log("api data ", authapidata?.client_authorization?.data);
+  };
+
+  useEffect(() => {
+    authorizationpetinedata();
+  }, []);
+
   //expendable row ar data jeita expand korley show korbey
-  const expandedRowRender = () => {
+  console.log("auth data end", authData);
+  const expandedRowRender = (record) => {
+    // console.log("record", record);
     return (
       <div className="ml-[-40px] my-2">
-        <AuthorizationEditTable></AuthorizationEditTable>
+        <AuthorizationEditTable nestedData={record?.auth_act} />
       </div>
     );
   };
@@ -40,17 +64,6 @@ const AuthorizationAntdTable = () => {
     setOpenEditModal(false);
     setSelectContact(false);
   };
-
-  // fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/Authorization.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setAuthData(d);
-      });
-  }, []);
-
-  // console.log("authData", authData);
 
   const columns = [
     {
@@ -240,41 +253,44 @@ const AuthorizationAntdTable = () => {
       dataIndex: "operation",
       key: "operation",
       width: 150,
-      render: (_, { id }) => (
-        <div>
-          <div className="flex justify-center gap-1 text-primary">
-            <button
-              onClick={() => {
-                setSelectContact(true);
-              }}
-            >
-              <MdContentCopy className="text-xs mx-2 " />
-            </button>
+      render: (_, record) => {
+        console.log("render data", record);
+        return (
+          <div>
+            <div className="flex justify-center gap-1 text-primary">
+              <button
+                onClick={() => {
+                  setSelectContact(true);
+                }}
+              >
+                <MdContentCopy className="text-xs mx-2 " />
+              </button>
 
-            <span>|</span>
-            <button
-              onClick={() => {
-                setOpenEditModal(true);
-              }}
-            >
-              <AiOutlinePlus className="text-xs mx-2 " />
-            </button>
+              <span>|</span>
+              <button
+                onClick={() => {
+                  setOpenEditModal(true);
+                }}
+              >
+                <AiOutlinePlus className="text-xs mx-2 " />
+              </button>
+              {/* edit */}
+              <span>|</span>
+              <button onClick={() => editAuth(record)}>
+                <FiEdit className="text-xs mx-2  text-lime-700" title="Edit" />
+              </button>
 
-            <span>|</span>
-            <button onClick={() => editAuth(id)}>
-              <FiEdit className="text-xs mx-2  text-lime-700" title="Edit" />
-            </button>
-
-            <span>|</span>
-            <Link to={"/"}>
-              <AiOutlineDelete
-                className="text-xs text-red-500 mx-2"
-                title="Delete"
-              />
-            </Link>
+              <span>|</span>
+              <Link to={"/"}>
+                <AiOutlineDelete
+                  className="text-xs text-red-500 mx-2"
+                  title="Delete"
+                />
+              </Link>
+            </div>
           </div>
-        </div>
-      ),
+        );
+      },
     },
     {
       title: "Status",
@@ -341,23 +357,27 @@ const AuthorizationAntdTable = () => {
         </div>
 
         <div className=" overflow-scroll ">
-          <Table
-            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-            rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-            size="small"
-            className=" text-xs font-normal "
-            columns={columns}
-            dataSource={authData}
-            expandable={{
-              expandedRowRender,
-            }}
-            scroll={{
-              y: 850,
-            }}
-            expandedRowKeys={expandedRowKeys}
-            onExpand={onTableRowExpand}
-            onChange={handleChange}
-          />
+          {authData && authData.length > 0 ? (
+            <Table
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              rowKey={(record) => record.id} //record is kind of whole one data object and here we are
+              size="small"
+              className=" text-xs font-normal table-striped-rows"
+              columns={columns}
+              dataSource={authData}
+              expandable={{
+                expandedRowRender,
+              }}
+              scroll={{
+                y: 850,
+              }}
+              expandedRowKeys={expandedRowKeys}
+              onExpand={onTableRowExpand}
+              onChange={handleChange}
+            />
+          ) : (
+            <Loading />
+          )}
         </div>
       </>
       {selectContact && (

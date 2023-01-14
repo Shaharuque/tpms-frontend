@@ -23,6 +23,7 @@ const PayPeriodEnitModal = ({ handleClose, open, editRecord, token }) => {
   const onSubmit = (data) => {
     console.log("normal data", data);
     const payload = {
+      period_edit_id: editRecord?.id,
       start_date: data?.start_date,
       end_date: data?.end_date,
       check_date: data?.check_date,
@@ -58,7 +59,6 @@ const PayPeriodEnitModal = ({ handleClose, open, editRecord, token }) => {
   useEffect(() => {
     setTimeout(() => {
       reset({
-        id: editRecord?.id,
         start_date: editRecord?.start_date,
         end_date: editRecord?.end_date,
         check_date: editRecord?.check_date,
