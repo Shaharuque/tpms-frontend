@@ -5,12 +5,16 @@ import { Link } from "react-router-dom";
 import PatientStatusAction from "../Patient/Patients/PatientStatusAction";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { BsPersonLinesFill, BsPersonPlusFill } from "react-icons/bs";
+import { useGetStuffDataMutation } from "../../../features/Stuff_redux/stuff/stuffDataTableApi";
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [StafData, SetStafData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [items, setItems] = useState([]);
+
+  const [getStuffData, { data: stuffData, isLoading: stuffLoading }] =
+    useGetStuffDataMutation();
 
   // fakeApi call
   useEffect(() => {
