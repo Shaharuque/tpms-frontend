@@ -5,6 +5,7 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { toast } from "react-toastify";
 import useToken from "../../../../CustomHooks/useToken";
 import { PostfetchData } from "../../../../Misc/Helper";
 
@@ -40,10 +41,20 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
       token,
     });
     console.log("add data ", CreatePatientApi);
-    // if (AddingInsuranceData.status === "success") {
-    //   alert("data added");
-    //   setaddedData(true);
-    // }
+    if (CreatePatientApi.status === "success") {
+      toast.success("Created Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else {
+      toast.error("Put Valid Information", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
   };
   return (
     <div>

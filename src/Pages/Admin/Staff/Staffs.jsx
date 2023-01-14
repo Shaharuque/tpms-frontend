@@ -5,28 +5,43 @@ import { Link } from "react-router-dom";
 import PatientStatusAction from "../Patient/Patients/PatientStatusAction";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { BsPersonLinesFill, BsPersonPlusFill } from "react-icons/bs";
-import { useGetStuffDataMutation } from "../../../features/Stuff_redux/stuff/stuffDataTableApi";
+import { useGetStaffDataMutation } from "../../../features/Stuff_redux/stuff/stuffDataTableApi";
+import useToken from "../../../CustomHooks/useToken";
+import Loading from "../../../Loading/Loading";
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [StafData, SetStafData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [items, setItems] = useState([]);
+  const { token } = useToken();
+  const [getStuffData, { data: stuffData, isLoading: stuffLoading, isError }] =
+    useGetStaffDataMutation();
 
-  const [getStuffData, { data: stuffData, isLoading: stuffLoading }] =
-    useGetStuffDataMutation();
+  useEffect(() => {
+    getStuffData({ token });
+  }, [getStuffData, token]);
+
+  // if (stuffLoading) {
+  //   return <Loading />;
+  // }
+
+  console.log("rtk data receve", stuffData);
+  console.log("name", stuffData?.staffs?.data?.full_name);
+  const staffTableData = stuffData?.staffs?.data;
+  // SetStafData(stuffData?.staffs?.data);
 
   // fakeApi call
-  useEffect(() => {
-    axios("../../All_Fake_Api/Staff.json")
-      .then((response) => {
-        SetStafData(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  console.log(StafData);
+  // useEffect(() => {
+  //   axios("../../All_Fake_Api/Staff.json")
+  //     .then((response) => {
+  //       SetStafData(response?.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+  // console.log(StafData);
 
   const clearFilters = () => {
     setFilteredInfo({});
@@ -35,8 +50,8 @@ const Staffs = () => {
   const columns = [
     {
       title: "Name",
-      dataIndex: "Name",
-      key: "Name",
+      dataIndex: "full_name",
+      key: "full_name",
       width: 150,
       filters: [
         {
@@ -60,76 +75,57 @@ const Staffs = () => {
           value: "Hector Moses",
         },
       ],
-      filteredValue: filteredInfo.Name || null,
-      onFilter: (value, record) => record.Name.includes(value),
-      sorter: (a, b) => {
-        return a.Name > b.Name ? -1 : 1;
-      },
-      sortOrder: sortedInfo.columnKey === "Name" ? sortedInfo.order : null,
-
       // render contains what we want to reflect as our data
       // Name, id, key=>each row data(object) property value can be accessed.
       //here,using id as key, as key isn't availale in the data we got.
-      render: (_, { Name, id }) => {
-        console.log("tags : ", Name, id);
+      render: (_, { full_name, id }) => {
+        // console.log("tags : ", Name, id);
         return (
           <Link
             to={`/admin/staff/staffs-biographic/${id}`}
             className="text-secondary"
           >
-            {Name}
+            {full_name}
           </Link>
         );
       },
+      filteredValue: filteredInfo.full_name || null,
+      onFilter: (value, record) => record.full_name.includes(value),
+      sorter: (a, b) => {
+        return a.full_name > b.full_name ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Credential Type",
-      dataIndex: "Credential_Type",
-      key: "Credential_Type",
+      dataIndex: "credential_type",
+      key: "credential_type",
       width: 150,
-      filters: [],
-      filteredValue: filteredInfo.Credential_Type || null,
-      onFilter: (value, record) => record.Credential_Type.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.Credential_Type > b.Credential_Type ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_type > b.credential_type ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "Credential_Type" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Phone",
-      dataIndex: "Phone",
-      key: "Phone",
+      dataIndex: "office_phone",
+      key: "office_phone",
       width: 120,
-      // filters: [
-      //   {
-      //     text: "(940)-234-0329",
-      //     value: "(940)-234-0329",
-      //   },
-      //   {
-      //     text: "(124)-996-5455",
-      //     value: "(124)-996-5455",
-      //   },
-      //   {
-      //     text: "(972)-202-5007",
-      //     value: "(972)-202-5007",
-      //   },
-      // ],
-      // filteredValue: filteredInfo.Phone || null,
-      // onFilter: (value, record) => record.Phone.includes(value),
       sorter: (a, b) => {
         return a.Phone > b.Phone ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "Phone" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "office_phone" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
-      render: (_, { Phone }) => {
+      render: (_, { office_phone }) => {
         return (
           <div>
-            <h1>{Phone ? Phone : "No Data"}</h1>
+            <h1>{office_phone ? office_phone : "No Data"}</h1>
           </div>
         );
       },
@@ -137,8 +133,8 @@ const Staffs = () => {
     },
     {
       title: "Email",
-      dataIndex: "Email",
-      key: "Email",
+      dataIndex: "office_email",
+      key: "office_email",
       width: 200,
       filters: [
         {
@@ -161,8 +157,8 @@ const Staffs = () => {
     },
     {
       title: "Language",
-      dataIndex: "Language",
-      key: "Language",
+      dataIndex: "language",
+      key: "language",
       width: 100,
       filters: [
         {
@@ -218,23 +214,20 @@ const Staffs = () => {
     },
     {
       title: "Status",
-      key: "Status",
-      dataIndex: "Status",
+      key: "is_active",
+      dataIndex: "is_active",
       width: 120,
-      render: (_, { Status }) => {
+      render: (_, { is_active }) => {
         //console.log("Status : ", Status);
-        return <PatientStatusAction status={Status}></PatientStatusAction>;
+        return <PatientStatusAction status={is_active}></PatientStatusAction>;
       },
-      filters: [],
-      filteredValue: filteredInfo.Status || null,
-      onFilter: (value, record) => record.Status.includes(value),
     },
   ];
 
   //console.log(items)
 
   const handleChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
+    // console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
@@ -285,11 +278,12 @@ const Staffs = () => {
 
       <div className=" overflow-scroll">
         <Table
+          rowKey={(record) => record.id}
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           size="small"
           className=" text-xs font-normal"
           columns={columns}
-          dataSource={StafData}
+          dataSource={staffTableData}
           onChange={handleChange}
         />
       </div>
