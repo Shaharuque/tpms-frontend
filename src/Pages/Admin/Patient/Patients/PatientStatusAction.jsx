@@ -4,9 +4,11 @@ import { Switch } from "antd";
 
 const PatientStatusAction = ({ status }) => {
   // console.log("stattus", status);
-  let convertedStatus = status === true ? 0 : 1;
+  let convertedStatus = status ? 1 : 0;
+
   const [value, setValue] = useState(convertedStatus);
-  console.log(value);
+  let BoleanToNumber = value ? 1 : 0;
+  console.log(BoleanToNumber);
 
   return (
     <div className="flex items-center justify-center">
