@@ -22,26 +22,9 @@ const Staffs = () => {
     getStuffData({ token });
   }, [getStuffData, token]);
 
-  // if (stuffLoading) {
-  //   return <Loading />;
-  // }
-
   console.log("rtk data receve", stuffData);
   console.log("name", stuffData?.staffs?.data?.full_name);
   const staffTableData = stuffData?.staffs?.data;
-  // SetStafData(stuffData?.staffs?.data);
-
-  // fakeApi call
-  // useEffect(() => {
-  //   axios("../../All_Fake_Api/Staff.json")
-  //     .then((response) => {
-  //       SetStafData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  // console.log(StafData);
 
   const clearFilters = () => {
     setFilteredInfo({});
@@ -277,15 +260,19 @@ const Staffs = () => {
       </div>
 
       <div className=" overflow-scroll">
-        <Table
-          rowKey={(record) => record.id}
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          size="small"
-          className=" text-xs font-normal"
-          columns={columns}
-          dataSource={staffTableData}
-          onChange={handleChange}
-        />
+        {stuffLoading ? (
+          <Loading />
+        ) : (
+          <Table
+            rowKey={(record) => record.id}
+            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            size="small"
+            className=" text-xs font-normal"
+            columns={columns}
+            dataSource={staffTableData}
+            onChange={handleChange}
+          />
+        )}
       </div>
     </div>
   );
