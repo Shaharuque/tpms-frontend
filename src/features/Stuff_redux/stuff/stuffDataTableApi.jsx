@@ -3,38 +3,34 @@
 
 import { apiSlice } from "../../api/apiSlice";
 
-// export const stuffDataApi = apiSlice.injectEndpoints({
-//   endpoints: (builder) => ({
-//     //handle auth endpoint here
-//     //Get All Stuffs
-//     getStuffData: builder.mutation({
-//       query: ({ token, page }) => ({
-//         url: `admin/ac/setting/pay/period/get?page=${page}`,
-//         method: "POST",
-//         headers: {
-//           "content-type": "Application/json",
-//           Authorization: token,
-//         },
-//       }),
-//     }),
-//   }),
-// });
-
-// export const { useGetStuffDataMutation } = stuffDataApi;
-
 export const stuffDataApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getStaffData: builder.mutation({
-      query: ({ token }) => ({
-        url: `admin/ac/staff/get/all`,
+    // get all stuff data
+    getStaffData: builder.query({
+      query: ({ token, page }) => ({
+        url: `admin/ac/staff/get/all?page=${page}`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
           Authorization: token,
         },
       }),
+      providesTags: ["StuffTable"],
+    }),
+    // update active status
+    updateStatus: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "admin/ac/staff/active/update",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["StuffTable"],
     }),
   }),
 });
 
-export const { useGetStaffDataMutation } = stuffDataApi;
+export const { useGetStaffDataQuery, useUpdateStatusMutation } = stuffDataApi;

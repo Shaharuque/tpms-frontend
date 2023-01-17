@@ -1,14 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import useToken from "../../../../CustomHooks/useToken";
+import { useSelectedTreatmentsMutation } from "../../../../features/Settings_redux/selectedTreatmentsApi";
+import { useCreateStuffMutation } from "../../../../features/Stuff_redux/stuff/stuffApi";
 
 const CreateStaff = () => {
+  // const { staff } = useParams();
+  const [gender, setgender] = useState();
+  const { token } = useToken();
+
+  //selected treatments data get api
+  const [
+    selectedTreatments,
+    { data: treatments, isSuccess: getTreamentSuccess },
+  ] = useSelectedTreatmentsMutation();
+
+  //create staff api
+  const [createStuff, { isSuccess, isError }] = useCreateStuffMutation();
+
+  useEffect(() => {
+    selectedTreatments({ token });
+  }, [token]);
+
+  //select treatment boiler plate
+  let treatmentSelect = null;
+  if (treatments?.treatment_data?.length === 0) {
+    treatmentSelect = <div className="text-red-700">Select Treatments</div>;
+  } else if (treatments?.treatment_data?.length > 0) {
+    treatmentSelect = (
+      <>
+        {treatments?.treatment_data?.map((treatment) => {
+          return (
+            <option key={treatment?.id} value={treatment?.id}>
+              {treatment?.treatment_name}
+            </option>
+          );
+        })}
+      </>
+    );
+  }
+  //gender option pick
+  const handlegender = (e) => {
+    setgender(e.target.value);
+  };
+  console.log(gender);
+
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    let payload = {
+      ...data,
+      gender,
+    };
+    if (payload) {
+      createStuff({
+        token,
+        payload,
+      });
+    }
+    console.log(payload);
+    // reset();
   };
+  console.log(isSuccess);
   return (
     <div className="sm:h-[100vh]">
       <div className="flex items-center flex-wrap gap-2 justify-between">
@@ -74,7 +128,7 @@ const CreateStaff = () => {
               type="text"
               name="nick_name"
               className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-              {...register("nick_name")}
+              {...register("nickname")}
             />
           </div>
           {/* DOB */}
@@ -82,13 +136,13 @@ const CreateStaff = () => {
             {" "}
             <label className="label">
               <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Date of Birth<span className="text-red-500">*</span>
+                Staff Birthday<span className="text-red-500">*</span>
               </span>
             </label>
             <input
               className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               type="date"
-              {...register("check_Date")}
+              {...register("staff_birthday")}
             />
           </div>
           <div>
@@ -128,7 +182,7 @@ const CreateStaff = () => {
               type="text"
               name="office_phone"
               className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-              {...register("office_phone")}
+              {...register("office_fax")}
             />
           </div>
           <div>
@@ -157,7 +211,7 @@ const CreateStaff = () => {
                   type="text"
                   name="driving_license"
                   className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-                  {...register("driving_license")}
+                  {...register("driver_license")}
                 />
               </div>
               <div className="">
@@ -165,7 +219,7 @@ const CreateStaff = () => {
                 <input
                   className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
                   type="date"
-                  {...register("license_Date")}
+                  {...register("license_exp_date")}
                 />
               </div>
             </div>
@@ -192,7 +246,7 @@ const CreateStaff = () => {
             <input
               className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               type="date"
-              {...register("hiring_date")}
+              {...register("hir_date_compnay")}
             />
           </div>
           <div>
@@ -205,8 +259,10 @@ const CreateStaff = () => {
               className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               {...register("credential_type")}
             >
-              <option value="Speech Therapist">Speech Therapist</option>
-              <option value="female">Female</option>
+              <option value={0}>Select</option>
+              <option value={23}>
+                Infant Toddler Developmental Specialist
+              </option>
             </select>
           </div>
           <div>
@@ -217,10 +273,9 @@ const CreateStaff = () => {
             </label>
             <select
               className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
-              {...register("credential_type")}
+              {...register("treatment_type")}
             >
-              <option value="Speech Therapist">Speech Therapist</option>
-              <option value="female">Female</option>
+              {treatmentSelect}
             </select>
           </div>
           <div>
@@ -311,9 +366,8 @@ const CreateStaff = () => {
                 <input
                   type="radio"
                   name="patient"
-                  onClick={() => {
-                    // setValue(!value);
-                  }}
+                  value={2}
+                  onChange={handlegender}
                 />
                 <span className="text-xs ml-1 text-gray-600 font-normal">
                   female
@@ -323,9 +377,8 @@ const CreateStaff = () => {
                 <input
                   type="radio"
                   name="patient"
-                  onClick={() => {
-                    // setValue(!value);
-                  }}
+                  value={1}
+                  onChange={handlegender}
                 />
                 <span className="text-xs ml-1 text-gray-600 font-normal">
                   male

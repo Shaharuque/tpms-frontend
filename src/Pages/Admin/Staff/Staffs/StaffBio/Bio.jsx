@@ -2,12 +2,25 @@ import { Switch } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import useToken from "../../../../../CustomHooks/useToken";
+import { useGetInfoQuery } from "../../../../../features/Stuff_redux/stuff/stuffApi";
 
 const Bio = () => {
+  const { id } = useParams();
+  const { token } = useToken();
   const [note, setNote] = useState("");
   const [session, setSession] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   console.log(session);
+
+  //get satff info api
+  const {
+    data: staffData,
+    isLoading,
+    isSuccess,
+  } = useGetInfoQuery({ token, id: id });
+  console.log("staff data", staffData, isLoading);
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {

@@ -1,47 +1,33 @@
 import { Table } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PatientStatusAction from "../Patient/Patients/PatientStatusAction";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { BsPersonLinesFill, BsPersonPlusFill } from "react-icons/bs";
-import { useGetStaffDataMutation } from "../../../features/Stuff_redux/stuff/stuffDataTableApi";
+import {
+  stuffDataApi,
+  useGetStaffDataQuery,
+} from "../../../features/Stuff_redux/stuff/stuffDataTableApi";
 import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
+import StuffStatusAction from "./Staffs/StuffStatus/StuffStatusAction";
+import { useDispatch } from "react-redux";
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [StafData, SetStafData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [items, setItems] = useState([]);
   const { token } = useToken();
-  const [getStuffData, { data: stuffData, isLoading: stuffLoading, isError }] =
-    useGetStaffDataMutation();
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    getStuffData({ token });
-  }, [getStuffData, token]);
+  const {
+    data: stuffData,
+    isLoading: stuffLoading,
+    isError,
+  } = useGetStaffDataQuery({ token, page });
 
-  // if (stuffLoading) {
-  //   return <Loading />;
-  // }
-
-  console.log("rtk data receve", stuffData);
-  console.log("name", stuffData?.staffs?.data?.full_name);
+  console.log("rtk data received", stuffData);
   const staffTableData = stuffData?.staffs?.data;
   // SetStafData(stuffData?.staffs?.data);
-
-  // fakeApi call
-  // useEffect(() => {
-  //   axios("../../All_Fake_Api/Staff.json")
-  //     .then((response) => {
-  //       SetStafData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  // console.log(StafData);
 
   const clearFilters = () => {
     setFilteredInfo({});
@@ -188,16 +174,6 @@ const Staffs = () => {
       dataIndex: "id",
       key: "id",
       width: 100,
-      filters: [
-        {
-          text: `Male`,
-          value: "Male",
-        },
-        {
-          text: "Female",
-          value: "Female",
-        },
-      ],
       render: (_, { Status }) => {
         //console.log("Status : ", Status);
         return (
@@ -217,9 +193,11 @@ const Staffs = () => {
       key: "is_active",
       dataIndex: "is_active",
       width: 120,
-      render: (_, { is_active }) => {
+      render: (_, { is_active, id }) => {
         //console.log("Status : ", Status);
-        return <PatientStatusAction status={is_active}></PatientStatusAction>;
+        return (
+          <StuffStatusAction id={id} status={is_active}></StuffStatusAction>
+        );
       },
     },
   ];
@@ -254,7 +232,7 @@ const Staffs = () => {
               <div>
                 <TiArrowSortedDown className=" text-3xl absolute top-[-12px] right-[-6px] text-primary" />
               </div>
-              <Link to={"/admin/create-staff/staff"}>
+              <Link to={`/admin/create-staff/provider`}>
                 <button className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary mx-auto flex items-center font-semibold gap-2">
                   <div className="flex items-center">
                     <BsPersonPlusFill className="mr-2" />
