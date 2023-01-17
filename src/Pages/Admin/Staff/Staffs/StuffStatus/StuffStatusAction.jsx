@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch } from "antd";
-import { useUpdateStatusMutation } from "../../../../../features/Stuff_redux/stuff/stuffDataTableApi";
+import { useUpdateStatusMutation } from "../../../../../features/Stuff_redux/staff/staffDataTableAPi";
 import useToken from "../../../../../CustomHooks/useToken";
 import { toast } from "react-toastify";
 

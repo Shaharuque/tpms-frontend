@@ -3,7 +3,7 @@
 
 import { apiSlice } from "../../api/apiSlice";
 
-export const stuffDataApi = apiSlice.injectEndpoints({
+export const staffDataTableAPi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // get all stuff data
     getStaffData: builder.query({
@@ -33,4 +33,5 @@ export const stuffDataApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetStaffDataQuery, useUpdateStatusMutation } = stuffDataApi;
+export const { useGetStaffDataQuery, useUpdateStatusMutation } =
+  staffDataTableAPi;

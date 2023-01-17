@@ -4,7 +4,7 @@ import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
 import useToken from "../../../../CustomHooks/useToken";
 import { useSelectedTreatmentsMutation } from "../../../../features/Settings_redux/selectedTreatmentsApi";
-import { useCreateStuffMutation } from "../../../../features/Stuff_redux/stuff/stuffApi";
+import { useCreateStuffMutation } from "../../../../features/Stuff_redux/staff/staffApi";
 
 const CreateStaff = () => {
   // const { staff } = useParams();

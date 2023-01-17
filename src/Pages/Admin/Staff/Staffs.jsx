@@ -3,10 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { BsPersonLinesFill, BsPersonPlusFill } from "react-icons/bs";
-import {
-  stuffDataApi,
-  useGetStaffDataQuery,
-} from "../../../features/Stuff_redux/stuff/stuffDataTableApi";
+import { useGetStaffDataQuery } from "../../../features/Stuff_redux/staff/staffDataTableAPi";
 import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
 import StuffStatusAction from "./Staffs/StuffStatus/StuffStatusAction";
@@ -21,7 +18,7 @@ const Staffs = () => {
 
   const {
     data: stuffData,
-    isLoading: stuffLoading,
+    isLoading: staffLoading,
     isError,
   } = useGetStaffDataQuery({ token, page });
 

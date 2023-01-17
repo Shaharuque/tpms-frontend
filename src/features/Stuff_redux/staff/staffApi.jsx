@@ -2,7 +2,7 @@
 
 import { apiSlice } from "../../api/apiSlice";
 
-export const stuffApi = apiSlice.injectEndpoints({
+export const staffApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Get staff info id wise
     getInfo: builder.query({
@@ -30,4 +30,4 @@ export const stuffApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateStuffMutation, useGetInfoQuery } = stuffApi;
+export const { useCreateStuffMutation, useGetInfoQuery } = staffApi;

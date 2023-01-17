@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useGetInfoQuery } from "../../../../../features/Stuff_redux/stuff/stuffApi";
+import { useGetInfoQuery } from "../../../../../features/Stuff_redux/staff/staffApi";
 
 const Bio = () => {
   const { id } = useParams();
