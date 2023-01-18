@@ -7,7 +7,7 @@ export const staffApi = apiSlice.injectEndpoints({
     // Get staff info id wise
     getInfo: builder.query({
       query: ({ token, id }) => ({
-        url: `/admin/ac/staff/info/${id}`,
+        url: `admin/ac/staff/info/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -26,6 +26,7 @@ export const staffApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
+      invalidatesTags: ["StuffTable"],
     }),
   }),
 });
