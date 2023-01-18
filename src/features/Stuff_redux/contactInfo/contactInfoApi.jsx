@@ -4,6 +4,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // get staff table and emergency table data
     getAllStaff: builder.query({
+      //staffContactInfo
       query: ({ token, id }) => ({
         url: `admin/ac/staff/contact/info/${id}`,
         method: "GET",
@@ -12,7 +13,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
-      providesTags: ["staffData"],
+      providesTags: ["contactInfo"],
     }),
 
     //   addContactInfo  staff contact info
@@ -26,7 +27,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      invalidatesTags: ["staffData"],
+      invalidatesTags: ["contactInfo"],
     }),
 
     //   add Emergency contact info
@@ -40,7 +41,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      invalidatesTags: ["staffData"],
+      invalidatesTags: ["contactInfo"],
     }),
   }),
 });
