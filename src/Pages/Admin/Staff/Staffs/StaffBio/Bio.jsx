@@ -2,22 +2,60 @@ import { Switch } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import useToken from "../../../../../CustomHooks/useToken";
+import { useGetInfoQuery } from "../../../../../features/Stuff_redux/staff/staffApi";
 
 const Bio = () => {
+  const { id } = useParams();
+  const { token } = useToken();
   const [note, setNote] = useState("");
   const [session, setSession] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   console.log(session);
+
+  //get satff info api
+  const {
+    data: staffData,
+    isLoading,
+    isSuccess,
+  } = useGetInfoQuery({ token, id: id });
+  console.log("staff data", staffData, isLoading);
+  const {
+    first_name,
+    middle_name,
+    last_name,
+    nickname,
+    ssn,
+    staff_birthday,
+    office_email,
+    office_phone,
+    office_fax,
+    hir_date_compnay,
+    individual_npi,
+    is_active,
+    taxonomy_code,
+    terminated_date,
+    treatment_type,
+    license_exp_date,
+    language,
+    gender,
+  } = staffData?.employee_info || {};
+  console.log(staff_birthday);
+
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        first_name: `bill`,
-        middle_name: "luo",
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name,
+        nickname: nickname,
+        staff_birthday: staff_birthday,
         comment: "Notes",
       });
     }, 600);
-  }, [reset]);
+  }, [reset, first_name, middle_name, last_name]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -72,9 +110,9 @@ const Bio = () => {
             </label>
             <input
               type="text"
-              name="nick_name"
+              name="nickname"
               className="input-border input-font w-full focus:outline-none"
-              {...register("nick_name")}
+              {...register("nickname")}
             />
           </div>
           {/* DOB */}
@@ -87,7 +125,7 @@ const Bio = () => {
             <input
               className="input-border input-font w-full focus:outline-none"
               type="date"
-              {...register("check_Date")}
+              {...register("staff_birthday")}
             />
           </div>
           <div>

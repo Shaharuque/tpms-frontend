@@ -3,7 +3,8 @@ import React from "react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 const BasicInfo = ({ adData }) => {
-  const { setActive, active, settingRelation, register } = adData;
+  const { dob, setDob, setActive, active, settingRelation, register } = adData;
+
   return (
     <div>
       <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
@@ -70,8 +71,10 @@ const BasicInfo = ({ adData }) => {
           <input
             className="input-border input-font  w-full focus:outline-none"
             type="date"
-            {...register("client_dob")}
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
           />
+
           {/* <div ref={ref}>
                 <input
                            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 focus:outline-none pb-[0.8px]"

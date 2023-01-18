@@ -28,6 +28,7 @@ import DynamicPhone from "./PhoneAddress/DynamicPhone";
 import PrimaryPhone from "./PhoneAddress/PrimaryPhone";
 import BasicInfo from "./BasicInfo";
 import TestingFrom from "./TestingFrom";
+
 const PatientInformation = () => {
   const testingobj = {
     City: "mirpur",
@@ -120,11 +121,7 @@ const PatientInformation = () => {
 
   const { token } = useToken();
   const [active, setActive] = useState(false);
-  const [appointment, setAppointment] = useState(false);
-  const [email, setEmail] = useState(false);
-  const [emailReminder, setEmailReminder] = useState(false);
   const [Guarantor, setGuarantor] = useState(false);
-  const [file, setFile] = useState();
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
 
@@ -202,6 +199,11 @@ const PatientInformation = () => {
   const loading = data?.loading;
   const primaryPhone = patient_details?.phone_number;
   const primaryEmail = patient_details?.email;
+
+  const [dob, setDob] = useState(patient_details?.client_dob);
+  console.log("dob", dob);
+
+  console.log("patient_details===", patient_details);
   useEffect(() => {
     // action dispatched
     dispatch(getpatientsDetails({ id, token }));
@@ -216,7 +218,7 @@ const PatientInformation = () => {
           ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
-        dob: patient_details?.client_dob,
+        // dob: patient_details?.client_dob,
         // dob: date ? `${month}/${day}/${year}` : null,
         // email: patient_details?.email,
         // phone: patient_details?.phone_number,
@@ -286,6 +288,10 @@ const PatientInformation = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <BasicInfo
             adData={{
+              dob,
+              setDob,
+              control,
+              Controller,
               setActive,
               active,
               settingRelation,
