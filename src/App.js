@@ -196,6 +196,7 @@ import InsuranceDetails from "./Pages/SuperAdmin/Components/InsuranceDetails/Ins
 import SMSEmailSettings from "./Pages/SuperAdmin/Components/SMSEmailSettings/SMSEmailSettings";
 import BlockUnblockAdmins from "./Pages/SuperAdmin/Components/BlockUnblockAdmins/BlockUnblockAdmins";
 import BillerlogUser from "./Pages/SuperAdmin/Components/BillerlogUser/BillerlogUser";
+import OfficeStaff from "./Pages/Admin/Staff/AddStaff/OfficeStaff";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -624,12 +625,12 @@ function App() {
             {/* STAFF  */}
             <Route path="staffs" element={<Staffs></Staffs>}></Route>
             <Route
-              path="create-staff/staff"
+              path="create-staff/provider"
               element={<CreateStaff></CreateStaff>}
             ></Route>
             <Route
               path="create-staff/officeStaff"
-              element={<CreateStaff></CreateStaff>}
+              element={<OfficeStaff></OfficeStaff>}
             ></Route>
             <Route path="staff" element={<StaffInformation></StaffInformation>}>
               <Route path="staffs-biographic/:id" element={<Bio></Bio>}></Route>

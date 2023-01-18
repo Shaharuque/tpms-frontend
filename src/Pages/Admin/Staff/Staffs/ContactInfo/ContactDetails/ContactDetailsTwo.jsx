@@ -2,15 +2,101 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import TextArea from "antd/lib/input/TextArea";
+import { useEffect } from "react";
+import { useAddEmergencyContactInfoMutation } from "../../../../../../features/Stuff_redux/contactInfo/contactInfoApi";
+import useToken from "../../../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
 
-const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
-  const [note, setNote] = useState("");
-
+const ContactDetailsTwo = ({
+  emergency,
+  emergencyApiData,
+  handleEmergencyDetails,
+}) => {
   const { register, handleSubmit, reset } = useForm();
+  const { token } = useToken();
+  // isSuccess: deleteSuccess, isError: deleteError
+  const [addEmergencyContactInfo, { data: emResData, isLoading, isError }] =
+    useAddEmergencyContactInfoMutation();
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    const payload = {
+      employee_id: emergencyApiData?.employee_id,
+      em_address_one: data?.address_one,
+      em_address_two: data?.address_two,
+      em_contact_name: data?.contact_name,
+      em_city: data?.city,
+      em_state: data?.state,
+      em_zip: data?.zip,
+      em_mobile: data?.mobile,
+      em_fax: data?.fax,
+      em_main_phone: data?.main_phone,
+      em_address_note: data?.address_note,
+    };
+    addEmergencyContactInfo({ token, payload });
+    console.log(payload);
   };
+
+  // validation
+  useEffect(() => {
+    if (emResData?.status === "success") {
+      toast.success(emResData?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (isError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [emResData, emResData?.message, emResData?.status, isError]);
+
+  // api data set
+  const {
+    address_one,
+    fax,
+    id,
+    address_two,
+    city,
+    state,
+    main_phone,
+    mobile,
+    address_note,
+    contact_name,
+    zip,
+  } = emergencyApiData;
+  console.log(state);
+  useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        address_one: address_one || null,
+        address_two: address_two || null,
+        city: city || null,
+        state: state || null,
+        main_phone: main_phone || null,
+        mobile: mobile || null,
+        contact_name: contact_name || null,
+        zip: zip || null,
+        fax: fax || null,
+        address_note: address_note || null,
+      });
+    }, 0);
+  }, [
+    address_note,
+    address_one,
+    address_two,
+    city,
+    contact_name,
+    fax,
+    id,
+    main_phone,
+    mobile,
+    reset,
+    state,
+    zip,
+  ]);
   return (
     <div>
       <div>
@@ -53,7 +139,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                       type="text"
                       name="address1"
                       className="input-border input-font w-full focus:outline-none"
-                      {...register("address1")}
+                      {...register("address_one")}
                     />
                   </div>
                   <div>
@@ -64,7 +150,7 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                       type="text"
                       name="address2"
                       className="input-border input-font w-full focus:outline-none"
-                      {...register("address2")}
+                      {...register("address_two")}
                     />
                   </div>
                   <div>
@@ -143,16 +229,21 @@ const ContactDetailsTwo = ({ emergency, handleEmergencyDetails }) => {
                     <label className="label">
                       <span className="label-font">Notes</span>
                     </label>
-                    <TextArea
+                    <textarea
                       rows={4}
                       placeholder="maxLength is 6"
                       size="middle"
-                      onChange={(e) => setNote(e.target.value)}
+                      {...register("address_note")}
+                      // onChange={(e) => setNote(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="my-3">
-                  <button className=" pms-button" type="submit">
+                  <button
+                    disabled={isLoading}
+                    className=" pms-button"
+                    type="submit"
+                  >
                     Save Emergency Contact
                   </button>
                 </div>
