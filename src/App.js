@@ -207,6 +207,13 @@ import AdminCreateUser from "./Pages/SuperAdmin/Components/AdminAccess/Component
 import AdminDeleteUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminDeleteUser/AdminDeleteUser";
 import AdminUnlockUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminUnlockUser/AdminUnlockUser";
 import AdminSwitchUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminSwitchUser/AdminSwitchUser";
+import Program from "./Pages/Admin/Settings/Settings/Program/Program";
+import AccountType from "./Pages/Admin/Settings/Settings/Program/AccountType/AccountType";
+import AllPrograms from "./Pages/Admin/Settings/Settings/Program/AllPrograms/AllPrograms";
+import ProgramCategory from "./Pages/Admin/Settings/Settings/Program/ProgramCategory/ProgramCategory";
+import Questionnaire from "./Pages/Admin/Settings/Settings/Program/Questionnaire/Questionnaire";
+import AddAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/AddAllProgram";
+import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/EditAllProgram";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -960,6 +967,33 @@ function App() {
                 path="app-id-tracking"
                 element={<AppIdTracking></AppIdTracking>}
               ></Route>
+              <Route
+                path="create-program"
+                element={<AddAllProgram></AddAllProgram>}
+              ></Route>
+              <Route
+                path="edit-program/:id"
+                element={<EditAllProgram></EditAllProgram>}
+              ></Route>
+              <Route path="program" element={<Program></Program>}>
+                <Route index element={<Navigate to="account-type" />} />
+                <Route
+                  path="account-type"
+                  element={<AccountType></AccountType>}
+                ></Route>
+                <Route
+                  path="all-program"
+                  element={<AllPrograms></AllPrograms>}
+                ></Route>
+                <Route
+                  path="program-category"
+                  element={<ProgramCategory></ProgramCategory>}
+                ></Route>
+                <Route
+                  path="questionnaire"
+                  element={<Questionnaire></Questionnaire>}
+                ></Route>
+              </Route>
             </Route>
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>

@@ -179,7 +179,7 @@ const AuthorizationEdit = ({ editdata }) => {
   };
 
   return (
-    <div className="">
+    <div className="sm:h-[100vh]">
       <div className="flex flex-wrap items-center gap-2 mb-2">
         {/* Changes needed */}
         <Link
@@ -315,7 +315,7 @@ const AuthorizationEdit = ({ editdata }) => {
                     {/* Multi date picker component called */}
                     <div
                       ref={refClose}
-                      className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
+                      className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s "
                     >
                       {openCalendar && (
                         <CustomDateRange

@@ -149,6 +149,9 @@ const AuthorizationEditTable = ({ nestedData }) => {
             columns={columns}
             dataSource={nestedData}
             onChange={handleChange}
+            scroll={{
+              y: 650,
+            }}
           />
         </div>
       </>

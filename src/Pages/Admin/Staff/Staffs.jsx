@@ -31,18 +31,6 @@ const Staffs = () => {
   const staffTableData = stuffData?.staffs?.data;
   // SetStafData(stuffData?.staffs?.data);
 
-  // fakeApi call
-  // useEffect(() => {
-  //   axios("../../All_Fake_Api/Staff.json")
-  //     .then((response) => {
-  //       SetStafData(response?.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-  // console.log(StafData);
-
   const clearFilters = () => {
     setFilteredInfo({});
   };
@@ -281,10 +269,13 @@ const Staffs = () => {
           rowKey={(record) => record.id}
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
           size="small"
-          className=" text-xs font-normal"
+          className="table-striped-rows text-xs font-normal"
           columns={columns}
           dataSource={staffTableData}
           onChange={handleChange}
+          scroll={{
+            y: 750,
+          }}
         />
       </div>
     </div>
