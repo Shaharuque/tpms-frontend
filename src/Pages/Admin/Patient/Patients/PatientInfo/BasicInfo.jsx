@@ -71,6 +71,7 @@ const BasicInfo = ({ adData }) => {
           <input
             className="input-border input-font  w-full focus:outline-none"
             type="date"
+            defaultValue={dob}
             value={dob}
             onChange={(e) => setDob(e.target.value)}
           />

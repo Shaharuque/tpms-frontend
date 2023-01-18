@@ -200,8 +200,12 @@ const PatientInformation = () => {
   const primaryPhone = patient_details?.phone_number;
   const primaryEmail = patient_details?.email;
 
-  const [dob, setDob] = useState(patient_details?.client_dob);
+  const [dob, setDob] = useState();
   console.log("dob", dob);
+  //for showing default date in real time
+  useEffect(() => {
+    setDob(patient_details?.client_dob);
+  }, [patient_details?.client_dob]);
 
   console.log("patient_details===", patient_details);
   useEffect(() => {
