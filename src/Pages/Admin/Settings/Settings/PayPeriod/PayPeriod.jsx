@@ -361,7 +361,7 @@ const PayPeriod = () => {
               rowKey={(record) => record.id}
               size="small"
               bordered
-              className=" text-xs font-normal"
+              className="table-striped-rows text-xs font-normal"
               columns={columns}
               dataSource={payperiods?.pos_data?.data}
               rowSelection={{

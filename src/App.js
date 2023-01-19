@@ -197,6 +197,24 @@ import SMSEmailSettings from "./Pages/SuperAdmin/Components/SMSEmailSettings/SMS
 import BlockUnblockAdmins from "./Pages/SuperAdmin/Components/BlockUnblockAdmins/BlockUnblockAdmins";
 import BillerlogUser from "./Pages/SuperAdmin/Components/BillerlogUser/BillerlogUser";
 import OfficeStaff from "./Pages/Admin/Staff/AddStaff/OfficeStaff";
+import Facility from "./Pages/SuperAdmin/Components/ProviderAccess/Components/Facility/Facility";
+import CreateUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/CreateUser/CreateUser";
+import DeleteUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/DeleteUser/DeleteUser";
+import UnlockUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/UnlockUser/UnlockUser";
+import SwitchUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/SwitchUser/SwitchUser";
+import Welcome from "./Pages/SuperAdmin/Components/Welcome";
+import PageAccess from "./Pages/SuperAdmin/Components/AdminAccess/Components/PageAccess/PageAccess";
+import AdminCreateUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminCreateUser/AdminCreateUser";
+import AdminDeleteUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminDeleteUser/AdminDeleteUser";
+import AdminUnlockUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminUnlockUser/AdminUnlockUser";
+import AdminSwitchUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminSwitchUser/AdminSwitchUser";
+import Program from "./Pages/Admin/Settings/Settings/Program/Program";
+import AccountType from "./Pages/Admin/Settings/Settings/Program/AccountType/AccountType";
+import AllPrograms from "./Pages/Admin/Settings/Settings/Program/AllPrograms/AllPrograms";
+import ProgramCategory from "./Pages/Admin/Settings/Settings/Program/ProgramCategory/ProgramCategory";
+import Questionnaire from "./Pages/Admin/Settings/Settings/Program/Questionnaire/Questionnaire";
+import AddAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/AddAllProgram";
+import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/EditAllProgram";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -314,11 +332,53 @@ function App() {
 
           {/* Super Admin Panel */}
           <Route path="/super-admin" element={<SuperAdmin></SuperAdmin>}>
-            <Route index element={<ProviderAccess></ProviderAccess>}></Route>
+            <Route index element={<Welcome></Welcome>}></Route>
             <Route
-              path="admin-access"
-              element={<AdminAccess></AdminAccess>}
-            ></Route>
+              path="provider-access"
+              element={<ProviderAccess></ProviderAccess>}
+            >
+              <Route index element={<Navigate to="facility" />} />
+              <Route path="facility" element={<Facility></Facility>}></Route>
+              <Route
+                path="create-user"
+                element={<CreateUser></CreateUser>}
+              ></Route>
+              <Route
+                path="delete-user"
+                element={<DeleteUser></DeleteUser>}
+              ></Route>
+              <Route
+                path="unlock-user"
+                element={<UnlockUser></UnlockUser>}
+              ></Route>
+              <Route
+                path="switch-user"
+                element={<SwitchUser></SwitchUser>}
+              ></Route>
+            </Route>
+            <Route path="admin-access" element={<AdminAccess></AdminAccess>}>
+              <Route index element={<Navigate to="page-access" />} />
+              <Route
+                path="page-access"
+                element={<PageAccess></PageAccess>}
+              ></Route>
+              <Route
+                path="admin-create-user"
+                element={<AdminCreateUser></AdminCreateUser>}
+              ></Route>
+              <Route
+                path="admin-delete-user"
+                element={<AdminDeleteUser></AdminDeleteUser>}
+              ></Route>
+              <Route
+                path="admin-unlock-user"
+                element={<AdminUnlockUser></AdminUnlockUser>}
+              ></Route>
+              <Route
+                path="admin-switch-user"
+                element={<AdminSwitchUser></AdminSwitchUser>}
+              ></Route>
+            </Route>
             <Route path="payor" element={<Payor></Payor>}></Route>
             <Route
               path="Companies-and-facilities"
@@ -908,6 +968,33 @@ function App() {
                 path="app-id-tracking"
                 element={<AppIdTracking></AppIdTracking>}
               ></Route>
+              <Route
+                path="create-program"
+                element={<AddAllProgram></AddAllProgram>}
+              ></Route>
+              <Route
+                path="edit-program/:id"
+                element={<EditAllProgram></EditAllProgram>}
+              ></Route>
+              <Route path="program" element={<Program></Program>}>
+                <Route index element={<Navigate to="account-type" />} />
+                <Route
+                  path="account-type"
+                  element={<AccountType></AccountType>}
+                ></Route>
+                <Route
+                  path="all-program"
+                  element={<AllPrograms></AllPrograms>}
+                ></Route>
+                <Route
+                  path="program-category"
+                  element={<ProgramCategory></ProgramCategory>}
+                ></Route>
+                <Route
+                  path="questionnaire"
+                  element={<Questionnaire></Questionnaire>}
+                ></Route>
+              </Route>
             </Route>
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>

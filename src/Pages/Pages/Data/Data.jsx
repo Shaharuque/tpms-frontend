@@ -6,6 +6,7 @@ import {
   BsFileEarmarkMedical,
   BsFileEarmark,
   BsFolder2Open,
+  BsBox,
 } from "react-icons/bs";
 import { MdOutlinePayment, MdTrackChanges } from "react-icons/md";
 import { ImUsers } from "react-icons/im";
@@ -363,10 +364,15 @@ export const setting = [
     name: "App id tracking",
     icon: <MdTrackChanges />,
   },
+  {
+    link: "program",
+    name: "Program",
+    icon: <BsBox />,
+  },
 ];
 export const SuperAdminRoute = [
   {
-    link: "/super-admin",
+    link: "provider-access",
     name: "Provider Access",
     icon: <BiRename />,
   },

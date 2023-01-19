@@ -35,6 +35,8 @@ className=" label-font"
 
 ### ANtd-table important data:
 
+className="table-striped-rows text-xs font-normal"
+
 .ant-table-thead>tr>th,
 .ant-table-tbody>tr>td,  
 .ant-table tfoot>tr>th,

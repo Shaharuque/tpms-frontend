@@ -5,9 +5,10 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 
 const CredentialsModal = ({ handleClose, open, name }) => {
   const [active, setActive] = useState(false);
-
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
+
+  // Add credential Api
 
   const onSubmit = (data) => {
     console.log(data);

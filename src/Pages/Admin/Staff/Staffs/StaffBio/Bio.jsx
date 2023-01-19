@@ -1,10 +1,15 @@
+// Staff Birthday is not working
 import { Switch } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useGetInfoQuery } from "../../../../../features/Stuff_redux/staff/staffApi";
+import {
+  useGetInfoQuery,
+  useUpdateStaffMutation,
+} from "../../../../../features/Stuff_redux/staff/staffApi";
 
 const Bio = () => {
   const { id } = useParams();
@@ -12,6 +17,7 @@ const Bio = () => {
   const [note, setNote] = useState("");
   const [session, setSession] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const [staffBirthday, setStaffBirthday] = useState();
   console.log(session);
 
   //get satff info api
@@ -21,25 +27,146 @@ const Bio = () => {
     isSuccess,
   } = useGetInfoQuery({ token, id: id });
   console.log("staff data", staffData, isLoading);
+  //update staff api
+  const [updateStaff, { isSuccess: updateSuccess, isError: updateError }] =
+    useUpdateStaffMutation();
+  const {
+    caqh_id,
+    first_name,
+    middle_name,
+    last_name,
+    nickname,
+    ssn,
+    staff_birthday,
+    office_email,
+    office_phone,
+    office_fax,
+    hir_date_compnay,
+    individual_npi,
+    is_active,
+    taxonomy_code,
+    terminated_date,
+    treatment_type,
+    title,
+    license_exp_date,
+    language,
+    gender,
+    service_area_zip,
+  } = staffData?.employee_info || {};
+  console.log("staff_birthday", staff_birthday);
+  // staff_birthday
+  useEffect(() => {
+    setStaffBirthday(staff_birthday);
+  }, [staff_birthday]);
+
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        first_name: `bill`,
-        middle_name: "luo",
+        caqh_id: caqh_id,
+        first_name: first_name,
+        middle_name: middle_name,
+        last_name: last_name,
+        nickname: nickname,
+        staff_birthday: staff_birthday,
+        ssn: ssn,
+        office_email: office_email,
+        office_phone: office_phone,
+        office_fax: office_fax,
+        hir_date_compnay: hir_date_compnay,
+        individual_npi: individual_npi,
+        is_active: is_active,
+        taxonomy_code: taxonomy_code,
+        terminated_date: terminated_date,
+        treatment_type: treatment_type,
+        title: title,
+        service_area_zip: service_area_zip,
+        license_exp_date: license_exp_date,
+        language: language,
+        gender: gender,
         comment: "Notes",
       });
     }, 600);
-  }, [reset]);
+  }, [
+    reset,
+    caqh_id,
+    first_name,
+    middle_name,
+    last_name,
+    nickname,
+    ssn,
+    staff_birthday,
+    office_email,
+    office_phone,
+    office_fax,
+    hir_date_compnay,
+    individual_npi,
+    is_active,
+    taxonomy_code,
+    terminated_date,
+    treatment_type,
+    title,
+    license_exp_date,
+    language,
+    service_area_zip,
+    gender,
+  ]);
 
   const onSubmit = (data) => {
     console.log(data);
     console.log(note);
+    const payload = {
+      employee_edit_id: id,
+      caqh_id: data.caqh_id,
+      first_name: data.first_name,
+      middle_name: data.middle_name,
+      last_name: data.last_name,
+      nickname: data.nickname,
+      staff_birthday: data.staff_birthday,
+      ssn: data.ssn,
+      office_email: data.office_email,
+      office_phone: data.office_phone,
+      office_fax: data.office_fax,
+      hir_date_compnay: data.hir_date_compnay,
+      individual_npi: data.individual_npi,
+      is_active: data.is_active,
+      taxonomy_code: data.taxonomy_code,
+      terminated_date: data.terminated_date,
+      treatment_type: data.treatment_type,
+      title: data.title,
+      service_area_zip: data.service_area_zip,
+      license_exp_date: data.license_exp_date,
+      language: data.language,
+      gender: data.gender,
+    };
+    //update staff api call
+    if (payload) {
+      updateStaff({
+        token,
+        payload,
+      });
+    }
+    console.log("payload", payload);
   };
+  useEffect(() => {
+    if (updateSuccess) {
+      toast.success("Successfully updated", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+      });
+    } else if (updateError) {
+      toast.error("Cann't be Updated", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+      });
+    }
+  }, [updateSuccess, updateError]);
   return (
     <div className="sm:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
-      <form onSub mit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 my-3 mr-2 gap-x-6 gap-y-3 ">
           {/* First Name with all the validation  */}
           <div>
@@ -85,9 +212,9 @@ const Bio = () => {
             </label>
             <input
               type="text"
-              name="nick_name"
+              name="nickname"
               className="input-border input-font w-full focus:outline-none"
-              {...register("nick_name")}
+              {...register("nickname")}
             />
           </div>
           {/* DOB */}
@@ -98,10 +225,16 @@ const Bio = () => {
               </span>
             </label>
             <input
+              className="input-border input-font  w-full focus:outline-none"
+              type="date"
+              value={staffBirthday}
+              onChange={(e) => setStaffBirthday(e.target.value)}
+            />
+            {/* <input
               className="input-border input-font w-full focus:outline-none"
               type="date"
-              {...register("check_Date")}
-            />
+              {...register("staff_birthday")}
+            /> */}
           </div>
           <div>
             <label className="label">
@@ -141,6 +274,19 @@ const Bio = () => {
               {...register("office_email")}
             />
           </div>
+          <div>
+            <label className="label">
+              <span className=" label-font">
+                Office Fax<span className="text-red-500">*</span>
+              </span>
+            </label>
+            <input
+              type="text"
+              name="office_fax"
+              className="input-border input-font w-full focus:outline-none"
+              {...register("office_fax")}
+            />
+          </div>
           {/* driving license */}
           <div>
             <label className="label">
@@ -160,7 +306,7 @@ const Bio = () => {
             <input
               className="input-border input-font w-full focus:outline-none"
               type="date"
-              {...register("license_Date")}
+              {...register("license_exp_date")}
             />
           </div>
           <div>
@@ -181,7 +327,7 @@ const Bio = () => {
             <input
               className="input-border input-font w-full focus:outline-none"
               type="date"
-              {...register("hiring_date")}
+              {...register("hir_date_compnay")}
             />
           </div>
           <div>
@@ -216,9 +362,9 @@ const Bio = () => {
             </label>
             <input
               type="text"
-              name="npi"
+              name="individual_npi"
               className="input-border input-font w-full focus:outline-none"
-              {...register("npi")}
+              {...register("individual_npi")}
             />
           </div>
           <div>
@@ -238,9 +384,9 @@ const Bio = () => {
             </label>
             <input
               type="text"
-              name="zip"
+              name="service_area_zip"
               className="input-border input-font w-full focus:outline-none"
-              {...register("zip")}
+              {...register("service_area_zip")}
             />
           </div>
           <div>
@@ -250,7 +396,7 @@ const Bio = () => {
             <input
               className="input-border input-font w-full focus:outline-none"
               type="date"
-              {...register("termination_date")}
+              {...register("terminated_date")}
             />
           </div>
           <div>
@@ -287,6 +433,7 @@ const Bio = () => {
                 <input
                   type="radio"
                   name="patient"
+                  value={gender}
                   onClick={() => {
                     // setValue(!value);
                   }}

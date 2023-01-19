@@ -13,7 +13,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
-      providesTags: ["contactInfo"],
+      providesTags: ["ContactInfo"],
     }),
 
     //   addContactInfo  staff contact info
@@ -27,7 +27,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      invalidatesTags: ["contactInfo"],
+      invalidatesTags: ["ContactInfo"],
     }),
 
     //   add Emergency contact info
@@ -41,7 +41,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      invalidatesTags: ["contactInfo"],
+      invalidatesTags: ["ContactInfo"],
     }),
   }),
 });

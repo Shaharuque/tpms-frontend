@@ -197,7 +197,7 @@ const CreateServiceRules = () => {
             rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
             size="small"
             bordered
-            className=" text-xs font-normal"
+            className="table-striped-rows text-xs font-normal"
             columns={columns}
             dataSource={table}
             rowSelection={{

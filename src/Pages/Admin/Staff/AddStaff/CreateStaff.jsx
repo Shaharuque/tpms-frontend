@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import useToken from "../../../../CustomHooks/useToken";
 import { useSelectedTreatmentsMutation } from "../../../../features/Settings_redux/selectedTreatmentsApi";
 import { useCreateStuffMutation } from "../../../../features/Stuff_redux/staff/staffApi";
@@ -18,7 +19,8 @@ const CreateStaff = () => {
   ] = useSelectedTreatmentsMutation();
 
   //create staff api
-  const [createStuff, { isSuccess, isError }] = useCreateStuffMutation();
+  const [createStuff, { isSuccess: createSuccess, isError: createError }] =
+    useCreateStuffMutation();
 
   useEffect(() => {
     selectedTreatments({ token });
@@ -52,6 +54,7 @@ const CreateStaff = () => {
     let payload = {
       ...data,
       gender,
+      employee_type: "provider",
     };
     if (payload) {
       createStuff({
@@ -60,9 +63,24 @@ const CreateStaff = () => {
       });
     }
     console.log(payload);
-    // reset();
   };
-  console.log(isSuccess);
+  useEffect(() => {
+    if (createSuccess) {
+      toast.success("Successfully Staff Created", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      reset();
+    } else if (createError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [createSuccess, createError]);
+
   return (
     <div className="sm:h-[100vh]">
       <div className="flex items-center flex-wrap gap-2 justify-between">

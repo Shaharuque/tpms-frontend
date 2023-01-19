@@ -1,59 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "../../../../../../Style/staff.css";
-import CredentialsModal from "../CredentialsModal";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import AddCredential from "./AddCredentialModal/AddCredential";
+import EditCredential from "./EditCredentialModal/EditCredential";
 
-const Credential = ({ handleCredential, credentialOpen }) => {
+const Credential = ({ handleCredential, credentialOpen, credentials }) => {
   const [display, setDisplay] = useState(true);
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [editModal, setEditModal] = useState(false);
+  const [credentialRecord, setCredentialRecord] = useState();
 
-  //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/Credential.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        // setLoading2(false);
-      });
-  }, []);
-
+  //Handle credentialEdit Modal
+  const handleEditModal = (record) => {
+    setCredentialRecord(record);
+    setEditModal(!editModal);
+  };
   const column = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Credential",
+      dataIndex: "credential_name",
+      key: "credential_name",
       width: 120,
       filters: [
         {
-          text: "Miner",
-          value: "Miner",
+          text: "behaviour",
+          value: "behaviour",
+        },
+        {
+          text: "tpms",
+          value: "tpms",
         },
       ],
-      filteredValue: filteredInfo.name || null,
-      onFilter: (value, record) => record.name.includes(value),
+      filteredValue: filteredInfo.credential_name || null,
+      onFilter: (value, record) => record.credential_name.includes(value),
       sorter: (a, b) => {
-        return a.name > b.name ? -1 : 1;
+        return a.credential_name > b.credential_name ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "name" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "credential_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
     {
       title: "Credential Type",
-      key: "credential_type",
-      dataIndex: "credential_type",
+      key: "credential_applicable",
+      dataIndex: "credential_applicable",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.credential_type || null,
-      onFilter: (value, record) => record.credential_type.includes(value),
+      filteredValue: filteredInfo.credential_applicable || null,
+      onFilter: (value, record) => record.credential_applicable.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.credential_type > b.credential_type ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_applicable > b.credential_applicable ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
         sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
@@ -62,34 +64,39 @@ const Credential = ({ handleCredential, credentialOpen }) => {
 
     {
       title: "Date issue",
-      key: "date_issue",
-      dataIndex: "date_issue",
+      key: "credential_date_expired",
+      dataIndex: "credential_date_expired",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.date_issue || null,
-      onFilter: (value, record) => record.date_issue.includes(value),
+      filteredValue: filteredInfo.credential_date_expired || null,
+      onFilter: (value, record) =>
+        record.credential_date_expired.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.date_issue > b.date_issue ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_date_expired > b.credential_date_expired ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "date_issue" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "credential_date_expired"
+          ? sortedInfo.order
+          : null,
       ellipsis: true,
     },
     {
       title: "Expired Date",
-      key: "date_expire",
-      dataIndex: "date_expire",
+      key: "credential_date_issue",
+      dataIndex: "credential_date_issue",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.date_expire || null,
-      onFilter: (value, record) => record.date_expire.includes(value),
+      filteredValue: filteredInfo.credential_date_issue || null,
+      onFilter: (value, record) => record.credential_date_issue.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.date_expire > b.date_expire ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_date_issue > b.credential_date_issue ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "date_expire" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "credential_date_issue"
+          ? sortedInfo.order
+          : null,
       ellipsis: true,
     },
     {
@@ -97,10 +104,10 @@ const Credential = ({ handleCredential, credentialOpen }) => {
       dataIndex: "operation",
       key: "operation",
       width: 150,
-      render: () => (
+      render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={handleClickOpen}
+            onClick={() => handleEditModal(record?.id)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -174,7 +181,7 @@ const Credential = ({ handleCredential, credentialOpen }) => {
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                  dataSource={tableData}
+                  dataSource={credentials?.credentials_list?.data}
                   onChange={handleChange}
                 />
               </div>
@@ -195,11 +202,16 @@ const Credential = ({ handleCredential, credentialOpen }) => {
         </div>
       )}
       {openEditModal && (
-        <CredentialsModal
+        <AddCredential
           handleClose={handleClose}
           open={openEditModal}
-          //   name={Credential}
-        ></CredentialsModal>
+        ></AddCredential>
+      )}
+      {editModal && (
+        <EditCredential
+          credentialId={credentialRecord}
+          handleClose={handleEditModal}
+        ></EditCredential>
       )}
     </div>
   );
