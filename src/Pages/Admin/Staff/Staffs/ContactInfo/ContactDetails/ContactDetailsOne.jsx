@@ -2,15 +2,99 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import TextArea from "antd/lib/input/TextArea";
+import { useEffect } from "react";
+import { useAddContactInfoMutation } from "../../../../../../features/Stuff_redux/contactInfo/contactInfoApi";
+import useToken from "../../../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
 
-const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
-  const [note, setNote] = useState("");
+const ContactDetailsOne = ({
+  contactDetails,
+  handleContactDetails,
+  contactApiData,
+}) => {
   const { register, handleSubmit, reset } = useForm();
+  const { token } = useToken();
+  const [addContactInfo, { isSuccess, isLoading, isError }] =
+    useAddContactInfoMutation();
+
   const onSubmit = (data) => {
     console.log(data);
-    reset();
+    const payload = {
+      employee_id: contactApiData?.employee_id,
+      address_one: data?.address_one,
+      address_two: data?.address_two,
+      city: data?.city,
+      state: data?.state,
+      zip: data?.zip,
+      mobile: data?.mobile,
+      fax: data?.fax,
+      main_phone: data?.main_phone,
+      address_note: data?.address_note,
+    };
+    console.log("payload", payload);
+    addContactInfo({ token, payload });
   };
-  console.log(note);
+  // console.log("data come", contactApiData);
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Contact Details Updated", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (isError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [isError, isSuccess]);
+
+  // api data set
+  const {
+    address_one,
+    fax,
+    id,
+    address_two,
+    city,
+    state,
+    main_phone,
+    mobile,
+    address_note,
+    zip,
+  } = contactApiData;
+  console.log(state);
+  useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        address_one: address_one || null,
+        address_two: address_two || null,
+        city: city || null,
+        state: state || null,
+        main_phone: main_phone || null,
+        mobile: mobile || null,
+        zip: zip || null,
+        fax: fax || null,
+        address_note: address_note || null,
+      });
+    }, 0);
+  }, [
+    address_note,
+    address_one,
+    address_two,
+    city,
+    fax,
+    id,
+    main_phone,
+    mobile,
+    reset,
+    state,
+    zip,
+  ]);
+
   return (
     <div>
       {" "}
@@ -42,8 +126,9 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                   <input
                     type="text"
                     name="address1"
+                    defaultValue={contactApiData?.address_note}
                     className="input-border input-font w-full focus:outline-none"
-                    {...register("address1")}
+                    {...register("address_one")}
                   />
                 </div>
                 <div>
@@ -54,7 +139,7 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                     type="text"
                     name="address2"
                     className="input-border input-font w-full focus:outline-none"
-                    {...register("address2")}
+                    {...register("address_two")}
                   />
                 </div>
                 <div>
@@ -79,6 +164,20 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                   >
                     <option value="Speech Therapist">Speech Therapist</option>
                     <option value="female">Female</option>
+                    <option value="AK">Alaska</option>
+
+                    <option value="AL">Alabama</option>
+                    <option value="jm">jamaica</option>
+                    <option value="AS">American Samoa</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District of Columbia</option>
+                    <option value="FM">Federated States of Micronesia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
                   </select>
                 </div>
 
@@ -133,15 +232,20 @@ const ContactDetailsOne = ({ contactDetails, handleContactDetails }) => {
                   <label className="label">
                     <span className="label-font">Notes</span>
                   </label>
-                  <TextArea
+                  <textarea
                     rows={4}
                     size="middle"
-                    onChange={(e) => setNote(e.target.value)}
+                    {...register("address_note")}
+                    // onChange={(e) => setNote(e.target.value)}
                   />
                 </div>
               </div>
               <div className="my-3 ">
-                <button className="pms-button" type="submit">
+                <button
+                  disabled={isLoading}
+                  className="pms-button"
+                  type="submit"
+                >
                   Save Contact
                 </button>
               </div>

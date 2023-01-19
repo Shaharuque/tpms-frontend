@@ -1,19 +1,48 @@
 import { Modal } from "antd";
+import { useEffect } from "preact/hooks";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import useToken from "../../../../../../../../CustomHooks/useToken";
+import { useAddCredentialMutation } from "../../../../../../../../features/Stuff_redux/credentials/credentialsApi";
 
-const CredentialsModal = ({ handleClose, open, name }) => {
+const AddCredential = ({ handleClose, open, name }) => {
   const [active, setActive] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
+  const { token } = useToken();
+  const { id } = useParams();
 
   // Add credential Api
+  const [
+    addCredential,
+    { isSuccess: addCredentialSuccess, isError: addCredentialError },
+  ] = useAddCredentialMutation();
 
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    const payload = {
+      employee_id: id,
+      cred_type: data.cred_type,
+      date_issue: data.date_issue,
+      date_expire: data.expiry_Date,
+      //0/1 hobey cred_apply
+      cred_apply: 1,
+      cred_file: null,
+    };
+    if (payload) {
+      addCredential({
+        token,
+        payload,
+      });
+    }
+    console.log(payload);
   };
+
+  if (addCredentialSuccess) {
+    handleClose();
+  }
 
   return (
     <div>
@@ -42,15 +71,16 @@ const CredentialsModal = ({ handleClose, open, name }) => {
               <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="modal-label-name">Credential</span>
+                    <span className=" label-font">
+                      Credential<span className="text-red-500">*</span>
+                    </span>
                   </label>
-                  <select
-                    className="modal-input-field ml-1 w-full"
-                    {...register("credential")}
-                  >
-                    <option value="Speech Therapist">Speech Therapist</option>
-                    <option value="female">Female</option>
-                  </select>
+                  <input
+                    type="text"
+                    name="cred_type"
+                    className="input-border input-font w-full focus:outline-none"
+                    {...register("cred_type")}
+                  />
                 </div>
 
                 <div>
@@ -115,4 +145,4 @@ const CredentialsModal = ({ handleClose, open, name }) => {
   );
 };
 
-export default CredentialsModal;
+export default AddCredential;
