@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useGetAllStaffQuery } from "../../../../../features/Stuff_redux/contactInfo/contactInfoApi";
+import { useStaffContactInfoQuery } from "../../../../../features/Stuff_redux/contactInfo/contactInfoApi";
 import ContactDetailsOne from "./ContactDetails/ContactDetailsOne";
 import ContactDetailsTwo from "./ContactDetails/ContactDetailsTwo";
 
@@ -11,12 +11,8 @@ const ContactDetails = () => {
   const { token } = useToken();
   const { id } = useParams();
   console.log(id);
-  const {
-    data: contactData,
-    isLoading,
-    isError,
-    error,
-  } = useGetAllStaffQuery({ token, id });
+  const { data: contactData } = useStaffContactInfoQuery({ token, id });
+
   // console.log("contactData", contactData);
   const handleContactDetails = () => {
     SetContactDetails(!contactDetails);

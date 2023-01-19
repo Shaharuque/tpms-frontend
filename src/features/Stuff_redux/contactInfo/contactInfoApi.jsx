@@ -3,7 +3,7 @@ import { apiSlice } from "../../api/apiSlice";
 export const staffInfoApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // get staff table and emergency table data
-    getAllStaff: builder.query({
+    staffContactInfo: builder.query({
       //staffContactInfo
       query: ({ token, id }) => ({
         url: `admin/ac/staff/contact/info/${id}`,
@@ -47,7 +47,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetAllStaffQuery,
+  useStaffContactInfoQuery,
   useAddContactInfoMutation,
   useAddEmergencyContactInfoMutation,
 } = staffInfoApi;
