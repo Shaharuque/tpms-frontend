@@ -18,7 +18,7 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/Parent-training-session"}>
-          <button className="pms-button">PARENT TRAINING SESSION NOTE</button>
+          <button className="pms-button">PARENT TRAINING SESSION NOTE</button>  
         </Link>
         <div className="my-2"></div>
         <Link to={"/BCBA-trainee"}>
@@ -66,7 +66,73 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/DischargeSummary"}>
-          <button className="pms-button">Discharge Summary</button>
+          <button className="pms-button">DISCHARGE SUMMARY</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/TreatmentPlanForm"}>
+          <button className="pms-button">TREATMENT PLAN FORM</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Parent-treatment-from"}>
+          <button className="pms-button">PARENT TREATMENT FORM</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/assessment-form"}>
+          <button className="pms-button">ASSESSMENT FORM</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/behavior-analysis-progress-note"}>
+          <button className="pms-button">Behavior Analysis Progress Note</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/supervision-supervision"}>
+          <button className="pms-button">SUPERVISION NON-BILLABLE SUPERVISION</button>
+        </Link>
+
+        <div className="my-2"></div>
+        <Link to={"/supervision-form"}>
+          <button className="pms-button">SUPERVISION FORM</button>
+        </Link>
+
+        <div className="my-2"></div>
+        <Link to={"/Service-Verification-log"}>
+          <button className="pms-button">SERVICE VERIFICATION LOG</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Super-vision-Non-billable-Brct"}>
+          <button className="pms-button">SUPERVISION NON-BILLABLE BRCT</button>
+        </Link>
+
+        <div className="my-2"></div>
+        <Link to={"/cp-notes-form"}>
+          <button className="pms-button">CP NOTES Form</button>
+        </Link>
+
+        <div className="my-2"></div>
+        <Link to={"/clinical-form"}>
+          <button className="pms-button">Clinical Form</button>
+        </Link>
+
+
+        <div className="my-2"></div>
+        <Link to={"/smallsoap-form"}>
+          <button className="pms-button">small soap Form</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/unique-supervision-form"}>
+          <button className="pms-button">Unique Supervision Form</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/management-modification-form"}>
+          <button className="pms-button">Management Modification Form</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Supervision-Assessment"}>
+          <button className="pms-button">SESSION NOTES 2</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Structure-Of-Process"}>
+          <button className="pms-button">Structure-Of-Process</button>
         </Link>
       </div>
     </div>
