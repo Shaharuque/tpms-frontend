@@ -6,8 +6,8 @@ export const credentialApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //Get staff credentials
     getcredentials: builder.query({
-      query: ({ token, page, id }) => ({
-        url: `admin/ac/staff/credentials/all/${id}`,
+      query: ({ token, page = 3, id }) => ({
+        url: `admin/ac/staff/credentials/all/${id}?page=1`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
