@@ -107,7 +107,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={() => handleEditModal(record?.id)}
+            onClick={() => handleEditModal(record)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -209,6 +209,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       )}
       {editModal && (
         <EditCredential
+          open={editModal}
           credentialId={credentialRecord}
           handleClose={handleEditModal}
         ></EditCredential>
