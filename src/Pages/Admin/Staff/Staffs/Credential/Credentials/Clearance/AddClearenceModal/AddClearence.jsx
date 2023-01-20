@@ -2,51 +2,50 @@ import { Modal } from "antd";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { useAddCredentialMutation } from "../../../../../../../../features/Stuff_redux/credentials/credentialsApi";
-import useToken from "../../../../../../../../CustomHooks/useToken";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import useToken from "../../../../../../../../CustomHooks/useToken";
+import { useAddClearenceMutation } from "../../../../../../../../features/Stuff_redux/credentials/clearenceApi";
 
-const AddCredential = ({ handleClose, open }) => {
+const AddClearence = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
   const { token } = useToken();
   const { id } = useParams();
 
   // Add credential Api
   const [
-    addCredential,
-    { isSuccess: addCredentialSuccess, isError: addCredentialError },
-  ] = useAddCredentialMutation();
+    addClearence,
+    { isSuccess: addClearenceSuccess, isError: addClearenceError },
+  ] = useAddClearenceMutation();
 
   const onSubmit = (data) => {
     const payload = {
       employee_id: id,
-      cred_type: data?.cred_type,
+      clear_type: data?.clear_type,
       date_issue: data?.date_issue,
-      date_expire: data?.expiry_Date,
+      date_expire: data?.date_expire,
       //0/1 hobey cred_apply
-      cred_apply: data?.cred_apply ? 1 : 0,
+      clear_apply: data?.clear_apply ? 1 : 0,
       // cred_file: null,
     };
     if (payload) {
-      addCredential({
+      addClearence({
         token,
         payload,
       });
     }
     console.log(payload);
-    console.log("normal data", data);
   };
 
   useEffect(() => {
-    if (addCredentialSuccess) {
+    if (addClearenceSuccess) {
       handleClose();
       toast.success("Successfully Added", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
       });
-    } else if (addCredentialError) {
+    } else if (addClearenceError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
@@ -54,7 +53,7 @@ const AddCredential = ({ handleClose, open }) => {
       });
     }
     //handleClose dependency tey na dileo choley cuz aita change hoy na
-  }, [addCredentialSuccess, addCredentialError]);
+  }, [addClearenceSuccess, addClearenceError]);
   return (
     <div>
       <Modal
@@ -82,14 +81,14 @@ const AddCredential = ({ handleClose, open }) => {
               <div>
                 <label className="label">
                   <span className=" label-font">
-                    Credential<span className="text-red-500">*</span>
+                    Clearence<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
-                  name="cred_type"
+                  name="clear_type"
                   className="input-border input-font w-full focus:outline-none"
-                  {...register("cred_type")}
+                  {...register("clear_type")}
                 />
               </div>
 
@@ -106,12 +105,12 @@ const AddCredential = ({ handleClose, open }) => {
               <div>
                 {" "}
                 <label className="label">
-                  <span className="modal-label-name">Expiry Date</span>
+                  <span className="modal-label-name">Date Expired</span>
                 </label>
                 <input
                   type="date"
                   className="modal-input-field ml-1 w-full"
-                  {...register("expiry_Date")}
+                  {...register("date_expire")}
                 />
               </div>
               <div>
@@ -127,8 +126,8 @@ const AddCredential = ({ handleClose, open }) => {
               <div className="flex ml-1 mt-1 gap-2 items-center">
                 <input
                   type="checkbox"
-                  name="cred_apply"
-                  {...register("cred_apply")}
+                  name="clear_apply"
+                  {...register("clear_apply")}
                 />
                 <span className="modal-label-name">
                   Credential Not Applicable
@@ -151,4 +150,4 @@ const AddCredential = ({ handleClose, open }) => {
     </div>
   );
 };
-export default AddCredential;
+export default AddClearence;

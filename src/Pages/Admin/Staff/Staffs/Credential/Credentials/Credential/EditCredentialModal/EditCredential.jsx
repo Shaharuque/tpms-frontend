@@ -3,20 +3,89 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+import useToken from "../../../../../../../../CustomHooks/useToken";
+import {
+  useGetcredentialinfoQuery,
+  useUpdateCredentialMutation,
+} from "../../../../../../../../features/Stuff_redux/credentials/credentialsApi";
+import Loading from "../../../../../../../../Loading/Loading";
 
-const EditCredential = ({ handleClose, open, credentialId }) => {
-  console.log(credentialId);
+const EditCredential = ({ handleClose, open, credentialInfo }) => {
+  console.log(credentialInfo);
+  const { token } = useToken();
+
+  //Getting credential info data api
+  const {
+    data: credentialData,
+    isLoading,
+    isSuccess,
+  } = useGetcredentialinfoQuery({ token, id: credentialInfo?.id });
+  // console.log("credentialData", credentialData);
+  //Update credential info data api
+  const [updateCredential, { isSuccess: updateSuccess, isError: updateError }] =
+    useUpdateCredentialMutation();
+
+  const {
+    credential_name,
+    credential_applicable,
+    credential_date_expired,
+    credential_date_issue,
+  } = credentialData?.credential_info || {};
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    console.log("normal data", data);
+    const payload = {
+      cred_id: credentialInfo.id,
+      cred_type: data?.cred_type,
+      date_expire: data?.date_expire,
+      date_issue: data?.date_issue,
+      cred_apply: data?.cred_apply ? 1 : 0,
+      // cred_file: null,
+    };
+    console.log(payload);
+    if (payload) {
+      updateCredential({
+        token,
+        payload,
+      });
+    }
   };
 
+  //To show default data in the form
   useEffect(() => {
     setTimeout(() => {
-      reset({ cred_type: credentialId?.credential_name });
+      reset({
+        cred_type: credential_name,
+        cred_apply: credential_applicable ? true : false,
+        date_expire: credential_date_expired,
+        date_issue: credential_date_issue,
+      });
     }, 500);
-  }, [reset, credentialId?.credential_name]);
+  }, [
+    reset,
+    credential_name,
+    credential_applicable,
+    credential_date_expired,
+    credential_date_issue,
+  ]);
+
+  //To show Toast
+  useEffect(() => {
+    if (updateSuccess) {
+      handleClose();
+      toast.success("Successfully Added", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+      });
+    } else if (updateError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+      });
+    }
+  }, [updateSuccess, updateError, handleClose]);
   return (
     <div>
       <Modal
@@ -73,7 +142,7 @@ const EditCredential = ({ handleClose, open, credentialId }) => {
                 <input
                   type="date"
                   className="modal-input-field ml-1 w-full"
-                  {...register("expiry_Date")}
+                  {...register("date_expire")}
                 />
               </div>
               <div>
@@ -89,8 +158,8 @@ const EditCredential = ({ handleClose, open, credentialId }) => {
               <div className="flex ml-1 mt-1 gap-2 items-center">
                 <input
                   type="checkbox"
-                  name="patient"
-                  {...register("patient")}
+                  name="cred_apply"
+                  {...register("cred_apply")}
                 />
                 <span className="modal-label-name">
                   Credential Not Applicable

@@ -210,7 +210,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       {editModal && (
         <EditCredential
           open={editModal}
-          credentialId={credentialRecord}
+          credentialInfo={credentialRecord}
           handleClose={handleEditModal}
         ></EditCredential>
       )}
