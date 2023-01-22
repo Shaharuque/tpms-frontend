@@ -73,7 +73,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -83,7 +83,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="date"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -93,7 +93,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="date"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -103,7 +103,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -113,7 +113,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -123,7 +123,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -135,7 +135,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -145,7 +145,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -155,7 +155,7 @@ const PrivateClient = () => {
                 </span>
                 <input
                   type="text"
-                  className="form-bottom-border input-font py-[2px] w-full focus:outline-none"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
@@ -164,7 +164,7 @@ const PrivateClient = () => {
               <span className="form-input-name text-[#207ac7] w-full">
                 INTERPRETIVE SUMMARY/PRESENTING PROBLEM:
               </span>
-              <div className="mt-3">
+              <div className="mt-3 border-2 border-blue-600">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -206,6 +206,8 @@ const PrivateClient = () => {
                 <span className="text-lg ml-1 text-gray-600 font-bold">No</span>
               </div>
             </div>
+          </div>
+          <div>
             <span className="form-input-name text-[#207ac7] w-full">
               Have you had previous psychotherapy?
             </span>
@@ -232,71 +234,88 @@ const PrivateClient = () => {
                 />
                 <span className="text-lg ml-1 text-gray-600 font-bold">No</span>
               </div>
-              <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
-                  Are you currently taking prescribed psychiatric medication
-                  (antidepressants or others)?
+            </div>
+          </div>
+          <div>
+            <h1>What(previous therapist's name)</h1>
+            <div>
+              <input
+                type="text"
+                name="patient"
+                className="border-2 border-blue-600 focus:outline-none w-full py-2 px-2 mt-2"
+                onClick={() => {
+                  // setValue(!value);
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <span className="form-input-name text-[#207ac7] w-full">
+              Are you currently taking prescribed psychiatric medication
+              (antidepressants or others)?
+            </span>
+            <div className="flex items-center mb-4 mt-2">
+              <div className="flex ml-1 mt-1 items-center">
+                <input
+                  type="radio"
+                  name="patient"
+                  onClick={() => {
+                    // setValue(!value);
+                  }}
+                />
+                <span className="text-lg ml-1 text-gray-600 font-bold">
+                  Yes
                 </span>
-                <div className="flex items-center mb-4 mt-2">
-                  <div className="flex ml-1 mt-1 items-center">
-                    <input
-                      type="radio"
-                      name="patient"
-                      onClick={() => {
-                        // setValue(!value);
-                      }}
-                    />
-                    <span className="text-lg ml-1 text-gray-600 font-bold">
-                      Yes
-                    </span>
-                  </div>
-                  <div className="flex ml-1 mt-1 items-center">
-                    <input
-                      type="radio"
-                      name="patient"
-                      onClick={() => {
-                        // setValue(!value);
-                      }}
-                    />
-                    <span className="text-lg ml-1 text-gray-600 font-bold">
-                      No
-                    </span>
-                  </div>
-                </div>
               </div>
-              <div className="mt-4">
-                <h1 className="form-input-name my-2">If yes, please list</h1>
-                <div className="mt-3">
-                  <TextArea
-                    onChange={(e) => setNotes(e.target.value)}
-                    maxLength={1500}
-                    rows={2}
-                    placeholder=" Notes"
-                    size="large"
-                    className=""
-                  />
-                </div>
-              </div>
-              <div className="mt-4">
-                <h1 className="form-input-name my-2">Prescribed by:</h1>
-                <div className="mt-3">
-                  <TextArea
-                    onChange={(e) => setNotes(e.target.value)}
-                    maxLength={1500}
-                    rows={2}
-                    placeholder=" Notes"
-                    size="large"
-                    className=""
-                  />
-                </div>
+              <div className="flex ml-1 mt-1 items-center">
+                <input
+                  type="radio"
+                  name="patient"
+                  onClick={() => {
+                    // setValue(!value);
+                  }}
+                />
+                <span className="text-lg ml-1 text-gray-600 font-bold">No</span>
               </div>
             </div>
           </div>
           <div>
+            <h1>If yes, please list</h1>
+            <div>
+              <div className="mt-3 border-2 border-blue-600">
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder=" Notes"
+                  size="small"
+                  className=""
+                />
+              </div>
+            </div>
+          </div>
+          <div className="mt-2">
+            <h1>Prescribed by:</h1>
+            <div>
+              <div className="mt-3 border-2 border-blue-600">
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder=" Notes"
+                  size="small"
+                  className=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div>
             <h1 className="form-sub-header">HEALTH AND SOCIAL INFORMATION</h1>
             <div className="mt-4">
               <span className="form-input-name text-[#207ac7] w-full">
-                Have you had previous psychotherapy?
+                Do you currently have a primary physician?
               </span>
               <div className="flex items-center mb-4 mt-2">
                 <div className="flex ml-1 mt-1 items-center">
@@ -327,22 +346,68 @@ const PrivateClient = () => {
             </div>
             <div className="mt-4">
               <h1 className="form-input-name my-2">If yes, please list</h1>
-              <div className="mt-3 form-input-border">
+              <h1 className="form-input-name">phone</h1>
+              <div className="mt-3 border-2 border-blue-600">
                 <input
                   type="text"
                   name="client_name"
-                  className=" input-font focus:outline-none"
+                  className=" input-font py-2 focus:outline-none"
                   {...register("client_name")}
                 />
               </div>
             </div>
+            <div className="mt-4">
+              <span className="form-input-name text-[#207ac7] w-full">
+                Are you currently seeing more than one medical health
+                specialist?
+              </span>
+              <div className="flex items-center mb-4 mt-2">
+                <div className="flex ml-1 mt-1 items-center">
+                  <input
+                    type="radio"
+                    name="patient"
+                    onClick={() => {
+                      // setValue(!value);
+                    }}
+                  />
+                  <span className="text-lg ml-1 text-gray-600 font-bold">
+                    Yes
+                  </span>
+                </div>
+                <div className="flex ml-1 mt-1 items-center">
+                  <input
+                    type="radio"
+                    name="patient"
+                    onClick={() => {
+                      // setValue(!value);
+                    }}
+                  />
+                  <span className="text-lg ml-1 text-gray-600 font-bold">
+                    No
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4">
+              <h1 className="form-input-name my-2">If yes, please list</h1>
 
+              <div className="mt-3 border-2 border-blue-600">
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={1500}
+                  rows={2}
+                  placeholder=" Notes"
+                  size="large"
+                  className=""
+                />
+              </div>
+            </div>
             <div>
               <div className="mt-3">
                 <span className="form-input-name text-[#207ac7] w-full">
                   When was your last physical?
                 </span>
-                <div className="mt-4">
+                <div className="mt-4 border-2 border-blue-600">
                   <TextArea
                     onChange={(e) => setNotes(e.target.value)}
                     maxLength={1500}
@@ -359,7 +424,7 @@ const PrivateClient = () => {
                   concerns (e.g. chronic pain, headaches, hypertension,
                   diabetes, etc.:
                 </span>
-                <div className="mt-3">
+                <div className="mt-3 border-2 border-blue-600">
                   <TextArea
                     onChange={(e) => setNotes(e.target.value)}
                     maxLength={1500}
@@ -375,7 +440,7 @@ const PrivateClient = () => {
                   Are you currently on medication to manage a physical health
                   concern? If yes, please list:
                 </span>
-                <div className="mt-3">
+                <div className="mt-3 border-2 border-blue-600">
                   <TextArea
                     onChange={(e) => setNotes(e.target.value)}
                     maxLength={1500}
@@ -423,7 +488,79 @@ const PrivateClient = () => {
                     If yes, check where applicable:
                   </h1>
                   <select
-                    className=" form-input-border w-full"
+                    className="border-2 border-blue-600 focus:outline-none py-2 w-full"
+                    {...register("patients")}
+                  >
+                    <option value="">--</option>
+                    <option value="single">Sleeping too late</option>
+                    <option value="single">Sleeping too much</option>
+                    <option value="single">Poor Quality Dream</option>
+                    <option value="single">Disturbing Dreams</option>
+                    <option value="married">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* <div>
+                <div className="flex justify-between">
+                  <h1>How many times per week do you excercise? </h1>
+                  <div className="border-2 border-blue-600">
+                <input
+                  type="text"
+                  name="client_name"
+                  className=" input-font py-2 focus:outline-none"
+                  {...register("client_name")}
+                />
+              </div><h1>How many times per week do you excercise? </h1>
+                  <div className="border-2 border-blue-600">
+                <input
+                  type="text"
+                  name="client_name"
+                  className=" input-font py-2 focus:outline-none"
+                  {...register("client_name")}
+                />
+              </div>
+                 
+                </div>
+              </div> */}
+
+              <div className="mt-4">
+                <span className="form-input-name text-[#207ac7] w-full">
+                  Are you having any difficulty with appetite or eating habits?
+                </span>
+                <div className="flex items-center mb-4 mt-2">
+                  <div className="flex ml-1 mt-1 items-center">
+                    <input
+                      type="radio"
+                      name="patient"
+                      onClick={() => {
+                        // setValue(!value);
+                      }}
+                    />
+                    <span className="text-lg ml-1 text-gray-600 font-bold">
+                      Yes
+                    </span>
+                  </div>
+                  <div className="flex ml-1 mt-1 items-center">
+                    <input
+                      type="radio"
+                      name="patient"
+                      onClick={() => {
+                        // setValue(!value);
+                      }}
+                    />
+                    <span className="text-lg ml-1 text-gray-600 font-bold">
+                      No
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <h1 className="form-input-name my-2">
+                    If yes, check where applicable:
+                  </h1>
+                  <select
+                    className="border-2 border-blue-600 focus:outline-none py-2 w-full"
                     {...register("patients")}
                   >
                     <option value="">--</option>
@@ -504,7 +641,7 @@ const PrivateClient = () => {
                   a 24 hour period?
                 </h1>
                 <select
-                  className="mt-2 form-input-border w-full"
+                  className="mt-2 border-2 border-blue-600 py-2 w-full"
                   {...register("patients")}
                 >
                   <option value="">--</option>
@@ -523,7 +660,7 @@ const PrivateClient = () => {
                   How often do you engage recreational drug use?
                 </h1>
                 <select
-                  className="mt-2 form-input-border w-full"
+                  className="mt-2 border-2 border-blue-600 py-2 w-full"
                   {...register("patients")}
                 >
                   <option value="">--</option>
@@ -539,7 +676,7 @@ const PrivateClient = () => {
                   Do you smoke cigarettes or use other tobacco products?
                 </h1>
                 <select
-                  className="mt-2 form-input-border w-full"
+                  className="mt-2 border-2 border-blue-600 py-2 w-full"
                   {...register("patients")}
                 >
                   <option value="">--</option>
@@ -552,7 +689,7 @@ const PrivateClient = () => {
                   Have you had suicidal thoughts recently?
                 </h1>
                 <select
-                  className="mt-2 form-input-border w-full"
+                  className="mt-2 border-2 border-blue-600 py-2 w-full"
                   {...register("patients")}
                 >
                   <option value="">--</option>
@@ -569,7 +706,7 @@ const PrivateClient = () => {
                   Have you had them in the past?
                 </h1>
                 <select
-                  className="mt-2 form-input-border w-full"
+                  className="mt-2 border-2 border-blue-600 py-2 w-full"
                   {...register("patients")}
                 >
                   <option value="">--</option>
@@ -616,11 +753,11 @@ const PrivateClient = () => {
                 <h1 className="form-input-name my-2">
                   If yes, how long have you been in this relationship?
                 </h1>
-                <div className="mt-3 form-input-border">
+                <div className="mt-3 border-2 border-blue-600 py-2">
                   <input
                     type="text"
                     name="client_name"
-                    className=" input-font focus:outline-none"
+                    className="w-full input-font focus:outline-none"
                     {...register("client_name")}
                   />
                 </div>
@@ -630,7 +767,7 @@ const PrivateClient = () => {
                   On a scale of 1-10 (10 being the highest quality), how would
                   you rate your current relationship?
                 </span>
-                <div className="mt-3">
+                <div className="mt-3 border-2 border-blue-600 ">
                   <TextArea
                     onChange={(e) => setNotes(e.target.value)}
                     maxLength={1500}
@@ -641,12 +778,12 @@ const PrivateClient = () => {
                   />
                 </div>
               </div>
-              <div className="mt-4">
+              <div className="mt-4 ">
                 <span className="form-input-name text-[#207ac7] w-full">
                   In the last year, have you experienced any significant life
                   changes or stressors? If yes, please explain:
                 </span>
-                <div className="mt-3">
+                <div className="mt-3 border-2 border-blue-600">
                   <TextArea
                     onChange={(e) => setNotes(e.target.value)}
                     maxLength={1500}
@@ -663,8 +800,8 @@ const PrivateClient = () => {
               <h1 className="form-input-name my-4 text-[#207ac7] w-full">
                 Have you ever experienced any of the following?
               </h1>
-              <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2">
-                <div className="form-input-border py-[1px] form-input-list-name">
+              {/* <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2">
+                <div className="border-2 border-blue-600 py-2 form-input-list-name">
                   Extreme depressed mood
                 </div>
                 <div>
@@ -677,7 +814,7 @@ const PrivateClient = () => {
                     <option value="No">No</option>
                   </select>
                 </div>
-                <div className="form-input-border py-[1px] form-input-list-name">
+                <div className="border-2 border-blue-600 py-2  form-input-list-name">
                   Dramatic mood swings
                 </div>
                 <div>
@@ -882,6 +1019,527 @@ const PrivateClient = () => {
                     />
                   </div>
                 </div>
+              </div> */}
+              <div class="overflow-x-auto">
+                <table class="min-w-full border-2 border-blue-600 ">
+                  {/* <thead class="border-b">
+              <tr>
+               
+                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                  First
+                </th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
+                  Last
+                </th>
+                
+              </tr>
+            </thead> */}
+                  <tbody>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                        <div class="flex gap-3">
+                          <span>
+                            <label
+                              for="rec_name"
+                              className=" font-bold text-base"
+                            >
+                              Authored by:
+                            </label>
+                          </span>
+
+                          <input
+                            type="text"
+                            className=" w-full border-none focus:outline-none "
+                            {...register("authored_by")}
+                          />
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3 mb-3">
+                          <span>
+                            <label
+                              for="rec_name"
+                              className=" font-bold text-base"
+                            >
+                              Name:
+                            </label>
+                          </span>
+
+                          <input
+                            type="text"
+                            className=" w-full border-none focus:outline-none "
+                            {...register("name")}
+                          />
+                        </div>
+                        <div class="flex gap-3 mb-3">
+                          <span>
+                            <label
+                              for="rec_name"
+                              className=" font-bold text-base"
+                            >
+                              BACB Certificate:
+                            </label>
+                          </span>
+
+                          <input
+                            type="text"
+                            className=" w-full border-none focus:outline-none "
+                            {...register("bacb_certificate")}
+                          />
+                        </div>
+                        <div class="flex gap-3">
+                          <span>
+                            <label
+                              for="rec_name"
+                              className=" font-bold text-base"
+                            >
+                              NPI #:
+                            </label>
+                          </span>
+
+                          <input
+                            type="text"
+                            className=" w-full border-none focus:outline-none "
+                            {...register("npi")}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -920,7 +1578,7 @@ const PrivateClient = () => {
               </span>
               <input
                 type="text"
-                className="form-bottom-border input-font py-[2px]  focus:outline-none"
+                className="border-b-2 border-blue-600 input-font py-[2px]  focus:outline-none"
                 {...register("Diagnosis")}
               />
               <span className="form-input-name ">
@@ -928,7 +1586,7 @@ const PrivateClient = () => {
               </span>
               <input
                 type="text"
-                className="form-bottom-border input-font py-[2px]  focus:outline-none"
+                className="border-b-2 border-blue-600 input-font py-[2px]  focus:outline-none"
                 {...register("Diagnosis")}
               />
             </div>
@@ -936,7 +1594,7 @@ const PrivateClient = () => {
               <h1 className="form-input-name  w-full">
                 INTERPRETIVE SUMMARY/PRESENTING PROBLEM:
               </h1>
-              <div className="mt-3">
+              <div className="mt-3 border-2 border-blue-600">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -979,11 +1637,11 @@ const PrivateClient = () => {
             </div>
             <div>
               <h1 className="form-input-name my-3 w-full">
-                with (previous therapist’s name)
+                If yes, what is your faith?
               </h1>
             </div>
 
-            <div className="form-input-border w-full ">
+            <div className="border-2 border-blue-600 py-2 w-full ">
               <input
                 type="text"
                 name="Diagnosis"
@@ -992,11 +1650,11 @@ const PrivateClient = () => {
               />
             </div>
             <div className="my-4 py-[1px] form-input-list-name">
-              Sleep disturbances
+              If no, do you consider yourself to be spiritual?
             </div>
             <div>
               <select
-                className=" form-select-border w-full"
+                className=" border-2 border-blue-600 py-2 w-full"
                 {...register("patients")}
               >
                 <option value="">--</option>
@@ -1022,7 +1680,7 @@ const PrivateClient = () => {
               <h1 className="form-input-name my-2 text-[#207ac7] w-full">
                 Have you ever experienced any of the following?
               </h1>
-              <div className=" grid grid-cols-3 items-center md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-3">
+              {/* <div className=" grid grid-cols-3 items-center md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-3">
                 <div className="form-input-border w-full py-[1px] form-input-list-name">
                   Difficulty
                 </div>
@@ -1259,6 +1917,420 @@ const PrivateClient = () => {
                     {...register("Diagnosis")}
                   />
                 </div>
+              </div> */}
+              <div class="overflow-x-auto">
+                <table class="min-w-full border-2 border-blue-600 ">
+                  <tbody>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Extreme depressed mood
+                          </label>
+                        </span>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <div>
+                          <select
+                            className="  w-full focus:outline-none"
+                            {...register("patients")}
+                          >
+                            <option value="">--</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/3">
+                        <span>
+                          <input
+                            type="text"
+                            className="w-full focus:outline-none"
+                            name=""
+                            id=""
+                          />
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -1268,7 +2340,7 @@ const PrivateClient = () => {
               <span className="form-input-name text-[#207ac7] w-full">
                 What do you consider to be your strengths?
               </span>
-              <div className="mt-3">
+              <div className="mt-3 border-2 border-blue-600">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={1000}
@@ -1283,7 +2355,7 @@ const PrivateClient = () => {
               <span className="form-input-name text-[#207ac7] w-full">
                 What do you like most about yourself?
               </span>
-              <div className="mt-3">
+              <div className="mt-3  border-2 border-blue-600">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={1000}
@@ -1298,7 +2370,7 @@ const PrivateClient = () => {
               <span className="form-input-name text-[#207ac7] w-full">
                 What are effective coping strategies that you have learned?
               </span>
-              <div className="mt-3">
+              <div className="mt-3  border-2 border-blue-600">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={1000}
@@ -1313,7 +2385,7 @@ const PrivateClient = () => {
               <span className="form-input-name text-[#207ac7] w-full">
                 What are your goals for therapy?
               </span>
-              <div className="mt-3">
+              <div className="mt-3  border-2 border-blue-600">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={1000}
@@ -1329,7 +2401,7 @@ const PrivateClient = () => {
                 SERVICES BEING PROVIDED TO CONSUMER (PLEASE CHECK ALL THAT
                 APPLY)
               </h1>
-              <div className=" grid grid-cols-2 items-center md:grid-cols-4 lg:grid-cols-4 2xl:grid-cols-4">
+              {/* <div className=" grid grid-cols-2 items-center md:grid-cols-4 lg:grid-cols-4 2xl:grid-cols-4">
                 <div className="flex items-center justify-center border border-blue-700 py-2">
                   <input
                     type="checkbox"
@@ -1521,6 +2593,212 @@ const PrivateClient = () => {
                     </span>
                   </div>
                 </div>
+              </div> */}
+              <div class="overflow-x-auto">
+                <table class="min-w-full border-2 border-blue-600 ">
+                  <tbody>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/4">
+                        <div className="flex items-center   py-2">
+                          <input
+                            type="checkbox"
+                            name="checkedActive"
+                            {...register("checkedActive")}
+                          />
+                          <span className="text-[16px] ml-2 text-gray-700  font-semibold">
+                            Diagnostic Assessment
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

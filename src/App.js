@@ -153,6 +153,20 @@ import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
 import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
 import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
+import TreatmentPlanForm from "./Pages/Admin/FormsTemplate/TreatmentPlanForm";
+import ParentTrainingForm from "./Pages/Admin/FormsTemplate/ParentTreatmentForm";
+import AssessmentForm from "./Pages/Admin/FormsTemplate/AssessmentForm";
+import BehaviorAnalysisProgressNote from "./Pages/Admin/FormsTemplate/BehaviorAnalysisProgressNote";
+import SupervisionSupervision from "./Pages/Admin/FormsTemplate/SupervisionSupervision";
+import SupervisionForm from "./Pages/Admin/FormsTemplate/SupervisionForm";
+import ServiceVerificationlog from "./Pages/Admin/FormsTemplate/ServiceVerificationlog";
+import SupervisionNonbillableBrct from "./Pages/Admin/FormsTemplate/SupervisionNonbillableBrct";
+import CPNotesForm from "./Pages/Admin/FormsTemplate/CPNotesForm";
+import ClinicalForm from "./Pages/Admin/FormsTemplate/ClinicalForm";
+import SmallSoap from "./Pages/Admin/FormsTemplate/SmallSoap";
+import UniqueSupervisionForm from "./Pages/Admin/FormsTemplate/UniqueSupervisionForm";
+import ManagementModificationForm from "./Pages/Admin/FormsTemplate/ManagementModificationForm";
+import SupervisionAssessment from "./Pages/Admin/FormsTemplate/SupervisionAssessment";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
 import RequireAuth from "./Authorization/RequireAuth";
 import InfiniteScrollTest from "./Testing/ApiTesting/InfiniteScrollTest";
@@ -215,6 +229,7 @@ import ProgramCategory from "./Pages/Admin/Settings/Settings/Program/ProgramCate
 import Questionnaire from "./Pages/Admin/Settings/Settings/Program/Questionnaire/Questionnaire";
 import AddAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/AddAllProgram";
 import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/EditAllProgram";
+import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -277,6 +292,68 @@ function App() {
           <Route
             path="/DischargeSummary"
             element={<DischargeSummary></DischargeSummary>}
+          ></Route>
+          <Route
+            path="/TreatmentPlanForm"
+            element={<TreatmentPlanForm></TreatmentPlanForm>}
+          ></Route>
+          <Route
+            path="/Parent-treatment-from"
+            element={<ParentTrainingForm></ParentTrainingForm>}
+          ></Route>
+          <Route
+            path="/assessment-form"
+            element={<AssessmentForm></AssessmentForm>}
+          ></Route>
+          <Route
+            path="/behavior-analysis-progress-note"
+            element={
+              <BehaviorAnalysisProgressNote></BehaviorAnalysisProgressNote>
+            }
+          ></Route>
+          <Route
+            path="/supervision-supervision"
+            element={<SupervisionSupervision></SupervisionSupervision>}
+          ></Route>
+          <Route
+            path="/supervision-form"
+            element={<SupervisionForm></SupervisionForm>}
+          ></Route>
+          <Route
+            path="/Service-Verification-log"
+            element={<ServiceVerificationlog></ServiceVerificationlog>}
+          ></Route>
+          <Route
+            path="/Super-vision-Non-billable-Brct"
+            element={<SupervisionNonbillableBrct></SupervisionNonbillableBrct>}
+          ></Route>
+          <Route
+            path="/cp-notes-form"
+            element={<CPNotesForm></CPNotesForm>}
+          ></Route>
+          <Route
+            path="/clinical-form"
+            element={<ClinicalForm></ClinicalForm>}
+          ></Route>
+          <Route
+            path="/smallsoap-form"
+            element={<SmallSoap></SmallSoap>}
+          ></Route>
+          <Route
+            path="/unique-supervision-form"
+            element={<UniqueSupervisionForm></UniqueSupervisionForm>}
+          ></Route>
+          <Route
+            path="/management-modification-form"
+            element={<ManagementModificationForm></ManagementModificationForm>}
+          ></Route>
+          <Route
+            path="/Supervision-Assessment"
+            element={<SupervisionAssessment></SupervisionAssessment>}
+          ></Route>
+          <Route
+            path="/Structure-Of-Process"
+            element={<StructureofProcess></StructureofProcess>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
