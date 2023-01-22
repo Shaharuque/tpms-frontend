@@ -2,73 +2,75 @@ import { Modal } from "antd";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../../../../../CustomHooks/useToken";
 import {
-  useClearenceInfoQuery,
-  useUpdateClearenceMutation,
-} from "../../../../../../../../features/Stuff_redux/credentials/clearenceApi";
-import Loading from "../../../../../../../../Loading/Loading";
+  useGetQualificationInfoQuery,
+  useUpdateQualificationMutation,
+} from "../../../../../../../../features/Stuff_redux/credentials/qualificationApi";
 
-const EditClearence = ({ handleClose, open, clearenceInfo }) => {
-  console.log(clearenceInfo);
+const EditQualification = ({ handleClose, open, qualificationInfo }) => {
+  const { register, handleSubmit, reset } = useForm();
+  console.log("id record pp", qualificationInfo);
   const { token } = useToken();
-
   //Getting clearence info data api
+
+  const { data: qualificationData } = useGetQualificationInfoQuery({
+    token,
+    id: qualificationInfo,
+  });
+  console.log(qualificationData);
+
   const {
-    data: clearenceData,
-    isLoading,
-    isSuccess,
-  } = useClearenceInfoQuery({ token, id: clearenceInfo?.id });
+    qualification_name,
+    qualification_date_issue,
+    qualification_date_exp,
+    qualification_applicable,
+  } = qualificationData?.qualification || {};
+
+  // To show default data in the form
+  useEffect(() => {
+    setTimeout(() => {
+      reset({
+        clear_type: qualification_name,
+        clear_apply: qualification_applicable ? true : false,
+        date_expire: qualification_date_exp,
+        date_issue: qualification_date_issue,
+      });
+    }, 500);
+  }, [
+    qualification_applicable,
+    qualification_date_exp,
+    qualification_date_issue,
+    qualification_name,
+    reset,
+  ]);
 
   //Update clearence info data api
-  const [updateClearence, { isSuccess: updateSuccess, isError: updateError }] =
-    useUpdateClearenceMutation();
+  const [
+    updateQualification,
+    { isSuccess: updateSuccess, isError: updateError },
+  ] = useUpdateQualificationMutation();
 
-  const {
-    clearance_name,
-    clearance_date_issue,
-    clearance_date_exp,
-    clearance_applicable,
-  } = clearenceData?.credential_info || {}; //api tey bhul
-
-  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     const payload = {
-      clear_id: clearenceInfo.id,
-      clear_type: data?.clear_type,
+      qual_id: qualificationInfo,
+      qual_type: data?.clear_type,
       date_issue: data?.date_issue,
       date_expire: data?.date_expire,
       //0/1 hobey cred_apply
-      clear_apply: data?.clear_apply ? 1 : 0,
+      qual_apply: data?.clear_apply ? 1 : 0,
       // cred_file: null,
     };
-    console.log("clearance", payload);
+    console.log("qualification paylod", payload);
     if (payload) {
-      updateClearence({
+      updateQualification({
         token,
         payload,
       });
     }
   };
-
-  //To show default data in the form
-  useEffect(() => {
-    setTimeout(() => {
-      reset({
-        clear_type: clearance_name,
-        clear_apply: clearance_applicable ? true : false,
-        date_expire: clearance_date_exp,
-        date_issue: clearance_date_issue,
-      });
-    }, 500);
-  }, [
-    reset,
-    clearance_name,
-    clearance_applicable,
-    clearance_date_exp,
-    clearance_date_issue,
-  ]);
 
   //To show Toast
   useEffect(() => {
@@ -184,4 +186,4 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
   );
 };
 
-export default EditClearence;
+export default EditQualification;

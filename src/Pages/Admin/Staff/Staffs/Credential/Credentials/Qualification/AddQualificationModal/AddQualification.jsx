@@ -2,91 +2,61 @@ import { Modal } from "antd";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { toast } from "react-toastify";
+import { useAddCredentialMutation } from "../../../../../../../../features/Stuff_redux/credentials/credentialsApi";
 import useToken from "../../../../../../../../CustomHooks/useToken";
-import {
-  useClearenceInfoQuery,
-  useUpdateClearenceMutation,
-} from "../../../../../../../../features/Stuff_redux/credentials/clearenceApi";
-import Loading from "../../../../../../../../Loading/Loading";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAddQualificationMutation } from "../../../../../../../../features/Stuff_redux/credentials/qualificationApi";
 
-const EditClearence = ({ handleClose, open, clearenceInfo }) => {
-  console.log(clearenceInfo);
-  const { token } = useToken();
-
-  //Getting clearence info data api
-  const {
-    data: clearenceData,
-    isLoading,
-    isSuccess,
-  } = useClearenceInfoQuery({ token, id: clearenceInfo?.id });
-
-  //Update clearence info data api
-  const [updateClearence, { isSuccess: updateSuccess, isError: updateError }] =
-    useUpdateClearenceMutation();
-
-  const {
-    clearance_name,
-    clearance_date_issue,
-    clearance_date_exp,
-    clearance_applicable,
-  } = clearenceData?.credential_info || {}; //api tey bhul
-
+const AddQualification = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
+  const { token } = useToken();
+  const { id } = useParams();
+
+  // Add credential Api
+  const [
+    addQualification,
+    { isSuccess: addCredentialSuccess, isError: addCredentialError },
+  ] = useAddQualificationMutation();
+
   const onSubmit = (data) => {
     const payload = {
-      clear_id: clearenceInfo.id,
-      clear_type: data?.clear_type,
+      employee_id: id,
+      qual_type: data?.cred_type,
       date_issue: data?.date_issue,
-      date_expire: data?.date_expire,
+      date_expire: data?.expiry_Date,
       //0/1 hobey cred_apply
-      clear_apply: data?.clear_apply ? 1 : 0,
+      qual_apply: data?.cred_apply ? 1 : 0,
       // cred_file: null,
     };
-    console.log("clearance", payload);
+    console.log("post data", payload);
     if (payload) {
-      updateClearence({
+      addQualification({
         token,
         payload,
       });
     }
+    console.log(payload);
+    console.log("normal data", data);
   };
 
-  //To show default data in the form
   useEffect(() => {
-    setTimeout(() => {
-      reset({
-        clear_type: clearance_name,
-        clear_apply: clearance_applicable ? true : false,
-        date_expire: clearance_date_exp,
-        date_issue: clearance_date_issue,
-      });
-    }, 500);
-  }, [
-    reset,
-    clearance_name,
-    clearance_applicable,
-    clearance_date_exp,
-    clearance_date_issue,
-  ]);
-
-  //To show Toast
-  useEffect(() => {
-    if (updateSuccess) {
+    if (addCredentialSuccess) {
       handleClose();
       toast.success("Successfully Added", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 5000,
         theme: "dark",
       });
-    } else if (updateError) {
+    } else if (addCredentialError) {
       toast.error("Some Error Occured", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 5000,
         theme: "dark",
       });
     }
-  }, [updateSuccess, updateError, handleClose]);
+    //handleClose dependency tey na dileo choley cuz aita change hoy na
+  }, [addCredentialSuccess, addCredentialError]);
   return (
     <div>
       <Modal
@@ -101,7 +71,9 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
       >
         <div className="px-5 py-2">
           <div className="flex items-center justify-between">
-            <h1 className="text-lg text-left text-orange-400 ">Credential</h1>
+            <h1 className="text-lg text-left text-orange-400 ">
+              Qualification
+            </h1>
             <IoCloseCircleOutline
               onClick={handleClose}
               className="text-gray-600 text-2xl hover:text-primary"
@@ -114,14 +86,14 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
               <div>
                 <label className="label">
                   <span className=" label-font">
-                    Credential<span className="text-red-500">*</span>
+                    Qualification<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
-                  name="clear_type"
+                  name="cred_type"
                   className="input-border input-font w-full focus:outline-none"
-                  {...register("clear_type")}
+                  {...register("cred_type")}
                 />
               </div>
 
@@ -143,7 +115,7 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
                 <input
                   type="date"
                   className="modal-input-field ml-1 w-full"
-                  {...register("date_expire")}
+                  {...register("expiry_Date")}
                 />
               </div>
               <div>
@@ -159,8 +131,8 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
               <div className="flex ml-1 mt-1 gap-2 items-center">
                 <input
                   type="checkbox"
-                  name="clear_apply"
-                  {...register("clear_apply")}
+                  name="cred_apply"
+                  {...register("cred_apply")}
                 />
                 <span className="modal-label-name">
                   Credential Not Applicable
@@ -183,5 +155,4 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
     </div>
   );
 };
-
-export default EditClearence;
+export default AddQualification;

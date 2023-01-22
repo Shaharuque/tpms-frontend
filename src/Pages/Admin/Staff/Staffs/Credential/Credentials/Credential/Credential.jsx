@@ -19,6 +19,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
     setCredentialRecord(record);
     setEditModal(!editModal);
   };
+
   const column = [
     {
       title: "Credential",
@@ -107,7 +108,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={() => handleEditModal(record)}
+            onClick={() => handleEditModal(record?.id)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -209,8 +210,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       )}
       {editModal && (
         <EditCredential
-          open={editModal}
-          credentialInfo={credentialRecord}
+          credentialId={credentialRecord}
           handleClose={handleEditModal}
         ></EditCredential>
       )}

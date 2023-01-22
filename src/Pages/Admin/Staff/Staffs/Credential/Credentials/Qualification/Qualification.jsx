@@ -1,55 +1,68 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "../../../../../../Style/staff.css";
-import CredentialsModal from "../CredentialsModal";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import AddQualification from "./AddQualificationModal/AddQualification";
+import EditQualification from "./EditQualificationModal/EditQualification";
 
-const Qualification = ({ name, handleQualification, qualificationOpen }) => {
+const Qualification = ({
+  name,
+  qualification,
+  handleQualification,
+  qualificationOpen,
+}) => {
   const [display, setDisplay] = useState(true);
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  console.log(tableData, "tableData");
+  const [editModal, setEditModal] = useState(false);
+  const [qualificationRecord, setQualificationRecord] = useState();
 
-  //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/Credential.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        // setLoading2(false);
-      });
-  }, []);
+  console.log("qualification data", qualification);
+  //Handle qualification Edit Modal
+  const handleQualificationEdit = (record) => {
+    setQualificationRecord(record);
+    setEditModal(!editModal);
+  };
 
   const column = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Credential",
+      dataIndex: "qualification_name",
+      key: "qualification_name",
       width: 120,
-      filters: [{}],
-      filteredValue: filteredInfo.name || null,
-      onFilter: (value, record) => record.name.includes(value),
+      filters: [
+        {
+          text: "behaviour",
+          value: "behaviour",
+        },
+        {
+          text: "tpms",
+          value: "tpms",
+        },
+      ],
+      filteredValue: filteredInfo.credential_name || null,
+      onFilter: (value, record) => record.credential_name.includes(value),
       sorter: (a, b) => {
-        return a.name > b.name ? -1 : 1;
+        return a.credential_name > b.credential_name ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "name" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "credential_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
     {
       title: "Credential Type",
-      key: "credential_type",
-      dataIndex: "credential_type",
+      key: "credential_applicable",
+      dataIndex: "credential_applicable",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.credential_type || null,
-      onFilter: (value, record) => record.credential_type.includes(value),
+      filteredValue: filteredInfo.credential_applicable || null,
+      onFilter: (value, record) => record.credential_applicable.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.credential_type > b.credential_type ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_applicable > b.credential_applicable ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
         sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
@@ -58,34 +71,39 @@ const Qualification = ({ name, handleQualification, qualificationOpen }) => {
 
     {
       title: "Date issue",
-      key: "date_issue",
-      dataIndex: "date_issue",
+      key: "qualification_date_exp",
+      dataIndex: "qualification_date_exp",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.date_issue || null,
-      onFilter: (value, record) => record.date_issue.includes(value),
+      filteredValue: filteredInfo.credential_date_expired || null,
+      onFilter: (value, record) =>
+        record.credential_date_expired.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.date_issue > b.date_issue ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_date_expired > b.credential_date_expired ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "date_issue" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "qualification_date_exp"
+          ? sortedInfo.order
+          : null,
       ellipsis: true,
     },
     {
       title: "Expired Date",
-      key: "date_expire",
-      dataIndex: "date_expire",
+      key: "qualification_date_issue",
+      dataIndex: "qualification_date_issue",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.date_expire || null,
-      onFilter: (value, record) => record.date_expire.includes(value),
+      filteredValue: filteredInfo.credential_date_issue || null,
+      onFilter: (value, record) => record.credential_date_issue.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.date_expire > b.date_expire ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_date_issue > b.credential_date_issue ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "date_expire" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "qualification_date_issue"
+          ? sortedInfo.order
+          : null,
       ellipsis: true,
     },
     {
@@ -93,10 +111,10 @@ const Qualification = ({ name, handleQualification, qualificationOpen }) => {
       dataIndex: "operation",
       key: "operation",
       width: 150,
-      render: () => (
+      render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={handleClickOpen}
+            onClick={() => handleQualificationEdit(record?.id)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -134,9 +152,9 @@ const Qualification = ({ name, handleQualification, qualificationOpen }) => {
     <div>
       <h2
         onClick={handleQualification}
-        className=" mt-4 text-xs font-normal px-2 py-2 text-white bg-secondary rounded-sm"
+        className=" mt-4 text-xs font-normal  px-2 py-2 text-white bg-secondary rounded-sm"
       >
-        Qualification
+        Credential
       </h2>
       {qualificationOpen && (
         <div className="border">
@@ -151,7 +169,7 @@ const Qualification = ({ name, handleQualification, qualificationOpen }) => {
           >
             {display && (
               <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
-                <p>No Qualification Records</p>
+                <p>No Credential Records</p>
                 <button
                   onClick={() => setDisplay(false)}
                   className="text-black"
@@ -170,7 +188,7 @@ const Qualification = ({ name, handleQualification, qualificationOpen }) => {
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                  dataSource={tableData}
+                  dataSource={qualification?.qualification_list?.data}
                   onChange={handleChange}
                 />
               </div>
@@ -180,7 +198,7 @@ const Qualification = ({ name, handleQualification, qualificationOpen }) => {
                 className="pms-button mr-2 mt-2"
                 onClick={handleClickOpen}
               >
-                Add Qualification
+                Add Credential
               </button>
 
               <button onClick={clearFilters} className="pms-clear-button mt-2">
@@ -191,11 +209,17 @@ const Qualification = ({ name, handleQualification, qualificationOpen }) => {
         </div>
       )}
       {openEditModal && (
-        <CredentialsModal
+        <AddQualification
           handleClose={handleClose}
           open={openEditModal}
-          name={name}
-        ></CredentialsModal>
+        ></AddQualification>
+      )}
+      {editModal && (
+        <EditQualification
+          open={editModal}
+          qualificationInfo={qualificationRecord}
+          handleClose={handleQualificationEdit}
+        ></EditQualification>
       )}
     </div>
   );
