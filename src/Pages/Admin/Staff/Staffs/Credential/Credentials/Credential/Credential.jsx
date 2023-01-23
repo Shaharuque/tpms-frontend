@@ -22,6 +22,17 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
 
   const column = [
     {
+      title: "Name",
+      dataIndex: "Test",
+      key: "Test",
+      width: 120,
+      render: (_, {}) => {
+        // console.log("tags : ", Name, id);
+        return <h1>{credentials?.employee?.first_name}</h1>;
+      },
+      ellipsis: true,
+    },
+    {
       title: "Credential",
       dataIndex: "credential_name",
       key: "credential_name",
@@ -178,7 +189,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                 <Table
                   pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                   size="small"
-                  className=" text-xs font-normal mt-5"
+                  className="table-striped-rows text-xs font-normal"
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are
@@ -187,7 +198,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                 />
               </div>
             </div>
-            <div className="my-4 ml-2">
+            <div className="my-4 sm:ml-2">
               <button
                 className="pms-button mr-2 mt-2"
                 onClick={handleClickOpen}

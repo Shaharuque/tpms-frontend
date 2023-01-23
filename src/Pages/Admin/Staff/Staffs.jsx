@@ -208,7 +208,7 @@ const Staffs = () => {
   };
 
   return (
-    <div className={StafData ? "h-[100vh]" : "h-[100vh]"}>
+    <div className={""}>
       <div className="flex items-center flex-wrap justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           Staffs
@@ -259,7 +259,7 @@ const Staffs = () => {
             rowKey={(record) => record.id}
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal"
+            className="table-striped-rows text-xs font-normal"
             columns={columns}
             dataSource={staffTableData}
             onChange={handleChange}

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "../../../../../../Style/staff.css";
-import CredentialsModal from "../CredentialsModal";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import AddClearence from "./AddClearenceModal/AddClearence";
 import EditClearence from "./EditClearenceModal/EditClearence";
 
-const Clearance = ({ handleClearence, clearenceOpen, name, clearences }) => {
+const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
   console.log("clearences data", clearences);
   const [display, setDisplay] = useState(true);
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -22,6 +21,17 @@ const Clearance = ({ handleClearence, clearenceOpen, name, clearences }) => {
     setEditModal(!editModal);
   };
   const column = [
+    {
+      title: "Name",
+      dataIndex: "Test",
+      key: "Test",
+      width: 120,
+      render: (_, {}) => {
+        // console.log("tags : ", Name, id);
+        return <h1>{clearences?.employee?.first_name}</h1>;
+      },
+      ellipsis: true,
+    },
     {
       title: "Clearence Name",
       dataIndex: "clearance_name",
@@ -167,7 +177,7 @@ const Clearance = ({ handleClearence, clearenceOpen, name, clearences }) => {
                 <Table
                   pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                   size="small"
-                  className=" text-xs font-normal mt-5"
+                  className="table-striped-rows text-xs font-normal"
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are

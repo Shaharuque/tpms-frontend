@@ -113,14 +113,14 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className=" label-font">
+                  <span className="modal-label-name">
                     Credential<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="clear_type"
-                  className="input-border input-font w-full focus:outline-none"
+                  className="modal-input-field ml-1 w-full"
                   {...register("clear_type")}
                 />
               </div>
@@ -156,7 +156,7 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
                   {...register("fileName")}
                 />
               </div>
-              <div className="flex ml-1 mt-1 gap-2 items-center">
+              <div className="flex ml-1 mt-4 gap-2 items-center">
                 <input
                   type="checkbox"
                   name="clear_apply"

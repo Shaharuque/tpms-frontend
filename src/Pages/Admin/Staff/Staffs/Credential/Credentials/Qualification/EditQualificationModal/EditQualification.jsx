@@ -76,7 +76,7 @@ const EditQualification = ({ handleClose, open, qualificationInfo }) => {
   useEffect(() => {
     if (updateSuccess) {
       handleClose();
-      toast.success("Successfully Added", {
+      toast.success("Successfully Updated", {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
