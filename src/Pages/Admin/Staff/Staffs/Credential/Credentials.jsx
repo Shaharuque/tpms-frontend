@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
+import { useGetClearenceQuery } from "../../../../../features/Stuff_redux/credentials/clearenceApi";
 import { useGetcredentialsQuery } from "../../../../../features/Stuff_redux/credentials/credentialsApi";
 import Loading from "../../../../../Loading/Loading";
 import Clearance from "./Credentials/Clearance/Clearance";
@@ -14,13 +15,22 @@ const Credentials = () => {
   const { token } = useToken();
   const { id } = useParams();
 
+  //get all credential data api
   const { data: credentials, isLoading: credentialsLoading } =
     useGetcredentialsQuery({
       token,
       page: 1,
       id: id,
     });
-  if (credentialsLoading) {
+
+  //get all clearence data api
+  const { data: clearences, isLoading: clearenceLoading } =
+    useGetClearenceQuery({
+      token,
+      page: 1,
+      id: id,
+    });
+  if (credentialsLoading || clearenceLoading) {
     return <Loading></Loading>;
   }
   const handleCredential = () => {
@@ -49,6 +59,7 @@ const Credentials = () => {
       </div>
       <div>
         <Clearance
+          clearences={clearences}
           handleClearence={handleClearence}
           clearenceOpen={clearenceOpen}
         ></Clearance>

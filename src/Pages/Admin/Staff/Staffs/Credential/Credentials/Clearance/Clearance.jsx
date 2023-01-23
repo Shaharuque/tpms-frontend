@@ -5,38 +5,36 @@ import CredentialsModal from "../CredentialsModal";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import AddClearence from "./AddClearenceModal/AddClearence";
+import EditClearence from "./EditClearenceModal/EditClearence";
 
-const Clearance = ({ handleClearence, clearenceOpen, name }) => {
-  console.log(name);
+const Clearance = ({ handleClearence, clearenceOpen, name, clearences }) => {
+  console.log("clearences data", clearences);
   const [display, setDisplay] = useState(true);
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  console.log(tableData, "tableData");
+  const [editModal, setEditModal] = useState(false);
+  const [clearenceRecord, setClearenceRecord] = useState();
 
-  //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/Credential.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        // setLoading2(false);
-      });
-  }, []);
-
+  //Handle clearence Modal
+  const handleClearenceEdit = (record) => {
+    setClearenceRecord(record);
+    setEditModal(!editModal);
+  };
   const column = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Clearence Name",
+      dataIndex: "clearance_name",
+      key: "clearance_name",
       width: 120,
       filters: [{}],
-      filteredValue: filteredInfo.name || null,
-      onFilter: (value, record) => record.name.includes(value),
+      filteredValue: filteredInfo.clearance_name || null,
+      onFilter: (value, record) => record.clearance_name.includes(value),
       sorter: (a, b) => {
-        return a.name > b.name ? -1 : 1;
+        return a.clearance_name > b.clearance_name ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "name" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "clearance_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -59,34 +57,36 @@ const Clearance = ({ handleClearence, clearenceOpen, name }) => {
 
     {
       title: "Date issue",
-      key: "date_issue",
-      dataIndex: "date_issue",
+      key: "clearance_date_issue",
+      dataIndex: "clearance_date_issue",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.date_issue || null,
-      onFilter: (value, record) => record.date_issue.includes(value),
+      filteredValue: filteredInfo.clearance_date_issue || null,
+      onFilter: (value, record) => record.clearance_date_issue.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.date_issue > b.date_issue ? -1 : 1; //sorting problem solved using this logic
+        return a.clearance_date_issue > b.clearance_date_issue ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "date_issue" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "clearance_date_issue"
+          ? sortedInfo.order
+          : null,
       ellipsis: true,
     },
     {
       title: "Expired Date",
-      key: "date_expire",
-      dataIndex: "date_expire",
+      key: "clearance_date_exp",
+      dataIndex: "clearance_date_exp",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.date_expire || null,
-      onFilter: (value, record) => record.date_expire.includes(value),
+      filteredValue: filteredInfo.clearance_date_exp || null,
+      onFilter: (value, record) => record.clearance_date_exp.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.date_expire > b.date_expire ? -1 : 1; //sorting problem solved using this logic
+        return a.clearance_date_exp > b.clearance_date_exp ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "date_expire" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "clearance_date_exp" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -94,10 +94,10 @@ const Clearance = ({ handleClearence, clearenceOpen, name }) => {
       dataIndex: "operation",
       key: "operation",
       width: 150,
-      render: () => (
+      render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={handleClickOpen}
+            onClick={() => handleClearenceEdit(record)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -171,7 +171,7 @@ const Clearance = ({ handleClearence, clearenceOpen, name }) => {
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                  dataSource={tableData}
+                  dataSource={clearences?.clearance_list?.data}
                   onChange={handleChange}
                 />
               </div>
@@ -192,11 +192,17 @@ const Clearance = ({ handleClearence, clearenceOpen, name }) => {
         </div>
       )}
       {openEditModal && (
-        <CredentialsModal
+        <AddClearence
           handleClose={handleClose}
           open={openEditModal}
-          name={name}
-        ></CredentialsModal>
+        ></AddClearence>
+      )}
+      {editModal && (
+        <EditClearence
+          open={editModal}
+          clearenceInfo={clearenceRecord}
+          handleClose={handleClearenceEdit}
+        ></EditClearence>
       )}
     </div>
   );
