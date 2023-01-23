@@ -1,6 +1,6 @@
 import { apiSlice } from "../../api/apiSlice";
 
-export const credentialApi = apiSlice.injectEndpoints({
+export const qualificationApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //Get qualification
     getQualification: builder.query({
@@ -53,14 +53,15 @@ export const credentialApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Qualification"],
     }),
     //Delete qualification by id
-    deleteQualification: builder.query({
-      query: ({ token, id }) => ({
-        url: `admin/ac/staff/qualification/delete/${id}`,
-        method: "GET",
+    deleteQualification: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/staff/qualification/delete`,
+        method: "POST",
         headers: {
           "content-type": "Application/json",
           Authorization: token,
         },
+        body: JSON.stringify(payload),
       }),
       invalidatesTags: ["Qualification"],
     }),
@@ -71,6 +72,6 @@ export const {
   useAddQualificationMutation,
   useGetQualificationQuery,
   useUpdateQualificationMutation,
-  useDeleteQualificationQuery,
+  useDeleteQualificationMutation,
   useGetQualificationInfoQuery,
-} = credentialApi;
+} = qualificationApi;

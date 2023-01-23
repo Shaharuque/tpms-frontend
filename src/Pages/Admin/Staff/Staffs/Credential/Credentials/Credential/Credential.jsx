@@ -22,6 +22,17 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
 
   const column = [
     {
+      title: "Name",
+      dataIndex: "Test",
+      key: "Test",
+      width: 120,
+      render: (_, {}) => {
+        // console.log("tags : ", Name, id);
+        return <h1>{credentials?.employee?.first_name}</h1>;
+      },
+      ellipsis: true,
+    },
+    {
       title: "Credential",
       dataIndex: "credential_name",
       key: "credential_name",
