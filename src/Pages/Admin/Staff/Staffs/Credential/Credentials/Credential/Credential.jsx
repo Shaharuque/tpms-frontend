@@ -186,7 +186,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                 />
               </div>
             </div>
-            <div className="my-4 ml-2">
+            <div className="my-4 sm:ml-2">
               <button
                 className="pms-button mr-2 mt-2"
                 onClick={handleClickOpen}
