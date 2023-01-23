@@ -26,6 +26,7 @@ export const clearenceApi = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      providesTags: ["Clearence"],
     }),
     //Add staff clearence
     addClearence: builder.mutation({
