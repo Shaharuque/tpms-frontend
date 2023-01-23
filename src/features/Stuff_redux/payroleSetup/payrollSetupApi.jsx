@@ -6,8 +6,8 @@ export const payrollApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //staff payroll get
     getPayrolls: builder.query({
-      query: ({ token, page = 3, id }) => ({
-        url: `admin/ac/staff/payroll/get/${id}?page=1`,
+      query: ({ token, page, id }) => ({
+        url: `admin/ac/staff/payroll/get/${id}?page=${page}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",

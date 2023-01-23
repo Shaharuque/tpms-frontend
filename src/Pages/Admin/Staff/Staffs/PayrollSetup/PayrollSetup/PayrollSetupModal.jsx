@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const PayrollSetupModal = ({ handleClose, open }) => {
+const PayrollSetupModal = ({ handleClose, open, services }) => {
   const [active, setActive] = useState(false);
-
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
-
+  //Multi select api data
+  console.log("services", services);
   const onSubmit = (data) => {
     console.log(data);
     reset();

@@ -4,30 +4,48 @@ import { BsArrow90DegRight } from "react-icons/bs";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useGetPayrollsQuery } from "../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
+import useToken from "../../../../../CustomHooks/useToken";
+import { useParams } from "react-router-dom";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import ReactPaginate from "react-paginate";
 
 const PayrollSetup = () => {
   const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-
-  //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/Payroll.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        console.log(tableData, "tableData");
-        // setLoading2(false);
-      });
-  }, []);
-
   const [select, setSelect] = useState("");
-  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [page, setPage] = useState(1);
+  const { token } = useToken();
+  const { id } = useParams();
+
+  //Get Payroll api
+  const {
+    data: payrollData,
+    isLoading,
+    isError,
+  } = useGetPayrollsQuery({
+    token,
+    id,
+    page,
+  });
+  console.log("payroll data", payrollData);
+  const { services } = payrollData || [];
+  console.log("All services", services);
+  const totalPage = payrollData?.payrolls?.last_page;
+
+  //handle pagination function
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
+  };
+
   const handleClickOpen = () => {
-    setOpenEditModal(true);
+    setOpenModal(true);
   };
   const handleClose = () => {
-    setOpenEditModal(false);
+    setOpenModal(false);
   };
 
   const column = [
@@ -36,9 +54,12 @@ const PayrollSetup = () => {
       dataIndex: "service",
       key: "service",
       width: 120,
-      filters: [{}],
-      filteredValue: filteredInfo.service || null,
-      onFilter: (value, record) => record.service.includes(value),
+      render: (_, record) => {
+        let service = payrollData?.services?.find(
+          (s) => s?.id === record?.service_id
+        );
+        return <h1>{service?.description}</h1>;
+      },
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1;
       },
@@ -51,9 +72,9 @@ const PayrollSetup = () => {
       key: "hourly_rate",
       dataIndex: "hourly_rate",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.hourly_rate || null,
-      onFilter: (value, record) => record.hourly_rate.includes(value),
+      render: (_, record) => {
+        return <h1>{record?.hourly_rate}/hr</h1>;
+      },
       //   sorter is for sorting asc or dsc purhourly_rate
       sorter: (a, b) => {
         return a.hourly_rate > b.hourly_rate ? -1 : 1; //sorting problem solved using this logic
@@ -68,9 +89,9 @@ const PayrollSetup = () => {
       key: "milage_rate",
       dataIndex: "milage_rate",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.milage_rate || null,
-      onFilter: (value, record) => record.milage_rate.includes(value),
+      render: (_, record) => {
+        return <h1>{record?.milage_rate} cents/miles</h1>;
+      },
       //   sorter is for sorting asc or dsc purhourly_rate
       sorter: (a, b) => {
         return a.milage_rate > b.milage_rate ? -1 : 1; //sorting problem solved using this logic
@@ -84,9 +105,6 @@ const PayrollSetup = () => {
       key: "billable",
       dataIndex: "billable",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.billable || null,
-      onFilter: (value, record) => record.billable.includes(value),
       //   sorter is for sorting asc or dsc purhourly_rate
       sorter: (a, b) => {
         return a.billable > b.billable ? -1 : 1; //sorting problem solved using this logic
@@ -94,7 +112,6 @@ const PayrollSetup = () => {
       sortOrder: sortedInfo.columnKey === "billable" ? sortedInfo.order : null,
       ellipsis: true,
       render: (_, { id, billable }) => {
-        console.log(billable);
         return <div>{billable ? "Yes" : "No"}</div>;
       },
     },
@@ -169,21 +186,45 @@ const PayrollSetup = () => {
         </div>
       </div>
 
-      <div className="mb-5 overflow-scroll">
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          size="small"
-          className=" text-xs font-normal mt-5"
-          columns={column}
-          bordered
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-          dataSource={tableData}
-          onChange={handleChange}
-          rowSelection={{
-            ...rowSelection,
-          }}
-        />
+      <div className=" overflow-scroll">
+        {!isLoading ? (
+          <Table
+            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            size="small"
+            className=" text-xs font-normal mt-5"
+            columns={column}
+            bordered
+            rowKey={(record) => record.id} //record is kind of whole one data object and here we are
+            dataSource={payrollData?.payrolls?.data}
+            onChange={handleChange}
+            rowSelection={{
+              ...rowSelection,
+            }}
+          />
+        ) : (
+          <ShimmerTableTet></ShimmerTableTet>
+        )}
       </div>
+      {totalPage > 1 && (
+        <div className="flex flex-row-reverse justify-between">
+          <div className="flex items-center justify-start">
+            <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              // previousLabel={"🡰"}
+              // nextLabel={"🡲"}
+              pageCount={Number(totalPage)}
+              marginPagesDisplayed={1}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              previousLinkClassName={"pagination_Link"}
+              nextLinkClassName={"pagination_Link"}
+              activeClassName={"pagination_Link-active"}
+              disabledClassName={"pagination_Link-disabled"}
+            ></ReactPaginate>
+          </div>
+        </div>
+      )}
       <div className="flex my-5">
         <select
           onChange={(e) => setSelect(e.target.value)}
@@ -206,10 +247,11 @@ const PayrollSetup = () => {
         <button className="pms-input-button">Update</button>
       </div>
 
-      {openEditModal && (
+      {openModal && (
         <PayrollSetupModal
           handleClose={handleClose}
-          open={openEditModal}
+          open={openModal}
+          services={services}
         ></PayrollSetupModal>
       )}
     </div>
