@@ -177,7 +177,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                 <Table
                   pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                   size="small"
-                  className=" text-xs font-normal mt-5"
+                  className="table-striped-rows text-xs font-normal"
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are

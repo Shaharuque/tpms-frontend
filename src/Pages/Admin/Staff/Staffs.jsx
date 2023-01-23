@@ -259,7 +259,7 @@ const Staffs = () => {
             rowKey={(record) => record.id}
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal"
+            className="table-striped-rows text-xs font-normal"
             columns={columns}
             dataSource={staffTableData}
             onChange={handleChange}
