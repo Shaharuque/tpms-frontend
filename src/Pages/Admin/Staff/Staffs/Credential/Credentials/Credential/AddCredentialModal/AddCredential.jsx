@@ -81,14 +81,14 @@ const AddCredential = ({ handleClose, open }) => {
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className=" label-font">
-                    Credential<span className="text-red-500">*</span>
+                  <span className="modal-label-name">
+                    Credential <span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="cred_type"
-                  className="input-border input-font w-full focus:outline-none"
+                  className="modal-input-field ml-1 w-full"
                   {...register("cred_type")}
                 />
               </div>
@@ -120,11 +120,11 @@ const AddCredential = ({ handleClose, open }) => {
                 </label>
                 <input
                   type="file"
-                  className=" px-2 py-[5px] mx-1 text-xs w-full"
+                  className=" px-2 py-[5px]  text-xs w-full"
                   {...register("fileName")}
                 />
               </div>
-              <div className="flex ml-1 mt-1 gap-2 items-center">
+              <div className="flex  ml-1 mt-4 gap-2 items-center">
                 <input
                   type="checkbox"
                   name="cred_apply"

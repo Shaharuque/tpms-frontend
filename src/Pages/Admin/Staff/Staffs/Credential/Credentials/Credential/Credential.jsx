@@ -189,7 +189,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                 <Table
                   pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                   size="small"
-                  className=" text-xs font-normal mt-5"
+                  className="table-striped-rows text-xs font-normal"
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are
@@ -198,7 +198,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                 />
               </div>
             </div>
-            <div className="my-4 ml-2">
+            <div className="my-4 sm:ml-2">
               <button
                 className="pms-button mr-2 mt-2"
                 onClick={handleClickOpen}

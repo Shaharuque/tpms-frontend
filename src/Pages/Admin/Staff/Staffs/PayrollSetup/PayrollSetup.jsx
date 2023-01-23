@@ -22,7 +22,6 @@ const PayrollSetup = () => {
   }, []);
 
   const [select, setSelect] = useState("");
-
   const [openEditModal, setOpenEditModal] = useState(false);
   const handleClickOpen = () => {
     setOpenEditModal(true);
@@ -123,6 +122,22 @@ const PayrollSetup = () => {
     },
   ];
 
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(
+        `selectedRowKeys: ${selectedRowKeys}`,
+        "selectedRows: ",
+        selectedRows
+      );
+    },
+    onSelect: (record, selected, selectedRows) => {
+      console.log(record, selected, selectedRows);
+    },
+    onSelectAll: (selected, selectedRows, changeRows) => {
+      console.log(selected, selectedRows, changeRows);
+    },
+  };
+
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
@@ -164,27 +179,33 @@ const PayrollSetup = () => {
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are
           dataSource={tableData}
           onChange={handleChange}
+          rowSelection={{
+            ...rowSelection,
+          }}
         />
       </div>
-
-      <div className="flex items-center flex-wrap gap-3">
-        <BsArrow90DegRight className=" font-bold text-secondary" />
-        <div>
-          <button className=" pms-button mr-3">Select All</button>
-          <button className=" pms-button">Unselect All</button>
-        </div>
-        <div className=" ">
-          <select
-            onChange={(e) => setSelect(e.target.value)}
-            name="post"
-            className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-52 md:w-72"
-          >
-            <option value=""></option>
-            <option value="claim_no">Claim No</option>
-            <option value="patient">Patient</option>
-          </select>
-        </div>
+      <div className="flex my-5">
+        <select
+          onChange={(e) => setSelect(e.target.value)}
+          className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+        >
+          <option value="select" className="text-black"></option>
+          <option value="hourly_and__mileage_Rate" className="text-black">
+            Update Hourly and Mileage Rate
+          </option>
+          <option value="update_hourly_rate" className="text-black">
+            Update Hourly Rate
+          </option>
+          <option value="update_mileage_rate" className="text-black">
+            Update Milage Rate
+          </option>
+          <option value="Bulk Delete" className="text-black">
+            Bulk Delete
+          </option>
+        </select>
+        <button className="pms-input-button">Update</button>
       </div>
+
       {openEditModal && (
         <PayrollSetupModal
           handleClose={handleClose}
