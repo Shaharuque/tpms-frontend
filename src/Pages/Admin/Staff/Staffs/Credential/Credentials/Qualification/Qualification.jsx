@@ -6,7 +6,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import AddQualification from "./AddQualificationModal/AddQualification";
 import EditQualification from "./EditQualificationModal/EditQualification";
-
+import { useDeleteQualificationQuery } from "../../../../../../../features/Stuff_redux/credentials/qualificationApi";
 const Qualification = ({
   name,
   qualification,
@@ -24,6 +24,15 @@ const Qualification = ({
   const handleQualificationEdit = (record) => {
     setQualificationRecord(record);
     setEditModal(!editModal);
+  };
+
+  // const handleDelete = (record) => {
+  //   console.log("delete id", record);
+  //   const { data, isLoading } = useDeleteQualificationQuery({});
+  // };
+
+  const handleDelete = () => {
+    //  delete
   };
 
   const column = [
@@ -122,6 +131,7 @@ const Qualification = ({
           <span>|</span>
 
           <AiOutlineDelete
+            onClick={() => handleDelete(record?.id)}
             className="text-xs text-red-500 mx-2"
             title="Delete"
           />

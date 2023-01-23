@@ -2,7 +2,7 @@ import { apiSlice } from "../../api/apiSlice";
 
 export const credentialApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    //Get staff credentials
+    //Get qualification
     getQualification: builder.query({
       query: ({ token, page = 3, id }) => ({
         url: `admin/ac/staff/qualification/all/${id}?page=1`,
@@ -14,7 +14,7 @@ export const credentialApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["Qualification"],
     }),
-    //Add staff credential
+    //Add qualification
     addQualification: builder.mutation({
       query: ({ token, payload }) => ({
         url: "admin/ac/staff/qualification/save",
@@ -27,7 +27,7 @@ export const credentialApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Qualification"],
     }),
-    //get staff credential table individual data
+    //get qualification table individual data
     getQualificationInfo: builder.query({
       query: ({ token, id }) => ({
         url: `admin/ac/staff/qualification/info/${id}`,
@@ -37,8 +37,9 @@ export const credentialApi = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      providesTags: ["Qualification"],
     }),
-    //Update staff credential info
+    //Update qualification info
     updateQualification: builder.mutation({
       query: ({ token, payload }) => ({
         url: "admin/ac/staff/qualification/update",
@@ -51,6 +52,18 @@ export const credentialApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Qualification"],
     }),
+    //Delete qualification by id
+    deleteQualification: builder.query({
+      query: ({ token, id }) => ({
+        url: `admin/ac/staff/qualification/delete/${id}`,
+        method: "GET",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+      }),
+      invalidatesTags: ["Qualification"],
+    }),
   }),
 });
 
@@ -58,5 +71,6 @@ export const {
   useAddQualificationMutation,
   useGetQualificationQuery,
   useUpdateQualificationMutation,
+  useDeleteQualificationQuery,
   useGetQualificationInfoQuery,
 } = credentialApi;

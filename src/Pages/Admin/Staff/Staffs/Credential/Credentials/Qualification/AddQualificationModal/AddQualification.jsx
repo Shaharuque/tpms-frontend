@@ -16,7 +16,7 @@ const AddQualification = ({ handleClose, open }) => {
   // Add credential Api
   const [
     addQualification,
-    { isSuccess: addCredentialSuccess, isError: addCredentialError },
+    { isSuccess: addQualificationSuccess, isError: addQualificationError },
   ] = useAddQualificationMutation();
 
   const onSubmit = (data) => {
@@ -41,14 +41,14 @@ const AddQualification = ({ handleClose, open }) => {
   };
 
   useEffect(() => {
-    if (addCredentialSuccess) {
+    if (addQualificationSuccess) {
       handleClose();
       toast.success("Successfully Added", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
       });
-    } else if (addCredentialError) {
+    } else if (addQualificationError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
@@ -56,7 +56,7 @@ const AddQualification = ({ handleClose, open }) => {
       });
     }
     //handleClose dependency tey na dileo choley cuz aita change hoy na
-  }, [addCredentialSuccess, addCredentialError]);
+  }, [addQualificationSuccess, addQualificationError]);
   return (
     <div>
       <Modal
@@ -135,7 +135,7 @@ const AddQualification = ({ handleClose, open }) => {
                   {...register("cred_apply")}
                 />
                 <span className="modal-label-name">
-                  Credential Not Applicable
+                  Qualification Not Applicable
                 </span>
               </div>
             </div>

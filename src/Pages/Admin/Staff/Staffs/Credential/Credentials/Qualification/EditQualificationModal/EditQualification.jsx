@@ -14,7 +14,7 @@ const EditQualification = ({ handleClose, open, qualificationInfo }) => {
   const { register, handleSubmit, reset } = useForm();
   console.log("id record pp", qualificationInfo);
   const { token } = useToken();
-  //Getting clearence info data api
+  //Getting qualification info data api
 
   const { data: qualificationData } = useGetQualificationInfoQuery({
     token,
@@ -47,7 +47,7 @@ const EditQualification = ({ handleClose, open, qualificationInfo }) => {
     reset,
   ]);
 
-  //Update clearence info data api
+  //Update qualification info data api
   const [
     updateQualification,
     { isSuccess: updateSuccess, isError: updateError },
