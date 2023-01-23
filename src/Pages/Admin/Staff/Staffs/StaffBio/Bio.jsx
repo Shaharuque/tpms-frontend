@@ -2,7 +2,7 @@
 import { Switch } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
@@ -15,10 +15,11 @@ const Bio = () => {
   const { id } = useParams();
   const { token } = useToken();
   const [note, setNote] = useState("");
-  const [session, setSession] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
+
+  const [session, setSession] = useState();
+  const { register, handleSubmit, reset, control } = useForm();
   const [staffBirthday, setStaffBirthday] = useState();
-  console.log(session);
+  // console.log("chk session", session == true ? 1 : 2);
 
   //get satff info api
   const {
@@ -54,7 +55,7 @@ const Bio = () => {
     gender,
     back_color,
     email_remainder,
-    session_check,
+    session_check = 1,
     service_area_zip,
   } = staffData?.employee_info || {};
   console.log("staff_birthday", staff_birthday);
@@ -62,6 +63,8 @@ const Bio = () => {
   useEffect(() => {
     setStaffBirthday(staff_birthday);
   }, [staff_birthday]);
+
+  // setSession(convertedStatus);
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -87,7 +90,7 @@ const Bio = () => {
         service_area_zip: service_area_zip,
         license_exp_date: license_exp_date,
         language: language,
-        gender: gender,
+        gender: String(gender),
         comment: "Notes",
       });
     }, 600);
@@ -117,7 +120,7 @@ const Bio = () => {
   ]);
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("form raw data", data);
     console.log(note);
     const payload = {
       employee_edit_id: id,
@@ -141,7 +144,8 @@ const Bio = () => {
       service_area_zip: data.service_area_zip,
       license_exp_date: data.license_exp_date,
       language: data.language,
-      gender: data.gender,
+      gender: Number(data.gender),
+      // session_check: session == true ? 1 : 2,
     };
     //update staff api call
     if (payload) {
@@ -153,12 +157,14 @@ const Bio = () => {
     console.log("payload", payload);
   };
 
-  const handleSessionCheck = () => {
-    console.log("session check", session_check);
-    // if (session_check === 2) {
-    //   setSession(false);
-    // }
-  };
+  // const handleSessionCheck = () => {
+  //   // setSession(!session);
+  //   console.log("ss", session);
+  //   // console.log("session check", !session_check);
+  //   // if (session_check === 2) {
+  //   //   setSession(false);
+  //   // }
+  // };
   useEffect(() => {
     if (updateSuccess) {
       toast.success("Successfully updated", {
@@ -174,6 +180,8 @@ const Bio = () => {
       });
     }
   }, [updateSuccess, updateError]);
+  let convertedStatus = session_check ? 1 : 2;
+  // console.log("api set ", session_check);
   return (
     <div className="sm:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
@@ -441,26 +449,13 @@ const Bio = () => {
             </label>
             <div className="flex items-center">
               <div className="flex ml-1 mt-1 items-center">
-                <input
-                  type="radio"
-                  name="patient"
-                  value={gender}
-                  onClick={() => {
-                    // setValue(!value);
-                  }}
-                />
+                <input type="radio" value={2} {...register("gender")} />
                 <span className="text-xs ml-1 text-gray-600 font-normal">
                   female
                 </span>
               </div>
               <div className="flex ml-1 mt-1 items-center">
-                <input
-                  type="radio"
-                  name="patient"
-                  onClick={() => {
-                    // setValue(!value);
-                  }}
-                />
+                <input type="radio" value={1} {...register("gender")} />
                 <span className="text-xs ml-1 text-gray-600 font-normal">
                   male
                 </span>
@@ -470,10 +465,21 @@ const Bio = () => {
           <div>
             <div className="flex items-center gap-2 my-5">
               <Switch
+                defaultChecked={convertedStatus}
                 // defaultChecked={session_check === 2 ? true : false}
-                onChange={() => handleSessionCheck()}
+                onClick={() => setSession(!session)}
+                // onChange={() => handleSessionCheck()}
                 size="small"
               />
+
+              {/* <Controller
+                control={control}
+                defaultValue={session_check === 2 ? true : false}
+                name="session_check"
+                render={({ field: { value, onChange } }) => (
+                  <Switch onChange={onChange} checked={value} />
+                )}
+              /> */}
               <span>Create Session</span>
             </div>
           </div>
