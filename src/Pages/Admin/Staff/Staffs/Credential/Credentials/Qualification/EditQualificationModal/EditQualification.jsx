@@ -2,79 +2,81 @@ import { Modal } from "antd";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../../../../../CustomHooks/useToken";
 import {
-  useClearenceInfoQuery,
-  useUpdateClearenceMutation,
-} from "../../../../../../../../features/Stuff_redux/credentials/clearenceApi";
-import Loading from "../../../../../../../../Loading/Loading";
+  useGetQualificationInfoQuery,
+  useUpdateQualificationMutation,
+} from "../../../../../../../../features/Stuff_redux/credentials/qualificationApi";
 
-const EditClearence = ({ handleClose, open, clearenceInfo }) => {
-  console.log(clearenceInfo);
-  const { token } = useToken();
-
-  //Getting clearence info data api
-  const {
-    data: clearenceData,
-    isLoading,
-    isSuccess,
-  } = useClearenceInfoQuery({ token, id: clearenceInfo?.id });
-
-  //Update clearence info data api
-  const [updateClearence, { isSuccess: updateSuccess, isError: updateError }] =
-    useUpdateClearenceMutation();
-
-  const {
-    clearance_name,
-    clearance_date_issue,
-    clearance_date_exp,
-    clearance_applicable,
-  } = clearenceData?.credential_info || {}; //api tey bhul
-
+const EditQualification = ({ handleClose, open, qualificationInfo }) => {
   const { register, handleSubmit, reset } = useForm();
+  console.log("id record pp", qualificationInfo);
+  const { token } = useToken();
+  //Getting qualification info data api
+
+  const { data: qualificationData } = useGetQualificationInfoQuery({
+    token,
+    id: qualificationInfo,
+  });
+  console.log(qualificationData);
+
+  const {
+    qualification_name,
+    qualification_date_issue,
+    qualification_date_exp,
+    qualification_applicable,
+  } = qualificationData?.qualification || {};
+
+  // To show default data in the form
+  useEffect(() => {
+    setTimeout(() => {
+      reset({
+        clear_type: qualification_name,
+        clear_apply: qualification_applicable ? true : false,
+        date_expire: qualification_date_exp,
+        date_issue: qualification_date_issue,
+      });
+    }, 500);
+  }, [
+    qualification_applicable,
+    qualification_date_exp,
+    qualification_date_issue,
+    qualification_name,
+    reset,
+  ]);
+
+  //Update qualification info data api
+  const [
+    updateQualification,
+    { isSuccess: updateSuccess, isError: updateError },
+  ] = useUpdateQualificationMutation();
+
   const onSubmit = (data) => {
     const payload = {
-      clear_id: clearenceInfo.id,
-      clear_type: data?.clear_type,
+      qual_id: qualificationInfo,
+      qual_type: data?.clear_type,
       date_issue: data?.date_issue,
       date_expire: data?.date_expire,
       //0/1 hobey cred_apply
-      clear_apply: data?.clear_apply ? 1 : 0,
+      qual_apply: data?.clear_apply ? 1 : 0,
       // cred_file: null,
     };
-    console.log("clearance", payload);
+    console.log("qualification paylod", payload);
     if (payload) {
-      updateClearence({
+      updateQualification({
         token,
         payload,
       });
     }
   };
 
-  //To show default data in the form
-  useEffect(() => {
-    setTimeout(() => {
-      reset({
-        clear_type: clearance_name,
-        clear_apply: clearance_applicable ? true : false,
-        date_expire: clearance_date_exp,
-        date_issue: clearance_date_issue,
-      });
-    }, 500);
-  }, [
-    reset,
-    clearance_name,
-    clearance_applicable,
-    clearance_date_exp,
-    clearance_date_issue,
-  ]);
-
   //To show Toast
   useEffect(() => {
     if (updateSuccess) {
       handleClose();
-      toast.success("Successfully Added", {
+      toast.success("Successfully Updated", {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
@@ -113,14 +115,14 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
             <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-3 mr-2 gap-x-2 gap-y-1">
               <div>
                 <label className="label">
-                  <span className="modal-label-name">
+                  <span className=" label-font">
                     Credential<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="clear_type"
-                  className="modal-input-field ml-1 w-full"
+                  className="input-border input-font w-full focus:outline-none"
                   {...register("clear_type")}
                 />
               </div>
@@ -156,7 +158,7 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
                   {...register("fileName")}
                 />
               </div>
-              <div className="flex ml-1 mt-4 gap-2 items-center">
+              <div className="flex ml-1 mt-1 gap-2 items-center">
                 <input
                   type="checkbox"
                   name="clear_apply"
@@ -184,4 +186,4 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
   );
 };
 
-export default EditClearence;
+export default EditQualification;

@@ -39,6 +39,7 @@ export const credentialApi = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      providesTags: ["Credentials"],
     }),
     //Update staff credential info
     updateCredential: builder.mutation({

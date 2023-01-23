@@ -19,7 +19,19 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
     setCredentialRecord(record);
     setEditModal(!editModal);
   };
+
   const column = [
+    {
+      title: "Name",
+      dataIndex: "Test",
+      key: "Test",
+      width: 120,
+      render: (_, {}) => {
+        // console.log("tags : ", Name, id);
+        return <h1>{credentials?.employee?.first_name}</h1>;
+      },
+      ellipsis: true,
+    },
     {
       title: "Credential",
       dataIndex: "credential_name",
@@ -107,7 +119,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={() => handleEditModal(record)}
+            onClick={() => handleEditModal(record?.id)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -209,8 +221,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       )}
       {editModal && (
         <EditCredential
-          open={editModal}
-          credentialInfo={credentialRecord}
+          credentialId={credentialRecord}
           handleClose={handleEditModal}
         ></EditCredential>
       )}

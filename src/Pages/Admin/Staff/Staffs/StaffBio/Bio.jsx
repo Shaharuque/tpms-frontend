@@ -36,21 +36,25 @@ const Bio = () => {
     middle_name,
     last_name,
     nickname,
-    ssn,
     staff_birthday,
+    ssn,
     office_email,
     office_phone,
     office_fax,
+    license_exp_date,
     hir_date_compnay,
+    treatment_type,
+    credential_type,
     individual_npi,
     is_active,
     taxonomy_code,
     terminated_date,
-    treatment_type,
     title,
-    license_exp_date,
     language,
     gender,
+    back_color,
+    email_remainder,
+    session_check,
     service_area_zip,
   } = staffData?.employee_info || {};
   console.log("staff_birthday", staff_birthday);
@@ -147,6 +151,13 @@ const Bio = () => {
       });
     }
     console.log("payload", payload);
+  };
+
+  const handleSessionCheck = () => {
+    console.log("session check", session_check);
+    // if (session_check === 2) {
+    //   setSession(false);
+    // }
   };
   useEffect(() => {
     if (updateSuccess) {
@@ -458,7 +469,11 @@ const Bio = () => {
           </div>
           <div>
             <div className="flex items-center gap-2 my-5">
-              <Switch onClick={() => setSession(!session)} size="small" />
+              <Switch
+                // defaultChecked={session_check === 2 ? true : false}
+                onChange={() => handleSessionCheck()}
+                size="small"
+              />
               <span>Create Session</span>
             </div>
           </div>
