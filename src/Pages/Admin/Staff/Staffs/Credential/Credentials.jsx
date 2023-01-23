@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
 import { useGetClearenceQuery } from "../../../../../features/Stuff_redux/credentials/clearenceApi";
 import { useGetcredentialsQuery } from "../../../../../features/Stuff_redux/credentials/credentialsApi";
+import { useGetQualificationQuery } from "../../../../../features/Stuff_redux/credentials/qualificationApi";
 import Loading from "../../../../../Loading/Loading";
 import Clearance from "./Credentials/Clearance/Clearance";
 import Credential from "./Credentials/Credential/Credential";
@@ -30,9 +31,20 @@ const Credentials = () => {
       page: 1,
       id: id,
     });
-  if (credentialsLoading || clearenceLoading) {
+
+  //get all Qualification data api
+  const { data: qualification, isLoading: qualificationLoading } =
+    useGetQualificationQuery({
+      token,
+      page: 1,
+      id: id,
+    });
+
+  if (credentialsLoading || clearenceLoading || qualificationLoading) {
     return <Loading></Loading>;
   }
+
+  console.log("qualification data", qualification);
   const handleCredential = () => {
     setCredentialOpen(!credentialOpen);
     setClearenceOpen(false);
@@ -68,6 +80,7 @@ const Credentials = () => {
         <Qualification
           handleQualification={handleQualification}
           qualificationOpen={qualificationOpen}
+          qualification={qualification}
         ></Qualification>
       </div>
     </div>

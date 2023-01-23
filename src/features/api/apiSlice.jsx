@@ -21,6 +21,7 @@ export const apiSlice = createApi({
     "Staff",
     "Credentials",
     "Clearence",
+    "Qualification",
   ],
   endpoints: (builder) => ({}),
 });
