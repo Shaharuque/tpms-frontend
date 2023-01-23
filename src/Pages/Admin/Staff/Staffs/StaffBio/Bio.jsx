@@ -470,7 +470,7 @@ const Bio = () => {
           <div>
             <div className="flex items-center gap-2 my-5">
               <Switch
-                defaultChecked={session_check === 2 ? true : false}
+                // defaultChecked={session_check === 2 ? true : false}
                 onChange={() => handleSessionCheck()}
                 size="small"
               />

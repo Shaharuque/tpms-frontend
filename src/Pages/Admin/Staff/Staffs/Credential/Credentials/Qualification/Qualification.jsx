@@ -164,7 +164,7 @@ const Qualification = ({
         onClick={handleQualification}
         className=" mt-4 text-xs font-normal  px-2 py-2 text-white bg-secondary rounded-sm"
       >
-        Credential
+        Qualification
       </h2>
       {qualificationOpen && (
         <div className="border">
