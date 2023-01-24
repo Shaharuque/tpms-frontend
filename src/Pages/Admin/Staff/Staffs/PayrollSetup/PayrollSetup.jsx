@@ -4,31 +4,137 @@ import { BsArrow90DegRight } from "react-icons/bs";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
+import {
+  useBulkDeletePayrollMutation,
+  useDeletePayrollMutation,
+  useGetPayrollsQuery,
+} from "../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
+import useToken from "../../../../../CustomHooks/useToken";
+import { useParams } from "react-router-dom";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import ReactPaginate from "react-paginate";
+import PayrollEditModal from "./PayrollSetup/PayrollEditModal";
+import { toast } from "react-toastify";
 
 const PayrollSetup = () => {
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [select, setSelect] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [page, setPage] = useState(1);
+  const [payrollId, setPayRollId] = useState();
+  const [selectedPayrolls, setSelectedPayrolls] = useState([]);
+  const { token } = useToken();
+  const { id } = useParams();
 
-  //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/Payroll.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        console.log(tableData, "tableData");
-        // setLoading2(false);
-      });
-  }, []);
+  console.log("to update bulk", select);
 
-  const [select, setSelect] = useState("");
-  const [openEditModal, setOpenEditModal] = useState(false);
+  //Get Payroll api
+  const {
+    data: payrollData,
+    isLoading,
+    isError,
+  } = useGetPayrollsQuery({
+    token,
+    id,
+    page,
+  });
+
+  //Delete payroll api
+  const [deletePayroll, { isSuccess: deleteSuccess, isError: deleteError }] =
+    useDeletePayrollMutation();
+
+  //Bulk-Delete payroll api
+  const [
+    bulkDeletePayroll,
+    { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError },
+  ] = useBulkDeletePayrollMutation();
+
+  //console.log("payroll data", payrollData);
+  const { services } = payrollData || [];
+  //console.log("All services", services);
+  const totalPage = payrollData?.payrolls?.last_page;
+
+  //handle pagination function
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
+  };
+  //Edit Modal
+  const handleEditModal = (id) => {
+    setPayRollId(id);
+    setEditModal(true);
+  };
+  //add Modal
   const handleClickOpen = () => {
-    setOpenEditModal(true);
+    setOpenModal(true);
   };
   const handleClose = () => {
-    setOpenEditModal(false);
+    setOpenModal(false);
+    setEditModal(false);
   };
+  //delete payroll handler(id wise)
+  const deletePayrollHandler = (record) => {
+    console.log("delete record to be ", record);
+    if (record?.id) {
+      deletePayroll({
+        token,
+        payload: {
+          id: record?.id,
+        },
+      });
+    }
+  };
+  useEffect(() => {
+    if (deleteSuccess) {
+      toast.success("Successfully Payroll Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (deleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [deleteSuccess, deleteError]);
+
+  const handleBulkDelete = () => {
+    if (selectedPayrolls?.length !== 0 && select === "Bulk Delete") {
+      bulkDeletePayroll({
+        token,
+        payload: {
+          ids: selectedPayrolls,
+        },
+      });
+    } else {
+      toast.error("Please Select Valid Option", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  };
+  useEffect(() => {
+    if (bulkDeleteSuccess) {
+      toast.success("Successfully Payrolls Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (bulkDeleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [bulkDeleteSuccess, bulkDeleteError]);
 
   const column = [
     {
@@ -36,9 +142,12 @@ const PayrollSetup = () => {
       dataIndex: "service",
       key: "service",
       width: 120,
-      filters: [{}],
-      filteredValue: filteredInfo.service || null,
-      onFilter: (value, record) => record.service.includes(value),
+      render: (_, record) => {
+        let service = payrollData?.services?.find(
+          (s) => s?.id === record?.service_id
+        );
+        return <h1>{service?.description}</h1>;
+      },
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1;
       },
@@ -51,9 +160,9 @@ const PayrollSetup = () => {
       key: "hourly_rate",
       dataIndex: "hourly_rate",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.hourly_rate || null,
-      onFilter: (value, record) => record.hourly_rate.includes(value),
+      render: (_, record) => {
+        return <h1>{record?.hourly_rate}/hr</h1>;
+      },
       //   sorter is for sorting asc or dsc purhourly_rate
       sorter: (a, b) => {
         return a.hourly_rate > b.hourly_rate ? -1 : 1; //sorting problem solved using this logic
@@ -68,9 +177,9 @@ const PayrollSetup = () => {
       key: "milage_rate",
       dataIndex: "milage_rate",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.milage_rate || null,
-      onFilter: (value, record) => record.milage_rate.includes(value),
+      render: (_, record) => {
+        return <h1>{record?.milage_rate} cents/miles</h1>;
+      },
       //   sorter is for sorting asc or dsc purhourly_rate
       sorter: (a, b) => {
         return a.milage_rate > b.milage_rate ? -1 : 1; //sorting problem solved using this logic
@@ -84,9 +193,6 @@ const PayrollSetup = () => {
       key: "billable",
       dataIndex: "billable",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.billable || null,
-      onFilter: (value, record) => record.billable.includes(value),
       //   sorter is for sorting asc or dsc purhourly_rate
       sorter: (a, b) => {
         return a.billable > b.billable ? -1 : 1; //sorting problem solved using this logic
@@ -94,7 +200,6 @@ const PayrollSetup = () => {
       sortOrder: sortedInfo.columnKey === "billable" ? sortedInfo.order : null,
       ellipsis: true,
       render: (_, { id, billable }) => {
-        console.log(billable);
         return <div>{billable ? "Yes" : "No"}</div>;
       },
     },
@@ -103,10 +208,10 @@ const PayrollSetup = () => {
       dataIndex: "operation",
       key: "operation",
       width: 150,
-      render: () => (
+      render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={handleClickOpen}
+            onClick={() => handleEditModal(record)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -114,6 +219,7 @@ const PayrollSetup = () => {
           <span>|</span>
 
           <AiOutlineDelete
+            onClick={() => deletePayrollHandler(record)}
             className="text-xs text-red-500 mx-2"
             title="Delete"
           />
@@ -122,21 +228,13 @@ const PayrollSetup = () => {
     },
   ];
 
+  //get rows to be deleted
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
-    },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows);
+      setSelectedPayrolls(selectedRowKeys);
     },
   };
+  console.log(selectedPayrolls);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -169,21 +267,45 @@ const PayrollSetup = () => {
         </div>
       </div>
 
-      <div className="mb-5 overflow-scroll">
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          size="small"
-          className=" text-xs font-normal mt-5"
-          columns={column}
-          bordered
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-          dataSource={tableData}
-          onChange={handleChange}
-          rowSelection={{
-            ...rowSelection,
-          }}
-        />
+      <div className=" overflow-scroll">
+        {!isLoading ? (
+          <Table
+            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            size="small"
+            className=" text-xs font-normal mt-5"
+            columns={column}
+            bordered
+            rowKey={(record) => record.id} //record is kind of whole one data object and here we are
+            dataSource={payrollData?.payrolls?.data}
+            onChange={handleChange}
+            rowSelection={{
+              ...rowSelection,
+            }}
+          />
+        ) : (
+          <ShimmerTableTet></ShimmerTableTet>
+        )}
       </div>
+      {totalPage > 1 && (
+        <div className="flex flex-row-reverse justify-between">
+          <div className="flex items-center justify-start">
+            <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              // previousLabel={"🡰"}
+              // nextLabel={"🡲"}
+              pageCount={Number(totalPage)}
+              marginPagesDisplayed={1}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              previousLinkClassName={"pagination_Link"}
+              nextLinkClassName={"pagination_Link"}
+              activeClassName={"pagination_Link-active"}
+              disabledClassName={"pagination_Link-disabled"}
+            ></ReactPaginate>
+          </div>
+        </div>
+      )}
       <div className="flex my-5">
         <select
           onChange={(e) => setSelect(e.target.value)}
@@ -203,14 +325,25 @@ const PayrollSetup = () => {
             Bulk Delete
           </option>
         </select>
-        <button className="pms-input-button">Update</button>
+        <button onClick={handleBulkDelete} className="pms-input-button">
+          Update
+        </button>
       </div>
 
-      {openEditModal && (
+      {openModal && (
         <PayrollSetupModal
           handleClose={handleClose}
-          open={openEditModal}
+          open={openModal}
+          services={services}
         ></PayrollSetupModal>
+      )}
+      {editModal && (
+        <PayrollEditModal
+          payroll_id={payrollId}
+          services={services}
+          handleClose={handleClose}
+          open={editModal}
+        ></PayrollEditModal>
       )}
     </div>
   );
