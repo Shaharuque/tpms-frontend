@@ -27,7 +27,7 @@ const PyarollMultiSelect = ({ Alldata }) => {
     if (selected.length) {
       if (selected.length > 3) return `All Selected ${selected.length}`;
 
-      return selected.map(({ label }) => label);
+      return selected.map(({ label }) => label + "," + " ");
     }
     return "None selected";
   };
