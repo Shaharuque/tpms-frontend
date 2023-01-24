@@ -2,13 +2,14 @@ import { Modal } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import PyarollMultiSelect from "../../../../../Shared/CustomComponents/PyarollMultiSelect";
 
 const PayrollSetupModal = ({ handleClose, open, services }) => {
   const [active, setActive] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
   //Multi select api data
-  console.log("services", services);
+  console.log("services data ", services);
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -48,13 +49,15 @@ const PayrollSetupModal = ({ handleClose, open, services }) => {
                   <label className="label">
                     <span className="modal-label-name">Service</span>
                   </label>
-                  <select
+                  {/* <select
                     className="modal-input-field ml-1 w-full"
                     {...register(`service`)}
                   >
                     <option value="Speech Therapist">Speech Therapist</option>
                     <option value="female">Female</option>
-                  </select>
+                  </select> */}
+
+                  <PyarollMultiSelect Alldata={services} />
                 </div>
 
                 <div>
