@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import PyarollMultiSelect from "../../../../../Shared/CustomComponents/PyarollMultiSelect";
+import PyarollMultiSelect from "../PayrollMultiSelect/PyarollMultiSelect";
 
 const PayrollSetupModal = ({ handleClose, open, services }) => {
   const [active, setActive] = useState(false);
