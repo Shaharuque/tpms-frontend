@@ -4,21 +4,31 @@ import { BsArrow90DegRight } from "react-icons/bs";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useGetPayrollsQuery } from "../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
+import {
+  useBulkDeletePayrollMutation,
+  useDeletePayrollMutation,
+  useGetPayrollsQuery,
+} from "../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
 import useToken from "../../../../../CustomHooks/useToken";
 import { useParams } from "react-router-dom";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import ReactPaginate from "react-paginate";
+import PayrollEditModal from "./PayrollSetup/PayrollEditModal";
+import { toast } from "react-toastify";
 
 const PayrollSetup = () => {
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [select, setSelect] = useState("");
+  const [select, setSelect] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const [page, setPage] = useState(1);
+  const [payrollId, setPayRollId] = useState();
+  const [selectedPayrolls, setSelectedPayrolls] = useState([]);
   const { token } = useToken();
   const { id } = useParams();
+
+  console.log("to update bulk", select);
 
   //Get Payroll api
   const {
@@ -30,9 +40,20 @@ const PayrollSetup = () => {
     id,
     page,
   });
-  console.log("payroll data", payrollData);
+
+  //Delete payroll api
+  const [deletePayroll, { isSuccess: deleteSuccess, isError: deleteError }] =
+    useDeletePayrollMutation();
+
+  //Bulk-Delete payroll api
+  const [
+    bulkDeletePayroll,
+    { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError },
+  ] = useBulkDeletePayrollMutation();
+
+  //console.log("payroll data", payrollData);
   const { services } = payrollData || [];
-  console.log("All services", services);
+  //console.log("All services", services);
   const totalPage = payrollData?.payrolls?.last_page;
 
   //handle pagination function
@@ -40,13 +61,80 @@ const PayrollSetup = () => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
   };
-
+  //Edit Modal
+  const handleEditModal = (id) => {
+    setPayRollId(id);
+    setEditModal(true);
+  };
+  //add Modal
   const handleClickOpen = () => {
     setOpenModal(true);
   };
   const handleClose = () => {
     setOpenModal(false);
+    setEditModal(false);
   };
+  //delete payroll handler(id wise)
+  const deletePayrollHandler = (record) => {
+    console.log("delete record to be ", record);
+    if (record?.id) {
+      deletePayroll({
+        token,
+        payload: {
+          id: record?.id,
+        },
+      });
+    }
+  };
+  useEffect(() => {
+    if (deleteSuccess) {
+      toast.success("Successfully Payroll Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (deleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [deleteSuccess, deleteError]);
+
+  const handleBulkDelete = () => {
+    if (selectedPayrolls?.length !== 0 && select === "Bulk Delete") {
+      bulkDeletePayroll({
+        token,
+        payload: {
+          ids: selectedPayrolls,
+        },
+      });
+    } else {
+      toast.error("Please Select Valid Option", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  };
+  useEffect(() => {
+    if (bulkDeleteSuccess) {
+      toast.success("Successfully Payrolls Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (bulkDeleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [bulkDeleteSuccess, bulkDeleteError]);
 
   const column = [
     {
@@ -120,10 +208,10 @@ const PayrollSetup = () => {
       dataIndex: "operation",
       key: "operation",
       width: 150,
-      render: () => (
+      render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={handleClickOpen}
+            onClick={() => handleEditModal(record)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -131,6 +219,7 @@ const PayrollSetup = () => {
           <span>|</span>
 
           <AiOutlineDelete
+            onClick={() => deletePayrollHandler(record)}
             className="text-xs text-red-500 mx-2"
             title="Delete"
           />
@@ -139,21 +228,13 @@ const PayrollSetup = () => {
     },
   ];
 
+  //get rows to be deleted
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
-    },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows);
+      setSelectedPayrolls(selectedRowKeys);
     },
   };
+  console.log(selectedPayrolls);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -244,7 +325,9 @@ const PayrollSetup = () => {
             Bulk Delete
           </option>
         </select>
-        <button className="pms-input-button">Update</button>
+        <button onClick={handleBulkDelete} className="pms-input-button">
+          Update
+        </button>
       </div>
 
       {openModal && (
@@ -253,6 +336,14 @@ const PayrollSetup = () => {
           open={openModal}
           services={services}
         ></PayrollSetupModal>
+      )}
+      {editModal && (
+        <PayrollEditModal
+          payroll_id={payrollId}
+          services={services}
+          handleClose={handleClose}
+          open={editModal}
+        ></PayrollEditModal>
       )}
     </div>
   );

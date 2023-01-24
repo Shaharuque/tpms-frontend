@@ -5,58 +5,90 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../../../CustomHooks/useToken";
-import { useAddPayrollMutation } from "../../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
+import {
+  useGetpayrollinfoQuery,
+  useUpdatePayrollMutation,
+} from "../../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
 import PyarollMultiSelect from "../PayrollMultiSelect/PyarollMultiSelect";
 
-const PayrollSetupModal = ({ handleClose, open, services }) => {
+const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
+  console.log("from edit modal", open, payroll_id, services);
   const [active, setActive] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
   const [serviceId, setServiceId] = useState([]);
-  const { id } = useParams();
   const { token } = useToken();
-  console.log("seleted service ID", serviceId);
-  console.log("services data ", services);
-  //add payroll api
-  const [addPayroll, { isSuccess: addSuccess, isError: addError }] =
-    useAddPayrollMutation();
+  const { id } = useParams();
+
+  //record service id wise service description
+  const existingService = services?.find(
+    (each) => each.id === payroll_id?.service_id
+  );
+  console.log("Clicked existing service", existingService);
+
+  //Individual payroll data id wise
+  //   const { data: payrollInfo, isLoading } = useGetpayrollinfoQuery({
+  //     token,
+  //     id: payroll_id,
+  //     payload: {
+  //       id: payroll_id,
+  //     },
+  //   });
+  //   console.log(isLoading, payrollInfo);
+
+  //update payroll api
+  const [updatePayroll, { isSuccess: updateSuccess, isError: updateError }] =
+    useUpdatePayrollMutation();
+
+  //To show default data in the form
+  useEffect(() => {
+    setTimeout(() => {
+      reset({
+        milage_rate: payroll_id?.milage_rate,
+        hourly_rate: payroll_id?.hourly_rate,
+      });
+    }, 500);
+  }, [reset, payroll_id?.milage_rate, payroll_id?.hourly_rate]);
 
   const onSubmit = (data) => {
     const payload = {
-      hourly_rate: data?.hourly_rate,
-      milage_rate: data?.milage_rate,
-      ser_id: serviceId,
+      edit_id: payroll_id?.id,
       employee_id: id,
+      service_id: data?.service,
+      hourly: data?.hourly_rate,
+      milage: data?.milage_rate,
+      apply_all: 1, //1=true,2=false
     };
-    if (serviceId?.length !== 0) {
-      addPayroll({
+    if (payload) {
+      updatePayroll({
         token,
         payload,
       });
     }
+    // console.log(payload);
   };
 
   useEffect(() => {
-    if (addSuccess) {
+    if (updateSuccess) {
       toast.success("Successfully Staff Created", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
       });
       handleClose();
-    } else if (addError) {
+    } else if (updateError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
       });
     }
-  }, [addSuccess, addError]);
+  }, [updateSuccess, updateError]);
   return (
     <div>
       <div>
         <Modal
-          open={true} //aikhaney true na likey ekta state ana lagbey tar value 'true'
+          open={open} //aikhaney true na likey ekta state ana lagbey tar value 'true'
           centered
           footer={null}
           bodyStyle={{ padding: "0" }}
@@ -85,10 +117,28 @@ const PayrollSetupModal = ({ handleClose, open, services }) => {
                   <label className="label">
                     <span className="modal-label-name">Service</span>
                   </label>
-                  <PyarollMultiSelect
-                    setServiceId={setServiceId}
-                    Alldata={services}
-                  />
+                  <select
+                    className="modal-input-field ml-1 w-full"
+                    name="service"
+                    {...register("service")}
+                  >
+                    {existingService ? (
+                      <option value={existingService?.id}>
+                        {existingService?.description}
+                      </option>
+                    ) : (
+                      <option>Select Treatment</option>
+                    )}
+                    {services
+                      ?.filter((item) => item.id !== existingService?.id)
+                      ?.map((service) => {
+                        return (
+                          <option key={service?.id} value={service?.id}>
+                            {service?.description}
+                          </option>
+                        );
+                      })}
+                  </select>
                 </div>
 
                 <div>
@@ -145,4 +195,4 @@ const PayrollSetupModal = ({ handleClose, open, services }) => {
   );
 };
 
-export default PayrollSetupModal;
+export default PayrollEditModal;

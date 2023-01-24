@@ -13,11 +13,20 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [editModal, setEditModal] = useState(false);
   const [credentialRecord, setCredentialRecord] = useState();
+  const [openEditModal, setOpenEditModal] = useState(false);
 
   //Handle credentialEdit Modal
   const handleEditModal = (record) => {
     setCredentialRecord(record);
-    setEditModal(!editModal);
+    setEditModal(true);
+  };
+
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
+  const handleClose = () => {
+    setOpenEditModal(false);
+    setEditModal(false);
   };
 
   const column = [
@@ -119,7 +128,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
           <FiEdit
-            onClick={() => handleEditModal(record?.id)}
+            onClick={() => handleEditModal(record)}
             className="text-xs mx-2  text-lime-700"
             title="Edit"
           />
@@ -135,11 +144,6 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
     },
   ];
 
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const handleClickOpen = () => {
-    setOpenEditModal(true);
-  };
-
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
@@ -150,9 +154,6 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
     setFilteredInfo({});
   };
 
-  const handleClose = () => {
-    setOpenEditModal(false);
-  };
   return (
     <div>
       <h2
@@ -221,8 +222,9 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       )}
       {editModal && (
         <EditCredential
-          credentialId={credentialRecord}
-          handleClose={handleEditModal}
+          credentialInfo={credentialRecord}
+          handleClose={handleClose}
+          open={editModal}
         ></EditCredential>
       )}
     </div>
