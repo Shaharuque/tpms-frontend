@@ -15,11 +15,9 @@ const Bio = () => {
   const { id } = useParams();
   const { token } = useToken();
   const [note, setNote] = useState("");
-
   const [session, setSession] = useState();
   const { register, handleSubmit, reset, control } = useForm();
   const [staffBirthday, setStaffBirthday] = useState();
-  // console.log("chk session", session == true ? 1 : 2);
 
   //get satff info api
   const {
@@ -27,7 +25,7 @@ const Bio = () => {
     isLoading,
     isSuccess,
   } = useGetInfoQuery({ token, id: id });
-  console.log("staff data", staffData, isLoading);
+  // console.log("staff data", staffData, isLoading);
   //update staff api
   const [updateStaff, { isSuccess: updateSuccess, isError: updateError }] =
     useUpdateStaffMutation();
@@ -55,10 +53,10 @@ const Bio = () => {
     gender,
     back_color,
     email_remainder,
-    session_check = 1,
+    session_check,
     service_area_zip,
   } = staffData?.employee_info || {};
-  console.log("staff_birthday", staff_birthday);
+  // console.log("staff_birthday", staff_birthday);
   // staff_birthday
   useEffect(() => {
     setStaffBirthday(staff_birthday);
@@ -121,7 +119,7 @@ const Bio = () => {
 
   const onSubmit = (data) => {
     console.log("form raw data", data);
-    console.log(note);
+    // console.log(note);
     const payload = {
       employee_edit_id: id,
       caqh_id: data.caqh_id,
@@ -145,8 +143,9 @@ const Bio = () => {
       license_exp_date: data.license_exp_date,
       language: data.language,
       gender: Number(data.gender),
-      // session_check: session == true ? 1 : 2,
+      session_check: session === true ? 1 : 2,
     };
+    console.log("chk session", session === true ? 1 : 2);
     //update staff api call
     if (payload) {
       updateStaff({
@@ -154,7 +153,7 @@ const Bio = () => {
         payload,
       });
     }
-    console.log("payload", payload);
+    // console.log("payload", payload);
   };
 
   // const handleSessionCheck = () => {
@@ -180,8 +179,9 @@ const Bio = () => {
       });
     }
   }, [updateSuccess, updateError]);
-  let convertedStatus = session_check ? 1 : 2;
-  // console.log("api set ", session_check);
+
+  // let convertedStatus = session_check === 1 ? true : false;
+  // console.log("convert ", convertedStatus, "raw api", session_check);
   return (
     <div className="sm:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
@@ -465,8 +465,8 @@ const Bio = () => {
           <div>
             <div className="flex items-center gap-2 my-5">
               <Switch
-                defaultChecked={convertedStatus}
-                // defaultChecked={session_check === 2 ? true : false}
+                // checked={session_check !== 1 ? false : true}
+                defaultChecked={session_check === 1 ? true : false}
                 onClick={() => setSession(!session)}
                 // onChange={() => handleSessionCheck()}
                 size="small"
