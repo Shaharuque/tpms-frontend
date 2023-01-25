@@ -3,40 +3,40 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Table } from "antd";
-import TextArea from "antd/lib/input/TextArea";
-import { useGetLeaveTrackingMutation } from "../../../../../features/Stuff_redux/leaveTracking/leaveTrackingApi";
+import {
+  useAddLeaveTrackingMutation,
+  useGetLeaveTrackingQuery,
+} from "../../../../../features/Stuff_redux/leaveTracking/leaveTrackingApi";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
+import Loading from "../../../../../Loading/Loading";
 
 const LeaveTracking = () => {
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const id = useParams();
+  const { id } = useParams();
   const { token } = useToken();
 
-  // console.log("token", token, "id", param);
-  //   fetch data
-  // useEffect(() => {
-  //   fetch("../../../All_Fake_Api/StaffLeaveTracking.json")
-  //     .then((res) => res.json())
-  //     .then((d) => {
-  //       setTableData(d);
-  //       // console.log(tableData, "tableData");
-  //       // setLoading2(false);
-  //     });
-  // }, []);
+  // get Leaves-Tracking api
+  const { data: leaveTrackData, isLoading: getleaveTrackLoading } =
+    useGetLeaveTrackingQuery({
+      token,
+      payload: {
+        employee_id: id,
+      },
+    });
 
+  // Add new leave api
   const [
-    getLeaveTracking,
-    { data: leaveTrackData, isLoading, isSuccess, isError },
-  ] = useGetLeaveTrackingMutation();
+    addLeaveTracking,
+    {
+      data: addleaveTrackdata,
+      isSuccess: addleaveTrackSuccess,
+      isError: addleaveTrackError,
+    },
+  ] = useAddLeaveTrackingMutation();
 
-  useEffect(() => {
-    getLeaveTracking({ id, token });
-  }, [getLeaveTracking, id, token]);
-
-  console.log("api response data", leaveTrackData?.leave_list?.data);
   const column = [
     {
       title: "Date of Holiday",
@@ -100,11 +100,11 @@ const LeaveTracking = () => {
                 pending
               </button>
             )}
-            {/* {status === "Scheduled" && (
+            {status === "Scheduled" && (
               <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
                 {status}
               </button>
-            )} */}
+            )}
           </div>
         );
       },
@@ -140,15 +140,42 @@ const LeaveTracking = () => {
     },
   ];
 
-  const [note, setNote] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [timeOpen, setTimeOpen] = useState(false);
 
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(note);
-    reset();
+    const addTrackPaylod = {
+      employee_id: id,
+      leave_date: data.date,
+      desc: data.desc,
+    };
+    addLeaveTracking({
+      token,
+      payload: addTrackPaylod,
+    });
   };
+  //Success/Error message show
+  useEffect(() => {
+    if (addleaveTrackSuccess) {
+      toast.success(addleaveTrackdata?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      reset();
+    } else if (addleaveTrackError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [
+    addleaveTrackError,
+    addleaveTrackSuccess,
+    addleaveTrackdata?.message,
+    reset,
+  ]);
 
   const handleChange = (pagination, filters, sorter) => {
     // console.log("Various parameters", pagination, filters, sorter);
@@ -160,6 +187,9 @@ const LeaveTracking = () => {
     setFilteredInfo({});
   };
 
+  if (getleaveTrackLoading) {
+    return <Loading />;
+  }
   return (
     <div className="h-[100vh]">
       <div className="flex items-center justify-between gap-2 my-2">
@@ -201,11 +231,18 @@ const LeaveTracking = () => {
                 <label className="label">
                   <span className="modal-label-name">Description</span>
                 </label>
-                <TextArea
+                {/* <TextArea
                   rows={4}
                   placeholder="description"
                   size="middle"
                   onChange={(e) => setNote(e.target.value)}
+                /> */}
+                <textarea
+                  rows={4}
+                  placeholder="maxLength is 6"
+                  size="middle"
+                  {...register("desc")}
+                  // onChange={(e) => setNote(e.target.value)}
                 />
               </div>
               <div>
