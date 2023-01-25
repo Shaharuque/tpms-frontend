@@ -1,7 +1,7 @@
 import React from "react";
 
-const OtherSetUpBottom = ({ key, data, register }) => {
-  const tx_type = `txType[${key}]`;
+const OtherSetUpBottom = ({ data, register }) => {
+  const tx_type = `txType[1]`;
   const { treatment_name, box_24j, id_qualifire } = data;
   return (
     <fieldset name={tx_type} key={tx_type}>
