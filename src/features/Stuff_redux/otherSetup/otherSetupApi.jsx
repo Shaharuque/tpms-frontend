@@ -2,7 +2,7 @@
 
 import { apiSlice } from "../../api/apiSlice";
 
-export const otherStaffApi = apiSlice.injectEndpoints({
+export const otherSetupApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //update staff department
     getOtherSetup: builder.query({
@@ -18,4 +18,4 @@ export const otherStaffApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetOtherSetupQuery } = otherStaffApi;
+export const { useGetOtherSetupQuery } = otherSetupApi;
