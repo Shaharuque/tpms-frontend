@@ -61,6 +61,9 @@ const Bio = () => {
     service_area_zip,
   } = staffData?.employee_info || {};
 
+  // gender: (Male = 1), (female = 2);
+  console.log("gender data from api", gender);
+
   // staff_birthday date convertion
   // How to convert 2021-07-14T00:00:00.000Z into a standard date in YYYY-MM-DD format
   const converted_date = moment(staff_birthday).utc().format("YYYY-MM-DD");
@@ -68,8 +71,10 @@ const Bio = () => {
   useEffect(() => {
     setStaffBirthday(converted_date);
   }, [converted_date]);
+  console.log("staff birthday", staffBirthday);
 
-  console.log(email_remainder, session_check);
+  //email_remainder, session_check
+  // console.log(email_remainder, session_check);
   const [createSession, setCreateSession] = useState(
     BoolConverter(session_check)
   );
@@ -83,9 +88,6 @@ const Bio = () => {
     setEmailReminder(BoolConverter(email_remainder));
   }, [email_remainder]);
 
-  // setSession(convertedStatus);
-  // gender: (Male = 1), (female = 2);
-  console.log(gender);
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
@@ -95,7 +97,6 @@ const Bio = () => {
         middle_name: middle_name,
         last_name: last_name,
         nickname: nickname,
-        staff_birthday: staff_birthday,
         ssn: ssn,
         office_email: office_email,
         office_phone: office_phone,
@@ -113,6 +114,7 @@ const Bio = () => {
         language: language,
         gender: String(gender),
         comment: "Notes",
+        session_check: session === true ? 2 : 1,
       });
     }, 0);
   }, [
@@ -123,7 +125,6 @@ const Bio = () => {
     last_name,
     nickname,
     ssn,
-    staff_birthday,
     office_email,
     office_phone,
     office_fax,
@@ -139,6 +140,7 @@ const Bio = () => {
     language,
     service_area_zip,
     gender,
+    session,
   ]);
 
   console.log(
@@ -148,7 +150,6 @@ const Bio = () => {
   );
 
   const onSubmit = (data) => {
-    // console.log("form raw data", data);
     // console.log(note);
     const payload = {
       employee_edit_id: id,
@@ -157,7 +158,7 @@ const Bio = () => {
       middle_name: data?.middle_name,
       last_name: data?.last_name,
       nickname: data?.nickname,
-      staff_birthday: data?.staff_birthday,
+      staff_birthday: staffBirthday,
       ssn: data?.ssn,
       // staff_other_id:data?.staff_other_id,
       office_email: data?.office_email,
@@ -190,12 +191,12 @@ const Bio = () => {
     };
 
     //update staff api call
-    // if (payload) {
-    //   updateStaff({
-    //     token,
-    //     payload,
-    //   });
-    // }
+    if (payload) {
+      updateStaff({
+        token,
+        payload,
+      });
+    }
     console.log("payload", payload);
   };
 
@@ -505,7 +506,7 @@ const Bio = () => {
             <div className="flex items-center gap-2 my-5">
               <Switch
                 checked={createSession}
-                onClick={() => setCreateSession(!createSession)}
+                onChange={() => setCreateSession(!createSession)}
                 size="small"
               />
               <span>Create Session</span>
@@ -515,7 +516,7 @@ const Bio = () => {
             <div className="flex items-center gap-2 my-5">
               <Switch
                 checked={emailReminder}
-                onClick={() => setEmailReminder(!emailReminder)}
+                onChange={() => setEmailReminder(!emailReminder)}
                 size="small"
               />
               <span>Email Reminder</span>
