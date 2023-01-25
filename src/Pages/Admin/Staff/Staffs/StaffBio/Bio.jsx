@@ -90,6 +90,7 @@ const Bio = () => {
         language: language,
         gender: String(gender),
         comment: "Notes",
+        session_check: session === true ? 2 : 1,
       });
     }, 600);
   }, [
@@ -115,11 +116,12 @@ const Bio = () => {
     language,
     service_area_zip,
     gender,
+    session,
   ]);
-
+  // console.log("--", session === true ? 1 : 2);
   const onSubmit = (data) => {
     console.log("form raw data", data);
-    // console.log(note);
+    console.log("--", session);
     const payload = {
       employee_edit_id: id,
       caqh_id: data.caqh_id,
@@ -143,7 +145,7 @@ const Bio = () => {
       license_exp_date: data.license_exp_date,
       language: data.language,
       gender: Number(data.gender),
-      session_check: session === true ? 1 : 2,
+      session_check: data.session_check === true ? 1 : 2,
     };
     console.log("chk session", session === true ? 1 : 2);
     //update staff api call
@@ -466,7 +468,7 @@ const Bio = () => {
             <div className="flex items-center gap-2 my-5">
               <Switch
                 // checked={session_check !== 1 ? false : true}
-                defaultChecked={session_check === 1 ? true : false}
+                defaultChecked={session_check !== 1 ? true : false}
                 onClick={() => setSession(!session)}
                 // onChange={() => handleSessionCheck()}
                 size="small"
@@ -474,10 +476,13 @@ const Bio = () => {
 
               {/* <Controller
                 control={control}
-                defaultValue={session_check === 2 ? true : false}
                 name="session_check"
                 render={({ field: { value, onChange } }) => (
-                  <Switch onChange={onChange} checked={value} />
+                  < 
+                    // defaultValue={session_check === 1}
+                    onChange={onChange}
+                    checked={value === 1 ? true : false}
+                  />
                 )}
               /> */}
               <span>Create Session</span>

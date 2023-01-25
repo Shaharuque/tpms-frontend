@@ -4,28 +4,44 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Table } from "antd";
 import TextArea from "antd/lib/input/TextArea";
+import { useGetLeaveTrackingMutation } from "../../../../../features/Stuff_redux/leaveTracking/leaveTrackingApi";
+import { useParams } from "react-router-dom";
+import useToken from "../../../../../CustomHooks/useToken";
 
 const LeaveTracking = () => {
   const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const id = useParams();
+  const { token } = useToken();
 
+  // console.log("token", token, "id", param);
   //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/StaffLeaveTracking.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        console.log(tableData, "tableData");
-        // setLoading2(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("../../../All_Fake_Api/StaffLeaveTracking.json")
+  //     .then((res) => res.json())
+  //     .then((d) => {
+  //       setTableData(d);
+  //       // console.log(tableData, "tableData");
+  //       // setLoading2(false);
+  //     });
+  // }, []);
 
+  const [
+    getLeaveTracking,
+    { data: leaveTrackData, isLoading, isSuccess, isError },
+  ] = useGetLeaveTrackingMutation();
+
+  useEffect(() => {
+    getLeaveTracking({ id, token });
+  }, [getLeaveTracking, id, token]);
+
+  console.log("api response data", leaveTrackData?.leave_list?.data);
   const column = [
     {
       title: "Date of Holiday",
-      dataIndex: "history_date",
-      key: "history_date",
+      dataIndex: "leave_date",
+      key: "leave_date",
       width: 120,
       filters: [{}],
       filteredValue: filteredInfo.history_date || null,
@@ -73,21 +89,22 @@ const LeaveTracking = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div className="flex justify-center items-center">
-            {status === "Hold" && (
+            {status === "approved" && (
               <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
                 {status}
               </button>
             )}
-            {status === "Pending" && (
+            {status !== "approved" && (
               <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
+                {/* {status} */}
+                pending
               </button>
             )}
-            {status === "Scheduled" && (
+            {/* {status === "Scheduled" && (
               <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
                 {status}
               </button>
-            )}
+            )} */}
           </div>
         );
       },
@@ -134,7 +151,7 @@ const LeaveTracking = () => {
   };
 
   const handleChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
+    // console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
@@ -162,7 +179,7 @@ const LeaveTracking = () => {
           columns={column}
           bordered
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-          dataSource={tableData}
+          dataSource={leaveTrackData?.leave_list?.data}
           onChange={handleChange}
         />
       </div>
