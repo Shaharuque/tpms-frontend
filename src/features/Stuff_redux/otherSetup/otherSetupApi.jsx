@@ -1,10 +1,10 @@
-//staff otherSetup api will be handled here
+//staff other setup api will be handled here
 
 import { apiSlice } from "../../api/apiSlice";
 
-export const otherStaffApi = apiSlice.injectEndpoints({
+export const otherSetupApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    //update staff department
+    //Get staff Other Setup
     getOtherSetup: builder.query({
       query: ({ token, id }) => ({
         url: `/admin/ac/staff/other/setup/${id}`,
@@ -18,4 +18,4 @@ export const otherStaffApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetOtherSetupQuery } = otherStaffApi;
+export const { useGetOtherSetupQuery } = otherSetupApi;

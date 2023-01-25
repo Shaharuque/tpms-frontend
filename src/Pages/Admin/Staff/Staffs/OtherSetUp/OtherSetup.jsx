@@ -26,21 +26,100 @@ const OtherSetup = () => {
 
   console.log("other setup api data", otherSetup);
 
+  const {
+    adp_employee_id,
+    created_at,
+    custom_five,
+    custom_four,
+    custom_six,
+    custom_three,
+    custom_two,
+    degree_level,
+    employee_id,
+    exemt_staff,
+    external_software_id,
+    gets_paid_holiday,
+    heigh_degree,
+    is_contractor,
+    is_parttime,
+    max_hour_per_day,
+    max_hour_per_week,
+    paid_time_off,
+    provider_level,
+    provider_render_without,
+    signature_image,
+    signature_valid_form,
+    signature_valid_to,
+    updated_at,
+  } = otherSetup?.info || {};
+
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        first_name: `bill`,
-        middle_name: "luo",
+        adp_employee_id,
+        created_at,
+        custom_five,
+        custom_four,
+        custom_six,
+        custom_three,
+        custom_two,
+        degree_level,
+        employee_id,
+        exemt_staff,
+        external_software_id,
+        gets_paid_holiday,
+        heigh_degree,
+        is_contractor,
+        is_parttime,
+        max_hour_per_day,
+        max_hour_per_week,
+        paid_time_off,
+        provider_level,
+        provider_render_without,
+        signature_image,
+        signature_valid_form,
+        signature_valid_to,
+        updated_at,
       });
     }, 600);
-  }, [reset]);
+  }, [
+    reset,
+    adp_employee_id,
+    created_at,
+    custom_five,
+    custom_four,
+    custom_six,
+    custom_three,
+    custom_two,
+    degree_level,
+    employee_id,
+    exemt_staff,
+    external_software_id,
+    gets_paid_holiday,
+    heigh_degree,
+    is_contractor,
+    is_parttime,
+    max_hour_per_day,
+    max_hour_per_week,
+    paid_time_off,
+    provider_level,
+    provider_render_without,
+    signature_image,
+    signature_valid_form,
+    signature_valid_to,
+    updated_at,
+  ]);
 
-  const [paidTimeOff, setPaidTimeOff] = useState(BoolConverter(1));
-  const [exemptStaff, setExemptStaff] = useState(BoolConverter(2));
-  const [paidHoliday, setPaidHoliday] = useState(BoolConverter(null));
-  const [isPartTime, setIsPartTime] = useState(BoolConverter(null));
-  const [isContractor, setIsContractor] = useState(BoolConverter(null));
+  const [paidTimeOff, setPaidTimeOff] = useState(BoolConverter(paid_time_off));
+  const [exemptStaff, setExemptStaff] = useState(BoolConverter(exemt_staff));
+  const [paidHoliday, setPaidHoliday] = useState(
+    BoolConverter(gets_paid_holiday)
+  );
+  const [isPartTime, setIsPartTime] = useState(BoolConverter(is_parttime));
+  const [isContractor, setIsContractor] = useState(
+    BoolConverter(is_contractor)
+  );
   const [providerWithoutNote, setProviderWithoutNote] = useState(
     BoolConverter(1)
   );

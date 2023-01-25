@@ -158,12 +158,12 @@ const Bio = () => {
     };
     console.log("chk session", session === true ? 1 : 2);
     //update staff api call
-    // if (payload) {
-    //   updateStaff({
-    //     token,
-    //     payload,
-    //   });
-    // }
+    if (payload) {
+      updateStaff({
+        token,
+        payload,
+      });
+    }
     console.log("payload", payload);
   };
 
