@@ -1,12 +1,31 @@
 import { Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import useToken from "../../../../../CustomHooks/useToken";
+import { useGetOtherSetupQuery } from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import OtherSetUpBottom from "./OtherSetUpBottom/OtherSetUpBottom";
 
 const OtherSetup = () => {
   const [active, setActive] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const { token } = useToken();
+  const { id } = useParams();
+
+  //Get otherSetup Api
+  const {
+    data: otherSetup,
+    isLoading: otherSetupLoading,
+    isSuccess: otherSetupSuccess,
+    isError,
+  } = useGetOtherSetupQuery({
+    token,
+    id,
+  });
+
+  console.log("other setup api data", otherSetup);
+
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
