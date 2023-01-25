@@ -10,6 +10,7 @@ import {
   useGetInfoQuery,
   useUpdateStaffMutation,
 } from "../../../../../features/Stuff_redux/staff/staffApi";
+import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 
 const Bio = () => {
   const { id } = useParams();
@@ -25,7 +26,7 @@ const Bio = () => {
     isLoading,
     isSuccess,
   } = useGetInfoQuery({ token, id: id });
-  // console.log("staff data", staffData, isLoading);
+  console.log("staff data", staffData, isLoading);
   //update staff api
   const [updateStaff, { isSuccess: updateSuccess, isError: updateError }] =
     useUpdateStaffMutation();
@@ -61,8 +62,17 @@ const Bio = () => {
   useEffect(() => {
     setStaffBirthday(staff_birthday);
   }, [staff_birthday]);
+  console.log(email_remainder, session_check);
+  const [createSession, setCreateSession] = useState(
+    BoolConverter(email_remainder)
+  );
+  const [emailReminder, setEmailReminder] = useState(
+    BoolConverter(email_remainder)
+  );
 
   // setSession(convertedStatus);
+  // gender: (Male = 1), (female = 2);
+  console.log(gender);
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -143,17 +153,18 @@ const Bio = () => {
       license_exp_date: data.license_exp_date,
       language: data.language,
       gender: Number(data.gender),
-      session_check: session === true ? 1 : 2,
+      session_check: BoolConverter(createSession),
+      email_remainder: BoolConverter(emailReminder),
     };
     console.log("chk session", session === true ? 1 : 2);
     //update staff api call
-    if (payload) {
-      updateStaff({
-        token,
-        payload,
-      });
-    }
-    // console.log("payload", payload);
+    // if (payload) {
+    //   updateStaff({
+    //     token,
+    //     payload,
+    //   });
+    // }
+    console.log("payload", payload);
   };
 
   // const handleSessionCheck = () => {
@@ -186,7 +197,7 @@ const Bio = () => {
     <div className="sm:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 my-3 mr-2 gap-x-6 gap-y-3 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-3 mr-2 gap-x-6 gap-y-3 ">
           {/* First Name with all the validation  */}
           <div>
             <label className="label">
@@ -320,7 +331,7 @@ const Bio = () => {
               {...register("driving_license")}
             />
           </div>
-          <div className="md:mt-[38px]">
+          <div className="mt-[33px]">
             {" "}
             <input
               className="input-border input-font w-full focus:outline-none"
@@ -450,13 +461,13 @@ const Bio = () => {
             <div className="flex items-center">
               <div className="flex ml-1 mt-1 items-center">
                 <input type="radio" value={2} {...register("gender")} />
-                <span className="text-xs ml-1 text-gray-600 font-normal">
+                <span className="text-sm ml-1 text-gray-600 font-medium">
                   female
                 </span>
               </div>
               <div className="flex ml-1 mt-1 items-center">
                 <input type="radio" value={1} {...register("gender")} />
-                <span className="text-xs ml-1 text-gray-600 font-normal">
+                <span className="text-sm ml-1 text-gray-600 font-medium">
                   male
                 </span>
               </div>
@@ -465,22 +476,21 @@ const Bio = () => {
           <div>
             <div className="flex items-center gap-2 my-5">
               <Switch
-                // checked={session_check !== 1 ? false : true}
-                defaultChecked={session_check === 1 ? true : false}
-                onClick={() => setSession(!session)}
-                // onChange={() => handleSessionCheck()}
+                defaultChecked={createSession}
+                onClick={() => setCreateSession(!createSession)}
                 size="small"
               />
-
-              {/* <Controller
-                control={control}
-                defaultValue={session_check === 2 ? true : false}
-                name="session_check"
-                render={({ field: { value, onChange } }) => (
-                  <Switch onChange={onChange} checked={value} />
-                )}
-              /> */}
               <span>Create Session</span>
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center gap-2 my-5">
+              <Switch
+                defaultChecked={emailReminder}
+                onClick={() => setEmailReminder(!emailReminder)}
+                size="small"
+              />
+              <span>Email Reminder</span>
             </div>
           </div>
           <div className="sm:col-span-2">
