@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./PayrollMultiSelect.css";
 
-const PyarollMultiSelect = ({ Alldata }) => {
+const PyarollMultiSelect = ({ Alldata, setServiceId }) => {
   const [selected, setSelected] = useState([]);
-  //   const [alldata, setAlldata] = useState([]);
-  //   const data = Alldata.map((item) => setAlldata(item));
 
   const PayrollDataProcess = () => {
     let processedData = [];
@@ -14,7 +12,7 @@ const PyarollMultiSelect = ({ Alldata }) => {
         processedData.push({
           label: x?.description,
           value: x?.id,
-          //   id: x?.id,
+          //id: x?.id,
         });
       }
     }
@@ -31,7 +29,17 @@ const PyarollMultiSelect = ({ Alldata }) => {
     }
     return "None selected";
   };
-  console.log("Multi Select data", selected);
+  // console.log("Multi Select data", selected);
+
+  useEffect(() => {
+    const getServicesId = async () => {
+      const getId = selected.map((item) => item.value);
+      setServiceId(getId);
+    };
+    getServicesId();
+  }, [selected, setServiceId]);
+
+  console.log(selected);
   return (
     <div>
       <MultiSelect

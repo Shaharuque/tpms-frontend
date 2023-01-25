@@ -14,11 +14,18 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [editModal, setEditModal] = useState(false);
   const [clearenceRecord, setClearenceRecord] = useState();
+  const [openEditModal, setOpenEditModal] = useState(false);
 
   //Handle clearence Modal
   const handleClearenceEdit = (record) => {
     setClearenceRecord(record);
     setEditModal(!editModal);
+  };
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
   };
   const column = [
     {
@@ -123,11 +130,6 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
     },
   ];
 
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const handleClickOpen = () => {
-    setOpenEditModal(true);
-  };
-
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
@@ -138,9 +140,6 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
     setFilteredInfo({});
   };
 
-  const handleClose = () => {
-    setOpenEditModal(false);
-  };
   return (
     <div>
       <h2

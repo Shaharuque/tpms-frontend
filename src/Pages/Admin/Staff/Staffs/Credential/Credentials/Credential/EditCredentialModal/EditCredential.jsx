@@ -11,7 +11,7 @@ import {
 import Loading from "../../../../../../../../Loading/Loading";
 
 const EditCredential = ({ handleClose, open, credentialInfo }) => {
-  console.log(credentialInfo);
+  // console.log(credentialInfo);
   const { token } = useToken();
 
   //Getting credential info data api
