@@ -84,7 +84,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   className="form-check-label inline-block mt-[2px] text-sm"
                   htmlFor="flexSwitchCheckDefault"
                 >
-                  first_name invaitation
+                  Portal invaitation
                 </label>
               </div>
               <IoCloseCircleOutline

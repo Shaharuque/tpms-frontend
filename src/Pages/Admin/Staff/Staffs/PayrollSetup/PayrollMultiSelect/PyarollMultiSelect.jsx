@@ -43,7 +43,7 @@ const PyarollMultiSelect = ({ Alldata, setServiceId }) => {
   return (
     <div>
       <MultiSelect
-        className="Global"
+        className="AppoinmentGlobal ml-1"
         // main data source
         // options={options}
         options={dataoptions}
