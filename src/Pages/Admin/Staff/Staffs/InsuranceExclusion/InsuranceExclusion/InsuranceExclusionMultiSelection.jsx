@@ -11,7 +11,7 @@ import {
   useExcludeSelectedMutation,
   useGetAllPayorQuery,
   useGetAssignedQuery,
-} from "../../../../../../features/Stuff_redux/Insurance_Exclusion/InsuranceExclusion";
+} from "../../../../../../features/Stuff_redux/Insurance_Exclusion/InsuranceExclusionApi";
 import Loading from "../../../../../../Loading/Loading";
 const InsuranceExclusionMultiSelection = () => {
   // const [selectedKeys, setSelectedKeys] = useState("");
@@ -179,15 +179,11 @@ const InsuranceExclusionMultiSelection = () => {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1">
         <div className="w-full">
-          <label
-            for="countries_multiple"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
-          >
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
             Insurance
           </label>
           <select
             multiple={true}
-            id="countries_multiple"
             onChange={(e) => {
               handleAdding(e);
             }}
@@ -205,7 +201,7 @@ const InsuranceExclusionMultiSelection = () => {
         <div className="flex justify-center items-center">
           <button
             onClick={handleExcluded}
-            // disabled={targatedData === ""}
+            disabled={targatedData.length === 0}
             className="pms-button my-2"
             type="submit"
           >
@@ -232,11 +228,7 @@ const InsuranceExclusionMultiSelection = () => {
                 <span className="flex items-center gap-2">
                   <GoAlert className="text-red-500" /> No Current Association
                 </span>
-                <span
-                // onClick={() => {
-                //   setDisplay(false);
-                // }}
-                >
+                <span>
                   <FcCancel />
                 </span>
               </div>

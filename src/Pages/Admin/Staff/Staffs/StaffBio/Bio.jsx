@@ -115,7 +115,7 @@ const Bio = () => {
         license_exp_date: license_exp_date,
         language: language,
         gender: String(gender),
-        notes: notes.slice(0, 6),
+        // notes: notes.slice(0, 6),
         session_check: session === true ? 2 : 1,
       });
     }, 0);
@@ -143,7 +143,7 @@ const Bio = () => {
     service_area_zip,
     gender,
     session,
-    notes,
+    // notes,
   ]);
 
   console.log(
