@@ -3,29 +3,45 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { Table } from "antd";
-import TextArea from "antd/lib/input/TextArea";
+import {
+  useAddLeaveTrackingMutation,
+  useGetLeaveTrackingQuery,
+} from "../../../../../features/Stuff_redux/leaveTracking/leaveTrackingApi";
+import { useParams } from "react-router-dom";
+import useToken from "../../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
+import Loading from "../../../../../Loading/Loading";
 
 const LeaveTracking = () => {
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const { id } = useParams();
+  const { token } = useToken();
 
-  //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/StaffLeaveTracking.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        console.log(tableData, "tableData");
-        // setLoading2(false);
-      });
-  }, []);
+  // get Leaves-Tracking api
+  const { data: leaveTrackData, isLoading: getleaveTrackLoading } =
+    useGetLeaveTrackingQuery({
+      token,
+      payload: {
+        employee_id: id,
+      },
+    });
+
+  // Add new leave api
+  const [
+    addLeaveTracking,
+    {
+      data: addleaveTrackdata,
+      isSuccess: addleaveTrackSuccess,
+      isError: addleaveTrackError,
+    },
+  ] = useAddLeaveTrackingMutation();
 
   const column = [
     {
       title: "Date of Holiday",
-      dataIndex: "history_date",
-      key: "history_date",
+      dataIndex: "leave_date",
+      key: "leave_date",
       width: 120,
       filters: [{}],
       filteredValue: filteredInfo.history_date || null,
@@ -73,14 +89,15 @@ const LeaveTracking = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div className="flex justify-center items-center">
-            {status === "Hold" && (
+            {status === "approved" && (
               <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
                 {status}
               </button>
             )}
-            {status === "Pending" && (
+            {status !== "approved" && (
               <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
+                {/* {status} */}
+                pending
               </button>
             )}
             {status === "Scheduled" && (
@@ -123,18 +140,45 @@ const LeaveTracking = () => {
     },
   ];
 
-  const [note, setNote] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [timeOpen, setTimeOpen] = useState(false);
 
   const onSubmit = (data) => {
-    console.log(data);
-    console.log(note);
-    reset();
+    const addTrackPaylod = {
+      employee_id: id,
+      leave_date: data.date,
+      desc: data.desc,
+    };
+    addLeaveTracking({
+      token,
+      payload: addTrackPaylod,
+    });
   };
+  //Success/Error message show
+  useEffect(() => {
+    if (addleaveTrackSuccess) {
+      toast.success(addleaveTrackdata?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      reset();
+    } else if (addleaveTrackError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [
+    addleaveTrackError,
+    addleaveTrackSuccess,
+    addleaveTrackdata?.message,
+    reset,
+  ]);
 
   const handleChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
+    // console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
@@ -143,6 +187,9 @@ const LeaveTracking = () => {
     setFilteredInfo({});
   };
 
+  if (getleaveTrackLoading) {
+    return <Loading />;
+  }
   return (
     <div className="h-[100vh]">
       <div className="flex items-center justify-between gap-2 my-2">
@@ -162,7 +209,7 @@ const LeaveTracking = () => {
           columns={column}
           bordered
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-          dataSource={tableData}
+          dataSource={leaveTrackData?.leave_list?.data}
           onChange={handleChange}
         />
       </div>
@@ -184,11 +231,19 @@ const LeaveTracking = () => {
                 <label className="label">
                   <span className="modal-label-name">Description</span>
                 </label>
-                <TextArea
+                {/* <TextArea
                   rows={4}
                   placeholder="description"
                   size="middle"
                   onChange={(e) => setNote(e.target.value)}
+                /> */}
+                <textarea
+                  rows={4}
+                  placeholder="maxLength is 6"
+                  size="middle"
+                  className="w-full border bottom-2 p-1"
+                  {...register("desc")}
+                  // onChange={(e) => setNote(e.target.value)}
                 />
               </div>
               <div>

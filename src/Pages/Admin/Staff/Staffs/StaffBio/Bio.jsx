@@ -100,6 +100,7 @@ const Bio = () => {
         language: language,
         gender: String(gender),
         comment: "Notes",
+        session_check: session === true ? 2 : 1,
       });
     }, 600);
   }, [
@@ -125,11 +126,12 @@ const Bio = () => {
     language,
     service_area_zip,
     gender,
+    session,
   ]);
-
+  // console.log("--", session === true ? 1 : 2);
   const onSubmit = (data) => {
     console.log("form raw data", data);
-    // console.log(note);
+    console.log("--", session);
     const payload = {
       employee_edit_id: id,
       caqh_id: data.caqh_id,
