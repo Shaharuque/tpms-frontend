@@ -233,6 +233,7 @@ const ContactDetailsTwo = ({
                       rows={4}
                       placeholder="maxLength is 6"
                       size="middle"
+                      className="w-full border bottom-2 ml-1 p-1"
                       {...register("address_note")}
                       // onChange={(e) => setNote(e.target.value)}
                     />

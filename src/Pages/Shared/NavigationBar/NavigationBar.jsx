@@ -355,6 +355,7 @@ const TestNaviBar = ({ handle }) => {
                         state="hover-1"
                       ></lord-icon> */}
                       <AiOutlineNotification />
+
                       <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
                         8
                       </h1>

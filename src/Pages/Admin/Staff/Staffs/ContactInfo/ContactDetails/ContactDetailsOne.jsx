@@ -235,6 +235,7 @@ const ContactDetailsOne = ({
                   <textarea
                     rows={4}
                     size="middle"
+                    className="w-full border bottom-2 ml-1 p-1"
                     {...register("address_note")}
                     // onChange={(e) => setNote(e.target.value)}
                   />

@@ -11,7 +11,8 @@ import {
   useUpdateStaffMutation,
 } from "../../../../../features/Stuff_redux/staff/staffApi";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
-
+import { ColorPicker, useColor } from "react-color-palette";
+import "react-color-palette/lib/css/styles.css";
 const Bio = () => {
   const { id } = useParams();
   const { token } = useToken();
@@ -19,6 +20,9 @@ const Bio = () => {
   const [session, setSession] = useState();
   const { register, handleSubmit, reset, control } = useForm();
   const [staffBirthday, setStaffBirthday] = useState();
+  const [color, setColor] = useColor("hex", "#121212");
+  const [open, setOpen] = useState(false);
+  console.log(color.hex);
 
   //get satff info api
   const {
@@ -493,6 +497,26 @@ const Bio = () => {
                 size="small"
               />
               <span>Email Reminder</span>
+            </div>
+          </div>
+          <div>
+            <label className="label">
+              <span className=" label-font">Background Color</span>
+            </label>
+            <div>
+              <div className={`p-3 bg-[#e37a7a] w-full ml-1`}></div>
+              {/* {open && ( */}
+              <ColorPicker
+                width={200}
+                height={100}
+                color={color}
+                onChange={setColor}
+                hideHSV
+                dark
+                hideRGB
+                hideHEX
+              />
+              {/* )} */}
             </div>
           </div>
           <div className="sm:col-span-2">
