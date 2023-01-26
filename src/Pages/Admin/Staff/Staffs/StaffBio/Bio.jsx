@@ -59,10 +59,12 @@ const Bio = () => {
     email_remainder,
     session_check,
     service_area_zip,
+    notes,
   } = staffData?.employee_info || {};
 
+  console.log("testing", notes);
   // gender: (Male = 1), (female = 2);
-  console.log("gender data from api", gender);
+  //console.log("gender data from api", gender);
 
   // staff_birthday date convertion
   // How to convert 2021-07-14T00:00:00.000Z into a standard date in YYYY-MM-DD format
@@ -113,7 +115,7 @@ const Bio = () => {
         license_exp_date: license_exp_date,
         language: language,
         gender: String(gender),
-        comment: "Notes",
+        notes: notes.slice(0, 6),
         session_check: session === true ? 2 : 1,
       });
     }, 0);
@@ -141,6 +143,7 @@ const Bio = () => {
     service_area_zip,
     gender,
     session,
+    notes,
   ]);
 
   console.log(
@@ -183,7 +186,7 @@ const Bio = () => {
       // is_staff_active:data?.is_staff_active,
       // enable_fource_creation: data?.enable_fource_creation,
       // has_catalsty_access: data?.has_catalsty_access,
-      // notes: data?.notes,
+      notes: data?.notes,
       // back_color: data?.back_color,
       // text_color:data?.text_color,
       session_check: BoolConverter(createSession),
@@ -526,7 +529,14 @@ const Bio = () => {
             <label className="label">
               <span className=" label-font">Notes</span>
             </label>
-            <TextArea rows={4} placeholder="maxLength is 6" size="middle" />
+            <TextArea
+              type="text"
+              name="notes"
+              rows={4}
+              placeholder="maxLength is 6"
+              size="middle"
+              {...register("notes")}
+            />
           </div>
         </div>
 
