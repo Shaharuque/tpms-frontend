@@ -3,23 +3,141 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FcCancel } from "react-icons/fc";
 import { GoAlert } from "react-icons/go";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import useToken from "../../../../../../CustomHooks/useToken";
+import {
+  useExcludeDeleteMutation,
+  useExcludeSelectedMutation,
+  useGetAllPayorQuery,
+  useGetAssignedQuery,
+} from "../../../../../../features/Stuff_redux/Insurance_Exclusion/InsuranceExclusionApi";
+import Loading from "../../../../../../Loading/Loading";
 const InsuranceExclusionMultiSelection = () => {
-  const [selectedKeys, setSelectedKeys] = useState("");
-  const [TransferData, setTransferData] = useState([]);
+  // const [selectedKeys, setSelectedKeys] = useState("");
+  // const [TransferData, setTransferData] = useState([]);
   const [sortedInfo, setSortedInfo] = useState({});
-  const [display, setDisplay] = useState(true);
-  const arr1 = [];
+  const [targatedData, setTargatedData] = useState([]);
+  // const arr1 = [];
+  const { token } = useToken();
+  const { id } = useParams();
+
+  //  get all payor by id
+  const {
+    data: allPayors,
+    isLoading: PayorsLoading,
+    isError: PayorError,
+  } = useGetAllPayorQuery({
+    token,
+    payload: { employee_id: id },
+  });
+
+  // get all assign payor by id
+  const {
+    data: assignPayorData,
+    isLoading: assignLoading,
+    isError: assignPayorError,
+  } = useGetAssignedQuery({ token, payload: { employee_id: id } });
+
+  // exclusion  Selected api
+  const [
+    excludeSelected,
+    {
+      data: excludedData,
+      isSuccess: excludeSelectedSuccess,
+      isError: excludeSelectedError,
+    },
+  ] = useExcludeSelectedMutation();
+  //Success/Error message show added api
+  useEffect(() => {
+    if (excludeSelectedSuccess) {
+      toast.success(excludedData?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (excludeSelectedError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [excludeSelectedError, excludeSelectedSuccess, excludedData?.message]);
+  // delete api
+  const [
+    excludeDelete,
+    {
+      data: excludeDeleteData,
+      isSuccess: excludeDeleteDataSuccess,
+      isError: excludeDeleteDataError,
+    },
+  ] = useExcludeDeleteMutation();
+  //Success/Error message show delete api
+  useEffect(() => {
+    if (excludeDeleteDataSuccess) {
+      toast.success(excludeDeleteData?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (excludeDeleteDataError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [
+    excludeDeleteData?.message,
+    excludeDeleteDataError,
+    excludeDeleteDataSuccess,
+  ]);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setSortedInfo(sorter);
   };
 
+  const handleAdding = (e) => {
+    let value = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value * 1
+    );
+    console.log("data is vlaue", value);
+    setTargatedData(value);
+  };
+
+  // Added
+  const handleExcluded = () => {
+    const payload = {
+      payor_ids: targatedData,
+      employee_id: id,
+    };
+    excludeSelected({
+      token,
+      payload,
+    });
+    setTargatedData([]);
+  };
+
+  // delete
+  const handleDelete = (delid) => {
+    const payload = {
+      del_id: delid,
+      employee_id: id,
+    };
+    excludeDelete({
+      token,
+      payload,
+    });
+  };
+
   const column = [
     {
       title: "title",
-      dataIndex: "title",
-      key: "title",
+      dataIndex: "payor_id",
+      key: "payor_id",
       width: 120,
       sorter: (a, b) => {
         return a.title > b.title ? -1 : 1;
@@ -34,7 +152,10 @@ const InsuranceExclusionMultiSelection = () => {
       width: 100,
       render: (_, { id, File_name }) => {
         return (
-          <div className="flex items-center justify-center font-bold text-red-500">
+          <div
+            onClick={() => handleDelete(id)}
+            className="flex items-center  cursor-pointer justify-center font-bold text-red-500"
+          >
             X
           </div>
         );
@@ -42,17 +163,14 @@ const InsuranceExclusionMultiSelection = () => {
     },
   ];
 
-  // testing spaceee............
-  useEffect(() => {
-    axios("../../../All_Fake_Api/Transfer.json")
-      .then((response) => {
-        // console.log("chkd ata", response?.data)
-        setTransferData(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  if (assignLoading && PayorsLoading) {
+    return <Loading />;
+  }
+
+  if (PayorError && assignPayorError) {
+    // Error template show
+    return <p>Error</p>;
+  }
 
   return (
     <div className="h-[100vh]">
@@ -61,36 +179,29 @@ const InsuranceExclusionMultiSelection = () => {
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1">
         <div className="w-full">
-          <label
-            for="countries_multiple"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
-          >
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
             Insurance
           </label>
           <select
-            multiple
-            id="countries_multiple"
-            // className="h-40"
-            className="text-black border h-48 border-gray-300  rounded-md focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
+            multiple={true}
+            onChange={(e) => {
+              handleAdding(e);
+            }}
+            className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {TransferData.length > 0 &&
-              TransferData.map((item, index) => (
-                <option
-                  className="px-2 text-sm"
-                  onClick={(e) => arr1.push(item)}
-                  value={item.id}
-                >
-                  {item.key}
-                  {item.title}
+            {allPayors?.all_payors.length > 0 &&
+              allPayors?.all_payors.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
+                  {item.payor_name}
                 </option>
-              ))}{" "}
+              ))}
           </select>
         </div>
 
         <div className="flex justify-center items-center">
           <button
-            onClick={() => setSelectedKeys(arr1)}
-            // className=" py-[5px] font-normal px-3 my-auto  text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
+            onClick={handleExcluded}
+            disabled={targatedData.length === 0}
             className="pms-button my-2"
             type="submit"
           >
@@ -98,37 +209,31 @@ const InsuranceExclusionMultiSelection = () => {
           </button>
         </div>
         <div>
-          {selectedKeys ? (
-            <div className="overflow-scroll">
-              <Table
-                pagination={false}
-                size="small"
-                className=" text-xs font-normal mt-5"
-                columns={column}
-                bordered
-                rowKey={(record) => record.id}
-                dataSource={selectedKeys}
-                onChange={handleChange}
-              />
-            </div>
-          ) : (
-            <>
-              {display && (
-                <div className="text-red-500 red-box border border-gray-300 rounded-sm px-3 font-medium py-[10px]  text-xs w-full flex justify-between items-center gap-2">
-                  <span className="flex items-center gap-2">
-                    <GoAlert className="text-red-500" /> No Current Association
-                  </span>
-                  <span
-                    onClick={() => {
-                      setDisplay(false);
-                    }}
-                  >
-                    <FcCancel />
-                  </span>
-                </div>
-              )}
-            </>
-          )}
+          {/* {selectedKeys ? ( */}
+          <div className="overflow-scroll">
+            <Table
+              pagination={false}
+              size="small"
+              className=" text-xs font-normal mt-5"
+              columns={column}
+              bordered
+              rowKey={(record) => record.id}
+              dataSource={assignPayorData?.assign_payors}
+              onChange={handleChange}
+            />
+          </div>
+          <>
+            {assignPayorData?.assign_payors < 0 && (
+              <div className="text-red-500 red-box border border-gray-300 rounded-sm px-3 font-medium py-[10px]  text-xs w-full flex justify-between items-center gap-2">
+                <span className="flex items-center gap-2">
+                  <GoAlert className="text-red-500" /> No Current Association
+                </span>
+                <span>
+                  <FcCancel />
+                </span>
+              </div>
+            )}
+          </>
         </div>
       </div>
     </div>

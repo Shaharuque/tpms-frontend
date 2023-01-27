@@ -246,28 +246,30 @@ const LeaveTracking = () => {
                   // onChange={(e) => setNote(e.target.value)}
                 />
               </div>
-              <div>
-                <label className="label">
-                  <span className="modal-label-name">Date</span>
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                  {...register("date")}
-                />
-              </div>
-              <div className="mt-8">
-                <button className="mr-2 pms-button" type="submit">
-                  Save
-                </button>
-                <button
-                  className="pms-close-button"
-                  autoFocus
-                  onClick={() => setTimeOpen(false)}
-                >
-                  CANCEL
-                </button>
+              <div className=" flex item-center gap-4 flex-wrap">
+                <div>
+                  <label className="label">
+                    <span className="modal-label-name">Date</span>
+                  </label>
+                  <input
+                    type="date"
+                    name="date"
+                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
+                    {...register("date")}
+                  />
+                </div>
+                <div className="mt-8">
+                  <button className="mr-2 pms-button" type="submit">
+                    Apply Leave
+                  </button>
+                  <button
+                    className="pms-close-button"
+                    autoFocus
+                    onClick={() => setTimeOpen(false)}
+                  >
+                    CANCEL
+                  </button>
+                </div>
               </div>
             </div>
           </form>

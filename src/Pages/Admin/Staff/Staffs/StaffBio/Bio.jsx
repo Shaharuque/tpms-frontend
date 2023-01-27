@@ -1,4 +1,5 @@
 // Staff Birthday is not working
+import moment from "moment";
 import { Switch } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ import {
   useGetInfoQuery,
   useUpdateStaffMutation,
 } from "../../../../../features/Stuff_redux/staff/staffApi";
+import Loading from "../../../../../Loading/Loading";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
@@ -27,10 +29,10 @@ const Bio = () => {
   //get satff info api
   const {
     data: staffData,
-    isLoading,
+    isLoading: staffDataLoading,
     isSuccess,
   } = useGetInfoQuery({ token, id: id });
-  console.log("staff data", staffData, isLoading);
+  console.log("staff data", staffData, staffDataLoading);
   //update staff api
   const [updateStaff, { isSuccess: updateSuccess, isError: updateError }] =
     useUpdateStaffMutation();
@@ -45,6 +47,7 @@ const Bio = () => {
     office_email,
     office_phone,
     office_fax,
+    driver_license,
     license_exp_date,
     hir_date_compnay,
     treatment_type,
@@ -60,23 +63,36 @@ const Bio = () => {
     email_remainder,
     session_check,
     service_area_zip,
+    notes,
   } = staffData?.employee_info || {};
-  // console.log("staff_birthday", staff_birthday);
-  // staff_birthday
+
+  console.log("testing", notes);
+  // gender: (Male = 1), (female = 2);
+  //console.log("gender data from api", gender);
+
+  // staff_birthday date convertion
+  // How to convert 2021-07-14T00:00:00.000Z into a standard date in YYYY-MM-DD format
+  const converted_date = moment(staff_birthday).utc().format("YYYY-MM-DD");
+
   useEffect(() => {
-    setStaffBirthday(staff_birthday);
-  }, [staff_birthday]);
-  console.log(email_remainder, session_check);
+    setStaffBirthday(converted_date);
+  }, [converted_date]);
+  console.log("staff birthday", staffBirthday);
+
+  //email_remainder, session_check
+  // console.log(email_remainder, session_check);
   const [createSession, setCreateSession] = useState(
-    BoolConverter(email_remainder)
+    BoolConverter(session_check)
   );
   const [emailReminder, setEmailReminder] = useState(
     BoolConverter(email_remainder)
   );
-
-  // setSession(convertedStatus);
-  // gender: (Male = 1), (female = 2);
-  console.log(gender);
+  useEffect(() => {
+    setCreateSession(BoolConverter(session_check));
+  }, [session_check]);
+  useEffect(() => {
+    setEmailReminder(BoolConverter(email_remainder));
+  }, [email_remainder]);
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -87,7 +103,6 @@ const Bio = () => {
         middle_name: middle_name,
         last_name: last_name,
         nickname: nickname,
-        staff_birthday: staff_birthday,
         ssn: ssn,
         office_email: office_email,
         office_phone: office_phone,
@@ -100,13 +115,14 @@ const Bio = () => {
         treatment_type: treatment_type,
         title: title,
         service_area_zip: service_area_zip,
+        driver_license: driver_license,
         license_exp_date: license_exp_date,
         language: language,
         gender: String(gender),
-        comment: "Notes",
+        // notes: notes.slice(0, 6),
         session_check: session === true ? 2 : 1,
       });
-    }, 600);
+    }, 0);
   }, [
     reset,
     caqh_id,
@@ -115,7 +131,6 @@ const Bio = () => {
     last_name,
     nickname,
     ssn,
-    staff_birthday,
     office_email,
     office_phone,
     office_fax,
@@ -126,43 +141,62 @@ const Bio = () => {
     terminated_date,
     treatment_type,
     title,
+    driver_license,
     license_exp_date,
     language,
     service_area_zip,
     gender,
     session,
+    // notes,
   ]);
-  // console.log("--", session === true ? 1 : 2);
+
+  console.log(
+    "after calling boolConverter",
+    BoolConverter(emailReminder),
+    BoolConverter(createSession)
+  );
+
   const onSubmit = (data) => {
-    console.log("form raw data", data);
-    console.log("--", session);
+    // console.log(note);
     const payload = {
       employee_edit_id: id,
-      caqh_id: data.caqh_id,
-      first_name: data.first_name,
-      middle_name: data.middle_name,
-      last_name: data.last_name,
-      nickname: data.nickname,
-      staff_birthday: data.staff_birthday,
-      ssn: data.ssn,
-      office_email: data.office_email,
-      office_phone: data.office_phone,
-      office_fax: data.office_fax,
-      hir_date_compnay: data.hir_date_compnay,
-      individual_npi: data.individual_npi,
+      caqh_id: data?.caqh_id,
+      first_name: data?.first_name,
+      middle_name: data?.middle_name,
+      last_name: data?.last_name,
+      nickname: data?.nickname,
+      staff_birthday: staffBirthday,
+      ssn: data?.ssn,
+      // staff_other_id:data?.staff_other_id,
+      office_email: data?.office_email,
+      office_phone: data?.office_phone,
+      office_fax: data?.office_fax,
+      driver_license: data?.driver_license,
+      license_exp_date: data?.license_exp_date,
+      title: data?.title,
+      hir_date_compnay: data?.hir_date_compnay,
+      // credential_type:data?.credential_type,
       is_active: data.is_active,
-      taxonomy_code: data.taxonomy_code,
-      terminated_date: data.terminated_date,
-      treatment_type: data.treatment_type,
-      title: data.title,
-      service_area_zip: data.service_area_zip,
-      license_exp_date: data.license_exp_date,
-      language: data.language,
+      treatment_type: data?.treatment_type,
+      individual_npi: data?.individual_npi,
+      caqh_id: data?.caqh_id,
+      service_area_zip: data?.service_area_zip,
+      terminated_date: data?.terminated_date,
+      language: data?.language,
+      taxonomy_code: data?.taxonomy_code,
       gender: Number(data.gender),
+      // military_service:data?.military_service,
+      // therapist_bill:data?.therapist_bill,
+      // is_staff_active:data?.is_staff_active,
+      // enable_fource_creation: data?.enable_fource_creation,
+      // has_catalsty_access: data?.has_catalsty_access,
+      notes: data?.notes,
+      // back_color: data?.back_color,
+      // text_color:data?.text_color,
       session_check: BoolConverter(createSession),
       email_remainder: BoolConverter(emailReminder),
     };
-    console.log("chk session", session === true ? 1 : 2);
+
     //update staff api call
     if (payload) {
       updateStaff({
@@ -173,14 +207,6 @@ const Bio = () => {
     console.log("payload", payload);
   };
 
-  // const handleSessionCheck = () => {
-  //   // setSession(!session);
-  //   console.log("ss", session);
-  //   // console.log("session check", !session_check);
-  //   // if (session_check === 2) {
-  //   //   setSession(false);
-  //   // }
-  // };
   useEffect(() => {
     if (updateSuccess) {
       toast.success("Successfully updated", {
@@ -196,6 +222,10 @@ const Bio = () => {
       });
     }
   }, [updateSuccess, updateError]);
+
+  if (staffDataLoading) {
+    return <Loading></Loading>;
+  }
 
   // let convertedStatus = session_check === 1 ? true : false;
   // console.log("convert ", convertedStatus, "raw api", session_check);
@@ -332,9 +362,9 @@ const Bio = () => {
             </label>
             <input
               type="text"
-              name="driving_license"
+              name="driver_license"
               className="input-border input-font w-full focus:outline-none"
-              {...register("driving_license")}
+              {...register("driver_license")}
             />
           </div>
           <div className="mt-[33px]">
@@ -482,8 +512,8 @@ const Bio = () => {
           <div>
             <div className="flex items-center gap-2 my-5">
               <Switch
-                defaultChecked={createSession}
-                onClick={() => setCreateSession(!createSession)}
+                checked={createSession}
+                onChange={() => setCreateSession(!createSession)}
                 size="small"
               />
               <span>Create Session</span>
@@ -492,8 +522,8 @@ const Bio = () => {
           <div>
             <div className="flex items-center gap-2 my-5">
               <Switch
-                defaultChecked={emailReminder}
-                onClick={() => setEmailReminder(!emailReminder)}
+                checked={emailReminder}
+                onChange={() => setEmailReminder(!emailReminder)}
                 size="small"
               />
               <span>Email Reminder</span>
@@ -506,7 +536,7 @@ const Bio = () => {
             <div>
               <div className={`p-3 bg-[#e37a7a] w-full ml-1`}></div>
               {/* {open && ( */}
-              <ColorPicker
+              {/* <ColorPicker
                 width={200}
                 height={100}
                 color={color}
@@ -515,7 +545,7 @@ const Bio = () => {
                 dark
                 hideRGB
                 hideHEX
-              />
+              /> */}
               {/* )} */}
             </div>
           </div>
@@ -523,7 +553,14 @@ const Bio = () => {
             <label className="label">
               <span className=" label-font">Notes</span>
             </label>
-            <TextArea rows={4} placeholder="maxLength is 6" size="middle" />
+            <TextArea
+              type="text"
+              name="notes"
+              rows={4}
+              placeholder="maxLength is 6"
+              size="middle"
+              {...register("notes")}
+            />
           </div>
         </div>
 
