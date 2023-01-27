@@ -25,6 +25,7 @@ export const apiSlice = createApi({
     "Payroll",
     "LeaveTrack",
     "Staff_SubActivity",
+    "PatientExclusion",
     "Insurance",
   ],
   endpoints: (builder) => ({}),

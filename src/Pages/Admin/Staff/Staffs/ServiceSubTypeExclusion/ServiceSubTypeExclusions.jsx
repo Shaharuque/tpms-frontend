@@ -171,11 +171,7 @@ const ServiceSubTypeExclusions = () => {
           >
             {subActivityData.length > 0 &&
               subActivityData?.map((item, index) => (
-                <option
-                  key={item.id}
-                  className="px-2 text-sm"
-                  value={item.service_id}
-                >
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.sub_activity}
                 </option>
               ))}
