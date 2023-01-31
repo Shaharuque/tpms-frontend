@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { DatePicker, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { DateRangePicker } from "react-date-range";
@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { BsArrowRight } from "react-icons/bs";
 import { Calendar } from "react-calendar";
 import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
+import { AiOutlineCalendar } from "react-icons/ai";
+import { RiArrowLeftRightLine } from "react-icons/ri";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
@@ -15,6 +17,10 @@ const ProcessingClaim = () => {
   const [TData, setTData] = useState([]);
   const [date, setDate] = useState(new Date());
   const [openSingleCalendar, setOpenSingleCalendar] = useState(false);
+
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
 
   const handleSingleClearDate = () => {
     setOpenSingleCalendar(false);
@@ -327,19 +333,19 @@ const ProcessingClaim = () => {
           <div className=" flex items-center gap-4 flex-wrap">
             {/* <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-6 2xl:grid-cols-7  mr-2 gap-6"> */}
             <div className="flex gap-3">
-              <div className="w-3/4">
+              <div className="">
                 <label className="label">
                   <span className=" label-font">
                     To Date<span className="text-red-500">*</span>
                   </span>
                 </label>
-                <input
+                {/* <input                                        
                   onClick={() => setOpenSingleCalendar(!openSingleCalendar)}
                   value={date ? date.toLocaleDateString() : "Select a Date"}
-                  className="input-border input-font w-full focus:outline-none"
+                  className="input-border input-font w-full focus:outline-none py-[1px]"
                   {...register("date")}
                 />
-                {/* single calendar */}
+    
                 {openSingleCalendar && (
                   <div className="col-span-2 w-[60%] xl:w-[20%] md:w-[25%] mt-1 rounded my-0 absolute z-10 bg-white single-date p-1">
                     <Calendar onChange={setDate} value={date} />
@@ -368,12 +374,24 @@ const ProcessingClaim = () => {
                       </div>
                     </div>
                   </div>
-                )}
+                )} */}
+                <div className="flex items-end w-full">
+                  <Space direction="vertical">
+                    <DatePicker
+                      autoFocus={false}
+                      bordered
+                      size="middle"
+                      style={{}}
+                      onChange={onChange}
+                    />
+                  </Space>
+                  <AiOutlineCalendar className="ml-[-1.9px] mb-[-3px] font-semibold text-primary text-2xl" />
+                </div>
               </div>
-              {/* go*/}
+
               <button
                 onClick={handleGO}
-                className=" mt-[26px] w-12 pms-input-button"
+                className=" mt-[28px] w-12 mb-2 pms-button"
               >
                 Go
               </button>
@@ -427,7 +445,7 @@ const ProcessingClaim = () => {
                 {sortBy1 && (
                   <>
                     {sortBy1 === "Date Range" ? (
-                      <div>
+                      <div className="w-[220px]">
                         <label className="label">
                           <span className=" label-font">{sortBy1}</span>
                         </label>
@@ -443,10 +461,7 @@ const ProcessingClaim = () => {
                               onClick={() => setOpenCalendar(true)}
                               className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                             />
-                            <BsArrowRight
-                              onClick={() => setOpenCalendar(true)}
-                              className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                            ></BsArrowRight>
+                            <RiArrowLeftRightLine className="w-1/3 text-gray-600"></RiArrowLeftRightLine>
                             <input
                               value={
                                 endDate
@@ -462,7 +477,7 @@ const ProcessingClaim = () => {
                           {/* Multi date picker component called */}
                           <div
                             ref={refClose}
-                            className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
+                            className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
                           >
                             {openCalendar && (
                               <CustomDateRange
@@ -523,7 +538,7 @@ const ProcessingClaim = () => {
                     {sortBy2 && (
                       <>
                         {sortBy2 === "Date Range" ? (
-                          <div>
+                          <div className="w-[220px]">
                             <label className="label">
                               <span className=" label-font">{sortBy2}</span>
                             </label>
@@ -539,10 +554,7 @@ const ProcessingClaim = () => {
                                   onClick={() => setOpenCalendar(true)}
                                   className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                                 />
-                                <BsArrowRight
-                                  onClick={() => setOpenCalendar(true)}
-                                  className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                                ></BsArrowRight>
+                                <RiArrowLeftRightLine className="w-1/3 text-gray-600"></RiArrowLeftRightLine>
                                 <input
                                   value={
                                     endDate
@@ -558,7 +570,7 @@ const ProcessingClaim = () => {
                               {/* Multi date picker component called */}
                               <div
                                 ref={refClose}
-                                className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
+                                className="absolute z-10 2xl:ml-[0%] xl:ml-[-28%] lg:ml-[0%] md:ml-[-10%]  md:mr-[10%] sm:mr-[14%] mt-1 "
                               >
                                 {openCalendar && (
                                   <CustomDateRange
@@ -579,7 +591,7 @@ const ProcessingClaim = () => {
                             <select
                               // onChange={(e) => setInsuranceSelect(e.target.value)}
                               name="type"
-                              className="input-border input-font w-full focus:outline-none"
+                              className="input-border input-font w-full focus:outline-none "
                             >
                               <option value="all">All</option>
                               <option value="patient">Patient</option>
@@ -594,7 +606,7 @@ const ProcessingClaim = () => {
                 {/* submit  */}
                 <div className="gap-2 mb-10 flex">
                   <button
-                    className="mt-8 w-12 pms-input-button"
+                    className="mt-[40px] mb-1 w-12 pms-input-button"
                     type="submit"
                     onClick={() => {
                       setTableOpen(true);
@@ -602,7 +614,9 @@ const ProcessingClaim = () => {
                   >
                     Run
                   </button>
-                  <button className="pms-close-button w-16 mt-8">Cancel</button>
+                  <button className="pms-close-button w-16 mb-[3px] mt-[40px]">
+                    Cancel
+                  </button>
                 </div>
               </>
             )}

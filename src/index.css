@@ -276,6 +276,11 @@ code {
   min-width: 100%;
 }
 
+.date-range {
+  box-shadow: 2px 3px 4px -1px rgba(0, 0, 0, 0.85);
+  /* border: 1px solid #00a3b2; */
+}
+
 @media only screen and (max-width:465px) {
   .rdrWeekDay {
     font-size: 12px !important;

@@ -152,12 +152,12 @@ const InsuranceExclusionMultiSelection = () => {
       width: 100,
       render: (_, { id, File_name }) => {
         return (
-          <div
+          <button
             onClick={() => handleDelete(id)}
             className="flex items-center  cursor-pointer justify-center font-bold text-red-500"
           >
             X
-          </div>
+          </button>
         );
       },
     },
@@ -220,6 +220,9 @@ const InsuranceExclusionMultiSelection = () => {
               rowKey={(record) => record.id}
               dataSource={assignPayorData?.assign_payors}
               onChange={handleChange}
+              scroll={{
+                y: 200,
+              }}
             />
           </div>
           <>

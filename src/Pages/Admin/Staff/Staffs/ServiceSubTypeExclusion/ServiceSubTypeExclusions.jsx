@@ -141,12 +141,12 @@ const ServiceSubTypeExclusions = () => {
       width: 100,
       render: (_, { id, File_name }) => {
         return (
-          <div
+          <button
             onClick={() => handleDelete(id)}
             className="flex items-center justify-center font-bold text-red-500"
           >
             X
-          </div>
+          </button>
         );
       },
     },
@@ -199,6 +199,9 @@ const ServiceSubTypeExclusions = () => {
               rowKey={(record) => record.id}
               dataSource={assignedSubactivityData}
               onChange={handleChange}
+              scroll={{
+                y: 200,
+              }}
             />
           </div>
           <>

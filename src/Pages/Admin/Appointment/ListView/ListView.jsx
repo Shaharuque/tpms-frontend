@@ -897,7 +897,7 @@ const ListView = () => {
                           <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text [14px] w-full"
+                              className="flex  justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text [14px] w-full"
                             >
                               <input
                                 value={
@@ -906,10 +906,10 @@ const ListView = () => {
                                     : "Start Date"
                                 }
                                 readOnly
-                                className="focus:outline-none py-[1px] font-medium text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                className="focus:outline-none py-[1px] font-medium text-center bg-transparent text-white w-2/5 cursor-pointer"
                                 {...register("start_date")}
                               />
-                              <RiArrowLeftRightLine className="w-1/3 text-white"></RiArrowLeftRightLine>
+                              <RiArrowLeftRightLine className="w-1/5 text-white"></RiArrowLeftRightLine>
                               <input
                                 value={
                                   endDate
@@ -917,7 +917,7 @@ const ListView = () => {
                                     : "End Date"
                                 }
                                 readOnly
-                                className="focus:outline-none font-medium text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                className="focus:outline-none font-medium text-center bg-transparent text-white w-2/5 cursor-pointer"
                                 {...register("end_date")}
                               />
                             </div>
@@ -926,8 +926,8 @@ const ListView = () => {
                           <div>
                             <div
                               ref={refClose}
-                              // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
-                              className="absolute z-10 lg:ml-[0%] md:ml-[0%] mr-[14%] mt-1 "
+                              // className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
+                              className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] mr-[8%] mt-1 "
                             >
                               {openCalendar && (
                                 <CustomDateRange

@@ -138,12 +138,12 @@ const PatientExclusion = () => {
       width: 100,
       render: (_, { id, File_name }) => {
         return (
-          <div
+          <button
             onClick={() => handleDelete(id)}
             className="flex items-center justify-center font-bold text-red-500"
           >
             X
-          </div>
+          </button>
         );
       },
     },
@@ -196,6 +196,9 @@ const PatientExclusion = () => {
               rowKey={(record) => record.id}
               dataSource={assignedPatientsData}
               onChange={handleChange}
+              scroll={{
+                y: 200,
+              }}
             />
           </div>
           <>

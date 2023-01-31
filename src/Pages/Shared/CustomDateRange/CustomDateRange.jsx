@@ -21,7 +21,7 @@ import {
 
 const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
   return (
-    <div className="">
+    <div className="date-range">
       <div>
         <DateRangePicker
           onChange={(item) => setRange([item.selection])}
@@ -31,7 +31,7 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           rangeColors={["#0AA7B8"]}
           months={2}
           direction="horizontal"
-          className="border-2 border-gray-100 p-2 sm:p-0 bg-white shadow-xl"
+          className="border-2 border-gray-100 p-2 sm:p-0 bg-white"
           staticRanges={[
             ...defaultStaticRanges,
             {
@@ -65,7 +65,7 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           ]}
         />
       </div>
-      <div className="text-right w-full bg-[#26818F] rounded-b-sm range-date-ok py-1 shadow-xl">
+      <div className="text-right w-full bg-[#26818F]  rounded-b-sm range-date-ok py-1 shadow-xl">
         <button
           className="px-4 m-1 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
           type="submit"

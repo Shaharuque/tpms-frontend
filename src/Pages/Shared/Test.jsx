@@ -1,5 +1,6 @@
 import { DatePicker, Space } from "antd";
 import dayjs from "dayjs";
+import moment from "moment";
 import React from "react";
 
 const Test = () => {
@@ -43,15 +44,35 @@ const Test = () => {
       value: [dayjs().add(0, "year"), dayjs()],
     },
   ];
+
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
   return (
-    <div className="mt-24 ml-24">
-      <Space direction="vertical" size={5}>
-        <RangePicker
-          format="DD MMM,YY"
-          presets={rangePresets}
-          onChange={onRangeChange}
-        />
-      </Space>
+    <div>
+      <div>
+        <DatePicker onChange={onChange} />
+      </div>
+      <div className="mt-24 ml-24">
+        <Space direction="vertical" size={5}>
+          <RangePicker
+            ranges={{
+              Today: [moment(), moment()],
+              "This Month": [
+                moment().startOf("month"),
+                moment().endOf("month"),
+              ],
+              "Last Year": [
+                moment().startOf("previousYear"),
+                moment().endOf("year"),
+              ],
+            }}
+            format="DD MMM,YY"
+            presets={rangePresets}
+            onChange={onRangeChange}
+          />
+        </Space>
+      </div>
     </div>
   );
 };

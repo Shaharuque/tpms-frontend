@@ -282,7 +282,7 @@ const AuthorizationEdit = ({ editdata }) => {
                     </span>
                   </label>
                   <div className="ml-1">
-                    <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                    <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                       <input
                         value={
                           startDate
@@ -292,11 +292,11 @@ const AuthorizationEdit = ({ editdata }) => {
                         readOnly
                         onClick={() => setOpenCalendar(true)}
                         {...register("start_date")}
-                        className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                        className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-2/5 cursor-pointer"
                       />
                       <RiArrowLeftRightLine
                         onClick={() => setOpenCalendar(true)}
-                        className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium"
+                        className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium w-1/5"
                       ></RiArrowLeftRightLine>
                       <input
                         // defaultValue={"5-10-2034"}
@@ -308,14 +308,14 @@ const AuthorizationEdit = ({ editdata }) => {
                         readOnly
                         onClick={() => setOpenCalendar(true)}
                         {...register("end_date")}
-                        className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                        className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-2/5 cursor-pointer"
                       />
                     </div>
 
                     {/* Multi date picker component called */}
                     <div
                       ref={refClose}
-                      className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s "
+                      className="absolute z-10 md:ml-[-9%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s "
                     >
                       {openCalendar && (
                         <CustomDateRange

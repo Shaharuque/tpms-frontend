@@ -29,6 +29,8 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
     setEditModal(false);
   };
 
+  console.log(credentials?.credentials_list);
+
   const column = [
     {
       title: "Name",
@@ -173,17 +175,38 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
               transition: "all .3s ease-out",
             }}
           >
-            {display && (
-              <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
-                <p>No Credential Records</p>
-                <button
-                  onClick={() => setDisplay(false)}
-                  className="text-black"
-                >
-                  X
-                </button>
-              </div>
-            )}
+            {/* {credentials?.credentials_list?.data.length === 0 ? (
+              <>
+                {display && (
+                  <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
+                    <p>No Credential Records</p>
+                    <button
+                      onClick={() => setDisplay(false)}
+                      className="text-black"
+                    >
+                      X
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <div>
+                  <div className=" overflow-scroll">
+                    <Table
+                      pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                      size="small"
+                      className="table-striped-rows text-xs font-normal"
+                      columns={column}
+                      bordered
+                      rowKey={(record) => record.id} //record is kind of whole one data object and here we are
+                      dataSource={credentials?.credentials_list?.data}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+              </>
+            )} */}
 
             <div>
               <div className=" overflow-scroll">
@@ -199,6 +222,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                 />
               </div>
             </div>
+
             <div className="my-4 sm:ml-2">
               <button
                 className="pms-button mr-2 mt-2"
