@@ -1,28 +1,30 @@
 import { Table } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PatientStatusAction from "../Patient/Patients/PatientStatusAction";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { BsPersonLinesFill, BsPersonPlusFill } from "react-icons/bs";
+import { useGetStaffDataQuery } from "../../../features/Stuff_redux/staff/staffDataTableAPi";
+import useToken from "../../../CustomHooks/useToken";
+import Loading from "../../../Loading/Loading";
+import StuffStatusAction from "./Staffs/StuffStatus/StuffStatusAction";
+import { useDispatch } from "react-redux";
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [StafData, SetStafData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [items, setItems] = useState([]);
+  const { token } = useToken();
+  const [page, setPage] = useState(1);
 
-  // fakeApi call
-  useEffect(() => {
-    axios("../../All_Fake_Api/Staff.json")
-      .then((response) => {
-        SetStafData(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  console.log(StafData);
+  const {
+    data: stuffData,
+    isLoading: staffLoading,
+    isError,
+  } = useGetStaffDataQuery({ token, page });
+
+  console.log("rtk data received", stuffData);
+  const staffTableData = stuffData?.staffs?.data;
+  // SetStafData(stuffData?.staffs?.data);
 
   const clearFilters = () => {
     setFilteredInfo({});
@@ -31,8 +33,8 @@ const Staffs = () => {
   const columns = [
     {
       title: "Name",
-      dataIndex: "Name",
-      key: "Name",
+      dataIndex: "full_name",
+      key: "full_name",
       width: 150,
       filters: [
         {
@@ -56,76 +58,57 @@ const Staffs = () => {
           value: "Hector Moses",
         },
       ],
-      filteredValue: filteredInfo.Name || null,
-      onFilter: (value, record) => record.Name.includes(value),
-      sorter: (a, b) => {
-        return a.Name > b.Name ? -1 : 1;
-      },
-      sortOrder: sortedInfo.columnKey === "Name" ? sortedInfo.order : null,
-
       // render contains what we want to reflect as our data
       // Name, id, key=>each row data(object) property value can be accessed.
       //here,using id as key, as key isn't availale in the data we got.
-      render: (_, { Name, id }) => {
-        console.log("tags : ", Name, id);
+      render: (_, { full_name, id }) => {
+        // console.log("tags : ", Name, id);
         return (
           <Link
             to={`/admin/staff/staffs-biographic/${id}`}
             className="text-secondary"
           >
-            {Name}
+            {full_name}
           </Link>
         );
       },
+      filteredValue: filteredInfo.full_name || null,
+      onFilter: (value, record) => record.full_name.includes(value),
+      sorter: (a, b) => {
+        return a.full_name > b.full_name ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Credential Type",
-      dataIndex: "Credential_Type",
-      key: "Credential_Type",
+      dataIndex: "credential_type",
+      key: "credential_type",
       width: 150,
-      filters: [],
-      filteredValue: filteredInfo.Credential_Type || null,
-      onFilter: (value, record) => record.Credential_Type.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.Credential_Type > b.Credential_Type ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_type > b.credential_type ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "Credential_Type" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Phone",
-      dataIndex: "Phone",
-      key: "Phone",
+      dataIndex: "office_phone",
+      key: "office_phone",
       width: 120,
-      // filters: [
-      //   {
-      //     text: "(940)-234-0329",
-      //     value: "(940)-234-0329",
-      //   },
-      //   {
-      //     text: "(124)-996-5455",
-      //     value: "(124)-996-5455",
-      //   },
-      //   {
-      //     text: "(972)-202-5007",
-      //     value: "(972)-202-5007",
-      //   },
-      // ],
-      // filteredValue: filteredInfo.Phone || null,
-      // onFilter: (value, record) => record.Phone.includes(value),
       sorter: (a, b) => {
         return a.Phone > b.Phone ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "Phone" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "office_phone" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
-      render: (_, { Phone }) => {
+      render: (_, { office_phone }) => {
         return (
           <div>
-            <h1>{Phone ? Phone : "No Data"}</h1>
+            <h1>{office_phone ? office_phone : "No Data"}</h1>
           </div>
         );
       },
@@ -133,8 +116,8 @@ const Staffs = () => {
     },
     {
       title: "Email",
-      dataIndex: "Email",
-      key: "Email",
+      dataIndex: "office_email",
+      key: "office_email",
       width: 200,
       filters: [
         {
@@ -157,8 +140,8 @@ const Staffs = () => {
     },
     {
       title: "Language",
-      dataIndex: "Language",
-      key: "Language",
+      dataIndex: "language",
+      key: "language",
       width: 100,
       filters: [
         {
@@ -188,16 +171,6 @@ const Staffs = () => {
       dataIndex: "id",
       key: "id",
       width: 100,
-      filters: [
-        {
-          text: `Male`,
-          value: "Male",
-        },
-        {
-          text: "Female",
-          value: "Female",
-        },
-      ],
       render: (_, { Status }) => {
         //console.log("Status : ", Status);
         return (
@@ -214,29 +187,28 @@ const Staffs = () => {
     },
     {
       title: "Status",
-      key: "Status",
-      dataIndex: "Status",
+      key: "is_active",
+      dataIndex: "is_active",
       width: 120,
-      render: (_, { Status }) => {
+      render: (_, { is_active, id }) => {
         //console.log("Status : ", Status);
-        return <PatientStatusAction status={Status}></PatientStatusAction>;
+        return (
+          <StuffStatusAction id={id} status={is_active}></StuffStatusAction>
+        );
       },
-      filters: [],
-      filteredValue: filteredInfo.Status || null,
-      onFilter: (value, record) => record.Status.includes(value),
     },
   ];
 
   //console.log(items)
 
   const handleChange = (pagination, filters, sorter) => {
-    console.log("Various parameters", pagination, filters, sorter);
+    // console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
 
   return (
-    <div className={StafData ? "h-[100vh]" : "h-[100vh]"}>
+    <div className={""}>
       <div className="flex items-center flex-wrap justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           Staffs
@@ -257,7 +229,7 @@ const Staffs = () => {
               <div>
                 <TiArrowSortedDown className=" text-3xl absolute top-[-12px] right-[-6px] text-primary" />
               </div>
-              <Link to={"/admin/create-staff/staff"}>
+              <Link to={`/admin/create-staff/provider`}>
                 <button className="text-[14px] text-secondary border px-[20px] py-1 mb-2 rounded-sm border-secondary hover:text-white hover:bg-secondary mx-auto flex items-center font-semibold gap-2">
                   <div className="flex items-center">
                     <BsPersonPlusFill className="mr-2" />
@@ -280,14 +252,19 @@ const Staffs = () => {
       </div>
 
       <div className=" overflow-scroll">
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          size="small"
-          className=" text-xs font-normal"
-          columns={columns}
-          dataSource={StafData}
-          onChange={handleChange}
-        />
+        {staffLoading ? (
+          <Loading />
+        ) : (
+          <Table
+            rowKey={(record) => record.id}
+            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            size="small"
+            className="table-striped-rows text-xs font-normal"
+            columns={columns}
+            dataSource={staffTableData}
+            onChange={handleChange}
+          />
+        )}
       </div>
     </div>
   );

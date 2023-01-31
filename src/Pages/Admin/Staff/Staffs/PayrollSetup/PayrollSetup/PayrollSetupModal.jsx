@@ -1,18 +1,57 @@
 import { Modal } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import useToken from "../../../../../../CustomHooks/useToken";
+import { useAddPayrollMutation } from "../../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
+import PyarollMultiSelect from "../PayrollMultiSelect/PyarollMultiSelect";
 
-const PayrollSetupModal = ({ handleClose, open }) => {
+const PayrollSetupModal = ({ handleClose, open, services }) => {
   const [active, setActive] = useState(false);
-
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
+  const [serviceId, setServiceId] = useState([]);
+  const { id } = useParams();
+  const { token } = useToken();
+  console.log("seleted service ID", serviceId);
+  console.log("services data ", services);
+  //add payroll api
+  const [addPayroll, { isSuccess: addSuccess, isError: addError }] =
+    useAddPayrollMutation();
 
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    const payload = {
+      hourly_rate: data?.hourly_rate,
+      milage_rate: data?.milage_rate,
+      ser_id: serviceId,
+      employee_id: id,
+    };
+    if (serviceId?.length !== 0) {
+      addPayroll({
+        token,
+        payload,
+      });
+    }
   };
+
+  useEffect(() => {
+    if (addSuccess) {
+      toast.success("Successfully Staff Created", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (addError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [addSuccess, addError]);
   return (
     <div>
       <div>
@@ -23,8 +62,6 @@ const PayrollSetupModal = ({ handleClose, open }) => {
           bodyStyle={{ padding: "0" }}
           closable={false}
           className="box rounded-xl"
-          // onClose={handleClose}
-          // aria-labelledby="responsive-dialog-title"
         >
           <div className="px-5 py-2">
             <div className="flex items-center justify-between">
@@ -48,13 +85,10 @@ const PayrollSetupModal = ({ handleClose, open }) => {
                   <label className="label">
                     <span className="modal-label-name">Service</span>
                   </label>
-                  <select
-                    className="modal-input-field ml-1 w-full"
-                    {...register(`service`)}
-                  >
-                    <option value="Speech Therapist">Speech Therapist</option>
-                    <option value="female">Female</option>
-                  </select>
+                  <PyarollMultiSelect
+                    setServiceId={setServiceId}
+                    Alldata={services}
+                  />
                 </div>
 
                 <div>

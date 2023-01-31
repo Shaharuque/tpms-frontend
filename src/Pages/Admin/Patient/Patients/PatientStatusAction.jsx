@@ -3,23 +3,22 @@ import { memo } from "react";
 import { Switch } from "antd";
 
 const PatientStatusAction = ({ status }) => {
-  // let changedStatus;
-  // if (status === "true") {
-  //   changedStatus = 1;
-  // } else if (status === "false") {
-  //   changedStatus = 0;
-  // }
-  const [value, setValue] = useState();
-  console.log(value);
+  // console.log("stattus", status);
+  let convertedStatus = status ? 1 : 0;
+
+  const [value, setValue] = useState(convertedStatus);
+  let BoleanToNumber = value ? 1 : 0;
+  console.log(BoleanToNumber);
 
   return (
     <div className="flex items-center justify-center">
       <Switch
         size="small"
-        checked={status ? true : false}
-        // onClick={() => setValue(!status)}
+        defaultChecked={value}
+        onClick={() => setValue(!value)}
       />
-      {!status ? (
+
+      {!value ? (
         <h1 className="ml-1">In-Active</h1>
       ) : (
         <h1 className="ml-1">Active</h1>

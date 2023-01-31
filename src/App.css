@@ -108,9 +108,8 @@ input[type='checkbox'] {
   padding-right: 8px;
   padding-top: 7px;
   padding-bottom: 4px;
-  font-family: 'Roboto',
-    sans-serif;
-  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
   line-height: 17.6px !important;
   text-transform: capitalize;
   letter-spacing: 1px;
@@ -118,7 +117,7 @@ input[type='checkbox'] {
   background-color: #0aa7b8;
   background-clip: border-box;
   color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: 3px;
   box-shadow: 2px 2px 2px 0px #626d6e;
   display: inline-block;
   transition: ease-in-out 0.3s;
@@ -169,7 +168,6 @@ input[type='checkbox'] {
   text-transform: capitalize;
   letter-spacing: 1px;
   word-spacing: 0.2px;
-
   background-clip: border-box;
   color: #0aa7b8;
   border-radius: 5px;
@@ -269,7 +267,7 @@ select:focus {
 /* -----------------------------------------input form --------------------------------------- */
 
 .input-border {
-  border-bottom: 1px solid rgba(9, 162, 179, 0.498);
+  border-bottom: 1px solid #09a2b37f;
   font-size: 14px;
   color: #4b5563;
   border-radius: 0;

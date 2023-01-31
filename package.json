@@ -43,6 +43,7 @@
     "react-big-calendar": "^1.4.0",
     "react-calendar": "^3.7.0",
     "react-chartjs-2": "^4.2.0",
+    "react-color-palette": "^6.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^4.8.0",

@@ -41,8 +41,10 @@ const PayPeriod = () => {
   ] = useBulkDeletePayperiodMutation();
 
   //delete payperiod api
-  const [deletePayperiod, { data: deleteResponse, isSuccess: deleteSuccess }] =
-    useDeletePayperiodMutation();
+  const [
+    deletePayperiod,
+    { data: deleteResponse, isSuccess: deleteSuccess, isError: deleteError },
+  ] = useDeletePayperiodMutation();
 
   let totalPage = payperiods?.pos_data?.last_page
     ? payperiods?.pos_data?.last_page
@@ -104,6 +106,21 @@ const PayPeriod = () => {
     }
   };
   console.log(deleteResponse, deleteSuccess);
+  useEffect(() => {
+    if (deleteSuccess) {
+      toast.success("Deleted Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (deleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [deleteSuccess, deleteError]);
 
   const handleBulkDelete = () => {
     if (payPeriodsId?.length !== 0 && bulkChecking === "Bulk Delete") {
@@ -112,6 +129,12 @@ const PayPeriod = () => {
         data: {
           ids: payPeriodsId,
         },
+      });
+    } else {
+      toast.error("Please Select Valid Option", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
       });
     }
   };
@@ -338,7 +361,7 @@ const PayPeriod = () => {
               rowKey={(record) => record.id}
               size="small"
               bordered
-              className=" text-xs font-normal"
+              className="table-striped-rows text-xs font-normal"
               columns={columns}
               dataSource={payperiods?.pos_data?.data}
               rowSelection={{
@@ -381,7 +404,7 @@ const PayPeriod = () => {
                   Select
                 </option>
                 <option value="Bulk Delete" className="text-black">
-                  bulk delete
+                  Bulk Delete
                 </option>
               </select>
               <button onClick={handleBulkDelete} className="pms-input-button">

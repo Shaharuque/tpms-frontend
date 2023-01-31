@@ -68,7 +68,7 @@ import Patients from "./Pages/Admin/Patient/Patients";
 import PatientsInfo from "./Pages/Admin/Patient/Patients/PatientsInfo";
 import PatientInformation from "./Pages/Admin/Patient/Patients/PatientInfo/PatientInformation";
 import Authorization from "./Pages/Admin/Patient/Patients/Authorization/Authorization";
-import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AuthorizationEdit";
+import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AuthorizationEdit/AuthorizationEdit";
 import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
@@ -153,6 +153,20 @@ import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
 import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
 import DischargeSummary from "./Pages/Admin/FormsTemplate/DischargeSummary";
+import TreatmentPlanForm from "./Pages/Admin/FormsTemplate/TreatmentPlanForm";
+import ParentTrainingForm from "./Pages/Admin/FormsTemplate/ParentTreatmentForm";
+import AssessmentForm from "./Pages/Admin/FormsTemplate/AssessmentForm";
+import BehaviorAnalysisProgressNote from "./Pages/Admin/FormsTemplate/BehaviorAnalysisProgressNote";
+import SupervisionSupervision from "./Pages/Admin/FormsTemplate/SupervisionSupervision";
+import SupervisionForm from "./Pages/Admin/FormsTemplate/SupervisionForm";
+import ServiceVerificationlog from "./Pages/Admin/FormsTemplate/ServiceVerificationlog";
+import SupervisionNonbillableBrct from "./Pages/Admin/FormsTemplate/SupervisionNonbillableBrct";
+import CPNotesForm from "./Pages/Admin/FormsTemplate/CPNotesForm";
+import ClinicalForm from "./Pages/Admin/FormsTemplate/ClinicalForm";
+import SmallSoap from "./Pages/Admin/FormsTemplate/SmallSoap";
+import UniqueSupervisionForm from "./Pages/Admin/FormsTemplate/UniqueSupervisionForm";
+import ManagementModificationForm from "./Pages/Admin/FormsTemplate/ManagementModificationForm";
+import SupervisionAssessment from "./Pages/Admin/FormsTemplate/SupervisionAssessment";
 import AntTableSearchBox from "./Testing/AntTableTest/AntTableSearchBox";
 import RequireAuth from "./Authorization/RequireAuth";
 import InfiniteScrollTest from "./Testing/ApiTesting/InfiniteScrollTest";
@@ -196,6 +210,26 @@ import InsuranceDetails from "./Pages/SuperAdmin/Components/InsuranceDetails/Ins
 import SMSEmailSettings from "./Pages/SuperAdmin/Components/SMSEmailSettings/SMSEmailSettings";
 import BlockUnblockAdmins from "./Pages/SuperAdmin/Components/BlockUnblockAdmins/BlockUnblockAdmins";
 import BillerlogUser from "./Pages/SuperAdmin/Components/BillerlogUser/BillerlogUser";
+import OfficeStaff from "./Pages/Admin/Staff/AddStaff/OfficeStaff";
+import Facility from "./Pages/SuperAdmin/Components/ProviderAccess/Components/Facility/Facility";
+import CreateUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/CreateUser/CreateUser";
+import DeleteUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/DeleteUser/DeleteUser";
+import UnlockUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/UnlockUser/UnlockUser";
+import SwitchUser from "./Pages/SuperAdmin/Components/ProviderAccess/Components/SwitchUser/SwitchUser";
+import Welcome from "./Pages/SuperAdmin/Components/Welcome";
+import PageAccess from "./Pages/SuperAdmin/Components/AdminAccess/Components/PageAccess/PageAccess";
+import AdminCreateUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminCreateUser/AdminCreateUser";
+import AdminDeleteUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminDeleteUser/AdminDeleteUser";
+import AdminUnlockUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminUnlockUser/AdminUnlockUser";
+import AdminSwitchUser from "./Pages/SuperAdmin/Components/AdminAccess/Components/AdminSwitchUser/AdminSwitchUser";
+import Program from "./Pages/Admin/Settings/Settings/Program/Program";
+import AccountType from "./Pages/Admin/Settings/Settings/Program/AccountType/AccountType";
+import AllPrograms from "./Pages/Admin/Settings/Settings/Program/AllPrograms/AllPrograms";
+import ProgramCategory from "./Pages/Admin/Settings/Settings/Program/ProgramCategory/ProgramCategory";
+import Questionnaire from "./Pages/Admin/Settings/Settings/Program/Questionnaire/Questionnaire";
+import AddAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/AddAllProgram";
+import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/EditAllProgram";
+import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -259,6 +293,68 @@ function App() {
             path="/DischargeSummary"
             element={<DischargeSummary></DischargeSummary>}
           ></Route>
+          <Route
+            path="/TreatmentPlanForm"
+            element={<TreatmentPlanForm></TreatmentPlanForm>}
+          ></Route>
+          <Route
+            path="/Parent-treatment-from"
+            element={<ParentTrainingForm></ParentTrainingForm>}
+          ></Route>
+          <Route
+            path="/assessment-form"
+            element={<AssessmentForm></AssessmentForm>}
+          ></Route>
+          <Route
+            path="/behavior-analysis-progress-note"
+            element={
+              <BehaviorAnalysisProgressNote></BehaviorAnalysisProgressNote>
+            }
+          ></Route>
+          <Route
+            path="/supervision-supervision"
+            element={<SupervisionSupervision></SupervisionSupervision>}
+          ></Route>
+          <Route
+            path="/supervision-form"
+            element={<SupervisionForm></SupervisionForm>}
+          ></Route>
+          <Route
+            path="/Service-Verification-log"
+            element={<ServiceVerificationlog></ServiceVerificationlog>}
+          ></Route>
+          <Route
+            path="/Super-vision-Non-billable-Brct"
+            element={<SupervisionNonbillableBrct></SupervisionNonbillableBrct>}
+          ></Route>
+          <Route
+            path="/cp-notes-form"
+            element={<CPNotesForm></CPNotesForm>}
+          ></Route>
+          <Route
+            path="/clinical-form"
+            element={<ClinicalForm></ClinicalForm>}
+          ></Route>
+          <Route
+            path="/smallsoap-form"
+            element={<SmallSoap></SmallSoap>}
+          ></Route>
+          <Route
+            path="/unique-supervision-form"
+            element={<UniqueSupervisionForm></UniqueSupervisionForm>}
+          ></Route>
+          <Route
+            path="/management-modification-form"
+            element={<ManagementModificationForm></ManagementModificationForm>}
+          ></Route>
+          <Route
+            path="/Supervision-Assessment"
+            element={<SupervisionAssessment></SupervisionAssessment>}
+          ></Route>
+          <Route
+            path="/Structure-Of-Process"
+            element={<StructureofProcess></StructureofProcess>}
+          ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
@@ -313,11 +409,53 @@ function App() {
 
           {/* Super Admin Panel */}
           <Route path="/super-admin" element={<SuperAdmin></SuperAdmin>}>
-            <Route index element={<ProviderAccess></ProviderAccess>}></Route>
+            <Route index element={<Welcome></Welcome>}></Route>
             <Route
-              path="admin-access"
-              element={<AdminAccess></AdminAccess>}
-            ></Route>
+              path="provider-access"
+              element={<ProviderAccess></ProviderAccess>}
+            >
+              <Route index element={<Navigate to="facility" />} />
+              <Route path="facility" element={<Facility></Facility>}></Route>
+              <Route
+                path="create-user"
+                element={<CreateUser></CreateUser>}
+              ></Route>
+              <Route
+                path="delete-user"
+                element={<DeleteUser></DeleteUser>}
+              ></Route>
+              <Route
+                path="unlock-user"
+                element={<UnlockUser></UnlockUser>}
+              ></Route>
+              <Route
+                path="switch-user"
+                element={<SwitchUser></SwitchUser>}
+              ></Route>
+            </Route>
+            <Route path="admin-access" element={<AdminAccess></AdminAccess>}>
+              <Route index element={<Navigate to="page-access" />} />
+              <Route
+                path="page-access"
+                element={<PageAccess></PageAccess>}
+              ></Route>
+              <Route
+                path="admin-create-user"
+                element={<AdminCreateUser></AdminCreateUser>}
+              ></Route>
+              <Route
+                path="admin-delete-user"
+                element={<AdminDeleteUser></AdminDeleteUser>}
+              ></Route>
+              <Route
+                path="admin-unlock-user"
+                element={<AdminUnlockUser></AdminUnlockUser>}
+              ></Route>
+              <Route
+                path="admin-switch-user"
+                element={<AdminSwitchUser></AdminSwitchUser>}
+              ></Route>
+            </Route>
             <Route path="payor" element={<Payor></Payor>}></Route>
             <Route
               path="Companies-and-facilities"
@@ -624,12 +762,12 @@ function App() {
             {/* STAFF  */}
             <Route path="staffs" element={<Staffs></Staffs>}></Route>
             <Route
-              path="create-staff/staff"
+              path="create-staff/provider"
               element={<CreateStaff></CreateStaff>}
             ></Route>
             <Route
               path="create-staff/officeStaff"
-              element={<CreateStaff></CreateStaff>}
+              element={<OfficeStaff></OfficeStaff>}
             ></Route>
             <Route path="staff" element={<StaffInformation></StaffInformation>}>
               <Route path="staffs-biographic/:id" element={<Bio></Bio>}></Route>
@@ -907,6 +1045,33 @@ function App() {
                 path="app-id-tracking"
                 element={<AppIdTracking></AppIdTracking>}
               ></Route>
+              <Route
+                path="create-program"
+                element={<AddAllProgram></AddAllProgram>}
+              ></Route>
+              <Route
+                path="edit-program/:id"
+                element={<EditAllProgram></EditAllProgram>}
+              ></Route>
+              <Route path="program" element={<Program></Program>}>
+                <Route index element={<Navigate to="account-type" />} />
+                <Route
+                  path="account-type"
+                  element={<AccountType></AccountType>}
+                ></Route>
+                <Route
+                  path="all-program"
+                  element={<AllPrograms></AllPrograms>}
+                ></Route>
+                <Route
+                  path="program-category"
+                  element={<ProgramCategory></ProgramCategory>}
+                ></Route>
+                <Route
+                  path="questionnaire"
+                  element={<Questionnaire></Questionnaire>}
+                ></Route>
+              </Route>
             </Route>
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>

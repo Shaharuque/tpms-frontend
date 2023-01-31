@@ -22,6 +22,7 @@ import useToken from "../../../../CustomHooks/useToken";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
 import DateRangePickersTest from "../../../Shared/CustomDateRange/DateRangePicker/DateRangePickersTest";
+import { RiArrowLeftRightLine } from "react-icons/ri";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -678,6 +679,7 @@ const ListView = () => {
     },
   });
   const onSubmit = async (data) => {
+    console.log("form-data", data);
     const from_date = convert(data?.start_date);
     const to_date = convert(data?.end_date);
     //console.log(from_date, to_date);
@@ -742,7 +744,7 @@ const ListView = () => {
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
             <div
               onClick={clickHandler}
-              className="flex items-center justify-between"
+              className="flex items-center justify-between "
             >
               {!clicked && (
                 <>
@@ -821,7 +823,8 @@ const ListView = () => {
                   </div>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className="relative">
-                  <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 2xl:grid-cols-8 gap-2 mb-2">
+                  <div className=" flex item-center  flex-wrap gap-3 ">
+                    {/* <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 2xl:grid-cols-8 gap-2 mb-2"> */}
                     {billable && (
                       <div>
                         <label className="label">
@@ -837,7 +840,7 @@ const ListView = () => {
                         ></Clients>
                       </div>
                     )}
-                    <div className="w-full">
+                    <div className="">
                       <label className="label">
                         <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
                           Provider
@@ -884,7 +887,7 @@ const ListView = () => {
                             </select>
                           </div>
                         </div>
-                        <div>
+                        <div className="w-[220px]">
                           <label className="label">
                             <span className="label-text  text-[16px] text-gray-100 text-left">
                               Selected date
@@ -894,7 +897,7 @@ const ListView = () => {
                           <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex flex-wrap justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text [14px] w-full"
+                              className="flex  justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text [14px] w-full"
                             >
                               <input
                                 value={
@@ -903,10 +906,10 @@ const ListView = () => {
                                     : "Start Date"
                                 }
                                 readOnly
-                                className="focus:outline-none py-[1px] font-medium text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                className="focus:outline-none py-[1px] font-medium text-center bg-transparent text-white w-2/5 cursor-pointer"
                                 {...register("start_date")}
                               />
-                              <BsArrowRight className="w-1/3 text-white"></BsArrowRight>
+                              <RiArrowLeftRightLine className="w-1/5 text-white"></RiArrowLeftRightLine>
                               <input
                                 value={
                                   endDate
@@ -914,7 +917,7 @@ const ListView = () => {
                                     : "End Date"
                                 }
                                 readOnly
-                                className="focus:outline-none font-medium text-center bg-transparent text-white w-1/3 cursor-pointer"
+                                className="focus:outline-none font-medium text-center bg-transparent text-white w-2/5 cursor-pointer"
                                 {...register("end_date")}
                               />
                             </div>
@@ -923,8 +926,8 @@ const ListView = () => {
                           <div>
                             <div
                               ref={refClose}
-                              // className="absolute z-10 md:ml-[5%] lg:ml-[10%] xl:ml-[27%] 2xl:ml-[35%]s"
-                              className="absolute mt-2 z-10 sm:ml-[-290px]"
+                              // className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
+                              className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] mr-[8%] mt-1 "
                             >
                               {openCalendar && (
                                 <CustomDateRange
@@ -989,7 +992,7 @@ const ListView = () => {
                     {table && (
                       <>
                         <div className="  ">
-                          <div className="px-2 py-2 w-full mr-2 mt-[35px] bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
+                          <div className="px-2 py-2 w-full mr-2 2xl:mt-[35px] xl:mt-[0px]  bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
                             <input
                               placeholder="Search here..."
                               onChange={(e) => globalFilter(e.target.value)}
@@ -1002,7 +1005,7 @@ const ListView = () => {
                         </div>
                         <button
                           onClick={clearFilters}
-                          className="mb-2 mt-[35px]  w-1/3 px-1  bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
+                          className="2xl:mb-2 xl:mb-0 lg:mb-0 md:mb-0 2xl:mt-[35px] xl:mt-[0px] py-2 px-1  bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
                         >
                           Clear filters
                         </button>

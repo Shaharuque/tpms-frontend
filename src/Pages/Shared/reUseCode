@@ -1,4 +1,4 @@
-## Input:
+## Modal Input:
 
 className="modal-label-name"
 className="col-span-2 modal-input-field ml-1 w-full"
@@ -34,6 +34,8 @@ className="input-border input-font w-full focus:outline-none"
 className=" label-font"
 
 ### ANtd-table important data:
+
+className="table-striped-rows text-xs font-normal"
 
 .ant-table-thead>tr>th,
 .ant-table-tbody>tr>td,  

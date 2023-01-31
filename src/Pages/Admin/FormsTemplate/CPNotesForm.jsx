@@ -1,0 +1,231 @@
+import TextArea from "antd/lib/input/TextArea";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import logo from "../../Assets/logo4.png";
+import "../../Style/form.css";
+import SignatureModal from "./SignatureManage/SignatureModal";
+import { FaSignature } from "react-icons/fa";
+import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
+
+const CPNotesForm = () => {
+  const [caregiverSignature, setCaregiverSignature] = useState(false);
+  const [providerSignature, setProviderSignature] = useState(false);
+  const [ProviderImageURL, setProviderImageURL] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
+  console.log("ProviderImageURL", ProviderImageURL);
+  console.log("imageURL", imageURL);
+  const [file, setFile] = useState();
+
+  console.log("file", file);
+
+  const handleSignatureProvider = () => {
+    setProviderSignature(true);
+  };
+  const handleSignatureCaregiver = () => {
+    setCaregiverSignature(true);
+  };
+  const handleSignatureClose = () => {
+    setCaregiverSignature(false);
+    setProviderSignature(false);
+  };
+
+  const { register, handleSubmit } = useForm();
+  const [notes, setNotes] = useState("");
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  return (
+    <div>
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+        <div>
+          <div className="flex items-center flex-wrap gap-3 justify-between">
+            <img src={logo} alt="" />
+            <div className="text-[16px] sm:mr-10 mr-0 ml-10 sm:ml-0">
+              <p className="my-1">
+                <span className="form-head">Mail: </span>demo@example.com
+              </p>
+              <p className="my-1">
+                <Link to={"#"}>
+                  <span className="form-head">Email: </span>demo@example.com
+                </Link>
+              </p>
+              <p className="my-1">
+                <span className="form-head">Phone: </span> 000-000-0000
+              </p>
+              <p className="my-1">
+                <Link to={"#"}>
+                  <span className="form-head">Fax: </span>000.000.0000
+                </Link>
+              </p>
+            </div>
+          </div>
+          <div className="form-title mb-5">
+            <h1>ASSESSMENT FORM</h1>
+            <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
+          </div>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {" "}
+          <div>
+            <div className="w-full mt-4 mb-4">
+              <div className="mt-3    border-blue-600 border-2">
+                <span className="form-input-name">Clinical Status</span>
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder="Enter here..."
+                  size="large"
+                  className="border-none"
+                  {...register("Clinical Status")}
+                />
+              </div>
+              <div className=" border-t-0  border-blue-600 border-2">
+                <span className="form-input-name">
+                  Who was present during the session
+                </span>
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder="Enter here..."
+                  size="large"
+                  className=""
+                  {...register("present_during_seation")}
+                />
+              </div>
+              <div className=" border-t-0  border-blue-600 border-2">
+                <span className="form-input-name">
+                  Behavior targeted for decrease
+                </span>
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder="Enter here..."
+                  size="large"
+                  className=""
+                  {...register("target_decrease")}
+                />
+              </div>
+              <div className=" border-t-0  border-blue-600 border-2">
+                <span className="form-input-name">
+                  Techniques used during the session
+                </span>
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder="Enter here..."
+                  size="large"
+                  className=""
+                  {...register("technique_during_seasion")}
+                />
+              </div>
+              <div className=" border-t-0  border-blue-600 border-2">
+                <span className="form-input-name">Programs worked on</span>
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder="Enter here..."
+                  size="large"
+                  className=""
+                  {...register("programs_workd_on")}
+                />
+              </div>{" "}
+              <div className=" border-t-0  border-blue-600 border-2">
+                <span className="form-input-name">Reinforcers used</span>
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder="Enter here..."
+                  size="large"
+                  className=""
+                  {...register("Reinforcers used")}
+                />
+              </div>
+              <div className=" border-t-0  border-blue-600 border-2">
+                <span className="form-input-name"> Client Progress </span>
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder="Enter here..."
+                  size="large"
+                  className=""
+                  {...register("Client Progress")}
+                />
+              </div>
+              <div className=" border-t-0  border-blue-600 border-2">
+                <span className="form-input-name">Plan for next session</span>
+                <TextArea
+                  onChange={(e) => setNotes(e.target.value)}
+                  maxLength={300}
+                  rows={5}
+                  placeholder="Enter here..."
+                  size="large"
+                  className=""
+                  {...register("next_session")}
+                />
+              </div>
+            </div>
+
+            <div className=" flex  flex-wrap justify-between mt-10">
+              <div>
+                <button
+                  className="flex items-center text-lg hover:underline hover:text-rose-800 mx-auto font-medium gap-1 text-[#207ac7]"
+                  onClick={handleSignatureProvider}
+                >
+                  Provider Signature
+                  <FaSignature className="text-lg" />
+                </button>
+              </div>
+
+              <div>
+                <button
+                  className="flex items-center text-lg hover:underline hover:text-rose-800 mx-auto font-medium gap-1 text-[#207ac7]"
+                  onClick={handleSignatureProvider}
+                >
+                  Caregiver Signature <FaSignature className="text-lg" />
+                </button>
+              </div>
+            </div>
+            <div className="flex items-center justify-between my-12">
+              <button className=" bg-purple-900 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
+                <AiFillCloud /> Save
+              </button>
+              <button className=" bg-cyan-900 text-white flex items-center px-4 py-2 gap-1 text-lg font-semibold rounded-md my-2">
+                <AiOutlinePrinter /> Print
+              </button>
+            </div>
+          </div>
+        </form>
+
+        {providerSignature && (
+          <SignatureModal
+            handleSignatureClose={handleSignatureClose}
+            open={providerSignature}
+            setImageURL={setProviderImageURL}
+            setFile={setFile}
+          ></SignatureModal>
+        )}
+
+        <div className="flex flex-wrap gap-2 items-center justify-between form-footer">
+          <div className="text-black">
+            Demo Institution{" "}
+            <span className=" font-normal">somewhere in america</span>
+          </div>
+          <div>
+            Phone: 000-000-0000, Email: demo@example.com, Fax: 000.000.0000,
+            example.com
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CPNotesForm;

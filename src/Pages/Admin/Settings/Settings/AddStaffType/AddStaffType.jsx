@@ -6,11 +6,6 @@ import Loading from "../../../../../Loading/Loading";
 import { PostfetchData } from "../../../../../Misc/Helper";
 
 const AddStaffType = () => {
-  // QueryPost('https://test-prod.therapypms.com/api/v1/admin/ac/setting/cpt/code/exclusion/get', mutate)
-  //   const {mutate} = useAddSuperHeroData();
-  // console.log('query data', mutate)
-  // mutate();
-
   const { token } = useToken();
   const [staffType, setstaffType] = useState();
   const [selectedStaffType, setselectedStaffType] = useState([]);
@@ -140,6 +135,7 @@ const AddStaffType = () => {
             multiple={true}
             id="countries_multiple"
             onChange={(e) => {
+              console.log("data", e.target.value);
               handleAdding(e);
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"

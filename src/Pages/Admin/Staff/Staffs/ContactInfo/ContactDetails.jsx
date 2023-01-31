@@ -1,10 +1,19 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import useToken from "../../../../../CustomHooks/useToken";
+import { useStaffContactInfoQuery } from "../../../../../features/Stuff_redux/contactInfo/contactInfoApi";
 import ContactDetailsOne from "./ContactDetails/ContactDetailsOne";
 import ContactDetailsTwo from "./ContactDetails/ContactDetailsTwo";
 
 const ContactDetails = () => {
   const [contactDetails, SetContactDetails] = useState(true);
   const [emergency, setEmergency] = useState(false);
+  const { token } = useToken();
+  const { id } = useParams();
+  console.log(id);
+  const { data: contactData } = useStaffContactInfoQuery({ token, id });
+
+  // console.log("contactData", contactData);
   const handleContactDetails = () => {
     SetContactDetails(!contactDetails);
     setEmergency(false);
@@ -13,17 +22,28 @@ const ContactDetails = () => {
     setEmergency(!emergency);
     SetContactDetails(false);
   };
+  // api fetch
+
   return (
     <div className="md:h-[100vh]">
       <h1 className=" text-orange-400">Contact Details</h1>
-      <ContactDetailsOne
-        handleContactDetails={handleContactDetails}
-        contactDetails={contactDetails}
-      ></ContactDetailsOne>
-      <ContactDetailsTwo
-        handleEmergencyDetails={handleEmergencyDetails}
-        emergency={emergency}
-      ></ContactDetailsTwo>
+      {contactData?.contact_details && contactData?.status === "success" && (
+        <ContactDetailsOne
+          handleContactDetails={handleContactDetails}
+          contactDetails={contactDetails}
+          contactApiData={contactData?.contact_details}
+        ></ContactDetailsOne>
+      )}
+      {/* emergency_contact_details */}
+
+      {contactData?.emergency_contact_details &&
+        contactData?.status === "success" && (
+          <ContactDetailsTwo
+            handleEmergencyDetails={handleEmergencyDetails}
+            emergency={emergency}
+            emergencyApiData={contactData?.emergency_contact_details}
+          ></ContactDetailsTwo>
+        )}
     </div>
   );
 };
