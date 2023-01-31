@@ -8,28 +8,9 @@ import useToken from "../../../../../../../CustomHooks/useToken";
 import { useGetPatientAuthorizationActivityQuery } from "../../../../../../../features/Patient_redux/authorization/authorizationApi";
 import AuthorizationEditModal from "../../AuthorizationModal/AuthorizationEditModal";
 
-const AuthorizationActivityNestedTable = ({ id }) => {
+const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
-  const { token } = useToken();
-
-  //Patient Authorization Activity nested table data api
-  const {
-    data: allActivityData,
-    isLoading: activityLoading,
-    isError: activityError,
-  } = useGetPatientAuthorizationActivityQuery({
-    token,
-    payload: {
-      authorization_id: id,
-    },
-  });
-  console.log(
-    "authorization Activity data",
-    allActivityData?.client_authorization_activity?.data
-  );
-  const allAuthorizationActivity =
-    allActivityData?.client_authorization_activity?.data || [];
 
   const handleClose = () => {
     setOpenEditModal(false);

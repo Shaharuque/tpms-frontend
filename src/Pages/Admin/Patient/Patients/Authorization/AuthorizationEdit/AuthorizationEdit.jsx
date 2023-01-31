@@ -17,7 +17,7 @@ import AuthorizationActivityNestedTable from "./AuthorizationActivityNestedTable
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
-  console.log("single authorization data edit id ", id);
+  // console.log("single authorization data edit id ", id);
   const patientId = localStorage.getItem("p_key");
   // console.log(patientId);
   const [notes, setNotes] = useState("");
@@ -30,6 +30,10 @@ const AuthorizationEdit = () => {
   const [endD, setEndD] = useState(null);
   const { token } = useToken();
   const dbId = parseInt(id);
+  //
+  const [txType, setTxType] = useState([]);
+  const [insurance, setInsurance] = useState([]);
+  const [supvProvider, setSupvProvider] = useState([]);
 
   //Patient Authorization Activity nested table data api
   const {
@@ -65,13 +69,14 @@ const AuthorizationEdit = () => {
     );
     console.log("authorization full info", response?.data);
     setauthEditData(response?.data?.client_authorization_info);
+    setTxType(response?.data?.treatment_types);
+    setInsurance(response?.data?.all_payors);
+    setSupvProvider(response?.data?.supervisor);
   };
-
   // Calling Api
   useEffect(() => {
     editApiCall();
   }, []);
-  console.log(authEditData);
   // Api Data Destructring
   let selectedDate = authEditData?.selected_date || null;
   const {
@@ -181,7 +186,6 @@ const AuthorizationEdit = () => {
     setTimeout(() => {
       reset({
         description: description || null,
-        tx_type: treatment_type || null,
         authorization_number: authorization_number || null,
         uci_id: uci_id || null,
         start_date: startDate
@@ -258,10 +262,32 @@ const AuthorizationEdit = () => {
                   </label>
                   <select
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                    {...register("insurance")}
+                    {...register("payor_id")}
                   >
-                    <option value="single">single</option>
-                    <option value="married">married</option>
+                    {authEditData?.payor_id ? (
+                      <option value={authEditData?.payor_id}>
+                        {insurance
+                          ?.filter(
+                            (item) => item.payor_id === authEditData?.payor_id
+                          )
+                          ?.map((payors) => {
+                            return payors?.payor_name;
+                          })}
+                      </option>
+                    ) : (
+                      <option>Select Payor</option>
+                    )}
+                    {insurance
+                      ?.filter(
+                        (item) => item.payor_id !== authEditData?.payor_id
+                      )
+                      ?.map((payors) => {
+                        return (
+                          <option key={payors?.id} value={payors?.payor_id}>
+                            {payors?.payor_name}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div>
@@ -273,10 +299,26 @@ const AuthorizationEdit = () => {
                   </label>
                   <select
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                    {...register("tx_type")}
+                    {...register("treatment_type")}
                   >
-                    <option value="single">single</option>
-                    <option value="married">married</option>
+                    {authEditData?.treatment_type ? (
+                      <option value={authEditData?.treatment_type_id}>
+                        {authEditData?.treatment_type}
+                      </option>
+                    ) : (
+                      <option>Select Treatment</option>
+                    )}
+                    {txType
+                      ?.filter(
+                        (item) => item.id !== authEditData?.treatment_type_id
+                      )
+                      ?.map((treatment) => {
+                        return (
+                          <option key={treatment?.id} value={treatment?.id}>
+                            {treatment?.treatment_name}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div>
@@ -288,10 +330,37 @@ const AuthorizationEdit = () => {
                   </label>
                   <select
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                    {...register("sup_provider")}
+                    {...register("supervisor_id")}
                   >
-                    <option value="single">single</option>
-                    <option value="married">married</option>
+                    {authEditData?.supervisor_id ? (
+                      <option value={authEditData?.supervisor_id}>
+                        {supvProvider
+                          ?.filter(
+                            (item) =>
+                              item.employee_id === authEditData?.supervisor_id
+                          )
+                          ?.map((supv) => {
+                            return supv?.employee?.full_name;
+                          })}
+                      </option>
+                    ) : (
+                      <option>Select Treatment</option>
+                    )}
+                    {supvProvider
+                      ?.filter(
+                        (item) =>
+                          item.employee_id !== authEditData?.supervisor_id
+                      )
+                      ?.map((supv) => {
+                        return (
+                          <option
+                            key={supv?.id}
+                            value={supv?.employee?.employee_id}
+                          >
+                            {supv?.employee?.full_name}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div>
@@ -615,7 +684,9 @@ const AuthorizationEdit = () => {
           </div>
 
           {/* Table */}
-          <AuthorizationActivityNestedTable></AuthorizationActivityNestedTable>
+          <AuthorizationActivityNestedTable
+            allAuthorizationActivity={allAuthorizationActivity}
+          ></AuthorizationActivityNestedTable>
         </motion.div>
       )}
       {openEditModal && (
