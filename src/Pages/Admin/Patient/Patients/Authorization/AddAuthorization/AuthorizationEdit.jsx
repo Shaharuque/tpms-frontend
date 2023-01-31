@@ -1,10 +1,10 @@
+// Nested authorization table showed here again Patient Authorization Activity api thekey
 // Authorization edit
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
-import AuthorizationEditTable from "./AuthorizationEditTable";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import { Switch } from "antd";
 import { BsArrowRight } from "react-icons/bs";
@@ -13,10 +13,12 @@ import useToken from "../../../../../../CustomHooks/useToken";
 import axios from "axios";
 import Loading from "../../../../../../Loading/Loading";
 import { RiArrowLeftRightLine } from "react-icons/ri";
+import { useGetPatientAuthorizationActivityQuery } from "../../../../../../features/Patient_redux/authorization/authorizationApi";
+import AuthorizationActivityTable from "./AuthorizationActivityTable";
 
-const AuthorizationEdit = ({ editdata }) => {
+const AuthorizationEdit = () => {
   const { id } = useParams();
-  console.log("description id ", id);
+  console.log("single authorization data edit id ", id);
   const patientId = localStorage.getItem("p_key");
   // console.log(patientId);
   const [value, setValue] = useState(false);
@@ -30,6 +32,24 @@ const AuthorizationEdit = ({ editdata }) => {
   const [endD, setEndD] = useState(null);
   const { token } = useToken();
   const dbId = parseInt(id);
+
+  //Patient Authorization Activity nested table data api
+  const {
+    data: allActivityData,
+    isLoading: activityLoading,
+    isError: activityError,
+  } = useGetPatientAuthorizationActivityQuery({
+    token,
+    payload: {
+      authorization_id: id,
+    },
+  });
+  console.log(
+    "authorization Activity data",
+    allActivityData?.client_authorization_activity?.data
+  );
+  const allAuthorizationActivity =
+    allActivityData?.client_authorization_activity?.data || [];
 
   const editApiCall = async () => {
     const response = await axios.get(
@@ -45,6 +65,7 @@ const AuthorizationEdit = ({ editdata }) => {
         },
       }
     );
+    console.log("authorization full info", response?.data);
     setauthEditData(response?.data?.client_authorization_info);
   };
 
@@ -586,22 +607,20 @@ const AuthorizationEdit = ({ editdata }) => {
 
           {/* Table */}
 
-          {authEditData?.auth_act && authEditData?.auth_act.length > 0 ? (
-            <AuthorizationEditTable
-              nestedData={authEditData?.auth_act}
-            ></AuthorizationEditTable>
-          ) : (
-            <Loading />
-          )}
+          {/* <AuthorizationActivityTable
+            nestedData={authEditData?.auth_act}
+          ></AuthorizationActivityTable> */}
 
-          <button
-            onClick={() => {
-              setOpenEditModal(true);
-            }}
-            className="px-2 my-3 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded-sm"
-          >
-            + Add Service
-          </button>
+          <div className="flex justify-end">
+            <button
+              onClick={() => {
+                setOpenEditModal(true);
+              }}
+              className="px-2 my-3 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded"
+            >
+              + Add Service
+            </button>
+          </div>
         </motion.div>
       )}
       {openEditModal && (

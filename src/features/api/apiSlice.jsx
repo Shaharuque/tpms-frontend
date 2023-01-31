@@ -27,6 +27,7 @@ export const apiSlice = createApi({
     "Staff_SubActivity",
     "PatientExclusion",
     "Insurance",
+    "PatientAuthorization",
   ],
   endpoints: (builder) => ({}),
 });

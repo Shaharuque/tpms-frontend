@@ -121,14 +121,20 @@ const PatientExclusion = () => {
 
   const column = [
     {
-      title: "title",
-      dataIndex: "client_id",
-      key: "client_id",
+      title: "Patient Name",
+      dataIndex: "patient_name",
+      key: "patient_name",
       width: 120,
-      sorter: (a, b) => {
-        return a.client_id > b.client_id ? -1 : 1;
+      render: (_, { patient_name }) => {
+        return (
+          <h1 className="text-center">{patient_name?.client_full_name}</h1>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "client_id" ? sortedInfo.order : null,
+      sorter: (a, b) => {
+        return a.patient_name > b.patient_name ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "patient_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
