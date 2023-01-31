@@ -5,23 +5,21 @@ import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
-import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import { Switch } from "antd";
-import { BsArrowRight } from "react-icons/bs";
-import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
-import useToken from "../../../../../../CustomHooks/useToken";
 import axios from "axios";
-import Loading from "../../../../../../Loading/Loading";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 import { useGetPatientAuthorizationActivityQuery } from "../../../../../../features/Patient_redux/authorization/authorizationApi";
-import AuthorizationActivityTable from "./AuthorizationActivityTable";
+import useToken from "../../../../../../CustomHooks/useToken";
+import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
+import Loading from "../../../../../../Loading/Loading";
+import AuthorizationEditModal from "../AuthorizationModal/AuthorizationEditModal";
+import AuthorizationActivityNestedTable from "./AuthorizationActivityNestedTable/AuthorizationActivityNestedTable";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
   console.log("single authorization data edit id ", id);
   const patientId = localStorage.getItem("p_key");
   // console.log(patientId);
-  const [value, setValue] = useState(false);
   const [notes, setNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -605,12 +603,6 @@ const AuthorizationEdit = () => {
         >
           <div className="divider"></div>
 
-          {/* Table */}
-
-          {/* <AuthorizationActivityTable
-            nestedData={authEditData?.auth_act}
-          ></AuthorizationActivityTable> */}
-
           <div className="flex justify-end">
             <button
               onClick={() => {
@@ -621,6 +613,9 @@ const AuthorizationEdit = () => {
               + Add Service
             </button>
           </div>
+
+          {/* Table */}
+          <AuthorizationActivityNestedTable></AuthorizationActivityNestedTable>
         </motion.div>
       )}
       {openEditModal && (

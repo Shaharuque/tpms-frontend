@@ -68,7 +68,7 @@ import Patients from "./Pages/Admin/Patient/Patients";
 import PatientsInfo from "./Pages/Admin/Patient/Patients/PatientsInfo";
 import PatientInformation from "./Pages/Admin/Patient/Patients/PatientInfo/PatientInformation";
 import Authorization from "./Pages/Admin/Patient/Patients/Authorization/Authorization";
-import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AuthorizationEdit";
+import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/AuthorizationEdit/AuthorizationEdit";
 import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";

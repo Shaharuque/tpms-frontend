@@ -4,10 +4,9 @@ import { Table } from "antd";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
-import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
 import useToken from "../../../../../../CustomHooks/useToken";
 import { useGetPatientAuthorizationActivityQuery } from "../../../../../../features/Patient_redux/authorization/authorizationApi";
-import Loading from "../../../../../../Loading/Loading";
+import AuthorizationEditModal from "../AuthorizationModal/AuthorizationEditModal";
 
 const AuthorizationActivityTable = ({ id }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
