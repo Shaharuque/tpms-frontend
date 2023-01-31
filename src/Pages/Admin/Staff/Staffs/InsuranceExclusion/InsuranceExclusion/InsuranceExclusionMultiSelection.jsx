@@ -135,14 +135,18 @@ const InsuranceExclusionMultiSelection = () => {
 
   const column = [
     {
-      title: "title",
-      dataIndex: "payor_id",
-      key: "payor_id",
+      title: "Insurance",
+      dataIndex: "all_payor_name",
+      key: "all_payor_name",
       width: 120,
-      sorter: (a, b) => {
-        return a.title > b.title ? -1 : 1;
+      render: (_, { all_payor_name }) => {
+        return <h1 className="text-center">{all_payor_name?.payor_name}</h1>;
       },
-      sortOrder: sortedInfo.columnKey === "title" ? sortedInfo.order : null,
+      sorter: (a, b) => {
+        return a.all_payor_name > b.all_payor_name ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "all_payor_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {

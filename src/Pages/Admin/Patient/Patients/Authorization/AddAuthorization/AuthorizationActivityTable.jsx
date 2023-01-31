@@ -1,14 +1,36 @@
+//each authorization data has nested data and we will get that from Patient Authorization Activity api
 import React, { useState } from "react";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
+import useToken from "../../../../../../CustomHooks/useToken";
+import { useGetPatientAuthorizationActivityQuery } from "../../../../../../features/Patient_redux/authorization/authorizationApi";
+import Loading from "../../../../../../Loading/Loading";
 
-const AuthorizationEditTable = ({ nestedData }) => {
+const AuthorizationActivityTable = ({ id }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
-  const [authEditData, setAuthEditData] = useState(nestedData);
+  const { token } = useToken();
+
+  //Patient Authorization Activity nested table data api
+  const {
+    data: allActivityData,
+    isLoading: activityLoading,
+    isError: activityError,
+  } = useGetPatientAuthorizationActivityQuery({
+    token,
+    payload: {
+      authorization_id: id,
+    },
+  });
+  console.log(
+    "authorization Activity data",
+    allActivityData?.client_authorization_activity?.data
+  );
+  const allAuthorizationActivity =
+    allActivityData?.client_authorization_activity?.data || [];
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -18,8 +40,6 @@ const AuthorizationEditTable = ({ nestedData }) => {
     console.log("Various parameters", pagination, filters, sorter);
     setSortedInfo(sorter);
   };
-
-  // console.log("authData", authEditData);
 
   const columns = [
     {
@@ -35,9 +55,13 @@ const AuthorizationEditTable = ({ nestedData }) => {
     },
     {
       title: "Cpt. Code",
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "cptcode",
+      key: "cptcode",
       width: 80,
+      render: (_, { cptcode }) => {
+        console.log("render data", cptcode);
+        return <h1>{cptcode?.cpt_code}</h1>;
+      },
       sorter: (a, b) => {
         return a.id > b.id ? -1 : 1; //sorting problem solved using this logic
       },
@@ -46,11 +70,11 @@ const AuthorizationEditTable = ({ nestedData }) => {
     },
     {
       title: "Max By",
-      dataIndex: "max_by",
-      key: "max_by",
+      dataIndex: "billed_type",
+      key: "billed_type",
       width: 100,
       sorter: (a, b) => {
-        return a.max_by > b.max_by ? -1 : 1; //sorting problem solved using this logic
+        return a.billed_type > b.billed_type ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "max_by" ? sortedInfo.order : null,
       ellipsis: true,
@@ -58,24 +82,26 @@ const AuthorizationEditTable = ({ nestedData }) => {
 
     {
       title: "Frequency",
-      dataIndex: "frequency",
-      key: "frequency",
+      dataIndex: "hours_max_per_one",
+      key: "hours_max_per_one",
       width: 80,
       sorter: (a, b) => {
-        return a.frequency > b.frequency ? -1 : 1; //sorting problem solved using this logic
+        return a.hours_max_per_one > b.hours_max_per_one ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "frequency" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "hours_max_per_one" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Auth",
-      dataIndex: "auth",
-      key: "auth",
+      dataIndex: "hours_max_is_one",
+      key: "hours_max_is_one",
       width: 50,
       sorter: (a, b) => {
-        return a.auth > b.auth ? -1 : 1; //sorting problem solved using this logic
+        return a.hours_max_is_one > b.hours_max_is_one ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "auth" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "hours_max_is_one" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -87,6 +113,17 @@ const AuthorizationEditTable = ({ nestedData }) => {
         return a.scheduled > b.scheduled ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "scheduled" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Rendered",
+      dataIndex: "Rendered",
+      key: "Rendered",
+      width: 50,
+      sorter: (a, b) => {
+        return a.Rendered > b.Rendered ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "Rendered" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -147,7 +184,7 @@ const AuthorizationEditTable = ({ nestedData }) => {
             size="small"
             className=" text-xs font-normal "
             columns={columns}
-            dataSource={nestedData}
+            dataSource={allAuthorizationActivity}
             onChange={handleChange}
             scroll={{
               y: 650,
@@ -165,4 +202,4 @@ const AuthorizationEditTable = ({ nestedData }) => {
   );
 };
 
-export default AuthorizationEditTable;
+export default AuthorizationActivityTable;

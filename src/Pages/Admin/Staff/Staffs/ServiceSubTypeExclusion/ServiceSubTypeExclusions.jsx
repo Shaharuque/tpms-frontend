@@ -123,15 +123,20 @@ const ServiceSubTypeExclusions = () => {
 
   const column = [
     {
-      title: "title",
-      dataIndex: "sub_activity_id",
-      key: "sub_activity_id",
+      title: "Patient Name",
+      dataIndex: "sub_activity_name",
+      key: "sub_activity_name",
       width: 120,
+      render: (_, { sub_activity_name }) => {
+        return (
+          <h1 className="text-center">{sub_activity_name?.sub_activity}</h1>
+        );
+      },
       sorter: (a, b) => {
-        return a.sub_activity_id > b.sub_activity_id ? -1 : 1;
+        return a.sub_activity_name > b.sub_activity_name ? -1 : 1;
       },
       sortOrder:
-        sortedInfo.columnKey === "sub_activity_id" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "sub_activity_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {

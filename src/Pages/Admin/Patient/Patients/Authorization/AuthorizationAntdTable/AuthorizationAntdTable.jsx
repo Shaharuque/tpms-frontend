@@ -7,11 +7,12 @@ import { FiEdit } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
 import SelectContactRate from "../Authorization/SelectContactRate";
 import AuthorizationEditModal from "../Authorization/AuthorizationEditModal";
-import AuthorizationEditTable from "../AddAuthorization/AuthorizationEditTable";
 import useToken from "../../../../../../CustomHooks/useToken";
 import { fetchData, PostfetchData } from "../../../../../../Misc/Helper";
 import AuthorizationEdit from "../AddAuthorization/AuthorizationEdit";
 import Loading from "../../../../../../Loading/Loading";
+import { useGetPatientAuthorizationQuery } from "../../../../../../features/Patient_redux/authorization/authorizationApi";
+import AuthorizationActivityTable from "../AddAuthorization/AuthorizationActivityTable";
 //data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
 
 const AuthorizationAntdTable = () => {
@@ -26,36 +27,51 @@ const AuthorizationAntdTable = () => {
   const { token } = useToken();
   const navigate = useNavigate();
   const { id } = useParams();
+
+  //get patient authorization api
+  const { data: authorizationData, isLoading: authorizationloading } =
+    useGetPatientAuthorizationQuery({
+      token,
+      payload: {
+        client_id: id,
+      },
+    });
+  console.log(
+    "All patient Authorization",
+    authorizationData?.client_authorization?.data
+  );
+  const clientAuthorizationData =
+    authorizationData?.client_authorization?.data || [];
+
   const editAuth = (record) => {
-    console.log("editdata edit", record);
+    //console.log("editdata edit", record);
     navigate(`/admin/authorization-Edit/${record?.id}`);
   };
 
-  const authorizationpetinedata = async () => {
-    const body = {
-      client_id: id,
-    };
-    const authapidata = await PostfetchData({
-      endPoint: "admin/ac/patient/authorization",
-      payload: body,
-      token,
-    });
+  // const authorizationpetinedata = async () => {
+  //   const body = {
+  //     client_id: id,
+  //   };
+  //   const authapidata = await PostfetchData({
+  //     endPoint: "admin/ac/patient/authorization",
+  //     payload: body,
+  //     token,
+  //   });
 
-    setAuthData(authapidata?.client_authorization?.data);
-    // console.log("api data ", authapidata?.client_authorization?.data);
-  };
+  //   setAuthData(authapidata?.client_authorization?.data);
+  //   // console.log("api data ", authapidata?.client_authorization?.data);
+  // };
 
-  useEffect(() => {
-    authorizationpetinedata();
-  }, []);
+  // useEffect(() => {
+  //   authorizationpetinedata();
+  // }, []);
 
-  //expendable row ar data jeita expand korley show korbey
-  console.log("auth data end", authData);
+  //expendable row ar data jeita expand korley show korbey tar jnno new component call and props hisabey each row ar record id send
   const expandedRowRender = (record) => {
     // console.log("record", record);
     return (
       <div className="ml-[-40px] my-2">
-        <AuthorizationEditTable nestedData={record?.auth_act} />
+        <AuthorizationActivityTable id={record?.id} />
       </div>
     );
   };
@@ -201,9 +217,9 @@ const AuthorizationAntdTable = () => {
     },
     {
       title: "Auth No.",
-      dataIndex: "auth_no",
-      key: "auth_no",
-      width: 60,
+      dataIndex: "authorization_number",
+      key: "authorization_number",
+      width: 100,
       filters: [
         {
           text: `Amet`,
@@ -214,13 +230,16 @@ const AuthorizationAntdTable = () => {
           value: "Malesuada",
         },
       ],
-      filteredValue: filteredInfo.auth_no || null,
-      onFilter: (value, record) => record.auth_no.includes(value),
+      filteredValue: filteredInfo.authorization_number || null,
+      onFilter: (value, record) => record.authorization_number.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
-        return a.auth_no > b.auth_no ? -1 : 1; //sorting problem solved using this logic
+        return a.authorization_number > b.authorization_number ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "auth_no" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "authorization_number"
+          ? sortedInfo.order
+          : null,
       ellipsis: true,
     },
     {
@@ -357,14 +376,14 @@ const AuthorizationAntdTable = () => {
         </div>
 
         <div className=" overflow-scroll ">
-          {authData && authData.length > 0 ? (
+          {!authorizationloading ? (
             <Table
               pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
               rowKey={(record) => record.id} //record is kind of whole one data object and here we are
               size="small"
               className=" text-xs font-normal table-striped-rows"
               columns={columns}
-              dataSource={authData}
+              dataSource={clientAuthorizationData}
               expandable={{
                 expandedRowRender,
               }}
