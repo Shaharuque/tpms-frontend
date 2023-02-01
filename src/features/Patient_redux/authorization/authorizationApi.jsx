@@ -31,10 +31,49 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["PatientAuthorization"],
     }),
+    //Get Patient Authorization Activity Services api
+    getActivityServices: builder.query({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/auth/act/get/service`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
+    //Get Patient Authorization Activity SubType api
+    getActivitySubtypes: builder.query({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/auth/act/get/subtype`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
+    //Get Patient Authorization Activity Cptcode api
+    getActivityCptcode: builder.query({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/auth/act/get/cptcode`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
   }),
 });
 
 export const {
   useGetPatientAuthorizationQuery,
   useGetPatientAuthorizationActivityQuery,
+  useGetActivityServicesQuery,
+  useGetActivitySubtypesQuery,
+  useGetActivityCptcodeQuery,
 } = patientAuthorizationApi;

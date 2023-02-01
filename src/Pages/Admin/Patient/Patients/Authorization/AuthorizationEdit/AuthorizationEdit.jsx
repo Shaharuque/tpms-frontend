@@ -14,6 +14,7 @@ import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRan
 import Loading from "../../../../../../Loading/Loading";
 import AuthorizationEditModal from "../AuthorizationModal/AuthorizationEditModal";
 import AuthorizationActivityNestedTable from "./AuthorizationActivityNestedTable/AuthorizationActivityNestedTable";
+import BoolConverter from "../../../../../Shared/BoolConverter/BoolConverter";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
@@ -85,7 +86,38 @@ const AuthorizationEdit = () => {
     authorization_number,
     uci_id,
     treatment_type,
+    diagnosis_one,
+    diagnosis_two,
+    diagnosis_three,
+    diagnosis_four,
+    in_network,
+    copay,
+    cms_four,
+    cms_eleven,
+    is_valid,
+    is_placeholder,
   } = authEditData || {};
+
+  //Toggle handler code
+  const [network, setNetwork] = useState(BoolConverter(in_network));
+  const [valid, setValid] = useState(BoolConverter(is_valid));
+  const [place_holder, setPlace_holder] = useState(
+    BoolConverter(is_placeholder)
+  );
+
+  useEffect(() => {
+    setNetwork(BoolConverter(in_network));
+  }, [in_network]);
+
+  useEffect(() => {
+    setValid(BoolConverter(is_valid));
+  }, [is_valid]);
+
+  useEffect(() => {
+    setPlace_holder(BoolConverter(is_placeholder));
+  }, [is_placeholder]);
+
+  console.log("after boolconversion call data", network, valid, place_holder);
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -192,9 +224,29 @@ const AuthorizationEdit = () => {
           ? `${startMonth} ${startDay}, ${startYear}`
           : startD,
         end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : endD,
+        diagnosis_one,
+        diagnosis_two,
+        diagnosis_three,
+        diagnosis_four,
+        cms_four,
+        cms_eleven,
+        copay,
       });
     }, 0);
-  }, [startD, endD, reset, startDate, endDate]);
+  }, [
+    startD,
+    endD,
+    reset,
+    startDate,
+    endDate,
+    diagnosis_one,
+    diagnosis_two,
+    diagnosis_three,
+    diagnosis_four,
+    cms_four,
+    cms_eleven,
+    copay,
+  ]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -485,7 +537,7 @@ const AuthorizationEdit = () => {
                       type="text"
                       name="diagnosis1"
                       className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                      {...register("diagnosis1")}
+                      {...register("diagnosis_one")}
                     />
                   </div>
                   <div>
@@ -499,7 +551,7 @@ const AuthorizationEdit = () => {
                       name="diagnosis2"
                       // className="border border-gray-300 rounded-sm py-[5px] mx-2 text-xs w-full"
                       className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                      {...register("diagnosis2")}
+                      {...register("diagnosis_two")}
                     />
                   </div>
                 </div>
@@ -515,7 +567,7 @@ const AuthorizationEdit = () => {
                       type="text"
                       name="diagnosis3"
                       className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                      {...register("diagnosis3")}
+                      {...register("diagnosis_three")}
                     />
                   </div>
                   <div>
@@ -528,7 +580,7 @@ const AuthorizationEdit = () => {
                       type="text"
                       name="diagnosis4"
                       className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                      {...register("diagnosis4")}
+                      {...register("diagnosis_four")}
                     />
                   </div>
                 </div>
@@ -549,17 +601,10 @@ const AuthorizationEdit = () => {
                   </div>
                   <div className="mt-[30px]">
                     <div className="flex ml-1 mt-1 items-center">
-                      {/* <input
-                    type="checkbox"
-                    name="patient"
-                    onClick={() => {
-                      setValue(!value);
-                    }}
-                  /> */}
                       <Switch
+                        checked={network}
+                        onChange={() => setNetwork(!network)}
                         size="small"
-                        checked={active ? true : false}
-                        onClick={() => setActive(!active)}
                       />
                       <span className="text-[14px] ml-1 text-gray-600 font-medium">
                         In Network
@@ -591,7 +636,7 @@ const AuthorizationEdit = () => {
                     type="text"
                     name="cms4"
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                    {...register("cms4")}
+                    {...register("cms_four")}
                   />
                 </div>
                 <div>
@@ -604,15 +649,15 @@ const AuthorizationEdit = () => {
                     type="text"
                     name="cms11"
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-                    {...register("cms11")}
+                    {...register("cms_eleven")}
                   />
                 </div>
-                <div className="ml-2 mt-5">
-                  <div className="my-1">
+                <div className="ml-2 mt-5 flex justify-between items-center">
+                  <div>
                     <Switch
+                      checked={valid}
+                      onChange={() => setValid(!valid)}
                       size="small"
-                      checked={active ? true : false}
-                      onClick={() => setActive(!active)}
                     />
                     <span className="text-[14px] font-medium text-gray-500 mx-3">
                       Active
@@ -620,9 +665,9 @@ const AuthorizationEdit = () => {
                   </div>
                   <div>
                     <Switch
+                      checked={place_holder}
+                      onChange={() => setPlace_holder(!place_holder)}
                       size="small"
-                      checked={placeHolder ? true : false}
-                      onClick={() => setPlaceHolder(!placeHolder)}
                     />
                     <span className="text-[14px] font-medium text-gray-500 mx-3">
                       Placeholder
@@ -691,6 +736,7 @@ const AuthorizationEdit = () => {
       )}
       {openEditModal && (
         <AuthorizationEditModal
+          treatment_name={authEditData?.treatment_type || null}
           handleClose={handleClose}
           open={openEditModal}
         ></AuthorizationEditModal>

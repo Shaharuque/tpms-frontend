@@ -120,7 +120,6 @@ const Bio = () => {
         language: language,
         gender: String(gender),
         // notes: notes.slice(0, 6),
-        session_check: session === true ? 2 : 1,
       });
     }, 0);
   }, [
@@ -146,7 +145,6 @@ const Bio = () => {
     language,
     service_area_zip,
     gender,
-    session,
     // notes,
   ]);
 
