@@ -12,7 +12,7 @@ const OtherSetUpBottom = ({ propdata }) => {
       {OtherSetupApiData.map((field, index) => {
         return (
           <div key={field.id} className="flex items-center gap-2 mb-2">
-            <h3 className="text-xs font-normal w-80">
+            <h3 className="text-[14px] font-medium w-[440px]">
               {field?.treatment_name}
             </h3>
             <input
@@ -30,11 +30,8 @@ const OtherSetUpBottom = ({ propdata }) => {
               {...register(`id_qualifire.${index}.id_qualifire`)}
             >
               <option value={field.id_qualifire}>{field.id_qualifire}</option>
-              <option value="female">Female</option>
               <option value="Speech Therapist">Speech Therapist</option>
-              <option value="female">Female</option>
               <option value="Speech Therapist">Speech Therapist</option>
-              <option value="female">Female</option>
             </select>
           </div>
         );
