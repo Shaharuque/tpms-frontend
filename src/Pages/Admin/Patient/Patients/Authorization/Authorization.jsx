@@ -192,8 +192,8 @@ const Authorization = () => {
     },
     {
       title: "Ins. ID",
-      dataIndex: "id",
-      key: "id",
+      dataIndex: "uci_id",
+      key: "uci_id",
       width: 60,
       filters: [
         {
@@ -205,13 +205,13 @@ const Authorization = () => {
           value: "Malesuada",
         },
       ],
-      filteredValue: filteredInfo.id || null,
-      onFilter: (value, record) => record.id.includes(value),
+      filteredValue: filteredInfo.uci_id || null,
+      onFilter: (value, record) => record.uci_id.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
-        return a.id > b.id ? -1 : 1; //sorting problem solved using this logic
+        return a.uci_id > b.uci_id ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "uci_id" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {

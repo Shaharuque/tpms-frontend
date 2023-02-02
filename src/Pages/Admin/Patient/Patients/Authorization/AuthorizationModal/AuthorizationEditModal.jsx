@@ -3,15 +3,52 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Modal } from "antd";
 import TextArea from "antd/lib/input/TextArea";
+import {
+  useGetActivityCptcodeQuery,
+  useGetActivityServicesQuery,
+  useGetActivitySubtypesQuery,
+} from "../../../../../../features/Patient_redux/authorization/authorizationApi";
+import useToken from "../../../../../../CustomHooks/useToken";
 
-const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
+const AuthorizationEditModal = ({
+  handleClose,
+  open,
+  editableRow,
+  treatment_name,
+}) => {
+  // console.log("getting treatment_name:-", treatment_name);
   const { register, handleSubmit, reset } = useForm();
   const [notes, setNotes] = useState("");
+  const { token } = useToken();
+
+  //Patient Authorization Activity Services api
+  const { data: activityServices, isLoading: activityServicesLoading } =
+    useGetActivityServicesQuery({
+      token,
+      payload: {
+        treatment_name,
+      },
+    });
+  const { data: activitySubtypes, isLoading: activitySubtypesLoading } =
+    useGetActivitySubtypesQuery({
+      token,
+      payload: {
+        treatment_name,
+      },
+    });
+  const { data: activityCptCode, isLoading: activityCptLoading } =
+    useGetActivityCptcodeQuery({
+      token,
+      payload: {
+        treatment_name,
+      },
+    });
+  console.log(activityServices, activitySubtypes, activityCptCode);
   const onSubmit = (data) => {
     console.log(data);
-    reset();
+    // reset();
   };
-  //   console.log(editableRow);
+
   useEffect(() => {
     setTimeout(() => {
       reset({
@@ -58,8 +95,16 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       className="modal-input-field ml-1 w-full"
                       {...register("service")}
                     >
-                      <option value="single">single</option>
-                      <option value="married">married</option>
+                      {activityServices?.services?.map((service) => {
+                        return (
+                          <option
+                            key={service?.id}
+                            value={service?.description}
+                          >
+                            {service?.description}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div>
@@ -73,8 +118,16 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       className="modal-input-field ml-1 w-full"
                       {...register("service_sub_type")}
                     >
-                      <option value="single">single</option>
-                      <option value="married">married</option>
+                      {activitySubtypes?.subtypes?.map((subtype) => {
+                        return (
+                          <option
+                            key={subtype?.id}
+                            value={subtype?.sub_activity}
+                          >
+                            {subtype?.sub_activity}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div>
@@ -88,8 +141,13 @@ const AuthorizationEditModal = ({ handleClose, open, editableRow }) => {
                       className="modal-input-field ml-1 w-full"
                       {...register("cpt_code")}
                     >
-                      <option value="single">single</option>
-                      <option value="married">married</option>
+                      {activityCptCode?.cptcodes?.map((cptCode) => {
+                        return (
+                          <option key={cptCode?.id} value={cptCode?.cpt_code}>
+                            {cptCode?.cpt_code}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                   <div className="flex gap-2">

@@ -1,15 +1,16 @@
 import { Switch } from "antd";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
 import { useGetOtherSetupQuery } from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
+import Loading from "../../../../../Loading/Loading";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import OtherSetUpBottom from "./OtherSetUpBottom/OtherSetUpBottom";
 
 const OtherSetup = () => {
   const [active, setActive] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
+
   const { token } = useToken();
   const { id } = useParams();
 
@@ -24,7 +25,24 @@ const OtherSetup = () => {
     id,
   });
 
+  const OtherSetupApiData = otherSetup?.tx_type_data;
   console.log("other setup api data", otherSetup);
+  console.log("other setup api data text type", otherSetup?.tx_type_data);
+
+  const { register, control, handleSubmit, reset } = useForm({
+    defaultValues: {
+      edit_tx_id: otherSetup?.tx_type_data,
+      box_24j: otherSetup?.tx_type_data,
+      id_qualifire: otherSetup?.tx_type_data,
+    },
+  });
+
+  const { fields } = useFieldArray({
+    name: "tretmentName",
+    control,
+  });
+
+  console.log("main fields", fields);
 
   const {
     adp_employee_id,
@@ -82,7 +100,7 @@ const OtherSetup = () => {
         signature_valid_to,
         updated_at,
       });
-    }, 600);
+    }, 0);
   }, [
     reset,
     adp_employee_id,
@@ -124,30 +142,31 @@ const OtherSetup = () => {
     BoolConverter(1)
   );
 
-  const data = [
-    {
-      treatment_name: "treatment Name",
-      box_24j: "null",
-      id_qualifire: "id_qualir  fire",
-    },
-    {
-      treatment_name: "treatment Name fgfgf ",
-      box_24j: "null",
-      id_qualifire: "id_qualifirrtr e",
-    },
-    {
-      treatment_name: "treatment Namegr",
-      box_24j: "null",
-      id_qualifire: "id_qualifire fgf",
-    },
-    {
-      treatment_name: "treatment Name 3333",
-      box_24j: "null",
-      id_qualifire: "id_qu  alifire",
-    },
-  ];
+  // const data = [
+  //   {
+  //     treatment_name: "treatment Name",
+  //     box_24j: "null",
+  //     id_qualifire: "id_qualir  fire",
+  //   },
+  //   {
+  //     treatment_name: "treatment Name fgfgf ",
+  //     box_24j: "null",
+  //     id_qualifire: "id_qualifirrtr e",
+  //   },
+  //   {
+  //     treatment_name: "treatment Namegr",
+  //     box_24j: "null",
+  //     id_qualifire: "id_qualifire fgf",
+  //   },
+  //   {
+  //     treatment_name: "treatment Name 3333",
+  //     box_24j: "null",
+  //     id_qualifire: "id_qu  alifire",
+  //   },
+  // ];
 
   const onSubmit = (data) => {
+    // console.log("from data", data);
     const payLoad = {
       ...data,
       paid_time_off: BoolConverter(paidTimeOff),
@@ -160,6 +179,9 @@ const OtherSetup = () => {
     console.log(payLoad);
   };
 
+  if (otherSetupLoading) {
+    return <Loading />;
+  }
   return (
     <div className="md:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Other Setup</h1>
@@ -401,13 +423,14 @@ const OtherSetup = () => {
             <h3 className="text-sm font-medium w-80">Box 24J</h3>
             <h3 className="text-sm font-medium w-80">ID Qualifier</h3>
           </div>
-          {data.map((d, id) => (
-            <OtherSetUpBottom
-              key={id}
-              data={d}
-              register={register}
-            ></OtherSetUpBottom>
-          ))}
+
+          {/* {!otherSetupLoading ? (
+            <Loading />
+          ) : ( */}
+          <OtherSetUpBottom
+            propdata={{ fields, register, OtherSetupApiData }}
+          />
+          {/* )} */}
         </div>
         <div className="mt-10 ml-2">
           <button className=" pms-button" type="submit">

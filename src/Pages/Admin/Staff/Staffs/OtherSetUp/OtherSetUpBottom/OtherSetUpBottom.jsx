@@ -1,27 +1,42 @@
 import React from "react";
+import Loading from "../../../../../../Loading/Loading";
 
-const OtherSetUpBottom = ({ data, register }) => {
-  const tx_type = `txType[1]`;
-  const { treatment_name, box_24j, id_qualifire } = data;
+const OtherSetUpBottom = ({ propdata }) => {
+  // if (!propdata) {
+  //   return <Loading />;
+  // }
+  const { fields, register, OtherSetupApiData } = propdata;
+  console.log("fields props", fields);
   return (
-    <fieldset name={tx_type} key={tx_type}>
-      <div className="flex items-center gap-2 mb-2 ">
-        <h3 className="text-xs font-normal w-80">{treatment_name}</h3>
-        <input
-          type="text"
-          name={`${tx_type}.${box_24j}`}
-          className="input-border input-font w-full focus:outline-none py-[1px]"
-          {...register(`${box_24j}`)}
-        />
-        <select
-          className="input-border input-font w-full focus:outline-none py-[1px]"
-          {...register(`${id_qualifire}`)}
-        >
-          <option value="Speech Therapist">Speech Therapist</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-    </fieldset>
+    <div>
+      {OtherSetupApiData.map((field, index) => {
+        return (
+          <div key={field.id} className="flex items-center gap-2 mb-2">
+            <h3 className="text-[14px] font-medium w-[440px]">
+              {field?.treatment_name}
+            </h3>
+            <input
+              type="text"
+              defaultValue={field.box_24j}
+              // name={`${tx_type}.${box_24j}`}
+              className="input-border input-font w-full focus:outline-none py-[1px]"
+              // {...register(`${box_24j}`)}
+              {...register(`box_24j.${index}.box_24j`)}
+            />
+
+            <select
+              className="input-border input-font w-full focus:outline-none py-[1px]"
+              // defaultValue={}
+              {...register(`id_qualifire.${index}.id_qualifire`)}
+            >
+              <option value={field.id_qualifire}>{field.id_qualifire}</option>
+              <option value="Speech Therapist">Speech Therapist</option>
+              <option value="Speech Therapist">Speech Therapist</option>
+            </select>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
