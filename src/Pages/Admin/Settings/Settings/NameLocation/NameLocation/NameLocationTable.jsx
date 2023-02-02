@@ -62,7 +62,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
             }}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 my-5 mr-2 gap-6">
+              <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 my-5 mr-2 gap-6">
                 {/* name  */}
                 <div>
                   <label className="label">
@@ -285,7 +285,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     </span>
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     name="ftp_password"
                     className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1 py-[1px] w-full focus:outline-none"
                     {...register("ftp_password")}
