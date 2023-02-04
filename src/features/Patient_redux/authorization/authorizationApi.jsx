@@ -18,6 +18,34 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["PatientAuthorization"],
     }),
+
+    //get patient authorization info
+    getPatientAuthorizationInfo: builder.query({
+      query: ({ token, id }) => ({
+        url: `admin/ac/patient/authorization/info/${id}`,
+        method: "GET",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+      }),
+      providesTags: ["PatientAuthorization"],
+    }),
+
+    //update Authorization Info
+    patientAuthorizationUpdate: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/authorization/update`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["PatientAuthorization"],
+    }),
+
     //Get Patient Authorization Activity api
     getPatientAuthorizationActivity: builder.query({
       query: ({ token, payload }) => ({
@@ -31,6 +59,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["PatientAuthorization"],
     }),
+
     //Get Patient Authorization Activity Services api
     getActivityServices: builder.query({
       query: ({ token, payload }) => ({
@@ -43,6 +72,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         body: JSON.stringify(payload),
       }),
     }),
+
     //Get Patient Authorization Activity SubType api
     getActivitySubtypes: builder.query({
       query: ({ token, payload }) => ({
@@ -55,6 +85,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         body: JSON.stringify(payload),
       }),
     }),
+
     //Get Patient Authorization Activity Cptcode api
     getActivityCptcode: builder.query({
       query: ({ token, payload }) => ({
@@ -72,7 +103,9 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
 
 export const {
   useGetPatientAuthorizationQuery,
+  useGetPatientAuthorizationInfoQuery,
   useGetPatientAuthorizationActivityQuery,
+  usePatientAuthorizationUpdateMutation,
   useGetActivityServicesQuery,
   useGetActivitySubtypesQuery,
   useGetActivityCptcodeQuery,
