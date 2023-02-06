@@ -30,124 +30,148 @@ import BasicInfo from "./BasicInfo";
 import TestingFrom from "./TestingFrom";
 
 const PatientInformation = () => {
-  const testingobj = {
-    City: "mirpur",
-    Street: "usa",
-    address: [
-      {
-        street: "djlasjdiad",
-        city: "sflsdf38akdj",
-        country: "NY",
-        status: false,
+  // const testingobj = {
+  //   City: "mirpur",
+  //   Street: "usa",
+  //   address: [
+  //     {
+  //       street: "djlasjdiad",
+  //       city: "sflsdf38akdj",
+  //       country: "NY",
+  //       status: false,
 
-        zip: 555,
-      },
-      {
-        street: "heilo",
-        city: "dmd",
-        country: "NY",
-        status: true,
+  //       zip: 555,
+  //     },
+  //     {
+  //       street: "heilo",
+  //       city: "dmd",
+  //       country: "NY",
+  //       status: true,
 
-        zip: 73563,
-      },
-      {
-        street: "h45fglo",
-        city: "dlfd",
-        country: "UK",
-        status: false,
+  //       zip: 73563,
+  //     },
+  //     {
+  //       street: "h45fglo",
+  //       city: "dlfd",
+  //       country: "UK",
+  //       status: false,
 
-        zip: 4545,
-      },
-      {
-        street: "435234o",
-        city: "ld",
-        country: "UK",
-        status: true,
+  //       zip: 4545,
+  //     },
+  //     {
+  //       street: "435234o",
+  //       city: "ld",
+  //       country: "UK",
+  //       status: true,
 
-        zip: 4523,
-      },
-    ],
-    allNumber: [
-      {
-        number: 54,
-        checked: true,
-      },
-      {
-        number: 53,
-        checked: false,
-      },
-    ],
-    assignment: "male",
-    checkedActive: 1,
-    client_dob: "",
-    country: "NY",
-    dob: "2021-08-05",
-    email: "testdfv@sdf.dsf",
-    first_date: "",
-    first_name: "cbvxdfg",
-    fruit: "Male",
-    gender: "Male",
-    allEmail: [
-      {
-        email: "najirkhan@gmail.com",
-        checked: true,
-        sendMail: false,
-      },
-      {
-        email: "lawla@gmail.com",
-        checked: true,
-        sendMail: true,
-      },
-      {
-        email: "hello@gmail.com",
-        checked: true,
-        sendMail: false,
-      },
-    ],
-    group: "work",
-    group2: "work",
-    language: "male",
-    last_name: "sdgsdg",
-    middle_name: null,
-    more_zip0: "34",
-    more_zip1: "45234",
-    phone: "+14353464363",
-    pos: "work",
-    race_details: "male",
-    referred_by: "male",
-    region: "work",
-    zip: "500",
-  };
+  //       zip: 4523,
+  //     },
+  //   ],
+  //   allNumber: [
+  //     {
+  //       number: 54,
+  //       checked: true,
+  //     },
+  //     {
+  //       number: 53,
+  //       checked: false,
+  //     },
+  //   ],
+  //   assignment: "male",
+  //   checkedActive: 1,
+  //   client_dob: "",
+  //   country: "NY",
+  //   dob: "2021-08-05",
+  //   email: "testdfv@sdf.dsf",
+  //   first_date: "",
+  //   first_name: "cbvxdfg",
+  //   fruit: "Male",
+  //   gender: "Male",
+  //   allEmail: [
+  //     {
+  //       email: "najirkhan@gmail.com",
+  //       checked: true,
+  //       sendMail: false,
+  //     },
+  //     {
+  //       email: "lawla@gmail.com",
+  //       checked: true,
+  //       sendMail: true,
+  //     },
+  //     {
+  //       email: "hello@gmail.com",
+  //       checked: true,
+  //       sendMail: false,
+  //     },
+  //   ],
+  //   group: "work",
+  //   group2: "work",
+  //   language: "male",
+  //   last_name: "sdgsdg",
+  //   middle_name: null,
+  //   more_zip0: "34",
+  //   more_zip1: "45234",
+  //   phone: "+14353464363",
+  //   pos: "work",
+  //   race_details: "male",
+  //   referred_by: "male",
+  //   region: "work",
+  //   zip: "500",
+  // };
+  // Patient Information
+  const { id } = useParams();
+  //console.log("patient Info", id);
+  const dispatch = useDispatch();
 
+  const data = useSelector((state) => state.patientInfo);
+  const patient_details = data?.patientDetails?.clients;
+  const loading = data?.loading;
+  const primaryPhone = patient_details?.phone_number;
+  const primaryEmail = patient_details?.email;
   const { token } = useToken();
   const [active, setActive] = useState(false);
   const [Guarantor, setGuarantor] = useState(false);
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
+  const [hook, setHook] = useState("");
+  const [dob, setDob] = useState();
+  // console.log("dob", dob);
+  //for showing default date in real time
+  useEffect(() => {
+    setDob(patient_details?.client_dob);
+  }, [patient_details?.client_dob]);
 
-  // //console.log("obj data", obj);
+  console.log("patient_details===", patient_details?.client_address);
+  useEffect(() => {
+    // action dispatched
+    dispatch(getpatientsDetails({ id, token }));
+  }, [id, dispatch, token]);
 
-  // //console.log("phone :", phone);
   //file uploaded issue
   const [signatureUpload, setSignatureUpload] = useState("");
-  // //console.log("setSignatureUpload = = =", signatureUpload);
-  // file uploaded added
+
+  // const [clientAddress, setClientAddress] = useState([]);
+  // useEffect(() => {
+  //   setClientAddress(patient_details?.client_address);
+  // }, [patient_details?.client_address]);
+
+  const clientAddress = patient_details?.client_address;
+
+  console.log("clientAddress == ", clientAddress);
 
   // testing form
-
   const { register, control, handleSubmit, reset, setValue, getValues } =
     useForm({
       defaultValues: {
-        address: testingobj.address,
-        number: testingobj.allNumber,
-        Email: testingobj.allEmail,
+        address: clientAddress,
+        // number: testingobj.allNumber,
+        // Email: testingobj.allEmail,
       },
     });
 
   const { fields, append, remove } = useFieldArray({
     control,
     name: "address",
-    // name: "number",
   });
 
   const {
@@ -170,48 +194,15 @@ const PatientInformation = () => {
     name: "Email",
   });
 
-  const [hook, setHook] = useState("");
-
-  // // testing single calendar
-  // const [date, setDate] = useState(new Date());
-  // const [openCalendar, setOpenCalendar] = useState(false);
-  // const changeDate = (date) => {
-  //   setDate(date);
-  // };
-  // //console.log(date);
-
-  // const month = date ? date.getMonth() + 1 : null;
-  // const day = date ? date.getDate() : null;
-  // const year = date ? date.getFullYear() : null;
-
-  // const handleCancelDate = () => {
-  //   // setOpenCalendar(false);
-  //   setDate(null);
-  // };
-
-  // Patient Information
-  const { id } = useParams();
-  //console.log("patient Info", id);
-  const dispatch = useDispatch();
-
-  const data = useSelector((state) => state.patientInfo);
-  const patient_details = data?.patientDetails?.clients;
-  const loading = data?.loading;
-  const primaryPhone = patient_details?.phone_number;
-  const primaryEmail = patient_details?.email;
-
-  const [dob, setDob] = useState();
-  console.log("dob", dob);
-  //for showing default date in real time
-  useEffect(() => {
-    setDob(patient_details?.client_dob);
-  }, [patient_details?.client_dob]);
-
-  console.log("patient_details===", patient_details);
-  useEffect(() => {
-    // action dispatched
-    dispatch(getpatientsDetails({ id, token }));
-  }, [id, dispatch, token]);
+  const onSubmit = (data) => {
+    // console.log(data);
+    const is_client_active = data?.checkedActive ? 1 : 0;
+    const formData = {
+      is_client_active,
+    };
+    // console.log(formData);
+    // //console.log(file);
+  };
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -222,28 +213,12 @@ const PatientInformation = () => {
           ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
-        // dob: patient_details?.client_dob,
-        // dob: date ? `${month}/${day}/${year}` : null,
-        // email: patient_details?.email,
-        // phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
         checkedActive: patient_details?.is_active_client,
       });
     }, 0);
   }, [patient_details, reset]);
-
-  const onSubmit = (data) => {
-    console.log(data);
-    const is_client_active = data?.checkedActive ? 1 : 0;
-    const formData = {
-      is_client_active,
-    };
-    console.log(formData);
-    // //console.log(file);
-  };
-
-  // //console.log("---", addressRendomValue);
 
   ///relation value handle
   const settingRelation = (e) => {
@@ -279,10 +254,6 @@ const PatientInformation = () => {
     setValue("GuaratorCity", getValues("City"));
     setValue("GuratorCountry", getValues("country"));
     setValue("GuratorZip", getValues("zip"));
-    // //console.log("getvalue street", getValues("Street"));
-    // //console.log("getvalue city", getValues("City"));
-    // //console.log("getvalue country", getValues("country"));
-    // //console.log("getvalue zip", getValues("zip"));
   };
 
   // console.log("obj", obj);
