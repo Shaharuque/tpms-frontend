@@ -16,7 +16,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      providesTags: ["PatientAuthorization"],
+      providesTags: ["PatientAuthorizationTable"],
     }),
 
     //get patient authorization info
@@ -43,7 +43,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      invalidatesTags: ["PatientAuthorization"],
+      invalidatesTags: ["PatientAuthorization", "PatientAuthorizationTable"],
     }),
 
     //Get Patient Authorization Activity api
@@ -57,7 +57,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      providesTags: ["PatientAuthorization"],
+      providesTags: ["PatientAuthorizationActivity"],
     }),
 
     //Get Patient Authorization Activity Services api
@@ -98,6 +98,61 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         body: JSON.stringify(payload),
       }),
     }),
+
+    //Patient Authorization activity create/add
+    patientAuthorizationActivityCreate: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/auth/act/save`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["PatientAuthorizationActivity"],
+    }),
+
+    //Patient Authorization Activity delete
+    patientAuthorizationActivityDelete: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/auth/act/delete`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["PatientAuthorizationActivity"],
+    }),
+
+    //Patient Authorization Create Info
+    getAuthorizationCreateInfo: builder.query({
+      query: ({ token, id }) => ({
+        url: `admin/ac/patient/authorization/create/info/${id}`,
+        method: "GET",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+      }),
+    }),
+
+    //Patient Authorization create=>patient id wise
+    //Patient Authorization Save
+    patientAuthorizationCreate: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/authorization/save`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["PatientAuthorizationTable"],
+    }),
   }),
 });
 
@@ -105,8 +160,12 @@ export const {
   useGetPatientAuthorizationQuery,
   useGetPatientAuthorizationInfoQuery,
   useGetPatientAuthorizationActivityQuery,
+  usePatientAuthorizationActivityCreateMutation,
+  usePatientAuthorizationActivityDeleteMutation,
   usePatientAuthorizationUpdateMutation,
   useGetActivityServicesQuery,
   useGetActivitySubtypesQuery,
   useGetActivityCptcodeQuery,
+  useGetAuthorizationCreateInfoQuery,
+  usePatientAuthorizationCreateMutation,
 } = patientAuthorizationApi;

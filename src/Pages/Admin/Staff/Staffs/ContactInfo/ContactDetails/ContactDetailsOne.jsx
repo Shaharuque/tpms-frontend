@@ -126,7 +126,6 @@ const ContactDetailsOne = ({
                   <input
                     type="text"
                     name="address1"
-                    defaultValue={contactApiData?.address_note}
                     className="input-border input-font w-full focus:outline-none"
                     {...register("address_one")}
                   />

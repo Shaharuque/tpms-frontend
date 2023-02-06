@@ -7,32 +7,53 @@ import { motion } from "framer-motion";
 import { Switch } from "antd";
 import { BsArrowRight } from "react-icons/bs";
 import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
+import {
+  useGetAuthorizationCreateInfoQuery,
+  usePatientAuthorizationCreateMutation,
+} from "../../../../../../features/Patient_redux/authorization/authorizationApi";
+import useToken from "../../../../../../CustomHooks/useToken";
+import BoolConverter from "../../../../../Shared/BoolConverter/BoolConverter";
+import { toast } from "react-toastify";
 
 const AddAuthorization = () => {
+  const { token } = useToken();
+  //As This Id is important so I saved it at localStorage
   const patientId = localStorage.getItem("p_key");
-  console.log(patientId);
-  const [value, setValue] = useState(false);
+  //console.log(patientId);
   const [notes, setNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
-  const [active, setActive] = useState(false);
-  const [placeHolder, setPlaceHolder] = useState(true);
   const [auth, setAuth] = useState(false);
+  const [network, setNetwork] = useState(false);
+  const [valid, setValid] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(notes);
-  };
+  //Patient Authorization Create Info API
+  const {
+    data: createInfo,
+    isLoading: createInfoLoading,
+    isSuccess,
+    isError,
+  } = useGetAuthorizationCreateInfoQuery({
+    token,
+    id: patientId,
+  });
+  //Patient Authorization Save API(create authorization)
+  const [
+    patientAuthorizationCreate,
+    { isSuccess: createSuccess, isError: createError },
+  ] = usePatientAuthorizationCreateMutation();
 
-  const handleClose = () => {
-    reset();
-  };
+  const allPayors = createInfo?.all_payors;
+  const allSupervisor = createInfo?.supervisor;
+  const allTreatmentTypes = createInfo?.treatment_types;
+  console.log("dropdown data", allPayors);
 
-  //Date converter function [yy-mm-dd]
+  //String Date to [mm/dd/yy] converter function
   function convert(str) {
     let date = new Date(str),
       mnth = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);
-    return [date.getFullYear(), mnth, day].join("-");
+    return [mnth, day, date.getFullYear()].join("/");
   }
 
   //Date Range Picker
@@ -92,6 +113,56 @@ const AddAuthorization = () => {
     }
   };
   //end outside click
+
+  useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        start_date: `${startMonth} ${startDay}, ${startYear}`,
+        end_date: `${endMonth} ${endDay}, ${endYear}`,
+      });
+    }, 0);
+  }, [endDay, endMonth, endYear, startDay, startMonth, startYear]);
+
+  const onSubmit = (data) => {
+    const payload = {
+      client_id: parseInt(patientId),
+      ...data,
+      select_date: `${convert(data?.start_date)} - ${convert(data?.end_date)}`,
+      in_network: BoolConverter(network),
+      is_valid: BoolConverter(valid),
+      is_placeholder: BoolConverter(placeHolder),
+      notes,
+    };
+    if (payload) {
+      patientAuthorizationCreate({
+        token,
+        payload,
+      });
+    }
+    console.log(payload);
+  };
+
+  const handleClose = () => {
+    reset();
+  };
+
+  useEffect(() => {
+    if (createSuccess) {
+      toast.success("Successfully Authorization Created", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      reset();
+    } else if (createError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [createSuccess, createError]);
 
   return (
     <div className="md:h-[100vh]">
@@ -163,10 +234,15 @@ const AddAuthorization = () => {
               </label>
               <select
                 className="input-border input-font  w-full focus:outline-none"
-                {...register("insurance")}
+                {...register("payor_id")}
               >
-                <option value="single">single</option>
-                <option value="married">married</option>
+                {allPayors?.map((payors) => {
+                  return (
+                    <option key={payors?.id} value={payors?.payor_id}>
+                      {payors?.payor_name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div>
@@ -178,10 +254,18 @@ const AddAuthorization = () => {
               </label>
               <select
                 className="input-border input-font  w-full focus:outline-none"
-                {...register("tx_type")}
+                {...register("treatment_type")}
               >
-                <option value="single">single</option>
-                <option value="married">married</option>
+                {allTreatmentTypes?.map((treatment) => {
+                  return (
+                    <option
+                      key={treatment?.id}
+                      value={treatment?.treatment_name}
+                    >
+                      {treatment?.treatment_name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
             <div>
@@ -193,10 +277,15 @@ const AddAuthorization = () => {
               </label>
               <select
                 className="input-border input-font  w-full focus:outline-none"
-                {...register("sup_provider")}
+                {...register("supervisor_id")}
               >
-                <option value="single">single</option>
-                <option value="married">married</option>
+                {allSupervisor?.map((supv) => {
+                  return (
+                    <option key={supv?.id} value={supv?.employee?.id}>
+                      {supv?.employee?.full_name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
 
@@ -215,6 +304,7 @@ const AddAuthorization = () => {
                     readOnly
                     onClick={() => setOpenCalendar(true)}
                     className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
+                    {...register("start_date")}
                   />
                   <BsArrowRight
                     onClick={() => setOpenCalendar(true)}
@@ -227,6 +317,7 @@ const AddAuthorization = () => {
                     readOnly
                     onClick={() => setOpenCalendar(true)}
                     className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
+                    {...register("end_date")}
                   />
                 </div>
 
@@ -295,10 +386,11 @@ const AddAuthorization = () => {
               </label>
               <select
                 className="input-border input-font  w-full focus:outline-none"
-                {...register("cob")}
+                {...register("is_primary")}
               >
-                <option value="single">single</option>
-                <option value="married">married</option>
+                <option value="1">Primary</option>
+                <option value="2">Secondary</option>
+                <option value="3">Tertiary</option>
               </select>
             </div>
 
@@ -309,7 +401,7 @@ const AddAuthorization = () => {
               <input
                 type="file"
                 className=" ml-1 py-[5px]  text-xs w-full"
-                {...register("fileName")}
+                {...register("upload_authorization")}
               />
             </div>
 
@@ -324,7 +416,7 @@ const AddAuthorization = () => {
                   type="text"
                   name="diagnosis1"
                   className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("diagnosis1")}
+                  {...register("diagnosis_one")}
                 />
               </div>
               <div>
@@ -336,7 +428,7 @@ const AddAuthorization = () => {
                   name="diagnosis2"
                   // className="border border-gray-300 rounded-sm py-[5px] mx-2 text-xs w-full"
                   className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("diagnosis2")}
+                  {...register("diagnosis_two")}
                 />
               </div>
             </div>
@@ -352,7 +444,7 @@ const AddAuthorization = () => {
                   type="text"
                   name="diagnosis3"
                   className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("diagnosis3")}
+                  {...register("diagnosis_three")}
                 />
               </div>
               <div>
@@ -363,7 +455,7 @@ const AddAuthorization = () => {
                   type="text"
                   name="diagnosis4"
                   className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("diagnosis4")}
+                  {...register("diagnosis_four")}
                 />
               </div>
             </div>
@@ -382,12 +474,10 @@ const AddAuthorization = () => {
               </div>
               <div className="mt-[30px]">
                 <div className="flex ml-1 mt-1 items-center">
-                  <input
-                    type="checkbox"
-                    name="patient"
-                    onClick={() => {
-                      setValue(!value);
-                    }}
+                  <Switch
+                    checked={network}
+                    onChange={() => setNetwork(!network)}
+                    size="small"
                   />
                   <span className="text-[14px] ml-1 text-gray-600 font-medium">
                     In Network
@@ -415,7 +505,7 @@ const AddAuthorization = () => {
                 type="text"
                 name="cms4"
                 className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("cms4")}
+                {...register("cms_four")}
               />
             </div>
             <div>
@@ -426,15 +516,15 @@ const AddAuthorization = () => {
                 type="text"
                 name="cms11"
                 className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("cms11")}
+                {...register("cms_eleven")}
               />
             </div>
             <div className="ml-2 mt-5">
               <div className="my-1">
                 <Switch
+                  checked={valid}
+                  onChange={() => setValid(!valid)}
                   size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
                 />
                 <span className="text-[14px] font-medium text-gray-500 mx-3">
                   Active
@@ -442,9 +532,9 @@ const AddAuthorization = () => {
               </div>
               <div>
                 <Switch
+                  checked={placeHolder}
+                  onChange={() => setPlaceHolder(!placeHolder)}
                   size="small"
-                  checked={placeHolder ? true : false}
-                  onClick={() => setPlaceHolder(!placeHolder)}
                 />
                 <span className="text-[14px] font-medium text-gray-500 mx-3">
                   Placeholder

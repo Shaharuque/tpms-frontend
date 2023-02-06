@@ -35,10 +35,10 @@ const Authorization = () => {
         client_id: id,
       },
     });
-  console.log(
-    "All patient Authorization",
-    authorizationData?.client_authorization?.data
-  );
+  // console.log(
+  //   "All patient Authorization",
+  //   authorizationData?.client_authorization?.data
+  // );
   const clientAuthorizationData =
     authorizationData?.client_authorization?.data || [];
 
@@ -243,26 +243,24 @@ const Authorization = () => {
     },
     {
       title: "COB",
-      dataIndex: "cob",
-      key: "cob",
+      dataIndex: "is_primary",
+      key: "is_primary",
       width: 100,
-      filters: [
-        {
-          text: `Amet`,
-          value: "Amet",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.cob || null,
-      onFilter: (value, record) => record.cob.includes(value),
+      render: (_, { is_primary }) => {
+        if (is_primary === 1) {
+          return <h1 className="text-green-600">Primary</h1>;
+        } else if (is_primary === 2) {
+          return <h1 className="text-red-600">Secondary</h1>;
+        } else if (is_primary === 3) {
+          return <h1>Tertiary</h1>;
+        }
+      },
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
-        return a.cob > b.cob ? -1 : 1; //sorting problem solved using this logic
+        return a.is_primary > b.is_primary ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "cob" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "is_primary" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -272,7 +270,6 @@ const Authorization = () => {
       key: "operation",
       width: 150,
       render: (_, record) => {
-        console.log("render data", record);
         return (
           <div>
             <div className="flex justify-center gap-1 text-primary">
