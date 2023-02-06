@@ -8,6 +8,7 @@ import AddDocuments from "./Documents/AddDocuments";
 import useToken from "../../../../../CustomHooks/useToken";
 import { useGetdocumentsQuery } from "../../../../../features/Patient_redux/patientDocuments/documentsAPI";
 import Loading from "../../../../../Loading/Loading";
+import { DatabaseDateConverter } from "../../../../Shared/Dateconverter/DateConverter";
 
 const Documents = () => {
   const { id } = useParams();
@@ -43,6 +44,9 @@ const Documents = () => {
     );
   }
 
+  // const uplodedOn = DatabaseDateConverter(data.documents.data?.created_at);
+  console.log("uploader on  ", data.documents.data?.created_at);
+
   const column = [
     {
       title: "Description",
@@ -77,18 +81,26 @@ const Documents = () => {
 
     {
       title: "Uploaded On",
-      key: "uploaded_on",
-      dataIndex: "uploaded_on",
+      key: "created_at",
+      dataIndex: "created_at",
+      render: (_, { created_at }) => {
+        console.log("render data", created_at);
+        return (
+          <div>
+            <p>{DatabaseDateConverter(created_at)}</p>
+          </div>
+        );
+      },
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.uploaded_on || null,
+      filteredValue: filteredInfo.created_at || null,
       onFilter: (value, record) => record.uploaded_on.includes(value),
       //   sorter is for sorting asc or dsc purFile_name
       sorter: (a, b) => {
-        return a.uploaded_on > b.uploaded_on ? -1 : 1; //sorting problem solved using this logic
+        return a.created_at > b.created_at ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "uploaded_on" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "created_by" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -97,14 +109,14 @@ const Documents = () => {
       dataIndex: "created_by",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.created_by || null,
+      filteredValue: filteredInfo.created_at || null,
       onFilter: (value, record) => record.created_by.includes(value),
       //   sorter is for sorting asc or dsc purFile_name
       sorter: (a, b) => {
-        return a.created_by > b.created_by ? -1 : 1; //sorting problem solved using this logic
+        return a.created_at > b.created_at ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "created_by" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "created_at" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Table } from "antd";
 import { GiPlainCircle } from "react-icons/gi";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -17,7 +17,6 @@ import AuthorizationEditModal from "./AuthorizationModal/AuthorizationEditModal"
 const Authorization = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [authData, setAuthData] = useState([]);
   const [selectContact, setSelectContact] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   //row expand code related
@@ -26,7 +25,6 @@ const Authorization = () => {
   const { token } = useToken();
   const navigate = useNavigate();
   const { id } = useParams();
-
   //get patient authorization api
   const { data: authorizationData, isLoading: authorizationloading } =
     useGetPatientAuthorizationQuery({
@@ -46,24 +44,6 @@ const Authorization = () => {
     //console.log("editdata edit", record);
     navigate(`/admin/authorization-Edit/${record?.id}`);
   };
-
-  // const authorizationpetinedata = async () => {
-  //   const body = {
-  //     client_id: id,
-  //   };
-  //   const authapidata = await PostfetchData({
-  //     endPoint: "admin/ac/patient/authorization",
-  //     payload: body,
-  //     token,
-  //   });
-
-  //   setAuthData(authapidata?.client_authorization?.data);
-  //   // console.log("api data ", authapidata?.client_authorization?.data);
-  // };
-
-  // useEffect(() => {
-  //   authorizationpetinedata();
-  // }, []);
 
   //expendable row ar data jeita expand korley show korbey tar jnno new component call and props hisabey each row ar record id send
   const expandedRowRender = (record) => {

@@ -12,7 +12,7 @@ const AddDocuments = ({ handleClose, open }) => {
   const { token } = useToken();
   const { register, handleSubmit, reset } = useForm();
 
-  const [addDocuemnts, { data, isLoading, isSuccess, isError }] =
+  const [addDocuemnts, { data, isSuccess, isError }] =
     useAddDocuemntsMutation();
   console.log("data updated", data);
   const onSubmit = (data) => {
