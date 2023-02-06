@@ -3,23 +3,55 @@ import React, { useEffect } from "react";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
+import useToken from "../../../../../../CustomHooks/useToken";
+import {
+  useGetdocumentsinfoQuery,
+  useUpdateDocumentMutation,
+} from "../documentsAPI";
 
-const DocumentsActionModal = ({ handleClose, open, row }) => {
+const DocumentsActionModal = ({ handleClose, open, row, id }) => {
   const { register, handleSubmit, reset } = useForm();
+  // const { id } = useParams();
+  const { token } = useToken();
+
+  const [updateDocument, { data: updateData, isLoading, isError }] =
+    useUpdateDocumentMutation();
+
+  console.log("updated", updateData);
 
   const onSubmit = (data) => {
     console.log(data);
+
+    const payload = {
+      document_id: id,
+      description: data.description,
+      exp_date: data.expiry_Date,
+      file_name: data.fileName,
+    };
+    console.log("payload");
+    updateDocument({ token, payload });
     reset();
   };
   console.log(row);
+
+  const { data, isLoading: singleitemLoading } = useGetdocumentsinfoQuery({
+    token,
+    id,
+  });
+
+  // if (singleitemLoading) {
+  //   <p>loading ........ </p>;
+  // }
+  console.log("data api edit", data);
   useEffect(() => {
     setTimeout(() => {
       reset({
-        description: `${row.original.description}`,
-        // expiry_Date: `${row.original.upload_date}`,
+        description: `${data.document.description}`,
+        expiry_Date: `${data.document.exp_date}`,
       });
     }, 500);
-  }, [reset, row]);
+  }, [reset, row, data]);
 
   return (
     <div>

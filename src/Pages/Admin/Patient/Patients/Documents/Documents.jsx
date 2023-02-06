@@ -5,9 +5,12 @@ import check from "../../../../Assets/contact.png";
 import { Table } from "antd";
 import DocumentsAction from "./Documents/DocumentsAction";
 import AddDocuments from "./Documents/AddDocuments";
+import useToken from "../../../../../CustomHooks/useToken";
+import { useGetdocumentsQuery } from "./documentsAPI";
 
 const Documents = () => {
   const { id } = useParams();
+  const { token } = useToken();
   console.log("patient Documents", id);
   const [openEditModal, setOpenEditModal] = useState(false);
   const handleClose = () => {
@@ -16,26 +19,17 @@ const Documents = () => {
   const handleClickOpen = () => {
     setOpenEditModal(true);
   };
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
-  //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/PatientDocuments.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        console.log(tableData, "tableData");
-        // setLoading2(false);
-      });
-  }, []);
+  const { data, isLoading, isError } = useGetdocumentsQuery({ token, id });
+  console.log("api data come", data?.documents?.data);
 
   const column = [
     {
       title: "Description",
-      dataIndex: "Document",
-      key: "Document",
+      dataIndex: "description",
+      key: "description",
       width: 120,
       filters: [{}],
       filteredValue: filteredInfo.Document || null,
@@ -49,8 +43,8 @@ const Documents = () => {
 
     {
       title: "File Name",
-      key: "File_name",
-      dataIndex: "File_name",
+      key: "file_name",
+      dataIndex: "file_name",
       width: 100,
       filters: [{}],
       filteredValue: filteredInfo.File_name || null,
@@ -97,8 +91,8 @@ const Documents = () => {
     },
     {
       title: "Expired Date",
-      key: "expired_date",
-      dataIndex: "expired_date",
+      key: "exp_date",
+      dataIndex: "exp_date",
       width: 100,
       filters: [{}],
       filteredValue: filteredInfo.expired_date || null,
@@ -161,7 +155,7 @@ const Documents = () => {
           columns={column}
           bordered
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-          dataSource={tableData}
+          dataSource={data?.documents?.data}
           onChange={handleChange}
         />
       </div>

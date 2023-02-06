@@ -1,6 +1,8 @@
 import React, { memo, useState } from "react";
 import { AiOutlineEye, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import useToken from "../../../../../../CustomHooks/useToken";
+import { useDocumentDeleteMutation } from "../documentsAPI";
 import DocumentsActionModal from "./DocumentsActionModal";
 
 const DocumentsAction = ({ id, fileName }) => {
@@ -9,8 +11,19 @@ const DocumentsAction = ({ id, fileName }) => {
     setOpenEditModal(true);
   };
 
+  const { token } = useToken();
   const handleClose = () => {
     setOpenEditModal(false);
+  };
+
+  const [documentDelete, { data, isSuccess, isError }] =
+    useDocumentDeleteMutation();
+  console.log("----", data);
+  const handleDelete = (id) => {
+    const payload = {
+      document_id: id,
+    };
+    documentDelete({ token, payload });
   };
   return (
     <div>
@@ -23,7 +36,10 @@ const DocumentsAction = ({ id, fileName }) => {
         <button onClick={handleClickOpen} className="text-secondary">
           <AiOutlineEdit />
         </button>
-        <button className="text-sm mx-1 text-rose-600">
+        <button
+          onClick={() => handleDelete(id)}
+          className="text-sm mx-1 text-rose-600"
+        >
           <AiOutlineDelete />
         </button>
       </div>
@@ -31,6 +47,7 @@ const DocumentsAction = ({ id, fileName }) => {
         <DocumentsActionModal
           handleClose={handleClose}
           open={openEditModal}
+          id={id}
         ></DocumentsActionModal>
       )}
     </div>
