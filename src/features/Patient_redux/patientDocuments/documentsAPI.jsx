@@ -1,4 +1,4 @@
-import { apiSlice } from "../../../../../features/api/apiSlice";
+import { apiSlice } from "../../api/apiSlice";
 
 //documents crud operatios api will be handled here
 export const documentsApi = apiSlice.injectEndpoints({
@@ -56,7 +56,7 @@ export const documentsApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Documents"],
     }),
 
-    //Update document  info
+    //Delete document
     documentDelete: builder.mutation({
       query: ({ token, payload }) => ({
         url: "admin/ac/patient/document/delete",

@@ -3,15 +3,16 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import useToken from "../../../../../../CustomHooks/useToken";
-import { useAddDocuemntsMutation } from "../documentsAPI";
+import { useAddDocuemntsMutation } from "../../../../../../features/Patient_redux/patientDocuments/documentsAPI";
 
 const AddDocuments = ({ handleClose, open }) => {
   const { id } = useParams();
   const { token } = useToken();
   const { register, handleSubmit, reset } = useForm();
 
-  const [addDocuemnts, { data, isLoading, isError }] =
+  const [addDocuemnts, { data, isLoading, isSuccess, isError }] =
     useAddDocuemntsMutation();
   console.log("data updated", data);
   const onSubmit = (data) => {
@@ -26,6 +27,24 @@ const AddDocuments = ({ handleClose, open }) => {
     addDocuemnts({ token, payload });
     reset();
   };
+
+  //Success/Error message show added api
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (isError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [data?.message, handleClose, isError, isSuccess]);
 
   return (
     <div>

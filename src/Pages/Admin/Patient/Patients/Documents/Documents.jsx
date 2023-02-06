@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HiPlus } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import check from "../../../../Assets/contact.png";
@@ -6,7 +6,8 @@ import { Table } from "antd";
 import DocumentsAction from "./Documents/DocumentsAction";
 import AddDocuments from "./Documents/AddDocuments";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useGetdocumentsQuery } from "./documentsAPI";
+import { useGetdocumentsQuery } from "../../../../../features/Patient_redux/patientDocuments/documentsAPI";
+import Loading from "../../../../../Loading/Loading";
 
 const Documents = () => {
   const { id } = useParams();
@@ -22,8 +23,25 @@ const Documents = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
-  const { data, isLoading, isError } = useGetdocumentsQuery({ token, id });
+  const {
+    data,
+    isLoading: documentLoading,
+    isError,
+  } = useGetdocumentsQuery({ token, id });
   console.log("api data come", data?.documents?.data);
+
+  if (documentLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return (
+      <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
+        <p>Backend Error</p>
+        <button className="text-black">X</button>
+      </div>
+    );
+  }
 
   const column = [
     {

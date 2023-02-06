@@ -1,8 +1,9 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import useToken from "../../../../../../CustomHooks/useToken";
-import { useDocumentDeleteMutation } from "../documentsAPI";
+import { useDocumentDeleteMutation } from "../../../../../../features/Patient_redux/patientDocuments/documentsAPI";
 import DocumentsActionModal from "./DocumentsActionModal";
 
 const DocumentsAction = ({ id, fileName }) => {
@@ -25,6 +26,23 @@ const DocumentsAction = ({ id, fileName }) => {
     };
     documentDelete({ token, payload });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (isError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [data?.message, isError, isSuccess]);
+
   return (
     <div>
       <div className="flex justify-center gap-2">

@@ -3,22 +3,38 @@ import React, { useEffect } from "react";
 import { memo } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import { useParams } from "react-router-dom";
 import useToken from "../../../../../../CustomHooks/useToken";
+import Loading from "../../../../../../Loading/Loading";
 import {
   useGetdocumentsinfoQuery,
   useUpdateDocumentMutation,
-} from "../documentsAPI";
+} from "../../../../../../features/Patient_redux/patientDocuments/documentsAPI";
+import { toast } from "react-toastify";
 
 const DocumentsActionModal = ({ handleClose, open, row, id }) => {
   const { register, handleSubmit, reset } = useForm();
   // const { id } = useParams();
   const { token } = useToken();
-
-  const [updateDocument, { data: updateData, isLoading, isError }] =
+  // post edit data show
+  const [updateDocument, { data: updateData, isSuccess, isError }] =
     useUpdateDocumentMutation();
 
-  console.log("updated", updateData);
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(updateData?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (isError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [handleClose, isError, isSuccess, updateData?.message]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -34,15 +50,12 @@ const DocumentsActionModal = ({ handleClose, open, row, id }) => {
     reset();
   };
   console.log(row);
-
+  // get edit data show
   const { data, isLoading: singleitemLoading } = useGetdocumentsinfoQuery({
     token,
     id,
   });
 
-  // if (singleitemLoading) {
-  //   <p>loading ........ </p>;
-  // }
   console.log("data api edit", data);
   useEffect(() => {
     setTimeout(() => {
@@ -53,6 +66,9 @@ const DocumentsActionModal = ({ handleClose, open, row, id }) => {
     }, 500);
   }, [reset, row, data]);
 
+  if (singleitemLoading) {
+    return <p>loading...</p>;
+  }
   return (
     <div>
       <Modal
@@ -116,7 +132,11 @@ const DocumentsActionModal = ({ handleClose, open, row, id }) => {
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
-              <button className=" pms-button mr-2" type="submit">
+              <button
+                disabled={singleitemLoading}
+                className=" pms-button mr-2"
+                type="submit"
+              >
                 Save
               </button>
 
