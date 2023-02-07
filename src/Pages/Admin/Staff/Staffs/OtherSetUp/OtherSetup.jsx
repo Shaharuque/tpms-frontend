@@ -71,6 +71,8 @@ const OtherSetup = () => {
     updated_at,
   } = otherSetup?.info || {};
 
+  console.log("paid time od", BoolConverter(paid_time_off));
+
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
@@ -129,6 +131,7 @@ const OtherSetup = () => {
     updated_at,
   ]);
 
+  // bollian value all state
   const [paidTimeOff, setPaidTimeOff] = useState(BoolConverter(paid_time_off));
   const [exemptStaff, setExemptStaff] = useState(BoolConverter(exemt_staff));
   const [paidHoliday, setPaidHoliday] = useState(
@@ -141,6 +144,21 @@ const OtherSetup = () => {
   const [providerWithoutNote, setProviderWithoutNote] = useState(
     BoolConverter(1)
   );
+
+  // boolian value data control
+  useEffect(() => {
+    setPaidTimeOff(BoolConverter(paid_time_off));
+    setExemptStaff(BoolConverter(exemt_staff));
+    setPaidHoliday(BoolConverter(gets_paid_holiday));
+    setIsPartTime(BoolConverter(is_parttime));
+    setIsContractor(BoolConverter(is_contractor));
+  }, [
+    exemt_staff,
+    gets_paid_holiday,
+    is_contractor,
+    is_parttime,
+    paid_time_off,
+  ]);
 
   // const data = [
   //   {
@@ -284,7 +302,7 @@ const OtherSetup = () => {
               type="text"
               name="custom_six "
               className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("custom_six ")}
+              {...register("custom_six")}
             />
           </div>
           <div>
@@ -306,8 +324,20 @@ const OtherSetup = () => {
               className="input-border input-font w-full focus:outline-none "
               {...register("degree_level")}
             >
-              <option value="Speech Therapist">Speech Therapist</option>
-              <option value="female">Female</option>
+              <option value=""></option>
+              <option value="1">Associate degree</option>
+              <option value="2">Bachelor’s Degree</option>
+              <option value="3">Master’s Degree</option>
+              <option value="4">Doctorate</option>
+              <option value="5">BCBA</option>
+              <option value="6">BCBA-D</option>
+              <option value="7">BCABA</option>
+              <option value="8">High School</option>
+              <option value="9">Enrolled Masters</option>
+              <option value="10">RBT</option>
+              <option value="11">PsyD</option>
+              <option value="13">LCSW</option>
+              <option value="15">BT</option>
             </select>
           </div>
           <div>

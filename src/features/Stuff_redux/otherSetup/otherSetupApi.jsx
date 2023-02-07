@@ -1,5 +1,4 @@
 //staff other setup api will be handled here
-
 import { apiSlice } from "../../api/apiSlice";
 
 export const otherSetupApi = apiSlice.injectEndpoints({
