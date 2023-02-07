@@ -15,6 +15,7 @@ const OtherSetUpBottom = ({ propdata }) => {
             <h3 className="text-[14px] font-medium w-[440px]">
               {field?.treatment_name}
             </h3>
+
             <input
               type="text"
               defaultValue={field.box_24j}

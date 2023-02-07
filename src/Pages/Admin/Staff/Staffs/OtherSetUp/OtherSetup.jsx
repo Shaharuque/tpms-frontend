@@ -3,14 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useGetOtherSetupQuery } from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
+import {
+  useAddOtherSetupMutation,
+  useGetOtherSetupQuery,
+} from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
 import Loading from "../../../../../Loading/Loading";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import OtherSetUpBottom from "./OtherSetUpBottom/OtherSetUpBottom";
 
 const OtherSetup = () => {
   const [active, setActive] = useState(false);
-
+  const store = [];
   const { token } = useToken();
   const { id } = useParams();
 
@@ -24,6 +27,13 @@ const OtherSetup = () => {
     token,
     id,
   });
+
+  // ADD OTHER SETUP API
+  const [addOtherSetup, { isSuccess, data, isError: addotherSetupError }] =
+    useAddOtherSetupMutation();
+
+  console.log("post api", data);
+  console.log("Errpr api", addotherSetupError);
 
   const OtherSetupApiData = otherSetup?.tx_type_data;
   console.log("other setup api data", otherSetup);
@@ -71,8 +81,12 @@ const OtherSetup = () => {
     updated_at,
   } = otherSetup?.info || {};
 
-  console.log("paid time od", BoolConverter(paid_time_off));
+  console.log("tx_type_data", otherSetup?.tx_type_data);
 
+  const txTypeStore =
+    otherSetup?.tx_type_data.map((item) => store.push(item.treatment_id)) || [];
+
+  console.log("all txtype store", store);
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
@@ -185,16 +199,20 @@ const OtherSetup = () => {
 
   const onSubmit = (data) => {
     // console.log("from data", data);
-    const payLoad = {
+    const payload = {
       ...data,
+      edit_id: data.employee_id,
       paid_time_off: BoolConverter(paidTimeOff),
       exemt_staff: BoolConverter(exemptStaff),
       gets_paid_holiday: BoolConverter(paidHoliday),
       is_parttime: BoolConverter(isPartTime),
       is_contractor: BoolConverter(isContractor),
       provider_render_without: BoolConverter(providerWithoutNote),
+      edit_tx_id: store,
+      max_hour_per_day: 6,
     };
-    console.log(payLoad);
+    console.log("payload", payload);
+    addOtherSetup({ token, payload });
   };
 
   if (otherSetupLoading) {
