@@ -53,7 +53,6 @@ const PatientsInfo = () => {
               />
             </div>
           </div>
-
           <div className="text-xs text-secondary font-normal patient-nav mt-2 mb-1">
             <CustomLink
               className="flex gap-1 pb-1 clink items-center"
@@ -64,7 +63,6 @@ const PatientsInfo = () => {
               </h1>
             </CustomLink>
           </div>
-
           <div className="text-xs  text-secondary font-normal patient-nav mb-1">
             <CustomLink
               className="flex gap-1 pb-1 clink items-center"
@@ -75,7 +73,6 @@ const PatientsInfo = () => {
               </h1>
             </CustomLink>
           </div>
-
           <div className="text-xs  text-secondary font-normal patient-nav mb-1">
             <CustomLink
               className="flex gap-1 pb-1 clink items-center"
@@ -87,7 +84,6 @@ const PatientsInfo = () => {
               </h1>
             </CustomLink>
           </div>
-
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink
               className="flex gap-1 pb-1 clink items-center"

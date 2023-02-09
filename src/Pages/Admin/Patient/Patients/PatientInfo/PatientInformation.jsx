@@ -118,37 +118,52 @@ const PatientInformation = () => {
   //   region: "work",
   //   zip: "500",
   // };
-
-  const { token } = useToken();
-  const [active, setActive] = useState(false);
-  const [Guarantor, setGuarantor] = useState(false);
-  const [relation, setRelation] = useState("Self");
-  const [checkLocation, setLocation] = useState(false);
-
-  //file uploaded issue
-  const [signatureUpload, setSignatureUpload] = useState("");
-  // //console.log("setSignatureUpload = = =", signatureUpload);
-  // file uploaded added
-
-  // testing form
+  // Patient Information
+  const { id } = useParams();
+  //console.log("patient Info", id);
+  const dispatch = useDispatch();
 
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
   const primaryPhone = patient_details?.phone_number;
   const primaryEmail = patient_details?.email;
-
+  const { token } = useToken();
+  const [active, setActive] = useState(false);
+  const [Guarantor, setGuarantor] = useState(false);
+  const [relation, setRelation] = useState("Self");
+  const [checkLocation, setLocation] = useState(false);
+  const [hook, setHook] = useState("");
   const [dob, setDob] = useState();
-  console.log("dob", dob);
+  // console.log("dob", dob);
   //for showing default date in real time
   useEffect(() => {
     setDob(patient_details?.client_dob);
   }, [patient_details?.client_dob]);
 
+  console.log("patient_details===", patient_details?.client_address);
+  useEffect(() => {
+    // action dispatched
+    dispatch(getpatientsDetails({ id, token }));
+  }, [id, dispatch, token]);
+
+  //file uploaded issue
+  const [signatureUpload, setSignatureUpload] = useState("");
+
+  // const [clientAddress, setClientAddress] = useState([]);
+  // useEffect(() => {
+  //   setClientAddress(patient_details?.client_address);
+  // }, [patient_details?.client_address]);
+
+  const clientAddress = patient_details?.client_address;
+
+  console.log("clientAddress == ", clientAddress);
+
+  // testing form
   const { register, control, handleSubmit, reset, setValue, getValues } =
     useForm({
       defaultValues: {
-        address: patient_details.client_address,
+        address: clientAddress,
         // number: testingobj.allNumber,
         // Email: testingobj.allEmail,
       },
@@ -157,7 +172,6 @@ const PatientInformation = () => {
   const { fields, append, remove } = useFieldArray({
     control,
     name: "address",
-    // name: "number",
   });
 
   const {
@@ -180,18 +194,15 @@ const PatientInformation = () => {
     name: "Email",
   });
 
-  const [hook, setHook] = useState("");
-
-  // Patient Information
-  const { id } = useParams();
-  //console.log("patient Info", id);
-  const dispatch = useDispatch();
-
-  console.log("patient_details===", patient_details);
-  useEffect(() => {
-    // action dispatched
-    dispatch(getpatientsDetails({ id, token }));
-  }, [id, dispatch, token]);
+  const onSubmit = (data) => {
+    // console.log(data);
+    const is_client_active = data?.checkedActive ? 1 : 0;
+    const formData = {
+      is_client_active,
+    };
+    // console.log(formData);
+    // //console.log(file);
+  };
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -208,18 +219,6 @@ const PatientInformation = () => {
       });
     }, 0);
   }, [patient_details, reset]);
-
-  const onSubmit = (data) => {
-    console.log(data);
-    const is_client_active = data?.checkedActive ? 1 : 0;
-    const formData = {
-      is_client_active,
-    };
-    console.log(formData);
-    // //console.log(file);
-  };
-
-  // //console.log("---", addressRendomValue);
 
   ///relation value handle
   const settingRelation = (e) => {
