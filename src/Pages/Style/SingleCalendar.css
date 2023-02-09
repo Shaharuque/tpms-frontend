@@ -12,14 +12,14 @@
 /* week days */
 abbr[title] {
   text-decoration: none;
-  color: #0AA7B8;
+  color: #22acbb;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: capitalize;
 }
 
 .react-calendar__tile abbr {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* .react-calendar__navigation{
@@ -98,7 +98,7 @@ abbr[title] {
 
 .react-calendar__navigation button span,
 .react-calendar__navigation__arrow {
-  font-weight: 700;
+  font-weight: 400;
   color: #949495;
 }
 
