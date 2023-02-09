@@ -46,6 +46,13 @@ const AuthorizationActivityTable = ({ id }) => {
       dataIndex: "activity_name",
       key: "activity_name",
       width: 100,
+      render: (_, record) => {
+        return (
+          <h1>
+            {record?.activity_one} {record?.activity_two}
+          </h1>
+        );
+      },
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1; //sorting problem solved using this logic
       },
@@ -136,7 +143,35 @@ const AuthorizationActivityTable = ({ id }) => {
       sortOrder: sortedInfo.columnKey === "remaining" ? sortedInfo.order : null,
       ellipsis: true,
     },
-
+    {
+      title: "Start Date",
+      dataIndex: "onset_date",
+      key: "onset_date",
+      width: 50,
+      sorter: (a, b) => {
+        return a.onset_date > b.onset_date ? -1 : 1; //sorting problem solved using this logic
+      },
+      render: (_, { onset_date }) => {
+        return <h1 className="font-bold">{onset_date}</h1>;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "End Date",
+      dataIndex: "end_date",
+      key: "end_date",
+      width: 50,
+      sorter: (a, b) => {
+        return a.end_date > b.end_date ? -1 : 1; //sorting problem solved using this logic
+      },
+      render: (_, { end_date }) => {
+        return <h1 className="font-bold">{end_date}</h1>;
+      },
+      sortOrder: sortedInfo.columnKey === "end_date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
     {
       title: "Action",
       dataIndex: "operation",

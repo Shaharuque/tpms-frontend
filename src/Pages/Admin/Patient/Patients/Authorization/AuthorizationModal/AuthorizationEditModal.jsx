@@ -7,9 +7,12 @@ import {
   useGetActivityCptcodeQuery,
   useGetActivityServicesQuery,
   useGetActivitySubtypesQuery,
+  usePatientAuthorizationActivityCreateMutation,
 } from "../../../../../../features/Patient_redux/authorization/authorizationApi";
 import useToken from "../../../../../../CustomHooks/useToken";
 import ModalLoader from "../../../../../../Loading/ModalLoader";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AuthorizationEditModal = ({
   handleClose,
@@ -21,6 +24,14 @@ const AuthorizationEditModal = ({
   const { register, handleSubmit, reset } = useForm();
   const [notes, setNotes] = useState("");
   const { token } = useToken();
+  const { id: authorizationId } = useParams();
+  const patientId = localStorage.getItem("p_key");
+
+  //Patient authorization activity create/save api
+  const [
+    patientAuthorizationActivityCreate,
+    { isSuccess: activityCreateSuccess, isError: activityCreateError },
+  ] = usePatientAuthorizationActivityCreateMutation();
 
   //Patient Authorization Activity Services api
   const { data: activityServices, isLoading: activityServicesLoading } =
@@ -45,10 +56,6 @@ const AuthorizationEditModal = ({
       },
     });
   console.log(activityServices, activitySubtypes, activityCptCode);
-  const onSubmit = (data) => {
-    console.log(data);
-    // reset();
-  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -58,6 +65,57 @@ const AuthorizationEditModal = ({
       });
     }, 500);
   }, [reset, editableRow]);
+
+  const onSubmit = (data) => {
+    const payload = {
+      client_id: Number(patientId),
+      authrization_id: Number(authorizationId),
+      activity_one: data?.activity_one,
+      activity_two: data?.activity_two,
+      cpt_code: Number(data?.cpt_code),
+      m1: data?.m1,
+      m2: data?.m2,
+      m3: data?.m3,
+      m4: data?.m4,
+      billed_type: data?.billed_type,
+      billed_time: data?.billed_time,
+      rate: data?.rate,
+      hours_max_one: data?.hours_max_one,
+      hours_max_per_one: data?.hours_max_per_one,
+      hours_max_is_one: data?.hours_max_is_one,
+      hours_max_two: data?.hours_max_two,
+      hours_max_per_two: data?.hours_max_per_two,
+      hours_max_is_two: data?.hours_max_is_two,
+      hours_max_three: data?.hours_max_three,
+      hours_max_per_three: data?.hours_max_per_three,
+      hours_max_is_three: data?.hours_max_is_three,
+      notes: notes,
+    };
+    if (payload) {
+      patientAuthorizationActivityCreate({
+        token,
+        payload,
+      });
+    }
+    console.log(payload);
+  };
+
+  useEffect(() => {
+    if (activityCreateSuccess) {
+      toast.success("Authorization Activity Created Successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (activityCreateError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [activityCreateSuccess, activityCreateError, handleClose]);
 
   return (
     <div>
@@ -79,7 +137,7 @@ const AuthorizationEditModal = ({
               <div className="px-5 py-2 ">
                 <div className="flex items-center justify-between">
                   <h1 className="text-lg text-left text-orange-400 ">
-                    Edit Document
+                    Add/Edit Service
                   </h1>
                   <IoCloseCircleOutline
                     onClick={handleClose}
@@ -98,7 +156,7 @@ const AuthorizationEditModal = ({
                       </label>
                       <select
                         className="modal-input-field ml-1 w-full"
-                        {...register("service")}
+                        {...register("activity_one")}
                       >
                         {activityServices?.services?.map((service) => {
                           return (
@@ -121,7 +179,7 @@ const AuthorizationEditModal = ({
                       </label>
                       <select
                         className="modal-input-field ml-1 w-full"
-                        {...register("service_sub_type")}
+                        {...register("activity_two")}
                       >
                         {activitySubtypes?.subtypes?.map((subtype) => {
                           return (
@@ -148,7 +206,7 @@ const AuthorizationEditModal = ({
                       >
                         {activityCptCode?.cptcodes?.map((cptCode) => {
                           return (
-                            <option key={cptCode?.id} value={cptCode?.cpt_code}>
+                            <option key={cptCode?.id} value={cptCode?.cpt_id}>
                               {cptCode?.cpt_code}
                             </option>
                           );
@@ -211,20 +269,25 @@ const AuthorizationEditModal = ({
                         </label>
                         <select
                           className="modal-input-field ml-1 w-full"
-                          {...register("per_unit")}
+                          {...register("billed_type")}
                         >
-                          <option value="single">single</option>
-                          <option value="married">married</option>
+                          <option value="15 mins">15 mins</option>
+                          <option value="Hour">Hour</option>
+                          <option value="Per Unit">Per Unit</option>
+                          <option value="Per Session">Per Session</option>
                         </select>
                       </div>
                       <div className="mt-[32px]">
                         <select
                           className="modal-input-field ml-1 w-full"
-                          {...register("minute")}
+                          {...register("billed_time")}
                         >
-                          <option value="single"></option>
-                          <option value="single">single</option>
-                          <option value="married">married</option>
+                          <option value="15 min">15 min</option>
+                          <option value="30 min">30 min</option>
+                          <option value="45 min">45 min</option>
+                          <option value="1 hour">1 hour</option>
+                          <option value="2 hour">2 hour</option>
+                          <option value="1 min">1 min</option>
                         </select>
                       </div>
                     </div>
@@ -247,6 +310,7 @@ const AuthorizationEditModal = ({
                         <span className="text-red-500">*</span>
                       </span>
                     </label>
+                    {/* 1 */}
                     <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
                       <div className="  text-sm font-semibold my-auto px-3">
                         Maximum
@@ -254,10 +318,10 @@ const AuthorizationEditModal = ({
                       <div className="">
                         <select
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
-                          {...register("hours")}
+                          {...register("hours_max_one")}
                         >
-                          <option value="hours">Hours</option>
-                          <option value="married">married</option>
+                          <option value="Hours">Hours</option>
+                          <option value="Unit">Unit</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium my-auto px-3 mx-1">
@@ -266,25 +330,26 @@ const AuthorizationEditModal = ({
                       <div className="">
                         <select
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
-                          {...register("hours")}
+                          {...register("hours_max_per_one")}
                         >
-                          <option value="single">single</option>
-                          <option value="married">married</option>
+                          <option value="0"></option>
+                          <option value="Day">Day</option>
+                          <option value="Week">Week</option>
+                          <option value="Month">Month</option>
+                          <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium px-3 mx-1">
                         Is
                       </div>
                       <div className="">
-                        <select
+                        <input
                           className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
-                          {...register("hours")}
-                        >
-                          <option value="single">single</option>
-                          <option value="married">married</option>
-                        </select>
+                          {...register("hours_max_is_one")}
+                        ></input>
                       </div>
                     </div>
+                    {/* 2 */}
                     <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
                       <div className="  text-sm font-semibold my-auto px-3">
                         Maximum
@@ -292,10 +357,10 @@ const AuthorizationEditModal = ({
                       <div className="">
                         <select
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
-                          {...register("hours")}
+                          {...register("hours_max_two")}
                         >
-                          <option value="hours">Hours</option>
-                          <option value="married">married</option>
+                          <option value="Hours">Hours</option>
+                          <option value="Unit">Unit</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium my-auto px-3 mx-1">
@@ -304,25 +369,26 @@ const AuthorizationEditModal = ({
                       <div className="">
                         <select
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
-                          {...register("hours")}
+                          {...register("hours_max_per_two")}
                         >
-                          <option value="single">single</option>
-                          <option value="married">married</option>
+                          <option value="0"></option>
+                          <option value="Day">Day</option>
+                          <option value="Week">Week</option>
+                          <option value="Month">Month</option>
+                          <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium px-3 mx-1">
                         Is
                       </div>
                       <div className="">
-                        <select
+                        <input
                           className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
-                          {...register("hours")}
-                        >
-                          <option value="single">single</option>
-                          <option value="married">married</option>
-                        </select>
+                          {...register("hours_max_is_two")}
+                        ></input>
                       </div>
                     </div>
+                    {/* 3 */}
                     <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
                       <div className="  text-sm font-semibold my-auto px-3">
                         Maximum
@@ -330,10 +396,10 @@ const AuthorizationEditModal = ({
                       <div className="">
                         <select
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
-                          {...register("hours")}
+                          {...register("hours_max_three")}
                         >
-                          <option value="hours">Hours</option>
-                          <option value="married">married</option>
+                          <option value="Hours">Hours</option>
+                          <option value="Unit">Unit</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium my-auto px-3 mx-1">
@@ -342,23 +408,23 @@ const AuthorizationEditModal = ({
                       <div className="">
                         <select
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
-                          {...register("hours")}
+                          {...register("hours_max_per_three")}
                         >
-                          <option value="single">single</option>
-                          <option value="married">married</option>
+                          <option value="0"></option>
+                          <option value="Day">Day</option>
+                          <option value="Week">Week</option>
+                          <option value="Month">Month</option>
+                          <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium px-3 mx-1">
                         Is
                       </div>
                       <div className="">
-                        <select
+                        <input
                           className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
-                          {...register("hours")}
-                        >
-                          <option value="single">single</option>
-                          <option value="married">married</option>
-                        </select>
+                          {...register("hours_max_is_three")}
+                        ></input>
                       </div>
                     </div>
                   </div>

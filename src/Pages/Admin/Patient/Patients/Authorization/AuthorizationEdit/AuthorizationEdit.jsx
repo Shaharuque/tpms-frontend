@@ -26,16 +26,15 @@ const AuthorizationEdit = () => {
   // console.log("single authorization data edit id ", id);
   const patientId = localStorage.getItem("p_key");
   // console.log(patientId);
-  const [notes, setNotes] = useState("");
+  const [textNotes, setTextNotes] = useState("");
   const { register, handleSubmit, reset } = useForm();
-  const [openEditModal, setOpenEditModal] = useState(false);
+  const [addServiceModal, setAddServiceModal] = useState(false);
   const [authEditData, setauthEditData] = useState([]);
   const [treatmentType, setTreatmentType] = useState();
   const [startD, setStartD] = useState(null);
   const [endD, setEndD] = useState(null);
   const { token } = useToken();
   console.log("testing on change txtype", treatmentType);
-  console.log("Notes", notes);
 
   //Patient authorization info API(ID wise)
   const {
@@ -60,7 +59,7 @@ const AuthorizationEdit = () => {
     },
   });
 
-  //Patient Authorization update
+  //Patient Authorization update api
   const [
     patientAuthorizationUpdate,
     { isSuccess: updateSuccess, isError: updateError },
@@ -98,7 +97,9 @@ const AuthorizationEdit = () => {
     is_valid,
     is_placeholder,
     is_primary,
+    notes,
   } = authorizationInfo?.client_authorization_info || {};
+  console.log("Notes", notes);
   //All payors array
   const txType = authorizationInfo?.treatment_types;
   //All supervisor array
@@ -133,7 +134,7 @@ const AuthorizationEdit = () => {
   console.log("after boolconversion call data", network, valid, place_holder);
 
   const handleClose = () => {
-    setOpenEditModal(false);
+    setAddServiceModal(false);
   };
 
   //Date Range Picker
@@ -196,7 +197,7 @@ const AuthorizationEdit = () => {
     const newDate = `${createDate} ${splitedData[1]}, ${splitedData[2]}`;
     return newDate;
   };
-  //String Date to [yy-mm-dd] converter function
+  //String Date to [mm/dd/yy] converter function
   function convert(str) {
     let date = new Date(str),
       mnth = ("0" + (date.getMonth() + 1)).slice(-2),
@@ -246,6 +247,7 @@ const AuthorizationEdit = () => {
         cms_four,
         cms_eleven,
         copay,
+        notes,
       });
     }, 0);
   }, [
@@ -272,6 +274,7 @@ const AuthorizationEdit = () => {
     startMonth,
     startYear,
     uci_id,
+    notes,
   ]);
 
   const onSubmit = (data) => {
@@ -282,12 +285,13 @@ const AuthorizationEdit = () => {
       in_network: network,
       is_valid: valid,
       is_placeholder: place_holder,
+      notes: textNotes,
     };
     patientAuthorizationUpdate({
       token,
       payload,
     });
-    //console.log(payload);
+    console.log(payload);
   };
 
   useEffect(() => {
@@ -405,7 +409,7 @@ const AuthorizationEdit = () => {
                   {...register("treatment_type")}
                   onChange={(e) => setTreatmentType(e.target.value)}
                 >
-                  {treatment_type_id ? (
+                  {treatment_type ? (
                     <option value={treatment_type}>{treatment_type}</option>
                   ) : (
                     <option>Select Treatment</option>
@@ -444,7 +448,7 @@ const AuthorizationEdit = () => {
                         })}
                     </option>
                   ) : (
-                    <option>Select Treatment</option>
+                    <option>Select Supervisor</option>
                   )}
                   {supvProvider
                     ?.filter((item) => item.employee_id !== supervisor_id)
@@ -726,9 +730,9 @@ const AuthorizationEdit = () => {
                 </label>
                 <textarea
                   {...register("notes")}
-                  onChange={(e) => setNotes(e.target.value)}
+                  onChange={(e) => setTextNotes(e.target.value)}
                   name="comment"
-                  className="border border-gray-300 text-xs p-2  ml-1 h-24 w-full"
+                  className="border border-gray-300 text-sm p-2  ml-1 h-24 w-full"
                 ></textarea>
               </div>
             </div>
@@ -763,7 +767,7 @@ const AuthorizationEdit = () => {
             <button
               // disabled={treatmentType ? false : true}
               onClick={() => {
-                setOpenEditModal(true);
+                setAddServiceModal(true);
               }}
               className="px-2 my-3 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs  hover:to-secondary text-white rounded"
             >
@@ -777,11 +781,11 @@ const AuthorizationEdit = () => {
           ></AuthorizationActivityNestedTable>
         </motion.div>
       )}
-      {openEditModal && (
+      {addServiceModal && (
         <AuthorizationEditModal
           treatment_name={treatmentType}
           handleClose={handleClose}
-          open={openEditModal}
+          open={addServiceModal}
         ></AuthorizationEditModal>
       )}
     </div>

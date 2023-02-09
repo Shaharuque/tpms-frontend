@@ -1,21 +1,47 @@
 //each authorization data has nested data and we will get that from Patient Authorization Activity api
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import useToken from "../../../../../../../CustomHooks/useToken";
-import { useGetPatientAuthorizationActivityQuery } from "../../../../../../../features/Patient_redux/authorization/authorizationApi";
+import {
+  useGetPatientAuthorizationActivityQuery,
+  usePatientAuthorizationActivityDeleteMutation,
+} from "../../../../../../../features/Patient_redux/authorization/authorizationApi";
 import AuthorizationEditModal from "../../AuthorizationModal/AuthorizationEditModal";
+import { toast } from "react-toastify";
 
 const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
+  const { token } = useToken();
 
+  //Delete Patient Authorization activity API
+  const [
+    patientAuthorizationActivityDelete,
+    { isSuccess: deleteSuccess, isError: deleteError },
+  ] = usePatientAuthorizationActivityDeleteMutation();
+
+  //String Date to [mm/dd/yy] converter function
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [mnth, day, date.getFullYear()].join("/");
+  }
+  //Handle Authorization Activity Delete
+  const deleteAuthorizationActivity = (activityId) => {
+    patientAuthorizationActivityDelete({
+      token,
+      payload: {
+        activity_id: activityId,
+      },
+    });
+  };
   const handleClose = () => {
     setOpenEditModal(false);
   };
-
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setSortedInfo(sorter);
@@ -26,7 +52,14 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
       title: "Service",
       dataIndex: "activity_name",
       key: "activity_name",
-      width: 100,
+      width: 150,
+      render: (_, record) => {
+        return (
+          <h1>
+            {record?.activity_one} {record?.activity_two}
+          </h1>
+        );
+      },
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1; //sorting problem solved using this logic
       },
@@ -37,7 +70,7 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
       title: "Cpt. Code",
       dataIndex: "cptcode",
       key: "cptcode",
-      width: 80,
+      width: 120,
       render: (_, { cptcode }) => {
         console.log("render data", cptcode);
         return <h1>{cptcode?.cpt_code}</h1>;
@@ -64,7 +97,7 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
       title: "Frequency",
       dataIndex: "hours_max_per_one",
       key: "hours_max_per_one",
-      width: 80,
+      width: 100,
       sorter: (a, b) => {
         return a.hours_max_per_one > b.hours_max_per_one ? -1 : 1; //sorting problem solved using this logic
       },
@@ -76,7 +109,7 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
       title: "Auth",
       dataIndex: "hours_max_is_one",
       key: "hours_max_is_one",
-      width: 50,
+      width: 100,
       sorter: (a, b) => {
         return a.hours_max_is_one > b.hours_max_is_one ? -1 : 1; //sorting problem solved using this logic
       },
@@ -88,7 +121,7 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
       title: "Scheduled",
       dataIndex: "scheduled",
       key: "scheduled",
-      width: 60,
+      width: 100,
       sorter: (a, b) => {
         return a.scheduled > b.scheduled ? -1 : 1; //sorting problem solved using this logic
       },
@@ -99,7 +132,7 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
       title: "Rendered",
       dataIndex: "Rendered",
       key: "Rendered",
-      width: 50,
+      width: 100,
       sorter: (a, b) => {
         return a.Rendered > b.Rendered ? -1 : 1; //sorting problem solved using this logic
       },
@@ -110,20 +143,48 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
       title: "Remaining",
       dataIndex: "remaining",
       key: "remaining",
-      width: 50,
+      width: 100,
       sorter: (a, b) => {
         return a.remaining > b.remaining ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "remaining" ? sortedInfo.order : null,
       ellipsis: true,
     },
-
+    {
+      title: "Start Date",
+      dataIndex: "onset_date",
+      key: "onset_date",
+      width: 100,
+      sorter: (a, b) => {
+        return a.onset_date > b.onset_date ? -1 : 1; //sorting problem solved using this logic
+      },
+      render: (_, { onset_date }) => {
+        return <h1 className="font-bold">{onset_date}</h1>;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "End Date",
+      dataIndex: "end_date",
+      key: "end_date",
+      width: 100,
+      sorter: (a, b) => {
+        return a.end_date > b.end_date ? -1 : 1; //sorting problem solved using this logic
+      },
+      render: (_, { end_date }) => {
+        return <h1 className="font-bold">{end_date}</h1>;
+      },
+      sortOrder: sortedInfo.columnKey === "end_date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
     {
       title: "Action",
       dataIndex: "operation",
       key: "operation",
-      width: 50,
-      render: () => (
+      width: 100,
+      render: (_, record) => (
         <div>
           {" "}
           <div>
@@ -141,18 +202,34 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
               </button>
 
               <span>|</span>
-              <Link to={"/"}>
+              <button onClick={() => deleteAuthorizationActivity(record?.id)}>
                 <AiOutlineDelete
                   className="text-xs text-red-500 mx-2"
                   title="Delete"
                 />
-              </Link>
+              </button>
             </div>
           </div>
         </div>
       ),
     },
   ];
+
+  useEffect(() => {
+    if (deleteSuccess) {
+      toast.success("Successfully Authorization Activity Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (deleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [deleteSuccess, deleteError]);
 
   return (
     <div>
