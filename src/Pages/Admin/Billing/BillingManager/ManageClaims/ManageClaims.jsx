@@ -225,7 +225,8 @@ const ManageClaims = () => {
                 name="type"
                 className="input-border input-font w-full focus:outline-none"
               >
-                <option value="all">Batch</option>
+                <option value=""></option>
+                <option value="Batch">Batch</option>
                 <option value="Tx Providers">Tx Providers</option>
                 <option value="CMS Therapist">CMS Therapist</option>
                 <option value="Service Type">Service Type</option>
