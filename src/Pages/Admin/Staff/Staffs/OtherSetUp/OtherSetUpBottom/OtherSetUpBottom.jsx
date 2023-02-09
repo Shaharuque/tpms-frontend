@@ -30,9 +30,25 @@ const OtherSetUpBottom = ({ propdata }) => {
               // defaultValue={}
               {...register(`id_qualifire.${index}.id_qualifire`)}
             >
-              <option value={field.id_qualifire}>{field.id_qualifire}</option>
-              <option value="Speech Therapist">Speech Therapist</option>
-              <option value="Speech Therapist">Speech Therapist</option>
+              {/* <option value={field.id_qualifire || "ID Qualifier(BT)"}>
+                {field.id_qualifire}
+              </option> */}
+              <option value={field.id_qualifire}>
+                {field.id_qualifire || "ID Qualifier(BT)"}
+              </option>
+              <option value="0B">0B</option>
+              <option value="1B">1B</option>
+              <option value="1C">1C</option>
+              <option value="1D">1D</option>
+              <option value="1G">1G</option>
+              <option value="1H">1H</option>
+              <option value="EI">EI</option>
+              <option value="G2">G2</option>
+              <option value="LU">LU</option>
+              <option value="N5">N5</option>
+              <option value="SY">SY</option>
+              <option value="X5">X5</option>
+              <option value="ZZ">ZZ</option>
             </select>
           </div>
         );

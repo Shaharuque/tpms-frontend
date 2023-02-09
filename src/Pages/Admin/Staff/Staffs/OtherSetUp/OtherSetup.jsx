@@ -2,6 +2,7 @@ import { Switch } from "antd";
 import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
 import {
   useAddOtherSetupMutation,
@@ -31,6 +32,23 @@ const OtherSetup = () => {
   // ADD OTHER SETUP API
   const [addOtherSetup, { isSuccess, data, isError: addotherSetupError }] =
     useAddOtherSetupMutation();
+
+  //Success/Error message show added api
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (addotherSetupError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [addotherSetupError, data?.message, isError, isSuccess]);
 
   console.log("post api", data);
   console.log("Errpr api", addotherSetupError);
@@ -209,7 +227,6 @@ const OtherSetup = () => {
       is_contractor: BoolConverter(isContractor),
       provider_render_without: BoolConverter(providerWithoutNote),
       edit_tx_id: store,
-      max_hour_per_day: 6,
     };
     console.log("payload", payload);
     addOtherSetup({ token, payload });

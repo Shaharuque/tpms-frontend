@@ -26,6 +26,7 @@ const Documents = () => {
 
   const {
     data,
+    isSuccess,
     isLoading: documentLoading,
     isError,
   } = useGetdocumentsQuery({ token, id });
@@ -158,12 +159,14 @@ const Documents = () => {
 
   return (
     <div className="h-[100vh]">
-      <div className="mt-10">
-        <img className="mx-auto" src={check} alt="" />
-        <p className="text-xs font-light text-gray-600 flex items-center justify-center my-2">
-          admin admin has no document
-        </p>
-      </div>
+      {!isSuccess && (
+        <div className="mt-10">
+          <img className="mx-auto" src={check} alt="" />
+          <p className="text-xs font-light text-gray-600 flex items-center justify-center my-2">
+            admin admin has no document
+          </p>
+        </div>
+      )}
 
       <div className="flex items-center justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
