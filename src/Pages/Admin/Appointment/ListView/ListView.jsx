@@ -11,7 +11,6 @@ import { BiSearchAlt } from "react-icons/bi";
 import ManageTableAction from "./ListView/ManageTableAction";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { BsArrowRight } from "react-icons/bs";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -23,6 +22,14 @@ import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
 import DateRangePickersTest from "../../../Shared/CustomDateRange/DateRangePicker/DateRangePickersTest";
 import { RiArrowLeftRightLine } from "react-icons/ri";
+import {
+  manageSessionApi,
+  useGetManageSessionListQuery,
+  useManageSessionStatusChangeMutation,
+} from "../../../../features/Appointment_redux/ListView/manageSessionApi";
+import { useDispatch } from "react-redux";
+import ReactPaginate from "react-paginate";
+import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -38,58 +45,129 @@ const ListView = () => {
   const [patients, setPatients] = useState();
   const [stuffs, setStuffs] = useState();
   const [patientId, setPatientId] = useState();
-  const [stuffsId, setStuffsId] = useState();
-  const [formData, setFromData] = useState();
+  const [stuffsId, setStuffsId] = useState([]);
+  const [formData, setFromData] = useState(null);
   const [items, setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
-  const [page, setpage] = useState(2);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+  const [responseError, setResponseError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [location, setLocation] = useState("");
+  const [appiontmentIds, setAppointmentIds] = useState();
+  const [statusName, setStatusName] = useState(null);
+  const [actionType, setActionType] = useState(null);
+  const [testingSelect, setTestingSelect] = useState();
+  const dispatch = useDispatch();
+  console.log("position", location);
+  console.log("selected appointment Ids", appiontmentIds);
+  console.log("selected rows", testingSelect);
 
-  //Clients multi select data from server
+  //Manage Session Appointment Status Change API
+  const [
+    manageSessionStatusChange,
+    { data: statusChangeData, isSuccess: actionSuccess },
+  ] = useManageSessionStatusChangeMutation();
+  console.log("after status change", statusChangeData);
+
+  useEffect(() => {
+    if (statusChangeData?.status === "success") {
+      setAppointmentIds({
+        selectedRowKeys: [],
+      });
+      // setTestingSelect(null);
+    }
+  }, [statusChangeData?.status]);
+
+  //Manage Session=> Get Session List API
+  const { data: menageSessionList, isLoading: listLoading } =
+    useGetManageSessionListQuery({
+      token,
+      page,
+      payload: formData,
+    });
+  const list = menageSessionList?.appointments?.data;
+  useEffect(() => {
+    if (list?.length > 0) {
+      setTable(true);
+      setTotalPage(menageSessionList?.appointments?.last_page);
+    }
+  }, [list]);
+  // //useEffect a dependency na diley sheita ekbar call hoy(in general)
+  // useEffect(() => {
+  //   if (formData !== null) {
+  //     //now manually action dispatch in RTK query
+  //     setIsLoading(true);
+  //     dispatch(
+  //       manageSessionApi.endpoints.getManageSessionList.initiate({
+  //         token,
+  //         payload: formData,
+  //         page: page,
+  //       })
+  //     )
+  //       .unwrap() //action dispatch korar por jei result pabo sheita promisify korar jnno unwrap() use kora hoisey
+  //       //promisify hobar por async-awit or .then use kora jetey parey
+  //       .then((data) => {
+  //         setIsLoading(false);
+  //         console.log("rtk query data", data);
+  //         setItems(data?.appointments?.data);
+  //         setTotalPage(data?.appointments?.last_page);
+  //         setTable(true);
+  //       })
+  //       .catch((err) => {
+  //         setResponseError("There was a problem!");
+  //       });
+  //   }
+  // }, [dispatch, formData, token, page]);
+
+  //Appointment Pos get API
+  const { data: posData, isLoading: posDataLoading } =
+    useGetAppointmentPOSQuery(token);
+
+  //Clients multi select data from server(Client=>Patient)
   useEffect(() => {
     const getPatientsData = async () => {
       const res = await axios({
-        method: "GET",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/patient/names`,
+        method: "POST",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/client`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
           Authorization: token || null,
         },
       });
-      const data = res?.data?.clients;
+      const data = res?.data?.claims;
       // console.log(data);
       setPatients(data);
     };
     getPatientsData();
-  }, []);
+  }, [token]);
   // console.log("patients", patients);
-  console.log("selected clients", patientId);
+  //console.log("selected clients", patientId);
 
-  //Provider multi select data from server
+  //Provider multi select data from server(Provider=>Staff)
   useEffect(() => {
     const getProviderData = async () => {
       const res = await axios({
-        method: "GET",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/staff/names`,
+        method: "POST",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/provider`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
           Authorization: token || null,
         },
       });
-      const data = res?.data?.staff_names;
+      const data = res?.data?.claims;
       setStuffs(data);
     };
     getProviderData();
-  }, []);
+  }, [token]);
   // console.log("stuffs", stuffs);
-  console.log("selected stuffs", stuffsId);
+  //console.log("selected stuffs", stuffsId);
 
   const receivedData = (data) => {
     console.log(data);
   };
-
-  //provider names API
 
   //Date converter function [yy-mm-dd]
   function convert(str) {
@@ -176,38 +254,13 @@ const ListView = () => {
       .then((data) => setTData(data));
   }, []);
 
-  //console.log(items);
+  console.log("table data", items);
 
-  //By Infinite scrolling new page called and data will be load
-  //get data from API + data fetch from api while scrolling[Important]
-  const fetchPatients = async () => {
-    let manageSessionData = [];
-    await axios({
-      url: `https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments?page=${page}`,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: token || null,
-      },
-      data: formData,
-    }).then((response) => {
-      manageSessionData = response?.data?.appointments?.data;
-    });
-    console.log(manageSessionData);
-    return manageSessionData;
+  //handle pagination
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
   };
-
-  const fetchData = async () => {
-    const patientsFromServer = await fetchPatients();
-    console.log(patientsFromServer);
-    setItems([...items, ...patientsFromServer]);
-    if (patientsFromServer?.length === 0) {
-      sethasMore(false);
-    }
-    setpage(page + 1);
-  };
-  console.log(items);
 
   // -----------------------------------------Table Data-----------------------------------
   const columns = [
@@ -242,11 +295,11 @@ const ListView = () => {
       width: 150,
       filters: [
         {
-          text: `Aasiya Baig`,
-          value: "Aasiya  Baig",
+          text: "Meghan Markle",
+          value: "Meghan  Markle",
         },
         {
-          text: `Aileen Newman`,
+          text: `Aasiya  Farha`,
           value: "Aasiya  Farha",
         },
         {
@@ -286,7 +339,7 @@ const ListView = () => {
       title: "Service & Hrs",
       dataIndex: "activity_name",
       key: "activity_name",
-      width: 150,
+      width: 250,
       filters: [
         {
           text: `assisment BCaBA`,
@@ -370,29 +423,9 @@ const ListView = () => {
     },
     {
       title: "Pos",
-      key: "pos",
-      dataIndex: "pos",
-      width: 80,
-      render: (_, { pos }) => {
-        //console.log("pos : ", pos);
-        return (
-          <>
-            {pos === "telehealth" ? (
-              <div className="flex items-center gap-2 ">
-                Telehealth
-                <BsFillCameraVideoFill className="text-green-500" />
-              </div>
-            ) : (
-              <div>{pos}</div>
-            )}
-          </>
-        );
-      },
-      sorter: (a, b) => {
-        return a.pos > b.pos ? -1 : 1;
-      },
-
-      sortOrder: sortedInfo.columnKey === "pos" ? sortedInfo.order : null,
+      key: "location",
+      dataIndex: "location",
+      width: 120,
       filters: [
         {
           text: "telehealth",
@@ -407,8 +440,33 @@ const ListView = () => {
           value: "office",
         },
       ],
-      filteredValue: filteredInfo.pos || null,
-      onFilter: (value, record) => record.pos.includes(value),
+      render: (_, { location }) => {
+        //console.log("pos : ", pos);
+        return (
+          <>
+            {location === "02" ? (
+              <div className="flex items-center justify-center gap-2 ">
+                Telehealth
+                <BsFillCameraVideoFill className="text-green-500" />
+              </div>
+            ) : (
+              <div>
+                {
+                  posData?.pos?.find((each) => each?.pos_code === location)
+                    ?.pos_name
+                }
+              </div>
+            )}
+          </>
+        );
+      },
+      filteredValue: filteredInfo.location || null,
+      onFilter: (value, record) => record.location.includes(value),
+      sorter: (a, b) => {
+        return a.location > b.location ? -1 : 1;
+      },
+
+      sortOrder: sortedInfo.columnKey === "location" ? sortedInfo.order : null,
     },
     {
       title: "Scheduled Date",
@@ -555,20 +613,63 @@ const ListView = () => {
     },
   ];
 
+  // const rowSelection = {
+  //   onChange: (selectedRowKeys, selectedRows) => {
+  //     console.log(
+  //       `selectedRowKeys: ${selectedRowKeys}`,
+  //       "selectedRows: ",
+  //       selectedRows
+  //     );
+  //   },
+  //   onSelect: (record, selected, selectedRows) => {
+  //     console.log(record, selected, selectedRows);
+  //   },
+  //   onSelectAll: (selected, selectedRows, changeRows) => {
+  //     console.log(selected, selectedRows, changeRows);
+  //   },
+  // };
+  //get rows id to do some action on them
+
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
+      setAppointmentIds({ selectedRowKeys });
     },
     onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
+      console.log("selected row", selectedRows);
+      setTestingSelect(selectedRows);
     },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows);
+    getCheckboxProps: (record) => {
+      // console.log("record", record);
+      const rowIndex = record?.is_locked;
+      return {
+        disabled: rowIndex === 1,
+      };
     },
+  };
+
+  //Status change handler Function
+  const statusChange = (e) => {
+    if (e.target.value === "Bulk Delete") {
+      console.log(e.target.value);
+      setStatusName("");
+      setActionType("delete");
+    }
+    setStatusName(e.target.value);
+    setActionType("update_status");
+  };
+
+  //Action Handler Function
+  const handleAction = () => {
+    const payload = {
+      action_type: actionType,
+      status_name: statusName,
+      appointment_ids: appiontmentIds?.selectedRowKeys,
+    };
+    manageSessionStatusChange({
+      token,
+      payload,
+    });
+    console.log("payload for the action handler api", payload);
   };
 
   const handleChange = (pagination, filters, sorter) => {
@@ -678,6 +779,7 @@ const ListView = () => {
       filters: [],
     },
   });
+
   const onSubmit = async (data) => {
     console.log("form-data", data);
     const from_date = convert(data?.start_date);
@@ -685,32 +787,15 @@ const ListView = () => {
     //console.log(from_date, to_date);
     const payLoad = {
       client_id: patientId,
-      // provider_id: stuffsId,
-      pos: "",
-      status: "",
+      provider_id: stuffsId?.length > 0 ? stuffsId : "",
+      ses_status: data?.status,
+      ses_pos: location,
+      ses_app_type: 1,
       from_date: from_date,
       to_date: to_date,
     };
     setFromData(payLoad);
-    if (payLoad) {
-      const fetchManageSessions = {
-        url: "https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: token || null,
-        },
-        data: payLoad,
-      };
-
-      axios(fetchManageSessions).then((response) => {
-        console.log("list data", response?.data?.appointments);
-        const manageSessionData = response?.data?.appointments?.data;
-        setItems(manageSessionData);
-      });
-    }
-    setTable(true);
+    setPage(1);
   };
 
   useEffect(() => {
@@ -864,26 +949,23 @@ const ListView = () => {
                           <div>
                             <select
                               className=" bg-transparent border-b-[3px] border-[#ffffff] text-white py-[4px]  px-1  font-medium  text-[14px] w-full focus:outline-none"
-                              {...register("place_of_service")}
+                              {...register("pos")}
+                              onChange={(e) => setLocation(e.target.value)}
                             >
                               <option value="" className="text-black">
                                 Select
                               </option>
-                              <option value="follow up" className="text-black">
-                                Today's follow up
-                              </option>
-                              <option value="cat" className="text-black">
-                                Lost 7 days
-                              </option>
-                              <option value="15" className="text-black">
-                                Lost 15 days
-                              </option>
-                              <option value="15" className="text-black">
-                                Lost 30 days
-                              </option>
-                              <option value="15" className="text-black">
-                                30 days & over
-                              </option>
+                              {posData?.pos?.map((p) => {
+                                return (
+                                  <option
+                                    className="text-black"
+                                    key={p?.id}
+                                    value={p?.pos_code}
+                                  >
+                                    {p?.pos_name}
+                                  </option>
+                                );
+                              })}
                             </select>
                           </div>
                         </div>
@@ -955,20 +1037,44 @@ const ListView = () => {
                                 <option value="" className="text-black">
                                   Select
                                 </option>
-                                <option value="Today" className="text-black">
-                                  Today's follow up
+                                <option
+                                  value="Scheduled"
+                                  className="text-black"
+                                >
+                                  Scheduled
                                 </option>
-                                <option className="text-black" value="UK">
-                                  Lost 7 days
+                                <option className="text-black" value="No Show">
+                                  No Show
                                 </option>
-                                <option className="text-black" value="15">
-                                  Lost 15 days
+                                <option className="text-black" value="Hold">
+                                  Hold
                                 </option>
-                                <option className="text-black" value="15">
-                                  Lost 30 days
+                                <option
+                                  className="text-black"
+                                  value="Cancelled by Client"
+                                >
+                                  Cancelled by Client
                                 </option>
-                                <option className="text-black" value="15">
-                                  30 days & over
+                                <option
+                                  className="text-black"
+                                  value="CC more than 24 hrs"
+                                >
+                                  CC more than 24 hrs
+                                </option>
+                                <option
+                                  className="text-black"
+                                  value="CC less than 24 hrs"
+                                >
+                                  CC less than 24 hrs
+                                </option>
+                                <option
+                                  className="text-black"
+                                  value="Cancelled by Provider"
+                                >
+                                  Cancelled by Provider
+                                </option>
+                                <option className="text-black" value="Rendered">
+                                  Rendered
                                 </option>
                               </select>
                             </div>
@@ -1161,29 +1267,46 @@ const ListView = () => {
                     )}
                   </div>
                 ) : null}
-                <InfiniteScroll
-                  dataLength={items?.length} //items is basically all data here
-                  next={fetchData}
-                  hasMore={hasMore}
-                  loader={<ShimmerTableTet></ShimmerTableTet>}
-                >
-                  <Table
-                    pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                    rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                    size="small"
-                    bordered
-                    className=" text-xs font-normal"
-                    columns={columns}
-                    dataSource={items}
-                    rowSelection={{
-                      ...rowSelection,
-                    }}
-                    // scroll={{
-                    //   y: 650,
-                    // }}
-                    onChange={handleChange}
-                  />
-                </InfiniteScroll>
+                <div>
+                  <div className=" overflow-scroll">
+                    {!listLoading ? (
+                      <Table
+                        pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                        rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                        size="small"
+                        bordered
+                        className=" text-xs font-normal"
+                        columns={columns}
+                        dataSource={list}
+                        rowSelection={{
+                          ...rowSelection,
+                        }}
+                        scroll={{
+                          y: 650,
+                        }}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      <ShimmerTableTet></ShimmerTableTet>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-end">
+                    {totalPage > 1 && (
+                      <ReactPaginate
+                        previousLabel={"<"}
+                        nextLabel={">"}
+                        pageCount={Number(totalPage)}
+                        marginPagesDisplayed={1}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        previousLinkClassName={"pagination_Link"}
+                        nextLinkClassName={"pagination_Link"}
+                        activeClassName={"pagination_Link-active"}
+                        disabledClassName={"pagination_Link-disabled"}
+                      ></ReactPaginate>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
             {!listView && (
@@ -1201,35 +1324,39 @@ const ListView = () => {
                 <div className="flex">
                   <select
                     className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
-                    {...register("pos")}
+                    onChange={(e) => statusChange(e)}
                   >
                     <option value="" className="text-black">
                       Select
                     </option>
-                    <option value="Today" className="text-black">
+                    <option value="Scheduled" className="text-black">
                       Scheduled
                     </option>
-                    <option value="UK" className="text-black">
+                    <option value="No Show" className="text-black">
                       No Show
                     </option>
-                    <option value="15" className="text-black">
+                    <option value="Hold" className="text-black">
+                      Hold
+                    </option>
+                    <option>Cancelled by Client</option>
+                    <option>Cancelled by Provider</option>
+                    <option value="Bulk Delete" className="text-black">
                       Bulk Delete
                     </option>
-                    <option value="15" className="text-black">
-                      Lost 30 days
-                    </option>
-                    <option value="15" className="text-black">
-                      30 days & over
+                    <option value="Rendered" className="text-black">
+                      Rendered
                     </option>
                   </select>
-                  <button className="bg-[#34A7B8] px-2 text-white rounded">
+                  <button
+                    onClick={handleAction}
+                    className="bg-[#34A7B8] px-2 text-white rounded"
+                  >
                     Go
                   </button>
                 </div>
               </div>
             }
           </>
-          //
         )}
       </div>
     </div>
