@@ -24,7 +24,7 @@ const Clients = ({ patients, setPatientId }) => {
   const customValueRenderer = (selected, _options) => {
     if (selected.length) {
       if (selected.length > 3) return `All Selected ${selected.length}`;
-      return selected.map(({ label }) => label);
+      return selected.map(({ label }) => label + "," + " ");
     }
     return "None selected";
   };
@@ -40,7 +40,7 @@ const Clients = ({ patients, setPatientId }) => {
     getClientsId();
   }, [selected, setPatientId]);
 
-  console.log(selected);
+  //console.log(selected);
 
   // useEffect(() => {
   //   const getClientsId = async () => {
