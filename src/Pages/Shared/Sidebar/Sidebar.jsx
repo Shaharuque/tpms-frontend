@@ -110,6 +110,11 @@ const menuItem = [
         name: "Patient Statement",
         icon: <BsFileEarmarkRuled />,
       },
+      {
+        path: "/admin/patient-eligibility",
+        name: "Eligibility",
+        icon: <BsFileEarmarkRuled />,
+      },
     ],
   },
   {

@@ -26,6 +26,9 @@ const AuthorizationEditModal = ({
   const { token } = useToken();
   const { id: authorizationId } = useParams();
   const patientId = localStorage.getItem("p_key");
+  const [billed, setBilled] = useState("");
+
+  console.log("billed", billed);
 
   //Patient authorization activity create/save api
   const [
@@ -55,7 +58,7 @@ const AuthorizationEditModal = ({
         treatment_name,
       },
     });
-  console.log(activityServices, activitySubtypes, activityCptCode);
+  // console.log(activityServices, activitySubtypes, activityCptCode);
 
   useEffect(() => {
     setTimeout(() => {
@@ -270,6 +273,9 @@ const AuthorizationEditModal = ({
                         <select
                           className="modal-input-field ml-1 w-full"
                           {...register("billed_type")}
+                          onChange={(e) => {
+                            setBilled(e.target.value);
+                          }}
                         >
                           <option value="15 mins">15 mins</option>
                           <option value="Hour">Hour</option>
@@ -277,19 +283,21 @@ const AuthorizationEditModal = ({
                           <option value="Per Session">Per Session</option>
                         </select>
                       </div>
-                      <div className="mt-[32px]">
-                        <select
-                          className="modal-input-field ml-1 w-full"
-                          {...register("billed_time")}
-                        >
-                          <option value="15 min">15 min</option>
-                          <option value="30 min">30 min</option>
-                          <option value="45 min">45 min</option>
-                          <option value="1 hour">1 hour</option>
-                          <option value="2 hour">2 hour</option>
-                          <option value="1 min">1 min</option>
-                        </select>
-                      </div>
+                      {billed === "Per Unit" && (
+                        <div className="mt-[32px]">
+                          <select
+                            className="modal-input-field ml-1 w-full"
+                            {...register("billed_time")}
+                          >
+                            <option value="15 min">15 min</option>
+                            <option value="30 min">30 min</option>
+                            <option value="45 min">45 min</option>
+                            <option value="1 hour">1 hour</option>
+                            <option value="2 hour">2 hour</option>
+                            <option value="1 min">1 min</option>
+                          </select>
+                        </div>
+                      )}
                     </div>
                     <div className="w-1/2">
                       <label className="label">
@@ -311,25 +319,25 @@ const AuthorizationEditModal = ({
                       </span>
                     </label>
                     {/* 1 */}
-                    <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
+                    <div className="flex flex-wrap  border border-gray-300 p-1">
                       <div className="  text-sm font-semibold my-auto px-3">
                         Maximum
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-2 font-medium text-xs w-full"
                           {...register("hours_max_one")}
                         >
                           <option value="Hours">Hours</option>
                           <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium my-auto px-3 mx-1">
+                      <div className=" text-sm font-medium my-auto px-3 mx-1">
                         Per
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-2 font-medium text-xs w-full"
                           {...register("hours_max_per_one")}
                         >
                           <option value="0"></option>
@@ -339,36 +347,36 @@ const AuthorizationEditModal = ({
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium px-3 mx-1">
+                      <div className=" text-sm font-medium my-auto px-3 mx-1">
                         Is
                       </div>
                       <div className="">
                         <input
-                          className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-2 font-medium  text-xs w-full"
                           {...register("hours_max_is_one")}
                         ></input>
                       </div>
                     </div>
                     {/* 2 */}
-                    <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
-                      <div className="  text-sm font-semibold my-auto px-3">
+                    <div className="flex flex-wrap  border border-gray-300 p-1">
+                      <div className=" py-2  text-sm font-semibold my-auto px-3">
                         Maximum
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm  py-2 px-2 font-medium text-xs w-full"
                           {...register("hours_max_two")}
                         >
                           <option value="Hours">Hours</option>
                           <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium my-auto px-3 mx-1">
+                      <div className=" text-sm font-medium my-auto px-3 mx-1">
                         Per
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-2 font-medium text-xs w-full"
                           {...register("hours_max_per_two")}
                         >
                           <option value="0"></option>
@@ -378,36 +386,36 @@ const AuthorizationEditModal = ({
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium px-3 mx-1">
+                      <div className=" text-sm font-medium my-auto px-3 mx-1">
                         Is
                       </div>
                       <div className="">
                         <input
-                          className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-2 font-medium  text-xs w-full"
                           {...register("hours_max_is_two")}
                         ></input>
                       </div>
                     </div>
                     {/* 3 */}
-                    <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
+                    <div className="flex flex-wrap border border-gray-300 p-1">
                       <div className="  text-sm font-semibold my-auto px-3">
                         Maximum
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-2 font-medium text-xs w-full"
                           {...register("hours_max_three")}
                         >
                           <option value="Hours">Hours</option>
                           <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium my-auto px-3 mx-1">
+                      <div className=" text-sm font-medium my-auto px-3 mx-1">
                         Per
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-2 font-medium text-xs w-full"
                           {...register("hours_max_per_three")}
                         >
                           <option value="0"></option>
@@ -417,12 +425,12 @@ const AuthorizationEditModal = ({
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium px-3 mx-1">
+                      <div className=" text-sm font-medium my-auto px-3 mx-1">
                         Is
                       </div>
                       <div className="">
                         <input
-                          className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-2 font-medium  text-xs w-full"
                           {...register("hours_max_is_three")}
                         ></input>
                       </div>

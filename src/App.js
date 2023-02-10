@@ -98,6 +98,7 @@ import BillingManager from "./Pages/Admin/Billing/BillingManager/BillingManager"
 import ArLedger from "./Pages/Admin/Billing/ARLeadger/ArLedger";
 import ContractRate from "./Pages/Admin/Billing/ContactRate/ContractRate";
 import PatientStatement from "./Pages/Admin/Billing/PatientStatement/PatientStatement";
+import Eligibility from "./Pages/Admin/Billing/Eligibility/Eligibility";
 import Sidebar from "./Pages/Shared/Sidebar/Sidebar";
 import AddAuthorization from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AddAuthorization";
 import ContractRateAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateAdd";
@@ -867,6 +868,10 @@ function App() {
               path="patient-statement"
               element={<PatientStatement></PatientStatement>}
             ></Route>
+            <Route
+              path="patient-eligibility"
+              element={<Eligibility></Eligibility>}
+            ></Route>
             {/* ----------------------------------Billing End----------------------------------------------- */}
             {/* PAYMENT */}
             <Route
@@ -886,6 +891,7 @@ function App() {
               path="billing/deposit-add"
               element={<MPostingEditAdd></MPostingEditAdd>}
             ></Route>
+
             {/* ----------------------------------PAYMENT End----------------------------------------------- */}
             {/* PAYROLL  */}
             <Route
