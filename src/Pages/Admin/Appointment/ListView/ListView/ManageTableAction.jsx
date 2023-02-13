@@ -7,7 +7,7 @@ import SessionAddNote from "./SessionAddNote";
 import SessionViewNote from "./SessionViewNote";
 import { Menu } from "antd";
 
-const ManageTableAction = ({ row }) => {
+const ManageTableAction = ({ row, appointmentId }) => {
   const { ref, visible, setVisible } = useOutsideAlerter(false);
   const [openAddNote, setOpenAddNote] = useState(false);
   const [openViewNote, setOpenViewNote] = useState(false);
@@ -68,18 +68,20 @@ const ManageTableAction = ({ row }) => {
         <SessionAddNote
           handleClose={handleClose}
           open={openAddNote}
-          editableRow={row}
         ></SessionAddNote>
       )}
       {openViewNote && (
         <SessionViewNote
           handleClose={handleClose}
           open={openViewNote}
-          editableRow={row}
         ></SessionViewNote>
       )}
       {editSession && (
-        <EditSession handleClose={handleClose} open={editSession}></EditSession>
+        <EditSession
+          handleClose={handleClose}
+          openEdit={editSession}
+          appointmentId={appointmentId}
+        ></EditSession>
       )}
     </div>
   );

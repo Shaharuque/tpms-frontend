@@ -47,21 +47,17 @@ const ListView = () => {
   const [patientId, setPatientId] = useState();
   const [stuffsId, setStuffsId] = useState([]);
   const [formData, setFromData] = useState(null);
-  const [items, setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [responseError, setResponseError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState("");
-  const [appiontmentIds, setAppointmentIds] = useState();
   const [statusName, setStatusName] = useState(null);
   const [actionType, setActionType] = useState(null);
-  const [testingSelect, setTestingSelect] = useState();
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const dispatch = useDispatch();
   console.log("position", location);
-  console.log("selected appointment Ids", appiontmentIds);
-  console.log("selected rows", testingSelect);
 
   //Manage Session Appointment Status Change API
   const [
@@ -72,14 +68,11 @@ const ListView = () => {
 
   useEffect(() => {
     if (statusChangeData?.status === "success") {
-      setAppointmentIds({
-        selectedRowKeys: [],
-      });
-      // setTestingSelect(null);
+      setSelectedRowKeys([]);
     }
   }, [statusChangeData?.status]);
 
-  //Manage Session=> Get Session List API
+  //Manage Session List=> Get Session List API
   const { data: menageSessionList, isLoading: listLoading } =
     useGetManageSessionListQuery({
       token,
@@ -92,7 +85,7 @@ const ListView = () => {
       setTable(true);
       setTotalPage(menageSessionList?.appointments?.last_page);
     }
-  }, [list]);
+  }, [list, menageSessionList?.appointments?.last_page]);
   // //useEffect a dependency na diley sheita ekbar call hoy(in general)
   // useEffect(() => {
   //   if (formData !== null) {
@@ -253,8 +246,6 @@ const ListView = () => {
       .then((res) => res.json())
       .then((data) => setTData(data));
   }, []);
-
-  console.log("table data", items);
 
   //handle pagination
   const handlePageClick = ({ selected: selectedPage }) => {
@@ -595,10 +586,12 @@ const ListView = () => {
       dataIndex: "operation",
       key: "operation",
       width: 60,
-      render: (_, { id }) => (
+      render: (_, record) => (
         <div className="flex justify-center">
           <Dropdown
-            overlay={<ManageTableAction></ManageTableAction>}
+            overlay={
+              <ManageTableAction appointmentId={record?.id}></ManageTableAction>
+            }
             trigger={["click"]}
             overlayStyle={{ zIndex: "100" }}
           >
@@ -615,29 +608,32 @@ const ListView = () => {
 
   // const rowSelection = {
   //   onChange: (selectedRowKeys, selectedRows) => {
-  //     console.log(
-  //       `selectedRowKeys: ${selectedRowKeys}`,
-  //       "selectedRows: ",
-  //       selectedRows
-  //     );
+  //     setAppointmentIds({ selectedRowKeys });
   //   },
   //   onSelect: (record, selected, selectedRows) => {
-  //     console.log(record, selected, selectedRows);
+  //     console.log("selected row", selectedRows);
+  //     setTestingSelect(selectedRows);
   //   },
   //   onSelectAll: (selected, selectedRows, changeRows) => {
   //     console.log(selected, selectedRows, changeRows);
   //   },
+  //   getCheckboxProps: (record) => {
+  //     const rowIndex = record?.is_locked;
+  //     return {
+  //       disabled: rowIndex === 1,
+  //     };
+  //   },
   // };
+
   //get rows id to do some action on them
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selected row-keys: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
 
   const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setAppointmentIds({ selectedRowKeys });
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log("selected row", selectedRows);
-      setTestingSelect(selectedRows);
-    },
+    selectedRowKeys,
+    onChange: onSelectChange,
     getCheckboxProps: (record) => {
       // console.log("record", record);
       const rowIndex = record?.is_locked;
@@ -663,7 +659,7 @@ const ListView = () => {
     const payload = {
       action_type: actionType,
       status_name: statusName,
-      appointment_ids: appiontmentIds?.selectedRowKeys,
+      appointment_ids: selectedRowKeys,
     };
     manageSessionStatusChange({
       token,
@@ -1278,9 +1274,7 @@ const ListView = () => {
                         className=" text-xs font-normal"
                         columns={columns}
                         dataSource={list}
-                        rowSelection={{
-                          ...rowSelection,
-                        }}
+                        rowSelection={rowSelection}
                         scroll={{
                           y: 650,
                         }}

@@ -5,22 +5,28 @@ import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import useToken from "../../../../../../../CustomHooks/useToken";
-import {
-  useGetPatientAuthorizationActivityQuery,
-  usePatientAuthorizationActivityDeleteMutation,
-} from "../../../../../../../features/Patient_redux/authorization/authorizationApi";
-import AuthorizationEditModal from "../../AuthorizationModal/AuthorizationEditModal";
+import { usePatientAuthorizationActivityDeleteMutation } from "../../../../../../../features/Patient_redux/authorization/authorizationApi";
 import { toast } from "react-toastify";
+import AuthorizationActivityEditModal from "../../AuthorizationActivityModal/AuthorizationActivityEditModal";
 
-const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
+const AuthorizationActivityNestedTable = ({
+  allAuthorizationActivity,
+  treatment_name,
+  defaultTreatment,
+}) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
+  const [authorizationActivityId, setAuthorizationActivityId] = useState();
   const { token } = useToken();
 
   //Delete Patient Authorization activity API
   const [
     patientAuthorizationActivityDelete,
-    { isSuccess: deleteSuccess, isError: deleteError },
+    {
+      data: AuthorizationActivityDeleted,
+      isSuccess: deleteSuccess,
+      isError: deleteError,
+    },
   ] = usePatientAuthorizationActivityDeleteMutation();
 
   //String Date to [mm/dd/yy] converter function
@@ -195,6 +201,7 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
 
               <button
                 onClick={() => {
+                  setAuthorizationActivityId(record?.id);
                   setOpenEditModal(true);
                 }}
               >
@@ -216,20 +223,20 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
   ];
 
   useEffect(() => {
-    if (deleteSuccess) {
-      toast.success("Successfully Authorization Activity Deleted", {
+    if (AuthorizationActivityDeleted?.status === "success") {
+      toast.success(AuthorizationActivityDeleted?.status, {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
       });
-    } else if (deleteError) {
-      toast.error("Some Error Occured", {
+    } else if (AuthorizationActivityDeleted?.status === "error") {
+      toast.error(AuthorizationActivityDeleted?.message, {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
       });
     }
-  }, [deleteSuccess, deleteError]);
+  }, [AuthorizationActivityDeleted?.status]);
 
   return (
     <div>
@@ -250,10 +257,13 @@ const AuthorizationActivityNestedTable = ({ allAuthorizationActivity }) => {
         </div>
       </>
       {openEditModal && (
-        <AuthorizationEditModal
+        <AuthorizationActivityEditModal
+          authorizationActivityId={authorizationActivityId}
           handleClose={handleClose}
           open={openEditModal}
-        ></AuthorizationEditModal>
+          treatment_name={treatment_name}
+          defaultTreatment={defaultTreatment}
+        ></AuthorizationActivityEditModal>
       )}
     </div>
   );

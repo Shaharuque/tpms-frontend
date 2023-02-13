@@ -14,10 +14,9 @@ import ModalLoader from "../../../../../../Loading/ModalLoader";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const AuthorizationEditModal = ({
+const AuthorizationActivityAddModal = ({
   handleClose,
   open,
-  editableRow,
   treatment_name,
 }) => {
   // console.log("getting treatment_name:-", treatment_name);
@@ -64,7 +63,7 @@ const AuthorizationEditModal = ({
         // expiry_Date: `${row.original.upload_date}`,
       });
     }, 500);
-  }, [reset, editableRow]);
+  }, [reset]);
 
   const onSubmit = (data) => {
     const payload = {
@@ -320,8 +319,8 @@ const AuthorizationEditModal = ({
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
                           {...register("hours_max_one")}
                         >
-                          <option value="Hours">Hours</option>
-                          <option value="Unit">Unit</option>
+                          <option value="1">Hours</option>
+                          <option value="3">Unit</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium my-auto px-3 mx-1">
@@ -359,8 +358,8 @@ const AuthorizationEditModal = ({
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
                           {...register("hours_max_two")}
                         >
-                          <option value="Hours">Hours</option>
-                          <option value="Unit">Unit</option>
+                          <option value="1">Hours</option>
+                          <option value="3">Unit</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium my-auto px-3 mx-1">
@@ -398,8 +397,8 @@ const AuthorizationEditModal = ({
                           className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
                           {...register("hours_max_three")}
                         >
-                          <option value="Hours">Hours</option>
-                          <option value="Unit">Unit</option>
+                          <option value="1">Hours</option>
+                          <option value="3">Unit</option>
                         </select>
                       </div>
                       <div className="border text-sm font-medium my-auto px-3 mx-1">
@@ -463,4 +462,4 @@ const AuthorizationEditModal = ({
   );
 };
 
-export default AuthorizationEditModal;
+export default AuthorizationActivityAddModal;

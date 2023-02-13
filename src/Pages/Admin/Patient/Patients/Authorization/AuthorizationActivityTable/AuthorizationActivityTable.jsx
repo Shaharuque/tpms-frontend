@@ -6,7 +6,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import useToken from "../../../../../../CustomHooks/useToken";
 import { useGetPatientAuthorizationActivityQuery } from "../../../../../../features/Patient_redux/authorization/authorizationApi";
-import AuthorizationEditModal from "../AuthorizationModal/AuthorizationEditModal";
+import AuthorizationEditModal from "../AuthorizationActivityModal/AuthorizationEditModal";
 
 const AuthorizationActivityTable = ({ id }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -45,7 +45,7 @@ const AuthorizationActivityTable = ({ id }) => {
       title: "Service",
       dataIndex: "activity_name",
       key: "activity_name",
-      width: 100,
+      width: 200,
       render: (_, record) => {
         return (
           <h1>
@@ -147,7 +147,7 @@ const AuthorizationActivityTable = ({ id }) => {
       title: "Start Date",
       dataIndex: "onset_date",
       key: "onset_date",
-      width: 50,
+      width: 100,
       sorter: (a, b) => {
         return a.onset_date > b.onset_date ? -1 : 1; //sorting problem solved using this logic
       },
@@ -162,7 +162,7 @@ const AuthorizationActivityTable = ({ id }) => {
       title: "End Date",
       dataIndex: "end_date",
       key: "end_date",
-      width: 50,
+      width: 100,
       sorter: (a, b) => {
         return a.end_date > b.end_date ? -1 : 1; //sorting problem solved using this logic
       },

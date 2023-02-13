@@ -9,8 +9,8 @@ import useToken from "../../../../../CustomHooks/useToken";
 import { useGetPatientAuthorizationQuery } from "../../../../../features/Patient_redux/authorization/authorizationApi";
 import AuthorizationActivityTable from "./AuthorizationActivityTable/AuthorizationActivityTable";
 import Loading from "../../../../../Loading/Loading";
-import SelectContactRate from "./AuthorizationModal/SelectContactRate";
-import AuthorizationEditModal from "./AuthorizationModal/AuthorizationEditModal";
+import SelectContactRate from "./AuthorizationActivityModal/SelectContactRate";
+import AuthorizationEditModal from "./AuthorizationActivityModal/AuthorizationEditModal";
 
 //data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
 
@@ -170,7 +170,7 @@ const Authorization = () => {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
-      width: 100,
+      width: 150,
       filters: [
         {
           text: `Amet`,
@@ -181,6 +181,11 @@ const Authorization = () => {
           value: "Malesuada",
         },
       ],
+      render: (_, { authorization_name }) => {
+        if (authorization_name) {
+          return <h1>{authorization_name.split(" ")[0]}</h1>;
+        }
+      },
       filteredValue: filteredInfo.insurance || null,
       onFilter: (value, record) => record.insurance.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
@@ -194,7 +199,7 @@ const Authorization = () => {
       title: "Ins. ID",
       dataIndex: "uci_id",
       key: "uci_id",
-      width: 60,
+      width: 150,
       filters: [
         {
           text: `Amet`,
@@ -218,7 +223,7 @@ const Authorization = () => {
       title: "Auth No.",
       dataIndex: "authorization_number",
       key: "authorization_number",
-      width: 100,
+      width: 150,
       filters: [
         {
           text: `Amet`,
@@ -311,7 +316,7 @@ const Authorization = () => {
       title: "Status",
       key: "status",
       dataIndex: "status",
-      width: 60,
+      width: 100,
       render: (_, { status }) => {
         return (
           <>

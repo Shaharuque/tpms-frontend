@@ -73,6 +73,20 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    //Patient Authorization Activity SubActivity(needed when to update activity)
+    //result will be shown in the Service Sub-Type field
+    getActivitySubActivity: builder.query({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/auth/act/get/subactivity`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
+
     //Get Patient Authorization Activity SubType api
     getActivitySubtypes: builder.query({
       query: ({ token, payload }) => ({
@@ -99,6 +113,19 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       }),
     }),
 
+    //Patient Authorization Activity Info(Activity Id wise)
+    patientAuthorizationActivityInfo: builder.query({
+      query: ({ token, id }) => ({
+        url: `admin/ac/patient/auth/act/${id}`,
+        method: "GET",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+      }),
+      providesTags: ["IndividualActivity"],
+    }),
+
     //Patient Authorization activity create/add
     patientAuthorizationActivityCreate: builder.mutation({
       query: ({ token, payload }) => ({
@@ -111,6 +138,20 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         body: JSON.stringify(payload),
       }),
       invalidatesTags: ["PatientAuthorizationActivity"],
+    }),
+
+    //Patient Authorization Activity Update
+    patientAuthorizationActivityUpdate: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/patient/auth/act/update`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["PatientAuthorizationActivity", "IndividualActivity"],
     }),
 
     //Patient Authorization Activity delete
@@ -159,13 +200,16 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
 export const {
   useGetPatientAuthorizationQuery,
   useGetPatientAuthorizationInfoQuery,
-  useGetPatientAuthorizationActivityQuery,
-  usePatientAuthorizationActivityCreateMutation,
-  usePatientAuthorizationActivityDeleteMutation,
-  usePatientAuthorizationUpdateMutation,
-  useGetActivityServicesQuery,
-  useGetActivitySubtypesQuery,
-  useGetActivityCptcodeQuery,
   useGetAuthorizationCreateInfoQuery,
   usePatientAuthorizationCreateMutation,
+  usePatientAuthorizationUpdateMutation,
+  useGetPatientAuthorizationActivityQuery,
+  usePatientAuthorizationActivityInfoQuery,
+  usePatientAuthorizationActivityCreateMutation,
+  usePatientAuthorizationActivityUpdateMutation,
+  usePatientAuthorizationActivityDeleteMutation,
+  useGetActivityServicesQuery,
+  useGetActivitySubActivityQuery,
+  useGetActivitySubtypesQuery,
+  useGetActivityCptcodeQuery,
 } = patientAuthorizationApi;
