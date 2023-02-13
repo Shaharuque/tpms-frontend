@@ -21,14 +21,14 @@ const OtherSetUpBottom = ({ propdata }) => {
               defaultValue={field.box_24j}
               // name={`${tx_type}.${box_24j}`}
               className="input-border input-font w-full focus:outline-none py-[1px]"
-              // {...register(`${box_24j}`)}
-              {...register(`box_24j.${index}.box_24j`)}
+              {...register(`box_24j.${index}`)}
+              // {...register(`box_24j.${index}.box_24j`)}
             />
 
             <select
               className="input-border input-font w-full focus:outline-none py-[1px]"
               // defaultValue={}
-              {...register(`id_qualifire.${index}.id_qualifire`)}
+              {...register(`id_qualifire.${index}`)}
             >
               {/* <option value={field.id_qualifire || "ID Qualifier(BT)"}>
                 {field.id_qualifire}

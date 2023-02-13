@@ -102,7 +102,7 @@ const OtherSetup = () => {
   console.log("tx_type_data", otherSetup?.tx_type_data);
 
   const txTypeStore =
-    otherSetup?.tx_type_data.map((item) => store.push(item.treatment_id)) || [];
+    otherSetup?.tx_type_data.map((item) => store.push(item.id)) || [];
 
   console.log("all txtype store", store);
   useEffect(() => {
