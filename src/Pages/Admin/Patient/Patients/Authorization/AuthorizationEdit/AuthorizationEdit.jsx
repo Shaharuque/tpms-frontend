@@ -16,10 +16,11 @@ import {
 import useToken from "../../../../../../CustomHooks/useToken";
 import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
 import Loading from "../../../../../../Loading/Loading";
-import AuthorizationEditModal from "../AuthorizationModal/AuthorizationEditModal";
+import AuthorizationEditModal from "../AuthorizationActivityModal/AuthorizationEditModal";
 import AuthorizationActivityNestedTable from "./AuthorizationActivityNestedTable/AuthorizationActivityNestedTable";
 import BoolConverter from "../../../../../Shared/BoolConverter/BoolConverter";
 import { toast } from "react-toastify";
+import AuthorizationActivityAddModal from "../AuthorizationActivityModal/AuthorizationActivityAddModal";
 
 const AuthorizationEdit = () => {
   const { id } = useParams();
@@ -778,15 +779,17 @@ const AuthorizationEdit = () => {
           {/* Table */}
           <AuthorizationActivityNestedTable
             allAuthorizationActivity={allAuthorizationActivity}
+            treatment_name={treatmentType}
+            defaultTreatment={treatment_type}
           ></AuthorizationActivityNestedTable>
         </motion.div>
       )}
       {addServiceModal && (
-        <AuthorizationEditModal
+        <AuthorizationActivityAddModal
           treatment_name={treatmentType}
           handleClose={handleClose}
           open={addServiceModal}
-        ></AuthorizationEditModal>
+        ></AuthorizationActivityAddModal>
       )}
     </div>
   );

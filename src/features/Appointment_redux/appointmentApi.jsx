@@ -75,6 +75,19 @@ export const apointmentApi = apiSlice.injectEndpoints({
         body: JSON.stringify(payload),
       }),
     }),
+
+    //Appointment Info
+    appointmentInfo: builder.query({
+      query: ({ token, payload }) => ({
+        url: `admin/ac/get/single/appointment/info`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
   }),
 });
 
@@ -84,5 +97,6 @@ export const {
   useGetAppointmentPatientAuthMutation,
   useGetAppointmentAuthorizationActivityMutation,
   useAppointmentCreateMutation,
+  useAppointmentInfoQuery,
   useGetAppointmentPOSQuery,
 } = apointmentApi;

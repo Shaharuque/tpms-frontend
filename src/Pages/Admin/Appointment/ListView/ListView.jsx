@@ -30,6 +30,7 @@ import {
 import { useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
+import { toast } from "react-toastify";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -47,39 +48,45 @@ const ListView = () => {
   const [patientId, setPatientId] = useState();
   const [stuffsId, setStuffsId] = useState([]);
   const [formData, setFromData] = useState(null);
-  const [items, setItems] = useState([]);
   const [hasMore, sethasMore] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [responseError, setResponseError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState("");
-  const [appiontmentIds, setAppointmentIds] = useState();
   const [statusName, setStatusName] = useState(null);
   const [actionType, setActionType] = useState(null);
-  const [testingSelect, setTestingSelect] = useState();
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const dispatch = useDispatch();
-  console.log("position", location);
-  console.log("selected appointment Ids", appiontmentIds);
-  console.log("selected rows", testingSelect);
+  //console.log("position", location);
 
   //Manage Session Appointment Status Change API
   const [
     manageSessionStatusChange,
     { data: statusChangeData, isSuccess: actionSuccess },
   ] = useManageSessionStatusChangeMutation();
-  console.log("after status change", statusChangeData);
+  //console.log("after status change", statusChangeData);
 
   useEffect(() => {
-    if (statusChangeData?.status === "success") {
-      setAppointmentIds({
-        selectedRowKeys: [],
+    if (statusChangeData?.status === "success" && actionType !== "delete") {
+      setSelectedRowKeys([]);
+      toast.success("Successfully Session Update", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
       });
-      // setTestingSelect(null);
+    }
+    if (statusChangeData?.status === "success" && actionType === "delete") {
+      setSelectedRowKeys([]);
+      toast.success("Selected Session Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
     }
   }, [statusChangeData?.status]);
 
-  //Manage Session=> Get Session List API
+  //Manage Session List=> Get Session List API
   const { data: menageSessionList, isLoading: listLoading } =
     useGetManageSessionListQuery({
       token,
@@ -92,7 +99,7 @@ const ListView = () => {
       setTable(true);
       setTotalPage(menageSessionList?.appointments?.last_page);
     }
-  }, [list]);
+  }, [list, menageSessionList?.appointments?.last_page]);
   // //useEffect a dependency na diley sheita ekbar call hoy(in general)
   // useEffect(() => {
   //   if (formData !== null) {
@@ -166,7 +173,7 @@ const ListView = () => {
   //console.log("selected stuffs", stuffsId);
 
   const receivedData = (data) => {
-    console.log(data);
+    //console.log(data);
   };
 
   //Date converter function [yy-mm-dd]
@@ -254,21 +261,19 @@ const ListView = () => {
       .then((data) => setTData(data));
   }, []);
 
-  console.log("table data", items);
-
   //handle pagination
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
   };
 
-  // -----------------------------------------Table Data-----------------------------------
+  // Table Data Columns Defined Here //
   const columns = [
     {
-      title: "Lock",
+      title: <h1 className="text-center">Lock</h1>,
       key: "is_locked",
       dataIndex: "is_locked",
-      width: 40,
+      width: 80,
       // render contains what we want to reflect as our data
       render: (_, { is_locked }) => {
         //console.log("tags : ", lock);
@@ -380,7 +385,7 @@ const ListView = () => {
       title: "Provider",
       dataIndex: "provider_full_name",
       key: "provider_full_name",
-      width: 150,
+      width: 200,
       filters: [
         {
           text: `Andrew  Flintoff`,
@@ -595,10 +600,12 @@ const ListView = () => {
       dataIndex: "operation",
       key: "operation",
       width: 60,
-      render: (_, { id }) => (
+      render: (_, record) => (
         <div className="flex justify-center">
           <Dropdown
-            overlay={<ManageTableAction></ManageTableAction>}
+            overlay={
+              <ManageTableAction appointmentId={record?.id}></ManageTableAction>
+            }
             trigger={["click"]}
             overlayStyle={{ zIndex: "100" }}
           >
@@ -615,29 +622,32 @@ const ListView = () => {
 
   // const rowSelection = {
   //   onChange: (selectedRowKeys, selectedRows) => {
-  //     console.log(
-  //       `selectedRowKeys: ${selectedRowKeys}`,
-  //       "selectedRows: ",
-  //       selectedRows
-  //     );
+  //     setAppointmentIds({ selectedRowKeys });
   //   },
   //   onSelect: (record, selected, selectedRows) => {
-  //     console.log(record, selected, selectedRows);
+  //     console.log("selected row", selectedRows);
+  //     setTestingSelect(selectedRows);
   //   },
   //   onSelectAll: (selected, selectedRows, changeRows) => {
   //     console.log(selected, selectedRows, changeRows);
   //   },
+  //   getCheckboxProps: (record) => {
+  //     const rowIndex = record?.is_locked;
+  //     return {
+  //       disabled: rowIndex === 1,
+  //     };
+  //   },
   // };
+
   //get rows id to do some action on them
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selected row-keys: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
 
   const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setAppointmentIds({ selectedRowKeys });
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log("selected row", selectedRows);
-      setTestingSelect(selectedRows);
-    },
+    selectedRowKeys,
+    onChange: onSelectChange,
     getCheckboxProps: (record) => {
       // console.log("record", record);
       const rowIndex = record?.is_locked;
@@ -650,26 +660,37 @@ const ListView = () => {
   //Status change handler Function
   const statusChange = (e) => {
     if (e.target.value === "Bulk Delete") {
-      console.log(e.target.value);
+      //console.log(e.target.value);
       setStatusName("");
       setActionType("delete");
+    } else {
+      //console.log(e.target.value);
+      setStatusName(e.target.value);
+      setActionType("update_status");
     }
-    setStatusName(e.target.value);
-    setActionType("update_status");
   };
+  // console.log("changing status and action", statusName, actionType);
 
   //Action Handler Function
   const handleAction = () => {
-    const payload = {
-      action_type: actionType,
-      status_name: statusName,
-      appointment_ids: appiontmentIds?.selectedRowKeys,
-    };
-    manageSessionStatusChange({
-      token,
-      payload,
-    });
-    console.log("payload for the action handler api", payload);
+    if (selectedRowKeys?.length > 0) {
+      const payload = {
+        action_type: actionType,
+        status_name: statusName,
+        appointment_ids: selectedRowKeys,
+      };
+      manageSessionStatusChange({
+        token,
+        payload,
+      });
+      console.log("payload for the action handler api", payload);
+    } else {
+      toast.warning("Select Some Id's To Work With", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
   };
 
   const handleChange = (pagination, filters, sorter) => {
@@ -794,7 +815,15 @@ const ListView = () => {
       from_date: from_date,
       to_date: to_date,
     };
-    setFromData(payLoad);
+    if (payLoad?.to_date === "NaN-aN-aN") {
+      toast.error("Select Valid Date Range", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else {
+      setFromData(payLoad);
+    }
     setPage(1);
   };
 
@@ -818,12 +847,9 @@ const ListView = () => {
     reset,
   ]);
 
-  // ----------------------------------------Multi-Select---------------------------------
-  // *************
-
   return (
     // For responsive view point
-    <div className={!table ? "h-[100vh]" : ""}>
+    <div className="h-[100vh]">
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
@@ -1278,9 +1304,7 @@ const ListView = () => {
                         className=" text-xs font-normal"
                         columns={columns}
                         dataSource={list}
-                        rowSelection={{
-                          ...rowSelection,
-                        }}
+                        rowSelection={rowSelection}
                         scroll={{
                           y: 650,
                         }}
