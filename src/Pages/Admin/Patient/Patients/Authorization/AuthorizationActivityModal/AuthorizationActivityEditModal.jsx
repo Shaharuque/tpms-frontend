@@ -31,6 +31,7 @@ const AuthorizationActivityEditModal = ({
   const { token } = useToken();
   const { id: authorizationId } = useParams();
   const patientId = localStorage.getItem("p_key");
+  const [billed, setBilled] = useState("");
   //setting initial service Name
   console.log("service name", serviceName);
 
@@ -228,16 +229,16 @@ const AuthorizationActivityEditModal = ({
             // fullScreen={fullScreen}
             open={open}
             centered
-            width={600}
-            footer={false}
             closable={false}
-            bodyStyle={{ padding: "0" }}
-            className="box rounded-md"
+            footer={false}
+            width={565}
+            bodyStyle={{ padding: "0px" }}
+            style={{ padding: "10px" }}
           >
             {activityServicesLoading ? (
               <ModalLoader></ModalLoader>
             ) : (
-              <div className="px-5 py-2 ">
+              <div className="px-5 py-2 box">
                 <div className="flex items-center justify-between">
                   <h1 className="text-lg text-left text-orange-400 ">
                     Add/Edit Service
@@ -249,7 +250,7 @@ const AuthorizationActivityEditModal = ({
                 </div>
                 <div className="bg-gray-200 py-[1px] mt-3"></div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
+                  <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-3 mr-2 gap-x-2 sm:gap-y-1 gap-y-[1px]">
                     <div>
                       <label className="label">
                         <span className="modal-label-name">
@@ -383,6 +384,9 @@ const AuthorizationActivityEditModal = ({
                         <select
                           className="modal-input-field ml-1 w-full"
                           {...register("billed_type")}
+                          onChange={(e) => {
+                            setBilled(e.target.value);
+                          }}
                         >
                           <option value="15 mins">15 mins</option>
                           <option value="Hour">Hour</option>
@@ -390,19 +394,21 @@ const AuthorizationActivityEditModal = ({
                           <option value="Per Session">Per Session</option>
                         </select>
                       </div>
-                      <div className="mt-[32px]">
-                        <select
-                          className="modal-input-field ml-1 w-full"
-                          {...register("billed_time")}
-                        >
-                          <option value="15 min">15 min</option>
-                          <option value="30 min">30 min</option>
-                          <option value="45 min">45 min</option>
-                          <option value="1 hour">1 hour</option>
-                          <option value="2 hour">2 hour</option>
-                          <option value="1 min">1 min</option>
-                        </select>
-                      </div>
+                      {billed === "Per Unit" && (
+                        <div className="mt-[32px]">
+                          <select
+                            className="modal-input-field ml-1 w-full"
+                            {...register("billed_time")}
+                          >
+                            <option value="15 min">15 min</option>
+                            <option value="30 min">30 min</option>
+                            <option value="45 min">45 min</option>
+                            <option value="1 hour">1 hour</option>
+                            <option value="2 hour">2 hour</option>
+                            <option value="1 min">1 min</option>
+                          </select>
+                        </div>
+                      )}
                     </div>
                     <div className="w-1/2">
                       <label className="label">
@@ -424,25 +430,25 @@ const AuthorizationActivityEditModal = ({
                       </span>
                     </label>
                     {/* 1 */}
-                    <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
-                      <div className="  text-sm font-semibold my-auto px-3">
+                    <div className="flex flex-wrap gap-y-[1px] border border-gray-300 p-1">
+                      <div className="  text-xs font-semibold my-auto px-3">
                         Maximum
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[1px] font-medium text-xs w-full"
                           {...register("hours_max_one")}
                         >
-                          <option value="1">Hours</option>
-                          <option value="3">Unit</option>
+                          <option value="Hours">Hours</option>
+                          <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium my-auto px-3 mx-1">
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">
                         Per
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full"
                           {...register("hours_max_per_one")}
                         >
                           <option value="0"></option>
@@ -452,36 +458,36 @@ const AuthorizationActivityEditModal = ({
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium px-3 mx-1">
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">
                         Is
                       </div>
                       <div className="">
                         <input
-                          className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[2.5px] font-medium  text-xs w-full"
                           {...register("hours_max_is_one")}
                         ></input>
                       </div>
                     </div>
                     {/* 2 */}
-                    <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
-                      <div className="  text-sm font-semibold my-auto px-3">
+                    <div className="flex flex-wrap gap-y-[1px] border border-gray-300 p-1">
+                      <div className="  text-xs font-semibold my-auto px-3">
                         Maximum
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm  py-[1px]  px-2 font-medium text-xs w-full"
                           {...register("hours_max_two")}
                         >
-                          <option value="1">Hours</option>
-                          <option value="3">Unit</option>
+                          <option value="Hours">Hours</option>
+                          <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium my-auto px-3 mx-1">
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">
                         Per
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full"
                           {...register("hours_max_per_two")}
                         >
                           <option value="0"></option>
@@ -491,36 +497,36 @@ const AuthorizationActivityEditModal = ({
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium px-3 mx-1">
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">
                         Is
                       </div>
                       <div className="">
                         <input
-                          className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[2.5px]  font-medium  text-xs w-full"
                           {...register("hours_max_is_two")}
                         ></input>
                       </div>
                     </div>
                     {/* 3 */}
-                    <div className="flex flex-wrap gap-3 border border-gray-300 p-1">
-                      <div className="  text-sm font-semibold my-auto px-3">
+                    <div className="flex flex-wrap gap-y-[1px] border border-gray-300 p-1">
+                      <div className="  text-xs font-semibold my-auto px-3">
                         Maximum
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full"
                           {...register("hours_max_three")}
                         >
-                          <option value="1">Hours</option>
-                          <option value="3">Unit</option>
+                          <option value="Hours">Hours</option>
+                          <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium my-auto px-3 mx-1">
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">
                         Per
                       </div>
                       <div className="">
                         <select
-                          className="border border-gray-300 rounded-sm px-2 py-[3px] text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full"
                           {...register("hours_max_per_three")}
                         >
                           <option value="0"></option>
@@ -530,12 +536,12 @@ const AuthorizationActivityEditModal = ({
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className="border text-sm font-medium px-3 mx-1">
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">
                         Is
                       </div>
                       <div className="">
                         <input
-                          className="border border-gray-300 rounded-sm px-2 py-[3px]  text-xs w-full"
+                          className="border border-gray-300 rounded-sm px-2 py-[2px] font-medium  text-xs w-full"
                           {...register("hours_max_is_three")}
                         ></input>
                       </div>
@@ -550,7 +556,7 @@ const AuthorizationActivityEditModal = ({
                       <TextArea
                         onChange={(e) => setNotes(e.target.value)}
                         maxLength={1002}
-                        rows={5}
+                        rows={3}
                         placeholder=" Notes"
                         size="large"
                       />

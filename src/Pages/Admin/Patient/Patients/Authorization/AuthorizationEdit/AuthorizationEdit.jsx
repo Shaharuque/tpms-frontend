@@ -316,7 +316,7 @@ const AuthorizationEdit = () => {
   }
 
   return (
-    <div className="sm:h-[100vh]">
+    <div className="">
       <div className="flex flex-wrap items-center gap-2 mb-2">
         {/* Changes needed */}
         <Link
@@ -701,24 +701,24 @@ const AuthorizationEdit = () => {
                   {...register("cms_eleven")}
                 />
               </div>
-              <div className="ml-2 mt-5 flex justify-between items-center">
-                <div>
+              <div className="ml-2 mt-5 flex gap-3 items-center">
+                <div className="flex items-center">
                   <Switch
                     checked={valid}
                     onChange={() => setValid(!valid)}
                     size="small"
                   />
-                  <span className="text-[14px] font-medium text-gray-500 mx-3">
+                  <span className="text-[14px] ml-2 font-medium text-gray-500">
                     Active
                   </span>
                 </div>
-                <div>
+                <div className="flex items-center">
                   <Switch
                     checked={place_holder}
                     onChange={() => setPlace_holder(!place_holder)}
                     size="small"
                   />
-                  <span className="text-[14px] font-medium text-gray-500 mx-3">
+                  <span className="text-[14px] ml-2 font-medium text-gray-500">
                     Placeholder
                   </span>
                 </div>
@@ -738,20 +738,15 @@ const AuthorizationEdit = () => {
               </div>
             </div>
             {/* submit  */}
-            <button
-              className=" py-[5px] font-normal px-3 mr-1 text-xs ml-1 bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-              type="submit"
-            >
+            <button className=" pms-button" type="submit">
               Save
             </button>
 
-            <button
-              className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-              autoFocus
-              onClick={handleClose}
-            >
-              Close
-            </button>
+            <Link to={`/admin/patient/patient-authorization/${patientId}`}>
+              <button className=" ml-2 pms-close-button" autoFocus>
+                Cancel
+              </button>
+            </Link>
           </>
         </form>
       </motion.div>

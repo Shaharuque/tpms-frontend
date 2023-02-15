@@ -239,23 +239,23 @@ const AuthorizationActivityNestedTable = ({
   }, [AuthorizationActivityDeleted?.status]);
 
   return (
-    <div>
-      <>
-        <div className=" overflow-scroll py-2 px-2">
+    <>
+      <div className={allAuthorizationActivity ? "h-[40vh]" : ""}>
+        <div className="overflow-scroll py-2">
           <Table
             rowKey={(record) => record.id}
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
-            className=" text-xs font-normal "
+            className=" text-xs font-normal"
             columns={columns}
             dataSource={allAuthorizationActivity}
             onChange={handleChange}
-            scroll={{
-              y: 650,
-            }}
+            // scroll={{
+            //   y: 650,
+            // }}
           />
         </div>
-      </>
+      </div>
       {openEditModal && (
         <AuthorizationActivityEditModal
           authorizationActivityId={authorizationActivityId}
@@ -265,7 +265,7 @@ const AuthorizationActivityNestedTable = ({
           defaultTreatment={defaultTreatment}
         ></AuthorizationActivityEditModal>
       )}
-    </div>
+    </>
   );
 };
 

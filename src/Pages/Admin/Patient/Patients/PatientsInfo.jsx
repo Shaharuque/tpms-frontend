@@ -37,12 +37,12 @@ const PatientsInfo = () => {
           1222, OTtn, With Jersey City NJ 32809
         </div>
       </div>
-      <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between">
+      <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between gap-2 my-2">
         <motion.div
           initial={{ opacity: 0, x: -25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
-          className=" my-2 p-2  setting-nav shadow-md rounded-lg "
+          className=" p-2  setting-nav shadow-md rounded-lg "
         >
           <div className="">
             <div className="">
@@ -119,7 +119,7 @@ const PatientsInfo = () => {
           initial={{ opacity: 0, x: 25 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.6 }}
-          className=" m-2 p-2  setting-body shadow-md rounded-lg "
+          className="p-2  setting-body shadow-md rounded-lg "
         >
           <Outlet />
         </motion.div>
