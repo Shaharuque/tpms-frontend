@@ -430,7 +430,7 @@ const AuthorizationActivityEditModal = ({
                       </span>
                     </label>
                     {/* 1 */}
-                    <div className="flex flex-wrap gap-y-[1px] border border-gray-300 p-1">
+                    <div className="flex sm:flex-wrap-none flex-wrap gap-y-[1px] border border-gray-300 p-1">
                       <div className="  text-xs font-semibold my-auto px-3">
                         Maximum
                       </div>
@@ -469,7 +469,7 @@ const AuthorizationActivityEditModal = ({
                       </div>
                     </div>
                     {/* 2 */}
-                    <div className="flex flex-wrap gap-y-[1px] border border-gray-300 p-1">
+                    <div className="flex sm:flex-wrap-none flex-wrap gap-y-[1px] border border-gray-300 p-1">
                       <div className="  text-xs font-semibold my-auto px-3">
                         Maximum
                       </div>
@@ -508,7 +508,7 @@ const AuthorizationActivityEditModal = ({
                       </div>
                     </div>
                     {/* 3 */}
-                    <div className="flex flex-wrap gap-y-[1px] border border-gray-300 p-1">
+                    <div className="flex sm:flex-wrap-none flex-wrap gap-y-[1px] border border-gray-300 p-1">
                       <div className="  text-xs font-semibold my-auto px-3">
                         Maximum
                       </div>
