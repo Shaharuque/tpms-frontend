@@ -30,6 +30,7 @@ import {
 import { useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
+import { toast } from "react-toastify";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -57,18 +58,31 @@ const ListView = () => {
   const [actionType, setActionType] = useState(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const dispatch = useDispatch();
-  console.log("position", location);
+  //console.log("position", location);
 
   //Manage Session Appointment Status Change API
   const [
     manageSessionStatusChange,
     { data: statusChangeData, isSuccess: actionSuccess },
   ] = useManageSessionStatusChangeMutation();
-  console.log("after status change", statusChangeData);
+  //console.log("after status change", statusChangeData);
 
   useEffect(() => {
-    if (statusChangeData?.status === "success") {
+    if (statusChangeData?.status === "success" && actionType !== "delete") {
       setSelectedRowKeys([]);
+      toast.success("Successfully Session Update", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+    if (statusChangeData?.status === "success" && actionType === "delete") {
+      setSelectedRowKeys([]);
+      toast.success("Selected Session Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
     }
   }, [statusChangeData?.status]);
 
@@ -159,7 +173,7 @@ const ListView = () => {
   //console.log("selected stuffs", stuffsId);
 
   const receivedData = (data) => {
-    console.log(data);
+    //console.log(data);
   };
 
   //Date converter function [yy-mm-dd]
@@ -253,13 +267,13 @@ const ListView = () => {
     setPage(selectedPage + 1);
   };
 
-  // -----------------------------------------Table Data-----------------------------------
+  // Table Data Columns Defined Here //
   const columns = [
     {
-      title: "Lock",
+      title: <h1 className="text-center">Lock</h1>,
       key: "is_locked",
       dataIndex: "is_locked",
-      width: 40,
+      width: 80,
       // render contains what we want to reflect as our data
       render: (_, { is_locked }) => {
         //console.log("tags : ", lock);
@@ -371,7 +385,7 @@ const ListView = () => {
       title: "Provider",
       dataIndex: "provider_full_name",
       key: "provider_full_name",
-      width: 150,
+      width: 200,
       filters: [
         {
           text: `Andrew  Flintoff`,
@@ -646,26 +660,37 @@ const ListView = () => {
   //Status change handler Function
   const statusChange = (e) => {
     if (e.target.value === "Bulk Delete") {
-      console.log(e.target.value);
+      //console.log(e.target.value);
       setStatusName("");
       setActionType("delete");
+    } else {
+      //console.log(e.target.value);
+      setStatusName(e.target.value);
+      setActionType("update_status");
     }
-    setStatusName(e.target.value);
-    setActionType("update_status");
   };
+  // console.log("changing status and action", statusName, actionType);
 
   //Action Handler Function
   const handleAction = () => {
-    const payload = {
-      action_type: actionType,
-      status_name: statusName,
-      appointment_ids: selectedRowKeys,
-    };
-    manageSessionStatusChange({
-      token,
-      payload,
-    });
-    console.log("payload for the action handler api", payload);
+    if (selectedRowKeys?.length > 0) {
+      const payload = {
+        action_type: actionType,
+        status_name: statusName,
+        appointment_ids: selectedRowKeys,
+      };
+      manageSessionStatusChange({
+        token,
+        payload,
+      });
+      console.log("payload for the action handler api", payload);
+    } else {
+      toast.warning("Select Some Id's To Work With", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
   };
 
   const handleChange = (pagination, filters, sorter) => {
@@ -790,7 +815,15 @@ const ListView = () => {
       from_date: from_date,
       to_date: to_date,
     };
-    setFromData(payLoad);
+    if (payLoad?.to_date === "NaN-aN-aN") {
+      toast.error("Select Valid Date Range", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else {
+      setFromData(payLoad);
+    }
     setPage(1);
   };
 
@@ -814,12 +847,9 @@ const ListView = () => {
     reset,
   ]);
 
-  // ----------------------------------------Multi-Select---------------------------------
-  // *************
-
   return (
     // For responsive view point
-    <div className={!table ? "h-[100vh]" : ""}>
+    <div className="h-[100vh]">
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">

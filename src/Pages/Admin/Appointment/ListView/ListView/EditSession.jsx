@@ -17,10 +17,8 @@ import useToken from "../../../../../CustomHooks/useToken";
 
 const EditSession = ({ handleClose, openEdit, appointmentId }) => {
   console.log("managesession row id", appointmentId);
-  const [recurrence, setRecurrence] = useState(false);
-  const [daily, setDaily] = useState(false);
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState();
   console.log("selected date", date);
   const { register, handleSubmit, reset } = useForm();
   const [clientId, setClientId] = useState();
@@ -49,7 +47,11 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
     from_time,
     to_time,
   } = appointmentInfo?.appointments || {};
-  console.log("client name", api_app_client?.id);
+  console.log("client name", appointmentInfo?.appointments);
+
+  if (schedule_date) {
+    console.log(new Date(schedule_date).toUTCString());
+  }
 
   //Setting default clientId
   useEffect(() => {
@@ -154,7 +156,7 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        check_date: schedule_date ? schedule_date : date.toLocaleDateString(),
+        from_time: schedule_date ? schedule_date : date.toLocaleDateString(),
         client_id: api_app_client?.id,
         authorization_id: api_app_auth?.id,
         activity_id: authorization_activity_id,
@@ -179,7 +181,6 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
     console.log(data);
     // reset();
   };
-
   return (
     <div>
       <Modal
@@ -352,7 +353,10 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                     )}
                     {/* single calendar */}
                     <div className="col-span-2 w-[95%] my-0 mx-auto">
-                      <Calendar onChange={setDate} defaultValue={date} />
+                      <Calendar
+                        onChange={setDate}
+                        defaultValue={new Date(schedule_date).toUTCString()}
+                      />
                       <div className="flex justify-between rounded-b-[5px] bg-white py-1 rounded-br-[5px]">
                         <button
                           onClick={() => handleClearDate()}
@@ -426,145 +430,6 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                 </option>
                 <option value="Rendered">Rendered</option>
               </select>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-5  mr-2 gap-1">
-              <div className="">
-                <Switch
-                  size="small"
-                  onClick={() => {
-                    setRecurrence(!recurrence);
-                  }}
-                />
-                <label
-                  className="modal-label-name ml-2"
-                  htmlFor="flesmwitchCheckDefault"
-                >
-                  Recurrence Pattern?
-                </label>
-              </div>
-              <div>
-                {recurrence && (
-                  <input
-                    className="px-2 modal-input-field ml-1 w-full"
-                    type="date"
-                    {...register("check_Date")}
-                  />
-                )}
-              </div>
-              {recurrence && (
-                <>
-                  <div>
-                    <Switch
-                      size="small"
-                      onClick={() => {
-                        setDaily(!daily);
-                      }}
-                    />
-                    <label
-                      className="modal-label-name ml-2 "
-                      htmlFor="flesmwitchCheckDefault"
-                    >
-                      Daily
-                    </label>
-                  </div>
-                  {daily && (
-                    <div className=" grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-1">
-                      <div className="flex ml-1 mt-1 items-center">
-                        <input
-                          type="checkbox"
-                          // checked={value ? true : false}
-                          name="patient"
-                          // onClick={() => {
-                          //   setValue(!value);
-                          // }}
-                        />
-                        <span className="text-[12px] ml-1 text-gray-600 font-normal">
-                          SU
-                        </span>
-                      </div>
-                      <div className="flex ml-1 mt-1 items-center">
-                        <input
-                          type="checkbox"
-                          // checked={value ? true : false}
-                          name="patient"
-                          // onClick={() => {
-                          //   setValue(!value);
-                          // }}
-                        />
-                        <span className="text-[12px] ml-1 text-gray-600 font-normal">
-                          MO
-                        </span>
-                      </div>
-                      <div className="flex ml-1 mt-1 items-center">
-                        <input
-                          type="checkbox"
-                          // checked={value ? true : false}
-                          name="patient"
-                          // onClick={() => {
-                          //   setValue(!value);
-                          // }}
-                        />
-                        <span className="text-[12px] ml-1 text-gray-600 font-normal">
-                          TU
-                        </span>
-                      </div>
-                      <div className="flex ml-1 mt-1 items-center">
-                        <input
-                          type="checkbox"
-                          // checked={value ? true : false}
-                          name="patient"
-                          // onClick={() => {
-                          //   setValue(!value);
-                          // }}
-                        />
-                        <span className="text-[12px] ml-1 text-gray-600 font-normal">
-                          WE
-                        </span>
-                      </div>
-                      <div className="flex ml-1 mt-1 items-center">
-                        <input
-                          type="checkbox"
-                          // checked={value ? true : false}
-                          name="patient"
-                          // onClick={() => {
-                          //   setValue(!value);
-                          // }}
-                        />
-                        <span className="text-[12px] ml-1 text-gray-600 font-normal">
-                          TH
-                        </span>
-                      </div>
-                      <div className="flex ml-1 mt-1 items-center">
-                        <input
-                          type="checkbox"
-                          // checked={value ? true : false}
-                          name="patient"
-                          // onClick={() => {
-                          //   setValue(!value);
-                          // }}
-                        />
-                        <span className="text-[12px] ml-1 text-gray-600 font-normal">
-                          FR
-                        </span>
-                      </div>
-                      <div className="flex ml-1 mt-1 items-center">
-                        <input
-                          type="checkbox"
-                          // checked={value ? true : false}
-                          name="patient"
-                          // onClick={() => {
-                          //   setValue(!value);
-                          // }}
-                        />
-                        <span className="text-[12px] ml-1 text-gray-600 font-normal">
-                          SA
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </>
-              )}
             </div>
 
             <div className="bg-gray-200 py-[1px] mt-3"></div>
