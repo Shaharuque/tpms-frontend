@@ -1,5 +1,4 @@
 //staff other setup api will be handled here
-
 import { apiSlice } from "../../api/apiSlice";
 
 export const otherSetupApi = apiSlice.injectEndpoints({
@@ -14,8 +13,23 @@ export const otherSetupApi = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      providesTags: ["OtherSetup"],
+    }),
+
+    addOtherSetup: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "admin/ac/staff/other/setup/update",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["OtherSetup"],
     }),
   }),
 });
 
-export const { useGetOtherSetupQuery } = otherSetupApi;
+export const { useGetOtherSetupQuery, useAddOtherSetupMutation } =
+  otherSetupApi;

@@ -1,5 +1,5 @@
 import { Switch, TimePicker } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import Calendar from "react-calendar";
@@ -7,6 +7,15 @@ import Calendar from "react-calendar";
 import { Modal } from "antd";
 import AppoinmentMultiSelection from "../../../Shared/CustomComponents/AppoinmentMultiSelection";
 import "../../../Style/SingleCalendar.css";
+import {
+  useAppointmentCreateMutation,
+  useGetAppointmentAuthorizationActivityMutation,
+  useGetAppointmentPatientAuthMutation,
+  useGetAppointmentPatientNameQuery,
+  useGetAppointmentProviderNameQuery,
+} from "../../../../features/Appointment_redux/appointmentApi";
+import useToken from "../../../../CustomHooks/useToken";
+import BoolConverter from "../../BoolConverter/BoolConverter";
 
 const CreateAppointment = ({ handleClose, clicked }) => {
   // console.log(handleClose, clicked);
@@ -16,10 +25,78 @@ const CreateAppointment = ({ handleClose, clicked }) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const { register, handleSubmit, reset } = useForm();
+  const [clientId, setClientId] = useState(0);
+  const [authId, setAuthId] = useState(0);
+  const [fromtime, setFromTime] = useState(null);
+  const [toTime, setToTime] = useState(null);
+  const { token } = useToken();
+  console.log("Billable", billable);
 
-  const onChange = (time, timeString) => {
-    console.log(time, timeString);
+  //Appointment Get Patient Name Api
+  const { data: patientsName, isLoading: patientsNameLoading } =
+    useGetAppointmentPatientNameQuery(token);
+
+  //Appointment Get Provider Name Api
+  const { data: providersName, isLoading: providersNameLoading } =
+    useGetAppointmentProviderNameQuery(token);
+
+  //Appointment Get Patient Authorization/auth
+  const [
+    getAppointmentPatientAuth,
+    {
+      data: patientAuthData,
+      isLoading: patientAuthLoading,
+      isError: patientAuthError,
+    },
+  ] = useGetAppointmentPatientAuthMutation();
+
+  console.log("loaidng feature", patientsNameLoading, patientAuthLoading);
+
+  //Appointment Get Patient Authorization Activity/Service Api
+  const [
+    getAppointmentAuthorizationActivity,
+    {
+      data: authorizationActivityData,
+      isLoading: authorizationActivityLoading,
+      isError: authorizationActivityError,
+    },
+  ] = useGetAppointmentAuthorizationActivityMutation();
+
+  //Appointment Create New Session API
+  const [
+    appointmentCreate,
+    { data: creationData, isSuccess: createSuccess, isError: createError },
+  ] = useAppointmentCreateMutation();
+
+  console.log("Creating appointment", creationData);
+
+  useEffect(() => {
+    getAppointmentPatientAuth({
+      token,
+      payload: {
+        client_id: clientId,
+      },
+    });
+  }, [clientId, token, getAppointmentPatientAuth]);
+  useEffect(() => {
+    getAppointmentAuthorizationActivity({
+      token,
+      payload: {
+        auth_id: authId,
+      },
+    });
+  }, [authId, token, getAppointmentAuthorizationActivity]);
+
+  const from_Time = (time, timeString) => {
+    console.log("From-Time", timeString);
+    setFromTime(timeString);
   };
+
+  const to_Time = (time, timeString) => {
+    console.log("To-Time", timeString);
+    setToTime(timeString);
+  };
+  console.log("after selecting time", fromtime, toTime);
 
   const days = [
     "Sunday",
@@ -60,7 +137,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
     setDate(new Date());
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
@@ -71,8 +148,20 @@ const CreateAppointment = ({ handleClose, clicked }) => {
   }, [date, reset]);
 
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    const payload = {
+      billable: BoolConverter(billable),
+      ...data,
+      form_time_session: fromtime,
+      to_time_session: toTime,
+    };
+    if (payload) {
+      appointmentCreate({
+        token,
+        payload,
+      });
+    }
+    console.log(payload);
+    // reset();
   };
 
   // --------------------------------------------------Multi-Select-------------------------------
@@ -110,7 +199,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
           <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1 md:gap-2">
-              <span className="modal-label-name ml-1">Active Patient</span>
+              <span className="modal-label-name ml-1 mb-2">App Type</span>
               <div className="col-span-2 ml-1">
                 <Switch
                   defaultChecked
@@ -126,39 +215,71 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                   {billable ? "Billable" : "Non-Billable"}
                 </label>
               </div>
-
               <label className="label">
                 <span className="modal-label-name">Patient Name</span>
               </label>
+              {(authorizationActivityLoading || patientAuthLoading) && (
+                <h1>Loading</h1>
+              )}
               <select
                 className="col-span-2 modal-input-field ml-1 w-full"
-                {...register("patients")}
+                {...register("client_id")}
+                onChange={(e) => setClientId(e.target.value)}
               >
-                <option value=""></option>
-                <option value="single">single</option>
-                <option value="married">married</option>
+                <option value="0">Select Patient</option>
+                {patientsName?.claims?.map((patient) => {
+                  return (
+                    <option key={patient?.id} value={patient?.id}>
+                      {patient?.client_full_name}
+                    </option>
+                  );
+                })}
               </select>
               <label className="label">
                 <span className="modal-label-name">Auth</span>
               </label>
               <select
+                disabled={patientAuthLoading || patientAuthError ? true : false}
                 className="col-span-2 modal-input-field ml-1 w-full"
-                {...register("Auth")}
+                {...register("authorization_id")}
+                onChange={(e) => setAuthId(e.target.value)}
               >
-                <option value=""></option>
-                <option value="single">single</option>
-                <option value="married">married</option>
+                <option value="0">Select Auth</option>
+                {patientAuthData?.claims?.map((auth) => {
+                  return (
+                    <option key={auth?.id} value={auth?.id}>
+                      {auth?.description +
+                        `(${
+                          auth?.onset_date + " " + "to" + " " + auth?.end_date
+                        })` +
+                        " " +
+                        "|" +
+                        " " +
+                        auth?.authorization_number}
+                    </option>
+                  );
+                })}
               </select>
               <label className="label">
                 <span className="modal-label-name">Service</span>
               </label>
               <select
+                disabled={
+                  authorizationActivityLoading || authorizationActivityError
+                    ? true
+                    : false
+                }
                 className="col-span-2 modal-input-field ml-1 w-full"
-                {...register("service")}
+                {...register("activity_id")}
               >
-                <option value=""></option>
-                <option value="single">single</option>
-                <option value="married">married</option>
+                <option value="0">Select Activity</option>
+                {authorizationActivityData?.claims?.map((activity) => {
+                  return (
+                    <option key={activity?.id} value={activity?.id}>
+                      {activity?.activity_name}
+                    </option>
+                  );
+                })}
               </select>
               <label className="label">
                 <span className="modal-label-name">Provider Name</span>
@@ -166,11 +287,16 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               {billable ? (
                 <select
                   className="col-span-2 modal-input-field ml-1 w-full"
-                  {...register("provider")}
+                  {...register("provider_id")}
                 >
-                  <option value=""></option>
-                  <option value="single">single</option>
-                  <option value="married">married</option>
+                  <option value="0">Select Provider</option>
+                  {providersName?.claims?.map((provider) => {
+                    return (
+                      <option key={provider?.id} value={provider?.id}>
+                        {provider?.full_name}
+                      </option>
+                    );
+                  })}
                 </select>
               ) : (
                 <div className="col-span-2 ml-1">
@@ -182,23 +308,24 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               </label>
               <select
                 className="col-span-2 modal-input-field ml-1 w-full"
-                {...register("pos")}
+                {...register("location")}
               >
-                <option value=""></option>
-                <option value="single">single</option>
-                <option value="married">married</option>
+                <option value="0"></option>
+                <option value="90">School (90)</option>
+                <option value="11">Office (11)</option>
+                <option value="12">Home (12)</option>
               </select>
               {/* calender */}
               <label className="label">
                 <span className="modal-label-name">From Date</span>
               </label>
               <input
-                name="check_date"
+                name="from_time"
                 readOnly
                 onClick={() => setOpen(!open)}
                 value={date ? date.toLocaleDateString() : "Select a Date"}
                 className="col-span-2 modal-input-field ml-1 w-full px-2"
-                {...register("check_date")}
+                {...register("from_time")}
               />
 
               {open && (
@@ -215,15 +342,13 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                     {date ? (
                       <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-l-[5px]">
                         <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
-                          <span className="text-2xl">
-                            {days[date.getDay()]}
-                          </span>
+                          <span className="text-xl">{days[date.getDay()]}</span>
                         </div>
                         <div className="flex flex-col justify-center items-center">
                           <h1 className="text-8xl font-medium">
                             {currentDate}
                           </h1>
-                          <h1 className="text-2xl font-medium">{month}</h1>
+                          <h1 className="text-xl font-medium">{month}</h1>
                         </div>
                         <div className="flex justify-center items-end">
                           <h1 className="text-4xl font-medium mt-4">{year}</h1>
@@ -243,20 +368,20 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                       <div className="flex justify-between rounded-b-[5px] bg-white py-1 rounded-br-[5px]">
                         <button
                           onClick={() => handleClearDate()}
-                          className="text-[12px] text-red-400"
+                          className="text-[12px] text-red-400 hover:bg-black hover:text-white p-2 rounded"
                         >
                           CLEAR
                         </button>
                         <div>
                           <button
                             onClick={() => handleCancelDate()}
-                            className="text-[12px] text-[#0AA7B8]"
+                            className="text-[12px] text-[#0AA7B8] hover:bg-black hover:text-white p-2 rounded"
                           >
                             CANCEL
                           </button>
                           <button
                             onClick={() => setOpen(false)}
-                            className="text-[12px] ml-2 text-[#0AA7B8]"
+                            className="text-[12px] ml-2 text-[#0AA7B8] hover:bg-teal-500 hover:text-white p-2 rounded"
                           >
                             OK
                           </button>
@@ -285,14 +410,14 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                   className="modal-input-field"
                   use12Hours
                   format="h:mm A"
-                  onChange={onChange}
+                  onChange={from_Time}
                 />
                 <div className="modal-label-name mt-2 mx-auto">To Time</div>
                 <TimePicker
                   className="modal-input-field"
                   use12Hours
                   format="h:mm A"
-                  onChange={onChange}
+                  onChange={to_Time}
                 />
               </div>
               <label className="label">
@@ -302,9 +427,16 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("status")}
               >
-                <option value=""></option>
-                <option value="single">single</option>
-                <option value="married">married</option>
+                <option value="0">Select</option>
+                <option value="Scheduled">Scheduled</option>
+                <option value="Hold">Hold</option>
+                <option value="Cancelled by Client">Cancelled by Client</option>
+                <option value="CC more than 24 hrs">CC more than 24 hrs</option>
+                <option value="CC less than 24 hrs">CC less than 24 hrs</option>
+                <option value="Cancelled by Provider">
+                  Cancelled by Provider
+                </option>
+                <option value="Rendered">Rendered</option>
               </select>
             </div>
 

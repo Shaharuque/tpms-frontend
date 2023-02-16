@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Table } from "antd";
 import { GiPlainCircle } from "react-icons/gi";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -9,15 +9,12 @@ import useToken from "../../../../../CustomHooks/useToken";
 import { useGetPatientAuthorizationQuery } from "../../../../../features/Patient_redux/authorization/authorizationApi";
 import AuthorizationActivityTable from "./AuthorizationActivityTable/AuthorizationActivityTable";
 import Loading from "../../../../../Loading/Loading";
-import SelectContactRate from "./AuthorizationModal/SelectContactRate";
-import AuthorizationEditModal from "./AuthorizationModal/AuthorizationEditModal";
-
-//data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
+import SelectContactRate from "./AuthorizationActivityModal/SelectContactRate";
+import AuthorizationEditModal from "./AuthorizationActivityModal/AuthorizationEditModal";
 
 const Authorization = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [authData, setAuthData] = useState([]);
   const [selectContact, setSelectContact] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   //row expand code related
@@ -26,7 +23,6 @@ const Authorization = () => {
   const { token } = useToken();
   const navigate = useNavigate();
   const { id } = useParams();
-
   //get patient authorization api
   const { data: authorizationData, isLoading: authorizationloading } =
     useGetPatientAuthorizationQuery({
@@ -35,10 +31,10 @@ const Authorization = () => {
         client_id: id,
       },
     });
-  console.log(
-    "All patient Authorization",
-    authorizationData?.client_authorization?.data
-  );
+  // console.log(
+  //   "All patient Authorization",
+  //   authorizationData?.client_authorization?.data
+  // );
   const clientAuthorizationData =
     authorizationData?.client_authorization?.data || [];
 
@@ -46,24 +42,6 @@ const Authorization = () => {
     //console.log("editdata edit", record);
     navigate(`/admin/authorization-Edit/${record?.id}`);
   };
-
-  // const authorizationpetinedata = async () => {
-  //   const body = {
-  //     client_id: id,
-  //   };
-  //   const authapidata = await PostfetchData({
-  //     endPoint: "admin/ac/patient/authorization",
-  //     payload: body,
-  //     token,
-  //   });
-
-  //   setAuthData(authapidata?.client_authorization?.data);
-  //   // console.log("api data ", authapidata?.client_authorization?.data);
-  // };
-
-  // useEffect(() => {
-  //   authorizationpetinedata();
-  // }, []);
 
   //expendable row ar data jeita expand korley show korbey tar jnno new component call and props hisabey each row ar record id send
   const expandedRowRender = (record) => {
@@ -170,7 +148,7 @@ const Authorization = () => {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
-      width: 100,
+      width: 150,
       filters: [
         {
           text: `Amet`,
@@ -181,6 +159,11 @@ const Authorization = () => {
           value: "Malesuada",
         },
       ],
+      render: (_, { authorization_name }) => {
+        if (authorization_name) {
+          return <h1>{authorization_name.split(" ")[0]}</h1>;
+        }
+      },
       filteredValue: filteredInfo.insurance || null,
       onFilter: (value, record) => record.insurance.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
@@ -194,7 +177,7 @@ const Authorization = () => {
       title: "Ins. ID",
       dataIndex: "uci_id",
       key: "uci_id",
-      width: 60,
+      width: 150,
       filters: [
         {
           text: `Amet`,
@@ -218,7 +201,7 @@ const Authorization = () => {
       title: "Auth No.",
       dataIndex: "authorization_number",
       key: "authorization_number",
-      width: 100,
+      width: 150,
       filters: [
         {
           text: `Amet`,
@@ -243,26 +226,24 @@ const Authorization = () => {
     },
     {
       title: "COB",
-      dataIndex: "cob",
-      key: "cob",
+      dataIndex: "is_primary",
+      key: "is_primary",
       width: 100,
-      filters: [
-        {
-          text: `Amet`,
-          value: "Amet",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.cob || null,
-      onFilter: (value, record) => record.cob.includes(value),
+      render: (_, { is_primary }) => {
+        if (is_primary === 1) {
+          return <h1 className="text-green-600">Primary</h1>;
+        } else if (is_primary === 2) {
+          return <h1 className="text-red-600">Secondary</h1>;
+        } else if (is_primary === 3) {
+          return <h1>Tertiary</h1>;
+        }
+      },
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
-        return a.cob > b.cob ? -1 : 1; //sorting problem solved using this logic
+        return a.is_primary > b.is_primary ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "cob" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "is_primary" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -272,7 +253,6 @@ const Authorization = () => {
       key: "operation",
       width: 150,
       render: (_, record) => {
-        console.log("render data", record);
         return (
           <div>
             <div className="flex justify-center gap-1 text-primary">
@@ -314,7 +294,7 @@ const Authorization = () => {
       title: "Status",
       key: "status",
       dataIndex: "status",
-      width: 60,
+      width: 100,
       render: (_, { status }) => {
         return (
           <>

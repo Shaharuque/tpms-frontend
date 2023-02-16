@@ -1,18 +1,26 @@
 import { Switch } from "antd";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useGetOtherSetupQuery } from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
+import {
+  useAddOtherSetupMutation,
+  useGetOtherSetupQuery,
+} from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
 import Loading from "../../../../../Loading/Loading";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import OtherSetUpBottom from "./OtherSetUpBottom/OtherSetUpBottom";
 
 const OtherSetup = () => {
-  const [active, setActive] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const store = [];
   const { token } = useToken();
   const { id } = useParams();
+  const [txTypedata, settxTypedata] = useState([]);
+  const [singleInput, setsingleInput] = useState([]);
+  const { register, control, handleSubmit, reset } = useForm();
 
   //Get otherSetup Api
   const {
@@ -25,24 +33,48 @@ const OtherSetup = () => {
     id,
   });
 
-  const OtherSetupApiData = otherSetup?.tx_type_data;
-  console.log("other setup api data", otherSetup);
-  console.log("other setup api data text type", otherSetup?.tx_type_data);
+  // ADD OTHER SETUP API
+  const [addOtherSetup, { isSuccess, data, isError: addotherSetupError }] =
+    useAddOtherSetupMutation();
 
-  const { register, control, handleSubmit, reset } = useForm({
-    defaultValues: {
-      edit_tx_id: otherSetup?.tx_type_data,
-      box_24j: otherSetup?.tx_type_data,
-      id_qualifire: otherSetup?.tx_type_data,
-    },
-  });
+  //Clients multi select data from server
+  useEffect(() => {
+    const othersetupApicall = async () => {
+      setLoading(true);
+      const res = await axios({
+        method: "GET",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/staff/other/setup/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token || null,
+        },
+      });
 
-  const { fields } = useFieldArray({
-    name: "tretmentName",
-    control,
-  });
+      settxTypedata(res.data?.tx_type_data);
+      reset();
+      setLoading(false);
+      // setsingleInput(res.data?.info);
+    };
+    othersetupApicall();
+  }, [id, token, isSuccess]);
 
-  console.log("main fields", fields);
+  //Success/Error message show added api
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (addotherSetupError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [addotherSetupError, data?.message, isSuccess]);
 
   const {
     adp_employee_id,
@@ -129,6 +161,7 @@ const OtherSetup = () => {
     updated_at,
   ]);
 
+  // bollian value all state
   const [paidTimeOff, setPaidTimeOff] = useState(BoolConverter(paid_time_off));
   const [exemptStaff, setExemptStaff] = useState(BoolConverter(exemt_staff));
   const [paidHoliday, setPaidHoliday] = useState(
@@ -142,46 +175,53 @@ const OtherSetup = () => {
     BoolConverter(1)
   );
 
-  // const data = [
-  //   {
-  //     treatment_name: "treatment Name",
-  //     box_24j: "null",
-  //     id_qualifire: "id_qualir  fire",
-  //   },
-  //   {
-  //     treatment_name: "treatment Name fgfgf ",
-  //     box_24j: "null",
-  //     id_qualifire: "id_qualifirrtr e",
-  //   },
-  //   {
-  //     treatment_name: "treatment Namegr",
-  //     box_24j: "null",
-  //     id_qualifire: "id_qualifire fgf",
-  //   },
-  //   {
-  //     treatment_name: "treatment Name 3333",
-  //     box_24j: "null",
-  //     id_qualifire: "id_qu  alifire",
-  //   },
-  // ];
+  // boolian value data control
+  useEffect(() => {
+    setPaidTimeOff(BoolConverter(paid_time_off));
+    setExemptStaff(BoolConverter(exemt_staff));
+    setPaidHoliday(BoolConverter(gets_paid_holiday));
+    setIsPartTime(BoolConverter(is_parttime));
+    setIsContractor(BoolConverter(is_contractor));
+  }, [
+    exemt_staff,
+    gets_paid_holiday,
+    is_contractor,
+    is_parttime,
+    paid_time_off,
+  ]);
+
+  console.log("single input", singleInput);
+
+  const txTypeStore =
+    (txTypedata &&
+      txTypedata.length > 0 &&
+      txTypedata.map((item) => store.push(item.id))) ||
+    [];
+
+  console.log("store", store);
 
   const onSubmit = (data) => {
     // console.log("from data", data);
-    const payLoad = {
+    const payload = {
       ...data,
+      edit_id: employee_id,
       paid_time_off: BoolConverter(paidTimeOff),
       exemt_staff: BoolConverter(exemptStaff),
       gets_paid_holiday: BoolConverter(paidHoliday),
       is_parttime: BoolConverter(isPartTime),
       is_contractor: BoolConverter(isContractor),
       provider_render_without: BoolConverter(providerWithoutNote),
+      edit_tx_id: store,
     };
-    console.log(payLoad);
+    console.log("payload", payload);
+    addOtherSetup({ token, payload });
   };
-
-  if (otherSetupLoading) {
+  if (otherSetupLoading || loading) {
     return <Loading />;
   }
+
+  // console.log("dm", dm);
+  // console.log("loading..", loading);
   return (
     <div className="md:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Other Setup</h1>
@@ -284,7 +324,7 @@ const OtherSetup = () => {
               type="text"
               name="custom_six "
               className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("custom_six ")}
+              {...register("custom_six")}
             />
           </div>
           <div>
@@ -306,8 +346,20 @@ const OtherSetup = () => {
               className="input-border input-font w-full focus:outline-none "
               {...register("degree_level")}
             >
-              <option value="Speech Therapist">Speech Therapist</option>
-              <option value="female">Female</option>
+              <option value=""></option>
+              <option value="1">Associate degree</option>
+              <option value="2">Bachelor’s Degree</option>
+              <option value="3">Master’s Degree</option>
+              <option value="4">Doctorate</option>
+              <option value="5">BCBA</option>
+              <option value="6">BCBA-D</option>
+              <option value="7">BCABA</option>
+              <option value="8">High School</option>
+              <option value="9">Enrolled Masters</option>
+              <option value="10">RBT</option>
+              <option value="11">PsyD</option>
+              <option value="13">LCSW</option>
+              <option value="15">BT</option>
             </select>
           </div>
           <div>
@@ -329,7 +381,7 @@ const OtherSetup = () => {
             <input
               className="input-border input-font w-full focus:outline-none py-[1px]"
               type="date"
-              {...register("valid_from")}
+              {...register("signature_valid_form")}
             />
           </div>
           <div>
@@ -339,7 +391,7 @@ const OtherSetup = () => {
             <input
               className="input-border input-font w-full focus:outline-none py-[1px]"
               type="date"
-              {...register("valid_to")}
+              {...register("signature_valid_to")}
             />
           </div>
           <div>
@@ -349,7 +401,7 @@ const OtherSetup = () => {
             <input
               type="file"
               className=" px-2 text-xs w-full"
-              {...register("fileName")}
+              {...register("signature_image")}
             />
           </div>
         </div>
@@ -427,9 +479,14 @@ const OtherSetup = () => {
           {/* {!otherSetupLoading ? (
             <Loading />
           ) : ( */}
-          <OtherSetUpBottom
-            propdata={{ fields, register, OtherSetupApiData }}
-          />
+          {loading ? (
+            <p>loadin</p>
+          ) : (
+            <OtherSetUpBottom
+              // propdata={{ fields, register, OtherSetupApiData, dm }}
+              propdata={{ register, txTypedata, loading }}
+            />
+          )}
           {/* )} */}
         </div>
         <div className="mt-10 ml-2">

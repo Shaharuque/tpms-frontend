@@ -155,17 +155,6 @@ const ManageClaims = () => {
       sortOrder: sortedInfo.columnKey === "M2" ? sortedInfo.order : null,
       ellipsis: true,
 
-      // render: (_, { id }) => {
-      //   //console.log("tags : ", lock);
-      //   return (
-      //     <div className="flex justify-center text-teal-070">
-      //       <div>
-      //         <BsThreeDots />
-      //       </div>
-      //     </div>
-      //   );
-      // },
-
       render: (_, { id }) => (
         <div className="flex justify-center">
           <Dropdown
@@ -225,7 +214,8 @@ const ManageClaims = () => {
                 name="type"
                 className="input-border input-font w-full focus:outline-none"
               >
-                <option value="all">Batch</option>
+                <option value=""></option>
+                <option value="Batch">Batch</option>
                 <option value="Tx Providers">Tx Providers</option>
                 <option value="CMS Therapist">CMS Therapist</option>
                 <option value="Service Type">Service Type</option>

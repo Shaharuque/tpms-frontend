@@ -1,6 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { headers } from "../../Misc/BaseClient";
 
 export const postLoginData = createAsyncThunk(
   "login/postLoginData",

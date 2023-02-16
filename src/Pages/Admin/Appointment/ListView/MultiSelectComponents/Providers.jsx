@@ -20,12 +20,12 @@ const Providers = ({ stuffs, setStuffsId }) => {
   };
 
   const dataOptionsStuff = stuffDataProcess();
-  console.log(dataOptionsStuff);
+  //console.log(dataOptionsStuff);
 
   const customValueRenderer = (selected, _options) => {
     if (selected.length) {
       if (selected.length > 3) return `All Selected ${selected.length}`;
-      return selected.map(({ label }) => label);
+      return selected.map(({ label }) => label + "," + " ");
     }
     return "None selected";
   };
