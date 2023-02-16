@@ -1,6 +1,4 @@
 import React from "react";
-import { MdLaunch } from "react-icons/md";
-import { MdDeleteForever } from "react-icons/md";
 export default function CredenTial() {
   return (
     <div>

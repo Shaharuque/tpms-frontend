@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HiPlus } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import check from "../../../../Assets/contact.png";
 import { Table } from "antd";
 import DocumentsAction from "./Documents/DocumentsAction";
 import AddDocuments from "./Documents/AddDocuments";
+import useToken from "../../../../../CustomHooks/useToken";
+import { useGetdocumentsQuery } from "../../../../../features/Patient_redux/patientDocuments/documentsAPI";
+import Loading from "../../../../../Loading/Loading";
+import { DatabaseDateConverter } from "../../../../Shared/Dateconverter/DateConverter";
 
 const Documents = () => {
   const { id } = useParams();
+  const { token } = useToken();
   console.log("patient Documents", id);
   const [openEditModal, setOpenEditModal] = useState(false);
   const handleClose = () => {
@@ -16,26 +21,38 @@ const Documents = () => {
   const handleClickOpen = () => {
     setOpenEditModal(true);
   };
-  const [tableData, setTableData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
-  //   fetch data
-  useEffect(() => {
-    fetch("../../../All_Fake_Api/PatientDocuments.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setTableData(d);
-        console.log(tableData, "tableData");
-        // setLoading2(false);
-      });
-  }, []);
+  const {
+    data,
+    isSuccess,
+    isLoading: documentLoading,
+    isError,
+  } = useGetdocumentsQuery({ token, id });
+  console.log("api data come", data?.documents?.data);
+
+  if (documentLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return (
+      <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
+        <p>Backend Error</p>
+        <button className="text-black">X</button>
+      </div>
+    );
+  }
+
+  // const uplodedOn = DatabaseDateConverter(data.documents.data?.created_at);
+  console.log("uploader on  ", data.documents.data?.created_at);
 
   const column = [
     {
       title: "Description",
-      dataIndex: "Document",
-      key: "Document",
+      dataIndex: "description",
+      key: "description",
       width: 120,
       filters: [{}],
       filteredValue: filteredInfo.Document || null,
@@ -49,8 +66,8 @@ const Documents = () => {
 
     {
       title: "File Name",
-      key: "File_name",
-      dataIndex: "File_name",
+      key: "file_name",
+      dataIndex: "file_name",
       width: 100,
       filters: [{}],
       filteredValue: filteredInfo.File_name || null,
@@ -65,18 +82,26 @@ const Documents = () => {
 
     {
       title: "Uploaded On",
-      key: "uploaded_on",
-      dataIndex: "uploaded_on",
+      key: "created_at",
+      dataIndex: "created_at",
+      render: (_, { created_at }) => {
+        console.log("render data", created_at);
+        return (
+          <div>
+            <p>{DatabaseDateConverter(created_at)}</p>
+          </div>
+        );
+      },
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.uploaded_on || null,
+      filteredValue: filteredInfo.created_at || null,
       onFilter: (value, record) => record.uploaded_on.includes(value),
       //   sorter is for sorting asc or dsc purFile_name
       sorter: (a, b) => {
-        return a.uploaded_on > b.uploaded_on ? -1 : 1; //sorting problem solved using this logic
+        return a.created_at > b.created_at ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "uploaded_on" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "created_by" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -85,20 +110,20 @@ const Documents = () => {
       dataIndex: "created_by",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.created_by || null,
+      filteredValue: filteredInfo.created_at || null,
       onFilter: (value, record) => record.created_by.includes(value),
       //   sorter is for sorting asc or dsc purFile_name
       sorter: (a, b) => {
-        return a.created_by > b.created_by ? -1 : 1; //sorting problem solved using this logic
+        return a.created_at > b.created_at ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "created_by" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "created_at" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Expired Date",
-      key: "expired_date",
-      dataIndex: "expired_date",
+      key: "exp_date",
+      dataIndex: "exp_date",
       width: 100,
       filters: [{}],
       filteredValue: filteredInfo.expired_date || null,
@@ -134,12 +159,14 @@ const Documents = () => {
 
   return (
     <div className="h-[100vh]">
-      <div className="mt-10">
-        <img className="mx-auto" src={check} alt="" />
-        <p className="text-xs font-light text-gray-600 flex items-center justify-center my-2">
-          admin admin has no document
-        </p>
-      </div>
+      {!isSuccess && (
+        <div className="mt-10">
+          <img className="mx-auto" src={check} alt="" />
+          <p className="text-xs font-light text-gray-600 flex items-center justify-center my-2">
+            admin admin has no document
+          </p>
+        </div>
+      )}
 
       <div className="flex items-center justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
@@ -161,7 +188,7 @@ const Documents = () => {
           columns={column}
           bordered
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-          dataSource={tableData}
+          dataSource={data?.documents?.data}
           onChange={handleChange}
         />
       </div>

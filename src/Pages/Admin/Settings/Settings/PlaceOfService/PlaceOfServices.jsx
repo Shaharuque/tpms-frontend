@@ -2,7 +2,6 @@ import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
-import { BiLeftArrow } from "react-icons/bi";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import useToken from "../../../../../CustomHooks/useToken";
@@ -15,7 +14,6 @@ const PlaceOfServices = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
   const [recordData, setRecordData] = useState();
-  const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const { token } = useToken();
