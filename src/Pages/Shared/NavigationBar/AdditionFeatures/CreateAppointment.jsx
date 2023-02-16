@@ -45,17 +45,19 @@ const CreateAppointment = ({ handleClose, clicked }) => {
     getAppointmentPatientAuth,
     {
       data: patientAuthData,
-      isLaoding: patientAuthLoading,
+      isLoading: patientAuthLoading,
       isError: patientAuthError,
     },
   ] = useGetAppointmentPatientAuthMutation();
+
+  console.log("loaidng feature", patientsNameLoading, patientAuthLoading);
 
   //Appointment Get Patient Authorization Activity/Service Api
   const [
     getAppointmentAuthorizationActivity,
     {
       data: authorizationActivityData,
-      isLaoding: authorizationActivityLoading,
+      isLoading: authorizationActivityLoading,
       isError: authorizationActivityError,
     },
   ] = useGetAppointmentAuthorizationActivityMutation();
@@ -213,10 +215,12 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                   {billable ? "Billable" : "Non-Billable"}
                 </label>
               </div>
-
               <label className="label">
                 <span className="modal-label-name">Patient Name</span>
               </label>
+              {(authorizationActivityLoading || patientAuthLoading) && (
+                <h1>Loading</h1>
+              )}
               <select
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("client_id")}

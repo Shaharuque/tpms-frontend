@@ -31,9 +31,19 @@ import { useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
 import { toast } from "react-toastify";
+import { timeConverter } from "../../../Shared/TimeConverter/TimeConverter";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
+
+// To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
+const dateConverter = (date) => {
+  const afterSplit = date?.split("-");
+  //console.log(afterSplit);
+  if (afterSplit?.length > 0) {
+    return `${afterSplit[1]}/${afterSplit[2]}/${afterSplit[0]}`;
+  }
+};
 
 const ListView = () => {
   const { token } = useToken();
@@ -491,7 +501,9 @@ const ListView = () => {
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
-          <div className=" text-black text-center">{record?.schedule_date}</div>
+          <div className=" text-black text-center">
+            {dateConverter(record?.schedule_date)}
+          </div>
         );
       },
       filteredValue: filteredInfo.schedule_date || null,
@@ -508,7 +520,7 @@ const ListView = () => {
       title: "Hours",
       dataIndex: "Hours",
       key: "Hours",
-      width: 100,
+      width: 200,
       filters: [
         {
           text: `9:57 PM`,
@@ -519,6 +531,15 @@ const ListView = () => {
           value: "3:01 PM",
         },
       ],
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-gray-600 text-center ">
+            {timeConverter(record?.from_time?.split(" ")[1])} to{" "}
+            {timeConverter(record?.to_time?.split(" ")[1])}
+          </div>
+        );
+      },
       filteredValue: filteredInfo.Hours || null,
       onFilter: (value, record) => {
         return record.Hours.includes(value);

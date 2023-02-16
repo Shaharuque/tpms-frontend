@@ -1,4 +1,4 @@
-import { Switch, TimePicker } from "antd";
+import { TimePicker } from "antd";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -15,11 +15,27 @@ import {
 import { useAppointmentInfoQuery } from "../../../../../features/Appointment_redux/appointmentApi";
 import useToken from "../../../../../CustomHooks/useToken";
 
+//To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
+const dateConverter = (date) => {
+  const afterSplit = date?.split("-");
+  console.log(afterSplit);
+  if (afterSplit?.length > 0) {
+    return `${afterSplit[1]}/${afterSplit[2]}/${afterSplit[0]}`;
+  }
+};
+//To Convert Date  (Pacific Standard Time) to MM-DD-YY
+function stringDateConverter(str) {
+  var date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [mnth, day, date.getFullYear()].join("-");
+}
+
 const EditSession = ({ handleClose, openEdit, appointmentId }) => {
   console.log("managesession row id", appointmentId);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState();
-  console.log("selected date", date);
+  console.log("selected date", stringDateConverter(date));
   const { register, handleSubmit, reset } = useForm();
   const [clientId, setClientId] = useState();
   const [authId, setAuthId] = useState(null);
@@ -47,11 +63,15 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
     from_time,
     to_time,
   } = appointmentInfo?.appointments || {};
-  console.log("client name", appointmentInfo?.appointments);
 
-  if (schedule_date) {
-    console.log(new Date(schedule_date).toUTCString());
-  }
+  console.log("Patient Info", appointmentInfo?.appointments);
+  let dateConverted = dateConverter(schedule_date);
+
+  useEffect(() => {
+    if (dateConverted) {
+      setDate(new Date(dateConverted));
+    }
+  }, [dateConverted]);
 
   //Setting default clientId
   useEffect(() => {
@@ -156,7 +176,7 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        from_time: schedule_date ? schedule_date : date.toLocaleDateString(),
+        // from_time: date?.toLocaleDateString(),
         client_id: api_app_client?.id,
         authorization_id: api_app_auth?.id,
         activity_id: authorization_activity_id,
@@ -166,20 +186,22 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
       });
     }, 1000);
   }, [
-    date,
+    // date,
     reset,
     api_app_client?.id,
     api_app_auth?.id,
     authorization_activity_id,
     provider_id,
     location,
-    schedule_date,
     status,
   ]);
 
   const onSubmit = (data) => {
-    console.log(data);
-    // reset();
+    const payload = {
+      ...data,
+      from_time: stringDateConverter(date),
+    };
+    console.log(payload);
   };
   return (
     <div>
@@ -314,7 +336,7 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                 onClick={() => setOpen(!open)}
                 value={date ? date.toLocaleDateString() : "Select a Date"}
                 className="col-span-2 modal-input-field ml-1 w-full px-2"
-                {...register("from_time")}
+                // {...register("from_time")}
               />
 
               {open && (
@@ -353,10 +375,7 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                     )}
                     {/* single calendar */}
                     <div className="col-span-2 w-[95%] my-0 mx-auto">
-                      <Calendar
-                        onChange={setDate}
-                        defaultValue={new Date(schedule_date).toUTCString()}
-                      />
+                      <Calendar onChange={setDate} defaultValue={date} />
                       <div className="flex justify-between rounded-b-[5px] bg-white py-1 rounded-br-[5px]">
                         <button
                           onClick={() => handleClearDate()}
@@ -435,7 +454,7 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" flex items-end justify-end mt-2">
               <button className=" pms-button mr-2" type="submit">
-                Add Appointment
+                Edit Appointment
               </button>
 
               <button className="pms-close-button" onClick={handleClose}>
