@@ -8,18 +8,31 @@ import { Calendar } from "react-calendar";
 import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { RiArrowLeftRightLine } from "react-icons/ri";
+import GlobalMultiSelect from "../../../../Shared/CustomComponents/GlobalMultiSelect";
+import ProcessClaimsMultiSelect from "../../../../Shared/CustomComponents/ProcessClaimsMultiSelect";
+import { usePayorByDateMutation } from "../../../../../features/Billing_redux/Primary_Billing_redux/processingClaimApi";
+import useToken from "../../../../../CustomHooks/useToken";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
   const [insuranceSelect, setInsuranceSelect] = useState("");
+  const [toDate, settoDate] = useState(null);
   const [sortBy1, setSortBy1] = useState("");
   const [sortBy2, setSortBy2] = useState("");
   const [TData, setTData] = useState([]);
   const [date, setDate] = useState(new Date());
   const [openSingleCalendar, setOpenSingleCalendar] = useState(false);
+  const { token } = useToken();
+  // PayorByDate post method callling api
+
+  const [PayorByDate, { data: responsePayorData, isLoading, isSuccess }] =
+    usePayorByDateMutation();
+
+  console.log("api data", responsePayorData);
 
   const onChange = (date, dateString) => {
     console.log(date, dateString);
+    settoDate(dateString);
   };
 
   const handleSingleClearDate = () => {
@@ -253,6 +266,11 @@ const ProcessingClaim = () => {
 
   const handleGO = () => {
     setInsurance(true);
+    const payload = {
+      to_date: toDate,
+    };
+    PayorByDate({ token, payload });
+    console.log("hello go button", toDate);
   };
 
   const { handleSubmit, register, reset } = useForm();
@@ -323,8 +341,13 @@ const ProcessingClaim = () => {
       setOpenCalendar(false);
     }
   };
-  //end outside click
-  //end outside click
+
+  // const MapingPayorbyDate =
+  //   responsePayorData.length > 0 && responsePayorData.map((item) => item);
+  // //end outside click
+  // //end outside click
+  // console.log("MapingPayorbyDate", MapingPayorbyDate);
+
   return (
     <div className={!tableOpen ? "h-[100vh]" : ""}>
       <h1 className="text-lg text-orange-400">Processing Claim(s)</h1>
@@ -406,7 +429,7 @@ const ProcessingClaim = () => {
                       Insurance<span className="text-red-500">*</span>
                     </span>
                   </label>
-                  <select
+                  {/* <select
                     onChange={(e) => setInsuranceSelect(e.target.value)}
                     name="type"
                     className="input-border input-font w-full focus:outline-none"
@@ -414,7 +437,9 @@ const ProcessingClaim = () => {
                     <option value="all">All</option>
                     <option value="patient">Patient</option>
                     <option value="provider">Provider</option>
-                  </select>
+                  </select> */}
+
+                  <ProcessClaimsMultiSelect payorData={responsePayorData} />
                 </div>
                 {/* Sort By  */}
                 <div>
