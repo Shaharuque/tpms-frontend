@@ -1,8 +1,7 @@
 import { Switch } from "antd";
-import { responsiveMap } from "antd/lib/_util/responsiveObserve";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
@@ -11,17 +10,15 @@ import {
   useGetOtherSetupQuery,
 } from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
 import Loading from "../../../../../Loading/Loading";
-import { fetchData } from "../../../../../Misc/Helper";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import OtherSetUpBottom from "./OtherSetUpBottom/OtherSetUpBottom";
 
 const OtherSetup = () => {
-  const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(false);
   const store = [];
   const { token } = useToken();
   const { id } = useParams();
-  const [dm, setdm] = useState([]);
+  const [txTypedata, settxTypedata] = useState([]);
   const [singleInput, setsingleInput] = useState([]);
   const { register, control, handleSubmit, reset } = useForm();
 
@@ -54,7 +51,7 @@ const OtherSetup = () => {
         },
       });
 
-      setdm(res.data?.tx_type_data);
+      settxTypedata(res.data?.tx_type_data);
       reset();
       setLoading(false);
       // setsingleInput(res.data?.info);
@@ -196,7 +193,10 @@ const OtherSetup = () => {
   console.log("single input", singleInput);
 
   const txTypeStore =
-    (dm && dm.length > 0 && dm.map((item) => store.push(item.id))) || [];
+    (txTypedata &&
+      txTypedata.length > 0 &&
+      txTypedata.map((item) => store.push(item.id))) ||
+    [];
 
   console.log("store", store);
 
@@ -484,7 +484,7 @@ const OtherSetup = () => {
           ) : (
             <OtherSetUpBottom
               // propdata={{ fields, register, OtherSetupApiData, dm }}
-              propdata={{ register, dm, loading }}
+              propdata={{ register, txTypedata, loading }}
             />
           )}
           {/* )} */}

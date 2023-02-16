@@ -167,13 +167,14 @@ const PatientInformation = () => {
       },
     });
 
-  useEffect(() => {
-    reset({
-      address: patient_details?.client_address,
-      number: testingobj.allNumber,
-      Email: testingobj.allEmail,
-    });
-  }, [patient_details?.client_address]);
+  // this code very important
+  // useEffect(() => {
+  //   reset({
+  //     address: patient_details?.client_address,
+  //     number: testingobj.allNumber,
+  //     Email: testingobj.allEmail,
+  //   });
+  // }, [patient_details?.client_address]);
 
   const { fields, append, remove } = useFieldArray({
     control,

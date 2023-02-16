@@ -5,13 +5,12 @@ const OtherSetUpBottom = ({ propdata }) => {
   // if (!propdata) {
   //   return <Loading />;
   // }
-  const { register, dm, Loading } = propdata;
-  console.log("fields props", dm);
+  const { register, txTypedata } = propdata;
   return (
     <div>
-      {dm &&
-        dm.length > 0 &&
-        dm.map((field, index) => {
+      {txTypedata &&
+        txTypedata.length > 0 &&
+        txTypedata.map((field, index) => {
           return (
             <div key={field.id} className="flex items-center gap-2 mb-2">
               <h3 className="text-[14px] font-medium w-[440px]">
@@ -24,7 +23,6 @@ const OtherSetUpBottom = ({ propdata }) => {
                 // name={`${tx_type}.${box_24j}`}
                 className="input-border input-font w-full focus:outline-none py-[1px]"
                 {...register(`box_24j.${index}`)}
-                // {...register(`box_24j.${index}.box_24j`)}
               />
 
               <select
@@ -32,9 +30,6 @@ const OtherSetUpBottom = ({ propdata }) => {
                 // defaultValue={}
                 {...register(`id_qualifire.${index}`)}
               >
-                {/* <option value={field.id_qualifire || "ID Qualifier(BT)"}>
-                {field.id_qualifire}
-              </option> */}
                 <option value={field.id_qualifire}>
                   {field.id_qualifire || "ID Qualifier(BT)"}
                 </option>
