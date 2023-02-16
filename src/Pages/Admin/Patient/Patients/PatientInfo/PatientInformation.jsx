@@ -135,14 +135,45 @@ const PatientInformation = () => {
 
   // testing form
 
+  const data = useSelector((state) => state.patientInfo);
+  const patient_details = data?.patientDetails?.clients;
+  const loading = data?.loading;
+  const primaryPhone = patient_details?.phone_number;
+  const primaryEmail = patient_details?.email;
+  // setPatientADd(patient_details?.client_address);
+  const [patientAdd, setPatientADd] = useState(patient_details?.client_address);
+  const [dob, setDob] = useState();
+  console.log("dob", dob);
+  //for showing default date in real time
+  useEffect(() => {
+    setDob(patient_details?.client_dob);
+  }, [patient_details?.client_dob]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("hello world ");
+    }, 1000);
+  }, [patient_details]);
+
+  console.log("check pttt data", patient_details?.client_address);
+
   const { register, control, handleSubmit, reset, setValue, getValues } =
     useForm({
       defaultValues: {
-        address: testingobj.address,
+        // address: testingobj.address,
+        address: patient_details?.client_address,
         number: testingobj.allNumber,
         Email: testingobj.allEmail,
       },
     });
+
+  useEffect(() => {
+    reset({
+      address: patient_details?.client_address,
+      number: testingobj.allNumber,
+      Email: testingobj.allEmail,
+    });
+  }, [patient_details?.client_address]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -193,19 +224,6 @@ const PatientInformation = () => {
   const { id } = useParams();
   //console.log("patient Info", id);
   const dispatch = useDispatch();
-
-  const data = useSelector((state) => state.patientInfo);
-  const patient_details = data?.patientDetails?.clients;
-  const loading = data?.loading;
-  const primaryPhone = patient_details?.phone_number;
-  const primaryEmail = patient_details?.email;
-
-  const [dob, setDob] = useState();
-  console.log("dob", dob);
-  //for showing default date in real time
-  useEffect(() => {
-    setDob(patient_details?.client_dob);
-  }, [patient_details?.client_dob]);
 
   console.log("patient_details===", patient_details);
   useEffect(() => {
@@ -285,7 +303,7 @@ const PatientInformation = () => {
     // //console.log("getvalue zip", getValues("zip"));
   };
 
-  // console.log("obj", obj);
+  console.log("fields", fields);
   return (
     <div>
       <div>
@@ -307,14 +325,15 @@ const PatientInformation = () => {
             {/* address  */}
             <div>
               <PrimaryAddress append={append} rg={register} />
-
-              <DynamicAddress
-                adData={{
-                  fields,
-                  register,
-                  remove,
-                }}
-              />
+              {patient_details?.admin_id && (
+                <DynamicAddress
+                  adData={{
+                    fields,
+                    register,
+                    remove,
+                  }}
+                />
+              )}
 
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
                 <div>

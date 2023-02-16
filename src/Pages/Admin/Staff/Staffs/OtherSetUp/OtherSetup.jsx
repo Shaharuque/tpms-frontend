@@ -1,4 +1,6 @@
 import { Switch } from "antd";
+import { responsiveMap } from "antd/lib/_util/responsiveObserve";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -9,14 +11,19 @@ import {
   useGetOtherSetupQuery,
 } from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
 import Loading from "../../../../../Loading/Loading";
+import { fetchData } from "../../../../../Misc/Helper";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import OtherSetUpBottom from "./OtherSetUpBottom/OtherSetUpBottom";
 
 const OtherSetup = () => {
   const [active, setActive] = useState(false);
+  const [loading, setLoading] = useState(false);
   const store = [];
   const { token } = useToken();
   const { id } = useParams();
+  const [dm, setdm] = useState([]);
+  const [singleInput, setsingleInput] = useState([]);
+  const { register, control, handleSubmit, reset } = useForm();
 
   //Get otherSetup Api
   const {
@@ -33,6 +40,28 @@ const OtherSetup = () => {
   const [addOtherSetup, { isSuccess, data, isError: addotherSetupError }] =
     useAddOtherSetupMutation();
 
+  //Clients multi select data from server
+  useEffect(() => {
+    const othersetupApicall = async () => {
+      setLoading(true);
+      const res = await axios({
+        method: "GET",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/staff/other/setup/${id}`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token || null,
+        },
+      });
+
+      setdm(res.data?.tx_type_data);
+      reset();
+      setLoading(false);
+      // setsingleInput(res.data?.info);
+    };
+    othersetupApicall();
+  }, [id, token, isSuccess]);
+
   //Success/Error message show added api
   useEffect(() => {
     if (isSuccess) {
@@ -48,29 +77,7 @@ const OtherSetup = () => {
         theme: "dark",
       });
     }
-  }, [addotherSetupError, data?.message, isError, isSuccess]);
-
-  console.log("post api", data);
-  console.log("Errpr api", addotherSetupError);
-
-  const OtherSetupApiData = otherSetup?.tx_type_data;
-  console.log("other setup api data", otherSetup);
-  console.log("other setup api data text type", otherSetup?.tx_type_data);
-
-  const { register, control, handleSubmit, reset } = useForm({
-    defaultValues: {
-      edit_tx_id: otherSetup?.tx_type_data,
-      box_24j: otherSetup?.tx_type_data,
-      id_qualifire: otherSetup?.tx_type_data,
-    },
-  });
-
-  const { fields } = useFieldArray({
-    name: "tretmentName",
-    control,
-  });
-
-  console.log("main fields", fields);
+  }, [addotherSetupError, data?.message, isSuccess]);
 
   const {
     adp_employee_id,
@@ -99,12 +106,6 @@ const OtherSetup = () => {
     updated_at,
   } = otherSetup?.info || {};
 
-  console.log("tx_type_data", otherSetup?.tx_type_data);
-
-  const txTypeStore =
-    otherSetup?.tx_type_data.map((item) => store.push(item.id)) || [];
-
-  console.log("all txtype store", store);
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
@@ -192,34 +193,18 @@ const OtherSetup = () => {
     paid_time_off,
   ]);
 
-  // const data = [
-  //   {
-  //     treatment_name: "treatment Name",
-  //     box_24j: "null",
-  //     id_qualifire: "id_qualir  fire",
-  //   },
-  //   {
-  //     treatment_name: "treatment Name fgfgf ",
-  //     box_24j: "null",
-  //     id_qualifire: "id_qualifirrtr e",
-  //   },
-  //   {
-  //     treatment_name: "treatment Namegr",
-  //     box_24j: "null",
-  //     id_qualifire: "id_qualifire fgf",
-  //   },
-  //   {
-  //     treatment_name: "treatment Name 3333",
-  //     box_24j: "null",
-  //     id_qualifire: "id_qu  alifire",
-  //   },
-  // ];
+  console.log("single input", singleInput);
+
+  const txTypeStore =
+    (dm && dm.length > 0 && dm.map((item) => store.push(item.id))) || [];
+
+  console.log("store", store);
 
   const onSubmit = (data) => {
     // console.log("from data", data);
     const payload = {
       ...data,
-      edit_id: data.employee_id,
+      edit_id: employee_id,
       paid_time_off: BoolConverter(paidTimeOff),
       exemt_staff: BoolConverter(exemptStaff),
       gets_paid_holiday: BoolConverter(paidHoliday),
@@ -231,10 +216,12 @@ const OtherSetup = () => {
     console.log("payload", payload);
     addOtherSetup({ token, payload });
   };
-
-  if (otherSetupLoading) {
+  if (otherSetupLoading || loading) {
     return <Loading />;
   }
+
+  // console.log("dm", dm);
+  // console.log("loading..", loading);
   return (
     <div className="md:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Other Setup</h1>
@@ -394,7 +381,7 @@ const OtherSetup = () => {
             <input
               className="input-border input-font w-full focus:outline-none py-[1px]"
               type="date"
-              {...register("valid_from")}
+              {...register("signature_valid_form")}
             />
           </div>
           <div>
@@ -404,7 +391,7 @@ const OtherSetup = () => {
             <input
               className="input-border input-font w-full focus:outline-none py-[1px]"
               type="date"
-              {...register("valid_to")}
+              {...register("signature_valid_to")}
             />
           </div>
           <div>
@@ -414,7 +401,7 @@ const OtherSetup = () => {
             <input
               type="file"
               className=" px-2 text-xs w-full"
-              {...register("fileName")}
+              {...register("signature_image")}
             />
           </div>
         </div>
@@ -492,9 +479,14 @@ const OtherSetup = () => {
           {/* {!otherSetupLoading ? (
             <Loading />
           ) : ( */}
-          <OtherSetUpBottom
-            propdata={{ fields, register, OtherSetupApiData }}
-          />
+          {loading ? (
+            <p>loadin</p>
+          ) : (
+            <OtherSetUpBottom
+              // propdata={{ fields, register, OtherSetupApiData, dm }}
+              propdata={{ register, dm, loading }}
+            />
+          )}
           {/* )} */}
         </div>
         <div className="mt-10 ml-2">
