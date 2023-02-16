@@ -12,8 +12,6 @@ import Loading from "../../../../../Loading/Loading";
 import SelectContactRate from "./AuthorizationActivityModal/SelectContactRate";
 import AuthorizationEditModal from "./AuthorizationActivityModal/AuthorizationEditModal";
 
-//data tey key dewa lagbey id diley option select kaj korey na key:"1" ditey hobey backend thekey data ashar somoy id:'1' diley hobey na
-
 const Authorization = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
