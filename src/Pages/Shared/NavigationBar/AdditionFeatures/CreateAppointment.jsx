@@ -191,6 +191,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
             <h1 className="text-lg text-left text-orange-400 ">
               Add Appointment
             </h1>
+
             <IoCloseCircleOutline
               onClick={handleClose}
               className="text-gray-600 text-2xl hover:text-primary"
