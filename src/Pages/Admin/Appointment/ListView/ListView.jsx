@@ -7,13 +7,11 @@ import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
-import { BiSearchAlt } from "react-icons/bi";
 import ManageTableAction from "./ListView/ManageTableAction";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
-import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import Clients from "./MultiSelectComponents/Clients";
 import Providers from "./MultiSelectComponents/Providers";
@@ -21,11 +19,7 @@ import useToken from "../../../../CustomHooks/useToken";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import {
-  manageSessionApi,
-  useGetManageSessionListQuery,
-  useManageSessionStatusChangeMutation,
-} from "../../../../features/Appointment_redux/ListView/manageSessionApi";
+import { useManageSessionStatusChangeMutation } from "../../../../features/Appointment_redux/ListView/manageSessionApi";
 import { useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
@@ -57,7 +51,6 @@ const ListView = () => {
   const [patientId, setPatientId] = useState();
   const [stuffsId, setStuffsId] = useState([]);
   const [formData, setFromData] = useState(null);
-  const [hasMore, sethasMore] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [responseError, setResponseError] = useState(null);
@@ -66,15 +59,46 @@ const ListView = () => {
   const [statusName, setStatusName] = useState(null);
   const [actionType, setActionType] = useState(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const dispatch = useDispatch();
-  //console.log("position", location);
+  const [items, setItems] = useState([]);
+  const [check, setCheck] = useState(false);
+  const [sessionlist, setSessionlist] = useState([]);
+  const [listLoading, setListLoading] = useState(false);
+  const [paginateActive, setPaginateActive] = useState(false);
+
+  //Manage Session Get Session List From API
+  useEffect(() => {
+    const getManageSession = async () => {
+      setListLoading(true);
+      const res = await axios({
+        method: "POST",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token || null,
+        },
+        data: formData,
+      });
+      const data = res?.data?.appointments;
+      setItems(data?.data);
+      setTotalPage(data?.last_page);
+      setListLoading(false);
+    };
+    getManageSession();
+  }, [token, page, formData]);
+
+  useEffect(() => {
+    if (items?.length > 0) {
+      setTable(true);
+    }
+  }, [items]);
 
   //Manage Session Appointment Status Change API
   const [
     manageSessionStatusChange,
     { data: statusChangeData, isSuccess: actionSuccess },
   ] = useManageSessionStatusChangeMutation();
-  //console.log("after status change", statusChangeData);
+  console.log("after status change", actionSuccess);
 
   useEffect(() => {
     if (statusChangeData?.status === "success" && actionType !== "delete") {
@@ -84,6 +108,22 @@ const ListView = () => {
         autoClose: 5000,
         theme: "dark",
       });
+      //Session List refetch based on the selected page number
+      const getManageSession = async () => {
+        const res = await axios({
+          method: "POST",
+          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token || null,
+          },
+          data: formData,
+        });
+        const data = res?.data?.appointments;
+        setItems(data?.data);
+      };
+      getManageSession();
     }
     if (statusChangeData?.status === "success" && actionType === "delete") {
       setSelectedRowKeys([]);
@@ -92,49 +132,24 @@ const ListView = () => {
         autoClose: 5000,
         theme: "dark",
       });
+      //Session List refetch based on the selected page number
+      const getManageSession = async () => {
+        const res = await axios({
+          method: "POST",
+          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token || null,
+          },
+          data: formData,
+        });
+        const data = res?.data?.appointments;
+        setItems(data?.data);
+      };
+      getManageSession();
     }
   }, [statusChangeData?.status]);
-
-  //Manage Session List=> Get Session List API
-  const { data: menageSessionList, isLoading: listLoading } =
-    useGetManageSessionListQuery({
-      token,
-      page,
-      payload: formData,
-    });
-  const list = menageSessionList?.appointments?.data;
-  useEffect(() => {
-    if (list?.length > 0) {
-      setTable(true);
-      setTotalPage(menageSessionList?.appointments?.last_page);
-    }
-  }, [list, menageSessionList?.appointments?.last_page]);
-  // //useEffect a dependency na diley sheita ekbar call hoy(in general)
-  // useEffect(() => {
-  //   if (formData !== null) {
-  //     //now manually action dispatch in RTK query
-  //     setIsLoading(true);
-  //     dispatch(
-  //       manageSessionApi.endpoints.getManageSessionList.initiate({
-  //         token,
-  //         payload: formData,
-  //         page: page,
-  //       })
-  //     )
-  //       .unwrap() //action dispatch korar por jei result pabo sheita promisify korar jnno unwrap() use kora hoisey
-  //       //promisify hobar por async-awit or .then use kora jetey parey
-  //       .then((data) => {
-  //         setIsLoading(false);
-  //         console.log("rtk query data", data);
-  //         setItems(data?.appointments?.data);
-  //         setTotalPage(data?.appointments?.last_page);
-  //         setTable(true);
-  //       })
-  //       .catch((err) => {
-  //         setResponseError("There was a problem!");
-  //       });
-  //   }
-  // }, [dispatch, formData, token, page]);
 
   //Appointment Pos get API
   const { data: posData, isLoading: posDataLoading } =
@@ -158,7 +173,6 @@ const ListView = () => {
     };
     getPatientsData();
   }, [token]);
-  // console.log("patients", patients);
   //console.log("selected clients", patientId);
 
   //Provider multi select data from server(Provider=>Staff)
@@ -178,12 +192,35 @@ const ListView = () => {
     };
     getProviderData();
   }, [token]);
-  // console.log("stuffs", stuffs);
   //console.log("selected stuffs", stuffsId);
 
-  const receivedData = (data) => {
-    //console.log(data);
+  //-----------Dynamic column multi value filtering--------------//
+  //For getting unique value
+  function getUnique(array) {
+    let uniqueArray = [];
+
+    // Loop through array values
+    for (let value of array) {
+      if (uniqueArray.indexOf(value) === -1) {
+        uniqueArray.push(value);
+      }
+    }
+    return uniqueArray;
+  }
+  //this funtion to get dynamic filter value-text
+  const patientSearch = () => {
+    let patientArray = items?.map((d) => d?.app_client?.client_full_name);
+    const resultArray = getUnique(patientArray);
+    //return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      newArray.push({ text: x, value: x });
+    }
+    return newArray;
   };
+  // if (items?.length > 0) {
+  //   console.log(patientSearch());
+  // }
 
   //Date converter function [yy-mm-dd]
   function convert(str) {
@@ -270,10 +307,11 @@ const ListView = () => {
       .then((data) => setTData(data));
   }, []);
 
-  //handle pagination
+  //Handle Pagination
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
+    setFilteredInfo({});
   };
 
   // Table Data Columns Defined Here //
@@ -307,28 +345,7 @@ const ListView = () => {
       dataIndex: "client_full_name",
       key: "client_full_name",
       width: 150,
-      filters: [
-        {
-          text: "Meghan Markle",
-          value: "Meghan  Markle",
-        },
-        {
-          text: `Aasiya  Farha`,
-          value: "Aasiya  Farha",
-        },
-        {
-          text: "Donovan",
-          value: "Donovan",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-      ],
+      filters: items?.length > 0 && patientSearch(),
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -659,102 +676,26 @@ const ListView = () => {
   //   },
   // };
 
-  //get rows id to do some action on them
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selected row-keys: ", newSelectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-    getCheckboxProps: (record) => {
-      // console.log("record", record);
-      const rowIndex = record?.is_locked;
-      return {
-        disabled: rowIndex === 1,
-      };
-    },
-  };
-
-  //Status change handler Function
-  const statusChange = (e) => {
-    if (e.target.value === "Bulk Delete") {
-      //console.log(e.target.value);
-      setStatusName("");
-      setActionType("delete");
-    } else {
-      //console.log(e.target.value);
-      setStatusName(e.target.value);
-      setActionType("update_status");
-    }
-  };
-  // console.log("changing status and action", statusName, actionType);
-
-  //Action Handler Function
-  const handleAction = () => {
-    if (selectedRowKeys?.length > 0) {
-      const payload = {
-        action_type: actionType,
-        status_name: statusName,
-        appointment_ids: selectedRowKeys,
-      };
-      manageSessionStatusChange({
-        token,
-        payload,
-      });
-      console.log("payload for the action handler api", payload);
-    } else {
-      toast.warning("Select Some Id's To Work With", {
-        position: "top-center",
-        autoClose: 5000,
-        theme: "dark",
-      });
-    }
-  };
-
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+  console.log("----", filteredInfo);
 
-  const globalFilter = (value) => {
-    //console.log(value);
-    const filteredData = TData?.filter(
-      (each) =>
-        each?.Patients?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.Service_hrs?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.pos?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.schedule_date?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.status?.toLowerCase().includes(value)
-    );
-    setTData(filteredData);
-
-    if (!value) {
-      axios("../All_Fake_Api/Fakedb.json")
-        .then((response) => {
-          console.log("calling");
-          setTData(response?.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-
-  const clearFilters = () => {
+  const clearFilters = (e) => {
+    e.preventDefault();
     setFilteredInfo({});
   };
 
   //Individual filtering [tagging feature]
-  const deletePatientTag = (tag) => {
+  const deletePatientsName = (tag) => {
     console.log(tag);
-    const patients_array = filteredInfo?.Patients?.filter(
+    const client_full_name_array = filteredInfo?.client_full_name?.filter(
       (item) => item !== tag
     );
     setFilteredInfo({
-      Patients: patients_array,
+      client_full_name: client_full_name_array,
       Service_hrs: filteredInfo?.Service_hrs,
       status: filteredInfo?.status,
       pos: filteredInfo?.pos,
@@ -822,10 +763,11 @@ const ListView = () => {
   });
 
   const onSubmit = async (data) => {
+    setCheck(true);
+    setFilteredInfo({}); //When Go btn is pressed
     console.log("form-data", data);
     const from_date = convert(data?.start_date);
     const to_date = convert(data?.end_date);
-    //console.log(from_date, to_date);
     const payLoad = {
       client_id: patientId,
       provider_id: stuffsId?.length > 0 ? stuffsId : "",
@@ -843,8 +785,9 @@ const ListView = () => {
       });
     } else {
       setFromData(payLoad);
+      setPage(1);
     }
-    setPage(1);
+    handlePageClick({ selected: 0 });
   };
 
   useEffect(() => {
@@ -866,6 +809,61 @@ const ListView = () => {
     endYear,
     reset,
   ]);
+
+  //get rows id to do some action on them
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selected row-keys: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+
+    //Billing is_locked===true then you can't chose that checkbox
+    getCheckboxProps: (record) => {
+      //console.log("record", record);
+      const rowIndex = record?.is_locked;
+      return {
+        disabled: rowIndex === 1,
+      };
+    },
+  };
+
+  //Status change handler Function
+  const statusChange = (e) => {
+    if (e.target.value === "Bulk Delete") {
+      //console.log(e.target.value);
+      setStatusName("");
+      setActionType("delete");
+    } else {
+      //console.log(e.target.value);
+      setStatusName(e.target.value);
+      setActionType("update_status");
+    }
+  };
+  // console.log("changing status and action", statusName, actionType);
+
+  //Action Handler Function
+  const handleAction = () => {
+    if (selectedRowKeys?.length > 0) {
+      const payload = {
+        action_type: actionType,
+        status_name: statusName,
+        appointment_ids: selectedRowKeys,
+      };
+      manageSessionStatusChange({
+        token,
+        payload,
+      });
+      console.log("payload for the action handler api", payload);
+    } else {
+      toast.warning("Select ID Before Submit Action", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  };
 
   return (
     // For responsive view point
@@ -967,7 +965,6 @@ const ListView = () => {
                         <Clients
                           patients={patients}
                           setPatientId={setPatientId}
-                          receivedData={receivedData}
                         ></Clients>
                       </div>
                     )}
@@ -1143,18 +1140,7 @@ const ListView = () => {
                     )}
                     {table && (
                       <>
-                        <div className="  ">
-                          <div className="px-2 py-2 w-full mr-2 2xl:mt-[35px] xl:mt-[0px]  bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
-                            <input
-                              placeholder="Search here..."
-                              onChange={(e) => globalFilter(e.target.value)}
-                              className="focus:outline-none w-full"
-                            />
-                            <label>
-                              <BiSearchAlt />
-                            </label>
-                          </div>
-                        </div>
+                        <div className="  "></div>
                         <button
                           onClick={clearFilters}
                           className="2xl:mb-2 xl:mb-0 lg:mb-0 md:mb-0 2xl:mt-[35px] xl:mt-[0px] py-2 px-1  bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
@@ -1172,39 +1158,36 @@ const ListView = () => {
 
         {table && (
           <>
+            {/* Selected filters tag will be showed here */}
             {listView && (
               <div className="my-5">
-                {filteredInfo?.Patients?.length > 0 ||
+                {filteredInfo?.client_full_name?.length > 0 ||
                 filteredInfo?.Service_hrs?.length > 0 ||
-                filteredInfo?.pos?.length > 0 ||
-                filteredInfo?.status?.length > 0 ||
-                filteredInfo?.schedule_date?.length > 0 ? (
+                filteredInfo?.pos?.length > 0 ? (
                   <div className="my-5 flex flex-wrap items-center gap-2">
-                    {filteredInfo?.Patients?.length > 0 && (
-                      <div className=" ">
-                        <div className="flex flex-wrap mb-2 gap-1">
-                          {filteredInfo?.Patients?.map((tag, index) => (
-                            <div
-                              className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                              key={index}
-                            >
-                              <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                                <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                  Patient:
-                                </span>
-                                {tag}
-                              </div>
-                              <div>
-                                <div
-                                  className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                  onClick={() => deletePatientTag(tag)}
-                                >
-                                  X
-                                </div>
+                    {filteredInfo?.client_full_name?.length > 0 && (
+                      <div className="flex flex-wrap mb-2 gap-1">
+                        {filteredInfo?.client_full_name?.map((tag, index) => (
+                          <div
+                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
+                            key={index}
+                          >
+                            <div className="border border-primary text-[13px] pt-[1px] pb-[2.3px] px-2">
+                              <span className="text-secondary text-[13px] font-medium mr-1  ">
+                                Patient:
+                              </span>
+                              {tag}
+                            </div>
+                            <div>
+                              <div
+                                className="cursor-pointer text-[12px] text-white bg-primary py-[3px] px-2 rounded-sm"
+                                onClick={() => deletePatientsName(tag)}
+                              >
+                                X
                               </div>
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                        ))}
                       </div>
                     )}
 
@@ -1225,58 +1208,6 @@ const ListView = () => {
                               <div
                                 className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
                                 onClick={() => deleteServiceTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {filteredInfo?.status?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.status?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                status:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deletestatusTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {filteredInfo?.pos?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.pos?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Pos:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deletePosTag(tag)}
                               >
                                 X
                               </div>
@@ -1313,44 +1244,50 @@ const ListView = () => {
                     )}
                   </div>
                 ) : null}
-                <div>
-                  <div className=" overflow-scroll">
-                    {!listLoading ? (
-                      <Table
-                        pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                        rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                        size="small"
-                        bordered
-                        className=" text-xs font-normal"
-                        columns={columns}
-                        dataSource={list}
-                        rowSelection={rowSelection}
-                        scroll={{
-                          y: 650,
-                        }}
-                        onChange={handleChange}
-                      />
-                    ) : (
-                      <ShimmerTableTet></ShimmerTableTet>
-                    )}
+                {items?.length > 0 && (
+                  <div>
+                    <div className=" overflow-scroll">
+                      {!listLoading ? (
+                        <>
+                          <Table
+                            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                            rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                            size="small"
+                            bordered
+                            className=" text-xs font-normal"
+                            columns={columns}
+                            // dataSource={sessionlist}
+                            dataSource={items}
+                            rowSelection={rowSelection}
+                            scroll={{
+                              y: 650,
+                            }}
+                            onChange={handleChange}
+                          />
+                          <div className="flex items-center justify-end">
+                            {totalPage > 1 && (
+                              <ReactPaginate
+                                previousLabel={"<"}
+                                nextLabel={">"}
+                                pageCount={Number(totalPage)}
+                                marginPagesDisplayed={1}
+                                onPageChange={handlePageClick}
+                                forcePage={page - 1}
+                                containerClassName={"pagination"}
+                                previousLinkClassName={"pagination_Link"}
+                                nextLinkClassName={"pagination_Link"}
+                                activeClassName={"pagination_Link-active"}
+                                disabledClassName={"pagination_Link-disabled"}
+                              ></ReactPaginate>
+                            )}
+                          </div>
+                        </>
+                      ) : (
+                        <ShimmerTableTet></ShimmerTableTet>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center justify-end">
-                    {totalPage > 1 && (
-                      <ReactPaginate
-                        previousLabel={"<"}
-                        nextLabel={">"}
-                        pageCount={Number(totalPage)}
-                        marginPagesDisplayed={1}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination"}
-                        previousLinkClassName={"pagination_Link"}
-                        nextLinkClassName={"pagination_Link"}
-                        activeClassName={"pagination_Link-active"}
-                        disabledClassName={"pagination_Link-disabled"}
-                      ></ReactPaginate>
-                    )}
-                  </div>
-                </div>
+                )}
               </div>
             )}
             {!listView && (
