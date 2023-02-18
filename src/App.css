@@ -199,7 +199,7 @@ input[type='checkbox'] {
 }
 
 .pms-white-button {
-  padding: 7px 3px 4px;
+  padding: 7px 5px 4px;
   font-family: 'Roboto',
     sans-serif;
   font-size: 16px;
@@ -215,6 +215,12 @@ input[type='checkbox'] {
   display: inline-block;
   transition: ease-in-out 0.3s;
   border: 1px solid rgb(255, 255, 255);
+}
+
+.pms-white-button:hover {
+  color: #fff;
+  background-color: #0aa7b8;
+
 }
 
 /* ---------------------------------------Modal Input----------------------------- */

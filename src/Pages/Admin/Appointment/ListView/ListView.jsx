@@ -327,12 +327,12 @@ const ListView = () => {
         return (
           <div className="flex justify-center">
             {is_locked === 0 && (
-              <button>
+              <button title="Billed">
                 <AiFillUnlock className=" text-lg font-medium text-[#309BAB]" />
               </button>
             )}
             {is_locked === 1 && (
-              <button>
+              <button title="Lock In">
                 <AiFillLock className="text-lg font-medium  text-red-600" />
               </button>
             )}
@@ -867,7 +867,7 @@ const ListView = () => {
 
   return (
     // For responsive view point
-    <div className="h-[100vh]">
+    <div className={!table ? "h-[100vh]" : ""}>
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
@@ -1132,7 +1132,7 @@ const ListView = () => {
                       </>
                     ) : (
                       <button
-                        className=" mb-3 mt-[35px] sm:w-1/4 pms-white-button"
+                        className=" mb-3 mt-[35px] pms-white-button"
                         type="submit"
                       >
                         Go
@@ -1140,13 +1140,12 @@ const ListView = () => {
                     )}
                     {table && (
                       <>
-                        <div className="  "></div>
-                        <button
+                        {/* <button
                           onClick={clearFilters}
                           className="2xl:mb-2 xl:mb-0 lg:mb-0 md:mb-0 2xl:mt-[35px] xl:mt-[0px] py-2 px-1  bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
                         >
                           Clear filters
-                        </button>
+                        </button> */}
                       </>
                     )}
                   </div>
@@ -1260,7 +1259,7 @@ const ListView = () => {
                             dataSource={items}
                             rowSelection={rowSelection}
                             scroll={{
-                              y: 650,
+                              y: 750,
                             }}
                             onChange={handleChange}
                           />
@@ -1302,9 +1301,9 @@ const ListView = () => {
             )}
             {
               <div>
-                <div className="flex">
+                <div className="flex items-center gap-2 flex-wrap">
                   <select
-                    className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
+                    className="modal-input-field ml-1"
                     onChange={(e) => statusChange(e)}
                   >
                     <option value="" className="text-black">
@@ -1328,10 +1327,7 @@ const ListView = () => {
                       Rendered
                     </option>
                   </select>
-                  <button
-                    onClick={handleAction}
-                    className="bg-[#34A7B8] px-2 text-white rounded"
-                  >
+                  <button onClick={handleAction} className="pms-button">
                     Go
                   </button>
                 </div>
