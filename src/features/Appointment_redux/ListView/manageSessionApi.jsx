@@ -37,7 +37,8 @@ export const manageSessionApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      providesTags: ["ManageSession"],
+      refetchOnMountOrArgChange: true,
+      // providesTags: ["ManageSession"],
     }),
 
     //Manage Session Status Change
@@ -52,7 +53,7 @@ export const manageSessionApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      invalidatesTags: ["ManageSession"],
+      // invalidatesTags: ["ManageSession"],
     }),
   }),
 });
