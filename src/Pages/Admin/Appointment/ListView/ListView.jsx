@@ -733,7 +733,7 @@ const ListView = () => {
     setTData(filteredData);
 
     if (!value) {
-      axios("../All_Fake_Api/Fakedb.json")
+      axios("../All_Fake_Api/Fakedb.son")
         .then((response) => {
           console.log("calling");
           setTData(response?.data);
