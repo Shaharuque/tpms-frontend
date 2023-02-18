@@ -20,7 +20,6 @@ import Providers from "./MultiSelectComponents/Providers";
 import useToken from "../../../../CustomHooks/useToken";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
-import DateRangePickersTest from "../../../Shared/CustomDateRange/DateRangePicker/DateRangePickersTest";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 import {
   manageSessionApi,
