@@ -867,7 +867,7 @@ const ListView = () => {
 
   return (
     // For responsive view point
-    <div className={!table ? "h-[100vh]" : ""}>
+    <div className={!table ? "h-[150vh]" : ""}>
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
@@ -1052,7 +1052,7 @@ const ListView = () => {
                             <div
                               ref={refClose}
                               // className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
-                              className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] mr-[8%] mt-1 "
+                              className="absolute z-10 2xl:ml-[0%] xl:ml-[-15%] lg:ml-[0%] md:ml-[-25%] md:mr-[5%] ml-[-4%] mr-[8%] mt-1 "
                             >
                               {openCalendar && (
                                 <CustomDateRange
