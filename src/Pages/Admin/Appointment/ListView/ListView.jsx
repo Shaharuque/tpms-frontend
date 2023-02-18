@@ -957,7 +957,7 @@ const ListView = () => {
                     {billable && (
                       <div>
                         <label className="label">
-                          <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                          <span className="label-text text-[16px] text-gray-100 text-left">
                             Clients
                           </span>
                         </label>
@@ -970,7 +970,7 @@ const ListView = () => {
                     )}
                     <div className="">
                       <label className="label">
-                        <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                        <span className="label-text text-[16px] text-gray-100 text-left">
                           Provider
                         </span>
                       </label>
