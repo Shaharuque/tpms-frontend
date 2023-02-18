@@ -7,7 +7,6 @@ import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
-import { BiSearchAlt } from "react-icons/bi";
 import ManageTableAction from "./ListView/ManageTableAction";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -64,6 +63,7 @@ const ListView = () => {
   const [check, setCheck] = useState(false);
   const [sessionlist, setSessionlist] = useState([]);
   const [listLoading, setListLoading] = useState(false);
+  const [paginateActive, setPaginateActive] = useState(false);
 
   //Manage Session Get Session List From API
   useEffect(() => {
@@ -93,8 +93,6 @@ const ListView = () => {
     }
   }, [items]);
 
-  console.log("list items", items);
-
   //Manage Session Appointment Status Change API
   const [
     manageSessionStatusChange,
@@ -110,8 +108,8 @@ const ListView = () => {
         autoClose: 5000,
         theme: "dark",
       });
+      //Session List refetch based on the selected page number
       const getManageSession = async () => {
-        setListLoading(true);
         const res = await axios({
           method: "POST",
           url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
@@ -124,8 +122,6 @@ const ListView = () => {
         });
         const data = res?.data?.appointments;
         setItems(data?.data);
-        setTotalPage(data?.last_page);
-        setListLoading(false);
       };
       getManageSession();
     }
@@ -136,8 +132,8 @@ const ListView = () => {
         autoClose: 5000,
         theme: "dark",
       });
+      //Session List refetch based on the selected page number
       const getManageSession = async () => {
-        setListLoading(true);
         const res = await axios({
           method: "POST",
           url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
@@ -150,12 +146,10 @@ const ListView = () => {
         });
         const data = res?.data?.appointments;
         setItems(data?.data);
-        setTotalPage(data?.last_page);
-        setListLoading(false);
       };
       getManageSession();
     }
-  }, [statusChangeData?.status, actionType, formData, page, token]);
+  }, [statusChangeData?.status]);
 
   //Appointment Pos get API
   const { data: posData, isLoading: posDataLoading } =
@@ -313,7 +307,7 @@ const ListView = () => {
       .then((data) => setTData(data));
   }, []);
 
-  //handle pagination
+  //Handle Pagination
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
@@ -793,6 +787,7 @@ const ListView = () => {
       setFromData(payLoad);
       setPage(1);
     }
+    handlePageClick({ selected: 0 });
   };
 
   useEffect(() => {
@@ -823,8 +818,10 @@ const ListView = () => {
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
+
+    //Billing is_locked===true then you can't chose that checkbox
     getCheckboxProps: (record) => {
-      // console.log("record", record);
+      //console.log("record", record);
       const rowIndex = record?.is_locked;
       return {
         disabled: rowIndex === 1,
@@ -860,7 +857,7 @@ const ListView = () => {
       });
       console.log("payload for the action handler api", payload);
     } else {
-      toast.warning("Select Some Id's To Work With", {
+      toast.warning("Select ID Before Submit Action", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
@@ -1166,9 +1163,7 @@ const ListView = () => {
               <div className="my-5">
                 {filteredInfo?.client_full_name?.length > 0 ||
                 filteredInfo?.Service_hrs?.length > 0 ||
-                filteredInfo?.pos?.length > 0 ||
-                filteredInfo?.status?.length > 0 ||
-                filteredInfo?.schedule_date?.length > 0 ? (
+                filteredInfo?.pos?.length > 0 ? (
                   <div className="my-5 flex flex-wrap items-center gap-2">
                     {filteredInfo?.client_full_name?.length > 0 && (
                       <div className="flex flex-wrap mb-2 gap-1">
@@ -1222,58 +1217,6 @@ const ListView = () => {
                       </div>
                     )}
 
-                    {filteredInfo?.status?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.status?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                status:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deletestatusTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {filteredInfo?.pos?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.pos?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Pos:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deletePosTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
                     {filteredInfo?.schedule_date?.length > 0 && (
                       <div className="flex flex-wrap mb-2 gap-1">
                         {filteredInfo?.schedule_date?.map((tag, index) => (
@@ -1301,45 +1244,50 @@ const ListView = () => {
                     )}
                   </div>
                 ) : null}
-                <div>
-                  <div className=" overflow-scroll">
-                    {!listLoading ? (
-                      <Table
-                        pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                        rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                        size="small"
-                        bordered
-                        className=" text-xs font-normal"
-                        columns={columns}
-                        // dataSource={sessionlist}
-                        dataSource={items}
-                        rowSelection={rowSelection}
-                        scroll={{
-                          y: 650,
-                        }}
-                        onChange={handleChange}
-                      />
-                    ) : (
-                      <ShimmerTableTet></ShimmerTableTet>
-                    )}
+                {items?.length > 0 && (
+                  <div>
+                    <div className=" overflow-scroll">
+                      {!listLoading ? (
+                        <>
+                          <Table
+                            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                            rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                            size="small"
+                            bordered
+                            className=" text-xs font-normal"
+                            columns={columns}
+                            // dataSource={sessionlist}
+                            dataSource={items}
+                            rowSelection={rowSelection}
+                            scroll={{
+                              y: 650,
+                            }}
+                            onChange={handleChange}
+                          />
+                          <div className="flex items-center justify-end">
+                            {totalPage > 1 && (
+                              <ReactPaginate
+                                previousLabel={"<"}
+                                nextLabel={">"}
+                                pageCount={Number(totalPage)}
+                                marginPagesDisplayed={1}
+                                onPageChange={handlePageClick}
+                                forcePage={page - 1}
+                                containerClassName={"pagination"}
+                                previousLinkClassName={"pagination_Link"}
+                                nextLinkClassName={"pagination_Link"}
+                                activeClassName={"pagination_Link-active"}
+                                disabledClassName={"pagination_Link-disabled"}
+                              ></ReactPaginate>
+                            )}
+                          </div>
+                        </>
+                      ) : (
+                        <ShimmerTableTet></ShimmerTableTet>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex items-center justify-end">
-                    {totalPage > 1 && (
-                      <ReactPaginate
-                        previousLabel={"<"}
-                        nextLabel={">"}
-                        pageCount={Number(totalPage)}
-                        marginPagesDisplayed={1}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination"}
-                        previousLinkClassName={"pagination_Link"}
-                        nextLinkClassName={"pagination_Link"}
-                        activeClassName={"pagination_Link-active"}
-                        disabledClassName={"pagination_Link-disabled"}
-                      ></ReactPaginate>
-                    )}
-                  </div>
-                </div>
+                )}
               </div>
             )}
             {!listView && (
