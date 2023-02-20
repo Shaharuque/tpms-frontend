@@ -15,7 +15,7 @@ import {
 import { useAppointmentInfoQuery } from "../../../../../features/Appointment_redux/appointmentApi";
 import useToken from "../../../../../CustomHooks/useToken";
 
-//To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
+//To Convert Date YY-MM-DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
   const afterSplit = date?.split("-");
   console.log(afterSplit);

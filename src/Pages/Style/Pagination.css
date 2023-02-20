@@ -28,7 +28,7 @@
 .pagination_Link-active a {
     color: white;
     border: 1px solid #309BAB;
-    color: #309BAB;
+    background-color: #309BAB;
 }
 
 .pagination a:hover {
