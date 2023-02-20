@@ -26,13 +26,12 @@
 }
 
 .Global .dropdown-heading .dropdown-heading-value {
-  color: #9b9b9b !important;
+  color: #000 !important;
 }
 
 .Global .dropdown-heading {
   width: 200px !important;
   height: 22.5px !important;
-
 }
 
 .rmsc .dropdown-content .panel-content {
