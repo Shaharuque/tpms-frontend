@@ -13,7 +13,7 @@
 }
 
 .listview {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.714) !important;
+    border-bottom: 3.5px solid #fff !important;
 }
 
 .listview .dropdown-container {
@@ -57,12 +57,12 @@
 }
 
 .listview .dropdown-content {
-    padding-top: 8px!important;
-    position: absolute!important;
-    top: 100%!important;
-    width: 200px !important ;
+    padding-top: 8px !important;
+    position: absolute !important;
+    top: 100% !important;
+    width: 200px !important;
     /* width: 100%!important; */
-    z-index: 13000!important;
+    z-index: 13000 !important;
 }
 
 .listview .dropdown-heading {
