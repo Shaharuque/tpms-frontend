@@ -25,6 +25,8 @@ import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
 import { toast } from "react-toastify";
 import { timeConverter } from "../../../Shared/TimeConverter/TimeConverter";
+import NonBillableSession from "./NonBillableSession/NonBillableSession";
+import NonBillableCardsView from "./NonBillableSession/NonBillableCardView/NonBillableCardsView";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -65,6 +67,15 @@ const ListView = () => {
   const [listLoading, setListLoading] = useState(false);
   const [paginateActive, setPaginateActive] = useState(false);
 
+  // For Non-Billable Manage Sessions
+  const [nonBillablePage, setNonBillablePage] = useState(1);
+  const [nonBillableTotalPage, setNonBillableTotalPage] = useState(0);
+  const [nonBillableListLoading, setNonBillableListLoading] = useState(false);
+  const [payload, setPayload] = useState(null);
+  const [procceed, setprocceed] = useState(false);
+  const [nonBillableData, setNonBillableData] = useState([]);
+  const [hide, setHide] = useState(false);
+
   //Manage Session Get Session List From API
   useEffect(() => {
     const getManageSession = async () => {
@@ -84,7 +95,16 @@ const ListView = () => {
       setTotalPage(data?.last_page);
       setListLoading(false);
     };
-    getManageSession();
+    if (formData?.client_id?.length > 0) {
+      getManageSession();
+    }
+    if (formData?.client_id?.length === 0) {
+      toast.error(<h1 className="font-bold">Please select patient</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
+    }
   }, [token, page, formData]);
 
   useEffect(() => {
@@ -92,6 +112,33 @@ const ListView = () => {
       setTable(true);
     }
   }, [items]);
+  console.log("Billable ManageSession List", items);
+
+  //Non-Billable Manage Session List From API
+  useEffect(() => {
+    const getNonbillableSessions = async () => {
+      setNonBillableListLoading(true);
+      const res = await axios({
+        method: "POST",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token || null,
+        },
+        data: payload,
+      });
+      const data = res?.data?.appointments;
+      setNonBillableData(data?.data);
+      setNonBillableTotalPage(data?.last_page);
+      setNonBillableListLoading(false);
+    };
+    if (payload?.provider_id?.length > 0 && procceed === true) {
+      getNonbillableSessions();
+    }
+  }, [token, nonBillablePage, payload, procceed]);
+
+  console.log("Non-Billable ManageSession List", nonBillableData, procceed);
 
   //Manage Session Appointment Status Change API
   const [
@@ -192,7 +239,7 @@ const ListView = () => {
     };
     getProviderData();
   }, [token]);
-  //console.log("selected stuffs", stuffsId);
+  console.log("selected stuffs", stuffsId);
 
   //-----------Dynamic column multi value filtering--------------//
   //For getting unique value
@@ -276,6 +323,7 @@ const ListView = () => {
   const handleClose = () => {
     setClicked(!clicked);
     setTable(false);
+    setprocceed(false); //Non-billable Session Table Will be closed
   };
 
   // Hide calendar on outside click
@@ -294,11 +342,20 @@ const ListView = () => {
 
   const handleBillable = (e) => {
     setBillable(!billable);
+    //billable Session Table Will be closed and setItems is empty when toggle goes to billable to non-billable
     setTable(false);
+    setItems([]);
+
+    //Non-billable Session Table Will be closed and
+    setprocceed(false);
+    setNonBillableData([]);
   };
 
   const handleListView = () => {
     setListView(!listView);
+    //To Closed the Non-billable Session List view
+    // setprocceed(!procceed);
+    setHide(!hide);
   };
 
   useEffect(() => {
@@ -778,10 +835,10 @@ const ListView = () => {
       to_date: to_date,
     };
     if (payLoad?.to_date === "NaN-aN-aN") {
-      toast.error("Select Valid Date Range", {
+      toast.error(<h1 className="font-bold">Select Valid Date-Range</h1>, {
         position: "top-center",
         autoClose: 5000,
-        theme: "dark",
+        theme: "light",
       });
     } else {
       setFromData(payLoad);
@@ -865,9 +922,19 @@ const ListView = () => {
     }
   };
 
+  //--------------------Non-Billable Session Handler Code------------------------
+  // Non billable Session Handler Code
+  const nonBillableSessionHandler = (e) => {
+    e.preventDefault();
+    console.log("clicked");
+    const selectedProviderIds = { provider_id: stuffsId };
+    setPayload(selectedProviderIds);
+    setprocceed(true);
+  };
+
   return (
     // For responsive view point
-    <div className={!table ? "h-[100vh]" : ""}>
+    <div className={!table ? "h-[150vh]" : ""}>
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
@@ -954,35 +1021,33 @@ const ListView = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="relative">
                   <div className=" flex item-center  flex-wrap gap-3 ">
                     {/* <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 2xl:grid-cols-8 gap-2 mb-2"> */}
-                    {billable && (
-                      <div>
-                        <label className="label">
-                          <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
-                            Clients
-                          </span>
-                        </label>
-
-                        <Clients
-                          patients={patients}
-                          setPatientId={setPatientId}
-                        ></Clients>
-                      </div>
-                    )}
-                    <div className="">
-                      <label className="label">
-                        <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
-                          Provider
-                        </span>
-                      </label>
-
-                      <Providers
-                        stuffs={stuffs}
-                        setStuffsId={setStuffsId}
-                      ></Providers>
-                    </div>
 
                     {billable ? (
                       <>
+                        <div>
+                          <label className="label">
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              Clients
+                            </span>
+                          </label>
+
+                          <Clients
+                            patients={patients}
+                            setPatientId={setPatientId}
+                          ></Clients>
+                        </div>
+                        <div className="">
+                          <label className="label">
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              Provider
+                            </span>
+                          </label>
+
+                          <Providers
+                            stuffs={stuffs}
+                            setStuffsId={setStuffsId}
+                          ></Providers>
+                        </div>
                         <div>
                           <label className="label">
                             <span className="label-text text-[16px] text-gray-100 text-left">
@@ -1052,7 +1117,7 @@ const ListView = () => {
                             <div
                               ref={refClose}
                               // className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
-                              className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] mr-[8%] mt-1 "
+                              className="absolute z-10 2xl:ml-[0%] xl:ml-[-15%] lg:ml-[0%] md:ml-[-25%] md:mr-[5%] ml-[-4%] mr-[8%] mt-1 "
                             >
                               {openCalendar && (
                                 <CustomDateRange
@@ -1131,12 +1196,32 @@ const ListView = () => {
                         </div>
                       </>
                     ) : (
-                      <button
-                        className=" mb-3 mt-[35px] pms-white-button"
-                        type="submit"
-                      >
-                        Go
-                      </button>
+                      // Non billable session component called
+                      // <NonBillableSession
+                      //   stuffs={stuffs}
+                      //   stuffsId={stuffsId}
+                      //   setStuffsId={setStuffsId}
+                      // ></NonBillableSession>
+                      <div className="flex">
+                        <div className="">
+                          <label className="label">
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              Provider
+                            </span>
+                          </label>
+
+                          <Providers
+                            stuffs={stuffs}
+                            setStuffsId={setStuffsId}
+                          ></Providers>
+                        </div>
+                        <button
+                          className=" mb-3 mt-[35px] pms-white-button"
+                          onClick={nonBillableSessionHandler}
+                        >
+                          Go
+                        </button>
+                      </div>
                     )}
                     {table && (
                       <>
@@ -1155,6 +1240,7 @@ const ListView = () => {
           </div>
         </div>
 
+        {/* Manage Session billable Data Table Part */}
         {table && (
           <>
             {/* Selected filters tag will be showed here */}
@@ -1243,7 +1329,7 @@ const ListView = () => {
                     )}
                   </div>
                 ) : null}
-                {items?.length > 0 && (
+                {items?.length > 0 ? (
                   <div>
                     <div className=" overflow-scroll">
                       {!listLoading ? (
@@ -1286,9 +1372,13 @@ const ListView = () => {
                       )}
                     </div>
                   </div>
+                ) : (
+                  // CSS Design Need To Applied Here
+                  <h1>No Data Found</h1>
                 )}
               </div>
             )}
+            {/* Billable Session Data in Card-View */}
             {!listView && (
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -1296,7 +1386,7 @@ const ListView = () => {
                 transition={{ delay: 0.2 }}
                 className="my-5"
               >
-                <CardsView data={TData}></CardsView>
+                <CardsView schedules={items} posData={posData}></CardsView>
               </motion.div>
             )}
             {
@@ -1335,6 +1425,37 @@ const ListView = () => {
             }
           </>
         )}
+
+        {/* Non Billable Session Table Data Part */}
+        <div className="mt-5">
+          <>
+            {procceed && !hide && (
+              <NonBillableSession
+                nonBillableData={nonBillableData}
+                setNonBillablePage={setNonBillablePage}
+                nonBillableTotalPage={nonBillableTotalPage}
+                nonBillableListLoading={nonBillableListLoading}
+                stuffs={stuffs}
+                posData={posData}
+              ></NonBillableSession>
+            )}
+          </>
+          {/* Non-Billable Session Data in Card-View */}
+          {!listView && hide && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="my-5"
+            >
+              <NonBillableCardsView
+                schedules={nonBillableData}
+                stuffs={stuffs}
+                posData={posData}
+              ></NonBillableCardsView>
+            </motion.div>
+          )}
+        </div>
       </div>
     </div>
   );

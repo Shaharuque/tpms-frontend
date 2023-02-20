@@ -12,13 +12,13 @@ import {
   MdOutlineMedicalServices,
   MdOutlineModeEditOutline,
 } from "react-icons/md";
-import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
-import "../../../../Style/ListView.css";
-import EditSession from "../ListView/EditSession";
-import SessionAddNote from "../ListView/SessionAddNote";
-import SessionViewNote from "../ListView/SessionViewNote";
+import { useOutsideAlerter } from "../../../../../../CustomHooks/useDetectOutsideClick";
+import "../../../../../Style/ListView.css";
 import { Fade } from "react-reveal";
-import { timeConverter } from "../../../../Shared/TimeConverter/TimeConverter";
+import SessionViewNote from "../../ListView/SessionViewNote";
+import EditSession from "../../ListView/EditSession";
+import SessionAddNote from "../../ListView/SessionAddNote";
+import { timeConverter } from "../../../../../Shared/TimeConverter/TimeConverter";
 
 //To Convert Date YY-MM-DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -27,7 +27,7 @@ const dateConverter = (date) => {
     return `${afterSplit[1]}/${afterSplit[2]}/${afterSplit[0]}`;
   }
 };
-const CardView = ({ data, posData }) => {
+const NonBillableCardView = ({ data, stuffs, posData }) => {
   const [patientDetails, setPatientDetails] = useState(false);
   const [checkBox, setCheckBox] = useState([]);
   //console.log(checkBox);
@@ -35,11 +35,9 @@ const CardView = ({ data, posData }) => {
   const {
     lock,
     is_locked,
-    app_client,
-    app_client_auth_act,
     schedule_date,
     status,
-    app_provider,
+    provider_id,
     from_time,
     to_time,
     location,
@@ -81,7 +79,7 @@ const CardView = ({ data, posData }) => {
       <div className="px-5">
         <div className=" grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-5 mb-2">
           <div className="flex items-center gap-2">
-            {/* Checkbox Select Code */}
+            {/* Checkbox Code */}
             {/* <input
               type="checkbox"
               // id={`custom-checkbox-${index}`}
@@ -100,10 +98,10 @@ const CardView = ({ data, posData }) => {
           <div className="col-span-2">
             <div>
               <h1 className="text-xs font-medium text-gray-500">
-                Patient Name
+                Provider Name
               </h1>
               <p className=" font-medium text-sm text-gray-900">
-                {app_client?.client_full_name}
+                {stuffs?.find((each) => each?.id === provider_id)?.full_name}
               </p>
             </div>
           </div>
@@ -161,7 +159,7 @@ const CardView = ({ data, posData }) => {
       {patientDetails && (
         <Fade>
           <h1 className="bg-secondary text-sm w-ful py-1 px-5 text-white font-medium">
-            Patient Details
+            Non-Billable Details
           </h1>
           <div>
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 ">
@@ -169,10 +167,13 @@ const CardView = ({ data, posData }) => {
                 <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-2">
                   <div>
                     <h1 className="text-xs font-medium text-gray-500">
-                      Patient Name
+                      Provider Name
                     </h1>
                     <p className=" font-medium text-sm text-gray-900">
-                      {app_client?.client_full_name}
+                      {
+                        stuffs?.find((each) => each?.id === provider_id)
+                          ?.full_name
+                      }
                     </p>
                   </div>
                   <div>
@@ -191,24 +192,6 @@ const CardView = ({ data, posData }) => {
                       {timeConverter(from_time?.split(" ")[1])} to{" "}
                       {timeConverter(to_time?.split(" ")[1])}
                     </p>
-                  </div>
-                  <div>
-                    <h1 className="text-xs font-medium text-gray-500">
-                      Provider Name
-                    </h1>
-                    <p className=" font-medium text-sm text-gray-900">
-                      {app_provider?.full_name}
-                    </p>
-                  </div>
-                  <div className="col-span-2">
-                    <div>
-                      <h1 className="text-xs font-medium text-gray-500">
-                        Service & Hrs.
-                      </h1>
-                      <p className=" font-medium text-sm text-gray-900">
-                        {app_client_auth_act?.activity_name}
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -280,4 +263,4 @@ const CardView = ({ data, posData }) => {
   );
 };
 
-export default CardView;
+export default NonBillableCardView;
