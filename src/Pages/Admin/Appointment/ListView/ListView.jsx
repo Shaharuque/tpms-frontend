@@ -90,6 +90,8 @@ const ListView = () => {
   useEffect(() => {
     if (items?.length > 0) {
       setTable(true);
+    } else {
+      setTable(false);
     }
   }, [items]);
 
@@ -867,7 +869,7 @@ const ListView = () => {
 
   return (
     // For responsive view point
-    <div className={!table ? "h-[150vh]" : ""}>
+    <div className={!table || items?.length < 18 ? "h-[150vh]" : ""}>
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
@@ -957,7 +959,7 @@ const ListView = () => {
                     {billable && (
                       <div>
                         <label className="label">
-                          <span className="label-text text-[16px]  mb-[2px] text-gray-100 text-left">
+                          <span className="label-text text-[16px] text-gray-100 text-left">
                             Clients
                           </span>
                         </label>
@@ -970,7 +972,7 @@ const ListView = () => {
                     )}
                     <div className="">
                       <label className="label">
-                        <span className="label-text text-[16px] mb-[2px] text-gray-100 text-left">
+                        <span className="label-text text-[16px] text-gray-100 text-left">
                           Provider
                         </span>
                       </label>

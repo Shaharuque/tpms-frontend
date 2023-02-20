@@ -1,15 +1,7 @@
 .listview .dropdown-container {
-    /* border: 0 0 0 0 solid orange;
-        border: 0px solid rebeccapurple !important; */
     border-bottom: 2px solid rgb(251, 251, 251) !important;
     width: 150px;
     background-color: #00a1b100 !important;
-    /* color: white !important; */
-}
-
-.listview .dropdown-heading {
-    /* width: 100%;
-      height: 20px !important; */
 }
 
 .listview {
@@ -18,20 +10,15 @@
 
 .listview .dropdown-container {
     margin: -5px 0px 0px 0px;
-    /* position: relative;
-         outline: 0; */
     background-color: #00a1b100 !important;
     border: 0px solid #00a1b100 !important;
     width: 100% !important;
     border-radius: 0px !important;
-    /* border-radius: var(--rmsc-radius); */
-    /* border: 0px solid var(--rmsc-border) !important; */
+    border: 0px solid var(--rmsc-border) !important;
 }
 
 .listview .dropdown-container:focus-within {
-    /* border-bottom: 3px solid rgb(251, 251, 251) !important; */
     box-shadow: #00a1b100 0 0 0 0px !important;
-
 }
 
 .listview .gray {
@@ -40,12 +27,6 @@
 
 .listview .dropdown-heading .dropdown-heading-value {
     color: #fff !important;
-}
-
-.listview .dropdown-heading {
-    width: 100%;
-    /* height: 22.5px !important; */
-
 }
 
 .rmsc .dropdown-content .panel-content {
@@ -61,11 +42,10 @@
     position: absolute !important;
     top: 100% !important;
     width: 200px !important;
-    /* width: 100%!important; */
     z-index: 13000 !important;
 }
 
 .listview .dropdown-heading {
     width: 200px !important;
-    /* height: 22.5px !important; */
+    height: 32px !important;
 }
