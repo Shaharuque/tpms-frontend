@@ -94,6 +94,7 @@ const ListView = () => {
       setItems(data?.data);
       setTotalPage(data?.last_page);
       setListLoading(false);
+      setTable(true);
     };
     if (formData?.client_id?.length > 0) {
       getManageSession();
@@ -107,14 +108,14 @@ const ListView = () => {
     }
   }, [token, page, formData]);
 
-  useEffect(() => {
-    if (items?.length > 0) {
-      setTable(true);
-    } else {
-      setTable(false);
-    }
-  }, [items]);
-  console.log("Billable ManageSession List", items);
+  // useEffect(() => {
+  //   if (items?.length > 0) {
+  //     setTable(true);
+  //   } else {
+  //     setTable(false);
+  //   }
+  // }, [items]);
+  console.log("Billable ManageSession List", items, table);
 
   //Non-Billable Manage Session List From API
   useEffect(() => {
@@ -137,6 +138,13 @@ const ListView = () => {
     };
     if (payload?.provider_id?.length > 0 && procceed === true) {
       getNonbillableSessions();
+    }
+    if (payload?.provider_id?.length === 0 && procceed === true) {
+      toast.error(<h1 className="font-bold">Please select provider</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
     }
   }, [token, nonBillablePage, payload, procceed]);
 
@@ -325,6 +333,7 @@ const ListView = () => {
   const handleClose = () => {
     setClicked(!clicked);
     setTable(false);
+    // setCheck(false)
     setprocceed(false); //Non-billable Session Table Will be closed
   };
 
@@ -403,8 +412,8 @@ const ListView = () => {
       title: "Patients",
       dataIndex: "client_full_name",
       key: "client_full_name",
-      width: 150,
-      filters: items?.length > 0 && patientSearch(),
+      width: 200,
+      // filters: items?.length > 0 && patientSearch(),
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -413,9 +422,9 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.client_full_name || null,
-      onFilter: (value, record) =>
-        record?.app_client?.client_full_name?.includes(value),
+      // filteredValue: filteredInfo.client_full_name || null,
+      // onFilter: (value, record) =>
+      //   record?.app_client?.client_full_name?.includes(value),
       sorter: (a, b) => {
         return a.app_client?.client_full_name > b.app_client?.client_full_name
           ? -1
@@ -452,9 +461,9 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.activity_name || null,
-      onFilter: (value, record) =>
-        record?.app_client_auth_act?.activity_name?.includes(value),
+      // filteredValue: filteredInfo.activity_name || null,
+      // onFilter: (value, record) =>
+      //   record?.app_client_auth_act?.activity_name?.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
         return a.app_client_auth_act?.activity_name >
@@ -501,9 +510,9 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.provider_full_name || null,
-      onFilter: (value, record) =>
-        record?.app_provider?.full_name?.includes(value),
+      // filteredValue: filteredInfo.provider_full_name || null,
+      // onFilter: (value, record) =>
+      //   record?.app_provider?.full_name?.includes(value),
       sorter: (a, b) => {
         return a.app_provider?.full_name > b.app_provider?.full_name ? -1 : 1;
       },
@@ -550,8 +559,8 @@ const ListView = () => {
           </>
         );
       },
-      filteredValue: filteredInfo.location || null,
-      onFilter: (value, record) => record.location.includes(value),
+      // filteredValue: filteredInfo.location || null,
+      // onFilter: (value, record) => record.location.includes(value),
       sorter: (a, b) => {
         return a.location > b.location ? -1 : 1;
       },
@@ -562,17 +571,17 @@ const ListView = () => {
       title: "Scheduled Date",
       dataIndex: "schedule_date",
       key: "schedule_date",
-      width: 100,
-      filters: [
-        {
-          text: `Feb 20, 2023`,
-          value: "Feb 20, 2023",
-        },
-        {
-          text: "Dec 30, 2021",
-          value: "Dec 30, 2021",
-        },
-      ],
+      width: 200,
+      // filters: [
+      //   {
+      //     text: `Feb 20, 2023`,
+      //     value: "Feb 20, 2023",
+      //   },
+      //   {
+      //     text: "Dec 30, 2021",
+      //     value: "Dec 30, 2021",
+      //   },
+      // ],
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -581,8 +590,8 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.schedule_date || null,
-      onFilter: (value, record) => record.schedule_date.includes(value),
+      // filteredValue: filteredInfo.schedule_date || null,
+      // onFilter: (value, record) => record.schedule_date.includes(value),
       sorter: (a, b) => {
         return a.schedule_date > b.schedule_date ? -1 : 1;
         // a.schedule_date - b.schedule_date
@@ -596,16 +605,16 @@ const ListView = () => {
       dataIndex: "Hours",
       key: "Hours",
       width: 200,
-      filters: [
-        {
-          text: `9:57 PM`,
-          value: "9:57 PM",
-        },
-        {
-          text: "3:01 PM",
-          value: "3:01 PM",
-        },
-      ],
+      // filters: [
+      //   {
+      //     text: `9:57 PM`,
+      //     value: "9:57 PM",
+      //   },
+      //   {
+      //     text: "3:01 PM",
+      //     value: "3:01 PM",
+      //   },
+      // ],
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -615,10 +624,10 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.Hours || null,
-      onFilter: (value, record) => {
-        return record.Hours.includes(value);
-      },
+      // filteredValue: filteredInfo.Hours || null,
+      // onFilter: (value, record) => {
+      //   return record.Hours.includes(value);
+      // },
       sorter: (a, b) => {
         return a.Hours > b.Hours ? -1 : 1;
         // a.Hours - b.Hours,
@@ -674,22 +683,22 @@ const ListView = () => {
           </div>
         );
       },
-      filters: [
-        {
-          text: "hold",
-          value: "hold",
-        },
-        {
-          text: "Rendered",
-          value: "Rendered",
-        },
-        {
-          text: "Scheduled",
-          value: "Scheduled",
-        },
-      ],
-      filteredValue: filteredInfo.status || null,
-      onFilter: (value, record) => record.status.includes(value),
+      // filters: [
+      //   {
+      //     text: "hold",
+      //     value: "hold",
+      //   },
+      //   {
+      //     text: "Rendered",
+      //     value: "Rendered",
+      //   },
+      //   {
+      //     text: "Scheduled",
+      //     value: "Scheduled",
+      //   },
+      // ],
+      // filteredValue: filteredInfo.status || null,
+      // onFilter: (value, record) => record.status.includes(value),
     },
     {
       title: "Action",
@@ -700,7 +709,10 @@ const ListView = () => {
         <div className="flex justify-center">
           <Dropdown
             overlay={
-              <ManageTableAction appointmentId={record?.id}></ManageTableAction>
+              <ManageTableAction
+                isLocked={record?.is_locked}
+                appointmentId={record?.id}
+              ></ManageTableAction>
             }
             trigger={["click"]}
             overlayStyle={{ zIndex: "100" }}
@@ -1249,189 +1261,116 @@ const ListView = () => {
         </div>
 
         {/* Manage Session billable Data Table Part */}
-        {table && (
+        {!listLoading ? (
           <>
-            {/* Selected filters tag will be showed here */}
-            {listView && (
-              <div className="my-5">
-                {filteredInfo?.client_full_name?.length > 0 ||
-                filteredInfo?.Service_hrs?.length > 0 ||
-                filteredInfo?.pos?.length > 0 ? (
-                  <div className="my-5 flex flex-wrap items-center gap-2">
-                    {filteredInfo?.client_full_name?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.client_full_name?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-[13px] pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[13px] font-medium mr-1  ">
-                                Patient:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-[12px] text-white bg-primary py-[3px] px-2 rounded-sm"
-                                onClick={() => deletePatientsName(tag)}
-                              >
-                                X
+            {table && (
+              <>
+                {/* Selected filters tag will be showed here */}
+                {listView && (
+                  <div className="my-5">
+                    {items?.length > 0 ? (
+                      <div>
+                        <div className=" overflow-scroll">
+                          {!listLoading ? (
+                            <>
+                              <Table
+                                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                                rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                                size="small"
+                                bordered
+                                className=" text-xs font-normal"
+                                columns={columns}
+                                // dataSource={sessionlist}
+                                dataSource={items}
+                                rowSelection={rowSelection}
+                                scroll={{
+                                  y: 750,
+                                }}
+                                onChange={handleChange}
+                              />
+                              <div className="flex items-center justify-end">
+                                {totalPage > 1 && (
+                                  <ReactPaginate
+                                    previousLabel={"<"}
+                                    nextLabel={">"}
+                                    pageCount={Number(totalPage)}
+                                    marginPagesDisplayed={1}
+                                    onPageChange={handlePageClick}
+                                    forcePage={page - 1}
+                                    containerClassName={"pagination"}
+                                    previousLinkClassName={"pagination_Link"}
+                                    nextLinkClassName={"pagination_Link"}
+                                    activeClassName={"pagination_Link-active"}
+                                    disabledClassName={
+                                      "pagination_Link-disabled"
+                                    }
+                                  ></ReactPaginate>
+                                )}
                               </div>
-                            </div>
-                          </div>
-                        ))}
+                            </>
+                          ) : (
+                            <ShimmerTableTet></ShimmerTableTet>
+                          )}
+                        </div>
                       </div>
-                    )}
-
-                    {filteredInfo?.Service_hrs?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.Service_hrs?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Service_hrs:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deleteServiceTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {filteredInfo?.schedule_date?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.schedule_date?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                schedule_date:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deleteScheduleTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                    ) : (
+                      // CSS Design Need To Applied Here
+                      <h1 className="w-full text-center p-2 bg-red-400 text-white rounded-sm">
+                        No Data Found
+                      </h1>
                     )}
                   </div>
-                ) : null}
-                {items?.length > 0 ? (
+                )}
+                {/* Billable Session Data in Card-View */}
+                {!listView && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="my-5"
+                  >
+                    <CardsView schedules={items} posData={posData}></CardsView>
+                  </motion.div>
+                )}
+                {
                   <div>
-                    <div className=" overflow-scroll">
-                      {!listLoading ? (
-                        <>
-                          <Table
-                            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                            rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                            size="small"
-                            bordered
-                            className=" text-xs font-normal"
-                            columns={columns}
-                            // dataSource={sessionlist}
-                            dataSource={items}
-                            rowSelection={rowSelection}
-                            scroll={{
-                              y: 750,
-                            }}
-                            onChange={handleChange}
-                          />
-                          <div className="flex items-center justify-end">
-                            {totalPage > 1 && (
-                              <ReactPaginate
-                                previousLabel={"<"}
-                                nextLabel={">"}
-                                pageCount={Number(totalPage)}
-                                marginPagesDisplayed={1}
-                                onPageChange={handlePageClick}
-                                forcePage={page - 1}
-                                containerClassName={"pagination"}
-                                previousLinkClassName={"pagination_Link"}
-                                nextLinkClassName={"pagination_Link"}
-                                activeClassName={"pagination_Link-active"}
-                                disabledClassName={"pagination_Link-disabled"}
-                              ></ReactPaginate>
-                            )}
-                          </div>
-                        </>
-                      ) : (
-                        <ShimmerTableTet></ShimmerTableTet>
-                      )}
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <select
+                        className="modal-input-field ml-1"
+                        onChange={(e) => statusChange(e)}
+                      >
+                        <option value="" className="text-black">
+                          Select
+                        </option>
+                        <option value="Scheduled" className="text-black">
+                          Scheduled
+                        </option>
+                        <option value="No Show" className="text-black">
+                          No Show
+                        </option>
+                        <option value="Hold" className="text-black">
+                          Hold
+                        </option>
+                        <option>Cancelled by Client</option>
+                        <option>Cancelled by Provider</option>
+                        <option value="Bulk Delete" className="text-black">
+                          Bulk Delete
+                        </option>
+                        <option value="Rendered" className="text-black">
+                          Rendered
+                        </option>
+                      </select>
+                      <button onClick={handleAction} className="pms-button">
+                        Go
+                      </button>
                     </div>
                   </div>
-                ) : (
-                  // CSS Design Need To Applied Here
-                  <h1>No Data Found</h1>
-                )}
-              </div>
+                }
+              </>
             )}
-            {/* Billable Session Data in Card-View */}
-            {!listView && (
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="my-5"
-              >
-                <CardsView schedules={items} posData={posData}></CardsView>
-              </motion.div>
-            )}
-            {
-              <div>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <select
-                    className="modal-input-field ml-1"
-                    onChange={(e) => statusChange(e)}
-                  >
-                    <option value="" className="text-black">
-                      Select
-                    </option>
-                    <option value="Scheduled" className="text-black">
-                      Scheduled
-                    </option>
-                    <option value="No Show" className="text-black">
-                      No Show
-                    </option>
-                    <option value="Hold" className="text-black">
-                      Hold
-                    </option>
-                    <option>Cancelled by Client</option>
-                    <option>Cancelled by Provider</option>
-                    <option value="Bulk Delete" className="text-black">
-                      Bulk Delete
-                    </option>
-                    <option value="Rendered" className="text-black">
-                      Rendered
-                    </option>
-                  </select>
-                  <button onClick={handleAction} className="pms-button">
-                    Go
-                  </button>
-                </div>
-              </div>
-            }
           </>
+        ) : (
+          <ShimmerTableTet></ShimmerTableTet>
         )}
 
         {/* Non Billable Session Table Data Part */}
@@ -1441,10 +1380,13 @@ const ListView = () => {
               <NonBillableSession
                 nonBillableData={nonBillableData}
                 setNonBillablePage={setNonBillablePage}
+                nonBillablePage={nonBillablePage}
                 nonBillableTotalPage={nonBillableTotalPage}
                 nonBillableListLoading={nonBillableListLoading}
+                payload={payload}
                 stuffs={stuffs}
                 posData={posData}
+                setNonBillableData={setNonBillableData}
               ></NonBillableSession>
             )}
           </>

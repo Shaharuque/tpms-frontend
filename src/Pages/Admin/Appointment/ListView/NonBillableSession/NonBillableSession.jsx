@@ -10,6 +10,8 @@ import { timeConverter } from "../../../../Shared/TimeConverter/TimeConverter";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import ReactPaginate from "react-paginate";
 import { Table } from "antd";
+import { useManageSessionStatusChangeMutation } from "../../../../../features/Appointment_redux/ListView/manageSessionApi";
+import { toast } from "react-toastify";
 
 // To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -21,20 +23,93 @@ const dateConverter = (date) => {
 };
 
 const NonBillableSession = ({
+  setNonBillableData,
   nonBillableData,
   setNonBillablePage,
+  nonBillablePage,
   nonBillableTotalPage,
   nonBillableListLoading,
+  payload,
   stuffs,
   posData,
 }) => {
   const [sortedInfo, setSortedInfo] = useState({});
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [statusName, setStatusName] = useState(null);
+  const [actionType, setActionType] = useState(null);
+  const { token } = useToken();
   console.log(
     "non-billable data",
     nonBillableData,
     nonBillableTotalPage,
     nonBillableListLoading
   );
+
+  //Manage Session Appointment Status Change API
+  const [
+    manageSessionStatusChange,
+    { data: statusChangeData, isSuccess: actionSuccess },
+  ] = useManageSessionStatusChangeMutation();
+  console.log("after status change", actionSuccess);
+
+  useEffect(() => {
+    if (statusChangeData?.status === "success" && actionType !== "delete") {
+      setSelectedRowKeys([]);
+      toast.success(
+        <h1 className="font-bold">
+          Successfully Non-Billable Session Status Updated
+        </h1>,
+        {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "light",
+        }
+      );
+      //Session List refetch based on the selected page number
+      const getNonbillableSessions = async () => {
+        const res = await axios({
+          method: "POST",
+          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token || null,
+          },
+          data: payload,
+        });
+        const data = res?.data?.appointments;
+        setNonBillableData(data?.data);
+      };
+      getNonbillableSessions();
+    }
+    if (statusChangeData?.status === "success" && actionType === "delete") {
+      setSelectedRowKeys([]);
+      toast.success(
+        <h1 className="font-bold">Selected Non-Billable Session Deleted</h1>,
+        {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "light",
+        }
+      );
+      //Session List refetch based on the selected page number
+      const getNonbillableSessions = async () => {
+        const res = await axios({
+          method: "POST",
+          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token || null,
+          },
+          data: payload,
+        });
+        const data = res?.data?.appointments;
+        setNonBillableData(data?.data);
+      };
+      getNonbillableSessions();
+    }
+  }, [statusChangeData?.status]);
 
   // Table Data Columns Defined Here //
   const columns = [
@@ -243,53 +318,146 @@ const NonBillableSession = ({
     setNonBillablePage(selectedPage + 1);
   };
 
+  //get rows id to do some action on them
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selected row-keys: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+
+    //Billing is_locked===true then you can't chose that checkbox
+    getCheckboxProps: (record) => {
+      //console.log("record", record);
+      const rowIndex = record?.is_locked;
+      return {
+        disabled: rowIndex === 1,
+      };
+    },
+  };
+
+  const statusChange = (e) => {
+    console.log("non-billable status change", e.target.value);
+    if (e.target.value === "Bulk Delete") {
+      //console.log(e.target.value);
+      setStatusName("");
+      setActionType("delete");
+    } else {
+      //console.log(e.target.value);
+      setStatusName(e.target.value);
+      setActionType("update_status");
+    }
+  };
+
+  //Action Handler Function
+  const handleAction = () => {
+    if (selectedRowKeys?.length > 0) {
+      const payload = {
+        action_type: actionType,
+        status_name: statusName,
+        appointment_ids: selectedRowKeys,
+      };
+      manageSessionStatusChange({
+        token,
+        payload,
+      });
+      console.log("payload for the action handler api", payload);
+    } else {
+      toast.error("Select ID Before Submit Action", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
+    }
+  };
   return (
     <div>
-      {nonBillableData?.length > 0 ? (
+      {!nonBillableListLoading ? (
         <div>
-          <div className=" overflow-scroll">
-            {!nonBillableListLoading ? (
-              <>
-                <Table
-                  pagination={false}
-                  rowKey={(record) => record.id}
-                  size="small"
-                  bordered
-                  className=" text-xs font-normal"
-                  columns={columns}
-                  dataSource={nonBillableData}
-                  scroll={{
-                    y: 750,
-                  }}
-                  onChange={handleChange}
-                />
-                <div className="flex items-center justify-end">
-                  {nonBillableTotalPage > 1 && (
-                    <ReactPaginate
-                      previousLabel={"<"}
-                      nextLabel={">"}
-                      pageCount={Number(nonBillableTotalPage)}
-                      marginPagesDisplayed={1}
-                      onPageChange={handlePageClick}
-                      forcePage={nonBillableTotalPage - 1}
-                      containerClassName={"pagination"}
-                      previousLinkClassName={"pagination_Link"}
-                      nextLinkClassName={"pagination_Link"}
-                      activeClassName={"pagination_Link-active"}
-                      disabledClassName={"pagination_Link-disabled"}
-                    ></ReactPaginate>
-                  )}
-                </div>
-              </>
-            ) : (
-              <ShimmerTableTet></ShimmerTableTet>
-            )}
-          </div>
+          {nonBillableData?.length > 0 ? (
+            <div>
+              <div className=" overflow-scroll">
+                {!nonBillableListLoading ? (
+                  <>
+                    <Table
+                      pagination={false}
+                      rowKey={(record) => record.id}
+                      size="small"
+                      bordered
+                      className=" text-xs font-normal"
+                      columns={columns}
+                      dataSource={nonBillableData}
+                      rowSelection={rowSelection}
+                      scroll={{
+                        y: 750,
+                      }}
+                      onChange={handleChange}
+                    />
+                    <div className="flex items-center justify-end">
+                      {nonBillableTotalPage > 1 && (
+                        <ReactPaginate
+                          previousLabel={"<"}
+                          nextLabel={">"}
+                          pageCount={Number(nonBillableTotalPage)}
+                          marginPagesDisplayed={1}
+                          onPageChange={handlePageClick}
+                          forcePage={nonBillableTotalPage - 1}
+                          containerClassName={"pagination"}
+                          previousLinkClassName={"pagination_Link"}
+                          nextLinkClassName={"pagination_Link"}
+                          activeClassName={"pagination_Link-active"}
+                          disabledClassName={"pagination_Link-disabled"}
+                        ></ReactPaginate>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <ShimmerTableTet></ShimmerTableTet>
+                )}
+              </div>
+            </div>
+          ) : (
+            // CSS Design Need To Applied Here
+            <h1 className="w-full text-center p-2 bg-red-400 text-white rounded-sm">
+              No Data Found
+            </h1>
+          )}
         </div>
       ) : (
-        // CSS Design Need To Applied Here
-        <h1>No Data Found</h1>
+        <ShimmerTableTet></ShimmerTableTet>
       )}
+      {/* For Status Change */}
+      <div className="flex items-center gap-2 flex-wrap mt-6">
+        <select
+          className="modal-input-field ml-1"
+          onChange={(e) => statusChange(e)}
+        >
+          <option value="" className="text-black">
+            Select
+          </option>
+          <option value="Scheduled" className="text-black">
+            Scheduled
+          </option>
+          <option value="No Show" className="text-black">
+            No Show
+          </option>
+          <option value="Hold" className="text-black">
+            Hold
+          </option>
+          <option>Cancelled by Client</option>
+          <option>Cancelled by Provider</option>
+          <option value="Bulk Delete" className="text-black">
+            Bulk Delete
+          </option>
+          <option value="Rendered" className="text-black">
+            Rendered
+          </option>
+        </select>
+        <button onClick={handleAction} className="pms-button">
+          Go
+        </button>
+      </div>
     </div>
   );
 };
