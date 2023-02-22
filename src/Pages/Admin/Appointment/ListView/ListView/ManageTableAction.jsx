@@ -7,7 +7,8 @@ import SessionAddNote from "./SessionAddNote";
 import SessionViewNote from "./SessionViewNote";
 import { Menu } from "antd";
 
-const ManageTableAction = ({ row, appointmentId }) => {
+const ManageTableAction = ({ row, appointmentId, isLocked }) => {
+  console.log("for edit purpose", isLocked);
   const { ref, visible, setVisible } = useOutsideAlerter(false);
   const [openAddNote, setOpenAddNote] = useState(false);
   const [openViewNote, setOpenViewNote] = useState(false);
@@ -55,12 +56,17 @@ const ManageTableAction = ({ row, appointmentId }) => {
             >
               <AiOutlineEye className="text-sm" /> View Note
             </button>
-            <button
-              className="text-xs text-secondary px-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
-              onClick={editSessionHandler}
-            >
-              <MdOutlineModeEditOutline className="text-sm" /> Edit Session
-            </button>
+
+            {isLocked !== 1 && (
+              <>
+                <button
+                  className="text-xs text-secondary px-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+                  onClick={editSessionHandler}
+                >
+                  <MdOutlineModeEditOutline className="text-sm" /> Edit Session
+                </button>
+              </>
+            )}
           </div>
         </div>
       ) : null}
