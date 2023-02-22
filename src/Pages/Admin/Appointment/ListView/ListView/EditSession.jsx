@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import Calendar from "react-calendar";
 import { Modal } from "antd";
+import moment from "moment";
 import "../../../../Style/SingleCalendar.css";
 import {
   useGetAppointmentAuthorizationActivityMutation,
@@ -14,8 +15,8 @@ import {
 } from "../../../../../features/Appointment_redux/appointmentApi";
 import { useAppointmentInfoQuery } from "../../../../../features/Appointment_redux/appointmentApi";
 import useToken from "../../../../../CustomHooks/useToken";
-
-//To Convert Date YY-MM-DD(2022-10-21) to MM/DD/YY
+import Loading from "../../../../../Loading/Loading";
+//To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
   const afterSplit = date?.split("-");
   console.log(afterSplit);
@@ -23,6 +24,31 @@ const dateConverter = (date) => {
     return `${afterSplit[1]}/${afterSplit[2]}/${afterSplit[0]}`;
   }
 };
+
+const timeConverter = (s) => {
+  if (s) {
+    const clone = s.slice(11, 22).split(":");
+    console.log("clone", clone);
+    return `${clone[0]}:${clone[1]}`;
+  }
+  return s;
+};
+
+function tConvert(time) {
+  // Check correct time format and split into components
+  time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [
+    time,
+  ];
+
+  if (time.length > 1) {
+    // If time format correct
+    time = time.slice(1); // Remove full string match value
+    time[5] = +time[0] < 12 ? " AM" : " PM"; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join(""); // return adjusted time or original string
+}
+
 //To Convert Date  (Pacific Standard Time) to MM-DD-YY
 function stringDateConverter(str) {
   var date = new Date(str),
@@ -35,12 +61,13 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
   console.log("managesession row id", appointmentId);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState();
+  const [fromtime, setFromTime] = useState();
+  const [toTime, setToTime] = useState();
   console.log("selected date", stringDateConverter(date));
   const { register, handleSubmit, reset } = useForm();
   const [clientId, setClientId] = useState();
   const [authId, setAuthId] = useState(null);
-  const [fromtime, setFromTime] = useState(null);
-  const [toTime, setToTime] = useState(null);
+
   const { token } = useToken();
 
   //Appointment Get Info API
@@ -66,6 +93,19 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
 
   console.log("Patient Info", appointmentInfo?.appointments);
   let dateConverted = dateConverter(schedule_date);
+  let TOtimeConverted = timeConverter(to_time);
+  let timeConverted = timeConverter(from_time);
+
+  console.log("timeConverted", timeConverted);
+  console.log("TOtimeConverted", TOtimeConverted, "main time", to_time);
+  console.log("timeConverted", timeConverted?.length);
+
+  // useEffect(() => {
+  //   if (from_time && from_Time.split("").length > 0) {
+  //     let tp = timeConverter(from_Time);
+  //     console.log("from_time", tp);
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (dateConverted) {
@@ -147,7 +187,7 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
     console.log("To-Time", timeString);
     setToTime(timeString);
   };
-  console.log("after selecting time", fromtime, toTime);
+  // console.log("after selecting time", fromtime, toTime);
 
   const days = [
     "Sunday",
@@ -199,10 +239,31 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
   const onSubmit = (data) => {
     const payload = {
       ...data,
-      from_time: stringDateConverter(date),
+      from_date: stringDateConverter(date),
+      // form_time_session: fromtime || timeConverted,
+      form_time_session: fromtime ? fromtime : tConvert(timeConverted),
+      // defaulttime: tConvert(timeConverted),
+
+      // form_time_session: tConvert(timeConverted) || timeConverted,
+      // timeSessionPost: toTime,
+      // timeSessiondefault: TOtimeConverted,
+      to_time_session: toTime ? toTime : tConvert(TOtimeConverted),
     };
-    console.log(payload);
+
+    console.log(payload, tConvert(TOtimeConverted));
   };
+
+  // const formtimeOne = (time: Dayjs, timeString: string) => {
+  //   console.log(time, timeString);
+  // };
+
+  // if (timeConverted && timeConverted.length < 0) {
+  //   return <Loading />;
+  // }
+  if (timeConverted && timeConverted.length < 0) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <Modal
@@ -227,7 +288,15 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
             />
           </div>
 
-          <div className="bg-gray-200 py-[1px] mt-3"></div>
+          <div className="h-4 py-1">
+            {infoLoading ? (
+              <>
+                <progress className="progress w-full bg-secondary h-[3px]"></progress>
+              </>
+            ) : (
+              <div className="bg-gray-200 py-[1.5px] mt-3"></div>
+            )}
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1 md:gap-2">
               <label className="label">
@@ -417,19 +486,48 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                 <span className="modal-label-name">From Time</span>
               </label>
               <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-3 pl-1 gap-1">
-                <TimePicker
-                  className="modal-input-field"
-                  use12Hours
-                  format="h:mm A"
-                  onChange={from_Time}
-                />
+                {timeConverted && timeConverted.length > 0 ? (
+                  <TimePicker
+                    className="modal-input-field"
+                    defaultValue={moment(
+                      timeConverted &&
+                        timeConverted.length > 0 &&
+                        // timeConverted,
+                        tConvert(timeConverted),
+                      "HH:mm A"
+                    )}
+                    use12Hours
+                    format="h:mm A"
+                    onChange={from_Time}
+                  />
+                ) : (
+                  <lord-icon
+                    src="https://cdn.lordicon.com/ymrqtsej.json"
+                    trigger="loop"
+                    colors="primary:#121331,secondary:#107c91"
+                  ></lord-icon>
+                )}
                 <div className="modal-label-name mt-2 mx-auto">To Time</div>
-                <TimePicker
-                  className="modal-input-field"
-                  use12Hours
-                  format="h:mm A"
-                  onChange={to_Time}
-                />
+                {TOtimeConverted && TOtimeConverted.length > 0 ? (
+                  <TimePicker
+                    className="modal-input-field"
+                    defaultValue={moment(
+                      TOtimeConverted &&
+                        TOtimeConverted.length > 0 &&
+                        tConvert(TOtimeConverted),
+                      "HH:mm A"
+                    )}
+                    use12Hours
+                    format="h:mm A"
+                    onChange={to_Time}
+                  />
+                ) : (
+                  <lord-icon
+                    src="https://cdn.lordicon.com/ymrqtsej.json"
+                    trigger="loop"
+                    colors="primary:#121331,secondary:#107c91"
+                  ></lord-icon>
+                )}
               </div>
               <label className="label">
                 <span className="modal-label-name">Status</span>
