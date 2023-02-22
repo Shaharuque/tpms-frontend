@@ -429,7 +429,7 @@ const ListView = () => {
       title: "Service & Hrs",
       dataIndex: "activity_name",
       key: "activity_name",
-      width: 250,
+      width: 190,
       filters: [
         {
           text: `assisment BCaBA`,
@@ -470,7 +470,7 @@ const ListView = () => {
       title: "Provider",
       dataIndex: "provider_full_name",
       key: "provider_full_name",
-      width: 200,
+      width: 160,
       filters: [
         {
           text: `Andrew  Flintoff`,
@@ -515,7 +515,7 @@ const ListView = () => {
       title: "Pos",
       key: "location",
       dataIndex: "location",
-      width: 120,
+      width: 150,
       filters: [
         {
           text: "telehealth",
