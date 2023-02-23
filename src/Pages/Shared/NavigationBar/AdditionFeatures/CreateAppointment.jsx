@@ -197,15 +197,15 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               className="text-gray-600 text-2xl hover:text-primary"
             />
           </div>
-          <div class="loader-line"></div>
-
-          {authorizationActivityLoading || patientAuthLoading ? (
-            <>
-              <progress className="progress w-full bg-secondary h-[3px]"></progress>
-            </>
-          ) : (
-            <div className="bg-gray-200 py-[1px] mt-3"></div>
-          )}
+          <div className="h-4 py-1">
+            {authorizationActivityLoading || patientAuthLoading ? (
+              <>
+                <progress className="progress w-full bg-secondary h-[3px]"></progress>
+              </>
+            ) : (
+              <div className="bg-gray-200 py-[1.5px] mt-3"></div>
+            )}
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1 md:gap-2">
               <span className="modal-label-name ml-1 mb-2">App Type</span>

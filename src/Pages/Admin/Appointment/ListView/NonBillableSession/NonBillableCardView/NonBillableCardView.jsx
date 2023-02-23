@@ -12,13 +12,13 @@ import {
   MdOutlineMedicalServices,
   MdOutlineModeEditOutline,
 } from "react-icons/md";
-import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
-import "../../../../Style/ListView.css";
-import EditSession from "../ListView/EditSession";
-import SessionAddNote from "../ListView/SessionAddNote";
-import SessionViewNote from "../ListView/SessionViewNote";
+import { useOutsideAlerter } from "../../../../../../CustomHooks/useDetectOutsideClick";
+import "../../../../../Style/ListView.css";
 import { Fade } from "react-reveal";
-import { timeConverter } from "../../../../Shared/TimeConverter/TimeConverter";
+import SessionViewNote from "../../ListView/SessionViewNote";
+import EditSession from "../../ListView/EditSession";
+import SessionAddNote from "../../ListView/SessionAddNote";
+import { timeConverter } from "../../../../../Shared/TimeConverter/TimeConverter";
 
 //To Convert Date YY-MM-DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -27,7 +27,7 @@ const dateConverter = (date) => {
     return `${afterSplit[1]}/${afterSplit[2]}/${afterSplit[0]}`;
   }
 };
-const CardView = ({ data, posData }) => {
+const NonBillableCardView = ({ data, stuffs, posData }) => {
   const [patientDetails, setPatientDetails] = useState(false);
   const [checkBox, setCheckBox] = useState([]);
   //console.log(checkBox);
@@ -35,11 +35,9 @@ const CardView = ({ data, posData }) => {
   const {
     lock,
     is_locked,
-    app_client,
-    app_client_auth_act,
     schedule_date,
     status,
-    app_provider,
+    provider_id,
     from_time,
     to_time,
     location,
@@ -81,7 +79,7 @@ const CardView = ({ data, posData }) => {
       <div className="px-5">
         <div className=" grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-5 mb-2">
           <div className="flex items-center gap-2">
-            {/* Checkbox Select Code */}
+            {/* Checkbox Code */}
             {/* <input
               type="checkbox"
               // id={`custom-checkbox-${index}`}
@@ -99,17 +97,17 @@ const CardView = ({ data, posData }) => {
           </div>
           <div className="col-span-2">
             <div>
-              <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
-                Patient Name
+              <h1 className="text-xs font-medium text-gray-500">
+                Provider Name
               </h1>
               <p className=" font-medium text-sm text-gray-900">
-                {app_client?.client_full_name}
+                {stuffs?.find((each) => each?.id === provider_id)?.full_name}
               </p>
             </div>
           </div>
           <div className="md:col-span-2 ">
             <div>
-              <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
+              <h1 className="text-xs font-medium text-gray-500">
                 Scheduled Date
               </h1>
               <p className="text-sm font-medium text-gray-900">
@@ -119,37 +117,20 @@ const CardView = ({ data, posData }) => {
           </div>
           <div className="col-span-2 flex ">
             <div>
-              <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
-                Status
-              </h1>
+              <h1 className="text-xs font-medium text-gray-500">Status</h1>
               <div>
                 {status === "Scheduled" && (
-                  <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
+                  <button className="bg-gray-500 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {status}
                   </button>
                 )}
                 {status === "Rendered" && (
-                  <button className="bg-green-700 text-white text-[10px] py-[2px]  rounded w-14">
+                  <button className="bg-[#2795B4] text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {status}
                   </button>
                 )}
                 {status === "Hold" && (
-                  <button className="bg-gray-100 text-black text-[10px] py-[2px]  rounded w-14">
-                    {status}
-                  </button>
-                )}
-                {status === "No Show" && (
-                  <button className="bg-rose-700 text-white text-[10px] py-[2px]  rounded w-14">
-                    {status}
-                  </button>
-                )}
-                {status === "Cancelled by Client" && (
-                  <button className="bg-secondary text-white text-[10px] py-[2px]  rounded w-24">
-                    {status}
-                  </button>
-                )}
-                {status === "Cancelled by Provider" && (
-                  <button className="bg-yellow-600 text-white text-[10px] py-[2px]  rounded w-28">
+                  <button className="bg-red-700 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
                     {status}
                   </button>
                 )}
@@ -178,24 +159,25 @@ const CardView = ({ data, posData }) => {
       {patientDetails && (
         <Fade>
           <h1 className="bg-secondary text-sm w-ful py-1 px-5 text-white font-medium">
-            Patient Details
+            Non-Billable Details
           </h1>
           <div>
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 ">
               <div className="col-span-2 px-5 py-4">
                 <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-2">
                   <div>
-                    <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
-                      Patient Name
+                    <h1 className="text-xs font-medium text-gray-500">
+                      Provider Name
                     </h1>
                     <p className=" font-medium text-sm text-gray-900">
-                      {app_client?.client_full_name}
+                      {
+                        stuffs?.find((each) => each?.id === provider_id)
+                          ?.full_name
+                      }
                     </p>
                   </div>
                   <div>
-                    <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
-                      POS
-                    </h1>
+                    <h1 className="text-xs font-medium text-gray-500">POS</h1>
                     <p className=" font-medium text-sm text-gray-900">
                       {
                         posData?.pos?.find(
@@ -205,31 +187,11 @@ const CardView = ({ data, posData }) => {
                     </p>
                   </div>
                   <div>
-                    <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
-                      Hours
-                    </h1>
-                    <p className=" font-medium text-sm text-primary">
+                    <h1 className="text-xs font-medium text-gray-500">Hours</h1>
+                    <p className=" font-medium text-xs text-teal-700">
                       {timeConverter(from_time?.split(" ")[1])} to{" "}
                       {timeConverter(to_time?.split(" ")[1])}
                     </p>
-                  </div>
-                  <div>
-                    <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
-                      Provider Name
-                    </h1>
-                    <p className=" font-medium text-sm text-gray-900">
-                      {app_provider?.full_name}
-                    </p>
-                  </div>
-                  <div className="col-span-2">
-                    <div>
-                      <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
-                        Service & Hrs.
-                      </h1>
-                      <p className=" font-medium text-sm text-gray-900">
-                        {app_client_auth_act?.activity_name}
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -301,4 +263,4 @@ const CardView = ({ data, posData }) => {
   );
 };
 
-export default CardView;
+export default NonBillableCardView;

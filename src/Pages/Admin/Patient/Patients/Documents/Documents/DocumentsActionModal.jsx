@@ -66,7 +66,7 @@ const DocumentsActionModal = ({ handleClose, open, row, id }) => {
   }, [reset, row, data]);
 
   if (singleitemLoading) {
-    return <p>loading...</p>;
+    return <></>;
   }
   return (
     <div>
@@ -90,7 +90,7 @@ const DocumentsActionModal = ({ handleClose, open, row, id }) => {
               className="text-gray-600 font-semibold  text-2xl hover:text-primary"
             />
           </div>
-
+          {singleitemLoading && <div>SHow loading</div>}
           <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">

@@ -1,11 +1,15 @@
 import React from "react";
 import CardView from "./CardView";
 
-const CardsView = ({ data }) => {
+const CardsView = ({ schedules, posData }) => {
   return (
     <div className="">
-      {data.map((a, i) => (
-        <CardView key={i} data={a}></CardView>
+      {schedules?.map((appointment) => (
+        <CardView
+          key={appointment?.id}
+          data={appointment}
+          posData={posData}
+        ></CardView>
       ))}
     </div>
   );

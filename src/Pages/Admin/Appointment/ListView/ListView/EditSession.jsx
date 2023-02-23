@@ -288,7 +288,15 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
             />
           </div>
 
-          <div className="bg-gray-200 py-[1px] mt-3"></div>
+          <div className="h-4 py-1">
+            {infoLoading ? (
+              <>
+                <progress className="progress w-full bg-secondary h-[3px]"></progress>
+              </>
+            ) : (
+              <div className="bg-gray-200 py-[1.5px] mt-3"></div>
+            )}
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1 md:gap-2">
               <label className="label">
@@ -493,7 +501,11 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                     onChange={from_Time}
                   />
                 ) : (
-                  <p>loading..</p>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/ymrqtsej.json"
+                    trigger="loop"
+                    colors="primary:#121331,secondary:#107c91"
+                  ></lord-icon>
                 )}
                 <div className="modal-label-name mt-2 mx-auto">To Time</div>
                 {TOtimeConverted && TOtimeConverted.length > 0 ? (
@@ -510,7 +522,11 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                     onChange={to_Time}
                   />
                 ) : (
-                  <p>loading..</p>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/ymrqtsej.json"
+                    trigger="loop"
+                    colors="primary:#121331,secondary:#107c91"
+                  ></lord-icon>
                 )}
               </div>
               <label className="label">
