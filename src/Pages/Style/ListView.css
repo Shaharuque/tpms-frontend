@@ -3,6 +3,10 @@
     margin: 10px auto;
 }
 
+.sp {
+    text-align: center !important;
+}
+
 .card:hover {
     transform: translateY(-10px);
     /* box-shadow:  (51, 57, 50, .2); */

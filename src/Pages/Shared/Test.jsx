@@ -1,79 +1,34 @@
-import { DatePicker, Space } from "antd";
-import dayjs from "dayjs";
-import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import CreateAppointmentAvailability from "./NavigationBar/AdditionFeatures/CreateAppointmentAvailability/CreateAppointmentAvailability";
 
 const Test = () => {
-  const { RangePicker } = DatePicker;
+  const [availability, setAvailability] = useState(true);
 
-  const onRangeChange = (dates, dateStrings) => {
-    if (dates) {
-      console.log("From: ", dates[0], ", to: ", dates[1]);
-      console.log("From: ", dateStrings[0], ", to: ", dateStrings[1]);
-    } else {
-      console.log("Clear");
-    }
+  const availabilityHandler = () => {
+    setAvailability(true);
   };
-  const rangePresets = [
-    {
-      label: "Today",
-      value: [dayjs().add(0, "d"), dayjs()],
-    },
-    {
-      label: "Yesterday",
-      value: [dayjs().add(-1, "d"), dayjs()],
-    },
-    {
-      label: "Last 7 Days",
-      value: [dayjs().add(-7, "d"), dayjs()],
-    },
-    {
-      label: "Next 7 Days",
-      value: [dayjs().add(-14, "d"), dayjs()],
-    },
-    {
-      label: "Last 30 Days",
-      value: [dayjs().add(-1, "month"), dayjs()],
-    },
-    {
-      label: "last Year",
-      value: [dayjs().add(-1, "year"), dayjs()],
-    },
-    {
-      label: "This Year",
-      value: [dayjs().add(0, "year"), dayjs()],
-    },
-  ];
-
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
+  const handleClose = () => {
+    setAvailability(false);
   };
   return (
-    <div>
-      <div>
-        <DatePicker onChange={onChange} />
+    <>
+      {" "}
+      <div className="ml-24 mt-24">
+        <button
+          className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+          onClick={() => availabilityHandler()}
+        >
+          <AiOutlinePlus className="text-sm" /> Add Note
+        </button>
       </div>
-      <div className="mt-24 ml-24">
-        <Space direction="vertical" size={5}>
-          <RangePicker
-            ranges={{
-              Today: [moment(), moment()],
-              "This Month": [
-                moment().startOf("month"),
-                moment().endOf("month"),
-              ],
-              "Last Year": [
-                moment().startOf("previousYear"),
-                moment().endOf("year"),
-              ],
-            }}
-            format="DD MMM,YY"
-            presets={rangePresets}
-            onChange={onRangeChange}
-          />
-        </Space>
-      </div>
-    </div>
+      {availability && (
+        <CreateAppointmentAvailability
+          handleClose={handleClose}
+          open={availability}
+        ></CreateAppointmentAvailability>
+      )}
+    </>
   );
 };
 

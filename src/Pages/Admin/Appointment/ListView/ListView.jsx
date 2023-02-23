@@ -1222,7 +1222,7 @@ const ListView = () => {
                       //   stuffsId={stuffsId}
                       //   setStuffsId={setStuffsId}
                       // ></NonBillableSession>
-                      <div className="flex">
+                      <div className="flex flex-wrap">
                         <div className="mr-2">
                           <label className="label">
                             <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">

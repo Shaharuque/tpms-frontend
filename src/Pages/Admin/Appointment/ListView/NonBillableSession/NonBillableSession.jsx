@@ -9,9 +9,10 @@ import { RiArrowLeftRightLine } from "react-icons/ri";
 import { timeConverter } from "../../../../Shared/TimeConverter/TimeConverter";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import ReactPaginate from "react-paginate";
-import { Table } from "antd";
+import { Dropdown, Space, Table } from "antd";
 import { useManageSessionStatusChangeMutation } from "../../../../../features/Appointment_redux/ListView/manageSessionApi";
 import { toast } from "react-toastify";
+import NonBillableAction from "./NonBillableAction/NonBillableAction";
 
 // To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -287,23 +288,26 @@ const NonBillableSession = ({
       dataIndex: "operation",
       key: "operation",
       width: 60,
-      // render: (_, record) => (
-      //   <div className="flex justify-center">
-      //     <Dropdown
-      //       overlay={
-      //         <ManageTableAction appointmentId={record?.id}></ManageTableAction>
-      //       }
-      //       trigger={["click"]}
-      //       overlayStyle={{ zIndex: "100" }}
-      //     >
-      //       <button onClick={(e) => e.preventDefault()}>
-      //         <Space>
-      //           <BsThreeDots />
-      //         </Space>
-      //       </button>
-      //     </Dropdown>
-      //   </div>
-      // ),
+      render: (_, record) => (
+        <div className="flex justify-center">
+          <Dropdown
+            overlay={
+              <NonBillableAction
+              // isLocked={record?.is_locked}
+              // appointmentId={record?.id}
+              ></NonBillableAction>
+            }
+            trigger={["click"]}
+            overlayStyle={{ zIndex: "100" }}
+          >
+            <button onClick={(e) => e.preventDefault()}>
+              <Space>
+                <BsThreeDots />
+              </Space>
+            </button>
+          </Dropdown>
+        </div>
+      ),
     },
   ];
 

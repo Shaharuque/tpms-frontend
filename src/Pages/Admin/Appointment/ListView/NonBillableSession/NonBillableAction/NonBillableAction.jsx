@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { AiOutlineEye, AiOutlinePlus } from "react-icons/ai";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 import { FiCopy } from "react-icons/fi";
-import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
-import EditSession from "./EditSession";
-import SessionAddNote from "./SessionAddNote";
-import SessionViewNote from "./SessionViewNote";
-import SessionCopyNote from "./SessionCopyNote";
-import AddProgram from "./AddProgram";
+import { useOutsideAlerter } from "../../../../../../CustomHooks/useDetectOutsideClick";
+import NonBillableAddNotes from "./NonBillableAddNotes";
+import NonBillableViewNotes from "./NonBillableViewNotes";
+import NonBillableAddProgram from "./NonBillableAddProgram";
+import NonBillableEditSession from "./NonBillableEditSession";
 
-const ManageTableAction = ({ row, appointmentId, isLocked }) => {
+const NonBillableAction = ({ row, appointmentId, isLocked }) => {
   console.log("for edit purpose", isLocked);
   const { ref, visible, setVisible } = useOutsideAlerter(false);
   const [openAddNote, setOpenAddNote] = useState(false);
@@ -70,12 +69,12 @@ const ManageTableAction = ({ row, appointmentId, isLocked }) => {
             >
               <AiOutlineEye className="text-sm" /> View Note
             </button>
-            <button
+            {/* <button
               className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
               onClick={copyNoteHandler}
             >
               <FiCopy className="text-sm" /> Copy Note
-            </button>
+            </button> */}
             <button
               className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
               onClick={addProgramHandler}
@@ -97,35 +96,38 @@ const ManageTableAction = ({ row, appointmentId, isLocked }) => {
         </div>
       ) : null}
       {openAddNote && (
-        <SessionAddNote
+        <NonBillableAddNotes
           handleClose={handleClose}
           open={openAddNote}
-        ></SessionAddNote>
+        ></NonBillableAddNotes>
       )}
       {openViewNote && (
-        <SessionViewNote
+        <NonBillableViewNotes
           handleClose={handleClose}
           open={openViewNote}
-        ></SessionViewNote>
+        ></NonBillableViewNotes>
       )}
-      {copyNote && (
+      {/* {copyNote && (
         <SessionCopyNote
           handleClose={handleClose}
           open={copyNote}
         ></SessionCopyNote>
-      )}
+      )} */}
       {addProgram && (
-        <AddProgram handleClose={handleClose} open={addProgram}></AddProgram>
+        <NonBillableAddProgram
+          handleClose={handleClose}
+          open={addProgram}
+        ></NonBillableAddProgram>
       )}
       {editSession && (
-        <EditSession
+        <NonBillableEditSession
           handleClose={handleClose}
           openEdit={editSession}
           appointmentId={appointmentId}
-        ></EditSession>
+        ></NonBillableEditSession>
       )}
     </div>
   );
 };
 
-export default ManageTableAction;
+export default NonBillableAction;
