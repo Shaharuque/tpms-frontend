@@ -24,7 +24,7 @@
 
 .AppoinmentGlobal .dropdown-content .panel-content {
   max-height: 11rem !important;
- 
+
 }
 
 
@@ -48,11 +48,11 @@
   height: 30px !important; */
 }
 
-.parentSelection{
+.parentSelection {
   display: flex;
   justify-content: space-between;
 }
 
-.btnCustom{
+.btnCustom {
   margin: 0 5px;
 }

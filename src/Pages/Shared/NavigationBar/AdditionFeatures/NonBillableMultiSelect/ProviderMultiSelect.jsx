@@ -59,15 +59,13 @@ const ProviderMultiSelect = ({
           />
         </div>
         <div>
-          <div className="btnCustom">
-            <Button
-              className="pms-button"
-              type="primary"
-              onClick={() => handleNewField()}
-            >
-              Seelct All
-            </Button>
-          </div>
+          <button
+            className="pms-button"
+            // type="primary"
+            onClick={() => handleNewField()}
+          >
+            Select All
+          </button>
         </div>
       </div>
     </>

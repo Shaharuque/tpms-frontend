@@ -218,7 +218,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
         centered
         footer={null}
         bodyStyle={{ padding: "0" }}
-        width={500}
+        width={525}
         closable={false}
         className="box rounded-xl"
         // onClose={handleClose}
