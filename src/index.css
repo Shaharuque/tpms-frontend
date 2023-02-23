@@ -452,3 +452,12 @@ code {
       width: 100%;
   }
 }
+
+
+/* date range select year month */
+
+.rdrDefinedRangesWrapper .rdrStaticRangeSelected{
+  color: #ff0000 !important;
+  font-weight: 1000 !important;
+  background-color: orange;
+}
