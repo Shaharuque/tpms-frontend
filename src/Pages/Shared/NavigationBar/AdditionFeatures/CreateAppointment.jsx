@@ -202,6 +202,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
         autoClose: 5000,
         theme: "dark",
       });
+      handleClose();
     } else if (creationData?.status === "error") {
       toast.error(<h1 className="text-center">{creationData?.message}</h1>, {
         position: "top-center",
