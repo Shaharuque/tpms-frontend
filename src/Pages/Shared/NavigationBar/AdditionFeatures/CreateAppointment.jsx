@@ -20,6 +20,7 @@ import useToken from "../../../../CustomHooks/useToken";
 import BoolConverter from "../../BoolConverter/BoolConverter";
 import ProviderMultiSelect from "./NonBillableMultiSelect/ProviderMultiSelect";
 import { toast } from "react-toastify";
+import CreateAppointmentAvailability from "./CreateAppointmentAvailability/CreateAppointmentAvailability";
 
 const CreateAppointment = ({ handleClose, clicked }) => {
   // console.log(handleClose, clicked);
@@ -37,6 +38,15 @@ const CreateAppointment = ({ handleClose, clicked }) => {
   // For Non-billable appointment create=>provider select
   const [seletedProvider, setSelectedProvider] = useState([]);
   console.log("Billable", billable);
+
+  // Appointment Availability
+  const [availability, setAvailability] = useState(false);
+  const availabilityHandler = () => {
+    setAvailability(true);
+  };
+  const availabilityHandleClose = () => {
+    setAvailability(false);
+  };
 
   //Appointment Get Patient Name Api
   const { data: patientsName, isLoading: patientsNameLoading } =
@@ -184,12 +194,12 @@ const CreateAppointment = ({ handleClose, clicked }) => {
         form_time_session: fromtime,
         to_time_session: toTime,
       };
-      if (seletedProvider?.length > 0) {
-        appointmentCreate({
-          token,
-          payload,
-        });
-      }
+      // if (seletedProvider?.length > 0) {
+      //   appointmentCreate({
+      //     token,
+      //     payload,
+      //   });
+      // }
       console.log("for Non-billable payload", payload);
     }
     // reset();
@@ -370,19 +380,27 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 <span className="modal-label-name">Provider Name</span>
               </label>
               {billable ? (
-                <select
-                  className="col-span-2 modal-input-field ml-1 w-full"
-                  {...register("provider_id")}
-                >
-                  <option value="0">Select Provider</option>
-                  {providersName?.claims?.map((provider) => {
-                    return (
-                      <option key={provider?.id} value={provider?.id}>
-                        {provider?.full_name}
-                      </option>
-                    );
-                  })}
-                </select>
+                <div className="col-span-2 flex item-center">
+                  <select
+                    className=" modal-input-field ml-1 w-2/3"
+                    {...register("provider_id")}
+                  >
+                    <option value="0">Select Provider</option>
+                    {providersName?.claims?.map((provider) => {
+                      return (
+                        <option key={provider?.id} value={provider?.id}>
+                          {provider?.full_name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <button
+                    onClick={() => availabilityHandler()}
+                    className="pms-all-select-button ml-2"
+                  >
+                    Availability
+                  </button>
+                </div>
               ) : (
                 // Non-billable Appointment creation part provider multi select
                 <div className="col-span-2 ml-1">
@@ -686,6 +704,12 @@ const CreateAppointment = ({ handleClose, clicked }) => {
           </form>
         </div>
       </Modal>
+      {availability && (
+        <CreateAppointmentAvailability
+          handleClose={availabilityHandleClose}
+          open={availability}
+        ></CreateAppointmentAvailability>
+      )}
     </div>
   );
 };

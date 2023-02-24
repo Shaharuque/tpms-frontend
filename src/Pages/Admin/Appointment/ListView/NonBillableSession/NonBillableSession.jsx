@@ -394,7 +394,7 @@ const NonBillableSession = ({
                       dataSource={nonBillableData}
                       rowSelection={rowSelection}
                       scroll={{
-                        y: 750,
+                        y: 850,
                       }}
                       onChange={handleChange}
                     />

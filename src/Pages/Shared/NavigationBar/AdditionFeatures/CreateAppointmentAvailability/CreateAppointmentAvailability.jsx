@@ -1,8 +1,29 @@
 import { Modal } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const CreateAppointmentAvailability = ({ handleClose, open }) => {
+  const [time, setTime] = useState("");
+  console.log(time);
+  const morning = [
+    {
+      time: "10:15 AM",
+    },
+    {
+      time: "10:00 PM",
+    },
+    {
+      time: "4:15AM",
+    },
+    {
+      time: "11:15 AM",
+    },
+    {
+      time: "9:15 AM",
+    },
+  ];
+
+  // console.log(morning);
   return (
     <div>
       <div>
@@ -31,9 +52,17 @@ const CreateAppointmentAvailability = ({ handleClose, open }) => {
                   Morning
                 </h1>
                 <div className="border grid grid-cols-2 mb-2 p-1 gap-1 shadow-sm">
-                  <button className="available-button border">10:15 AM</button>
-                  <button className="available-button border">10:00 PM</button>
-                  <button className="available-button border">10:45 AM</button>
+                  {morning.map((x) => (
+                    <button
+                      onClick={() => setTime(x.time)}
+                      className="available-button border"
+                    >
+                      {x.time}
+                    </button>
+                  ))}
+
+                  {/* <button className="available-button border">10:00 PM</button>
+                  <button className="available-button border">10:45 AM</button> */}
                 </div>
               </div>
               <div className="">

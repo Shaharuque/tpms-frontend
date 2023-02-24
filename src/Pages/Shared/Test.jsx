@@ -8,7 +8,7 @@ const Test = () => {
   const availabilityHandler = () => {
     setAvailability(true);
   };
-  const handleClose = () => {
+  const availabilityHandleClose = () => {
     setAvailability(false);
   };
   return (
@@ -24,7 +24,7 @@ const Test = () => {
       </div>
       {availability && (
         <CreateAppointmentAvailability
-          handleClose={handleClose}
+          handleClose={availabilityHandleClose}
           open={availability}
         ></CreateAppointmentAvailability>
       )}
