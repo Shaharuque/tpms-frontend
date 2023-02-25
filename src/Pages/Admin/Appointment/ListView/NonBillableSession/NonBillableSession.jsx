@@ -28,6 +28,7 @@ const NonBillableSession = ({
   nonBillableData,
   setNonBillablePage,
   nonBillablePage,
+  setNonBillableTotalPage,
   nonBillableTotalPage,
   nonBillableListLoading,
   payload,
@@ -107,6 +108,7 @@ const NonBillableSession = ({
         });
         const data = res?.data?.appointments;
         setNonBillableData(data?.data);
+        setNonBillableTotalPage(data?.last_page);
       };
       getNonbillableSessions();
     }
@@ -293,8 +295,8 @@ const NonBillableSession = ({
           <Dropdown
             overlay={
               <NonBillableAction
-              // isLocked={record?.is_locked}
-              // appointmentId={record?.id}
+                isLocked={record?.is_locked}
+                appointmentId={record?.id}
               ></NonBillableAction>
             }
             trigger={["click"]}
@@ -377,60 +379,45 @@ const NonBillableSession = ({
   };
   return (
     <div>
-      {!nonBillableListLoading ? (
-        <div>
-          {nonBillableData?.length > 0 ? (
-            <div>
-              <div className=" overflow-scroll">
-                {!nonBillableListLoading ? (
-                  <>
-                    <Table
-                      pagination={false}
-                      rowKey={(record) => record.id}
-                      size="small"
-                      bordered
-                      className=" text-xs font-normal"
-                      columns={columns}
-                      dataSource={nonBillableData}
-                      rowSelection={rowSelection}
-                      scroll={{
-                        y: 850,
-                      }}
-                      onChange={handleChange}
-                    />
-                    <div className="flex items-center justify-end">
-                      {nonBillableTotalPage > 1 && (
-                        <ReactPaginate
-                          previousLabel={"<"}
-                          nextLabel={">"}
-                          pageCount={Number(nonBillableTotalPage)}
-                          marginPagesDisplayed={1}
-                          onPageChange={handlePageClick}
-                          forcePage={nonBillableTotalPage - 1}
-                          containerClassName={"pagination"}
-                          previousLinkClassName={"pagination_Link"}
-                          nextLinkClassName={"pagination_Link"}
-                          activeClassName={"pagination_Link-active"}
-                          disabledClassName={"pagination_Link-disabled"}
-                        ></ReactPaginate>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <ShimmerTableTet></ShimmerTableTet>
-                )}
-              </div>
-            </div>
-          ) : (
-            // CSS Design Need To Applied Here
-            <h1 className="w-full text-center p-2 bg-red-400 text-white rounded-sm">
-              No Data Found
-            </h1>
-          )}
-        </div>
-      ) : (
-        <ShimmerTableTet></ShimmerTableTet>
-      )}
+      <div className=" overflow-scroll">
+        {!nonBillableListLoading ? (
+          <>
+            <Table
+              pagination={false}
+              rowKey={(record) => record.id}
+              size="small"
+              bordered
+              className=" text-xs font-normal"
+              columns={columns}
+              dataSource={nonBillableData}
+              rowSelection={rowSelection}
+              scroll={{
+                y: 750,
+              }}
+              onChange={handleChange}
+            />
+          </>
+        ) : (
+          <ShimmerTableTet></ShimmerTableTet>
+        )}
+      </div>
+      <div className="flex items-center justify-end">
+        {nonBillableTotalPage > 0 && (
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            pageCount={Number(nonBillableTotalPage)}
+            marginPagesDisplayed={1}
+            onPageChange={handlePageClick}
+            forcePage={nonBillablePage - 1}
+            containerClassName={"pagination"}
+            previousLinkClassName={"pagination_Link"}
+            nextLinkClassName={"pagination_Link"}
+            activeClassName={"pagination_Link-active"}
+            disabledClassName={"pagination_Link-disabled"}
+          ></ReactPaginate>
+        )}
+      </div>
       {/* For Status Change */}
       <div className="flex items-center gap-2 flex-wrap mt-6">
         <select

@@ -34,7 +34,6 @@ const ProviderMultiSelect = ({
 
   const handleNewField = (hasSelectAll, value) => {
     setSelected(options);
-    console.log("selected", selected);
   };
   console.log("Appoinment Multi select data", selected);
 
@@ -61,7 +60,8 @@ const ProviderMultiSelect = ({
         <div>
           <button
             className="pms-button"
-            // type="primary"
+            // Have to define type="button" to differentiate from form submit
+            type="button"
             onClick={() => handleNewField()}
           >
             Select All

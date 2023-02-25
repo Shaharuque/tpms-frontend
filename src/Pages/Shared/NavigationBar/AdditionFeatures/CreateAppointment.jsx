@@ -212,6 +212,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
         autoClose: 5000,
         theme: "dark",
       });
+      handleClose();
     } else if (creationData?.status === "error") {
       toast.error(<h1 className="text-center">{creationData?.message}</h1>, {
         position: "top-center",
@@ -395,6 +396,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                     })}
                   </select>
                   <button
+                    type="button"
                     onClick={() => availabilityHandler()}
                     className="pms-all-select-button ml-2"
                   >

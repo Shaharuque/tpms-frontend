@@ -360,6 +360,7 @@ const ListView = () => {
     //Non-billable Session Table Will be closed and
     setprocceed(false);
     setNonBillableData([]);
+    setNonBillablePage(1);
   };
 
   const handleListView = () => {
@@ -944,6 +945,7 @@ const ListView = () => {
     const selectedProviderIds = { provider_id: stuffsId };
     setPayload(selectedProviderIds);
     setprocceed(true);
+    setNonBillablePage(1);
   };
 
   return (
@@ -1381,6 +1383,7 @@ const ListView = () => {
                 nonBillableData={nonBillableData}
                 setNonBillablePage={setNonBillablePage}
                 nonBillablePage={nonBillablePage}
+                setNonBillableTotalPage={setNonBillableTotalPage}
                 nonBillableTotalPage={nonBillableTotalPage}
                 nonBillableListLoading={nonBillableListLoading}
                 payload={payload}
