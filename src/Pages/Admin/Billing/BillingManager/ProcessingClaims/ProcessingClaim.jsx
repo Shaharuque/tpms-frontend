@@ -350,12 +350,12 @@ const ProcessingClaim = () => {
 
   return (
     <div className={!tableOpen ? "h-[100vh]" : ""}>
-      <h1 className="text-lg text-orange-400">Processing Claim(s)</h1>
+      <h1 className="text-lg text-orange-400 mb-10">Processing Claim(s)</h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" flex items-center gap-4 flex-wrap">
             {/* <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-6 2xl:grid-cols-7  mr-2 gap-6"> */}
-            <div className="flex gap-3">
+            <div className="flex gap-[2px] mb-[6px]">
               <div className="">
                 <label className="label">
                   <span className=" label-font">
@@ -408,13 +408,13 @@ const ProcessingClaim = () => {
                       onChange={onChange}
                     />
                   </Space>
-                  <AiOutlineCalendar className="ml-[-1.9px] mb-[-3px] font-semibold text-primary text-2xl" />
+                  {/* <AiOutlineCalendar className="ml-[-1.9px] mb-[-3px] font-semibold text-primary text-2xl" /> */}
                 </div>
               </div>
 
               <button
                 onClick={handleGO}
-                className=" mt-[28px] w-12 mb-2 pms-button"
+                className=" bg-[#34A7B8] rounded-sm text-white w-12 mt-[26px] p-[6px] shadow-md shadow-gray-300"
               >
                 Go
               </button>
@@ -631,7 +631,7 @@ const ProcessingClaim = () => {
                 {/* submit  */}
                 <div className="gap-2 mb-10 flex">
                   <button
-                    className="mt-[40px] mb-1 w-12 pms-input-button"
+                    className="bg-[#34A7B8] rounded-sm text-white w-16 mt-[20px] p-[8px] shadow-md shadow-gray-300"
                     type="submit"
                     onClick={() => {
                       setTableOpen(true);
@@ -639,7 +639,7 @@ const ProcessingClaim = () => {
                   >
                     Run
                   </button>
-                  <button className="pms-close-button w-16 mb-[3px] mt-[40px]">
+                  <button className="bg-[#b91c1c] rounded-sm text-white w-16 mt-[20px] p-[8px] shadow-md shadow-gray-300">
                     Cancel
                   </button>
                 </div>

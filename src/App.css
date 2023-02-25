@@ -118,7 +118,7 @@ input[type='checkbox'] {
   background-clip: border-box;
   color: rgb(255, 255, 255);
   border-radius: 3px;
-  box-shadow: 2px 2px 2px 0px #626d6e;
+  /* box-shadow: 2px 2px 2px 0px #626d6e; */
   display: inline-block;
   transition: ease-in-out 0.3s;
   border: 1px solid #0AA7B8;
@@ -143,8 +143,8 @@ input[type='checkbox'] {
   background-color: #b91c1c;
   background-clip: border-box;
   color: rgb(255, 255, 255);
-  border-radius: 5px;
-  box-shadow: 2px 2px 2px 0px #626d6e;
+  border-radius: 3px;
+  /* box-shadow: 2px 2px 2px 0px #626d6e; */
   display: inline-block;
   transition: ease-in-out 0.3s;
   border: 0.5px solid #b91c1c;
@@ -191,7 +191,7 @@ input[type='checkbox'] {
   padding: 4px 12px;
   background-color: #0aa7b8;
   box-shadow: 2px 2px 2px 0px #626d6e;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 .pms-all-select-button {
@@ -209,7 +209,7 @@ input[type='checkbox'] {
   background-clip: border-box;
   color: rgb(255, 255, 255);
   border-radius: 3px;
-  box-shadow: 2px 2px 2px 0px #626d6e;
+  /* box-shadow: 2px 2px 2px 0px #626d6e; */
   display: inline-block;
   transition: ease-in-out 0.3s;
   border: 1px solid #0AA7B8;
