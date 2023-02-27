@@ -961,8 +961,8 @@ const ListView = () => {
         table &&
         items?.length > 0 &&
         nonBillableData.length > 0
-          ? ""
-          : "h-[170vh]"
+          ? "h-[170vh]"
+          : ""
       }
     >
       <div>
