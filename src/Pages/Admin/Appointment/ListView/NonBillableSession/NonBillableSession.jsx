@@ -378,78 +378,88 @@ const NonBillableSession = ({
     }
   };
   return (
-    <div>
-      <div className=" overflow-scroll">
-        {!nonBillableListLoading ? (
-          <>
-            <Table
-              pagination={false}
-              rowKey={(record) => record.id}
-              size="small"
-              bordered
-              className=" text-xs font-normal"
-              columns={columns}
-              dataSource={nonBillableData}
-              rowSelection={rowSelection}
-              scroll={{
-                y: 750,
-              }}
-              onChange={handleChange}
-            />
-          </>
-        ) : (
-          <ShimmerTableTet></ShimmerTableTet>
-        )}
-      </div>
-      <div className="flex items-center justify-end">
-        {nonBillableTotalPage > 0 && (
-          <ReactPaginate
-            previousLabel={"<"}
-            nextLabel={">"}
-            pageCount={Number(nonBillableTotalPage)}
-            marginPagesDisplayed={1}
-            onPageChange={handlePageClick}
-            forcePage={nonBillablePage - 1}
-            containerClassName={"pagination"}
-            previousLinkClassName={"pagination_Link"}
-            nextLinkClassName={"pagination_Link"}
-            activeClassName={"pagination_Link-active"}
-            disabledClassName={"pagination_Link-disabled"}
-          ></ReactPaginate>
-        )}
-      </div>
-      {/* For Status Change */}
-      <div className="flex items-center gap-2 flex-wrap mt-6">
-        <select
-          className="modal-input-field ml-1"
-          onChange={(e) => statusChange(e)}
-        >
-          <option value="" className="text-black">
-            Select
-          </option>
-          <option value="Scheduled" className="text-black">
-            Scheduled
-          </option>
-          <option value="No Show" className="text-black">
-            No Show
-          </option>
-          <option value="Hold" className="text-black">
-            Hold
-          </option>
-          <option>Cancelled by Client</option>
-          <option>Cancelled by Provider</option>
-          <option value="Bulk Delete" className="text-black">
-            Bulk Delete
-          </option>
-          <option value="Rendered" className="text-black">
-            Rendered
-          </option>
-        </select>
-        <button onClick={handleAction} className="pms-button">
-          Go
-        </button>
-      </div>
-    </div>
+    <>
+      {!nonBillableListLoading ? (
+        <div>
+          {nonBillableData?.length > 0 && (
+            <div>
+              <div className=" overflow-scroll">
+                {!nonBillableListLoading ? (
+                  <>
+                    <Table
+                      pagination={false}
+                      rowKey={(record) => record.id}
+                      size="small"
+                      bordered
+                      className=" text-xs font-normal"
+                      columns={columns}
+                      dataSource={nonBillableData}
+                      rowSelection={rowSelection}
+                      scroll={{
+                        y: 750,
+                      }}
+                      onChange={handleChange}
+                    />
+                  </>
+                ) : (
+                  <ShimmerTableTet></ShimmerTableTet>
+                )}
+              </div>
+              <div className="flex items-center justify-end">
+                {nonBillableTotalPage > 0 && (
+                  <ReactPaginate
+                    previousLabel={"<"}
+                    nextLabel={">"}
+                    pageCount={Number(nonBillableTotalPage)}
+                    marginPagesDisplayed={1}
+                    onPageChange={handlePageClick}
+                    forcePage={nonBillablePage - 1}
+                    containerClassName={"pagination"}
+                    previousLinkClassName={"pagination_Link"}
+                    nextLinkClassName={"pagination_Link"}
+                    activeClassName={"pagination_Link-active"}
+                    disabledClassName={"pagination_Link-disabled"}
+                  ></ReactPaginate>
+                )}
+              </div>
+              {/* For Status Change */}
+              <div className="flex items-center gap-2 flex-wrap mt-6">
+                <select
+                  className="modal-input-field ml-1"
+                  onChange={(e) => statusChange(e)}
+                >
+                  <option value="" className="text-black">
+                    Select
+                  </option>
+                  <option value="Scheduled" className="text-black">
+                    Scheduled
+                  </option>
+                  <option value="No Show" className="text-black">
+                    No Show
+                  </option>
+                  <option value="Hold" className="text-black">
+                    Hold
+                  </option>
+                  <option>Cancelled by Client</option>
+                  <option>Cancelled by Provider</option>
+                  <option value="Bulk Delete" className="text-black">
+                    Bulk Delete
+                  </option>
+                  <option value="Rendered" className="text-black">
+                    Rendered
+                  </option>
+                </select>
+                <button onClick={handleAction} className="pms-button">
+                  Go
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      ) : (
+        <ShimmerTableTet></ShimmerTableTet>
+      )}
+    </>
   );
 };
 

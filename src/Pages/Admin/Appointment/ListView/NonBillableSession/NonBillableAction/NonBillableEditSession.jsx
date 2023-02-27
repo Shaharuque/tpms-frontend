@@ -537,6 +537,7 @@ const NonBillableEditSession = ({ handleClose, openEdit, appointmentId }) => {
                   Cancelled by Provider
                 </option>
                 <option value="Rendered">Rendered</option>
+                <option value="No Show">No Show</option>
               </select>
             </div>
 

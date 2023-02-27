@@ -332,9 +332,12 @@ const ListView = () => {
   };
   const handleClose = () => {
     setClicked(!clicked);
+    //While Close button clicked the Billable Session Table will be closed
     setTable(false);
     // setCheck(false)
+
     setprocceed(false); //Non-billable Session Table Will be closed
+    setNonBillableData([]); //Non-billable Session Table Data will be empty when close button clicked
   };
 
   // Hide calendar on outside click
