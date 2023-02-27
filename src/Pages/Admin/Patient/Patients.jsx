@@ -304,6 +304,7 @@ const TableApi = () => {
       key: "phone_number",
       width: 100,
       filters: contactInfoSearch(),
+      filterSearch: true,
       //render contains what we want to reflect as our data
       render: (_, { phone_number }) => {
         return (
@@ -337,6 +338,7 @@ const TableApi = () => {
       key: "client_dob",
       width: 80,
       filters: dobSearch(),
+      filterSearch: true,
       //render contains what we want to reflect as our data
       render: (_, { client_dob }) => {
         return (
@@ -371,6 +373,7 @@ const TableApi = () => {
       key: "client_gender",
       width: 80,
       filters: genderSearch(),
+      filterSearch: true,
       filteredValue: filteredInfo.client_gender || null,
       onFilter: (value, record) => record.client_gender.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -387,6 +390,7 @@ const TableApi = () => {
       key: "location",
       width: 80,
       filters: posSearch(),
+      filterSearch: true,
       render: (_, { location }) => {
         return (
           <div>
