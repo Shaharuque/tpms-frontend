@@ -194,12 +194,12 @@ const CreateAppointment = ({ handleClose, clicked }) => {
         form_time_session: fromtime,
         to_time_session: toTime,
       };
-      // if (seletedProvider?.length > 0) {
-      //   appointmentCreate({
-      //     token,
-      //     payload,
-      //   });
-      // }
+      if (seletedProvider?.length > 0) {
+        appointmentCreate({
+          token,
+          payload,
+        });
+      }
       console.log("for Non-billable payload", payload);
     }
     // reset();
