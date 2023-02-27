@@ -293,7 +293,9 @@ code {
 /* date range select year month */
 
 .rdrDefinedRangesWrapper .rdrStaticRangeSelected{
-  color: #ff0000 !important;
-  font-weight: 1000 !important;
-  background-color: orange;
+  color: #fbf8f8 !important;
+  font-weight: bolder;
+  border-radius: 2px;
+  background: #9cc5d37a;
+
 }
