@@ -32,6 +32,7 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
       <div>
         <DateRangePicker
           onChange={(item) => setRange([item.selection])}
+          showSelectionPreview={true}
           editableDateInputs={true}
           moveRangeOnFirstSelection={false}
           ranges={range}

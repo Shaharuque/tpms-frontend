@@ -288,3 +288,14 @@ code {
       width: 100%;
   }
 }
+
+
+/* date range select year month */
+
+.rdrDefinedRangesWrapper .rdrStaticRangeSelected{
+  color: #fbf8f8 !important;
+  font-weight: bolder;
+  border-radius: 2px;
+  background: #9cc5d37a;
+
+}
