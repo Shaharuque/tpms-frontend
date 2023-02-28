@@ -1,7 +1,7 @@
 import React from "react";
 
 const GuarantorInfo = ({ register, checkLocation, SameasPatientBtn, hook }) => {
-  //console.log(checkLocation);
+  console.log(checkLocation);
   return (
     <div className="my-2">
       <h1 className="text-sm font-medium my-1 ml-1">Guarantor Info</h1>
@@ -55,7 +55,8 @@ const GuarantorInfo = ({ register, checkLocation, SameasPatientBtn, hook }) => {
             type="text"
             placeholder="Street"
             className="input-border input-font py-[1px] w-full focus:outline-none"
-            {...register(checkLocation ? "GuaratorStreet" : "null")}
+            {...register("GuaratorStreet")}
+            // {...register(checkLocation ? "GuaratorStreet" : "null")}
           />
         </div>
 
@@ -79,15 +80,19 @@ const GuarantorInfo = ({ register, checkLocation, SameasPatientBtn, hook }) => {
             placeholder="City"
             className="input-border input-font py-[1px] w-full focus:outline-none"
             defaultValue={hook?.City}
-            {...register(checkLocation ? "GuaratorCity" : "dj")}
+            // {...register(checkLocation ? "GuaratorCity" : "null")}
+            {...register("GuaratorCity")}
           />
         </div>
         <div>
           <select
             className="input-border input-font  w-full focus:outline-none"
-            {...register(checkLocation ? "GuratorCountry" : "null")}
+            // {...register(checkLocation ? "GuratorCountry" : "null")}
+            {...register("GuratorCountry")}
           >
             <option value="NY">NY</option>
+            <option value="UK">UK</option>
+            <option value="MT">MT</option>
             <option value="UK">UK</option>
           </select>
         </div>
@@ -96,7 +101,8 @@ const GuarantorInfo = ({ register, checkLocation, SameasPatientBtn, hook }) => {
             type="text"
             placeholder="Zip"
             className="input-border input-font py-[1px] w-full focus:outline-none"
-            {...register(checkLocation ? "GuratorZip" : "dj")}
+            // {...register(checkLocation ? "GuratorZip" : "null")}
+            {...register("GuratorZip")}
           />
         </div>
       </div>

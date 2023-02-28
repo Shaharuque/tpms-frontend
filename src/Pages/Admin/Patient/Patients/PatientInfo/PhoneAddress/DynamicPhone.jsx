@@ -3,7 +3,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 const DynamicPhone = ({ adData }) => {
   const { phoneFields, phoneRemove, register } = adData;
-
+  console.log("phoneFields", phoneFields);
   return (
     <div>
       {phoneFields.map((field, index) => {
@@ -21,7 +21,7 @@ const DynamicPhone = ({ adData }) => {
                   {...register(`number.${index}.number`, {
                     // required: true
                   })}
-                  defaultValue={field.number}
+                  defaultValue={field.phone_number}
                 />
               </div>
               <div>
