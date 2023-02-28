@@ -14,9 +14,13 @@ import {
   useGetAppointmentPatientAuthMutation,
   useGetAppointmentPatientNameQuery,
   useGetAppointmentProviderNameQuery,
+  useGetAppointmentPOSQuery,
 } from "../../../../features/Appointment_redux/appointmentApi";
 import useToken from "../../../../CustomHooks/useToken";
 import BoolConverter from "../../BoolConverter/BoolConverter";
+import ProviderMultiSelect from "./NonBillableMultiSelect/ProviderMultiSelect";
+import { toast } from "react-toastify";
+import CreateAppointmentAvailability from "./CreateAppointmentAvailability/CreateAppointmentAvailability";
 
 const CreateAppointment = ({ handleClose, clicked }) => {
   // console.log(handleClose, clicked);
@@ -31,7 +35,18 @@ const CreateAppointment = ({ handleClose, clicked }) => {
   const [fromtime, setFromTime] = useState(null);
   const [toTime, setToTime] = useState(null);
   const { token } = useToken();
+  // For Non-billable appointment create=>provider select
+  const [seletedProvider, setSelectedProvider] = useState([]);
   console.log("Billable", billable);
+
+  // Appointment Availability
+  const [availability, setAvailability] = useState(false);
+  const availabilityHandler = () => {
+    setAvailability(true);
+  };
+  const availabilityHandleClose = () => {
+    setAvailability(false);
+  };
 
   //Appointment Get Patient Name Api
   const { data: patientsName, isLoading: patientsNameLoading } =
@@ -62,6 +77,12 @@ const CreateAppointment = ({ handleClose, clicked }) => {
       isError: authorizationActivityError,
     },
   ] = useGetAppointmentAuthorizationActivityMutation();
+
+  //Appointment Get POS
+  const { data: posData, isLoading: isPosLoading } =
+    useGetAppointmentPOSQuery(token);
+
+  console.log("pos data", posData);
 
   //Appointment Create New Session API
   const [
@@ -149,30 +170,58 @@ const CreateAppointment = ({ handleClose, clicked }) => {
   }, [date, reset]);
 
   const onSubmit = (data) => {
-    const payload = {
-      billable: BoolConverter(billable),
-      ...data,
-      form_time_session: fromtime,
-      to_time_session: toTime,
-    };
-    if (payload) {
-      appointmentCreate({
-        token,
-        payload,
-      });
+    if (billable) {
+      const payload = {
+        billable: BoolConverter(billable),
+        ...data,
+        form_time_session: fromtime,
+        to_time_session: toTime,
+      };
+      if (payload) {
+        appointmentCreate({
+          token,
+          payload,
+        });
+      }
+      console.log("for billable payload", payload);
+    } else {
+      const payload = {
+        billable: BoolConverter(billable),
+        ...data,
+        client_id: 1,
+        authorization_id: 1,
+        provider_mul_id: seletedProvider,
+        form_time_session: fromtime,
+        to_time_session: toTime,
+      };
+      if (seletedProvider?.length > 0) {
+        appointmentCreate({
+          token,
+          payload,
+        });
+      }
+      console.log("for Non-billable payload", payload);
     }
-    console.log(payload);
     // reset();
   };
+  // To Show Success Or Error Message
+  useEffect(() => {
+    if (creationData?.status === "success") {
+      toast.success(<h1>Successfully Appoinment Created</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+      handleClose();
+    } else if (creationData?.status === "error") {
+      toast.error(<h1 className="text-center">{creationData?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [creationData?.status]);
 
-  // --------------------------------------------------Multi-Select-------------------------------
-  // const [value, setValue] = useState([]);
-  // const data = ["Eugenia", "Bryan", "Linda", "Eugenia", "Bryan", "Linda"].map(
-  //   (item) => ({
-  //     label: item,
-  //     value: item,
-  //   })
-  // );
   return (
     <div>
       <Modal
@@ -180,7 +229,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
         centered
         footer={null}
         bodyStyle={{ padding: "0" }}
-        width={500}
+        width={525}
         closable={false}
         className="box rounded-xl"
         // onClose={handleClose}
@@ -215,6 +264,7 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                   size="small"
                   onClick={() => {
                     setBillable(!billable);
+                    reset();
                   }}
                 />
                 <label
@@ -229,43 +279,68 @@ const CreateAppointment = ({ handleClose, clicked }) => {
               </label>
 
               <select
+                disabled={patientsNameLoading || !billable ? true : false}
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("client_id")}
                 onChange={(e) => setClientId(e.target.value)}
               >
-                <option value="0">Select Patient</option>
-                {patientsName?.claims?.map((patient) => {
-                  return (
-                    <option key={patient?.id} value={patient?.id}>
-                      {patient?.client_full_name}
-                    </option>
-                  );
-                })}
+                {!billable ? (
+                  <option disabled value={1}>
+                    Non-Billable Client
+                  </option>
+                ) : (
+                  <>
+                    <option value="0">Select Patient</option>
+                    {patientsName?.claims?.map((patient) => {
+                      return (
+                        <option key={patient?.id} value={patient?.id}>
+                          {patient?.client_full_name}
+                        </option>
+                      );
+                    })}
+                  </>
+                )}
               </select>
               <label className="label">
                 <span className="modal-label-name">Auth</span>
               </label>
               <select
-                disabled={patientAuthLoading || patientAuthError ? true : false}
+                disabled={
+                  patientAuthLoading || patientAuthError || !billable
+                    ? true
+                    : false
+                }
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("authorization_id")}
                 onChange={(e) => setAuthId(e.target.value)}
               >
-                <option value="0">Select Auth</option>
-                {patientAuthData?.claims?.map((auth) => {
-                  return (
-                    <option key={auth?.id} value={auth?.id}>
-                      {auth?.description +
-                        `(${
-                          auth?.onset_date + " " + "to" + " " + auth?.end_date
-                        })` +
-                        " " +
-                        "|" +
-                        " " +
-                        auth?.authorization_number}
-                    </option>
-                  );
-                })}
+                {!billable ? (
+                  <option disabled value={1}>
+                    NONCLI01323_AUTH249
+                  </option>
+                ) : (
+                  <>
+                    <option value="0">Select Auth</option>
+                    {patientAuthData?.claims?.map((auth) => {
+                      return (
+                        <option key={auth?.id} value={auth?.id}>
+                          {auth?.description +
+                            `(${
+                              auth?.onset_date +
+                              " " +
+                              "to" +
+                              " " +
+                              auth?.end_date
+                            })` +
+                            " " +
+                            "|" +
+                            " " +
+                            auth?.authorization_number}
+                        </option>
+                      );
+                    })}
+                  </>
+                )}
               </select>
               <label className="label">
                 <span className="modal-label-name">Service</span>
@@ -279,35 +354,63 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("activity_id")}
               >
-                <option value="0">Select Activity</option>
-                {authorizationActivityData?.claims?.map((activity) => {
-                  return (
-                    <option key={activity?.id} value={activity?.id}>
-                      {activity?.activity_name}
-                    </option>
-                  );
-                })}
+                {!billable ? (
+                  <>
+                    <option value={1}>Regular Time</option>
+                    <option value={2}>Training & Admin</option>
+                    <option value={3}>Fill-In</option>
+                    <option value={4}>Other</option>
+                    <option value={5}>Public Holiday</option>
+                    <option value={6}>Paid Time Off</option>
+                    <option value={7}>Unpaid</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="0">Select Activity</option>
+                    {authorizationActivityData?.claims?.map((activity) => {
+                      return (
+                        <option key={activity?.id} value={activity?.id}>
+                          {activity?.activity_name}
+                        </option>
+                      );
+                    })}
+                  </>
+                )}
               </select>
               <label className="label">
                 <span className="modal-label-name">Provider Name</span>
               </label>
               {billable ? (
-                <select
-                  className="col-span-2 modal-input-field ml-1 w-full"
-                  {...register("provider_id")}
-                >
-                  <option value="0">Select Provider</option>
-                  {providersName?.claims?.map((provider) => {
-                    return (
-                      <option key={provider?.id} value={provider?.id}>
-                        {provider?.full_name}
-                      </option>
-                    );
-                  })}
-                </select>
+                <div className="col-span-2 flex item-center">
+                  <select
+                    className=" modal-input-field ml-1 w-2/3"
+                    {...register("provider_id")}
+                  >
+                    <option value="0">Select Provider</option>
+                    {providersName?.claims?.map((provider) => {
+                      return (
+                        <option key={provider?.id} value={provider?.id}>
+                          {provider?.full_name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => availabilityHandler()}
+                    className="pms-all-select-button ml-2"
+                  >
+                    Availability
+                  </button>
+                </div>
               ) : (
+                // Non-billable Appointment creation part provider multi select
                 <div className="col-span-2 ml-1">
-                  <AppoinmentMultiSelection />
+                  <ProviderMultiSelect
+                    providers={providersName?.claims}
+                    seletedProvider={seletedProvider}
+                    setSelectedProvider={setSelectedProvider}
+                  />
                 </div>
               )}
               <label className="label">
@@ -317,10 +420,14 @@ const CreateAppointment = ({ handleClose, clicked }) => {
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("location")}
               >
-                <option value="0"></option>
-                <option value="90">School (90)</option>
-                <option value="11">Office (11)</option>
-                <option value="12">Home (12)</option>
+                <option value="0">Select Location</option>
+                {posData?.pos?.map((p) => {
+                  return (
+                    <option key={p?.id} value={p?.pos_code}>
+                      {p?.pos_name}
+                    </option>
+                  );
+                })}
               </select>
               {/* calender */}
               <label className="label">
@@ -599,6 +706,12 @@ const CreateAppointment = ({ handleClose, clicked }) => {
           </form>
         </div>
       </Modal>
+      {availability && (
+        <CreateAppointmentAvailability
+          handleClose={availabilityHandleClose}
+          open={availability}
+        ></CreateAppointmentAvailability>
+      )}
     </div>
   );
 };

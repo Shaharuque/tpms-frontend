@@ -1,6 +1,7 @@
 //This particular navigation bar is used in our project
 import React, { useState } from "react";
 import { BsDownload } from "react-icons/bs";
+import "../../Style/Navigation.css";
 import {
   BiFullscreen,
   BiExitFullscreen,

@@ -1,11 +1,10 @@
 import { Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const SessionViewNote = ({ handleClose, open, editableRow }) => {
   const { register, handleSubmit, reset } = useForm();
-  const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -20,6 +19,7 @@ const SessionViewNote = ({ handleClose, open, editableRow }) => {
     <div>
       <div>
         <Modal
+          width={450}
           open={open}
           centered
           footer={false}
@@ -53,9 +53,8 @@ const SessionViewNote = ({ handleClose, open, editableRow }) => {
               <div className="bg-gray-200 py-[1px] mt-3"></div>
               <div className=" flex items-end justify-end mt-2">
                 <button className=" pms-button mr-2" type="submit">
-                  Save
+                  Go
                 </button>
-
                 <button className="pms-close-button" onClick={handleClose}>
                   Close
                 </button>

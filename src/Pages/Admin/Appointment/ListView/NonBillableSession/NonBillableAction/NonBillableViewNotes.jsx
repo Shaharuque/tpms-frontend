@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const SessionAddNote = ({ handleClose, open }) => {
+const NonBillableViewNotes = ({ handleClose, open, editableRow }) => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
@@ -14,7 +14,7 @@ const SessionAddNote = ({ handleClose, open }) => {
     setTimeout(() => {
       reset({});
     }, 500);
-  }, [reset]);
+  }, [reset, editableRow]);
   return (
     <div>
       <div>
@@ -27,9 +27,9 @@ const SessionAddNote = ({ handleClose, open }) => {
           bodyStyle={{ padding: "0" }}
           className="box rounded-lg"
         >
-          <div className="px-5 py-2  ">
+          <div className="px-5 py-2 ">
             <div className="flex items-center justify-between">
-              <h1 className="text-lg text-left text-orange-400">Add Notes</h1>
+              <h1 className="text-lg text-left text-orange-400">View Notes</h1>
               <IoCloseCircleOutline
                 onClick={handleClose}
                 className="text-gray-500 text-2xl hover:text-primary"
@@ -55,7 +55,6 @@ const SessionAddNote = ({ handleClose, open }) => {
                 <button className=" pms-button mr-2" type="submit">
                   Go
                 </button>
-
                 <button className="pms-close-button" onClick={handleClose}>
                   Close
                 </button>
@@ -68,4 +67,4 @@ const SessionAddNote = ({ handleClose, open }) => {
   );
 };
 
-export default SessionAddNote;
+export default NonBillableViewNotes;

@@ -1,4 +1,4 @@
-.utho {
+/* .utho {
     transform: scale(1.03);
 }
 
@@ -10,4 +10,22 @@
     height: 10px;
     background: red;
     transform-origin: 0%;
+} */
+
+.available-button {
+    border-radius: 5px;
+    padding-left: 0px;
+    padding: 4px 0;
+    background-color: azure;
+    font-size: 12px;
+    line-height: 19px !important;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    word-spacing: 0.2px;
+    transition: ease-in-out 0.3s;
+}
+
+.available-button:hover {
+    background-color: #0AA7B8;
+    color: aliceblue;
 }

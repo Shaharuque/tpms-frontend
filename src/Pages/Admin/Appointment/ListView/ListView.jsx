@@ -332,9 +332,12 @@ const ListView = () => {
   };
   const handleClose = () => {
     setClicked(!clicked);
+    //While Close button clicked the Billable Session Table will be closed
     setTable(false);
     // setCheck(false)
+
     setprocceed(false); //Non-billable Session Table Will be closed
+    setNonBillableData([]); //Non-billable Session Table Data will be empty when close button clicked
   };
 
   // Hide calendar on outside click
@@ -360,6 +363,7 @@ const ListView = () => {
     //Non-billable Session Table Will be closed and
     setprocceed(false);
     setNonBillableData([]);
+    setNonBillablePage(1);
   };
 
   const handleListView = () => {
@@ -944,6 +948,7 @@ const ListView = () => {
     const selectedProviderIds = { provider_id: stuffsId };
     setPayload(selectedProviderIds);
     setprocceed(true);
+    setNonBillablePage(1);
   };
 
   return (
@@ -1230,7 +1235,7 @@ const ListView = () => {
                       //   stuffsId={stuffsId}
                       //   setStuffsId={setStuffsId}
                       // ></NonBillableSession>
-                      <div className="flex">
+                      <div className="flex flex-wrap">
                         <div className="mr-2">
                           <label className="label">
                             <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
@@ -1389,6 +1394,7 @@ const ListView = () => {
                 nonBillableData={nonBillableData}
                 setNonBillablePage={setNonBillablePage}
                 nonBillablePage={nonBillablePage}
+                setNonBillableTotalPage={setNonBillableTotalPage}
                 nonBillableTotalPage={nonBillableTotalPage}
                 nonBillableListLoading={nonBillableListLoading}
                 payload={payload}

@@ -9,9 +9,10 @@ import { RiArrowLeftRightLine } from "react-icons/ri";
 import { timeConverter } from "../../../../Shared/TimeConverter/TimeConverter";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import ReactPaginate from "react-paginate";
-import { Table } from "antd";
+import { Dropdown, Space, Table } from "antd";
 import { useManageSessionStatusChangeMutation } from "../../../../../features/Appointment_redux/ListView/manageSessionApi";
 import { toast } from "react-toastify";
+import NonBillableAction from "./NonBillableAction/NonBillableAction";
 
 // To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -27,6 +28,7 @@ const NonBillableSession = ({
   nonBillableData,
   setNonBillablePage,
   nonBillablePage,
+  setNonBillableTotalPage,
   nonBillableTotalPage,
   nonBillableListLoading,
   payload,
@@ -106,6 +108,7 @@ const NonBillableSession = ({
         });
         const data = res?.data?.appointments;
         setNonBillableData(data?.data);
+        setNonBillableTotalPage(data?.last_page);
       };
       getNonbillableSessions();
     }
@@ -287,23 +290,26 @@ const NonBillableSession = ({
       dataIndex: "operation",
       key: "operation",
       width: 60,
-      // render: (_, record) => (
-      //   <div className="flex justify-center">
-      //     <Dropdown
-      //       overlay={
-      //         <ManageTableAction appointmentId={record?.id}></ManageTableAction>
-      //       }
-      //       trigger={["click"]}
-      //       overlayStyle={{ zIndex: "100" }}
-      //     >
-      //       <button onClick={(e) => e.preventDefault()}>
-      //         <Space>
-      //           <BsThreeDots />
-      //         </Space>
-      //       </button>
-      //     </Dropdown>
-      //   </div>
-      // ),
+      render: (_, record) => (
+        <div className="flex justify-center">
+          <Dropdown
+            overlay={
+              <NonBillableAction
+                isLocked={record?.is_locked}
+                appointmentId={record?.id}
+              ></NonBillableAction>
+            }
+            trigger={["click"]}
+            overlayStyle={{ zIndex: "100" }}
+          >
+            <button onClick={(e) => e.preventDefault()}>
+              <Space>
+                <BsThreeDots />
+              </Space>
+            </button>
+          </Dropdown>
+        </div>
+      ),
     },
   ];
 
@@ -372,10 +378,10 @@ const NonBillableSession = ({
     }
   };
   return (
-    <div>
+    <>
       {!nonBillableListLoading ? (
         <div>
-          {nonBillableData?.length > 0 ? (
+          {nonBillableData?.length > 0 && (
             <div>
               <div className=" overflow-scroll">
                 {!nonBillableListLoading ? (
@@ -394,71 +400,66 @@ const NonBillableSession = ({
                       }}
                       onChange={handleChange}
                     />
-                    <div className="flex items-center justify-end">
-                      {nonBillableTotalPage > 1 && (
-                        <ReactPaginate
-                          previousLabel={"<"}
-                          nextLabel={">"}
-                          pageCount={Number(nonBillableTotalPage)}
-                          marginPagesDisplayed={1}
-                          onPageChange={handlePageClick}
-                          forcePage={nonBillableTotalPage - 1}
-                          containerClassName={"pagination"}
-                          previousLinkClassName={"pagination_Link"}
-                          nextLinkClassName={"pagination_Link"}
-                          activeClassName={"pagination_Link-active"}
-                          disabledClassName={"pagination_Link-disabled"}
-                        ></ReactPaginate>
-                      )}
-                    </div>
                   </>
                 ) : (
                   <ShimmerTableTet></ShimmerTableTet>
                 )}
               </div>
+              <div className="flex items-center justify-end">
+                {nonBillableTotalPage > 0 && (
+                  <ReactPaginate
+                    previousLabel={"<"}
+                    nextLabel={">"}
+                    pageCount={Number(nonBillableTotalPage)}
+                    marginPagesDisplayed={1}
+                    onPageChange={handlePageClick}
+                    forcePage={nonBillablePage - 1}
+                    containerClassName={"pagination"}
+                    previousLinkClassName={"pagination_Link"}
+                    nextLinkClassName={"pagination_Link"}
+                    activeClassName={"pagination_Link-active"}
+                    disabledClassName={"pagination_Link-disabled"}
+                  ></ReactPaginate>
+                )}
+              </div>
+              {/* For Status Change */}
+              <div className="flex items-center gap-2 flex-wrap mt-6">
+                <select
+                  className="modal-input-field ml-1"
+                  onChange={(e) => statusChange(e)}
+                >
+                  <option value="" className="text-black">
+                    Select
+                  </option>
+                  <option value="Scheduled" className="text-black">
+                    Scheduled
+                  </option>
+                  <option value="No Show" className="text-black">
+                    No Show
+                  </option>
+                  <option value="Hold" className="text-black">
+                    Hold
+                  </option>
+                  <option>Cancelled by Client</option>
+                  <option>Cancelled by Provider</option>
+                  <option value="Bulk Delete" className="text-black">
+                    Bulk Delete
+                  </option>
+                  <option value="Rendered" className="text-black">
+                    Rendered
+                  </option>
+                </select>
+                <button onClick={handleAction} className="pms-button">
+                  Go
+                </button>
+              </div>
             </div>
-          ) : (
-            // CSS Design Need To Applied Here
-            <h1 className="w-full text-center p-2 bg-red-400 text-white rounded-sm">
-              No Data Found
-            </h1>
           )}
         </div>
       ) : (
         <ShimmerTableTet></ShimmerTableTet>
       )}
-      {/* For Status Change */}
-      <div className="flex items-center gap-2 flex-wrap mt-6">
-        <select
-          className="modal-input-field ml-1"
-          onChange={(e) => statusChange(e)}
-        >
-          <option value="" className="text-black">
-            Select
-          </option>
-          <option value="Scheduled" className="text-black">
-            Scheduled
-          </option>
-          <option value="No Show" className="text-black">
-            No Show
-          </option>
-          <option value="Hold" className="text-black">
-            Hold
-          </option>
-          <option>Cancelled by Client</option>
-          <option>Cancelled by Provider</option>
-          <option value="Bulk Delete" className="text-black">
-            Bulk Delete
-          </option>
-          <option value="Rendered" className="text-black">
-            Rendered
-          </option>
-        </select>
-        <button onClick={handleAction} className="pms-button">
-          Go
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 

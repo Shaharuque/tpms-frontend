@@ -29486,6 +29486,7 @@ td.ant-table-column-sort {
   list-style: none;
   font-feature-settings: 'tnum';
   min-width: 120px;
+  max-width: 200px;
   background-color: #fff;
   border-radius: 2px;
   z-index: 100;

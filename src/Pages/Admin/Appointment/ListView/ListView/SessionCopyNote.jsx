@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const SessionAddNote = ({ handleClose, open }) => {
+const SessionCopyNote = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
@@ -29,7 +29,7 @@ const SessionAddNote = ({ handleClose, open }) => {
         >
           <div className="px-5 py-2  ">
             <div className="flex items-center justify-between">
-              <h1 className="text-lg text-left text-orange-400">Add Notes</h1>
+              <h1 className="text-lg text-left text-orange-400">Copy Notes</h1>
               <IoCloseCircleOutline
                 onClick={handleClose}
                 className="text-gray-500 text-2xl hover:text-primary"
@@ -68,4 +68,4 @@ const SessionAddNote = ({ handleClose, open }) => {
   );
 };
 
-export default SessionAddNote;
+export default SessionCopyNote;

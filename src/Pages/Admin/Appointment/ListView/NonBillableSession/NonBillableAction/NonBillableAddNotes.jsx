@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const SessionAddNote = ({ handleClose, open }) => {
+const NonBillableAddNotes = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
     console.log(data);
@@ -68,4 +68,4 @@ const SessionAddNote = ({ handleClose, open }) => {
   );
 };
 
-export default SessionAddNote;
+export default NonBillableAddNotes;

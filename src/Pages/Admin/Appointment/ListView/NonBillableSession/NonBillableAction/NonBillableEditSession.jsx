@@ -1,21 +1,21 @@
 import { TimePicker } from "antd";
 import React, { useEffect, useState } from "react";
+import moment from "moment";
+import { Modal } from "antd";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import Calendar from "react-calendar";
-import { Modal } from "antd";
-import moment from "moment";
-import "../../../../Style/SingleCalendar.css";
+import "../../../../../Style/SingleCalendar.css";
 import {
   useGetAppointmentAuthorizationActivityMutation,
   useGetAppointmentPatientAuthMutation,
   useGetAppointmentPatientNameQuery,
   useGetAppointmentPOSQuery,
   useGetAppointmentProviderNameQuery,
-} from "../../../../../features/Appointment_redux/appointmentApi";
-import { useAppointmentInfoQuery } from "../../../../../features/Appointment_redux/appointmentApi";
-import useToken from "../../../../../CustomHooks/useToken";
-import Loading from "../../../../../Loading/Loading";
+} from "../../../../../../features/Appointment_redux/appointmentApi";
+import { useAppointmentInfoQuery } from "../../../../../../features/Appointment_redux/appointmentApi";
+import useToken from "../../../../../../CustomHooks/useToken";
+import Loading from "../../../../../../Loading/Loading";
 
 //To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -58,7 +58,7 @@ function stringDateConverter(str) {
   return [mnth, day, date.getFullYear()].join("-");
 }
 
-const EditSession = ({ handleClose, openEdit, appointmentId }) => {
+const NonBillableEditSession = ({ handleClose, openEdit, appointmentId }) => {
   console.log("managesession row id", appointmentId);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState();
@@ -265,6 +265,11 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
     return <Loading />;
   }
 
+  // const { register, handleSubmit, reset } = useForm();
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  //   reset();
+  // };
   return (
     <div>
       <Modal
@@ -304,43 +309,27 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                 <span className="modal-label-name">Patient Name</span>
               </label>
               <select
+                disabled={true}
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("client_id")}
                 onChange={(e) => handleClientName(e)}
               >
-                <option value="0">Select Patient</option>
-                {patientsName?.claims?.map((patient) => {
-                  return (
-                    <option key={patient?.id} value={patient?.id}>
-                      {patient?.client_full_name}
-                    </option>
-                  );
-                })}
+                <option disabled value={1}>
+                  Non-Billable Client
+                </option>
               </select>
               <label className="label">
                 <span className="modal-label-name">Auth</span>
               </label>
               <select
-                disabled={patientAuthLoading || patientAuthError ? true : false}
+                disabled={true}
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("authorization_id")}
                 onChange={(e) => setAuthId(e.target.value)}
               >
-                <option value="0">Select Auth</option>
-                {patientAuthData?.claims?.map((auth) => {
-                  return (
-                    <option key={auth?.id} value={auth?.id}>
-                      {auth?.description +
-                        `(${
-                          auth?.onset_date + " " + "to" + " " + auth?.end_date
-                        })` +
-                        " " +
-                        "|" +
-                        " " +
-                        auth?.authorization_number}
-                    </option>
-                  );
-                })}
+                <option disabled value={1}>
+                  NONCLI01323_AUTH249
+                </option>
               </select>
               <label className="label">
                 <span className="modal-label-name">Service</span>
@@ -354,14 +343,15 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                 className="col-span-2 modal-input-field ml-1 w-full"
                 {...register("activity_id")}
               >
-                <option value="0">Select Activity</option>
-                {authorizationActivityData?.claims?.map((activity) => {
-                  return (
-                    <option key={activity?.id} value={activity?.id}>
-                      {activity?.activity_name}
-                    </option>
-                  );
-                })}
+                <>
+                  <option value={1}>Regular Time</option>
+                  <option value={2}>Training & Admin</option>
+                  <option value={3}>Fill-In</option>
+                  <option value={4}>Other</option>
+                  <option value={5}>Public Holiday</option>
+                  <option value={6}>Paid Time Off</option>
+                  <option value={7}>Unpaid</option>
+                </>
               </select>
               <label className="label">
                 <span className="modal-label-name">Provider Name</span>
@@ -547,6 +537,7 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
                   Cancelled by Provider
                 </option>
                 <option value="Rendered">Rendered</option>
+                <option value="No Show">No Show</option>
               </select>
             </div>
 
@@ -567,4 +558,4 @@ const EditSession = ({ handleClose, openEdit, appointmentId }) => {
   );
 };
 
-export default EditSession;
+export default NonBillableEditSession;

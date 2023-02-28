@@ -270,9 +270,9 @@ const TableApi = () => {
       title: "Patient",
       dataIndex: "client_full_name",
       key: "client_full_name",
-      width: 100,
+      width: 200,
       filters: patientSearch(),
-
+      filterSearch: true, //Filtering value search(Antd new Feature)
       filteredValue: filteredInfo.client_full_name || null,
       onFilter: (value, record) => record.client_full_name.includes(value),
       sorter: (a, b) => {
@@ -657,7 +657,7 @@ const TableApi = () => {
         null}
         <InfiniteScroll
           dataLength={items.length} //items is basically all data here
-          next={fetchData}
+          next={items?.length > 0 && fetchData} //This condition is mendatory for perfectly working with infinite scrolling
           hasMore={hasMore}
           loader={<ShimmerTableTet></ShimmerTableTet>}
         >
