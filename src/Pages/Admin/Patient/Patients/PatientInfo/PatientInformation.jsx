@@ -30,94 +30,94 @@ import BasicInfo from "./BasicInfo";
 import TestingFrom from "./TestingFrom";
 
 const PatientInformation = () => {
-  const testingobj = {
-    City: "mirpur",
-    Street: "usa",
-    address: [
-      {
-        street: "djlasjdiad",
-        city: "sflsdf38akdj",
-        country: "NY",
-        status: false,
+  // const testingobj = {
+  //   City: "mirpur",
+  //   Street: "usa",
+  //   address: [
+  //     {
+  //       street: "djlasjdiad",
+  //       city: "sflsdf38akdj",
+  //       country: "NY",
+  //       status: false,
 
-        zip: 555,
-      },
-      {
-        street: "heilo",
-        city: "dmd",
-        country: "NY",
-        status: true,
+  //       zip: 555,
+  //     },
+  //     {
+  //       street: "heilo",
+  //       city: "dmd",
+  //       country: "NY",
+  //       status: true,
 
-        zip: 73563,
-      },
-      {
-        street: "h45fglo",
-        city: "dlfd",
-        country: "UK",
-        status: false,
+  //       zip: 73563,
+  //     },
+  //     {
+  //       street: "h45fglo",
+  //       city: "dlfd",
+  //       country: "UK",
+  //       status: false,
 
-        zip: 4545,
-      },
-      {
-        street: "435234o",
-        city: "ld",
-        country: "UK",
-        status: true,
+  //       zip: 4545,
+  //     },
+  //     {
+  //       street: "435234o",
+  //       city: "ld",
+  //       country: "UK",
+  //       status: true,
 
-        zip: 4523,
-      },
-    ],
-    allNumber: [
-      {
-        number: 54,
-        checked: true,
-      },
-      {
-        number: 53,
-        checked: false,
-      },
-    ],
-    assignment: "male",
-    checkedActive: 1,
-    client_dob: "",
-    country: "NY",
-    dob: "2021-08-05",
-    email: "testdfv@sdf.dsf",
-    first_date: "",
-    first_name: "cbvxdfg",
-    fruit: "Male",
-    gender: "Male",
-    allEmail: [
-      {
-        email: "najirkhan@gmail.com",
-        checked: true,
-        sendMail: false,
-      },
-      {
-        email: "lawla@gmail.com",
-        checked: true,
-        sendMail: true,
-      },
-      {
-        email: "hello@gmail.com",
-        checked: true,
-        sendMail: false,
-      },
-    ],
-    group: "work",
-    group2: "work",
-    language: "male",
-    last_name: "sdgsdg",
-    middle_name: null,
-    more_zip0: "34",
-    more_zip1: "45234",
-    phone: "+14353464363",
-    pos: "work",
-    race_details: "male",
-    referred_by: "male",
-    region: "work",
-    zip: "500",
-  };
+  //       zip: 4523,
+  //     },
+  //   ],
+  //   allNumber: [
+  //     {
+  //       number: 54,
+  //       checked: true,
+  //     },
+  //     {
+  //       number: 53,
+  //       checked: false,
+  //     },
+  //   ],
+  //   assignment: "male",
+  //   checkedActive: 1,
+  //   client_dob: "",
+  //   country: "NY",
+  //   dob: "2021-08-05",
+  //   email: "testdfv@sdf.dsf",
+  //   first_date: "",
+  //   first_name: "cbvxdfg",
+  //   fruit: "Male",
+  //   gender: "Male",
+  //   allEmail: [
+  //     {
+  //       email: "najirkhan@gmail.com",
+  //       checked: true,
+  //       sendMail: false,
+  //     },
+  //     {
+  //       email: "lawla@gmail.com",
+  //       checked: true,
+  //       sendMail: true,
+  //     },
+  //     {
+  //       email: "hello@gmail.com",
+  //       checked: true,
+  //       sendMail: false,
+  //     },
+  //   ],
+  //   group: "work",
+  //   group2: "work",
+  //   language: "male",
+  //   last_name: "sdgsdg",
+  //   middle_name: null,
+  //   more_zip0: "34",
+  //   more_zip1: "45234",
+  //   phone: "+14353464363",
+  //   pos: "work",
+  //   race_details: "male",
+  //   referred_by: "male",
+  //   region: "work",
+  //   zip: "500",
+  // };
 
   const { token } = useToken();
   const [active, setActive] = useState(false);
@@ -323,9 +323,13 @@ const PatientInformation = () => {
     // //console.log("getvalue zip", getValues("zip"));
   };
 
+  console.log("patientAdd");
+
   console.log("fields", fields);
   return (
-    <div>
+    <div
+      className={patient_details?.client_address.length < 2 ? "h-[100vh]" : ""}
+    >
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <BasicInfo
