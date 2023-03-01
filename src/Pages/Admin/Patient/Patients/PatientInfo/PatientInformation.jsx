@@ -345,7 +345,8 @@ const PatientInformation = () => {
             }}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
+          {/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1"> */}
+          <div className="flex flex-wrap my-1 mr-2 gap-x-36 gap-y-5">
             {/* address  */}
             <div>
               <PrimaryAddress append={append} rg={register} />
@@ -393,7 +394,7 @@ const PatientInformation = () => {
               </div>
             </div>
             {/* phone  */}
-            <div className=" lg:mx-auto md:mx-0">
+            <div className="">
               <PrimaryPhone
                 adData={{
                   phoneAppend,
@@ -423,7 +424,7 @@ const PatientInformation = () => {
               </motion.div>
             </div>
             {/* Email  */}
-            <div className=" lg:mx-auto md:mx-0">
+            <div className="">
               <PrimaryEmail
                 adData={{
                   emailAppend,
