@@ -250,6 +250,7 @@ const PatientInformation = () => {
           ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
+        zone: patient_details?.zone,
         // dob: patient_details?.client_dob,
         // dob: date ? `${month}/${day}/${year}` : null,
         // email: patient_details?.email,
@@ -257,6 +258,11 @@ const PatientInformation = () => {
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
         checkedActive: patient_details?.is_active_client,
+        // address
+        client_street: patient_details?.client_street,
+        client_city: patient_details?.client_city,
+        client_state: patient_details?.client_state,
+        client_zip: patient_details?.client_zip,
         // all gurantor
         guarantor_first_name:
           patient_details?.client_granter?.guarantor_first_name,
@@ -366,9 +372,9 @@ const PatientInformation = () => {
                     className="input-border input-font py-[1px] w-full focus:outline-none"
                     {...register("pos")}
                   >
-                    <option value="work">work</option>
-                    <option value="home">home</option>
-                    <option value="family">family</option>
+                    <option value="Main Office">Main Office</option>
+                    <option value="Telehealth">Telehealth</option>
+                    <option value="Home">Home</option>
                   </select>
                 </div>
                 <div>
@@ -379,11 +385,11 @@ const PatientInformation = () => {
                   </label>
                   <select
                     className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("region")}
+                    {...register("zone")}
                   >
-                    <option value="work">work</option>
-                    <option value="home">home</option>
-                    <option value="family">family</option>
+                    <option value="2"></option>
+                    <option value="6">Main Zone</option>
+                    <option value="27">ABC Behavioral Therapy Center</option>
                   </select>
                 </div>
               </div>

@@ -22,6 +22,7 @@ const PrimaryPhone = ({ adData }) => {
             }}
             // inputProps={{ ...register("phoneinput") }}
           /> */}
+
           <input
             type="text"
             placeholder="Phone"
@@ -35,9 +36,9 @@ const PrimaryPhone = ({ adData }) => {
             className="input-border input-font  w-full focus:outline-none"
             {...register("group")}
           >
-            <option value="work">work</option>
-            <option value="home">home</option>
-            <option value="family">family</option>
+            <option value="Work">Work</option>
+            <option value="Mobile">Cell</option>
+            <option value="Home">Home</option>
           </select>
         </div>
         <button
