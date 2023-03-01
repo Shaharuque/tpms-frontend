@@ -15,9 +15,9 @@ const ArLedger = () => {
             }
             to={"ar-leader-claim-wish"}
           >
-            Claim Wish
+            Claim Wise
             <span className="bg-orange-400 badge text-white ml-2 rounded-full text-[10px]">
-              step-1
+              Option-1
             </span>
           </NavLink>
 
@@ -29,9 +29,9 @@ const ArLedger = () => {
             }
             to={"ar-leader-session-wish"}
           >
-            Session Wish
+            Session Wise
             <span className="bg-orange-400 badge text-white ml-2 text-[10px] rounded-full">
-              step-2
+              Option-2
             </span>
           </NavLink>
         </Nav>

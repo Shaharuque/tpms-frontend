@@ -91,8 +91,6 @@ const AddTreatments = () => {
                 </option>
               ))}
           </select>
-          <br />
-          <button className="pms-button">View Details</button>
         </div>
 
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
@@ -112,7 +110,7 @@ const AddTreatments = () => {
             className="pms-close-button w-24"
           >
             <div className="flex item-center justify-center">
-              <HiOutlineArrowLeft className="mr-2 text-base" />
+              <HiOutlineArrowLeft className="mr-[2px]" />
               REMOVE
             </div>
           </button>
@@ -145,16 +143,6 @@ const AddTreatments = () => {
                 )
               )}
           </select>
-          {/* </FormControl> */}
-          <br />
-          <button
-            // onClick={() => {
-            //   FacilityInsurance();
-            // }}
-            className="pms-button"
-          >
-            View Details
-          </button>
         </div>
       </div>
       {/* {(passAllInsurance?.status === "success" ||

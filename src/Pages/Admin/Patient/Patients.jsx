@@ -270,7 +270,7 @@ const TableApi = () => {
       title: "Patient",
       dataIndex: "client_full_name",
       key: "client_full_name",
-      width: 200,
+      width: 150,
       filters: patientSearch(),
       filterSearch: true, //Filtering value search(Antd new Feature)
       filteredValue: filteredInfo.client_full_name || null,

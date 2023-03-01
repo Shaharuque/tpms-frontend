@@ -426,6 +426,7 @@ const ClaimWise = () => {
                 >
                   <option value="patient">Patient</option>
                   <option value="claim_no">Claim No</option>
+                  <option value="insurance">Insurance</option>
                 </select>
               </div>
               {select === "claim_no" ? (
@@ -571,7 +572,103 @@ const ClaimWise = () => {
                   </div>
                 </>
               ) : (
-                <></>
+                <>
+                  <div>
+                    <label className="label">
+                      <span className=" label-font">Insurance</span>
+                    </label>
+                    <div className="py-[2px]">
+                      <GlobalMultiSelect />
+                    </div>
+                  </div>
+                  <div className="w-[220px]">
+                    <label className="label">
+                      <span className=" label-font">Selected date</span>
+                    </label>
+                    <div className="ml-1 text-[14px]">
+                      <div className="flex  items-center justify-around text-gray-600 input-border px-1 ">
+                        <input
+                          value={
+                            startDate
+                              ? `${startMonth} ${startDay}, ${startYear}`
+                              : "Start Date"
+                          }
+                          readOnly
+                          onClick={() => setOpen((open) => !open)}
+                          className="focus:outline-none w-1/3 font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent  cursor-pointer"
+                        />
+
+                        <RiArrowLeftRightLine
+                          onClick={() => setOpen((open) => !open)}
+                          className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium"
+                        ></RiArrowLeftRightLine>
+
+                        <input
+                          value={
+                            endDate
+                              ? `${endMonth} ${endDay}, ${endYear}`
+                              : "End Date"
+                          }
+                          readOnly
+                          onClick={() => setOpen((open) => !open)}
+                          className="focus:outline-none w-1/3 font-medium text-center bg-transparent text-[14px] text-gray-600  cursor-pointer"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      ref={refClose}
+                      className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
+                    >
+                      {open && (
+                        <div>
+                          <div>
+                            <DateRangePicker
+                              onChange={(item) => setRange([item.selection])}
+                              editableDateInputs={true}
+                              moveRangeOnFirstSelection={false}
+                              ranges={range}
+                              months={2}
+                              direction="horizontal"
+                              className="border-2 border-gray-100 p-2 sm:p-0 bg-white"
+                            />
+                          </div>
+                          <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
+                            <button
+                              className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+                              type="submit"
+                              onClick={handleCancelDate}
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              className="px-4 m-2 text-secondary border border-white bg-white rounded"
+                              type="submit"
+                              onClick={() => setOpen(false)}
+                            >
+                              Save
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex mt-8 items-center ">
+                      <Switch
+                        size="small"
+                        checked={value ? true : false}
+                        onClick={() => setValue(!value)}
+                      />
+                      <span className="text-[14px] font-medium text-gray-500 mx-1">
+                        Zero Paid
+                      </span>
+                    </div>
+                    {/* submit  */}
+                    <button className="pms-input-button mt-6" type="submit">
+                      View
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           </form>

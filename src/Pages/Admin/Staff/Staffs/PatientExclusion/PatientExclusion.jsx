@@ -146,7 +146,7 @@ const PatientExclusion = () => {
         return (
           <button
             onClick={() => handleDelete(id)}
-            className="flex items-center justify-center font-bold text-red-500"
+            className="mx-auto font-bold text-red-500"
           >
             X
           </button>
