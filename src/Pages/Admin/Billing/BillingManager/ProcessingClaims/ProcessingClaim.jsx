@@ -1,6 +1,6 @@
 import { DatePicker, Space, Table } from "antd";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import { useForm } from "react-hook-form";
 import { BsArrowRight } from "react-icons/bs";
@@ -8,14 +8,22 @@ import { Calendar } from "react-calendar";
 import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import GlobalMultiSelect from "../../../../Shared/CustomComponents/GlobalMultiSelect";
-import ProcessClaimsMultiSelect from "../../../../Shared/CustomComponents/ProcessClaimsMultiSelect";
-import { usePayorByDateMutation } from "../../../../../features/Billing_redux/Primary_Billing_redux/processingClaimApi";
 import useToken from "../../../../../CustomHooks/useToken";
+import InsuranceMultiSelect from "./InsuranceMultiSelect/InsuranceMultiSelect";
+import {
+  useGetActivityProcessClaimMutation,
+  useGetCPTProcessClaimMutation,
+  useGetDegreeLevelProcessClaimMutation,
+  useGetModifireProcessClaimMutation,
+  useGetPatientProcessClaimMutation,
+  useGetTherapistProcessClaimMutation,
+  useGetZoneProcessClaimMutation,
+  usePayorByDateMutation,
+} from "../../../../../features/Billing_redux/Primary_Billing_redux/processingClaimApi";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
-  const [insuranceSelect, setInsuranceSelect] = useState("");
+  const [insuranceSelect, setInsuranceSelect] = useState([]);
   const [toDate, settoDate] = useState(null);
   const [sortBy1, setSortBy1] = useState("");
   const [sortBy2, setSortBy2] = useState("");
@@ -23,12 +31,154 @@ const ProcessingClaim = () => {
   const [date, setDate] = useState(new Date());
   const [openSingleCalendar, setOpenSingleCalendar] = useState(false);
   const { token } = useToken();
-  // PayorByDate post method callling api
+  const [selectedSortOptionOne, setSelectedSortOptionOne] = useState(null);
+  console.log("selected option from sortby1", selectedSortOptionOne);
 
-  const [PayorByDate, { data: responsePayorData, isLoading, isSuccess }] =
-    usePayorByDateMutation();
+  console.log("sortBy1", sortBy1);
 
-  console.log("api data", responsePayorData);
+  //Process Claim Get Payor api
+  const [
+    PayorByDate,
+    {
+      data: responsePayorData,
+      isLoading: payorLoading,
+      isSuccess: payorSuccess,
+    },
+  ] = usePayorByDateMutation();
+
+  //Process Claim Get Patient
+  const [
+    getPatientProcessClaim,
+    {
+      data: patientData,
+      isLoading: patientDataLoading,
+      isSuccess: patientDataSuccess,
+    },
+  ] = useGetPatientProcessClaimMutation();
+
+  //Process Claim Get Therapist Name API
+  const [
+    getTherapistProcessClaim,
+    {
+      data: therapistData,
+      isLoading: therapistLoading,
+      isError: therapistError,
+    },
+  ] = useGetTherapistProcessClaimMutation();
+
+  //Process Claim Get CPT CODE API
+  const [
+    getCPTProcessClaim,
+    { data: cptCodesData, isLoading: cptLoading, isError: cptError },
+  ] = useGetCPTProcessClaimMutation();
+
+  //Process Claim Get Activity Type
+  const [
+    getActivityProcessClaim,
+    { data: activityData, isLoading: activityLoading, isError: activityError },
+  ] = useGetActivityProcessClaimMutation();
+
+  //Process Claim Get Degree Level
+  const [
+    getDegreeLevelProcessClaim,
+    {
+      data: degreeLevelData,
+      isLoading: degreeLevelLoading,
+      isError: degreeLevelError,
+    },
+  ] = useGetDegreeLevelProcessClaimMutation();
+
+  //Process Claim Get ZONE
+  const [
+    getZoneProcessClaim,
+    { data: zoneData, isLoading: zoneLoading, isError: zoneError },
+  ] = useGetZoneProcessClaimMutation();
+
+  //Process Claim Get Modifire
+  const [
+    getModifireProcessClaim,
+    { data: modifierData, isLoading: modifireLoading, isError: modifireError },
+  ] = useGetModifireProcessClaimMutation();
+
+  useEffect(() => {
+    if (sortBy1 === "Patient" && insuranceSelect?.length > 0) {
+      getPatientProcessClaim({
+        token,
+        payload: {
+          to_date: toDate,
+          payor_id: insuranceSelect,
+        },
+      });
+    }
+    if (sortBy1 === "Tx Providers" && insuranceSelect?.length > 0) {
+      getTherapistProcessClaim({
+        token,
+        payload: {
+          to_date: toDate,
+          payor_id: insuranceSelect,
+        },
+      });
+    }
+    if (sortBy1 === "CPT Code" && insuranceSelect?.length > 0) {
+      getCPTProcessClaim({
+        token,
+        payload: {
+          to_date: toDate,
+          payor_id: insuranceSelect,
+        },
+      });
+    }
+    if (sortBy1 === "Service Type" && insuranceSelect?.length > 0) {
+      getActivityProcessClaim({
+        token,
+        payload: {
+          to_date: toDate,
+          payor_id: insuranceSelect,
+        },
+      });
+    }
+    if (sortBy1 === "Degree Level" && insuranceSelect?.length > 0) {
+      getDegreeLevelProcessClaim({
+        token,
+        payload: {
+          to_date: toDate,
+          payor_id: insuranceSelect,
+        },
+      });
+    }
+    if (sortBy1 === "Region" && insuranceSelect?.length > 0) {
+      getZoneProcessClaim({
+        token,
+        payload: {
+          to_date: toDate,
+          payor_id: insuranceSelect,
+        },
+      });
+    }
+    if (sortBy1 === "Modifier" && insuranceSelect?.length > 0) {
+      getModifireProcessClaim({
+        token,
+        payload: {
+          to_date: toDate,
+          payor_id: insuranceSelect,
+        },
+      });
+    }
+  }, [sortBy1, toDate, insuranceSelect]);
+
+  let allPatients = patientData?.patient || [];
+  const allProviders = therapistData?.therapist || [];
+  const allCptCodes = cptCodesData?.cpt_code || [];
+  const allActivities = activityData?.activity_type || [];
+  const allDegreeLevel = degreeLevelData?.degree_level || [];
+  const allRegions = zoneData?.zone || [];
+  const allModifire = modifierData?.modifire || [];
+  console.log("allPatients", allPatients);
+  console.log("allProviders", allProviders);
+  console.log("allCPTCodes", allCptCodes);
+  console.log("allDegreeLevel", allDegreeLevel);
+  console.log("allRegions", allRegions);
+  console.log("allModifire", allModifire);
 
   const onChange = (date, dateString) => {
     console.log(date, dateString);
@@ -439,7 +589,11 @@ const ProcessingClaim = () => {
                     <option value="provider">Provider</option>
                   </select> */}
 
-                  <ProcessClaimsMultiSelect payorData={responsePayorData} />
+                  <InsuranceMultiSelect
+                    payorData={responsePayorData?.all_payor || []}
+                    setInsuranceSelect={setInsuranceSelect}
+                    setSortBy1={setSortBy1}
+                  />
                 </div>
                 {/* Sort By  */}
                 <div>
@@ -451,8 +605,9 @@ const ProcessingClaim = () => {
                   <select
                     onChange={(e) => setSortBy1(e.target.value)}
                     name="type"
-                    className="input-border input-font  focus:outline-none"
+                    className="input-border input-font  focus:outline-none w-[200px]"
                   >
+                    <option defaultValue={0}>Select</option>
                     <option value="Patient">Patient(s)</option>
                     <option value="Tx Providers">Tx Providers</option>
                     <option value="CMS Therapist">CMS Therapist</option>
@@ -467,9 +622,10 @@ const ProcessingClaim = () => {
                     <option value="Modifier">Modifier</option>
                   </select>
                 </div>
+                {/* First Sort By */}
                 {sortBy1 && (
                   <>
-                    {sortBy1 === "Date Range" ? (
+                    {sortBy1 === "Date Range" && (
                       <div className="w-[220px]">
                         <label className="label">
                           <span className=" label-font">{sortBy1}</span>
@@ -515,24 +671,214 @@ const ProcessingClaim = () => {
                           </div>
                         </div>
                       </div>
-                    ) : (
+                    )}
+                    {sortBy1 === "Patient" && (
                       <div>
                         <label className="label">
                           <span className=" label-font">{sortBy1}</span>
                         </label>
                         <select
-                          // onChange={(e) => setInsuranceSelect(e.target.value)}
+                          disabled={patientDataLoading && true}
+                          onChange={(e) =>
+                            setSelectedSortOptionOne(e.target.value)
+                          }
                           name="type"
-                          className="input-border input-font w-full focus:outline-none"
+                          className="input-border input-font w-[200px] focus:outline-none"
                         >
-                          <option value="all">All</option>
-                          <option value="patient">Patient</option>
-                          <option value="provider">Provider</option>
+                          <option value="0">Select</option>
+                          {allPatients?.length > 0 && (
+                            <>
+                              {allPatients?.map((p) => {
+                                return (
+                                  <option
+                                    value={p?.client_name?.id}
+                                    key={p?.client_name?.id}
+                                  >
+                                    {p?.client_name?.client_full_name}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </select>
+                      </div>
+                    )}
+                    {sortBy1 === "Tx Providers" && (
+                      <div>
+                        <label className="label">
+                          <span className=" label-font">{sortBy1}</span>
+                        </label>
+                        <select
+                          disabled={therapistLoading && true}
+                          onChange={(e) =>
+                            setSelectedSortOptionOne(e.target.value)
+                          }
+                          name="type"
+                          className="input-border input-font w-[200px] focus:outline-none"
+                        >
+                          <option value="0">Select</option>
+                          {allProviders?.length > 0 && (
+                            <>
+                              {allProviders?.map((provider) => {
+                                return (
+                                  <option
+                                    value={provider?.therapist_name?.id}
+                                    key={provider?.therapist_name?.id}
+                                  >
+                                    {provider?.therapist_name?.full_name}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </select>
+                      </div>
+                    )}
+                    {sortBy1 === "CPT Code" && (
+                      <div>
+                        <label className="label">
+                          <span className=" label-font">{sortBy1}</span>
+                        </label>
+                        <select
+                          disabled={cptLoading && true}
+                          onChange={(e) =>
+                            setSelectedSortOptionOne(e.target.value)
+                          }
+                          name="type"
+                          className="input-border input-font w-[200px] focus:outline-none"
+                        >
+                          <option value="0">Select</option>
+                          {allCptCodes?.length > 0 && (
+                            <>
+                              {allCptCodes?.map((cpt, index) => {
+                                return (
+                                  <option value={cpt?.id} key={index}>
+                                    {cpt?.service}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </select>
+                      </div>
+                    )}
+                    {sortBy1 === "Service Type" && (
+                      <div>
+                        <label className="label">
+                          <span className=" label-font">{sortBy1}</span>
+                        </label>
+                        <select
+                          disabled={activityLoading && true}
+                          onChange={(e) =>
+                            setSelectedSortOptionOne(e.target.value)
+                          }
+                          name="type"
+                          className="input-border input-font w-[200px] focus:outline-none"
+                        >
+                          <option value="0">Select</option>
+                          {allActivities?.length > 0 && (
+                            <>
+                              {allActivities?.map((activity, index) => {
+                                return (
+                                  <option
+                                    value={activity?.activity_id}
+                                    key={index}
+                                  >
+                                    {activity?.pclm_activity_type?.activity_one}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </select>
+                      </div>
+                    )}
+                    {sortBy1 === "Degree Level" && (
+                      <div>
+                        <label className="label">
+                          <span className=" label-font">{sortBy1}</span>
+                        </label>
+                        <select
+                          disabled={degreeLevelLoading && true}
+                          onChange={(e) =>
+                            setSelectedSortOptionOne(e.target.value)
+                          }
+                          name="type"
+                          className="input-border input-font w-[200px] focus:outline-none"
+                        >
+                          <option value="0">Select</option>
+                          {allDegreeLevel?.length > 0 && (
+                            <>
+                              {allDegreeLevel?.map((degree) => {
+                                return (
+                                  <option value={degree?.id} key={degree?.id}>
+                                    {degree?.activity_two}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </select>
+                      </div>
+                    )}
+                    {sortBy1 === "Region" && (
+                      <div>
+                        <label className="label">
+                          <span className=" label-font">{sortBy1}</span>
+                        </label>
+                        <select
+                          disabled={zoneLoading && true}
+                          onChange={(e) =>
+                            setSelectedSortOptionOne(e.target.value)
+                          }
+                          name="type"
+                          className="input-border input-font w-[200px] focus:outline-none"
+                        >
+                          <option value="0">Select</option>
+                          {allRegions?.length > 0 && (
+                            <>
+                              {allRegions?.map((region, index) => {
+                                return (
+                                  <option value={region?.zone} key={index}>
+                                    {region?.zone}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </select>
+                      </div>
+                    )}
+                    {sortBy1 === "Modifier" && (
+                      <div>
+                        <label className="label">
+                          <span className=" label-font">{sortBy1}</span>
+                        </label>
+                        <select
+                          disabled={modifireLoading && true}
+                          onChange={(e) =>
+                            setSelectedSortOptionOne(e.target.value)
+                          }
+                          name="type"
+                          className="input-border input-font w-[200px] focus:outline-none"
+                        >
+                          <option value="0">Select</option>
+                          {allModifire?.length > 0 && (
+                            <>
+                              {allModifire?.map((modifier, index) => {
+                                return (
+                                  <option value={modifier} key={index}>
+                                    {modifier !== null ? modifier : "Empty"}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
                         </select>
                       </div>
                     )}
 
-                    {/* Sort By  */}
+                    {/* SortBy2  */}
                     <div>
                       <label className="label">
                         <span className=" label-font">
@@ -544,6 +890,7 @@ const ProcessingClaim = () => {
                         name="type"
                         className="input-border input-font w-full focus:outline-none"
                       >
+                        <option value="0">Select</option>
                         <option value="Patient">Patient(s)</option>
                         <option value="Tx Providers">Tx Providers</option>
                         <option value="CMS Therapist">CMS Therapist</option>

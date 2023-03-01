@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
-import "./CustomMultiSelect.css";
+import "./InsuranceMultiSelectCSS/InsuranceMultiSelect.css";
 
 const ProcessClaimsMultiSelect = ({
-  patients,
-  setPatientId,
-  stuffs,
-  setStuffsId,
   payorData,
   setInsuranceSelect,
+  setSortBy1,
 }) => {
   const [selected, setSelected] = useState([]);
 
@@ -19,7 +16,7 @@ const ProcessClaimsMultiSelect = ({
         processedData.push({
           label: x?.payor_facility?.payor_name,
           value: x?.payor_facility?.payor_name,
-          id: x?.payor_facility?.id,
+          id: x?.payor_facility?.payor_id,
         });
       }
     }
@@ -30,8 +27,8 @@ const ProcessClaimsMultiSelect = ({
 
   const customValueRenderer = (selected, _options) => {
     if (selected.length) {
-      if (selected.length > 3) return `All Selected ${selected.length}`;
-      return selected.map(({ label }) => label);
+      if (selected.length > 3) return `All Selected (${selected.length})`;
+      return selected.map(({ label }) => label + ",");
     }
     return <h1 className="text-black">None selected</h1>;
   };
@@ -40,6 +37,7 @@ const ProcessClaimsMultiSelect = ({
     const getSelectedInsurance = async () => {
       const getId = selected.map((item) => item.id);
       setInsuranceSelect(getId);
+      // setSortBy1("");
     };
     getSelectedInsurance();
   }, [selected, setInsuranceSelect]);
