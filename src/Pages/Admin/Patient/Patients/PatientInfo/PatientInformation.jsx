@@ -352,7 +352,7 @@ const PatientInformation = () => {
           />
 
           {/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1"> */}
-          <div className="flex flex-wrap my-1 mr-2 gap-x-36 gap-y-5">
+          <div className="flex flex-wrap my-1 mr-2 gap-x-32 gap-y-5">
             {/* address  */}
             <div>
               <PrimaryAddress append={append} rg={register} />
@@ -366,7 +366,8 @@ const PatientInformation = () => {
                 />
               )}
 
-              <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
+              {/* <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-1 gap-x-4 gap-y-2"> */}
+              <div className=" flex items-center justify-between my-1 gap-x-4 gap-y-2">
                 <div>
                   <label className="label">
                     <span className=" label-font">
