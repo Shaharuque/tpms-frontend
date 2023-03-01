@@ -162,19 +162,28 @@ const PatientInformation = () => {
       defaultValues: {
         // address: testingobj.address,
         address: patient_details?.client_address,
-        number: testingobj.allNumber,
-        Email: testingobj.allEmail,
+        number: patient_details?.client_phone,
+        Email: patient_details?.client_email,
       },
     });
 
-  // this code very important
-  // useEffect(() => {
-  //   reset({
+  // useForm({
+  //   defaultValues: {
+  //     // address: testingobj.address,
   //     address: patient_details?.client_address,
   //     number: testingobj.allNumber,
   //     Email: testingobj.allEmail,
-  //   });
-  // }, [patient_details?.client_address]);
+  //   },
+  // });
+
+  // this code very important
+  useEffect(() => {
+    reset({
+      address: patient_details?.client_address,
+      number: patient_details?.client_phone,
+      Email: patient_details?.client_email,
+    });
+  }, [patient_details?.client_address]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -248,6 +257,16 @@ const PatientInformation = () => {
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
         checkedActive: patient_details?.is_active_client,
+        // all gurantor
+        guarantor_first_name:
+          patient_details?.client_granter?.guarantor_first_name,
+        guarantor_last_name:
+          patient_details?.client_granter?.guarantor_last_name,
+        guarantor_check_Date: patient_details?.client_granter?.guarantor_dob,
+        GuaratorStreet: patient_details?.client_granter?.g_street,
+        GuaratorCity: patient_details?.client_granter?.g_city,
+        GuratorCountry: patient_details?.client_granter?.g_state,
+        GuratorZip: patient_details?.client_granter?.g_zip,
       });
     }, 0);
   }, [patient_details, reset]);
