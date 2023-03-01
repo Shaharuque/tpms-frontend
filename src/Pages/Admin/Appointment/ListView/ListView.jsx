@@ -954,19 +954,19 @@ const ListView = () => {
   return (
     // For responsive view point
     <div
-      // className={
-      //   !table || items?.length < 18 || nonBillableData?.length < 0
+      className={
+        !table || items?.length < 18 || nonBillableData?.length < 0
+          ? "h-[170vh]"
+          : ""
+      }
+      // class={
+      //   nonBillableData &&
+      //   table &&
+      //   items?.length > 0 &&
+      //   nonBillableData.length > 0
       //     ? "h-[170vh]"
       //     : ""
       // }
-      class={
-        nonBillableData &&
-        table &&
-        items?.length > 0 &&
-        nonBillableData.length > 0
-          ? ""
-          : "h-[170vh]"
-      }
     >
       <div>
         <div className="cursor-pointer">

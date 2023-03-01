@@ -270,7 +270,7 @@ const TableApi = () => {
       title: "Patient",
       dataIndex: "client_full_name",
       key: "client_full_name",
-      width: 200,
+      width: 150,
       filters: patientSearch(),
       filterSearch: true, //Filtering value search(Antd new Feature)
       filteredValue: filteredInfo.client_full_name || null,
@@ -304,6 +304,7 @@ const TableApi = () => {
       key: "phone_number",
       width: 100,
       filters: contactInfoSearch(),
+      filterSearch: true,
       //render contains what we want to reflect as our data
       render: (_, { phone_number }) => {
         return (
@@ -337,6 +338,7 @@ const TableApi = () => {
       key: "client_dob",
       width: 80,
       filters: dobSearch(),
+      filterSearch: true,
       //render contains what we want to reflect as our data
       render: (_, { client_dob }) => {
         return (
@@ -371,6 +373,7 @@ const TableApi = () => {
       key: "client_gender",
       width: 80,
       filters: genderSearch(),
+      filterSearch: true,
       filteredValue: filteredInfo.client_gender || null,
       onFilter: (value, record) => record.client_gender.includes(value),
       //   sorter is for sorting asc or dsc purpose
@@ -387,6 +390,7 @@ const TableApi = () => {
       key: "location",
       width: 80,
       filters: posSearch(),
+      filterSearch: true,
       render: (_, { location }) => {
         return (
           <div>

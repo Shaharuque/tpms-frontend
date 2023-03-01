@@ -21,7 +21,6 @@ const PatientLedgerAction = ({ row }) => {
     setOpenARFollowup(false);
   };
 
-
   console.log("row=", row);
   return (
     <div>

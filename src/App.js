@@ -231,6 +231,8 @@ import Questionnaire from "./Pages/Admin/Settings/Settings/Program/Questionnaire
 import AddAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/AddAllProgram";
 import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/EditAllProgram";
 import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
+import ClaimWise from "./Pages/Admin/Billing/ARLeadger/Components/ClaimWise/ClaimWise";
+import SessionWise from "./Pages/Admin/Billing/ARLeadger/Components/SessionWise/SessionWise";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -851,7 +853,17 @@ function App() {
                 element={<ManageSecondaryClaims></ManageSecondaryClaims>}
               ></Route>
             </Route>
-            <Route path="ar-leader" element={<ArLedger></ArLedger>}></Route>
+            <Route path="ar-leader" element={<ArLedger></ArLedger>}>
+              <Route index element={<Navigate to="ar-leader-claim-wish" />} />
+              <Route
+                path="ar-leader-claim-wish"
+                element={<ClaimWise></ClaimWise>}
+              ></Route>
+              <Route
+                path="ar-leader-session-wish"
+                element={<SessionWise></SessionWise>}
+              ></Route>
+            </Route>
             <Route
               path="contract-rate"
               element={<ContractRate></ContractRate>}
