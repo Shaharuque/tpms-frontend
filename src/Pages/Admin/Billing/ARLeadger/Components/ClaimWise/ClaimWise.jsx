@@ -10,9 +10,13 @@ import { Link } from "react-router-dom";
 import GlobalMultiSelect from "../../../../../Shared/CustomComponents/GlobalMultiSelect";
 import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
 import { BiCommentDetail } from "react-icons/bi";
-import ClaimWishActionModal from "./ClaimWishActionModal";
+import ClaimWiseActionModal from "./ClaimWiseActionModal";
+import { useGetLedgerPatientsMutation } from "../../../../../../features/Billing_redux/AR_Ledger_redux/ledgerApi";
+import useToken from "../../../../../../CustomHooks/useToken";
+import PatientMultiSelect from "../PatientMultiSelect/PatientMultiSelect";
 const ClaimWise = () => {
-  const [select, setSelect] = useState("patient");
+  const [selected, setSelected] = useState("patient");
+  const [clientIds, setClientIds] = useState([]);
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);
   const [sortBy, setSortBy] = useState("");
@@ -21,8 +25,25 @@ const ClaimWise = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const { Text } = Typography;
   const [record, setRecord] = useState();
-
   const [openEditModal, setOpenEditModal] = useState(false);
+
+  const { token } = useToken();
+
+  console.log("selected option", selected);
+  console.log("selected Patient ids", clientIds);
+
+  // Ledger Get Patients API
+  const [getLedgerPatients, { data: patients, isLoading: patientsLoading }] =
+    useGetLedgerPatientsMutation();
+
+  useEffect(() => {
+    if (selected === "patient") {
+      getLedgerPatients(token);
+    }
+  }, [selected, token]);
+
+  const allPatients = patients?.clients || [];
+
   const handleClickOpen = () => {
     setOpenEditModal(true);
   };
@@ -447,16 +468,16 @@ const ClaimWise = () => {
                   <span className=" label-font">Sort by</span>
                 </label>
                 <select
-                  onChange={(e) => setSelect(e.target.value)}
+                  onChange={(e) => setSelected(e.target.value)}
                   name="post"
-                  className="input-border input-font w-full focus:outline-none"
+                  className="input-border input-font md:w-full w-[200px] focus:outline-none"
                 >
                   <option value="patient">Patient</option>
                   <option value="claim_no">Claim No</option>
                   <option value="insurance">Insurance</option>
                 </select>
               </div>
-              {select === "claim_no" ? (
+              {selected === "claim_no" ? (
                 <>
                   <div className="">
                     <label className="label">
@@ -473,14 +494,18 @@ const ClaimWise = () => {
                     View
                   </button>
                 </>
-              ) : select === "patient" ? (
+              ) : selected === "patient" ? (
                 <>
                   <div>
                     <label className="label">
                       <span className=" label-font">Patients</span>
                     </label>
                     <div className="py-[2px]">
-                      <GlobalMultiSelect />
+                      <PatientMultiSelect
+                        allPatients={allPatients}
+                        setClientIds={setClientIds}
+                        patientsLoading={patientsLoading}
+                      />
                     </div>
                   </div>
                   <div className="w-[220px]">
@@ -774,11 +799,11 @@ const ClaimWise = () => {
         </div>
       )}
       {openEditModal && (
-        <ClaimWishActionModal
+        <ClaimWiseActionModal
           record={record}
           handleClose={handleClose}
           open={openEditModal}
-        ></ClaimWishActionModal>
+        ></ClaimWiseActionModal>
       )}
     </div>
   );

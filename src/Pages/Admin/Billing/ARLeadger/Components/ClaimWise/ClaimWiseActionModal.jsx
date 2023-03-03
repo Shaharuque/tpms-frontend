@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
-import ClaimWishComments from "./ClaimWishComments/ClaimWishComments";
+import ClaimWishComments from "./ClaimWiseComments/ClaimWiseComments";
 
 const ClaimWishActionModal = ({ handleClose, open, row, record }) => {
   const { register, handleSubmit, reset } = useForm();
