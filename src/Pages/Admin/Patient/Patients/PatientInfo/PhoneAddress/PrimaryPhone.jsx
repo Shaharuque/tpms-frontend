@@ -33,7 +33,7 @@ const PrimaryPhone = ({ adData }) => {
         </div>
         <div>
           <select
-            className="input-border input-font  w-24 focus:outline-none"
+            className="input-border input-font  w-16 focus:outline-none"
             {...register("group")}
           >
             <option value="Work">Work</option>

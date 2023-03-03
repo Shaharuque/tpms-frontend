@@ -72,6 +72,7 @@ import AuthorizationEdit from "./Pages/Admin/Patient/Patients/Authorization/Auth
 import Documents from "./Pages/Admin/Patient/Patients/Documents/Documents";
 import PatientLedger from "./Pages/Admin/Patient/Patients/PatientLedger/PatientLedger";
 import PatientPortal from "./Pages/Admin/Patient/Patients/PatientPortal/PatientPortal";
+import Intake from "./Pages/Admin/Patient/Patients/Intake/Intake";
 // ###### Not Found
 import NotFound from "./NoPageFound/NotFound";
 //Testing
@@ -93,12 +94,16 @@ import InsuranceExclusion from "./Pages/Admin/Staff/Staffs/InsuranceExclusion/In
 import StaffPortal from "./Pages/Admin/Staff/Staffs/StaffPortal/StaffPortal";
 import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeExclusion/ServiceSubTypeExclusions";
 import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
+import WorkSchedule from "./Pages/Admin/Staff/Staffs/WorkSchedule/WorkSchedule";
+// ##### Billing
 import TestingTable from "./Testing/AntTableTest/TestingTable";
 import BillingManager from "./Pages/Admin/Billing/BillingManager/BillingManager";
 import ArLedger from "./Pages/Admin/Billing/ARLeadger/ArLedger";
 import ContractRate from "./Pages/Admin/Billing/ContactRate/ContractRate";
 import PatientStatement from "./Pages/Admin/Billing/PatientStatement/PatientStatement";
 import Eligibility from "./Pages/Admin/Billing/Eligibility/Eligibility";
+import ClaimWise from "./Pages/Admin/Billing/ARLeadger/Components/ClaimWise/ClaimWise";
+import SessionWise from "./Pages/Admin/Billing/ARLeadger/Components/SessionWise/SessionWise";
 import Sidebar from "./Pages/Shared/Sidebar/Sidebar";
 import AddAuthorization from "./Pages/Admin/Patient/Patients/Authorization/AddAuthorization/AddAuthorization";
 import ContractRateAdd from "./Pages/Admin/Billing/ContactRate/ContractRate/ContractRateAdd";
@@ -231,8 +236,6 @@ import Questionnaire from "./Pages/Admin/Settings/Settings/Program/Questionnaire
 import AddAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/AddAllProgram";
 import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/EditAllProgram";
 import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
-import ClaimWise from "./Pages/Admin/Billing/ARLeadger/Components/ClaimWise/ClaimWise";
-import SessionWise from "./Pages/Admin/Billing/ARLeadger/Components/SessionWise/SessionWise";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -752,6 +755,10 @@ function App() {
                 path="patient-ledger/:id"
                 element={<PatientLedger></PatientLedger>}
               ></Route>
+              <Route
+                path="patient-intake/:id"
+                element={<Intake></Intake>}
+              ></Route>
             </Route>
             <Route
               path="authorization-add"
@@ -813,6 +820,10 @@ function App() {
               <Route
                 path="staffs-portal/:id"
                 element={<StaffPortal></StaffPortal>}
+              ></Route>
+              <Route
+                path="work-schedule/:id"
+                element={<WorkSchedule></WorkSchedule>}
               ></Route>
             </Route>
             {/* ----------------------------------Staff End----------------------------------------------- */}

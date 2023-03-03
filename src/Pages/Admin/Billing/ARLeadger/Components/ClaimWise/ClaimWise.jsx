@@ -8,6 +8,9 @@ import { DateRangePicker } from "react-date-range";
 import { Switch, Table, Typography } from "antd";
 import { Link } from "react-router-dom";
 import GlobalMultiSelect from "../../../../../Shared/CustomComponents/GlobalMultiSelect";
+import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
+import { BiCommentDetail } from "react-icons/bi";
+import ClaimWishActionModal from "./ClaimWishActionModal";
 const ClaimWise = () => {
   const [select, setSelect] = useState("patient");
   const [table, setTable] = useState(false);
@@ -17,6 +20,15 @@ const ClaimWise = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const { Text } = Typography;
+  const [record, setRecord] = useState();
+
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
 
   //   fetch data
   React.useEffect(() => {
@@ -302,8 +314,22 @@ const ClaimWise = () => {
       dataIndex: "operation",
       key: "operation",
       width: 90,
-      render: (_, { nt }) => {
-        // return <PatientLedgerAction></PatientLedgerAction>;
+      render: (_, record) => {
+        return (
+          <>
+            <div className="flex justify-center gap-2">
+              <button
+                onClick={() => {
+                  handleClickOpen();
+                  setRecord(record);
+                }}
+                className="text-sm mx-1 text-secondary"
+              >
+                <BiCommentDetail />
+              </button>
+            </div>
+          </>
+        );
       },
     },
   ];
@@ -349,8 +375,8 @@ const ClaimWise = () => {
     setSortBy(e.target.value);
   };
 
-  //Date Range Picker
-  const [open, setOpen] = useState(false);
+  //Date Range Picker-----------------------------------------------------------------------------------------------------------------------
+  const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -367,6 +393,7 @@ const ClaimWise = () => {
         key: "selection",
       },
     ]);
+    setOpenCalendar(false);
   };
 
   // date range picker calendar
@@ -384,9 +411,7 @@ const ClaimWise = () => {
     ? startDate.getFullYear().toString().slice(2, 4)
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
-  //End Date Range Picker
 
-  // Hide calendar on outside click
   const refClose = useRef(null);
   useEffect(() => {
     document.addEventListener("click", hideOnClickOutside, true);
@@ -395,10 +420,12 @@ const ClaimWise = () => {
   // Hide dropdown on outside click
   const hideOnClickOutside = (e) => {
     if (refClose.current && !refClose.current.contains(e.target)) {
-      setOpen(false);
+      setOpenCalendar(false);
     }
   };
   //end outside click
+
+  //End Date Range Picker--------------------------------------------------------------------------------------------------------------------
 
   return (
     <div className={!table ? "h-[170vh]" : ""}>
@@ -457,74 +484,59 @@ const ClaimWise = () => {
                     </div>
                   </div>
                   <div className="w-[220px]">
-                    <label className="label">
-                      <span className=" label-font">Selected date</span>
-                    </label>
-                    <div className="ml-1 text-[14px]">
-                      <div className="flex  items-center justify-around text-gray-600 input-border px-1 ">
-                        <input
-                          value={
-                            startDate
-                              ? `${startMonth} ${startDay}, ${startYear}`
-                              : "Start Date"
-                          }
-                          readOnly
-                          onClick={() => setOpen((open) => !open)}
-                          className="focus:outline-none w-1/3 font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent  cursor-pointer"
-                        />
-
-                        <RiArrowLeftRightLine
-                          onClick={() => setOpen((open) => !open)}
-                          className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium"
-                        ></RiArrowLeftRightLine>
-
-                        <input
-                          value={
-                            endDate
-                              ? `${endMonth} ${endDay}, ${endYear}`
-                              : "End Date"
-                          }
-                          readOnly
-                          onClick={() => setOpen((open) => !open)}
-                          className="focus:outline-none w-1/3 font-medium text-center bg-transparent text-[14px] text-gray-600  cursor-pointer"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      ref={refClose}
-                      className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
-                    >
-                      {open && (
-                        <div>
-                          <div>
-                            <DateRangePicker
-                              onChange={(item) => setRange([item.selection])}
-                              editableDateInputs={true}
-                              moveRangeOnFirstSelection={false}
-                              ranges={range}
-                              months={2}
-                              direction="horizontal"
-                              className="border-2 border-gray-100 p-2 sm:p-0 bg-white"
-                            />
-                          </div>
-                          <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                            <button
-                              className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                              type="submit"
-                              onClick={handleCancelDate}
-                            >
-                              Cancel
-                            </button>
-                            <button
-                              className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                              type="submit"
-                              onClick={() => setOpen(false)}
-                            >
-                              Save
-                            </button>
-                          </div>
+                    <div>
+                      <label className="label">
+                        <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                          Selected date
+                        </span>
+                      </label>
+                      <div className="ml-1">
+                        <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                          <input
+                            value={
+                              startDate
+                                ? `${startMonth} ${startDay}, ${startYear}`
+                                : `Start Date`
+                            }
+                            readOnly
+                            onClick={() => setOpenCalendar(true)}
+                            // {...register("start_date")}
+                            className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-2/5 cursor-pointer"
+                          />
+                          <RiArrowLeftRightLine
+                            onClick={() => setOpenCalendar(true)}
+                            className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium w-1/5"
+                          ></RiArrowLeftRightLine>
+                          <input
+                            // defaultValue={"5-10-2034"}
+                            value={
+                              endDate
+                                ? `${endMonth} ${endDay}, ${endYear}`
+                                : `End Date`
+                            }
+                            readOnly
+                            onClick={() => setOpenCalendar(true)}
+                            // {...register("end_date")}
+                            className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-2/5 cursor-pointer"
+                          />
                         </div>
-                      )}
+
+                        {/* Multi date picker component called */}
+                        <div
+                          ref={refClose}
+                          // className="absolute z-10 md:ml-[-20%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s "
+                          className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
+                        >
+                          {openCalendar && (
+                            <CustomDateRange
+                              range={range}
+                              setRange={setRange}
+                              handleCancelDate={handleCancelDate}
+                              setOpen={setOpenCalendar}
+                            ></CustomDateRange>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="flex gap-3">
@@ -582,74 +594,59 @@ const ClaimWise = () => {
                     </div>
                   </div>
                   <div className="w-[220px]">
-                    <label className="label">
-                      <span className=" label-font">Selected date</span>
-                    </label>
-                    <div className="ml-1 text-[14px]">
-                      <div className="flex  items-center justify-around text-gray-600 input-border px-1 ">
-                        <input
-                          value={
-                            startDate
-                              ? `${startMonth} ${startDay}, ${startYear}`
-                              : "Start Date"
-                          }
-                          readOnly
-                          onClick={() => setOpen((open) => !open)}
-                          className="focus:outline-none w-1/3 font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent  cursor-pointer"
-                        />
-
-                        <RiArrowLeftRightLine
-                          onClick={() => setOpen((open) => !open)}
-                          className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium"
-                        ></RiArrowLeftRightLine>
-
-                        <input
-                          value={
-                            endDate
-                              ? `${endMonth} ${endDay}, ${endYear}`
-                              : "End Date"
-                          }
-                          readOnly
-                          onClick={() => setOpen((open) => !open)}
-                          className="focus:outline-none w-1/3 font-medium text-center bg-transparent text-[14px] text-gray-600  cursor-pointer"
-                        />
-                      </div>
-                    </div>
-                    <div
-                      ref={refClose}
-                      className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
-                    >
-                      {open && (
-                        <div>
-                          <div>
-                            <DateRangePicker
-                              onChange={(item) => setRange([item.selection])}
-                              editableDateInputs={true}
-                              moveRangeOnFirstSelection={false}
-                              ranges={range}
-                              months={2}
-                              direction="horizontal"
-                              className="border-2 border-gray-100 p-2 sm:p-0 bg-white"
-                            />
-                          </div>
-                          <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                            <button
-                              className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                              type="submit"
-                              onClick={handleCancelDate}
-                            >
-                              Cancel
-                            </button>
-                            <button
-                              className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                              type="submit"
-                              onClick={() => setOpen(false)}
-                            >
-                              Save
-                            </button>
-                          </div>
+                    <div>
+                      <label className="label">
+                        <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                          Selected date
+                        </span>
+                      </label>
+                      <div className="ml-1">
+                        <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                          <input
+                            value={
+                              startDate
+                                ? `${startMonth} ${startDay}, ${startYear}`
+                                : `Start Date`
+                            }
+                            readOnly
+                            onClick={() => setOpenCalendar(true)}
+                            // {...register("start_date")}
+                            className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-2/5 cursor-pointer"
+                          />
+                          <RiArrowLeftRightLine
+                            onClick={() => setOpenCalendar(true)}
+                            className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium w-1/5"
+                          ></RiArrowLeftRightLine>
+                          <input
+                            // defaultValue={"5-10-2034"}
+                            value={
+                              endDate
+                                ? `${endMonth} ${endDay}, ${endYear}`
+                                : `End Date`
+                            }
+                            readOnly
+                            onClick={() => setOpenCalendar(true)}
+                            // {...register("end_date")}
+                            className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-2/5 cursor-pointer"
+                          />
                         </div>
-                      )}
+
+                        {/* Multi date picker component called */}
+                        <div
+                          ref={refClose}
+                          // className="absolute z-10 md:ml-[-9%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s "
+                          className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
+                        >
+                          {openCalendar && (
+                            <CustomDateRange
+                              range={range}
+                              setRange={setRange}
+                              handleCancelDate={handleCancelDate}
+                              setOpen={setOpenCalendar}
+                            ></CustomDateRange>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -775,6 +772,13 @@ const ClaimWise = () => {
             <button className=" pms-button ml-3">Go</button>
           </div>
         </div>
+      )}
+      {openEditModal && (
+        <ClaimWishActionModal
+          record={record}
+          handleClose={handleClose}
+          open={openEditModal}
+        ></ClaimWishActionModal>
       )}
     </div>
   );
