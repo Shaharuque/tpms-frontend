@@ -5,6 +5,13 @@ import { Dropdown, Space, Table } from "antd";
 import { BsThreeDots } from "react-icons/bs";
 import ManageTableAction from "../../../Appointment/ListView/ListView/ManageTableAction";
 import ManageClaimsTableAction from "./ManageClaimAction/ManageClaimsTableAction";
+import {
+  useGet24jProviderManageClaimMutation,
+  useGetManageClaimActivityMutation,
+  useGetPayorManageClaimMutation,
+  useGetTxProviderManageClaimMutation,
+} from "../../../../../features/Billing_redux/Primary_Billing_redux/manageClaimApi";
+import useToken from "../../../../../CustomHooks/useToken";
 
 const ManageClaims = () => {
   const [active, setActive] = useState(false);
@@ -13,11 +20,56 @@ const ManageClaims = () => {
   const [select, setSelect] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [sort_By, setSort_By] = useState("");
+  const [selectedSortOptionOne, setSelectedSortOptionOne] = useState(null);
   const [ManageClimbsData, SetManageClimbsData] = useState([]);
   const { handleSubmit, register, reset } = useForm();
   // table
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const { token } = useToken();
+
+  console.log("selected sorted option one", selectedSortOptionOne);
+
+  //Manage Claim Get Payor
+  const [getPayorManageClaim, { data: payorData, isLoading: payorLoading }] =
+    useGetPayorManageClaimMutation();
+
+  //Manage Claim Get TX Provider
+  const [
+    getTxProviderManageClaim,
+    { data: txProviderData, isLoading: txProviderLoading },
+  ] = useGetTxProviderManageClaimMutation();
+
+  //Manage Claim Get CMS Provider(24J)
+  const [
+    get24jProviderManageClaim,
+    { data: CMSProviderData, isLoading: CMSProviderLoading },
+  ] = useGet24jProviderManageClaimMutation();
+
+  //Manage Claim Get Activity Type
+  const [
+    getManageClaimActivity,
+    { data: activityData, isLoading: activityLoading },
+  ] = useGetManageClaimActivityMutation();
+
+  useEffect(() => {
+    if (sortBy === "Insurance") {
+      getPayorManageClaim(token);
+    }
+    if (sortBy === "Tx Provider") {
+      getTxProviderManageClaim(token);
+    }
+    if (sortBy === "24J Provider") {
+      get24jProviderManageClaim(token);
+    }
+    if (sortBy === "Service Type") {
+      getManageClaimActivity(token);
+    }
+  }, [sortBy, token]);
+
+  const allInsurance = payorData?.payors || [];
+  const allCMSProvider = CMSProviderData?.cms_provider || [];
+  const allActivity = activityData?.activity_type || [];
 
   const onSubmit = (data) => {
     // console.log(data);
@@ -44,8 +96,6 @@ const ManageClaims = () => {
         console.log(error);
       });
   }, []);
-
-  console.log(ManageClimbsData);
 
   const columns = [
     {
@@ -212,40 +262,108 @@ const ManageClaims = () => {
               <select
                 onChange={handleSortBy}
                 name="type"
-                className="input-border input-font w-full focus:outline-none"
+                className="input-border input-font md:w-full w-[200px] focus:outline-none"
               >
                 <option value=""></option>
                 <option value="Batch">Batch</option>
-                <option value="Tx Providers">Tx Providers</option>
-                <option value="CMS Therapist">CMS Therapist</option>
+                <option value="Claim">Claim</option>
+                <option value="Insurance">Insurance</option>
+                <option value="Patients">Patients</option>
+                <option value="Tx Provider">Tx Provider</option>
+                <option value="24J Provider">24J Provider</option>
                 <option value="Service Type">Service Type</option>
-                <option value="Claim Status">Claim Status</option>
                 <option value="Date Range">Date Range</option>
-                <option value="Degree Level">Degree Level</option>
-                <option value="Region">Region</option>
-                <option value="CPT Code">CPT Code</option>
-                <option value="Zero Units">Zero Units</option>
-                <option value="Place Of Service"> Place Of Service</option>
+                <option value="Date of Submission">Date of Submission</option>
               </select>
             </div>
             {active && (
               <>
                 {" "}
+                {/* Sort By-1 */}
                 <div>
                   <label className="label">
                     <span className=" label-font">{sortBy}</span>
                   </label>
                   <select
-                    // onChange={(e) => setInsuranceSelect(e.target.value)}
+                    disabled={
+                      payorLoading ||
+                      txProviderLoading ||
+                      CMSProviderLoading ||
+                      activityLoading
+                        ? true
+                        : false
+                    }
+                    onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                     name="type"
-                    className="input-border input-font w-full focus:outline-none"
+                    className="input-border input-font md:w-full w-[200px] focus:outline-none"
                   >
-                    <option value="all">All</option>
-                    <option value="patient">Patient</option>
-                    <option value="provider">Provider</option>
+                    {sortBy === "Insurance" && (
+                      <>
+                        <option value="0">Select</option>
+                        {allInsurance?.length > 0 && (
+                          <>
+                            {allInsurance?.map((ins) => {
+                              return (
+                                <option value={ins?.payor_id} key={ins?.id}>
+                                  {ins?.payor_name}
+                                </option>
+                              );
+                            })}
+                          </>
+                        )}
+                      </>
+                    )}
+                    {sortBy === "Tx Provider" && (
+                      <>
+                        <option value="0">Select</option>
+                        {txProviderData?.length > 0 && (
+                          <>
+                            {txProviderData?.map((txP) => {
+                              return (
+                                <option value={txP?.id} key={txP?.id}>
+                                  {txP?.full_name}
+                                </option>
+                              );
+                            })}
+                          </>
+                        )}
+                      </>
+                    )}
+                    {sortBy === "24J Provider" && (
+                      <>
+                        <option value="0">Select</option>
+                        {allCMSProvider?.length > 0 && (
+                          <>
+                            {allCMSProvider?.map((cmsP) => {
+                              return (
+                                <option value={cmsP?.id} key={cmsP?.id}>
+                                  {cmsP?.full_name}
+                                </option>
+                              );
+                            })}
+                          </>
+                        )}
+                      </>
+                    )}
+                    {sortBy === "Service Type" && (
+                      <>
+                        <option value="0">Select</option>
+                        {allActivity?.length > 0 && (
+                          <>
+                            {allActivity?.map((activity) => {
+                              return (
+                                <option value={activity?.id} key={activity?.id}>
+                                  {activity?.activity_one}
+                                </option>
+                              );
+                            })}
+                          </>
+                        )}
+                      </>
+                    )}
                   </select>
                 </div>
-                {/* Sort By  */}
+                {/* Sort By-2  */}
                 <div>
                   <label className="label">
                     <span className=" label-font">Sort By</span>
@@ -280,10 +398,18 @@ const ManageClaims = () => {
             )}
             {/* submit  */}
             <div className="flex mb-10 gap-2">
-              <button className="mt-8 pms-button" type="submit">
+              <button
+                className="mt-8 bg-[#34A7B8] rounded-sm text-white px-2 shadow-md shadow-gray-600 h-8"
+                type="submit"
+              >
                 Get Claim(s)
               </button>
-              <button className="pms-close-button mt-8">Cancel</button>
+              <button
+                className="bg-[#b91c1c] rounded-sm text-white shadow-md shadow-gray-800 mt-8 px-2"
+                type="button"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </form>
