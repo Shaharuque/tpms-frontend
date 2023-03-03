@@ -42,7 +42,21 @@ code {
 }
 
 
+/* Customized default Select Option */
+select option:checked {
+  background: teal;
+  color: #fff;
+}
 
+select option {
+  padding: 8px;
+  font-family: sans-serif;
+}
+
+select option:hover {
+  background: teal !important;
+  color: #fff;
+}
 
 /* -----------------------------------------input form --------------------------------------- */
 
