@@ -8,6 +8,7 @@ import { DateRangePicker } from "react-date-range";
 import { Switch, Table, Typography } from "antd";
 import { Link } from "react-router-dom";
 import GlobalMultiSelect from "../../../../../Shared/CustomComponents/GlobalMultiSelect";
+import SessionWiseModal from "./SessionWiseModal/SessionWiseModal";
 
 const SessionWise = () => {
   const [select, setSelect] = useState("patient");
@@ -303,8 +304,8 @@ const SessionWise = () => {
       dataIndex: "operation",
       key: "operation",
       width: 90,
-      render: (_, { nt }) => {
-        // return <PatientLedgerAction></PatientLedgerAction>;
+      render: (_, { record }) => {
+        return <SessionWiseModal record={record}></SessionWiseModal>;
       },
     },
   ];

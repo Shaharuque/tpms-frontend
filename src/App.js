@@ -233,6 +233,7 @@ import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/
 import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 import ClaimWise from "./Pages/Admin/Billing/ARLeadger/Components/ClaimWise/ClaimWise";
 import SessionWise from "./Pages/Admin/Billing/ARLeadger/Components/SessionWise/SessionWise";
+import WorkSchedule from "./Pages/Admin/Staff/Staffs/WorkSchedule/WorkSchedule";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -752,6 +753,10 @@ function App() {
                 path="patient-ledger/:id"
                 element={<PatientLedger></PatientLedger>}
               ></Route>
+              <Route
+                path="patient-ledger/:id"
+                element={<PatientLedger></PatientLedger>}
+              ></Route>
             </Route>
             <Route
               path="authorization-add"
@@ -813,6 +818,10 @@ function App() {
               <Route
                 path="staffs-portal/:id"
                 element={<StaffPortal></StaffPortal>}
+              ></Route>
+              <Route
+                path="work-schedule/:id"
+                element={<WorkSchedule></WorkSchedule>}
               ></Route>
             </Route>
             {/* ----------------------------------Staff End----------------------------------------------- */}

@@ -43,7 +43,7 @@
 .rdrDayNumber,
 .rdrMonthAndYearPicker>select {
     font-size: 12px !important;
-    font-weight: 400 !important;
+    font-weight: 450 !important;
     color: #898989 !important;
 }
 
@@ -68,12 +68,15 @@
 
 .rdrMonth {
     padding: 5px 15px !important;
+    border: 1px solid #eaeaea !important;
+    margin: 5px !important;
+    border-radius: 10px !important;
 }
 
 .rdrStaticRangeLabel {
     font-size: 14px !important;
     padding: 5px 10px !important;
-    font-weight: 400 !important;
+    font-weight: 450 !important;
 }
 
 .rdrStaticRangeLabel:hover {

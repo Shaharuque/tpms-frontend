@@ -16,6 +16,8 @@ import {
   MdOutlineWorkOff,
   MdPersonSearch,
 } from "react-icons/md";
+import { GrDocumentTime } from "react-icons/gr";
+import { AiOutlineFieldTime } from "react-icons/ai";
 
 const StaffInformation = () => {
   const { id } = useParams();
@@ -182,6 +184,16 @@ const StaffInformation = () => {
               >
                 <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
                   <RiUserFill className=" text-2xl" /> Staff Portal
+                </h1>
+              </CustomLink>
+            </div>
+            <div className="text-xs text-secondary font-normal patient-nav mb-2">
+              <CustomLink
+                className="flex gap-1 pb-1 clink items-center"
+                to={`work-schedule/${id}`}
+              >
+                <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
+                  <AiOutlineFieldTime className=" text-2xl" /> Work Schedule
                 </h1>
               </CustomLink>
             </div>
