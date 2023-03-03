@@ -29021,7 +29021,7 @@ textarea.ant-mentions {
 .ant-table.ant-table-small .ant-table-tbody>tr>td,
 .ant-table.ant-table-small tfoot>tr>th,
 .ant-table.ant-table-small tfoot>tr>td {
-  padding: 10px 6px;
+  padding: 7px 6px;
   background-color: white;
   border: 1px solid #EDF6F7;
 
@@ -29486,6 +29486,7 @@ td.ant-table-column-sort {
   list-style: none;
   font-feature-settings: 'tnum';
   min-width: 120px;
+  max-width: 200px;
   background-color: #fff;
   border-radius: 2px;
   z-index: 100;

@@ -8,7 +8,7 @@ const PrimaryPhone = ({ adData }) => {
       <label className="label">
         <span className=" label-font">Phone</span>
       </label>
-      <div className="flex flex-wrap gap-1 items-center gap-x-2 gap-y-2">
+      <div className="flex flex-wrap gap-1 items-center gap-x-3 gap-y-2">
         <div className=" ml-1">
           {/* package input field */}
           {/* <PhoneInput
@@ -22,6 +22,7 @@ const PrimaryPhone = ({ adData }) => {
             }}
             // inputProps={{ ...register("phoneinput") }}
           /> */}
+
           <input
             type="text"
             placeholder="Phone"
@@ -32,12 +33,12 @@ const PrimaryPhone = ({ adData }) => {
         </div>
         <div>
           <select
-            className="input-border input-font  w-full focus:outline-none"
+            className="input-border input-font  w-16 focus:outline-none"
             {...register("group")}
           >
-            <option value="work">work</option>
-            <option value="home">home</option>
-            <option value="family">family</option>
+            <option value="Work">Work</option>
+            <option value="Mobile">Cell</option>
+            <option value="Home">Home</option>
           </select>
         </div>
         <button

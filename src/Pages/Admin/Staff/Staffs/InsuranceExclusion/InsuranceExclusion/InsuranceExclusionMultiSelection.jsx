@@ -158,7 +158,7 @@ const InsuranceExclusionMultiSelection = () => {
         return (
           <button
             onClick={() => handleDelete(id)}
-            className="flex items-center  cursor-pointer justify-center font-bold text-red-500"
+            className="mx-auto font-bold text-red-500"
           >
             X
           </button>

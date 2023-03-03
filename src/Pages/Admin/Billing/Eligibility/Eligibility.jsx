@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
 import axios from "axios";
 import { Table } from "antd";
+import { motion } from "framer-motion";
 
 const Eligibility = () => {
   // table
@@ -192,7 +193,7 @@ const Eligibility = () => {
     }
   };
   return (
-    <div className="h-[100vh]">
+    <div className="sm:h-[100vh]">
       <div className="flex items-center gap-2 flex-wrap">
         {" "}
         <div>
@@ -239,9 +240,12 @@ const Eligibility = () => {
             </div>
 
             {/* Multi date picker component called */}
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
               ref={refClose}
-              className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
+              className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[-27%] md:mr-[5%] sm:mr-[14%] mt-1 "
             >
               {openCalendar && (
                 <CustomDateRange
@@ -251,7 +255,7 @@ const Eligibility = () => {
                   setOpen={setOpenCalendar}
                 ></CustomDateRange>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
         <button

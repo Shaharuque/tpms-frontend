@@ -1,5 +1,7 @@
 import React from "react";
 import { DateRangePicker, defaultStaticRanges } from "react-date-range";
+import "./CustomDateRange.css";
+import { motion } from "framer-motion";
 // important
 import {
   // addDays,
@@ -21,10 +23,16 @@ import {
 
 const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
   return (
-    <div className="date-range">
+    <motion.div
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 }}
+      className="date-range"
+    >
       <div>
         <DateRangePicker
           onChange={(item) => setRange([item.selection])}
+          showSelectionPreview={true}
           editableDateInputs={true}
           moveRangeOnFirstSelection={false}
           ranges={range}
@@ -81,7 +89,7 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           Save
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

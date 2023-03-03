@@ -1,11 +1,10 @@
 import { Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const SessionAddNote = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();
-  const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
     console.log(data);
     reset();
@@ -20,6 +19,7 @@ const SessionAddNote = ({ handleClose, open }) => {
     <div>
       <div>
         <Modal
+          width={450}
           open={open}
           centered
           footer={false}
@@ -39,7 +39,7 @@ const SessionAddNote = ({ handleClose, open }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="label">
-                  <span className="modal-label-name">Patient Name</span>
+                  <span className="modal-label-name">Select Form</span>
                 </label>
                 <select
                   className="modal-input-field ml-1 w-full"

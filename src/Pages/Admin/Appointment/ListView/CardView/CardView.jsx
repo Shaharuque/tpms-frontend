@@ -18,21 +18,31 @@ import EditSession from "../ListView/EditSession";
 import SessionAddNote from "../ListView/SessionAddNote";
 import SessionViewNote from "../ListView/SessionViewNote";
 import { Fade } from "react-reveal";
+import { timeConverter } from "../../../../Shared/TimeConverter/TimeConverter";
 
-const CardView = ({ data }) => {
+//To Convert Date YY-MM-DD(2022-10-21) to MM/DD/YY
+const dateConverter = (date) => {
+  const afterSplit = date?.split("-");
+  if (afterSplit?.length > 0) {
+    return `${afterSplit[1]}/${afterSplit[2]}/${afterSplit[0]}`;
+  }
+};
+const CardView = ({ data, posData }) => {
   const [patientDetails, setPatientDetails] = useState(false);
   const [checkBox, setCheckBox] = useState([]);
-  console.log(checkBox);
+  //console.log(checkBox);
   console.log("data", data);
   const {
-    Patients,
-    Provider,
-    Scheduled_Date,
-    Status,
     lock,
-    pos,
-    Service_hrs,
-    Hours,
+    is_locked,
+    app_client,
+    app_client_auth_act,
+    schedule_date,
+    status,
+    app_provider,
+    from_time,
+    to_time,
+    location,
   } = data;
   const [locked, setLocked] = useState(lock);
 
@@ -71,56 +81,76 @@ const CardView = ({ data }) => {
       <div className="px-5">
         <div className=" grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-5 mb-2">
           <div className="flex items-center gap-2">
-            <input
+            {/* Checkbox Select Code */}
+            {/* <input
               type="checkbox"
               // id={`custom-checkbox-${index}`}
               // name={name}
               // value={name}
               onChange={() => setCheckBox(data)}
-            />
+            /> */}
             <label>
-              {locked ? (
-                <AiFillUnlock className="text-lg font-medium text-secondary" />
-              ) : (
+              {is_locked === 1 ? (
                 <AiFillLock className="mx-auto text-lg font-medium text-red-600" />
+              ) : (
+                <AiFillUnlock className="text-lg font-medium text-secondary" />
               )}
             </label>
           </div>
           <div className="col-span-2">
             <div>
-              <h1 className="text-xs font-medium text-gray-500">
+              <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
                 Patient Name
               </h1>
-              <p className=" font-medium text-sm text-gray-900">{Patients}</p>
+              <p className=" font-medium text-sm text-gray-900">
+                {app_client?.client_full_name}
+              </p>
             </div>
           </div>
           <div className="md:col-span-2 ">
             <div>
-              <h1 className="text-xs font-medium text-gray-500">
+              <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
                 Scheduled Date
               </h1>
               <p className="text-sm font-medium text-gray-900">
-                {Scheduled_Date}
+                {dateConverter(schedule_date)}
               </p>
             </div>
           </div>
           <div className="col-span-2 flex ">
             <div>
-              <h1 className="text-xs font-medium text-gray-500">Status</h1>
+              <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
+                Status
+              </h1>
               <div>
-                {Status === "Scheduled" && (
-                  <button className="bg-gray-500 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
-                    {Status}
+                {status === "Scheduled" && (
+                  <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
+                    {status}
                   </button>
                 )}
-                {Status === "Rendered" && (
-                  <button className="bg-green-700 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
-                    {Status}
+                {status === "Rendered" && (
+                  <button className="bg-green-700 text-white text-[10px] py-[2px]  rounded w-14">
+                    {status}
                   </button>
                 )}
-                {Status === "hold" && (
-                  <button className="bg-red-700 text-white text-xs py-[4px] px-2 rounded-sm w-[75px]">
-                    {Status}
+                {status === "Hold" && (
+                  <button className="bg-gray-100 text-black text-[10px] py-[2px]  rounded w-14">
+                    {status}
+                  </button>
+                )}
+                {status === "No Show" && (
+                  <button className="bg-rose-700 text-white text-[10px] py-[2px]  rounded w-14">
+                    {status}
+                  </button>
+                )}
+                {status === "Cancelled by Client" && (
+                  <button className="bg-secondary text-white text-[10px] py-[2px]  rounded w-24">
+                    {status}
+                  </button>
+                )}
+                {status === "Cancelled by Provider" && (
+                  <button className="bg-yellow-600 text-white text-[10px] py-[2px]  rounded w-28">
+                    {status}
                   </button>
                 )}
               </div>
@@ -155,38 +185,49 @@ const CardView = ({ data }) => {
               <div className="col-span-2 px-5 py-4">
                 <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-2">
                   <div>
-                    <h1 className="text-xs font-medium text-gray-500">
+                    <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
                       Patient Name
                     </h1>
                     <p className=" font-medium text-sm text-gray-900">
-                      {Patients}
+                      {app_client?.client_full_name}
                     </p>
                   </div>
                   <div>
-                    <h1 className="text-xs font-medium text-gray-500">POS</h1>
-                    <p className=" font-medium text-sm text-gray-900">{pos}</p>
-                  </div>
-                  <div>
-                    <h1 className="text-xs font-medium text-gray-500">Hours</h1>
+                    <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
+                      POS
+                    </h1>
                     <p className=" font-medium text-sm text-gray-900">
-                      {Hours}
+                      {
+                        posData?.pos?.find(
+                          (each) => each?.pos_code === location
+                        )?.pos_name
+                      }
                     </p>
                   </div>
                   <div>
-                    <h1 className="text-xs font-medium text-gray-500">
+                    <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
+                      Hours
+                    </h1>
+                    <p className=" font-medium text-sm text-primary">
+                      {timeConverter(from_time?.split(" ")[1])} to{" "}
+                      {timeConverter(to_time?.split(" ")[1])}
+                    </p>
+                  </div>
+                  <div>
+                    <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
                       Provider Name
                     </h1>
                     <p className=" font-medium text-sm text-gray-900">
-                      {Provider}
+                      {app_provider?.full_name}
                     </p>
                   </div>
                   <div className="col-span-2">
                     <div>
-                      <h1 className="text-xs font-medium text-gray-500">
+                      <h1 className="text-xs font-medium text-gray-500 mb-[3px]">
                         Service & Hrs.
                       </h1>
                       <p className=" font-medium text-sm text-gray-900">
-                        {Service_hrs}
+                        {app_client_auth_act?.activity_name}
                       </p>
                     </div>
                   </div>

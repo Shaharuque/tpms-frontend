@@ -143,7 +143,7 @@ input[type='checkbox'] {
   background-color: #b91c1c;
   background-clip: border-box;
   color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: 3px;
   box-shadow: 2px 2px 2px 0px #626d6e;
   display: inline-block;
   transition: ease-in-out 0.3s;
@@ -191,7 +191,32 @@ input[type='checkbox'] {
   padding: 4px 12px;
   background-color: #0aa7b8;
   box-shadow: 2px 2px 2px 0px #626d6e;
-  border-radius: 5px;
+  border-radius: 3px;
+}
+
+.pms-all-select-button {
+  padding-left: 11px;
+  padding-right: 8px;
+  padding-top: 1px;
+  /* padding-bottom: 2px; */
+  font-family: 'Roboto',
+    sans-serif;
+  font-size: 14px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  word-spacing: 0.2px;
+  background-color: #0aa7b8;
+  background-clip: border-box;
+  color: rgb(255, 255, 255);
+  border-radius: 3px;
+  /* box-shadow: 2px 2px 2px 0px #626d6e; */
+  display: inline-block;
+  transition: ease-in-out 0.3s;
+  border: 1px solid #0AA7B8;
+}
+
+.pms-all-select-button:hover {
+  background-image: linear-gradient(141deg, #02818F 0%, #0aa7b8 100%);
 }
 
 .pms-input-button:hover {
@@ -199,7 +224,7 @@ input[type='checkbox'] {
 }
 
 .pms-white-button {
-  padding: 7px 3px 4px;
+  padding: 7px 5px 4px;
   font-family: 'Roboto',
     sans-serif;
   font-size: 16px;
@@ -215,6 +240,12 @@ input[type='checkbox'] {
   display: inline-block;
   transition: ease-in-out 0.3s;
   border: 1px solid rgb(255, 255, 255);
+}
+
+.pms-white-button:hover {
+  color: #fff;
+  background-color: #0aa7b8;
+
 }
 
 /* ---------------------------------------Modal Input----------------------------- */

@@ -7,31 +7,26 @@ import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
-import { BiSearchAlt } from "react-icons/bi";
 import ManageTableAction from "./ListView/ManageTableAction";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import axios from "axios";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
-import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import Clients from "./MultiSelectComponents/Clients";
 import Providers from "./MultiSelectComponents/Providers";
 import useToken from "../../../../CustomHooks/useToken";
 import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
-import DateRangePickersTest from "../../../Shared/CustomDateRange/DateRangePicker/DateRangePickersTest";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import {
-  manageSessionApi,
-  useGetManageSessionListQuery,
-  useManageSessionStatusChangeMutation,
-} from "../../../../features/Appointment_redux/ListView/manageSessionApi";
+import { useManageSessionStatusChangeMutation } from "../../../../features/Appointment_redux/ListView/manageSessionApi";
 import { useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
 import { toast } from "react-toastify";
 import { timeConverter } from "../../../Shared/TimeConverter/TimeConverter";
+import NonBillableSession from "./NonBillableSession/NonBillableSession";
+import NonBillableCardsView from "./NonBillableSession/NonBillableCardView/NonBillableCardsView";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -58,7 +53,6 @@ const ListView = () => {
   const [patientId, setPatientId] = useState();
   const [stuffsId, setStuffsId] = useState([]);
   const [formData, setFromData] = useState(null);
-  const [hasMore, sethasMore] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [responseError, setResponseError] = useState(null);
@@ -67,15 +61,101 @@ const ListView = () => {
   const [statusName, setStatusName] = useState(null);
   const [actionType, setActionType] = useState(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const dispatch = useDispatch();
-  //console.log("position", location);
+  const [items, setItems] = useState([]);
+  const [check, setCheck] = useState(false);
+  const [sessionlist, setSessionlist] = useState([]);
+  const [listLoading, setListLoading] = useState(false);
+  const [paginateActive, setPaginateActive] = useState(false);
+
+  // For Non-Billable Manage Sessions
+  const [nonBillablePage, setNonBillablePage] = useState(1);
+  const [nonBillableTotalPage, setNonBillableTotalPage] = useState(0);
+  const [nonBillableListLoading, setNonBillableListLoading] = useState(false);
+  const [payload, setPayload] = useState(null);
+  const [procceed, setprocceed] = useState(false);
+  const [nonBillableData, setNonBillableData] = useState([]);
+  const [hide, setHide] = useState(false);
+
+  //Manage Session Get Session List From API
+  useEffect(() => {
+    const getManageSession = async () => {
+      setListLoading(true);
+      const res = await axios({
+        method: "POST",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token || null,
+        },
+        data: formData,
+      });
+      const data = res?.data?.appointments;
+      setItems(data?.data);
+      setTotalPage(data?.last_page);
+      setListLoading(false);
+      setTable(true);
+    };
+    if (formData?.client_id?.length > 0) {
+      getManageSession();
+    }
+    if (formData?.client_id?.length === 0) {
+      toast.error(<h1 className="font-bold">Please select patient</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
+    }
+  }, [token, page, formData]);
+
+  // useEffect(() => {
+  //   if (items?.length > 0) {
+  //     setTable(true);
+  //   } else {
+  //     setTable(false);
+  //   }
+  // }, [items]);
+  console.log("Billable ManageSession List", items, table);
+
+  //Non-Billable Manage Session List From API
+  useEffect(() => {
+    const getNonbillableSessions = async () => {
+      setNonBillableListLoading(true);
+      const res = await axios({
+        method: "POST",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token || null,
+        },
+        data: payload,
+      });
+      const data = res?.data?.appointments;
+      setNonBillableData(data?.data);
+      setNonBillableTotalPage(data?.last_page);
+      setNonBillableListLoading(false);
+    };
+    if (payload?.provider_id?.length > 0 && procceed === true) {
+      getNonbillableSessions();
+    }
+    if (payload?.provider_id?.length === 0 && procceed === true) {
+      toast.error(<h1 className="font-bold">Please select provider</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
+    }
+  }, [token, nonBillablePage, payload, procceed]);
+
+  console.log("Non-Billable ManageSession List", nonBillableData, procceed);
 
   //Manage Session Appointment Status Change API
   const [
     manageSessionStatusChange,
     { data: statusChangeData, isSuccess: actionSuccess },
   ] = useManageSessionStatusChangeMutation();
-  //console.log("after status change", statusChangeData);
+  console.log("after status change", actionSuccess);
 
   useEffect(() => {
     if (statusChangeData?.status === "success" && actionType !== "delete") {
@@ -85,6 +165,22 @@ const ListView = () => {
         autoClose: 5000,
         theme: "dark",
       });
+      //Session List refetch based on the selected page number
+      const getManageSession = async () => {
+        const res = await axios({
+          method: "POST",
+          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token || null,
+          },
+          data: formData,
+        });
+        const data = res?.data?.appointments;
+        setItems(data?.data);
+      };
+      getManageSession();
     }
     if (statusChangeData?.status === "success" && actionType === "delete") {
       setSelectedRowKeys([]);
@@ -93,49 +189,24 @@ const ListView = () => {
         autoClose: 5000,
         theme: "dark",
       });
+      //Session List refetch based on the selected page number
+      const getManageSession = async () => {
+        const res = await axios({
+          method: "POST",
+          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token || null,
+          },
+          data: formData,
+        });
+        const data = res?.data?.appointments;
+        setItems(data?.data);
+      };
+      getManageSession();
     }
   }, [statusChangeData?.status]);
-
-  //Manage Session List=> Get Session List API
-  const { data: menageSessionList, isLoading: listLoading } =
-    useGetManageSessionListQuery({
-      token,
-      page,
-      payload: formData,
-    });
-  const list = menageSessionList?.appointments?.data;
-  useEffect(() => {
-    if (list?.length > 0) {
-      setTable(true);
-      setTotalPage(menageSessionList?.appointments?.last_page);
-    }
-  }, [list, menageSessionList?.appointments?.last_page]);
-  // //useEffect a dependency na diley sheita ekbar call hoy(in general)
-  // useEffect(() => {
-  //   if (formData !== null) {
-  //     //now manually action dispatch in RTK query
-  //     setIsLoading(true);
-  //     dispatch(
-  //       manageSessionApi.endpoints.getManageSessionList.initiate({
-  //         token,
-  //         payload: formData,
-  //         page: page,
-  //       })
-  //     )
-  //       .unwrap() //action dispatch korar por jei result pabo sheita promisify korar jnno unwrap() use kora hoisey
-  //       //promisify hobar por async-awit or .then use kora jetey parey
-  //       .then((data) => {
-  //         setIsLoading(false);
-  //         console.log("rtk query data", data);
-  //         setItems(data?.appointments?.data);
-  //         setTotalPage(data?.appointments?.last_page);
-  //         setTable(true);
-  //       })
-  //       .catch((err) => {
-  //         setResponseError("There was a problem!");
-  //       });
-  //   }
-  // }, [dispatch, formData, token, page]);
 
   //Appointment Pos get API
   const { data: posData, isLoading: posDataLoading } =
@@ -159,7 +230,6 @@ const ListView = () => {
     };
     getPatientsData();
   }, [token]);
-  // console.log("patients", patients);
   //console.log("selected clients", patientId);
 
   //Provider multi select data from server(Provider=>Staff)
@@ -179,12 +249,35 @@ const ListView = () => {
     };
     getProviderData();
   }, [token]);
-  // console.log("stuffs", stuffs);
-  //console.log("selected stuffs", stuffsId);
+  console.log("selected stuffs", stuffsId);
 
-  const receivedData = (data) => {
-    //console.log(data);
+  //-----------Dynamic column multi value filtering--------------//
+  //For getting unique value
+  function getUnique(array) {
+    let uniqueArray = [];
+
+    // Loop through array values
+    for (let value of array) {
+      if (uniqueArray.indexOf(value) === -1) {
+        uniqueArray.push(value);
+      }
+    }
+    return uniqueArray;
+  }
+  //this funtion to get dynamic filter value-text
+  const patientSearch = () => {
+    let patientArray = items?.map((d) => d?.app_client?.client_full_name);
+    const resultArray = getUnique(patientArray);
+    //return filterData;
+    let newArray = [];
+    for (let x of resultArray) {
+      newArray.push({ text: x, value: x });
+    }
+    return newArray;
   };
+  // if (items?.length > 0) {
+  //   console.log(patientSearch());
+  // }
 
   //Date converter function [yy-mm-dd]
   function convert(str) {
@@ -239,7 +332,12 @@ const ListView = () => {
   };
   const handleClose = () => {
     setClicked(!clicked);
+    //While Close button clicked the Billable Session Table will be closed
     setTable(false);
+    // setCheck(false)
+
+    setprocceed(false); //Non-billable Session Table Will be closed
+    setNonBillableData([]); //Non-billable Session Table Data will be empty when close button clicked
   };
 
   // Hide calendar on outside click
@@ -258,11 +356,21 @@ const ListView = () => {
 
   const handleBillable = (e) => {
     setBillable(!billable);
+    //billable Session Table Will be closed and setItems is empty when toggle goes to billable to non-billable
     setTable(false);
+    setItems([]);
+
+    //Non-billable Session Table Will be closed and
+    setprocceed(false);
+    setNonBillableData([]);
+    setNonBillablePage(1);
   };
 
   const handleListView = () => {
     setListView(!listView);
+    //To Closed the Non-billable Session List view
+    // setprocceed(!procceed);
+    setHide(!hide);
   };
 
   useEffect(() => {
@@ -271,10 +379,11 @@ const ListView = () => {
       .then((data) => setTData(data));
   }, []);
 
-  //handle pagination
+  //Handle Pagination
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
+    setFilteredInfo({});
   };
 
   // Table Data Columns Defined Here //
@@ -290,12 +399,12 @@ const ListView = () => {
         return (
           <div className="flex justify-center">
             {is_locked === 0 && (
-              <button>
+              <button title="Un-Lock">
                 <AiFillUnlock className=" text-lg font-medium text-[#309BAB]" />
               </button>
             )}
             {is_locked === 1 && (
-              <button>
+              <button title="Billed">
                 <AiFillLock className="text-lg font-medium  text-red-600" />
               </button>
             )}
@@ -307,29 +416,8 @@ const ListView = () => {
       title: "Patients",
       dataIndex: "client_full_name",
       key: "client_full_name",
-      width: 150,
-      filters: [
-        {
-          text: "Meghan Markle",
-          value: "Meghan  Markle",
-        },
-        {
-          text: `Aasiya  Farha`,
-          value: "Aasiya  Farha",
-        },
-        {
-          text: "Donovan",
-          value: "Donovan",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-      ],
+      width: 200,
+      // filters: items?.length > 0 && patientSearch(),
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -338,9 +426,9 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.client_full_name || null,
-      onFilter: (value, record) =>
-        record?.app_client?.client_full_name?.includes(value),
+      // filteredValue: filteredInfo.client_full_name || null,
+      // onFilter: (value, record) =>
+      //   record?.app_client?.client_full_name?.includes(value),
       sorter: (a, b) => {
         return a.app_client?.client_full_name > b.app_client?.client_full_name
           ? -1
@@ -354,7 +442,7 @@ const ListView = () => {
       title: "Service & Hrs",
       dataIndex: "activity_name",
       key: "activity_name",
-      width: 250,
+      width: 190,
       filters: [
         {
           text: `assisment BCaBA`,
@@ -377,9 +465,9 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.activity_name || null,
-      onFilter: (value, record) =>
-        record?.app_client_auth_act?.activity_name?.includes(value),
+      // filteredValue: filteredInfo.activity_name || null,
+      // onFilter: (value, record) =>
+      //   record?.app_client_auth_act?.activity_name?.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
         return a.app_client_auth_act?.activity_name >
@@ -395,7 +483,7 @@ const ListView = () => {
       title: "Provider",
       dataIndex: "provider_full_name",
       key: "provider_full_name",
-      width: 200,
+      width: 160,
       filters: [
         {
           text: `Andrew  Flintoff`,
@@ -426,9 +514,9 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.provider_full_name || null,
-      onFilter: (value, record) =>
-        record?.app_provider?.full_name?.includes(value),
+      // filteredValue: filteredInfo.provider_full_name || null,
+      // onFilter: (value, record) =>
+      //   record?.app_provider?.full_name?.includes(value),
       sorter: (a, b) => {
         return a.app_provider?.full_name > b.app_provider?.full_name ? -1 : 1;
       },
@@ -440,7 +528,7 @@ const ListView = () => {
       title: "Pos",
       key: "location",
       dataIndex: "location",
-      width: 120,
+      width: 150,
       filters: [
         {
           text: "telehealth",
@@ -475,8 +563,8 @@ const ListView = () => {
           </>
         );
       },
-      filteredValue: filteredInfo.location || null,
-      onFilter: (value, record) => record.location.includes(value),
+      // filteredValue: filteredInfo.location || null,
+      // onFilter: (value, record) => record.location.includes(value),
       sorter: (a, b) => {
         return a.location > b.location ? -1 : 1;
       },
@@ -487,17 +575,17 @@ const ListView = () => {
       title: "Scheduled Date",
       dataIndex: "schedule_date",
       key: "schedule_date",
-      width: 100,
-      filters: [
-        {
-          text: `Feb 20, 2023`,
-          value: "Feb 20, 2023",
-        },
-        {
-          text: "Dec 30, 2021",
-          value: "Dec 30, 2021",
-        },
-      ],
+      width: 200,
+      // filters: [
+      //   {
+      //     text: `Feb 20, 2023`,
+      //     value: "Feb 20, 2023",
+      //   },
+      //   {
+      //     text: "Dec 30, 2021",
+      //     value: "Dec 30, 2021",
+      //   },
+      // ],
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -506,8 +594,8 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.schedule_date || null,
-      onFilter: (value, record) => record.schedule_date.includes(value),
+      // filteredValue: filteredInfo.schedule_date || null,
+      // onFilter: (value, record) => record.schedule_date.includes(value),
       sorter: (a, b) => {
         return a.schedule_date > b.schedule_date ? -1 : 1;
         // a.schedule_date - b.schedule_date
@@ -521,16 +609,16 @@ const ListView = () => {
       dataIndex: "Hours",
       key: "Hours",
       width: 200,
-      filters: [
-        {
-          text: `9:57 PM`,
-          value: "9:57 PM",
-        },
-        {
-          text: "3:01 PM",
-          value: "3:01 PM",
-        },
-      ],
+      // filters: [
+      //   {
+      //     text: `9:57 PM`,
+      //     value: "9:57 PM",
+      //   },
+      //   {
+      //     text: "3:01 PM",
+      //     value: "3:01 PM",
+      //   },
+      // ],
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
@@ -540,10 +628,10 @@ const ListView = () => {
           </div>
         );
       },
-      filteredValue: filteredInfo.Hours || null,
-      onFilter: (value, record) => {
-        return record.Hours.includes(value);
-      },
+      // filteredValue: filteredInfo.Hours || null,
+      // onFilter: (value, record) => {
+      //   return record.Hours.includes(value);
+      // },
       sorter: (a, b) => {
         return a.Hours > b.Hours ? -1 : 1;
         // a.Hours - b.Hours,
@@ -572,49 +660,49 @@ const ListView = () => {
               </button>
             )}
             {status === "Rendered" && (
-              <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
+              <button className="bg-green-700 text-white text-[10px] py-[2px]  rounded w-14">
                 {status}
               </button>
             )}
             {status === "Hold" && (
-              <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
+              <button className="bg-gray-100 text-black text-[10px] py-[2px]  rounded w-14">
                 {status}
               </button>
             )}
             {status === "No Show" && (
-              <button className="bg-blue-700 text-white text-[10px] py-[2px]  rounded w-14">
+              <button className="bg-rose-700 text-white text-[10px] py-[2px]  rounded w-14">
                 {status}
               </button>
             )}
             {status === "Cancelled by Client" && (
-              <button className="bg-black text-white text-[10px] py-[2px]  rounded w-14">
+              <button className="bg-secondary text-white text-[10px] py-[2px]  rounded w-24">
                 {status}
               </button>
             )}
             {status === "Cancelled by Provider" && (
-              <button className="bg-yellow-700 text-white text-[10px] py-[2px]  rounded w-28">
+              <button className="bg-yellow-600 text-white text-[10px] py-[2px]  rounded w-28">
                 {status}
               </button>
             )}
           </div>
         );
       },
-      filters: [
-        {
-          text: "hold",
-          value: "hold",
-        },
-        {
-          text: "Rendered",
-          value: "Rendered",
-        },
-        {
-          text: "Scheduled",
-          value: "Scheduled",
-        },
-      ],
-      filteredValue: filteredInfo.status || null,
-      onFilter: (value, record) => record.status.includes(value),
+      // filters: [
+      //   {
+      //     text: "hold",
+      //     value: "hold",
+      //   },
+      //   {
+      //     text: "Rendered",
+      //     value: "Rendered",
+      //   },
+      //   {
+      //     text: "Scheduled",
+      //     value: "Scheduled",
+      //   },
+      // ],
+      // filteredValue: filteredInfo.status || null,
+      // onFilter: (value, record) => record.status.includes(value),
     },
     {
       title: "Action",
@@ -625,7 +713,10 @@ const ListView = () => {
         <div className="flex justify-center">
           <Dropdown
             overlay={
-              <ManageTableAction appointmentId={record?.id}></ManageTableAction>
+              <ManageTableAction
+                isLocked={record?.is_locked}
+                appointmentId={record?.id}
+              ></ManageTableAction>
             }
             trigger={["click"]}
             overlayStyle={{ zIndex: "100" }}
@@ -660,102 +751,26 @@ const ListView = () => {
   //   },
   // };
 
-  //get rows id to do some action on them
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selected row-keys: ", newSelectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-    getCheckboxProps: (record) => {
-      // console.log("record", record);
-      const rowIndex = record?.is_locked;
-      return {
-        disabled: rowIndex === 1,
-      };
-    },
-  };
-
-  //Status change handler Function
-  const statusChange = (e) => {
-    if (e.target.value === "Bulk Delete") {
-      //console.log(e.target.value);
-      setStatusName("");
-      setActionType("delete");
-    } else {
-      //console.log(e.target.value);
-      setStatusName(e.target.value);
-      setActionType("update_status");
-    }
-  };
-  // console.log("changing status and action", statusName, actionType);
-
-  //Action Handler Function
-  const handleAction = () => {
-    if (selectedRowKeys?.length > 0) {
-      const payload = {
-        action_type: actionType,
-        status_name: statusName,
-        appointment_ids: selectedRowKeys,
-      };
-      manageSessionStatusChange({
-        token,
-        payload,
-      });
-      console.log("payload for the action handler api", payload);
-    } else {
-      toast.warning("Select Some Id's To Work With", {
-        position: "top-center",
-        autoClose: 5000,
-        theme: "dark",
-      });
-    }
-  };
-
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+  console.log("----", filteredInfo);
 
-  const globalFilter = (value) => {
-    //console.log(value);
-    const filteredData = TData?.filter(
-      (each) =>
-        each?.Patients?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.Service_hrs?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.pos?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.schedule_date?.toLowerCase().includes(value.toLowerCase()) ||
-        each?.status?.toLowerCase().includes(value)
-    );
-    setTData(filteredData);
-
-    if (!value) {
-      axios("../All_Fake_Api/Fakedb.json")
-        .then((response) => {
-          console.log("calling");
-          setTData(response?.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-
-  const clearFilters = () => {
+  const clearFilters = (e) => {
+    e.preventDefault();
     setFilteredInfo({});
   };
 
   //Individual filtering [tagging feature]
-  const deletePatientTag = (tag) => {
+  const deletePatientsName = (tag) => {
     console.log(tag);
-    const patients_array = filteredInfo?.Patients?.filter(
+    const client_full_name_array = filteredInfo?.client_full_name?.filter(
       (item) => item !== tag
     );
     setFilteredInfo({
-      Patients: patients_array,
+      client_full_name: client_full_name_array,
       Service_hrs: filteredInfo?.Service_hrs,
       status: filteredInfo?.status,
       pos: filteredInfo?.pos,
@@ -823,10 +838,11 @@ const ListView = () => {
   });
 
   const onSubmit = async (data) => {
+    setCheck(true);
+    setFilteredInfo({}); //When Go btn is pressed
     console.log("form-data", data);
     const from_date = convert(data?.start_date);
     const to_date = convert(data?.end_date);
-    //console.log(from_date, to_date);
     const payLoad = {
       client_id: patientId,
       provider_id: stuffsId?.length > 0 ? stuffsId : "",
@@ -837,15 +853,16 @@ const ListView = () => {
       to_date: to_date,
     };
     if (payLoad?.to_date === "NaN-aN-aN") {
-      toast.error("Select Valid Date Range", {
+      toast.error(<h1 className="font-bold">Select Valid Date-Range</h1>, {
         position: "top-center",
         autoClose: 5000,
-        theme: "dark",
+        theme: "light",
       });
     } else {
       setFromData(payLoad);
+      setPage(1);
     }
-    setPage(1);
+    handlePageClick({ selected: 0 });
   };
 
   useEffect(() => {
@@ -868,9 +885,89 @@ const ListView = () => {
     reset,
   ]);
 
+  //get rows id to do some action on them
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selected row-keys: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+
+    //Billing is_locked===true then you can't chose that checkbox
+    getCheckboxProps: (record) => {
+      //console.log("record", record);
+      const rowIndex = record?.is_locked;
+      return {
+        disabled: rowIndex === 1,
+      };
+    },
+  };
+
+  //Status change handler Function
+  const statusChange = (e) => {
+    if (e.target.value === "Bulk Delete") {
+      //console.log(e.target.value);
+      setStatusName("");
+      setActionType("delete");
+    } else {
+      //console.log(e.target.value);
+      setStatusName(e.target.value);
+      setActionType("update_status");
+    }
+  };
+  // console.log("changing status and action", statusName, actionType);
+
+  //Action Handler Function
+  const handleAction = () => {
+    if (selectedRowKeys?.length > 0) {
+      const payload = {
+        action_type: actionType,
+        status_name: statusName,
+        appointment_ids: selectedRowKeys,
+      };
+      manageSessionStatusChange({
+        token,
+        payload,
+      });
+      console.log("payload for the action handler api", payload);
+    } else {
+      toast.warning("Select ID Before Submit Action", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  };
+
+  //--------------------Non-Billable Session Handler Code------------------------
+  // Non billable Session Handler Code
+  const nonBillableSessionHandler = (e) => {
+    e.preventDefault();
+    console.log("clicked");
+    const selectedProviderIds = { provider_id: stuffsId };
+    setPayload(selectedProviderIds);
+    setprocceed(true);
+    setNonBillablePage(1);
+  };
+
   return (
     // For responsive view point
-    <div className="h-[100vh]">
+    <div
+      className={
+        !table || items?.length < 18 || nonBillableData?.length < 0
+          ? "h-[170vh]"
+          : ""
+      }
+      // class={
+      //   nonBillableData &&
+      //   table &&
+      //   items?.length > 0 &&
+      //   nonBillableData.length > 0
+      //     ? "h-[170vh]"
+      //     : ""
+      // }
+    >
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
@@ -957,36 +1054,33 @@ const ListView = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="relative">
                   <div className=" flex item-center  flex-wrap gap-3 ">
                     {/* <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 2xl:grid-cols-8 gap-2 mb-2"> */}
-                    {billable && (
-                      <div>
-                        <label className="label">
-                          <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
-                            Clients
-                          </span>
-                        </label>
-
-                        <Clients
-                          patients={patients}
-                          setPatientId={setPatientId}
-                          receivedData={receivedData}
-                        ></Clients>
-                      </div>
-                    )}
-                    <div className="">
-                      <label className="label">
-                        <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
-                          Provider
-                        </span>
-                      </label>
-
-                      <Providers
-                        stuffs={stuffs}
-                        setStuffsId={setStuffsId}
-                      ></Providers>
-                    </div>
 
                     {billable ? (
                       <>
+                        <div>
+                          <label className="label">
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              Clients
+                            </span>
+                          </label>
+
+                          <Clients
+                            patients={patients}
+                            setPatientId={setPatientId}
+                          ></Clients>
+                        </div>
+                        <div className="">
+                          <label className="label">
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              Provider
+                            </span>
+                          </label>
+
+                          <Providers
+                            stuffs={stuffs}
+                            setStuffsId={setStuffsId}
+                          ></Providers>
+                        </div>
                         <div>
                           <label className="label">
                             <span className="label-text text-[16px] text-gray-100 text-left">
@@ -1056,7 +1150,7 @@ const ListView = () => {
                             <div
                               ref={refClose}
                               // className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
-                              className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] mr-[8%] mt-1 "
+                              className="absolute z-10 2xl:ml-[0%] xl:ml-[-15%] lg:ml-[0%] md:ml-[-25%] md:mr-[5%] ml-[-4%] mr-[8%] mt-1 "
                             >
                               {openCalendar && (
                                 <CustomDateRange
@@ -1135,33 +1229,41 @@ const ListView = () => {
                         </div>
                       </>
                     ) : (
-                      <button
-                        className=" mb-3 mt-[35px] sm:w-1/4 pms-white-button"
-                        type="submit"
-                      >
-                        Go
-                      </button>
+                      // Non billable session component called
+                      // <NonBillableSession
+                      //   stuffs={stuffs}
+                      //   stuffsId={stuffsId}
+                      //   setStuffsId={setStuffsId}
+                      // ></NonBillableSession>
+                      <div className="flex flex-wrap">
+                        <div className="mr-2">
+                          <label className="label">
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
+                              Provider
+                            </span>
+                          </label>
+
+                          <Providers
+                            stuffs={stuffs}
+                            setStuffsId={setStuffsId}
+                          ></Providers>
+                        </div>
+                        <button
+                          className=" mb-3 mt-[35px] pms-white-button"
+                          onClick={nonBillableSessionHandler}
+                        >
+                          Go
+                        </button>
+                      </div>
                     )}
                     {table && (
                       <>
-                        <div className="  ">
-                          <div className="px-2 py-2 w-full mr-2 2xl:mt-[35px] xl:mt-[0px]  bg-white from-primary text-sm  hover:to-secondary text-secondary border border-secondary rounded-sm flex justify-between items-center ">
-                            <input
-                              placeholder="Search here..."
-                              onChange={(e) => globalFilter(e.target.value)}
-                              className="focus:outline-none w-full"
-                            />
-                            <label>
-                              <BiSearchAlt />
-                            </label>
-                          </div>
-                        </div>
-                        <button
+                        {/* <button
                           onClick={clearFilters}
                           className="2xl:mb-2 xl:mb-0 lg:mb-0 md:mb-0 2xl:mt-[35px] xl:mt-[0px] py-2 px-1  bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
                         >
                           Clear filters
-                        </button>
+                        </button> */}
                       </>
                     )}
                   </div>
@@ -1171,238 +1273,153 @@ const ListView = () => {
           </div>
         </div>
 
-        {table && (
+        {/* Manage Session billable Data Table Part */}
+        {!listLoading ? (
           <>
-            {listView && (
-              <div className="my-5">
-                {filteredInfo?.Patients?.length > 0 ||
-                filteredInfo?.Service_hrs?.length > 0 ||
-                filteredInfo?.pos?.length > 0 ||
-                filteredInfo?.status?.length > 0 ||
-                filteredInfo?.schedule_date?.length > 0 ? (
-                  <div className="my-5 flex flex-wrap items-center gap-2">
-                    {filteredInfo?.Patients?.length > 0 && (
-                      <div className=" ">
-                        <div className="flex flex-wrap mb-2 gap-1">
-                          {filteredInfo?.Patients?.map((tag, index) => (
-                            <div
-                              className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                              key={index}
-                            >
-                              <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                                <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                  Patient:
-                                </span>
-                                {tag}
+            {table && (
+              <>
+                {/* Selected filters tag will be showed here */}
+                {listView && (
+                  <div className="my-5">
+                    {items?.length > 0 ? (
+                      <div>
+                        <div className=" overflow-scroll">
+                          {!listLoading ? (
+                            <>
+                              <Table
+                                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                                rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                                size="small"
+                                bordered
+                                className=" text-xs font-normal"
+                                columns={columns}
+                                // dataSource={sessionlist}
+                                dataSource={items}
+                                rowSelection={rowSelection}
+                                scroll={{
+                                  y: 750,
+                                }}
+                                onChange={handleChange}
+                              />
+                              <div className="flex items-center justify-end">
+                                {totalPage > 1 && (
+                                  <ReactPaginate
+                                    previousLabel={"<"}
+                                    nextLabel={">"}
+                                    pageCount={Number(totalPage)}
+                                    marginPagesDisplayed={1}
+                                    onPageChange={handlePageClick}
+                                    forcePage={page - 1}
+                                    containerClassName={"pagination"}
+                                    previousLinkClassName={"pagination_Link"}
+                                    nextLinkClassName={"pagination_Link"}
+                                    activeClassName={"pagination_Link-active"}
+                                    disabledClassName={
+                                      "pagination_Link-disabled"
+                                    }
+                                  ></ReactPaginate>
+                                )}
                               </div>
-                              <div>
-                                <div
-                                  className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                  onClick={() => deletePatientTag(tag)}
-                                >
-                                  X
-                                </div>
-                              </div>
-                            </div>
-                          ))}
+                            </>
+                          ) : (
+                            <ShimmerTableTet></ShimmerTableTet>
+                          )}
                         </div>
                       </div>
-                    )}
-
-                    {filteredInfo?.Service_hrs?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.Service_hrs?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Service_hrs:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deleteServiceTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {filteredInfo?.status?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.status?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                status:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deletestatusTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {filteredInfo?.pos?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.pos?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                Pos:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deletePosTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {filteredInfo?.schedule_date?.length > 0 && (
-                      <div className="flex flex-wrap mb-2 gap-1">
-                        {filteredInfo?.schedule_date?.map((tag, index) => (
-                          <div
-                            className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                            key={index}
-                          >
-                            <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                              <span className="text-secondary text-[15px] font-medium mr-1  ">
-                                schedule_date:
-                              </span>
-                              {tag}
-                            </div>
-                            <div>
-                              <div
-                                className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                                onClick={() => deleteScheduleTag(tag)}
-                              >
-                                X
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : null}
-                <div>
-                  <div className=" overflow-scroll">
-                    {!listLoading ? (
-                      <Table
-                        pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                        rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                        size="small"
-                        bordered
-                        className=" text-xs font-normal"
-                        columns={columns}
-                        dataSource={list}
-                        rowSelection={rowSelection}
-                        scroll={{
-                          y: 650,
-                        }}
-                        onChange={handleChange}
-                      />
                     ) : (
-                      <ShimmerTableTet></ShimmerTableTet>
+                      // CSS Design Need To Applied Here
+                      <h1 className="w-full text-center p-2 bg-red-400 text-white rounded-sm">
+                        No Data Found
+                      </h1>
                     )}
                   </div>
-                  <div className="flex items-center justify-end">
-                    {totalPage > 1 && (
-                      <ReactPaginate
-                        previousLabel={"<"}
-                        nextLabel={">"}
-                        pageCount={Number(totalPage)}
-                        marginPagesDisplayed={1}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination"}
-                        previousLinkClassName={"pagination_Link"}
-                        nextLinkClassName={"pagination_Link"}
-                        activeClassName={"pagination_Link-active"}
-                        disabledClassName={"pagination_Link-disabled"}
-                      ></ReactPaginate>
-                    )}
+                )}
+                {/* Billable Session Data in Card-View */}
+                {!listView && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="my-5"
+                  >
+                    <CardsView schedules={items} posData={posData}></CardsView>
+                  </motion.div>
+                )}
+                {
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <select
+                        className="modal-input-field ml-1"
+                        onChange={(e) => statusChange(e)}
+                      >
+                        <option value="" className="text-black">
+                          Select
+                        </option>
+                        <option value="Scheduled" className="text-black">
+                          Scheduled
+                        </option>
+                        <option value="No Show" className="text-black">
+                          No Show
+                        </option>
+                        <option value="Hold" className="text-black">
+                          Hold
+                        </option>
+                        <option>Cancelled by Client</option>
+                        <option>Cancelled by Provider</option>
+                        <option value="Bulk Delete" className="text-black">
+                          Bulk Delete
+                        </option>
+                        <option value="Rendered" className="text-black">
+                          Rendered
+                        </option>
+                      </select>
+                      <button onClick={handleAction} className="pms-button">
+                        Go
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </div>
+                }
+              </>
             )}
-            {!listView && (
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="my-5"
-              >
-                <CardsView data={TData}></CardsView>
-              </motion.div>
-            )}
-            {
-              <div>
-                <div className="flex">
-                  <select
-                    className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
-                    onChange={(e) => statusChange(e)}
-                  >
-                    <option value="" className="text-black">
-                      Select
-                    </option>
-                    <option value="Scheduled" className="text-black">
-                      Scheduled
-                    </option>
-                    <option value="No Show" className="text-black">
-                      No Show
-                    </option>
-                    <option value="Hold" className="text-black">
-                      Hold
-                    </option>
-                    <option>Cancelled by Client</option>
-                    <option>Cancelled by Provider</option>
-                    <option value="Bulk Delete" className="text-black">
-                      Bulk Delete
-                    </option>
-                    <option value="Rendered" className="text-black">
-                      Rendered
-                    </option>
-                  </select>
-                  <button
-                    onClick={handleAction}
-                    className="bg-[#34A7B8] px-2 text-white rounded"
-                  >
-                    Go
-                  </button>
-                </div>
-              </div>
-            }
           </>
+        ) : (
+          <ShimmerTableTet></ShimmerTableTet>
         )}
+
+        {/* Non Billable Session Table Data Part */}
+        <div className="mt-5">
+          <>
+            {procceed && !hide && (
+              <NonBillableSession
+                nonBillableData={nonBillableData}
+                setNonBillablePage={setNonBillablePage}
+                nonBillablePage={nonBillablePage}
+                setNonBillableTotalPage={setNonBillableTotalPage}
+                nonBillableTotalPage={nonBillableTotalPage}
+                nonBillableListLoading={nonBillableListLoading}
+                payload={payload}
+                stuffs={stuffs}
+                posData={posData}
+                setNonBillableData={setNonBillableData}
+              ></NonBillableSession>
+            )}
+          </>
+          {/* Non-Billable Session Data in Card-View */}
+          {!listView && hide && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="my-5"
+            >
+              <NonBillableCardsView
+                schedules={nonBillableData}
+                stuffs={stuffs}
+                posData={posData}
+              ></NonBillableCardsView>
+            </motion.div>
+          )}
+        </div>
       </div>
     </div>
   );

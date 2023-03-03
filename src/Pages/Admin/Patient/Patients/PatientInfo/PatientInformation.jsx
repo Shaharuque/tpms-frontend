@@ -30,94 +30,94 @@ import BasicInfo from "./BasicInfo";
 import TestingFrom from "./TestingFrom";
 
 const PatientInformation = () => {
-  const testingobj = {
-    City: "mirpur",
-    Street: "usa",
-    address: [
-      {
-        street: "djlasjdiad",
-        city: "sflsdf38akdj",
-        country: "NY",
-        status: false,
+  // const testingobj = {
+  //   City: "mirpur",
+  //   Street: "usa",
+  //   address: [
+  //     {
+  //       street: "djlasjdiad",
+  //       city: "sflsdf38akdj",
+  //       country: "NY",
+  //       status: false,
 
-        zip: 555,
-      },
-      {
-        street: "heilo",
-        city: "dmd",
-        country: "NY",
-        status: true,
+  //       zip: 555,
+  //     },
+  //     {
+  //       street: "heilo",
+  //       city: "dmd",
+  //       country: "NY",
+  //       status: true,
 
-        zip: 73563,
-      },
-      {
-        street: "h45fglo",
-        city: "dlfd",
-        country: "UK",
-        status: false,
+  //       zip: 73563,
+  //     },
+  //     {
+  //       street: "h45fglo",
+  //       city: "dlfd",
+  //       country: "UK",
+  //       status: false,
 
-        zip: 4545,
-      },
-      {
-        street: "435234o",
-        city: "ld",
-        country: "UK",
-        status: true,
+  //       zip: 4545,
+  //     },
+  //     {
+  //       street: "435234o",
+  //       city: "ld",
+  //       country: "UK",
+  //       status: true,
 
-        zip: 4523,
-      },
-    ],
-    allNumber: [
-      {
-        number: 54,
-        checked: true,
-      },
-      {
-        number: 53,
-        checked: false,
-      },
-    ],
-    assignment: "male",
-    checkedActive: 1,
-    client_dob: "",
-    country: "NY",
-    dob: "2021-08-05",
-    email: "testdfv@sdf.dsf",
-    first_date: "",
-    first_name: "cbvxdfg",
-    fruit: "Male",
-    gender: "Male",
-    allEmail: [
-      {
-        email: "najirkhan@gmail.com",
-        checked: true,
-        sendMail: false,
-      },
-      {
-        email: "lawla@gmail.com",
-        checked: true,
-        sendMail: true,
-      },
-      {
-        email: "hello@gmail.com",
-        checked: true,
-        sendMail: false,
-      },
-    ],
-    group: "work",
-    group2: "work",
-    language: "male",
-    last_name: "sdgsdg",
-    middle_name: null,
-    more_zip0: "34",
-    more_zip1: "45234",
-    phone: "+14353464363",
-    pos: "work",
-    race_details: "male",
-    referred_by: "male",
-    region: "work",
-    zip: "500",
-  };
+  //       zip: 4523,
+  //     },
+  //   ],
+  //   allNumber: [
+  //     {
+  //       number: 54,
+  //       checked: true,
+  //     },
+  //     {
+  //       number: 53,
+  //       checked: false,
+  //     },
+  //   ],
+  //   assignment: "male",
+  //   checkedActive: 1,
+  //   client_dob: "",
+  //   country: "NY",
+  //   dob: "2021-08-05",
+  //   email: "testdfv@sdf.dsf",
+  //   first_date: "",
+  //   first_name: "cbvxdfg",
+  //   fruit: "Male",
+  //   gender: "Male",
+  //   allEmail: [
+  //     {
+  //       email: "najirkhan@gmail.com",
+  //       checked: true,
+  //       sendMail: false,
+  //     },
+  //     {
+  //       email: "lawla@gmail.com",
+  //       checked: true,
+  //       sendMail: true,
+  //     },
+  //     {
+  //       email: "hello@gmail.com",
+  //       checked: true,
+  //       sendMail: false,
+  //     },
+  //   ],
+  //   group: "work",
+  //   group2: "work",
+  //   language: "male",
+  //   last_name: "sdgsdg",
+  //   middle_name: null,
+  //   more_zip0: "34",
+  //   more_zip1: "45234",
+  //   phone: "+14353464363",
+  //   pos: "work",
+  //   race_details: "male",
+  //   referred_by: "male",
+  //   region: "work",
+  //   zip: "500",
+  // };
 
   const { token } = useToken();
   const [active, setActive] = useState(false);
@@ -162,19 +162,28 @@ const PatientInformation = () => {
       defaultValues: {
         // address: testingobj.address,
         address: patient_details?.client_address,
-        number: testingobj.allNumber,
-        Email: testingobj.allEmail,
+        number: patient_details?.client_phone,
+        Email: patient_details?.client_email,
       },
     });
 
-  // this code very important
-  // useEffect(() => {
-  //   reset({
+  // useForm({
+  //   defaultValues: {
+  //     // address: testingobj.address,
   //     address: patient_details?.client_address,
   //     number: testingobj.allNumber,
   //     Email: testingobj.allEmail,
-  //   });
-  // }, [patient_details?.client_address]);
+  //   },
+  // });
+
+  // this code very important
+  useEffect(() => {
+    reset({
+      address: patient_details?.client_address,
+      number: patient_details?.client_phone,
+      Email: patient_details?.client_email,
+    });
+  }, [patient_details?.client_address]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -241,6 +250,7 @@ const PatientInformation = () => {
           ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
+        zone: patient_details?.zone,
         // dob: patient_details?.client_dob,
         // dob: date ? `${month}/${day}/${year}` : null,
         // email: patient_details?.email,
@@ -248,6 +258,21 @@ const PatientInformation = () => {
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
         checkedActive: patient_details?.is_active_client,
+        // address
+        client_street: patient_details?.client_street,
+        client_city: patient_details?.client_city,
+        client_state: patient_details?.client_state,
+        client_zip: patient_details?.client_zip,
+        // all gurantor
+        guarantor_first_name:
+          patient_details?.client_granter?.guarantor_first_name,
+        guarantor_last_name:
+          patient_details?.client_granter?.guarantor_last_name,
+        guarantor_check_Date: patient_details?.client_granter?.guarantor_dob,
+        GuaratorStreet: patient_details?.client_granter?.g_street,
+        GuaratorCity: patient_details?.client_granter?.g_city,
+        GuratorCountry: patient_details?.client_granter?.g_state,
+        GuratorZip: patient_details?.client_granter?.g_zip,
       });
     }, 0);
   }, [patient_details, reset]);
@@ -304,9 +329,11 @@ const PatientInformation = () => {
     // //console.log("getvalue zip", getValues("zip"));
   };
 
+  console.log("patientAdd");
+
   console.log("fields", fields);
   return (
-    <div>
+    <div className={patient_details?.client_address.length < 1 ? "" : ""}>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <BasicInfo
@@ -323,8 +350,9 @@ const PatientInformation = () => {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
+            {/* <div className="flex flex-wrap my-1 mr-2 md:gap-x-2 gap-y-5"> */}
             {/* address  */}
-            <div>
+            <div className="pr-24">
               <PrimaryAddress append={append} rg={register} />
               {patient_details?.admin_id && (
                 <DynamicAddress
@@ -336,8 +364,9 @@ const PatientInformation = () => {
                 />
               )}
 
-              <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
-                <div>
+              {/* <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-1 gap-x-4 gap-y-2"> */}
+              <div className=" flex items-center justify-between my-1 gap-x-4 gap-y-2">
+                <div className="w-full">
                   <label className="label">
                     <span className=" label-font">
                       POS<span className="text-red-500">*</span>
@@ -347,12 +376,12 @@ const PatientInformation = () => {
                     className="input-border input-font py-[1px] w-full focus:outline-none"
                     {...register("pos")}
                   >
-                    <option value="work">work</option>
-                    <option value="home">home</option>
-                    <option value="family">family</option>
+                    <option value="Main Office">Main Office</option>
+                    <option value="Telehealth">Telehealth</option>
+                    <option value="Home">Home</option>
                   </select>
                 </div>
-                <div>
+                <div className="w-full">
                   <label className="label">
                     <span className=" label-font">
                       Region<span className="text-red-500">*</span>
@@ -360,17 +389,17 @@ const PatientInformation = () => {
                   </label>
                   <select
                     className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("region")}
+                    {...register("zone")}
                   >
-                    <option value="work">work</option>
-                    <option value="home">home</option>
-                    <option value="family">family</option>
+                    <option value="2"></option>
+                    <option value="6">Main Zone</option>
+                    <option value="27">ABC Behavioral Therapy Center</option>
                   </select>
                 </div>
               </div>
             </div>
             {/* phone  */}
-            <div className=" lg:mx-auto md:mx-0">
+            <div className="">
               <PrimaryPhone
                 adData={{
                   phoneAppend,
@@ -400,7 +429,7 @@ const PatientInformation = () => {
               </motion.div>
             </div>
             {/* Email  */}
-            <div className=" lg:mx-auto md:mx-0">
+            <div className="">
               <PrimaryEmail
                 adData={{
                   emailAppend,
@@ -431,8 +460,9 @@ const PatientInformation = () => {
 
           <div className="flex ml-1 mt-1 items-center">
             <input
-              disabled={relation === "Self" ? true : null}
+              disabled={relation === "Self"}
               type="checkbox"
+              // checked={relation !== "Self"}
               onChange={handleChange}
               // value={isSubscribed}
               // name="patient"
@@ -480,7 +510,7 @@ const PatientInformation = () => {
               <p className="mt-3 text-sm ">Upload Signature</p>
             </div>
           </div>
-          <div className="mb-5">
+          <div className="mb-24">
             {/* submit  */}
             <button className="pms-button my-3" type="submit">
               Save Patient
