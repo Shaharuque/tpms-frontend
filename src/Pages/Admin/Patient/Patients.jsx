@@ -153,7 +153,7 @@ const TableApi = () => {
       setItems(data);
     };
     getPatientsData();
-  }, []);
+  }, [token]);
   console.log("headers from patients", headers);
 
   const fetchPatients = async () => {
@@ -673,6 +673,9 @@ const TableApi = () => {
             columns={columns}
             dataSource={items} //Which data chunk you want to show in table
             // For fixed header table at top
+            // scroll={{
+            //   y: 750,
+            // }}
             onChange={handleChange}
           />
         </InfiniteScroll>

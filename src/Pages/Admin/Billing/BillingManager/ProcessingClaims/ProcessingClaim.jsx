@@ -1041,15 +1041,15 @@ const ProcessingClaim = () => {
                   </>
                 )}
                 {/* submit  */}
-                <div className="flex mb-10 gap-2">
+                <div className="flex gap-2">
                   <button
-                    className="mt-8 bg-[#34A7B8] rounded-sm text-white px-2 shadow-md shadow-gray-600 h-8"
+                    className=" bg-[#34A7B8] rounded-sm text-white px-2 shadow-md shadow-gray-600 h-8"
                     type="submit"
                   >
                     Run
                   </button>
                   <button
-                    className="bg-[#b91c1c] rounded-sm text-white shadow-md shadow-gray-800 mt-8 px-2"
+                    className="bg-[#b91c1c] rounded-sm text-white shadow-md shadow-gray-800  px-2"
                     type="button"
                   >
                     Cancel

@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./PatientMultiSelectCSS/PatientMultiSelect.css";
 
-const PatientMultiSelect = ({ allPatients, setClientIds, patientsLoading }) => {
+const PayorMultiSelect = ({
+  allInsurance,
+  setInsuranceIds,
+  insuranceLoading,
+}) => {
   const [selected, setSelected] = useState([]);
-  const patientDataProcess = () => {
+  const insuranceDataProcess = () => {
     let processedData = [];
-    if (allPatients) {
-      for (let x of allPatients) {
-        if (x?.client_full_name !== null) {
+    if (allInsurance) {
+      for (let x of allInsurance) {
+        if (x?.payor_id !== null) {
           processedData.push({
-            label: x?.client_first_name + " " + x?.client_last_name,
-            value: x?.client_first_name + " " + x?.client_last_name,
-            id: x?.id,
+            label: x?.payor_name,
+            value: x?.payor_name,
+            id: x?.payor_id,
           });
         }
       }
@@ -20,7 +24,7 @@ const PatientMultiSelect = ({ allPatients, setClientIds, patientsLoading }) => {
     return processedData;
   };
 
-  const patientSelectionOptions = patientDataProcess();
+  const patientSelectionOptions = insuranceDataProcess();
 
   const customValueRenderer = (selected, _options) => {
     if (selected.length) {
@@ -31,17 +35,17 @@ const PatientMultiSelect = ({ allPatients, setClientIds, patientsLoading }) => {
   };
 
   useEffect(() => {
-    const getSelectedClients = async () => {
+    const getSelectedInsurance = async () => {
       const getId = selected.map((item) => item.id);
-      setClientIds(getId);
+      setInsuranceIds(getId);
       // setSortBy1("");
     };
-    getSelectedClients();
-  }, [selected, setClientIds]);
+    getSelectedInsurance();
+  }, [selected, setInsuranceIds]);
 
   return (
     <MultiSelect
-      disabled={patientsLoading && true}
+      disabled={insuranceLoading && true}
       className="Global"
       options={patientSelectionOptions}
       value={selected}
@@ -52,4 +56,4 @@ const PatientMultiSelect = ({ allPatients, setClientIds, patientsLoading }) => {
   );
 };
 
-export default PatientMultiSelect;
+export default PayorMultiSelect;

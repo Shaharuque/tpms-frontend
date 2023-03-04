@@ -4,19 +4,36 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { BsFileEarmarkPlusFill } from "react-icons/bs";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import { DateRangePicker } from "react-date-range";
 import { Switch, Table, Typography } from "antd";
 import { Link } from "react-router-dom";
-import GlobalMultiSelect from "../../../../../Shared/CustomComponents/GlobalMultiSelect";
 import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
 import { BiCommentDetail } from "react-icons/bi";
 import ClaimWiseActionModal from "./ClaimWiseActionModal";
-import { useGetLedgerPatientsMutation } from "../../../../../../features/Billing_redux/AR_Ledger_redux/ledgerApi";
+import {
+  useGetLedgerCPTMutation,
+  useGetLedgerPatientsMutation,
+  useGetLedgerPayorMutation,
+} from "../../../../../../features/Billing_redux/AR_Ledger_redux/ledgerApi";
 import useToken from "../../../../../../CustomHooks/useToken";
 import PatientMultiSelect from "../PatientMultiSelect/PatientMultiSelect";
+import PayorMultiSelect from "../PatientMultiSelect/PayorMultiSelect";
+import axios from "axios";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ShimmerTableTet from "../../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import { toast } from "react-toastify";
+
+//Date converter function [yy-mm-dd]
+function convert(str) {
+  let date = new Date(str),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+  return [date.getFullYear(), mnth, day].join("-");
+}
+
 const ClaimWise = () => {
   const [selected, setSelected] = useState("patient");
   const [clientIds, setClientIds] = useState([]);
+  const [insuranceIds, setInsuranceIds] = useState([]);
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);
   const [sortBy, setSortBy] = useState("");
@@ -26,23 +43,43 @@ const ClaimWise = () => {
   const { Text } = Typography;
   const [record, setRecord] = useState();
   const [openEditModal, setOpenEditModal] = useState(false);
+  // For infine scroll
+  const [ledgerData, setLedgerData] = useState([]);
+  const [hasMore, sethasMore] = useState(true);
+  const [page, setpage] = useState(2);
+  const [formData, setFromData] = useState(null);
 
   const { token } = useToken();
 
   console.log("selected option", selected);
   console.log("selected Patient ids", clientIds);
+  console.log("selected Insurance ids", insuranceIds);
 
   // Ledger Get Patients API
   const [getLedgerPatients, { data: patients, isLoading: patientsLoading }] =
     useGetLedgerPatientsMutation();
 
+  //Ledger Get Payor API
+  const [getLedgerPayor, { data: payors, isLoading: payorLoading }] =
+    useGetLedgerPayorMutation();
+
+  //Ledger Get CPT Code API
+  const [getLedgerCPT, { data: cptCodes, isLoading: cptLoading }] =
+    useGetLedgerCPTMutation();
+
   useEffect(() => {
     if (selected === "patient") {
       getLedgerPatients(token);
+      getLedgerCPT(token);
     }
-  }, [selected, token]);
+    if (selected === "insurance") {
+      getLedgerPayor(token);
+    }
+  }, [selected, token, getLedgerPatients, getLedgerPayor, getLedgerCPT]);
 
   const allPatients = patients?.clients || [];
+  const allPayor = payors?.clients || [];
+  const allCPT = cptCodes?.cpt_code || [];
 
   const handleClickOpen = () => {
     setOpenEditModal(true);
@@ -68,6 +105,18 @@ const ClaimWise = () => {
       key: "patient",
       width: 100,
       filters: [{}],
+      render: (_, record) => {
+        return (
+          <div>
+            <Link
+              className="font-normal text-secondary"
+              to={"/admin/patient-List"}
+            >
+              {record?.ledger_client?.client_full_name}
+            </Link>
+          </div>
+        );
+      },
       filteredValue: filteredInfo.patient || null,
       onFilter: (value, record) => record.patient.includes(value),
       sorter: (a, b) => {
@@ -75,18 +124,6 @@ const ClaimWise = () => {
       },
       sortOrder: sortedInfo.columnKey === "patient" ? sortedInfo.order : null,
       ellipsis: true,
-      render: (_, { patient }) => {
-        return (
-          <div>
-            <Link
-              className="font-normal text-secondary"
-              to={"/admin/patient-List"}
-            >
-              {patient}
-            </Link>
-          </div>
-        );
-      },
     },
     {
       index: 2,
@@ -381,22 +418,11 @@ const ClaimWise = () => {
     setFilteredInfo({});
   };
 
-  const { handleSubmit, register, reset } = useForm({
-    defaultValues: {
-      filters: [],
-    },
-  });
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
-    setTable(true);
-  };
-
   const handleSortBy = (e) => {
     setSortBy(e.target.value);
   };
 
-  //Date Range Picker-----------------------------------------------------------------------------------------------------------------------
+  //-----------Date Range Picker-----------------
   const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
     {
@@ -446,7 +472,113 @@ const ClaimWise = () => {
   };
   //end outside click
 
-  //End Date Range Picker--------------------------------------------------------------------------------------------------------------------
+  //----------Date Range Picker Code End------------------
+
+  //get data from API + data fetch from api while scrolling[Important]
+
+  //While 1st render page=1 data will be rendered
+  useEffect(() => {
+    const getLedgerData = async () => {
+      const res = await axios({
+        method: "POST",
+        url: `https://test-prod.therapypms.com/api/v1/admin/ac/ledger/list?page=1`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token ? token : null,
+        },
+        data: formData,
+      });
+      const data = res.data?.ledger_list?.data;
+      console.log("1st render data", data);
+      setLedgerData(data);
+    };
+    if (formData?.client_id?.length > 0) {
+      getLedgerData();
+    }
+  }, [token, formData]);
+
+  const fetchLedger = async () => {
+    const res = await axios({
+      method: "POST",
+      url: `https://test-prod.therapypms.com/api/v1/admin/ac/ledger/list?page=${page}`,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: token ? token : null,
+      },
+      data: formData,
+    });
+    const data = res.data?.ledger_list?.data;
+    console.log("scroll render data", data);
+    return data;
+  };
+
+  const fetchData = async () => {
+    const patientsFromServer = await fetchLedger();
+    console.log(patientsFromServer);
+    setLedgerData([...ledgerData, ...patientsFromServer]);
+    if (patientsFromServer.length === 0) {
+      sethasMore(false);
+    }
+    setpage(page + 1);
+  };
+
+  //----------React Hook Form Part--------------
+  const { handleSubmit, register, reset } = useForm({
+    defaultValues: {
+      filters: [],
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    const from_date = convert(data?.start_date);
+    const to_date = convert(data?.end_date);
+    const payLoad = {
+      sort_by: selected === "patient" ? 2 : selected === "insurance" ? 3 : 1,
+      // claim_no,
+      client_id: clientIds,
+      // all_insurance,
+      // payor_id,
+      // cpt,
+      // fil_cat_name,
+      reportrange: `${from_date} - ${to_date}`,
+    };
+
+    if (to_date === "NaN-aN-aN") {
+      toast.error(<h1 className="font-bold">Select Valid Date-Range</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
+    } else {
+      setTable(true);
+      setFromData(payLoad);
+      setLedgerData([]);
+      setpage(2);
+      sethasMore(true);
+    }
+  };
+  useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        start_date: startDate ? `${startMonth} ${startDay}, ${startYear}` : "",
+        end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date",
+      });
+    }, 0);
+  }, [
+    startDate,
+    startMonth,
+    startDay,
+    startYear,
+    endDate,
+    endMonth,
+    endDay,
+    endYear,
+    reset,
+  ]);
 
   return (
     <div className={!table ? "h-[170vh]" : ""}>
@@ -484,15 +616,13 @@ const ClaimWise = () => {
                       <span className=" label-font">Claim No</span>
                     </label>
                     <input
-                      type="number"
+                      type="string"
                       name="check"
-                      className="input-border input-font w-full focus:outline-none"
+                      defaultValue={"Claim No"}
+                      className="input-border input-font w-[100px] focus:outline-none"
                       {...register("client_code")}
                     />
                   </div>
-                  <button className="pms-input-button mt-6" type="submit">
-                    View
-                  </button>
                 </>
               ) : selected === "patient" ? (
                 <>
@@ -525,7 +655,7 @@ const ClaimWise = () => {
                             }
                             readOnly
                             onClick={() => setOpenCalendar(true)}
-                            // {...register("start_date")}
+                            {...register("start_date")}
                             className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-2/5 cursor-pointer"
                           />
                           <RiArrowLeftRightLine
@@ -541,7 +671,7 @@ const ClaimWise = () => {
                             }
                             readOnly
                             onClick={() => setOpenCalendar(true)}
-                            // {...register("end_date")}
+                            {...register("end_date")}
                             className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-2/5 cursor-pointer"
                           />
                         </div>
@@ -575,7 +705,16 @@ const ClaimWise = () => {
                         className="input-border input-font w-full focus:outline-none"
                         {...register("CPT_Code")}
                       >
-                        <option value="name">EFT</option>
+                        <option value="0">Select</option>
+                        {allCPT?.map((cpt) => {
+                          return (
+                            <>
+                              <option value={cpt?.cpt_code}>
+                                {cpt?.cpt_code}
+                              </option>
+                            </>
+                          );
+                        })}
                       </select>
                     </div>
                     {/*Aging Status  */}
@@ -591,31 +730,20 @@ const ClaimWise = () => {
                       </select>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="flex mt-8 items-center ">
-                      <Switch
-                        size="small"
-                        checked={value ? true : false}
-                        onClick={() => setValue(!value)}
-                      />
-                      <span className="text-[14px] font-medium text-gray-500 mx-1">
-                        Zero Paid
-                      </span>
-                    </div>
-                    {/* submit  */}
-                    <button className="pms-input-button mt-6" type="submit">
-                      View
-                    </button>
-                  </div>
                 </>
               ) : (
+                // Insurance Option Part
                 <>
                   <div>
                     <label className="label">
                       <span className=" label-font">Insurance</span>
                     </label>
                     <div className="py-[2px]">
-                      <GlobalMultiSelect />
+                      <PayorMultiSelect
+                        allInsurance={allPayor}
+                        setInsuranceIds={setInsuranceIds}
+                        insuranceLoading={payorLoading}
+                      />
                     </div>
                   </div>
                   <div className="w-[220px]">
@@ -674,24 +802,25 @@ const ClaimWise = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="flex mt-8 items-center ">
-                      <Switch
-                        size="small"
-                        checked={value ? true : false}
-                        onClick={() => setValue(!value)}
-                      />
-                      <span className="text-[14px] font-medium text-gray-500 mx-1">
-                        Zero Paid
-                      </span>
-                    </div>
-                    {/* submit  */}
-                    <button className="pms-input-button mt-6" type="submit">
-                      View
-                    </button>
-                  </div>
+                  {/* Zero Paid btn was here */}
                 </>
               )}
+              <div className="flex items-center gap-2">
+                <div className="flex mt-8 items-center ">
+                  <Switch
+                    size="small"
+                    checked={value ? true : false}
+                    onClick={() => setValue(!value)}
+                  />
+                  <span className="text-[14px] font-medium text-gray-500 mx-1">
+                    Zero Paid
+                  </span>
+                </div>
+                {/* submit  */}
+                <button className="pms-input-button mt-6" type="submit">
+                  View
+                </button>
+              </div>
             </div>
           </form>
         </motion.div>
@@ -708,78 +837,85 @@ const ClaimWise = () => {
           </div>
 
           <div className=" overflow-scroll py-3">
-            <Table
-              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-              size="small"
-              bordered
-              className=" text-xs font-normal "
-              columns={column}
-              dataSource={allData}
-              rowSelection={{
-                ...rowSelection,
-              }}
-              scroll={{
-                y: 700,
-              }}
-              onChange={handleChange}
-              summary={(pageData) => {
-                let totalBill = 0;
-                let totalAllowed = 0;
-                let totalPaid = 0;
-                let totalBalance = 0;
-                let totalAdj = 0;
-                pageData.forEach(
-                  ({ billed_amount, allowed_amount, paid, adj, balance }) => {
-                    totalBill += billed_amount;
-                    totalAllowed += allowed_amount;
-                    totalPaid += paid;
-                    totalBalance += balance;
-                    totalAdj += adj;
-                  }
-                );
-                return (
-                  <>
-                    <Table.Summary.Row>
-                      <Table.Summary.Cell index={2} colSpan={7}>
-                        <span className="text-black font-bold flex justify-end mx-5 ">
-                          {" "}
-                          Total
-                        </span>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={8}>
-                        <Text className="text-black font-bold flex justify-end">
-                          {totalBill}
-                        </Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold flex justify-end">
-                          {totalAllowed}
-                        </Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold flex justify-end">
-                          {totalPaid}
-                        </Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold flex justify-end">
-                          {totalAdj}
-                        </Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold flex justify-end">
-                          {totalBalance}
-                        </Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell
-                        index={2}
-                        colSpan={4}
-                      ></Table.Summary.Cell>
-                    </Table.Summary.Row>
-                  </>
-                );
-              }}
-            />
+            <InfiniteScroll
+              dataLength={ledgerData.length} //items is basically all data here
+              next={ledgerData?.length > 0 && fetchData} //This condition is mendatory for perfectly working with infinite scrolling
+              hasMore={hasMore}
+              loader={<ShimmerTableTet></ShimmerTableTet>}
+            >
+              <Table
+                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                size="small"
+                bordered
+                className=" text-xs font-normal "
+                columns={column}
+                dataSource={ledgerData}
+                rowSelection={{
+                  ...rowSelection,
+                }}
+                // scroll={{
+                //   y: 700,
+                // }}
+                onChange={handleChange}
+                // summary={(pageData) => {
+                //   let totalBill = 0;
+                //   let totalAllowed = 0;
+                //   let totalPaid = 0;
+                //   let totalBalance = 0;
+                //   let totalAdj = 0;
+                //   pageData.forEach(
+                //     ({ billed_amount, allowed_amount, paid, adj, balance }) => {
+                //       totalBill += billed_amount;
+                //       totalAllowed += allowed_amount;
+                //       totalPaid += paid;
+                //       totalBalance += balance;
+                //       totalAdj += adj;
+                //     }
+                //   );
+                //   return (
+                //     <>
+                //       <Table.Summary.Row>
+                //         <Table.Summary.Cell index={2} colSpan={7}>
+                //           <span className="text-black font-bold flex justify-end mx-5 ">
+                //             {" "}
+                //             Total
+                //           </span>
+                //         </Table.Summary.Cell>
+                //         <Table.Summary.Cell index={8}>
+                //           <Text className="text-black font-bold flex justify-end">
+                //             {totalBill}
+                //           </Text>
+                //         </Table.Summary.Cell>
+                //         <Table.Summary.Cell index={6}>
+                //           <Text className="text-black font-bold flex justify-end">
+                //             {totalAllowed}
+                //           </Text>
+                //         </Table.Summary.Cell>
+                //         <Table.Summary.Cell index={6}>
+                //           <Text className="text-black font-bold flex justify-end">
+                //             {totalPaid}
+                //           </Text>
+                //         </Table.Summary.Cell>
+                //         <Table.Summary.Cell index={6}>
+                //           <Text className="text-black font-bold flex justify-end">
+                //             {totalAdj}
+                //           </Text>
+                //         </Table.Summary.Cell>
+                //         <Table.Summary.Cell index={6}>
+                //           <Text className="text-black font-bold flex justify-end">
+                //             {totalBalance}
+                //           </Text>
+                //         </Table.Summary.Cell>
+                //         <Table.Summary.Cell
+                //           index={2}
+                //           colSpan={4}
+                //         ></Table.Summary.Cell>
+                //       </Table.Summary.Row>
+                //     </>
+                //   );
+                // }}
+              />
+            </InfiniteScroll>
           </div>
 
           <div className="flex item-center flex-wrap my-5">
