@@ -643,7 +643,7 @@ const ListView = () => {
       title: "Status",
       key: "status",
       dataIndex: "status",
-      width: 100,
+      width: 110,
       sorter: (a, b) => {
         return a.status > b.status ? -1 : 1;
         // a.status - b.status,
@@ -680,7 +680,7 @@ const ListView = () => {
               </button>
             )}
             {status === "Cancelled by Provider" && (
-              <button className="bg-yellow-600 text-white text-[10px] py-[2px]  rounded w-28">
+              <button className="bg-[#39B4C7] text-white text-[10px] p-[2px]  rounded w-28">
                 {status}
               </button>
             )}
