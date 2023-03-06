@@ -6,6 +6,7 @@ import {
   BiFullscreen,
   BiExitFullscreen,
   BiMessageRounded,
+  BiDotsHorizontal,
 } from "react-icons/bi";
 import {
   AiOutlinePlus,
@@ -27,7 +28,7 @@ import { userLoggedOut } from "../../../features/login_redux/loginSlice";
 import { useDispatch } from "react-redux";
 
 // i am using alakaja
-const TestNaviBar = ({ handle }) => {
+const TestNaviBar = ({ handle, handleSIdebar }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -45,27 +46,33 @@ const TestNaviBar = ({ handle }) => {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className=" relative shadow-md rounded-3xl mr-[22px]"
+      className=" relative shadow-md rounded-3xl"
     >
       <div className="flex items-center justify-between bg-white rounded-3xl p-2">
-        <div
-          className="flex justify-center items-center gap-2 md:gap-4  font-medium cursor-pointer font-[Poppins] 
+        <div className="flex items-center justify-between w-6/7">
+          <div
+            className="flex  justify-center items-center gap-2 md:gap-4  font-medium cursor-pointer font-[Poppins] 
       text-gray-800 ml-2"
-        >
-          <div className="w-9 rounded-full">
-            <img className=" rounded-full" src={company} alt="pic" />
+          >
+            <div className="w-9 rounded-full">
+              <img className=" rounded-full" src={company} alt="pic" />
+            </div>
+
+            <div>
+              <p className="md:text-base font-semibold text-[12px] text-gray-800  bg-transparent ">
+                ABC Behavioral Therapy Centers
+              </p>
+            </div>
           </div>
 
-          <div>
-            <p className="md:text-base font-semibold text-[8px] text-gray-800  bg-transparent ">
-              ABC Behavioral Therapy Centers
-            </p>
-          </div>
+          <button className="lg:hidden" onClick={handleSIdebar}>
+            <BiDotsHorizontal className="text-2xl text-secondary ml-[10px]" />
+          </button>
         </div>
 
         <div
           onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-3 top-[10px] cursor-pointer lg:hidden"
+          className="text-3xl absolute right-3 top-[10px] cursor-pointer lg:hidden w-1/7"
         >
           <div className="mt-1">
             {open ? (

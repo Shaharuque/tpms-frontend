@@ -1,0 +1,39 @@
+/* ---------------------------------- Sidebar ------------------------ */
+
+.Side_container {}
+
+.sidebar-box {
+    color: #fff;
+    height: 100vh;
+    transition: 0.1s;
+    box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+    -webkit-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+    -moz-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .Side_container {
+        display: none;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .Side_container {
+        display: none;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .Side_container {
+        display: none;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1201px) {}
