@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm, Controller } from "react-hook-form";
-import SimpleFileUpload from "react-simple-file-upload";
-import { AiOutlineQuestionCircle } from "react-icons/ai";
-import { FaPlus } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getpatientsDetails } from "../../../../../features/Patient_redux/patientSlice";
 import Loading from "../../../../../Loading/Loading";
 import TextArea from "antd/lib/input/TextArea";
-import { useOutsideAlerter } from "../../../../../CustomHooks/useDetectOutsideClick";
-import { Switch } from "antd";
-// import Calendar from "react-calendar";
-// import "./SingleCalendar.css";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 import useToken from "../../../../../CustomHooks/useToken";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import GuarantorInfo from "./GuarantorInfo/GuarantorInfo";
 import AboutPatient from "./AboutPatient/AboutPatient";
@@ -27,121 +18,22 @@ import PrimaryEmail from "./Emailaddress/PrimaryEmail";
 import DynamicPhone from "./PhoneAddress/DynamicPhone";
 import PrimaryPhone from "./PhoneAddress/PrimaryPhone";
 import BasicInfo from "./BasicInfo";
-import TestingFrom from "./TestingFrom";
 
 const PatientInformation = () => {
-  // const testingobj = {
-  //   City: "mirpur",
-  //   Street: "usa",
-  //   address: [
-  //     {
-  //       street: "djlasjdiad",
-  //       city: "sflsdf38akdj",
-  //       country: "NY",
-  //       status: false,
-
-  //       zip: 555,
-  //     },
-  //     {
-  //       street: "heilo",
-  //       city: "dmd",
-  //       country: "NY",
-  //       status: true,
-
-  //       zip: 73563,
-  //     },
-  //     {
-  //       street: "h45fglo",
-  //       city: "dlfd",
-  //       country: "UK",
-  //       status: false,
-
-  //       zip: 4545,
-  //     },
-  //     {
-  //       street: "435234o",
-  //       city: "ld",
-  //       country: "UK",
-  //       status: true,
-
-  //       zip: 4523,
-  //     },
-  //   ],
-  //   allNumber: [
-  //     {
-  //       number: 54,
-  //       checked: true,
-  //     },
-  //     {
-  //       number: 53,
-  //       checked: false,
-  //     },
-  //   ],
-  //   assignment: "male",
-  //   checkedActive: 1,
-  //   client_dob: "",
-  //   country: "NY",
-  //   dob: "2021-08-05",
-  //   email: "testdfv@sdf.dsf",
-  //   first_date: "",
-  //   first_name: "cbvxdfg",
-  //   fruit: "Male",
-  //   gender: "Male",
-  //   allEmail: [
-  //     {
-  //       email: "najirkhan@gmail.com",
-  //       checked: true,
-  //       sendMail: false,
-  //     },
-  //     {
-  //       email: "lawla@gmail.com",
-  //       checked: true,
-  //       sendMail: true,
-  //     },
-  //     {
-  //       email: "hello@gmail.com",
-  //       checked: true,
-  //       sendMail: false,
-  //     },
-  //   ],
-  //   group: "work",
-  //   group2: "work",
-  //   language: "male",
-  //   last_name: "sdgsdg",
-  //   middle_name: null,
-  //   more_zip0: "34",
-  //   more_zip1: "45234",
-  //   phone: "+14353464363",
-  //   pos: "work",
-  //   race_details: "male",
-  //   referred_by: "male",
-  //   region: "work",
-  //   zip: "500",
-  // };
-
   const { token } = useToken();
   const [active, setActive] = useState(false);
   const [Guarantor, setGuarantor] = useState(false);
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
 
-  // //console.log("obj data", obj);
-
-  // //console.log("phone :", phone);
   //file uploaded issue
   const [signatureUpload, setSignatureUpload] = useState("");
-  // //console.log("setSignatureUpload = = =", signatureUpload);
-  // file uploaded added
-
-  // testing form
-
   const data = useSelector((state) => state.patientInfo);
   const patient_details = data?.patientDetails?.clients;
   const loading = data?.loading;
   const primaryPhone = patient_details?.phone_number;
   const primaryEmail = patient_details?.email;
-  // setPatientADd(patient_details?.client_address);
-  const [patientAdd, setPatientADd] = useState(patient_details?.client_address);
+
   const [dob, setDob] = useState();
   console.log("dob", dob);
   //for showing default date in real time
@@ -155,26 +47,14 @@ const PatientInformation = () => {
     }, 1000);
   }, [patient_details]);
 
-  console.log("check pttt data", patient_details?.client_address);
-
   const { register, control, handleSubmit, reset, setValue, getValues } =
     useForm({
       defaultValues: {
-        // address: testingobj.address,
         address: patient_details?.client_address,
         number: patient_details?.client_phone,
         Email: patient_details?.client_email,
       },
     });
-
-  // useForm({
-  //   defaultValues: {
-  //     // address: testingobj.address,
-  //     address: patient_details?.client_address,
-  //     number: testingobj.allNumber,
-  //     Email: testingobj.allEmail,
-  //   },
-  // });
 
   // this code very important
   useEffect(() => {
@@ -183,7 +63,12 @@ const PatientInformation = () => {
       number: patient_details?.client_phone,
       Email: patient_details?.client_email,
     });
-  }, [patient_details?.client_address]);
+  }, [
+    patient_details?.client_address,
+    patient_details?.client_email,
+    patient_details?.client_phone,
+    reset,
+  ]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -207,28 +92,10 @@ const PatientInformation = () => {
     remove: emailRemove,
   } = useFieldArray({
     control,
-    // name: "address",
     name: "Email",
   });
 
   const [hook, setHook] = useState("");
-
-  // // testing single calendar
-  // const [date, setDate] = useState(new Date());
-  // const [openCalendar, setOpenCalendar] = useState(false);
-  // const changeDate = (date) => {
-  //   setDate(date);
-  // };
-  // //console.log(date);
-
-  // const month = date ? date.getMonth() + 1 : null;
-  // const day = date ? date.getDate() : null;
-  // const year = date ? date.getFullYear() : null;
-
-  // const handleCancelDate = () => {
-  //   // setOpenCalendar(false);
-  //   setDate(null);
-  // };
 
   // Patient Information
   const { id } = useParams();
@@ -251,10 +118,6 @@ const PatientInformation = () => {
           : null,
         last_name: patient_details?.client_last_name,
         zone: patient_details?.zone,
-        // dob: patient_details?.client_dob,
-        // dob: date ? `${month}/${day}/${year}` : null,
-        // email: patient_details?.email,
-        // phone: patient_details?.phone_number,
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
         checkedActive: patient_details?.is_active_client,
@@ -287,12 +150,8 @@ const PatientInformation = () => {
     // //console.log(file);
   };
 
-  // //console.log("---", addressRendomValue);
-
   ///relation value handle
   const settingRelation = (e) => {
-    // //console.log("selected option", e.target.value);
-    //const relation = e.target.value;
     if (e.target.value === "Self") {
       setGuarantor(false);
       document.getElementById("checkbox").checked = false;
@@ -319,14 +178,14 @@ const PatientInformation = () => {
 
   const SameasPatientBtn = () => {
     setLocation(true);
-    setValue("GuaratorStreet", getValues("Street"));
-    setValue("GuaratorCity", getValues("City"));
-    setValue("GuratorCountry", getValues("country"));
-    setValue("GuratorZip", getValues("zip"));
-    // //console.log("getvalue street", getValues("Street"));
-    // //console.log("getvalue city", getValues("City"));
-    // //console.log("getvalue country", getValues("country"));
-    // //console.log("getvalue zip", getValues("zip"));
+    setValue("GuaratorStreet", getValues("client_street"));
+    setValue("GuaratorCity", getValues("client_city"));
+    setValue("GuratorCountry", getValues("client_state"));
+    setValue("GuratorZip", getValues("client_zip"));
+    console.log("getvalue street", getValues("Street"));
+    console.log("getvalue city", getValues("City"));
+    console.log("getvalue country", getValues("country"));
+    console.log("getvalue zip", getValues("zip"));
   };
 
   console.log("patientAdd");
@@ -351,7 +210,6 @@ const PatientInformation = () => {
             }}
           />
 
-          {/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1"> */}
           <div className="flex flex-wrap my-1 mr-2 gap-x-36 gap-y-5">
             {/* address  */}
             <div>
@@ -456,20 +314,13 @@ const PatientInformation = () => {
           </div>
 
           <AboutPatient register={register}></AboutPatient>
-
           <div className="divider"></div>
-
           <div className="flex ml-1 mt-1 items-center">
             <input
               disabled={relation === "Self" ? true : null}
               type="checkbox"
               onChange={handleChange}
-              // value={isSubscribed}
-              // name="patient"
               id="checkbox"
-              // onClick={() => {
-              //   setGuarantor(!Guarantor);
-              // }}
             />
             <span className="text-sm ml-1 text-gray-700 font-medium">
               Is Guarantor Available?

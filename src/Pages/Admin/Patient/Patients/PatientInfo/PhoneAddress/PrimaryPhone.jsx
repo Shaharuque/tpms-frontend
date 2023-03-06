@@ -51,7 +51,7 @@ const PrimaryPhone = ({ adData }) => {
 
       <div className="flex ml-1 mt-2 items-center">
         {/* custom toggle  */}
-        <label className="inline-flex relative items-center cursor-pointer">
+         <label className="inline-flex relative items-center cursor-pointer">
           <input
             type="checkbox"
             {...register("phonecheck")}
