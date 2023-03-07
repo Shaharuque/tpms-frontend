@@ -52,6 +52,7 @@ const ManageClaims = () => {
     { data: activityData, isLoading: activityLoading },
   ] = useGetManageClaimActivityMutation();
 
+  // API calling Based on the selected option by SortBy
   useEffect(() => {
     if (sortBy === "Insurance") {
       getPayorManageClaim(token);

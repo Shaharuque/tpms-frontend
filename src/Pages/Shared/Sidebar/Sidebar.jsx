@@ -274,7 +274,7 @@ const Sidebar = ({ handle }) => {
           {sideFixed ? (
             <>
               <div className="">
-                <div className="sidebar-box-fixed w-[250px]  bg-secondary">
+                <div className="sidebar-box-fixed w-[280px]  bg-secondary">
                   <div className="top-section">
                     {isHovering ? (
                       <>
@@ -363,7 +363,7 @@ const Sidebar = ({ handle }) => {
                   // Have to do something with this className
                   className={
                     isHovering
-                      ? " w-[250px] sidebar-box h-[100vh]"
+                      ? " w-[280px] sidebar-box h-[100vh]"
                       : " w-[70px] sidebar-box h-[100vh]"
                   }
                 >

@@ -29,7 +29,7 @@ const ArLedger = () => {
             }
             to={"ar-leader-session-wish"}
           >
-            Session Wise
+            CPT Wise
             <span className="bg-orange-400 badge text-white ml-2 text-[10px] rounded-full">
               Option-2
             </span>
