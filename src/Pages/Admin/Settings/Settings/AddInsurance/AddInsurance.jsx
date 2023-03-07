@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import Swal from "sweetalert2";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
@@ -85,7 +86,12 @@ const AddInsurance = () => {
     });
     console.log("add data func check", AddingInsuranceData);
     if (AddingInsuranceData.status === "success") {
-      alert("data added");
+      Swal.fire({
+        icon: "success",
+        title: AddingInsuranceData?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setaddedData(true);
     }
   };
@@ -102,10 +108,20 @@ const AddInsurance = () => {
     });
     if (RemoveSelectedData.status === "success") {
       console.log(RemoveSelectedData);
-      alert("data remove ");
+      Swal.fire({
+        icon: "success",
+        title: RemoveSelectedData?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setaddedData(true);
     } else {
-      alert("another space use");
+      Swal.fire({
+        icon: "error",
+        title: RemoveSelectedData?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
