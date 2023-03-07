@@ -222,7 +222,7 @@ const AddInsurance = () => {
             className="pms-close-button w-24"
           >
             <div className="flex item-center justify-center">
-              <HiOutlineArrowLeft className="mr-2 text-base" />
+              <HiOutlineArrowLeft className="text-base" />
               REMOVE
             </div>
           </button>
