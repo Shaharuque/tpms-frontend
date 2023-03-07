@@ -257,10 +257,15 @@ const ClaimWise = () => {
       dataIndex: "paid",
       width: 70,
       render: (_, record) => {
+        let result = record?.lreport_dep_payment?.map((each) => each?.payment);
+        let sum = 0;
+        for (let i = 0; i < result?.length; i++) {
+          sum += parseFloat(result[i]);
+        }
         return (
           <div className="text-center">
             {record?.lreport_dep_payment?.length > 0
-              ? parseFloat(record?.lreport_dep_payment[0]?.payment)?.toFixed(2)
+              ? sum?.toFixed(2)
               : 0?.toFixed(2)}
           </div>
         );
