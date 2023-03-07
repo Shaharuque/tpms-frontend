@@ -1,6 +1,6 @@
 import { DatePicker, Space, Table } from "antd";
 import axios from "axios";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import { useForm } from "react-hook-form";
 import { BsArrowRight } from "react-icons/bs";
@@ -12,6 +12,7 @@ import useToken from "../../../../../CustomHooks/useToken";
 import InsuranceMultiSelect from "./InsuranceMultiSelect/InsuranceMultiSelect";
 import {
   useGetActivityProcessClaimMutation,
+  useGetCMSProviderProcessClaimMutation,
   useGetCPTProcessClaimMutation,
   useGetDegreeLevelProcessClaimMutation,
   useGetModifireProcessClaimMutation,
@@ -20,6 +21,7 @@ import {
   useGetZoneProcessClaimMutation,
   usePayorByDateMutation,
 } from "../../../../../features/Billing_redux/Primary_Billing_redux/processingClaimApi";
+import moment from "moment";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
@@ -32,6 +34,8 @@ const ProcessingClaim = () => {
   const [openSingleCalendar, setOpenSingleCalendar] = useState(false);
   const { token } = useToken();
   const [selectedSortOptionOne, setSelectedSortOptionOne] = useState(null);
+  // For Multi Select Insurance
+  const [selected, setSelected] = useState([]);
   console.log("selected option from sortby1", selectedSortOptionOne);
 
   console.log("sortBy1", sortBy1);
@@ -100,6 +104,16 @@ const ProcessingClaim = () => {
     { data: modifierData, isLoading: modifireLoading, isError: modifireError },
   ] = useGetModifireProcessClaimMutation();
 
+  //Process Claim Get CMS Provider
+  const [
+    getCMSProviderProcessClaim,
+    {
+      data: cmsProviderData,
+      isLoading: cmsProviderLoading,
+      isError: cmsProviderError,
+    },
+  ] = useGetCMSProviderProcessClaimMutation();
+
   useEffect(() => {
     if (sortBy1 === "Patient" && insuranceSelect?.length > 0) {
       getPatientProcessClaim({
@@ -164,7 +178,28 @@ const ProcessingClaim = () => {
         },
       });
     }
-  }, [sortBy1, toDate, insuranceSelect]);
+    if (sortBy1 === "CMS Therapist" && insuranceSelect?.length > 0) {
+      getCMSProviderProcessClaim({
+        token,
+        payload: {
+          to_date: toDate,
+          payor_id: insuranceSelect,
+        },
+      });
+    }
+  }, [
+    sortBy1,
+    toDate,
+    insuranceSelect,
+    getActivityProcessClaim,
+    getCPTProcessClaim,
+    getDegreeLevelProcessClaim,
+    getModifireProcessClaim,
+    getPatientProcessClaim,
+    getTherapistProcessClaim,
+    getZoneProcessClaim,
+    token,
+  ]);
 
   let allPatients = patientData?.patient || [];
   const allProviders = therapistData?.therapist || [];
@@ -173,14 +208,18 @@ const ProcessingClaim = () => {
   const allDegreeLevel = degreeLevelData?.degree_level || [];
   const allRegions = zoneData?.zone || [];
   const allModifire = modifierData?.modifire || [];
+  const allCMSProviders = cmsProviderData?.cms_provider || [];
   console.log("allPatients", allPatients);
   console.log("allProviders", allProviders);
   console.log("allCPTCodes", allCptCodes);
   console.log("allDegreeLevel", allDegreeLevel);
   console.log("allRegions", allRegions);
   console.log("allModifire", allModifire);
+  console.log("allCMSProviders", allCMSProviders);
 
   const onChange = (date, dateString) => {
+    setSelected([]);
+    setInsurance(false);
     console.log(date, dateString);
     settoDate(dateString);
   };
@@ -505,7 +544,7 @@ const ProcessingClaim = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" flex items-center gap-4 flex-wrap">
             {/* <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-6 2xl:grid-cols-7  mr-2 gap-6"> */}
-            <div className="flex gap-[2px] mb-[6px]">
+            <div className="flex gap-[4px] mb-[6px]">
               <div className="">
                 <label className="label">
                   <span className=" label-font">
@@ -556,18 +595,22 @@ const ProcessingClaim = () => {
                       size="middle"
                       style={{}}
                       onChange={onChange}
+                      // Disabled future Dates
+                      disabledDate={(current) => current.isAfter(moment())}
                     />
                   </Space>
                   {/* <AiOutlineCalendar className="ml-[-1.9px] mb-[-3px] font-semibold text-primary text-2xl" /> */}
                 </div>
               </div>
 
-              <button
-                onClick={handleGO}
-                className=" bg-[#34A7B8] rounded-sm text-white w-12 mt-[26px] p-[6px] shadow-md shadow-gray-300"
-              >
-                Go
-              </button>
+              <div className="flex items-end">
+                <button
+                  onClick={handleGO}
+                  className=" bg-[#34A7B8] rounded-sm text-white w-12 h-8 shadow-md shadow-gray-800"
+                >
+                  Go
+                </button>
+              </div>
             </div>
 
             {insurance && (
@@ -579,18 +622,12 @@ const ProcessingClaim = () => {
                       Insurance<span className="text-red-500">*</span>
                     </span>
                   </label>
-                  {/* <select
-                    onChange={(e) => setInsuranceSelect(e.target.value)}
-                    name="type"
-                    className="input-border input-font w-full focus:outline-none"
-                  >
-                    <option value="all">All</option>
-                    <option value="patient">Patient</option>
-                    <option value="provider">Provider</option>
-                  </select> */}
 
                   <InsuranceMultiSelect
+                    selected={selected}
+                    setSelected={setSelected}
                     payorData={responsePayorData?.all_payor || []}
+                    payorLoading={payorLoading}
                     setInsuranceSelect={setInsuranceSelect}
                     setSortBy1={setSortBy1}
                   />
@@ -607,7 +644,7 @@ const ProcessingClaim = () => {
                     name="type"
                     className="input-border input-font  focus:outline-none w-[200px]"
                   >
-                    <option defaultValue={0}>Select</option>
+                    <option value={0}>Select</option>
                     <option value="Patient">Patient(s)</option>
                     <option value="Tx Providers">Tx Providers</option>
                     <option value="CMS Therapist">CMS Therapist</option>
@@ -877,6 +914,34 @@ const ProcessingClaim = () => {
                         </select>
                       </div>
                     )}
+                    {sortBy1 === "CMS Therapist" && (
+                      <div>
+                        <label className="label">
+                          <span className=" label-font">{sortBy1}</span>
+                        </label>
+                        <select
+                          disabled={cmsProviderLoading && true}
+                          onChange={(e) =>
+                            setSelectedSortOptionOne(e.target.value)
+                          }
+                          name="type"
+                          className="input-border input-font w-[200px] focus:outline-none"
+                        >
+                          <option value="0">Select</option>
+                          {allCMSProviders?.length > 0 && (
+                            <>
+                              {allCMSProviders?.map((cms, index) => {
+                                return (
+                                  <option value={cms?.id} key={index}>
+                                    {cms?.full_name}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </select>
+                      </div>
+                    )}
 
                     {/* SortBy2  */}
                     <div>
@@ -888,7 +953,7 @@ const ProcessingClaim = () => {
                       <select
                         onChange={(e) => setSortBy2(e.target.value)}
                         name="type"
-                        className="input-border input-font w-full focus:outline-none"
+                        className="input-border input-font focus:outline-none w-[200px] "
                       >
                         <option value="0">Select</option>
                         <option value="Patient">Patient(s)</option>
@@ -976,9 +1041,9 @@ const ProcessingClaim = () => {
                   </>
                 )}
                 {/* submit  */}
-                <div className="gap-2 mb-10 flex">
+                <div className="gap-2 flex items-end justify-end">
                   <button
-                    className="bg-[#34A7B8] rounded-sm text-white w-16 mt-[20px] p-[8px] shadow-md shadow-gray-300"
+                    className="bg-[#34A7B8] rounded-sm text-white w-16 h-8 shadow-md shadow-gray-800"
                     type="submit"
                     onClick={() => {
                       setTableOpen(true);
@@ -986,7 +1051,7 @@ const ProcessingClaim = () => {
                   >
                     Run
                   </button>
-                  <button className="bg-[#b91c1c] rounded-sm text-white w-16 mt-[20px] p-[8px] shadow-md shadow-gray-300">
+                  <button className="bg-[#b91c1c] rounded-sm text-white w-16 h-8 shadow-md shadow-gray-800">
                     Cancel
                   </button>
                 </div>

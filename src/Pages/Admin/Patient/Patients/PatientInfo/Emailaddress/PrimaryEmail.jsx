@@ -10,7 +10,7 @@ const PrimaryEmail = ({ adData }) => {
           <label className="label">
             <span className=" label-font">Email New</span>
           </label>
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <div>
               <input
                 type="text"
@@ -22,7 +22,7 @@ const PrimaryEmail = ({ adData }) => {
             </div>
             <div>
               <select
-                className="input-border input-font w-full focus:outline-none"
+                className="input-border input-font  w-16 focus:outline-none"
                 {...register("group2")}
               >
                 <option value="work">work</option>

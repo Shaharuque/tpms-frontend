@@ -1081,7 +1081,7 @@ const ListView = () => {
                             setStuffsId={setStuffsId}
                           ></Providers>
                         </div>
-                        <div>
+                        <div className="sm:w-[240px] w-[200px]">
                           <label className="label">
                             <span className="label-text text-[16px] text-gray-100 text-left">
                               Place of Services
@@ -1110,7 +1110,7 @@ const ListView = () => {
                             </select>
                           </div>
                         </div>
-                        <div className="w-[220px]">
+                        <div className="w-[200px]">
                           <label className="label">
                             <span className="label-text  text-[16px] text-gray-100 text-left">
                               Selected date
@@ -1163,7 +1163,7 @@ const ListView = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-5">
+                        <div className="flex gap-5 w-[200px]">
                           <div>
                             <label className="label">
                               <span className="label-text text-[16px] text-gray-100 text-left">

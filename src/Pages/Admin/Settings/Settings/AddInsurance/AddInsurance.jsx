@@ -59,6 +59,7 @@ const AddInsurance = () => {
       (option) => option.value * 1
     );
     setSelectedKeys(value);
+    setfacilityselectedkeys();
   };
 
   const handleRemoving = (e) => {
@@ -67,7 +68,10 @@ const AddInsurance = () => {
       (option) => option.value * 1
     );
     setfacilityselectedkeys(value);
+    setSelectedKeys();
   };
+
+  console.log("selected key", selectedKeys, "facilaty", facilityselectedkeys);
 
   const handleSelectedValue = async () => {
     console.log("add button click get data adding", selectedKeys);
@@ -171,6 +175,9 @@ const AddInsurance = () => {
             onClick={() => {
               InsuranceView();
             }}
+            disabled={
+              selectedKeys === undefined && facilityselectedkeys?.length > 0
+            }
             className="pms-button"
           >
             View Details
@@ -179,6 +186,9 @@ const AddInsurance = () => {
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
           <button
             onClick={() => handleSelectedValue()}
+            disabled={
+              selectedKeys === undefined && facilityselectedkeys?.length > 0
+            }
             className="pms-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -190,6 +200,9 @@ const AddInsurance = () => {
             onClick={(e) => {
               handleRemoveValue(e);
             }}
+            disabled={
+              selectedKeys?.length > 0 && facilityselectedkeys === undefined
+            }
             className="pms-close-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -225,6 +238,9 @@ const AddInsurance = () => {
             onClick={() => {
               FacilityInsurance();
             }}
+            disabled={
+              selectedKeys?.length > 0 && facilityselectedkeys === undefined
+            }
             className="pms-button"
           >
             View Details

@@ -192,9 +192,7 @@ const PatientInformation = () => {
 
   console.log("fields", fields);
   return (
-    <div
-      className={patient_details?.client_address.length < 2 ? "h-[100vh]" : ""}
-    >
+    <div className={patient_details?.client_address.length < 1 ? "" : ""}>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <BasicInfo
@@ -210,10 +208,12 @@ const PatientInformation = () => {
             }}
           />
 
-          <div className="flex flex-wrap my-1 mr-2 gap-x-36 gap-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
+            {/* <div className="flex flex-wrap my-1 mr-2 md:gap-x-2 gap-y-5"> */}
             {/* address  */}
-            <div>
+            <div className="pr-24">
               <PrimaryAddress append={append} rg={register} />
+              <br></br>
               {patient_details?.admin_id && (
                 <DynamicAddress
                   adData={{
@@ -224,8 +224,9 @@ const PatientInformation = () => {
                 />
               )}
 
-              <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 my-1  gap-x-4 gap-y-2">
-                <div>
+              {/* <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-1 gap-x-4 gap-y-2"> */}
+              <div className=" flex items-center justify-between my-1 gap-x-4 gap-y-2">
+                <div className="w-full">
                   <label className="label">
                     <span className=" label-font">
                       POS<span className="text-red-500">*</span>
@@ -240,7 +241,7 @@ const PatientInformation = () => {
                     <option value="Home">Home</option>
                   </select>
                 </div>
-                <div>
+                <div className="w-full">
                   <label className="label">
                     <span className=" label-font">
                       Region<span className="text-red-500">*</span>
@@ -266,7 +267,7 @@ const PatientInformation = () => {
                   primaryPhone,
                 }}
               />
-
+              <br></br>
               <motion.div
                 initial={{
                   opacity: 0,
@@ -296,7 +297,7 @@ const PatientInformation = () => {
                   primaryEmail,
                 }}
               />
-
+              <br></br>
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -317,8 +318,9 @@ const PatientInformation = () => {
           <div className="divider"></div>
           <div className="flex ml-1 mt-1 items-center">
             <input
-              disabled={relation === "Self" ? true : null}
+              disabled={relation === "Self"}
               type="checkbox"
+              // checked={relation !== "Self"}
               onChange={handleChange}
               id="checkbox"
             />
@@ -361,7 +363,7 @@ const PatientInformation = () => {
               <p className="mt-3 text-sm ">Upload Signature</p>
             </div>
           </div>
-          <div className="mb-5">
+          <div className="mb-24">
             {/* submit  */}
             <button className="pms-button my-3" type="submit">
               Save Patient

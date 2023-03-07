@@ -42,7 +42,21 @@ code {
 }
 
 
+/* Customized default Select Option */
+select option:checked {
+  background: #00a3b2;
+  color: #fff;
+}
 
+select option {
+  padding: 8px;
+  font-family: sans-serif;
+}
+
+select option:hover {
+  background: #00a3b2 !important;
+  color: #fff;
+}
 
 /* -----------------------------------------input form --------------------------------------- */
 
@@ -266,7 +280,7 @@ code {
   left: -50%;
   height: 3px;
   width: 40%;
-  background-color: teal;
+  background-color: #00a3b2;
   -webkit-animation: lineAnim 1s linear infinite;
   -moz-animation: lineAnim 1s linear infinite;
   animation: lineAnim 1s linear infinite;
@@ -289,4 +303,16 @@ code {
     left: 100%;
     width: 100%;
   }
+}
+
+
+/* button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+} */
+
+button[disabled], html input[disabled] {
+  cursor: not-allowed;
 }
