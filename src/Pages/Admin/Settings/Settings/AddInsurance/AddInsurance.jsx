@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
+import Swal from "sweetalert2";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
@@ -59,6 +60,7 @@ const AddInsurance = () => {
       (option) => option.value * 1
     );
     setSelectedKeys(value);
+    setfacilityselectedkeys();
   };
 
   const handleRemoving = (e) => {
@@ -67,7 +69,10 @@ const AddInsurance = () => {
       (option) => option.value * 1
     );
     setfacilityselectedkeys(value);
+    setSelectedKeys();
   };
+
+  console.log("selected key", selectedKeys, "facilaty", facilityselectedkeys);
 
   const handleSelectedValue = async () => {
     console.log("add button click get data adding", selectedKeys);
@@ -81,7 +86,12 @@ const AddInsurance = () => {
     });
     console.log("add data func check", AddingInsuranceData);
     if (AddingInsuranceData.status === "success") {
-      alert("data added");
+      Swal.fire({
+        icon: "success",
+        title: AddingInsuranceData?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setaddedData(true);
     }
   };
@@ -98,10 +108,20 @@ const AddInsurance = () => {
     });
     if (RemoveSelectedData.status === "success") {
       console.log(RemoveSelectedData);
-      alert("data remove ");
+      Swal.fire({
+        icon: "success",
+        title: RemoveSelectedData?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setaddedData(true);
     } else {
-      alert("another space use");
+      Swal.fire({
+        icon: "error",
+        title: RemoveSelectedData?.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -171,6 +191,9 @@ const AddInsurance = () => {
             onClick={() => {
               InsuranceView();
             }}
+            disabled={
+              selectedKeys === undefined && facilityselectedkeys?.length > 0
+            }
             className="pms-button"
           >
             View Details
@@ -179,6 +202,9 @@ const AddInsurance = () => {
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
           <button
             onClick={() => handleSelectedValue()}
+            disabled={
+              selectedKeys === undefined && facilityselectedkeys?.length > 0
+            }
             className="pms-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -190,10 +216,13 @@ const AddInsurance = () => {
             onClick={(e) => {
               handleRemoveValue(e);
             }}
+            disabled={
+              selectedKeys?.length > 0 && facilityselectedkeys === undefined
+            }
             className="pms-close-button w-24"
           >
             <div className="flex item-center justify-center">
-              <HiOutlineArrowLeft className="mr-2 text-base" />
+              <HiOutlineArrowLeft className="text-base" />
               REMOVE
             </div>
           </button>
@@ -225,6 +254,9 @@ const AddInsurance = () => {
             onClick={() => {
               FacilityInsurance();
             }}
+            disabled={
+              selectedKeys?.length > 0 && facilityselectedkeys === undefined
+            }
             className="pms-button"
           >
             View Details

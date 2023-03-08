@@ -1,19 +1,3 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
-
-// const FormsBuilder = () => {
-// return (
-//     <div>
-//       <Link to={"/forms"}>
-//         <button className="pms-button">Forms</button>
-//       </Link>
-
-//     </div>
-// );
-// };
-
-// export default FormsBuilder;
-
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 // import "formBuilder/dist/form-render.min.js"
@@ -135,7 +119,7 @@ const FormBuilderCreate = () => {
           <button className="pms-button mr-3" onClick={cleardata}>
             Clear
           </button>
-          <button className="pms-button" onClick={showdata}> 
+          <button className="pms-button" onClick={showdata}>
             Show data
           </button>
         </div>

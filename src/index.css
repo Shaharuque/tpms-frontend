@@ -310,3 +310,15 @@ select option:hover {
     width: 100%;
   }
 }
+
+
+/* button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+} */
+
+button[disabled], html input[disabled] {
+  cursor: not-allowed;
+}
