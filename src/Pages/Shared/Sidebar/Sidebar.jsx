@@ -308,6 +308,7 @@ const Sidebar = ({ handle }) => {
                             activeclassname="active_sidebar"
                           >
                             <SidebarMenu
+                              setSideBar={setSideBar}
                               items={items}
                               isHovering={isHovering}
                               dropState={dropState[items.name]}
@@ -320,7 +321,10 @@ const Sidebar = ({ handle }) => {
                             key={index}
                             className="link flex"
                             activeclassname="active_sidebar"
-                            onClick={(_) => handleDropState("other")}
+                            onClick={(_) => {
+                              handleDropState("other");
+                              setSideBar(false);
+                            }}
                           >
                             <div className="flex items-center">
                               <div className=" text-xl px-2 py-1">
@@ -400,6 +404,7 @@ const Sidebar = ({ handle }) => {
                             activeclassname="active_sidebar"
                           >
                             <SidebarMenu
+                              setSideBar={setSideBar}
                               items={items}
                               isHovering={isHovering}
                               dropState={dropState[items.name]}
@@ -412,7 +417,10 @@ const Sidebar = ({ handle }) => {
                             key={index}
                             className="link flex"
                             activeclassname="active_sidebar"
-                            onClick={(_) => handleDropState("other")}
+                            onClick={(_) => {
+                              handleDropState("other");
+                              // handleSIdebar = { handleSIdebar };
+                            }}
                           >
                             <div className="flex items-center">
                               <div className=" text-xl px-2 py-1">
@@ -443,11 +451,13 @@ const Sidebar = ({ handle }) => {
           )}
 
           <div
-            className={
-              sideFixed ? "slide mx-5 w-[87vw] transition-all" : "slide"
-            }
+            className={sideFixed ? "slide mx-5 mt-2 transition-all" : "slide"}
           >
-            <div className={!sideFixed ? "lg:ml-[98px] lg:mr-[22px] mx-2" : ""}>
+            <div
+              className={
+                !sideFixed ? "lg:ml-[98px] lg:mr-[22px] mx-2" : "ml-[280px]"
+              }
+            >
               <NavigationBar
                 handleSIdebar={handleSIdebar}
                 handle={handle}
@@ -456,7 +466,7 @@ const Sidebar = ({ handle }) => {
             <main
               className={
                 sideFixed
-                  ? "font-medium  main bg-white shadow-md rounded-3xl w-auto mt-2 "
+                  ? "font-medium  main bg-white shadow-md rounded-3xl w-[83vw] mt-2 ml-[280px] mr-0"
                   : "font-medium  main bg-white shadow-md rounded-3xl w-auto mt-2 mx-2 lg:ml-[98px] lg:mr-[22px] "
               }
             >

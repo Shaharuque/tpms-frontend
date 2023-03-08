@@ -6,13 +6,22 @@ import { NavLink } from "react-router-dom";
 // import StateOpen from "../Hooks/StateUse";
 import { motion } from "framer-motion";
 
-const SidebarMenu = ({ items, isHovering, dropState, handleDropState }) => {
+const SidebarMenu = ({
+  items,
+  isHovering,
+  dropState,
+  handleDropState,
+  setSideBar,
+}) => {
   return (
     <div className="pl-4 py-3 hover:bg-primary text-white">
       <div
         // onBlur={() => setOpen(false)}
         // onClick={() => setOpen(!open)}
-        onClick={(_) => handleDropState(items.name)}
+        onClick={(_) => {
+          handleDropState(items.name);
+          setSideBar(false);
+        }}
         className="flex items-center justify-between"
       >
         <div className="flex items-center">

@@ -9,7 +9,7 @@ const Footer = ({ sideFixed }) => {
       transition={{ delay: 0.4 }}
       className={
         sideFixed
-          ? "shadow-md text-center mb-3 mt-3 py-4  bg-white rounded-3xl "
+          ? "shadow-md text-center mb-3 mt-3 py-4 ml-[280px] bg-white rounded-3xl "
           : "shadow-md lg:ml-[98px] lg:mr-[22px] mx-2 text-center mb-3 mt-3 py-4  bg-white rounded-3xl "
       }
     >
