@@ -177,7 +177,7 @@ const CardView = ({ data, posData }) => {
 
       {patientDetails && (
         <Fade>
-          <h1 className="bg-secondary text-sm w-ful py-1 px-5 text-white font-medium">
+          <h1 className="bg-secondary text-sm w-full py-1 px-5 text-white font-medium">
             Patient Details
           </h1>
           <div>
@@ -233,7 +233,7 @@ const CardView = ({ data, posData }) => {
                   </div>
                 </div>
               </div>
-              <div className="bg-secondary py-2">
+              <div className="bg-secondary py-2 w-full">
                 <div className="flex justify-center items-center">
                   <div>
                     <div>

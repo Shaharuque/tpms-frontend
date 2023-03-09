@@ -40,6 +40,7 @@ import Footer from "../Footer/Footer";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { handleSidebarFixed } from "../../../features/Sidebar_redux/SidebarSlice";
+import { motion } from "framer-motion";
 // import StateUse from "../Hooks/StateUse";
 //
 const menuItem = [
@@ -453,7 +454,10 @@ const Sidebar = ({ handle }) => {
             </>
           )}
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
             className={isToggled ? "slide mx-5 mt-2 transition-all" : "slide"}
           >
             <div
@@ -476,7 +480,7 @@ const Sidebar = ({ handle }) => {
               <Outlet />
             </main>
             <Footer sideFixed={isToggled}></Footer>
-          </div>
+          </motion.div>
         </div>
       </>
     </>
