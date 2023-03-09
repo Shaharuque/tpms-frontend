@@ -38,6 +38,8 @@ import SidebarMenu from "./SidebarMenu";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import Footer from "../Footer/Footer";
 import { BiDotsHorizontal } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { handleSidebarFixed } from "../../../features/Sidebar_redux/SidebarSlice";
 // import StateUse from "../Hooks/StateUse";
 //
 const menuItem = [
@@ -230,8 +232,11 @@ const x = menuItem.map((item) => {
 // console.log(initialDropState);
 
 const Sidebar = ({ handle }) => {
-  const [isHovering, setIsHovering] = useState(false);
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
+  const dispatch = useDispatch();
 
+  const [isHovering, setIsHovering] = useState(false);
   const [dropState, setDropState] = useState(initialDropState);
 
   const handleDropState = (dropName) => {
@@ -262,16 +267,15 @@ const Sidebar = ({ handle }) => {
     // console.log("sidebar", sideBar);
   };
 
-  const [sideFixed, setSideFixed] = useState(false);
   const handleFixed = () => {
-    setSideFixed(!sideFixed);
-    console.log("side fix", sideFixed);
+    dispatch(handleSidebarFixed());
   };
+
   return (
     <>
       <>
-        <div className={sideFixed ? "flex" : "relative bg-neutral pt-3 pb-2"}>
-          {sideFixed ? (
+        <div className={isToggled ? "flex" : "relative bg-neutral pt-3 pb-2"}>
+          {isToggled ? (
             <>
               <div className="">
                 <div className="sidebar-box-fixed w-[280px]  bg-secondary">
@@ -419,7 +423,6 @@ const Sidebar = ({ handle }) => {
                             activeclassname="active_sidebar"
                             onClick={(_) => {
                               handleDropState("other");
-                              // handleSIdebar = { handleSIdebar };
                             }}
                           >
                             <div className="flex items-center">
@@ -451,11 +454,11 @@ const Sidebar = ({ handle }) => {
           )}
 
           <div
-            className={sideFixed ? "slide mx-5 mt-2 transition-all" : "slide"}
+            className={isToggled ? "slide mx-5 mt-2 transition-all" : "slide"}
           >
             <div
               className={
-                !sideFixed ? "lg:ml-[98px] lg:mr-[22px] mx-2" : "ml-[280px]"
+                !isToggled ? "lg:ml-[98px] lg:mr-[22px] mx-2" : "ml-[280px]"
               }
             >
               <NavigationBar
@@ -465,14 +468,14 @@ const Sidebar = ({ handle }) => {
             </div>
             <main
               className={
-                sideFixed
-                  ? "font-medium  main bg-white shadow-md rounded-3xl w-[83vw] mt-2 ml-[280px] mr-0"
+                isToggled
+                  ? "font-medium  main bg-white shadow-md rounded-3xl 2xl:w-[83vw] xl:w-[75vw] w-auto mt-2 ml-[280px] mr-0"
                   : "font-medium  main bg-white shadow-md rounded-3xl w-auto mt-2 mx-2 lg:ml-[98px] lg:mr-[22px] "
               }
             >
               <Outlet />
             </main>
-            <Footer sideFixed={sideFixed}></Footer>
+            <Footer sideFixed={isToggled}></Footer>
           </div>
         </div>
       </>

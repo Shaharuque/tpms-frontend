@@ -20,7 +20,7 @@ import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 import { useManageSessionStatusChangeMutation } from "../../../../features/Appointment_redux/ListView/manageSessionApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
 import { toast } from "react-toastify";
@@ -75,6 +75,10 @@ const ListView = () => {
   const [procceed, setprocceed] = useState(false);
   const [nonBillableData, setNonBillableData] = useState([]);
   const [hide, setHide] = useState(false);
+
+  // is fixed toggle
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
 
   //Manage Session Get Session List From API
   useEffect(() => {
@@ -1150,7 +1154,7 @@ const ListView = () => {
                             <div
                               ref={refClose}
                               // className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
-                              className="absolute z-10 2xl:ml-[0%] xl:ml-[-15%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] ml-[-4%] mr-[8%] mt-1 "
+                              className="absolute z-10 2xl:ml-[0%] xl:ml-[-39%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] ml-[-4%] mr-[8%] mt-1 "
                             >
                               {openCalendar && (
                                 <CustomDateRange
