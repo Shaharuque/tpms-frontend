@@ -58,7 +58,8 @@ const ClaimWise = () => {
   const [page, setpage] = useState(2);
   const [lastPageNo, setLastPageNo] = useState(0);
   const [formData, setFormData] = useState(null);
-  const [selectedRowId, setSelectedRowId] = useState([]);
+  // const [selectedRowId, setSelectedRowId] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const { token } = useToken();
 
@@ -394,21 +395,14 @@ const ClaimWise = () => {
     },
   ];
 
+  //get rows id to do some action on them
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selected row-keys: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
   const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRowId(selectedRowKeys);
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
-    },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows);
-    },
+    selectedRowKeys,
+    onChange: onSelectChange,
   };
 
   const handleChange = (pagination, filters, sorter) => {
@@ -895,29 +889,18 @@ const ClaimWise = () => {
                 className=" text-xs font-normal "
                 columns={column}
                 dataSource={ledgerData}
-                rowSelection={{
-                  ...rowSelection,
-                }}
+                rowSelection={rowSelection}
                 // scroll={{
                 //   y: 700,
                 // }}
                 onChange={handleChange}
                 summary={(pageData) => {
-                  console.log(pageData);
                   let totalAllowed = 0;
                   let totalPaid = 0;
                   let totalBalance = 0;
                   let totalAdj = 0;
                   pageData.forEach(
-                    ({
-                      billed_amount,
-                      allowed_amount,
-                      paid,
-                      adj,
-                      balance,
-                      lreport_dep_payment,
-                      ledger_process_clm,
-                    }) => {
+                    ({ lreport_dep_payment, ledger_process_clm }) => {
                       let presentBalance;
                       if (lreport_dep_payment?.length > 0) {
                         presentBalance = parseFloat(
@@ -1028,7 +1011,7 @@ const ClaimWise = () => {
               {optionSelect === "add-note" && (
                 <AddNote
                   bulkNoteSave={bulkNoteSave}
-                  selectedRowId={selectedRowId}
+                  selectedRowId={selectedRowKeys}
                 ></AddNote>
               )}
             </>
