@@ -56,6 +56,7 @@ const ClaimWise = () => {
   const [ledgerData, setLedgerData] = useState([]);
   const [hasMore, sethasMore] = useState(true);
   const [page, setpage] = useState(2);
+  const [lastPageNo, setLastPageNo] = useState(0);
   const [formData, setFormData] = useState(null);
   const [selectedRowId, setSelectedRowId] = useState([]);
 
@@ -504,10 +505,12 @@ const ClaimWise = () => {
       const data = res.data?.ledger_list?.data;
       console.log("1st render data", data);
       setLedgerData(data);
+      setLastPageNo(res.data?.ledger_list?.last_page);
     };
     if (
       formData?.client_id?.length > 0 ||
-      formData?.all_insurance?.length > 0
+      formData?.all_insurance?.length > 0 ||
+      formData?.claim_no
     ) {
       getLedgerData();
     }
@@ -548,25 +551,38 @@ const ClaimWise = () => {
 
   const onSubmit = (data) => {
     setSelect(false);
-    console.log(data);
     const from_date = convert(data?.start_date);
     const to_date = convert(data?.end_date);
     const payLoad = {
       sort_by: selected === "patient" ? 2 : selected === "insurance" ? 3 : 1,
-      // claim_no,
+      claim_no: data?.claim_no,
       client_id: clientIds,
       all_insurance: insuranceIds,
       // payor_id,
       // cpt,
       // fil_cat_name,
-      reportrange: `${from_date} - ${to_date}`,
+      claim_check: 1,
+      reportrange: selected === "claim_no" ? "" : `${from_date} - ${to_date}`,
     };
+    console.log(payLoad);
 
-    if (to_date === "NaN-aN-aN") {
+    if (to_date === "NaN-aN-aN" && selected !== "claim_no") {
       toast.error(<h1 className="font-bold">Select Valid Date-Range</h1>, {
         position: "top-center",
         autoClose: 5000,
         theme: "light",
+      });
+    } else if (payLoad?.claim_no === "" && selected === "claim_no") {
+      toast.error(<h1>Please Enter Claim No.</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    } else if (payLoad?.client_id?.length === 0 && selected === "patient") {
+      toast.error(<h1>Please Select Valid Client</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
       });
     } else {
       setTable(true);
@@ -582,6 +598,7 @@ const ClaimWise = () => {
       reset({
         start_date: startDate ? `${startMonth} ${startDay}, ${startYear}` : "",
         end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date",
+        claim_no: "",
       });
     }, 0);
   }, [
@@ -644,9 +661,9 @@ const ClaimWise = () => {
                     <input
                       type="string"
                       name="check"
-                      defaultValue={"Claim No"}
+                      placeholder={"Claim No"}
                       className="input-border input-font w-[100px] focus:outline-none"
-                      {...register("client_code")}
+                      {...register("claim_no")}
                     />
                   </div>
                 </>
@@ -866,9 +883,9 @@ const ClaimWise = () => {
           <div className=" overflow-scroll py-3">
             <InfiniteScroll
               dataLength={ledgerData.length} //items is basically all data here
-              next={ledgerData?.length > 0 && fetchData} //This condition is mendatory for perfectly working with infinite scrolling
+              next={ledgerData?.length > 0 && lastPageNo > 1 && fetchData} //This condition is mendatory for perfectly working with infinite scrolling
               hasMore={hasMore}
-              loader={<ShimmerTableTet></ShimmerTableTet>}
+              loader={lastPageNo > 1 && <ShimmerTableTet></ShimmerTableTet>}
             >
               <Table
                 rowKey={(record) => record.id}
