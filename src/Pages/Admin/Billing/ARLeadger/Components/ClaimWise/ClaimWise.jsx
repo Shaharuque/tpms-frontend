@@ -10,6 +10,7 @@ import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRan
 import { BiCommentDetail } from "react-icons/bi";
 import ClaimWiseActionModal from "./ClaimWiseActionModal";
 import {
+  useBulkNoteSaveMutation,
   useGetLedgerCPTMutation,
   useGetLedgerPatientsMutation,
   useGetLedgerPayorMutation,
@@ -46,7 +47,6 @@ const ClaimWise = () => {
   const [table, setTable] = useState(false);
   const [value, setValue] = useState(false);
   const [sortBy, setSortBy] = useState("");
-  const [allData, setAllData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const { Text } = Typography;
@@ -57,6 +57,7 @@ const ClaimWise = () => {
   const [hasMore, sethasMore] = useState(true);
   const [page, setpage] = useState(2);
   const [formData, setFormData] = useState(null);
+  const [selectedRowId, setSelectedRowId] = useState([]);
 
   const { token } = useToken();
 
@@ -94,16 +95,6 @@ const ClaimWise = () => {
   const handleClose = () => {
     setOpenEditModal(false);
   };
-
-  //   fetch data
-  React.useEffect(() => {
-    fetch("../../../All_Fake_Api/patientLeadger.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setAllData(d);
-        // setLoading2(false);
-      });
-  }, []);
 
   const column = [
     {
@@ -404,6 +395,7 @@ const ClaimWise = () => {
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedRowId(selectedRowKeys);
       console.log(
         `selectedRowKeys: ${selectedRowKeys}`,
         "selectedRows: ",
@@ -484,8 +476,18 @@ const ClaimWise = () => {
 
   //----------Date Range Picker Code End------------------
 
-  //get data from API + data fetch from api while scrolling[Important]
+  // Ledger Bulk Note Save
+  const [bulkNoteSave, { data: bulkNoteData, isSuccess: singleNoteSucceed }] =
+    useBulkNoteSaveMutation();
+  console.log(bulkNoteData);
+  useEffect(() => {
+    if (singleNoteSucceed === true) {
+      sethasMore(true);
+      setpage(2);
+    }
+  }, [singleNoteSucceed]);
 
+  //get data from API + data fetch from api while scrolling[Important]
   //While 1st render page=1 data will be rendered
   useEffect(() => {
     const getLedgerData = async () => {
@@ -509,7 +511,7 @@ const ClaimWise = () => {
     ) {
       getLedgerData();
     }
-  }, [token, formData]);
+  }, [token, formData, singleNoteSucceed]);
 
   const fetchLedger = async () => {
     const res = await axios({
@@ -597,9 +599,13 @@ const ClaimWise = () => {
   const [select, setSelect] = useState(false);
   const [optionSelect, setOptionSelect] = useState("");
   const handleAction = () => {
-    console.log(optionSelect);
+    // console.log(optionSelect);
     setSelect(!select);
   };
+
+  // useEffect(()=>{
+
+  // },[])
   return (
     <div className={!table || ledgerData.length < 10 ? "h-[170vh]" : ""}>
       <div>
@@ -1000,7 +1006,16 @@ const ClaimWise = () => {
               Go
             </button>
           </div>
-          {select && <>{optionSelect === "add-note" && <AddNote></AddNote>}</>}
+          {select && (
+            <>
+              {optionSelect === "add-note" && (
+                <AddNote
+                  bulkNoteSave={bulkNoteSave}
+                  selectedRowId={selectedRowId}
+                ></AddNote>
+              )}
+            </>
+          )}
         </div>
       )}
       {openEditModal && (

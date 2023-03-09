@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import useToken from "../../../../../../CustomHooks/useToken";
 
-const AddNote = () => {
+const AddNote = ({ selectedRowId, bulkNoteSave }) => {
+  const [notes, setNotes] = useState(null);
   const { register, handleSubmit, reset } = useForm();
+  const { token } = useToken();
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (selectedRowId?.length > 0) {
+      const payload = {
+        ids: selectedRowId,
+        ...data,
+        notes,
+      };
+      bulkNoteSave({
+        token,
+        payload,
+      });
+    }
   };
   return (
     <motion.div
@@ -25,12 +38,17 @@ const AddNote = () => {
               </span>
             </label>
             <select
-              {...register("aging_status")}
+              {...register("category_name")}
               className="input-border input-font  w-full focus:outline-none"
             >
-              <option value="Self">Self</option>
-              <option value="Spouse">Spouse</option>
-              <option value="Other">Other</option>
+              <option value={0}></option>
+              <option value="COB">COB</option>
+              <option value="NCOF-Re-File">NCOF-Re-File</option>
+              <option value="Appeal">Appeal</option>
+              <option value="Reprocessing">Reprocessing</option>
+              <option value="Medical Records">Medical Records</option>
+              <option value="Payor Escalation">Payor Escalation</option>
+              <option value="Provider Escalation">Provider Escalation</option>
             </select>
           </div>
           <div>
@@ -41,18 +59,18 @@ const AddNote = () => {
               type="date"
               name="follow-up-date"
               className="input-border input-font py-[1px] w-full focus:outline-none"
-              {...register("follow_update")}
+              {...register("followup_date")}
             />
           </div>
           <div>
             <label className="label">
-              <span className=" label-font">Follow Up Date</span>
+              <span className=" label-font">Worked Date</span>
             </label>
             <input
               type="date"
               name="Worked Date"
               className="input-border input-font py-[1px] w-full focus:outline-none"
-              {...register("Worked_Date")}
+              {...register("worked_date")}
             />
           </div>
           <div className="sm:col-span-3">
@@ -62,7 +80,8 @@ const AddNote = () => {
               </span>
             </label>
             <textarea
-              {...register("notes")}
+              // {...register("notes")}
+              onChange={(e) => setNotes(e.target.value)}
               name="comment"
               className="border border-gray-300 text-sm p-2  ml-1 h-24 w-full sm:w-1/2"
             ></textarea>
