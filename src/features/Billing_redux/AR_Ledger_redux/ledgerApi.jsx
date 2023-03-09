@@ -35,6 +35,18 @@ export const ledgerApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+    //Ledger Bulk Note Save
+    bulkNoteSave: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "admin/ac/ledger/bulk/note/save",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
   }),
 });
 
@@ -42,4 +54,5 @@ export const {
   useGetLedgerPatientsMutation,
   useGetLedgerPayorMutation,
   useGetLedgerCPTMutation,
+  useBulkNoteSaveMutation,
 } = ledgerApi;
