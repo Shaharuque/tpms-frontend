@@ -22,6 +22,7 @@ import {
   usePayorByDateMutation,
 } from "../../../../../features/Billing_redux/Primary_Billing_redux/processingClaimApi";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
@@ -216,6 +217,10 @@ const ProcessingClaim = () => {
   console.log("allRegions", allRegions);
   console.log("allModifire", allModifire);
   console.log("allCMSProviders", allCMSProviders);
+
+  // is fixed toggle
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
 
   const onChange = (date, dateString) => {
     setSelected([]);
@@ -695,7 +700,11 @@ const ProcessingClaim = () => {
                           {/* Multi date picker component called */}
                           <div
                             ref={refClose}
-                            className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
+                            className={
+                              isToggled
+                                ? "absolute z-10 2xl:ml-[0%] xl:ml-[-25%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
+                                : "absolute z-10 2xl:ml-[0%] xl:ml-[-10%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
+                            }
                           >
                             {openCalendar && (
                               <CustomDateRange
@@ -1007,7 +1016,7 @@ const ProcessingClaim = () => {
                               {/* Multi date picker component called */}
                               <div
                                 ref={refClose}
-                                className="absolute z-10 2xl:ml-[0%] xl:ml-[-28%] lg:ml-[0%] md:ml-[-10%]  md:mr-[10%] sm:mr-[14%] mt-1 "
+                                className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[-30%]  md:mr-[10%] sm:mr-[14%] mt-1 "
                               >
                                 {openCalendar && (
                                   <CustomDateRange
