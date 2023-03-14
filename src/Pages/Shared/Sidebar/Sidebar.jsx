@@ -41,6 +41,7 @@ import { BiDotsHorizontal } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { handleSidebarFixed } from "../../../features/Sidebar_redux/SidebarSlice";
 import { motion } from "framer-motion";
+import useWindowDimensions from "../../../CustomHooks/useWindowDimensions";
 // import StateUse from "../Hooks/StateUse";
 //
 const menuItem = [
@@ -226,9 +227,9 @@ const menuItem = [
 // });
 
 const initialDropState = {};
-const x = menuItem.map((item) => {
-  if (item.subRoute) initialDropState[item.name] = false;
-});
+// const x = menuItem.map((item) => {
+//   if (item.subRoute) initialDropState[item.name] = false;
+// });
 
 // console.log(initialDropState);
 
@@ -236,9 +237,11 @@ const Sidebar = ({ handle }) => {
   const isToggled = useSelector((state) => state.sideBarInfo);
   console.log("isToggled", isToggled);
   const dispatch = useDispatch();
-
   const [isHovering, setIsHovering] = useState(false);
   const [dropState, setDropState] = useState(initialDropState);
+
+  const { height, width } = useWindowDimensions();
+  console.log("height", height);
 
   const handleDropState = (dropName) => {
     if (dropName === "other") setDropState(initialDropState);
@@ -279,7 +282,10 @@ const Sidebar = ({ handle }) => {
           {isToggled ? (
             <>
               <div className="">
-                <div className="sidebar-box-fixed w-[280px]  bg-secondary">
+                <div
+                  className="sidebar-box-fixed w-[290px]  bg-secondary scrollbar"
+                  id="style-1"
+                >
                   <div className="top-section">
                     {isHovering ? (
                       <>
@@ -301,79 +307,78 @@ const Sidebar = ({ handle }) => {
                     )}
                   </div>
                   {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
-                  {menuItem
-                    .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
-                    .map((items, index) => (
-                      <div key={index}>
-                        {items.subRoute ? (
-                          <NavLink
-                            to={"#"}
-                            key={index}
-                            className=""
-                            activeclassname="active_sidebar"
-                          >
-                            <SidebarMenu
-                              setSideBar={setSideBar}
-                              items={items}
-                              isHovering={isHovering}
-                              dropState={dropState[items.name]}
-                              handleDropState={handleDropState}
-                            ></SidebarMenu>
-                          </NavLink>
-                        ) : (
-                          <NavLink
-                            to={items.path}
-                            key={index}
-                            className="link flex"
-                            activeclassname="active_sidebar"
-                            onClick={(_) => {
-                              handleDropState("other");
-                              setSideBar(false);
-                            }}
-                          >
-                            <div className="flex items-center">
-                              <div className=" text-xl px-2 py-1">
-                                {items.icon}
-                              </div>
+                  <div className={height <= 720 ? "sidebar-scrolling" : ""}>
+                    {/* <div className="force-overflow"> */}
+                    {menuItem
+                      .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
+                      .map((items, index) => (
+                        <div key={index}>
+                          {items.subRoute ? (
+                            <NavLink
+                              to={"#"}
+                              key={index}
+                              className=""
+                              activeclassname="active_sidebar"
+                            >
+                              <SidebarMenu
+                                setSideBar={setSideBar}
+                                items={items}
+                                isHovering={isHovering}
+                                dropState={dropState[items.name]}
+                                handleDropState={handleDropState}
+                              ></SidebarMenu>
+                            </NavLink>
+                          ) : (
+                            <NavLink
+                              to={items.path}
+                              key={index}
+                              className="link flex"
+                              activeclassname="active_sidebar"
+                              onClick={(_) => {
+                                handleDropState("other");
+                                setSideBar(false);
+                              }}
+                            >
+                              <div className="flex items-center">
+                                <div className=" text-xl px-2 py-1">
+                                  {items.icon}
+                                </div>
 
-                              <div
-                                className={
-                                  isHovering
-                                    ? "opacity-1 duration-600 ease-in text-[18px]  font-semibold"
-                                    : "opacity-0 duration-200 ease-out text-[18px] font-semibold hidden"
-                                }
-                              >
-                                {items.name}
+                                <div
+                                  className={
+                                    isHovering
+                                      ? "opacity-1 duration-600 ease-in text-[18px]  font-semibold"
+                                      : "opacity-0 duration-200 ease-out text-[18px] font-semibold hidden"
+                                  }
+                                >
+                                  {items.name}
+                                </div>
                               </div>
-                            </div>
-                          </NavLink>
-                        )}
-                      </div>
-                    ))}
+                            </NavLink>
+                          )}
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </>
           ) : (
             <>
+              {/* If fixed part no available  */}
               <div
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}
                 className={
                   sideBar
                     ? "Side_container"
-                    : " fixed bg-secondary left-0 top-0 z-30  "
+                    : " fixed bg-secondary left-0 top-0 z-30 "
                 }
               >
                 <div
-                  // style={{
-                  //   width: isHovering ? "280px" : "70px",
-                  //   // transition: isHovering ? "ease-in 0.5s" : "ease-out 0.3s",
-                  // }}
-                  // Have to do something with this className
                   className={
                     isHovering
-                      ? " w-[280px] sidebar-box h-[100vh]"
-                      : " w-[70px] sidebar-box h-[100vh]"
+                      ? " w-[290px] sidebar-box h-[100vh] sidebar-transition"
+                      : " w-[70px] sidebar-box h-[100vh] sidebar-transition"
                   }
                 >
                   <div className="top-section">
@@ -397,58 +402,69 @@ const Sidebar = ({ handle }) => {
                     )}
                   </div>
                   {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
-                  {menuItem
-                    .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
-                    .map((items, index) => (
-                      <div key={index}>
-                        {items.subRoute ? (
-                          <NavLink
-                            to={"#"}
-                            key={index}
-                            className=""
-                            activeclassname="active_sidebar"
-                          >
-                            <SidebarMenu
-                              setSideBar={setSideBar}
-                              items={items}
-                              isHovering={isHovering}
-                              dropState={dropState[items.name]}
-                              handleDropState={handleDropState}
-                            ></SidebarMenu>
-                          </NavLink>
-                        ) : (
-                          <NavLink
-                            to={items.path}
-                            key={index}
-                            className="link flex"
-                            activeclassname="active_sidebar"
-                            onClick={(_) => {
-                              handleDropState("other");
-                            }}
-                          >
-                            <div className="flex items-center">
-                              <div className=" text-xl px-2 py-1">
-                                {items.icon}
+                  <div
+                    className={
+                      height <= 720 ? "sidebar-scrolling pb-10" : "pb-10"
+                    }
+                  >
+                    {menuItem
+                      .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
+                      .map((items, index) => (
+                        <div key={index}>
+                          {items.subRoute ? (
+                            <NavLink
+                              to={"#"}
+                              key={index}
+                              className=""
+                              // activeclassname="active_sidebar"
+                            >
+                              <SidebarMenu
+                                setSideBar={setSideBar}
+                                items={items}
+                                isHovering={isHovering}
+                                dropState={dropState[items.name]}
+                                handleDropState={handleDropState}
+                              ></SidebarMenu>
+                            </NavLink>
+                          ) : (
+                            <NavLink
+                              to={items.path}
+                              key={index}
+                              className="link flex"
+                              // activeClassname="active_sidebar"
+                              onClick={(_) => {
+                                handleDropState("other");
+                              }}
+                            >
+                              <div className="flex items-center">
+                                <div className=" text-xl px-2 py-1">
+                                  {items.icon}
+                                </div>
+                                <div
+                                  // onClick={() => setOpen(!open)}
+                                  // style={{
+                                  //   display: isHovering ? "block" : "none",
+                                  // }}
+                                  // className="link_text text-sm"
+                                  // className={
+                                  //   isHovering
+                                  //     ? "sidebar-menu text-[18px] opacity-1 font-semibold"
+                                  //     : "sidebar-menu-go text-[18px] opacity-0 font-semibold hidden"
+                                  // }
+                                  className={
+                                    isHovering
+                                      ? " transition duration-500 ease-in-out hover:bg-gray-100 text-[18px]  font-semibold"
+                                      : " transition duration-500 ease-in-out hover:bg-gray-100 text-[18px] font-semibold hidden"
+                                  }
+                                >
+                                  {items.name}
+                                </div>
                               </div>
-                              <div
-                                // onClick={() => setOpen(!open)}
-                                // style={{
-                                //   display: isHovering ? "block" : "none",
-                                // }}
-                                // className="link_text text-sm"
-                                className={
-                                  isHovering
-                                    ? "opacity-1 duration-600 ease-in text-[18px]  font-semibold"
-                                    : "opacity-0 duration-200 ease-out text-[18px] font-semibold hidden"
-                                }
-                              >
-                                {items.name}
-                              </div>
-                            </div>
-                          </NavLink>
-                        )}
-                      </div>
-                    ))}
+                            </NavLink>
+                          )}
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
             </>

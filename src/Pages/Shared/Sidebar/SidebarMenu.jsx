@@ -40,8 +40,8 @@ const SidebarMenu = ({
         <div
           className={
             isHovering
-              ? "mr-2 opacity-1 duration-600 ease-in text-[14px]"
-              : "mr-2 opacity-0 duration-200 ease-out text-[14px]"
+              ? "mr-3 opacity-1 duration-600 ease-in text-[16px]"
+              : "mr-3 opacity-0 duration-200 ease-out text-[16px]"
           }
         >
           <IoIosArrowUp
@@ -76,14 +76,19 @@ const SidebarMenu = ({
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6 }}
+                  transition={{ delay: 0.5 }}
                 >
                   {/* Ai particular part a change kora lagbey */}
                   <div
+                    // className={
+                    //   isHovering
+                    //     ? "mr-2  duration-500 ease-in-out transform text-[16px] font-medium py-1"
+                    //     : "mr-2 opacity-0 ease-out text-[16px]  font-medium hidden"
+                    // }
                     className={
                       isHovering
-                        ? "mr-2 opacity-0.5 ease-in text-[16px] font-medium py-1"
-                        : "mr-2 opacity-0 ease-out text-[16px]  font-medium hidden"
+                        ? "mr-2 opacity-0.5 ease-in text-[16px] w-[187px] font-medium py-1"
+                        : "mr-2 opacity-0 ease-out text-[16px] font-medium hidden"
                     }
                   >
                     {s.name}

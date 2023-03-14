@@ -98,7 +98,12 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
                   onClick={handle.enter}
                   className="  text-xl font-bold text-secondary"
                 >
-                  <BiFullscreen />
+                  <lord-icon
+                    src="https://cdn.lordicon.com/pnwpbzow.json"
+                    trigger="hover"
+                    colors="primary:#0aa7b8"
+                    style={{ height: "25px" }}
+                  ></lord-icon>
                 </button>
               ) : (
                 <button
@@ -157,12 +162,12 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
                 <button onClick={(e) => e.preventDefault()}>
                   <Space>
                     <div>
-                      <button className=" flex text-2xl text-secondary mt-1">
-                        <AiOutlineNotification />
-                        <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
-                          8
-                        </h1>
-                      </button>
+                      <lord-icon
+                        src="https://cdn.lordicon.com/psnhyobz.json"
+                        trigger="hover"
+                        colors="primary:#0AA7B8"
+                        style={{ height: "25px", marginTop: "5px" }}
+                      ></lord-icon>
                     </div>
                   </Space>
                 </button>
@@ -266,7 +271,13 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
                     className="rounded px-2 mx-auto bg-[#0CADBF] text-white font-medium text-sm  shadow-md mb-3 mt-5 flex items-center justify-center py-1 gap-2 hover:bg-[#B91C1C]"
                     onClick={handleSignOut}
                   >
-                    Sign Out <VscSignOut className="font-bold text-lg" />
+                    Sign Out{" "}
+                    <lord-icon
+                      src="https://cdn.lordicon.com/moscwhoj.json"
+                      trigger="loop"
+                      colors="primary:#ffffff,secondary:#ffffff"
+                      style={{}}
+                    ></lord-icon>
                   </button>{" "}
                 </div>
               </div>
@@ -288,7 +299,12 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
                 onClick={handle.enter}
                 className="  text-xl font-bold text-secondary flex justify-center"
               >
-                <BiFullscreen />
+                <lord-icon
+                  src="https://cdn.lordicon.com/pnwpbzow.json"
+                  trigger="hover"
+                  colors="primary:#0aa7b8"
+                  style={{ height: "25px" }}
+                ></lord-icon>
               </button>
             ) : (
               <button
@@ -315,7 +331,7 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
                   <lord-icon
                     src="https://cdn.lordicon.com/mecwbjnp.json"
                     trigger="hover"
-                    style={{ height: "25px", fontWidth: 700 }}
+                    style={{ height: "25px", Width: 800 }}
                     colors="primary:#02818F"
                     state="hover-1"
                   ></lord-icon>
@@ -353,21 +369,25 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
             >
               <button onClick={(e) => e.preventDefault()}>
                 <Space>
-                  <div>
-                    <button className="flex  text-2xl text-secondary mt-1">
-                      {/* <lord-icon
-                        src="https://cdn.lordicon.com/msetysan.json"
-                        trigger="hover"
-                        style={{ height: "55px" }}
-                        colors="primary:#02818F"
-                        state="hover-1"
-                      ></lord-icon> */}
+                  <div title="Announcement">
+                    {/* <button className="flex  text-2xl text-secondary mt-1">
                       <AiOutlineNotification />
 
-                      <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
-                        8
-                      </h1>
-                    </button>
+                      <div className="absolute left-[7px] top-[-5px]">
+                        <lord-icon
+                          src="https://cdn.lordicon.com/msetysan.json"
+                          trigger="hover"
+                          colors="primary:#e83a30"
+                          style={{ height: "20px", marginTop: "5px" }}
+                        ></lord-icon>
+                      </div>
+                    </button> */}
+                    <lord-icon
+                      src="https://cdn.lordicon.com/psnhyobz.json"
+                      trigger="hover"
+                      colors="primary:#0AA7B8"
+                      style={{ height: "25px", marginTop: "5px" }}
+                    ></lord-icon>
                   </div>
                 </Space>
               </button>
@@ -377,7 +397,12 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
           {/* message  */}
           <div>
             <button className="  text-2xl font-bold text-secondary md:mt-[2px] flex items-center">
-              <BiMessageRounded />
+              <lord-icon
+                src="https://cdn.lordicon.com/hpivxauj.json"
+                trigger="hover"
+                colors="primary:#0aa7b8"
+                style={{ height: "25px" }}
+              ></lord-icon>
             </button>
           </div>
           {/**download */}
@@ -465,8 +490,15 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
                   className="rounded px-2 mx-auto bg-[#0CADBF] text-white font-medium text-sm gap-2 shadow-md mb-3 mt-5 flex items-center justify-center py-1 hover:bg-[#B91C1C]"
                   onClick={handleSignOut}
                 >
-                  Sign Out <VscSignOut className="font-bold text-lg" />
-                </button>{" "}
+                  Sign Out
+                  <lord-icon
+                    src="https://cdn.lordicon.com/moscwhoj.json"
+                    trigger="loop"
+                    colors="primary:#ffffff,secondary:#ffffff"
+                    style={{}}
+                  ></lord-icon>
+                  {/* <VscSignOut className="font-bold text-lg" /> */}
+                </button>
               </div>
             </div>
           </div>

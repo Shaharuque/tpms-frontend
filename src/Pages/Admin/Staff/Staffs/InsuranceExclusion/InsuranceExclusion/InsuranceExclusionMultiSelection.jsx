@@ -13,6 +13,7 @@ import {
   useGetAssignedQuery,
 } from "../../../../../../features/Stuff_redux/Insurance_Exclusion/InsuranceExclusionApi";
 import Loading from "../../../../../../Loading/Loading";
+import { useSelector } from "react-redux";
 const InsuranceExclusionMultiSelection = () => {
   // const [selectedKeys, setSelectedKeys] = useState("");
   // const [TransferData, setTransferData] = useState([]);
@@ -21,6 +22,10 @@ const InsuranceExclusionMultiSelection = () => {
   // const arr1 = [];
   const { token } = useToken();
   const { id } = useParams();
+
+  // is fixed toggle
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
 
   //  get all payor by id
   const {
@@ -181,7 +186,13 @@ const InsuranceExclusionMultiSelection = () => {
       <h1 className="text-lg text-orange-500 text-left font-semibold ">
         Insurance Exclusion
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1">
+      <div
+        className={
+          isToggled
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1"
+            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1"
+        }
+      >
         <div className="w-full">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
             Insurance

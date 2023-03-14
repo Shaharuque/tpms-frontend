@@ -5,6 +5,7 @@ import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
+import { useSelector } from "react-redux";
 
 const AddInsurance = () => {
   const { token } = useToken();
@@ -17,6 +18,10 @@ const AddInsurance = () => {
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
   const [addedData, setaddedData] = useState(false);
+
+  // is fixed toggle
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
 
   // multiple get api will be called together to increase performance
   // parallel API calling
@@ -166,7 +171,14 @@ const AddInsurance = () => {
 
   return (
     <div>
-      <div className="ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
+      <div
+        className={
+          isToggled
+            ? "ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 my-3 mr-2 gap-x-6 gap-y-3 "
+            : "ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 "
+        }
+      >
+        {/* <div className="ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 "> */}
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
 
