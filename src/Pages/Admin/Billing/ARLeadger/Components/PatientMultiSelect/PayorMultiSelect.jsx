@@ -31,7 +31,7 @@ const PayorMultiSelect = ({
       if (selected.length > 3) return `All Selected (${selected.length})`;
       return selected.map(({ label }) => label + "," + " ");
     }
-    return <h1 className="text-black">None selected</h1>;
+    return <h1 className="text-[#4b5563]">None selected</h1>;
   };
 
   useEffect(() => {

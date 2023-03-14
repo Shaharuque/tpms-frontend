@@ -4,10 +4,8 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { BsFileEarmarkPlusFill } from "react-icons/bs";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import { DateRangePicker } from "react-date-range";
 import { Switch, Table, Typography } from "antd";
 import { Link } from "react-router-dom";
-import GlobalMultiSelect from "../../../../../Shared/CustomComponents/GlobalMultiSelect";
 import SessionWiseModal from "./SessionWiseModal/SessionWiseModal";
 import useToken from "../../../../../../CustomHooks/useToken";
 import {
@@ -25,6 +23,8 @@ import PayorMultiSelect from "../PatientMultiSelect/PayorMultiSelect";
 import CustomDateRange from "../../../../../Shared/CustomDateRange/CustomDateRange";
 import PatientMultiSelect from "../PatientMultiSelect/PatientMultiSelect";
 import AddNote from "../AddNote/AddNote";
+import ViewTransactions from "../ViewTransactions/ViewTransactions";
+import PdfDownload from "./PdfDownload/PdfDownload";
 
 //Date converter function [yy-mm-dd]
 function convert(str) {
@@ -591,12 +591,23 @@ const SessionWise = () => {
   const [select, setSelect] = useState(false);
   const [optionSelect, setOptionSelect] = useState("");
   const handleAction = () => {
-    // console.log(optionSelect);
-    setSelect(!select);
+    if (selectedRowKeys?.length > 0) {
+      setSelect(true);
+    } else {
+      setSelect(false);
+      toast.error(<h1>Please Choose Valid Rows</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
   };
 
+  const [pdfOpen, setPdfOpen] = useState(false);
   return (
     <div className={!table || ledgerData.length < 10 ? "h-[170vh]" : ""}>
+      <button onClick={() => setPdfOpen(true)}>DownLoad</button>
+      {pdfOpen && <PdfDownload></PdfDownload>}
       <div>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -922,12 +933,16 @@ const SessionWise = () => {
                 <option value="add-note" className="text-black">
                   Add Note
                 </option>
+                <option value="transactions" className="text-black">
+                  View Transactions
+                </option>
               </select>
             </div>
             <button onClick={handleAction} className="pms-button mx-2">
               Go
             </button>
           </div>
+
           {select && (
             <>
               {optionSelect === "add-note" && (
@@ -935,6 +950,12 @@ const SessionWise = () => {
                   bulkNoteSave={bulkNoteSave}
                   selectedRowId={selectedRowKeys}
                 ></AddNote>
+              )}
+
+              {optionSelect === "transactions" && (
+                <ViewTransactions
+                  selectedRowId={selectedRowKeys}
+                ></ViewTransactions>
               )}
             </>
           )}
