@@ -43,7 +43,7 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           staticRanges={[
             ...defaultStaticRanges,
             {
-              label: "Last year",
+              label: "Last Year",
               range: () => ({
                 startDate: startOfYear(addYears(new Date(), -1)),
                 endDate: endOfYear(addYears(new Date(), -1)),
@@ -57,7 +57,7 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
               },
             },
             {
-              label: "This year",
+              label: "This Year",
               range: () => ({
                 startDate: startOfYear(new Date()),
                 endDate: endOfYear(new Date()),
