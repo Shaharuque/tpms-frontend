@@ -453,8 +453,8 @@ const Sidebar = ({ handle }) => {
                                   // }
                                   className={
                                     isHovering
-                                      ? " transition duration-500 ease-in-out hover:bg-gray-100 text-[18px]  font-semibold"
-                                      : " transition duration-500 ease-in-out hover:bg-gray-100 text-[18px] font-semibold hidden"
+                                      ? " transition duration-500 ease-in-out text-[18px]  font-semibold"
+                                      : " transition duration-500 ease-in-out text-[18px] font-semibold hidden"
                                   }
                                 >
                                   {items.name}
