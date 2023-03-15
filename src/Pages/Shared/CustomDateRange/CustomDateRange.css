@@ -255,6 +255,27 @@
 
 @media only screen and (max-width:639px) {
 
+    .rdrMonthPicker {
+        /* margin-right: -10px !important; */
+        margin-left: 0px !important;
+        /* background-color: red; */
+        /* padding: 10px 0 !important; */
+        background-color: #EFF2F7;
+        border-radius: 5px;
+    }
+
+    .rdrYearPicker {
+        margin-left: 0px !important;
+        padding: 0px 5px;
+        background-color: #EFF2F7;
+        border-radius: 5px;
+    }
+
+    .rdrNextButton i {
+        margin: 0 0 0 04px !important;
+
+    }
+
 
     /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
     /* For mobile  */
