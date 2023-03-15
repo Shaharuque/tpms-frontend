@@ -5,7 +5,13 @@ import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
-import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
+import {
+  AiFillLock,
+  AiFillUnlock,
+  AiOutlineDown,
+  AiOutlineEye,
+  AiOutlineMessage,
+} from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableAction from "./ListView/ManageTableAction";
 import "react-date-range/dist/styles.css";
@@ -27,6 +33,7 @@ import { toast } from "react-toastify";
 import { timeConverter } from "../../../Shared/TimeConverter/TimeConverter";
 import NonBillableSession from "./NonBillableSession/NonBillableSession";
 import NonBillableCardsView from "./NonBillableSession/NonBillableCardView/NonBillableCardsView";
+import AddSessionHintAdd from "./ListView/AddSessionHintAdd";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -390,6 +397,15 @@ const ListView = () => {
     setFilteredInfo({});
   };
 
+  const [noteModal, setNoteModal] = useState(false);
+  const addNoteHandler = () => {
+    setNoteModal(true);
+  };
+
+  const handleNoteClose = () => {
+    setNoteModal(false);
+  };
+
   // Table Data Columns Defined Here //
   const columns = [
     {
@@ -709,6 +725,22 @@ const ListView = () => {
       // onFilter: (value, record) => record.status.includes(value),
     },
     {
+      title: "Nt",
+      dataIndex: "operation",
+      key: "operation",
+      width: 60,
+      render: (_, record) => (
+        <div className="flex justify-center">
+          <button
+            className="flex items-center justify-center "
+            onClick={addNoteHandler}
+          >
+            <AiOutlineMessage className="text-base text-secondary" />
+          </button>
+        </div>
+      ),
+    },
+    {
       title: "Action",
       dataIndex: "operation",
       key: "operation",
@@ -735,25 +767,6 @@ const ListView = () => {
       ),
     },
   ];
-
-  // const rowSelection = {
-  //   onChange: (selectedRowKeys, selectedRows) => {
-  //     setAppointmentIds({ selectedRowKeys });
-  //   },
-  //   onSelect: (record, selected, selectedRows) => {
-  //     console.log("selected row", selectedRows);
-  //     setTestingSelect(selectedRows);
-  //   },
-  //   onSelectAll: (selected, selectedRows, changeRows) => {
-  //     console.log(selected, selectedRows, changeRows);
-  //   },
-  //   getCheckboxProps: (record) => {
-  //     const rowIndex = record?.is_locked;
-  //     return {
-  //       disabled: rowIndex === 1,
-  //     };
-  //   },
-  // };
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -1102,13 +1115,13 @@ const ListView = () => {
                               </option>
                               {posData?.pos?.map((p) => {
                                 return (
-                                  <option
+                                  <options
                                     className="text-black"
                                     key={p?.id}
                                     value={p?.pos_code}
                                   >
                                     {p?.pos_name}
-                                  </option>
+                                  </options>
                                 );
                               })}
                             </select>
@@ -1429,6 +1442,12 @@ const ListView = () => {
           )}
         </div>
       </div>
+      {noteModal && (
+        <AddSessionHintAdd
+          handleClose={handleNoteClose}
+          open={noteModal}
+        ></AddSessionHintAdd>
+      )}
     </div>
   );
 };

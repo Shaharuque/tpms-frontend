@@ -27,7 +27,7 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="date-range"
+      className="date-range rounded-lg"
     >
       <div>
         <DateRangePicker
@@ -73,16 +73,16 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           ]}
         />
       </div>
-      <div className="text-right w-full bg-[#26818F]  rounded-b-sm range-date-ok py-1 shadow-xl">
+      <div className="text-right w-full bg-[#26818F]  rounded-b-md range-date-ok py-2 pr-1 shadow-xl">
         <button
-          className="px-4 m-1 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
+          className="px-4 m-1 py-1 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
           type="submit"
           onClick={handleCancelDate}
         >
           Cancel
         </button>
         <button
-          className="px-4 m-1 text-secondary border border-white bg-white rounded"
+          className="px-4 m-1 py-1 text-secondary border border-white bg-white rounded"
           type="submit"
           onClick={() => setOpen(false)}
         >

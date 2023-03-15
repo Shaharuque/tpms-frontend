@@ -1,7 +1,7 @@
 .rdrSelected,
 .rdrInRange {
-    /* background: rgba(255, 0, 0, 0.788) !important; */
-    background: #29c1d2 !important;
+    background: rgba(255, 0, 0, 0.788) !important;
+    /* background: #29c1d2 !important; */
     border: #000;
 }
 
@@ -10,6 +10,9 @@
     padding: 4px;
 }
 
+/* .rdrMonthAndYearPickers select:hover {
+    background-color: hsla(186, 89%, 37%, 0.179) !important;
+} */
 
 .rdrStartEdge,
 .rdrEndEdge {
@@ -35,9 +38,9 @@
     background-color: red;
 }
 
-.rdrStaticRange {
+/* .rdrStaticRange {
     border-radius: 5px;
-}
+} */
 
 .rdrDayNumber,
 .rdrDay {
@@ -60,9 +63,10 @@
 }
 
 .rdrMonthAndYearWrapper {
-    height: 30px !important;
+    height: 45px !important;
     border-bottom: 1px solid #cececf9d;
     padding: 13px 0;
+
 }
 
 .rdrDayToday .rdrDayNumber span:after {
@@ -76,6 +80,21 @@
     margin-left: -8px;
     font-size: 14px !important;
     padding: none;
+}
+
+.rdrMonthPicker {
+    /* margin-right: -10px !important; */
+    margin-left: -35px !important;
+    /* background-color: red; */
+    /* padding: 10px 0 !important; */
+    background-color: #EFF2F7;
+    border-radius: 5px;
+}
+
+.rdrYearPicker {
+    margin-left: 12px !important;
+    background-color: #EFF2F7;
+    border-radius: 5px;
 }
 
 .rdrMonth {
@@ -123,6 +142,12 @@
     border-radius: 5px;
     background-color: #27d1e4;
 
+}
+
+.rdrDateRangePickerWrapper {
+    display: inline-flex;
+    user-select: none;
+    border-radius: 5px;
 }
 
 @media only screen and (max-width:465px) {
@@ -196,9 +221,6 @@
         margin: 0px !important;
     }
 
-    .rdrMonthAndYearPickers select {
-        padding: 10px 20px 10px 0px !important;
-    }
 
     .rdrStaticRanges {
         margin-top: 10px;
@@ -206,6 +228,27 @@
         flex-wrap: wrap !important;
         justify-content: center !important;
         width: 100%;
+    }
+
+    .rdrMonthPicker {
+        /* margin-right: -10px !important; */
+        margin-left: 0px !important;
+        /* background-color: red; */
+        /* padding: 10px 0 !important; */
+        background-color: #EFF2F7;
+        border-radius: 5px;
+    }
+
+    .rdrYearPicker {
+        margin-left: 0px !important;
+        padding: 0px 5px;
+        background-color: #EFF2F7;
+        border-radius: 5px;
+    }
+
+    .rdrNextButton i {
+        margin: 0 0 0 04px !important;
+
     }
 
 }
