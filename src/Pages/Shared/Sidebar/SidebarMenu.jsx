@@ -17,7 +17,7 @@ const SidebarMenu = ({
     <div className="pl-4 py-3 hover:bg-primary text-white">
       <div
         // onBlur={() => setOpen(false)}
-        // onClick={() => setOpen(!open)}
+        // onClick={() => setOpen(!open)} 
         onClick={(_) => {
           handleDropState(items.name);
           setSideBar(false);

@@ -1,6 +1,7 @@
 .rdrSelected,
 .rdrInRange {
-    background: rgba(255, 0, 0, 0.788) !important;
+    /* background: rgba(255, 0, 0, 0.788) !important; */
+    background: #29c1d2 !important;
     border: #000;
 }
 
@@ -30,7 +31,8 @@
 .rdrDefinedRangesWrapper {
     /* width: 100% !important; */
     padding-top: 50px !important;
-    width: 150px !important;
+    width: 120px !important;
+    background-color: red;
 }
 
 .rdrStaticRange {
@@ -278,7 +280,6 @@
         padding: 0px 15px !important;
     }
 
-
     .rdrStaticRangeLabel {
         border: 1pxsolid #e5e5e5;
         align-items: center !important;
@@ -301,7 +302,6 @@
         /* border: 1PX solid #8e8e93; */
         width: 100%;
     }
-
 }
 
 @media only screen and (max-width:1023px) {
