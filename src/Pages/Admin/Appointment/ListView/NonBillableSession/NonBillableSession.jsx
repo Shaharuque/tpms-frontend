@@ -71,7 +71,7 @@ const NonBillableSession = ({
       const getNonbillableSessions = async () => {
         const res = await axios({
           method: "POST",
-          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+          url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -98,7 +98,7 @@ const NonBillableSession = ({
       const getNonbillableSessions = async () => {
         const res = await axios({
           method: "POST",
-          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+          url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",

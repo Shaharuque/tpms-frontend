@@ -488,7 +488,7 @@ const ClaimWise = () => {
     const getLedgerData = async () => {
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/ledger/list?page=1`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/ledger/list?page=1`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -513,7 +513,7 @@ const ClaimWise = () => {
   const fetchLedger = async () => {
     const res = await axios({
       method: "POST",
-      url: `https://test-prod.therapypms.com/api/v1/admin/ac/ledger/list?page=${page}`,
+      url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/ledger/list?page=${page}`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

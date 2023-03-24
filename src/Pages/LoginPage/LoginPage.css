@@ -29,7 +29,7 @@
     /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
     .login-form {
         width: 65%;
-        top: 18em;
+        /* top: 18em; */
         right: 9em;
     }
 
@@ -53,8 +53,9 @@
     /* For desktop: */
 
     .login-form {
-        width: 29%;
-        top: 15em;
+        width: 40%;
+        /* width: 29%; */
+        /* top: 15em; */
         right: 10em;
     }
 }

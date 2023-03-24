@@ -93,7 +93,7 @@ const ListView = () => {
       setListLoading(true);
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/appointments?page=${page}`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -134,7 +134,7 @@ const ListView = () => {
       setNonBillableListLoading(true);
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -180,7 +180,7 @@ const ListView = () => {
       const getManageSession = async () => {
         const res = await axios({
           method: "POST",
-          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+          url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/appointments?page=${page}`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -204,7 +204,7 @@ const ListView = () => {
       const getManageSession = async () => {
         const res = await axios({
           method: "POST",
-          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+          url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/appointments?page=${page}`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -222,13 +222,14 @@ const ListView = () => {
   //Appointment Pos get API
   const { data: posData, isLoading: posDataLoading } =
     useGetAppointmentPOSQuery(token);
+  console.log("pos data", posData?.pos);
 
   //Clients multi select data from server(Client=>Patient)
   useEffect(() => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/client`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/client`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -248,7 +249,7 @@ const ListView = () => {
     const getProviderData = async () => {
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/provider`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/provider`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -1115,13 +1116,13 @@ const ListView = () => {
                               </option>
                               {posData?.pos?.map((p) => {
                                 return (
-                                  <options
+                                  <option
                                     className="text-black"
                                     key={p?.id}
                                     value={p?.pos_code}
                                   >
                                     {p?.pos_name}
-                                  </options>
+                                  </option>
                                 );
                               })}
                             </select>

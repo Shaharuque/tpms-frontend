@@ -44,7 +44,7 @@ const AddServiceSubTypeTab = () => {
     const getAllTreatments = async () => {
       let response;
       response = await axios({
-        url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/subactivity/treatment/get/all",
+        url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/treatment/get/all",
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -115,7 +115,7 @@ const AddServiceSubTypeTab = () => {
       //if type is not selected then api will not be called
       if (type) {
         res = await axios({
-          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/subactivity/service",
+          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/service",
           method: "POST",
           headers: {
             Accept: "application/json",

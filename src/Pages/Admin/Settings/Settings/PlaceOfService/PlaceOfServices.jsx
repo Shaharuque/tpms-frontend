@@ -42,7 +42,7 @@ const PlaceOfServices = () => {
   //   const getPatientsData = async (page) => {
   //     const res = await axios({
   //       method: "get",
-  //       url: `https://test-prod.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+  //       url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/get/pos?page=${page}`,
   //       headers: {
   //         "Content-Type": "application/json",
   //         Accept: "application/json",
@@ -61,7 +61,7 @@ const PlaceOfServices = () => {
   // const fetchPatients = async () => {
   //   const res = await axios({
   //     method: "GET",
-  //     url: `https://test-prod.therapypms.com/api/v1/admin/ac/setting/get/pos?page=${page}`,
+  //     url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/get/pos?page=${page}`,
   //     headers: headers,
   //   });
   //   const result = res?.data?.pos_data?.data;
