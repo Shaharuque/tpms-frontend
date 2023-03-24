@@ -242,6 +242,7 @@ const Sidebar = ({ handle }) => {
 
   const { height, width } = useWindowDimensions();
   console.log("height", height);
+  console.log("width", width);
 
   const handleDropState = (dropName) => {
     if (dropName === "other") setDropState(initialDropState);
@@ -265,7 +266,7 @@ const Sidebar = ({ handle }) => {
   //console.log(localStorage.getItem("type")); //admin or provider pabo type apatoto api pailey next kaj
   const logged_type = localStorage.getItem("type");
 
-  const [sideBar, setSideBar] = useState(false);
+  const [sideBar, setSideBar] = useState(true);
   const handleSIdebar = () => {
     setSideBar(!sideBar);
     // console.log("sidebar", sideBar);
@@ -369,7 +370,7 @@ const Sidebar = ({ handle }) => {
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}
                 className={
-                  sideBar
+                  sideBar && width < 1024
                     ? "Side_container"
                     : " fixed bg-secondary left-0 top-0 z-30 "
                 }

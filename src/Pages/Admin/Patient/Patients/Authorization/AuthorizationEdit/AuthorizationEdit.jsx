@@ -750,7 +750,6 @@ const AuthorizationEdit = () => {
           </>
         </form>
       </motion.div>
-
       {id && (
         <motion.div
           initial={{ opacity: 0, y: -15 }}

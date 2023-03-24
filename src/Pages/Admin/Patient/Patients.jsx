@@ -463,10 +463,6 @@ const TableApi = () => {
       key: "is_active_client",
       dataIndex: "is_active_client",
       width: 100,
-      // filters: [
-      //   { text: "Active", value: "true" }, //antd table filtering working on string type value so from backend I need true/false boolean value to string format
-      //   { text: "In-Active", value: "false" },
-      // ],
       render: (_, { is_active_client }) => {
         //console.log("Status : ", Status);
         return (
@@ -477,15 +473,6 @@ const TableApi = () => {
           </div>
         );
       },
-      // filteredValue: filteredInfo.status || null,
-      // onFilter: (value, record) => {
-      //   return record.status.includes(value);
-      // },
-      // //   sorter is for sorting asc or dsc purpose
-      // sorter: (a, b) => {
-      //   return a.status > b.status ? -1 : 1; //sorting problem solved using this logic
-      // },
-      // sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
     },
   ];
   return (

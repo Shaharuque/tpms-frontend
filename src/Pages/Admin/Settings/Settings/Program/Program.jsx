@@ -15,7 +15,7 @@ const Program = () => {
             }
             to={"account-type"}
           >
-            Account Type
+            Recording Type
           </NavLink>
           <NavLink
             className={(navinfo) =>

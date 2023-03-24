@@ -1,4 +1,10 @@
-import { FaUser, FaUserFriends, FaBoxOpen, FaWpforms } from "react-icons/fa";
+import {
+  FaUser,
+  FaUserFriends,
+  FaBoxOpen,
+  FaWpforms,
+  FaRegAddressCard,
+} from "react-icons/fa";
 import { TbBuildingHospital, TbFileTime } from "react-icons/tb";
 import { BiRename, BiLinkAlt, BiFolderOpen } from "react-icons/bi";
 import {
@@ -11,11 +17,18 @@ import {
 import { MdOutlinePayment, MdTrackChanges } from "react-icons/md";
 import { ImUsers } from "react-icons/im";
 import { TbArrowsRightLeft } from "react-icons/tb";
-import { AiOutlineUserAdd, AiOutlineUser, AiOutlineFile } from "react-icons/ai";
+import {
+  AiOutlineUserAdd,
+  AiOutlineUser,
+  AiOutlineFile,
+  AiOutlineMail,
+  AiOutlineCloud,
+} from "react-icons/ai";
 import {
   RiSettingsFill,
   RiHospitalLine,
   RiSendPlaneLine,
+  RiFolderUserLine,
 } from "react-icons/ri";
 import { FiLayers, FiAnchor } from "react-icons/fi";
 import { VscServerProcess } from "react-icons/vsc";
@@ -337,17 +350,17 @@ export const setting = [
   {
     link: "data-export",
     name: "Data Import",
-    icon: <TbArrowsRightLeft />,
+    icon: <AiOutlineCloud />,
   },
   {
     link: "meet-lists",
     name: "TPMS Meet",
-    icon: <TbArrowsRightLeft />,
+    icon: <RiFolderUserLine />,
   },
   {
     link: "sms-email-setting/email-setting",
     name: "SMS/Email Setting",
-    icon: <TbArrowsRightLeft />,
+    icon: <AiOutlineMail />,
   },
   {
     link: "intake-form",
@@ -357,12 +370,12 @@ export const setting = [
   {
     link: "structure-of-process",
     name: "Structure of process",
-    icon: <VscServerProcess />,
+    icon: <BsFileEarmark />,
   },
   {
     link: "app-id-tracking",
     name: "App id tracking",
-    icon: <MdTrackChanges />,
+    icon: <FaRegAddressCard />,
   },
   {
     link: "program",

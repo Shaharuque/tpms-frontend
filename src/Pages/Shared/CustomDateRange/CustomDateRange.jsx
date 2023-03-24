@@ -42,14 +42,14 @@ const CustomDateRange = ({ setRange, range, handleCancelDate, setOpen }) => {
           className="border-2 border-gray-100 p-2 sm:p-0 bg-white"
           staticRanges={[
             ...defaultStaticRanges,
-            {
+            {  
               label: "Last Year",
               range: () => ({
                 startDate: startOfYear(addYears(new Date(), -1)),
                 endDate: endOfYear(addYears(new Date(), -1)),
               }),
               isSelected(range) {
-                const definedRange = this.range();
+                const definedRange = this.range();     
                 return (
                   isSameDay(range.startDate, definedRange.startDate) &&
                   isSameDay(range.endDate, definedRange.endDate)

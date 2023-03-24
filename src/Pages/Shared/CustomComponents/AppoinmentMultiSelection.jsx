@@ -31,7 +31,6 @@ const AppoinmentMultiSelection = () => {
       if (selected.length > 3) return `All Selected ${selected.length}`;
       return selected.map(({ label }) => label);
     }
-
     return "None selected";
   };
 
@@ -47,7 +46,7 @@ const AppoinmentMultiSelection = () => {
     <>
       <div className="parentSelection">
         <div>
-          <MultiSelect
+          <MultiSelect    
             className="AppoinmentGlobal"
             options={options}
             value={selected}
