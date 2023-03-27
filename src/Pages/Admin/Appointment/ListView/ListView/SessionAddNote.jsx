@@ -27,7 +27,7 @@ const SessionAddNote = ({ handleClose, open }) => {
           bodyStyle={{ padding: "0" }}
           className="box rounded-lg"
         >
-          <div className="px-5 py-2  ">
+          <div className="px-5 py-2">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400">Add Notes</h1>
               <IoCloseCircleOutline

@@ -1,0 +1,82 @@
+/* ---------------------------------- Sidebar ------------------------ */
+
+.Side_container {}
+
+.sidebar-box-fixed {
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    overflow: hidden;
+    bottom: 0;
+    box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+    -webkit-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+    -moz-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+}
+
+.sidebar-scrolling {
+    height: 560px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.sidebar-box {
+    color: #fff;
+    /* transition: all ease-in-out 0.9s; */
+    box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+    -webkit-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+    -moz-box-shadow: 6px -4px 5px -4px rgba(39, 50, 51, 0.87);
+}
+
+.sidebar-transition {
+    transition: width 0.4s ease 0s;
+}
+
+.sidebar-menu {
+    transition: 1s ease-in;
+    transition: 0.3s ease-in-out 0.5s;
+
+}
+
+.sidebar-menu-go {
+    transition: 1s ease-out;
+    transform: translateX(18px);
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .Side_container {
+        display: none;
+    }
+
+    .isFixed {
+        display: none;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .Side_container {
+        display: none;
+    }
+
+    .isFixed {
+        display: none;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .Side_container {
+        display: none;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) next-hub-max*/
+@media only screen and (min-width: 1025px) and (max-width: 1300px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1301px) {
+    .isFixed {
+        display: none;
+    }
+}

@@ -63,7 +63,7 @@ export const createPos = createAsyncThunk(
     try {
       const response = await axios({
         method: "post",
-        url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/create/pos",
+        url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/create/pos",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

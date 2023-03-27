@@ -31,7 +31,7 @@ export default function AddServiceSubTypeTabEditModal({
       //if type is not selected then api will not be called
       if (id) {
         res = await axios({
-          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/subactivity/single/data",
+          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/single/data",
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -67,7 +67,7 @@ export default function AddServiceSubTypeTabEditModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/subactivity/update",
+          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/update",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -127,7 +127,7 @@ export default function AddServiceSubTypeTabEditModal({
     } else {
       let res = await axios({
         method: "post",
-        url: "https://test-prod.therapypms.com/api/v1/admin/ac/setting/subactivity/save",
+        url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/save",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

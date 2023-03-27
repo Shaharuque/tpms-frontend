@@ -6,6 +6,7 @@ import {
   BiFullscreen,
   BiExitFullscreen,
   BiMessageRounded,
+  BiDotsHorizontal,
 } from "react-icons/bi";
 import {
   AiOutlinePlus,
@@ -27,7 +28,7 @@ import { userLoggedOut } from "../../../features/login_redux/loginSlice";
 import { useDispatch } from "react-redux";
 
 // i am using alakaja
-const TestNaviBar = ({ handle }) => {
+const TestNaviBar = ({ handle, handleSIdebar }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -45,27 +46,33 @@ const TestNaviBar = ({ handle }) => {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className=" relative shadow-md rounded-3xl mr-[22px]"
+      className=" relative shadow-md rounded-3xl"
     >
       <div className="flex items-center justify-between bg-white rounded-3xl p-2">
-        <div
-          className="flex justify-center items-center gap-2 md:gap-4  font-medium cursor-pointer font-[Poppins] 
+        <div className="flex items-center justify-between w-6/7">
+          <div
+            className="flex  justify-center items-center gap-2 md:gap-4  font-medium cursor-pointer font-[Poppins] 
       text-gray-800 ml-2"
-        >
-          <div className="w-9 rounded-full">
-            <img className=" rounded-full" src={company} alt="pic" />
+          >
+            <div className="w-9 rounded-full">
+              <img className=" rounded-full" src={company} alt="pic" />
+            </div>
+
+            <div>
+              <p className="md:text-base font-semibold text-[12px] text-gray-800  bg-transparent ">
+                ABC Behavioral Therapy Centers
+              </p>
+            </div>
           </div>
 
-          <div>
-            <p className="md:text-base font-semibold text-[8px] text-gray-800  bg-transparent ">
-              ABC Behavioral Therapy Centers
-            </p>
-          </div>
+          <button className="lg:hidden" onClick={handleSIdebar}>
+            <BiDotsHorizontal className="text-2xl text-secondary ml-[10px]" />
+          </button>
         </div>
 
         <div
           onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-3 top-[10px] cursor-pointer lg:hidden"
+          className="text-3xl absolute right-3 top-[10px] cursor-pointer lg:hidden w-1/7"
         >
           <div className="mt-1">
             {open ? (
@@ -91,7 +98,12 @@ const TestNaviBar = ({ handle }) => {
                   onClick={handle.enter}
                   className="  text-xl font-bold text-secondary"
                 >
-                  <BiFullscreen />
+                  <lord-icon
+                    src="https://cdn.lordicon.com/pnwpbzow.json"
+                    trigger="hover"
+                    colors="primary:#0aa7b8"
+                    style={{ height: "25px" }}
+                  ></lord-icon>
                 </button>
               ) : (
                 <button
@@ -150,12 +162,12 @@ const TestNaviBar = ({ handle }) => {
                 <button onClick={(e) => e.preventDefault()}>
                   <Space>
                     <div>
-                      <button className=" flex text-2xl text-secondary mt-1">
-                        <AiOutlineNotification />
-                        <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
-                          8
-                        </h1>
-                      </button>
+                      <lord-icon
+                        src="https://cdn.lordicon.com/psnhyobz.json"
+                        trigger="hover"
+                        colors="primary:#0AA7B8"
+                        style={{ height: "25px", marginTop: "5px" }}
+                      ></lord-icon>
                     </div>
                   </Space>
                 </button>
@@ -259,7 +271,13 @@ const TestNaviBar = ({ handle }) => {
                     className="rounded px-2 mx-auto bg-[#0CADBF] text-white font-medium text-sm  shadow-md mb-3 mt-5 flex items-center justify-center py-1 gap-2 hover:bg-[#B91C1C]"
                     onClick={handleSignOut}
                   >
-                    Sign Out <VscSignOut className="font-bold text-lg" />
+                    Sign Out{" "}
+                    <lord-icon
+                      src="https://cdn.lordicon.com/moscwhoj.json"
+                      trigger="loop"
+                      colors="primary:#ffffff,secondary:#ffffff"
+                      style={{}}
+                    ></lord-icon>
                   </button>{" "}
                 </div>
               </div>
@@ -281,7 +299,12 @@ const TestNaviBar = ({ handle }) => {
                 onClick={handle.enter}
                 className="  text-xl font-bold text-secondary flex justify-center"
               >
-                <BiFullscreen />
+                <lord-icon
+                  src="https://cdn.lordicon.com/pnwpbzow.json"
+                  trigger="hover"
+                  colors="primary:#0aa7b8"
+                  style={{ height: "25px" }}
+                ></lord-icon>
               </button>
             ) : (
               <button
@@ -308,7 +331,7 @@ const TestNaviBar = ({ handle }) => {
                   <lord-icon
                     src="https://cdn.lordicon.com/mecwbjnp.json"
                     trigger="hover"
-                    style={{ height: "25px", fontWidth: 700 }}
+                    style={{ height: "25px", Width: 800 }}
                     colors="primary:#02818F"
                     state="hover-1"
                   ></lord-icon>
@@ -346,21 +369,25 @@ const TestNaviBar = ({ handle }) => {
             >
               <button onClick={(e) => e.preventDefault()}>
                 <Space>
-                  <div>
-                    <button className="flex  text-2xl text-secondary mt-1">
-                      {/* <lord-icon
-                        src="https://cdn.lordicon.com/msetysan.json"
-                        trigger="hover"
-                        style={{ height: "55px" }}
-                        colors="primary:#02818F"
-                        state="hover-1"
-                      ></lord-icon> */}
+                  <div title="Announcement">
+                    {/* <button className="flex  text-2xl text-secondary mt-1">
                       <AiOutlineNotification />
 
-                      <h1 className=" ml-[-7px] mt-[-3px]  h-4  bg-red-700 text-white badge-xs rounded-full">
-                        8
-                      </h1>
-                    </button>
+                      <div className="absolute left-[7px] top-[-5px]">
+                        <lord-icon
+                          src="https://cdn.lordicon.com/msetysan.json"
+                          trigger="hover"
+                          colors="primary:#e83a30"
+                          style={{ height: "20px", marginTop: "5px" }}
+                        ></lord-icon>
+                      </div>
+                    </button> */}
+                    <lord-icon
+                      src="https://cdn.lordicon.com/psnhyobz.json"
+                      trigger="hover"
+                      colors="primary:#0AA7B8"
+                      style={{ height: "25px", marginTop: "5px" }}
+                    ></lord-icon>
                   </div>
                 </Space>
               </button>
@@ -370,7 +397,12 @@ const TestNaviBar = ({ handle }) => {
           {/* message  */}
           <div>
             <button className="  text-2xl font-bold text-secondary md:mt-[2px] flex items-center">
-              <BiMessageRounded />
+              <lord-icon
+                src="https://cdn.lordicon.com/hpivxauj.json"
+                trigger="hover"
+                colors="primary:#0aa7b8"
+                style={{ height: "25px" }}
+              ></lord-icon>
             </button>
           </div>
           {/**download */}
@@ -458,8 +490,15 @@ const TestNaviBar = ({ handle }) => {
                   className="rounded px-2 mx-auto bg-[#0CADBF] text-white font-medium text-sm gap-2 shadow-md mb-3 mt-5 flex items-center justify-center py-1 hover:bg-[#B91C1C]"
                   onClick={handleSignOut}
                 >
-                  Sign Out <VscSignOut className="font-bold text-lg" />
-                </button>{" "}
+                  Sign Out
+                  <lord-icon
+                    src="https://cdn.lordicon.com/moscwhoj.json"
+                    trigger="loop"
+                    colors="primary:#ffffff,secondary:#ffffff"
+                    style={{}}
+                  ></lord-icon>
+                  {/* <VscSignOut className="font-bold text-lg" /> */}
+                </button>
               </div>
             </div>
           </div>

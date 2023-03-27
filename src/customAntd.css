@@ -398,9 +398,16 @@ mark {
   line-height: 1;
 }
 
+/* icon colors */
 .anticon svg {
   display: inline-block;
+  /* color: #32979C; */
   color: white;
+}
+
+/* Custom CSS */
+.ant-picker-input .ant-picker-suffix .anticon svg {
+  color: #32979C;
 }
 
 .anticon::before {

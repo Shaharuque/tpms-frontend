@@ -43,7 +43,7 @@ const OtherSetup = () => {
       setLoading(true);
       const res = await axios({
         method: "GET",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/staff/other/setup/${id}`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/staff/other/setup/${id}`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

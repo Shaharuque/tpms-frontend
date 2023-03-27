@@ -29,7 +29,6 @@ const WorkSchedule = () => {
                 <h5 className="text-sm text-gray-500 w-[125px] px-1">
                   Start Time
                 </h5>
-                <h5 className="text-sm text-gray-500 w-[0px] mr-5 "></h5>
 
                 <h5 className="text-sm text-gray-500 w-[130px] mr-5 ">
                   End Time

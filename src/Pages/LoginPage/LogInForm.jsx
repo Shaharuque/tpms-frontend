@@ -36,10 +36,11 @@ const LogInForm = ({ from }) => {
     console.log(formdata);
     setLoading(true);
     reset();
+    localStorage.clear(); //this clears the localStorage completely
 
     // axios POST request
     const options = {
-      url: "https://test-prod.therapypms.com/api/v1/admin/login",
+      url: "https://test-prod.therapypms.com/api/v1/internal/admin/login",
       method: "POST",
       headers: {
         Accept: "application/json",

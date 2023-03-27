@@ -388,7 +388,8 @@ const RecurringSession = () => {
               </div>
 
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 my-5 mr-2 gap-x-3">
+                <div className="flex gap-2">
+                  {/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 my-5 mr-2 gap-x-3"> */}
                   <div>
                     <label className="label">
                       <span className="text-[16px] mb-2 ml-1 text-gray-100">
@@ -412,14 +413,14 @@ const RecurringSession = () => {
                     </select>
                   </div>
                   {select === "Patients" ? (
-                    <div className="w-full">
+                    <div className="">
                       <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
                         Patients
                       </h1>
                       <CustomMultiSelection></CustomMultiSelection>
                     </div>
                   ) : select === "Provider" ? (
-                    <div className="w-full">
+                    <div className="">
                       <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
                         Provider
                       </h1>
@@ -428,10 +429,7 @@ const RecurringSession = () => {
                   ) : (
                     <></>
                   )}
-                  <button
-                    className="font-regular mt-[45px] sm:w-1/4  text-[16px] font-bold bg-white  hover:to-secondary text-primary rounded"
-                    type="submit"
-                  >
+                  <button className="pms-button" type="submit">
                     Go
                   </button>
                 </div>

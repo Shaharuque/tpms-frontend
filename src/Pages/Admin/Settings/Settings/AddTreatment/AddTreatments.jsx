@@ -3,6 +3,7 @@ import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
 import { fetchData } from "../../../../../Misc/Helper";
+import { useSelector } from "react-redux";
 
 // import InsuranceDetails from "./InsuranceDetails";
 
@@ -13,6 +14,10 @@ const AddTreatments = () => {
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
   const [allTreatmentData, setAllTreatmentData] = useState(null);
   const [selectedTreatmentData, setSelectedTreatmentData] = useState(null);
+
+  // is fixed toggle
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
 
   //multiple get api will be called together to increase performance
   //parallel API calling[Important]
@@ -70,7 +75,13 @@ const AddTreatments = () => {
 
   return (
     <div>
-      <div className="ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
+      <div
+        className={
+          isToggled
+            ? "ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 my-3 mr-2 gap-x-6 gap-y-3 "
+            : "ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 "
+        }
+      >
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Treatments</h1>
 

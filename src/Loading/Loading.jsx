@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <div>
       <div className="flex h-[84vh] items-center justify-center">
-        {/* <button
+        <button
           type="button"
           className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-cyan-600 hover:bg-cyan-400 transition ease-in-out duration-150 cursor-not-allowed"
           disabled=""
@@ -30,14 +30,14 @@ const Loading = () => {
             ></path>
           </svg>
           Please Wait, Processing...
-        </button> */}
+        </button>
 
-        <lord-icon
+        {/* <lord-icon
           src="https://cdn.lordicon.com/xjovhxra.json"
           trigger="loop"
           colors="primary:#16a9c7,secondary:#107c91"
           style={{ width: "150px", height: "150px" }}
-        ></lord-icon>
+        ></lord-icon> */}
       </div>
     </div>
   );

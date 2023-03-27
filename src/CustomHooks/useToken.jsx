@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import CryptoJS from "crypto-js";
 const useToken = () => {
   let token;

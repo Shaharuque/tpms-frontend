@@ -1,8 +1,18 @@
 .rdrSelected,
 .rdrInRange {
-    background: #0AA1B2 !important;
+    background: rgba(255, 0, 0, 0.788) !important;
+    /* background: #29c1d2 !important; */
     border: #000;
 }
+
+.rdrStaticRanges {
+    gap: 0 5px;
+    padding: 4px;
+}
+
+/* .rdrMonthAndYearPickers select:hover {
+    background-color: hsla(186, 89%, 37%, 0.179) !important;
+} */
 
 .rdrStartEdge,
 .rdrEndEdge {
@@ -24,14 +34,19 @@
 .rdrDefinedRangesWrapper {
     /* width: 100% !important; */
     padding-top: 50px !important;
-    width: 95px !important
+    width: 120px !important;
+    background-color: red;
 }
 
+/* .rdrStaticRange {
+    border-radius: 5px;
+} */
+
 .rdrDayNumber,
-.rdrStaticRangeLabel,
 .rdrDay {
     color: #0AA1B2;
 }
+
 
 .rdrWeekDay {
     color: #849095 !important;
@@ -48,9 +63,10 @@
 }
 
 .rdrMonthAndYearWrapper {
-    height: 30px !important;
+    height: 45px !important;
     border-bottom: 1px solid #cececf9d;
     padding: 13px 0;
+
 }
 
 .rdrDayToday .rdrDayNumber span:after {
@@ -64,6 +80,21 @@
     margin-left: -8px;
     font-size: 14px !important;
     padding: none;
+}
+
+.rdrMonthPicker {
+    /* margin-right: -10px !important; */
+    margin-left: -35px !important;
+    /* background-color: red; */
+    /* padding: 10px 0 !important; */
+    background-color: #EFF2F7;
+    border-radius: 5px;
+}
+
+.rdrYearPicker {
+    margin-left: 12px !important;
+    background-color: #EFF2F7;
+    border-radius: 5px;
 }
 
 .rdrMonth {
@@ -82,6 +113,7 @@
 .rdrStaticRangeLabel:hover {
     background-color: #0AA1B2 !important;
     color: #fff !important;
+    border-radius: 5px;
 }
 
 .rdrStaticRangeLabel:active {
@@ -105,11 +137,17 @@
 /* date range select year month */
 
 .rdrDefinedRangesWrapper .rdrStaticRangeSelected {
-    color: #ffffff !important;
+    color: white !important;
     font-weight: bolder;
-    border-radius: 2px;
-    background-color: #e6f9fb;
+    border-radius: 5px;
+    background-color: #27d1e4;
 
+}
+
+.rdrDateRangePickerWrapper {
+    display: inline-flex;
+    user-select: none;
+    border-radius: 5px;
 }
 
 @media only screen and (max-width:465px) {
@@ -183,9 +221,6 @@
         margin: 0px !important;
     }
 
-    .rdrMonthAndYearPickers select {
-        padding: 10px 20px 10px 0px !important;
-    }
 
     .rdrStaticRanges {
         margin-top: 10px;
@@ -195,9 +230,51 @@
         width: 100%;
     }
 
+    .rdrMonthPicker {
+        /* margin-right: -10px !important; */
+        margin-left: 0px !important;
+        /* background-color: red; */
+        /* padding: 10px 0 !important; */
+        background-color: #EFF2F7;
+        border-radius: 5px;
+    }
+
+    .rdrYearPicker {
+        margin-left: 0px !important;
+        padding: 0px 5px;
+        background-color: #EFF2F7;
+        border-radius: 5px;
+    }
+
+    .rdrNextButton i {
+        margin: 0 0 0 04px !important;
+
+    }
+
 }
 
 @media only screen and (max-width:639px) {
+
+    .rdrMonthPicker {
+        /* margin-right: -10px !important; */
+        margin-left: 0px !important;
+        /* background-color: red; */
+        /* padding: 10px 0 !important; */
+        background-color: #EFF2F7;
+        border-radius: 5px;
+    }
+
+    .rdrYearPicker {
+        margin-left: 0px !important;
+        padding: 0px 5px;
+        background-color: #EFF2F7;
+        border-radius: 5px;
+    }
+
+    .rdrNextButton i {
+        margin: 0 0 0 04px !important;
+
+    }
 
 
     /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
@@ -267,7 +344,6 @@
         padding: 0px 15px !important;
     }
 
-
     .rdrStaticRangeLabel {
         border: 1pxsolid #e5e5e5;
         align-items: center !important;
@@ -290,7 +366,6 @@
         /* border: 1PX solid #8e8e93; */
         width: 100%;
     }
-
 }
 
 @media only screen and (max-width:1023px) {

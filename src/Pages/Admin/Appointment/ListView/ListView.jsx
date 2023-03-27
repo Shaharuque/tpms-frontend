@@ -5,7 +5,13 @@ import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
-import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
+import {
+  AiFillLock,
+  AiFillUnlock,
+  AiOutlineDown,
+  AiOutlineEye,
+  AiOutlineMessage,
+} from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableAction from "./ListView/ManageTableAction";
 import "react-date-range/dist/styles.css";
@@ -20,13 +26,14 @@ import lottie from "lottie-web";
 import { defineElement } from "lord-icon-element";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 import { useManageSessionStatusChangeMutation } from "../../../../features/Appointment_redux/ListView/manageSessionApi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
 import { toast } from "react-toastify";
 import { timeConverter } from "../../../Shared/TimeConverter/TimeConverter";
 import NonBillableSession from "./NonBillableSession/NonBillableSession";
 import NonBillableCardsView from "./NonBillableSession/NonBillableCardView/NonBillableCardsView";
+import AddSessionHintAdd from "./ListView/AddSessionHintAdd";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -76,13 +83,17 @@ const ListView = () => {
   const [nonBillableData, setNonBillableData] = useState([]);
   const [hide, setHide] = useState(false);
 
+  // is fixed toggle
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
+
   //Manage Session Get Session List From API
   useEffect(() => {
     const getManageSession = async () => {
       setListLoading(true);
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/appointments?page=${page}`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -123,7 +134,7 @@ const ListView = () => {
       setNonBillableListLoading(true);
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -169,7 +180,7 @@ const ListView = () => {
       const getManageSession = async () => {
         const res = await axios({
           method: "POST",
-          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+          url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/appointments?page=${page}`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -193,7 +204,7 @@ const ListView = () => {
       const getManageSession = async () => {
         const res = await axios({
           method: "POST",
-          url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/appointments?page=${page}`,
+          url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/appointments?page=${page}`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -211,13 +222,14 @@ const ListView = () => {
   //Appointment Pos get API
   const { data: posData, isLoading: posDataLoading } =
     useGetAppointmentPOSQuery(token);
+  console.log("pos data", posData?.pos);
 
   //Clients multi select data from server(Client=>Patient)
   useEffect(() => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/client`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/client`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -237,7 +249,7 @@ const ListView = () => {
     const getProviderData = async () => {
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/manage/session/get/provider`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/provider`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -384,6 +396,15 @@ const ListView = () => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
     setFilteredInfo({});
+  };
+
+  const [noteModal, setNoteModal] = useState(false);
+  const addNoteHandler = () => {
+    setNoteModal(true);
+  };
+
+  const handleNoteClose = () => {
+    setNoteModal(false);
   };
 
   // Table Data Columns Defined Here //
@@ -643,7 +664,7 @@ const ListView = () => {
       title: "Status",
       key: "status",
       dataIndex: "status",
-      width: 100,
+      width: 110,
       sorter: (a, b) => {
         return a.status > b.status ? -1 : 1;
         // a.status - b.status,
@@ -680,7 +701,7 @@ const ListView = () => {
               </button>
             )}
             {status === "Cancelled by Provider" && (
-              <button className="bg-yellow-600 text-white text-[10px] py-[2px]  rounded w-28">
+              <button className="bg-[#39B4C7] text-white text-[10px] p-[2px]  rounded w-28">
                 {status}
               </button>
             )}
@@ -703,6 +724,22 @@ const ListView = () => {
       // ],
       // filteredValue: filteredInfo.status || null,
       // onFilter: (value, record) => record.status.includes(value),
+    },
+    {
+      title: "Nt",
+      dataIndex: "operation",
+      key: "operation",
+      width: 60,
+      render: (_, record) => (
+        <div className="flex justify-center">
+          <button
+            className="flex items-center justify-center "
+            onClick={addNoteHandler}
+          >
+            <AiOutlineMessage className="text-base text-secondary" />
+          </button>
+        </div>
+      ),
     },
     {
       title: "Action",
@@ -731,25 +768,6 @@ const ListView = () => {
       ),
     },
   ];
-
-  // const rowSelection = {
-  //   onChange: (selectedRowKeys, selectedRows) => {
-  //     setAppointmentIds({ selectedRowKeys });
-  //   },
-  //   onSelect: (record, selected, selectedRows) => {
-  //     console.log("selected row", selectedRows);
-  //     setTestingSelect(selectedRows);
-  //   },
-  //   onSelectAll: (selected, selectedRows, changeRows) => {
-  //     console.log(selected, selectedRows, changeRows);
-  //   },
-  //   getCheckboxProps: (record) => {
-  //     const rowIndex = record?.is_locked;
-  //     return {
-  //       disabled: rowIndex === 1,
-  //     };
-  //   },
-  // };
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -1081,7 +1099,7 @@ const ListView = () => {
                             setStuffsId={setStuffsId}
                           ></Providers>
                         </div>
-                        <div>
+                        <div className="sm:w-[240px] w-[200px]">
                           <label className="label">
                             <span className="label-text text-[16px] text-gray-100 text-left">
                               Place of Services
@@ -1110,7 +1128,7 @@ const ListView = () => {
                             </select>
                           </div>
                         </div>
-                        <div className="w-[220px]">
+                        <div className="w-[200px]">
                           <label className="label">
                             <span className="label-text  text-[16px] text-gray-100 text-left">
                               Selected date
@@ -1150,7 +1168,11 @@ const ListView = () => {
                             <div
                               ref={refClose}
                               // className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] sm:mr-[14%] mt-1 "
-                              className="absolute z-10 2xl:ml-[0%] xl:ml-[-15%] lg:ml-[0%] md:ml-[-25%] md:mr-[5%] ml-[-4%] mr-[8%] mt-1 "
+                              className={
+                                !isToggled
+                                  ? "absolute z-10 2xl:ml-[0%] xl:ml-[-17%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] ml-[-4%] mr-[8%] mt-1 "
+                                  : "absolute z-10 2xl:ml-[0%] xl:ml-[-45%] lg:ml-[0%] md:ml-[0%] md:mr-[5%] ml-[-4%] mr-[8%] mt-1  "
+                              }
                             >
                               {openCalendar && (
                                 <CustomDateRange
@@ -1163,7 +1185,7 @@ const ListView = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-5">
+                        <div className="flex gap-5 w-[200px]">
                           <div>
                             <label className="label">
                               <span className="label-text text-[16px] text-gray-100 text-left">
@@ -1421,6 +1443,12 @@ const ListView = () => {
           )}
         </div>
       </div>
+      {noteModal && (
+        <AddSessionHintAdd
+          handleClose={handleNoteClose}
+          open={noteModal}
+        ></AddSessionHintAdd>
+      )}
     </div>
   );
 };

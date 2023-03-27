@@ -11,10 +11,10 @@ className="modal-input-field ml-1 w-full"
 ## Button:
 
 <div className=" flex items-end justify-end mt-2">
-    <button className="pms-button mr-2" type="submit"> 
+    <button className="pms-button mr-2" type="submit">
         Save
-    </button>     
-                                       
+    </button>
+
     <button className="pms-close-button" onClick={handleClose}>
         Close
     </button>
@@ -22,27 +22,45 @@ className="modal-input-field ml-1 w-full"
 
 ### Divider
 
- <div className="bg-gray-200 py-[1px] mt-3"></div>
+<div className="bg-gray-200 py-[1px] mt-3"></div>
 
 ### clear filter
 
 <button onClick={clearFilters} className="pms-clear-button">
 
-### input-name
+    ### input-name
 
-className="input-border input-font w-full focus:outline-none"
-className=" label-font"
+    className="input-border input-font w-full focus:outline-none"
+    className=" label-font"
 
-### ANtd-table important data:
+    ### ANtd-table important data:
 
-className="table-striped-rows text-xs font-normal"
+    className="table-striped-rows text-xs font-normal"
 
-.ant-table-thead>tr>th,
-.ant-table-tbody>tr>td,  
-.ant-table tfoot>tr>th,
-.ant-table tfoot>tr>td {
-position: relative;
-padding: 16px 16px;
-overflow-wrap: break-word;
-text-align: center;
-}
+    .ant-table-thead>tr>th,
+    .ant-table-tbody>tr>td,
+    .ant-table tfoot>tr>th,
+    .ant-table tfoot>tr>td {
+    position: relative;
+    padding: 16px 16px;
+    overflow-wrap: break-word;
+    text-align: center;
+    }
+
+    // is fixed toggle
+    const isToggled = useSelector((state) => state.sideBarInfo);
+    console.log("isToggled", isToggled);
+
+
+
+    <!-- <div>
+        <label className="label">
+            <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                Notes
+            </span>
+        </label>
+        <textarea {...register("notes")} onChange={(e)=> setTextNotes(e.target.value)}
+                  name="comment"
+                  className="border border-gray-300 text-sm p-2  ml-1 h-24 w-full"
+                ></textarea>
+    </div> -->

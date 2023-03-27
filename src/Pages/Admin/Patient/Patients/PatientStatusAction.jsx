@@ -1,28 +1,22 @@
 import React, { useState } from "react";
 import { memo } from "react";
-import { Switch } from "antd";
 
-const PatientStatusAction = ({ status }) => {
-  // console.log("stattus", status);
-  let convertedStatus = status ? 1 : 0;
-
-  const [value, setValue] = useState(convertedStatus);
-  let BoleanToNumber = value ? 1 : 0;
-  console.log(BoleanToNumber);
+const PatientStatusAction = ({ s }) => {
+  const [status, setStatus] = useState("");
+  const handleStatus = (e) => {
+    setStatus(e.target.value);
+  };
 
   return (
-    <div className="flex items-center justify-center">
-      <Switch
-        size="small"
-        defaultChecked={value}
-        onClick={() => setValue(!value)}
-      />
-
-      {!value ? (
-        <h1 className="ml-1">In-Active</h1>
-      ) : (
-        <h1 className="ml-1">Active</h1>
-      )}
+    <div className="">
+      <select
+        onChange={(e) => handleStatus(e)}
+        className="border w-full rounded-md lg:px-5 py-[4px]"
+      >
+        <option value="Active">Active</option>
+        <option value="In-Active">In-Active</option>
+        <option value="Wait-List">Wait-List</option>
+      </select>
     </div>
   );
 };

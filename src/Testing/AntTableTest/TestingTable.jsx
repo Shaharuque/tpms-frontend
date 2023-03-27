@@ -39,15 +39,18 @@ const TestingTable = () => {
     to_date: "2022-12-31",
   };
   useEffect(() => {
-    fetch("https://test-prod.therapypms.com/api/v1/admin/ac/get-appoinments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: token || null,
-      },
-      body: JSON.stringify(formData),
-    })
+    fetch(
+      "https://test-prod.therapypms.com/api/v1/internal/admin/ac/get-appoinments",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: token || null,
+        },
+        body: JSON.stringify(formData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => setTestData(data?.appointments));
   }, []);

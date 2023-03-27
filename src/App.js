@@ -236,6 +236,7 @@ import Questionnaire from "./Pages/Admin/Settings/Settings/Program/Questionnaire
 import AddAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/AddAllProgram";
 import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/EditAllProgram";
 import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
+import CallLog from "./Pages/Admin/Patient/Patients/CallLog/CallLog";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -758,6 +759,10 @@ function App() {
               <Route
                 path="patient-intake/:id"
                 element={<Intake></Intake>}
+              ></Route>
+              <Route
+                path="patient-call-log/:id"
+                element={<CallLog></CallLog>}
               ></Route>
             </Route>
             <Route

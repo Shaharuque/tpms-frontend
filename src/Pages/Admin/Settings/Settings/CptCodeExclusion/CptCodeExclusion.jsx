@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
 import { PostfetchData } from "../../../../../Misc/Helper";
+import { useSelector } from "react-redux";
 // import MultiTransferData from "../SettingsComponent/MultiTransferData";
 
 const CptCodeExclusion = () => {
@@ -13,6 +14,10 @@ const CptCodeExclusion = () => {
   const [cptSelectedKeys, setcptSelectedKey] = useState();
   const [excludedCptSelectedKeys, setexcludedCptSelectedKey] = useState();
   const [changeData, setchangeData] = useState(false);
+
+  // is fixed toggle
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
 
   const fetchWithPromiseAll = async () => {
     const Getcptdata = await PostfetchData({
@@ -127,7 +132,13 @@ const CptCodeExclusion = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
+      <div
+        className={
+          isToggled
+            ? "ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-2 my-3 mr-2 gap-x-6 gap-y-3 "
+            : "ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 "
+        }
+      >
         <div>
           <h1 className="text-sm text-gray-700 my-2">Available Cpt Codes</h1>
 

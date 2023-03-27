@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { FaPlus } from "react-icons/fa";
-import NameLocationTableAddButton from "./NameLocationTableAddButton";
 
 const Form = (item) => {
   const [add, setAdd] = useState(false);
@@ -12,13 +11,19 @@ const Form = (item) => {
     setAdd(!add);
   };
 
+  // const map = item.length > 0 && item.map((i, e) => i);
+  // console.log("---", item, item[0]);
+  // useEffect(() => {
+  //   console.log("specific---", map);
+  // }, []);
+
   // Editable value
   useEffect(
     () => {
       setTimeout(() => {
         reset(
           {
-            zone_name: item?.item[0]?.zone_name || "Main Zone",
+            zone_name: item?.item[0]?.zone_name,
             city: item?.item[0]?.city,
             facility_name_two: item?.item[0]?.facility_name_two,
             address: item?.item[0]?.address,
@@ -33,8 +38,9 @@ const Form = (item) => {
           }
         );
       }, 0);
+      console.log("---", item, item.item[2]);
     },
-    [item?.item[1]?.zone_name],
+    [item?.item[0]?.zone_name],
     item?.item[0]?.zone_name
   );
 
@@ -185,11 +191,12 @@ const Form = (item) => {
             transition={{ delay: 0.2 }}
           >
             <div className="divider"></div>
-            <NameLocationTableAddButton
+            <p>hello</p>
+            {/* <NameLocationTableAddButton
               handleAdd={handleAdd}
               register={register}
               setAdd={setAdd}
-            ></NameLocationTableAddButton>
+            ></NameLocationTableAddButton> */}
           </motion.div>
         )}
 

@@ -14,6 +14,7 @@ import {
 import { authReducer } from "../features/login_redux/loginSlice";
 import { apiSlice } from "../features/api/apiSlice";
 import { serviceSubTypeReducer } from "../features/Settings_redux/selectedServiceSubTypesApi";
+import { sideBarReducer } from "../features/Sidebar_redux/SidebarSlice";
 
 export const store = configureStore({
   reducer: {
@@ -31,6 +32,7 @@ export const store = configureStore({
     loginInfo: loginReducer,
     //normal reducers
     authInfo: authReducer,
+    sideBarInfo: sideBarReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

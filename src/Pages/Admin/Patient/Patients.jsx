@@ -140,7 +140,7 @@ const TableApi = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/admin/ac/patient/get/all?page=1`,
+        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/patient/get/all?page=1`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -153,13 +153,13 @@ const TableApi = () => {
       setItems(data);
     };
     getPatientsData();
-  }, []);
+  }, [token]);
   console.log("headers from patients", headers);
 
   const fetchPatients = async () => {
     const res = await axios({
       method: "POST",
-      url: `https://test-prod.therapypms.com/api/v1/admin/ac/patient/get/all?page=${page}`,
+      url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/patient/get/all?page=${page}`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -463,10 +463,6 @@ const TableApi = () => {
       key: "is_active_client",
       dataIndex: "is_active_client",
       width: 100,
-      // filters: [
-      //   { text: "Active", value: "true" }, //antd table filtering working on string type value so from backend I need true/false boolean value to string format
-      //   { text: "In-Active", value: "false" },
-      // ],
       render: (_, { is_active_client }) => {
         //console.log("Status : ", Status);
         return (
@@ -477,15 +473,6 @@ const TableApi = () => {
           </div>
         );
       },
-      // filteredValue: filteredInfo.status || null,
-      // onFilter: (value, record) => {
-      //   return record.status.includes(value);
-      // },
-      // //   sorter is for sorting asc or dsc purpose
-      // sorter: (a, b) => {
-      //   return a.status > b.status ? -1 : 1; //sorting problem solved using this logic
-      // },
-      // sortOrder: sortedInfo.columnKey === "status" ? sortedInfo.order : null,
     },
   ];
   return (
@@ -673,6 +660,9 @@ const TableApi = () => {
             columns={columns}
             dataSource={items} //Which data chunk you want to show in table
             // For fixed header table at top
+            // scroll={{
+            //   y: 750,
+            // }}
             onChange={handleChange}
           />
         </InfiniteScroll>

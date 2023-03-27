@@ -13,6 +13,7 @@ import {
   useGetAssignedSubtypeQuery,
 } from "../../../../../features/Stuff_redux/staffSubtype_Exclusion/staffSubtypeExclusionApi";
 import Loading from "../../../../../Loading/Loading";
+import { useSelector } from "react-redux";
 const ServiceSubTypeExclusions = () => {
   const [selectedKeys, setSelectedKeys] = useState("");
   const [TransferData, setTransferData] = useState([]);
@@ -21,6 +22,10 @@ const ServiceSubTypeExclusions = () => {
   const [targettedData, setTargettedData] = useState([]);
   const { token } = useToken();
   const { id } = useParams();
+
+  // is fixed toggle
+  const isToggled = useSelector((state) => state.sideBarInfo);
+  console.log("isToggled", isToggled);
 
   //staff all sub-activity get api
   const {
@@ -162,7 +167,14 @@ const ServiceSubTypeExclusions = () => {
       <h1 className="text-lg text-orange-500 text-left font-semibold ">
         Service Sub-Type Exclusion
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1">
+      <div
+        className={
+          isToggled
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1"
+            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1"
+        }                                                            
+      >o
+        {/* <div className="flex flex-wrap gap-y-1"> */}
         <div className="w-full">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
             Insurance
@@ -174,7 +186,7 @@ const ServiceSubTypeExclusions = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {subActivityData.length > 0 &&
+            {subActivityData.length > 0 &&                                                                   
               subActivityData?.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.sub_activity}
@@ -223,7 +235,7 @@ const ServiceSubTypeExclusions = () => {
           </>
         </div>
       </div>
-    </div>
+    </div>                                                  
   );
 };
 

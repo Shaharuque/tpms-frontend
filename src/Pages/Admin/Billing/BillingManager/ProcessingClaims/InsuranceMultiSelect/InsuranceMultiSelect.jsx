@@ -3,21 +3,24 @@ import { MultiSelect } from "react-multi-select-component";
 import "./InsuranceMultiSelectCSS/InsuranceMultiSelect.css";
 
 const ProcessClaimsMultiSelect = ({
+  selected,
+  setSelected,
   payorData,
   setInsuranceSelect,
   setSortBy1,
+  payorLoading,
 }) => {
-  const [selected, setSelected] = useState([]);
-
   const insuranceDataProcess = () => {
     let processedData = [];
     if (payorData) {
       for (let x of payorData) {
-        processedData.push({
-          label: x?.payor_facility?.payor_name,
-          value: x?.payor_facility?.payor_name,
-          id: x?.payor_facility?.payor_id,
-        });
+        if (x?.payor_facility?.payor_name !== null) {
+          processedData.push({
+            label: x?.payor_facility?.payor_name,
+            value: x?.payor_facility?.payor_name,
+            id: x?.payor_facility?.payor_id,
+          });
+        }
       }
     }
     return processedData;
@@ -44,6 +47,7 @@ const ProcessClaimsMultiSelect = ({
 
   return (
     <MultiSelect
+      disabled={payorLoading && true}
       className="Global"
       options={insuranceOptions}
       value={selected}
