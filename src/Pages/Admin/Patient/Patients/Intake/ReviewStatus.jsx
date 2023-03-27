@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { memo } from "react";
 
-const PatientStatusAction = ({ s }) => {
+const ReviewStatus = ({ s }) => {
   const [status, setStatus] = useState("");
   const handleStatus = (e) => {
     setStatus(e.target.value);
@@ -11,9 +10,9 @@ const PatientStatusAction = ({ s }) => {
     <div className="">
       <select
         onChange={(e) => handleStatus(e)}
-        className="border w-full rounded-md lg:px-5 py-[4px]"
+        className="border bg-gray-50 w-full rounded-md lg:px-5 py-[4px]"
       >
-        <option value="Active">Active</option>
+        <option value="Pending">Pending</option>
         <option value="In-Active">In-Active</option>
         <option value="Wait-List">Wait-List</option>
       </select>
@@ -21,4 +20,4 @@ const PatientStatusAction = ({ s }) => {
   );
 };
 
-export default memo(PatientStatusAction);
+export default ReviewStatus;

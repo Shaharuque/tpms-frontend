@@ -50,3 +50,17 @@ className="modal-input-field ml-1 w-full"
     // is fixed toggle
     const isToggled = useSelector((state) => state.sideBarInfo);
     console.log("isToggled", isToggled);
+
+
+
+    <!-- <div>
+        <label className="label">
+            <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                Notes
+            </span>
+        </label>
+        <textarea {...register("notes")} onChange={(e)=> setTextNotes(e.target.value)}
+                  name="comment"
+                  className="border border-gray-300 text-sm p-2  ml-1 h-24 w-full"
+                ></textarea>
+    </div> -->

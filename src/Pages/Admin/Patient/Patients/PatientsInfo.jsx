@@ -11,6 +11,7 @@ import { BsFillFileEarmarkLock2Fill } from "react-icons/bs";
 import { TbReport } from "react-icons/tb";
 import { RiFileDamageFill } from "react-icons/ri";
 import { TiDocumentAdd } from "react-icons/ti";
+import { AiOutlineCloudUpload, AiOutlinePhone } from "react-icons/ai";
 
 const PatientsInfo = () => {
   // Great parent component
@@ -25,14 +26,11 @@ const PatientsInfo = () => {
           <IoCaretBackCircleOutline />
         </Link>
         <div className="text-xs font-normal">
-          <span className="text-sm font-semibold text-primary">
-            {" "}
-            Amro LLC |
-          </span>{" "}
-          <span className="text-orange-400 font-semibold">DOB :</span>{" "}
-          09/28/2021 |{" "}
+          <span className="text-sm font-semibold text-primary">Amro LLC |</span>
+          <span className="text-orange-400 font-semibold">DOB :</span>
+          09/28/2021 |
           <span className="text-orange-400 font-semibold">Phone : </span>
-          (894)-023-8043 |{" "}
+          (894)-023-8043 |
           <span className="text-orange-400 font-semibold">Address : </span>
           1222, OTtn, With Jersey City NJ 32809
         </div>
@@ -79,7 +77,7 @@ const PatientsInfo = () => {
               to={`patient-authorization/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <BsFillFileEarmarkLock2Fill className=" text-2xl" />{" "}
+                <BsFillFileEarmarkLock2Fill className=" text-2xl" />
                 Ins/Authorization
               </h1>
             </CustomLink>
@@ -97,6 +95,16 @@ const PatientsInfo = () => {
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink
               className="flex gap-1 pb-1 clink items-center"
+              to={`patient-ledger/${id}`}
+            >
+              <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <TbReport className=" text-2xl" /> Patient Ledger
+              </h1>
+            </CustomLink>
+          </div>
+          <div className="text-xs text-secondary font-normal patient-nav mb-1">
+            <CustomLink
+              className="flex gap-1 pb-1 clink items-center"
               to={`patient-portal/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
@@ -107,10 +115,20 @@ const PatientsInfo = () => {
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink
               className="flex gap-1 pb-1 clink items-center"
-              to={`patient-ledger/${id}`}
+              to={`patient-intake/${id}`}
             >
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <RiFileDamageFill className=" text-2xl" /> Patient Ledger
+                <AiOutlineCloudUpload className=" text-2xl" /> Intake
+              </h1>
+            </CustomLink>
+          </div>
+          <div className="text-xs text-secondary font-normal patient-nav mb-1">
+            <CustomLink
+              className="flex gap-1 pb-1 clink items-center"
+              to={`patient-call-log/${id}`}
+            >
+              <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <AiOutlinePhone className=" text-2xl" /> Call Log
               </h1>
             </CustomLink>
           </div>

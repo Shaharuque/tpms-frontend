@@ -2,14 +2,23 @@ import { Switch, Table } from "antd";
 import React from "react";
 import { useState } from "react";
 import { MdDoNotDisturbOn } from "react-icons/md";
-import ReviewStatus from "./ReviewStatus";
 import { AiOutlineEye } from "react-icons/ai";
+import { HiPlus } from "react-icons/hi";
+import AddCallLog from "./CallLog/AddCallLog";
+import CallLogEdit from "./CallLog/CallLogEdit";
 
-const Intake = () => {
+const CallLog = () => {
   const [allData, setAllData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [assign, setAssign] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const handleClose = () => {
+    setOpenEditModal(false);
+  };
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
 
   //   fetch data
   React.useEffect(() => {
@@ -25,52 +34,32 @@ const Intake = () => {
 
   const column = [
     {
-      title: "From Name",
-      dataIndex: "operation",
-      key: "operation",
-      width: 90,
-      render: (_, { nt }) => {
-        return (
-          <>
-            <div className="flex justify-center">
-              <button className="text-secondary">
-                2469299116740435801_119.pdf
-              </button>
-            </div>
-          </>
-        );
+      title: "Date",
+      dataIndex: "description",
+      key: "description",
+      width: 120,
+      filters: [{}],
+      filteredValue: filteredInfo.Document || null,
+      onFilter: (value, record) => record.Document.includes(value),
+      sorter: (a, b) => {
+        return a.Document > b.Document ? -1 : 1;
       },
+      sortOrder: sortedInfo.columnKey === "Document" ? sortedInfo.order : null,
+      ellipsis: true,
     },
     {
-      title: "Assign",
-      dataIndex: "operation",
-      key: "operation",
-      width: 90,
-      render: (_, { nt }) => {
-        return (
-          <div className="flex justify-center">
-            <Switch
-              color="default"
-              defaultChecked
-              size="small"
-              onClick={() => setAssign(!assign)}
-            />
-          </div>
-        );
+      title: "Log",
+      dataIndex: "description",
+      key: "description",
+      width: 120,
+      filters: [{}],
+      filteredValue: filteredInfo.Document || null,
+      onFilter: (value, record) => record.Document.includes(value),
+      sorter: (a, b) => {
+        return a.Document > b.Document ? -1 : 1;
       },
-    },
-    {
-      title: "Submitted",
-      dataIndex: "operation",
-      key: "operation",
-      width: 90,
-      render: (_, { nt }) => {
-        return (
-          <div className="flex justify-center">
-            <MdDoNotDisturbOn className="text-rose-500 text-lg" />
-          </div>
-        );
-      },
+      sortOrder: sortedInfo.columnKey === "Document" ? sortedInfo.order : null,
+      ellipsis: true,
     },
     {
       title: "Review Status",
@@ -78,7 +67,7 @@ const Intake = () => {
       key: "operation",
       width: 90,
       render: (_, { nt }) => {
-        return <ReviewStatus></ReviewStatus>;
+        // return <ReviewStatus></ReviewStatus>;
       },
     },
     {
@@ -88,9 +77,10 @@ const Intake = () => {
       width: 90,
       render: (_, { nt }) => {
         return (
-          <div className="flex items-center justify-center">
-            <AiOutlineEye />
-          </div>
+          // <div className="flex items-center justify-center">
+          //   <AiOutlineEye />
+          // </div>
+          <CallLogEdit></CallLogEdit>
         );
       },
     },
@@ -108,11 +98,14 @@ const Intake = () => {
   return (
     <div>
       <div className="h-[100vh]">
-        <h1 className="text-lg mt-2 text-orange-500">Intake Form Uploads</h1>
         <div className="my-2">
-          <div className="flex justify-end items-center mr-2">
-            <button onClick={clearFilters} className="pms-clear-button">
-              Clear filters
+          <div className="flex justify-between items-center mr-2">
+            <h1 className="text-lg mt-2 text-orange-500">Call Log List</h1>
+            <button
+              onClick={handleClickOpen}
+              className="pms-button flex item-center gap-2"
+            >
+              <HiPlus /> Add New Data
             </button>
           </div>
 
@@ -131,9 +124,15 @@ const Intake = () => {
             />
           </div>
         </div>
+        {openEditModal && (
+          <AddCallLog
+            handleClose={handleClose}
+            open={openEditModal}
+          ></AddCallLog>
+        )}
       </div>
     </div>
   );
 };
 
-export default Intake;
+export default CallLog;

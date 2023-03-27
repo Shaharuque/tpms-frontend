@@ -418,15 +418,21 @@ const MPosting = () => {
             Clear filters
           </button>
           <Link to={"/admin/billing/deposit-add"}>
-            <button className="px-2 py-2 text-xs  flex items-center  pms-button">
+            <button className=" flex items-center  pms-button">
               <BsPlus className="text-lg" />
               Add Deposit
             </button>
           </Link>
+          <Link to={"/admin"}>
+            <button className="  flex items-center  pms-button">
+              <BsPlus className="text-lg" />
+              Back
+            </button>
+          </Link>
         </div>
       </div>
-      <div>
-        <form className="my-10" onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex items-center justify-between  flex-wrap">
+        <form className=" " onSubmit={handleSubmit(onSubmit)}>
           <div className=" flex items-center gap-4 flex-wrap">
             <div>
               <div className="w-[250px]">
@@ -623,28 +629,27 @@ const MPosting = () => {
             </div>
             <div className=" flex items-end justify-start mb-10 gap-2 mt-8">
               <button className="pms-button mr-2" type="submit">
-                Save
+                View
               </button>
 
-              <button className="pms-close-button">Close</button>
-
-              <div className="flex items-center ">
-                <Switch
-                  size="small"
-                  checked={value ? true : false}
-                  onClick={() => setValue(!value)}
-                />
-                <span className="text-[14px] font-medium text-gray-500 mx-3">
-                  {value ? <>Unallocated</> : <>all</>}
-                </span>
-              </div>
+              <button className="pms-close-button">Cancel</button>
             </div>
           </div>
         </form>
+        <div className="flex items-center">
+          <Switch
+            size="small"
+            checked={value ? true : false}
+            onClick={() => setValue(!value)}
+          />
+          <span className="text-[14px] font-medium text-gray-500 mx-3">
+            {value ? <>Unallocated</> : <>all</>}
+          </span>
+        </div>
       </div>
       <div>
         <div className="flex justify-between font-semibold">
-          <h1 className="mb-3 text-[16px]">Deposit List</h1>
+          <h1 className="my-3 text-[16px]">Deposit List</h1>
           <div>
             <AiOutlineDownload className="text-xl text-[#34A7B8] cursor-pointer" />
           </div>
