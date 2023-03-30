@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { AiOutlineIdcard, AiOutlineUserAdd } from "react-icons/ai";
 import CreateAppointment from "./AdditionFeatures/CreateAppointment";
 import CreatePatient from "./AdditionFeatures/CreatePatient";
-import { BsCalendar2Week } from "react-icons/bs";
 import NewEligibilityInquiry from "./AdditionFeatures/NewEligibilityInquiry";
 
 const Add = () => {

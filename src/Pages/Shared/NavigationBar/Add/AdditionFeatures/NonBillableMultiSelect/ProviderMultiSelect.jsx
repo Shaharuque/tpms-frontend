@@ -1,7 +1,8 @@
-import { Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
-import "../../../CustomComponents/AppointmentMultiselection.css";
+// import "../../../CustomComponents/AppointmentMultiselection.css";
+// import "../../../../CustomComponents/AppointmentMultiselection.css"
+import "../../../../CustomComponents/AppointmentMultiselection.css";
 
 const ProviderMultiSelect = ({
   providers,
