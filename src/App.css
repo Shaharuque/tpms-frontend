@@ -1,5 +1,6 @@
 /* @import 'antd/dist/antd.css'; */
-@import "./customAntd.css";
+/* @import "./customAntd.css"; */
+@import "./Antd-v5.css";
 @import "./customToastify.css";
 
 
