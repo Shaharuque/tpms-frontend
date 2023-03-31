@@ -249,7 +249,6 @@ function App() {
           {/* Login page */}
           <Route path="/" element={<LogIn></LogIn>}></Route>
           {/* ------------------------form--------------------------- */}
-          <Route path="/test" element={<Test></Test>}></Route>
           <Route path="/forms" element={<Form></Form>}></Route>
           <Route
             path="/form-demo-json"
