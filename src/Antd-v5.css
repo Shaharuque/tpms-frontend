@@ -1,0 +1,125 @@
+.ant-table-wrapper .ant-table-thead>tr>th,
+.ant-table-wrapper .ant-table-thead>tr>td {
+    position: relative;
+    color: #fff;
+    font-weight: 600;
+    text-align: start;
+    background: #00a1b1;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s ease;
+}
+
+.ant-table-wrapper .ant-table-thead th.ant-table-column-sort {
+    background: #007d88;
+}
+
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody>tr>td,
+.ant-table-wrapper .ant-table.ant-table-small tfoot>tr>th,
+.ant-table-wrapper .ant-table.ant-table-small tfoot>tr>td {
+    padding: 8px 8px;
+    text-align: center;
+}
+
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-title,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-footer,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-thead>tr>th,
+.ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody>tr>th,
+.ant-table-wrapper .ant-table.ant-table-small tfoot>tr>th,
+.ant-table-wrapper .ant-table.ant-table-small tfoot>tr>td {
+    padding: 3px 8px;
+}
+
+
+.ant-table-wrapper .ant-table-thead th.ant-table-column-has-sorters:hover {
+    background: #007d88;
+}
+
+a:hover {
+    color: #00a1b1;
+}
+
+.ant-table-wrapper .ant-table-filter-trigger {
+    color: rgba(255, 255, 255, 0.994);
+}
+
+.ant-table-wrapper .ant-table-column-sorter {
+    color: rgba(248, 248, 248, 0.983);
+}
+
+.ant-table-wrapper .ant-table-column-sorter-down.active {
+    color: #ffffff;
+}
+
+.ant-table-wrapper .ant-table-column-sorter-up.active,
+.ant-table-wrapper .ant-table-column-sorter-down.active {
+    color: #ffffff;
+}
+
+
+/*-------------- TOGGLE ---------------*/
+
+.ant-switch.ant-switch-checked {
+    background: #00a1b1;
+}
+
+.ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+    background: #0aa7b8;
+}
+
+.ant-switch.ant-switch-small.ant-switch-checked .ant-switch-inner {
+    padding-inline-start: 6px;
+    padding-inline-end: 18px;
+    background-color: #0AA7B8;
+}
+
+.ant-switch.ant-switch-small .ant-switch-inner {
+    padding-inline-start: 18px;
+    padding-inline-end: 6px;
+    background-color: rgb(144, 144, 144);
+}
+
+/*-------------- Modal ---------------*/
+
+.ant-modal .ant-modal-content {
+    position: relative;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 0;
+    border-radius: 0px !important;
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    pointer-events: auto;
+    padding: 0px 0px !important;
+}
+
+.ant-table-wrapper .ant-table-row-expand-icon:focus,
+.ant-table-wrapper .ant-table-row-expand-icon:hover {
+    color: #0AA7B8;
+}
+
+/*-------------- CheckBox ---------------*/
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #0AA7B8;
+    border-color: #0AA7B8;
+}
+
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-inner,
+.ant-checkbox:not(.ant-checkbox-disabled):hover .ant-checkbox-inner {
+    border-color: #0AA7B8;
+}
+
+.ant-checkbox-indeterminate .ant-checkbox-inner:after {
+    top: 50%;
+    inset-inline-start: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #0aa7b8;
+    border: 0;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    content: "";
+}
+
+.ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-checked:not(.ant-checkbox-disabled):after {
+    border-color: #0aa7b8;
+}
