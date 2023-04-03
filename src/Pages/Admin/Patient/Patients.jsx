@@ -148,8 +148,8 @@ const TableApi = () => {
         },
       });
       // const result = await res.json();
-      const data = res.data?.clients?.data;
-      //console.log(data)
+      const data = res.data?.patients?.data;
+      console.log("patient data after api hit", data);
       setItems(data);
     };
     getPatientsData();
@@ -166,8 +166,8 @@ const TableApi = () => {
         Authorization: token ? token : null,
       },
     });
-    const data = res.data?.clients?.data;
-    console.log(data);
+    const data = res.data?.patients?.data;
+    console.log("patient data after api hit next times", data);
     return data;
   };
 
