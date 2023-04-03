@@ -1138,7 +1138,7 @@ const ListView = () => {
                           <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex  justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text [14px] w-full"
+                              className="flex  justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text-[14px] w-full"
                             >
                               <input
                                 value={
@@ -1305,7 +1305,7 @@ const ListView = () => {
                   <div className="my-5">
                     {items?.length > 0 ? (
                       <div>
-                        <div className=" overflow-scroll">
+                        <div>
                           {!listLoading ? (
                             <>
                               <Table
