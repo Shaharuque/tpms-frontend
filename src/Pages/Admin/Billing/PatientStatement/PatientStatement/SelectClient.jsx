@@ -123,9 +123,10 @@ const SelectClient = ({ handleClose, open }) => {
           footer={false}
           closable={false}
           width={600}
+          className="box"
           bodyStyle={{ padding: "0" }}
         >
-          <div className="px-5 py-2 box">
+          <div className="px-4 py-2 ">
             <div className="flex items-center justify-between">
               <h1 className="text-lg text-left text-orange-400 ">
                 Select Client
@@ -146,6 +147,7 @@ const SelectClient = ({ handleClose, open }) => {
             <div className="bg-gray-200 py-[1px] mt-3"></div>
             <div className=" overflow-scroll">
               <Table
+                bordered
                 pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                 size="small"
                 className=" text-xs font-normal mt-5"

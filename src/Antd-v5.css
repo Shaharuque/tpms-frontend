@@ -123,3 +123,71 @@ a:hover {
 .ant-checkbox-wrapper:not(.ant-checkbox-wrapper-disabled):hover .ant-checkbox-checked:not(.ant-checkbox-disabled):after {
     border-color: #0aa7b8;
 }
+
+/*----------------date picker------------------*/
+
+
+.ant-picker-focused {
+    border-color: #0aa7b8;
+    box-shadow: none;
+    border-inline-end-width: 1px;
+    outline: 0;
+}
+
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+    color: #fff;
+    background: #0aa7b8;
+    padding-top: 2px;
+}
+
+.ant-picker-dropdown .ant-picker-cell .ant-picker-cell-inner {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    min-width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 4px;
+    transition: background 0.2s, border 0.2s;
+    padding-top: 2px;
+}
+
+.ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+    position: absolute;
+    top: 0;
+    inset-inline-end: 0;
+    bottom: 0;
+    inset-inline-start: 0;
+    z-index: 1;
+    border: 1px solid #0aa7b8;
+    border-radius: 4px;
+    content: "";
+}
+
+.ant-picker-dropdown .ant-picker-today-btn {
+    color: #0aa7b8;
+}
+
+.ant-picker:hover,
+.ant-picker-focused {
+    border-color: #0aa7b8;
+    border-inline-end-width: 1px;
+}
+
+.ant-picker-dropdown .ant-picker-panel .ant-picker-footer {
+    border-top: 1px solid rgba(5, 5, 5, 0.06);
+    padding: 4px 0;
+}
+
+.ant-picker-dropdown .ant-picker-today-btn:hover {
+    color: #0AA7B8;
+}
+
+.ant-picker-dropdown .ant-picker-header {
+    display: flex;
+    padding: 4px 8px;
+    color: rgba(0, 0, 0, 0.88);
+    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+}

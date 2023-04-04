@@ -8,6 +8,7 @@ import SelectClient from "./PatientStatement/SelectClient";
 import SelectPayoor from "./PatientStatement/SelectPayoor";
 import { RiArrowLeftRightLine } from "react-icons/ri";
 import CustomDateRange from "../../../Shared/CustomDateRange/CustomDateRange";
+import AllClient from "./PatientStatement/AllClient/AllClient";
 const PatientStatement = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
@@ -16,6 +17,7 @@ const PatientStatement = () => {
   const [tData, setTData] = useState([]);
   const [selectClient, setSelectClient] = useState(false);
   const [selectPayor, setSelectPayor] = useState(false);
+  const [allClient, setAllClient] = useState(false);
   const handleClose = () => {
     setSelectClient(false);
     setSelectPayor(false);
@@ -30,8 +32,10 @@ const PatientStatement = () => {
   const handleSubmit = () => {
     if (selected === "selective_client") {
       setSelectClient(true);
-    } else {
+    } else if (selected === "selective_private_payor") {
       setSelectPayor(true);
+    } else {
+      setAllClient(true);
     }
   };
 
@@ -97,7 +101,7 @@ const PatientStatement = () => {
   //End Date Range Picker--------------------------------------------------------------------------------------------------------------------
 
   return (
-    <div className="h-[100vh]">
+    <div className="h-[170vh]">
       <h1 className="text-lg text-orange-400">Statement</h1>
       <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5  2xl:grid-cols-7 my-5 mr-2 gap-4">
         <div>
@@ -184,6 +188,7 @@ const PatientStatement = () => {
       </div>
 
       {/* Related to options basis modal is handling here */}
+      {allClient && <AllClient></AllClient>}
       {selectClient && (
         <SelectClient
           open={selectClient}
