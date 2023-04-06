@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Switch } from "antd";
+import { AiOutlineCopy } from "react-icons/ai";
 
 const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
   console.log("box33 data", box_no_33);
@@ -354,150 +355,162 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
 
               {/* working hours  */}
 
-              <div>
-                <h1 className="">Select Working Hours</h1>
-                <div className=" my-5 mr-2 gap-5">
-                  <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
-                      Monday
-                    </h5>
-                    <input
-                      type="time"
-                      name="mon_start_time"
-                      // value={time?.mon_end_time}
-                      format="h:mm A"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("mon_start_time")}
-                    />
+              <div className="flex gap-2 flex-wrap">
+                <div>
+                  <h1 className="">Select Working Hours</h1>
+                  <div className=" my-5 mr-2 gap-5">
+                    <div className="flex flex-wrap items-center my-1 gap-2">
+                      <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                        Monday
+                      </h5>
+                      <input
+                        type="time"
+                        name="mon_start_time"
+                        // value={time?.mon_end_time}
+                        format="h:mm A"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("mon_start_time")}
+                      />
 
-                    <span className="text-sm text-gray-600">to</span>
-                    <input
-                      type="time"
-                      name="mon_end_time"
-                      format="h:mm A"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("mon_end_time")}
-                    />
-                  </div>
-                  <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
-                      Tuesday
-                    </h5>
-                    <input
-                      type="time"
-                      name="tus_start"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("tus_start")}
-                    />
+                      <span className="text-sm text-gray-600">to</span>
+                      <input
+                        type="time"
+                        name="mon_end_time"
+                        format="h:mm A"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("mon_end_time")}
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center my-1 gap-2">
+                      <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                        Tuesday
+                      </h5>
+                      <input
+                        type="time"
+                        name="tus_start"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("tus_start")}
+                      />
 
-                    <span className="text-sm text-gray-600">to</span>
-                    <input
-                      type="time"
-                      name="tus_end"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("tus_end")}
-                    />
-                  </div>
-                  <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
-                      Wednesday
-                    </h5>
-                    <input
-                      type="time"
-                      name="wed_start"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("wed_start")}
-                    />
+                      <span className="text-sm text-gray-600">to</span>
+                      <input
+                        type="time"
+                        name="tus_end"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("tus_end")}
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center my-1 gap-2">
+                      <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                        Wednesday
+                      </h5>
+                      <input
+                        type="time"
+                        name="wed_start"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("wed_start")}
+                      />
 
-                    <span className="text-sm text-gray-600">to</span>
-                    <input
-                      type="time"
-                      name="wed_end"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("wed_end")}
-                    />
-                  </div>
-                  <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
-                      Thursday
-                    </h5>
-                    <input
-                      type="time"
-                      name="thur_start"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("thur_start")}
-                    />
+                      <span className="text-sm text-gray-600">to</span>
+                      <input
+                        type="time"
+                        name="wed_end"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("wed_end")}
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center my-1 gap-2">
+                      <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                        Thursday
+                      </h5>
+                      <input
+                        type="time"
+                        name="thur_start"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("thur_start")}
+                      />
 
-                    <span className="text-sm text-gray-600">to</span>
-                    <input
-                      type="time"
-                      name="thur_end"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("thur_end")}
-                    />
-                  </div>
-                  <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
-                      Friday
-                    </h5>
-                    <input
-                      type="time"
-                      name="fri_start"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("fri_start")}
-                    />
+                      <span className="text-sm text-gray-600">to</span>
+                      <input
+                        type="time"
+                        name="thur_end"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("thur_end")}
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center my-1 gap-2">
+                      <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                        Friday
+                      </h5>
+                      <input
+                        type="time"
+                        name="fri_start"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("fri_start")}
+                      />
 
-                    <span className="text-sm text-gray-600">to</span>
-                    <input
-                      type="time"
-                      name="fri_end"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("fri_end")}
-                    />
-                  </div>
-                  <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
-                      Saturday
-                    </h5>
-                    <input
-                      type="time"
-                      name="sat_start"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("sat_start")}
-                    />
+                      <span className="text-sm text-gray-600">to</span>
+                      <input
+                        type="time"
+                        name="fri_end"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("fri_end")}
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center my-1 gap-2">
+                      <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                        Saturday
+                      </h5>
+                      <input
+                        type="time"
+                        name="sat_start"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("sat_start")}
+                      />
 
-                    <span className="text-sm text-gray-600">to</span>
-                    <input
-                      type="time"
-                      name="sat_end"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("sat_end")}
-                    />
-                  </div>
-                  <div className="flex flex-wrap items-center my-1 gap-2">
-                    <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
-                      Sunday
-                    </h5>
-                    <input
-                      type="time"
-                      name="sun_start"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("sun_start")}
-                    />
+                      <span className="text-sm text-gray-600">to</span>
+                      <input
+                        type="time"
+                        name="sat_end"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("sat_end")}
+                      />
+                    </div>
+                    <div className="flex flex-wrap items-center my-1 gap-2">
+                      <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
+                        Sunday
+                      </h5>
+                      <input
+                        type="time"
+                        name="sun_start"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("sun_start")}
+                      />
 
-                    <span className="text-sm text-gray-600">to</span>
-                    <input
-                      type="time"
-                      name="sun_end"
-                      className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
-                      {...register("sun_end")}
-                    />
+                      <span className="text-sm text-gray-600">to</span>
+                      <input
+                        type="time"
+                        name="sun_end"
+                        className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
+                        {...register("sun_end")}
+                      />
+                    </div>
                   </div>
+                </div>
+                <div className=" text-sm flex items-center gap-1 ">
+                  <AiOutlineCopy className="text-secondary" /> Copy Times
                 </div>
               </div>
 
-              {/* submit  */}
-              <input className="pms-button mb-3" type="submit" value={"Save"} />
+              <div className="mt-2">
+                {/* submit  */}
+                <input
+                  className="pms-button mb-3"
+                  type="submit"
+                  value={"Save Facility"}
+                />
+                <button className="pms-close-button ml-2">Close</button>
+              </div>
             </form>
           </motion.div>
         </div>

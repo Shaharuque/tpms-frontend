@@ -149,7 +149,7 @@ const TableApi = () => {
       });
       // const result = await res.json();
       const data = res.data?.patients?.data;
-      console.log("patient data after api hit", data);
+      //console.log(data)
       setItems(data);
     };
     getPatientsData();
@@ -167,7 +167,7 @@ const TableApi = () => {
       },
     });
     const data = res.data?.patients?.data;
-    console.log("patient data after api hit next times", data);
+    console.log(data);
     return data;
   };
 

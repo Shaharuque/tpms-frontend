@@ -204,17 +204,18 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
               {...register("phone_one")}
             />
           </div>
+
           <div>
             <label className="label">
               <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
-                Phone2
+                Payor ID (Eligibility)
               </span>
             </label>
             <input
               type="text"
               name="phone2"
               className="input-border text-gray-600 rounded-sm  text-[16px] font-medium ml-1 py-[1px] w-full focus:outline-none"
-              {...register("phone_two")}
+              {...register("Payor_id")}
             />
           </div>
 
@@ -261,6 +262,18 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
               />
               <span className="font-medium ml-1 text-gray-600 text-[16px]">
                 Regional Center
+              </span>
+            </div>
+          </div>
+          <div className="flex justify-start items-end my-2 md:my-0">
+            <div className="flex justify-center ml-1 items-center">
+              <Switch
+                size="small"
+                // checked={active ? true : false}
+                // onClick={() => setActive(!active)}
+              />
+              <span className="font-medium ml-1 text-gray-600 text-[16px]">
+                No Box 32
               </span>
             </div>
           </div>

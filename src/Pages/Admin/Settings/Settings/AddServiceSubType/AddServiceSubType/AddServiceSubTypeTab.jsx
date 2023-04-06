@@ -291,7 +291,7 @@ const AddServiceSubTypeTab = () => {
 
           <select
             onChange={(e) => handleTxType(e)}
-            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+            className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-[160px] focus:outline-none"
           >
             <option>Select</option>
             {treatmentSelect}
@@ -329,7 +329,7 @@ const AddServiceSubTypeTab = () => {
             </label>
             <select
               onChange={(e) => serviceOnchange(e)}
-              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-[180px] focus:outline-none"
             >
               <option value="Select Tx type">Select Tx type</option>
               {serviceSelect}
