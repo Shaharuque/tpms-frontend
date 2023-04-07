@@ -210,7 +210,7 @@ const Staffs = () => {
   console.log(staffTableData.length);
 
   return (
-    <div className={staffTableData.length < 3 ? "h-[100vh]" : ""}>
+    <div className={""}>
       <div className="flex items-center flex-wrap justify-between gap-2 my-2">
         <h1 className="text-lg text-orange-500 text-left font-semibold ">
           Staffs
