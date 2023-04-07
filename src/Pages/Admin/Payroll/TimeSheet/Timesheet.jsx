@@ -492,8 +492,8 @@ const Timesheet = () => {
       render: (_, { submitted, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div>
-            <FcCheckmark className="text-base" />
+          <div className="">
+            <FcCheckmark className="text-base mx-auto" />
           </div>
         );
       },
@@ -572,7 +572,7 @@ const Timesheet = () => {
                   </span>
                 </label>
                 <>
-                  <div className="text-gray-600 rounded-sm  text-[14px] font-medium w-full ml-1 ">
+                  <div className="text-gray-600 rounded-sm mt-[2px] text-[14px] font-medium w-full ml-1 ">
                     <GlobalMultiSelect />
                   </div>
                 </>
@@ -638,6 +638,7 @@ const Timesheet = () => {
               size="small"
               className=" text-xs font-normal"
               columns={columns}
+              bordered
               dataSource={TimeSheetData} //Which data chunk you want to show in table
               // For fixed header table at top
               rowSelection={{

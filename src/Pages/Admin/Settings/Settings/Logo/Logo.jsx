@@ -34,10 +34,10 @@ const Logo = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="p-5 border border-gray-500">
+                <div className="border p-3 border-gray-500">
                   <img
                     src={file || person}
-                    className=" h-52 w-52 border-2 border-black rounded"
+                    className=" h-52 w-52  rounded"
                     alt="alt"
                   />
                 </div>
