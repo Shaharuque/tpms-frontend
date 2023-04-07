@@ -36,28 +36,28 @@ const Staffs = () => {
       dataIndex: "full_name",
       key: "full_name",
       width: 150,
-      filters: [
-        {
-          text: `Jamey`,
-          value: "Jamey",
-        },
-        {
-          text: `Minnie`,
-          value: "Minnie",
-        },
-        {
-          text: "Donald",
-          value: "Donald",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-      ],
+      // filters: [
+      //   {
+      //     text: `Jamey`,
+      //     value: "Jamey",
+      //   },
+      //   {
+      //     text: `Minnie`,
+      //     value: "Minnie",
+      //   },
+      //   {
+      //     text: "Donald",
+      //     value: "Donald",
+      //   },
+      //   {
+      //     text: "Burke Beard",
+      //     value: "Burke Beard",
+      //   },
+      //   {
+      //     text: "Hector Moses",
+      //     value: "Hector Moses",
+      //   },
+      // ],
       // render contains what we want to reflect as our data
       // Name, id, key=>each row data(object) property value can be accessed.
       //here,using id as key, as key isn't availale in the data we got.
@@ -206,6 +206,8 @@ const Staffs = () => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+
+  console.log(staffTableData.length);
 
   return (
     <div className={""}>

@@ -606,7 +606,7 @@ const SessionWise = () => {
   const [pdfOpen, setPdfOpen] = useState(false);
   return (
     <div className={!table || ledgerData.length < 10 ? "h-[170vh]" : ""}>
-      <button onClick={() => setPdfOpen(true)}>DownLoad</button>
+      {/* <button onClick={() => setPdfOpen(true)}>DownLoad</button> */}
       {pdfOpen && <PdfDownload></PdfDownload>}
       <div>
         <motion.div

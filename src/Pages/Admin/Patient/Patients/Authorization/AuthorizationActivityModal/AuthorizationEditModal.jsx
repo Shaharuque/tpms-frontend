@@ -127,13 +127,13 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
             width={565}
             footer={false}
             closable={false}
-            bodyStyle={{ padding: "0" }}
-            style={{ padding: "10px" }}
+            bodyStyle={{ padding: "0px" }}
+            className="box"
           >
             {activityServicesLoading ? (
               <ModalLoader></ModalLoader>
             ) : (
-              <div className="px-5 py-2 box">
+              <div className="px-5 py-2 ">
                 <div className="flex items-center justify-between">
                   <h1 className="text-lg text-left text-orange-400 ">
                     Add/Edit Service

@@ -289,7 +289,7 @@ const TableApi = () => {
           <div className="">
             <button
               onClick={() => patientDetails(id)}
-              className="text-secondary"
+              className="text-secondary font-medium"
             >
               {client_full_name}
             </button>
@@ -653,6 +653,7 @@ const TableApi = () => {
           loader={<ShimmerTableTet></ShimmerTableTet>}
         >
           <Table
+            bordered
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
