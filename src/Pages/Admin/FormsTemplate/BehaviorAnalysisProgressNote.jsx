@@ -138,7 +138,6 @@ const BehaviorAnalysisProgressNote = () => {
                           type="text"
                           className=" w-full border-none focus:outline-none "
                           placeholder="Enter Here..."
-
                           {...register("authorization_period")}
                         />
                       </div>
@@ -158,7 +157,6 @@ const BehaviorAnalysisProgressNote = () => {
                           type="text"
                           className=" w-auto border-none focus:outline-none "
                           placeholder="Enter Here..."
-
                           {...register("staff_name_and_credential")}
                         />
                       </div>
@@ -177,58 +175,58 @@ const BehaviorAnalysisProgressNote = () => {
                           </label>
                         </span>
 
-                       <div>
-                       <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
-                          <div class="flex items-center mr-4">
-                            <input
-                              id="inline-radio"
-                              type="checkbox"
-                              value=""
-                              name="inline-radio-group"
-                              class="w-4 h-4"
-                              {...register("client")}
-                            />
-                            <label
-                              for="inline-radio"
-                              class="ml-2 form-input-name"
-                            >
-                              Client
-                            </label>
-                          </div>
-                          <div class="flex items-center mr-4">
-                            <input
-                              id="inline-radio"
-                              type="checkbox"
-                              value=""
-                              name="inline-radio-group"
-                              class="w-4 h-4"
-                              {...register("therapist")}
-                            />
-                            <label
-                              for="inline-radio"
-                              class="ml-2 form-input-name"
-                            >
-                              Therapist
-                            </label>
-                          </div>
-                          <div class="flex items-center mr-4">
-                            <input
-                              id="inline-2-radio"
-                              type="checkbox"
-                              value=""
-                              name="inline-radio-group"
-                              class="w-4 h-4"
-                              {...register("rendering_provider")}
-                            />
-                            <label
-                              for="inline-2-radio"
-                              class="ml-2 form-input-name"
-                            >
-                              Rendering Provider
-                            </label>
+                        <div>
+                          <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
+                            <div class="flex items-center mr-4">
+                              <input
+                                id="inline-radio"
+                                type="checkbox"
+                                value=""
+                                name="inline-radio-group"
+                                class="w-4 h-4"
+                                {...register("client")}
+                              />
+                              <label
+                                for="inline-radio"
+                                class="ml-2 form-input-name"
+                              >
+                                Client
+                              </label>
+                            </div>
+                            <div class="flex items-center mr-4">
+                              <input
+                                id="inline-radio"
+                                type="checkbox"
+                                value=""
+                                name="inline-radio-group"
+                                class="w-4 h-4"
+                                {...register("therapist")}
+                              />
+                              <label
+                                for="inline-radio"
+                                class="ml-2 form-input-name"
+                              >
+                                Therapist
+                              </label>
+                            </div>
+                            <div class="flex items-center mr-4">
+                              <input
+                                id="inline-2-radio"
+                                type="checkbox"
+                                value=""
+                                name="inline-radio-group"
+                                class="w-4 h-4"
+                                {...register("rendering_provider")}
+                              />
+                              <label
+                                for="inline-2-radio"
+                                class="ml-2 form-input-name"
+                              >
+                                Rendering Provider
+                              </label>
+                            </div>
                           </div>
                         </div>
-                       </div>
                       </div>
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
@@ -306,7 +304,6 @@ const BehaviorAnalysisProgressNote = () => {
                         <input
                           type="date"
                           className=" w-full border-none focus:outline-none "
-                          
                           {...register("physician_contact_info")}
                         />
                       </div>
@@ -326,7 +323,6 @@ const BehaviorAnalysisProgressNote = () => {
                           type="text"
                           className=" w-full border-none focus:outline-none "
                           placeholder="Enter Here..."
-
                           {...register("intervention_settings")}
                         />
                       </div>
@@ -372,7 +368,7 @@ const BehaviorAnalysisProgressNote = () => {
                       <div class="flex flex-col">
                         <span>
                           <label for="rec_name" class=" font-bold text-base">
-                          Training Addressed During Session:
+                            Training Addressed During Session:
                           </label>
                         </span>
                         <div class="flex flex-col flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
@@ -390,7 +386,6 @@ const BehaviorAnalysisProgressNote = () => {
                               class="ml-2 form-input-name"
                             >
                               Functional Communication Training
-
                             </label>
                           </div>
                           <div class="flex  items-center mr-4">
@@ -439,7 +434,6 @@ const BehaviorAnalysisProgressNote = () => {
                               class="ml-2 form-input-name"
                             >
                               Parent Training
-
                             </label>
                           </div>
                           <div class="flex items-center mr-4">
@@ -472,7 +466,6 @@ const BehaviorAnalysisProgressNote = () => {
                               class="ml-2 form-input-name"
                             >
                               Planned Ignore
-
                             </label>
                           </div>
                           <div class="flex items-center mr-4">
@@ -489,7 +482,6 @@ const BehaviorAnalysisProgressNote = () => {
                               class="ml-2 form-input-name"
                             >
                               Task Analysis
-
                             </label>
                           </div>
                         </div>
@@ -511,7 +503,6 @@ const BehaviorAnalysisProgressNote = () => {
                             class="ml-2 form-input-name"
                           >
                             Token Economy
-
                           </label>
                         </div>
                         <div class="flex items-center mr-4">
@@ -528,7 +519,6 @@ const BehaviorAnalysisProgressNote = () => {
                             class="ml-2 form-input-name"
                           >
                             Positive Reinforcement
-
                           </label>
                         </div>
                         <div class="flex items-center mr-4">
@@ -545,7 +535,6 @@ const BehaviorAnalysisProgressNote = () => {
                             class="ml-2 form-input-name"
                           >
                             Environmental Modifications
-
                           </label>
                         </div>
                         <div class="flex items-center mr-4">
@@ -562,7 +551,6 @@ const BehaviorAnalysisProgressNote = () => {
                             class="ml-2 form-input-name"
                           >
                             Response Blocking
-
                           </label>
                         </div>
                         <div class="flex items-center mr-4">
@@ -578,7 +566,7 @@ const BehaviorAnalysisProgressNote = () => {
                             for="inline-radio"
                             class="ml-2 form-input-name"
                           >
-                             Tolerance Training
+                            Tolerance Training
                           </label>
                         </div>
                         <div class="flex items-center mr-4">
@@ -594,8 +582,8 @@ const BehaviorAnalysisProgressNote = () => {
                             for="inline-radio"
                             class="ml-2 form-input-name"
                           >
-                             Extinction
-                           </label>
+                            Extinction
+                          </label>
                         </div>
                         <div class="flex items-center mr-4">
                           <input
@@ -628,7 +616,7 @@ const BehaviorAnalysisProgressNote = () => {
                       <div class="flex flex-col">
                         <span>
                           <label for="rec_name" class=" font-bold text-base">
-                          Individualized Behavioral Goals :
+                            Individualized Behavioral Goals :
                           </label>
                         </span>
                         <div class="mt-3 w-full ">
@@ -644,7 +632,7 @@ const BehaviorAnalysisProgressNote = () => {
                       <div class="flex flex-col">
                         <span>
                           <label for="rec_name" class=" font-bold text-base">
-                          Current Rate/Percentage:
+                            Current Rate/Percentage:
                           </label>
                         </span>
                         <div class="mt-3 w-full ">
@@ -663,8 +651,7 @@ const BehaviorAnalysisProgressNote = () => {
 
             <div className="mt-3">
               <span className="form-inner-head">
-              SESSION INFORMATION/PROGRESS:
-
+                SESSION INFORMATION/PROGRESS:
               </span>
               <div className="mt-3 mb-3   border-blue-600 border-2">
                 <TextArea

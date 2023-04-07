@@ -4,10 +4,7 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
 const RecurringSessionModal = ({ handleClose, open }) => {
-  const [active, setActive] = useState(false);
-
   const { register, handleSubmit, reset } = useForm();
-  const [value, setValue] = useState(false);
 
   const onSubmit = (data) => {
     console.log(data);
