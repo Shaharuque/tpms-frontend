@@ -207,8 +207,6 @@ const Staffs = () => {
     setSortedInfo(sorter);
   };
 
-  console.log(staffTableData.length);
-
   return (
     <div className={""}>
       <div className="flex items-center flex-wrap justify-between gap-2 my-2">
