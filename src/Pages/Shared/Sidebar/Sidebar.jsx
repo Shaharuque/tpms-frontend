@@ -267,7 +267,7 @@ const Sidebar = ({ handle }) => {
   const logged_type = localStorage.getItem("type");
 
   const [sideBar, setSideBar] = useState(true);
-  const handleSIdebar = () => {
+  const handleSidebar = () => {
     setSideBar(!sideBar);
     // console.log("sidebar", sideBar);
   };
@@ -425,6 +425,7 @@ const Sidebar = ({ handle }) => {
                                 isHovering={isHovering}
                                 dropState={dropState[items.name]}
                                 handleDropState={handleDropState}
+                                handleSidebar={handleSidebar}
                               ></SidebarMenu>
                             </NavLink>
                           ) : (
@@ -442,16 +443,7 @@ const Sidebar = ({ handle }) => {
                                   {items.icon}
                                 </div>
                                 <div
-                                  // onClick={() => setOpen(!open)}
-                                  // style={{
-                                  //   display: isHovering ? "block" : "none",
-                                  // }}
-                                  // className="link_text text-sm"
-                                  // className={
-                                  //   isHovering
-                                  //     ? "sidebar-menu text-[18px] opacity-1 font-semibold"
-                                  //     : "sidebar-menu-go text-[18px] opacity-0 font-semibold hidden"
-                                  // }
+                                  onClick={handleSidebar}
                                   className={
                                     isHovering
                                       ? " transition duration-500 ease-in-out text-[18px]  font-semibold"
@@ -483,7 +475,7 @@ const Sidebar = ({ handle }) => {
               }
             >
               <NavigationBar
-                handleSIdebar={handleSIdebar}
+                handleSidebar={handleSidebar}
                 handle={handle}
               ></NavigationBar>
             </div>

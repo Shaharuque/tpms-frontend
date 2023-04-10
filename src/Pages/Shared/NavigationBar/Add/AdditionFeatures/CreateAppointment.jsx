@@ -5,9 +5,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import Calendar from "react-calendar";
 // import "./CutomCSS/calenderDesign.css";
 import { Modal } from "antd";
-import AppoinmentMultiSelection from "../../../Shared/CustomComponents/AppoinmentMultiSelection";
-import "../../../Style/SingleCalendar.css";
-import { motion } from "framer-motion";
+import "../../../../Style/SingleCalendar.css";
 import {
   useAppointmentCreateMutation,
   useGetAppointmentAuthorizationActivityMutation,
@@ -15,9 +13,9 @@ import {
   useGetAppointmentPatientNameQuery,
   useGetAppointmentProviderNameQuery,
   useGetAppointmentPOSQuery,
-} from "../../../../features/Appointment_redux/appointmentApi";
-import useToken from "../../../../CustomHooks/useToken";
-import BoolConverter from "../../BoolConverter/BoolConverter";
+} from "../../../../../features/Appointment_redux/appointmentApi";
+import useToken from "../../../../../CustomHooks/useToken";
+import BoolConverter from "../../../BoolConverter/BoolConverter";
 import ProviderMultiSelect from "./NonBillableMultiSelect/ProviderMultiSelect";
 import { toast } from "react-toastify";
 import CreateAppointmentAvailability from "./CreateAppointmentAvailability/CreateAppointmentAvailability";

@@ -6,8 +6,8 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { toast } from "react-toastify";
-import useToken from "../../../../CustomHooks/useToken";
-import { PostfetchData } from "../../../../Misc/Helper";
+import useToken from "../../../../../CustomHooks/useToken";
+import { PostfetchData } from "../../../../../Misc/Helper";
 
 const CreatePatient = ({ handleClose, patientClicked }) => {
   const { token } = useToken();

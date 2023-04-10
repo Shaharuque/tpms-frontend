@@ -3,19 +3,16 @@ import React, { useState } from "react";
 import { BsDownload } from "react-icons/bs";
 import "../../Style/Navigation.css";
 import {
-  BiFullscreen,
   BiExitFullscreen,
   BiMessageRounded,
   BiDotsHorizontal,
 } from "react-icons/bi";
 import {
   AiOutlinePlus,
-  AiOutlineNotification,
   AiOutlineClose,
   AiOutlineFileAdd,
   AiFillUnlock,
 } from "react-icons/ai";
-import { VscSignOut } from "react-icons/vsc";
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.png";
@@ -23,12 +20,11 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { Dropdown, Space } from "antd";
-import Add from "./Add";
+import Add from "./Add/Add";
 import { userLoggedOut } from "../../../features/login_redux/loginSlice";
 import { useDispatch } from "react-redux";
 
-// i am using alakaja
-const TestNaviBar = ({ handle, handleSIdebar }) => {
+const NavigationBar = ({ handle, handleSidebar }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -65,7 +61,7 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
             </div>
           </div>
 
-          <button className="lg:hidden" onClick={handleSIdebar}>
+          <button className="lg:hidden" onClick={handleSidebar}>
             <BiDotsHorizontal className="text-2xl text-secondary ml-[10px]" />
           </button>
         </div>
@@ -508,4 +504,4 @@ const TestNaviBar = ({ handle, handleSIdebar }) => {
   );
 };
 
-export default TestNaviBar;
+export default NavigationBar;

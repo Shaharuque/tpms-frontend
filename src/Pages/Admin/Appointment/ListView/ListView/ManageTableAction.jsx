@@ -56,28 +56,28 @@ const ManageTableAction = ({ row, appointmentId, isLocked }) => {
   return (
     <div>
       {!editSession && !openAddNote && !openViewNote ? (
-        <div className=" bg-white py-2 border shadow-xl flex flex-col items-center z-30  w-[130px] rounded-sm">
+        <div className=" bg-white py-2 border shadow-xl flex flex-col items-center z-30  w-[140px] rounded-sm">
           <div>
             <button
-              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[115px] border border-secondary"
               onClick={() => addNoteHandler()}
             >
               <AiOutlinePlus className="text-sm" /> Add Note
             </button>
             <button
-              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[115px] border border-secondary"
               onClick={viewNoteHandler}
             >
               <AiOutlineEye className="text-sm" /> View Note
             </button>
             <button
-              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[115px] border border-secondary"
               onClick={copyNoteHandler}
             >
               <FiCopy className="text-sm" /> Copy Note
             </button>
             <button
-              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[115px] border border-secondary"
               onClick={addProgramHandler}
             >
               <AiOutlinePlus className="text-sm" /> Add Program
@@ -86,7 +86,7 @@ const ManageTableAction = ({ row, appointmentId, isLocked }) => {
             {isLocked !== 1 && (
               <>
                 <button
-                  className="text-xs text-secondary px-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+                  className="text-xs text-secondary px-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[115px] border border-secondary"
                   onClick={editSessionHandler}
                 >
                   <MdOutlineModeEditOutline className="text-sm" /> Edit Session

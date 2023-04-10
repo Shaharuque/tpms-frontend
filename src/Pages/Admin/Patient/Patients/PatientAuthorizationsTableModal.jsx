@@ -223,67 +223,60 @@ const PatientAuthorizationsTableModal = ({
 
   return (
     <div>
-      <div>
-        <Modal
-          centered
-          open={modalOpen}
-          onCancel={() => setModalOpen(false)}
-          width={1200}
-          className="p-5 box rounded-lg"
-          footer={[
-            <div className=" flex items-end justify-end mt-2">
-              <Link
-                to={`/admin/patient/patient-authorization/${patient_id}`}
-                className=" py-[5px] font-normal px-3 mr-1 text-xs  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm"
-              >
-                Add New Auth
-              </Link>
-
-              <button
-                className=" py-[5px]  px-3  text-xs font-normal bg-gradient-to-r  from-red-700 to-red-400  hover:to-red-700 text-white rounded-sm"
-                autoFocus
-                onClick={() => setModalOpen(false)}
-              >
-                Close
-              </button>
-            </div>,
-          ]}
-        >
-          <div>
-            <div className="flex items-center justify-between">
-              <h1 className="text-lg text-left text-orange-400 ">
-                All Authorizations
-              </h1>
-
-              <IoCloseCircleOutline className="text-gray-600 font-semibold  text-2xl hover:text-primary " />
-            </div>
-            <div className="bg-gray-200 py-[1px] mt-3 "></div>
-            <div className="flex items-center justify-between gap-2 my-2">
-              <h1 className="text-sm text-gray-600 text-left font-semibold ">
-                Auth List
-              </h1>
-            </div>
-
-            {loading ? (
-              <Loading></Loading>
-            ) : (
-              <div className=" overflow-scroll">
-                <Table
-                  sortDirections={["ascend", "descend"]}
-                  pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                  size="small"
-                  className=" text-xs font-normal mt-5"
-                  columns={columns}
-                  bordered
-                  rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                  dataSource={clientAuthorizationData}
-                  onChange={handleChange}
-                />
-              </div>
-            )}
+      <Modal
+        width={1200}
+        open={modalOpen}
+        centered
+        footer={false}
+        closable={false}
+        bodyStyle={{ padding: "0" }}
+        className="box rounded-lg"
+      >
+        <div className="px-5 py-2">
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg text-left text-orange-400 ">
+              All Authorizations
+            </h1>
+            <IoCloseCircleOutline
+              onClick={() => setModalOpen(false)}
+              className="text-gray-500 text-2xl hover:text-primary"
+            />
           </div>
-        </Modal>
-      </div>
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
+          {loading ? (
+            <Loading></Loading>
+          ) : (
+            <div className=" overflow-scroll">
+              <Table
+                sortDirections={["ascend", "descend"]}
+                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                size="small"
+                className=" text-xs font-normal mt-5"
+                columns={columns}
+                bordered
+                rowKey={(record) => record.id} //record is kind of whole one data object and here we are
+                dataSource={clientAuthorizationData}
+                onChange={handleChange}
+              />
+            </div>
+          )}
+          <div className="bg-gray-200 py-[1px] mt-3"></div>
+          <div className=" flex items-end justify-end mt-2">
+            <Link to={`/admin/patient/patient-authorization/${patient_id}`}>
+              <button className=" pms-button mr-2" type="submit">
+                Add New Auth
+              </button>
+            </Link>
+
+            <button
+              className="pms-close-button"
+              onClick={() => setModalOpen(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

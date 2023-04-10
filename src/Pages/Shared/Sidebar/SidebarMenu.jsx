@@ -12,12 +12,13 @@ const SidebarMenu = ({
   dropState,
   handleDropState,
   setSideBar,
+  handleSidebar,
 }) => {
   return (
     <div className="pl-4 py-3 hover:bg-primary text-white">
       <div
         // onBlur={() => setOpen(false)}
-        // onClick={() => setOpen(!open)} 
+        // onClick={() => setOpen(!open)}
         onClick={(_) => {
           handleDropState(items.name);
           setSideBar(false);
@@ -80,11 +81,7 @@ const SidebarMenu = ({
                 >
                   {/* Ai particular part a change kora lagbey */}
                   <div
-                    // className={
-                    //   isHovering
-                    //     ? "mr-2  duration-500 ease-in-out transform text-[16px] font-medium py-1"
-                    //     : "mr-2 opacity-0 ease-out text-[16px]  font-medium hidden"
-                    // }
+                    onClick={handleSidebar}
                     className={
                       isHovering
                         ? "mr-2 opacity-0.5 ease-in text-[16px] w-[187px] font-medium py-1"

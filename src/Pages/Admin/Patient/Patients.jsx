@@ -148,7 +148,7 @@ const TableApi = () => {
         },
       });
       // const result = await res.json();
-      const data = res.data?.clients?.data;
+      const data = res.data?.patients?.data;
       //console.log(data)
       setItems(data);
     };
@@ -166,7 +166,7 @@ const TableApi = () => {
         Authorization: token ? token : null,
       },
     });
-    const data = res.data?.clients?.data;
+    const data = res.data?.patients?.data;
     console.log(data);
     return data;
   };
@@ -289,7 +289,7 @@ const TableApi = () => {
           <div className="">
             <button
               onClick={() => patientDetails(id)}
-              className="text-secondary"
+              className="text-secondary font-medium"
             >
               {client_full_name}
             </button>
@@ -653,6 +653,7 @@ const TableApi = () => {
           loader={<ShimmerTableTet></ShimmerTableTet>}
         >
           <Table
+            bordered
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"

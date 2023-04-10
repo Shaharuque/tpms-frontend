@@ -434,9 +434,7 @@ const ProcessedPayroll = () => {
                     30 days & over
                   </option>
                 </select>
-                <button className="bg-[#34A7B8] px-2 text-white rounded">
-                  Go
-                </button>
+                <button className="pms-button">Go</button>
               </div>
             </div>
           </div>

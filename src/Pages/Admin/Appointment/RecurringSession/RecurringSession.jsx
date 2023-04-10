@@ -388,7 +388,7 @@ const RecurringSession = () => {
               </div>
 
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex gap-2">
+                <div className="flex gap-4">
                   {/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 my-5 mr-2 gap-x-3"> */}
                   <div>
                     <label className="label">
@@ -429,7 +429,10 @@ const RecurringSession = () => {
                   ) : (
                     <></>
                   )}
-                  <button className="pms-button" type="submit">
+                  <button
+                    className=" mb-3 mt-[35px]  pms-white-button"
+                    type="submit"
+                  >
                     Go
                   </button>
                 </div>
