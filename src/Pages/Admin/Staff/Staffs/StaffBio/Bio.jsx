@@ -15,6 +15,7 @@ import Loading from "../../../../../Loading/Loading";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
+import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 const Bio = () => {
   const { id } = useParams();
   const { token } = useToken();
@@ -25,6 +26,7 @@ const Bio = () => {
   const [color, setColor] = useColor("hex", "#121212");
   const [open, setOpen] = useState(false);
   console.log(color.hex);
+  const [signatureUpload, setSignatureUpload] = useState("");
 
   //get satff info api
   const {
@@ -228,7 +230,7 @@ const Bio = () => {
   // let convertedStatus = session_check === 1 ? true : false;
   // console.log("convert ", convertedStatus, "raw api", session_check);
   return (
-    <div className="sm:h-[100vh]">
+    <div className="h-[120vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-3 mr-2 gap-x-6 gap-y-3 ">
@@ -485,56 +487,15 @@ const Bio = () => {
               {...register("taxonomy_code")}
             />
           </div>
-
           <div>
-            <label className="label">
-              <span className=" label-font">
-                Gender <span className="text-red-500">*</span>
-              </span>
-            </label>
-            <div className="flex items-center">
-              <div className="flex ml-1 mt-1 items-center">
-                <input type="radio" value={2} {...register("gender")} />
-                <span className="text-sm ml-1 text-gray-600 font-medium">
-                  female
-                </span>
-              </div>
-              <div className="flex ml-1 mt-1 items-center">
-                <input type="radio" value={1} {...register("gender")} />
-                <span className="text-sm ml-1 text-gray-600 font-medium">
-                  male
-                </span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2 my-5">
-              <Switch
-                checked={createSession}
-                onChange={() => setCreateSession(!createSession)}
-                size="small"
-              />
-              <span>Create Session</span>
-            </div>
-          </div>
-          <div>
-            <div className="flex items-center gap-2 my-5">
-              <Switch
-                checked={emailReminder}
-                onChange={() => setEmailReminder(!emailReminder)}
-                size="small"
-              />
-              <span>Email Reminder</span>
-            </div>
-          </div>
-          <div>
-            <label className="label">
-              <span className=" label-font">Background Color</span>
-            </label>
             <div>
-              <div className={`p-3 bg-[#e37a7a] w-full ml-1`}></div>
-              {/* {open && ( */}
-              {/* <ColorPicker
+              <label className="label">
+                <span className=" label-font">Background Color</span>
+              </label>
+              <div>
+                <div className={`p-3 bg-[#e37a7a] w-full ml-1`}></div>
+                {/* {open && ( */}
+                {/* <ColorPicker
                 width={200}
                 height={100}
                 color={color}
@@ -544,10 +505,55 @@ const Bio = () => {
                 hideRGB
                 hideHEX
               /> */}
-              {/* )} */}
+                {/* )} */}
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center gap-2 ml-1 my-5">
+                <Switch
+                  checked={createSession}
+                  onChange={() => setCreateSession(!createSession)}
+                  size="small"
+                />
+                <span className="text-sm">Create/Edit Session</span>
+              </div>
             </div>
           </div>
-          <div className="sm:col-span-2">
+          <div>
+            <div>
+              <label className="label">
+                <span className=" label-font">
+                  Gender <span className="text-red-500">*</span>
+                </span>
+              </label>
+              <div className="flex items-center">
+                <div className="flex ml-1 mt-1 items-center">
+                  <input type="radio" value={2} {...register("gender")} />
+                  <span className="text-sm ml-1 text-gray-600 font-medium">
+                    female
+                  </span>
+                </div>
+                <div className="flex ml-1 mt-1 items-center">
+                  <input type="radio" value={1} {...register("gender")} />
+                  <span className="text-sm ml-1 text-gray-600 font-medium">
+                    male
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center gap-2 ml-1 my-5">
+                <Switch
+                  checked={emailReminder}
+                  onChange={() => setEmailReminder(!emailReminder)}
+                  size="small"
+                />
+                <span className="text-sm">Email Reminder</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="">
             <label className="label">
               <span className=" label-font">Notes</span>
             </label>
@@ -560,15 +566,22 @@ const Bio = () => {
               {...register("notes")}
             />
           </div>
-        </div>
 
-        <div>
-          <button className=" pms-button mr-2" type="submit">
-            Save
-          </button>
-          <button onClick={reset} className="pms-close-button">
-            Close
-          </button>
+          <div className="ml-2 mt-[12px] ">
+            <CustomFileUploader
+              signatureUpload={signatureUpload}
+              setSignatureUpload={setSignatureUpload}
+            ></CustomFileUploader>
+            <p className="mt-3 text-sm ">Upload Signature</p>
+          </div>
+          <div className="my-5">
+            <button className=" pms-button mr-2" type="submit">
+              Save
+            </button>
+            <button onClick={reset} className="pms-close-button">
+              Close
+            </button>
+          </div>
         </div>
       </form>
     </div>

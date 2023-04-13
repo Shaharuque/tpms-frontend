@@ -29,6 +29,27 @@
     padding: 1px 8px;
 }
 
+.ant-table-wrapper .ant-table-cell-ellipsis .ant-table-column-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+    font-size: 12px;
+    font-family: 'Roboto',
+        sans-serif;
+    letter-spacing: 1px;
+}
+
+.ant-table-wrapper .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>thead>tr>th,
+.ant-table-header>table>thead>tr>th,
+.ant-table-body>table>thead>tr>th,
+.ant-table-summary>table>thead>tr>th {
+    border-inline-end: 1px solid #f0f0f0;
+    font-size: 12px;
+    font-family: 'Roboto',
+        sans-serif;
+    letter-spacing: 1px;
+}
+
 
 .ant-table-wrapper .ant-table-thead th.ant-table-column-has-sorters:hover {
     background: #007d88;

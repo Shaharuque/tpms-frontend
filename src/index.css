@@ -317,6 +317,9 @@ select option:hover {
   }
 }
 
+input[name="gender"] {
+  accent-color: teal;
+}
 
 /* button:disabled,
 button[disabled]{
