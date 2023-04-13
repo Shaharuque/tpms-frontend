@@ -11,7 +11,7 @@
 .setting-nav {
     border: 0.1px solid #c2c2c28e;
     box-shadow: 0px 0px 16px -1px #adadad;
-    height: auto;
+    height: 100%;
     padding-left: 15px;
     padding-right: 15px;
 }

@@ -101,7 +101,7 @@ const Intake = () => {
   };
   return (
     <div>
-      <div className="sm:h-[100vh]">
+      <div className="">
         <h1 className="text-lg mt-2 text-orange-500">Intake Form Uploads</h1>
         <div className="my-2">
           <div className="flex justify-end items-center mr-2">
@@ -118,9 +118,9 @@ const Intake = () => {
               className=" text-xs font-normal "
               columns={column}
               dataSource={allData}
-              // scroll={{
-              //   y: 700,
-              // }}
+              scroll={{
+                y: 700,
+              }}
               onChange={handleChange}
             />
           </div>
