@@ -374,7 +374,7 @@ const Processing_Payroll = () => {
           </div>
 
           <button
-            className="pms-button  mt-[25px]"
+            className="pms-button  mt-[24px]"
             type="submit"
             onClick={() => setTable(true)}
           >

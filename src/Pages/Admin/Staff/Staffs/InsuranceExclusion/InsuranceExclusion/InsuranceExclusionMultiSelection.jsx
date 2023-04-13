@@ -190,7 +190,7 @@ const InsuranceExclusionMultiSelection = () => {
         className={
           isToggled
             ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1"
-            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1"
+            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2 gap-x-2 gap-y-1"
         }
       >
         <div className="w-full">

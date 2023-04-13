@@ -1,4 +1,4 @@
-import { Dropdown, Space, Table } from "antd";
+import { DatePicker, Dropdown, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Calendar } from "react-calendar";
@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { BsArrowRight, BsThreeDots } from "react-icons/bs";
 import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
 import PendingSecondaryClaimModal from "./PendingSecondaryClaim/PendingSecondaryClaimModal";
+import moment from "moment";
 
 const PendingSecondaryClaim = () => {
   const [insurance, setInsurance] = useState(false);
@@ -286,50 +287,27 @@ const PendingSecondaryClaim = () => {
                   To Date<span className="text-red-500">*</span>
                 </span>
               </label>
-              <input
-                onClick={() => setOpenSingleCalendar(!openSingleCalendar)}
-                value={date ? date.toLocaleDateString() : "Select a Date"}
-                className="input-border input-font w-full focus:outline-none"
-                {...register("date")}
-              />
-              {/* single calendar */}
-              {openSingleCalendar && (
-                <div className="col-span-2 w-[60%] xl:w-[20%] md:w-[25%] mt-1 rounded my-0 absolute z-10 bg-white single-date p-1">
-                  <Calendar onChange={setDate} value={date} />
-                  <div className="bg-gray-200 py-[1px] "></div>
-                  <div className="flex justify-between bg-white p-1">
-                    <button
-                      onClick={() => handleSingleClearDate()}
-                      className="pms-clear-button"
-                    >
-                      CLEAR
-                    </button>
-                    <div>
-                      <button
-                        onClick={() => setOpenSingleCalendar(false)}
-                        className=" pms-button mr-2"
-                        type="submit"
-                      >
-                        OK
-                      </button>
-                      <button
-                        className="pms-close-button"
-                        onClick={() => handleSingleCancelDate()}
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
+              <div className="flex items-end w-full">
+                <Space direction="vertical">
+                  <DatePicker
+                    autoFocus={false}
+                    size="middle"
+                    style={{}}
+                    // onChange={onChange}
+                    // Disabled future Dates
+                    className="input-border input-font w-full focus:outline-none border-none focus:border-none"
+                    disabledDate={(current) => current.isAfter(moment())}
+                  />
+                </Space>
+                {/* <AiOutlineCalendar className="ml-[-1.9px] mb-[-3px] font-semibold text-primary text-2xl" /> */}
+              </div>
             </div>
             {/* go*/}
-            <button
-              onClick={handleGO}
-              className=" mt-[26px] w-12 pms-input-button"
-            >
-              Go
-            </button>
+            <div className="flex items-end">
+              <button onClick={handleGO} className="pms-button mb-[1px]">
+                Go
+              </button>
+            </div>
           </div>
 
           {insurance && (

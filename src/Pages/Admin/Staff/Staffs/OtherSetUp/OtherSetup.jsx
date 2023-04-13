@@ -472,8 +472,10 @@ const OtherSetup = () => {
         <div className="other-box ml-2 my-5">
           <div className="flex items-center justify-around gap-2 mb-2 ">
             <h3 className="text-sm font-medium w-80">Tax Type</h3>
-            <h3 className="text-sm font-medium w-80">Box 24J</h3>
-            <h3 className="text-sm font-medium w-80">ID Qualifier</h3>
+            <h3 className="text-sm font-medium w-80 text-center">Box 24J</h3>
+            <h3 className="text-sm font-medium w-80 text-center">
+              ID Qualifier
+            </h3>
           </div>
 
           {/* {!otherSetupLoading ? (

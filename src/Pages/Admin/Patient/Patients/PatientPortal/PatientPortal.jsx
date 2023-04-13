@@ -162,7 +162,6 @@ const PatientPortal = () => {
           </div>
         </div>
       </div>
-      <div className="divider"></div>
     </div>
   );
 };

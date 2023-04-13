@@ -398,17 +398,11 @@ const ManageClaims = () => {
               </>
             )}
             {/* submit  */}
-            <div className="flex mb-10 gap-2">
-              <button
-                className="mt-8 bg-[#34A7B8] rounded-sm text-white px-2 shadow-md shadow-gray-600 h-8"
-                type="submit"
-              >
+            <div className="flex mt-[22px] gap-2">
+              <button className="pms-button" type="submit">
                 Get Claim(s)
               </button>
-              <button
-                className="bg-[#b91c1c] rounded-sm text-white shadow-md shadow-gray-800 mt-8 px-2"
-                type="button"
-              >
+              <button className="pms-close-button" type="button">
                 Cancel
               </button>
             </div>

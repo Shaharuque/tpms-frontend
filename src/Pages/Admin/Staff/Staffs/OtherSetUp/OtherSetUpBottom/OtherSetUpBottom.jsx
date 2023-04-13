@@ -13,7 +13,7 @@ const OtherSetUpBottom = ({ propdata }) => {
         txTypedata.map((field, index) => {
           return (
             <div key={field.id} className="flex items-center gap-2 mb-2">
-              <h3 className="text-[14px] font-medium w-[440px]">
+              <h3 className="text-[14px] ml-5 font-medium w-[440px]">
                 {field?.treatment_name}
               </h3>
 

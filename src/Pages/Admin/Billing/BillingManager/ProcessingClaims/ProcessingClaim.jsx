@@ -549,58 +549,23 @@ const ProcessingClaim = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" flex items-center gap-4 flex-wrap">
             {/* <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-6 2xl:grid-cols-7  mr-2 gap-6"> */}
-            <div className="flex gap-[4px] mb-[6px]">
+            <div className="flex gap-2 mb-[6px]">
               <div className="">
                 <label className="label">
                   <span className=" label-font">
                     To Date<span className="text-red-500">*</span>
                   </span>
                 </label>
-                {/* <input                                        
-                  onClick={() => setOpenSingleCalendar(!openSingleCalendar)}
-                  value={date ? date.toLocaleDateString() : "Select a Date"}
-                  className="input-border input-font w-full focus:outline-none py-[1px]"
-                  {...register("date")}
-                />
-    
-                {openSingleCalendar && (
-                  <div className="col-span-2 w-[60%] xl:w-[20%] md:w-[25%] mt-1 rounded my-0 absolute z-10 bg-white single-date p-1">
-                    <Calendar onChange={setDate} value={date} />
-                    <div className="bg-gray-200 py-[1px] "></div>
-                    <div className="flex justify-between bg-white p-1">
-                      <button
-                        onClick={() => handleSingleClearDate()}
-                        className="pms-clear-button"
-                      >
-                        CLEAR
-                      </button>
-                      <div>
-                        <button
-                          onClick={() => setOpenSingleCalendar(false)}
-                          className=" pms-button mr-2"
-                          type="submit"
-                        >
-                          OK
-                        </button>
-                        <button
-                          className="pms-close-button"
-                          onClick={() => handleSingleCancelDate()}
-                        >
-                          Close
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )} */}
+
                 <div className="flex items-end w-full">
                   <Space direction="vertical">
                     <DatePicker
                       autoFocus={false}
-                      bordered
                       size="middle"
                       style={{}}
                       onChange={onChange}
                       // Disabled future Dates
+                      className="input-border input-font w-full focus:outline-none border-none focus:border-none"
                       disabledDate={(current) => current.isAfter(moment())}
                     />
                   </Space>
@@ -609,10 +574,7 @@ const ProcessingClaim = () => {
               </div>
 
               <div className="flex items-end">
-                <button
-                  onClick={handleGO}
-                  className=" bg-[#34A7B8] rounded-sm text-white w-12 h-8 shadow-md shadow-gray-800"
-                >
+                <button onClick={handleGO} className="pms-button mb-[1px]">
                   Go
                 </button>
               </div>
@@ -628,14 +590,16 @@ const ProcessingClaim = () => {
                     </span>
                   </label>
 
-                  <InsuranceMultiSelect
-                    selected={selected}
-                    setSelected={setSelected}
-                    payorData={responsePayorData?.all_payor || []}
-                    payorLoading={payorLoading}
-                    setInsuranceSelect={setInsuranceSelect}
-                    setSortBy1={setSortBy1}
-                  />
+                  <div className="mt-1">
+                    <InsuranceMultiSelect
+                      selected={selected}
+                      setSelected={setSelected}
+                      payorData={responsePayorData?.all_payor || []}
+                      payorLoading={payorLoading}
+                      setInsuranceSelect={setInsuranceSelect}
+                      setSortBy1={setSortBy1}
+                    />
+                  </div>
                 </div>
                 {/* Sort By  */}
                 <div>
@@ -696,7 +660,6 @@ const ProcessingClaim = () => {
                               className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
                             />
                           </div>
-
                           {/* Multi date picker component called */}
                           <div
                             ref={refClose}
@@ -1050,17 +1013,11 @@ const ProcessingClaim = () => {
                   </>
                 )}
                 {/* submit  */}
-                <div className="flex gap-2">
-                  <button
-                    className=" bg-[#34A7B8] rounded-sm text-white px-2 shadow-md shadow-gray-600 h-8"
-                    type="submit"
-                  >
+                <div className="flex mt-6 gap-2">
+                  <button className="pms-button" type="submit">
                     Run
                   </button>
-                  <button
-                    className="bg-[#b91c1c] rounded-sm text-white shadow-md shadow-gray-800  px-2"
-                    type="button"
-                  >
+                  <button className="pms-close-button" type="button">
                     Cancel
                   </button>
                 </div>

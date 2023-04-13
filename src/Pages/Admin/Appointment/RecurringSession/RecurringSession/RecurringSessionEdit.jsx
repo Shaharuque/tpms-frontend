@@ -29,11 +29,8 @@ const RecurringSessionEdit = () => {
         <h1 className="text-sm md:text-lg text-gray-700">
           Edit Recurring Session
         </h1>
-        <div className="flex items-center gap-3">
-          <Link
-            to={"/admin/recurring-session"}
-            className=" py-[6px] flex items-center px-2 md:px-4 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded"
-          >
+        <div className="pms-button">
+          <Link to={"/admin/recurring-session"} className=" flex items-center">
             <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
           </Link>
         </div>

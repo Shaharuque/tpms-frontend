@@ -171,9 +171,9 @@ const ServiceSubTypeExclusions = () => {
         className={
           isToggled
             ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1"
-            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2  gap-y-1"
-        }                                                            
-      >o
+            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2 gap-x-2  gap-y-1"
+        }
+      >
         {/* <div className="flex flex-wrap gap-y-1"> */}
         <div className="w-full">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
@@ -186,7 +186,7 @@ const ServiceSubTypeExclusions = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {subActivityData.length > 0 &&                                                                   
+            {subActivityData.length > 0 &&
               subActivityData?.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.sub_activity}
@@ -235,7 +235,7 @@ const ServiceSubTypeExclusions = () => {
           </>
         </div>
       </div>
-    </div>                                                  
+    </div>
   );
 };
 

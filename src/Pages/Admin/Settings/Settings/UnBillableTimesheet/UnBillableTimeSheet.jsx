@@ -454,6 +454,7 @@ const UnBillableTimeSheet = () => {
       <div className="my-2">
         <div className=" overflow-scroll py-3">
           <Table
+            bordered
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"

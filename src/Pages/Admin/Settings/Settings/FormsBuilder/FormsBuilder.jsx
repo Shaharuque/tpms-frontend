@@ -128,6 +128,7 @@ const FormsBuilder = () => {
         </div>
         <div className=" overflow-scroll pt-3">
           <Table
+            bordered
             rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
