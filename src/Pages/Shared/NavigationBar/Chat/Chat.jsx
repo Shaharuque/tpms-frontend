@@ -29,8 +29,8 @@ const Chat = () => {
             </div>
           </div>
           {/* <!-- end header -->
-    <!-- Chatting --> */}
-          <div class="flex flex-row justify-between bg-white">
+           <!-- Chatting --> */}
+          <div class="flex flex-row   justify-between bg-white">
             {/* <!-- chat list --> */}
             <div class="flex flex-col w-2/5 border-r-2 overflow-y-auto">
               {/* <!-- search compt --> */}
@@ -42,7 +42,7 @@ const Chat = () => {
                 />
               </div>
               {/* <!-- end search compt -->
-        <!-- user list --> */}
+           <!-- user list --> */}
               <div class="flex flex-row py-4 px-2 justify-center items-center border-b-2">
                 <div class="w-1/4">
                   <img
@@ -131,7 +131,7 @@ const Chat = () => {
               {/* <!-- end user list --> */}
             </div>
             {/* <!-- end chat list -->
-      <!-- message --> */}
+           <!-- message --> */}
             <div class="w-full px-5 flex flex-col justify-between">
               <div class="flex flex-col mt-5">
                 <div class="flex justify-end mb-4">
