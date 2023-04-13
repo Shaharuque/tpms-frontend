@@ -58,6 +58,7 @@ const CustomFileUploader = ({ setSignatureUpload }) => {
       <Upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
+        fileList={fileList}
         onPreview={handlePreview}
         onChange={handleFileChange}
       >
@@ -78,6 +79,31 @@ const CustomFileUploader = ({ setSignatureUpload }) => {
         />
       </Modal>
     </>
+
+    // <>
+    //   <Upload
+    //     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+    //     listType="picture-card"
+    //     onPreview={handlePreview}
+    //     onChange={handleFileChange}
+    //   >
+    //     {fileList.length >= 1 ? null : uploadButton}
+    //   </Upload>
+    //   <Modal
+    //     open={previewOpen}
+    //     title={previewTitle}
+    //     footer={null}
+    //     onCancel={handleCancel}
+    //   >
+    //     <img
+    //       alt="example"
+    //       style={{
+    //         width: "100%",
+    //       }}
+    //       src={previewImage}
+    //     />
+    //   </Modal>
+    // </>
   );
 };
 

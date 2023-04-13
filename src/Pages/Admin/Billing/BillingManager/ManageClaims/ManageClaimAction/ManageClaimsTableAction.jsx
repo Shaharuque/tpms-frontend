@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { AiFillEye, AiOutlineEye, AiOutlinePlus } from "react-icons/ai";
-import { MdHistory, MdOutlineEditNote, MdOutlineModeEditOutline } from "react-icons/md";
+import {
+  MdHistory,
+  MdOutlineEditNote,
+  MdOutlineModeEditOutline,
+} from "react-icons/md";
 import { Menu } from "antd";
 import SessionAddNote from "../../../../Appointment/ListView/ListView/SessionAddNote";
 import SessionViewNote from "../../../../Appointment/ListView/ListView/SessionViewNote";
@@ -43,29 +47,29 @@ const ManageClaimsTableAction = ({ row }) => {
   return (
     <div>
       {!editSession && !openAddNote && !openViewNote ? (
-        <div className=" bg-white py-2 border shadow-xl flex flex-col items-center z-30  w-[130px] rounded-sm">
+        <div className=" bg-white py-2 border shadow-xl flex flex-col items-center z-30  w-[170px] rounded-sm">
           <div>
             <button
-              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[150px] border border-secondary"
               onClick={() => addNoteHandler()}
             >
-              <AiFillEye className="text-sm" /> View Hcfa
+              <AiFillEye className="text-sm" /> View HCFA
             </button>
             <button
-              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[150px] border border-secondary"
               onClick={viewNoteHandler}
             >
-              <RiDownloadLine className="text-sm" /> Downlod Edi
+              <RiDownloadLine className="text-sm" /> Downlod EDI
             </button>
             <button
-              className="text-xs text-secondary px-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              className="text-xs text-secondary px-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[150px] border border-secondary"
               onClick={editSessionHandler}
             >
-              <MdHistory className="text-sm" /> View History
+              <MdHistory className="text-sm" /> Revalidate 277CA
             </button>
 
             <button
-              className="text-xs text-secondary mt-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold  w-[110px] border border-secondary"
+              className="text-xs text-secondary px-2 mt-2 py-1 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold  w-[150px] border border-secondary gap-1"
               onClick={editSessionHandler}
             >
               <MdOutlineEditNote className="text-sm" /> Corrected Claim
@@ -88,11 +92,13 @@ const ManageClaimsTableAction = ({ row }) => {
         ></SessionViewNote>
       )}
       {editSession && (
-        <CorrectedClaim handleClose={handleClose} open={editSession}></CorrectedClaim>
+        <CorrectedClaim
+          handleClose={handleClose}
+          open={editSession}
+        ></CorrectedClaim>
       )}
     </div>
   );
 };
 
 export default ManageClaimsTableAction;
-
