@@ -50,6 +50,10 @@
     letter-spacing: 1px;
 }
 
+.anticon-plus {
+    display: none;
+}
+
 
 .ant-table-wrapper .ant-table-thead th.ant-table-column-has-sorters:hover {
     background: #007d88;

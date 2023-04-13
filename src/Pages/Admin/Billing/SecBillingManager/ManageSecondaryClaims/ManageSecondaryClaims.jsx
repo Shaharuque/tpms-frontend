@@ -1,43 +1,97 @@
 import { DatePicker, Dropdown, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { Calendar } from "react-calendar";
 import { useForm } from "react-hook-form";
-import { BsArrowRight, BsThreeDots } from "react-icons/bs";
-import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
-import ManageSecondaryClaimsModal from "./ManageSecondaryClaimsModal/ManageSecondaryClaimsModal";
-import moment from "moment";
+import { FiDownload } from "react-icons/fi";
+import ManageClaimsTableAction from "../../BillingManager/ManageClaims/ManageClaimAction/ManageClaimsTableAction";
+import {
+  useGet24jProviderManageClaimMutation,
+  useGetManageClaimActivityMutation,
+  useGetPayorManageClaimMutation,
+  useGetTxProviderManageClaimMutation,
+} from "../../../../../features/Billing_redux/Primary_Billing_redux/manageClaimApi";
+import { useToken } from "antd/es/theme/internal";
+import { BsThreeDots } from "react-icons/bs";
 
 const ManageSecondaryClaims = () => {
-  const [insurance, setInsurance] = useState(false);
-  const [insuranceSelect, setInsuranceSelect] = useState("");
-  const [sortBy1, setSortBy1] = useState("");
-  const [sortBy2, setSortBy2] = useState("");
-  const [TData, setTData] = useState([]);
-  const [date, setDate] = useState(new Date());
-  const [openSingleCalendar, setOpenSingleCalendar] = useState(false);
-
-  const handleSingleClearDate = () => {
-    setOpenSingleCalendar(false);
-    setDate(null);
-  };
-
-  const handleSingleCancelDate = () => {
-    setOpenSingleCalendar(false);
-    setDate(new Date());
-  };
-
+  const [active, setActive] = useState(false);
+  const [nextActive, setNextActive] = useState(false);
+  const [tActive, setTActive] = useState(false);
+  const [select, setSelect] = useState("");
+  const [sortBy, setSortBy] = useState("");
+  const [sort_By, setSort_By] = useState("");
+  const [selectedSortOptionOne, setSelectedSortOptionOne] = useState(null);
+  const [ManageClimbsData, SetManageClimbsData] = useState([]);
+  const { handleSubmit, register, reset } = useForm();
   // table
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [tableOpen, setTableOpen] = useState(false);
-  console.log(sortBy2);
+  const { token } = useToken();
 
-  // calling fake db
+  console.log("selected sorted option one", selectedSortOptionOne);
+
+  //Manage Claim Get Payor
+  const [getPayorManageClaim, { data: payorData, isLoading: payorLoading }] =
+    useGetPayorManageClaimMutation();
+
+  //Manage Claim Get TX Provider
+  const [
+    getTxProviderManageClaim,
+    { data: txProviderData, isLoading: txProviderLoading },
+  ] = useGetTxProviderManageClaimMutation();
+
+  //Manage Claim Get CMS Provider(24J)
+  const [
+    get24jProviderManageClaim,
+    { data: CMSProviderData, isLoading: CMSProviderLoading },
+  ] = useGet24jProviderManageClaimMutation();
+
+  //Manage Claim Get Activity Type
+  const [
+    getManageClaimActivity,
+    { data: activityData, isLoading: activityLoading },
+  ] = useGetManageClaimActivityMutation();
+
+  // API calling Based on the selected option by SortBy
   useEffect(() => {
-    axios("../../All_Fake_Api/ProcessingClaims.json")
+    if (sortBy === "Insurance") {
+      getPayorManageClaim(token);
+    }
+    if (sortBy === "Tx Provider") {
+      getTxProviderManageClaim(token);
+    }
+    if (sortBy === "24J Provider") {
+      get24jProviderManageClaim(token);
+    }
+    if (sortBy === "Service Type") {
+      getManageClaimActivity(token);
+    }
+  }, [sortBy, token]);
+
+  const allInsurance = payorData?.payors || [];
+  const allCMSProvider = CMSProviderData?.cms_provider || [];
+  const allActivity = activityData?.activity_type || [];
+
+  const onSubmit = (data) => {
+    // console.log(data);
+    setTActive(true);
+    reset();
+  };
+  const handleSortBy = (e) => {
+    setSortBy(e.target.value);
+    setActive(true);
+  };
+  const handleSort_By = (e) => {
+    setSort_By(e.target.value);
+    setNextActive(true);
+  };
+
+  // fakedb call
+  useEffect(() => {
+    axios("../../All_Fake_Api/ManageClimbs.json")
       .then((response) => {
-        setTData(response?.data);
+        SetManageClimbsData(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -46,119 +100,116 @@ const ManageSecondaryClaims = () => {
 
   const columns = [
     {
-      title: "Claims",
-      dataIndex: "M1",
-      key: "M1",
-      width: 80,
-      render: (_, { M1 }) => {
+      title: "Claim",
+      dataIndex: "claim",
+      key: "claim",
+      width: 50,
+      render: (_, { claim }) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{M1}</div>;
+        return <div className=" text-secondary">{claim}</div>;
       },
       sorter: (a, b) => {
-        return a.M1 > b.M1 ? -1 : 1;
+        return a.claim > b.claim ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "M1" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "claim" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
     {
       title: "Payor",
-      dataIndex: "Dos",
-      key: "Dos",
-      width: 90,
-      render: (_, { Dos }) => {
+      dataIndex: "claim_info",
+      key: "claim_info",
+      width: 70,
+      render: (_, { claim_info }) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{Dos}</div>;
+        return <div className=" text-secondary">{claim_info}</div>;
       },
       sorter: (a, b) => {
-        return a.Dos > b.Dos ? -1 : 1;
+        return a.claim_info > b.claim_info ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "Dos" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
     {
-      title: "Patients",
-      dataIndex: "ServiceHrs",
-      key: "ServiceHrs",
-      width: 100,
+      title: "Patient",
+      dataIndex: "patient",
+      key: "patient",
+      width: 50,
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.ServiceHrs > b.ServiceHrs ? -1 : 1; //sorting problem solved using this logic
+        return a.patient > b.patient ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "ServiceHrs" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "patient" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
     {
       title: "Date Range",
-      key: "TxProvider",
-      dataIndex: "TxProvider",
-      width: 80,
+      key: "date_range",
+      dataIndex: "date_range",
+      width: 50,
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.TxProvider > b.TxProvider ? -1 : 1; //sorting problem solved using this logic
+        return a.date_range > b.date_range ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
-        sortedInfo.columnKey === "TxProvider" ? sortedInfo.order : null,
+        sortedInfo.columnKey === "date_range" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Total",
-      dataIndex: "M1",
-      key: "M1",
-      width: 70,
-      sorter: (a, b) => {
-        return a.M1 > b.M1 ? -1 : 1;
-        // a.Scheduled_Date - b.Scheduled_Date
-      },
-      sortOrder: sortedInfo.columnKey === "M1" ? sortedInfo.order : null,
-      ellipsis: true,
-      render: (_, { M1 }) => {
-        //console.log("tags : ", lock);
-        return <div className=" text-end">{M1}</div>;
-      },
-    },
-    {
-      title: "F. Billed Dt.",
-      dataIndex: "Pos",
-      key: "Pos",
-      width: 70,
-      sorter: (a, b) => {
-        return a.Pos > b.Pos ? -1 : 1;
-        // a.Pos - b.Pos,
-      },
-      sortOrder: sortedInfo.columnKey === "Pos" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "L Billed Dt.",
-      key: "M1",
-      dataIndex: "M1",
+      dataIndex: "total",
+      key: "total",
       width: 50,
       sorter: (a, b) => {
-        return a.M1 > b.M1 ? -1 : 1;
+        return a.total > b.total ? -1 : 1;
+        // a.Scheduled_Date - b.Scheduled_Date
+      },
+      sortOrder: sortedInfo.columnKey === "total" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "F.Billed Dt.",
+      dataIndex: "F_billed",
+      key: "F_billed",
+      width: 50,
+      sorter: (a, b) => {
+        return a.F_billed > b.F_billed ? -1 : 1;
         // a.Pos - b.Pos,
       },
-      sortOrder: sortedInfo.columnKey === "M1" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "F_billed" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "L.Billed Dt.",
+      key: "L_billed",
+      dataIndex: "L_billed",
+      width: 50,
+      sorter: (a, b) => {
+        return a.L_billed > b.L_billed ? -1 : 1;
+        // a.Pos - b.Pos,
+      },
+      sortOrder: sortedInfo.columnKey === "L_billed" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
     {
       title: "Action",
-      dataIndex: "operation",
-      key: "operation",
-      width: 60,
+      key: "M2",
+      dataIndex: "M2",
+      width: 50,
+      sorter: (a, b) => {
+        return a.M2 > b.M2 ? -1 : 1;
+        // a.Pos - b.Pos,
+      },
+      sortOrder: sortedInfo.columnKey === "M2" ? sortedInfo.order : null,
+      ellipsis: true,
+
       render: (_, { id }) => (
         <div className="flex justify-center">
           <Dropdown
-            overlay={
-              <ManageSecondaryClaimsModal
-              // id={id}
-              // depositDetailsHandler={depositDetailsHandler}
-              ></ManageSecondaryClaimsModal>
-            }
+            overlay={<ManageClaimsTableAction></ManageClaimsTableAction>}
             trigger={["click"]}
             overlayStyle={{ zIndex: "100" }}
           >
@@ -170,11 +221,6 @@ const ManageSecondaryClaims = () => {
           </Dropdown>
         </div>
       ),
-      sorter: (a, b) => {
-        return a.id > b.id ? -1 : 1;
-      },
-      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
-      ellipsis: true,
     },
   ];
 
@@ -183,6 +229,8 @@ const ManageSecondaryClaims = () => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+
+  //
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -200,215 +248,148 @@ const ManageSecondaryClaims = () => {
     },
   };
 
-  // -------------------
-
-  const handleGO = () => {
-    setInsurance(true);
-  };
-
-  const { handleSubmit, register, reset } = useForm();
-  const onSubmit = (data) => {
-    reset();
-  };
-
-  //Date converter function [yy-mm-dd]
-  function convert(str) {
-    let date = new Date(str),
-      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-      day = ("0" + date.getDate()).slice(-2);
-    return [date.getFullYear(), mnth, day].join("-");
-  }
-
-  //Date Range Picker
-  const [openCalendar, setOpenCalendar] = useState(false);
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: "selection",
-    },
-  ]);
-
-  const handleCancelDate = () => {
-    setRange([
-      {
-        startDate: new Date(),
-        endDate: null,
-        key: "selection",
-      },
-    ]);
-    setOpenCalendar(false);
-  };
-
-  // date range picker calendar
-  const startDate = range ? range[0]?.startDate : null;
-  const endDate = range ? range[0]?.endDate : null;
-  const startMonth = startDate
-    ? startDate.toLocaleString("en-us", { month: "short" })
-    : null;
-  const endMonth = endDate
-    ? endDate.toLocaleString("en-us", { month: "short" })
-    : null;
-  const startDay = startDate ? startDate.getDate() : null;
-  const endDay = endDate ? endDate.getDate() : null;
-  const startYear = startDate
-    ? startDate.getFullYear().toString().slice(2, 4)
-    : null;
-  const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
-
-  //test design
-  const [clicked, setClicked] = useState(false);
-  const clickHandler = () => {
-    setClicked(true);
-  };
-
-  // Hide calendar on outside click
-  const refClose = useRef(null);
-  useEffect(() => {
-    document.addEventListener("click", hideOnClickOutside, true);
-  }, []);
-
-  // Hide dropdown on outside click
-  const hideOnClickOutside = (e) => {
-    if (refClose.current && !refClose.current.contains(e.target)) {
-      setOpenCalendar(false);
-    }
-  };
-  //end outside click
-  //end outside click
   return (
-    <div className={!tableOpen ? "h-[100vh]" : ""}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 items-center md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-7  mr-2 gap-6">
-          <div className="flex gap-3">
-            <div className="">
-              <label className="label">
-                <span className=" label-font">
-                  To Date<span className="text-red-500">*</span>
-                </span>
-              </label>
+    <div className={!tActive ? "h-[100vh]" : ""}>
+      {/* <h1 className="text-lg text-orange-400">Manage Claim(s)</h1> */}
 
-              <div className="flex items-end w-full">
-                <Space direction="vertical">
-                  <DatePicker
-                    autoFocus={false}
-                    size="middle"
-                    style={{}}
-                    // onChange={onChange}
-                    // Disabled future Dates
-                    className="input-border input-font w-full focus:outline-none border-none focus:border-none"
-                    disabledDate={(current) => current.isAfter(moment())}
-                  />
-                </Space>
-                {/* <AiOutlineCalendar className="ml-[-1.9px] mb-[-3px] font-semibold text-primary text-2xl" /> */}
-              </div>
-            </div>
-            {/* go*/}
-          </div>
-
-          {insurance && (
-            <>
-              {/* insurance  */}
-              <div>
-                <label className="label">
-                  <span className=" label-font">
-                    Insurance<span className="text-red-500">*</span>
-                  </span>
-                </label>
-                <select
-                  onChange={(e) => setInsuranceSelect(e.target.value)}
-                  name="type"
-                  className="input-border input-font w-full focus:outline-none"
-                >
-                  <option value="all">All</option>
-                  <option value="patient">Patient</option>
-                  <option value="provider">Provider</option>
-                </select>
-              </div>
+      <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex items-end justify-between">
+            <div className=" flex items-center gap-4 flex-wrap">
               {/* Sort By  */}
               <div>
                 <label className="label">
-                  <span className=" label-font">
-                    Sort By<span className="text-red-500">*</span>
-                  </span>
+                  <span className=" label-font">Sort By</span>
                 </label>
                 <select
-                  onChange={(e) => setSortBy1(e.target.value)}
+                  onChange={handleSortBy}
                   name="type"
-                  className="input-border input-font w-full focus:outline-none"
+                  className="input-border input-font md:w-full w-[200px] focus:outline-none"
                 >
-                  <option value="Patient">Patient(s)</option>
-                  <option value="Tx Providers">Tx Providers</option>
-                  <option value="CMS Therapist">CMS Therapist</option>
+                  <option value=""></option>
+                  <option value="Batch">Batch</option>
+                  <option value="Claim">Claim</option>
+                  <option value="Insurance">Insurance</option>
+                  <option value="Patients">Patients</option>
+                  <option value="Tx Provider">Tx Provider</option>
+                  <option value="24J Provider">24J Provider</option>
                   <option value="Service Type">Service Type</option>
-                  <option value="Claim Status">Claim Status</option>
                   <option value="Date Range">Date Range</option>
-                  <option value="Degree Level">Degree Level</option>
-                  <option value="Region">Region</option>
-                  <option value="M1 Code">M1 Code</option>
-                  <option value="Zero Units">Zero Units</option>
-                  <option value="Place Of Service">Place Of Service</option>
-                  <option value="Modifier">Modifier</option>
+                  <option value="Date of Submission">Date of Submission</option>
                 </select>
               </div>
-              {sortBy1 && (
+              {active && (
                 <>
-                  {sortBy1 === "Date Range" ? (
-                    <div>
-                      <label className="label">
-                        <span className=" label-font">{sortBy1}</span>
-                      </label>
-                      <div className="ml-1">
-                        <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
-                          <input
-                            value={
-                              startDate
-                                ? `${startMonth} ${startDay}, ${startYear}`
-                                : "Start Date"
-                            }
-                            readOnly
-                            onClick={() => setOpenCalendar(true)}
-                            className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
-                          />
-                          <BsArrowRight
-                            onClick={() => setOpenCalendar(true)}
-                            className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                          ></BsArrowRight>
-                          <input
-                            value={
-                              endDate
-                                ? `${endMonth} ${endDay}, ${endYear}`
-                                : "End Date"
-                            }
-                            readOnly
-                            onClick={() => setOpenCalendar(true)}
-                            className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
-                          />
-                        </div>
-
-                        {/* Multi date picker component called */}
-                        <div
-                          ref={refClose}
-                          className="absolute z-10  border md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
-                        >
-                          {openCalendar && (
-                            <CustomDateRange
-                              range={range}
-                              setRange={setRange}
-                              handleCancelDate={handleCancelDate}
-                              setOpen={setOpenCalendar}
-                            ></CustomDateRange>
+                  {" "}
+                  {/* Sort By-1 */}
+                  <div>
+                    <label className="label">
+                      <span className=" label-font">{sortBy}</span>
+                    </label>
+                    <select
+                      disabled={
+                        payorLoading ||
+                        txProviderLoading ||
+                        CMSProviderLoading ||
+                        activityLoading
+                          ? true
+                          : false
+                      }
+                      onChange={(e) => setSelectedSortOptionOne(e.target.value)}
+                      name="type"
+                      className="input-border input-font md:w-full w-[200px] focus:outline-none"
+                    >
+                      {sortBy === "Insurance" && (
+                        <>
+                          <option value="0">Select</option>
+                          {allInsurance?.length > 0 && (
+                            <>
+                              {allInsurance?.map((ins) => {
+                                return (
+                                  <option value={ins?.payor_id} key={ins?.id}>
+                                    {ins?.payor_name}
+                                  </option>
+                                );
+                              })}
+                            </>
                           )}
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
+                        </>
+                      )}
+                      {sortBy === "Tx Provider" && (
+                        <>
+                          <option value="0">Select</option>
+                          {txProviderData?.length > 0 && (
+                            <>
+                              {txProviderData?.map((txP) => {
+                                return (
+                                  <option value={txP?.id} key={txP?.id}>
+                                    {txP?.full_name}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </>
+                      )}
+                      {sortBy === "24J Provider" && (
+                        <>
+                          <option value="0">Select</option>
+                          {allCMSProvider?.length > 0 && (
+                            <>
+                              {allCMSProvider?.map((cmsP) => {
+                                return (
+                                  <option value={cmsP?.id} key={cmsP?.id}>
+                                    {cmsP?.full_name}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </>
+                      )}
+                      {sortBy === "Service Type" && (
+                        <>
+                          <option value="0">Select</option>
+                          {allActivity?.length > 0 && (
+                            <>
+                              {allActivity?.map((activity) => {
+                                return (
+                                  <option
+                                    value={activity?.id}
+                                    key={activity?.id}
+                                  >
+                                    {activity?.activity_one}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </>
+                      )}
+                    </select>
+                  </div>
+                  {/* Sort By-2  */}
+                  <div>
+                    <label className="label">
+                      <span className=" label-font">Sort By</span>
+                    </label>
+                    <select
+                      onChange={handleSort_By}
+                      name="type"
+                      className="input-border input-font w-full focus:outline-none"
+                    >
+                      <option value="all">All</option>
+                      <option value="patient">Patient</option>
+                      <option value="provider">Provider</option>
+                    </select>
+                  </div>
+                  {/* Sort By  */}
+                  {nextActive && (
                     <div>
                       <label className="label">
-                        <span className=" label-font">{sortBy1}</span>
+                        <span className=" label-font">{sort_By}</span>
                       </label>
                       <select
-                        // onChange={(e) => setInsuranceSelect(e.target.value)}
                         name="type"
                         className="input-border input-font w-full focus:outline-none"
                       >
@@ -418,181 +399,81 @@ const ManageSecondaryClaims = () => {
                       </select>
                     </div>
                   )}
-
-                  {/* Sort By  */}
-                  <div>
-                    <label className="label">
-                      <span className=" label-font">
-                        Sort By<span className="text-red-500">*</span>
-                      </span>
-                    </label>
-                    <select
-                      onChange={(e) => setSortBy2(e.target.value)}
-                      name="type"
-                      className="input-border input-font w-full focus:outline-none"
-                    >
-                      <option value="Patient">Patient(s)</option>
-                      <option value="Tx Providers">Tx Providers</option>
-                      <option value="CMS Therapist">CMS Therapist</option>
-                      <option value="Service Type">Service Type</option>
-                      <option value="Claim Status">Claim Status</option>
-                      <option value="Date Range">Date Range</option>
-                      <option value="Degree Level">Degree Level</option>
-                      <option value="Region">Region</option>
-                      <option value="M1 Code">M1 Code</option>
-                      <option value="Zero Units">Zero Units</option>
-                      <option value="Place Of Service">Place Of Service</option>
-                      <option value="Modifier">Modifier</option>
-                    </select>
-                  </div>
-                  {sortBy2 && (
-                    <>
-                      {sortBy2 === "Date Range" ? (
-                        <div>
-                          <label className="label">
-                            <span className=" label-font">{sortBy2}</span>
-                          </label>
-                          <div className="ml-1">
-                            <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
-                              <input
-                                value={
-                                  startDate
-                                    ? `${startMonth} ${startDay}, ${startYear}`
-                                    : "Start Date"
-                                }
-                                readOnly
-                                onClick={() => setOpenCalendar(true)}
-                                className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
-                              />
-                              <BsArrowRight
-                                onClick={() => setOpenCalendar(true)}
-                                className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                              ></BsArrowRight>
-                              <input
-                                value={
-                                  endDate
-                                    ? `${endMonth} ${endDay}, ${endYear}`
-                                    : "End Date"
-                                }
-                                readOnly
-                                onClick={() => setOpenCalendar(true)}
-                                className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
-                              />
-                            </div>
-
-                            {/* Multi date picker component called */}
-                            <div
-                              ref={refClose}
-                              className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
-                            >
-                              {openCalendar && (
-                                <CustomDateRange
-                                  range={range}
-                                  setRange={setRange}
-                                  handleCancelDate={handleCancelDate}
-                                  setOpen={setOpenCalendar}
-                                ></CustomDateRange>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div>
-                          <label className="label">
-                            <span className=" label-font">{sortBy2}</span>
-                          </label>
-                          <select
-                            // onChange={(e) => setInsuranceSelect(e.target.value)}
-                            name="type"
-                            className="input-border input-font w-full focus:outline-none"
-                          >
-                            <option value="all">All</option>
-                            <option value="patient">Patient</option>
-                            <option value="provider">Provider</option>
-                          </select>
-                        </div>
-                      )}
-                    </>
-                  )}
                 </>
               )}
               {/* submit  */}
-              <div className="gap-2 mb-10 flex">
-                <button
-                  className="mt-8 w-12 pms-input-button"
-                  type="submit"
-                  onClick={() => {
-                    setTableOpen(true);
-                  }}
-                >
-                  Run
+              <div className="flex mt-[22px] gap-2">
+                <button className="pms-button" type="submit">
+                  Get Claim(s)
                 </button>
-                <button className="pms-close-button w-16 mt-8">Cancel</button>
+                <button className="pms-close-button" type="button">
+                  Cancel
+                </button>
               </div>
-            </>
-          )}
-        </div>
-      </form>
-      {tableOpen && (
-        <>
-          {" "}
-          <div className="my-5">
-            <div className="overflow-scroll">
-              <>
-                <Table
-                  pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                  rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                  size="small"
-                  bordered
-                  className=" text-xs font-normal mt-5"
-                  columns={columns}
-                  dataSource={TData}
-                  rowSelection={{
-                    ...rowSelection,
-                  }}
-                  scroll={{
-                    y: 600,
-                  }}
-                  onChange={handleChange}
-                />
-              </>
             </div>
+            {tActive && (
+              <div>
+                <FiDownload className="text-secondary text-lg font-bold" />
+              </div>
+            )}
           </div>
-          {
+        </form>
+      </div>
+      {tActive && (
+        <>
+          <div className="my-5">
+            {/* <SettingTableBox
+              getTableProps={getTableProps}
+              headerGroups={headerGroups}
+              getTableBodyProps={getTableBodyProps}
+              rows={page}
+              prepareRow={prepareRow}
+            ></SettingTableBox> */}
+            <Table
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+              size="small"
+              bordered
+              className=" text-xs font-normal mt-5"
+              columns={columns}
+              dataSource={ManageClimbsData}
+              rowSelection={{
+                ...rowSelection,
+              }}
+              scroll={{
+                y: 650,
+              }}
+              onChange={handleChange}
+            />
+          </div>
+          <div className=" flex flex-wrap items-center gap-2">
             <div>
-              <div className="flex">
-                <select
-                  className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] font-normal mx-1 text-[14px] w-32 focus:outline-none z-0"
-                  {...register("pos")}
-                >
-                  <option value="" className="text-black">
-                    Select
-                  </option>
-                  <option value="Today" className="text-black">
-                    Scheduled
-                  </option>
-                  <option value="UK" className="text-black">
-                    No Show
-                  </option>
-                  <option value="15" className="text-black">
-                    Bulk Delete
-                  </option>
-                  <option value="15" className="text-black">
-                    Lost 30 days
-                  </option>
-                  <option value="15" className="text-black">
-                    30 days & over
-                  </option>
-                </select>
-                <button className="pms-input-button mr-2">Go</button>
-                <button className="pms-close-button">Cancel</button>
-              </div>
+              <select
+                onChange={(e) => setSelect(e.target.value)}
+                name="type"
+                className="border rounded-sm px-2 w-36 py-1 text-xs "
+              >
+                <option value="all">All</option>
+                <option value="patient">Patient</option>
+                <option value="provider">Provider</option>
+              </select>
             </div>
-          }
+            <button
+              className=" py-2   px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              type="submit"
+            >
+              Go
+            </button>
+            <button
+              className=" py-2   px-3 text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
         </>
       )}
     </div>
   );
 };
-
 export default ManageSecondaryClaims;

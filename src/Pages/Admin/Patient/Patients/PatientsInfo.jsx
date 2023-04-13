@@ -9,7 +9,6 @@ import "../../../Style/Patient.css";
 import { MdPersonSearch } from "react-icons/md";
 import { BsFillFileEarmarkLock2Fill } from "react-icons/bs";
 import { TbReport } from "react-icons/tb";
-import { RiFileDamageFill } from "react-icons/ri";
 import { TiDocumentAdd } from "react-icons/ti";
 import { AiOutlineCloudUpload, AiOutlinePhone } from "react-icons/ai";
 
