@@ -362,10 +362,10 @@ const MDepositApply = () => {
   return (
     <div className={!table ? "h-[100vh]" : ""}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 2xl:grid-cols-7 my-3 mr-2 gap-6 ">
+        <div className=" flex my-3 mr-2 gap-3 ">
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Post By
               </span>
             </label>
@@ -382,7 +382,7 @@ const MDepositApply = () => {
           {select === "claim_no" ? (
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium py-[1px] text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium py-[1px] text-[#9b9b9b] text-left">
                   Claim No.
                 </span>
               </label>
@@ -397,7 +397,7 @@ const MDepositApply = () => {
             <>
               <div>
                 <label className="label">
-                  <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                     Select Patient
                   </span>
                 </label>
@@ -415,7 +415,7 @@ const MDepositApply = () => {
               <div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                       Select Date Range
                     </span>
                   </label>
@@ -641,7 +641,7 @@ const MDepositApply = () => {
               <div>
                 <select
                   name="type"
-                  className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-xs "
+                  className="border border-gray-300 rounded-sm py-[5px] font-normal px-2 w-36 text-sm "
                 >
                   <option value=""></option>
                   <option value="Specific_Date">Specific Date</option>

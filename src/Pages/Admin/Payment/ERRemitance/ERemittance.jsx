@@ -21,7 +21,7 @@ const ERemittance = () => {
             <h1 className="text-xs">Upload 835</h1>
           </div>
         </div>
-        <div className="mx-auto">
+        <div className="mx-auto my-auto">
           <button className="pms-button">Import ERA</button>
         </div>
         <div className="mx-auto">

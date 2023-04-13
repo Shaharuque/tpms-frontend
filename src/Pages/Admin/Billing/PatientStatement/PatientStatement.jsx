@@ -26,17 +26,24 @@ const PatientStatement = () => {
   const handleRelated = (e) => {
     e.preventDefault();
     setSelected(e.target.value);
+    if (e.target.value === "selective_client") {
+      setSelectClient(true);
+    } else if (e.target.value === "selective_private_payor") {
+      setSelectPayor(true);
+    } else {
+    }
   };
   console.log(selected);
 
   const handleSubmit = () => {
-    if (selected === "selective_client") {
-      setSelectClient(true);
-    } else if (selected === "selective_private_payor") {
-      setSelectPayor(true);
-    } else {
-      setAllClient(true);
-    }
+    // if (selected === "selective_client") {
+    //   setSelectClient(true);
+    // } else if (selected === "selective_private_payor") {
+    //   setSelectPayor(true);
+    // } else {
+    //   setAllClient(true);
+    // }
+    setAllClient(true);
   };
 
   useEffect(() => {

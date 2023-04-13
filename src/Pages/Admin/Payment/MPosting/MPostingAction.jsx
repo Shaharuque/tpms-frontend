@@ -32,35 +32,35 @@ const MPostingAction = ({ id, depositDetailsHandler }) => {
       <div>
         <div className=" bg-white py-2 border shadow-xl flex flex-col items-center z-30  w-[150px] rounded-sm">
           <Link to={`/admin/billing/deposit-apply/${id}`}>
-            <button className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]">
+            <button className="text-xs text-black px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]">
               <MdOutlineDashboard className="text-sm" /> Apply Payment
             </button>
           </Link>
           <Link to={`/admin/billing/deposit-add/${id}`}>
-            <button className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]">
+            <button className="text-xs text-black px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]">
               <BiEdit className="text-sm" /> Edit Deposit
             </button>
           </Link>
           <Link to="/">
-            <button className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]">
+            <button className="text-xs text-black px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]">
               <AiOutlineDelete className="text-sm" /> Delete Deposit
             </button>
           </Link>
 
           <button
             onClick={depositDetailsHandler}
-            className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]"
+            className="text-xs text-black px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]"
           >
             <BsFileEarmark className="text-sm" /> Deposit Details
           </button>
 
           <Link to="/">
-            <button className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]">
+            <button className="text-xs text-black px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[130px]">
               <AiOutlinePrinter className="text-sm" /> Print Receipt
             </button>
           </Link>
           <Link to="/">
-            <button className="text-xs text-secondary  px-2 py-1 rounded-sm gap-1 hover:text-white hover:bg-secondary flex items-center font-bold w-[130px]">
+            <button className="text-xs text-black  px-2 py-1 rounded-sm gap-1 hover:text-white hover:bg-secondary flex items-center font-bold w-[130px]">
               <BsFileEarmark className="text-sm" /> ERA Text File
             </button>
           </Link>
