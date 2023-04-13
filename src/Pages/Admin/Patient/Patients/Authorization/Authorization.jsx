@@ -281,7 +281,7 @@ const Authorization = () => {
               <span>|</span>
               <Link to={"/"}>
                 <AiOutlineDelete
-                  className="text-xs text-red-500 mx-2"
+                  className="text-sm mt-[3px] text-red-500 mx-2"
                   title="Delete"
                 />
               </Link>
