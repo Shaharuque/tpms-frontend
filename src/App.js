@@ -237,6 +237,8 @@ import AddAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/C
 import EditAllProgram from "./Pages/Admin/Settings/Settings/Program/AllPrograms/Components/EditAllProgram";
 import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 import CallLog from "./Pages/Admin/Patient/Patients/CallLog/CallLog";
+import Chat from "./Pages/Shared/NavigationBar/Chat/Chat";
+import ChatInbox from "./Pages/Shared/NavigationBar/Chat/ChatInbox/ChatInbox";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -544,6 +546,9 @@ function App() {
               path="report-export-view"
               element={<DownloadView></DownloadView>}
             ></Route>
+            <Route path="chat" element={<Chat></Chat>}></Route>
+            <Route path="chat/:id" element={<ChatInbox></ChatInbox>}></Route>
+
             {/* ----------------------------------Profile Start----------------------------------------------- */}
 
             <Route path="profile" element={<Profile></Profile>}>

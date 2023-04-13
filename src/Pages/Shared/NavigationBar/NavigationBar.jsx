@@ -171,9 +171,12 @@ const NavigationBar = ({ handle, handleSidebar }) => {
             </div>
             {/* message  */}
             <div>
-              <button className=" my-3 text-2xl font-bold text-secondary md:mt-[2px] flex items-center">
+              <Link
+                to={"chat"}
+                className=" my-3 text-2xl font-bold text-secondary md:mt-[2px] flex items-center"
+              >
                 <BiMessageRounded />
-              </button>
+              </Link>
             </div>
             {/**download */}
             <div className="dropdown sm:dropdown-start">
@@ -392,14 +395,17 @@ const NavigationBar = ({ handle, handleSidebar }) => {
 
           {/* message  */}
           <div>
-            <button className="  text-2xl font-bold text-secondary md:mt-[2px] flex items-center">
+            <Link
+              to={"chat"}
+              className="  text-2xl font-bold text-secondary md:mt-[2px] flex items-center"
+            >
               <lord-icon
                 src="https://cdn.lordicon.com/hpivxauj.json"
                 trigger="hover"
                 colors="primary:#0aa7b8"
                 style={{ height: "25px" }}
               ></lord-icon>
-            </button>
+            </Link>
           </div>
           {/**download */}
 

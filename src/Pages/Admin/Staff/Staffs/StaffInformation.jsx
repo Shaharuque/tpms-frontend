@@ -54,13 +54,13 @@ const StaffInformation = () => {
         </div>
         {/* top Part end  */}
 
-        <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between">
+        <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between gap-2">
           {/* Navbar  */}
           <motion.div
             initial={{ opacity: 0, x: -25 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 }}
-            className=" my-2 p-2  setting-nav shadow-md rounded-lg "
+            className=" my-2 p-2  setting-nav  rounded-lg "
           >
             <div className="">
               <div className="mb-2">

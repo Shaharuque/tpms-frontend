@@ -26,39 +26,33 @@ const Intake = () => {
   const column = [
     {
       title: "From Name",
-      dataIndex: "operation",
-      key: "operation",
-      width: 90,
-      render: (_, { nt }) => {
-        return (
-          <>
-            <div className="flex justify-center">
-              <button className="text-secondary">
-                2469299116740435801_119.pdf
-              </button>
-            </div>
-          </>
-        );
+      dataIndex: "description",
+      key: "description",
+      width: 120,
+      filters: [{}],
+      filteredValue: filteredInfo.Document || null,
+      onFilter: (value, record) => record.Document.includes(value),
+      sorter: (a, b) => {
+        return a.Document > b.Document ? -1 : 1;
       },
+      sortOrder: sortedInfo.columnKey === "Document" ? sortedInfo.order : null,
+      ellipsis: true,
     },
     {
       title: "Assign",
-      dataIndex: "operation",
-      key: "operation",
-      width: 90,
-      render: (_, { nt }) => {
-        return (
-          <div className="flex justify-center">
-            <Switch
-              color="default"
-              defaultChecked
-              size="small"
-              onClick={() => setAssign(!assign)}
-            />
-          </div>
-        );
+      dataIndex: "description",
+      key: "description",
+      width: 120,
+      filters: [{}],
+      filteredValue: filteredInfo.Document || null,
+      onFilter: (value, record) => record.Document.includes(value),
+      sorter: (a, b) => {
+        return a.Document > b.Document ? -1 : 1;
       },
+      sortOrder: sortedInfo.columnKey === "Document" ? sortedInfo.order : null,
+      ellipsis: true,
     },
+
     {
       title: "Submitted",
       dataIndex: "operation",
@@ -76,7 +70,7 @@ const Intake = () => {
       title: "Review Status",
       dataIndex: "operation",
       key: "operation",
-      width: 90,
+      width: 110,
       render: (_, { nt }) => {
         return <ReviewStatus></ReviewStatus>;
       },
@@ -107,7 +101,7 @@ const Intake = () => {
   };
   return (
     <div>
-      <div className="h-[100vh]">
+      <div className="sm:h-[100vh]">
         <h1 className="text-lg mt-2 text-orange-500">Intake Form Uploads</h1>
         <div className="my-2">
           <div className="flex justify-end items-center mr-2">
