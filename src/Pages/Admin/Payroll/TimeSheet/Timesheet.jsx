@@ -257,7 +257,7 @@ const Timesheet = () => {
       title: "Time In",
       dataIndex: "timeIn",
       key: "timeIn",
-      width: 80,
+      width: 100,
       filters: [
         { text: "Celestine", value: "Celestine" },
         { text: "Annaliese", value: "Annaliese" },
@@ -294,8 +294,29 @@ const Timesheet = () => {
       render: (_, { timeIn, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div>
-            <h1>{timeIn}</h1>
+          <div className="flex justify-center">
+            {" "}
+            <div className="flex items-center gap-1">
+              <input
+                type="text"
+                name=""
+                value="10"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
+              <input
+                type="text"
+                name=""
+                value="20"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
+              <select
+                name="post"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
           </div>
         );
       },
@@ -452,10 +473,64 @@ const Timesheet = () => {
       ellipsis: true,
     },
     {
+      title: "Mileage Rate",
+      dataIndex: "miles",
+      key: "miles",
+      width: 80,
+      // filters: [
+      //   { text: "Celestine", value: "Celestine" },
+      //   { text: "Annaliese", value: "Annaliese" },
+      //   {
+      //     text: `Maude`,
+      //     value: "Maude",
+      //   },
+      //   {
+      //     text: `Molly`,
+      //     value: "Molly",
+      //   },
+      //   {
+      //     text: "Karla",
+      //     value: "Karla",
+      //   },
+      //   {
+      //     text: "Marcellus",
+      //     value: "Marcellus",
+      //   },
+      //   {
+      //     text: "Hilton",
+      //     value: "Hilton",
+      //   },
+      // ],
+      filteredValue: filteredInfo.miles || null,
+      onFilter: (value, record) => record.miles.includes(value),
+      sorter: (a, b) => {
+        return a.miles > b.miles ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "miles" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { miles, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <input
+              name="cms"
+              defaultValue={miles}
+              className="page py-[3px] text-center focus:outline-none"
+              onChange={inputHandle}
+              type="text"
+            ></input>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
       title: "Submitted",
       dataIndex: "submitted",
       key: "submitted",
-      width: 40,
+      width: 60,
       // filters: [
       //   { text: "Celestine", value: "Celestine" },
       //   { text: "Annaliese", value: "Annaliese" },
@@ -493,7 +568,7 @@ const Timesheet = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div className="">
-            <FcCheckmark className="text-base mx-auto" />
+            <FcCheckmark className="text-[15px] mx-auto" />
           </div>
         );
       },
@@ -533,16 +608,16 @@ const Timesheet = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 my-5 mr-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 mb-5 mr-2 gap-4">
           <div>
             <label className="label">
-              <span className="label-text text-base text-gray-500 text-left">
+              <span className="label-text text-[15px] text-gray-500 text-left">
                 Choose Payroll Period
               </span>
             </label>
             <select
               name="type"
-              className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm text-[12px] font-medium w-full ml-1 focus:outline-none"
               {...register("payroll")}
               onChange={() => setActive(true)}
             >
@@ -567,7 +642,7 @@ const Timesheet = () => {
             <>
               <div>
                 <label className="label">
-                  <span className="label-text text-gray-500 text-base font-medium text-left">
+                  <span className="label-text text-gray-500 text-[15px] font-medium text-left">
                     Staff
                   </span>
                 </label>
@@ -579,7 +654,7 @@ const Timesheet = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-base text-gray-500 text-left">
+                  <span className="label-text text-[15px] text-gray-500 text-left">
                     Status
                   </span>
                 </label>
@@ -660,7 +735,7 @@ const Timesheet = () => {
               </select>
             </div>
             <button
-              className="w-1/4 py-1 px-2 md:ml-3 text-base font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className="w-1/4 py-1 px-2 md:ml-3 text-[15px] font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               type="submit"
             >
               Ok

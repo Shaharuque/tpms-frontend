@@ -469,8 +469,8 @@ const OtherSetup = () => {
             </span>
           </div>
         </div>
-        <div className="other-box ml-2 my-5">
-          <div className="flex items-center justify-around gap-2 mb-2 ">
+        <div className="other-box ml-2 my-10">
+          <div className="flex items-center justify-around gap-2 mb-4 ">
             <h3 className="text-sm font-medium w-80">Tax Type</h3>
             <h3 className="text-sm font-medium w-80 text-center">Box 24J</h3>
             <h3 className="text-sm font-medium w-80 text-center">
