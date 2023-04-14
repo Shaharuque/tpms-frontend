@@ -338,7 +338,7 @@ const Processing_Payroll = () => {
           {/* <div className=" grid grid-cols-1 items-center justify-center sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-6"> */}
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Choose Payroll Submission Period
               </span>
             </label>
@@ -362,24 +362,27 @@ const Processing_Payroll = () => {
               <option value="01-12-2021">01/12/2021-07/12/2021</option>
             </select>
           </div>
-          <div className="mt-[2px]">
-            <label className="label">
-              <span className="label-text mb-[1px] text-[17px] font-medium text-[#9b9b9b] text-left">
-                Choose Staff to process
-              </span>
-            </label>
+          {select && (
             <>
-              <GlobalMultiSelect />
+              <div className="mt-[2px]">
+                <label className="label">
+                  <span className="label-text mb-[1px] text-[15px] font-medium text-[#9b9b9b] text-left">
+                    Choose Staff to process
+                  </span>
+                </label>
+                <>
+                  <GlobalMultiSelect />
+                </>
+              </div>
+              <button
+                className="pms-button  mt-[24px]"
+                type="submit"
+                onClick={() => setTable(true)}
+              >
+                View
+              </button>
             </>
-          </div>
-
-          <button
-            className="pms-button  mt-[24px]"
-            type="submit"
-            onClick={() => setTable(true)}
-          >
-            View
-          </button>
+          )}
         </div>
         {table && (
           <div className="my-3">
@@ -430,7 +433,7 @@ const Processing_Payroll = () => {
                   </option>
                 </select>
                 <button className="bg-[#34A7B8] px-2 text-white rounded">
-                  Go
+                  Ok
                 </button>
               </div>
             </div>

@@ -339,7 +339,7 @@ const ProcessedPayroll = () => {
           {/* <div className=" grid grid-cols-1 items-center md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6  mr-2 gap-6"> */}
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Choose Payroll Submission Period
               </span>
             </label>
@@ -367,7 +367,7 @@ const ProcessedPayroll = () => {
             <>
               <div className="">
                 <label className="label">
-                  <span className="label-text mb-1  text-[17px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text mb-1  text-[15px] font-medium text-[#9b9b9b] text-left">
                     Choose Staff to process
                   </span>
                 </label>
@@ -377,7 +377,7 @@ const ProcessedPayroll = () => {
               </div>
 
               <button
-                className="pms-button mt-[35px]"
+                className="pms-button mt-[29px]"
                 type="submit"
                 onClick={() => setTable(true)}
               >
@@ -434,7 +434,7 @@ const ProcessedPayroll = () => {
                     30 days & over
                   </option>
                 </select>
-                <button className="pms-button">Go</button>
+                <button className="pms-button">Ok</button>
               </div>
             </div>
           </div>

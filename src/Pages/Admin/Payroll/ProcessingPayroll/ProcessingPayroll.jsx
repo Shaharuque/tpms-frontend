@@ -13,8 +13,8 @@ const ProcessingPayroll = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-medium text-base"
-                : "rs-nav-item text-base font-medium"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"process-payroll"}
           >
@@ -27,8 +27,8 @@ const ProcessingPayroll = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-medium text-base"
-                : "rs-nav-item text-base font-medium"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"submit-payroll"}
           >
@@ -41,8 +41,8 @@ const ProcessingPayroll = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-medium text-base"
-                : "rs-nav-item text-base font-medium"
+                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
+                : "rs-nav-item text-[14px] font-medium"
             }
             to={"completed-payroll"}
           >
