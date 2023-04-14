@@ -52,6 +52,18 @@ const EditInsuranceSelect = () => {
             </div>
           </div>
         </div>
+        <div>
+          <label className="label">
+            <span className=" label-font">Insurance Type</span>
+          </label>
+          <select
+            className="input-border input-font  focus:outline-none "
+            {...register("insurance_type")}
+          >
+            <option value=""></option>
+            <option value="1">Associate degree</option>
+          </select>
+        </div>
         <div className="w-[100%] px-2 sm:w-[75%]">
           <div className=" grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 my-5 gap-3">
             <h3 className=" font-medium text-base my-2">Tax Type</h3>

@@ -17,7 +17,7 @@ const EraManager = () => {
   };
 
   return (
-    <>
+    <div className="h-[170vh]">
       <div className="md:flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">OA Files</h1>
         <div className=" md:flex items-center">
@@ -39,8 +39,8 @@ const EraManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
-                : "rs-nav-item text-[14px] font-medium"
+                ? "rs-nav-item rs-nav-item-active  text-[14px]"
+                : "rs-nav-item text-[14px] "
             }
             to={"era-files"}
           >
@@ -50,8 +50,8 @@ const EraManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
-                : "rs-nav-item text-[14px] font-medium"
+                ? "rs-nav-item rs-nav-item-active  text-[14px]"
+                : "rs-nav-item text-[14px] "
             }
             to={"file-277"}
           >
@@ -60,8 +60,8 @@ const EraManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
-                : "rs-nav-item text-[14px] font-medium"
+                ? "rs-nav-item rs-nav-item-active  text-[14px]"
+                : "rs-nav-item text-[14px] "
             }
             to={"file-999"}
           >
@@ -70,8 +70,8 @@ const EraManager = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
-                : "rs-nav-item text-[14px] font-medium"
+                ? "rs-nav-item rs-nav-item-active  text-[14px]"
+                : "rs-nav-item text-[14px] "
             }
             to={"edi-status-files"}
           >
@@ -87,7 +87,7 @@ const EraManager = () => {
           recordData={recordData}
         ></SFTPModal>
       )}
-    </>
+    </div>
   );
 };
 

@@ -4,8 +4,8 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const EmailAndSms = () => {
   return (
-    <>
-      <h1 className=" my-3 text-base font-medium text-orange-400">
+    <div className="p-2">
+      <h1 className=" my-3 text-[16px] font-medium text-orange-400">
         SMS/Email Settings
       </h1>
       <div className="container width-fix  mx-auto mb-5 mt-1">
@@ -13,8 +13,8 @@ const EmailAndSms = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-base"
-                : "rs-nav-item text-base font-normal"
+                ? "rs-nav-item rs-nav-item-active font-normal text-[14px]"
+                : "rs-nav-item text-[14px] font-normal"
             }
             to={"email-setting"}
           >
@@ -23,8 +23,8 @@ const EmailAndSms = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-normal text-base"
-                : "rs-nav-item text-base font-normal"
+                ? "rs-nav-item rs-nav-item-active font-normal text-[14px]"
+                : "rs-nav-item text-[14px] font-normal"
             }
             to={"sms-setting"}
           >
@@ -33,7 +33,7 @@ const EmailAndSms = () => {
         </Nav>
         <Outlet />
       </div>
-    </>
+    </div>
   );
 };
 

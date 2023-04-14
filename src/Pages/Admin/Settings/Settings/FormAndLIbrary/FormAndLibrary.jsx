@@ -29,7 +29,7 @@ const FormAndLibrary = () => {
   const arr1 = [];
   console.log(arr1);
   return (
-    <div>
+    <div className="p-2">
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => setBehaviorTherapy(!behaviorTherapy)}
@@ -128,9 +128,19 @@ const FormAndLibrary = () => {
             <h1 className="text-lg text-orange-500 ml-2">Behavioral Therapy</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
               <div className="ml-2">
-                <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Unassigned
+                </h1>
 
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* new code added */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -167,10 +177,19 @@ const FormAndLibrary = () => {
                 </button>
               </div>
               <div>
-                <h1 className="text-sm text-gray-700 my-2">
-                  Facility Selected Insurance
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Assigned
                 </h1>
+
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* ------ */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -203,9 +222,19 @@ const FormAndLibrary = () => {
             <h1 className="text-lg text-orange-500 ml-2">Mental Health</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
               <div className="ml-2">
-                <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Unassigned
+                </h1>
 
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* new code added */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -242,10 +271,19 @@ const FormAndLibrary = () => {
                 </button>
               </div>
               <div>
-                <h1 className="text-sm text-gray-700 my-2">
-                  Facility Selected Insurance
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Assigned
                 </h1>
+
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* ------ */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -278,9 +316,19 @@ const FormAndLibrary = () => {
             <h1 className="text-lg text-orange-500 ml-2">Speech Therapy</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
               <div className="ml-2">
-                <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Unassigned
+                </h1>
 
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* new code added */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -317,10 +365,19 @@ const FormAndLibrary = () => {
                 </button>
               </div>
               <div>
-                <h1 className="text-sm text-gray-700 my-2">
-                  Facility Selected Insurance
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Assigned
                 </h1>
+
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* ------ */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -355,9 +412,19 @@ const FormAndLibrary = () => {
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
               <div className="ml-2">
-                <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Unassigned
+                </h1>
 
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* new code added */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -394,10 +461,19 @@ const FormAndLibrary = () => {
                 </button>
               </div>
               <div>
-                <h1 className="text-sm text-gray-700 my-2">
-                  Facility Selected Insurance
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Assigned
                 </h1>
+
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* ------ */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -430,9 +506,19 @@ const FormAndLibrary = () => {
             <h1 className="text-lg text-orange-500 ml-2">Physical Therapy</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
               <div className="ml-2">
-                <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Unassigned
+                </h1>
 
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* new code added */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -469,10 +555,19 @@ const FormAndLibrary = () => {
                 </button>
               </div>
               <div>
-                <h1 className="text-sm text-gray-700 my-2">
-                  Facility Selected Insurance
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Assigned
                 </h1>
+
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* ------ */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -505,9 +600,19 @@ const FormAndLibrary = () => {
             <h1 className="text-lg text-orange-500 ml-2">Music Therapy</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 ">
               <div className="ml-2">
-                <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Unassigned
+                </h1>
 
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* new code added */}
+
                 <select
                   multiple
                   id="countries_multiple"
@@ -544,10 +649,19 @@ const FormAndLibrary = () => {
                 </button>
               </div>
               <div>
-                <h1 className="text-sm text-gray-700 my-2">
-                  Facility Selected Insurance
+                <h1 className="text-[16px] text-secondary my-2 text-center">
+                  Assigned
                 </h1>
+
+                <div>
+                  <input
+                    type="text"
+                    className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+                    placeholder="Search Here"
+                  />
+                </div>
                 {/* ------ */}
+
                 <select
                   multiple
                   id="countries_multiple"

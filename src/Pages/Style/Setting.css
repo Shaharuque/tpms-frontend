@@ -46,6 +46,7 @@
     border: 1px solid #CED4DB;
     border-radius: 5px;
     max-width: 100%;
+    text-align: center;
 }
 
 .timesheet-time-box {

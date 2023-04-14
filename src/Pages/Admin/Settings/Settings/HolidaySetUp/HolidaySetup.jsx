@@ -135,7 +135,7 @@ const HolidaySetup = () => {
     setFilteredInfo({});
   };
   return (
-    <div>
+    <div className="p-2">
       <div className="flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Holiday</h1>
 

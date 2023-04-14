@@ -134,7 +134,9 @@ const BusinessFiles = () => {
   // };
   return (
     <div className="p-2 ">
-      <h1 className="text-lg my-2 text-orange-400">Business Documents</h1>
+      <h1 className="text-[16px] mt-2 mb-4 text-orange-400">
+        Business Documents
+      </h1>
       <CssBaseline />
       <div className="pb-3 overflow-scroll">
         <Table

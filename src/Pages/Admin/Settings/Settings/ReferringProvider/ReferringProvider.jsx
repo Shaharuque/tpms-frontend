@@ -101,7 +101,7 @@ const ReferringProvider = () => {
       ellipsis: true,
     },
     {
-      title: "NPI",
+      title: "ID Qualifier",
       dataIndex: "npi",
       key: "npi",
       width: 80,
@@ -128,7 +128,7 @@ const ReferringProvider = () => {
       ellipsis: true,
     },
     {
-      title: "UPIN",
+      title: "Id",
       dataIndex: "upin",
       key: "upin",
       width: 80,
@@ -191,7 +191,7 @@ const ReferringProvider = () => {
     setFilteredInfo({});
   };
   return (
-    <div>
+    <div className="p-2">
       <div className="md:flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Referring Provider</h1>
 
