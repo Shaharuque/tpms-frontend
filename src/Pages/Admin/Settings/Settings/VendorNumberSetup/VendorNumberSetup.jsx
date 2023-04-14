@@ -168,7 +168,7 @@ const VendorNumberSetup = () => {
           <div className="flex flex-wrap items-center my-3 mr-2 gap-x-6 gap-y-3 ">
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Tx Type
                 </span>
               </label>
@@ -187,7 +187,7 @@ const VendorNumberSetup = () => {
 
             <div>
               <label className="label">
-                <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+                <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                   Regional Center
                 </span>
               </label>

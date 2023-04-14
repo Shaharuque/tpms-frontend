@@ -318,10 +318,10 @@ const PayPeriod = () => {
   };
 
   return (
-    <div>
-      <div className="flex mb-2 items-center justify-between">
+    <div className="p-2">
+      <div className="flex mb-2 flex-wrap items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Pay Period</h1>
-        <div className="md:flex items-center">
+        <div className="flex gap-2 items-center">
           <div>
             {/* <!-- The button to open modal --> */}
             <label htmlFor="pay-box" className="">

@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import { BsArrowRight } from "react-icons/bs";
 import { motion } from "framer-motion";
+import { RiArrowLeftRightLine } from "react-icons/ri";
+import CustomDateRange from "../../Shared/CustomDateRange/CustomDateRange";
 
 const Report = () => {
   const [type, setType] = useState("");
@@ -18,8 +20,8 @@ const Report = () => {
     // console.log(event.target.type.value);
   };
 
-  //Date Range Picker
-  const [open, setOpen] = useState(false);
+  //-----------Date Range Picker-----------------
+  const [openCalendar, setOpenCalendar] = useState(false);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -36,6 +38,7 @@ const Report = () => {
         key: "selection",
       },
     ]);
+    setOpenCalendar(false);
   };
 
   // date range picker calendar
@@ -53,9 +56,7 @@ const Report = () => {
     ? startDate.getFullYear().toString().slice(2, 4)
     : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
-  //End Date Range Picker
 
-  // Hide calendar on outside click
   const refClose = useRef(null);
   useEffect(() => {
     document.addEventListener("click", hideOnClickOutside, true);
@@ -64,17 +65,18 @@ const Report = () => {
   // Hide dropdown on outside click
   const hideOnClickOutside = (e) => {
     if (refClose.current && !refClose.current.contains(e.target)) {
-      setOpen(false);
+      setOpenCalendar(false);
     }
   };
   //end outside click
+
   return (
-    <div className="h-[100vh]">
+    <div className="h-[170vh]">
       <form onSubmit={handlePlaceOrder}>
-        <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 my-3 mr-2 gap-x-6 gap-y-1 ">
+        <div className="flex flex-wrap items-center my-3 mr-2 gap-x-3 gap-y-1 ">
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 All Report
               </span>
             </label>
@@ -125,7 +127,7 @@ const Report = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Type
               </span>
             </label>
@@ -142,79 +144,60 @@ const Report = () => {
           {type && (
             <>
               {type === "date_range" ? (
-                <div>
-                  <label className="label">
-                    <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
-                      Date Range
-                    </span>
-                  </label>
-                  <div className="ml-1 text-[14px]">
-                    <div className="flex flex-wrap justify-between  items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
-                      <input
-                        value={
-                          startDate
-                            ? `${startMonth} ${startDay}, ${startYear}`
-                            : "Start Date"
-                        }
-                        readOnly
-                        onClick={() => setOpen((open) => !open)}
-                        className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
-                      />
-                      <BsArrowRight
-                        onClick={() => setOpen((open) => !open)}
-                        className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                      ></BsArrowRight>
-                      <input
-                        value={
-                          endDate
-                            ? `${endMonth} ${endDay}, ${endYear}`
-                            : "End Date"
-                        }
-                        readOnly
-                        onClick={() => setOpen((open) => !open)}
-                        className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
-                      />
-                    </div>
-                  </div>
-                  <div
-                    ref={refClose}
-                    className="absolute z-10 md:ml-[-300px] ml-0  shadow-xl"
-                  >
-                    {open && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
+                <div className="w-[200px]">
+                  <div>
+                    <label className="label">
+                      <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                        Selected date
+                      </span>
+                    </label>
+                    <div className="">
+                      <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
+                        <input
+                          value={
+                            startDate
+                              ? `${startMonth} ${startDay}, ${startYear}`
+                              : `Start Date`
+                          }
+                          readOnly
+                          onClick={() => setOpenCalendar(true)}
+                          // {...register("start_date")}
+                          className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-2/5 cursor-pointer"
+                        />
+                        <RiArrowLeftRightLine
+                          onClick={() => setOpenCalendar(true)}
+                          className="cursor-pointer mx-1 text-gray-600 text-[14px] font-medium w-1/5"
+                        ></RiArrowLeftRightLine>
+                        <input
+                          // defaultValue={"5-10-2034"}
+                          value={
+                            endDate
+                              ? `${endMonth} ${endDay}, ${endYear}`
+                              : `End Date`
+                          }
+                          readOnly
+                          onClick={() => setOpenCalendar(true)}
+                          // {...register("end_date")}
+                          className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-2/5 cursor-pointer"
+                        />
+                      </div>
+
+                      {/* Multi date picker component called */}
+                      <div
+                        ref={refClose}
+                        // className="absolute z-10 md:ml-[-20%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s "
+                        className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
                       >
-                        <div>
-                          <DateRangePicker
-                            onChange={(item) => setRange([item.selection])}
-                            editableDateInputs={true}
-                            moveRangeOnFirstSelection={false}
-                            ranges={range}
-                            months={2}
-                            direction="horizontal"
-                            className="border-2 border-gray-100"
-                          />
-                        </div>
-                        <div className="text-right bg-[#26818F] border-r-2 rounded-b-lg range-date-ok py-0">
-                          <button
-                            className="px-4 m-2 text-white border border-white rounded hover:border-red-700 hover:bg-red-700"
-                            type="submit"
-                            onClick={handleCancelDate}
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            className="px-4 m-2 text-secondary border border-white bg-white rounded"
-                            type="submit"
-                            onClick={() => setOpen(false)}
-                          >
-                            Save
-                          </button>
-                        </div>
-                      </motion.div>
-                    )}
+                        {openCalendar && (
+                          <CustomDateRange
+                            range={range}
+                            setRange={setRange}
+                            handleCancelDate={handleCancelDate}
+                            setOpen={setOpenCalendar}
+                          ></CustomDateRange>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -235,7 +218,7 @@ const Report = () => {
           )}
           <div>
             <input
-              className="pms-button mt-[26px]"
+              className="pms-button mt-[24px]"
               type="submit"
               value="Export"
             />

@@ -56,7 +56,7 @@ const SmsSetting = () => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: 80,
+      width: 90,
       filters: [
         {
           text: `10/31/2021`,
@@ -83,7 +83,7 @@ const SmsSetting = () => {
       title: "Time",
       dataIndex: "time",
       key: "time",
-      width: 50,
+      width: 70,
       filters: [
         {
           text: `10/31/2021`,

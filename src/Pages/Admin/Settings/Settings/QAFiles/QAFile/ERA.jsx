@@ -157,7 +157,7 @@ const ERA = () => {
   };
 
   return (
-    <div>
+    <div className="p-2">
       <h1 className="text-lg mt-4 mb-2 text-orange-400">ERA FILE</h1>
       <div>
         <div className="flex justify-end items-end my-2">
@@ -168,22 +168,24 @@ const ERA = () => {
             Clear filters
           </button>
         </div>
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-          size="small"
-          bordered
-          className=" text-xs font-normal"
-          columns={columns}
-          dataSource={table}
-          rowSelection={{
-            ...rowSelection,
-          }}
-          scroll={{
-            y: 650,
-          }}
-          onChange={handleChange}
-        />
+        <div className=" overflow-scroll py-3">
+          <Table
+            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+            size="small"
+            bordered
+            className=" text-xs font-normal"
+            columns={columns}
+            dataSource={table}
+            rowSelection={{
+              ...rowSelection,
+            }}
+            scroll={{
+              y: 650,
+            }}
+            onChange={handleChange}
+          />
+        </div>
       </div>
     </div>
   );

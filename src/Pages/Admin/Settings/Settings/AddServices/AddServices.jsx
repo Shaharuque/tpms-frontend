@@ -254,8 +254,8 @@ const AddServices = () => {
   };
 
   return (
-    <div>
-      <div className="">
+    <div className="p-2">
+      <div>
         <div>
           <h1>Click on each Service name to edit</h1>
           <p className=" text-xs font-medium text-gray-500 my-3">
@@ -304,18 +304,21 @@ const AddServices = () => {
         </>
 
         {totalPage > 0 && (
-          <ReactPaginate
-            previousLabel={"<<"}
-            nextLabel={">>"}
-            pageCount={Number(totalPage)}
-            marginPagesDisplayed={1}
-            onPageChange={handlePageClick}
-            containerClassName={"pagination"}
-            previousLinkClassName={"pagination_Link"}
-            nextLinkClassName={"pagination_Link"}
-            activeClassName={"pagination_Link-active"}
-            disabledClassName={"pagination_Link-disabled"}
-          ></ReactPaginate>
+          <div className="flex justify-end">
+            {" "}
+            <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              pageCount={Number(totalPage)}
+              marginPagesDisplayed={1}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              previousLinkClassName={"pagination_Link"}
+              nextLinkClassName={"pagination_Link"}
+              activeClassName={"pagination_Link-active"}
+              disabledClassName={"pagination_Link-disabled"}
+            ></ReactPaginate>
+          </div>
         )}
       </div>
 

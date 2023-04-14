@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { Switch } from "antd";
 import { AiOutlineCopy } from "react-icons/ai";
+import { FiPlusCircle } from "react-icons/fi";
 
 const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
   console.log("box33 data", box_no_33);
@@ -68,7 +69,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 <div>
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
-                      Name
+                      Facility Name
                     </span>
                   </label>
                   <input
@@ -155,7 +156,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 <div>
                   <label className="label">
                     <span className="label-text text-[16px] font-medium text-[#9b9b9b] text-left">
-                      Phone
+                      Phone 1
                     </span>
                   </label>
                   <input
@@ -326,26 +327,26 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                     <option value="Dr">Dr</option>
                   </select>
                 </div>
-                <div className=" xl:mt-10 2xl:mt-0 items-start">
+                <div className=" xl:mt-10 2xl:mt-5 items-start">
                   <div>
                     <Switch
                       size="small"
                       checked={value ? true : false}
                       onClick={() => setValue(!value)}
                     />
-                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                    <span className="text-[14px]  font-medium text-gray-500 mx-3">
                       Combo Code
                     </span>
                   </div>
                 </div>
-                <div className=" xl:mt-10 2xl:mt-0 items-start">
+                <div className=" xl:mt-10 2xl:mt-5 items-start">
                   <div>
                     <Switch
                       size="small"
                       checked={value ? true : false}
                       onClick={() => setValue(!value)}
                     />
-                    <span className="text-[14px] font-medium text-gray-500 mx-3">
+                    <span className="text-[14px]  font-medium text-gray-500 mx-3">
                       Email Reminders
                     </span>
                   </div>
@@ -380,6 +381,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("mon_end_time")}
                       />
+                      <span className="text-sm ">
+                        <FiPlusCircle className="text-secondary" />
+                      </span>
                     </div>
                     <div className="flex flex-wrap items-center my-1 gap-2">
                       <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
@@ -399,6 +403,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("tus_end")}
                       />
+                      <span className="text-sm ">
+                        <FiPlusCircle className="text-secondary" />
+                      </span>
                     </div>
                     <div className="flex flex-wrap items-center my-1 gap-2">
                       <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
@@ -418,6 +425,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("wed_end")}
                       />
+                      <span className="text-sm ">
+                        <FiPlusCircle className="text-secondary" />
+                      </span>
                     </div>
                     <div className="flex flex-wrap items-center my-1 gap-2">
                       <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
@@ -437,6 +447,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("thur_end")}
                       />
+                      <span className="text-sm ">
+                        <FiPlusCircle className="text-secondary" />
+                      </span>
                     </div>
                     <div className="flex flex-wrap items-center my-1 gap-2">
                       <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
@@ -456,6 +469,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("fri_end")}
                       />
+                      <span className="text-sm ">
+                        <FiPlusCircle className="text-secondary" />
+                      </span>
                     </div>
                     <div className="flex flex-wrap items-center my-1 gap-2">
                       <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
@@ -475,6 +491,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("sat_end")}
                       />
+                      <span className="text-sm ">
+                        <FiPlusCircle className="text-secondary" />
+                      </span>
                     </div>
                     <div className="flex flex-wrap items-center my-1 gap-2">
                       <h5 className="text-sm text-gray-600 w-[70px] mr-5 md:mr-0">
@@ -494,11 +513,14 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("sun_end")}
                       />
+                      <span className="text-sm ">
+                        <FiPlusCircle className="text-secondary" />
+                      </span>
                     </div>
                   </div>
                 </div>
-                <div className=" text-sm flex items-center gap-1 ">
-                  <AiOutlineCopy className="text-secondary" /> Copy Times
+                <div className=" text-sm flex mt-10 gap-1 ">
+                  <AiOutlineCopy className="text-secondary" /> Copy Times to all
                 </div>
               </div>
 

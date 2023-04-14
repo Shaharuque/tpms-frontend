@@ -181,6 +181,13 @@ const AddInsurance = () => {
         {/* <div className="ml-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 my-3 mr-2 gap-x-6 gap-y-3 "> */}
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
+          <div>
+            <input
+              type="text"
+              className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+              placeholder="Search Here"
+            />
+          </div>
 
           <select
             multiple={true}
@@ -244,6 +251,13 @@ const AddInsurance = () => {
           <h1 className="text-sm text-gray-700 my-2">
             Facility Selected Insurance
           </h1>
+          <div>
+            <input
+              type="text"
+              className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+              placeholder="Search Here"
+            />
+          </div>
           <select
             multiple
             id="countries_multiple"

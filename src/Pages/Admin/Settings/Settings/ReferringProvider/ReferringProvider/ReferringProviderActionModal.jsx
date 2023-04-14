@@ -46,7 +46,7 @@ export default function ReferringProviderActionModal({
         <div className="px-5 py-2 ">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
-              Edit Document
+              Add Referring Provider
             </h1>
             <IoCloseCircleOutline
               onClick={handleClose}
@@ -95,7 +95,7 @@ export default function ReferringProviderActionModal({
               </div>
               <div>
                 <label className="label">
-                  <span className="modal-label-name">UPIN</span>
+                  <span className="modal-label-name">ID Qualifier</span>
                 </label>
                 <input
                   type="number"
@@ -103,6 +103,18 @@ export default function ReferringProviderActionModal({
                   name="upin"
                   className="modal-input-field ml-1 w-full"
                   {...register("upin")}
+                />
+              </div>
+              <div>
+                <label className="label">
+                  <span className="modal-label-name">ID</span>
+                </label>
+                <input
+                  type="number"
+                  placeholder="id"
+                  name="id"
+                  className="modal-input-field ml-1 w-full"
+                  {...register("id")}
                 />
               </div>
             </div>

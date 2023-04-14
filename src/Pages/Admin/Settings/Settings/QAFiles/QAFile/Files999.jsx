@@ -216,7 +216,7 @@ const Files999 = () => {
     }
   };
   return (
-    <div>
+    <div className="p-2">
       <div>
         <div>
           <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-4 2xl:grid-cols-6  mr-2 gap-6">
@@ -305,7 +305,7 @@ const Files999 = () => {
                 Clear filters
               </button>
             </div>
-            <Table
+        <div className=" overflow-scroll py-3"> <Table
               pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
               rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
               size="small"
@@ -320,7 +320,9 @@ const Files999 = () => {
               //   y: 650,
               // }}
               onChange={handleChange}
-            /> */}
+            /></div>
+
+            */}
           </>
         )}
       </div>

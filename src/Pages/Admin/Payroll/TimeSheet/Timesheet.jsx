@@ -608,7 +608,7 @@ const Timesheet = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 mb-5 mr-2 gap-4">
+        <div className="flex items-center flex-wrap mb-5 mr-2 gap-x-3 gap-y-4">
           <div>
             <label className="label">
               <span className="label-text text-[15px] text-gray-500 text-left">

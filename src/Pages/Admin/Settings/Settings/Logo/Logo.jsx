@@ -28,7 +28,7 @@ const Logo = () => {
               <div>
                 <div className="my-3">
                   <input
-                    className="form-control text-sm border border-gray-300 w-[100px] lg:w-full"
+                    className="form-control text-sm border border-gray-300 w-[100px] lg:w-full py-1"
                     type="file"
                     id="formFile"
                     onChange={handleChange}
@@ -44,7 +44,7 @@ const Logo = () => {
               </div>
             </div>
           </div>
-          <div className="lg:mt-5 xl:mt-[38px]">
+          <div className="lg:mt-5 xl:mt-[48px]">
             {/* <input type="submit" /> */}
             <input
               type="submit"

@@ -52,7 +52,7 @@ const InsuranceSetup = () => {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
-      width: 100,
+      width: 120,
       filters: [
         {
           text: `Anthem Blue C`,
@@ -183,7 +183,7 @@ const InsuranceSetup = () => {
           <div className="">
             <input
               name="cms"
-              className="page py-[3px]  focus:outline-none"
+              className="page py-[3px]   focus:outline-none"
               onChange={inputHandle}
               type="text"
             ></input>

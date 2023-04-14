@@ -10,8 +10,8 @@ const AddServiceSubType = () => {
           <NavLink
             className={(navinfo) =>
               navinfo.isActive
-                ? "rs-nav-item rs-nav-item-active font-medium text-base"
-                : "rs-nav-item text-base font-medium"
+                ? "rs-nav-item rs-nav-item-active  text-[14px]"
+                : "rs-nav-item text-[14px]"
             }
             to={"SubTypeTab"}
           >

@@ -21,8 +21,6 @@ import { BiSearchAlt } from "react-icons/bi";
 const ArFollowupBucket = () => {
   const [active, setActive] = useState(false);
 
-
-
   const [select, setSelect] = useState("");
   const [tableOpen, setTableOpen] = useState(false);
   const [flowUpData, SetFlowUpData] = useState([]);
@@ -512,7 +510,7 @@ const ArFollowupBucket = () => {
   };
   //end outside click
   return (
-    <div className={!tableOpen ? "h-[100vh]" : ""}>
+    <div className={!tableOpen ? "h-[170vh]" : ""}>
       <div className="flex items-center justify-between">
         <h1 className="text-lg my-1 text-orange-500">Follow Up Bucket</h1>
         <div className="flex items-center gap-3">
@@ -526,11 +524,11 @@ const ArFollowupBucket = () => {
         </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-8 my-3 mr-2 gap-x-2 gap-y-1">
+        <div className="flex items-center flex-wrap my-3 mr-2 gap-x-3 gap-y-1">
           {/* select  */}
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Select
               </span>
             </label>
@@ -549,7 +547,7 @@ const ArFollowupBucket = () => {
           {/* patients */}
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Patients
               </span>
             </label>
@@ -568,7 +566,7 @@ const ArFollowupBucket = () => {
           {/* Insurance */}
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Insurance
               </span>
             </label>
@@ -587,7 +585,7 @@ const ArFollowupBucket = () => {
           {/* CPT codes */}
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 CPT Codes
               </span>
             </label>
@@ -606,7 +604,7 @@ const ArFollowupBucket = () => {
           {/* aging status */}
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Aging Status
               </span>
             </label>
@@ -623,9 +621,9 @@ const ArFollowupBucket = () => {
             </select>
           </div>
           {/* Selected Date */}
-          <div>
+          <div className="w-[200px]">
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Selected Date
               </span>
             </label>
@@ -666,11 +664,11 @@ const ArFollowupBucket = () => {
                 className="text-[14px] text-gray-600 font-medium"
               /> */}
 
-               <Switch
-                  size="small"
-                  checked={active ? true : false}
-                  onClick={() => setActive(!active)}
-                />
+              <Switch
+                size="small"
+                checked={active ? true : false}
+                onClick={() => setActive(!active)}
+              />
 
               <span className="text-[14px] ml-1 text-gray-600 font-medium">
                 Zero Paid
@@ -686,7 +684,7 @@ const ArFollowupBucket = () => {
         </div>
         <div
           ref={refClose}
-          className="absolute z-10 lg:ml-[10%] xl:ml-[15%] 2xl:ml-[20] shadow-xl"
+          className="absolute z-10 lg:ml-[20%] xl:ml-[25%] 2xl:ml-[30%] shadow-xl"
         >
           {open && (
             <motion.div
