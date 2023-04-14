@@ -114,7 +114,7 @@ const PatientStatement = () => {
         <div className=" flex flex-wrap  my-5 mr-2 gap-4">
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Related to
               </span>
             </label>

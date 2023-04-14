@@ -5,29 +5,15 @@ import ChatInbox from "./ChatInbox/ChatInbox";
 
 const Chat = () => {
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="flex">
         {/* <Contacts />
         <ChatInbox /> */}
 
         {/* <!-- This is an example component --> */}
-        <div class="container mx-auto shadow-lg rounded-lg">
+        <div class=" mx-auto shadow-lg rounded-lg">
           {/* <!-- headaer --> */}
-          <div class="px-5 py-5 flex justify-between items-center bg-white border-b-2">
-            <div class="font-semibold text-2xl">GoingChat</div>
-            <div class="w-1/2">
-              <input
-                type="text"
-                name=""
-                id=""
-                placeholder="search IRL"
-                class="rounded-2xl bg-gray-100 py-3 px-5 w-full"
-              />
-            </div>
-            <div class="h-12 w-12 p-2 bg-yellow-500 rounded-full text-white font-semibold flex items-center justify-center">
-              RA
-            </div>
-          </div>
+
           {/* <!-- end header -->
            <!-- Chatting --> */}
           <div class="flex flex-row   justify-between bg-white">
@@ -128,12 +114,92 @@ const Chat = () => {
                   </span>
                 </div>
               </div>
+              <div class="flex flex-row py-4 px-2 items-center border-b-2">
+                <div class="w-1/4">
+                  <img
+                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+                    class="object-cover h-12 w-12 rounded-full"
+                    alt=""
+                  />
+                </div>
+                <div class="w-full">
+                  <div class="text-lg font-semibold">Javascript Indonesia</div>
+                  <span class="text-gray-500">
+                    Evan : some one can fix this
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row py-4 px-2 items-center border-b-2">
+                <div class="w-1/4">
+                  <img
+                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+                    class="object-cover h-12 w-12 rounded-full"
+                    alt=""
+                  />
+                </div>
+                <div class="w-full">
+                  <div class="text-lg font-semibold">Javascript Indonesia</div>
+                  <span class="text-gray-500">
+                    Evan : some one can fix this
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row py-4 px-2 items-center border-b-2">
+                <div class="w-1/4">
+                  <img
+                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+                    class="object-cover h-12 w-12 rounded-full"
+                    alt=""
+                  />
+                </div>
+                <div class="w-full">
+                  <div class="text-lg font-semibold">Javascript Indonesia</div>
+                  <span class="text-gray-500">
+                    Evan : some one can fix this
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row py-4 px-2 items-center border-b-2">
+                <div class="w-1/4">
+                  <img
+                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+                    class="object-cover h-12 w-12 rounded-full"
+                    alt=""
+                  />
+                </div>
+                <div class="w-full">
+                  <div class="text-lg font-semibold">Javascript Indonesia</div>
+                  <span class="text-gray-500">
+                    Evan : some one can fix this
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row py-4 px-2 items-center border-b-2">
+                <div class="w-1/4">
+                  <img
+                    src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+                    class="object-cover h-12 w-12 rounded-full"
+                    alt=""
+                  />
+                </div>
+                <div class="w-full">
+                  <div class="text-lg font-semibold">Javascript Indonesia</div>
+                  <span class="text-gray-500">
+                    Evan : some one can fix this
+                  </span>
+                </div>
+              </div>
               {/* <!-- end user list --> */}
             </div>
             {/* <!-- end chat list -->
            <!-- message --> */}
             <div class="w-full px-5 flex flex-col justify-between">
-              <div class="flex flex-col mt-5">
+              <div class="px-5 py-3 flex justify-between items-center bg-white border-b-2">
+                <div class="h-12 w-12 p-2 bg-yellow-500 rounded-full text-white font-semibold flex items-center justify-center">
+                  RA
+                </div>
+              </div>
+              <div class="flex flex-col ">
                 <div class="flex justify-end mb-4">
                   <div class="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
                     Welcome to group everyone !
