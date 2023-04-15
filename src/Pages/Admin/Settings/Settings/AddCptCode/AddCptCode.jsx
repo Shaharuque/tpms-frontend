@@ -9,6 +9,7 @@ import useToken from "../../../../../CustomHooks/useToken";
 import { fetchCpt } from "../../../../../features/Settings_redux/cptCodeSlice";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddCptCodeActionModal from "./AddCptCode/AddCptCodeActionModal";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
 
 const AddCptCode = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -18,19 +19,25 @@ const AddCptCode = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const endPoint = "admin/ac/setting/get/cpt/code";
-
   const { token } = useToken();
+
+  //List of all CPT Codes
   const allCpt = useSelector((state) => state?.cptInfo);
-  const data = allCpt?.cptData?.cpt_codes?.data
-    ? allCpt?.cptData?.cpt_codes?.data
-    : [];
+  const data = allCpt?.cptData?.data?.rows || [];
   const totalPage = allCpt?.cptData?.cpt_codes?.last_page
     ? allCpt?.cptData?.cpt_codes?.last_page
     : 0;
-  console.log("server response", allCpt);
+  console.log("All CPT Codes", data);
+  //Getting All Selected Treatment Data
+  const {
+    data: selectedTreatmentData,
+    isSuccess: selectedTreatmentSuccess,
+    isLoading: selectedTreatmentLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
+  console.log("Selected Treatements", selectedTreatmentData?.all_insurance);
 
   useEffect(() => {
-    dispatch(fetchCpt({ endPoint, page, token }));
+    dispatch(fetchCpt({ page, token }));
   }, [page, dispatch, token]);
 
   console.log(totalPage);
@@ -81,11 +88,16 @@ const AddCptCode = () => {
           value: "Speech Therapy",
         },
       ],
-      render: (_, { treatment }) => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-secondary">
-            {treatment?.treatment_name ? treatment?.treatment_name : "Not Set"}
+            {record?.facility_treatment_id
+              ? selectedTreatmentData?.all_insurance?.find(
+                  (treatment) =>
+                    parseInt(treatment.id) === record?.facility_treatment_id
+                )?.treatment_name
+              : "Not Set"}
           </div>
         );
       },
@@ -236,6 +248,7 @@ const AddCptCode = () => {
           page={page}
           token={token}
           endPoint={endPoint}
+          selectedTreatmentData={selectedTreatmentData?.all_insurance}
         ></AddCptCodeActionModal>
       )}
     </div>

@@ -17,22 +17,11 @@ export default function AddCptCodeActionModal({
   page,
   token,
   endPoint,
+  selectedTreatmentData,
 }) {
-  const [selectedTreatments, setSelectedTreatments] = useState([]);
-  const { id, cpt_code, treatment, facility_treatment_id } = record;
+  const { id, cpt_code, cpt_id, facility_treatment_id } = record;
   console.log("record", record);
   const dispatch = useDispatch();
-
-  //getting all the selected treatment data for Tx type selection purpose
-  useEffect(() => {
-    fetchData("admin/ac/setting/get/selected/treatment", token).then((res) => {
-      const result = res?.data?.selected_treatment;
-      if (result?.length !== 0) {
-        setSelectedTreatments(result);
-      }
-    });
-  }, []);
-  console.log(selectedTreatments);
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -42,13 +31,50 @@ export default function AddCptCodeActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/cpt/code/create",
+          url: "https://stagapi.therapypms.com/api/internaladmin/setting/add/cpt/code",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: token || null,
+            "x-auth-token": token || null,
           },
           data: FormData,
+        });
+
+        // console.log(res.data);
+        if (res.data.status === "success") {
+          console.log("Successfully Inserted");
+          toast.success("Successfully Inserted", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
+          dispatch(fetchCpt({ endPoint, page, token }));
+          handleClose();
+        } else {
+          toast.error("Cpt Code Already Exist", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+          });
+        }
+      } catch (error) {
+        console.log(error?.res?.data?.message); // this is the main part. Use the response property from the error object
+      }
+    } else {
+      console.log("update part is hitted");
+      try {
+        let res = await axios({
+          method: "post",
+          url: "https://stagapi.therapypms.com/api/internaladmin/setting/add/cpt/code",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token || null,
+          },
+          data: {
+            ...FormData,
+            cptid: cpt_id,
+          },
         });
 
         // console.log(res.data);
@@ -128,7 +154,7 @@ export default function AddCptCodeActionModal({
                   ) : (
                     <option>Select Treatment</option>
                   )}
-                  {selectedTreatments
+                  {selectedTreatmentData
                     ?.filter(
                       (item) =>
                         item.treatment_name !== record.treatment?.treatment_name
