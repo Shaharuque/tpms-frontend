@@ -60,7 +60,7 @@ const AddInsurance = () => {
     return <Loading></Loading>;
   }
 
-  console.log("data hello", insuranceApiData, selectedInsurance);
+  // console.log("data hello", insuranceApiData, selectedInsurance);
 
   const handleAdding = (e) => {
     let target = e.target;
@@ -89,8 +89,10 @@ const AddInsurance = () => {
     const body = {
       insurance_ids: selectedKeys,
     };
+
     const AddingInsuranceData = await PostfetchData({
-      endPoint: "admin/ac/setting/add/insurance",
+      // endPoint: "admin/ac/setting/add/insurance",
+      endPoint: "setting/add/insurance/facility",
       payload: body,
       token,
     });
@@ -109,10 +111,11 @@ const AddInsurance = () => {
   const handleRemoveValue = async () => {
     console.log("Remove  button click get data", facilityselectedkeys);
     const body = {
-      selected_insurance_ids: facilityselectedkeys,
+      insurance_ids: facilityselectedkeys,
     };
     const RemoveSelectedData = await PostfetchData({
-      endPoint: "admin/ac/setting/remove/insurance",
+      // endPoint: "admin/ac/setting/remove/insurance",
+      endPoint: "setting/delete/insurance/facility",
       payload: body,
       token,
     });
@@ -137,7 +140,12 @@ const AddInsurance = () => {
 
   const InsuranceView = async () => {
     if (selectedKeys.length > 1) {
-      alert("select just one value");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Select just One Value",
+        timer: 1500,
+      });
       return setSelectedKeys([0]);
     }
     console.log("data selectedkeys", selectedKeys);
@@ -147,7 +155,9 @@ const AddInsurance = () => {
       insurance_id: selectedKeys,
     };
     const fetchpostTest = await PostfetchData({
-      endPoint: "admin/ac/setting/get/all/insurance/details",
+      // endPoint: "admin/ac/setting/get/all/insurance/details",
+      endPoint: "setting/all/insurance/details",
+
       payload: body,
       token,
     });
@@ -158,7 +168,12 @@ const AddInsurance = () => {
 
   const FacilityInsurance = async () => {
     if (facilityselectedkeys.length > 1) {
-      alert("select just one value");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Select just One Value",
+        timer: 1500,
+      });
       return setfacilityselectedkeys([0]);
     }
 
@@ -166,7 +181,7 @@ const AddInsurance = () => {
       insurance_id: facilityselectedkeys,
     };
     const fetchpostTestt = await PostfetchData({
-      endPoint: "admin/ac/setting/get/selected/insurance/details",
+      endPoint: "setting/get-payor-selected-facility-details",
       payload: body,
       token,
     });

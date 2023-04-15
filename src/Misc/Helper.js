@@ -22,7 +22,7 @@ export const PostfetchData = async ({ endPoint, payload = null, token }) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: token || null,
+      "x-auth-token": token || null,
     },
   });
   return response.data;

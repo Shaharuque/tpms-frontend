@@ -4,6 +4,7 @@ import { Switch } from "antd";
 import { useEffect } from "react";
 import { PostfetchData } from "../../../../../Misc/Helper";
 import useToken from "../../../../../CustomHooks/useToken";
+import Swal from "sweetalert2";
 
 const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
   const [active, setActive] = useState(false);
@@ -16,14 +17,20 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
     console.log("formsubmit data check", data);
     const body = data;
     const SelelctedInsuranceUpdate = await PostfetchData({
-      endPoint: "admin/ac/setting/selected/insurance/details/update",
+      // endPoint: "admin/ac/setting/selected/insurance/details/update",
+      endPoint: "setting/update/insurance/facility",
       payload: body,
       token,
     });
     console.log("selected insurance update", SelelctedInsuranceUpdate);
 
     if (SelelctedInsuranceUpdate.status === "success") {
-      alert("insurance details updated");
+      Swal.fire({
+        icon: "success",
+        title: "Insurance Details Updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
