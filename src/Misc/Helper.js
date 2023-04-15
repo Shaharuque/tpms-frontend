@@ -10,7 +10,7 @@ export const fetchData = async (endPoint, token) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: token || null,
+      "x-auth-token": token || null,
     },
   });
   return response;

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 const AddInsurance = () => {
   const { token } = useToken();
+  console.log(token);
   ///console.log("token from custom hook", token);
   // const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
@@ -27,11 +28,13 @@ const AddInsurance = () => {
   // parallel API calling
   const fetchWithPromiseAll = async () => {
     const GetInsurancePromise = fetchData(
-      "admin/ac/setting/get/all/insurance",
+      // "admin/ac/setting/get/all/insurance",
+      "setting/get/all/insurance",
       token
     );
     const SelectedInsurancePromise = fetchData(
-      "admin/ac/setting/get/selected/insurance",
+      // "admin/ac/setting/get/selected/insurance",
+      "setting/get/facility/selected/insurance",
       token
     );
     const [GetInsurance, SelectedInsurance] = await Promise.all([
@@ -56,6 +59,8 @@ const AddInsurance = () => {
   if (addedData) {
     return <Loading></Loading>;
   }
+
+  console.log("data hello", insuranceApiData, selectedInsurance);
 
   const handleAdding = (e) => {
     let target = e.target;
@@ -268,12 +273,18 @@ const AddInsurance = () => {
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {/* calling same api  */}
-            {selectedInsurance?.data?.selected_insurance?.length > 0 &&
-              selectedInsurance?.data?.selected_insurance.map((item, index) => (
-                <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.payor_name}{" "}
-                </option>
-              ))}{" "}
+            {selectedInsurance?.data?.facility_selected_insurance?.length > 0 &&
+              selectedInsurance?.data?.facility_selected_insurance.map(
+                (item, index) => (
+                  <option
+                    key={item.id}
+                    className="px-2 text-sm"
+                    value={item.id}
+                  >
+                    {item.payor_name}{" "}
+                  </option>
+                )
+              )}{" "}
           </select>
           <br />
           <button
