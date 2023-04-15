@@ -4,19 +4,19 @@ import { apiSlice } from "../../api/apiSlice";
 
 export const addTreatmentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    //handle auth endpoint here
+    //All Treatment Api
     getAllTreatments: builder.query({
-      query: ({ token, page }) => ({
-        url: `admin/ac/setting/pay/period/get?page=${page}`,
+      query: ({ token }) => ({
+        url: `setting/get/all/treatment`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
-      providesTags: ["Payperiods"],
+      providesTags: ["AllTreatments"],
     }),
-    //Selected Treatment Api
+    //Facility Selected Treatment Api
     getAllSelectedTreatments: builder.query({
       query: ({ token }) => ({
         url: `setting/get/all/facility/treatment`,

@@ -4,7 +4,7 @@ import {
   patientDetailsReducer,
 } from "../features/Patient_redux/patientSlice";
 import { settingDataReducer } from "../features/Settings_redux/settingSlice";
-import { serviceReducer } from "../features/Settings_redux/settingFeaturesSlice";
+import { serviceReducer } from "../features/Settings_redux/settingServicesList";
 import { cptReducer } from "../features/Settings_redux/cptCodeSlice";
 import { loginReducer } from "../features/login_redux/loginPostSlice";
 import {
