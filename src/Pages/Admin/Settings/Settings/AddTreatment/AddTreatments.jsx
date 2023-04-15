@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
-import { fetchData } from "../../../../../Misc/Helper";
+import { PostfetchData, fetchData } from "../../../../../Misc/Helper";
 import { useSelector } from "react-redux";
 
 // import InsuranceDetails from "./InsuranceDetails";
@@ -22,30 +22,35 @@ const AddTreatments = () => {
   //multiple get api will be called together to increase performance
   //parallel API calling[Important]
   const fetchWithPromiseAll = async () => {
-    const GetTreatmentPromise = fetchData(
-      "admin/ac/setting/get/all/treatment",
-      token
-    );
-    const SelectedTreatmentPromise = fetchData(
-      "admin/ac/setting/get/selected/treatment",
-      token
-    );
+    const GetTreatmentPromise = await PostfetchData({
+      // "admin/ac/setting/get/all/treatment",
+      endPoint: "setting/get/all/treatment",
+      token,
+    });
+    const SelectedTreatmentPromise = await PostfetchData({
+      // "admin/ac/setting/get/selected/treatment",
+      endPoint: "setting/get/all/facility/treatment",
+      token,
+    });
     const [GetTreatments, SelectedTreatments] = await Promise.all([
       GetTreatmentPromise,
       SelectedTreatmentPromise,
     ]);
-    setAllTreatmentData(GetTreatments);
-    setSelectedTreatmentData(SelectedTreatments);
+    // setAllTreatmentData(GetTreatments);
+    // setSelectedTreatmentData(SelectedTreatments);
+    console.log(GetTreatments, SelectedTreatments);
   };
 
   useEffect(() => {
     fetchWithPromiseAll();
   }, []);
 
-  console.log(allTreatmentData, selectedTreatmentData);
-  if (!allTreatmentData && !selectedTreatmentData) {
-    return <Loading></Loading>;
-  }
+  // console.log(allTreatmentData, selectedTreatmentData);
+  // if (!allTreatmentData && !selectedTreatmentData) {
+  //   return <Loading></Loading>;
+  // }
+
+  console.log("all tmt data", allTreatmentData);
 
   const handleAdding = (e) => {
     let target = e.target;
