@@ -7,12 +7,12 @@ export const getsettings = createAsyncThunk(
   async (token) => {
     //onno api thik e kaj kortesey
     const response = await axios.get(
-      `https://test-prod.therapypms.com/api/v1/internal/admin/ac/get/setting/name/location`,
+      `https://stagapi.therapypms.com/api/internaladmin/setting/get/name/location`,
       {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token,
+          "x-auth-token": token || null,
         },
       }
     );

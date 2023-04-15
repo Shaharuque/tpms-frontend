@@ -18,21 +18,16 @@ const AddServices = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const { token } = useToken();
-  const endPoint = "admin/ac/setting/service/all";
 
   const allService = useSelector((state) => state?.serviceInfo);
   console.log(allService);
-  const data = allService?.result?.services?.data
-    ? allService?.result?.services?.data
-    : [];
-  const totalPage = allService?.result?.services?.last_page
-    ? allService?.result?.services?.last_page
-    : 0;
+  const data = allService?.result?.data?.data || [];
+  const totalPage = allService?.result?.data?.lastPage || 0;
   console.log(data);
 
   useEffect(() => {
     // For sending multiple parameter to createAsync Thunk we need to pass it as object
-    dispatch(fetchServices({ endPoint, page, token }));
+    dispatch(fetchServices({ page, token }));
   }, [page, dispatch, token]);
 
   const handlePageClick = ({ selected: selectedPage }) => {
@@ -83,8 +78,8 @@ const AddServices = () => {
         //console.log("tags : ", lock);
         return (
           <div className="text-secondary flex justify-start">
-            {record?.treatment_type?.treatment_name ? (
-              record?.treatment_type?.treatment_name
+            {record?.service_treatment?.treatment_name ? (
+              record?.service_treatment?.treatment_name
             ) : (
               <h1 className="text-red-600">Not found</h1>
             )}

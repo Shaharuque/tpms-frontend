@@ -40,33 +40,25 @@ const LogInForm = ({ from }) => {
 
     // axios POST request
     const options = {
-      url: "https://test-prod.therapypms.com/api/v1/internal/admin/login",
+      url: "https://stagapi.therapypms.com/api/internaladmin/auth",
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
       },
-      data: JSON.stringify(formdata), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
+      data: JSON.stringify(formdata),
     };
     axios(options).then((response) => {
       console.log(response.data);
-      // Encrypt the token
-      let ciphertextToken = CryptoJS.AES.encrypt(
-        JSON.stringify(response?.data?.access_token),
-        "tpm422"
-      ).toString();
-
-      if (response?.data?.account_type === "admin") {
+      if (response?.data?.status === "success") {
         dispatch(
           userLoggedIn({
             accessToken: response?.data?.access_token,
-            user: response?.data?.user,
           })
         );
-        localStorage.setItem("adminToken", ciphertextToken);
-        localStorage.setItem("type", response?.data?.account_type);
-        localStorage.setItem("user", JSON.stringify(response?.data?.user));
-        // navigate("/admin"); //admin panel a redirect
+        localStorage.setItem("adminToken", response?.data?.access_token);
+        // localStorage.setItem("type", response?.data?.account_type);
+        // localStorage.setItem("user", JSON.stringify(response?.data?.user))
 
         if (from !== null) {
           console.log("loging from navigation to", from?.from?.pathname);

@@ -8,33 +8,48 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { fetchServices } from "../../../../../../features/Settings_redux/settingFeaturesSlice";
-import { fetchData } from "../../../../../../Misc/Helper";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import useToken from "../../../../../../CustomHooks/useToken";
 
 export default function AddServicesActionModal({
   record,
   handleClose,
   open,
   page,
-  token,
 }) {
   console.log(record);
-  const { id, type, treatment_type, duration, mileage, service, description } =
-    record;
+  const {
+    id,
+    type,
+    treatment_type,
+    service_treatment,
+    duration,
+    mileage,
+    service,
+    description,
+  } = record;
+  console.log(service_treatment);
   const dispatch = useDispatch();
   const endPoint = "admin/ac/setting/service/all";
   const { register, handleSubmit, reset } = useForm();
   const [selectedTreatments, setSelectedTreatments] = useState([]);
+  const { token } = useToken();
 
-  //getting all the selected treatment data for Tx type selection purpose
+  //Getting All Selected Treatment Data
+  const {
+    data: selectedTreatmentData,
+    isSuccess: selectedTreatmentSuccess,
+    isLoading: selectedTreatmentLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
+
   useEffect(() => {
-    fetchData("admin/ac/setting/get/selected/treatment", token).then((res) => {
-      const result = res?.data?.selected_treatment;
-      if (result?.length !== 0) {
-        setSelectedTreatments(result);
-      }
-    });
-  }, [token]);
-  console.log(selectedTreatments);
+    if (
+      selectedTreatmentSuccess &&
+      selectedTreatmentData?.all_insurance?.length > 0
+    ) {
+      setSelectedTreatments(selectedTreatmentData?.all_insurance);
+    }
+  }, [selectedTreatmentData?.all_insurance, selectedTreatmentSuccess]);
 
   // Editable value
   useEffect(() => {
@@ -51,6 +66,7 @@ export default function AddServicesActionModal({
     }, 0);
   }, [
     reset,
+    treatment_type?.id,
     service,
     description,
     mileage,
@@ -153,12 +169,12 @@ export default function AddServicesActionModal({
                 {/* Dynamic option showed and select new option feature */}
                 <select
                   className="modal-input-field ml-1 w-full"
-                  defaultValue={treatment_type?.treatment_name}
+                  defaultValue={service_treatment?.treatment_name}
                   {...register("facility_treatment_id")}
                 >
-                  {record.treatment_type?.treatment_name ? (
-                    <option value={record.treatment_type?.id}>
-                      {record.treatment_type?.treatment_name}
+                  {record?.service_treatment?.treatment_name ? (
+                    <option value={record?.service_treatment?.id}>
+                      {record?.service_treatment?.treatment_name}
                     </option>
                   ) : (
                     <option>Select Treatment</option>
@@ -167,7 +183,7 @@ export default function AddServicesActionModal({
                     ?.filter(
                       (item) =>
                         item.treatment_name !==
-                        record.treatment_type?.treatment_name
+                        record?.service_treatment?.treatment_name
                     )
                     .map((treatment) => {
                       return (
@@ -189,8 +205,8 @@ export default function AddServicesActionModal({
                   className="modal-input-field ml-1 w-full"
                   {...register("type")}
                 >
-                  <option value={0}>UnBillable</option>
-                  <option value={1}>Billable</option>
+                  <option value={1}>UnBillable</option>
+                  <option value={2}>Billable</option>
                 </select>
               </div>
 

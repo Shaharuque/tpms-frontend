@@ -1,4 +1,4 @@
-export const baseIp = "https://test-prod.therapypms.com/api/v1/internal";
+export const baseIp = "https://stagapi.therapypms.com/api/internaladmin";
 export const headers = {
   "Content-Type": "application/json",
   Accept: "application/json",
