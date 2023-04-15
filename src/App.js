@@ -239,6 +239,8 @@ import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 import CallLog from "./Pages/Admin/Patient/Patients/CallLog/CallLog";
 import Chat from "./Pages/Shared/NavigationBar/Chat/Chat";
 import ChatInbox from "./Pages/Shared/NavigationBar/Chat/ChatInbox/ChatInbox";
+import BIRPProgressForm from "./Pages/Admin/FormsTemplate/MentalHealth/BIRPProgressForm";
+import DISCHARGE_SUMMEREY from "./Pages/Admin/FormsTemplate/MentalHealth/DISCHARGE_SUMMEREY";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -363,6 +365,14 @@ function App() {
           <Route
             path="/Structure-Of-Process"
             element={<StructureofProcess></StructureofProcess>}
+          ></Route>
+          <Route
+            path="/BIRPP-rogress-Form"
+            element={<BIRPProgressForm></BIRPProgressForm>}
+          ></Route>
+          <Route
+            path="/discharge-summary"
+            element={<DISCHARGE_SUMMEREY></DISCHARGE_SUMMEREY>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
