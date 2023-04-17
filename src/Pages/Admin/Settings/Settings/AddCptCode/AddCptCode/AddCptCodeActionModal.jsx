@@ -65,7 +65,7 @@ export default function AddCptCodeActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://stagapi.therapypms.com/api/internaladmin/setting/add/cpt/code",
+          url: "https://stagapi.therapypms.com/api/internaladmin/setting/update/cpt/code",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -106,11 +106,11 @@ export default function AddCptCodeActionModal({
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        cpt_code: cpt_code,
-        facility_treatment_id: facility_treatment_id,
+        cptcode: cpt_code,
+        treatment_id: facility_treatment_id,
       });
     }, 100);
-  }, [reset, cpt_code]);
+  }, [reset, cpt_code, facility_treatment_id]);
 
   return (
     <div>
@@ -145,7 +145,7 @@ export default function AddCptCodeActionModal({
                 <select
                   className="modal-input-field ml-1 w-full"
                   name="facility_treatment_id"
-                  {...register("facility_treatment_id")}
+                  {...register("treatment_id")}
                 >
                   {record.treatment?.treatment_name ? (
                     <option value={facility_treatment_id}>
@@ -176,9 +176,9 @@ export default function AddCptCodeActionModal({
                 <input
                   type="number"
                   placeholder="Cpt Code"
-                  name="cpt_code"
+                  name="cptcode"
                   className="modal-input-field ml-1 w-full"
-                  {...register("cpt_code")}
+                  {...register("cptcode")}
                 />
               </div>
             </div>
