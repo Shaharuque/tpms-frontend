@@ -4,6 +4,12 @@ import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
 import { PostfetchData, fetchData } from "../../../../../Misc/Helper";
 import { useSelector } from "react-redux";
+import {
+  useAddTreatmentMutation,
+  useDeleteTreatmentMutation,
+  useGetAllSelectedTreatmentsQuery,
+  useGetAllTreatmentsQuery,
+} from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
 
 // import InsuranceDetails from "./InsuranceDetails";
 
@@ -19,38 +25,33 @@ const AddTreatments = () => {
   const isToggled = useSelector((state) => state.sideBarInfo);
   console.log("isToggled", isToggled);
 
-  //multiple get api will be called together to increase performance
-  //parallel API calling[Important]
-  const fetchWithPromiseAll = async () => {
-    const GetTreatmentPromise = await PostfetchData({
-      // "admin/ac/setting/get/all/treatment",
-      endPoint: "setting/get/all/treatment",
-      token,
-    });
-    const SelectedTreatmentPromise = await PostfetchData({
-      // "admin/ac/setting/get/selected/treatment",
-      endPoint: "setting/get/all/facility/treatment",
-      token,
-    });
-    const [GetTreatments, SelectedTreatments] = await Promise.all([
-      GetTreatmentPromise,
-      SelectedTreatmentPromise,
-    ]);
-    // setAllTreatmentData(GetTreatments);
-    // setSelectedTreatmentData(SelectedTreatments);
-    console.log(GetTreatments, SelectedTreatments);
-  };
+  //
 
-  useEffect(() => {
-    fetchWithPromiseAll();
-  }, []);
+  const {
+    data: getallTreatmentData,
+    isSuccess,
+    isLoading: getallTreatmentLoading,
+  } = useGetAllTreatmentsQuery({ token: token });
+  console.log(isSuccess, getallTreatmentData);
 
+  const {
+    data: getallFacilityTreatments,
+    isLoading: getallFacilityTreatmentsLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
+  console.log(isSuccess, getallFacilityTreatments);
+
+  // add
+  const [addTreatment, { data: addResponse }] = useAddTreatmentMutation();
+  // delete
+  const [deleteTreatment, { data: deleteResponse }] =
+    useDeleteTreatmentMutation();
+  console.log(addResponse, deleteResponse);
+
+  // delete
   // console.log(allTreatmentData, selectedTreatmentData);
-  // if (!allTreatmentData && !selectedTreatmentData) {
-  //   return <Loading></Loading>;
-  // }
-
-  console.log("all tmt data", allTreatmentData);
+  if (getallFacilityTreatmentsLoading && getallTreatmentLoading) {
+    return <Loading></Loading>;
+  }
 
   const handleAdding = (e) => {
     let target = e.target;
@@ -72,10 +73,21 @@ const AddTreatments = () => {
 
   const handleSelectedValue = () => {
     console.log("add button click get data", selectedKeys);
+    addTreatment({
+      token,
+      data: {
+        treatment_ids: selectedKeys,
+      },
+    });
   };
-
   const handleRemoveValue = (e) => {
     console.log("Remove  button click get data", facilityselectedkeys);
+    deleteTreatment({
+      token,
+      data: {
+        del_id: facilityselectedkeys,
+      },
+    });
   };
 
   return (
@@ -108,10 +120,10 @@ const AddTreatments = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {allTreatmentData?.data?.all_insurance?.length > 0 &&
-              allTreatmentData?.data?.all_insurance.map((item, index) => (
+            {getallTreatmentData?.all_insurance?.length > 0 &&
+              getallTreatmentData?.all_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.payor_name}
+                  {item.treatment_name}
                 </option>
               ))}
           </select>
@@ -161,18 +173,12 @@ const AddTreatments = () => {
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {/* calling same api  */}
-            {selectedTreatmentData?.data?.selected_treatment?.length > 0 &&
-              selectedTreatmentData?.data?.selected_treatment.map(
-                (item, index) => (
-                  <option
-                    key={item.id}
-                    className="px-2 text-sm"
-                    value={item.id}
-                  >
-                    {item.treatment_name}
-                  </option>
-                )
-              )}
+            {getallFacilityTreatments?.data?.length > 0 &&
+              getallFacilityTreatments?.data.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
+                  {item.treatment_name}
+                </option>
+              ))}
           </select>
         </div>
       </div>

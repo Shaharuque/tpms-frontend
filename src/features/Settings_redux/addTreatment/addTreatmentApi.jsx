@@ -16,6 +16,7 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["AllTreatments"],
     }),
+
     //Facility Selected Treatment Api
     getAllSelectedTreatments: builder.query({
       query: ({ token }) => ({
@@ -28,60 +29,40 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["selectedTreatments"],
     }),
-    //add payperiod api
-    // addPayperiod: builder.mutation({
-    //   query: ({ token, data }) => ({
-    //     url: `admin/ac/setting/pay/period/save`,
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "Application/json",
-    //       Authorization: token,
-    //     },
-    //     body: JSON.stringify(data),
-    //   }),
-    //   invalidatesTags: ["Payperiods"],
-    // }),
-    // //update payperiod
-    // updatePayperiod: builder.mutation({
-    //   query: ({ token, data }) => ({
-    //     url: `admin/ac/setting/pay/period/update`,
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "Application/json",
-    //       Authorization: token,
-    //     },
-    //     body: JSON.stringify(data),
-    //   }),
-    //   invalidatesTags: ["Payperiods"],
-    // }),
-    // //bulkdelete payperiod
-    // bulkDeletePayperiod: builder.mutation({
-    //   query: ({ token, data }) => ({
-    //     url: `admin/ac/setting/pay/period/delete/bulk`,
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "Application/json",
-    //       Authorization: token,
-    //     },
-    //     body: JSON.stringify(data),
-    //   }),
-    //   invalidatesTags: ["Payperiods"],
-    // }),
-    // //single payperiod delete
-    // deletePayperiod: builder.mutation({
-    //   query: ({ token, data }) => ({
-    //     url: `admin/ac/setting/pay/period/delete`,
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "Application/json",
-    //       Authorization: token,
-    //     },
-    //     body: JSON.stringify(data),
-    //   }),
-    //   invalidatesTags: ["Payperiods"],
-    // }),
+
+    // add
+    addTreatment: builder.mutation({
+      query: ({ token, data }) => ({
+        url: `setting/add/treatment/facility`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      invalidatesTags: ["AllTreatments", "selectedTreatments"],
+    }),
+
+    //  delete
+    deleteTreatment: builder.mutation({
+      query: ({ token, data }) => ({
+        url: `setting/remove/treatment/facility/`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      invalidatesTags: ["AllTreatments", "selectedTreatments"],
+    }),
   }),
 });
 
-export const { useGetAllTreatmentsQuery, useGetAllSelectedTreatmentsQuery } =
-  addTreatmentApi;
+export const {
+  useGetAllTreatmentsQuery,
+  useGetAllSelectedTreatmentsQuery,
+  useAddTreatmentMutation,
+  useDeleteTreatmentMutation,
+} = addTreatmentApi;
