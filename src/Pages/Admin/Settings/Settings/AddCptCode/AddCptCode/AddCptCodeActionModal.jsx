@@ -161,7 +161,10 @@ export default function AddCptCodeActionModal({
                     )
                     ?.map((treatment) => {
                       return (
-                        <option key={treatment?.id} value={treatment?.id}>
+                        <option
+                          key={treatment?.treatment_id}
+                          value={treatment?.treatment_id}
+                        >
                           {treatment?.treatment_name}
                         </option>
                       );

@@ -30,7 +30,6 @@ export default function AddServicesActionModal({
   } = record;
 
   const dispatch = useDispatch();
-  const endPoint = "admin/ac/setting/service/all";
   const { register, handleSubmit, reset } = useForm();
   const [selectedTreatments, setSelectedTreatments] = useState([]);
   const { token } = useToken();
@@ -42,14 +41,13 @@ export default function AddServicesActionModal({
     isLoading: selectedTreatmentLoading,
   } = useGetAllSelectedTreatmentsQuery({ token: token });
 
+  console.log("selected treatments", selectedTreatmentData?.data);
+
   useEffect(() => {
-    if (
-      selectedTreatmentSuccess &&
-      selectedTreatmentData?.all_insurance?.length > 0
-    ) {
-      setSelectedTreatments(selectedTreatmentData?.all_insurance);
+    if (selectedTreatmentSuccess && selectedTreatmentData?.data?.length > 0) {
+      setSelectedTreatments(selectedTreatmentData?.data);
     }
-  }, [selectedTreatmentData?.all_insurance, selectedTreatmentSuccess]);
+  }, [selectedTreatmentData?.data, selectedTreatmentSuccess]);
 
   // Editable value
   useEffect(() => {
@@ -149,7 +147,7 @@ export default function AddServicesActionModal({
 
         // console.log(res.data);
         if (res?.data?.status === "success") {
-          toast.success(res?.data?.message, {
+          toast.success(<h1 className="text-[12px]">{res?.data?.message}</h1>, {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -164,7 +162,7 @@ export default function AddServicesActionModal({
         }
         //else res?.data?.status === "error" holey
         else {
-          toast.error(res?.data?.message, {
+          toast.error(<h1 className="text-[12px]">{res?.data?.message}</h1>, {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -227,9 +225,15 @@ export default function AddServicesActionModal({
                   defaultValue={service_treatment?.treatment_name}
                   {...register("treatment_id")}
                 >
-                  {record?.service_treatment?.treatment_name ? (
-                    <option value={record?.service_treatment?.id}>
-                      {record?.service_treatment?.treatment_name}
+                  {record?.facility_treatment_id ? (
+                    <option value={record?.facility_treatment_id}>
+                      {
+                        selectedTreatments?.find(
+                          (treatment) =>
+                            treatment.treatment_id ===
+                            record?.facility_treatment_id
+                        )?.treatment_name
+                      }
                     </option>
                   ) : (
                     <option>Select Treatment</option>
@@ -237,14 +241,13 @@ export default function AddServicesActionModal({
                   {selectedTreatments
                     ?.filter(
                       (item) =>
-                        item.treatment_name !==
-                        record?.service_treatment?.treatment_name
+                        item.treatment_id !== record?.facility_treatment_id
                     )
                     .map((treatment) => {
                       return (
                         <option
                           key={treatment?.treatment_id}
-                          value={treatment?.id}
+                          value={treatment?.treatment_id}
                         >
                           {treatment?.treatment_name}
                         </option>

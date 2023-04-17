@@ -35,7 +35,7 @@ const AddCptCode = () => {
     isSuccess: selectedTreatmentSuccess,
     isLoading: selectedTreatmentLoading,
   } = useGetAllSelectedTreatmentsQuery({ token: token });
-  console.log("Selected Treatements", selectedTreatmentData?.all_insurance);
+  console.log("Selected Treatements", selectedTreatmentData?.data);
 
   useEffect(() => {
     dispatch(fetchCpt({ page, token }));
@@ -154,9 +154,10 @@ const AddCptCode = () => {
         return (
           <div className=" text-secondary">
             {record?.facility_treatment_id
-              ? selectedTreatmentData?.all_insurance?.find(
+              ? selectedTreatmentData?.data?.find(
                   (treatment) =>
-                    parseInt(treatment.id) === record?.facility_treatment_id
+                    parseInt(treatment.treatment_id) ===
+                    record?.facility_treatment_id
                 )?.treatment_name
               : "Not Set"}
           </div>
@@ -312,7 +313,7 @@ const AddCptCode = () => {
           page={page}
           token={token}
           endPoint={endPoint}
-          selectedTreatmentData={selectedTreatmentData?.all_insurance}
+          selectedTreatmentData={selectedTreatmentData?.data}
         ></AddCptCodeActionModal>
       )}
     </div>

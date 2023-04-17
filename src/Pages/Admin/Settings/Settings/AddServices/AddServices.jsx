@@ -11,6 +11,7 @@ import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/Shimme
 import AddServicesActionModal from "./AddServices/AddServicesActionModal";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
 
 const AddServices = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -31,6 +32,13 @@ const AddServices = () => {
     // For sending multiple parameter to createAsync Thunk we need to pass it as object
     dispatch(fetchServices({ page, token }));
   }, [page, dispatch, token]);
+
+  //Getting All Selected Treatment Data
+  const {
+    data: selectedTreatmentData,
+    isSuccess: selectedTreatmentSuccess,
+    isLoading: selectedTreatmentLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
 
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", selectedPage);
@@ -60,7 +68,7 @@ const AddServices = () => {
           data: payload,
         });
         if (res?.data?.status === "success") {
-          toast.success("Successfully Inserted", {
+          toast.success(<h1 className="text-[12px]">Successfully Deleted</h1>, {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -75,7 +83,7 @@ const AddServices = () => {
         }
         //else res?.data?.status === "error" holey
         else {
-          toast.error(res?.data?.message, {
+          toast.error(<h1 className="text-[12px]">{res?.data?.message}</h1>, {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -87,7 +95,7 @@ const AddServices = () => {
           });
         }
       } catch (error) {
-        toast.warning(error?.message, {
+        toast.warning(<h1 className="text-[12px]">{error?.message}</h1>, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -140,11 +148,12 @@ const AddServices = () => {
         //console.log("tags : ", lock);
         return (
           <div className="text-secondary flex justify-start">
-            {record?.service_treatment?.treatment_name ? (
-              record?.service_treatment?.treatment_name
-            ) : (
-              <h1 className="text-red-600">Not found</h1>
-            )}
+            {
+              selectedTreatmentData?.data?.find(
+                (treatment) =>
+                  treatment?.treatment_id === record?.facility_treatment_id
+              )?.treatment_name
+            }
           </div>
         );
       },
