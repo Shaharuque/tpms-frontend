@@ -73,7 +73,7 @@ export default function AddCptCodeActionModal({
           },
           data: {
             ...FormData,
-            cptid: cpt_id,
+            cptid: id,
           },
         });
 
