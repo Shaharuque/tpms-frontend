@@ -10,6 +10,7 @@ import { fetchCpt } from "../../../../../features/Settings_redux/cptCodeSlice";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddCptCodeActionModal from "./AddCptCode/AddCptCodeActionModal";
 import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import axios from "axios";
 
 const AddCptCode = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -34,7 +35,7 @@ const AddCptCode = () => {
     isSuccess: selectedTreatmentSuccess,
     isLoading: selectedTreatmentLoading,
   } = useGetAllSelectedTreatmentsQuery({ token: token });
-  console.log("Selected Treatements", selectedTreatmentData?.all_insurance);
+  console.log("Selected Treatements", selectedTreatmentData?.data);
 
   useEffect(() => {
     dispatch(fetchCpt({ page, token }));
@@ -51,6 +52,66 @@ const AddCptCode = () => {
     console.log(record);
     setRecordData(record);
     setOpenAddModal(true);
+  };
+
+  //Delete The CPT code from the list
+  const handleDeleteCPT = async (cptid) => {
+    console.log(cptid);
+
+    if (cptid) {
+      const payload = { cptid };
+      try {
+        let res = await axios({
+          method: "post",
+          url: "https://stagapi.therapypms.com/api/internaladmin/setting/delete/cpt/code",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token,
+          },
+          data: payload,
+        });
+        if (res?.data?.status === "success") {
+          toast.success(<h1 className="text-[12px]">Successfully Deleted</h1>, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          dispatch(fetchCpt({ page, token }));
+          handleClose();
+        }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      } catch (error) {
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log(error?.message); // this is the main part. Use the response property from the error object
+      }
+    }
   };
 
   const handleClose = () => {
@@ -93,9 +154,10 @@ const AddCptCode = () => {
         return (
           <div className=" text-secondary">
             {record?.facility_treatment_id
-              ? selectedTreatmentData?.all_insurance?.find(
+              ? selectedTreatmentData?.data?.find(
                   (treatment) =>
-                    parseInt(treatment.id) === record?.facility_treatment_id
+                    parseInt(treatment.treatment_id) ===
+                    record?.facility_treatment_id
                 )?.treatment_name
               : "Not Set"}
           </div>
@@ -154,7 +216,10 @@ const AddCptCode = () => {
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
-              <button className="text-sm mx-1  text-red-500">
+              <button
+                onClick={() => handleDeleteCPT(record?.id)}
+                className="text-sm mx-1  text-red-500"
+              >
                 <AiOutlineDelete />
               </button>
             </div>
@@ -248,7 +313,7 @@ const AddCptCode = () => {
           page={page}
           token={token}
           endPoint={endPoint}
-          selectedTreatmentData={selectedTreatmentData?.all_insurance}
+          selectedTreatmentData={selectedTreatmentData?.data}
         ></AddCptCodeActionModal>
       )}
     </div>
