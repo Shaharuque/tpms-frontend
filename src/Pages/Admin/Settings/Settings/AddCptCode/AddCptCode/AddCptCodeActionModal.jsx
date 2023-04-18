@@ -47,6 +47,7 @@ export default function AddCptCodeActionModal({
             position: "top-center",
             autoClose: 5000,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
           dispatch(fetchCpt({ endPoint, page, token }));
           handleClose();
@@ -55,6 +56,7 @@ export default function AddCptCodeActionModal({
             position: "top-center",
             autoClose: 5000,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
         }
       } catch (error) {
@@ -79,11 +81,11 @@ export default function AddCptCodeActionModal({
 
         // console.log(res.data);
         if (res.data.status === "success") {
-          console.log("Successfully Inserted");
-          toast.success("Successfully Inserted", {
+          toast.success("Successfully Updated", {
             position: "top-center",
             autoClose: 5000,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
           dispatch(fetchCpt({ endPoint, page, token }));
           handleClose();
@@ -92,6 +94,7 @@ export default function AddCptCodeActionModal({
             position: "top-center",
             autoClose: 5000,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
         }
       } catch (error) {
@@ -106,7 +109,7 @@ export default function AddCptCodeActionModal({
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        cptcode: cpt_code,
+        cpt_code: cpt_code,
         treatment_id: facility_treatment_id,
       });
     }, 100);
@@ -179,9 +182,9 @@ export default function AddCptCodeActionModal({
                 <input
                   type="number"
                   placeholder="Cpt Code"
-                  name="cptcode"
+                  name="cpt_code"
                   className="modal-input-field ml-1 w-full"
-                  {...register("cptcode")}
+                  {...register("cpt_code")}
                 />
               </div>
             </div>

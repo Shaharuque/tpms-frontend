@@ -72,7 +72,7 @@ const AddCptCode = () => {
           data: payload,
         });
         if (res?.data?.status === "success") {
-          toast.success(<h1 className="text-[12px]">Successfully Deleted</h1>, {
+          toast.success("Successfully Deleted", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -81,6 +81,7 @@ const AddCptCode = () => {
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
           dispatch(fetchCpt({ page, token }));
           handleClose();

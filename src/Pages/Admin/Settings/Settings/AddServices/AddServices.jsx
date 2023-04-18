@@ -68,34 +68,28 @@ const AddServices = () => {
           data: payload,
         });
         if (res?.data?.status === "success") {
-          toast.success(<h1 className="text-[12px]">Successfully Deleted</h1>, {
+          toast.success("Successfully Deleted", {
             position: "top-center",
             autoClose: 5000,
-            hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
           dispatch(fetchServices({ page, token }));
           handleClose();
         }
         //else res?.data?.status === "error" holey
         else {
-          toast.error(<h1 className="text-[12px]">{res?.data?.message}</h1>, {
+          toast.error(res?.data?.message, {
             position: "top-center",
             autoClose: 5000,
-            hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
         }
       } catch (error) {
-        toast.warning(<h1 className="text-[12px]">{error?.message}</h1>, {
+        toast.warning(error?.message, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -104,6 +98,7 @@ const AddServices = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
+          style: { fontSize: "15px" },
         });
         console.log(error?.message); // this is the main part. Use the response property from the error object
       }

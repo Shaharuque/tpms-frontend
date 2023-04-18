@@ -99,6 +99,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
           dispatch(fetchServices({ page, token }));
           handleClose();
@@ -114,6 +115,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
         }
       } catch (error) {
@@ -126,6 +128,7 @@ export default function AddServicesActionModal({
           draggable: true,
           progress: undefined,
           theme: "dark",
+          style: { fontSize: "15px" },
         });
         console.log(error?.message); // this is the main part. Use the response property from the error object
       }
@@ -156,6 +159,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
           dispatch(fetchServices({ page, token }));
           handleClose();
@@ -171,6 +175,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
         }
       } catch (error) {
@@ -183,6 +188,7 @@ export default function AddServicesActionModal({
           draggable: true,
           progress: undefined,
           theme: "dark",
+          style: { fontSize: "15px" },
         });
         console.log(error?.message); // this is the main part. Use the response property from the error object
       }
