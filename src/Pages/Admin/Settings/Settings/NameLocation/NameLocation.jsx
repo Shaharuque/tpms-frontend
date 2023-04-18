@@ -52,11 +52,13 @@ const NameLocation = () => {
   return (
     <div className="px-2  mb-2">
       <NameLocationTable
+      
         box33Open={box33Open}
         handleTableOpen={handleTableOpen}
         time={working_hours}
         box_no_33={box_no_33}
       ></NameLocationTable>
+
       <NameLocationTable32
         data={box_no_32}
         handleTableOpen32={handleTableOpen32}

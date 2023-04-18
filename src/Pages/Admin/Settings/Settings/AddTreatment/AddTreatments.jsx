@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
-import { PostfetchData, fetchData } from "../../../../../Misc/Helper";
 import { useSelector } from "react-redux";
 import {
   useAddTreatmentMutation,
@@ -15,11 +14,8 @@ import {
 
 const AddTreatments = () => {
   const { token } = useToken();
-  // const [TransferData, setTransferData] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState();
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
-  const [allTreatmentData, setAllTreatmentData] = useState(null);
-  const [selectedTreatmentData, setSelectedTreatmentData] = useState(null);
 
   // is fixed toggle
   const isToggled = useSelector((state) => state.sideBarInfo);
