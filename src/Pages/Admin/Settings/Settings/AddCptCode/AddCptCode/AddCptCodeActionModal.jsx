@@ -109,7 +109,7 @@ export default function AddCptCodeActionModal({
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        cpt_code: cpt_code,
+        cptcode: cpt_code,
         treatment_id: facility_treatment_id,
       });
     }, 100);
@@ -182,9 +182,9 @@ export default function AddCptCodeActionModal({
                 <input
                   type="number"
                   placeholder="Cpt Code"
-                  name="cpt_code"
+                  name="cptcode"
                   className="modal-input-field ml-1 w-full"
-                  {...register("cpt_code")}
+                  {...register("cptcode")}
                 />
               </div>
             </div>
