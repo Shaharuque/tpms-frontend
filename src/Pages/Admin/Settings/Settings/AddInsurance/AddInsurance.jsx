@@ -6,6 +6,10 @@ import Loading from "../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 import { useSelector } from "react-redux";
+import {
+  useInsuranceSearchMutation,
+  useInsuranceSearchQuery,
+} from "../../../../../features/Settings_redux/Search/GlobalSearchApi";
 
 const AddInsurance = () => {
   const { token } = useToken();
@@ -19,11 +23,33 @@ const AddInsurance = () => {
   const [passSelectedInsurance, setpassSelectedInsurance] = useState(null);
   const [passAllInsurance, setpassAllInsurance] = useState(null);
   const [addedData, setaddedData] = useState(false);
+  const [getSearchData, setSearchData] = useState("");
 
   // is fixed toggle
   const isToggled = useSelector((state) => state.sideBarInfo);
   console.log("isToggled", isToggled);
+  // const [InsuranceSearch, { data, isLoading, isError }] =
+  //   useInsuranceSearchMutation();
 
+  // const handleSearch = (e) => {
+  //   console.log(e);
+  //   InsuranceSearch({
+  //     token,
+  //     data: {
+  //       searchItem: e ,
+  //     },
+  //   });
+  // };
+  // search api
+
+  const { data, isLoading, isError } = useInsuranceSearchQuery({
+    token,
+    data: {
+      searchItem: getSearchData,
+    },
+  });
+
+  // console.log("search data", getSearchData, data);
   // multiple get api will be called together to increase performance
   // parallel API calling
   const fetchWithPromiseAll = async () => {
@@ -48,7 +74,7 @@ const AddInsurance = () => {
   useEffect(() => {
     fetchWithPromiseAll();
     setaddedData(false);
-  }, [addedData]);
+  }, []);
 
   // console.log(insuranceApiData, selectedInsurance);
 
@@ -203,6 +229,7 @@ const AddInsurance = () => {
           <h1 className="text-sm text-gray-700 my-2">All Insurance</h1>
           <div>
             <input
+              onChange={(e) => setSearchData(e.target.value)}
               type="text"
               className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
               placeholder="Search Here"
@@ -217,8 +244,8 @@ const AddInsurance = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {insuranceApiData?.data?.all_insurance.length > 0 &&
-              insuranceApiData?.data?.all_insurance.map((item, index) => (
+            {data?.all_insurance.length > 0 &&
+              data?.all_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.payor_name}{" "}
                 </option>

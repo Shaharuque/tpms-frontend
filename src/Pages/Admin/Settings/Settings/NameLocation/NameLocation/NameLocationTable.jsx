@@ -1,10 +1,9 @@
 import React, { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import { Switch, TimePicker } from "antd";
+import { Switch } from "antd";
 import { AiOutlineCopy } from "react-icons/ai";
 import { FiPlusCircle } from "react-icons/fi";
-import moment from "moment";
 
 const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
   console.log("box33 data", box_no_33);
@@ -1810,8 +1809,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                       <input
                         type="time"
                         name="mon_end_time"
-                        // value={dbtimeconverter(time?.[0]?.sat_end)}
-                        // format="h:mm A"
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("mon_end_time")}
                       />
@@ -1829,18 +1826,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("tus_start")}
                       />
-
-                      {/* <TimePicker
-                        className="modal-input-field"
-                        defaultValue={moment(
-                          extractTime(time?.[0]?.fri_start),
-                          "HH:mm A"
-                        )}
-                        use24Hours
-                        format="h:mm A"
-                        onChange={Tuesday}
-                      /> */}
-
                       <span className="text-sm text-gray-600">to</span>
                       <input
                         type="time"
@@ -1881,7 +1866,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                       <input
                         type="time"
                         name="thur_start"
-                        defaultValue={"10,294,5"}
+                        // defaultValue={"10,294,5"}
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("thur_start")}
                       />
