@@ -25,7 +25,7 @@ const NameLocation = () => {
   const box_no_32 = settingDetails?.box_no_32 || [];
   const box_no_33 = settingDetails?.setting_name_location;
   const pos = settingDetails?.pos;
-  const working_hours = settingDetails?.working_hours;
+  const working_hours = settingDetails?.setting_working_hour;
   // console.log(working_hours);
 
   //getsettings action is dispatched [api calling]
@@ -52,7 +52,6 @@ const NameLocation = () => {
   return (
     <div className="px-2  mb-2">
       <NameLocationTable
-      
         box33Open={box33Open}
         handleTableOpen={handleTableOpen}
         time={working_hours}

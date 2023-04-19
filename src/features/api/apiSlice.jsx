@@ -3,8 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://stagapi.therapypms.com/api/internaladmin/",
-    // baseUrl: "http://localhost:9000/api/internaladmin/",
+    // baseUrl: "https://stagapi.therapypms.com/api/internaladmin/",
+    baseUrl: "http://localhost:9000/api/internaladmin/",
     // prepareHeaders: (headers, { getState, endpoint }) => {
     //   const token = getState()?.authInfo?.accessToken;
     //   console.log(token);
