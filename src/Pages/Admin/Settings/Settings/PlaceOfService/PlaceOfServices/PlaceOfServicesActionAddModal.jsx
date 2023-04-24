@@ -162,7 +162,7 @@ export default function PlaceOfServicesActionAddModal({
         <div className="px-5 py-2 ">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">
-              Edit Document
+              Add Place of Service
             </h1>
             <IoCloseCircleOutline
               onClick={handleClose}
@@ -178,6 +178,7 @@ export default function PlaceOfServicesActionAddModal({
                 </label>
                 <input
                   type="text"
+                  placeholder="Enter Here"
                   name="pos_name"
                   className="modal-input-field ml-1 w-full"
                   {...register("pos_name")}
@@ -192,6 +193,7 @@ export default function PlaceOfServicesActionAddModal({
                 </label>
                 <input
                   type="number"
+                  placeholder="Enter Here"
                   name="pos_code"
                   className="modal-input-field ml-1 w-full"
                   {...register("pos_code")}

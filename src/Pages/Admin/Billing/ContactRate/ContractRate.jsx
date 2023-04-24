@@ -313,9 +313,9 @@ const CoactiveractRate = () => {
       <h1 className="text-lg text-orange-400">Contact Rate</h1>
       <div className="md:flex mb-2 mt-5 flex-wrap  items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="mb-3">
+          <div className="mb-3 ml-[-2px ]">
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Select Insurance
               </span>
             </label>

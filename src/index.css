@@ -14,13 +14,13 @@ body {
   -moz-osx-font-smoothing: grayscale; */
   /* font-family: 'Poppins',
  sans-serif; */
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
+} */
 
 .fullscreen {
   overflow: auto;
@@ -166,7 +166,7 @@ select option:hover {
   color: var(--rs-navs-text);
   -webkit-transition: color 0.3s linear, background-color 0.3s linear;
   transition: color 0.3s linear, background-color 0.3s linear;
-  overflow: hidden;
+  /* overflow: hidden; */
   text-overflow: ellipsis;
   white-space: nowrap;
   outline: none;

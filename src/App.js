@@ -239,6 +239,18 @@ import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 import CallLog from "./Pages/Admin/Patient/Patients/CallLog/CallLog";
 import Chat from "./Pages/Shared/NavigationBar/Chat/Chat";
 import ChatInbox from "./Pages/Shared/NavigationBar/Chat/ChatInbox/ChatInbox";
+import BIRPProgressForm from "./Pages/Admin/FormsTemplate/MentalHealth/BIRPProgressForm";
+import DISCHARGE_SUMMEREY from "./Pages/Admin/FormsTemplate/MentalHealth/DISCHARGE_SUMMEREY";
+import MEDICATION_FLOWSHEET from "./Pages/Admin/FormsTemplate/MentalHealth/MEDICATION_FLOWSHEET";
+import PCP_COMMUNICATION from "./Pages/Admin/FormsTemplate/MentalHealth/PCP_COMMUNICATION";
+import CFARS_Form from "./Pages/Admin/FormsTemplate/MentalHealth/CFARS_Form";
+import NO_SHOW_PROGRESSNOTE from "./Pages/Admin/FormsTemplate/MentalHealth/NO_SHOW_PROGRESSNOTE";
+import LOCUS_WORKSHEET from "./Pages/Admin/FormsTemplate/MentalHealth/LOCUS_WORKSHEET";
+import RELEASE_OF_INFORMATION from "./Pages/Admin/FormsTemplate/MentalHealth/RELEASE_OF_INFORMATION";
+import CONSENT_TO_TREATMENT from "./Pages/Admin/FormsTemplate/MentalHealth/CONSENT_TO_TREATMENT";
+import FARS_FORM from "./Pages/Admin/FormsTemplate/MentalHealth/FARS_FORM";
+import MEDICATION_CONSENT from "./Pages/Admin/FormsTemplate/MentalHealth/MEDICATION_CONSENT";
+import BIOPSYCHOSOCIAL from "./Pages/Admin/FormsTemplate/MentalHealth/BIOPSYCHOSOCIAL";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -364,6 +376,49 @@ function App() {
             path="/Structure-Of-Process"
             element={<StructureofProcess></StructureofProcess>}
           ></Route>
+          <Route
+            path="/BIRPP-rogress-Form"
+            element={<BIRPProgressForm></BIRPProgressForm>}
+          ></Route>
+          <Route path="/cfars-form" element={<CFARS_Form></CFARS_Form>}></Route>
+          <Route
+            path="/discharge-summary"
+            element={<DISCHARGE_SUMMEREY></DISCHARGE_SUMMEREY>}
+          ></Route>
+          <Route
+            path="/medication-flowsheet"
+            element={<MEDICATION_FLOWSHEET></MEDICATION_FLOWSHEET>}
+          ></Route>
+          <Route
+            path="/no-show-progressnote"
+            element={<NO_SHOW_PROGRESSNOTE></NO_SHOW_PROGRESSNOTE>}
+          ></Route>
+          <Route
+            path="/pcp-communication"
+            element={<PCP_COMMUNICATION></PCP_COMMUNICATION>}
+          ></Route>
+          <Route
+            path="/locus-worksheet"
+            element={<LOCUS_WORKSHEET></LOCUS_WORKSHEET>}
+          ></Route>
+          <Route
+            path="/relase-of-information"
+            element={<RELEASE_OF_INFORMATION></RELEASE_OF_INFORMATION>}
+          ></Route>
+          <Route
+            path="/consent-to-treatment"
+            element={<CONSENT_TO_TREATMENT></CONSENT_TO_TREATMENT>}
+          ></Route>
+          <Route path="/fars-form" element={<FARS_FORM></FARS_FORM>}></Route>
+          <Route
+            path="/medication-consent"
+            element={<MEDICATION_CONSENT></MEDICATION_CONSENT>}
+          ></Route>
+          <Route
+            path="/biopsycosocial"
+            element={<BIOPSYCHOSOCIAL></BIOPSYCHOSOCIAL>}
+          ></Route>
+
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"

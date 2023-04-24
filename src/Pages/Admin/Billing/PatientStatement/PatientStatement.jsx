@@ -26,17 +26,24 @@ const PatientStatement = () => {
   const handleRelated = (e) => {
     e.preventDefault();
     setSelected(e.target.value);
+    if (e.target.value === "selective_client") {
+      setSelectClient(true);
+    } else if (e.target.value === "selective_private_payor") {
+      setSelectPayor(true);
+    } else {
+    }
   };
   console.log(selected);
 
   const handleSubmit = () => {
-    if (selected === "selective_client") {
-      setSelectClient(true);
-    } else if (selected === "selective_private_payor") {
-      setSelectPayor(true);
-    } else {
-      setAllClient(true);
-    }
+    // if (selected === "selective_client") {
+    //   setSelectClient(true);
+    // } else if (selected === "selective_private_payor") {
+    //   setSelectPayor(true);
+    // } else {
+    //   setAllClient(true);
+    // }
+    setAllClient(true);
   };
 
   useEffect(() => {
@@ -107,7 +114,7 @@ const PatientStatement = () => {
         <div className=" flex flex-wrap  my-5 mr-2 gap-4">
           <div>
             <label className="label">
-              <span className="label-text text-[17px] font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
                 Related to
               </span>
             </label>

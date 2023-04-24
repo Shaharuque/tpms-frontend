@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight, BsPlus, BsThreeDots } from "react-icons/bs";
 import { useForm } from "react-hook-form";
-import { AiOutlineDownload, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDownload, AiOutlineEye, AiOutlinePlus } from "react-icons/ai";
 import axios from "axios";
 import { Dropdown, Space, Switch, Table } from "antd";
 import MPostingAction from "./MPosting/MPostingAction";
@@ -419,7 +419,7 @@ const MPosting = () => {
           </button>
           <Link to={"/admin/billing/deposit-add"}>
             <button className=" flex items-center  pms-button">
-              <BsPlus className="text-lg" />
+              <AiOutlinePlus className="text-sm mr-1" />
               Add Deposit
             </button>
           </Link>
@@ -628,7 +628,7 @@ const MPosting = () => {
               />
             </div>
             <div className=" flex items-end justify-start mb-10 gap-2 mt-8">
-              <button className="pms-button mr-2" type="submit">
+              <button className="pms-button mr-1" type="submit">
                 View
               </button>
 

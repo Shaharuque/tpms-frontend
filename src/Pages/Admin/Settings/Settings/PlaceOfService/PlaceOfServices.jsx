@@ -192,7 +192,7 @@ const PlaceOfServices = () => {
     setFilteredInfo({});
   };
   return (
-    <div>
+    <div className="p-2">
       <div className="md:flex mb-2 items-center justify-between">
         <h1 className="text-lg my-2 text-orange-400">Place of Service</h1>
 

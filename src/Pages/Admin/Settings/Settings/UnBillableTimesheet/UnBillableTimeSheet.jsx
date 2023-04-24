@@ -30,7 +30,6 @@ const UnBillableTimeSheet = () => {
   const clearFilters = () => {
     setFilteredInfo({});
   };
-
   const columns = [
     {
       title: "Date",
@@ -80,7 +79,54 @@ const UnBillableTimeSheet = () => {
       },
       ellipsis: true,
     },
+    {
+      title: "Provider",
+      dataIndex: "provider",
+      key: "provider",
+      width: 100,
+      filters: [
+        { text: "Celestine", value: "Celestine" },
+        { text: "Annaliese", value: "Annaliese" },
+        {
+          text: `Maude`,
+          value: "Maude",
+        },
+        {
+          text: `Molly`,
+          value: "Molly",
+        },
+        {
+          text: "Karla",
+          value: "Karla",
+        },
+        {
+          text: "Marcellus",
+          value: "Marcellus",
+        },
+        {
+          text: "Hilton",
+          value: "Hilton",
+        },
+      ],
+      filteredValue: filteredInfo.provider || null,
+      onFilter: (value, record) => record.provider.includes(value),
+      sorter: (a, b) => {
+        return a.provider > b.provider ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "provider" ? sortedInfo.order : null,
 
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { provider, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <h1>{provider}</h1>
+          </div>
+        );
+      },
+      ellipsis: false,
+    },
     {
       title: "Patient",
       dataIndex: "patient",
@@ -181,7 +227,7 @@ const UnBillableTimeSheet = () => {
       title: "Time In",
       dataIndex: "timeIn",
       key: "timeIn",
-      width: 80,
+      width: 130,
       filters: [
         { text: "Celestine", value: "Celestine" },
         { text: "Annaliese", value: "Annaliese" },
@@ -218,8 +264,28 @@ const UnBillableTimeSheet = () => {
       render: (_, { timeIn, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div>
-            <h1>{timeIn}</h1>
+          <div className="flex justify-center">
+            <div className="flex items-center gap-1">
+              <input
+                type="text"
+                name=""
+                value="10"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
+              <input
+                type="text"
+                name=""
+                value="20"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
+              <select
+                name="post"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
           </div>
         );
       },
@@ -229,7 +295,7 @@ const UnBillableTimeSheet = () => {
       title: "Time Out",
       dataIndex: "timeOut",
       key: "timeOut",
-      width: 80,
+      width: 130,
       filters: [
         { text: "Celestine", value: "Celestine" },
         { text: "Annaliese", value: "Annaliese" },
@@ -266,8 +332,28 @@ const UnBillableTimeSheet = () => {
       render: (_, { timeOut, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div>
-            <h1>{timeOut}</h1>
+          <div className="flex justify-center">
+            <div className="flex items-center gap-1">
+              <input
+                type="text"
+                name=""
+                value="10"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
+              <input
+                type="text"
+                name=""
+                value="20"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
+              <select
+                name="post"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
           </div>
         );
       },
@@ -362,21 +448,24 @@ const UnBillableTimeSheet = () => {
       render: (_, { miles, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div className="flex justify-center">
+          <div>
             <input
+              name="cms"
               defaultValue={miles}
-              className="w-[60px] h-[28px] text-center border border-[#ced4da] focus:border-secondary"
-            />
+              className="page py-[3px] text-center focus:outline-none"
+              // onChange={inputHandle}
+              type="text"
+            ></input>
           </div>
         );
       },
       ellipsis: true,
     },
     {
-      title: "Status",
-      dataIndex: "submitted",
-      key: "submitted",
-      width: 40,
+      title: "Mileage Rate",
+      dataIndex: "miles",
+      key: "miles",
+      width: 80,
       // filters: [
       //   { text: "Celestine", value: "Celestine" },
       //   { text: "Annaliese", value: "Annaliese" },
@@ -393,7 +482,61 @@ const UnBillableTimeSheet = () => {
       //     value: "Karla",
       //   },
       //   {
-      //     text: "Marcellus",]-
+      //     text: "Marcellus",
+      //     value: "Marcellus",
+      //   },
+      //   {
+      //     text: "Hilton",
+      //     value: "Hilton",
+      //   },
+      // ],
+      filteredValue: filteredInfo.miles || null,
+      onFilter: (value, record) => record.miles.includes(value),
+      sorter: (a, b) => {
+        return a.miles > b.miles ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "miles" ? sortedInfo.order : null,
+
+      // render contains what we want to reflect as our data
+      // patient, id, key=>each row data(object) property value can be accessed.
+      render: (_, { miles, id, key }) => {
+        //console.log("tags : ", client_first_name, id, key);
+        return (
+          <div>
+            <input
+              name="cms"
+              defaultValue={miles}
+              className="page py-[3px] text-center focus:outline-none"
+              // onChange={inputHandle}
+              type="text"
+            ></input>
+          </div>
+        );
+      },
+      ellipsis: true,
+    },
+    {
+      title: "Submitted",
+      dataIndex: "submitted",
+      key: "submitted",
+      width: 60,
+      // filters: [
+      //   { text: "Celestine", value: "Celestine" },
+      //   { text: "Annaliese", value: "Annaliese" },
+      //   {
+      //     text: `Maude`,
+      //     value: "Maude",
+      //   },
+      //   {
+      //     text: `Molly`,
+      //     value: "Molly",
+      //   },
+      //   {
+      //     text: "Karla",
+      //     value: "Karla",
+      //   },
+      //   {
+      //     text: "Marcellus",
       //     value: "Marcellus",
       //   },
       //   {
@@ -413,8 +556,8 @@ const UnBillableTimeSheet = () => {
       render: (_, { submitted, id, key }) => {
         //console.log("tags : ", client_first_name, id, key);
         return (
-          <div className="flex items-center justify-center">
-            <FcCheckmark className="text-base" />
+          <div className="">
+            <FcCheckmark className="text-[15px] mx-auto" />
           </div>
         );
       },
@@ -438,7 +581,7 @@ const UnBillableTimeSheet = () => {
     },
   };
   return (
-    <div>
+    <div className="p-2">
       <div className="flex items-center flex-wrap gap-2 justify-between">
         <h1 className="text-lg my-2 text-orange-500">
           Timesheet(s) Submission
@@ -472,7 +615,7 @@ const UnBillableTimeSheet = () => {
           <div>
             <select
               name="type"
-              className="input-border text-gray-600 rounded-sm text-[14px] mt-1 font-medium w-full ml-1 py-1 focus:outline-none"
+              className="input-border text-gray-600 rounded-sm text-[14px] mt-1 font-medium  ml-1 py-1 focus:outline-none"
             >
               <option value="name"> Select Any Action </option>
               <option value="Save Changes"> Save Changes </option>
@@ -481,7 +624,7 @@ const UnBillableTimeSheet = () => {
             </select>
           </div>
           <button className="pms-button" type="submit">
-            Ok
+            Save
           </button>
         </div>
       </div>

@@ -544,7 +544,7 @@ const ProcessingClaim = () => {
 
   return (
     <div className={!tableOpen ? "h-[100vh]" : ""}>
-      <h1 className="text-lg text-orange-400 mb-10">Processing Claim(s)</h1>
+      {/* <h1 className="text-lg text-orange-400 mb-10">Processing Claim(s)</h1> */}
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" flex items-center gap-4 flex-wrap">

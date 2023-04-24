@@ -63,7 +63,7 @@ const EmailSetting = () => {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      width: 90,
+      width: 100,
       filters: [
         {
           text: `10/31/2021`,
@@ -90,7 +90,7 @@ const EmailSetting = () => {
       title: "Time",
       dataIndex: "time",
       key: "time",
-      width: 50,
+      width: 70,
       filters: [
         {
           text: `10/31/2021`,
@@ -131,9 +131,12 @@ const EmailSetting = () => {
             <div className="flex text-left gap-2 flex-wrap items-start justify-start">
               <p className="text">
                 {isReadMore ? record.content.slice(0, 150) : record.content}
-                <span onClick={toggleReadMore} className="read-or-hide">
+                <button
+                  onClick={toggleReadMore}
+                  className="read-or-hide text-secondary"
+                >
                   {isReadMore ? "...read more" : " show less"}
-                </span>
+                </button>
               </p>
 
               <AiFillEye

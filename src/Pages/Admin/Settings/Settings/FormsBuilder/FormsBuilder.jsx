@@ -105,9 +105,9 @@ const FormsBuilder = () => {
     },
   ];
   return (
-    <div>
+    <div className="p-2">
       <div className="flex items-center flex-wrap gap-2 justify-between">
-        <h1 className="text-lg my-2 text-orange-500">Create New Form</h1>
+        <h1 className="text-lg my-2 text-orange-500">Forms Builders</h1>
         <div className="flex items-center gap-3">
           <Link to={"/forms"}>
             <button className="pms-button mb-2 mr-">Forms</button>

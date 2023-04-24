@@ -48,7 +48,7 @@ const AddTImeOff = ({ handleClose, open }) => {
               </div>
               <div className="">
                 <label className="label">
-                  <span className="modal-label-name">Notes</span>
+                  <span className="modal-label-name">Description</span>
                 </label>
                 <div className="ml-1">
                   <TextArea rows={7} size="medium" />

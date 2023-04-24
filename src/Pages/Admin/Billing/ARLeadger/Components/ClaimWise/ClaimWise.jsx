@@ -629,7 +629,7 @@ const ClaimWise = () => {
           }}
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className="text-lg my-2 text-orange-500">AR Ledger</h1>
+            {/* <h1 className="text-lg my-2 text-orange-500">AR Ledger</h1> */}
             <div className=" flex items-center gap-4 flex-wrap">
               {/* name  */}
               <div className="">

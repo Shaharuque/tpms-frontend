@@ -230,7 +230,7 @@ const Bio = () => {
   // let convertedStatus = session_check === 1 ? true : false;
   // console.log("convert ", convertedStatus, "raw api", session_check);
   return (
-    <div className="h-[120vh]">
+    <div className="sm:h-[120vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-3 mr-2 gap-x-6 gap-y-3 ">

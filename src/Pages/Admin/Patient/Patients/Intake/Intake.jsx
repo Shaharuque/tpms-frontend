@@ -118,9 +118,9 @@ const Intake = () => {
               className=" text-xs font-normal "
               columns={column}
               dataSource={allData}
-              // scroll={{
-              //   y: 700,
-              // }}
+              scroll={{
+                y: 700,
+              }}
               onChange={handleChange}
             />
           </div>

@@ -26,28 +26,21 @@ const UnbillableActivity = () => {
   }, []);
   console.log(data);
 
+  //get rows to be deleted
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {},
+  };
+
   const columns = [
     {
       title: "Patients",
       dataIndex: "patient",
       key: "patient",
       width: 100,
-      filters: [
-        {
-          text: "Duck Duci",
-          value: "Duck Duci",
-        },
-        {
-          text: `Antum llc`,
-          value: "Antum llc",
-        },
-      ],
       render: (_, { patient }) => {
         //console.log("tags : ", lock);
         return <div className=" text-secondary">{patient}</div>;
       },
-      filteredValue: filteredInfo.patient || null,
-      onFilter: (value, record) => record.patient.includes(value),
       sorter: (a, b) => {
         return a.patient > b.patient ? -1 : 1;
       },
@@ -59,18 +52,6 @@ const UnbillableActivity = () => {
       dataIndex: "dos",
       key: "dos",
       width: 100,
-      filters: [
-        {
-          text: "Malesuada Corporation",
-          value: "Malesuada Corporation",
-        },
-        {
-          text: `17/01/2018`,
-          value: "17/01/2018",
-        },
-      ],
-      filteredValue: filteredInfo.dos || null,
-      onFilter: (value, record) => record.dos.includes(value),
       sorter: (a, b) => {
         return a.dos > b.dos ? -1 : 1;
       },
@@ -82,18 +63,6 @@ const UnbillableActivity = () => {
       dataIndex: "provider",
       key: "provider",
       width: 100,
-      filters: [
-        {
-          text: "Malesuada Corporation",
-          value: "Malesuada Corporation",
-        },
-        {
-          text: `17/01/2018`,
-          value: "17/01/2018",
-        },
-      ],
-      filteredValue: filteredInfo.provider || null,
-      onFilter: (value, record) => record.provider.includes(value),
       sorter: (a, b) => {
         return a.provider > b.provider ? -1 : 1;
       },
@@ -105,18 +74,6 @@ const UnbillableActivity = () => {
       dataIndex: "service",
       key: "service",
       width: 100,
-      filters: [
-        {
-          text: "Malesuada Corporation",
-          value: "Malesuada Corporation",
-        },
-        {
-          text: `Eget Magna Corp`,
-          value: "Eget Magna Corp",
-        },
-      ],
-      filteredValue: filteredInfo.service || null,
-      onFilter: (value, record) => record.service.includes(value),
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1;
       },
@@ -128,18 +85,6 @@ const UnbillableActivity = () => {
       dataIndex: "cpt",
       key: "cpt",
       width: 60,
-      filters: [
-        {
-          text: "Malesuada Corporation",
-          value: "Malesuada Corporation",
-        },
-        {
-          text: `Eget Magna Corp`,
-          value: "Eget Magna Corp",
-        },
-      ],
-      filteredValue: filteredInfo.cpt || null,
-      onFilter: (value, record) => record.cpt.includes(value),
       sorter: (a, b) => {
         return a.cpt > b.cpt ? -1 : 1;
       },
@@ -151,9 +96,6 @@ const UnbillableActivity = () => {
       dataIndex: "pos",
       key: "pos",
       width: 60,
-      filters: [],
-      filteredValue: filteredInfo.pos || null,
-      onFilter: (value, record) => record.pos.includes(value),
       sorter: (a, b) => {
         return a.pos > b.pos ? -1 : 1;
       },
@@ -309,18 +251,6 @@ const UnbillableActivity = () => {
       dataIndex: "created",
       key: "created",
       width: 100,
-      filters: [
-        {
-          text: "Duck Duci",
-          value: "xpLb2phVleSb6YjISm9b2427116509082476266dc57898a2",
-        },
-        {
-          text: `Health Net`,
-          value: "xpLb2phVleSb6YjISm9b2427116509082476266dc57898a2",
-        },
-      ],
-      filteredValue: filteredInfo.created || null,
-      onFilter: (value, record) => record.created.includes(value),
       sorter: (a, b) => {
         return a.created > b.created ? -1 : 1;
       },
@@ -365,7 +295,7 @@ const UnbillableActivity = () => {
   };
 
   return (
-    <div>
+    <div className="p-2">
       <h1 className="text-lg my-2 text-orange-400">Non-Billable Service(s)</h1>
       <Table
         pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
@@ -375,28 +305,25 @@ const UnbillableActivity = () => {
         className=" text-xs font-normal"
         columns={columns}
         dataSource={data}
+        rowSelection={{
+          ...rowSelection,
+        }}
         scroll={{
           y: 650,
         }}
         onChange={handleChange}
       />
-      <div className="flex items-center gap-2 my-3">
-        <select
-          // onChange={(e) => setService(e.target.value)}
-          name="type"
-          className="input-border input-font mt-[7px] focus:outline-none w-1/2 md:w-[15%]"
-        >
+
+      <div className="flex my-10">
+        <select className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] mx-1 text-[14px] w-32 focus:outline-none z-0">
+          <option value="select" className="text-black">
+            Select
+          </option>
           <option value="process era">Process ERA</option>
           <option value="reviewed">Reviewed</option>
           <option value="unreviewed">Unreviewed</option>
         </select>
-
-        <button
-          // onClick={submitHandle}
-          className="pms-input-button"
-        >
-          Save
-        </button>
+        <button className="pms-input-button">Save</button>
       </div>
     </div>
   );

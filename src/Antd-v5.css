@@ -50,6 +50,10 @@
     letter-spacing: 1px;
 }
 
+.anticon-plus {
+    display: none;
+}
+
 
 .ant-table-wrapper .ant-table-thead th.ant-table-column-has-sorters:hover {
     background: #007d88;
@@ -228,6 +232,38 @@ a:hover {
 .ant-picker-dropdown .ant-picker-header {
     display: flex;
     padding: 4px 8px;
-    color: rgba(0, 0, 0, 0.88);
+    color: rgba(52, 52, 52, 0.88);
     border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+}
+
+/* tabes -------------------------------
+ */
+
+.ant-tabs-left>.ant-tabs-nav .ant-tabs-tab+.ant-tabs-tab,
+.ant-tabs-right>.ant-tabs-nav .ant-tabs-tab+.ant-tabs-tab,
+.ant-tabs-left>div>.ant-tabs-nav .ant-tabs-tab+.ant-tabs-tab,
+.ant-tabs-right>div>.ant-tabs-nav .ant-tabs-tab+.ant-tabs-tab {
+    margin: 0px 0 0 0;
+
+
+}
+
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #1677ff;
+    text-shadow: 0 0 0.25px currentcolor;
+}
+
+.ant-tabs-nav .ant-tabs-tab,
+.ant-tabs-right>.ant-tabs-nav .ant-tabs-tab,
+.ant-tabs-left>div>.ant-tabs-nav .ant-tabs-tab,
+.ant-tabs-right>div>.ant-tabs-nav .ant-tabs-tab {
+    padding: 8px 24px;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid #000;
+}
+
+.ant-tabs .ant-tabs-tab:hover {
+    color: #fff;
+    background-color: #4096ff;
 }

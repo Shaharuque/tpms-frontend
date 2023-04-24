@@ -85,6 +85,14 @@ const AddTreatments = () => {
         <div>
           <h1 className="text-sm text-gray-700 my-2">All Treatments</h1>
 
+          <div>
+            <input
+              type="text"
+              className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+              placeholder="Search Here"
+            />
+          </div>
+
           {/* new code added */}
           <select
             multiple={true}
@@ -131,6 +139,13 @@ const AddTreatments = () => {
           <h1 className="text-sm text-gray-700 my-2">
             Facility Selected Treatments
           </h1>
+          <div>
+            <input
+              type="text"
+              className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
+              placeholder="Search Here"
+            />
+          </div>
           <select
             multiple
             id="countries_multiple"

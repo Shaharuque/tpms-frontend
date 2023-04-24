@@ -194,6 +194,7 @@ const Eligibility = () => {
   };
   return (
     <div className="sm:h-[100vh]">
+      <h1 className="text-lg text-orange-400">Eligibility</h1>
       <div className="flex items-center gap-2 flex-wrap">
         {" "}
         <div>
