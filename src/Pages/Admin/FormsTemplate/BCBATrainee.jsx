@@ -317,6 +317,7 @@ const BCBATrainee = () => {
                             </label>
                           </span>
 
+
                           <input
                             type="input"
                             className=" w-full border-b-2  border-blue-600 focus:outline-none "
