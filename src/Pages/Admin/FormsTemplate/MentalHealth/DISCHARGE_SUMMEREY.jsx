@@ -5,7 +5,6 @@ import logo from "../../../Assets/logo4.png";
 import { FaSignature } from "react-icons/fa";
 import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
 import SignatureModal from "../SignatureManage/SignatureModal";
-import { Radio, Tabs } from "antd";
 
 const DISCHARGE_SUMMEREY = () => {
   const [caregiverSignature, setCaregiverSignature] = useState(false);

@@ -139,8 +139,52 @@ const Form = () => {
           <button className="pms-button">BIRP Progress Form</button>
         </Link>
         <div className="my-2"></div>
+        <Link to={"/biopsycosocial"}>
+          <button className="pms-button">BIOPSYCHOSOCIAL</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/cfars-form"}>
+          <button className="pms-button">CFARS Form</button>
+        </Link>
+        <div className="my-2"></div>
         <Link to={"/discharge-summary"}>
           <button className="pms-button">DISCHARGE SUMMEREY</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/medication-flowsheet"}>
+          <button className="pms-button">MEDICATION FLOWSHEET</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/no-show-progressnote"}>
+          <button className="pms-button">NO SHOW PROGRESS NOTE</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/pcp-communication"}>
+          <button className="pms-button">PCP COMMUNICATION</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/locus-worksheet"}>
+          <button className="pms-button">LOCUS_WORKSHEET</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/relase-of-information"}>
+          <button className="pms-button">
+            RELEASE OF INFORMATION FROM CBH TO OTHER ORGANIZATION
+          </button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/consent-to-treatment"}>
+          <button className="pms-button">
+            CONSENT TO TREATMENT/ CLIENT ACKNOWLEDGEMENT
+          </button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/fars-form"}>
+          <button className="pms-button">FARS FORM</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/medication-consent"}>
+          <button className="pms-button">MEDICATION CONSENT</button>
         </Link>
       </div>
     </div>
