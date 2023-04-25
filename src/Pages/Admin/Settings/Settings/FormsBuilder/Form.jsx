@@ -26,6 +26,11 @@ const Form = () => {
           </button>
         </Link>
         <div className="my-2"></div>
+        <Link to={"/clinic-treatment"}>
+          <button className="pms-button">Clinical Treatment, Management & Modification Notes</button>
+        </Link>
+        
+        <div className="my-2"></div>
         <Link to={"/private-client"}>
           <button className="pms-button">PRIVATE CLIENT INTAKE FORM</button>
         </Link>
@@ -39,10 +44,8 @@ const Form = () => {
             OUTPATIENT TREATMENT REQUEST [OTR] FORM
           </button>
         </Link>
-        <div className="my-2"></div>
-        <Link to={"/clinic-treatment"}>
-          <button className="pms-button">Clinic Treatment</button>
-        </Link>
+       
+        
         <div className="my-2"></div>
         <div className="my-2"></div>
         <Link to={"/FBA"}>
