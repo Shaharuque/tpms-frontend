@@ -251,6 +251,11 @@ import CONSENT_TO_TREATMENT from "./Pages/Admin/FormsTemplate/MentalHealth/CONSE
 import FARS_FORM from "./Pages/Admin/FormsTemplate/MentalHealth/FARS_FORM";
 import MEDICATION_CONSENT from "./Pages/Admin/FormsTemplate/MentalHealth/MEDICATION_CONSENT";
 import BIOPSYCHOSOCIAL from "./Pages/Admin/FormsTemplate/MentalHealth/BIOPSYCHOSOCIAL";
+import MASTER_TREATMENT_PLAN from "./Pages/Admin/FormsTemplate/MentalHealth/MASTER_TREATMENT_PLAN";
+import BIOPSYCHOSOCIAL_ASSESSMENT from "./Pages/Admin/FormsTemplate/MentalHealth/BIOPSYCHOSOCIAL_ASSESSMENT";
+import NEW_TWO from "./Pages/Admin/FormsTemplate/SpeechTherapy/NEW_TWO";
+import SPEECH_LANGUAGE_SESSION_NOTE from "./Pages/Admin/FormsTemplate/SpeechTherapy/SPEECH_LANGUAGE_SESSION_NOTE";
+import SPEECH_LANGUAGE_PROGRESS_REPORT from "./Pages/Admin/FormsTemplate/SpeechTherapy/SPEECH_LANGUAGE_PROGRESS_REPORT";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -417,6 +422,27 @@ function App() {
           <Route
             path="/biopsycosocial"
             element={<BIOPSYCHOSOCIAL></BIOPSYCHOSOCIAL>}
+          ></Route>
+          <Route
+            path="/master-treatment-plan"
+            element={<MASTER_TREATMENT_PLAN></MASTER_TREATMENT_PLAN>}
+          ></Route>
+          <Route
+            path="/biopsychosocial-assessment"
+            element={<BIOPSYCHOSOCIAL_ASSESSMENT></BIOPSYCHOSOCIAL_ASSESSMENT>}
+          ></Route>
+          <Route path="/new-two" element={<NEW_TWO></NEW_TWO>}></Route>
+          <Route
+            path="/speech-language-note"
+            element={
+              <SPEECH_LANGUAGE_SESSION_NOTE></SPEECH_LANGUAGE_SESSION_NOTE>
+            }
+          ></Route>
+          <Route
+            path="/speech-language-progress-report"
+            element={
+              <SPEECH_LANGUAGE_PROGRESS_REPORT></SPEECH_LANGUAGE_PROGRESS_REPORT>
+            }
           ></Route>
 
           {/* ------------------------form End--------------------------- */}
