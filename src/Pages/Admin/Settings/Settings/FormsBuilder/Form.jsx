@@ -76,6 +76,10 @@ const Form = () => {
           <button className="pms-button">DISCHARGE SUMMARY</button>
         </Link>
         <div className="my-2"></div>
+        <Link to={"/DiagnosisSessionForm"}>
+          <button className="pms-button">DIAGNOSIS SESSION FORM</button>
+        </Link>
+        <div className="my-2"></div>
         <Link to={"/form-demo-json"}>
           <button className="pms-button">Demo form json</button>
         </Link>
@@ -103,10 +107,7 @@ const Form = () => {
         <Link to={"/MonthlySupervisionNote"}>
           <button className="pms-button">MONTHLY SUPERVISION NOTE</button>
         </Link>
-        <div className="my-2"></div>
-        <Link to={"/DiagnosisSessionForm"}>
-          <button className="pms-button">DIAGNOSIS SESSION FORM</button>
-        </Link>
+        
        
         
         <div className="my-2"></div>
