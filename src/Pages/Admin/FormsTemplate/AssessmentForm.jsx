@@ -37,7 +37,7 @@ const AssessmentForm = () => {
     };
   return (
     <div>
-    <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+    <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
       <div>
         <div className="flex items-center flex-wrap gap-3 justify-between">
           <img src={logo} alt="" />
@@ -70,7 +70,7 @@ const AssessmentForm = () => {
         <div>
           <div className="border-2 border-blue-600 px-2 shadow-md">
               <h1 className="form-inner-head">Task Completed</h1>
-            <div className="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
+            <div className="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4 font-bold">
               <div className="flex items-center mr-4">
                 <input
                   id="inline-radio"
@@ -82,7 +82,7 @@ const AssessmentForm = () => {
                 />
                 <label
                   for="inline-radio"
-                  className="ml-2 form-input-name "
+                  className="ml-2 form-inner-head "
                 >
                   Direct Assessment
 
@@ -100,7 +100,7 @@ const AssessmentForm = () => {
                 />
                 <label
                   for="inline-radio"
-                  className="ml-2 form-input-name"
+                  className="ml-2 form-inner-head"
                 >
                   Indirect Assessment
 
@@ -118,7 +118,7 @@ const AssessmentForm = () => {
                 />
                 <label
                   for="inline-radio"
-                  className="ml-2 form-input-name"
+                  className="ml-2 form-inner-head"
                 >
                   Creating Goals Language
                 </label>
@@ -134,7 +134,7 @@ const AssessmentForm = () => {
                 />
                 <label
                   for="inline-radio"
-                  className="ml-2 form-input-name"
+                  className="ml-2 form-inner-head"
                 >
                   Creating Behavior Intervention Plan Language
                 </label>
@@ -150,7 +150,7 @@ const AssessmentForm = () => {
                 />
                 <label
                   for="inline-radio"
-                  className="ml-2 form-input-name"
+                  className="ml-2 form-inner-head"
                 >
                   Creating Report Language
 
@@ -161,9 +161,9 @@ const AssessmentForm = () => {
 
           <div className="w-full mt-4 mb-4">
            
-            <div className="mt-3    border-blue-600 border-2">
+            <div className="mt-3    border-blue-600 border-2 p-2">
             
-              <span className="form-input-name">Assessment Tools Used (Specify Indirect or Direct)</span>
+              <span className="form-inner-head">Assessment Tools Used (Specify Indirect or Direct)</span>
               <TextArea
               
                 onChange={(e) => setNotes(e.target.value)}
@@ -179,8 +179,8 @@ const AssessmentForm = () => {
             </div>
             
             
-            <div className=" border-t-0  border-blue-600 border-2">
-            <span className="form-input-name">Description of Tasks Completed</span>
+            <div className=" border-t-0  border-blue-600 border-2 p-2">
+            <span className="form-inner-head">Description of Tasks Completed</span>
               <TextArea
                 onChange={(e) => setNotes(e.target.value)}
                 maxLength={300}
@@ -193,7 +193,7 @@ const AssessmentForm = () => {
             </div>
 
           </div>
-          <div className="border-2 border-blue-600 px-2">
+          <div className="border-2 border-blue-600 px-2 ">
             <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
               <div class="flex items-center mr-4">
                 <input
@@ -206,7 +206,7 @@ const AssessmentForm = () => {
                 />
                 <label
                   for="inline-radio"
-                  class="ml-2 form-input-name"
+                  class="ml-2 form-inner-head"
                 >
                   Client
                 </label>
@@ -222,7 +222,7 @@ const AssessmentForm = () => {
                 />
                 <label
                   for="inline-radio"
-                  class="ml-2 form-input-name"
+                  class="ml-2 form-inner-head"
                 >
                   Therapist
 
@@ -239,7 +239,7 @@ const AssessmentForm = () => {
                 />
                 <label
                   for="inline-2-radio"
-                  class="ml-2 form-input-name"
+                  class="ml-2 form-inner-head"
                 >
                   Rendering Provider
                 </label>
