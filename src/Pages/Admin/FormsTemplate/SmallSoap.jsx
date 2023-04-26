@@ -33,10 +33,11 @@ const SmallSoap = () => {
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
     console.log(data);
+    console.log(notes);
   };
   return (
     <div className="bg-white">
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -68,8 +69,8 @@ const SmallSoap = () => {
           {" "}
           <div>
             <div className="w-full mt-4 mb-4">
-              <div className="mt-3    border-blue-600 border-2">
-                <span className="form-input-name px-2 py-2">Subjective</span>
+              <div className="mt-3    border-blue-600 border-2 p-2">
+                <span className="form-inner-head px-2 py-2">Subjective</span>
                 <textarea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -80,8 +81,8 @@ const SmallSoap = () => {
                   {...register("Subjective")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name px-2 py-2">Objective</span>
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head px-2 py-2">Objective</span>
                 <textarea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -92,8 +93,8 @@ const SmallSoap = () => {
                   {...register("Objective")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name px-2 py-2">Assessment</span>
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head px-2 py-2">Assessment</span>
                 <textarea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -104,8 +105,8 @@ const SmallSoap = () => {
                   {...register("Assessment")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name px-2 py-2">Plan</span>
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head px-2 py-2">Plan</span>
                 <textarea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -131,7 +132,7 @@ const SmallSoap = () => {
                   />
                   <label
                     for="inline-radio"
-                    class="ml-2 form-input-name px-2 py-2"
+                    class="ml-2 form-inner-head px-2 py-2"
                   >
                     Client
                   </label>
@@ -147,7 +148,7 @@ const SmallSoap = () => {
                   />
                   <label
                     for="inline-radio"
-                    class="ml-2 form-input-name px-2 py-2"
+                    class="ml-2 form-inner-head px-2 py-2"
                   >
                     Therapist
                   </label>
@@ -163,7 +164,7 @@ const SmallSoap = () => {
                   />
                   <label
                     for="inline-2-radio"
-                    class="ml-2 form-input-name px-2 py-2"
+                    class="ml-2 form-inner-head px-2 py-2"
                   >
                     Rendering Provider
                   </label>

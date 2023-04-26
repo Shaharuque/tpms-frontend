@@ -100,6 +100,10 @@ const Form = () => {
           </button>
         </Link>
         <div className="my-2"></div>
+        <Link to={"/smallsoap-form"}>
+          <button className="pms-button">CP SOAP Form</button>
+        </Link>
+        <div className="my-2"></div>
         <Link to={"/form-demo-json"}>
           <button className="pms-button">Demo form json</button>
         </Link>
@@ -143,10 +147,7 @@ const Form = () => {
         <Link to={"/Structure-Of-Process"}>
           <button className="pms-button">Structure-Of-Process</button>
         </Link>
-        <div className="my-2"></div>
-        <Link to={"/smallsoap-form"}>
-          <button className="pms-button">CP SOAP Form</button>
-        </Link>
+       
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         Mental Health start from here
