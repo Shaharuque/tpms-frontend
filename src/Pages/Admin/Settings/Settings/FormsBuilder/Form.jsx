@@ -52,6 +52,12 @@ const Form = () => {
           <button className="pms-button"> CBH SERVICE VERIFICATION LOG</button>
         </Link>
         <div className="my-2"></div>
+        <Link to={"/supervision-supervision"}>
+          <button className="pms-button">
+            SUPERVISION NON-BILLABLE SUPERVISION
+          </button>
+        </Link>
+        <div className="my-2"></div>
         <Link to={"/form-demo-json"}>
           <button className="pms-button">Demo form json</button>
         </Link>
@@ -103,12 +109,6 @@ const Form = () => {
         <Link to={"/behavior-analysis-progress-note"}>
           <button className="pms-button">
             Behavior Analysis Progress Note
-          </button>
-        </Link>
-        <div className="my-2"></div>
-        <Link to={"/supervision-supervision"}>
-          <button className="pms-button">
-            SUPERVISION NON-BILLABLE SUPERVISION
           </button>
         </Link>
         <div className="my-2"></div>
