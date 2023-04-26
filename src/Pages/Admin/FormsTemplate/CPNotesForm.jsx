@@ -37,7 +37,7 @@ const CPNotesForm = () => {
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -61,7 +61,7 @@ const CPNotesForm = () => {
             </div>
           </div>
           <div className="form-title mb-5">
-            <h1>ASSESSMENT FORM</h1>
+            <h1>Notes</h1>
             <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
           </div>
         </div>
@@ -69,20 +69,20 @@ const CPNotesForm = () => {
           {" "}
           <div>
             <div className="w-full mt-4 mb-4">
-              <div className="mt-3    border-blue-600 border-2">
-                <span className="form-input-name">Clinical Status</span>
+              <div className="mt-3    border-blue-600 border-2 p-2">
+                <span className="form-inner-head ">Clinical Status</span>
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className="border-none"
+                  className="border-none focus:outline-none"
                   {...register("Clinical Status")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head">
                   Who was present during the session
                 </span>
                 <TextArea
@@ -91,12 +91,12 @@ const CPNotesForm = () => {
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("present_during_seation")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head">
                   Behavior targeted for decrease
                 </span>
                 <TextArea
@@ -105,12 +105,12 @@ const CPNotesForm = () => {
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("target_decrease")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head">
                   Techniques used during the session
                 </span>
                 <TextArea
@@ -119,55 +119,55 @@ const CPNotesForm = () => {
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("technique_during_seasion")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">Programs worked on</span>
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head">Programs worked on</span>
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("programs_workd_on")}
                 />
               </div>{" "}
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">Reinforcers used</span>
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head">Reinforcers used</span>
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("Reinforcers used")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name"> Client Progress </span>
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head"> Client Progress </span>
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("Client Progress")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">Plan for next session</span>
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head">Plan for next session</span>
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("next_session")}
                 />
               </div>
