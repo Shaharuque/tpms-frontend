@@ -11,7 +11,7 @@ const OutpatientTreatmentRequest = () => {
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="Company Logo Here" />
@@ -45,7 +45,7 @@ const OutpatientTreatmentRequest = () => {
 
         <div className="my-3">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className=" grid grid-cols-1 items-center sm:grid-cols-1 md:grid-cols-2 2xl:grid-cols-2 gap-7">
+            <div className="font-bold grid grid-cols-1 items-center sm:grid-cols-1 md:grid-cols-2 2xl:grid-cols-2 gap-7">
               <div className="flex">
                 <div>
                   <span className="form-input-name ">1)</span>
