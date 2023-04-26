@@ -90,22 +90,19 @@ const Form = () => {
           </button>
         </Link>
         <div className="my-2"></div>
-        <Link to={"/form-demo-json"}>
-          <button className="pms-button">Demo form json</button>
-        </Link>
-        <div className="my-2"></div>
-        <Link to={"/outpatient-treatment-request"}>
-          <button className="pms-button">
-            OUTPATIENT TREATMENT REQUEST [OTR] FORM
-          </button>
-        </Link>
-       
-        
-        <div className="my-2"></div>
-        <div className="my-2"></div>
         <Link to={"/FBA"}>
           <button className="pms-button">FBA</button>
         </Link>
+        
+        <div className="my-2"></div>
+        <Link to={"/form-demo-json"}>
+          <button className="pms-button">Demo form json</button>
+        </Link>
+        
+       
+        
+        <div className="my-2"></div>
+        
         <div className="my-2"></div>
         
        
