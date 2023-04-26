@@ -34,10 +34,11 @@ const BehaviorAnalysisProgressNote = () => {
   const [notes, setNotes] = useState("");
   const onSubmit = (data) => {
     console.log(data);
+    console.log(notes);
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -61,7 +62,7 @@ const BehaviorAnalysisProgressNote = () => {
             </div>
           </div>
           <div className="form-title mb-5">
-            <h1>TREATMENT PLAN FORM</h1>
+            <h1>BEHAVIOR ANALYSIS PROGRESS NOTE</h1>
             <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
           </div>
         </div>
@@ -70,18 +71,6 @@ const BehaviorAnalysisProgressNote = () => {
           <div>
             <div class="overflow-x-auto">
               <table class="min-w-full border-2 border-blue-600 ">
-                {/* <thead class="border-b">
-              <tr>
-               
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
-                  First
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-3 border-r">
-                  Last
-                </th>
-                
-              </tr>
-            </thead> */}
                 <tbody>
                   <tr class="border-b border-2 border-blue-600 ">
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
@@ -338,11 +327,7 @@ const BehaviorAnalysisProgressNote = () => {
                           </label>
                         </span>
                         <div class="mt-3 w-full ">
-                          <textarea
-                            placeholder=" Enter Here..."
-                            name=" behaviors_behaviors"
-                            class="ant-input ant-input-lg"
-                          ></textarea>
+                        <TextArea onChange={(e)=>setNotes(e.target.value)} placeholder=" Notes..." name=" behaviors_behaviors" class="ant-input ant-input-lg"></TextArea>
                         </div>
                       </div>
                     </td>
@@ -354,18 +339,14 @@ const BehaviorAnalysisProgressNote = () => {
                           </label>
                         </span>
                         <div class="mt-3 w-full ">
-                          <textarea
-                            placeholder=" Enter Here..."
-                            name=" Notes_1"
-                            class="ant-input ant-input-lg"
-                          ></textarea>
+                        <TextArea onChange={(e)=>setNotes(e.target.value)} placeholder=" Notes..." name=" behaviors_behaviors" class="ant-input ant-input-lg"></TextArea>
                         </div>
                       </div>
                     </td>
                   </tr>
                   <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                      <div class="flex flex-col">
+                    <td class="text-sm text-gray-900 font-light  px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                      <div class="flex flex-col font-bold">
                         <span>
                           <label for="rec_name" class=" font-bold text-base">
                             Training Addressed During Session:
@@ -383,7 +364,7 @@ const BehaviorAnalysisProgressNote = () => {
                             />
                             <label
                               for="inline-radio"
-                              class="ml-2 form-input-name"
+                              class="ml-2 form-input-name "
                             >
                               Functional Communication Training
                             </label>
@@ -488,7 +469,7 @@ const BehaviorAnalysisProgressNote = () => {
                       </div>
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                      <div class="flex flex-col">
+                      <div class="flex flex-col font-bold">
                         <div class="flex items-center mr-4">
                           <input
                             id="inline-radio"
@@ -602,11 +583,7 @@ const BehaviorAnalysisProgressNote = () => {
                           </label>
                         </div>
                         <div class="mt-3 w-full ">
-                          <textarea
-                            placeholder=" Notes..."
-                            name=" Notes_1"
-                            class="ant-input ant-input-lg"
-                          ></textarea>
+                         <TextArea onChange={(e)=>setNotes(e.target.value)} placeholder=" Notes..." name=" behaviors_behaviors" class="ant-input ant-input-lg"></TextArea>
                         </div>
                       </div>
                     </td>
@@ -620,11 +597,7 @@ const BehaviorAnalysisProgressNote = () => {
                           </label>
                         </span>
                         <div class="mt-3 w-full ">
-                          <textarea
-                            placeholder=" Notes..."
-                            name=" behaviors_behaviors"
-                            class="ant-input ant-input-lg"
-                          ></textarea>
+                        <TextArea onChange={(e)=>setNotes(e.target.value)} placeholder=" Notes..." name=" behaviors_behaviors" class="ant-input ant-input-lg"></TextArea>
                         </div>
                       </div>
                     </td>
@@ -636,11 +609,7 @@ const BehaviorAnalysisProgressNote = () => {
                           </label>
                         </span>
                         <div class="mt-3 w-full ">
-                          <textarea
-                            placeholder=" Notes..."
-                            name=" Notes_1"
-                            class="ant-input ant-input-lg"
-                          ></textarea>
+                        <TextArea onChange={(e)=>setNotes(e.target.value)} placeholder=" Notes..." name=" behaviors_behaviors" class="ant-input ant-input-lg"></TextArea>
                         </div>
                       </div>
                     </td>
