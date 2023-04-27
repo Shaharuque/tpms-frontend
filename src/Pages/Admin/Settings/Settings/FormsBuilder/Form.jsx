@@ -210,6 +210,22 @@ const Form = () => {
             SPEECH LANGUAGE PROGRESS REPORT
           </button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/therapist-communication-session-notes"}>
+          <button className="pms-button">
+            THERAPIST COMMUNICATION/SESSION NOTES
+          </button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/treatment-plan"}>
+          <button className="pms-button">TREATMENT PLAN</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/initial-speech-therapy-evaluation"}>
+          <button className="pms-button">
+            INITIAL SPEECH THERAPY EVALUATION/PLAN OF CARE
+          </button>
+        </Link>
       </div>
     </div>
   );

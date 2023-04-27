@@ -5,8 +5,9 @@ import logo from "../../../Assets/logo4.png";
 import { FaSignature } from "react-icons/fa";
 import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
 import SignatureModal from "../SignatureManage/SignatureModal";
+import { Radio } from "antd";
 
-const SPEECH_LANGUAGE_SESSION_NOTE = () => {
+const TREATMENT_PLAN = () => {
   const [caregiverSignature, setCaregiverSignature] = useState(false);
   const [providerSignature, setProviderSignature] = useState(false);
   const [ProviderImageURL, setProviderImageURL] = useState(null);
@@ -64,307 +65,550 @@ const SPEECH_LANGUAGE_SESSION_NOTE = () => {
           </div>
         </div>
         <div className="form-title my-5">
-          <h1>SPEECH LANGUAGE SESSION NOTE</h1>
+          <h1>TREATMENT PLAN</h1>
           <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
         </div>
       </div>
       <div className="mx-6">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="overflow-x-scroll">
-            <table class="min-w-full border-2 border-blue-600 my-8">
-              <tbody>
-                <tr class="border-b border-2 border-blue-600 ">
-                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                    <div class="flex gap-3">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          Client’s Name:
-                        </label>
-                      </span>
-                      <input
-                        type="text"
-                        name="text-name"
-                        {...register("text-name")}
-                      />
-                    </div>
-                  </td>
-                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                    <div class="flex gap-3">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          Date of Birth:
-                        </label>
-                      </span>
-                      <input
-                        type="date"
-                        name="text-name"
-                        {...register("text-name")}
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="border-b border-2 border-blue-600 ">
-                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                    <div class="flex gap-3">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          ICD-10 Code:
-                        </label>
-                      </span>
-                      <input
-                        type="text"
-                        name="text-name"
-                        {...register("text-name")}
-                      />
-                    </div>
-                  </td>
-                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                    <div class="flex gap-3"></div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="overflow-x-scroll">
-            <table class="min-w-full border-2 border-blue-600 my-8">
-              <tbody>
-                <tr class="border-b border-2 border-blue-600 ">
-                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                    <div class="flex gap-3">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          Date of session:
-                        </label>
-                      </span>
-                      <input
-                        type="date"
-                        name="text-name"
-                        {...register("text-name")}
-                      />
-                    </div>
-                  </td>
-                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                    <div class="flex gap-3">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          CPT Code:
-                        </label>
-                      </span>
-                      <input
-                        type="text"
-                        name="text-name"
-                        {...register("text-name")}
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="border-b border-2 border-blue-600 ">
-                  <td
-                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
-                    colSpan={"2"}
-                  >
-                    <div class="">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          Short-term goals Addressed:
-                        </label>
-                      </span>
-                      <br />
-                      <textarea
-                        onChange={(e) => setNotes(e.target.value)}
-                        maxLength={300}
-                        rows={5}
-                        placeholder="Enter here..."
-                        size="large"
-                        className="w-full p-5 form-input-textarea-borderNone"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="border-b border-2 border-blue-600 ">
-                  <td
-                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
-                    colSpan={"2"}
-                  >
-                    <div class="">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          Activity, progress & carryover:
-                        </label>
-                      </span>
-                      <br />
-                      <textarea
-                        onChange={(e) => setNotes(e.target.value)}
-                        maxLength={300}
-                        rows={5}
-                        placeholder="Enter here..."
-                        size="large"
-                        className="w-full p-5 form-input-textarea-borderNone"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="overflow-x-scroll">
-            <table class="min-w-full border-2 border-blue-600 my-8">
-              <tbody>
-                <tr class="border-b border-2 border-blue-600 ">
-                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                    <div class="flex gap-3">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          Date of session:
-                        </label>
-                      </span>
-                      <input
-                        type="date"
-                        name="text-name"
-                        {...register("text-name")}
-                      />
-                    </div>
-                  </td>
-                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                    <div class="flex gap-3">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          CPT Code:
-                        </label>
-                      </span>
-                      <input
-                        type="text"
-                        name="text-name"
-                        {...register("text-name")}
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="border-b border-2 border-blue-600 ">
-                  <td
-                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
-                    colSpan={"2"}
-                  >
-                    <div class="">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          Short-term goals Addressed:
-                        </label>
-                      </span>
-                      <br />
-                      <textarea
-                        onChange={(e) => setNotes(e.target.value)}
-                        maxLength={300}
-                        rows={5}
-                        placeholder="Enter here..."
-                        size="large"
-                        className="w-full p-5 form-input-textarea-borderNone"
-                      />
-                    </div>
-                  </td>
-                </tr>
-                <tr class="border-b border-2 border-blue-600 ">
-                  <td
-                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
-                    colSpan={"2"}
-                  >
-                    <div class="">
-                      <span>
-                        <label
-                          for="rec_name"
-                          className="form-inner-head font-bold text-base"
-                        >
-                          Activity, progress & carryover:
-                        </label>
-                      </span>
-                      <br />
-                      <textarea
-                        onChange={(e) => setNotes(e.target.value)}
-                        maxLength={300}
-                        rows={5}
-                        placeholder="Enter here..."
-                        size="large"
-                        className="w-full p-5 form-input-textarea-borderNone"
-                      />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <div>
-                {" "}
-                <span>
-                  <input
-                    type="input"
-                    className="  border-b-2  border-blue-600 focus:outline-none w-full"
-                    {...register("client_name")}
-                  />
-                </span>
-              </div>
-
-              <div className="flex justify-center">
-                <label
-                  for="rec_name"
-                  className="form-inner-head font-bold text-base my-3"
-                >
-                  Name
+          <div className="flex flex-wrap item-center gap-2 justify-between">
+            {" "}
+            <div class="flex gap-3">
+              <span>
+                <label for="rec_name" className=" font-bold text-base">
+                  Client Name:
                 </label>
-              </div>
+              </span>
+              <input
+                type="text"
+                name="checkedActive"
+                placeholder="Enter Your name"
+                {...register("checkedActive")}
+              />
             </div>
-            <div>
-              <div>
-                {" "}
-                <span>
-                  <input
-                    type="input"
-                    className="  border-b-2  border-blue-600 focus:outline-none w-full"
-                    {...register("client_name")}
-                  />
-                </span>
-              </div>
-
-              <div className="flex justify-center">
-                <label
-                  for="rec_name"
-                  className="form-inner-head font-bold text-base my-3"
-                >
-                  Name
+            <div class="flex gap-3">
+              <span>
+                <label for="rec_name" className=" font-bold text-base">
+                  Date:
                 </label>
-              </div>
+              </span>
+              <input
+                type="date"
+                name="checkedActive"
+                {...register("checkedActive")}
+              />
             </div>
+          </div>
+          <div className="flex gap-3 items-center justify-center my-7">
+            <div className="flex gap-3 justify-cneter flex-wrap">
+              <span>
+                <label for="rec_name" className=" font-bold text-base">
+                  Type of Treatment Plan:
+                </label>
+              </span>
+              <input
+                type="checkbox"
+                name="checkedActive"
+                placeholder="Enter Your name"
+                {...register("checkedActive")}
+              />
+              <span>
+                <label for="rec_name" className=" font-bold text-base">
+                  initial
+                </label>
+              </span>
+              <input
+                type="checkbox"
+                name="checkedActive"
+                placeholder="Enter Your name"
+                {...register("checkedActive")}
+              />
+              <span>
+                <label for="rec_name" className=" font-bold text-base">
+                  ongoing
+                </label>
+              </span>
+            </div>
+          </div>
+          <div className="overflow-x-scroll">
+            <table class="min-w-full border-2 border-blue-600 my-8">
+              <tbody>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    rowspan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Goal 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter here..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <div class="flex gap-3">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Open Date:
+                        </label>
+                      </span>
+                      <input
+                        type="date"
+                        name="text-name"
+                        {...register("text-name")}
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <div class="flex gap-3">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Target Date:
+                        </label>
+                      </span>
+                      <input
+                        type="date"
+                        name="text-name"
+                        {...register("text-name")}
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    colSpan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Objective 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter here..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    colSpan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Intervention 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter Entervention..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="overflow-x-scroll">
+            <table class="min-w-full border-2 border-blue-600 my-8">
+              <tbody>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    rowspan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Goal 2:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter here..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <div class="flex gap-3">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Open Date:
+                        </label>
+                      </span>
+                      <input
+                        type="date"
+                        name="text-name"
+                        {...register("text-name")}
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <div class="flex gap-3">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Target Date:
+                        </label>
+                      </span>
+                      <input
+                        type="date"
+                        name="text-name"
+                        {...register("text-name")}
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    colSpan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Objective 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter here..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    colSpan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Intervention 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter Entervention..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="overflow-x-scroll">
+            <table class="min-w-full border-2 border-blue-600 my-8">
+              <tbody>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    rowspan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Goal 3:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter here..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <div class="flex gap-3">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Open Date:
+                        </label>
+                      </span>
+                      <input
+                        type="date"
+                        name="text-name"
+                        {...register("text-name")}
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <div class="flex gap-3">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Target Date:
+                        </label>
+                      </span>
+                      <input
+                        type="date"
+                        name="text-name"
+                        {...register("text-name")}
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    colSpan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Objective 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter here..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    colSpan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Intervention 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter Entervention..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="overflow-x-scroll">
+            <table class="min-w-full border-2 border-blue-600 my-8">
+              <tbody>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    rowspan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Goal 4:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter here..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <div class="flex gap-3">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Open Date:
+                        </label>
+                      </span>
+                      <input
+                        type="date"
+                        name="text-name"
+                        {...register("text-name")}
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <div class="flex gap-3">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Target Date:
+                        </label>
+                      </span>
+                      <input
+                        type="date"
+                        name="text-name"
+                        {...register("text-name")}
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    colSpan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Objective 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter here..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="border-b border-2 border-blue-600 ">
+                  <td
+                    class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "
+                    colSpan={"2"}
+                  >
+                    <div class="">
+                      <span>
+                        <label
+                          for="rec_name"
+                          className="form-inner-head font-bold text-base"
+                        >
+                          Intervention 1:
+                        </label>
+                      </span>
+                      <br />
+                      <textarea
+                        onChange={(e) => setNotes(e.target.value)}
+                        maxLength={300}
+                        rows={3}
+                        placeholder="Enter Entervention..."
+                        size="large"
+                        className="w-full p-5 form-input-textarea-borderNone"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </form>
         <div>
@@ -426,4 +670,4 @@ const SPEECH_LANGUAGE_SESSION_NOTE = () => {
   );
 };
 
-export default SPEECH_LANGUAGE_SESSION_NOTE;
+export default TREATMENT_PLAN;

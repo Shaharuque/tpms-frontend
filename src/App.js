@@ -256,6 +256,9 @@ import BIOPSYCHOSOCIAL_ASSESSMENT from "./Pages/Admin/FormsTemplate/MentalHealth
 import NEW_TWO from "./Pages/Admin/FormsTemplate/SpeechTherapy/NEW_TWO";
 import SPEECH_LANGUAGE_SESSION_NOTE from "./Pages/Admin/FormsTemplate/SpeechTherapy/SPEECH_LANGUAGE_SESSION_NOTE";
 import SPEECH_LANGUAGE_PROGRESS_REPORT from "./Pages/Admin/FormsTemplate/SpeechTherapy/SPEECH_LANGUAGE_PROGRESS_REPORT";
+import THERAPIST_COMMUNICATION_SESSION_NOTES from "./Pages/Admin/FormsTemplate/SpeechTherapy/THERAPIST_COMMUNICATION_SESSION_NOTES";
+import TREATMENT_PLAN from "./Pages/Admin/FormsTemplate/SpeechTherapy/TREATMENT_PLAN";
+import INITIAL_SPEECH_THERAPY_EVALUATION from "./Pages/Admin/FormsTemplate/SpeechTherapy/INITIAL_SPEECH_THERAPY_EVALUATION";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -442,6 +445,22 @@ function App() {
             path="/speech-language-progress-report"
             element={
               <SPEECH_LANGUAGE_PROGRESS_REPORT></SPEECH_LANGUAGE_PROGRESS_REPORT>
+            }
+          ></Route>
+          <Route
+            path="/therapist-communication-session-notes"
+            element={
+              <THERAPIST_COMMUNICATION_SESSION_NOTES></THERAPIST_COMMUNICATION_SESSION_NOTES>
+            }
+          ></Route>
+          <Route
+            path="/treatment-plan"
+            element={<TREATMENT_PLAN></TREATMENT_PLAN>}
+          ></Route>
+          <Route
+            path="/initial-speech-therapy-evaluation"
+            element={
+              <INITIAL_SPEECH_THERAPY_EVALUATION></INITIAL_SPEECH_THERAPY_EVALUATION>
             }
           ></Route>
 
