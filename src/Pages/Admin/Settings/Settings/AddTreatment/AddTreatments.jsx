@@ -8,20 +8,40 @@ import {
   useDeleteTreatmentMutation,
   useGetAllSelectedTreatmentsQuery,
   useGetAllTreatmentsQuery,
+  useSearchSelectedTreatmentQuery,
+  useTreatmentSearchQuery,
 } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import { toast } from "react-toastify";
 
 // import InsuranceDetails from "./InsuranceDetails";
 
 const AddTreatments = () => {
   const { token } = useToken();
   const [selectedKeys, setSelectedKeys] = useState();
+  const [getSearchData, setSearchData] = useState("");
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
+  const [searchSelectedTreatment, setSearchSelectedTreatments] = useState();
 
   // is fixed toggle
   const isToggled = useSelector((state) => state.sideBarInfo);
   console.log("isToggled", isToggled);
 
-  //
+  //seach
+  const { data: searchTretmentdata } = useTreatmentSearchQuery({
+    token,
+    data: {
+      searchItem: getSearchData,
+    },
+  });
+
+  // search selected tretment
+  const { data: searchTreatment } = useSearchSelectedTreatmentQuery({
+    token,
+    data: {
+      searchItem: searchSelectedTreatment,
+    },
+  });
+  console.log("searchtmdata", searchTreatment);
 
   const {
     data: getallTreatmentData,
@@ -38,6 +58,9 @@ const AddTreatments = () => {
 
   // add
   const [addTreatment, { data: addResponse }] = useAddTreatmentMutation();
+
+  console.log("add resp", addResponse);
+
   // delete
   const [deleteTreatment, { data: deleteResponse }] =
     useDeleteTreatmentMutation();
@@ -57,6 +80,7 @@ const AddTreatments = () => {
       (option) => option.value * 1
     );
     setSelectedKeys(value);
+    setfacilityselectedkeys();
   };
 
   const handleRemoving = (e) => {
@@ -65,6 +89,7 @@ const AddTreatments = () => {
       (option) => option.value * 1
     );
     setfacilityselectedkeys(value);
+    setSelectedKeys();
   };
 
   const handleSelectedValue = () => {
@@ -75,7 +100,21 @@ const AddTreatments = () => {
         treatment_ids: selectedKeys,
       },
     });
+
+    if (addResponse?.status === "success") {
+      toast.success(<h1 className="text-[12px]">{addResponse?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
   };
+
   const handleRemoveValue = (e) => {
     console.log("Remove  button click get data", facilityselectedkeys);
     deleteTreatment({
@@ -83,6 +122,17 @@ const AddTreatments = () => {
       data: {
         del_id: facilityselectedkeys,
       },
+    });
+
+    toast.error(deleteResponse.message, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
     });
   };
 
@@ -100,6 +150,7 @@ const AddTreatments = () => {
 
           <div>
             <input
+              onChange={(e) => setSearchData(e.target.value)}
               type="text"
               className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
               placeholder="Search Here"
@@ -116,8 +167,16 @@ const AddTreatments = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {getallTreatmentData?.all_insurance?.length > 0 &&
+            {/* {getallTreatmentData?.all_insurance?.length > 0 &&
               getallTreatmentData?.all_insurance.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
+                  {item.treatment_name}
+                </option>
+              ))} */}
+
+            {/* ----------- */}
+            {searchTretmentdata?.all_Tretmanet?.length > 0 &&
+              searchTretmentdata?.all_Tretmanet.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.treatment_name}
                 </option>
@@ -128,6 +187,9 @@ const AddTreatments = () => {
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
           <button // onClick={handleAddItems}
             onClick={() => handleSelectedValue()}
+            disabled={
+              selectedKeys === undefined && facilityselectedkeys?.length > 0
+            }
             className="pms-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -140,6 +202,9 @@ const AddTreatments = () => {
               handleRemoveValue(e);
             }}
             className="pms-close-button w-24"
+            disabled={
+              selectedKeys?.length > 0 && facilityselectedkeys === undefined
+            }
           >
             <div className="flex item-center justify-center">
               <HiOutlineArrowLeft className="mr-[2px]" />
@@ -154,6 +219,7 @@ const AddTreatments = () => {
           </h1>
           <div>
             <input
+              onChange={(e) => setSearchSelectedTreatments(e.target.value)}
               type="text"
               className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
               placeholder="Search Here"
@@ -168,9 +234,16 @@ const AddTreatments = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {/* calling same api  */}
-            {getallFacilityTreatments?.data?.length > 0 &&
+            {/* {getallFacilityTreatments?.data?.length > 0 &&
               getallFacilityTreatments?.data.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
+                  {item.treatment_name}
+                </option>
+              ))} */}
+            {/* calling same api  */}
+
+            {searchTreatment?.all_Tretmanet?.length > 0 &&
+              searchTreatment?.all_Tretmanet.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.treatment_name}
                 </option>

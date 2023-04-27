@@ -78,9 +78,9 @@ const AddInsurance = () => {
 
   // console.log(insuranceApiData, selectedInsurance);
 
-  if (!insuranceApiData && !selectedInsurance) {
-    return <Loading></Loading>;
-  }
+  // if (!insuranceApiData && !selectedInsurance) {
+  //   return <Loading></Loading>;
+  // }
 
   if (addedData) {
     return <Loading></Loading>;
