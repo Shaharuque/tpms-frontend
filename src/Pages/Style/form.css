@@ -14,18 +14,18 @@
 }
 
 .form-inner-head {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 30.5px;
     color: #207ac7;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: 600;
+    /* text-transform: uppercase; */
     letter-spacing: 1px;
     word-spacing: 0.2px;
 }
 
 .form-sub-header {
     margin: 20px 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 38.4px;
     color: #d9534f;
     text-align: center;
@@ -73,6 +73,12 @@
 
 .form-input-textarea {
     border: 2px solid #207ac7;
+    border-left-width: 1px;
+    padding: 10px;
+    font-size: 12px;
+}
+.form-input-textarea-borderNone {
+    border: none;
     border-left-width: 1px;
     padding: 10px;
     font-size: 12px;

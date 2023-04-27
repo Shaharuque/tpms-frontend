@@ -203,6 +203,46 @@ const Form = () => {
         <Link to={"/medication-consent"}>
           <button className="pms-button">MEDICATION CONSENT</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/master-treatment-plan"}>
+          <button className="pms-button">MASTER TREATMENT PLAN</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/biopsychosocial-assessment"}>
+          <button className="pms-button">BIOPSYCHOSOCIAL ASSESSMENT</button>
+        </Link>
+        <div className="my-2"></div>
+        -------------------------------- Speech therapy -----------------
+        <div className="my-2"></div>
+        <Link to={"/new-two"}>
+          <button className="pms-button">NEW TWO</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/speech-language-note"}>
+          <button className="pms-button">SPEECH LANGUAGE SESSION NOTE</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/speech-language-progress-report"}>
+          <button className="pms-button">
+            SPEECH LANGUAGE PROGRESS REPORT
+          </button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/therapist-communication-session-notes"}>
+          <button className="pms-button">
+            THERAPIST COMMUNICATION/SESSION NOTES
+          </button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/treatment-plan"}>
+          <button className="pms-button">TREATMENT PLAN</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/initial-speech-therapy-evaluation"}>
+          <button className="pms-button">
+            INITIAL SPEECH THERAPY EVALUATION/PLAN OF CARE
+          </button>
+        </Link>
       </div>
     </div>
   );
