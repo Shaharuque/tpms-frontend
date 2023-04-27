@@ -9,35 +9,35 @@ import { FaSignature } from "react-icons/fa";
 import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
 
 const DiagnosisSessionForm = () => {
-    const [caregiverSignature, setCaregiverSignature] = useState(false);
-    const [providerSignature, setProviderSignature] = useState(false);
-    const [ProviderImageURL, setProviderImageURL] = useState(null);
-    const [imageURL, setImageURL] = useState(null);
-    console.log("ProviderImageURL", ProviderImageURL);
-    console.log("imageURL", imageURL);
-    const [file, setFile] = useState();
-  
-    console.log("file", file);
-  
-    const handleSignatureProvider = () => {
-      setProviderSignature(true);
-    };
-    const handleSignatureCaregiver = () => {
-      setCaregiverSignature(true);
-    };
-    const handleSignatureClose = () => {
-      setCaregiverSignature(false);
-      setProviderSignature(false);
-    };
-  
-    const { register, handleSubmit } = useForm();
-    const [notes, setNotes] = useState("");
-    const onSubmit = (data) => {
-      console.log(data);
-    };
+  const [caregiverSignature, setCaregiverSignature] = useState(false);
+  const [providerSignature, setProviderSignature] = useState(false);
+  const [ProviderImageURL, setProviderImageURL] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
+  console.log("ProviderImageURL", ProviderImageURL);
+  console.log("imageURL", imageURL);
+  const [file, setFile] = useState();
+
+  console.log("file", file);
+
+  const handleSignatureProvider = () => {
+    setProviderSignature(true);
+  };
+  const handleSignatureCaregiver = () => {
+    setCaregiverSignature(true);
+  };
+  const handleSignatureClose = () => {
+    setCaregiverSignature(false);
+    setProviderSignature(false);
+  };
+
+  const { register, handleSubmit } = useForm();
+  const [notes, setNotes] = useState("");
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -74,7 +74,7 @@ const DiagnosisSessionForm = () => {
                   {" "}
                   <span>
                     <label for="clname" className="form-inner-head my-2">
-                       Name:
+                      Name:
                     </label>
                   </span>{" "}
                   <span>
@@ -124,7 +124,7 @@ const DiagnosisSessionForm = () => {
                   {" "}
                   <span>
                     <label for="rbt" className="form-inner-head my-2">
-                    ICD:
+                      ICD:
                     </label>
                   </span>{" "}
                   <span>
@@ -137,11 +137,8 @@ const DiagnosisSessionForm = () => {
                 </div>
               </div>
             </div>
-            
             <div>
-              <h1 className="form-inner-head my-2">
-              REASON FOR TESTING:
-              </h1>
+              <h1 className="form-inner-head my-2">REASON FOR TESTING:</h1>
               <div className="mt-3 mb-8 border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
@@ -154,7 +151,6 @@ const DiagnosisSessionForm = () => {
                 />
               </div>
             </div>{" "}
-            
             <div>
               <h1 className="form-inner-head my-2">TESTS ADMINISTERED:</h1>
               <div className="mt-3 mb-8 border-blue-600 border-2">
@@ -184,9 +180,7 @@ const DiagnosisSessionForm = () => {
               </div>
             </div>
             <div>
-              <h1 className="form-inner-head my-2">
-              IMPLICATIONS OF TESTING:
-              </h1>
+              <h1 className="form-inner-head my-2">IMPLICATIONS OF TESTING:</h1>
               <div className="mt-3 border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
@@ -199,11 +193,8 @@ const DiagnosisSessionForm = () => {
                 />
               </div>
             </div>
-           
             <div>
-            <h1 className="form-inner-head my-2 mt-8">
-            RECOMMENDATIONS:
-              </h1>
+              <h1 className="form-inner-head my-2 mt-8">RECOMMENDATIONS:</h1>
               <div className="mt-3 mb-5 border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
@@ -216,48 +207,37 @@ const DiagnosisSessionForm = () => {
                 />
               </div>
             </div>
-
             <div className="flex items-center flex-wrap gap-2 ">
-                <div className="flex  flex-col flex-wrap gap-2 ">
-                  
-                  <span>
-                    <input
-                      type="input"
-                      className="  border-b-2  border-blue-600 focus:outline-none "
-                      {...register("name_1")}
-                    />
-                  </span>
-                  <span>
-                    <label for="clname" className="form-inner-head ml-[50%]">
-                       Name
-                    </label>
-                  </span>
-                </div>
+              <div className="flex  flex-col flex-wrap gap-2 ">
+                <span>
+                  <input
+                    type="input"
+                    className="  border-b-2  border-blue-600 focus:outline-none "
+                    {...register("name_1")}
+                  />
+                </span>
+                <span>
+                  <label for="clname" className="form-inner-head ml-[50%]">
+                    Name
+                  </label>
+                </span>
+              </div>
 
-                <div className="flex  flex-col flex-wrap gap-2 ">
-                  
-                  <span>
-                    <input
-                      type="input"
-                      className=" border-b-2  border-blue-600 focus:outline-none "
-                      {...register("name_2")}
-                    />
-                  </span>
-                  <span>
-                    <label for="clname" className="form-inner-head ml-[50%]">
-                       Name
-                    </label>
-                  </span>
-                </div>
-                
-
-               
+              <div className="flex  flex-col flex-wrap gap-2 ">
+                <span>
+                  <input
+                    type="input"
+                    className=" border-b-2  border-blue-600 focus:outline-none "
+                    {...register("name_2")}
+                  />
+                </span>
+                <span>
+                  <label for="clname" className="form-inner-head ml-[50%]">
+                    Name
+                  </label>
+                </span>
+              </div>
             </div>
-
-
-
-
-
             <div className=" flex  flex-wrap justify-between mt-10">
               <div>
                 <button
@@ -294,8 +274,12 @@ const DiagnosisSessionForm = () => {
                   </label>
                 </span>{" "}
                 <span>
-                  <input id="date" type="date" name="date"
-                  {...register("date_3") } />
+                  <input
+                    id="date"
+                    type="date"
+                    name="date"
+                    {...register("date_3")}
+                  />
                 </span>
               </div>
             </div>
@@ -331,9 +315,7 @@ const DiagnosisSessionForm = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DiagnosisSessionForm
-
-
+export default DiagnosisSessionForm;
