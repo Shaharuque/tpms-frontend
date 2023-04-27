@@ -11,6 +11,7 @@ import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/Shimme
 import AddCptCodeActionModal from "./AddCptCode/AddCptCodeActionModal";
 import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
 import axios from "axios";
+import { baseIp } from "../../../../../Misc/BaseClient";
 
 const AddCptCode = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -24,11 +25,12 @@ const AddCptCode = () => {
 
   //List of all CPT Codes
   const allCpt = useSelector((state) => state?.cptInfo);
-  const data = allCpt?.cptData?.data?.rows || [];
+  const data = allCpt?.cptData?.data?.data || [];
+  console.log("All CPT Codes", data);
   const totalPage = allCpt?.cptData?.cpt_codes?.last_page
     ? allCpt?.cptData?.cpt_codes?.last_page
     : 0;
-  console.log("All CPT Codes", data);
+
   //Getting All Selected Treatment Data
   const {
     data: selectedTreatmentData,
@@ -63,7 +65,7 @@ const AddCptCode = () => {
       try {
         let res = await axios({
           method: "post",
-          url: "https://stagapi.therapypms.com/api/internaladmin/setting/delete/cpt/code",
+          url: `${baseIp}/setting/delete/cpt/code`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -81,7 +83,7 @@ const AddCptCode = () => {
             draggable: true,
             progress: undefined,
             theme: "dark",
-            style: { fontSize: "15px" },
+            style: { fontSize: "12px" },
           });
           dispatch(fetchCpt({ page, token }));
           handleClose();
@@ -154,13 +156,7 @@ const AddCptCode = () => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-secondary">
-            {record?.facility_treatment_id
-              ? selectedTreatmentData?.data?.find(
-                  (treatment) =>
-                    parseInt(treatment.treatment_id) ===
-                    record?.facility_treatment_id
-                )?.treatment_name
-              : "Not Set"}
+            {record?.treatment_details?.treatment_name || "Not Set"}
           </div>
         );
       },

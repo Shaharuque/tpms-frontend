@@ -12,6 +12,7 @@ import AddServicesActionModal from "./AddServices/AddServicesActionModal";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import { baseIp } from "../../../../../Misc/BaseClient";
 
 const AddServices = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -59,7 +60,7 @@ const AddServices = () => {
       try {
         let res = await axios({
           method: "post",
-          url: "https://stagapi.therapypms.com/api/internaladmin/setting/delete/setting/service",
+          url: `${baseIp}/setting/delete/setting/service`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -140,15 +141,9 @@ const AddServices = () => {
       width: 100,
       filters: tx_type_search(),
       render: (_, record) => {
-        //console.log("tags : ", lock);
         return (
           <div className="text-secondary flex justify-start">
-            {
-              selectedTreatmentData?.data?.find(
-                (treatment) =>
-                  treatment?.treatment_id === record?.facility_treatment_id
-              )?.treatment_name
-            }
+            {record?.service_treatment?.treatment_name || "None"}
           </div>
         );
       },
@@ -171,7 +166,7 @@ const AddServices = () => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-secondary flex justify-start">
-            <h1>{record?.type === 2 ? "Billable" : "UnBillable"}</h1>
+            <h1>{record?.type === 1 ? "Billable" : "UnBillable"}</h1>
           </div>
         );
       },
