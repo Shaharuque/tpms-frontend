@@ -56,8 +56,12 @@ const Form = () => {
         </Link>
         <br />
         Data Sheet
-        <br />
-        new form new
+        <div className="my-2"></div>
+        <Link to={"/new-form-new"}>
+          <button className="pms-button">
+           New Form New
+          </button>
+        </Link>
         <br />
         Session Notes
         <div className="my-2"></div>

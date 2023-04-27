@@ -155,6 +155,7 @@ import AntDate from "./Testing/AntDatePicker/AntDate";
 import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
+import NewFromNew from "./Pages/Admin/FormsTemplate/NewFromNew";
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
 import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
@@ -462,6 +463,10 @@ function App() {
             element={
               <INITIAL_SPEECH_THERAPY_EVALUATION></INITIAL_SPEECH_THERAPY_EVALUATION>
             }
+          ></Route>
+           <Route
+            path="/new-form-new"
+            element={<NewFromNew></NewFromNew>}
           ></Route>
 
           {/* ------------------------form End--------------------------- */}
