@@ -23,7 +23,7 @@ const ParentTrainingSession = () => {
     setProviderSignature(true);
   };
   const handleSignatureCaregiver = () => {
-    setCaregiverSignature(true); 
+    setCaregiverSignature(true);
   };
   const handleSignatureClose = () => {
     setCaregiverSignature(false);
@@ -36,7 +36,7 @@ const ParentTrainingSession = () => {
     console.log(data);
   };
   return (
-    <div className="form-border 2xl:w-[70%] w-full mx-auto p-5">
+    <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
       <div>
         <div className="flex items-center flex-wrap gap-3 justify-between">
           <img src={logo} alt="" />
@@ -60,8 +60,7 @@ const ParentTrainingSession = () => {
           </div>
         </div>
         <div className="form-title mb-5">
-          <h2>Supervision Form</h2>
-          <h1>SUPERVISION: REGISTERED BEHAVIOR TECHNICIAN</h1>
+          <h1>PARENT TRAINING SESSION NOTE</h1>
           <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
         </div>
       </div>
@@ -71,97 +70,157 @@ const ParentTrainingSession = () => {
       <div className="my-3">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <h1 className="form-inner-head my-4">Client Information:</h1>
-            <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
-              <div className=" form-input-border">
-                <div className="flex items-center">
-                  <span className="form-input-name ">Client Name:</span>
-
-                  <input
-                    type="text"
-                    name="client_name"
-                    className=" input-font focus:outline-none"
-                    {...register("client_name")}
-                  />
-                </div>
-              </div>
-              <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
-                <div className="form-input-border-date">
-                  <div className="flex items-center">
-                    <span className="form-input-name ">DOB:</span>
-
-                    <input
-                      type="date"
-                      name="dob"
-                      className=" input-font focus:outline-none"
-                      {...register("dob")}
-                    />
+            <div>
+              <h1 className="form-inner-head my-4">Client Information:</h1>
+              <div class="flex flex-col ">
+                <div class="sm:-mx-6 lg:-mx-8">
+                  <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full border-2 border-blue-600 ">
+                        <tbody>
+                          <tr className="border-b border-2 border-blue-600 ">
+                            <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                              <div className="flex flex-wrap  gap-3">
+                                <label
+                                  for="client_name"
+                                  className=" font-bold text-base"
+                                >
+                                  Client Name:
+                                </label>
+                                <input
+                                  type="text"
+                                  className="border-none focus:outline-none"
+                                  {...register("client_name")}
+                                />
+                              </div>
+                            </td>
+                            <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                              <div className="flex flex-wrap gap-2">
+                                <label
+                                  for="dob"
+                                  className=" font-bold text-base"
+                                >
+                                  DOB:
+                                </label>
+                                <input
+                                  type="date"
+                                  className=" border-none focus:outline-none"
+                                  {...register("dob")}
+                                />
+                              </div>
+                            </td>
+                            <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                              <div className="flex flex-wrap  gap-2">
+                                <label
+                                  for="age"
+                                  className=" font-bold text-base"
+                                >
+                                  Age:
+                                </label>
+                                <input
+                                  type="text"
+                                  className=" border-none focus:outline-none"
+                                  {...register("Age")}
+                                />
+                              </div>
+                            </td>{" "}
+                          </tr>
+                          <tr className="border-b border-2 border-blue-600 ">
+                            <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                              <div className="flex flex-col gap-3">
+                                <span>
+                                  <label
+                                    for="diagnosis"
+                                    className=" font-bold text-base"
+                                  >
+                                    Diagnosis:
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="  border-none focus:outline-none "
+                                    {...register("diagnosis")}
+                                  />
+                                </span>
+                              </div>
+                            </td>
+                            <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                              <div className="flex flex-col  gap-2">
+                                <span>
+                                  <label
+                                    for="insured_id"
+                                    className=" font-bold text-base"
+                                  >
+                                    Insured Id:
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className=" border-none focus:outline-none "
+                                    {...register("insured_id")}
+                                  />
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                </div>
-                <div className="form-input-border">
-                  <div className="flex items-center">
-                    <span className="form-input-name ">Age:</span>
-
-                    <input
-                      type="number"
-                      name="age"
-                      className=" input-font focus:outline-none"
-                      {...register("age")}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="form-input-border  ">
-                <div className="flex items-center">
-                  <span className="form-input-name ">Diagnosis:</span>
-
-                  <input
-                    type="text"
-                    name="Diagnosis"
-                    className=" input-font focus:outline-none"
-                    {...register("Diagnosis")}
-                  />
-                </div>
-              </div>
-              <div className="form-input-border  ">
-                <div className="flex items-center">
-                  <span className="form-input-name ">Insured Id:</span>
-
-                  <input
-                    type="text"
-                    name="Insured"
-                    className=" input-font focus:outline-none"
-                    {...register("Insured")}
-                  />
                 </div>
               </div>
             </div>
           </div>
           <div>
             <h1 className="form-inner-head my-4">PROVIDER INFORMATION:</h1>
-            <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
-              <div className=" form-input-border">
-                <div className="flex items-center flex-wrap">
-                  <span className="form-input-name ">Provider Name:</span>
-
-                  <input
-                    type="text"
-                    name="client_name"
-                    className=" input-font focus:outline-none"
-                    {...register("client_name")}
-                  />
-                </div>
-              </div>
-              <div className="form-input-border  ">
-                <div className="flex items-center flex-wrap">
-                  <span className="form-input-name ">Credentials :</span>
-
-                  <input
-                    type="text"
-                    name="Diagnosis"
-                    className=" input-font focus:outline-none"
-                    {...register("Diagnosis")}
-                  />
+            <div>
+              <div>
+               
+                <div class="flex flex-col ">
+                  <div class="sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                      <div className="overflow-x-auto">
+                        <table className="min-w-full border-2 border-blue-600 ">
+                          <tbody>
+                            <tr className="border-b border-2 border-blue-600 ">
+                              <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                                <div className="flex flex-col gap-3">
+                                  <span>
+                                    <label
+                                      for="provider_name"
+                                      className=" font-bold text-base"
+                                    >
+                                      Provider Name:
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="  border-none focus:outline-none "
+                                      {...register("provider_name")}
+                                    />
+                                  </span>
+                                </div>
+                              </td>
+                              <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                                <div className="flex flex-col  gap-2">
+                                  <span>
+                                    <label
+                                      for="credentials"
+                                      className=" font-bold text-base"
+                                    >
+                                      Credentials :
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className=" border-none focus:outline-none "
+                                      {...register("credentials")}
+                                    />
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -169,67 +228,93 @@ const ParentTrainingSession = () => {
 
           <div>
             <h1 className="form-inner-head my-4">INDIVIDUAL PRESENT:</h1>
-            <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-3 2xl:grid-cols-3 ">
-              <div className="form-input-border">
-                <div className="flex items-center">
-                  <span className="form-input-name ">Caregiver:</span>
+            <div class="flex flex-col ">
+              <div class="sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full border-2 border-blue-600 ">
+                      <tbody>
+                        <tr className="border-b border-2 border-blue-600 ">
+                          <td className="text-sm text-gray-900 font-light px-2   border-r border-2 border-blue-600 ">
+                            <div className="flex flex-wrap  gap-3">
+                              <label
+                                for="caregiver"
+                                className=" font-bold text-base"
+                              >
+                               Caregiver:
 
-                  <input
-                    type="text"
-                    name="client_name"
-                    className=" input-font focus:outline-none"
-                    {...register("client_name")}
-                  />
-                </div>
-              </div>
+                              </label>
+                              <input
+                                type="text"
+                                className="border-none focus:outline-none"
+                                {...register("caregiver")}
+                              />
+                            </div>
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                            <div className="flex flex-wrap gap-2">
+                              <label for="client_name_2" className=" font-bold text-base">
+                              Client Name:
+                              </label>
+                              <input
+                                type="text"
+                                className=" border-none focus:outline-none"
+                                {...register("client_name_2")}
+                              />
+                            </div>
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                            <div className="flex items-center flex-wrap font-bold  ">
+                              <div>
+                                <div className="flex ml-1  mr-1 items-center ">
+                                  <input
+                                    type="checkbox"
+                                    name="bcba"
+                                    {...register("bcba")}
+                                  />
+                                  <span className="form-input-name ml-1">
+                                    BCBA
+                                  </span>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="flex ml-1  mr-1 items-center ">
+                                  <input
+                                    type="checkbox"
+                                    name="RBT"
+                                    {...register("RBT")}
+                                  />
+                                  <span className="form-input-name ml-1">
+                                    RBT
+                                  </span>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="flex ml-1  mr-1 items-center ">
+                                  <input
+                                    type="checkbox"
+                                    name="Other"
+                                    {...register("Other")}
+                                  />
+                                  <span className="form-input-name ml-1">
+                                    Other
+                                  </span>
+                                </div>
+                              </div>
 
-              <div className="form-input-border">
-                <div className="flex items-center">
-                  <span className="form-input-name ">Client Name:</span>
-
-                  <input
-                    type="text"
-                    name="dob"
-                    className=" input-font focus:outline-none"
-                    {...register("dob")}
-                  />
-                </div>
-              </div>
-              <div className="form-input-border">
-                <div className="flex items-center flex-wrap ">
-                  <div>
-                    <div className="flex ml-1  mr-1 items-center ">
-                      <input
-                        type="checkbox"
-                        name="bcba"
-                        {...register("bcba")}
-                      />
-                      <span className="form-input-name ml-1">BCBA</span>
-                    </div>
+                              <input
+                                type="text"
+                                name="client_name"
+                                placeholder="Explain..." 
+                                className="border bg-none p-2   focus:outline-none"
+                                {...register("others")}
+                              />
+                            </div>
+                          </td>{" "}
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <div>
-                    <div className="flex ml-1  mr-1 items-center ">
-                      <input type="checkbox" name="RBT" {...register("RBT")} />
-                      <span className="form-input-name ml-1">RBT</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex ml-1  mr-1 items-center ">
-                      <input
-                        type="checkbox"
-                        name="Other"
-                        {...register("Other")}
-                      />
-                      <span className="form-input-name ml-1">Other</span>
-                    </div>
-                  </div>
-
-                  <input
-                    type="text"
-                    name="client_name"
-                    className="border bg-none w-28 input-font focus:outline-none"
-                    {...register("others")}
-                  />
                 </div>
               </div>
             </div>
@@ -238,41 +323,57 @@ const ParentTrainingSession = () => {
             <h1 className="form-inner-head my-4">
               PARENT TRAINING SESSION DATE:
             </h1>
-            <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-3 2xl:grid-cols-3 ">
-              <div className="form-input-border-date">
-                <div className="flex items-center">
-                  <span className="form-input-name ">Service Date :</span>
+            <div class="flex flex-col ">
+              <div class="sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full border-2 border-blue-600 ">
+                      <tbody>
+                        <tr className="border-b border-2 border-blue-600 ">
+                          <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                            <div className="flex flex-wrap  gap-3">
+                              <label
+                                for="service_date"
+                                className=" font-bold text-base"
+                              >
+                               Service Date :
 
-                  <input
-                    type="date"
-                    name="session_date"
-                    className=" input-font focus:outline-none"
-                    {...register("session_date")}
-                  />
-                </div>
-              </div>
-              <div className="form-input-border-date">
-                <div className="flex items-center">
-                  <span className="form-input-name ">Service Start Time:</span>
-
-                  <input
-                    type="time"
-                    name="time"
-                    className=" input-font focus:outline-none"
-                    {...register("time")}
-                  />
-                </div>
-              </div>
-              <div className="form-input-border-date">
-                <div className="flex items-center">
-                  <span className="form-input-name ">Service End Time:</span>
-
-                  <input
-                    type="time"
-                    name="end_time"
-                    className=" input-font focus:outline-none"
-                    {...register("end_time")}
-                  />
+                              </label>
+                              <input
+                                type="date"
+                                className="border-none focus:outline-none"
+                                {...register("service_date")}
+                              />
+                            </div>
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                            <div className="flex flex-wrap gap-2">
+                              <label for="service_start_time" className=" font-bold text-base">
+                              Service Start Time:
+                              </label>
+                              <input
+                                type="time"
+                                className=" border-none focus:outline-none"
+                                {...register("service_start_time")}
+                              />
+                            </div>
+                          </td>
+                          <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                          <div className="flex flex-wrap gap-2">
+                              <label for="service_end_time" className=" font-bold text-base">
+                              Service End Time :
+                              </label>
+                              <input
+                                type="time"
+                                className=" border-none focus:outline-none"
+                                {...register("service_end_time")}
+                              />
+                            </div>
+                          </td>{" "}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -283,12 +384,12 @@ const ParentTrainingSession = () => {
             <div className="flex items-center">
               <div className="flex ml-1  mr-1 items-center ">
                 <input type="checkbox" name="bcba" {...register("bcba")} />
-                <span className="form-input-name ml-1">In Person</span>
+                <span className="form-input-name font-bold ml-1">In Person</span>
               </div>
               <div>
                 <div className="flex ml-1  mr-1 items-center ">
                   <input type="checkbox" name="RBT" {...register("RBT")} />
-                  <span className="form-input-name ml-1">Remote</span>
+                  <span className="form-input-name font-bold ml-1">Remote</span>
                 </div>
               </div>
             </div>
@@ -304,7 +405,7 @@ const ParentTrainingSession = () => {
                 rows={5}
                 placeholder=" Notes"
                 size="large"
-                className=""
+                className="border-2 border-blue-600"
               />
             </div>
           </div>
@@ -318,34 +419,61 @@ const ParentTrainingSession = () => {
                 rows={5}
                 placeholder=" Notes"
                 size="large"
-                className=""
+                className="border-2 border-blue-600"
               />
             </div>
           </div>
-          <div className=" grid grid-cols-1 my-3 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
-            <div className=" form-input-border">
-              <div className="flex items-center flex-wrap">
-                <span className="form-input-name">Provider Name:</span>
-                <input
-                  type="text"
-                  name="client_name"
-                  className=" input-font focus:outline-none"
-                  {...register("client_name")}
-                />
+          <div>
+               
+                <div class="flex flex-col ">
+                  <div class="sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                      <div className="overflow-x-auto">
+                        <table className="min-w-full border-2 border-blue-600 ">
+                          <tbody>
+                            <tr className="border-b border-2 border-blue-600 ">
+                              <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                                <div className="flex flex-col gap-3">Provider
+                                  <span>
+                                    <label
+                                      for="provider_name"
+                                      className=" font-bold text-base"
+                                    >
+                                      Provider Name:
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className="  border-none focus:outline-none "
+                                      {...register("provider_name")}
+                                    />
+                                  </span>
+                                </div>
+                              </td>
+                              <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                                <div className="flex flex-col  gap-2">
+                                  <span>
+                                    <label
+                                      for="provider_credentials"
+                                      className=" font-bold text-base"
+                                    >
+                                     Provider Credentials :
+                                    </label>
+                                    <input
+                                      type="text"
+                                      className=" border-none focus:outline-none "
+                                      {...register("provider_credentials")}
+                                    />
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="form-input-border ">
-              <div className="flex items-center flex-wrap">
-                <span className="form-input-name">Provider Credentials:</span>
-                <input
-                  type="text"
-                  name="Diagnosis"
-                  className=" input-font focus:outline-none"
-                  {...register("Diagnosis")}
-                />
-              </div>
-            </div>
-          </div>
         </form>
       </div>
 
