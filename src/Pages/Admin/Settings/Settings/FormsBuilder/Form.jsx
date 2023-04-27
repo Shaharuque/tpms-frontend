@@ -10,6 +10,25 @@ const Form = () => {
           <Link to={"/form-template"}>Demo Form</Link>
         </button>
         <div className="my-2"></div>
+        <Link to={"/form-demo-json"}>
+          <button className="pms-button">Demo form json</button>
+        </Link>
+        <div className="my-2"></div>
+        <div className="my-2"></div>
+        <div className="my-2"></div>
+        <Link to={"/supervision-form"}>
+          <button className="pms-button">SUPERVISION FORM</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/management-modification-form"}>
+          <button className="pms-button">Management Modification Form</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Structure-Of-Process"}>
+          <button className="pms-button">Structure-Of-Process</button>
+        </Link>
+        <br /> <div className="text-red-700">DOne</div>
+        <div className="my-2"></div>
         <Link to={"/form-direct-service"}>
           <button className="pms-button">
             DIRECT-SERVICE PARENT TRAINING NOTE
@@ -27,21 +46,31 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/clinic-treatment"}>
-          <button className="pms-button">Clinical Treatment, Management & Modification Notes</button>
+          <button className="pms-button">
+            Clinical Treatment, Management & Modification Notes
+          </button>
         </Link>
-        
         <div className="my-2"></div>
         <Link to={"/private-client"}>
           <button className="pms-button">PRIVATE CLIENT INTAKE FORM</button>
         </Link>
+        <br />
+        Data Sheet
+        <br />
+        new form new
+        <br />
+        Session Notes
         <div className="my-2"></div>
         <Link to={"/clinical-form"}>
           <button className="pms-button">CP Clinical Form</button>
-          
         </Link>
         <div className="my-2"></div>
         <Link to={"/cp-notes-form"}>
           <button className="pms-button">CP NOTES Form</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Super-vision-Non-billable-Brct"}>
+          <button className="pms-button">Supervision and Assessment</button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/Supervision-Assessment"}>
@@ -51,25 +80,33 @@ const Form = () => {
         <Link to={"/Service-Verification-log"}>
           <button className="pms-button"> CBH SERVICE VERIFICATION LOG</button>
         </Link>
+        <br />
+        GS Supervision Form
         <div className="my-2"></div>
         <Link to={"/supervision-supervision"}>
-          <button className="pms-button">
-            SUPERVISION NON-BILLABLE SUPERVISION
-          </button>
+          <button className="pms-button">Supervision Non-billable Note</button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/behavior-analysis-progress-note"}>
           <button className="pms-button">
-           CBH Behavior Analysis Progress Note
+            CBH Behavior Analysis Progress Note
           </button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/unique-supervision-form"}>
+          <button className="pms-button">Unique Supervision Form</button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/assessment-form"}>
           <button className="pms-button"> GS ASSESSMENT FORM</button>
         </Link>
         <div className="my-2"></div>
+        <Link to={"/Parent-treatment-from"}>
+          <button className="pms-button">GS Parent Training Form</button>
+        </Link>
+        <div className="my-2"></div>
         <Link to={"/TreatmentPlanForm"}>
-          <button className="pms-button">TREATMENT PLAN FORM</button>
+          <button className="pms-button">GS Treatment Plan Form</button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/DischargeSummary"}>
@@ -79,6 +116,8 @@ const Form = () => {
         <Link to={"/DiagnosisSessionForm"}>
           <button className="pms-button">DIAGNOSIS SESSION FORM</button>
         </Link>
+        <br />
+        CBH Behavior Analysis Assessment
         <div className="my-2"></div>
         <Link to={"/MonthlySupervisionNote"}>
           <button className="pms-button">MONTHLY SUPERVISION NOTE</button>
@@ -89,6 +128,8 @@ const Form = () => {
             BCBA TRAINEE UNIQUE SUPERVISION FORM
           </button>
         </Link>
+        <br />
+        Soap Notes
         <div className="my-2"></div>
         <Link to={"/FBA"}>
           <button className="pms-button">FBA</button>
@@ -103,54 +144,10 @@ const Form = () => {
         <Link to={"/smallsoap-form"}>
           <button className="pms-button">CP SOAP Form</button>
         </Link>
-        <div className="my-2"></div>
-        <Link to={"/form-demo-json"}>
-          <button className="pms-button">Demo form json</button>
-        </Link>
-       
-       
-        
-        <div className="my-2"></div>
-        
-        <div className="my-2"></div>
-        
-       
-        
-       
-        
-        <div className="my-2"></div>
-        <Link to={"/Parent-treatment-from"}>
-          <button className="pms-button">PARENT TREATMENT FORM</button>
-        </Link>
-        
-        <div className="my-2"></div>
-        <Link to={"/supervision-form"}>
-          <button className="pms-button">SUPERVISION FORM</button>
-        </Link>
-       
-        <div className="my-2"></div>
-        <Link to={"/Super-vision-Non-billable-Brct"}>
-          <button className="pms-button">SUPERVISION NON-BILLABLE BRCT</button>
-        </Link>
-        
-        
-        <div className="my-2"></div>
-        <Link to={"/unique-supervision-form"}>
-          <button className="pms-button">Unique Supervision Form</button>
-        </Link>
-        <div className="my-2"></div>
-        <Link to={"/management-modification-form"}>
-          <button className="pms-button">Management Modification Form</button>
-        </Link>
-        
-        <div className="my-2"></div>
-        <Link to={"/Structure-Of-Process"}>
-          <button className="pms-button">Structure-Of-Process</button>
-        </Link>
-       
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
-        Mental Health start from here
+        -----------------------Mental Health start from
+        here-----------------------------------
         <div className="my-2"></div>
         <Link to={"/BIRPP-rogress-Form"}>
           <button className="pms-button">BIRP Progress Form</button>
