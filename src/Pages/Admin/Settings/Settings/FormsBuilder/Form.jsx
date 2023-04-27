@@ -136,8 +136,12 @@ const Form = () => {
             BCBA TRAINEE UNIQUE SUPERVISION FORM
           </button>
         </Link>
-        <br />
-        Soap Notes
+        <div className="my-2"></div>
+        <Link to={"/Soap-Notes"}>
+          <button className="pms-button">
+          Soap Notes
+          </button>
+        </Link>
         <div className="my-2"></div>
         <Link to={"/FBA"}>
           <button className="pms-button">FBA</button>

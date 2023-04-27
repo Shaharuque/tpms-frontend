@@ -157,6 +157,7 @@ import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/Form
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
 import NewFromNew from "./Pages/Admin/FormsTemplate/NewFromNew";
 import GssupervisionForm from "./Pages/Admin/FormsTemplate/GssupervisionForm";
+
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
 import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
@@ -261,6 +262,7 @@ import SPEECH_LANGUAGE_PROGRESS_REPORT from "./Pages/Admin/FormsTemplate/SpeechT
 import THERAPIST_COMMUNICATION_SESSION_NOTES from "./Pages/Admin/FormsTemplate/SpeechTherapy/THERAPIST_COMMUNICATION_SESSION_NOTES";
 import TREATMENT_PLAN from "./Pages/Admin/FormsTemplate/SpeechTherapy/TREATMENT_PLAN";
 import INITIAL_SPEECH_THERAPY_EVALUATION from "./Pages/Admin/FormsTemplate/SpeechTherapy/INITIAL_SPEECH_THERAPY_EVALUATION";
+import SoapNotes from "./Pages/Admin/FormsTemplate/SoapNotes";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -472,6 +474,10 @@ function App() {
           <Route 
             path="/Gs-Supervision-Form"
             element={<GssupervisionForm></GssupervisionForm>}
+          ></Route>
+           <Route 
+            path="/Soap-Notes"
+            element={<SoapNotes></SoapNotes>}
           ></Route>
 
           {/* ------------------------form End--------------------------- */}
