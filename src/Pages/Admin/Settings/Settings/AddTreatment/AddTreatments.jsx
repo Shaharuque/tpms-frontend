@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
@@ -12,6 +12,7 @@ import {
   useTreatmentSearchQuery,
 } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
 import { toast } from "react-toastify";
+import { debounce } from "lodash";
 
 // import InsuranceDetails from "./InsuranceDetails";
 
@@ -21,6 +22,7 @@ const AddTreatments = () => {
   const [getSearchData, setSearchData] = useState("");
   const [facilityselectedkeys, setfacilityselectedkeys] = useState();
   const [searchSelectedTreatment, setSearchSelectedTreatments] = useState();
+  // const [inputValue, setInputValue] = useState("");
 
   // is fixed toggle
   const isToggled = useSelector((state) => state.sideBarInfo);
@@ -59,12 +61,40 @@ const AddTreatments = () => {
   // add
   const [addTreatment, { data: addResponse }] = useAddTreatmentMutation();
 
-  console.log("add resp", addResponse);
+  useEffect(() => {
+    if (addResponse?.status === "success") {
+      toast.success(<h1 className="text-[12px]">{addResponse?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }, [addResponse?.message, addResponse?.status]);
 
   // delete
   const [deleteTreatment, { data: deleteResponse }] =
     useDeleteTreatmentMutation();
   console.log(addResponse, deleteResponse);
+
+  useEffect(() => {
+    if (deleteResponse?.status === "success") {
+      toast.error(<h1 className="text-[12px]">{deleteResponse?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }, [deleteResponse?.message, deleteResponse?.status]);
 
   // delete
   // console.log(allTreatmentData, selectedTreatmentData);
@@ -100,19 +130,6 @@ const AddTreatments = () => {
         treatment_ids: selectedKeys,
       },
     });
-
-    if (addResponse?.status === "success") {
-      toast.success(<h1 className="text-[12px]">{addResponse?.message}</h1>, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
   };
 
   const handleRemoveValue = (e) => {
@@ -123,17 +140,26 @@ const AddTreatments = () => {
         del_id: facilityselectedkeys,
       },
     });
+  };
 
-    toast.error(deleteResponse.message, {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+  // debounce *****************
+  // Define the debounced function
+  const SearchTreatmentDebounce = debounce((value) => {
+    console.log(`You typed: ${value}`);
+    setSearchData(value);
+  }, 1000);
+  // Handle input change event and call the debounced function
+  const handleSearchTreatmnet = (event) => {
+    SearchTreatmentDebounce(event.target.value);
+  };
+
+  const selectedTreatmnetDebounce = debounce((value) => {
+    console.log(`You typed: ${value}`);
+    setSearchSelectedTreatments(value);
+  }, 1000);
+  // Handle input change event and call the debounced function
+  const handleSelectedSearch = (event) => {
+    selectedTreatmnetDebounce(event.target.value);
   };
 
   return (
@@ -150,7 +176,9 @@ const AddTreatments = () => {
 
           <div>
             <input
-              onChange={(e) => setSearchData(e.target.value)}
+              // onChange={(e) => setSearchData(e.target.value)}
+              onChange={handleSearchTreatmnet}
+              // value={inputValue}
               type="text"
               className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
               placeholder="Search Here"
@@ -167,14 +195,6 @@ const AddTreatments = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {/* {getallTreatmentData?.all_insurance?.length > 0 &&
-              getallTreatmentData?.all_insurance.map((item, index) => (
-                <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.treatment_name}
-                </option>
-              ))} */}
-
-            {/* ----------- */}
             {searchTretmentdata?.all_Tretmanet?.length > 0 &&
               searchTretmentdata?.all_Tretmanet.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
@@ -219,7 +239,7 @@ const AddTreatments = () => {
           </h1>
           <div>
             <input
-              onChange={(e) => setSearchSelectedTreatments(e.target.value)}
+              onChange={handleSelectedSearch}
               type="text"
               className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
               placeholder="Search Here"
