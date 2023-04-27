@@ -156,6 +156,7 @@ import ERemittance from "./Pages/Admin/Payment/ERRemitance/ERemittance";
 import FormBuilderCreate from "./Pages/Admin/Settings/Settings/FormsBuilder/FormBuilderCreate";
 import FBA from "./Pages/Admin/FormsTemplate/FBA";
 import NewFromNew from "./Pages/Admin/FormsTemplate/NewFromNew";
+import GssupervisionForm from "./Pages/Admin/FormsTemplate/GssupervisionForm";
 import BCBATraineeUSR from "./Pages/Admin/FormsTemplate/BCBATraineeUSR";
 import MonthlySupervisionNote from "./Pages/Admin/FormsTemplate/MonthlySupervisionNote";
 import DiagnosisSessionForm from "./Pages/Admin/FormsTemplate/DiagnosisSessionForm";
@@ -467,6 +468,10 @@ function App() {
            <Route
             path="/new-form-new"
             element={<NewFromNew></NewFromNew>}
+          ></Route>
+          <Route 
+            path="/Gs-Supervision-Form"
+            element={<GssupervisionForm></GssupervisionForm>}
           ></Route>
 
           {/* ------------------------form End--------------------------- */}

@@ -84,8 +84,12 @@ const Form = () => {
         <Link to={"/Service-Verification-log"}>
           <button className="pms-button"> CBH SERVICE VERIFICATION LOG</button>
         </Link>
-        <br />
-        GS Supervision Form
+       
+       
+        <div className="my-2"></div>
+        <Link to={"/Gs-Supervision-Form"}>
+          <button className="pms-button">  GS Supervision Form</button>
+        </Link>
         <div className="my-2"></div>
         <Link to={"/supervision-supervision"}>
           <button className="pms-button">Supervision Non-billable Note</button>
