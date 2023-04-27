@@ -37,7 +37,7 @@ const BCBATraineeUSR = () => {
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />

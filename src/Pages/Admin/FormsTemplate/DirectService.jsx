@@ -38,7 +38,7 @@ const DirectService = () => {
   return (
     <div>
       {" "}
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -73,164 +73,229 @@ const DirectService = () => {
         <div className="my-3">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
-                <div className=" form-input-border">
-                  <div className="flex items-center">
-                    <span className="form-input-name ">Child Name:</span>
+              <div class="flex flex-col ">
+               <div class="sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  <tbody>
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                        <div className="flex flex-col gap-3">
+                          <span>
+                            <label
+                              for="child_name"
+                              className=" font-bold text-base"
+                            >
+                              Child Name:
+                            </label>
+                            <input
+                              type="text"
+                              className="  border-none focus:outline-none "
+                              {...register("child_name")}
+                            />
+                          </span>
+                        </div>
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                        <div className="flex flex-col  gap-2">
+                          <span>
+                            <label
+                              for="attendees"
+                              className=" font-bold text-base"
+                            >
+                              Attendees:
+                            </label>
+                            <input
+                              type="text"
+                              className=" border-none focus:outline-none "
+                              {...register("attendees")}
+                            />
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
 
-                    <input
-                      type="text"
-                      name="client_name"
-                      className=" input-font focus:outline-none"
-                      {...register("client_name")}
-                    />
-                  </div>
-                </div>
-
-                <div className="form-input-border  ">
-                  <div className="flex items-center">
-                    <span className="form-input-name ">Attendees:</span>
-
-                    <input
-                      type="text"
-                      name="Diagnosis"
-                      className=" input-font focus:outline-none"
-                      {...register("Diagnosis")}
-                    />
-                  </div>
-                </div>
-
-                <div className="form-input-border  ">
-                  <div className="flex items-center">
-                    <span className="form-input-name ">Start Time:</span>
-
-                    <input
-                      type="text"
-                      name="Insured"
-                      className=" input-font focus:outline-none"
-                      {...register("Insured")}
-                    />
-                  </div>
-                </div>
-                <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
-                  <div className="form-input-border-date">
-                    <div className="flex items-center">
-                      <span className="form-input-name ">Date:</span>
-
-                      <input
-                        type="date"
-                        name="dob"
-                        className=" input-font focus:outline-none"
-                        {...register("dob")}
-                      />
-                    </div>
-                  </div>
-                  <div className="form-input-border-date">
-                    <div className="flex items-center">
-                      <span className="form-input-name ">End Time:</span>
-
-                      <input
-                        type="time"
-                        name="age"
-                        className=" input-font focus:outline-none"
-                        {...register("age")}
-                      />
-                    </div>
-                  </div>
-                </div>
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                        <div className="flex flex-wrap  gap-3">
+                        
+                            <label
+                              for="start_time"
+                              className=" font-bold text-base"
+                            >
+                              Start Time:
+                            </label>
+                            <input
+                              type="time"
+                              className="border-none focus:outline-none"
+                              {...register("start_time")}
+                            />
+                       
+                        </div>
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                        <div className="flex flex-wrap gap-2">
+                        
+                            <label
+                              for="end_time"
+                              className=" font-bold text-base"
+                            >
+                              End Time:
+                            </label>
+                            <input
+                              type="time"
+                              className=" border-none focus:outline-none"
+                              {...register("end_time")}
+                            />
+                          
+                        </div>
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-r border-2 border-blue-600 ">
+                        <div className="flex flex-wrap  gap-2">
+                         
+                            <label
+                              for="date"
+                              className=" font-bold text-base"
+                            >
+                              Date:
+                            </label>
+                            <input
+                              type="date"
+                              className=" border-none focus:outline-none"
+                              {...register("date")}
+                            />
+                         
+                        </div>
+                      </td>{" "}
+                    </tr>
+                  </tbody>
+                </table>
               </div>
+
+                </div>
+               </div>
+              </div>
+             
             </div>
             <div>
               <h1 className="form-inner-head mt-4">GOALS FOR SESSION:</h1>
-              <p className="text-[#d9534f] text-[1.2rem] font-normal mb-4">
+              <p className="text-[#d9534f] text-[.9rem] font-normal mb-4">
                 Check the box to the left of one or more goals that apply to
                 this session
               </p>
 
-              <div className="flex  items-center ">
-                <div className="form-input-border ">
-                  <input
-                    type="checkbox"
-                    name="checkedActive"
-                    {...register("checkedActive")}
-                  />
-                </div>
-
-                <span className="form-input-border form-input-name w-full">
-                  Explained specific behavior analytic concept / technique /
-                  procedure
-                </span>
+              <div className="overflow-x-auto">
+                <table className="min-w-full border-2 border-blue-600 ">
+                  <tbody>
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                        <input 
+                          type="checkbox"
+                          name="checkedActive"
+                          {...register("checkedActive")}
+                        />
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  ">
+                        <div>
+                          <span className="form-input form-input-name w-full overflow-hidden font-bold text-lg">
+                            Explained specific behavior analytic concept /
+                            technique / procedure
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                        <input
+                          type="checkbox"
+                          name="checkedActive"
+                          {...register("checkedActive")}
+                        />
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                        <div>
+                          <span className="form-input form-input-name w-full font-bold text-lg">
+                          Role played new procedure / technique
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                        <input
+                          type="checkbox"
+                          name="checkedActive"
+                          {...register("checkedActive")}
+                        />
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                        <div>
+                          <span className="form-input form-input-name w-full font-bold text-lg">
+                          Gave performance feedback to parent on implementation
+                          </span>
+                        </div>
+                      </td>
+                    </tr> <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                        <input
+                          type="checkbox"
+                          name="checkedActive"
+                          {...register("checkedActive")}
+                        />
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                        <div>
+                          <span className="form-input form-input-name w-full font-bold text-lg">
+                          Modified / created new goal based on parent information
+                          </span>
+                        </div>
+                      </td>
+                    </tr> <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                        <input
+                          type="checkbox"
+                          name="checkedActive"
+                          {...register("checkedActive")}
+                        />
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                        <div>
+                          <span className="form-input form-input-name w-full font-bold text-lg">
+                          Modeled protocol with child (if child present (0368T/0369T)
+                          </span>
+                        </div>
+                      </td>
+                    </tr> <tr className="border-b border-2 border-blue-600 ">
+                      <td className="text-sm text-gray-900 font-light px-2 py-3  border-l border-2 border-blue-600 ">
+                        <input
+                          type="checkbox"
+                          name="checkedActive"
+                          {...register("checkedActive")}
+                        />
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-2 py-3   ">
+                        <div>
+                          <span className="form-input form-input-name w-full font-bold text-lg">
+                          Other:
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div className="flex items-center ">
-                <div className="form-input-border ">
-                  <input
-                    type="checkbox"
-                    name="checkedActive"
-                    {...register("checkedActive")}
-                  />
-                </div>
 
-                <span className="form-input-border form-input-name w-full">
-                  Role played new procedure / technique
-                </span>
-              </div>
-              <div className="flex  items-center ">
-                <div className="form-input-border ">
-                  <input
-                    type="checkbox"
-                    name="checkedActive"
-                    {...register("checkedActive")}
-                  />
-                </div>
-
-                <span className="form-input-border form-input-name w-full">
-                  Gave performance feedback to parent on implementation
-                </span>
-              </div>
-              <div className="flex  items-center ">
-                <div className="form-input-border ">
-                  <input
-                    type="checkbox"
-                    name="checkedActive"
-                    {...register("checkedActive")}
-                  />
-                </div>
-
-                <span className="form-input-border form-input-name w-full">
-                  Modified / created new goal based on parent information
-                </span>
-              </div>
-              <div className="flex  items-center ">
-                <div className="form-input-border ">
-                  <input
-                    type="checkbox"
-                    name="checkedActive"
-                    {...register("checkedActive")}
-                  />
-                </div>
-
-                <span className="form-input-border form-input-name w-full">
-                  Modeled protocol with child (if child present (0368T/0369T)
-                </span>
-              </div>
-              <div className="flex  items-center ">
-                <div className="form-input-border ">
-                  <input
-                    type="checkbox"
-                    name="checkedActive"
-                    {...register("checkedActive")}
-                  />
-                </div>
-
-                <span className="form-input-border form-input-name w-full">
-                  Other:
-                </span>
-              </div>
+             
+             
+              
+             
+             
             </div>
 
             <div>
-              <h1 className="form-inner-head mt-4">NEEDS:</h1>
-              <p className="text-[#d9534f] text-[1.2rem] font-normal mb-4">
+              <h1 className="form-inner-head mt-4">ACTIVITIES:</h1>
+              <p className="text-[#d9534f] text-[.9rem] font-normal mb-4">
                 What activities did you engage in to help the client move closer
                 to his/her goals through parent training? What materials did you
                 use? A general summary will suffice.
@@ -242,13 +307,13 @@ const DirectService = () => {
                   rows={5}
                   placeholder=" Notes"
                   size="large"
-                  className=""
+                  className="border-2 border-blue-600"
                 />
               </div>
             </div>
             <div>
-              <h1 className="form-inner-head mt-4">FEEDBACK TO SUPERVISOR:</h1>
-              <p className="text-[#d9534f] text-[1.2rem] font-normal mb-4">
+              <h1 className="form-inner-head mt-4">NEEDS:</h1>
+              <p className="text-[#d9534f] text-[.9rem] font-normal mb-4">
                 What activities did you engage in to help the client move closer
                 to his/her goals through parent training? What materials did you
                 use? A general summary will suffice.
@@ -260,7 +325,7 @@ const DirectService = () => {
                   rows={5}
                   placeholder=" Notes"
                   size="large"
-                  className=""
+                  className="border-2 border-blue-600"
                 />
               </div>
             </div>

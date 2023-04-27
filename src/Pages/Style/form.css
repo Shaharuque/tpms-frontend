@@ -14,18 +14,18 @@
 }
 
 .form-inner-head {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 30.5px;
     color: #207ac7;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: 600;
+    /* text-transform: uppercase; */
     letter-spacing: 1px;
     word-spacing: 0.2px;
 }
 
 .form-sub-header {
     margin: 20px 0;
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 38.4px;
     color: #d9534f;
     text-align: center;
@@ -47,11 +47,41 @@
 
 }
 
+.form-small-title {
+    font-size: 18px;
+    line-height: 36px;
+    text-align: center;
+    color: #d9534f;
+    font-weight: 600;
+    text-transform: uppercase;
+
+}
+
+.form-input-name-black {
+    font-size: 17px;
+    line-height: 22.6px;
+    color: #000;
+    font-weight: 500;
+}
+
 .form-input-border {
     border: 2px solid #207ac7;
     border-left-width: 1px;
-    padding: 12px;
+    padding: 5px;
     font-size: 17px;
+}
+
+.form-input-textarea {
+    border: 2px solid #207ac7;
+    border-left-width: 1px;
+    padding: 10px;
+    font-size: 12px;
+}
+.form-input-textarea-borderNone {
+    border: none;
+    border-left-width: 1px;
+    padding: 10px;
+    font-size: 12px;
 }
 
 .form-select-border {
@@ -68,7 +98,8 @@
     font-size: 17px;
 }
 
-.form-input-name {
+.-black {
+    color: #207ac7;
     font-size: 17px;
     line-height: 25.5px;
     font-weight: 700;
@@ -107,11 +138,11 @@
     box-shadow: 0px -2px 3px -1px #aaaaaa;
 }
 
-.form-textarea{
+.form-textarea {
     margin: 15px 0px 0px;
 }
 
-.form-textarea > textarea{
+.form-textarea>textarea {
     width: 100%;
     border: 2px solid #207ac7;
     padding: 10px;

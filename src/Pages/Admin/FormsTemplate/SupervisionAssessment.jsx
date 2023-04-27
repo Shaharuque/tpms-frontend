@@ -36,7 +36,7 @@ const SupervisionAssessment = () => {
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white ">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -60,7 +60,7 @@ const SupervisionAssessment = () => {
             </div>
           </div>
           <div className="form-title mb-5">
-            <h1>TREATMENT PLAN FORM</h1>
+            <h1>SESSION NOTES</h1>
             <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
           </div>
         </div>
@@ -90,7 +90,37 @@ const SupervisionAssessment = () => {
               </div>
               <div>
                 <span className="form-input-name text-[#207ac7] w-full">
-                  Date of Assessment:
+                  Client Diagnosis:
+                </span>
+                <input
+                  type="text"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
+                  {...register("Diagnosis")}
+                />
+              </div>
+              <div>
+                <span className="form-input-name text-[#207ac7] w-full">
+                  Payor (Subscriber) Full Name:
+                </span>
+                <input
+                  type="text"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
+                  {...register("Diagnosis")}
+                />
+              </div>
+              <div>
+                <span className="form-input-name text-[#207ac7] w-full">
+                  Client Full Home Address:
+                </span>
+                <TextArea
+                  rows={2}
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
+                  {...register("Diagnosis")}
+                />
+              </div>
+              <div>
+                <span className="form-input-name text-[#207ac7] w-full">
+                  Session Date:
                 </span>
                 <input
                   type="date"
@@ -100,7 +130,7 @@ const SupervisionAssessment = () => {
               </div>
               <div>
                 <span className="form-input-name text-[#207ac7] w-full">
-                  Place of Assessment:
+                  Service location Type:
                 </span>
                 <input
                   type="text"
@@ -110,7 +140,7 @@ const SupervisionAssessment = () => {
               </div>
               <div>
                 <span className="form-input-name text-[#207ac7] w-full">
-                  Address:
+                  Service Units this code:
                 </span>
                 <input
                   type="text"
@@ -120,50 +150,20 @@ const SupervisionAssessment = () => {
               </div>
               <div>
                 <span className="form-input-name text-[#207ac7] w-full">
-                  Phone Number:
+                  Service Start Time:
                 </span>
                 <input
-                  type="text"
+                  type="time"
                   className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
               </div>
               <div>
                 <span className="form-input-name text-[#207ac7] w-full">
-                  Phone Number:
+                  Session End Time:
                 </span>
                 <input
-                  type="text"
-                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
-                  {...register("Diagnosis")}
-                />
-              </div>
-              <div>
-                <span className="form-input-name text-[#207ac7] w-full">
-                  Phone Number:
-                </span>
-                <input
-                  type="text"
-                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
-                  {...register("Diagnosis")}
-                />
-              </div>
-              <div>
-                <span className="form-input-name text-[#207ac7] w-full">
-                  Phone Number:
-                </span>
-                <input
-                  type="text"
-                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
-                  {...register("Diagnosis")}
-                />
-              </div>
-              <div>
-                <span className="form-input-name text-[#207ac7] w-full">
-                  Phone Number:
-                </span>
-                <input
-                  type="text"
+                  type="Time"
                   className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
                   {...register("Diagnosis")}
                 />
@@ -172,7 +172,8 @@ const SupervisionAssessment = () => {
 
             <div className="w-full mt-4 mb-4">
               <span className="form-input-name ">
-                Description of Tasks Completed
+                Service location full address: **Must include number, street,
+                city, state, zip code**
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
@@ -188,7 +189,7 @@ const SupervisionAssessment = () => {
             </div>
             <div className="w-full mt-4 mb-4">
               <span className="form-input-name ">
-                Description of Tasks Completed
+                All attendees in session: (First and last names of each)
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
@@ -205,7 +206,8 @@ const SupervisionAssessment = () => {
 
             <div className="w-full mt-4 mb-4">
               <span className="form-input-name ">
-                Description of Tasks Completed
+                Parent/Guardian present during session: Someone over the age of
+                18 must be present during entire session.
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <input type="text" name="" id="" />
@@ -213,7 +215,8 @@ const SupervisionAssessment = () => {
             </div>
             <div>
               <span className="form-input-name ">
-                Description of Tasks Completed
+                LOCATION OF PARENT MEETING IF RBT IS WORKING 1:1 WITH CLIENT
+                DURING SAME TIMEFRAME:
               </span>
               <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
                 <div class="flex items-center mr-4">
@@ -226,7 +229,7 @@ const SupervisionAssessment = () => {
                     {...register("client")}
                   />
                   <label for="inline-radio" class="ml-2 form-input-name">
-                    Client
+                    Room A
                   </label>
                 </div>
                 <div class="flex items-center mr-4">
@@ -239,20 +242,7 @@ const SupervisionAssessment = () => {
                     {...register("therapist")}
                   />
                   <label for="inline-radio" class="ml-2 form-input-name">
-                    Therapist
-                  </label>
-                </div>
-                <div class="flex items-center mr-4">
-                  <input
-                    id="inline-2-radio"
-                    type="checkbox"
-                    value=""
-                    name="inline-radio-group"
-                    class="w-4 h-4"
-                    {...register("rendering_provider")}
-                  />
-                  <label for="inline-2-radio" class="ml-2 form-input-name">
-                    Rendering Provider
+                    Room B
                   </label>
                 </div>
               </div>
@@ -260,7 +250,8 @@ const SupervisionAssessment = () => {
 
             <div className="w-full mt-4 mb-4">
               <span className="form-input-name ">
-                Description of Tasks Completed
+                Name of the authorized ABA supervisor: Full Name and credentials
+                (example Jane Doe, BCBA)
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
@@ -277,12 +268,14 @@ const SupervisionAssessment = () => {
 
             <div className="w-full mt-4 mb-4">
               <span className="form-input-name ">
-                Description of Tasks Completed
+                CODE USED FOR THIS SESSION: **IF YOU MORE THAN ONE CODE DURING
+                SESSION YOU MUST COMPLETE A NOTE FOR EACH CODE.
               </span>
             </div>
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name text-red-600 ">
+                F SUPERVISION IS BEING CONDUCTED DO NOT USE THIS FORM. YOU MUST
+                USE SUPERVISION FORM RELATED TO YOUR CREDENTIALING.
               </span>
             </div>
             <div>
@@ -295,13 +288,13 @@ const SupervisionAssessment = () => {
                         scope="col"
                         class="text-sm font-bold text-white px-2 py-3 border-r"
                       >
-                        First
+                        BOARD CERTIFIED BEHAVIOR ANALYST CODES
                       </th>
                       <th
                         scope="col"
                         class="text-sm font-bold text-white px-2 py-3 border-r"
                       >
-                        Last
+                        REGISTERED BEHAVIOR TECHNICIAN CODES
                       </th>
                     </tr>
                   </thead>
@@ -319,7 +312,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              ABA Direct Therapy by BCBA 97153
                             </label>
                           </span>
                         </div>
@@ -336,7 +329,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              ABA Direct Therapy by RBT 97153
                             </label>
                           </span>
                         </div>
@@ -355,7 +348,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Behavior Modification-97155
                             </label>
                           </span>
                         </div>
@@ -372,7 +365,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              H2019-Direct BlueCare clients Only
                             </label>
                           </span>
                         </div>
@@ -385,11 +378,15 @@ const SupervisionAssessment = () => {
 
             <div className="w-full mt-4 mb-4">
               <span className="form-input-name ">
-                Description of Tasks Completed
+                STRESSOR(S)/EXTRAORDINARY EVENTS/ SIGNIFICANT CHANGES SINCE LAST
+                SESSION WITH PROVIDER FILLING OUT THIS NOTE:
               </span>
+              <p className="text-red-600">
+                Circle responses to all the following:
+              </p>
             </div>
 
-            <div className="flex">
+            <div className="flex flex-wrap">
               <div>
                 <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
                   <span className="form-input-name ">1) Medication</span>
@@ -424,7 +421,7 @@ const SupervisionAssessment = () => {
 
               <div>
                 <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
-                  <span className="form-input-name ">1) Medication</span>
+                  <span className="form-input-name ">2) Living situation:</span>
                   <div class="flex items-center mr-4">
                     <input
                       id="inline-radio"
@@ -455,7 +452,7 @@ const SupervisionAssessment = () => {
               </div>
               <div>
                 <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
-                  <span className="form-input-name ">1) Medication</span>
+                  <span className="form-input-name ">3) Insurance:</span>
                   <div class="flex items-center mr-4">
                     <input
                       id="inline-radio"
@@ -487,7 +484,7 @@ const SupervisionAssessment = () => {
 
               <div>
                 <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
-                  <span className="form-input-name ">1) Medication</span>
+                  <span className="form-input-name ">4) Illness:</span>
                   <div class="flex items-center mr-4">
                     <input
                       id="inline-radio"
@@ -518,7 +515,9 @@ const SupervisionAssessment = () => {
               </div>
             </div>
             <div>
-              <span className="form-input-name ">) Medication</span>
+              <span className="form-input-name ">
+                5) Other notable changes?:
+              </span>
               <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
                 <div class="flex items-center mr-4">
                   <input
@@ -530,7 +529,7 @@ const SupervisionAssessment = () => {
                     {...register("client")}
                   />
                   <label for="inline-radio" class="ml-2 form-input-name">
-                    yes
+                    NONE
                   </label>
                 </div>
                 <div class="flex items-center mr-4">
@@ -543,15 +542,46 @@ const SupervisionAssessment = () => {
                     {...register("therapist")}
                   />
                   <label for="inline-radio" class="ml-2 form-input-name">
-                    no
+                    Home family activities
+                  </label>
+                </div>
+                <div class="flex items-center mr-4">
+                  <input
+                    id="inline-radio"
+                    type="radio"
+                    value=""
+                    name="inline-radio-group"
+                    class="w-4 h-4"
+                    {...register("therapist")}
+                  />
+                  <label for="inline-radio" class="ml-2 form-input-name">
+                    Inappropriate behaviors in school
+                  </label>
+                </div>
+                <div class="flex items-center mr-4">
+                  <input
+                    id="inline-radio"
+                    type="radio"
+                    value=""
+                    name="inline-radio-group"
+                    class="w-4 h-4"
+                    {...register("therapist")}
+                  />
+                  <label for="inline-radio" class="ml-2 form-input-name">
+                    Inappropriate behaviors in community
                   </label>
                 </div>
               </div>
             </div>
 
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
-                Description of Tasks Completed
+              <span className="form-input-name text-red-600">
+                If yes to any changes above, please list in detail changes and
+                impact on client. Medications changes noted by RBT must be
+                communicated to BCBA on date of session.{" "}
+                <span className="text-black">
+                  (This section is required if YES.)
+                </span>
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
@@ -567,7 +597,13 @@ const SupervisionAssessment = () => {
             </div>
 
             <div>
-              <span className="form-input-name ">) Medication</span>
+              <span className="form-input-name ">
+                Danger to:{" "}
+                <span className="text-bold">
+                  {" "}
+                  (circle or highlight response)
+                </span>
+              </span>
               <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
                 <div class="flex items-center mr-4">
                   <input
@@ -579,7 +615,7 @@ const SupervisionAssessment = () => {
                     {...register("client")}
                   />
                   <label for="inline-radio" class="ml-2 form-input-name">
-                    yes
+                    None
                   </label>
                 </div>
                 <div class="flex items-center mr-4">
@@ -592,13 +628,42 @@ const SupervisionAssessment = () => {
                     {...register("therapist")}
                   />
                   <label for="inline-radio" class="ml-2 form-input-name">
-                    no
+                    Self
+                  </label>
+                </div>
+                <div class="flex items-center mr-4">
+                  <input
+                    id="inline-radio"
+                    type="radio"
+                    value=""
+                    name="inline-radio-group"
+                    class="w-4 h-4"
+                    {...register("therapist")}
+                  />
+                  <label for="inline-radio" class="ml-2 form-input-name">
+                    Others
+                  </label>
+                </div>
+                <div class="flex items-center mr-4">
+                  <input
+                    id="inline-radio"
+                    type="radio"
+                    value=""
+                    name="inline-radio-group"
+                    class="w-4 h-4"
+                    {...register("therapist")}
+                  />
+                  <label for="inline-radio" class="ml-2 form-input-name">
+                    Property
                   </label>
                 </div>
               </div>
             </div>
             <div>
-              <span className="form-input-name ">) Medication</span>
+              <span className="form-input-name ">
+                If selected any option besides none select appropriate response:
+                Danger = Yes you must select one of the following:
+              </span>
               <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
                 <div class="flex items-center mr-4">
                   <input
@@ -610,7 +675,7 @@ const SupervisionAssessment = () => {
                     {...register("client")}
                   />
                   <label for="inline-radio" class="ml-2 form-input-name">
-                    yes
+                    Ideation
                   </label>
                 </div>
                 <div class="flex items-center mr-4">
@@ -623,12 +688,58 @@ const SupervisionAssessment = () => {
                     {...register("therapist")}
                   />
                   <label for="inline-radio" class="ml-2 form-input-name">
-                    no
+                    Plan
                   </label>
+                </div>
+                <div class="flex items-center mr-4">
+                  <input
+                    id="inline-radio"
+                    type="radio"
+                    value=""
+                    name="inline-radio-group"
+                    class="w-4 h-4"
+                    {...register("therapist")}
+                  />
+                  <label for="inline-radio" class="ml-2 form-input-name">
+                    Attempt
+                  </label>
+                </div>
+                <div class="flex items-center mr-4">
+                  <input
+                    id="inline-radio"
+                    type="radio"
+                    value=""
+                    name="inline-radio-group"
+                    class="w-4 h-4"
+                    {...register("therapist")}
+                  />
+                  <label for="inline-radio" class="ml-2 form-input-name">
+                    Intent
+                  </label>
+                </div>
+                <div class="flex items-center mr-4">
+                  <input
+                    id="inline-radio"
+                    type="radio"
+                    value=""
+                    name="inline-radio-group"
+                    class="w-4 h-4"
+                    {...register("therapist")}
+                  />
+                  <label for="inline-radio" class="ml-2 form-input-name">
+                    Other
+                  </label>
+                </div>
+                <div>
+                  <span className="text-red-600 text-sm border-b">
+                    ***If YES selected you must notify your supervising BCBA
+                    immediately. The BCBA will contact the office if warranted.
+                  </span>
                 </div>
                 <div className="w-full mt-4 mb-4">
                   <span className="form-input-name ">
-                    Description of Tasks Completed
+                    Disposition of client upon arrival: Must be more than "same"
+                    and one-word answers:
                   </span>
                   <div className="mt-3 mb-8   border-blue-600 border-2">
                     <TextArea
@@ -645,10 +756,11 @@ const SupervisionAssessment = () => {
               </div>
             </div>
 
-
-
             <div>
-              <h1 className="form-inner-head my-2">DOCUMENTS REVIEWED:</h1>
+              <h1 className="form-inner-head my-2">
+                Activities/Goals/Objectives worked on during this session: (Must
+                follow treatment plan.)
+              </h1>
               <div class="overflow-x-auto">
                 <table class="min-w-full border-2 border-blue-600 ">
                   <thead class="border-b bg-blue-600">
@@ -657,19 +769,19 @@ const SupervisionAssessment = () => {
                         scope="col"
                         class="text-sm font-bold text-white px-2 py-3 border-r"
                       >
-                        First
+                        SKILL ACQUISITION
                       </th>
                       <th
                         scope="col"
                         class="text-sm font-bold text-white px-2 py-3 border-r"
                       >
-                        Last
+                        BEHAVIOR CONTRACT
                       </th>
                       <th
                         scope="col"
                         class="text-sm font-bold text-white px-2 py-3 border-r"
                       >
-                        Last
+                        DIFFERENTIAL REINFORCEMENT
                       </th>
                     </tr>
                   </thead>
@@ -687,7 +799,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Social Skill Acquisition
                             </label>
                           </span>
                         </div>
@@ -704,7 +816,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Timer
                             </label>
                           </span>
                         </div>
@@ -721,7 +833,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              FCT
                             </label>
                           </span>
                         </div>
@@ -740,7 +852,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Role Play
                             </label>
                           </span>
                         </div>
@@ -757,7 +869,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Token Board
                             </label>
                           </span>
                         </div>
@@ -774,7 +886,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Visual Aid
                             </label>
                           </span>
                         </div>
@@ -793,7 +905,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Premack Principle
                             </label>
                           </span>
                         </div>
@@ -810,7 +922,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Self Monitor
                             </label>
                           </span>
                         </div>
@@ -827,12 +939,13 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Errorless Learning
                             </label>
                           </span>
                         </div>
                       </td>
-                    </tr> <tr class="border-b border-2 border-blue-600 ">
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
                       <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
                         <div class="flex gap-3">
                           <input
@@ -845,7 +958,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Stimulus Prompts
                             </label>
                           </span>
                         </div>
@@ -862,7 +975,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              DTT
                             </label>
                           </span>
                         </div>
@@ -879,12 +992,13 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              NET
                             </label>
                           </span>
                         </div>
                       </td>
-                    </tr> <tr class="border-b border-2 border-blue-600 ">
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
                       <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
                         <div class="flex gap-3">
                           <input
@@ -897,7 +1011,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Video Modeling
                             </label>
                           </span>
                         </div>
@@ -914,7 +1028,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Antecedent Manipulation
                             </label>
                           </span>
                         </div>
@@ -931,12 +1045,13 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Chaining
                             </label>
                           </span>
                         </div>
                       </td>
-                    </tr> <tr class="border-b border-2 border-blue-600 ">
+                    </tr>{" "}
+                    <tr class="border-b border-2 border-blue-600 ">
                       <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
                         <div class="flex gap-3">
                           <input
@@ -949,7 +1064,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Shaping
                             </label>
                           </span>
                         </div>
@@ -966,7 +1081,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Self Management
                             </label>
                           </span>
                         </div>
@@ -983,7 +1098,7 @@ const SupervisionAssessment = () => {
                               for="rec_name"
                               className=" font-bold text-base"
                             >
-                              Medical Issues
+                              Other
                             </label>
                           </span>
                         </div>
@@ -995,7 +1110,8 @@ const SupervisionAssessment = () => {
             </div>
             <div className="w-full mt-4 mb-4">
               <span className="form-input-name ">
-                Description of Tasks Completed
+                IF OTHER LIST BELOW WHAT PROCEDURES WERE USED:
+                <span className="text-black text-sm"></span>
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
@@ -1011,7 +1127,11 @@ const SupervisionAssessment = () => {
             </div>
             <div className="w-full mt-4 mb-4">
               <span className="form-input-name ">
-                Description of Tasks Completed
+                2) Treatment Approach/ Measures: How did you work on goal(s)
+                from #1? What tools/techniques/supplies did you use?{" "}
+                <span className="text-red-600">
+                  This section must be more than a sentence or two.
+                </span>
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">
                 <TextArea
@@ -1025,6 +1145,50 @@ const SupervisionAssessment = () => {
                 />
               </div>
             </div>
+            <div>
+              <span className="form-inner-head"> NEXT SCHEDULED SESSION:</span>
+             <div className="flex flex-wrap justify-between mb-4">
+             <div>
+                <span className="form-input-name text-[#207ac7] w-full">
+                  Date:
+                </span>
+                <input
+                  type="date"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
+                  {...register("Diagnosis")}
+                />
+              </div>
+              <div>
+                <span className="form-input-name text-[#207ac7] w-full">
+                  Time:
+                </span>
+                <input
+                  type="Time"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
+                  {...register("Diagnosis")}
+                />
+              </div>
+              <div>
+                <span className="form-input-name text-[#207ac7] w-full">
+                  Location Type:
+                </span>
+                <input
+                  type="text"
+                  className="border-b-2 border-blue-600 input-font py-[2px] w-full focus:outline-none"
+                  {...register("Diagnosis")}
+                />
+              </div>
+
+             </div>
+            </div>
+            <span>
+              Provider Signature: Must be signed using signing software or
+              printed and signed-cannot be a typed signature:{" "}
+              <span className="text-red-600 text-sm">
+                By signing you are agreeing that what you are submitting is and
+                accurate.
+              </span>
+            </span>
             <div className=" flex  flex-wrap justify-between mt-10">
               <div>
                 <button

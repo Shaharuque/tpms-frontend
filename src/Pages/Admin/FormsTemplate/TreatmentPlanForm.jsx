@@ -37,7 +37,7 @@ const TreatmentPlanForm = () => {
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -60,7 +60,7 @@ const TreatmentPlanForm = () => {
               </p>
             </div>
           </div>
-          <div className="form-title mb-5">
+          <div className="form-title mb-5 ">
             <h1>TREATMENT PLAN FORM</h1>
             <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
           </div>
@@ -68,9 +68,9 @@ const TreatmentPlanForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           {" "}
           <div>
-            <div className="border-2 border-blue-600 px-2">
+            <div className="border-2 border-blue-600 px-2 py-2">
                 <h1 className="form-inner-head">Task Completed</h1>
-              <div className="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
+              <div className="flex flex-wrap gap-5 lg:gap-0 mt-2 ">
                 <div className="flex items-center mr-4">
                   <input
                     id="inline-radio"
@@ -155,7 +155,7 @@ const TreatmentPlanForm = () => {
             </div>
 
             <div className="w-full mt-4 mb-4">
-              <span className="form-input-name ">
+              <span className="form-inner-head ">
               Description of Tasks Completed
               </span>
               <div className="mt-3 mb-8   border-blue-600 border-2">

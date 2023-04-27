@@ -37,7 +37,7 @@ const PrivateClient = () => {
   };
   return (
     <>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -68,7 +68,7 @@ const PrivateClient = () => {
           <div>
             <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 gap-4">
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Client Name:
                 </span>
                 <input
@@ -78,7 +78,7 @@ const PrivateClient = () => {
                 />
               </div>
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   DOB:
                 </span>
                 <input
@@ -88,7 +88,7 @@ const PrivateClient = () => {
                 />
               </div>
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Date of Assessment:
                 </span>
                 <input
@@ -98,7 +98,7 @@ const PrivateClient = () => {
                 />
               </div>
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Place of Assessment:
                 </span>
                 <input
@@ -108,7 +108,7 @@ const PrivateClient = () => {
                 />
               </div>
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Address:
                 </span>
                 <input
@@ -118,7 +118,7 @@ const PrivateClient = () => {
                 />
               </div>
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Phone Number:
                 </span>
                 <input
@@ -130,7 +130,7 @@ const PrivateClient = () => {
             </div>
             <div className="my-4 grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-3 2xl:grid-cols-3 gap-4">
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Insurance/Id#:
                 </span>
                 <input
@@ -140,7 +140,7 @@ const PrivateClient = () => {
                 />
               </div>
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   School/Employer (if applicable):
                 </span>
                 <input
@@ -150,7 +150,7 @@ const PrivateClient = () => {
                 />
               </div>
               <div>
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Grade (if applicable):
                 </span>
                 <input
@@ -161,7 +161,7 @@ const PrivateClient = () => {
               </div>
             </div>
             <div>
-              <span className="form-input-name text-[#207ac7] w-full">
+              <span className="form-input-name text-blue-600 w-full">
                 INTERPRETIVE SUMMARY/PRESENTING PROBLEM:
               </span>
               <div className="mt-3 border-2 border-blue-600">
@@ -178,7 +178,7 @@ const PrivateClient = () => {
           </div>
           <div>
             <h1 className="form-sub-header">TREATMENT HISTORY</h1>
-            <span className="form-input-name text-[#207ac7] w-full">
+            <span className="form-input-name text-blue-600 w-full">
               Are you currently receiving psychiatric services, professional
               counseling or psychotherapy elsewhere?
             </span>
@@ -208,7 +208,7 @@ const PrivateClient = () => {
             </div>
           </div>
           <div>
-            <span className="form-input-name text-[#207ac7] w-full">
+            <span className="form-input-name text-blue-600 w-full">
               Have you had previous psychotherapy?
             </span>
             <div className="flex items-center mb-4 mt-2">
@@ -251,7 +251,7 @@ const PrivateClient = () => {
           </div>
 
           <div className="mt-4">
-            <span className="form-input-name text-[#207ac7] w-full">
+            <span className="form-input-name text-blue-600 w-full">
               Are you currently taking prescribed psychiatric medication
               (antidepressants or others)?
             </span>
@@ -314,7 +314,7 @@ const PrivateClient = () => {
           <div>
             <h1 className="form-sub-header">HEALTH AND SOCIAL INFORMATION</h1>
             <div className="mt-4">
-              <span className="form-input-name text-[#207ac7] w-full">
+              <span className="form-input-name text-blue-600 w-full">
                 Do you currently have a primary physician?
               </span>
               <div className="flex items-center mb-4 mt-2">
@@ -357,7 +357,7 @@ const PrivateClient = () => {
               </div>
             </div>
             <div className="mt-4">
-              <span className="form-input-name text-[#207ac7] w-full">
+              <span className="form-input-name text-blue-600 w-full">
                 Are you currently seeing more than one medical health
                 specialist?
               </span>
@@ -404,7 +404,7 @@ const PrivateClient = () => {
             </div>
             <div>
               <div className="mt-3">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   When was your last physical?
                 </span>
                 <div className="mt-4 border-2 border-blue-600">
@@ -419,7 +419,7 @@ const PrivateClient = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Please list any persistent physical symptoms or health
                   concerns (e.g. chronic pain, headaches, hypertension,
                   diabetes, etc.:
@@ -436,7 +436,7 @@ const PrivateClient = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Are you currently on medication to manage a physical health
                   concern? If yes, please list:
                 </span>
@@ -453,7 +453,7 @@ const PrivateClient = () => {
               </div>
 
               <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Are you having any problems with your sleep habits?
                 </span>
                 <div className="flex items-center mb-4 mt-2">
@@ -525,7 +525,7 @@ const PrivateClient = () => {
               </div> */}
 
               <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Are you having any difficulty with appetite or eating habits?
                 </span>
                 <div className="flex items-center mb-4 mt-2">
@@ -573,7 +573,7 @@ const PrivateClient = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Have you experienced significant weight change in the last 2
                   months?
                 </span>
@@ -605,7 +605,7 @@ const PrivateClient = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Do you regularly use alcohol?
                 </span>
                 <div className="flex items-center mb-4 mt-2">
@@ -636,7 +636,7 @@ const PrivateClient = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <h1 className="form-input-name text-[#207ac7] w-full">
+                <h1 className="form-input-name text-blue-600 w-full">
                   In a typical month, how often do you have 4 or more drinks in
                   a 24 hour period?
                 </h1>
@@ -656,7 +656,7 @@ const PrivateClient = () => {
                 </select>
               </div>
               <div className="mt-4">
-                <h1 className="form-input-name text-[#207ac7] w-full">
+                <h1 className="form-input-name text-blue-600 w-full">
                   How often do you engage recreational drug use?
                 </h1>
                 <select
@@ -672,7 +672,7 @@ const PrivateClient = () => {
                 </select>
               </div>
               <div className="mt-4">
-                <h1 className="form-input-name text-[#207ac7] w-full">
+                <h1 className="form-input-name text-blue-600 w-full">
                   Do you smoke cigarettes or use other tobacco products?
                 </h1>
                 <select
@@ -685,7 +685,7 @@ const PrivateClient = () => {
                 </select>
               </div>
               <div className="mt-4">
-                <h1 className="form-input-name text-[#207ac7] w-full">
+                <h1 className="form-input-name text-blue-600 w-full">
                   Have you had suicidal thoughts recently?
                 </h1>
                 <select
@@ -702,7 +702,7 @@ const PrivateClient = () => {
                 </select>
               </div>
               <div className="mt-4">
-                <h1 className="form-input-name text-[#207ac7] w-full">
+                <h1 className="form-input-name text-blue-600 w-full">
                   Have you had them in the past?
                 </h1>
                 <select
@@ -719,7 +719,7 @@ const PrivateClient = () => {
                 </select>
               </div>
               <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   Are you currently in a romantic relationship?
                 </span>
                 <div className="flex items-center mb-4 mt-2">
@@ -763,7 +763,7 @@ const PrivateClient = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   On a scale of 1-10 (10 being the highest quality), how would
                   you rate your current relationship?
                 </span>
@@ -779,7 +779,7 @@ const PrivateClient = () => {
                 </div>
               </div>
               <div className="mt-4 ">
-                <span className="form-input-name text-[#207ac7] w-full">
+                <span className="form-input-name text-blue-600 w-full">
                   In the last year, have you experienced any significant life
                   changes or stressors? If yes, please explain:
                 </span>
@@ -797,7 +797,7 @@ const PrivateClient = () => {
             </div>
 
             <div>
-              <h1 className="form-input-name my-4 text-[#207ac7] w-full">
+              <h1 className="form-input-name my-4 text-blue-600 w-full">
                 Have you ever experienced any of the following?
               </h1>
               {/* <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2">
@@ -1545,7 +1545,7 @@ const PrivateClient = () => {
           </div>
           <div>
             <h1 className="form-sub-header">OCCUPATIONAL INFORMATION</h1>
-            <span className="form-input-name text-[#207ac7] w-full">
+            <span className="form-input-name text-blue-600 w-full">
               Are you currently employed?
             </span>
             <div className="flex items-center mb-4 mt-2">
@@ -1608,7 +1608,7 @@ const PrivateClient = () => {
           </div>
           <div>
             <h1 className="form-sub-header">RELIGIOUS/SPIRITUAL INFORMATION</h1>
-            <span className="form-input-name text-[#207ac7] w-full">
+            <span className="form-input-name text-blue-600 w-full">
               Are you currently employed?
             </span>
             <div className="flex items-center mb-4 mt-2">
@@ -1665,7 +1665,7 @@ const PrivateClient = () => {
           </div>
           <div>
             <h1 className="form-sub-header">FAMILY MENTAL HEALTH HISTORY</h1>
-            <div className="form-input-name text-[#207ac7] w-full">
+            <div className="form-input-name text-blue-600 w-full">
               Has anyone in your family
               <span className="font-thin text-rose-600 text-sm">
                 (either immediate family members or relatives)
@@ -1677,7 +1677,7 @@ const PrivateClient = () => {
               </span>
             </div>
             <div>
-              <h1 className="form-input-name my-2 text-[#207ac7] w-full">
+              <h1 className="form-input-name my-2 text-blue-600 w-full">
                 Have you ever experienced any of the following?
               </h1>
               {/* <div className=" grid grid-cols-3 items-center md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-3">
@@ -2337,7 +2337,7 @@ const PrivateClient = () => {
           <div>
             <h1 className="form-sub-header">OTHER INFORMATION</h1>
             <div>
-              <span className="form-input-name text-[#207ac7] w-full">
+              <span className="form-input-name text-blue-600 w-full">
                 What do you consider to be your strengths?
               </span>
               <div className="mt-3 border-2 border-blue-600">
@@ -2352,7 +2352,7 @@ const PrivateClient = () => {
               </div>
             </div>
             <div>
-              <span className="form-input-name text-[#207ac7] w-full">
+              <span className="form-input-name text-blue-600 w-full">
                 What do you like most about yourself?
               </span>
               <div className="mt-3  border-2 border-blue-600">
@@ -2367,7 +2367,7 @@ const PrivateClient = () => {
               </div>
             </div>
             <div>
-              <span className="form-input-name text-[#207ac7] w-full">
+              <span className="form-input-name text-blue-600 w-full">
                 What are effective coping strategies that you have learned?
               </span>
               <div className="mt-3  border-2 border-blue-600">
@@ -2382,7 +2382,7 @@ const PrivateClient = () => {
               </div>
             </div>
             <div>
-              <span className="form-input-name text-[#207ac7] w-full">
+              <span className="form-input-name text-blue-600 w-full">
                 What are your goals for therapy?
               </span>
               <div className="mt-3  border-2 border-blue-600">
@@ -2806,14 +2806,14 @@ const PrivateClient = () => {
           <div>
             <div className="flex flex-wrap gap-2 items-center justify-between my-5">
               <button
-                className="flex items-center text-lg hover:underline hover:text-rose-800 font-medium gap-1 text-[#207ac7]"
+                className="flex items-center text-lg hover:underline hover:text-rose-800 font-medium gap-1 text-blue-600"
                 onClick={handleSignatureProvider}
               >
                 Provider Signature
                 <FaSignature className="text-lg" />
               </button>
               <button
-                className="flex items-center text-lg hover:underline hover:text-rose-800 font-medium gap-1 text-[#207ac7]"
+                className="flex items-center text-lg hover:underline hover:text-rose-800 font-medium gap-1 text-blue-600"
                 onClick={handleSignatureCaregiver}
               >
                 Caregiver Signature

@@ -37,7 +37,7 @@ const ServiceVerificationlog = () => {
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -137,25 +137,14 @@ const ServiceVerificationlog = () => {
                     >
                       Time Out
                     </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-2 py-3 border-r border-2 border-blue-600 "
-                    >
-                      Staff Signature
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-2 py-3 border-r border-2 border-blue-600 "
-                    >
-                      Parent/Guardian/Teacher Signature
-                    </th>
+                    
                   </tr>
                 </thead>
                 <tbody>
                   <tr class="border-b border-2 border-blue-600 ">
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="date"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -163,7 +152,7 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -171,34 +160,18 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
                       />
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
+                   
                   </tr>
-
                   <tr class="border-b border-2 border-blue-600 ">
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="date"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -206,7 +179,7 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -214,34 +187,18 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
                       />
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
+                   
                   </tr>
-
                   <tr class="border-b border-2 border-blue-600 ">
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="date"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -249,7 +206,7 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -257,34 +214,18 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
                       />
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
+                   
                   </tr>
-
                   <tr class="border-b border-2 border-blue-600 ">
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="date"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -292,7 +233,7 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -300,34 +241,18 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
                       />
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
+                   
                   </tr>
-
                   <tr class="border-b border-2 border-blue-600 ">
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="date"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -335,7 +260,7 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
@@ -343,29 +268,43 @@ const ServiceVerificationlog = () => {
                     </td>
                     <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                       <input
-                        type="text"
+                        type="time"
                         className="border-none focus:outline-none "
                         placeholder="Enter Here..."
                         {...register("service_date")}
                       />
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                      <input
-                        type="text"
-                        className="border-none focus:outline-none "
-                        placeholder="Enter Here..."
-                        {...register("service_date")}
-                      />
-                    </td>
+                   
                   </tr>
+                  <tr class="border-b border-2 border-blue-600 ">
+                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <input
+                        type="date"
+                        className="border-none focus:outline-none "
+                        placeholder="Enter Here..."
+                        {...register("service_date")}
+                      />
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <input
+                        type="time"
+                        className="border-none focus:outline-none "
+                        placeholder="Enter Here..."
+                        {...register("service_date")}
+                      />
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                      <input
+                        type="time"
+                        className="border-none focus:outline-none "
+                        placeholder="Enter Here..."
+                        {...register("service_date")}
+                      />
+                    </td>
+                   
+                  </tr>
+
+                 
                 </tbody>
               </table>
             </div>
