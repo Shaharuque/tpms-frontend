@@ -72,14 +72,14 @@ const UniqueSupervisionForm = () => {
               <table class="min-w-full border-2 border-blue-600 ">
                 <tbody>
                   <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                    <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 w-1/2">
                       <div class="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
                             className=" font-bold text-base"
                           >
-                            Client Name:
+                            Trainee:
                           </label>
                         </span>
 
@@ -91,14 +91,33 @@ const UniqueSupervisionForm = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
                       <div class="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
                             className=" font-bold text-base"
                           >
-                            DOB:
+                            Start Time:
+                          </label>
+                        </span>
+
+                        <input
+                          type="time"
+                          value="00:00"
+                          className="  border-none focus:outline-none "
+                          {...register("dob")}
+                        />
+                      </div>
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                      <div class="flex gap-3">
+                        <span>
+                          <label
+                            for="rec_name"
+                            className=" font-bold text-base"
+                          >
+                            Date:
                           </label>
                         </span>
 
@@ -111,14 +130,14 @@ const UniqueSupervisionForm = () => {
                     </td>
                   </tr>
                   <tr class="border-b border-2 border-blue-600 ">
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
+                    <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 w-1/2">
                       <div class="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
                             className=" font-bold text-base"
                           >
-                            Age:
+                            supervisor:
                           </label>
                         </span>
 
@@ -130,14 +149,14 @@ const UniqueSupervisionForm = () => {
                         />
                       </div>
                     </td>
-                    <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
+                    <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
                       <div class="flex gap-3">
                         <span>
                           <label
                             for="rec_name"
                             className=" font-bold text-base"
                           >
-                            Diagnosis:
+                            End Time:
                           </label>
                         </span>
 
@@ -154,337 +173,462 @@ const UniqueSupervisionForm = () => {
               </table>
             </div>
 
-            <div className="flex gap-3">
-              <div className="flex flex-col gap-3">
-                <div>
-                  {" "}
-                  <div class="overflow-x-auto">
-                    <span className="form-inner-head">CLIENT INFORMATION:</span>
-                    <table class="min-w-full border-2 border-blue-600 ">
-                      <tbody>
-                        <tr class="border-b border-2 border-blue-600 ">
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                            <div class="flex gap-3">
+            <div className="flex flex-wrap gap-3 ">
+              <div>
+                <div className="flex flex-col mt-2 gap-3">
+                  <div>
+                    {" "}
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full border-2 border-blue-600 ">
+                        <thead>
+                          <tr>
+                            <th
+                              class=" px-2 py-3 border-r border-2 border-blue-600 bg-blue-600 font-bold text-lg text-white "
+                              colspan={2}
+                            >
+                              INDEPENDENT HOURS
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <span>
+                                  <label
+                                    for="rec_name"
+                                    className=" font-bold text-base"
+                                  >
+                                    Experience Type
+                                  </label>
+                                </span>
+                              </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <input
+                                  type="text"
+                                  className=" w-full border-none focus:outline-none "
+                                  placeholder="Enter Here..."
+                                  {...register("client_name")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600">
+                              <div class="flex gap-3">
+                                <span>
+                                  <label
+                                    for="rec_name"
+                                    className=" font-bold text-base"
+                                  >
+                                    Setting Name
+                                  </label>
+                                </span>
+                              </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <input
+                                  type="text"
+                                  className=" w-full border-none focus:outline-none "
+                                  placeholder="Enter Here..."
+                                  {...register("age")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <span>
+                                  <label
+                                    for="rec_name"
+                                    className=" font-bold text-base"
+                                  >
+                                    Activity Category
+                                  </label>
+                                </span>
+                              </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <input
+                                  type="radio"
+                                  className="  border-none focus:outline-none "
+                                  {...register("dob")}
+                                />
+                                <label htmlFor="">Restricted</label>
+
+                                <input
+                                  type="radio"
+                                  className="  border-none focus:outline-none "
+                                  {...register("dob")}
+                                />
+                                <label htmlFor="">Restricted</label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td
+                              class="text-sm text-gray-900 font-light px-2 py-3 "
+                              colSpan={2}
+                            >
                               <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  Client Name:
+                                <label for="clname" className="form-inner-head">
+                                  Activity Note{" "}
+                                  <span className="text-sm text-red-600">
+                                    (client Initials)
+                                  </span>{" "}
+                                  :
                                 </label>
                               </span>
-
-                              <input
-                                type="text"
-                                className=" w-full border-none focus:outline-none "
-                                placeholder="Enter Here..."
-                                {...register("client_name")}
-                              />
-                            </div>
-                          </td>
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  DOB:
-                                </label>
-                              </span>
-
-                              <input
-                                type="date"
-                                className="  border-none focus:outline-none "
-                                {...register("dob")}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="border-b border-2 border-blue-600 ">
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  Age:
-                                </label>
-                              </span>
-
-                              <input
-                                type="text"
-                                className=" w-full border-none focus:outline-none "
-                                placeholder="Enter Here..."
-                                {...register("age")}
-                              />
-                            </div>
-                          </td>
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  Diagnosis:
-                                </label>
-                              </span>
-
-                              <input
-                                type="text"
-                                className=" w-auto border-none focus:outline-none "
-                                placeholder="Enter Here..."
-                                {...register("diagnosis")}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="border-b border-2 border-blue-600 ">
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  Client Name:
-                                </label>
-                              </span>
-
-                              <input
-                                type="text"
-                                className=" w-full border-none focus:outline-none "
-                                placeholder="Enter Here..."
-                                {...register("client_name")}
-                              />
-                            </div>
-                          </td>
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  DOB:
-                                </label>
-                              </span>
-
-                              <input
-                                type="date"
-                                className="  border-none focus:outline-none "
-                                {...register("dob")}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="border-b border-2 border-blue-600">
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap ">
-                            <span>
-                              <label
-                                for="clname"
-                                className="form-input-name my-2"
-                              >
-                                Session Date:
-                              </label>
-                            </span>
-                            <div className=" border-blue-600 border-2">
-                              <TextArea
-                                onChange={(e) => setNotes(e.target.value)}
-                                maxLength={300}
-                                rows={5}
-                                placeholder="Enter here..."
-                                size="large"
-                                className=""
-                                {...register("present_during_seation")}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                              <div className=" border-red-600 border-2">
+                                <TextArea
+                                  onChange={(e) => setNotes(e.target.value)}
+                                  maxLength={300}
+                                  rows={5}
+                                  placeholder="Enter here..."
+                                  size="large"
+                                  className="w-full"
+                                  {...register("present_during_seation")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  {" "}
-                  <div class="overflow-x-auto">
-                    <span className="form-inner-head">CLIENT INFORMATION:</span>
-                    <table class="min-w-full border-2 border-blue-600 ">
-                      <tbody>
-                        <tr class="border-b border-2 border-blue-600 ">
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  Client Name:
-                                </label>
-                              </span>
-
-                              <input
-                                type="text"
-                                className=" w-full border-none focus:outline-none "
-                                placeholder="Enter Here..."
-                                {...register("client_name")}
-                              />
-                            </div>
-                          </td>
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  DOB:
-                                </label>
-                              </span>
-
-                              <input
-                                type="date"
-                                className="  border-none focus:outline-none "
-                                {...register("dob")}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr class="border-b border-2 border-blue-600 ">
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  Age:
-                                </label>
-                              </span>
-
-                              <input
-                                type="text"
-                                className=" w-full border-none focus:outline-none "
-                                placeholder="Enter Here..."
-                                {...register("age")}
-                              />
-                            </div>
-                          </td>
-                          <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                            <div class="flex gap-3">
-                              <span>
-                                <label
-                                  for="rec_name"
-                                  className=" font-bold text-base"
-                                >
-                                  Diagnosis:
-                                </label>
-                              </span>
-
-                              <input
-                                type="text"
-                                className=" w-auto border-none focus:outline-none "
-                                placeholder="Enter Here..."
-                                {...register("diagnosis")}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div>
+                    {" "}
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full border-2 border-blue-600 ">
+                        <thead>
+                          <tr>
+                            <th
+                              class=" px-2 py-3 border-r border-2 border-blue-600 bg-blue-600 font-bold text-lg text-white "
+                              colspan={2}
+                            >
+                              MONTH SUPERVISION PERIOD
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <span>
+                                  <label
+                                    for="rec_name"
+                                    className=" font-bold text-base"
+                                  >
+                                    Total Hours of Supervision:
+                                  </label>
+                                </span>
+                              </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <input
+                                  type="text"
+                                  className="  border-none focus:outline-none "
+                                  {...register("dob")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <span>
+                                  <label
+                                    for="rec_name"
+                                    className=" font-bold text-base"
+                                  >
+                                    Total Number of Contacts:
+                                  </label>
+                                </span>
+                              </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <input
+                                  type="text"
+                                  className=" w-auto border-none focus:outline-none "
+                                  placeholder="Enter Here..."
+                                  {...register("diagnosis")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600">
+                              <div class="flex gap-3">
+                                <span>
+                                  <label
+                                    for="rec_name"
+                                    className=" font-bold text-base"
+                                  >
+                                    Individual:
+                                  </label>
+                                </span>
+                              </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <input
+                                  type="text"
+                                  className=" w-auto border-none focus:outline-none "
+                                  placeholder="Enter Here..."
+                                  {...register("diagnosis")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <span>
+                                  <label
+                                    for="rec_name"
+                                    className=" font-bold text-base"
+                                  >
+                                    Group:
+                                  </label>
+                                </span>
+                              </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <input
+                                  type="text"
+                                  className=" w-auto border-none focus:outline-none "
+                                  placeholder="Enter Here..."
+                                  {...register("diagnosis")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                          <tr class="border-b border-2 border-blue-600 ">
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <span>
+                                  <label
+                                    for="rec_name"
+                                    className=" font-bold text-base"
+                                  >
+                                    Total number of Observations of the Trainee
+                                    with Clients:
+                                  </label>
+                                </span>
+                              </div>
+                            </td>
+                            <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                              <div class="flex gap-3">
+                                <input
+                                  type="text"
+                                  className=" w-auto border-none focus:outline-none "
+                                  placeholder="Enter Here..."
+                                  {...register("diagnosis")}
+                                />
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div>
-                {" "}
-                <div class="overflow-x-auto">
-                  <span className="form-inner-head">CLIENT INFORMATION:</span>
-                  <table class="min-w-full border-2 border-blue-600 ">
-                    <tbody>
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                          <div class="flex gap-3">
-                            <span>
-                              <label
-                                for="rec_name"
-                                className=" font-bold text-base"
-                              >
-                                Client Name:
-                              </label>
-                            </span>
 
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              placeholder="Enter Here..."
-                              {...register("client_name")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div class="flex gap-3">
-                            <span>
-                              <label
-                                for="rec_name"
-                                className=" font-bold text-base"
-                              >
-                                DOB:
-                              </label>
-                            </span>
+              <div class="overflow-x-auto mt-2">
+                <table class="min-w-full border-2 border-blue-600 ">
+                  <thead>
+                    <tr>
+                      <th
+                        class=" px-2 py-3 border-r border-2 border-blue-600 bg-blue-600 font-bold text-lg text-white "
+                        colspan={2}
+                      >
+                        SUPERVISED HOURS:
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3">
+                          <span>
+                            <label
+                              for="rec_name"
+                              className=" font-bold text-base"
+                            >
+                              Format:
+                            </label>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3">
+                          <input
+                            type="radio"
+                            className="  border-none focus:outline-none "
+                            {...register("dob")}
+                          />
+                          <label htmlFor="">Restricted</label>
 
-                            <input
-                              type="date"
-                              className="  border-none focus:outline-none "
-                              {...register("dob")}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                      <tr class="border-b border-2 border-blue-600 ">
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 w-1/2">
-                          <div class="flex gap-3">
-                            <span>
-                              <label
-                                for="rec_name"
-                                className=" font-bold text-base"
-                              >
-                                Age:
-                              </label>
-                            </span>
+                          <input
+                            type="radio"
+                            className="  border-none focus:outline-none "
+                            {...register("dob")}
+                          />
+                          <label htmlFor="">Restricted</label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3">
+                          <span>
+                            <label
+                              for="rec_name"
+                              className=" font-bold text-base"
+                            >
+                              Experience Types
+                            </label>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3">
+                          <input
+                            type="text"
+                            className=" w-full border-none focus:outline-none "
+                            placeholder="Enter Here..."
+                            {...register("age")}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3">
+                          <span>
+                            <label
+                              for="rec_name"
+                              className=" font-bold text-base"
+                            >
+                              Supervision Type
+                            </label>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3">
+                          <input
+                            type="radio"
+                            className="  border-none focus:outline-none "
+                            {...register("dob")}
+                          />
+                          <label htmlFor="">Individual</label>
 
-                            <input
-                              type="text"
-                              className=" w-full border-none focus:outline-none "
-                              placeholder="Enter Here..."
-                              {...register("age")}
-                            />
-                          </div>
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
-                          <div class="flex gap-3">
-                            <span>
-                              <label
-                                for="rec_name"
-                                className=" font-bold text-base"
-                              >
-                                Diagnosis:
-                              </label>
-                            </span>
+                          <input
+                            type="radio"
+                            className="  border-none focus:outline-none "
+                            {...register("dob")}
+                          />
+                          <label htmlFor="">Group</label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3">
+                          <span>
+                            <label
+                              for="rec_name"
+                              className=" font-bold text-base"
+                            >
+                              Activity Category
+                            </label>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 border-r border-2 border-blue-600 ">
+                        <div class="flex gap-3">
+                          <input
+                            type="radio"
+                            className="  border-none focus:outline-none "
+                            {...register("dob")}
+                          />
+                          <label htmlFor="">Restricted</label>
 
-                            <input
-                              type="text"
-                              className=" w-auto border-none focus:outline-none "
-                              placeholder="Enter Here..."
-                              {...register("diagnosis")}
-                            />
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                          <input
+                            type="radio"
+                            className="  border-none focus:outline-none "
+                            {...register("dob")}
+                          />
+                          <label htmlFor="">Unrestricted</label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td
+                        class="text-sm text-gray-900 font-light px-2 py-3 "
+                        colSpan={2}
+                      >
+                        <span>
+                          <label for="clname" className="form-inner-head">
+                            Activity Note{" "}
+                            <span className="text-sm text-red-600">
+                              (client Initials)
+                            </span>{" "}
+                            :
+                          </label>
+                        </span>
+                        <div className=" border-red-600 border-2">
+                          <TextArea
+                            onChange={(e) => setNotes(e.target.value)}
+                            maxLength={300}
+                            rows={5}
+                            placeholder="Enter here..."
+                            size="large"
+                            className="w-full"
+                            {...register("present_during_seation")}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="border-b border-2 border-blue-600 ">
+                      <td
+                        class="text-sm text-gray-900 font-light px-2 py-3 "
+                        colSpan={2}
+                      >
+                        <span>
+                          <label for="clname" className="form-inner-head">
+                            Activity Note{" "}
+                            <span className="text-sm text-red-600">
+                              (client Initials)
+                            </span>{" "}
+                            :
+                          </label>
+                        </span>
+                        <div className=" border-red-600 border-2">
+                          <TextArea
+                            onChange={(e) => setNotes(e.target.value)}
+                            maxLength={300}
+                            rows={5}
+                            placeholder="Enter here..."
+                            size="large"
+                            className="w-full"
+                            {...register("present_during_seation")}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
