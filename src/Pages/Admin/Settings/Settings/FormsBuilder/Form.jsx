@@ -240,6 +240,10 @@ const Form = () => {
             INITIAL SPEECH THERAPY EVALUATION/PLAN OF CARE
           </button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/daily-soap"}>
+          <button className="pms-button">Daily Soap Note</button>
+        </Link>
       </div>
     </div>
   );

@@ -259,6 +259,7 @@ import SPEECH_LANGUAGE_PROGRESS_REPORT from "./Pages/Admin/FormsTemplate/SpeechT
 import THERAPIST_COMMUNICATION_SESSION_NOTES from "./Pages/Admin/FormsTemplate/SpeechTherapy/THERAPIST_COMMUNICATION_SESSION_NOTES";
 import TREATMENT_PLAN from "./Pages/Admin/FormsTemplate/SpeechTherapy/TREATMENT_PLAN";
 import INITIAL_SPEECH_THERAPY_EVALUATION from "./Pages/Admin/FormsTemplate/SpeechTherapy/INITIAL_SPEECH_THERAPY_EVALUATION";
+import DailySoap from "./Pages/Admin/FormsTemplate/SpeechTherapy/DailySoap";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -463,6 +464,7 @@ function App() {
               <INITIAL_SPEECH_THERAPY_EVALUATION></INITIAL_SPEECH_THERAPY_EVALUATION>
             }
           ></Route>
+          <Route path="/daily-soap" element={<DailySoap></DailySoap>}></Route>
 
           {/* ------------------------form End--------------------------- */}
           <Route
