@@ -56,8 +56,12 @@ const Form = () => {
         </Link>
         <br />
         Data Sheet
-        <br />
-        new form new
+        <div className="my-2"></div>
+        <Link to={"/new-form-new"}>
+          <button className="pms-button">
+           New Form New
+          </button>
+        </Link>
         <br />
         Session Notes
         <div className="my-2"></div>
@@ -80,8 +84,12 @@ const Form = () => {
         <Link to={"/Service-Verification-log"}>
           <button className="pms-button"> CBH SERVICE VERIFICATION LOG</button>
         </Link>
-        <br />
-        GS Supervision Form
+       
+       
+        <div className="my-2"></div>
+        <Link to={"/Gs-Supervision-Form"}>
+          <button className="pms-button">  GS Supervision Form</button>
+        </Link>
         <div className="my-2"></div>
         <Link to={"/supervision-supervision"}>
           <button className="pms-button">Supervision Non-billable Note</button>
@@ -128,8 +136,12 @@ const Form = () => {
             BCBA TRAINEE UNIQUE SUPERVISION FORM
           </button>
         </Link>
-        <br />
-        Soap Notes
+        <div className="my-2"></div>
+        <Link to={"/Soap-Notes"}>
+          <button className="pms-button">
+          Soap Notes
+          </button>
+        </Link>
         <div className="my-2"></div>
         <Link to={"/FBA"}>
           <button className="pms-button">FBA</button>
