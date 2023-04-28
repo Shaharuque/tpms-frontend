@@ -58,12 +58,12 @@ const Form = () => {
         Data Sheet
         <div className="my-2"></div>
         <Link to={"/new-form-new"}>
-          <button className="pms-button">
-           New Form New
-          </button>
+          <button className="pms-button">New Form New</button>
         </Link>
-        <br />
-        Session Notes
+        <div className="my-2"></div>
+        <Link to={"/session-notes"}>
+          <button className="pms-button">SESSION NOTES</button>
+        </Link>
         <div className="my-2"></div>
         <Link to={"/clinical-form"}>
           <button className="pms-button">CP Clinical Form</button>
@@ -84,11 +84,9 @@ const Form = () => {
         <Link to={"/Service-Verification-log"}>
           <button className="pms-button"> CBH SERVICE VERIFICATION LOG</button>
         </Link>
-       
-       
         <div className="my-2"></div>
         <Link to={"/Gs-Supervision-Form"}>
-          <button className="pms-button">  GS Supervision Form</button>
+          <button className="pms-button"> GS Supervision Form</button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/supervision-supervision"}>
@@ -138,9 +136,7 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/Soap-Notes"}>
-          <button className="pms-button">
-          Soap Notes
-          </button>
+          <button className="pms-button">Soap Notes</button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/FBA"}>
