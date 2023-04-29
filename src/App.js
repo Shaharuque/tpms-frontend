@@ -264,11 +264,10 @@ import TREATMENT_PLAN from "./Pages/Admin/FormsTemplate/SpeechTherapy/TREATMENT_
 import INITIAL_SPEECH_THERAPY_EVALUATION from "./Pages/Admin/FormsTemplate/SpeechTherapy/INITIAL_SPEECH_THERAPY_EVALUATION";
 import SoapNotes from "./Pages/Admin/FormsTemplate/SoapNotes";
 import DailySoap from "./Pages/Admin/FormsTemplate/SpeechTherapy/DailySoap";
-<<<<<<< HEAD
 import CBHbehaviourAssessmentForm from "./Pages/Admin/FormsTemplate/CBHbehaviourAssessmentForm";
-=======
+
 import SESSION_NOTES from "./Pages/Admin/FormsTemplate/SESSION_NOTES";
->>>>>>> origin/maria
+
 
 function App() {
   const handle = useFullScreenHandle();
