@@ -124,8 +124,11 @@ const Form = () => {
         <Link to={"/DiagnosisSessionForm"}>
           <button className="pms-button">DIAGNOSIS SESSION FORM</button>
         </Link>
-        <br />
-        CBH Behavior Analysis Assessment
+       
+        <div className="my-2"></div>
+        <Link to={"/CbhBehaviourAnalysisAssessment"}>
+          <button className="pms-button">CBH Behavior Analysis Assessment</button>
+        </Link>
         <div className="my-2"></div>
         <Link to={"/MonthlySupervisionNote"}>
           <button className="pms-button">MONTHLY SUPERVISION NOTE</button>

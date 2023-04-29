@@ -264,6 +264,7 @@ import TREATMENT_PLAN from "./Pages/Admin/FormsTemplate/SpeechTherapy/TREATMENT_
 import INITIAL_SPEECH_THERAPY_EVALUATION from "./Pages/Admin/FormsTemplate/SpeechTherapy/INITIAL_SPEECH_THERAPY_EVALUATION";
 import SoapNotes from "./Pages/Admin/FormsTemplate/SoapNotes";
 import DailySoap from "./Pages/Admin/FormsTemplate/SpeechTherapy/DailySoap";
+import CBHbehaviourAssessmentForm from "./Pages/Admin/FormsTemplate/CBHbehaviourAssessmentForm";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -478,6 +479,10 @@ function App() {
             element={<GssupervisionForm></GssupervisionForm>}
           ></Route>
           <Route path="/Soap-Notes" element={<SoapNotes></SoapNotes>}></Route>
+          <Route
+            path="/CbhBehaviourAnalysisAssessment"
+            element={<CBHbehaviourAssessmentForm></CBHbehaviourAssessmentForm>}
+          ></Route>
 
           {/* ------------------------form End--------------------------- */}
           <Route
