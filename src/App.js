@@ -267,6 +267,7 @@ import DailySoap from "./Pages/Admin/FormsTemplate/SpeechTherapy/DailySoap";
 import CBHbehaviourAssessmentForm from "./Pages/Admin/FormsTemplate/CBHbehaviourAssessmentForm";
 
 import SESSION_NOTES from "./Pages/Admin/FormsTemplate/SESSION_NOTES";
+import DataSheetForm from "./Pages/Admin/FormsTemplate/DataSheetForm";
 
 
 function App() {
@@ -491,6 +492,10 @@ function App() {
             path="/CbhBehaviourAnalysisAssessment"
             element={<CBHbehaviourAssessmentForm></CBHbehaviourAssessmentForm>}
           ></Route>
+          <Route
+           path="/data-sheet"
+            element={<DataSheetForm></DataSheetForm>}
+            ></Route>
 
           {/* ------------------------form End--------------------------- */}
           <Route

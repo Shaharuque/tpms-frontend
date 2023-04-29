@@ -54,8 +54,10 @@ const Form = () => {
         <Link to={"/private-client"}>
           <button className="pms-button">PRIVATE CLIENT INTAKE FORM</button>
         </Link>
-        <br />
-        Data Sheet
+        <div className="my-2"></div>
+        <Link to={"/data-sheet"}>
+          <button className="pms-button">Data Sheet</button>
+        </Link>
         <div className="my-2"></div>
         <Link to={"/new-form-new"}>
           <button className="pms-button">New Form New</button>
