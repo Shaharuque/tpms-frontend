@@ -22,12 +22,14 @@ const NameLocation = () => {
   //Some Important data showing below
   const loading = data?.loading;
   const settingDetails = data?.settingDetails;
-  const box_no_32 = settingDetails?.box_no_32 || [];
+  const box_no_32 = settingDetails?.box_32 || [];
   const box_no_33 = settingDetails?.setting_name_location;
   const pos = settingDetails?.pos;
+  const box_32main = settingDetails?.box_32main;
   const working_hours = settingDetails?.setting_working_hour;
   // console.log(working_hours);
 
+  console.log("bx32 check", box_no_32);
   //getsettings action is dispatched [api calling]
   useEffect(() => {
     dispatch(getsettings(token));
@@ -60,6 +62,7 @@ const NameLocation = () => {
 
       <NameLocationTable32
         data={box_no_32}
+        primaryData={box_32main}
         handleTableOpen32={handleTableOpen32}
         table32Open={table32Open}
         loading={loading}

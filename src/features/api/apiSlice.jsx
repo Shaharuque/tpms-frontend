@@ -4,7 +4,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     // baseUrl: "https://stagapi.therapypms.com/api/internaladmin/",
-    baseUrl: "http://localhost:9000/api/internaladmin/",
+    baseUrl: "http://localhost:9000/api/v1/internaladmin/",
     // prepareHeaders: (headers, { getState, endpoint }) => {
     //   const token = getState()?.authInfo?.accessToken;
     //   console.log(token);

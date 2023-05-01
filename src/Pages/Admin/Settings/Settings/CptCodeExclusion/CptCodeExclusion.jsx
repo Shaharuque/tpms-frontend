@@ -1,46 +1,101 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
-import Swal from "sweetalert2";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
-import { PostfetchData } from "../../../../../Misc/Helper";
 import { useSelector } from "react-redux";
-// import MultiTransferData from "../SettingsComponent/MultiTransferData";
+import {} from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import { toast } from "react-toastify";
+import { debounce } from "lodash";
+import {
+  useAddCptExclusionMutation,
+  useAvailableCptCodesQuery,
+  useExcludedCptCodesQuery,
+  useRemoveCptExclusionMutation,
+} from "../../../../../features/Settings_redux/cptcodeExclusion/cptCodeExclusionApi";
 
 const CptCodeExclusion = () => {
   const { token } = useToken();
-  const [cptCode, setcptCode] = useState();
-  const [excludedCptCode, setexcludedCptCode] = useState([]);
-  const [cptSelectedKeys, setcptSelectedKey] = useState();
-  const [excludedCptSelectedKeys, setexcludedCptSelectedKey] = useState();
-  const [changeData, setchangeData] = useState(false);
+  const [selectedKeys, setSelectedKeys] = useState();
+  const [facilityselectedkeys, setfacilityselectedkeys] = useState();
+  const [getSearchData, setSearchData] = useState("");
+  const [searchSelectedTreatment, setSearchSelectedTreatments] = useState();
+  // const [inputValue, setInputValue] = useState("");
 
   // is fixed toggle
   const isToggled = useSelector((state) => state.sideBarInfo);
   console.log("isToggled", isToggled);
 
-  const fetchWithPromiseAll = async () => {
-    const Getcptdata = await PostfetchData({
-      endPoint: "admin/ac/setting/cpt/code/exclusion/get",
-      token,
-    });
-    const GetExcludedCptCodes = await PostfetchData({
-      endPoint: "admin/ac/setting/cpt/code/selected/exclusion",
-      token,
-    });
-    setcptCode(Getcptdata);
-    setexcludedCptCode(GetExcludedCptCodes);
-  };
+  // //seach
+  // const { data: searchTretmentdata } = useTreatmentSearchQuery({
+  //   token,
+  //   data: {
+  //     searchItem: getSearchData,
+  //   },
+  // });
+
+  // // search selected tretment
+  // const { data: searchTreatment } = useSearchSelectedTreatmentQuery({
+  //   token,
+  //   data: {
+  //     searchItem: searchSelectedTreatment,
+  //   },
+  // });
+  // console.log("searchtmdata", searchTreatment);
+
+  const {
+    data: getallTreatmentData,
+    isSuccess,
+    isLoading: getallTreatmentLoading,
+  } = useAvailableCptCodesQuery({ token: token });
+  console.log(isSuccess, getallTreatmentData);
+
+  const {
+    data: getallFacilityTreatments,
+    isLoading: getallFacilityTreatmentsLoading,
+  } = useExcludedCptCodesQuery({ token: token });
+  console.log(isSuccess, getallFacilityTreatments);
+
+  // add
+  const [addCptExclusion, { data: addResponse }] = useAddCptExclusionMutation();
 
   useEffect(() => {
-    fetchWithPromiseAll();
-    setchangeData(false);
-  }, [changeData]);
+    if (addResponse?.status === "success") {
+      toast.success(<h1 className="text-[12px]">{addResponse?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }, [addResponse?.message, addResponse?.status]);
 
-  // console.log("cpt code", cptCode?.cpt_code_exclusion)
-  // console.log("excluded code", excludedCptCode)
+  // delete
+  const [removeCptExclusion, { data: deleteResponse }] =
+    useRemoveCptExclusionMutation();
+  console.log(addResponse, deleteResponse);
 
-  if (!cptCode) {
+  useEffect(() => {
+    if (deleteResponse?.status === "success") {
+      toast.error(<h1 className="text-[12px]">{deleteResponse?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }, [deleteResponse?.message, deleteResponse?.status]);
+
+  // delete
+  // console.log(allTreatmentData, selectedTreatmentData);
+  if (getallFacilityTreatmentsLoading && getallTreatmentLoading) {
     return <Loading></Loading>;
   }
 
@@ -51,8 +106,8 @@ const CptCodeExclusion = () => {
       target.selectedOptions,
       (option) => option.value * 1
     );
-    setcptSelectedKey(value);
-    setexcludedCptSelectedKey();
+    setSelectedKeys(value);
+    setfacilityselectedkeys();
   };
 
   const handleRemoving = (e) => {
@@ -60,76 +115,49 @@ const CptCodeExclusion = () => {
       e.target.selectedOptions,
       (option) => option.value * 1
     );
-    setexcludedCptSelectedKey(value);
-    setcptSelectedKey();
+    setfacilityselectedkeys(value);
+    setSelectedKeys();
   };
 
-  const handleSelectedValue = async (e) => {
-    console.log("selected vlaue", cptSelectedKeys);
-    if (cptSelectedKeys && cptSelectedKeys.length > 0) {
-      const body = {
-        cpt_id: cptSelectedKeys,
-      };
-      const AddingCptCode = await PostfetchData({
-        endPoint: "admin/ac/setting/cpt/code/exclusion/add",
-        payload: body,
-        token,
-      });
-      console.log("add data func check", AddingCptCode);
-      if (AddingCptCode.status === "success") {
-        Swal.fire({
-          icon: "success",
-          title: "Added",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setchangeData(true);
-      }
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Selected Cpt Codes",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
+  const handleSelectedValue = () => {
+    console.log("add button click get data", selectedKeys);
+    addCptExclusion({
+      token,
+      data: {
+        cpt_ids: selectedKeys,
+      },
+    });
   };
 
-  const handleRemoveValue = async (e) => {
-    console.log("remove vlaue", excludedCptSelectedKeys);
-    console.log("excluded cpt", excludedCptCode);
-
-    if (excludedCptSelectedKeys && excludedCptSelectedKeys.length > 0) {
-      const body = { exclude_cpt_id: excludedCptSelectedKeys };
-      const RemoveCptCode = await PostfetchData({
-        endPoint: "admin/ac/setting/cpt/code/exclusion/remove",
-        payload: body,
-        token,
-      });
-      console.log("add data func check", RemoveCptCode);
-      if (RemoveCptCode.status === "success") {
-        Swal.fire({
-          icon: "success",
-          title: "Removed",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setchangeData(true);
-      }
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Selected Excluded Cpt Codes",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
+  const handleRemoveValue = (e) => {
+    console.log("Remove  button click get data", facilityselectedkeys);
+    removeCptExclusion({
+      token,
+      data: {
+        cpt_ids: facilityselectedkeys,
+      },
+    });
   };
 
-  // console.log('cptdata', cptCode)
-  // console.log('excluded cpt', excludedCptCode)
-  // console.log("selected vlaue",cptSelectedKeys)
+  // debounce *****************
+  // Define the debounced function
+  const SearchTreatmentDebounce = debounce((value) => {
+    console.log(`You typed: ${value}`);
+    setSearchData(value);
+  }, 1000);
+  // Handle input change event and call the debounced function
+  const handleSearchTreatmnet = (event) => {
+    SearchTreatmentDebounce(event.target.value);
+  };
 
+  const selectedTreatmnetDebounce = debounce((value) => {
+    console.log(`You typed: ${value}`);
+    setSearchSelectedTreatments(value);
+  }, 1000);
+  // Handle input change event and call the debounced function
+  const handleSelectedSearch = (event) => {
+    selectedTreatmnetDebounce(event.target.value);
+  };
   return (
     <div>
       <div
@@ -141,40 +169,44 @@ const CptCodeExclusion = () => {
       >
         <div>
           <h1 className="text-sm text-gray-700 my-2">Available Cpt Codes</h1>
+
           <div>
             <input
+              // onChange={(e) => setSearchData(e.target.value)}
+              onChange={handleSearchTreatmnet}
+              // value={inputValue}
               type="text"
               className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
               placeholder="Search Here"
             />
           </div>
 
+          {/* new code added */}
           <select
             multiple={true}
             id="countries_multiple"
+            // className="h-40"
             onChange={(e) => {
               handleAdding(e);
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {cptCode?.cpt_code_exclusion?.length > 0 &&
-              cptCode?.cpt_code_exclusion.map((item, index) => (
+            {getallTreatmentData?.all_insurance?.length > 0 &&
+              getallTreatmentData?.all_insurance.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.cpt_code}
                 </option>
               ))}
           </select>
-
-          <br />
         </div>
+
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
-          <button
-            onClick={(e) => handleSelectedValue(e)}
-            className="pms-button w-24"
+          <button // onClick={handleAddItems}
+            onClick={() => handleSelectedValue()}
             disabled={
-              excludedCptSelectedKeys?.length > 0 &&
-              cptSelectedKeys === undefined
+              selectedKeys === undefined && facilityselectedkeys?.length > 0
             }
+            className="pms-button w-24"
           >
             <div className="flex item-center justify-center">
               ADD
@@ -185,11 +217,13 @@ const CptCodeExclusion = () => {
             onClick={(e) => {
               handleRemoveValue(e);
             }}
-            disabled={cptSelectedKeys?.length > 0}
             className="pms-close-button w-24"
+            disabled={
+              selectedKeys?.length > 0 && facilityselectedkeys === undefined
+            }
           >
             <div className="flex item-center justify-center">
-              <HiOutlineArrowLeft className="mr-2 text-base" />
+              <HiOutlineArrowLeft className="mr-[2px]" />
               REMOVE
             </div>
           </button>
@@ -199,6 +233,7 @@ const CptCodeExclusion = () => {
           <h1 className="text-sm text-gray-700 my-2">Excluded Cpt Codes</h1>
           <div>
             <input
+              onChange={handleSelectedSearch}
               type="text"
               className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
               placeholder="Search Here"
@@ -213,14 +248,13 @@ const CptCodeExclusion = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {excludedCptCode?.cpt_code_exclusion?.length > 0 &&
-              excludedCptCode?.cpt_code_exclusion.map((item, index) => (
-                <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.cpt_code}
+            {getallFacilityTreatments?.all_excluded_cpt?.length > 0 &&
+              getallFacilityTreatments?.all_excluded_cpt.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item?.id}>
+                  {item?.cpt_code}
                 </option>
               ))}
           </select>
-          <br />
         </div>
       </div>
     </div>

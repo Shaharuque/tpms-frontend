@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { fetchServices } from "../../../../../../features/Settings_redux/settingServicesList";
 import { useGetAllSelectedTreatmentsQuery } from "../../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
 import useToken from "../../../../../../CustomHooks/useToken";
+import { baseIp } from "../../../../../../Misc/BaseClient";
 
 export default function AddServicesActionModal({
   record,
@@ -21,7 +22,7 @@ export default function AddServicesActionModal({
   const {
     id,
     type,
-    treatment_type,
+    facility_treatment_id,
     service_treatment,
     duration,
     mileage,
@@ -54,7 +55,7 @@ export default function AddServicesActionModal({
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        treatment_id: treatment_type?.id,
+        treatment_id: service_treatment?.id,
         service: service,
         description: description,
         mileage: mileage,
@@ -64,13 +65,12 @@ export default function AddServicesActionModal({
     }, 0);
   }, [
     reset,
-    treatment_type?.id,
+    service_treatment?.id,
     service,
     description,
     mileage,
     duration,
     type,
-    treatment_type?.treatment_name,
   ]);
 
   const onSubmit = async (FormData) => {
@@ -79,7 +79,7 @@ export default function AddServicesActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://stagapi.therapypms.com/api/internaladmin/setting/add/setting/service",
+          url: `${baseIp}/setting/add/setting/service`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -99,6 +99,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
           dispatch(fetchServices({ page, token }));
           handleClose();
@@ -114,6 +115,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
         }
       } catch (error) {
@@ -126,6 +128,7 @@ export default function AddServicesActionModal({
           draggable: true,
           progress: undefined,
           theme: "dark",
+          style: { fontSize: "15px" },
         });
         console.log(error?.message); // this is the main part. Use the response property from the error object
       }
@@ -133,7 +136,7 @@ export default function AddServicesActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://stagapi.therapypms.com/api/internaladmin/setting/update/setting/service",
+          url: `${baseIp}/setting/update/setting/service`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -141,7 +144,7 @@ export default function AddServicesActionModal({
           },
           data: {
             ...FormData,
-            service_id: id,
+            service_id: parseInt(id),
           },
         });
 
@@ -156,6 +159,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
           dispatch(fetchServices({ page, token }));
           handleClose();
@@ -171,6 +175,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
         }
       } catch (error) {
@@ -183,6 +188,7 @@ export default function AddServicesActionModal({
           draggable: true,
           progress: undefined,
           theme: "dark",
+          style: { fontSize: "15px" },
         });
         console.log(error?.message); // this is the main part. Use the response property from the error object
       }
@@ -222,18 +228,12 @@ export default function AddServicesActionModal({
                 {/* Dynamic option showed and select new option feature */}
                 <select
                   className="modal-input-field ml-1 w-full"
-                  defaultValue={service_treatment?.treatment_name}
+                  // defaultValue={service_treatment?.treatment_name}
                   {...register("treatment_id")}
                 >
-                  {record?.facility_treatment_id ? (
-                    <option value={record?.facility_treatment_id}>
-                      {
-                        selectedTreatments?.find(
-                          (treatment) =>
-                            treatment.treatment_id ===
-                            record?.facility_treatment_id
-                        )?.treatment_name
-                      }
+                  {record?.service_treatment ? (
+                    <option value={record?.service_treatment?.id}>
+                      {record?.service_treatment?.treatment_name}
                     </option>
                   ) : (
                     <option>Select Treatment</option>
@@ -241,13 +241,13 @@ export default function AddServicesActionModal({
                   {selectedTreatments
                     ?.filter(
                       (item) =>
-                        item.treatment_id !== record?.facility_treatment_id
+                        parseInt(item.id) !== record?.facility_treatment_id
                     )
                     .map((treatment) => {
                       return (
                         <option
                           key={treatment?.treatment_id}
-                          value={treatment?.treatment_id}
+                          value={parseInt(treatment?.id)}
                         >
                           {treatment?.treatment_name}
                         </option>
@@ -263,8 +263,8 @@ export default function AddServicesActionModal({
                   className="modal-input-field ml-1 w-full"
                   {...register("type")}
                 >
-                  <option value={"1"}>UnBillable</option>
-                  <option value={"2"}>Billable</option>
+                  <option value={"2"}>UnBillable</option>
+                  <option value={"1"}>Billable</option>
                 </select>
               </div>
 

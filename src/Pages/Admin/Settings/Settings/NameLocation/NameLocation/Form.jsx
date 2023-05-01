@@ -1,64 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
+import NameLocationTableAddButton from "./NameLocationTableAddButton";
 import { FaPlus } from "react-icons/fa";
 
-const Form = (item) => {
-  const [add, setAdd] = useState(false);
-  const [store, setStore] = useState([]);
-
-  const handleAdd = () => {
-    setAdd(!add);
-  };
-
-  // const map = item.length > 0 && item.map((i, e) => i);
-  // console.log("---", item, item[0]);
-  // useEffect(() => {
-  //   console.log("specific---", map);
-  // }, []);
-
-  // Editable value
-  useEffect(
-    () => {
-      setTimeout(() => {
-        reset(
-          {
-            zone_name: item?.item[0]?.zone_name,
-            city: item?.item[0]?.city,
-            facility_name_two: item?.item[0]?.facility_name_two,
-            address: item?.item[0]?.address,
-            state: item?.item[0]?.state,
-            npi: item?.item[0]?.npi ? item?.item[0]?.npi : "",
-            phone_one: item?.item[0]?.phone_one,
-            zip: item?.item[0]?.zip,
-          },
-          {
-            zone_name: item?.item[1]?.zone_name,
-            city: item?.item[1]?.city,
-          }
-        );
-      }, 0);
-      console.log("---", item, item.item[2]);
-    },
-    [item?.item[0]?.zone_name],
-    item?.item[0]?.zone_name
-  );
-
-  //console.log(item);
+const Form = ({ item, primarydata }) => {
+  console.log("item, primarydata", item);
 
   const {
     register,
+    control,
     handleSubmit,
-    formState: { errors },
     reset,
-  } = useForm();
-  const onSubmit = (data) => {
-    // const data_one = [data];
-    console.log(data);
-    setStore([...store, data]);
-    reset();
-  };
-  console.log(store);
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      // addressExtra: testingobj.address
+      externaladdedData: item,
+    },
+    mode: "onBlur",
+  });
+
+  useEffect(() => {
+    reset({
+      externaladdedData: item,
+    });
+  }, [item, reset]);
+
+  const { fields, append, remove } = useFieldArray({
+    name: "externaladdedData",
+    control,
+  });
+  const onSubmit = (data) => console.log(data);
+
+  console.log("fields", fields);
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -175,7 +150,8 @@ const Form = (item) => {
               </div>
 
               <div
-                onClick={handleAdd}
+                // onClick={handleAdd}
+                onClick={() => append()}
                 className="bg-secondary text-white  mt-[26px] p-[6px]"
               >
                 <FaPlus />
@@ -184,24 +160,16 @@ const Form = (item) => {
           </div>
           {/* First form done  */}
         </div>
-        {add && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <div className="divider"></div>
-            <p>hello</p>
-            {/* <NameLocationTableAddButton
-              handleAdd={handleAdd}
-              register={register}
-              setAdd={setAdd}
-            ></NameLocationTableAddButton> */}
-          </motion.div>
-        )}
 
-        {/* submit  */}
-        <input className="pms-button my-2" type="submit" value={"Save"} />
+        {/* // fields, register, errors, remove */}
+        <NameLocationTableAddButton
+          fields={fields}
+          register={register}
+          errors={errors}
+          remove={remove}
+        ></NameLocationTableAddButton>
+
+        <input type="submit" />
       </form>
     </div>
   );

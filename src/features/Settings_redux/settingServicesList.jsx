@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { baseIp } from "../../Misc/BaseClient";
 
 //async action(getAdmins) to fetch admins data list depending on page_ad
 export const fetchServices = createAsyncThunk(
@@ -9,7 +10,7 @@ export const fetchServices = createAsyncThunk(
     //onno api thik e kaj kortesey
     const response = await axios({
       method: "post",
-      url: "https://stagapi.therapypms.com/api/internaladmin/setting/list/setting/service",
+      url: `${baseIp}/setting/list/setting/service`,
       headers: {
         Accept: "application/json",
         "x-auth-token": token || null,
