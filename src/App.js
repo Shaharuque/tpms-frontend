@@ -96,7 +96,6 @@ import ServiceSubTypeExclusions from "./Pages/Admin/Staff/Staffs/ServiceSubTypeE
 import PatientExclusion from "./Pages/Admin/Staff/Staffs/PatientExclusion/PatientExclusion";
 import WorkSchedule from "./Pages/Admin/Staff/Staffs/WorkSchedule/WorkSchedule";
 // ##### Billing
-import TestingTable from "./Testing/AntTableTest/TestingTable";
 import BillingManager from "./Pages/Admin/Billing/BillingManager/BillingManager";
 import ArLedger from "./Pages/Admin/Billing/ARLeadger/ArLedger";
 import ContractRate from "./Pages/Admin/Billing/ContactRate/ContractRate";
@@ -239,6 +238,7 @@ import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 import CallLog from "./Pages/Admin/Patient/Patients/CallLog/CallLog";
 import Chat from "./Pages/Shared/NavigationBar/Chat/Chat";
 import ChatInbox from "./Pages/Shared/NavigationBar/Chat/ChatInbox/ChatInbox";
+import EditableCell from "./Testing/AntTableTest/EditableCell";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -398,7 +398,7 @@ function App() {
           ></Route>
           <Route
             path="/testing"
-            element={<TestingTable></TestingTable>}
+            element={<EditableCell></EditableCell>}
           ></Route>
           <Route
             path="/search-box"

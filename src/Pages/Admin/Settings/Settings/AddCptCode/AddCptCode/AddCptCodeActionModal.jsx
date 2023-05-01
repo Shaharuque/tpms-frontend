@@ -16,11 +16,10 @@ export default function AddCptCodeActionModal({
   record,
   page,
   token,
-  endPoint,
   selectedTreatmentData,
 }) {
   const { id, cpt_code, cpt_id, facility_treatment_id, treatment_details } =
-    record;
+    record || {};
   console.log("record", record);
   const dispatch = useDispatch();
 
@@ -50,7 +49,7 @@ export default function AddCptCodeActionModal({
             theme: "dark",
             style: { fontSize: "12px" },
           });
-          dispatch(fetchCpt({ endPoint, page, token }));
+          dispatch(fetchCpt({ page, token }));
           handleClose();
         } else {
           toast.error("Cpt Code Already Exist", {
@@ -89,7 +88,7 @@ export default function AddCptCodeActionModal({
             theme: "dark",
             style: { fontSize: "12px" },
           });
-          dispatch(fetchCpt({ endPoint, page, token }));
+          dispatch(fetchCpt({ page, token }));
           handleClose();
         } else {
           toast.error("Cpt Code Already Exist", {

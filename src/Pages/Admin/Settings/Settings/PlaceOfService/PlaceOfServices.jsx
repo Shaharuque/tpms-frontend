@@ -8,6 +8,9 @@ import useToken from "../../../../../CustomHooks/useToken";
 import { fetchPOS } from "../../../../../features/Settings_redux/placeOfServiceSlice";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import PlaceOfServicesActionAddModal from "./PlaceOfServices/PlaceOfServicesActionAddModal";
+import axios from "axios";
+import { baseIp } from "../../../../../Misc/BaseClient";
+import { toast } from "react-toastify";
 
 const PlaceOfServices = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -20,21 +23,71 @@ const PlaceOfServices = () => {
   const endPoint = "admin/ac/setting/get/pos";
 
   const pos = useSelector((state) => state?.posInfo);
-  console.log(pos);
-  const data = pos?.posData?.pos_data?.data ? pos?.posData?.pos_data?.data : [];
-  const totalPage = pos?.posData?.pos_data?.last_page
-    ? pos?.posData?.pos_data?.last_page
-    : 0;
+  const data = pos?.posData?.data?.data || [];
   console.log(data);
+  const totalPage = pos?.posData?.data?.lastPage || 0;
+  console.log(totalPage);
 
   useEffect(() => {
     // For sending multiple parameter to createAsync Thunk we need to pass it as object
-    dispatch(fetchPOS({ endPoint, page, token }));
+    dispatch(fetchPOS({ page, token }));
   }, [page, dispatch, token]);
 
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", typeof selectedPage);
     setPage(selectedPage + 1);
+  };
+  const handleDeletePos = async (del_id) => {
+    if (del_id) {
+      const payload = { pos_id: del_id };
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/delete/pos/code`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token,
+          },
+          data: payload,
+        });
+        if (res?.data?.status === "success") {
+          toast.success("successfully deleted pos code", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+          dispatch(fetchPOS({ page, token }));
+        }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      } catch (error) {
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    }
   };
 
   //get data from API + data fetch from api while scrolling[Important]
@@ -173,7 +226,10 @@ const PlaceOfServices = () => {
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
-              <button className="text-sm mx-1  text-red-500">
+              <button
+                onClick={() => handleDeletePos(record?.id)}
+                className="text-sm mx-1  text-red-500"
+              >
                 <AiOutlineDelete />
               </button>
             </div>

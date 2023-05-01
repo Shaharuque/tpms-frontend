@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box32 from "./Box32";
 import Box33 from "./Box33";
 
-const InsuranceBox = () => {
+const InsuranceBox = ({ insuranceBox }) => {
   const [box33, setBox33] = useState(true);
   const [box32, setBox32] = useState(false);
   const handleBox32 = () => {
@@ -15,8 +15,16 @@ const InsuranceBox = () => {
   };
   return (
     <div>
-      <Box33 handleBox33={handleBox33} box33={box33}></Box33>
-      <Box32 handleBox32={handleBox32} box32={box32}></Box32>
+      <Box33
+        handleBox33={handleBox33}
+        box33={box33}
+        insuranceBox={insuranceBox}
+      ></Box33>
+      <Box32
+        handleBox32={handleBox32}
+        box32={box32}
+        insuranceBox={insuranceBox}
+      ></Box32>
       <div className="bg-gray-200  py-[1px] my-5"></div>
     </div>
   );
