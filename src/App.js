@@ -267,11 +267,11 @@ import DailySoap from "./Pages/Admin/FormsTemplate/SpeechTherapy/DailySoap";
 import CBHbehaviourAssessmentForm from "./Pages/Admin/FormsTemplate/CBHbehaviourAssessmentForm";
 
 import SESSION_NOTES from "./Pages/Admin/FormsTemplate/SESSION_NOTES";
+import CBH_PROGRESS_NOTE from "./Pages/Admin/FormsTemplate/CBH_PROGRESS_NOTE";
+import CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE from "./Pages/Admin/FormsTemplate/CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE";
 import DataSheetForm from "./Pages/Admin/FormsTemplate/DataSheetForm";
 import LocusScoreSheetForm from "./Pages/Admin/FormsTemplate/LocusScoreSheetForm";
 import TreatmentPlanReview from "./Pages/Admin/FormsTemplate/TreatmentPlanReview";
-
-
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -506,6 +506,16 @@ function App() {
            path="/treatment-plan-form"re
             element={<TreatmentPlanReview></TreatmentPlanReview>}
             ></Route>
+          <Route
+            path="/cbh-progress-note"
+            element={<CBH_PROGRESS_NOTE></CBH_PROGRESS_NOTE>}
+          ></Route>
+          <Route
+            path="/cbh-medication-management-progress-note"
+            element={
+              <CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE></CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE>
+            }
+          ></Route>
 
           {/* ------------------------form End--------------------------- */}
           <Route
