@@ -269,6 +269,7 @@ import CBHbehaviourAssessmentForm from "./Pages/Admin/FormsTemplate/CBHbehaviour
 import SESSION_NOTES from "./Pages/Admin/FormsTemplate/SESSION_NOTES";
 import DataSheetForm from "./Pages/Admin/FormsTemplate/DataSheetForm";
 import LocusScoreSheetForm from "./Pages/Admin/FormsTemplate/LocusScoreSheetForm";
+import TreatmentPlanReview from "./Pages/Admin/FormsTemplate/TreatmentPlanReview";
 
 
 function App() {
@@ -500,6 +501,10 @@ function App() {
              <Route
            path="/locus-score-sheet"
             element={<LocusScoreSheetForm></LocusScoreSheetForm>}
+            ></Route>
+             <Route
+           path="/treatment-plan-form"re
+            element={<TreatmentPlanReview></TreatmentPlanReview>}
             ></Route>
 
           {/* ------------------------form End--------------------------- */}

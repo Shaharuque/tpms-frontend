@@ -161,6 +161,11 @@ const Form = () => {
         <Link to={"/locus-score-sheet"}>
           <button className="pms-button">Locus score sheet</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/treatment-plan-form"}>
+          <button className="pms-button">Treatment Plan Review</button>
+        </Link>
+
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
