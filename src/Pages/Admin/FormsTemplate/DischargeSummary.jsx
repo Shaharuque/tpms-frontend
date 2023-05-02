@@ -37,7 +37,7 @@ const DischargeSummary = () => {
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -67,7 +67,7 @@ const DischargeSummary = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {" "}
-          <div>
+          <div className="font-bold">
             <div className="flex">
               <div>
                 <span className="form-input-name ">1)</span>
@@ -146,7 +146,7 @@ const DischargeSummary = () => {
                   <div className="flex flex-col md:flex-row md:items-center justify-center w-full mt-2 mb-8 gap-2 lg:gap-5">
                     <div className="w-full max-w-[80px]">
                       <p>
-                        <strong>Strengths: ?</strong>
+                        <strong>Strengths:?</strong>
                       </p>
                     </div>
 

@@ -9,35 +9,35 @@ import { FaSignature } from "react-icons/fa";
 import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
 
 const ParentTrainingForm = () => {
-    const [caregiverSignature, setCaregiverSignature] = useState(false);
-    const [providerSignature, setProviderSignature] = useState(false);
-    const [ProviderImageURL, setProviderImageURL] = useState(null);
-    const [imageURL, setImageURL] = useState(null);
-    console.log("ProviderImageURL", ProviderImageURL);
-    console.log("imageURL", imageURL);
-    const [file, setFile] = useState();
-  
-    console.log("file", file);
-  
-    const handleSignatureProvider = () => {
-      setProviderSignature(true);
-    };
-    const handleSignatureCaregiver = () => {
-      setCaregiverSignature(true);
-    };
-    const handleSignatureClose = () => {
-      setCaregiverSignature(false);
-      setProviderSignature(false);
-    };
-  
-    const { register, handleSubmit } = useForm();
-    const [notes, setNotes] = useState("");
-    const onSubmit = (data) => {
-      console.log(data);
-    };
+  const [caregiverSignature, setCaregiverSignature] = useState(false);
+  const [providerSignature, setProviderSignature] = useState(false);
+  const [ProviderImageURL, setProviderImageURL] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
+  console.log("ProviderImageURL", ProviderImageURL);
+  console.log("imageURL", imageURL);
+  const [file, setFile] = useState();
+
+  console.log("file", file);
+
+  const handleSignatureProvider = () => {
+    setProviderSignature(true);
+  };
+  const handleSignatureCaregiver = () => {
+    setCaregiverSignature(true);
+  };
+  const handleSignatureClose = () => {
+    setCaregiverSignature(false);
+    setProviderSignature(false);
+  };
+
+  const { register, handleSubmit } = useForm();
+  const [notes, setNotes] = useState("");
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -61,7 +61,7 @@ const ParentTrainingForm = () => {
             </div>
           </div>
           <div className="form-title mb-5">
-            <h1>TREATMENT PLAN FORM</h1>
+            <h1>PARENT TRAINING FORM</h1>
             <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
           </div>
         </div>
@@ -69,7 +69,7 @@ const ParentTrainingForm = () => {
           {" "}
           <div>
             <div className="border-2 border-blue-600 px-2 shadow-md">
-                <h1 className="form-inner-head">Task Completed</h1>
+              <h1 className="form-inner-head">Task Completed</h1>
               <div className="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
                 <div className="flex items-center mr-4">
                   <input
@@ -80,12 +80,8 @@ const ParentTrainingForm = () => {
                     className="w-4 h-4"
                     {...register("BCBA")}
                   />
-                  <label
-                    for="inline-radio"
-                    className="ml-2 form-input-name "
-                  >
+                  <label for="inline-radio" className="ml-2 form-input-name ">
                     BCBA
-
                   </label>
                 </div>
                 <div class="flex items-center mr-4">
@@ -97,12 +93,8 @@ const ParentTrainingForm = () => {
                     className="w-4 h-4"
                     {...register("Parent_Caregiver")}
                   />
-                  <label
-                    for="inline-radio"
-                    className="ml-2 form-input-name"
-                  >
+                  <label for="inline-radio" className="ml-2 form-input-name">
                     Parent/Caregiver
-
                   </label>
                 </div>
                 <div class="flex items-center mr-4">
@@ -114,10 +106,7 @@ const ParentTrainingForm = () => {
                     class="w-4 h-4"
                     {...register("behavior_therapist_language")}
                   />
-                  <label
-                    for="inline-radio"
-                    className="ml-2 form-input-name"
-                  >
+                  <label for="inline-radio" className="ml-2 form-input-name">
                     Behavior Therapist Language
                   </label>
                 </div>
@@ -130,10 +119,7 @@ const ParentTrainingForm = () => {
                     class="w-4 h-4"
                     {...register("learner_language")}
                   />
-                  <label
-                    for="inline-radio"
-                    className="ml-2 form-input-name"
-                  >
+                  <label for="inline-radio" className="ml-2 form-input-name">
                     Learner Language
                   </label>
                 </div>
@@ -141,12 +127,11 @@ const ParentTrainingForm = () => {
             </div>
 
             <div className="w-full mt-4 mb-4">
-             
               <div className="mt-3    border-blue-600 border-2">
-              
-                <span className="form-input-name">Recommendations Provided to Parent</span>
+                <span className="form-input-name">
+                  Recommendations Provided to Parent
+                </span>
                 <TextArea
-                
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
                   rows={5}
@@ -155,11 +140,9 @@ const ParentTrainingForm = () => {
                   className="border-none"
                   {...register("recommendations_provided_to_parent")}
                 />
-                
-            
               </div>
               <div className=" border-t-0  border-blue-600 border-2">
-              <span className="form-input-name">Goals Addressed</span>
+                <span className="form-input-name">Goals Addressed</span>
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -171,7 +154,9 @@ const ParentTrainingForm = () => {
                 />
               </div>
               <div className=" border-t-0  border-blue-600 border-2">
-              <span className="form-input-name">Interventions Suggested/Modeled</span>
+                <span className="form-input-name">
+                  Interventions Suggested/Modeled
+                </span>
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -183,7 +168,9 @@ const ParentTrainingForm = () => {
                 />
               </div>
               <div className=" border-t-0  border-blue-600 border-2">
-              <span className="form-input-name">Feedback from Parent/Caregiver</span>
+                <span className="form-input-name">
+                  Feedback from Parent/Caregiver
+                </span>
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}
@@ -194,7 +181,6 @@ const ParentTrainingForm = () => {
                   {...register("feedback_from_parent_caregiver")}
                 />
               </div>
-
             </div>
             <div className="border-2 border-blue-600 px-2">
               <div class="flex flex-wrap gap-5 lg:gap-0 mt-4 mb-4">
@@ -207,10 +193,7 @@ const ParentTrainingForm = () => {
                     class="w-4 h-4"
                     {...register("client")}
                   />
-                  <label
-                    for="inline-radio"
-                    class="ml-2 form-input-name"
-                  >
+                  <label for="inline-radio" class="ml-2 form-input-name">
                     Client
                   </label>
                 </div>
@@ -223,12 +206,8 @@ const ParentTrainingForm = () => {
                     class="w-4 h-4"
                     {...register("therapist")}
                   />
-                  <label
-                    for="inline-radio"
-                    class="ml-2 form-input-name"
-                  >
+                  <label for="inline-radio" class="ml-2 form-input-name">
                     Therapist
-
                   </label>
                 </div>
                 <div class="flex items-center mr-4">
@@ -240,10 +219,7 @@ const ParentTrainingForm = () => {
                     class="w-4 h-4"
                     {...register("rendering_provider")}
                   />
-                  <label
-                    for="inline-2-radio"
-                    class="ml-2 form-input-name"
-                  >
+                  <label for="inline-2-radio" class="ml-2 form-input-name">
                     Rendering Provider
                   </label>
                 </div>
@@ -302,7 +278,7 @@ const ParentTrainingForm = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ParentTrainingForm
+export default ParentTrainingForm;

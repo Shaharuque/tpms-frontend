@@ -37,7 +37,7 @@ const ClinicalForm = () => {
   };
   return (
     <div>
-      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 ">
+      <div className="form-border 2xl:w-[70%] w-full mx-auto p-5 bg-white">
         <div>
           <div className="flex items-center flex-wrap gap-3 justify-between">
             <img src={logo} alt="" />
@@ -56,7 +56,7 @@ const ClinicalForm = () => {
               <p className="my-1">
                 <Link to={"#"}>
                   <span className="form-head">Fax: </span>000.000.0000
-                </Link> 
+                </Link>
               </p>
             </div>
           </div>
@@ -69,48 +69,8 @@ const ClinicalForm = () => {
           {" "}
           <div>
             <div className="w-full mt-4 mb-4">
-              <div className="mt-3    border-blue-600 border-2">
-                <span className="form-input-name">Clinical Status</span>
-                <TextArea
-                  onChange={(e) => setNotes(e.target.value)}
-                  maxLength={300}
-                  rows={5}
-                  placeholder="Enter here..."
-                  size="large"
-                  className="border-none"
-                  {...register("Clinical Status")}
-                />
-              </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">
-                  Who was present during the session
-                </span>
-                <TextArea
-                  onChange={(e) => setNotes(e.target.value)}
-                  maxLength={300}
-                  rows={5}
-                  placeholder="Enter here..."
-                  size="large"
-                  className=""
-                  {...register("present_during_seation")}
-                />
-              </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">
-                  Behavior targeted for decrease
-                </span>
-                <TextArea
-                  onChange={(e) => setNotes(e.target.value)}
-                  maxLength={300}
-                  rows={5}
-                  placeholder="Enter here..."
-                  size="large"
-                  className=""
-                  {...register("target_decrease")}
-                />
-              </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-input-name">
+              <div className="  border-blue-600 border-2 p-2">
+                <span className="form-inner-head lg:text-base sm:text-xs">
                   Current clinical status{" "}
                 </span>
                 <TextArea
@@ -119,12 +79,12 @@ const ClinicalForm = () => {
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("technique_during_seasion")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-inner-head">
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head lg:text-base sm:text-xs">
                   Goals Targeted(Behaviors for increase) addressed during this
                   session: (For daily progress, please see graphed data)
                 </span>
@@ -134,12 +94,12 @@ const ClinicalForm = () => {
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("programs_workd_on")}
                 />
               </div>{" "}
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-inner-head">
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head lg:text-base sm:text-xs">
                   Goals Targeted(Behaviors for decrease) addressed during this
                   session noted
                 </span>
@@ -149,12 +109,12 @@ const ClinicalForm = () => {
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className="border-none focus:outline-none"
                   {...register("Reinforcers used")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-inner-head">
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head lg:text-base sm:text-xs">
                   Techniques Attempted During Session
                 </span>
                 <TextArea
@@ -163,12 +123,12 @@ const ClinicalForm = () => {
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className=" border-none focus:outline-none"
                   {...register("Client Progress")}
                 />
               </div>
-              <div className=" border-t-0  border-blue-600 border-2">
-                <span className="form-inner-head">
+              <div className=" border-t-0  border-blue-600 border-2 p-2">
+                <span className="form-inner-head lg:text-base sm:text-xs">
                   Progress Toward Treatment Goals
                 </span>
                 <TextArea
@@ -177,7 +137,7 @@ const ClinicalForm = () => {
                   rows={5}
                   placeholder="Enter here..."
                   size="large"
-                  className=""
+                  className=" border-none focus:outline-none "
                   {...register("next_session")}
                 />
               </div>
@@ -251,7 +211,7 @@ const ClinicalForm = () => {
                         <span>
                           <label
                             for="rec_name"
-                            className=" font-bold text-base text-blue-600"
+                            className=" font-bold text-base text-blue-600 "
                           >
                             Feedback/Constructive Criticism Provided
                           </label>
@@ -281,7 +241,7 @@ const ClinicalForm = () => {
                     class="w-4 h-4"
                     {...register("client")}
                   />
-                  <label for="inline-radio" class="ml-2 form-input-name">
+                  <label for="inline-radio" class="ml-2 form-input-name font-bold">
                     Client
                   </label>
                 </div>
@@ -294,7 +254,7 @@ const ClinicalForm = () => {
                     class="w-4 h-4"
                     {...register("therapist")}
                   />
-                  <label for="inline-radio" class="ml-2 form-input-name">
+                  <label for="inline-radio" class="ml-2 form-input-name font-bold">
                     Therapist
                   </label>
                 </div>
@@ -307,7 +267,7 @@ const ClinicalForm = () => {
                     class="w-4 h-4"
                     {...register("rendering_provider")}
                   />
-                  <label for="inline-2-radio" class="ml-2 form-input-name">
+                  <label for="inline-2-radio" class="ml-2 form-input-name font-bold">
                     Rendering Provider
                   </label>
                 </div>

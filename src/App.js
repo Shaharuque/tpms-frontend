@@ -238,6 +238,26 @@ import StructureofProcess from "./Pages/Admin/FormsTemplate/StructureofProcess";
 import CallLog from "./Pages/Admin/Patient/Patients/CallLog/CallLog";
 import Chat from "./Pages/Shared/NavigationBar/Chat/Chat";
 import ChatInbox from "./Pages/Shared/NavigationBar/Chat/ChatInbox/ChatInbox";
+import BIRPProgressForm from "./Pages/Admin/FormsTemplate/MentalHealth/BIRPProgressForm";
+import DISCHARGE_SUMMEREY from "./Pages/Admin/FormsTemplate/MentalHealth/DISCHARGE_SUMMEREY";
+import MEDICATION_FLOWSHEET from "./Pages/Admin/FormsTemplate/MentalHealth/MEDICATION_FLOWSHEET";
+import PCP_COMMUNICATION from "./Pages/Admin/FormsTemplate/MentalHealth/PCP_COMMUNICATION";
+import CFARS_Form from "./Pages/Admin/FormsTemplate/MentalHealth/CFARS_Form";
+import NO_SHOW_PROGRESSNOTE from "./Pages/Admin/FormsTemplate/MentalHealth/NO_SHOW_PROGRESSNOTE";
+import LOCUS_WORKSHEET from "./Pages/Admin/FormsTemplate/MentalHealth/LOCUS_WORKSHEET";
+import RELEASE_OF_INFORMATION from "./Pages/Admin/FormsTemplate/MentalHealth/RELEASE_OF_INFORMATION";
+import CONSENT_TO_TREATMENT from "./Pages/Admin/FormsTemplate/MentalHealth/CONSENT_TO_TREATMENT";
+import FARS_FORM from "./Pages/Admin/FormsTemplate/MentalHealth/FARS_FORM";
+import MEDICATION_CONSENT from "./Pages/Admin/FormsTemplate/MentalHealth/MEDICATION_CONSENT";
+import BIOPSYCHOSOCIAL from "./Pages/Admin/FormsTemplate/MentalHealth/BIOPSYCHOSOCIAL";
+import MASTER_TREATMENT_PLAN from "./Pages/Admin/FormsTemplate/MentalHealth/MASTER_TREATMENT_PLAN";
+import BIOPSYCHOSOCIAL_ASSESSMENT from "./Pages/Admin/FormsTemplate/MentalHealth/BIOPSYCHOSOCIAL_ASSESSMENT";
+import NEW_TWO from "./Pages/Admin/FormsTemplate/SpeechTherapy/NEW_TWO";
+import SPEECH_LANGUAGE_SESSION_NOTE from "./Pages/Admin/FormsTemplate/SpeechTherapy/SPEECH_LANGUAGE_SESSION_NOTE";
+import SPEECH_LANGUAGE_PROGRESS_REPORT from "./Pages/Admin/FormsTemplate/SpeechTherapy/SPEECH_LANGUAGE_PROGRESS_REPORT";
+import THERAPIST_COMMUNICATION_SESSION_NOTES from "./Pages/Admin/FormsTemplate/SpeechTherapy/THERAPIST_COMMUNICATION_SESSION_NOTES";
+import TREATMENT_PLAN from "./Pages/Admin/FormsTemplate/SpeechTherapy/TREATMENT_PLAN";
+import INITIAL_SPEECH_THERAPY_EVALUATION from "./Pages/Admin/FormsTemplate/SpeechTherapy/INITIAL_SPEECH_THERAPY_EVALUATION";
 import EditableCell from "./Testing/AntTableTest/EditableCell";
 
 function App() {
@@ -363,6 +383,86 @@ function App() {
             path="/Structure-Of-Process"
             element={<StructureofProcess></StructureofProcess>}
           ></Route>
+          <Route
+            path="/BIRPP-rogress-Form"
+            element={<BIRPProgressForm></BIRPProgressForm>}
+          ></Route>
+          <Route path="/cfars-form" element={<CFARS_Form></CFARS_Form>}></Route>
+          <Route
+            path="/discharge-summary"
+            element={<DISCHARGE_SUMMEREY></DISCHARGE_SUMMEREY>}
+          ></Route>
+          <Route
+            path="/medication-flowsheet"
+            element={<MEDICATION_FLOWSHEET></MEDICATION_FLOWSHEET>}
+          ></Route>
+          <Route
+            path="/no-show-progressnote"
+            element={<NO_SHOW_PROGRESSNOTE></NO_SHOW_PROGRESSNOTE>}
+          ></Route>
+          <Route
+            path="/pcp-communication"
+            element={<PCP_COMMUNICATION></PCP_COMMUNICATION>}
+          ></Route>
+          <Route
+            path="/locus-worksheet"
+            element={<LOCUS_WORKSHEET></LOCUS_WORKSHEET>}
+          ></Route>
+          <Route
+            path="/relase-of-information"
+            element={<RELEASE_OF_INFORMATION></RELEASE_OF_INFORMATION>}
+          ></Route>
+          <Route
+            path="/consent-to-treatment"
+            element={<CONSENT_TO_TREATMENT></CONSENT_TO_TREATMENT>}
+          ></Route>
+          <Route path="/fars-form" element={<FARS_FORM></FARS_FORM>}></Route>
+          <Route
+            path="/medication-consent"
+            element={<MEDICATION_CONSENT></MEDICATION_CONSENT>}
+          ></Route>
+          <Route
+            path="/biopsycosocial"
+            element={<BIOPSYCHOSOCIAL></BIOPSYCHOSOCIAL>}
+          ></Route>
+          <Route
+            path="/master-treatment-plan"
+            element={<MASTER_TREATMENT_PLAN></MASTER_TREATMENT_PLAN>}
+          ></Route>
+          <Route
+            path="/biopsychosocial-assessment"
+            element={<BIOPSYCHOSOCIAL_ASSESSMENT></BIOPSYCHOSOCIAL_ASSESSMENT>}
+          ></Route>
+          <Route path="/new-two" element={<NEW_TWO></NEW_TWO>}></Route>
+          <Route
+            path="/speech-language-note"
+            element={
+              <SPEECH_LANGUAGE_SESSION_NOTE></SPEECH_LANGUAGE_SESSION_NOTE>
+            }
+          ></Route>
+          <Route
+            path="/speech-language-progress-report"
+            element={
+              <SPEECH_LANGUAGE_PROGRESS_REPORT></SPEECH_LANGUAGE_PROGRESS_REPORT>
+            }
+          ></Route>
+          <Route
+            path="/therapist-communication-session-notes"
+            element={
+              <THERAPIST_COMMUNICATION_SESSION_NOTES></THERAPIST_COMMUNICATION_SESSION_NOTES>
+            }
+          ></Route>
+          <Route
+            path="/treatment-plan"
+            element={<TREATMENT_PLAN></TREATMENT_PLAN>}
+          ></Route>
+          <Route
+            path="/initial-speech-therapy-evaluation"
+            element={
+              <INITIAL_SPEECH_THERAPY_EVALUATION></INITIAL_SPEECH_THERAPY_EVALUATION>
+            }
+          ></Route>
+
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"

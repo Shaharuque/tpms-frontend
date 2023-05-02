@@ -22,12 +22,14 @@ const NameLocation = () => {
   //Some Important data showing below
   const loading = data?.loading;
   const settingDetails = data?.settingDetails;
-  const box_no_32 = settingDetails?.box_no_32 || [];
+  const box_no_32 = settingDetails?.box_32 || [];
   const box_no_33 = settingDetails?.setting_name_location;
   const pos = settingDetails?.pos;
-  const working_hours = settingDetails?.working_hours;
+  const box_32main = settingDetails?.box_32main;
+  const working_hours = settingDetails?.setting_working_hour;
   // console.log(working_hours);
 
+  console.log("bx32 check", box_no_32);
   //getsettings action is dispatched [api calling]
   useEffect(() => {
     dispatch(getsettings(token));
@@ -47,7 +49,7 @@ const NameLocation = () => {
     setbox33Open(false);
   };
 
-  console.log("box_no_33", box_no_33);
+  //console.log("box_no_33", box_no_33);
 
   return (
     <div className="px-2  mb-2">
@@ -57,8 +59,10 @@ const NameLocation = () => {
         time={working_hours}
         box_no_33={box_no_33}
       ></NameLocationTable>
+
       <NameLocationTable32
         data={box_no_32}
+        primaryData={box_32main}
         handleTableOpen32={handleTableOpen32}
         table32Open={table32Open}
         loading={loading}

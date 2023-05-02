@@ -4,6 +4,34 @@ import { apiSlice } from "../../api/apiSlice";
 
 export const addTreatmentApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    // search treatment
+    TreatmentSearch: builder.query({
+      query: ({ token, data }) => ({
+        url: `setting/get/all/treatment/search`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      providesTags: ["SearchTretment"],
+    }),
+
+    // search treatment search
+    SearchSelectedTreatment: builder.query({
+      query: ({ token, data }) => ({
+        url: `setting/get/all/Selectedtreatment/search`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      providesTags: ["SearchSelectedTretment"],
+    }),
+
     //All Treatment Api
     getAllTreatments: builder.query({
       query: ({ token }) => ({
@@ -41,7 +69,12 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(data),
       }),
-      invalidatesTags: ["AllTreatments", "selectedTreatments"],
+      invalidatesTags: [
+        "AllTreatments",
+        "SearchSelectedTretment",
+        "selectedTreatments",
+        "SearchTretment",
+      ],
     }),
 
     //  delete
@@ -55,7 +88,12 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(data),
       }),
-      invalidatesTags: ["AllTreatments", "selectedTreatments"],
+      invalidatesTags: [
+        "AllTreatments",
+        "selectedTreatments",
+        "SearchTretment",
+        "SearchSelectedTretment",
+      ],
     }),
   }),
 });
@@ -65,4 +103,6 @@ export const {
   useGetAllSelectedTreatmentsQuery,
   useAddTreatmentMutation,
   useDeleteTreatmentMutation,
+  useTreatmentSearchQuery,
+  useSearchSelectedTreatmentQuery,
 } = addTreatmentApi;

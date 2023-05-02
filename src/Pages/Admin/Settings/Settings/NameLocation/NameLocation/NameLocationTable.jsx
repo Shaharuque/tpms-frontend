@@ -9,9 +9,14 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
   console.log("box33 data", box_no_33);
   const [value, setValue] = useState(true);
 
-  // console.log(time);
-  // console.log(time?.mon_end_time);
-  // timeChange
+  function extractTime(timestamp) {
+    console.log("type check", typeof timestamp);
+    if (typeof timestamp === "string") {
+      const timeStr = timestamp.split("T")[1].split(".")[0];
+      return timeStr;
+    }
+    return "";
+  }
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
@@ -47,10 +52,32 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
         ftp_username: box_no_33?.ftp_username,
         ftp_password: box_no_33?.ftp_password,
         is_combo: box_no_33?.is_combo,
-        // mon_end_time: time?.mon_end_time,
+        // mon_end_time: time[0]?.mon_end_time,
       });
     }, 0);
   }, [box_no_33, time?.mon_end_time, reset]);
+
+  // prefilled time
+  useEffect(() => {
+    setTimeout(() => {
+      reset({
+        mon_start_time: extractTime(time[0]?.mon_start_time),
+        mon_end_time: extractTime(time[0]?.mon_end_time),
+        tus_start: extractTime(time[0]?.tus_start),
+        tus_end: extractTime(time[0]?.tus_end),
+        wed_start: extractTime(time[0]?.wed_start),
+        wed_end: extractTime(time[0]?.wed_end),
+        thur_start: extractTime(time[0]?.thur_start),
+        thur_end: extractTime(time[0]?.thur_end),
+        fri_start: extractTime(time[0]?.fri_start),
+        fri_end: extractTime(time[0]?.fri_end),
+        sat_start: extractTime(time[0]?.sat_start),
+        sat_end: extractTime(time[0]?.sat_end),
+        sun_start: extractTime(time[0]?.sun_start),
+        sun_end: extractTime(time[0]?.sun_end),
+      });
+    }, 100);
+  }, [reset, time]);
 
   return (
     <div>
@@ -1771,9 +1798,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                       </h5>
                       <input
                         type="time"
-                        name="mon_start_time"
-                        // value={time?.mon_end_time}
-                        format="h:mm A"
+                        // name="timeField"
+                        // name="mon_start_time"
+                        format="h:mm"
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("mon_start_time")}
                       />
@@ -1782,7 +1809,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                       <input
                         type="time"
                         name="mon_end_time"
-                        format="h:mm A"
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("mon_end_time")}
                       />
@@ -1800,7 +1826,6 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("tus_start")}
                       />
-
                       <span className="text-sm text-gray-600">to</span>
                       <input
                         type="time"
@@ -1841,6 +1866,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                       <input
                         type="time"
                         name="thur_start"
+                        // defaultValue={"10,294,5"}
                         className="border rounded-sm px-2 py-[5px] mx-1 text-xs "
                         {...register("thur_start")}
                       />
