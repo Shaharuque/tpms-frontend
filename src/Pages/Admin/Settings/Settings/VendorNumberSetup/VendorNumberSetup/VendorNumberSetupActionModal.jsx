@@ -2,28 +2,155 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { Modal } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useVendorNumberEssentialsQuery } from "../../../../../../features/Settings_redux/vendorNumberSetup/vendorNumberSetupApi";
+import useToken from "../../../../../../CustomHooks/useToken";
+import axios from "axios";
+import { baseIp } from "../../../../../../Misc/BaseClient";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { fetchVendorNumber } from "../../../../../../features/Settings_redux/vendorNumberSlice";
 
 export default function VendorNumberSetupActionModal({
   open,
   handleClose,
   recordData,
+  txId,
+  regionalCenter,
+  page,
 }) {
-  const { vendor, service_code } = recordData;
+  const {
+    id,
+    regional_center_id,
+    service_code,
+    service_id,
+    treatment_id,
+    vendor_no,
+  } = recordData || {};
+  // const { vendor, service_code } = recordData;
   const { register, handleSubmit, reset } = useForm();
+  const { token } = useToken();
+  const dispatch = useDispatch();
+
+  //Getting Vendor Number Setup Essentials
+  const {
+    data: vendorEssentials,
+    isSuccess,
+    isLoading,
+  } = useVendorNumberEssentialsQuery({
+    token,
+  });
 
   React.useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        vendor_no: vendor,
-        service_no: service_code,
+        service_id: service_id || null,
+        treatment_id: treatment_id || null,
+        regional_center_id: regional_center_id || null,
+        vendor_no: vendor_no || null,
+        service_code: service_code || null,
       });
     }, 0);
-  }, [vendor, service_code, reset]);
+  }, [
+    vendor_no,
+    service_code,
+    service_id,
+    treatment_id,
+    regional_center_id,
+    reset,
+  ]);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit = async (FormData) => {
+    console.log(FormData);
+    if (FormData && !id) {
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/add/vendor/number`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token || null,
+          },
+          data: FormData,
+        });
+
+        // console.log(res.data);
+        if (res.data.status === "success") {
+          toast.success("successfully set new vendor number", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+          dispatch(
+            fetchVendorNumber({
+              page,
+              token,
+              tx_id: txId || null,
+              region_id: regionalCenter || null,
+            })
+          );
+          handleClose();
+        } else {
+          toast.error("vendor number already exist", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+        }
+      } catch (error) {
+        toast.error(error?.res?.data?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "dark",
+          style: { fontSize: "12px" },
+        });
+      }
+    } else {
+      console.log(FormData);
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/update/vendor/number`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token || null,
+          },
+          data: {
+            edit_vendor_id: id,
+            ...FormData,
+          },
+        });
+        if (res.data.status === "success") {
+          toast.success("Successfully Updated", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+          dispatch(
+            fetchVendorNumber({
+              page,
+              token,
+              tx_id: txId || null,
+              region_id: regionalCenter || null,
+            })
+          );
+          handleClose();
+        }
+      } catch (error) {
+        toast.error(error?.res?.data?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "dark",
+          style: { fontSize: "12px" },
+        });
+      }
+    }
+    // reset();
   };
   return (
     <div>
@@ -49,7 +176,7 @@ export default function VendorNumberSetupActionModal({
               />
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="w-full font-semibold">
+              <div className="w-full">
                 <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5 mr-2 gap-x-2 gap-y-2">
                   <div>
                     <label className="label">
@@ -57,12 +184,16 @@ export default function VendorNumberSetupActionModal({
                     </label>
                     <select
                       className="modal-input-field ml-1 w-full"
-                      {...register("Length")}
+                      {...register("service_id")}
                     >
-                      <option value="Mr">Bi Weekly</option>
-                      <option value="Mrs">Yearly</option>
-                      <option value="Miss">Miss</option>
-                      <option value="Dr">Dr</option>
+                      <option value={0}>select service</option>
+                      {vendorEssentials?.data?.service
+                        ?.filter((item) => item.service !== null)
+                        ?.map((item, index) => (
+                          <option key={index} value={item?.id}>
+                            {item?.service}
+                          </option>
+                        ))}
                     </select>
                   </div>
                   <div>
@@ -71,12 +202,16 @@ export default function VendorNumberSetupActionModal({
                     </label>
                     <select
                       className="modal-input-field ml-1 w-full"
-                      {...register("week_day")}
+                      {...register("treatment_id")}
                     >
-                      <option value="Mr">Sunday</option>
-                      <option value="Mrs">Monday</option>
-                      <option value="Miss">Tuesday</option>
-                      <option value="Dr">Wednesday</option>
+                      <option value={0}>select treatment</option>
+                      {vendorEssentials?.data?.tx_types
+                        ?.filter((item) => item.treatment_name !== null)
+                        .map((item, index) => (
+                          <option key={index} value={item?.id}>
+                            {item?.treatment_name}
+                          </option>
+                        ))}
                     </select>
                   </div>
                   <div>
@@ -85,12 +220,16 @@ export default function VendorNumberSetupActionModal({
                     </label>
                     <select
                       className="modal-input-field ml-1 w-full"
-                      {...register("year")}
+                      {...register("regional_center_id")}
                     >
-                      <option value="Mr">2019</option>
-                      <option value="Mrs">2020</option>
-                      <option value="Miss">2021</option>
-                      <option value="Dr">2022</option>
+                      <option value={0}>select regional center</option>
+                      {vendorEssentials?.data?.payors
+                        ?.filter((item) => item.regional_center_name !== null)
+                        .map((item, index) => (
+                          <option key={index} value={item?.id}>
+                            {item?.regional_center_name}
+                          </option>
+                        ))}
                     </select>
                   </div>
 
@@ -101,7 +240,7 @@ export default function VendorNumberSetupActionModal({
                       <span className="modal-label-name">Vendor No</span>
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       name="vendor_no"
                       className="modal-input-field ml-1 w-full"
                       {...register("vendor_no")}
@@ -113,10 +252,10 @@ export default function VendorNumberSetupActionModal({
                       <span className="modal-label-name">Service Code</span>
                     </label>
                     <input
-                      type="number"
-                      name="service_no"
+                      type="text"
+                      name="service_code"
                       className="modal-input-field ml-1 w-full"
-                      {...register("service_no")}
+                      {...register("service_code")}
                     />
                   </div>
                 </div>

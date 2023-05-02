@@ -7,10 +7,11 @@ import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 import { useSelector } from "react-redux";
 import {
-  useInsuranceSearchMutation,
+  useAddInsuranceMutation,
+  useGetAllSelectedInsuranceQuery,
   useInsuranceSearchQuery,
-} from "../../../../../features/Settings_redux/Search/GlobalSearchApi";
-
+  useSelectedInsuranceQuery,
+} from "../../../../../features/Settings_redux/addInsurance/addInsuranceApi";
 const AddInsurance = () => {
   const { token } = useToken();
   console.log(token);
@@ -24,6 +25,7 @@ const AddInsurance = () => {
   const [passAllInsurance, setpassAllInsurance] = useState(null);
   const [addedData, setaddedData] = useState(false);
   const [getSearchData, setSearchData] = useState("");
+  const [selectedSearchData, setselectedSearchData] = useState("");
 
   // is fixed toggle
   const isToggled = useSelector((state) => state.sideBarInfo);
@@ -48,33 +50,49 @@ const AddInsurance = () => {
       searchItem: getSearchData,
     },
   });
+  // console.log("insurance data", data?.all_insurance);
+  // selected search
+  const {
+    data: selectedInsuranceData,
+    isLoading: selectedinsuranceLoading,
+    isError: selectedinsuranceError,
+  } = useSelectedInsuranceQuery({
+    token,
+    data: {
+      searchItem: selectedSearchData,
+    },
+  });
+  // console.log("selectedInsuranceData data", selectedInsuranceData);
+
+  // addinsurance
+  const [, {}] = useAddInsuranceMutation();
 
   // console.log("search data", getSearchData, data);
   // multiple get api will be called together to increase performance
   // parallel API calling
-  const fetchWithPromiseAll = async () => {
-    const GetInsurancePromise = fetchData(
-      // "admin/ac/setting/get/all/insurance",
-      "setting/get/all/insurance",
-      token
-    );
-    const SelectedInsurancePromise = fetchData(
-      // "admin/ac/setting/get/selected/insurance",
-      "setting/get/facility/selected/insurance",
-      token
-    );
-    const [GetInsurance, SelectedInsurance] = await Promise.all([
-      GetInsurancePromise,
-      SelectedInsurancePromise,
-    ]);
-    setinsuranceApiData(GetInsurance);
-    setselectedInsurance(SelectedInsurance);
-  };
+  // const fetchWithPromiseAll = async () => {
+  //   const GetInsurancePromise = fetchData(
+  //     // "admin/ac/setting/get/all/insurance",
+  //     "setting/get/all/insurance",
+  //     token
+  //   );
+  //   const SelectedInsurancePromise = fetchData(
+  //     // "admin/ac/setting/get/selected/insurance",
+  //     "setting/get/facility/selected/insurance",
+  //     token
+  //   );
+  //   const [GetInsurance, SelectedInsurance] = await Promise.all([
+  //     GetInsurancePromise,
+  //     SelectedInsurancePromise,
+  //   ]);
+  //   setinsuranceApiData(GetInsurance);
+  //   setselectedInsurance(SelectedInsurance);
+  // };
 
-  useEffect(() => {
-    fetchWithPromiseAll();
-    setaddedData(false);
-  }, []);
+  // useEffect(() => {
+  //   fetchWithPromiseAll();
+  //   setaddedData(false);
+  // }, []);
 
   // console.log(insuranceApiData, selectedInsurance);
 
@@ -82,9 +100,9 @@ const AddInsurance = () => {
   //   return <Loading></Loading>;
   // }
 
-  if (addedData) {
-    return <Loading></Loading>;
-  }
+  // if (addedData) {
+  //   return <Loading></Loading>;
+  // }
 
   // console.log("data hello", insuranceApiData, selectedInsurance);
 
@@ -165,54 +183,56 @@ const AddInsurance = () => {
   };
 
   const InsuranceView = async () => {
-    if (selectedKeys.length > 1) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Select just One Value",
-        timer: 1500,
-      });
-      return setSelectedKeys([0]);
-    }
-    console.log("data selectedkeys", selectedKeys);
+    console.log("insurance view");
+    // if (selectedKeys.length > 1) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "Select just One Value",
+    //     timer: 1500,
+    //   });
+    //   return setSelectedKeys([0]);
+    // }
+    // console.log("data selectedkeys", selectedKeys);
 
-    //body always send to backend as object and json.stringify
-    const body = {
-      insurance_id: selectedKeys,
-    };
-    const fetchpostTest = await PostfetchData({
-      // endPoint: "admin/ac/setting/get/all/insurance/details",
-      endPoint: "setting/all/insurance/details",
+    // //body always send to backend as object and json.stringify
+    // const body = {
+    //   insurance_id: selectedKeys,
+    // };
+    // const fetchpostTest = await PostfetchData({
+    //   // endPoint: "admin/ac/setting/get/all/insurance/details",
+    //   endPoint: "setting/all/insurance/details",
 
-      payload: body,
-      token,
-    });
-    console.log("fetchpostTest", fetchpostTest);
-    setpassAllInsurance(fetchpostTest);
-    setpassSelectedInsurance({});
+    //   payload: body,
+    //   token,
+    // });
+    // console.log("fetchpostTest", fetchpostTest);
+    // setpassAllInsurance(fetchpostTest);
+    // setpassSelectedInsurance({});
   };
 
   const FacilityInsurance = async () => {
-    if (facilityselectedkeys.length > 1) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Select just One Value",
-        timer: 1500,
-      });
-      return setfacilityselectedkeys([0]);
-    }
+    console.log("facilaty insurance view");
+    // if (facilityselectedkeys.length > 1) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "Select just One Value",
+    //     timer: 1500,
+    //   });
+    //   return setfacilityselectedkeys([0]);
+    // }
 
-    const body = {
-      insurance_id: facilityselectedkeys,
-    };
-    const fetchpostTestt = await PostfetchData({
-      endPoint: "setting/get-payor-selected-facility-details",
-      payload: body,
-      token,
-    });
-    setpassSelectedInsurance(fetchpostTestt);
-    setpassAllInsurance({});
+    // const body = {
+    //   insurance_id: facilityselectedkeys,
+    // };
+    // const fetchpostTestt = await PostfetchData({
+    //   endPoint: "setting/get-payor-selected-facility-details",
+    //   payload: body,
+    //   token,
+    // });
+    // setpassSelectedInsurance(fetchpostTestt);
+    // setpassAllInsurance({});
   };
 
   return (
@@ -300,6 +320,7 @@ const AddInsurance = () => {
           </h1>
           <div>
             <input
+              onChange={(e) => setselectedSearchData(e.target.value)}
               type="text"
               className="border border-gray-600 w-full text-[12px] font-normal p-1 mb-2 rounded-sm"
               placeholder="Search Here"
@@ -315,18 +336,12 @@ const AddInsurance = () => {
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {/* calling same api  */}
-            {selectedInsurance?.data?.facility_selected_insurance?.length > 0 &&
-              selectedInsurance?.data?.facility_selected_insurance.map(
-                (item, index) => (
-                  <option
-                    key={item.id}
-                    className="px-2 text-sm"
-                    value={item.id}
-                  >
-                    {item.payor_name}{" "}
-                  </option>
-                )
-              )}{" "}
+            {selectedInsuranceData?.selectedInsurance.length > 0 &&
+              selectedInsuranceData?.selectedInsurance.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
+                  {item.payor_name}{" "}
+                </option>
+              ))}{" "}
           </select>
           <br />
           <button
@@ -342,15 +357,15 @@ const AddInsurance = () => {
           </button>
         </div>
       </div>
-      {(passAllInsurance?.status === "success" ||
-        passSelectedInsurance?.status === "success") && (
-        <div className="m-2">
-          <InsuranceDetails
-            AllInsurance={passAllInsurance}
-            SelectedInsurance={passSelectedInsurance}
-          ></InsuranceDetails>
-        </div>
-      )}{" "}
+      {/* {(passAllInsurance?.status === "success" ||
+        passSelectedInsurance?.status === "success") && ( */}
+      <div className="m-2">
+        <InsuranceDetails
+          AllInsurance={passAllInsurance}
+          SelectedInsurance={passSelectedInsurance}
+        ></InsuranceDetails>
+      </div>
+      {/* )}{" "} */}
     </div>
   );
 };

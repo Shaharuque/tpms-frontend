@@ -7,7 +7,7 @@ export const addInsurancApi = apiSlice.injectEndpoints({
     // search treatment
     InsuranceSearch: builder.query({
       query: ({ token, data }) => ({
-        url: `setting/get/all/treatment/search`,
+        url: `setting/get/all/insurance/search`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -19,35 +19,36 @@ export const addInsurancApi = apiSlice.injectEndpoints({
     }),
 
     //All Treatment Api
-    getAllInsurance: builder.query({
-      query: ({ token }) => ({
-        url: `setting/get/all/treatment`,
+    selectedInsurance: builder.query({
+      query: ({ token, data }) => ({
+        url: `setting/get/facility/selected/insurance`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
           "x-auth-token": token,
         },
+        body: JSON.stringify(data),
       }),
-      providesTags: ["AllInsurance"],
+      providesTags: ["SELECTEDINSURANCE"],
     }),
 
     //Facility Selected Treatment Api
-    getAllSelectedInsurance: builder.query({
-      query: ({ token }) => ({
-        url: `setting/get/all/facility/treatment`,
-        method: "POST",
-        headers: {
-          "content-type": "Application/json",
-          "x-auth-token": token,
-        },
-      }),
-      providesTags: ["selectedInsurance"],
-    }),
+    // getAllSelectedInsurance: builder.query({
+    //   query: ({ token }) => ({
+    //     url: `setting/get/all/facility/treatment`,
+    //     method: "POST",
+    //     headers: {
+    //       "content-type": "Application/json",
+    //       "x-auth-token": token,
+    //     },
+    //   }),
+    //   providesTags: ["selectedInsurance"],
+    // }),
 
     // add
     addInsurance: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/add/treatment/facility`,
+        url: `setting/add/insurance/facility`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -55,29 +56,27 @@ export const addInsurancApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(data),
       }),
-      invalidatesTags: ["AllInsurance", "selectedInsurance", "SearchInsurance"],
+      invalidatesTags: ["SELECTEDINSURANCE", "SearchInsurance"],
     }),
 
     //  delete
-    deleteInsurance: builder.mutation({
-      query: ({ token, data }) => ({
-        url: `setting/remove/treatment/facility/`,
-        method: "POST",
-        headers: {
-          "content-type": "Application/json",
-          "x-auth-token": token,
-        },
-        body: JSON.stringify(data),
-      }),
-      invalidatesTags: ["AllInsurance", "selectedInsurance", "SearchInsurance"],
-    }),
+    // deleteInsurance: builder.mutation({
+    //   query: ({ token, data }) => ({
+    //     url: `setting/remove/treatment/facility/`,
+    //     method: "POST",
+    //     headers: {
+    //       "content-type": "Application/json",
+    //       "x-auth-token": token,
+    //     },
+    //     body: JSON.stringify(data),
+    //   }),
+    //   invalidatesTags: ["AllInsurance", "selectedInsurance", "SearchInsurance"],
+    // }),
   }),
 });
 
 export const {
-  useAddInsuranceMutation,
-  useDeleteInsuranceMutation,
-  useGetAllSelectedInsuranceQuery,
-  useGetAllInsuranceQuery,
   useInsuranceSearchQuery,
+  useSelectedInsuranceQuery,
+  useAddInsuranceMutation,
 } = addInsurancApi;

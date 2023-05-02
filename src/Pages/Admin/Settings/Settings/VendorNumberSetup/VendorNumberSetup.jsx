@@ -4,6 +4,18 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import VendorNumberSetupActionModal from "./VendorNumberSetup/VendorNumberSetupActionModal";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import useToken from "../../../../../CustomHooks/useToken";
+import { fetchVendorNumber } from "../../../../../features/Settings_redux/vendorNumberSlice";
+import {
+  useVendorNumberEssentialsQuery,
+  useVendorNumberReginalCenterQuery,
+} from "../../../../../features/Settings_redux/vendorNumberSetup/vendorNumberSetupApi";
+import ReactPaginate from "react-paginate";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import { baseIp } from "../../../../../Misc/BaseClient";
+import { toast } from "react-toastify";
 
 const VendorNumberSetup = () => {
   const [open, setOpen] = useState(false);
@@ -11,6 +23,54 @@ const VendorNumberSetup = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [tableOpen, setTableOpen] = useState(false);
   const [recordData, setRecordData] = useState();
+  const [txId, setTxId] = useState(null);
+  const [regionalCenter, setRegionalCenter] = useState(null);
+  const [page, setPage] = useState(1);
+  const { token } = useToken();
+  const dispatch = useDispatch();
+
+  //List of all Vendor Number
+  const allVendorNumber = useSelector((state) => state?.vendorNumberInfo);
+  const data = allVendorNumber?.vendorData?.data?.data || [];
+  const totalPage = allVendorNumber?.vendorData?.data?.lastPage || 0;
+  console.log("All Vendor Data", allVendorNumber);
+
+  //Getting Vendor Number Setup Essentials
+  const {
+    data: vendorEssentials,
+    isSuccess,
+    isLoading,
+  } = useVendorNumberEssentialsQuery({
+    token,
+  });
+
+  //Getting all regional center
+  const {
+    data: regionalCenters,
+    isSuccess: getRegionalCenterSuccess,
+    isLoading: getRegionalCenterLoading,
+  } = useVendorNumberReginalCenterQuery({ token: token });
+
+  //Getting All Selected Treatment Data
+  const {
+    data: selectedTreatmentData,
+    isSuccess: selectedTreatmentSuccess,
+    isLoading: selectedTreatmentLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
+  console.log("Selected Treatements", selectedTreatmentData?.data);
+
+  useEffect(() => {
+    if (txId || regionalCenter) {
+      dispatch(
+        fetchVendorNumber({
+          page,
+          token,
+          tx_id: txId || null,
+          region_id: regionalCenter || null,
+        })
+      );
+    }
+  }, [txId, regionalCenter, token, dispatch, page]);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -18,23 +78,73 @@ const VendorNumberSetup = () => {
     setSortedInfo(sorter);
   };
 
-  const [table, setTable] = useState(false);
-  useEffect(() => {
-    axios("../../../All_Fake_Api/VendorNumber.json")
-      .then((response) => {
-        console.log("calling");
-        setTable(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  //console.log(table);
-
-  const handleClickOpen = (record) => {
+  const handleModal = (record) => {
     console.log(record);
     setRecordData(record);
     setOpen(true);
+  };
+
+  const handleDeleteVendor = async (del_id) => {
+    if (del_id) {
+      const payload = { vendor_id: del_id };
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/delete/vendor/number`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token,
+          },
+          data: payload,
+        });
+        if (res?.data?.status === "success") {
+          toast.success("successfully deleted vendor number", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+          dispatch(
+            fetchVendorNumber({
+              page,
+              token,
+              tx_id: txId || null,
+              region_id: regionalCenter || null,
+            })
+          );
+        }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      } catch (error) {
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    }
   };
 
   // -------------------------------------------Table Data-----------------------------------
@@ -44,22 +154,21 @@ const VendorNumberSetup = () => {
       dataIndex: "sevice",
       key: "sevice",
       width: 80,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      filteredValue: filteredInfo.sevice || null,
-      onFilter: (value, record) => record.sevice.includes(value),
+      render: (_, record) => {
+        //console.log("vendor : ", vendor);
+        return (
+          <div className="flex mt-1 justify-center items-center">
+            <h1>
+              {
+                vendorEssentials?.data?.service?.find(
+                  (ser) => parseInt(ser?.id) === record?.service_id
+                )?.service
+              }
+              {/* {record?.service_id} */}
+            </h1>
+          </div>
+        );
+      },
       sorter: (a, b) => {
         return a.sevice > b.sevice ? -1 : 1;
       },
@@ -69,8 +178,8 @@ const VendorNumberSetup = () => {
 
     {
       title: "Vendor No",
-      dataIndex: "vendor",
-      key: "vendor",
+      dataIndex: "vendor_no",
+      key: "vendor_no",
       width: 50,
       render: (_, record) => {
         //console.log("vendor : ", vendor);
@@ -80,7 +189,7 @@ const VendorNumberSetup = () => {
               name="cms"
               className="page py-[6px]  focus:outline-none text-center"
               type="text"
-              defaultValue={record.vendor}
+              defaultValue={record.vendor_no}
             ></input>
           </div>
         );
@@ -127,13 +236,16 @@ const VendorNumberSetup = () => {
           <div className=" flex justify-center items-center">
             <div className="flex justify-center">
               <button
-                onClick={() => handleClickOpen(record)}
+                onClick={() => handleModal(record)}
                 className="text-secondary"
               >
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
-              <button className="text-sm mx-1  text-red-500">
+              <button
+                onClick={() => handleDeleteVendor(record?.id)}
+                className="text-sm mx-1  text-red-500"
+              >
                 <AiOutlineDelete />
               </button>
             </div>
@@ -156,9 +268,28 @@ const VendorNumberSetup = () => {
     setOpen(false);
   };
 
-  const handleOnchange = (e) => {
-    console.log(e);
-    setTableOpen(!tableOpen);
+  const handleTxType = (e) => {
+    console.log(e.target.value);
+    if (parseInt(e.target.value) > 0) {
+      setTxId(e.target.value);
+      setTableOpen(true);
+      setPage(1);
+    } else {
+      setTableOpen(false);
+    }
+  };
+  const handleRegionalCenter = (e) => {
+    console.log(e.target.value);
+    if (parseInt(e.target.value) > 0) {
+      setRegionalCenter(e.target.value);
+      setTableOpen(true);
+      setPage(1);
+    }
+  };
+
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
   };
   return (
     <div>
@@ -174,14 +305,17 @@ const VendorNumberSetup = () => {
               </label>
 
               <select
+                disabled={selectedTreatmentLoading ? true : false}
                 name="tx_type"
-                onChange={(e) => handleOnchange(e)}
+                onChange={(e) => handleTxType(e)}
                 className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               >
-                <option value="Select Tx type">Select Tx type</option>
-                <option value="Behavior Therapy">Behavior Therapy</option>
-                <option value="Mental Health">Mental Health</option>
-                <option value="Physical Therapy">Physical Therapy</option>
+                <option value={0}>select tx type</option>
+                {selectedTreatmentData?.data?.map((item, index) => (
+                  <option key={index} value={item?.id}>
+                    {item?.treatment_name}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -191,16 +325,22 @@ const VendorNumberSetup = () => {
                   Regional Center
                 </span>
               </label>
-              <select className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none">
-                <option value="select regional center">
-                  select regional center
-                </option>
+              <select
+                onChange={(e) => handleRegionalCenter(e)}
+                className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
+              >
+                <option value={0}>select regional center</option>
+                {regionalCenters?.data?.map((item, index) => (
+                  <option key={index} value={item?.id}>
+                    {item?.regional_center_name}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
               <button
                 variant="outlined"
-                onClick={handleClickOpen}
+                onClick={handleModal}
                 className="pms-input-button mt-[30px]"
               >
                 Create New
@@ -221,19 +361,42 @@ const VendorNumberSetup = () => {
           </div>
 
           <div>
-            <Table
-              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-              rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-              size="small"
-              bordered
-              className="table-striped-rows text-xs font-normal"
-              columns={columns}
-              dataSource={table}
-              scroll={{
-                y: 650,
-              }}
-              onChange={handleChange}
-            />
+            <>
+              {allVendorNumber?.loading ? (
+                <ShimmerTableTet></ShimmerTableTet>
+              ) : (
+                <Table
+                  pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                  rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                  size="small"
+                  bordered
+                  className="table-striped-rows text-xs font-normal"
+                  columns={columns}
+                  dataSource={data}
+                  scroll={{
+                    y: 650,
+                  }}
+                  onChange={handleChange}
+                />
+              )}
+            </>
+
+            {totalPage > 1 && (
+              <div className="flex justify-end">
+                <ReactPaginate
+                  previousLabel={"<"}
+                  nextLabel={">"}
+                  pageCount={Number(totalPage)}
+                  marginPagesDisplayed={1}
+                  onPageChange={handlePageClick}
+                  containerClassName={"pagination"}
+                  previousLinkClassName={"pagination_Link"}
+                  nextLinkClassName={"pagination_Link"}
+                  activeClassName={"pagination_Link-active"}
+                  disabledClassName={"pagination_Link-disabled"}
+                ></ReactPaginate>
+              </div>
+            )}
           </div>
           <div>
             <button
@@ -251,6 +414,9 @@ const VendorNumberSetup = () => {
           open={open}
           recordData={recordData}
           handleClose={handleClose}
+          txId={txId}
+          region_id={regionalCenter}
+          page={page}
         ></VendorNumberSetupActionModal>
       )}
     </div>

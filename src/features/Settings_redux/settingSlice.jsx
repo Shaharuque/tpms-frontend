@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { baseIp } from "../../Misc/BaseClient";
 
 //async action(getAdmins) to fetch admins data list depending on page_ad
 export const getsettings = createAsyncThunk(

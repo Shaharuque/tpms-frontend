@@ -7,14 +7,13 @@ import { settingDataReducer } from "../features/Settings_redux/settingSlice";
 import { serviceReducer } from "../features/Settings_redux/settingServicesList";
 import { cptReducer } from "../features/Settings_redux/cptCodeSlice";
 import { loginReducer } from "../features/login_redux/loginPostSlice";
-import {
-  createPosReducer,
-  posReducer,
-} from "../features/Settings_redux/placeOfServiceSlice";
+import { posReducer } from "../features/Settings_redux/placeOfServiceSlice";
 import { authReducer } from "../features/login_redux/loginSlice";
 import { apiSlice } from "../features/api/apiSlice";
 import { serviceSubTypeReducer } from "../features/Settings_redux/selectedServiceSubTypesApi";
 import { sideBarReducer } from "../features/Sidebar_redux/SidebarSlice";
+import { vendorNumberReducer } from "../features/Settings_redux/vendorNumberSlice";
+import { referringProviderReducer } from "../features/Settings_redux/referringProviderApi";
 
 export const store = configureStore({
   reducer: {
@@ -27,8 +26,9 @@ export const store = configureStore({
     serviceInfo: serviceReducer,
     cptInfo: cptReducer,
     posInfo: posReducer,
-    posCreated: createPosReducer,
     getServiceSubTypes: serviceSubTypeReducer,
+    referringProviderInfo: referringProviderReducer,
+    vendorNumberInfo: vendorNumberReducer,
     loginInfo: loginReducer,
     //normal reducers
     authInfo: authReducer,

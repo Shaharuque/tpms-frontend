@@ -20,17 +20,14 @@ const AddCptCode = () => {
   const [recordData, setRecordData] = useState();
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const endPoint = "admin/ac/setting/get/cpt/code";
   const { token } = useToken();
 
   //List of all CPT Codes
   const allCpt = useSelector((state) => state?.cptInfo);
   const data = allCpt?.cptData?.data?.data || [];
   console.log("All CPT Codes", data);
-  const totalPage = allCpt?.cptData?.cpt_codes?.last_page
-    ? allCpt?.cptData?.cpt_codes?.last_page
-    : 0;
-
+  const totalPage = allCpt?.cptData?.data?.lastPage || 0;
+  console.log(totalPage);
   //Getting All Selected Treatment Data
   const {
     data: selectedTreatmentData,
@@ -309,7 +306,6 @@ const AddCptCode = () => {
           record={recordData}
           page={page}
           token={token}
-          endPoint={endPoint}
           selectedTreatmentData={selectedTreatmentData?.data}
         ></AddCptCodeActionModal>
       )}
