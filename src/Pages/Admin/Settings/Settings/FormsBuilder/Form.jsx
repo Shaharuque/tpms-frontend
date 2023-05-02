@@ -122,10 +122,11 @@ const Form = () => {
         <Link to={"/DiagnosisSessionForm"}>
           <button className="pms-button">DIAGNOSIS SESSION FORM</button>
         </Link>
-       
         <div className="my-2"></div>
         <Link to={"/CbhBehaviourAnalysisAssessment"}>
-          <button className="pms-button">CBH Behavior Analysis Assessment</button>
+          <button className="pms-button">
+            CBH Behavior Analysis Assessment
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/MonthlySupervisionNote"}>
@@ -154,6 +155,18 @@ const Form = () => {
         <div className="my-2"></div>
         <Link to={"/smallsoap-form"}>
           <button className="pms-button">CP SOAP Form</button>
+        </Link>
+        <br />
+        <div className="my-2"></div>
+        <Link to={"/cbh-progress-note"}>
+          <button className="pms-button">CBH-progress-note</button>
+        </Link>
+        <br />
+        <div className="my-2"></div>
+        <Link to={"/cbh-medication-management-progress-note"}>
+          <button className="pms-button">
+            CBH MEDICATION MANAGEMENT PROGRESS NOTE
+          </button>
         </Link>
         <br />
         {/* ------------------------ mental form lists --------------------------  */}

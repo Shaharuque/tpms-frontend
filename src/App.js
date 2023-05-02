@@ -267,7 +267,8 @@ import DailySoap from "./Pages/Admin/FormsTemplate/SpeechTherapy/DailySoap";
 import CBHbehaviourAssessmentForm from "./Pages/Admin/FormsTemplate/CBHbehaviourAssessmentForm";
 
 import SESSION_NOTES from "./Pages/Admin/FormsTemplate/SESSION_NOTES";
-
+import CBH_PROGRESS_NOTE from "./Pages/Admin/FormsTemplate/CBH_PROGRESS_NOTE";
+import CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE from "./Pages/Admin/FormsTemplate/CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -490,6 +491,16 @@ function App() {
           <Route
             path="/CbhBehaviourAnalysisAssessment"
             element={<CBHbehaviourAssessmentForm></CBHbehaviourAssessmentForm>}
+          ></Route>
+          <Route
+            path="/cbh-progress-note"
+            element={<CBH_PROGRESS_NOTE></CBH_PROGRESS_NOTE>}
+          ></Route>
+          <Route
+            path="/cbh-medication-management-progress-note"
+            element={
+              <CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE></CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE>
+            }
           ></Route>
 
           {/* ------------------------form End--------------------------- */}

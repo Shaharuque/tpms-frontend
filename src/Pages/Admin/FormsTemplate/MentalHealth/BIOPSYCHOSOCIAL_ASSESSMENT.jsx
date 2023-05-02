@@ -765,7 +765,7 @@ const BIOPSYCHOSOCIAL_ASSESSMENT = () => {
                   </td>
                   <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                     <div class="">
-                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 "> 
+                      <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                         <div>
                           <div>
                             <input
