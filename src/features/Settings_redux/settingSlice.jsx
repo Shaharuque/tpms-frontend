@@ -8,7 +8,7 @@ export const getsettings = createAsyncThunk(
     //onno api thik e kaj kortesey
     const response = await axios.get(
       // `https://stagapi.therapypms.com/api/internaladmin/setting/get/name/location`,
-      `http://localhost:9000/api/v1/internaladmin/setting/get/name/location`,
+      `http://localhost:8080/api/v1/internaladmin/setting/get/name/location`,
       {
         headers: {
           "Content-Type": "application/json",
