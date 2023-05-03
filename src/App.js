@@ -272,6 +272,7 @@ import CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE from "./Pages/Admin/FormsTemplate
 import DataSheetForm from "./Pages/Admin/FormsTemplate/DataSheetForm";
 import LocusScoreSheetForm from "./Pages/Admin/FormsTemplate/LocusScoreSheetForm";
 import TreatmentPlanReview from "./Pages/Admin/FormsTemplate/TreatmentPlanReview";
+import CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT from "./Pages/Admin/FormsTemplate/CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -495,17 +496,18 @@ function App() {
             element={<CBHbehaviourAssessmentForm></CBHbehaviourAssessmentForm>}
           ></Route>
           <Route
-           path="/data-sheet"
+            path="/data-sheet"
             element={<DataSheetForm></DataSheetForm>}
-            ></Route>
-             <Route
-           path="/locus-score-sheet"
+          ></Route>
+          <Route
+            path="/locus-score-sheet"
             element={<LocusScoreSheetForm></LocusScoreSheetForm>}
-            ></Route>
-             <Route
-           path="/treatment-plan-form"re
+          ></Route>
+          <Route
+            path="/treatment-plan-form"
+            re
             element={<TreatmentPlanReview></TreatmentPlanReview>}
-            ></Route>
+          ></Route>
           <Route
             path="/cbh-progress-note"
             element={<CBH_PROGRESS_NOTE></CBH_PROGRESS_NOTE>}
@@ -514,6 +516,12 @@ function App() {
             path="/cbh-medication-management-progress-note"
             element={
               <CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE></CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE>
+            }
+          ></Route>
+          <Route
+            path="/cbh-psychiatric-evaluation"
+            element={
+              <CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT></CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT>
             }
           ></Route>
 

@@ -1711,7 +1711,7 @@ const CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE = () => {
                           >
                             Explained rationale, risks/benefits, side effects, &
                             treatment alternatives <br /> to Client/guardian (if
-                            new and/or changed medication)? Yes No
+                            new and/or changed medication)?
                           </label>
                         </span>
                         <br />

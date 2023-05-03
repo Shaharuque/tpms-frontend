@@ -6,28 +6,6 @@ const Form = () => {
     <div className=" mx-auto flex items-center justify-center my-5">
       <div>
         <h1>from builder</h1>
-        <button className="pms-button">
-          <Link to={"/form-template"}>Demo Form</Link>
-        </button>
-        <div className="my-2"></div>
-        <Link to={"/form-demo-json"}>
-          <button className="pms-button">Demo form json</button>
-        </Link>
-        <div className="my-2"></div>
-        <div className="my-2"></div>
-        <div className="my-2"></div>
-        <Link to={"/supervision-form"}>
-          <button className="pms-button">SUPERVISION FORM</button>
-        </Link>
-        <div className="my-2"></div>
-        <Link to={"/management-modification-form"}>
-          <button className="pms-button">Management Modification Form</button>
-        </Link>
-        <div className="my-2"></div>
-        <Link to={"/Structure-Of-Process"}>
-          <button className="pms-button">Structure-Of-Process</button>
-        </Link>
-        <br /> <div className="text-red-700">DOne</div>
         <div className="my-2"></div>
         <Link to={"/form-direct-service"}>
           <button className="pms-button">
@@ -166,7 +144,6 @@ const Form = () => {
         <Link to={"/treatment-plan-form"}>
           <button className="pms-button">Treatment Plan Review</button>
         </Link>
-
         <br />
         <div className="my-2"></div>
         <Link to={"/cbh-progress-note"}>
@@ -177,6 +154,12 @@ const Form = () => {
         <Link to={"/cbh-medication-management-progress-note"}>
           <button className="pms-button">
             CBH MEDICATION MANAGEMENT PROGRESS NOTE
+          </button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/cbh-psychiatric-evaluation"}>
+          <button className="pms-button">
+            PSYCHIATRIC EVALUATION AND MANAGEMENT ASSESSMENT
           </button>
         </Link>
         <br />
@@ -279,6 +262,32 @@ const Form = () => {
         <Link to={"/daily-soap"}>
           <button className="pms-button">Daily Soap Note</button>
         </Link>
+        <br />
+        <br />
+        -------------------------------------------Extra-----------------------------------------{" "}
+        <br />
+        <button className="pms-button">
+          <Link to={"/form-template"}>Demo Form</Link>
+        </button>
+        <div className="my-2"></div>
+        <Link to={"/form-demo-json"}>
+          <button className="pms-button">Demo form json</button>
+        </Link>
+        <div className="my-2"></div>
+        <div className="my-2"></div>
+        <div className="my-2"></div>
+        <Link to={"/supervision-form"}>
+          <button className="pms-button">SUPERVISION FORM</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/management-modification-form"}>
+          <button className="pms-button">Management Modification Form</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Structure-Of-Process"}>
+          <button className="pms-button">Structure-Of-Process</button>
+        </Link>
+        <br /> <div className="text-red-700">DOne</div>
       </div>
     </div>
   );
