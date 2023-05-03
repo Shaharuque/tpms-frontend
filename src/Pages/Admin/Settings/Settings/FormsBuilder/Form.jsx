@@ -179,6 +179,12 @@ const Form = () => {
             CBH MEDICATION MANAGEMENT PROGRESS NOTE
           </button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/risk-assessment"}>
+          <button className="pms-button">
+            Risk Assessment
+          </button>
+        </Link>
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from

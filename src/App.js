@@ -272,6 +272,7 @@ import CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE from "./Pages/Admin/FormsTemplate
 import DataSheetForm from "./Pages/Admin/FormsTemplate/DataSheetForm";
 import LocusScoreSheetForm from "./Pages/Admin/FormsTemplate/LocusScoreSheetForm";
 import TreatmentPlanReview from "./Pages/Admin/FormsTemplate/TreatmentPlanReview";
+import RiskAssessment from "./Pages/Admin/FormsTemplate/RiskAssessment";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -514,6 +515,12 @@ function App() {
             path="/cbh-medication-management-progress-note"
             element={
               <CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE></CBH_MEDICATION_MANAGEMENT_PROGRESS_NOTE>
+            }
+          ></Route>
+          <Route
+            path="/risk-assessment"
+            element={
+              <RiskAssessment></RiskAssessment>
             }
           ></Route>
 
