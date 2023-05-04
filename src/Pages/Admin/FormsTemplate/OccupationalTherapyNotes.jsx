@@ -9,7 +9,7 @@ import { FaSignature } from "react-icons/fa";
 import { AiFillCloud, AiOutlinePrinter } from "react-icons/ai";
 import { Notes } from "@mui/icons-material";
 
-const SpeechLanguageSessionNotes = () => {
+const OccupationalTherapyNotes = () => {
   const [caregiverSignature, setCaregiverSignature] = useState(false);
   const [providerSignature, setProviderSignature] = useState(false);
   const [ProviderImageURL, setProviderImageURL] = useState(null);
@@ -63,7 +63,7 @@ const SpeechLanguageSessionNotes = () => {
             </div>
           </div>
           <div className="form-title mb-5">
-            <h1>SPEECH AND LANGUAGE SESSION NOTES</h1>
+            <h1>OCCUPATIONAL THERAPY NOTES</h1>
             <div className="py-[3px] my-3 w-36 mx-auto bg-[#d9534f]"></div>
           </div>
         </div>
@@ -105,49 +105,18 @@ const SpeechLanguageSessionNotes = () => {
               </div>
             </div>
 
+
             <div>
-              <div className="flex flex-wrap gap-5 lg:gap-0 mt-2 border-2 border-blue-600 p-2 ">
-                <div className="flex items-center mr-4">
-                  <input
-                    id="inline-radio"
-                    type="checkbox"
-                    value=""
-                    name="inline-radio-group"
-                    className="w-4 h-4"
-                    {...register("Client")}
-                  />
-                  <label for="inline-radio" className="ml-2 form-input-name ">
-                    Client
-                  </label>
-                </div>
-                <div class="flex items-center mr-4">
-                  <input
-                    id="inline-radio"
-                    type="checkbox"
-                    value=""
-                    name="inline-radio-group"
-                    className="w-4 h-4"
-                    {...register(" Therapist")}
-                  />
-                  <label for="inline-radio" className="ml-2 form-input-name">
-                    Therapist
-                  </label>
-                </div>
-                <div class="flex items-center mr-4">
-                  <input
-                    id="inline-radio"
-                    type="checkbox"
-                    value=""
-                    name="inline-radio-group"
-                    class="w-4 h-4"
-                    {...register("Rendering_Provider")}
-                  />
-                  <label for="inline-radio" className="ml-2 form-input-name">
-                    Rendering Provider
-                  </label>
-                </div>
+                
+              
+              <div className="grid grid-flow-col gap-5">
+                <div className=" grid-cols-6 text-center text-blue-600 "><input type="text" className="border-b-2  border-blue-600 w-full "{...register("name_1")} />Name</div>
+                <div className=" grid-cols-6 text-center text-blue-600"><input type="text" className="border-b-2  border-blue-600 w-full "{...register("name_2")} />Name</div>
+                
               </div>
             </div>
+
+           
 
             <div>
               <div className=" grid grid-cols-1 items-center md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 ">
@@ -265,4 +234,4 @@ const SpeechLanguageSessionNotes = () => {
   );
 };
 
-export default SpeechLanguageSessionNotes;
+export default OccupationalTherapyNotes;

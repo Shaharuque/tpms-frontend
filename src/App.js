@@ -274,10 +274,11 @@ import LocusScoreSheetForm from "./Pages/Admin/FormsTemplate/LocusScoreSheetForm
 import TreatmentPlanReview from "./Pages/Admin/FormsTemplate/TreatmentPlanReview";
 import CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT from "./Pages/Admin/FormsTemplate/CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT";
 import RiskAssessment from "./Pages/Admin/FormsTemplate/RiskAssessment";
-import SpeechLanguageSessionNotes from "./Pages/Admin/FormsTemplate/SpeechLanguageSessionNotes";
+import SpeechLanguageSessionNotes from "./Pages/Admin/FormsTemplate/OccupationalTherapyNotes";
 import DiagnosisForm from "./Pages/Admin/FormsTemplate/DiagnosisForm";
 import SpeechLanguageProgressReport from "./Pages/Admin/FormsTemplate/SpeechLanguageProgressReport";
 import OtProgressReport from "./Pages/Admin/FormsTemplate/OtProgressReport";
+import OccupationalTherapyNotes from "./Pages/Admin/FormsTemplate/OccupationalTherapyNotes";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -546,9 +547,13 @@ function App() {
             element={<SpeechLanguageProgressReport></SpeechLanguageProgressReport>}
           ></Route>
 
-<Route
+           <Route
             path="/ot-progressss-report"
             element={<OtProgressReport></OtProgressReport>}
+          ></Route>
+           <Route
+            path="/occupational-therapy-session-notes"
+            element={<OccupationalTherapyNotes></OccupationalTherapyNotes>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
