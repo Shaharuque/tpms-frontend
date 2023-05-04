@@ -166,10 +166,14 @@ const Form = () => {
         <Link to={"/risk-assessment"}>
           <button className="pms-button">Risk Assessment</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/speech-language-session-notes"}>
+          <button className="pms-button">Speech Language Session Notes</button>
+        </Link>
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
-        here-----------------------------------
+        here----------------------------------- 
         <div className="my-2"></div>
         <Link to={"/BIRPP-rogress-Form"}>
           <button className="pms-button">BIRP Progress Form</button>
