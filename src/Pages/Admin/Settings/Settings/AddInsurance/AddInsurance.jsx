@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi";
-import Swal from "sweetalert2";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
-import { fetchData, PostfetchData } from "../../../../../Misc/Helper";
 import InsuranceDetails from "./InsuranceDetails";
 import { useSelector } from "react-redux";
 import {
   useAddInsuranceMutation,
-  useGetAllSelectedInsuranceQuery,
-  useInsuranceSearchQuery,
-  useSelectedInsuranceQuery,
+  useAllInsuranceQuery,
+  useDeleteInsuranceMutation,
+  useFacilityInsuranceDetailsMutation,
+  useFacilityselectedInsuranceQuery,
+  useInsuranceDetailMutation,
 } from "../../../../../features/Settings_redux/addInsurance/addInsuranceApi";
+import { toast } from "react-toastify";
+import { PostfetchData } from "../../../../../Misc/Helper";
 const AddInsurance = () => {
   const { token } = useToken();
   console.log(token);
@@ -44,7 +46,11 @@ const AddInsurance = () => {
   // };
   // search api
 
-  const { data, isLoading, isError } = useInsuranceSearchQuery({
+  const {
+    data,
+    isLoading: insuranceLoading,
+    isError,
+  } = useAllInsuranceQuery({
     token,
     data: {
       searchItem: getSearchData,
@@ -55,8 +61,8 @@ const AddInsurance = () => {
   const {
     data: selectedInsuranceData,
     isLoading: selectedinsuranceLoading,
-    isError: selectedinsuranceError,
-  } = useSelectedInsuranceQuery({
+    // isError: selectedinsuranceError,
+  } = useFacilityselectedInsuranceQuery({
     token,
     data: {
       searchItem: selectedSearchData,
@@ -65,7 +71,108 @@ const AddInsurance = () => {
   // console.log("selectedInsuranceData data", selectedInsuranceData);
 
   // addinsurance
-  const [, {}] = useAddInsuranceMutation();
+  const [
+    addInsurance,
+    {
+      data: addInsuranceData,
+      // isLoading: addInsuranceLoading,
+      // isError: addInsuranceError,
+    },
+  ] = useAddInsuranceMutation();
+
+  useEffect(() => {
+    if (addInsuranceData?.status === "success") {
+      toast.success(
+        <h1 className="text-[12px]">{addInsuranceData?.message}</h1>,
+        {
+          position: "top-center",
+          autoClose: 5000,
+          closeOnClick: true,
+          theme: "dark",
+        }
+      );
+    }
+    if (addInsuranceData?.error) {
+      toast.error(<h1 className="text-[12px]">{addInsuranceData?.error}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        theme: "dark",
+      });
+    }
+  }, [
+    addInsuranceData?.error,
+    addInsuranceData?.message,
+    addInsuranceData?.status,
+  ]);
+
+  const [
+    deleteInsurance,
+    {
+      data: removeInsuranceData,
+      // isLoading: addInsuranceLoading,
+      // isError: addInsuranceError,
+    },
+  ] = useDeleteInsuranceMutation();
+
+  useEffect(() => {
+    if (removeInsuranceData?.status === "success") {
+      toast.success(
+        <h1 className="text-[12px]">{removeInsuranceData?.message}</h1>,
+        {
+          position: "top-center",
+          autoClose: 5000,
+          closeOnClick: true,
+          theme: "dark",
+        }
+      );
+    }
+    if (removeInsuranceData?.error) {
+      toast.error(
+        <h1 className="text-[12px]">{removeInsuranceData?.error}</h1>,
+        {
+          position: "top-center",
+          autoClose: 5000,
+          closeOnClick: true,
+          theme: "dark",
+        }
+      );
+    }
+  }, [
+    removeInsuranceData?.error,
+    removeInsuranceData?.message,
+    removeInsuranceData?.status,
+  ]);
+
+  // insurance details
+
+  const [
+    insuranceDetail,
+    {
+      data: insuranceDetailData,
+      isLoading: insuranceDetailLoading,
+      isError: insuranceDetailError,
+    },
+  ] = useInsuranceDetailMutation();
+
+  console.log("details data ", passAllInsurance);
+
+  // facility insurance details
+  const [
+    facilityInsuranceDetails,
+    {
+      data: facilityInsuranceDetailsData,
+      isLoading: facilityInsuranceDetailslLoading,
+      isError: facilityInsuranceDetailsError,
+    },
+  ] = useFacilityInsuranceDetailsMutation();
+
+  console.log("facilityInsuranceDetailsData  ", facilityInsuranceDetailsData);
+
+  useEffect(() => {
+    setpassSelectedInsurance(facilityInsuranceDetailsData);
+    setpassAllInsurance(insuranceDetailData);
+  }, [facilityInsuranceDetailsData, insuranceDetailData]);
 
   // console.log("search data", getSearchData, data);
   // multiple get api will be called together to increase performance
@@ -130,110 +237,116 @@ const AddInsurance = () => {
 
   const handleSelectedValue = async () => {
     console.log("add button click get data adding", selectedKeys);
-    const body = {
-      insurance_ids: selectedKeys,
-    };
 
-    const AddingInsuranceData = await PostfetchData({
-      // endPoint: "admin/ac/setting/add/insurance",
-      endPoint: "setting/add/insurance/facility",
-      payload: body,
+    addInsurance({
       token,
+      data: { insurance_ids: selectedKeys },
     });
-    console.log("add data func check", AddingInsuranceData);
-    if (AddingInsuranceData.status === "success") {
-      Swal.fire({
-        icon: "success",
-        title: AddingInsuranceData?.message,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      setaddedData(true);
-    }
   };
 
   const handleRemoveValue = async () => {
     console.log("Remove  button click get data", facilityselectedkeys);
-    const body = {
-      insurance_ids: facilityselectedkeys,
-    };
-    const RemoveSelectedData = await PostfetchData({
-      // endPoint: "admin/ac/setting/remove/insurance",
-      endPoint: "setting/delete/insurance/facility",
-      payload: body,
+    deleteInsurance({
       token,
+      data: { insurance_ids: facilityselectedkeys },
     });
-    if (RemoveSelectedData.status === "success") {
-      console.log(RemoveSelectedData);
-      Swal.fire({
-        icon: "success",
-        title: RemoveSelectedData?.message,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      setaddedData(true);
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: RemoveSelectedData?.message,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
   };
 
   const InsuranceView = async () => {
-    console.log("insurance view");
-    // if (selectedKeys.length > 1) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: "Select just One Value",
-    //     timer: 1500,
-    //   });
-    //   return setSelectedKeys([0]);
-    // }
-    // console.log("data selectedkeys", selectedKeys);
+    if (selectedKeys.length > 1) {
+      toast.error(<h1 className="text-[12px]">select just one value</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        theme: "dark",
+      });
+      return setSelectedKeys([0]);
+    }
+    console.log("data selectedkeys", selectedKeys);
 
-    // //body always send to backend as object and json.stringify
-    // const body = {
-    //   insurance_id: selectedKeys,
-    // };
-    // const fetchpostTest = await PostfetchData({
-    //   // endPoint: "admin/ac/setting/get/all/insurance/details",
-    //   endPoint: "setting/all/insurance/details",
+    //body always send to backend as object and json.stringify
+    const body = {
+      insurance_id: selectedKeys,
+    };
+    const fetchpostTest = await PostfetchData({
+      // endPoint: "admin/ac/setting/get/all/insurance/details",
+      endPoint: "setting/all/insurance/details",
 
-    //   payload: body,
-    //   token,
-    // });
-    // console.log("fetchpostTest", fetchpostTest);
-    // setpassAllInsurance(fetchpostTest);
-    // setpassSelectedInsurance({});
+      payload: body,
+      token,
+    });
+    console.log("fetchpostTest", fetchpostTest);
+    setpassAllInsurance(fetchpostTest);
+    setpassSelectedInsurance({});
   };
 
   const FacilityInsurance = async () => {
-    console.log("facilaty insurance view");
-    // if (facilityselectedkeys.length > 1) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: "Select just One Value",
-    //     timer: 1500,
-    //   });
-    //   return setfacilityselectedkeys([0]);
-    // }
+    if (facilityselectedkeys.length > 1) {
+      toast.error(<h1 className="text-[12px]">select just one value</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        theme: "dark",
+      });
+      return setfacilityselectedkeys([0]);
+    }
 
-    // const body = {
-    //   insurance_id: facilityselectedkeys,
-    // };
-    // const fetchpostTestt = await PostfetchData({
-    //   endPoint: "setting/get-payor-selected-facility-details",
-    //   payload: body,
-    //   token,
-    // });
-    // setpassSelectedInsurance(fetchpostTestt);
-    // setpassAllInsurance({});
+    const body = {
+      insurance_id: facilityselectedkeys,
+    };
+    const fetchpostTestt = await PostfetchData({
+      endPoint: "setting/get/payor/selected/facility/details",
+      payload: body,
+      token,
+    });
+    setpassSelectedInsurance(fetchpostTestt);
+    setpassAllInsurance({});
   };
+
+  // const InsuranceView = async () => {
+  //   console.log("insurance view");
+  //   if (selectedKeys.length > 1) {
+  //     toast.error(<h1 className="text-[12px]">select just one value</h1>, {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       closeOnClick: true,
+  //       theme: "dark",
+  //     });
+  //     return setSelectedKeys([0]);
+  //   }
+  //   // console.log("data selectedkeys", selectedKeys);
+
+  //   insuranceDetail({
+  //     token,
+  //     data: { insurance_id: selectedKeys },
+  //   });
+  //   setpassSelectedInsurance({});
+  // };
+
+  // const FacilityInsurance = async () => {
+  //   console.log("facilaty insurance view");
+  //   console.log("insurance view");
+  //   if (facilityselectedkeys.length > 1) {
+  //     toast.error(<h1 className="text-[12px]">select just one value</h1>, {
+  //       position: "top-center",
+  //       autoClose: 5000,
+  //       closeOnClick: true,
+  //       theme: "dark",
+  //     });
+  //     return setfacilityselectedkeys([0]);
+  //   }
+  //   // console.log("data selectedkeys", selectedKeys);
+
+  //   facilityInsuranceDetails({
+  //     token,
+  //     data: { insurance_id: facilityselectedkeys },
+  //   });
+  //   setpassAllInsurance({});
+  // };
+
+  if (insuranceLoading && selectedinsuranceLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
@@ -357,15 +470,15 @@ const AddInsurance = () => {
           </button>
         </div>
       </div>
-      {/* {(passAllInsurance?.status === "success" ||
-        passSelectedInsurance?.status === "success") && ( */}
-      <div className="m-2">
-        <InsuranceDetails
-          AllInsurance={passAllInsurance}
-          SelectedInsurance={passSelectedInsurance}
-        ></InsuranceDetails>
-      </div>
-      {/* )}{" "} */}
+      {(passAllInsurance?.status === "success" ||
+        passSelectedInsurance?.status === "success") && (
+        <div className="m-2">
+          <InsuranceDetails
+            AllInsurance={passAllInsurance}
+            SelectedInsurance={passSelectedInsurance}
+          ></InsuranceDetails>
+        </div>
+      )}{" "}
     </div>
   );
 };

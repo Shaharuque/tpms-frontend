@@ -35,6 +35,7 @@ export const apiSlice = createApi({
     "ManageSession",
     "Documents",
     "OtherSetup",
+    "availableCptCodes",
   ],
   endpoints: (builder) => ({}),
 });

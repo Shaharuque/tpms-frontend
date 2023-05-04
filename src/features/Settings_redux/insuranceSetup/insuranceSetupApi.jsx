@@ -72,6 +72,21 @@ export const insuranceSetupApi = apiSlice.injectEndpoints({
       invalidatesTags: ["insuranceSetup", "individualInsuranceSetupDetails"],
     }),
 
+    // update
+
+    payorSetupDetailsUpdate: builder.mutation({
+      query: ({ token, data }) => ({
+        url: `/setting/payor/setup/details/update`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      invalidatesTags: ["insuranceSetup", "individualInsuranceSetupDetails"],
+    }),
+
     // //  delete
     // deleteTreatment: builder.mutation({
     //   query: ({ token, data }) => ({
@@ -90,6 +105,7 @@ export const insuranceSetupApi = apiSlice.injectEndpoints({
 
 export const {
   useGetAllInsuranceSetupQuery,
+  usePayorSetupDetailsUpdateMutation,
   useGetPayorSetupDetailsQuery,
   useUpdateBox33InsuranceSetupMutation,
   useUpdateBox32InsuranceSetupMutation,

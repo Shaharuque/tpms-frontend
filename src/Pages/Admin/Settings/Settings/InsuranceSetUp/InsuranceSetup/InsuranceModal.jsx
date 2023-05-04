@@ -12,13 +12,12 @@ const InsuranceModal = ({ id, handleClose, open }) => {
   const { token } = useToken();
   console.log("clicked insurance", id);
 
-  const { data: payorSetupDetails, isLoading: payorSetupLoading } =
-    useGetPayorSetupDetailsQuery({
-      token,
-      data: {
-        edit_id: id,
-      },
-    });
+  const { data: payorSetupDetails, isLoading: payorSetupLoading } = useGetPayorSetupDetailsQuery({
+    token,
+    data: {
+      edit_id: id,
+    },
+  });
   console.log("payorSetupDetails", payorSetupDetails);
 
   useEffect(() => {
@@ -46,9 +45,7 @@ const InsuranceModal = ({ id, handleClose, open }) => {
           <div className="flex px-5 pb-3 items-center justify-between shadow-md border-b">
             <h1 className=" font-medium text-base">
               Edit Insurance -{" "}
-              <span className="text-red-600">
-                {payorSetupDetails?.payor_details?.payor_name}
-              </span>{" "}
+              <span className="text-red-600">{payorSetupDetails?.payor_details?.payor_name}</span>{" "}
             </h1>
             <IoCloseCircleOutline
               onClick={handleClose}
@@ -57,10 +54,11 @@ const InsuranceModal = ({ id, handleClose, open }) => {
           </div>
 
           <div className="px-5 overflow-scroll h-[700px]">
-            {insuranceBox && (
-              <InsuranceBox insuranceBox={insuranceBox}></InsuranceBox>
-            )}
-            <EditInsuranceSelect></EditInsuranceSelect>
+            {insuranceBox && <InsuranceBox insuranceBox={insuranceBox}></InsuranceBox>}
+            <EditInsuranceSelect
+              insuranceBox={payorSetupDetails}
+              payordetail={payorSetupDetails?.payor_details}
+            ></EditInsuranceSelect>
             <EditInsuranceTable></EditInsuranceTable>
           </div>
           <div className="pt-3 flex justify-end items-end px-5 border-t shadow-t-md">

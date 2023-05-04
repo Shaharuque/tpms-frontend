@@ -35,7 +35,6 @@ const AddTreatments = () => {
       searchItem: getSearchData,
     },
   });
-
   // search selected tretment
   const { data: searchTreatment } = useSearchSelectedTreatmentQuery({
     token,

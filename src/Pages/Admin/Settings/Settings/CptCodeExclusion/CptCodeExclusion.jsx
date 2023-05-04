@@ -46,17 +46,25 @@ const CptCodeExclusion = () => {
     data: getallTreatmentData,
     isSuccess,
     isLoading: getallTreatmentLoading,
+    refetch: getalltretmentrefetch,
   } = useAvailableCptCodesQuery({ token: token });
   console.log(isSuccess, getallTreatmentData);
 
   const {
     data: getallFacilityTreatments,
     isLoading: getallFacilityTreatmentsLoading,
+    refetch: getallfacilityrefetch,
   } = useExcludedCptCodesQuery({ token: token });
   console.log(isSuccess, getallFacilityTreatments);
 
   // add
   const [addCptExclusion, { data: addResponse }] = useAddCptExclusionMutation();
+
+  // automatic refetch data
+  useEffect(() => {
+    getalltretmentrefetch();
+    getallfacilityrefetch();
+  }, []);
 
   useEffect(() => {
     if (addResponse?.status === "success") {
@@ -74,8 +82,7 @@ const CptCodeExclusion = () => {
   }, [addResponse?.message, addResponse?.status]);
 
   // delete
-  const [removeCptExclusion, { data: deleteResponse }] =
-    useRemoveCptExclusionMutation();
+  const [removeCptExclusion, { data: deleteResponse }] = useRemoveCptExclusionMutation();
   console.log(addResponse, deleteResponse);
 
   useEffect(() => {
@@ -102,19 +109,13 @@ const CptCodeExclusion = () => {
   const handleAdding = (e) => {
     let target = e.target;
     // let name = target.name;
-    let value = Array.from(
-      target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(target.selectedOptions, (option) => option.value * 1);
     setSelectedKeys(value);
     setfacilityselectedkeys();
   };
 
   const handleRemoving = (e) => {
-    let value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(e.target.selectedOptions, (option) => option.value * 1);
     setfacilityselectedkeys(value);
     setSelectedKeys();
   };
@@ -203,9 +204,7 @@ const CptCodeExclusion = () => {
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
           <button // onClick={handleAddItems}
             onClick={() => handleSelectedValue()}
-            disabled={
-              selectedKeys === undefined && facilityselectedkeys?.length > 0
-            }
+            disabled={selectedKeys === undefined && facilityselectedkeys?.length > 0}
             className="pms-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -218,9 +217,7 @@ const CptCodeExclusion = () => {
               handleRemoveValue(e);
             }}
             className="pms-close-button w-24"
-            disabled={
-              selectedKeys?.length > 0 && facilityselectedkeys === undefined
-            }
+            disabled={selectedKeys?.length > 0 && facilityselectedkeys === undefined}
           >
             <div className="flex item-center justify-center">
               <HiOutlineArrowLeft className="mr-[2px]" />
