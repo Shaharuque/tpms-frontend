@@ -195,6 +195,10 @@ const Form = () => {
         <Link to={"/ot-session-notes"}>
           <button className="pms-button">OT SESSION Notes</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/pt-session-notes"}>
+          <button className="pms-button">PT SESSION Notes</button>
+        </Link>
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
