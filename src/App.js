@@ -281,6 +281,7 @@ import OtProgressReport from "./Pages/Admin/FormsTemplate/OtProgressReport";
 import OccupationalTherapyNotes from "./Pages/Admin/FormsTemplate/OccupationalTherapyNotes";
 
 import PhysicalTherapyNotes from "./Pages/Admin/FormsTemplate/PhysicalTherapyNotes";
+import OtSessionForm from "./Pages/Admin/FormsTemplate/OtSessionForm";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -560,6 +561,10 @@ function App() {
           <Route
             path="/physical-therapy-notes"
             element={<PhysicalTherapyNotes></PhysicalTherapyNotes>}
+          ></Route>
+          <Route
+            path="/ot-session-notes"
+            element={<OtSessionForm></OtSessionForm>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
