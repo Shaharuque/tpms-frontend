@@ -275,6 +275,7 @@ import TreatmentPlanReview from "./Pages/Admin/FormsTemplate/TreatmentPlanReview
 import CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT from "./Pages/Admin/FormsTemplate/CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT";
 import RiskAssessment from "./Pages/Admin/FormsTemplate/RiskAssessment";
 import SpeechLanguageSessionNotes from "./Pages/Admin/FormsTemplate/SpeechLanguageSessionNotes";
+import DiagnosisForm from "./Pages/Admin/FormsTemplate/DiagnosisForm";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -533,6 +534,10 @@ function App() {
           <Route
             path="/speech-language-session-notes"
             element={<SpeechLanguageSessionNotes></SpeechLanguageSessionNotes>}
+          ></Route>
+           <Route
+            path="/diagnosis-form"
+            element={<DiagnosisForm></DiagnosisForm>}
           ></Route>
 
           {/* ------------------------form End--------------------------- */}

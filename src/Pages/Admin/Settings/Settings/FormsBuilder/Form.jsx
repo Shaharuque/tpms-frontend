@@ -170,6 +170,10 @@ const Form = () => {
         <Link to={"/speech-language-session-notes"}>
           <button className="pms-button">Speech Language Session Notes</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/diagnosis-form"}>
+          <button className="pms-button">Diagnosis Form</button>
+        </Link>
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
