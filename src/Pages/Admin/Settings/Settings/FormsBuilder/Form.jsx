@@ -175,6 +175,11 @@ const Form = () => {
           <button className="pms-button">Diagnosis Form</button>
         </Link>
         <br />
+        <div className="my-2"></div>
+        <Link to={"/speech-language-progressss-report"}>
+          <button className="pms-button">Speech Language Progress Report</button>
+        </Link>
+        <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
         here----------------------------------- 
