@@ -277,6 +277,7 @@ import RiskAssessment from "./Pages/Admin/FormsTemplate/RiskAssessment";
 import SpeechLanguageSessionNotes from "./Pages/Admin/FormsTemplate/SpeechLanguageSessionNotes";
 import DiagnosisForm from "./Pages/Admin/FormsTemplate/DiagnosisForm";
 import SpeechLanguageProgressReport from "./Pages/Admin/FormsTemplate/SpeechLanguageProgressReport";
+import OtProgressReport from "./Pages/Admin/FormsTemplate/OtProgressReport";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -545,6 +546,10 @@ function App() {
             element={<SpeechLanguageProgressReport></SpeechLanguageProgressReport>}
           ></Route>
 
+<Route
+            path="/ot-progressss-report"
+            element={<OtProgressReport></OtProgressReport>}
+          ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"

@@ -179,6 +179,10 @@ const Form = () => {
         <Link to={"/speech-language-progressss-report"}>
           <button className="pms-button">Speech Language Progress Report</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/ot-progressss-report"}>
+          <button className="pms-button">OT Progress Report</button>
+        </Link>
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
