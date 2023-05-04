@@ -279,6 +279,8 @@ import DiagnosisForm from "./Pages/Admin/FormsTemplate/DiagnosisForm";
 import SpeechLanguageProgressReport from "./Pages/Admin/FormsTemplate/SpeechLanguageProgressReport";
 import OtProgressReport from "./Pages/Admin/FormsTemplate/OtProgressReport";
 import OccupationalTherapyNotes from "./Pages/Admin/FormsTemplate/OccupationalTherapyNotes";
+
+import PhysicalTherapyNotes from "./Pages/Admin/FormsTemplate/PhysicalTherapyNotes";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -554,6 +556,10 @@ function App() {
            <Route
             path="/occupational-therapy-session-notes"
             element={<OccupationalTherapyNotes></OccupationalTherapyNotes>}
+          ></Route>
+          <Route
+            path="/physical-therapy-notes"
+            element={<PhysicalTherapyNotes></PhysicalTherapyNotes>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route

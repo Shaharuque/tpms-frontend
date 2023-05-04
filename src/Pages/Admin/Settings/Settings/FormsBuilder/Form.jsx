@@ -187,6 +187,10 @@ const Form = () => {
         <Link to={"/occupational-therapy-session-notes"}>
           <button className="pms-button">Occupational Therapy Notes</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/physical-therapy-notes"}>
+          <button className="pms-button">Physical Therapy Notes</button>
+        </Link>
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
