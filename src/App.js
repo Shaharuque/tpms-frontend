@@ -286,6 +286,7 @@ import PtSessionForm from "./Pages/Admin/FormsTemplate/PtSessionForm";
 import ABAInformed from "./Pages/Admin/FormsTemplate/TpmsForm/ABAInformed";
 import ABAEvaluationParentalConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluationParentalConsent";
 import ABAEvaluation from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluation";
+import ABAEvalutionFeeDocument from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvalutionFeeDocument";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -585,6 +586,10 @@ function App() {
             <Route
             path="/aba-evaluation"
             element={<ABAEvaluation></ABAEvaluation>}
+          ></Route>
+           <Route
+            path="/ABA-Evalution-Fee-Document"
+            element={<ABAEvalutionFeeDocument></ABAEvalutionFeeDocument>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route

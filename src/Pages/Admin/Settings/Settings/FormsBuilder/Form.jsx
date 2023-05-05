@@ -336,7 +336,11 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/aba-evaluation"}>
-          <button className="pms-button">ABA-Evaluation-Parental-Consent</button>
+          <button className="pms-button">ABA-Evaluation</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/ABA-Evalution-Fee-Document"}>
+          <button className="pms-button">ABA-Evalution-Fee-Document</button>
         </Link>
         <br />
       </div>
