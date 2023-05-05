@@ -283,6 +283,7 @@ import OccupationalTherapyNotes from "./Pages/Admin/FormsTemplate/OccupationalTh
 import PhysicalTherapyNotes from "./Pages/Admin/FormsTemplate/PhysicalTherapyNotes";
 import OtSessionForm from "./Pages/Admin/FormsTemplate/OtSessionForm";
 import PtSessionForm from "./Pages/Admin/FormsTemplate/PtSessionForm";
+import ABAInformed from "./Pages/Admin/FormsTemplate/TpmsForm/ABAInformed";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -570,6 +571,10 @@ function App() {
            <Route
             path="/pt-session-notes"
             element={<PtSessionForm></PtSessionForm>}
+          ></Route>
+           <Route
+            path="/aba-informed"
+            element={<ABAInformed></ABAInformed>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
