@@ -346,6 +346,10 @@ const Form = () => {
         <Link to={"/Counseling-Fee-agreement-and-PaymentPolicy"}>
           <button className="pms-button">Counseling-Fee-agreement-and-PaymentPolicy</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/Counseling-Supervision"}>
+          <button className="pms-button">Counseling-Supervision</button>
+        </Link>
         <br />
       </div>
     </div>
