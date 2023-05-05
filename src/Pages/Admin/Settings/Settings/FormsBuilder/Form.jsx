@@ -342,6 +342,10 @@ const Form = () => {
         <Link to={"/ABA-Evalution-Fee-Document"}>
           <button className="pms-button">ABA-Evalution-Fee-Document</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/Counseling-Fee-agreement-and-PaymentPolicy"}>
+          <button className="pms-button">Counseling-Fee-agreement-and-PaymentPolicy</button>
+        </Link>
         <br />
       </div>
     </div>

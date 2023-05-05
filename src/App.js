@@ -287,6 +287,7 @@ import ABAInformed from "./Pages/Admin/FormsTemplate/TpmsForm/ABAInformed";
 import ABAEvaluationParentalConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluationParentalConsent";
 import ABAEvaluation from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluation";
 import ABAEvalutionFeeDocument from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvalutionFeeDocument";
+import CounselingFeeagreementandPaymentPolicy from "./Pages/Admin/FormsTemplate/TpmsForm/CounselingFeeagreementandPaymentPolicy";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -590,6 +591,10 @@ function App() {
            <Route
             path="/ABA-Evalution-Fee-Document"
             element={<ABAEvalutionFeeDocument></ABAEvalutionFeeDocument>}
+          ></Route>
+           <Route
+            path="/Counseling-Fee-agreement-and-PaymentPolicy"
+            element={<CounselingFeeagreementandPaymentPolicy></CounselingFeeagreementandPaymentPolicy>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
