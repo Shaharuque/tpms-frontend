@@ -285,6 +285,7 @@ import OtSessionForm from "./Pages/Admin/FormsTemplate/OtSessionForm";
 import PtSessionForm from "./Pages/Admin/FormsTemplate/PtSessionForm";
 import ABAInformed from "./Pages/Admin/FormsTemplate/TpmsForm/ABAInformed";
 import ABAEvaluationParentalConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluationParentalConsent";
+import ABAEvaluation from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluation";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -580,6 +581,10 @@ function App() {
             <Route
             path="/aba-evaluation-parental-consent"
             element={<ABAEvaluationParentalConsent></ABAEvaluationParentalConsent>}
+          ></Route>
+            <Route
+            path="/aba-evaluation"
+            element={<ABAEvaluation></ABAEvaluation>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
