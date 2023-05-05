@@ -291,6 +291,7 @@ import CounselingFeeagreementandPaymentPolicy from "./Pages/Admin/FormsTemplate/
 import CounselingSupervision from "./Pages/Admin/FormsTemplate/TpmsForm/CounselingSupervision";
 import CreditCard_Authorization from "./Pages/Admin/FormsTemplate/TpmsForm/CreditCard_Authorization";
 import Evaluation_consent_of_caregivers from "./Pages/Admin/FormsTemplate/TpmsForm/Evaluation_consent_of_caregivers";
+import MyClientRights from "./Pages/Admin/FormsTemplate/TpmsForm/MyClientRights";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -610,6 +611,10 @@ function App() {
           <Route
             path="/Evaluation_consent_of_caregivers"
             element={<Evaluation_consent_of_caregivers></Evaluation_consent_of_caregivers>}
+          ></Route>
+          <Route
+            path="/My-Client-Rights"
+            element={<MyClientRights></MyClientRights>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
