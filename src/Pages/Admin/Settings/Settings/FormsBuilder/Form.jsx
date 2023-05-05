@@ -362,6 +362,10 @@ const Form = () => {
         <Link to={"/My-Client-Rights"}>
           <button className="pms-button">My-Client-Rights</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/Parent-Assessment-Preparation-Memo"}>
+          <button className="pms-button">Parent-Assessment-Preparation-Memo</button>
+        </Link>
         <br />
       </div>
     </div>
