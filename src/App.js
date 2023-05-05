@@ -289,6 +289,7 @@ import ABAEvaluation from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluation";
 import ABAEvalutionFeeDocument from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvalutionFeeDocument";
 import CounselingFeeagreementandPaymentPolicy from "./Pages/Admin/FormsTemplate/TpmsForm/CounselingFeeagreementandPaymentPolicy";
 import CounselingSupervision from "./Pages/Admin/FormsTemplate/TpmsForm/CounselingSupervision";
+import CreditCard_Authorization from "./Pages/Admin/FormsTemplate/TpmsForm/CreditCard_Authorization";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -600,6 +601,10 @@ function App() {
            <Route
             path="/Counseling-Supervision"
             element={<CounselingSupervision></CounselingSupervision>}
+          ></Route>
+          <Route
+            path="/Credit-Card_Authorization"
+            element={<CreditCard_Authorization></CreditCard_Authorization>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
