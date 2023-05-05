@@ -293,6 +293,7 @@ import CreditCard_Authorization from "./Pages/Admin/FormsTemplate/TpmsForm/Credi
 import Evaluation_consent_of_caregivers from "./Pages/Admin/FormsTemplate/TpmsForm/Evaluation_consent_of_caregivers";
 import MyClientRights from "./Pages/Admin/FormsTemplate/TpmsForm/MyClientRights";
 import ParentAssessmentPreparationMemo from "./Pages/Admin/FormsTemplate/TpmsForm/ParentAssessmentPreparationMemo";
+import ParentConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ParentConsent";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -620,6 +621,10 @@ function App() {
            <Route
             path="/Parent-Assessment-Preparation-Memo"
             element={<ParentAssessmentPreparationMemo></ParentAssessmentPreparationMemo>}
+          ></Route>
+           <Route
+            path="/Parent-Consent"
+            element={<ParentConsent></ParentConsent>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route

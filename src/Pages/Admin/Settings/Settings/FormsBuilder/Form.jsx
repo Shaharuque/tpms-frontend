@@ -366,6 +366,10 @@ const Form = () => {
         <Link to={"/Parent-Assessment-Preparation-Memo"}>
           <button className="pms-button">Parent-Assessment-Preparation-Memo</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/Parent-Consent"}>
+          <button className="pms-button">Parent-Consent</button>
+        </Link>
         <br />
       </div>
     </div>
