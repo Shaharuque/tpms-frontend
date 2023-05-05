@@ -294,6 +294,8 @@ import Evaluation_consent_of_caregivers from "./Pages/Admin/FormsTemplate/TpmsFo
 import MyClientRights from "./Pages/Admin/FormsTemplate/TpmsForm/MyClientRights";
 import ParentAssessmentPreparationMemo from "./Pages/Admin/FormsTemplate/TpmsForm/ParentAssessmentPreparationMemo";
 import ParentConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ParentConsent";
+import ParentEvaluationPreparationMemo from "./Pages/Admin/FormsTemplate/TpmsForm/ParentEvaluationPreparationMemo";
+import SBHCovid19Policies from "./Pages/Admin/FormsTemplate/TpmsForm/SBHCovid19Policies";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -625,6 +627,14 @@ function App() {
            <Route
             path="/Parent-Consent"
             element={<ParentConsent></ParentConsent>}
+          ></Route>
+            <Route
+            path="/Parent-Evaluation-Preparation-Memo"
+            element={<ParentEvaluationPreparationMemo></ParentEvaluationPreparationMemo>}
+          ></Route>
+           <Route
+            path="/SBH-Covid19-Policies"
+            element={<SBHCovid19Policies></SBHCovid19Policies>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
