@@ -330,6 +330,10 @@ const Form = () => {
         <Link to={"/aba-informed"}>
           <button className="pms-button">ABA-INFORMED</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/aba-evaluation-parental-consent"}>
+          <button className="pms-button">ABA-Evaluation-Parental-Consent</button>
+        </Link>
         <br />
       </div>
     </div>
