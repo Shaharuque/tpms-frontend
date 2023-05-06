@@ -167,6 +167,14 @@ const Form = () => {
           <button className="pms-button">Risk Assessment</button>
         </Link>
         <br />
+        <div className="my-2"></div>
+        <Link to={"/cbh-psychiatric-evaluation-aba-only"}>
+          <button className="pms-button">
+            COMPREHENSIVE DIAGNOSTIC EVALUATION PSYCHIATRIC EVALUATION AND
+            MANAGEMENT ASSESSMENT
+          </button>
+        </Link>
+        <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
         here-----------------------------------

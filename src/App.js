@@ -274,6 +274,7 @@ import LocusScoreSheetForm from "./Pages/Admin/FormsTemplate/LocusScoreSheetForm
 import TreatmentPlanReview from "./Pages/Admin/FormsTemplate/TreatmentPlanReview";
 import CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT from "./Pages/Admin/FormsTemplate/CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT";
 import RiskAssessment from "./Pages/Admin/FormsTemplate/RiskAssessment";
+import CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT_ABAONLY from "./Pages/Admin/FormsTemplate/CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT_ABAONLY";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -528,6 +529,12 @@ function App() {
           <Route
             path="/risk-assessment"
             element={<RiskAssessment></RiskAssessment>}
+          ></Route>
+          <Route
+            path="/cbh-psychiatric-evaluation-aba-only"
+            element={
+              <CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT_ABAONLY></CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT_ABAONLY>
+            }
           ></Route>
 
           {/* ------------------------form End--------------------------- */}
