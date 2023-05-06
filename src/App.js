@@ -298,6 +298,7 @@ import ParentConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ParentConsent";
 import ParentEvaluationPreparationMemo from "./Pages/Admin/FormsTemplate/TpmsForm/ParentEvaluationPreparationMemo";
 import SBHCovid19Policies from "./Pages/Admin/FormsTemplate/TpmsForm/SBHCovid19Policies";
 import InformedConsentForTeletherapy from "./Pages/Admin/FormsTemplate/TpmsForm/InformedConsentForTeletherapy";
+import ReleaseofInformationConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ReleaseofInformationConsent";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -659,6 +660,10 @@ function App() {
           <Route
             path="/Informed-Consent-For-Teletherapy"
             element={<InformedConsentForTeletherapy></InformedConsentForTeletherapy>}
+          ></Route>
+           <Route
+            path="/Releaseof-Info-rmation-Consent"
+            element={<ReleaseofInformationConsent></ReleaseofInformationConsent>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
