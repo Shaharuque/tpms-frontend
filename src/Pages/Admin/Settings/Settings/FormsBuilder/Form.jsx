@@ -166,6 +166,39 @@ const Form = () => {
         <Link to={"/risk-assessment"}>
           <button className="pms-button">Risk Assessment</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/speech-language-session-notes"}>
+          <button className="pms-button">Speech Language Session Notes</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/diagnosis-form"}>
+          <button className="pms-button">Diagnosis Form</button>
+        </Link>
+        <br />
+        <div className="my-2"></div>
+        <Link to={"/speech-language-progressss-report"}>
+          <button className="pms-button">Speech Language Progress Report</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/ot-progressss-report"}>
+          <button className="pms-button">OT Progress Report</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/occupational-therapy-session-notes"}>
+          <button className="pms-button">Occupational Therapy Notes</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/physical-therapy-notes"}>
+          <button className="pms-button">Physical Therapy Notes</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/ot-session-notes"}>
+          <button className="pms-button">OT SESSION Notes</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/pt-session-notes"}>
+          <button className="pms-button">PT SESSION Notes</button>
+        </Link>
         <br />
         <div className="my-2"></div>
         <Link to={"/cbh-psychiatric-evaluation-aba-only"}>
@@ -177,7 +210,7 @@ const Form = () => {
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
-        here-----------------------------------
+        here----------------------------------- 
         <div className="my-2"></div>
         <Link to={"/BIRPP-rogress-Form"}>
           <button className="pms-button">BIRP Progress Form</button>
@@ -300,6 +333,60 @@ const Form = () => {
           <button className="pms-button">Structure-Of-Process</button>
         </Link>
         <br /> <div className="text-red-700">DOne</div>
+        ..............................Tpms Forms..................................
+        <div className="my-2"></div>
+        <Link to={"/aba-informed"}>
+          <button className="pms-button">ABA-INFORMED</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/aba-evaluation-parental-consent"}>
+          <button className="pms-button">ABA-Evaluation-Parental-Consent</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/aba-evaluation"}>
+          <button className="pms-button">ABA-Evaluation</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/ABA-Evalution-Fee-Document"}>
+          <button className="pms-button">ABA-Evalution-Fee-Document</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Counseling-Fee-agreement-and-PaymentPolicy"}>
+          <button className="pms-button">Counseling-Fee-agreement-and-PaymentPolicy</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Counseling-Supervision"}>
+          <button className="pms-button">Counseling-Supervision</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Credit-Card_Authorization"}>
+          <button className="pms-button">Credit-Card_Authorization</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Evaluation_consent_of_caregivers"}>
+          <button className="pms-button">Evaluation_consent_of_caregivers</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/My-Client-Rights"}>
+          <button className="pms-button">My-Client-Rights</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Parent-Assessment-Preparation-Memo"}>
+          <button className="pms-button">Parent-Assessment-Preparation-Memo</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Parent-Consent"}>
+          <button className="pms-button">Parent-Consent</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Parent-Evaluation-Preparation-Memo"}>
+          <button className="pms-button">Parent-Evaluation-Preparation-Memo</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/SBH-Covid19-Policies"}>
+          <button className="pms-button">SBH-Covid19-Policies</button>
+        </Link>
+        <br />
       </div>
     </div>
   );

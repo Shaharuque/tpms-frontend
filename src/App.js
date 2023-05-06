@@ -275,6 +275,28 @@ import TreatmentPlanReview from "./Pages/Admin/FormsTemplate/TreatmentPlanReview
 import CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT from "./Pages/Admin/FormsTemplate/CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT";
 import RiskAssessment from "./Pages/Admin/FormsTemplate/RiskAssessment";
 import CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT_ABAONLY from "./Pages/Admin/FormsTemplate/CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT_ABAONLY";
+import SpeechLanguageSessionNotes from "./Pages/Admin/FormsTemplate/OccupationalTherapyNotes";
+import DiagnosisForm from "./Pages/Admin/FormsTemplate/DiagnosisForm";
+import SpeechLanguageProgressReport from "./Pages/Admin/FormsTemplate/SpeechLanguageProgressReport";
+import OtProgressReport from "./Pages/Admin/FormsTemplate/OtProgressReport";
+import OccupationalTherapyNotes from "./Pages/Admin/FormsTemplate/OccupationalTherapyNotes";
+
+import PhysicalTherapyNotes from "./Pages/Admin/FormsTemplate/PhysicalTherapyNotes";
+import OtSessionForm from "./Pages/Admin/FormsTemplate/OtSessionForm";
+import PtSessionForm from "./Pages/Admin/FormsTemplate/PtSessionForm";
+import ABAInformed from "./Pages/Admin/FormsTemplate/TpmsForm/ABAInformed";
+import ABAEvaluationParentalConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluationParentalConsent";
+import ABAEvaluation from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvaluation";
+import ABAEvalutionFeeDocument from "./Pages/Admin/FormsTemplate/TpmsForm/ABAEvalutionFeeDocument";
+import CounselingFeeagreementandPaymentPolicy from "./Pages/Admin/FormsTemplate/TpmsForm/CounselingFeeagreementandPaymentPolicy";
+import CounselingSupervision from "./Pages/Admin/FormsTemplate/TpmsForm/CounselingSupervision";
+import CreditCard_Authorization from "./Pages/Admin/FormsTemplate/TpmsForm/CreditCard_Authorization";
+import Evaluation_consent_of_caregivers from "./Pages/Admin/FormsTemplate/TpmsForm/Evaluation_consent_of_caregivers";
+import MyClientRights from "./Pages/Admin/FormsTemplate/TpmsForm/MyClientRights";
+import ParentAssessmentPreparationMemo from "./Pages/Admin/FormsTemplate/TpmsForm/ParentAssessmentPreparationMemo";
+import ParentConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ParentConsent";
+import ParentEvaluationPreparationMemo from "./Pages/Admin/FormsTemplate/TpmsForm/ParentEvaluationPreparationMemo";
+import SBHCovid19Policies from "./Pages/Admin/FormsTemplate/TpmsForm/SBHCovid19Policies";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -536,7 +558,103 @@ function App() {
               <CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT_ABAONLY></CBH_PSYCHIATRIC_EVALUATION_AND_MANAGEMENT_ASSESSMENT_ABAONLY>
             }
           ></Route>
+          <Route
+            path="/speech-language-session-notes"
+            element={<SpeechLanguageSessionNotes></SpeechLanguageSessionNotes>}
+          ></Route>
+          <Route
+            path="/diagnosis-form"
+            element={<DiagnosisForm></DiagnosisForm>}
+          ></Route>
+          <Route
+            path="/speech-language-progressss-report"
+            element={
+              <SpeechLanguageProgressReport></SpeechLanguageProgressReport>
+            }
+          ></Route>
 
+          <Route
+            path="/ot-progressss-report"
+            element={<OtProgressReport></OtProgressReport>}
+          ></Route>
+          <Route
+            path="/occupational-therapy-session-notes"
+            element={<OccupationalTherapyNotes></OccupationalTherapyNotes>}
+          ></Route>
+          <Route
+            path="/physical-therapy-notes"
+            element={<PhysicalTherapyNotes></PhysicalTherapyNotes>}
+          ></Route>
+          <Route
+            path="/ot-session-notes"
+            element={<OtSessionForm></OtSessionForm>}
+          ></Route>
+          <Route
+            path="/pt-session-notes"
+            element={<PtSessionForm></PtSessionForm>}
+          ></Route>
+          <Route
+            path="/aba-informed"
+            element={<ABAInformed></ABAInformed>}
+          ></Route>
+          <Route
+            path="/aba-evaluation-parental-consent"
+            element={
+              <ABAEvaluationParentalConsent></ABAEvaluationParentalConsent>
+            }
+          ></Route>
+          <Route
+            path="/aba-evaluation"
+            element={<ABAEvaluation></ABAEvaluation>}
+          ></Route>
+          <Route
+            path="/ABA-Evalution-Fee-Document"
+            element={<ABAEvalutionFeeDocument></ABAEvalutionFeeDocument>}
+          ></Route>
+          <Route
+            path="/Counseling-Fee-agreement-and-PaymentPolicy"
+            element={
+              <CounselingFeeagreementandPaymentPolicy></CounselingFeeagreementandPaymentPolicy>
+            }
+          ></Route>
+          <Route
+            path="/Counseling-Supervision"
+            element={<CounselingSupervision></CounselingSupervision>}
+          ></Route>
+          <Route
+            path="/Credit-Card_Authorization"
+            element={<CreditCard_Authorization></CreditCard_Authorization>}
+          ></Route>
+          <Route
+            path="/Evaluation_consent_of_caregivers"
+            element={
+              <Evaluation_consent_of_caregivers></Evaluation_consent_of_caregivers>
+            }
+          ></Route>
+          <Route
+            path="/My-Client-Rights"
+            element={<MyClientRights></MyClientRights>}
+          ></Route>
+          <Route
+            path="/Parent-Assessment-Preparation-Memo"
+            element={
+              <ParentAssessmentPreparationMemo></ParentAssessmentPreparationMemo>
+            }
+          ></Route>
+          <Route
+            path="/Parent-Consent"
+            element={<ParentConsent></ParentConsent>}
+          ></Route>
+          <Route
+            path="/Parent-Evaluation-Preparation-Memo"
+            element={
+              <ParentEvaluationPreparationMemo></ParentEvaluationPreparationMemo>
+            }
+          ></Route>
+          <Route
+            path="/SBH-Covid19-Policies"
+            element={<SBHCovid19Policies></SBHCovid19Policies>}
+          ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
             path="/forget-password"
