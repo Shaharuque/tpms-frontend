@@ -68,6 +68,8 @@ const ReleaseofInformationConsent = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             {" "}
             <div>
+              <p>* indicates a required field</p>
+
               <div className="flex gap-3">
                 <span>
                   <label
@@ -99,15 +101,15 @@ const ReleaseofInformationConsent = () => {
                     id="inline-radio"
                     type="radio"
                     value=""
-                    name="inline-radio-group"
+                    name="send"
                     className="w-4 h-4"
-                    {...register("initial_assessment")}
+                    {...register("send")}
                   />
                   <label
-                    for="inline-radio"
+                    for="send"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Initial Assessment
+                    Send
                   </label>
                 </div>
                 <div className="flex items-center mr-4">
@@ -115,15 +117,15 @@ const ReleaseofInformationConsent = () => {
                     id="inline-2-radio"
                     type="radio"
                     value=""
-                    name="inline-radio-group"
+                    name="send"
                     className="w-4 h-4"
-                    {...register("reassessment")}
+                    {...register("Receive")}
                   />
                   <label
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Receive
                   </label>
                 </div>
               </div>
@@ -134,7 +136,7 @@ const ReleaseofInformationConsent = () => {
                     for="rec_name"
                     className=" font-bold text-base truncate"
                   >
-                   The following information:
+                    The following information:
                   </label>
                 </span>
                 <div className="flex items-center mr-4">
@@ -142,7 +144,7 @@ const ReleaseofInformationConsent = () => {
                     id="inline-radio"
                     type="checkbox"
                     value=""
-                    name="inline-radio-group"
+                    name="inline-radio-group-1"
                     className="w-4 h-4"
                     {...register("initial_assessment")}
                   />
@@ -150,7 +152,7 @@ const ReleaseofInformationConsent = () => {
                     for="inline-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Initial Assessment
+                    Medical history and evaluation(s)
                   </label>
                 </div>
                 <div className="flex items-center mr-4">
@@ -158,7 +160,7 @@ const ReleaseofInformationConsent = () => {
                     id="inline-2-radio"
                     type="checkbox"
                     value=""
-                    name="inline-radio-group"
+                    name="inline-radio-group-1"
                     className="w-4 h-4"
                     {...register("reassessment")}
                   />
@@ -166,7 +168,7 @@ const ReleaseofInformationConsent = () => {
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Mental health evaluations
                   </label>
                 </div>
                 <div className="flex items-center mr-4">
@@ -174,7 +176,7 @@ const ReleaseofInformationConsent = () => {
                     id="inline-2-radio"
                     type="checkbox"
                     value=""
-                    name="inline-radio-group"
+                    name="inline-radio-group-1"
                     className="w-4 h-4"
                     {...register("reassessment")}
                   />
@@ -182,14 +184,15 @@ const ReleaseofInformationConsent = () => {
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Developmental and/or social history
                   </label>
-                </div> <div className="flex items-center mr-4">
+                </div>{" "}
+                <div className="flex items-center mr-4">
                   <input
                     id="inline-2-radio"
                     type="checkbox"
                     value=""
-                    name="inline-radio-group"
+                    name="inline-radio-group-1"
                     className="w-4 h-4"
                     {...register("reassessment")}
                   />
@@ -197,14 +200,15 @@ const ReleaseofInformationConsent = () => {
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Educational records
                   </label>
-                </div> <div className="flex items-center mr-4">
+                </div>{" "}
+                <div className="flex items-center mr-4">
                   <input
                     id="inline-2-radio"
                     type="checkbox"
                     value=""
-                    name="inline-radio-group"
+                    name="inline-radio-group-1"
                     className="w-4 h-4"
                     {...register("reassessment")}
                   />
@@ -212,90 +216,65 @@ const ReleaseofInformationConsent = () => {
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Progress notes, and treatment or closing summary
+                  </label>
+                </div>
+                <div className="flex items-center mr-4">
+                  <input
+                    id="inline-2-radio"
+                    type="checkbox"
+                    value=""
+                    name="inline-radio-group-1"
+                    className="w-4 h-4"
+                    {...register("reassessment")}
+                  />
+                  <label
+                    for="inline-2-radio"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
+                  >
+                    Other
                   </label>
                 </div>
               </div>
-
 
               <div className="grid grid-cols-2 gap-5">
+                <div>
+                  {" "}
+                  <div className="flex gap-3">
+                    <span>
+                      <label
+                        for="rec_name"
+                        className=" font-bold text-base truncate"
+                      >
+                        To / From:
+                      </label>
+                    </span>
 
-                <div> <div className="flex gap-3">
-                <span>
-                  <label
-                    for="rec_name"
-                    className=" font-bold text-base truncate"
-                  >
-                    * Client's Name :
-                  </label>
-                </span>
-
-                <input
-                  type="text"
-                  className=" w-full border-b border-blue-600 focus:outline-none "
-                  {...register(" recipient_name")}
-                />
-              </div></div>
-                <div> <div className="flex gap-3">
-                <span>
-                  <label
-                    for="rec_name"
-                    className=" font-bold text-base truncate"
-                  >
-                    * Client's Name :
-                  </label>
-                </span>
-
-                <input
-                  type="text"
-                  className=" w-full border-b border-blue-600 focus:outline-none "
-                  {...register(" recipient_name")}
-                />
-              </div></div>
-
-              </div>
-
-
-              <div className="flex flex-col gap-4 mt-4 mb-4">
-                <span>
-                  <label
-                    for="rec_name"
-                    className=" font-bold text-base truncate"
-                  >
-                    * I authorize Signature Behavioral Health to:
-                  </label>
-                </span>
-                <div className="flex items-center mr-4">
-                  <input
-                    id="inline-radio"
-                    type="radio"
-                    value=""
-                    name="inline-radio-group"
-                    className="w-4 h-4"
-                    {...register("initial_assessment")}
-                  />
-                  <label
-                    for="inline-radio"
-                    className="ml-2 text-sm font-medium text-black dark:text-black"
-                  >
-                    Initial Assessment
-                  </label>
+                    <input
+                      type="text"
+                      className=" w-full border-b border-blue-600 focus:outline-none "
+                      {...register(" recipient_name")}
+                    />
+                  </div>
                 </div>
-                <div className="flex items-center mr-4">
-                  <input
-                    id="inline-2-radio"
-                    type="radio"
-                    value=""
-                    name="inline-radio-group"
-                    className="w-4 h-4"
-                    {...register("reassessment")}
-                  />
-                  <label
-                    for="inline-2-radio"
-                    className="ml-2 text-sm font-medium text-black dark:text-black"
-                  >
-                    Reassessment
-                  </label>
+                <div>
+                  {" "}
+                  <div className="flex gap-3">
+                    <span>
+                      <label
+                        for="rec_name"
+                        className=" font-bold text-base truncate"
+                      >
+                        Phone:
+                      </label>
+                    </span>
+
+                    <input
+                      type="text"
+                      className=" w-full border-b border-blue-600 focus:outline-none "
+                      {...register(" recipient_name")}
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -305,7 +284,83 @@ const ReleaseofInformationConsent = () => {
                     for="rec_name"
                     className=" font-bold text-base truncate"
                   >
-                   The following information:
+                    * Your relationship to client:
+                  </label>
+                </span>
+                <div className="flex items-center mr-4">
+                  <input
+                    id="inline-radio"
+                    type="radio"
+                    value=""
+                    name="relationship"
+                    className="w-4 h-4"
+                    {...register("initial_assessment")}
+                  />
+                  <label
+                    for="inline-radio"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
+                  >
+                    Self
+                  </label>
+                </div>
+                <div className="flex items-center mr-4">
+                  <input
+                    id="inline-2-radio"
+                    type="radio"
+                    value=""
+                    name="relationship"
+                    className="w-4 h-4"
+                    {...register("reassessment")}
+                  />
+                  <label
+                    for="inline-2-radio"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
+                  >
+                    Parent/legal guardian
+                  </label>
+                </div>
+                <div className="flex items-center mr-4">
+                  <input
+                    id="inline-2-radio"
+                    type="radio"
+                    value=""
+                    name="relationship"
+                    className="w-4 h-4"
+                    {...register("reassessment")}
+                  />
+                  <label
+                    for="inline-2-radio"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
+                  >
+                    Personal representative
+                  </label>
+                </div>
+                <div className="flex items-center mr-4">
+                  <input
+                    id="inline-2-radio"
+                    type="radio"
+                    value=""
+                    name="relationship"
+                    className="w-4 h-4"
+                    {...register("reassessment")}
+                  />
+                  <label
+                    for="inline-2-radio"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
+                  >
+                    Other
+                  </label>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4 mt-4 mb-4">
+                <span>
+                  <label
+                    for="rec_name"
+                    className=" font-bold text-base truncate"
+                  >
+                    * The above information may be used for the following
+                    purposes:
                   </label>
                 </span>
                 <div className="flex items-center mr-4">
@@ -321,7 +376,7 @@ const ReleaseofInformationConsent = () => {
                     for="inline-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Initial Assessment
+                    Planning appropriate treatment or program
                   </label>
                 </div>
                 <div className="flex items-center mr-4">
@@ -337,7 +392,7 @@ const ReleaseofInformationConsent = () => {
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Continuing appropriate treatment or program
                   </label>
                 </div>
                 <div className="flex items-center mr-4">
@@ -353,9 +408,10 @@ const ReleaseofInformationConsent = () => {
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Determining eligibility for benefits or program
                   </label>
-                </div> <div className="flex items-center mr-4">
+                </div>{" "}
+                <div className="flex items-center mr-4">
                   <input
                     id="inline-2-radio"
                     type="checkbox"
@@ -368,9 +424,10 @@ const ReleaseofInformationConsent = () => {
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Case review
                   </label>
-                </div> <div className="flex items-center mr-4">
+                </div>{" "}
+                <div className="flex items-center mr-4">
                   <input
                     id="inline-2-radio"
                     type="checkbox"
@@ -383,15 +440,38 @@ const ReleaseofInformationConsent = () => {
                     for="inline-2-radio"
                     className="ml-2 text-sm font-medium text-black dark:text-black"
                   >
-                    Reassessment
+                    Updating files
+                  </label>
+                </div>
+                <div className="flex items-center mr-4">
+                  <input
+                    id="inline-2-radio"
+                    type="checkbox"
+                    value=""
+                    name="inline-radio-group"
+                    className="w-4 h-4"
+                    {...register("reassessment")}
+                  />
+                  <label
+                    for="inline-2-radio"
+                    className="ml-2 text-sm font-medium text-black dark:text-black"
+                  >
+                    Other
                   </label>
                 </div>
               </div>
 
-              <p className="text-sm mt-3 mb-3">I understand that this authorization is voluntary, and I may revoke this consent at any time by providing written notice, and after (some states vary, usually 1 year) this consent automatically expires. I have been informed what information will be given, its purpose, and who will receive the information. I understand that I have a right to receive a copy of this authorization. I understand that I have a right to refuse to sign this authorization.</p>
+              <p className="text-sm mt-3 mb-3">
+                I understand that this authorization is voluntary, and I may
+                revoke this consent at any time by providing written notice, and
+                after (some states vary, usually 1 year) this consent
+                automatically expires. I have been informed what information
+                will be given, its purpose, and who will receive the
+                information. I understand that I have a right to receive a copy
+                of this authorization. I understand that I have a right to
+                refuse to sign this authorization.
+              </p>
 
-
-         
               <div className="mt-4">
                 <div className="overflow-x-auto">
                   <table className="min-w-full border-2 border-blue-600 ">
