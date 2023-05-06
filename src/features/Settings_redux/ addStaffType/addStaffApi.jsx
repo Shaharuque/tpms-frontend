@@ -2,7 +2,7 @@
 
 import { apiSlice } from "../../api/apiSlice";
 
-export const cptcodeExclusionApi = apiSlice.injectEndpoints({
+export const AddStaffTypeApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // search treatment
     // TreatmentSearch: builder.query({
@@ -81,7 +81,7 @@ export const cptcodeExclusionApi = apiSlice.injectEndpoints({
     //  delete
     // removeCptExclusion: builder.mutation({
     //   query: ({ token, data }) => ({
-    //     url: `setting/remove/cpt/exclusion`,
+    //     url: `setting/remove/staff/type/from/selected`,
     //     method: "POST",
     //     headers: {
     //       "content-type": "Application/json",
@@ -96,6 +96,24 @@ export const cptcodeExclusionApi = apiSlice.injectEndpoints({
     //     // "SearchSelectedTretment",
     //   ],
     // }),
+
+    removeStaffType: builder.mutation({
+      query: ({ token, data }) => ({
+        url: `setting/remove/staff/type/from/selected`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      invalidatesTags: [
+        "availableCptCodes",
+        "excludedCptCodes",
+        // "SearchTretment",
+        // "SearchSelectedTretment",
+      ],
+    }),
   }),
 });
 
@@ -103,4 +121,5 @@ export const {
   useAddStaffTypeMutation,
   useGetAllStaffQuery,
   useGetSelectedStaffQuery,
-} = cptcodeExclusionApi;
+  useRemoveStaffTypeMutation,
+} = AddStaffTypeApi;

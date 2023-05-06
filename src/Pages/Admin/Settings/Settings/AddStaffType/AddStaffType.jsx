@@ -5,11 +5,11 @@ import Loading from "../../../../../Loading/Loading";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { debounce } from "lodash";
-import { useRemoveCptExclusionMutation } from "../../../../../features/Settings_redux/cptcodeExclusion/cptCodeExclusionApi";
 import {
   useAddStaffTypeMutation,
   useGetAllStaffQuery,
   useGetSelectedStaffQuery,
+  useRemoveStaffTypeMutation,
 } from "../../../../../features/Settings_redux/ addStaffType/addStaffApi";
 
 const AddStaffType = () => {
@@ -71,7 +71,7 @@ const AddStaffType = () => {
   }, [addResponse?.message, addResponse?.status]);
 
   // delete
-  const [removeCptExclusion, { data: deleteResponse }] = useRemoveCptExclusionMutation();
+  const [removeStaffType, { data: deleteResponse }] = useRemoveStaffTypeMutation();
   console.log(addResponse, deleteResponse);
 
   useEffect(() => {
@@ -121,10 +121,10 @@ const AddStaffType = () => {
 
   const handleRemoveValue = (e) => {
     console.log("Remove  button click get data", facilityselectedkeys);
-    removeCptExclusion({
+    removeStaffType({
       token,
       data: {
-        cpt_ids: facilityselectedkeys,
+        assignIds: facilityselectedkeys,
       },
     });
   };
