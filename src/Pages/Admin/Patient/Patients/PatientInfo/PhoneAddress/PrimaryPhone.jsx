@@ -8,7 +8,7 @@ const PrimaryPhone = ({ adData }) => {
       <label className="label">
         <span className=" label-font">Phone</span>
       </label>
-      <div className="flex flex-wrap gap-1 items-center gap-x-3 gap-y-2">
+      <div className="flex gap-1 items-center gap-x-3 gap-y-2">
         <div className=" ml-1">
           {/* package input field */}
           {/* <PhoneInput
@@ -51,7 +51,7 @@ const PrimaryPhone = ({ adData }) => {
 
       <div className="flex ml-1 mt-2 items-center">
         {/* custom toggle  */}
-         <label className="inline-flex relative items-center cursor-pointer">
+        <label className="inline-flex relative items-center cursor-pointer">
           <input
             type="checkbox"
             {...register("phonecheck")}

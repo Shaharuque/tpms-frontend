@@ -19,14 +19,17 @@ const PayPeriodAdd = ({ handleClose, open, token }) => {
   ] = useAddPayperiodMutation();
 
   const onSubmit = (data) => {
-    console.log(data);
+    const payload = {
+      ...data,
+      period_length: parseInt(data.period_length),
+    };
     if (data) {
       addPayperiod({
         token,
-        data,
+        data: payload,
       });
     }
-    reset();
+    //reset();
   };
   // console.log(successData, addSuccess);
 
@@ -37,12 +40,14 @@ const PayPeriodAdd = ({ handleClose, open, token }) => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (errorOccured) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
-        theme: "dark",
+        theme: "light",
+        style: { fontSize: "12px" },
       });
     }
     //handleClose dependency tey na dileo choley cuz aita change hoy na
@@ -82,12 +87,13 @@ const PayPeriodAdd = ({ handleClose, open, token }) => {
                 <select
                   className="modal-input-field ml-1 w-full"
                   {...register("period_length")}
+                  required
                 >
                   <option value={1}>Weekly</option>
-                  <option value={4}>Bi-Weekly</option>
+                  {/* <option value={4}>Bi-Weekly</option> */}
                   <option value={2}>From 1st & 15th Every Month</option>
                   <option value={5}>From 5th & 20th Every Month</option>
-                  <option value={6}>From 5th & 20th Every Month</option>
+                  <option value={6}>From 15th & 30th Every Month</option>
                   <option value={3}>Monthly</option>
                 </select>
               </div>
@@ -98,6 +104,7 @@ const PayPeriodAdd = ({ handleClose, open, token }) => {
                 <select
                   className="modal-input-field ml-1 w-full"
                   {...register("week_day_name")}
+                  required
                 >
                   <option value="Sunday">Sunday</option>
                   <option value="Monday">Monday</option>
@@ -115,6 +122,7 @@ const PayPeriodAdd = ({ handleClose, open, token }) => {
                 <select
                   className="modal-input-field ml-1 w-full"
                   {...register("year")}
+                  required
                 >
                   <option value="2019">2019</option>
                   <option value="2020">2020</option>
@@ -131,6 +139,7 @@ const PayPeriodAdd = ({ handleClose, open, token }) => {
                   className="modal-input-field ml-1 w-full"
                   type="date"
                   {...register("end_date")}
+                  required
                 ></input>
               </div>
               <div className="mt-4">
@@ -140,6 +149,7 @@ const PayPeriodAdd = ({ handleClose, open, token }) => {
                 <select
                   className="modal-input-field ml-1 w-full"
                   {...register("check_date")}
+                  required
                 >
                   <option value="Sunday">Sunday</option>
                   <option value="Monday">Monday</option>
@@ -161,6 +171,7 @@ const PayPeriodAdd = ({ handleClose, open, token }) => {
                   className="modal-input-field ml-1 w-full"
                   type="number"
                   {...register("time_sheet")}
+                  required
                 ></input>
               </div>
             </div>

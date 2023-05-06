@@ -310,7 +310,7 @@ const VendorNumberSetup = () => {
                 onChange={(e) => handleTxType(e)}
                 className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               >
-                <option value={0}>select tx type</option>
+                <option value={0}>Select Type Option</option>
                 {selectedTreatmentData?.data?.map((item, index) => (
                   <option key={index} value={item?.id}>
                     {item?.treatment_name}
@@ -329,7 +329,7 @@ const VendorNumberSetup = () => {
                 onChange={(e) => handleRegionalCenter(e)}
                 className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               >
-                <option value={0}>select regional center</option>
+                <option value={0}>Select Regional Center</option>
                 {regionalCenters?.data?.map((item, index) => (
                   <option key={index} value={item?.id}>
                     {item?.regional_center_name}

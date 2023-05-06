@@ -12,7 +12,7 @@ const DynamicPhone = ({ adData }) => {
             <label className="label">
               <span className=" label-font">Phone</span>
             </label>
-            <div className="flex flex-wrap gap-1 items-center gap-x-3 gap-y-2">
+            <div className="flex  gap-1 items-center gap-x-3 gap-y-2">
               <div className=" ml-1">
                 <input
                   type="text"

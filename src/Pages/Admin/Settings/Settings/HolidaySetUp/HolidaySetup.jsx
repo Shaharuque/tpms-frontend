@@ -167,7 +167,12 @@ const HolidaySetup = () => {
         <AddTImeOff handleClose={handleClose} open={addTimeOff}></AddTImeOff>
       )}
       {openAddModal && (
-        <AddFederal handleClose={handleClose2} open={openAddModal}></AddFederal>
+        <AddFederal
+          allHoliday={allHoliday}
+          holidayLoading={holidayLoading}
+          handleClose={handleClose2}
+          open={openAddModal}
+        ></AddFederal>
       )}
     </div>
   );
