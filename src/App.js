@@ -299,6 +299,9 @@ import ParentEvaluationPreparationMemo from "./Pages/Admin/FormsTemplate/TpmsFor
 import SBHCovid19Policies from "./Pages/Admin/FormsTemplate/TpmsForm/SBHCovid19Policies";
 import SBH_notice_privacy_practices from "./Pages/Admin/FormsTemplate/TpmsForm/SBH_notice_privacy_practices";
 import SBHABAConsentForm from "./Pages/Admin/FormsTemplate/TpmsForm/SBHABAConsentForm";
+import InformedConsentForTeletherapy from "./Pages/Admin/FormsTemplate/TpmsForm/InformedConsentForTeletherapy";
+import ReleaseofInformationConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ReleaseofInformationConsent";
+import EvaluationServicesConsent from "./Pages/Admin/FormsTemplate/TpmsForm/EvaluationServicesConsent";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -666,6 +669,22 @@ function App() {
           <Route
             path="/SBH-aba-consent"
             element={<SBHABAConsentForm></SBHABAConsentForm>}
+          ></Route>
+          <Route
+            path="/Informed-Consent-For-Teletherapy"
+            element={
+              <InformedConsentForTeletherapy></InformedConsentForTeletherapy>
+            }
+          ></Route>
+          <Route
+            path="/Releaseof-Info-rmation-Consent"
+            element={
+              <ReleaseofInformationConsent></ReleaseofInformationConsent>
+            }
+          ></Route>
+          <Route
+            path="/Evaluation-Services-Consent"
+            element={<EvaluationServicesConsent></EvaluationServicesConsent>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route

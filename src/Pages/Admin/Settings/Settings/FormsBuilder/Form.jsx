@@ -399,6 +399,18 @@ const Form = () => {
         <Link to={"/SBH-Covid19-Policies"}>
           <button className="pms-button">SBH-Covid19-Policies</button>
         </Link>
+        <div className="my-2"></div>
+        <Link to={"/Informed-Consent-For-Teletherapy"}>
+          <button className="pms-button">Informed-Consent-For-Teletherapy</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Releaseof-Info-rmation-Consent"}>
+          <button className="pms-button">Releaseof-Info-rmation-Consent</button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/Evaluation-Services-Consent"}>
+          <button className="pms-button">Evaluation-Services-Consent</button>
+        </Link>
         <br />
         <div className="my-2"></div>
         <Link to={"/SBH-notice-privacy-practices"}>
