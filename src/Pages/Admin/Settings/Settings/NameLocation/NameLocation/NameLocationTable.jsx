@@ -4,10 +4,49 @@ import { useForm } from "react-hook-form";
 import { Switch } from "antd";
 import { AiOutlineCopy } from "react-icons/ai";
 import { FiPlusCircle } from "react-icons/fi";
+import axios from "axios";
+import { baseIp } from "../../../../../../Misc/BaseClient";
+import useToken from "../../../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
+import { getsettings } from "../../../../../../features/Settings_redux/settingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import BoolConverter from "../../../../../Shared/BoolConverter/BoolConverter";
 
-const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
-  console.log("box33 data", box_no_33);
-  const [value, setValue] = useState(true);
+const NameLocationTable = ({ time, box33Open, handleTableOpen }) => {
+  // console.log("box33 data", box_no_33);
+
+  const { token } = useToken();
+  const dispatch = useDispatch();
+
+  //response from async action
+  const data = useSelector((state) => state.settingInfo); //After action dispatched response can be received here
+  console.log("settings data", data);
+
+  //Some Important data showing below
+  const loading = data?.loading;
+  const settingDetails = data?.settingDetails;
+  const box_no_32 = data?.settingDetails?.box_32 || [];
+  const box_no_33 = data?.settingDetails?.setting_name_location;
+  const pos = settingDetails?.pos;
+  const box_32main = settingDetails?.box_32main;
+  const working_hours = settingDetails?.setting_working_hour;
+  // console.log(working_hours);
+
+  console.log("bx32 check", box_no_33);
+
+  const [emailReminder, setEmailReminder] = useState(
+    BoolConverter(box_no_33?.email_reminder)
+  );
+  const [isCombo, setIsCombo] = useState(BoolConverter(box_no_33?.is_combo));
+
+  useEffect(() => {
+    setEmailReminder(BoolConverter(box_no_33?.email_reminder));
+  }, [box_no_33?.email_reminder]);
+  useEffect(() => {
+    setIsCombo(BoolConverter(box_no_33?.is_combo));
+  }, [box_no_33?.is_combo]);
+  console.log("emailReminder", BoolConverter(emailReminder));
+  console.log("isCombo", BoolConverter(isCombo));
 
   function extractTime(timestamp) {
     console.log("type check", typeof timestamp);
@@ -19,9 +58,64 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
   }
 
   const { register, handleSubmit, reset } = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    // reset();
+    const payload = {
+      facility_name: data?.facility_name,
+      address: data?.address,
+      address_two: data?.address_two,
+      city: data?.city,
+      state: data?.state,
+      zip: data?.zip,
+      phone_one: data?.phone_one,
+      short_code: data?.short_code,
+      email: data?.email,
+      ein: data?.ein,
+      npi: data?.npi,
+      taxonomy: data?.taxonomy,
+      taxonomy_code: data?.taxonomy_code,
+      contact_person: data?.contact_person,
+      is_deafilt_facility: data?.is_deafilt_facility,
+      start_time: data?.start_time,
+      end_time: data?.end_time,
+      service_area_miles: data?.service_area_miles,
+      user_default_password: data?.user_default_password,
+      default_pos: data?.default_pos,
+      timezone: data?.timezone,
+      ftp_username: data?.ftp_username,
+      ftp_password: data?.ftp_password,
+      is_combo: BoolConverter(isCombo),
+      email_reminder: BoolConverter(emailReminder),
+    };
+
+    let res = await axios({
+      method: "post",
+      url: `${baseIp}/setting/update/name/location`,
+      headers: {
+        Accept: "application/json",
+        "x-auth-token": token,
+      },
+      data: payload,
+    });
+    if (res?.data?.status === "success") {
+      toast.success("successfully updated Box No 33 ", {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+      dispatch(getsettings(token));
+      reset();
+    } else {
+      toast.error(res?.data?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
   };
 
   // Editable value
@@ -51,7 +145,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
         timezone: box_no_33?.timezone,
         ftp_username: box_no_33?.ftp_username,
         ftp_password: box_no_33?.ftp_password,
-        is_combo: box_no_33?.is_combo,
+        // is_combo: box_no_33?.is_combo,
         // mon_end_time: time[0]?.mon_end_time,
       });
     }, 0);
@@ -1762,9 +1856,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 <div className=" xl:mt-10 2xl:mt-5 items-start">
                   <div>
                     <Switch
+                      checked={isCombo}
+                      onChange={() => setIsCombo(!isCombo)}
                       size="small"
-                      checked={value ? true : false}
-                      onClick={() => setValue(!value)}
                     />
                     <span className="text-[14px]  font-medium text-gray-500 mx-3">
                       Combo Code
@@ -1774,9 +1868,9 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
                 <div className=" xl:mt-10 2xl:mt-5 items-start">
                   <div>
                     <Switch
+                      checked={emailReminder}
+                      onChange={() => setEmailReminder(!emailReminder)}
                       size="small"
-                      checked={value ? true : false}
-                      onClick={() => setValue(!value)}
                     />
                     <span className="text-[14px]  font-medium text-gray-500 mx-3">
                       Email Reminders

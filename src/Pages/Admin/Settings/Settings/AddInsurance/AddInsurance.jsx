@@ -449,12 +449,18 @@ const AddInsurance = () => {
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
             {/* calling same api  */}
-            {selectedInsuranceData?.selectedInsurance.length > 0 &&
-              selectedInsuranceData?.selectedInsurance.map((item, index) => (
-                <option key={item.id} className="px-2 text-sm" value={item.id}>
-                  {item.payor_name}{" "}
-                </option>
-              ))}{" "}
+            {selectedInsuranceData?.facility_selected_insurance.length > 0 &&
+              selectedInsuranceData?.facility_selected_insurance.map(
+                (item, index) => (
+                  <option
+                    key={item.id}
+                    className="px-2 text-sm"
+                    value={item.id}
+                  >
+                    {item.payor_name}{" "}
+                  </option>
+                )
+              )}{" "}
           </select>
           <br />
           <button
