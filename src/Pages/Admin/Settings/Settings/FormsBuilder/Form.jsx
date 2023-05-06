@@ -177,7 +177,9 @@ const Form = () => {
         <br />
         <div className="my-2"></div>
         <Link to={"/speech-language-progressss-report"}>
-          <button className="pms-button">Speech Language Progress Report</button>
+          <button className="pms-button">
+            Speech Language Progress Report
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/ot-progressss-report"}>
@@ -210,7 +212,7 @@ const Form = () => {
         <br />
         {/* ------------------------ mental form lists --------------------------  */}
         -----------------------Mental Health start from
-        here----------------------------------- 
+        here-----------------------------------
         <div className="my-2"></div>
         <Link to={"/BIRPP-rogress-Form"}>
           <button className="pms-button">BIRP Progress Form</button>
@@ -333,14 +335,17 @@ const Form = () => {
           <button className="pms-button">Structure-Of-Process</button>
         </Link>
         <br /> <div className="text-red-700">DOne</div>
-        ..............................Tpms Forms..................................
+        ..............................Tpms
+        Forms..................................
         <div className="my-2"></div>
         <Link to={"/aba-informed"}>
           <button className="pms-button">ABA-INFORMED</button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/aba-evaluation-parental-consent"}>
-          <button className="pms-button">ABA-Evaluation-Parental-Consent</button>
+          <button className="pms-button">
+            ABA-Evaluation-Parental-Consent
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/aba-evaluation"}>
@@ -352,7 +357,9 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/Counseling-Fee-agreement-and-PaymentPolicy"}>
-          <button className="pms-button">Counseling-Fee-agreement-and-PaymentPolicy</button>
+          <button className="pms-button">
+            Counseling-Fee-agreement-and-PaymentPolicy
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/Counseling-Supervision"}>
@@ -364,7 +371,9 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/Evaluation_consent_of_caregivers"}>
-          <button className="pms-button">Evaluation_consent_of_caregivers</button>
+          <button className="pms-button">
+            Evaluation_consent_of_caregivers
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/My-Client-Rights"}>
@@ -372,7 +381,9 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/Parent-Assessment-Preparation-Memo"}>
-          <button className="pms-button">Parent-Assessment-Preparation-Memo</button>
+          <button className="pms-button">
+            Parent-Assessment-Preparation-Memo
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/Parent-Consent"}>
@@ -380,11 +391,24 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/Parent-Evaluation-Preparation-Memo"}>
-          <button className="pms-button">Parent-Evaluation-Preparation-Memo</button>
+          <button className="pms-button">
+            Parent-Evaluation-Preparation-Memo
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/SBH-Covid19-Policies"}>
           <button className="pms-button">SBH-Covid19-Policies</button>
+        </Link>
+        <br />
+        <div className="my-2"></div>
+        <Link to={"/SBH-notice-privacy-practices"}>
+          <button className="pms-button">
+            SBH NOTICE OF PRIVACY PRACTICES
+          </button>
+        </Link>
+        <div className="my-2"></div>
+        <Link to={"/SBH-aba-consent"}>
+          <button className="pms-button">SBH ABA CONSENT FORM</button>
         </Link>
         <br />
       </div>
