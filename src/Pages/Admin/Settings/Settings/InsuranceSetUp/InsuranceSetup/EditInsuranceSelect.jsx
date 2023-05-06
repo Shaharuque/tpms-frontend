@@ -6,6 +6,7 @@ import { BoolConverter01 } from "../../../../../Shared/BoolConverter/BoolConvert
 import { PostfetchData } from "../../../../../../Misc/Helper";
 import useToken from "../../../../../../CustomHooks/useToken";
 import { usePayorSetupDetailsUpdateMutation } from "../../../../../../features/Settings_redux/insuranceSetup/insuranceSetupApi";
+import { toast } from "react-toastify";
 
 const EditInsuranceSelect = ({ insuranceBox, payordetail }) => {
   console.log("data get props insurancebox", insuranceBox);
@@ -30,6 +31,21 @@ const EditInsuranceSelect = ({ insuranceBox, payordetail }) => {
     usePayorSetupDetailsUpdateMutation();
 
   console.log(payorupdatedata);
+
+  useEffect(() => {
+    if (payorupdatedata?.status === true) {
+      toast.success(<h1 className="text-[12px]">{payorupdatedata?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  }, [payorupdatedata?.message, payorupdatedata?.status]);
 
   const id = [];
   const Box24j = [];
@@ -195,43 +211,6 @@ const EditInsuranceSelect = ({ insuranceBox, payordetail }) => {
                   </>
                 );
               })}
-              {/* {insuranceBox?.tx_types?.length > 0 &&
-                insuranceBox?.tx_types.map((field, index) => {
-                  return (
-                    <>
-                      <div className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          // id={`custom-checkbox-${index}`}
-                          // name={name}
-                          // value={name}
-                          // onChange={(e) => handlechange(e)}
-                          // defaultValue={field?.id}
-                          {...register(`id_${index}`)}
-                        />
-
-                        <h3 className="text-sm font-normal ">{field?.treatment_name}</h3>
-                      </div>
-
-                      <input
-                        defaultValue={field.box_24j == null ? "" : field.box_24j}
-                        type="text"
-                        name="max_day"
-                        className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
-                        // {...register("max_day")}
-                        {...register(`box_24j_${index}`)}
-                      />
-
-                      <select
-                        className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
-                        {...register(`degree_level_${index}`)}
-                      >
-                        <option value="Speech Therapist">Speech Therapist</option>
-                        <option value="female">Female</option>
-                      </select>
-                    </>
-                  );
-                })} */}
             </>
 
             {/* <div className="bg-gray-200 py-[1px] mt-3"></div> */}
