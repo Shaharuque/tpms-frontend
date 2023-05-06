@@ -1,8 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {
-  patientDataReducer,
-  patientDetailsReducer,
-} from "../features/Patient_redux/patientSlice";
+import { patientDetailsReducer } from "../features/Patient_redux/patientSlice";
 import { settingDataReducer } from "../features/Settings_redux/settingSlice";
 import { serviceReducer } from "../features/Settings_redux/settingServicesList";
 import { cptReducer } from "../features/Settings_redux/cptCodeSlice";
@@ -20,7 +17,6 @@ export const store = configureStore({
     // Add the generated reducer as a specific top-level slice(RTK query)
     [apiSlice.reducerPath]: apiSlice.reducer,
     //async thunk reducers
-    patientData: patientDataReducer,
     patientInfo: patientDetailsReducer,
     settingInfo: settingDataReducer,
     serviceInfo: serviceReducer,

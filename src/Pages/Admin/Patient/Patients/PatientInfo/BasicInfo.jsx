@@ -7,12 +7,7 @@ const BasicInfo = ({ adData }) => {
 
   return (
     <div>
-      <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
-        {/* <input
-              type="checkbox"
-              name="checkedActive"
-              {...register("checkedActive")}
-            /> */}
+      {/* <div className="flex ml-1 mt-1 mr-2 items-center justify-end">
         <Switch
           size="small"
           checked={active ? true : false}
@@ -21,8 +16,8 @@ const BasicInfo = ({ adData }) => {
         <span className="text-[15px] ml-1 text-gray-700 gap-1 font-semibold">
           Active Patient
         </span>
-      </div>
-      <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 my-3 mr-2 gap-x-6 gap-y-1 ">
+      </div> */}
+      <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 my-3 mr-2 gap-x-6 gap-y-1 ">
         {/* name  */}
         <div>
           <label className="label">
@@ -148,6 +143,20 @@ const BasicInfo = ({ adData }) => {
             <option value="Ward">Ward</option>
             <option value="Stepdaughter">Stepdaughter</option>
           </select>
+        </div>
+
+        <div>
+          <label className="label">
+            <span className=" label-font">
+              Login Email<span className="text-red-500">*</span>
+            </span>
+          </label>
+          <input
+            type="text"
+            name="login_email"
+            className="input-border input-font py-[1px] w-full focus:outline-none"
+            {...register("login_email")}
+          />
         </div>
       </div>
     </div>

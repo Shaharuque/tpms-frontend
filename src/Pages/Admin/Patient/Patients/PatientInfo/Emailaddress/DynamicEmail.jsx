@@ -11,7 +11,7 @@ const DynamicEmail = ({ adData }) => {
             <label className="label">
               <span className=" label-font">Email</span>
             </label>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <div className="flex items-center gap-x-3 gap-y-2">
               <div>
                 <input
                   type="text"

@@ -10,6 +10,7 @@ import Loading from "../../../../../../Loading/Loading";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { fetchServiceSubType } from "../../../../../../features/Settings_redux/selectedServiceSubTypesApi";
+import { baseIp } from "../../../../../../Misc/BaseClient";
 export default function AddServiceSubTypeTabEditModal({
   handleClose,
   open,
@@ -20,6 +21,7 @@ export default function AddServiceSubTypeTabEditModal({
   subActivityEndPoint,
   page,
 }) {
+  console.log(txType, serviceId, billAbleId);
   const { id } = row || null;
   const [singleData, setSingleData] = useState({});
   const { token } = useToken();
@@ -31,22 +33,21 @@ export default function AddServiceSubTypeTabEditModal({
       //if type is not selected then api will not be called
       if (id) {
         res = await axios({
-          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/single/data",
+          url: `${baseIp}/setting/single/subactivity`,
           method: "POST",
           headers: {
             Accept: "application/json",
-            "treatmentSelect-Type": "application/json;charset=UTF-8",
-            Authorization: token,
+            "x-auth-token": token,
           },
-          data: { sub_id: id },
+          data: { id },
         });
       }
       const data = res?.data;
-      //console.log("single Data", data);
-      setSingleData(data?.sub_activity);
+      console.log("single Data", data);
+      setSingleData(data?.singleSubType);
     };
     getSingleServiceSubType();
-  }, [id]);
+  }, [id, token]);
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -67,33 +68,29 @@ export default function AddServiceSubTypeTabEditModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/update",
+          url: `${baseIp}/setting/update/subactivity`,
           headers: {
-            "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: token || null,
+            "x-auth-token": token,
           },
-          data: { edit_id: id, description: data?.description },
+          data: { edit_id: id, desc: data?.description },
         });
-
-        console.log(res.data);
         if (res?.data?.status === "success") {
-          toast.success("Successfully Updated", {
+          toast.success("Successfully Updated the service sub-type", {
             position: "top-center",
             autoClose: 5000,
-            hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
             theme: "dark",
+            style: { fontSize: "12px" },
           });
           dispatch(
             fetchServiceSubType({
-              endPoint: subActivityEndPoint,
-              page,
               token,
-              data: { treatment_id: txType, service_id: serviceId },
+              payload: {
+                treatment_id: txType,
+                bill_type: billAbleId,
+                ser_id: serviceId,
+              },
             })
           );
           handleClose();
@@ -103,61 +100,53 @@ export default function AddServiceSubTypeTabEditModal({
           toast.error(res?.data?.message, {
             position: "top-center",
             autoClose: 5000,
-            hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
             theme: "dark",
+            style: { fontSize: "12px" },
           });
         }
       } catch (error) {
         toast.warning(error?.message, {
           position: "top-center",
           autoClose: 5000,
-          hideProgressBar: false,
           closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
           theme: "dark",
+          style: { fontSize: "12px" },
         });
         console.log(error?.message); // this is the main part. Use the response property from the error object
       }
     } else {
+      // Add new service sub-type
       let res = await axios({
         method: "post",
-        url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/save",
+        url: `${baseIp}/setting/new/subactivity/save`,
         headers: {
-          "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         data: {
-          description: data?.description,
-          billable_id: billAbleId,
+          new_desc: data?.description,
+          bill_type: billAbleId,
           treatment_id: txType,
-          service_id: serviceId,
+          ser_id: serviceId,
         },
       });
-      console.log(res);
       if (res?.data?.status === "success") {
         toast.success("Successfully Added ", {
           position: "top-center",
           autoClose: 5000,
-          hideProgressBar: false,
           closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
           theme: "dark",
+          style: { fontSize: "12px" },
         });
         dispatch(
           fetchServiceSubType({
-            endPoint: subActivityEndPoint,
-            page,
             token,
-            data: { treatment_id: txType, service_id: serviceId },
+            payload: {
+              treatment_id: txType,
+              bill_type: billAbleId,
+              ser_id: serviceId,
+            },
           })
         );
         handleClose();
@@ -165,17 +154,13 @@ export default function AddServiceSubTypeTabEditModal({
         toast.error(res?.data?.message, {
           position: "top-center",
           autoClose: 5000,
-          hideProgressBar: false,
           closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
           theme: "dark",
+          style: { fontSize: "12px" },
         });
       }
     }
   };
-  // console.log("row", row);
 
   return (
     <div>

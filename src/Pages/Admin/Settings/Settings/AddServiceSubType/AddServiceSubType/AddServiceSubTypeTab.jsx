@@ -11,6 +11,10 @@ import Loading from "../../../../../../Loading/Loading";
 import { fetchData, PostfetchData } from "../../../../../../Misc/Helper";
 import ShimmerTableTet from "../../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddServiceSubTypeTabEditModal from "./AddServiceSubTypeTabEditModal";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import { baseIp } from "../../../../../../Misc/BaseClient";
+import { toast } from "react-toastify";
+import AddServiceSubTypeTabActive from "./AddServiceSubTypeTabActive";
 
 const AddServiceSubTypeTab = () => {
   const { token } = useToken();
@@ -21,7 +25,6 @@ const AddServiceSubTypeTab = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [recordData, setRecordData] = useState();
-  const [selectedTreatments, setSelectedTreatments] = useState([]);
   const [billType, setBillType] = useState([]);
   const [error, setError] = useState("");
   const [errorType, setErrorType] = useState("");
@@ -33,56 +36,53 @@ const AddServiceSubTypeTab = () => {
   const dispatch = useDispatch();
   const { serviceSubTypes, loading } =
     useSelector((state) => state.getServiceSubTypes) || {};
-  const tableData = serviceSubTypes?.sub_activity?.data || [];
-  console.log(serviceSubTypes);
+  const tableData = serviceSubTypes?.sub_activity_data || [];
+  console.log("service sub types:", tableData);
   const totalPage = serviceSubTypes?.sub_activity?.last_page
     ? serviceSubTypes?.sub_activity?.last_page
     : 0;
 
-  //getting all the selected treatment data for Tx type selection purpose
-  useEffect(() => {
-    const getAllTreatments = async () => {
-      let response;
-      response = await axios({
-        url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/treatment/get/all",
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "treatmentSelect-Type": "application/json;charset=UTF-8",
-          Authorization: token,
-        },
-      });
-      // const result = await res.json();
-      const data = response?.data?.treatment_data;
-      console.log("all treatments", data);
-      setSelectedTreatments(data);
-    };
-    getAllTreatments();
-  }, [token]);
-  //console.log(selectedTreatments);
+  //Getting all treatment
+  const {
+    data: selectedTreatmentData,
+    isSuccess: selectedTreatmentSuccess,
+    isLoading: selectedTreatmentLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
+  console.log("Selected Treatements", selectedTreatmentData?.data);
 
   useEffect(() => {
     const billType = () => {
       //tyType and txType==='Select' na hoy tahley e api tey hit korbey otherwise na
       if (txType && txType !== "Select") {
-        PostfetchData({
-          endPoint: "admin/ac/setting/subactivity/billable/type",
-          token,
-          payload: { treatment_id: txType },
-        }).then((res) => {
-          const result = res?.bill_type;
-          console.log(result);
-          if (result?.length !== 0) {
-            setBillType(result);
-          } else {
-            setErrorType("Noting Found");
-          }
-        });
+        axios
+          .post(
+            `${baseIp}/setting/subactivity/treatment/billable/type`,
+            {
+              treatment_id: txType,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                "x-auth-token": token,
+              },
+            }
+          )
+          .then((response) => {
+            const result = response?.data?.sub_act_bill_type;
+            if (result?.length !== 0) {
+              setBillType(result);
+            } else {
+              setErrorType("Noting Found");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     };
     billType();
   }, [txType, token]);
-  //console.log(billType);
+  console.log("billtype", billType);
 
   const handleClickOpen = (record) => {
     setOpenEditModal(true);
@@ -115,18 +115,17 @@ const AddServiceSubTypeTab = () => {
       //if type is not selected then api will not be called
       if (type) {
         res = await axios({
-          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/subactivity/service",
+          url: `${baseIp}/setting/subactivity/treatment/service/get`,
           method: "POST",
           headers: {
             Accept: "application/json",
-            "treatmentSelect-Type": "application/json;charset=UTF-8",
-            Authorization: token,
+            "x-auth-token": token,
           },
-          data: { treatment_id: txType, billable_type: type },
+          data: { treatment_id: txType, bill_type: type },
         });
       }
       // const result = await res.json();
-      const data = res?.data?.bill_type;
+      const data = res?.data?.all_service;
       console.log("conditionally api calling to get services", data);
       // setTable(data);
       setServices(data);
@@ -137,17 +136,15 @@ const AddServiceSubTypeTab = () => {
   //Getting sub activity table data
   const subActivityEndPoint = "admin/ac/setting/subactivity/get/data";
   useEffect(() => {
-    if (txType && serviceId) {
+    if (txType && serviceId && type) {
       dispatch(
         fetchServiceSubType({
-          endPoint: subActivityEndPoint,
-          page,
           token,
-          data: { treatment_id: txType, service_id: serviceId },
+          payload: { treatment_id: txType, bill_type: type, ser_id: serviceId },
         })
       );
     }
-  }, [txType, serviceId, dispatch, page, token]);
+  }, [type, serviceId, txType, dispatch, token]);
 
   // Controlling pagination
   const handlePageClick = ({ selected: selectedPage }) => {
@@ -156,12 +153,12 @@ const AddServiceSubTypeTab = () => {
   };
 
   let treatmentSelect = null;
-  if (selectedTreatments?.length === 0) {
+  if (selectedTreatmentData?.data?.length === 0) {
     treatmentSelect = <div className="text-red-700">Select Treatments</div>;
-  } else if (selectedTreatments?.length > 0) {
+  } else if (selectedTreatmentData?.data?.length > 0) {
     treatmentSelect = (
       <>
-        {selectedTreatments?.map((treatment) => {
+        {selectedTreatmentData?.data?.map((treatment) => {
           return (
             <option key={treatment?.id} value={treatment?.id}>
               {treatment?.treatment_name}
@@ -195,6 +192,61 @@ const AddServiceSubTypeTab = () => {
     setSortedInfo(sorter);
   };
 
+  const handleDelete = async (del_id) => {
+    if (del_id) {
+      const payload = { id: del_id };
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/delete/subactivity`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token,
+          },
+          data: payload,
+        });
+        if (res?.data?.status === "success") {
+          toast.success("Successfully Deleted the sub-type activity", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            pauseOnHover: true,
+            style: { fontSize: "12px" },
+          });
+          dispatch(
+            fetchServiceSubType({
+              token,
+              payload: {
+                treatment_id: txType,
+                bill_type: type,
+                ser_id: serviceId,
+              },
+            })
+          );
+        }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            closeOnClick: true,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+        }
+      } catch (error) {
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          style: { fontSize: "12px" },
+        });
+      }
+    }
+  };
+
   console.log(table);
 
   // -------------------------------------------Table Data-----------------------------------
@@ -222,14 +274,13 @@ const AddServiceSubTypeTab = () => {
         return (
           <div className=" flex justify-center items-center">
             <div className="flex items-center ">
-              <Switch
-                size="small"
-                checked={record?.type ? true : false}
-                onClick={() => setValue(!record?.type)}
-              />
-              <span className="text-[14px] font-medium text-gray-500 mx-3">
-                Active
-              </span>
+              <AddServiceSubTypeTabActive
+                id={record?.id}
+                status={record?.is_active}
+                txType={txType}
+                serviceId={serviceId}
+                type={type}
+              ></AddServiceSubTypeTabActive>
             </div>
           </div>
         );
@@ -257,7 +308,10 @@ const AddServiceSubTypeTab = () => {
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
-              <button className="text-sm mx-1  text-red-500">
+              <button
+                onClick={() => handleDelete(record?.id)}
+                className="text-sm mx-1  text-red-500"
+              >
                 <AiOutlineDelete />
               </button>
             </div>
@@ -313,7 +367,7 @@ const AddServiceSubTypeTab = () => {
             {billType?.map((t, index) => {
               return (
                 <option key={index} value={t?.type}>
-                  Billable
+                  {t?.type === 1 ? "Billble" : "Non-Billable"}
                 </option>
               );
             })}

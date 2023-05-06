@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Outlet, useParams } from "react-router-dom";
 import doctor from "../../../Assets/doctor.png";
@@ -11,13 +11,33 @@ import { BsFillFileEarmarkLock2Fill } from "react-icons/bs";
 import { TbReport } from "react-icons/tb";
 import { TiDocumentAdd } from "react-icons/ti";
 import { AiOutlineCloudUpload, AiOutlinePhone } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { getpatientsDetails } from "../../../../features/Patient_redux/patientSlice";
+import useToken from "../../../../CustomHooks/useToken";
 
 const PatientsInfo = () => {
-  // Great parent component
-  //
+  // main parent component for all patient related components
   const { id } = useParams();
-  // console.log(id);
   localStorage.setItem("p_key", id);
+  const { token } = useToken();
+  const dispatch = useDispatch();
+
+  const data = useSelector(
+    (state) => state?.patientInfo?.patientDetails?.data?.client_info || {}
+  );
+  console.log("patient_details===", data);
+  useEffect(() => {
+    // action dispatched
+    dispatch(
+      getpatientsDetails({
+        payload: {
+          patient_id: id,
+        },
+        token,
+      })
+    );
+  }, [id, dispatch, token]);
+
   return (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -25,13 +45,16 @@ const PatientsInfo = () => {
           <IoCaretBackCircleOutline />
         </Link>
         <div className="text-xs font-normal">
-          <span className="text-sm font-semibold text-primary">Amro LLC |</span>
+          <span className="text-sm font-semibold text-primary">
+            {data?.client_full_name} |
+          </span>
           <span className="text-orange-400 font-semibold">DOB :</span>
-          09/28/2021 |
+          {data?.client_dob} |
           <span className="text-orange-400 font-semibold">Phone : </span>
-          (894)-023-8043 |
+          {data?.phone_number} |
           <span className="text-orange-400 font-semibold">Address : </span>
-          1222, OTtn, With Jersey City NJ 32809
+          {data?.client_street}, {data?.client_city}, {data?.client_state}{" "}
+          {data?.client_zip}
         </div>
       </div>
       <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between gap-2 my-2">

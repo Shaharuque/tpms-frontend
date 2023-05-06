@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { headers } from "../../../Misc/BaseClient";
+import { baseIp, headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
 import { FaRegAddressCard } from "react-icons/fa";
@@ -138,18 +138,20 @@ const TableApi = () => {
   //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
     const getPatientsData = async () => {
-      const res = await axios({
-        method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/patient/get/all?page=1`,
+      let res = await axios({
+        method: "post",
+        url: `${baseIp}/patient/list`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token ? token : null, //directly access token from custom hook useToken
+          "x-auth-token": token,
+        },
+        data: {
+          page: 1,
         },
       });
-      // const result = await res.json();
-      const data = res.data?.patients?.data;
-      //console.log(data)
+      const data = res?.data?.data?.data;
+      console.log(data);
       setItems(data);
     };
     getPatientsData();
@@ -157,16 +159,19 @@ const TableApi = () => {
   console.log("headers from patients", headers);
 
   const fetchPatients = async () => {
-    const res = await axios({
-      method: "POST",
-      url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/patient/get/all?page=${page}`,
+    let res = await axios({
+      method: "post",
+      url: `${baseIp}/patient/list`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token ? token : null,
+        "x-auth-token": token,
+      },
+      data: {
+        page,
       },
     });
-    const data = res.data?.patients?.data;
+    const data = res?.data?.data?.data;
     console.log(data);
     return data;
   };
@@ -463,12 +468,13 @@ const TableApi = () => {
       key: "is_active_client",
       dataIndex: "is_active_client",
       width: 100,
-      render: (_, { is_active_client }) => {
+      render: (_, { id, is_active_client }) => {
         //console.log("Status : ", Status);
         return (
           <div className="flex justify-center">
             <PatientStatusAction
-              status={is_active_client}
+              id={id}
+              is_active_client={is_active_client}
             ></PatientStatusAction>
           </div>
         );
