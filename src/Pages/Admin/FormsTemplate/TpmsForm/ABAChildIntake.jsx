@@ -1660,7 +1660,7 @@ const ABAChildIntake = () => {
                 <span>
                   <label
                     for="rec_name"
-                    className=" font-bold text-base truncate"
+                    className=" font-bold text-base"
                   >
                     * Does either parent/guardian’s job require them to be away
                     from home for long hours or extended periods of time that
@@ -2670,7 +2670,7 @@ const ABAChildIntake = () => {
                 <span>
                   <label
                     for="rec_name"
-                    className=" font-bold text-base truncate"
+                    className=" font-bold text-base"
                   >
                     We provide in-home, community-based, and in-center ABA services(located at 7001 Johnnycake Rd, #106, Windsor Mill, MD 21224. Please indicate which location(s) you are interested in receiving services(you may choose more than 1 option). Please note this is a preference and is not guaranteed. We fulfill location requests for center-based services based on available space and medical necessity.
                   </label>
