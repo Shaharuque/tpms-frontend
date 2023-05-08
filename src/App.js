@@ -302,11 +302,9 @@ import SBHABAConsentForm from "./Pages/Admin/FormsTemplate/TpmsForm/SBHABAConsen
 import InformedConsentForTeletherapy from "./Pages/Admin/FormsTemplate/TpmsForm/InformedConsentForTeletherapy";
 import ReleaseofInformationConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ReleaseofInformationConsent";
 import EvaluationServicesConsent from "./Pages/Admin/FormsTemplate/TpmsForm/EvaluationServicesConsent";
-<<<<<<< HEAD
 import ABAChildIntake from "./Pages/Admin/FormsTemplate/TpmsForm/ABAChildIntake";
-=======
 import Evaluation_intake_form from "./Pages/Admin/FormsTemplate/TpmsForm/Evaluation_intake_form";
->>>>>>> origin/maria
+
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -691,15 +689,15 @@ function App() {
             path="/Evaluation-Services-Consent"
             element={<EvaluationServicesConsent></EvaluationServicesConsent>}
           ></Route>
-<<<<<<< HEAD
+
             <Route
             path="/ABA-Child-Intake"
             element={<ABAChildIntake></ABAChildIntake>}
-=======
+            ></Route>
           <Route
             path="/evaluation-intake-form"
             element={<Evaluation_intake_form></Evaluation_intake_form>}
->>>>>>> origin/maria
+
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
