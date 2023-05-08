@@ -302,6 +302,7 @@ import SBHABAConsentForm from "./Pages/Admin/FormsTemplate/TpmsForm/SBHABAConsen
 import InformedConsentForTeletherapy from "./Pages/Admin/FormsTemplate/TpmsForm/InformedConsentForTeletherapy";
 import ReleaseofInformationConsent from "./Pages/Admin/FormsTemplate/TpmsForm/ReleaseofInformationConsent";
 import EvaluationServicesConsent from "./Pages/Admin/FormsTemplate/TpmsForm/EvaluationServicesConsent";
+import Evaluation_intake_form from "./Pages/Admin/FormsTemplate/TpmsForm/Evaluation_intake_form";
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
@@ -685,6 +686,10 @@ function App() {
           <Route
             path="/Evaluation-Services-Consent"
             element={<EvaluationServicesConsent></EvaluationServicesConsent>}
+          ></Route>
+          <Route
+            path="/evaluation-intake-form"
+            element={<Evaluation_intake_form></Evaluation_intake_form>}
           ></Route>
           {/* ------------------------form End--------------------------- */}
           <Route
