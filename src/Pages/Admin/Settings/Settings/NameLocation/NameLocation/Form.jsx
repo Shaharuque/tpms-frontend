@@ -4,7 +4,7 @@ import NameLocationTableAddButton from "./NameLocationTableAddButton";
 import { FaPlus } from "react-icons/fa";
 
 const Form = ({ item, primarydata }) => {
-  console.log("item, primarydata", item);
+  console.log("item, primarydata", primarydata);
 
   const {
     register,
