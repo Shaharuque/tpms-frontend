@@ -405,7 +405,9 @@ const Form = () => {
         </Link>
         <div className="my-2"></div>
         <Link to={"/Informed-Consent-For-Teletherapy"}>
-          <button className="pms-button">Informed-Consent-For-Teletherapy</button>
+          <button className="pms-button">
+            Informed-Consent-For-Teletherapy
+          </button>
         </Link>
         <div className="my-2"></div>
         <Link to={"/Releaseof-Info-rmation-Consent"}>
@@ -427,6 +429,11 @@ const Form = () => {
           <button className="pms-button">SBH ABA CONSENT FORM</button>
         </Link>
         
+        <br />
+        <div className="my-2"></div>
+        <Link to={"/evaluation-intake-form"}>
+          <button className="pms-button">Evaluation Intake Form</button>
+        </Link>
         <br />
       </div>
     </div>
