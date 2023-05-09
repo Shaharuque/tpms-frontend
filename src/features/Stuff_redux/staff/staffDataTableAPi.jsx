@@ -20,11 +20,11 @@ export const staffDataTableAPi = apiSlice.injectEndpoints({
     // update active status
     updateStatus: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/active/update",
+        url: "/provider/employee/status/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),

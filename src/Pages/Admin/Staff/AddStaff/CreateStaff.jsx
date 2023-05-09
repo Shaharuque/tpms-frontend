@@ -1,42 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../CustomHooks/useToken";
-import { useSelectedTreatmentsMutation } from "../../../../features/Settings_redux/selectedTreatmentsApi";
 import { useCreateStuffMutation } from "../../../../features/Stuff_redux/staff/staffApi";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import { useGetSelectedStaffQuery } from "../../../../features/Settings_redux/addStaffType/addStaffApi";
 
 const CreateStaff = () => {
   // const { staff } = useParams();
   const [gender, setgender] = useState();
   const { token } = useToken();
+  const navigate = useNavigate();
 
   //selected treatments data get api
-  const [
-    selectedTreatments,
-    { data: treatments, isSuccess: getTreamentSuccess },
-  ] = useSelectedTreatmentsMutation();
+  const { data: selectedTreatmentData, isLoading: selectedTreatmentLoading } =
+    useGetAllSelectedTreatmentsQuery({ token: token });
+  console.log("Selected Treatements", selectedTreatmentData?.data);
+
+  //selected employee type data get api
+  const { data: credentialType, isLoading: typeLoading } =
+    useGetSelectedStaffQuery({ token: token });
+  console.log("Selected Treatements", credentialType?.data);
 
   //create staff api
   const [createStuff, { isSuccess: createSuccess, isError: createError }] =
     useCreateStuffMutation();
 
-  useEffect(() => {
-    selectedTreatments({ token });
-  }, [token]);
-
   //select treatment boiler plate
   let treatmentSelect = null;
-  if (treatments?.treatment_data?.length === 0) {
+  if (selectedTreatmentData?.data?.length === 0) {
     treatmentSelect = <div className="text-red-700">Select Treatments</div>;
-  } else if (treatments?.treatment_data?.length > 0) {
+  } else if (selectedTreatmentData?.data?.length > 0) {
     treatmentSelect = (
       <>
-        {treatments?.treatment_data?.map((treatment) => {
+        {selectedTreatmentData?.data?.map((treatment) => {
           return (
             <option key={treatment?.id} value={treatment?.id}>
               {treatment?.treatment_name}
+            </option>
+          );
+        })}
+      </>
+    );
+  }
+  //select Credential type boiler plate
+  let credentialSelect = null;
+  if (credentialType?.data?.length === 0) {
+    credentialSelect = (
+      <div className="text-red-700">Select Credential Type</div>
+    );
+  } else if (credentialType?.data?.length > 0) {
+    credentialSelect = (
+      <>
+        {credentialType?.data?.map((c) => {
+          return (
+            <option key={c?.id} value={c?.id}>
+              {c?.type_name}
             </option>
           );
         })}
@@ -49,7 +70,12 @@ const CreateStaff = () => {
   };
   console.log(gender);
 
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const onSubmit = (data) => {
     let payload = {
       ...data,
@@ -62,7 +88,7 @@ const CreateStaff = () => {
         payload,
       });
     }
-    console.log(payload);
+    // console.log(payload);
   };
   useEffect(() => {
     if (createSuccess) {
@@ -70,13 +96,16 @@ const CreateStaff = () => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
-      reset();
+      // reset();
+      navigate("/admin/staffs");
     } else if (createError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [createSuccess, createError]);
@@ -84,7 +113,7 @@ const CreateStaff = () => {
   return (
     <div className="sm:h-[100vh]">
       <div className="flex items-center flex-wrap gap-2 justify-between">
-        <h1 className="text-lg my-2 text-orange-500">Today's Copay</h1>
+        <h1 className="text-lg my-2 text-orange-500">Provider</h1>
         <div className="flex items-center gap-3">
           <Link
             to={"/admin/staffs"}
@@ -172,6 +201,7 @@ const CreateStaff = () => {
             <input
               type="text"
               name="ssn"
+              placeholder="XX-YYYYYY"
               className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("ssn")}
             />
@@ -184,8 +214,8 @@ const CreateStaff = () => {
               </span>
             </label>
             <input
-              type="text"
               name="office_phone"
+              placeholder="(XXX)-YYY-ZZZZ"
               className="input-border text-gray-600 rounded-sm py-[1px] text-[14px] font-medium w-full ml-1 focus:outline-none"
               {...register("office_phone")}
             />
@@ -274,13 +304,12 @@ const CreateStaff = () => {
               </span>
             </label>
             <select
+              disabled={typeLoading ? true : false}
               className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               {...register("credential_type")}
             >
-              <option value={0}>Select</option>
-              <option value={23}>
-                Infant Toddler Developmental Specialist
-              </option>
+              <option value="0">Select Credential Type</option>
+              {credentialSelect}
             </select>
           </div>
           <div>
@@ -290,9 +319,11 @@ const CreateStaff = () => {
               </span>
             </label>
             <select
+              disabled={selectedTreatmentLoading ? true : false}
               className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
               {...register("treatment_type")}
             >
+              <option value="0">Select Treatment Type</option>
               {treatmentSelect}
             </select>
           </div>

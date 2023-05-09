@@ -11,9 +11,10 @@ const ContactDetails = () => {
   const { token } = useToken();
   const { id } = useParams();
   console.log(id);
-  const { data: contactData } = useStaffContactInfoQuery({ token, id });
+  const { data: contactData, isSuccess: contactDetailsSucess } =
+    useStaffContactInfoQuery({ token, id });
 
-  // console.log("contactData", contactData);
+  console.log("contactData", contactData);
   const handleContactDetails = () => {
     SetContactDetails(!contactDetails);
     setEmergency(false);
@@ -27,7 +28,7 @@ const ContactDetails = () => {
   return (
     <div className="md:h-[100vh]">
       <h1 className=" text-orange-400">Contact Details</h1>
-      {contactData?.contact_details && contactData?.status === "success" && (
+      {contactData?.contact_details && contactDetailsSucess && (
         <ContactDetailsOne
           handleContactDetails={handleContactDetails}
           contactDetails={contactDetails}
@@ -36,14 +37,13 @@ const ContactDetails = () => {
       )}
       {/* emergency_contact_details */}
 
-      {contactData?.emergency_contact_details &&
-        contactData?.status === "success" && (
-          <ContactDetailsTwo
-            handleEmergencyDetails={handleEmergencyDetails}
-            emergency={emergency}
-            emergencyApiData={contactData?.emergency_contact_details}
-          ></ContactDetailsTwo>
-        )}
+      {contactData?.emergency_contact_details && contactDetailsSucess && (
+        <ContactDetailsTwo
+          handleEmergencyDetails={handleEmergencyDetails}
+          emergency={emergency}
+          emergencyApiData={contactData?.emergency_contact_details}
+        ></ContactDetailsTwo>
+      )}
     </div>
   );
 };

@@ -8,23 +8,79 @@ import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
 import StuffStatusAction from "./Staffs/StuffStatus/StuffStatusAction";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+import { baseIp } from "../../../Misc/BaseClient";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ShimmerTableTet from "../../Pages/Settings/SettingComponents/ShimmerTableTet";
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
-  const [StafData, SetStafData] = useState([]);
+  const [staffData, setStaffData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const { token } = useToken();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
+  const [hasMore, setHasMore] = useState(true);
 
-  const {
-    data: stuffData,
-    isLoading: staffLoading,
-    isError,
-  } = useGetStaffDataQuery({ token, page });
+  //get data from API + data fetch from api while scrolling[Important]
+  useEffect(() => {
+    const getStaffData = async () => {
+      let res = await axios({
+        method: "post",
+        url: `${baseIp}/provider/list`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-auth-token": token,
+        },
+        data: {
+          page: 1,
+        },
+      });
+      const data = res?.data?.providerData?.data;
+      setStaffData(data);
+    };
+    getStaffData();
+  }, [token]);
+  console.log("This is satff data of first page", staffData);
 
-  console.log("rtk data received", stuffData);
-  const staffTableData = stuffData?.staffs?.data;
-  // SetStafData(stuffData?.staffs?.data);
+  const fetchProviders = async () => {
+    let res = await axios({
+      method: "post",
+      url: `${baseIp}/provider/list`,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "x-auth-token": token,
+      },
+      data: {
+        page,
+      },
+    });
+    const data = res?.data?.providerData?.data;
+    console.log(data);
+    return data;
+  };
+
+  const fetchData = async () => {
+    const providersFromServer = await fetchProviders();
+    //console.log(providersFromServer);
+    setStaffData([...staffData, ...providersFromServer]);
+    if (providersFromServer.length === 0) {
+      setHasMore(false);
+    }
+    setPage(page + 1);
+  };
+  console.log("final total staffs", staffData);
+
+  // const {
+  //   data: stuffData,
+  //   isLoading: staffLoading,
+  //   isError,
+  // } = useGetStaffDataQuery({ token, page });
+
+  // console.log("rtk data received", stuffData);
+  // const staffTableData = stuffData?.staffs?.data;
+  // // SetStafData(stuffData?.staffs?.data);
 
   const clearFilters = () => {
     setFilteredInfo({});
@@ -86,12 +142,22 @@ const Staffs = () => {
       key: "credential_type",
       width: 150,
       //   sorter is for sorting asc or dsc purpose
+      render: (_, record) => {
+        // console.log("tags : ", Name, id);
+        return (
+          <div>
+            {record?.employeeTypeAssign?.type_name || (
+              <h1 className="text-red-500">Not Assigned Yet</h1>
+            )}
+          </div>
+        );
+      },
       sorter: (a, b) => {
         return a.credential_type > b.credential_type ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder:
         sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Phone",
@@ -193,7 +259,11 @@ const Staffs = () => {
       render: (_, { is_active, id }) => {
         //console.log("Status : ", Status);
         return (
-          <StuffStatusAction id={id} status={is_active}></StuffStatusAction>
+          <StuffStatusAction
+            id={id}
+            status={is_active}
+            setStaffData={setStaffData}
+          ></StuffStatusAction>
         );
       },
     },
@@ -251,21 +321,22 @@ const Staffs = () => {
         </div>
       </div>
 
-      <div className=" overflow-scroll">
-        {staffLoading ? (
-          <Loading />
-        ) : (
-          <Table
-            rowKey={(record) => record.id}
-            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-            size="small"
-            className="table-striped-rows text-xs font-normal"
-            columns={columns}
-            dataSource={staffTableData}
-            onChange={handleChange}
-          />
-        )}
-      </div>
+      <InfiniteScroll
+        dataLength={staffData?.length}
+        next={staffData?.length > 0 && fetchData}
+        hasMore={hasMore}
+        loader={<ShimmerTableTet></ShimmerTableTet>}
+      >
+        <Table
+          rowKey={(record) => record.id}
+          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+          size="small"
+          className="table-striped-rows text-xs font-normal"
+          columns={columns}
+          dataSource={staffData}
+          onChange={handleChange}
+        />
+      </InfiniteScroll>
     </div>
   );
 };

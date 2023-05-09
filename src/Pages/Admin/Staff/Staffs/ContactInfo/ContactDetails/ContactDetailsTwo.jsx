@@ -19,7 +19,7 @@ const ContactDetailsTwo = ({
     useAddEmergencyContactInfoMutation();
   const onSubmit = (data) => {
     const payload = {
-      employee_id: emergencyApiData?.employee_id,
+      employee_contact_edit: emergencyApiData?.employee_id,
       em_address_one: data?.address_one,
       em_address_two: data?.address_two,
       em_contact_name: data?.contact_name,
@@ -42,12 +42,14 @@ const ContactDetailsTwo = ({
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (isError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [emResData, emResData?.message, emResData?.status, isError]);
@@ -231,7 +233,6 @@ const ContactDetailsTwo = ({
                     </label>
                     <textarea
                       rows={4}
-                      placeholder="maxLength is 6"
                       size="middle"
                       className="w-full border bottom-2 ml-1 p-1"
                       {...register("address_note")}

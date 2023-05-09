@@ -217,7 +217,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                  dataSource={credentials?.credentials_list?.data}
+                  dataSource={credentials?.credentialsList?.data}
                   onChange={handleChange}
                 />
               </div>

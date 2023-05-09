@@ -2,36 +2,8 @@
 
 import { apiSlice } from "../../api/apiSlice";
 
-export const AddStaffTypeApi = apiSlice.injectEndpoints({
+export const addStaffTypeApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // search treatment
-    // TreatmentSearch: builder.query({
-    //   query: ({ token, data }) => ({
-    //     url: `setting/get/all/treatment/search`,
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "Application/json",
-    //       "x-auth-token": token,
-    //     },
-    //     body: JSON.stringify(data),
-    //   }),
-    //   providesTags: ["SearchTretment"],
-    // }),
-
-    // search treatment search
-    // SearchSelectedTreatment: builder.query({
-    //   query: ({ token, data }) => ({
-    //     url: `setting/get/all/Selectedtreatment/search`,
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "Application/json",
-    //       "x-auth-token": token,
-    //     },
-    //     body: JSON.stringify(data),
-    //   }),
-    //   providesTags: ["SearchSelectedTretment"],
-    // }),
-
     //All getAllStaff Api
     getAllStaff: builder.query({
       query: ({ token }) => ({
@@ -81,7 +53,7 @@ export const AddStaffTypeApi = apiSlice.injectEndpoints({
     //  delete
     // removeCptExclusion: builder.mutation({
     //   query: ({ token, data }) => ({
-    //     url: `setting/remove/staff/type/from/selected`,
+    //     url: `setting/remove/cpt/exclusion`,
     //     method: "POST",
     //     headers: {
     //       "content-type": "Application/json",
@@ -96,30 +68,8 @@ export const AddStaffTypeApi = apiSlice.injectEndpoints({
     //     // "SearchSelectedTretment",
     //   ],
     // }),
-
-    removeStaffType: builder.mutation({
-      query: ({ token, data }) => ({
-        url: `setting/remove/staff/type/from/selected`,
-        method: "POST",
-        headers: {
-          "content-type": "Application/json",
-          "x-auth-token": token,
-        },
-        body: JSON.stringify(data),
-      }),
-      invalidatesTags: [
-        "availableCptCodes",
-        "excludedCptCodes",
-        // "SearchTretment",
-        // "SearchSelectedTretment",
-      ],
-    }),
   }),
 });
 
-export const {
-  useAddStaffTypeMutation,
-  useGetAllStaffQuery,
-  useGetSelectedStaffQuery,
-  useRemoveStaffTypeMutation,
-} = AddStaffTypeApi;
+export const { useAddStaffTypeMutation, useGetAllStaffQuery, useGetSelectedStaffQuery } =
+  addStaffTypeApi;

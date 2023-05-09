@@ -15,6 +15,7 @@ export const holidaySetupAPi = apiSlice.injectEndpoints({
       }),
       providesTags: ["allHoliday"],
     }),
+
     holidayAdd: builder.mutation({
       query: ({ token, data }) => ({
         url: `setting/new/holiday/save`,
@@ -27,9 +28,25 @@ export const holidaySetupAPi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["allHoliday"],
     }),
+
     holidayDelete: builder.mutation({
       query: ({ token, data }) => ({
         url: `setting/holiday/delete`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      invalidatesTags: ["allHoliday"],
+    }),
+
+    // holid day update
+
+    holidayUpdate: builder.mutation({
+      query: ({ token, data }) => ({
+        url: `setting/federal/holiday/save`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -46,4 +63,5 @@ export const {
   useGetAllHolidayQuery,
   useHolidayAddMutation,
   useHolidayDeleteMutation,
+  useHolidayUpdateMutation,
 } = holidaySetupAPi;

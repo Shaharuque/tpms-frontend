@@ -1,7 +1,6 @@
 // Staff Birthday is not working
 import moment from "moment";
 import { Switch } from "antd";
-import TextArea from "antd/lib/input/TextArea";
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -16,6 +15,8 @@ import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import { ColorPicker, useColor } from "react-color-palette";
 import "react-color-palette/lib/css/styles.css";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import { useGetSelectedStaffQuery } from "../../../../../features/Settings_redux/addStaffType/addStaffApi";
 const Bio = () => {
   const { id } = useParams();
   const { token } = useToken();
@@ -29,15 +30,61 @@ const Bio = () => {
   const [signatureUpload, setSignatureUpload] = useState("");
 
   //get satff info api
-  const {
-    data: staffData,
-    isLoading: staffDataLoading,
-    isSuccess,
-  } = useGetInfoQuery({ token, id: id });
+  const { data: staffData, isLoading: staffDataLoading } = useGetInfoQuery({
+    token,
+    id: id,
+  });
   console.log("staff data", staffData, staffDataLoading);
   //update staff api
   const [updateStaff, { isSuccess: updateSuccess, isError: updateError }] =
     useUpdateStaffMutation();
+
+  //selected treatments data get api
+  const { data: selectedTreatmentData, isLoading: selectedTreatmentLoading } =
+    useGetAllSelectedTreatmentsQuery({ token: token });
+  console.log("Selected Treatements", selectedTreatmentData?.data);
+
+  //selected employee type data get api
+  const { data: credentialType, isLoading: typeLoading } =
+    useGetSelectedStaffQuery({ token: token });
+  console.log("Selected Treatements", credentialType?.data);
+
+  //select treatment boiler plate
+  let treatmentSelect = null;
+  if (selectedTreatmentData?.data?.length === 0) {
+    treatmentSelect = <div className="text-red-700">Select Treatments</div>;
+  } else if (selectedTreatmentData?.data?.length > 0) {
+    treatmentSelect = (
+      <>
+        {selectedTreatmentData?.data?.map((treatment) => {
+          return (
+            <option key={treatment?.id} value={treatment?.id}>
+              {treatment?.treatment_name}
+            </option>
+          );
+        })}
+      </>
+    );
+  }
+  //select Credential type boiler plate
+  let credentialSelect = null;
+  if (credentialType?.data?.length === 0) {
+    credentialSelect = (
+      <div className="text-red-700">Select Credential Type</div>
+    );
+  } else if (credentialType?.data?.length > 0) {
+    credentialSelect = (
+      <>
+        {credentialType?.data?.map((c) => {
+          return (
+            <option key={c?.id} value={c?.id}>
+              {c?.type_name}
+            </option>
+          );
+        })}
+      </>
+    );
+  }
   const {
     caqh_id,
     first_name,
@@ -115,13 +162,14 @@ const Bio = () => {
         taxonomy_code: taxonomy_code,
         terminated_date: terminated_date,
         treatment_type: treatment_type,
+        credential_type,
         title: title,
         service_area_zip: service_area_zip,
         driver_license: driver_license,
         license_exp_date: license_exp_date,
         language: language,
         gender: String(gender),
-        // notes: notes.slice(0, 6),
+        notes: notes,
       });
     }, 0);
   }, [
@@ -141,13 +189,14 @@ const Bio = () => {
     taxonomy_code,
     terminated_date,
     treatment_type,
+    credential_type,
     title,
     driver_license,
     license_exp_date,
     language,
     service_area_zip,
     gender,
-    // notes,
+    notes,
   ]);
 
   console.log(
@@ -159,40 +208,9 @@ const Bio = () => {
   const onSubmit = (data) => {
     // console.log(note);
     const payload = {
-      employee_edit_id: id,
-      caqh_id: data?.caqh_id,
-      first_name: data?.first_name,
-      middle_name: data?.middle_name,
-      last_name: data?.last_name,
-      nickname: data?.nickname,
+      employee_id: id,
+      ...data,
       staff_birthday: staffBirthday,
-      ssn: data?.ssn,
-      // staff_other_id:data?.staff_other_id,
-      office_email: data?.office_email,
-      office_phone: data?.office_phone,
-      office_fax: data?.office_fax,
-      driver_license: data?.driver_license,
-      license_exp_date: data?.license_exp_date,
-      title: data?.title,
-      hir_date_compnay: data?.hir_date_compnay,
-      // credential_type:data?.credential_type,
-      is_active: data.is_active,
-      treatment_type: data?.treatment_type,
-      individual_npi: data?.individual_npi,
-      caqh_id: data?.caqh_id,
-      service_area_zip: data?.service_area_zip,
-      terminated_date: data?.terminated_date,
-      language: data?.language,
-      taxonomy_code: data?.taxonomy_code,
-      gender: Number(data.gender),
-      // military_service:data?.military_service,
-      // therapist_bill:data?.therapist_bill,
-      // is_staff_active:data?.is_staff_active,
-      // enable_fource_creation: data?.enable_fource_creation,
-      // has_catalsty_access: data?.has_catalsty_access,
-      notes: data?.notes,
-      // back_color: data?.back_color,
-      // text_color:data?.text_color,
       session_check: BoolConverter(createSession),
       email_remainder: BoolConverter(emailReminder),
     };
@@ -204,7 +222,7 @@ const Bio = () => {
         payload,
       });
     }
-    console.log("payload", payload);
+    console.log("data", payload);
   };
 
   useEffect(() => {
@@ -213,12 +231,14 @@ const Bio = () => {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (updateError) {
       toast.error("Cann't be Updated", {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [updateSuccess, updateError]);
@@ -230,7 +250,7 @@ const Bio = () => {
   // let convertedStatus = session_check === 1 ? true : false;
   // console.log("convert ", convertedStatus, "raw api", session_check);
   return (
-    <div className="sm:h-[120vh]">
+    <div className="">
       <h1 className="text-lg mt-2 text-left text-orange-400">Bio's</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-3 mr-2 gap-x-6 gap-y-3 ">
@@ -404,8 +424,7 @@ const Bio = () => {
               className="input-border input-font  w-full focus:outline-none"
               {...register("credential_type")}
             >
-              <option value="Speech Therapist">Speech Therapist</option>
-              <option value="female">Female</option>
+              {credentialSelect}
             </select>
           </div>
           <div>
@@ -416,10 +435,9 @@ const Bio = () => {
             </label>
             <select
               className="input-border input-font  w-full focus:outline-none"
-              {...register("tx_type")}
+              {...register("treatment_type")}
             >
-              <option value="Speech Therapist">Speech Therapist</option>
-              <option value="female">Female</option>
+              {treatmentSelect}
             </select>
           </div>
           <div>
@@ -557,12 +575,13 @@ const Bio = () => {
             <label className="label">
               <span className=" label-font">Notes</span>
             </label>
-            <TextArea
+            <textarea
               type="text"
               name="notes"
               rows={4}
-              placeholder="maxLength is 6"
+              placeholder="Notes..."
               size="middle"
+              className="border border-teal-400 rounded-md w-full focus:outline-none p-2 text-sm text-gray-6"
               {...register("notes")}
             />
           </div>
