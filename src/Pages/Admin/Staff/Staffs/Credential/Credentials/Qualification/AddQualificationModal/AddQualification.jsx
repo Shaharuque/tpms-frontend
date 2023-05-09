@@ -92,7 +92,7 @@ const AddQualification = ({ handleClose, open }) => {
                 <input
                   type="text"
                   name="cred_type"
-                  className="input-border input-font w-full focus:outline-none"
+                  className="modal-input-field ml-1 w-full"
                   {...register("cred_type")}
                 />
               </div>

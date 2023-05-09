@@ -6,6 +6,9 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import AddCredential from "./AddCredentialModal/AddCredential";
 import EditCredential from "./EditCredentialModal/EditCredential";
+import { useDeleteCredentialMutation } from "../../../../../../../features/Stuff_redux/credentials/credentialsApi";
+import useToken from "../../../../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
 
 const Credential = ({ handleCredential, credentialOpen, credentials }) => {
   const [display, setDisplay] = useState(true);
@@ -14,6 +17,10 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
   const [editModal, setEditModal] = useState(false);
   const [credentialRecord, setCredentialRecord] = useState();
   const [openEditModal, setOpenEditModal] = useState(false);
+  const { token } = useToken();
+
+  const [deleteCredential, { isSuccess: deleteSuccess }] =
+    useDeleteCredentialMutation();
 
   //Handle credentialEdit Modal
   const handleEditModal = (record) => {
@@ -31,6 +38,27 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
 
   console.log(credentials?.credentials_list);
 
+  const handleDelete = (record) => {
+    const payload = {
+      cred_id: record?.id,
+    };
+    deleteCredential({
+      token,
+      payload,
+    });
+  };
+
+  useEffect(() => {
+    if (deleteSuccess) {
+      toast.success("Successfully Deleted Credential", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
+  }, []);
+
   const column = [
     {
       title: "Name",
@@ -44,22 +72,10 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       ellipsis: true,
     },
     {
-      title: "Credential",
+      title: "Credential Type",
       dataIndex: "credential_name",
       key: "credential_name",
       width: 120,
-      filters: [
-        {
-          text: "behaviour",
-          value: "behaviour",
-        },
-        {
-          text: "tpms",
-          value: "tpms",
-        },
-      ],
-      filteredValue: filteredInfo.credential_name || null,
-      onFilter: (value, record) => record.credential_name.includes(value),
       sorter: (a, b) => {
         return a.credential_name > b.credential_name ? -1 : 1;
       },
@@ -69,31 +85,14 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
     },
 
     {
-      title: "Credential Type",
-      key: "credential_applicable",
-      dataIndex: "credential_applicable",
-      width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.credential_applicable || null,
-      onFilter: (value, record) => record.credential_applicable.includes(value),
-      //   sorter is for sorting asc or dsc purcredential_type
-      sorter: (a, b) => {
-        return a.credential_applicable > b.credential_applicable ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder:
-        sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-
-    {
       title: "Date issue",
       key: "credential_date_expired",
       dataIndex: "credential_date_expired",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.credential_date_expired || null,
-      onFilter: (value, record) =>
-        record.credential_date_expired.includes(value),
+      // filters: [{}],
+      // filteredValue: filteredInfo.credential_date_expired || null,
+      // onFilter: (value, record) =>
+      //   record.credential_date_expired.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
         return a.credential_date_expired > b.credential_date_expired ? -1 : 1; //sorting problem solved using this logic
@@ -109,9 +108,9 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       key: "credential_date_issue",
       dataIndex: "credential_date_issue",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.credential_date_issue || null,
-      onFilter: (value, record) => record.credential_date_issue.includes(value),
+      // filters: [{}],
+      // filteredValue: filteredInfo.credential_date_issue || null,
+      // onFilter: (value, record) => record.credential_date_issue.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
         return a.credential_date_issue > b.credential_date_issue ? -1 : 1; //sorting problem solved using this logic
@@ -128,7 +127,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
       key: "operation",
       width: 150,
       render: (_, record) => (
-        <div className="flex justify-center gap-1 text-primary">
+        <div className="flex justify-center gap-1 text-primary cursor-pointer">
           <FiEdit
             onClick={() => handleEditModal(record)}
             className="text-xs mx-2  text-lime-700"
@@ -138,6 +137,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
           <span>|</span>
 
           <AiOutlineDelete
+            onClick={() => handleDelete(record)}
             className="text-xs text-red-500 mx-2"
             title="Delete"
           />
@@ -175,7 +175,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
               transition: "all .3s ease-out",
             }}
           >
-            {/* {credentials?.credentials_list?.data.length === 0 ? (
+            {credentials?.credentialsList?.data.length === 0 ? (
               <>
                 {display && (
                   <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
@@ -190,25 +190,6 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                 )}
               </>
             ) : (
-              <>
-                <div>
-                  <div className=" overflow-scroll">
-                    <Table
-                      pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                      size="small"
-                      className="table-striped-rows text-xs font-normal"
-                      columns={column}
-                      bordered
-                      rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                      dataSource={credentials?.credentials_list?.data}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-              </>
-            )} */}
-
-            <div>
               <div className=" overflow-scroll">
                 <Table
                   pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
@@ -221,7 +202,7 @@ const Credential = ({ handleCredential, credentialOpen, credentials }) => {
                   onChange={handleChange}
                 />
               </div>
-            </div>
+            )}
 
             <div className="my-4 sm:ml-2">
               <button

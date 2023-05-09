@@ -24,7 +24,6 @@ const AddClearence = ({ handleClose, open }) => {
       clear_type: data?.clear_type,
       date_issue: data?.date_issue,
       date_expire: data?.date_expire,
-      //0/1 hobey cred_apply
       clear_apply: data?.clear_apply ? 1 : 0,
       // cred_file: null,
     };

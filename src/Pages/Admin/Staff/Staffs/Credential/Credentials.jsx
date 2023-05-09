@@ -16,6 +16,7 @@ const Credentials = () => {
   const { token } = useToken();
   const { id } = useParams();
   const [page, setPage] = useState(1);
+  const [page2, setPage2] = useState(1);
 
   //get all credential data api
   const { data: credentials, isLoading: credentialsLoading } =
@@ -29,7 +30,7 @@ const Credentials = () => {
   const { data: clearences, isLoading: clearenceLoading } =
     useGetClearenceQuery({
       token,
-      page: 1,
+      page: page2,
       id: id,
     });
 

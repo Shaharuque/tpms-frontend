@@ -1,6 +1,4 @@
 //payperiod related apis will be handled here
-
-import { baseIp } from "../../../Misc/BaseClient";
 import { apiSlice } from "../../api/apiSlice";
 
 export const payPeriodApi = apiSlice.injectEndpoints({

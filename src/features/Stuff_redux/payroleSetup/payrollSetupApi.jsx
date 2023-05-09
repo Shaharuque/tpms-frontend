@@ -7,12 +7,13 @@ export const payrollApi = apiSlice.injectEndpoints({
     //staff payroll get
     getPayrolls: builder.query({
       query: ({ token, page, id }) => ({
-        url: `admin/ac/staff/payroll/get/${id}?page=${page}`,
-        method: "GET",
+        url: `/provider/payroll/list/get`,
+        method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
+        body: JSON.stringify({ page, id }),
       }),
       providesTags: ["Payroll"],
     }),
