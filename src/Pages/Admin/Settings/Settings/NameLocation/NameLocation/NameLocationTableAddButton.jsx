@@ -1,11 +1,11 @@
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
-  console.log("comming fields", fields);
+const NameLocationTableAddButton = ({ fieldD, register, errors, remove }) => {
+  console.log("comming fields", fieldD);
   return (
     <div>
-      {fields.map((field, index) => {
+      {fieldD.map((field, index) => {
         return (
           <div key={field.id}>
             <div>

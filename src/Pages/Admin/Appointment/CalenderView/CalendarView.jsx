@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import googleCalendar from "../../../Assets/google-calendar.png";
 import Loading from "../../../../Loading/Loading";
 import { Link } from "react-router-dom";
+import EventDetails from "./EventDetails";
 
 const Events = [
   {
@@ -19,12 +20,12 @@ const Events = [
     patient: "Mr.Anik chowdhary",
     provider: "ashni soni",
     treatment: "Mental therapy",
-    start: "2022-10-12T12:30:00",
-    end: "2022-10-12T14:30:00",
+    start: "2023-06-05T12:30:00",
+    end: "2023-06-05T14:30:00",
     color: "#FEE9A6",
     display: "background-inverse",
-    createdAt: "2022-10-22T19:45:10.483Z",
-    updatedAt: "2022-10-22T20:27:12.243Z",
+    createdAt: "2023-06-05T19:45:10.483Z",
+    updatedAt: "2023-06-05T20:27:12.243Z",
     __v: 0,
   },
   {
@@ -113,6 +114,7 @@ const Events = [
   },
 ];
 const CalenderView = () => {
+  const calendarRef = useRef(null);
   const events = [];
   const [selectedDate, setSelectedDate] = useState();
   const [open, setOpen] = useState(false);
@@ -179,7 +181,19 @@ const CalenderView = () => {
       method: "GET",
     }).then((res) => res.json())
   );
-  console.log(calenderEvents);
+  console.log(calenderEvents?.events);
+
+  // FOr hovering
+  const [hoveredEvent, setHoveredEvent] = useState(null);
+
+  const handleEventHover = (event) => {
+    console.log("data of hovered event", event.event.title);
+    setHoveredEvent(event.event);
+  };
+
+  const handleEventLeave = () => {
+    setHoveredEvent(null);
+  };
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -206,6 +220,7 @@ const CalenderView = () => {
       </div>
       <div className="border border-[#089bab] rounded-2xl p-2">
         <FullCalendar
+          ref={calendarRef}
           initialView="dayGridMonth"
           headerToolbar={{
             left: "prevYear,prev,next,nextYear today",
@@ -230,7 +245,25 @@ const CalenderView = () => {
             minute: "2-digit",
             meridiem: "short",
           }}
+          // for hovering
+          // eventContent={(info) => {
+          //   return (
+          //     <div
+          //       onMouseEnter={() => handleEventHover(info)}
+          //       onMouseLeave={handleEventLeave}
+          //     >
+          //       {info.event.title}
+          //     </div>
+          //   );
+          // }}
+          eventMouseEnter={handleEventHover}
+          eventMouseLeave={handleEventLeave}
         />
+        {/* {hoveredEvent && (
+          <EventDetails className="event-wrapper" event={hoveredEvent} />
+        )} */}
+
+        {hoveredEvent && <EventDetails event={hoveredEvent} />}
         {open ? (
           <CustomModal
             selectedDate={selectedDate}
@@ -238,6 +271,7 @@ const CalenderView = () => {
             clicked={open}
             eventId={eventId ? eventId : null}
             refetch={refetch}
+            event={hoveredEvent}
           ></CustomModal>
         ) : null}
       </div>

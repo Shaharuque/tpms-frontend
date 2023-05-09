@@ -4,10 +4,15 @@ import { Modal, Switch } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import axios from "axios";
 
-
-const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) => {
-  console.log(eventId)
-  const [eventDetails, setEventDetails] = useState({})
+const CustomModal = ({
+  selectedDate,
+  handleClose,
+  clicked,
+  refetch,
+  eventId,
+}) => {
+  console.log(eventId);
+  const [eventDetails, setEventDetails] = useState({});
   const { register, handleSubmit, reset } = useForm();
 
   //id based event data get
@@ -20,18 +25,17 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
         });
         // const result = await res.json();
         const result = response;
-        console.log(result?.data)
+        console.log(result?.data);
         setEventDetails(result?.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
     // If clicked of specific event in the calender then getEventDetails function will be called
-    if(eventId){
+    if (eventId) {
       getEventDetails();
     }
   }, []);
-
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -39,11 +43,13 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
       reset({
         patient: eventDetails ? eventDetails?.patient : null,
         provider: eventDetails ? eventDetails?.provider : null,
-        auth: eventDetails ? eventDetails?.auth : 'Cigna Authorization',   //this is for dummy data
+        auth: eventDetails ? eventDetails?.auth : "Cigna Authorization", //this is for dummy data
         // check_date: date ? date.toLocaleDateString() : null,
-        from_date: selectedDate ? selectedDate : eventDetails?.start?.split('T')[0],
-        from_time: eventDetails ? eventDetails?.start?.split('T')[1] : null,
-        to_time: eventDetails ? eventDetails?.end?.split('T')[1] : null,
+        from_date: selectedDate
+          ? selectedDate
+          : eventDetails?.start?.split("T")[0],
+        from_time: eventDetails ? eventDetails?.start?.split("T")[1] : null,
+        to_time: eventDetails ? eventDetails?.end?.split("T")[1] : null,
       });
     }, 0);
   }, [reset, selectedDate, eventId, eventDetails, eventDetails?.patient]);
@@ -94,21 +100,20 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
         width={500}
         closable={false}
         className="box rounded-xl"
-      // onClose={handleClose}
-      // aria-labelledby="responsive-dialog-title"
+        // onClose={handleClose}
+        // aria-labelledby="responsive-dialog-title"
       >
         <div className="px-5 py-2">
           <div className="flex items-center justify-between">
-            {
-              !eventId ?
-                <h1 className="text-lg text-left text-orange-400 ">
-                  Add Appointment
-                </h1>
-                :
-                <h1 className="text-lg text-left text-orange-400 ">
-                  Edit Appointment
-                </h1>
-            }
+            {!eventId ? (
+              <h1 className="text-lg text-left text-orange-400 ">
+                Add Appointment
+              </h1>
+            ) : (
+              <h1 className="text-lg text-left text-orange-400 ">
+                Edit Appointment
+              </h1>
+            )}
             <IoCloseCircleOutline
               onClick={handleClose}
               className="text-gray-600 text-2xl hover:text-primary"

@@ -5,7 +5,7 @@ name: TPMS CI/CD
 
 on:
   push:
-    branches: ["main"]
+    branches: ["amin"]
 
 jobs:
   build:
