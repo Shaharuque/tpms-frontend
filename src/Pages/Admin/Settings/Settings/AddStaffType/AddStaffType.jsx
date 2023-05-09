@@ -10,7 +10,7 @@ import {
   useAddStaffTypeMutation,
   useGetAllStaffQuery,
   useGetSelectedStaffQuery,
-} from "../../../../../features/Settings_redux/ addStaffType/addStaffApi";
+} from "../../../../../features/Settings_redux/addStaffType/addStaffApi";
 
 const AddStaffType = () => {
   const { token } = useToken();
@@ -48,8 +48,10 @@ const AddStaffType = () => {
   } = useGetAllStaffQuery({ token: token });
   console.log(isSuccess, getallTreatmentData);
 
-  const { data: getallFacilityTreatments, isLoading: getallFacilityTreatmentsLoading } =
-    useGetSelectedStaffQuery({ token: token });
+  const {
+    data: getallFacilityTreatments,
+    isLoading: getallFacilityTreatmentsLoading,
+  } = useGetSelectedStaffQuery({ token: token });
   console.log(isSuccess, getallFacilityTreatments);
 
   // add
@@ -71,7 +73,8 @@ const AddStaffType = () => {
   }, [addResponse?.message, addResponse?.status]);
 
   // delete
-  const [removeCptExclusion, { data: deleteResponse }] = useRemoveCptExclusionMutation();
+  const [removeCptExclusion, { data: deleteResponse }] =
+    useRemoveCptExclusionMutation();
   console.log(addResponse, deleteResponse);
 
   useEffect(() => {
@@ -98,13 +101,19 @@ const AddStaffType = () => {
   const handleAdding = (e) => {
     let target = e.target;
     // let name = target.name;
-    let value = Array.from(target.selectedOptions, (option) => option.value * 1);
+    let value = Array.from(
+      target.selectedOptions,
+      (option) => option.value * 1
+    );
     setSelectedKeys(value);
     setfacilityselectedkeys();
   };
 
   const handleRemoving = (e) => {
-    let value = Array.from(e.target.selectedOptions, (option) => option.value * 1);
+    let value = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value * 1
+    );
     setfacilityselectedkeys(value);
     setSelectedKeys();
   };
@@ -193,7 +202,9 @@ const AddStaffType = () => {
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
           <button // onClick={handleAddItems}
             onClick={() => handleSelectedValue()}
-            disabled={selectedKeys === undefined && facilityselectedkeys?.length > 0}
+            disabled={
+              selectedKeys === undefined && facilityselectedkeys?.length > 0
+            }
             className="pms-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -206,7 +217,9 @@ const AddStaffType = () => {
               handleRemoveValue(e);
             }}
             className="pms-close-button w-24"
-            disabled={selectedKeys?.length > 0 && facilityselectedkeys === undefined}
+            disabled={
+              selectedKeys?.length > 0 && facilityselectedkeys === undefined
+            }
           >
             <div className="flex item-center justify-center">
               <HiOutlineArrowLeft className="mr-[2px]" />
@@ -216,7 +229,9 @@ const AddStaffType = () => {
         </div>
 
         <div>
-          <h1 className="text-sm text-gray-700 my-2">Facility Selected Staff Types</h1>
+          <h1 className="text-sm text-gray-700 my-2">
+            Facility Selected Staff Types
+          </h1>
           <div>
             <input
               onChange={handleSelectedSearch}
