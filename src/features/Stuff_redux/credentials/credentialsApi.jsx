@@ -34,11 +34,11 @@ export const credentialApi = apiSlice.injectEndpoints({
     //get staff credential table individual data
     getcredentialinfo: builder.query({
       query: ({ token, id }) => ({
-        url: `admin/ac/staff/credential/info/${id}`,
+        url: `/provider/single/credential/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
       providesTags: ["Credentials"],
@@ -46,11 +46,24 @@ export const credentialApi = apiSlice.injectEndpoints({
     //Update staff credential info
     updateCredential: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/credential/update",
+        url: "/provider/credential/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["Credentials"],
+    }),
+    //Delete staff credential info
+    deleteCredential: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "/provider/credential/delete",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -64,4 +77,5 @@ export const {
   useAddCredentialMutation,
   useUpdateCredentialMutation,
   useGetcredentialinfoQuery,
+  useDeleteCredentialMutation,
 } = credentialApi;

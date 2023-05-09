@@ -51,9 +51,9 @@ const PayrollSetup = () => {
     { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError },
   ] = useBulkDeletePayrollMutation();
 
-  //console.log("payroll data", payrollData);
+  // console.log("payroll data", payrollData);
   const { services } = payrollData || [];
-  //console.log("All services", services);
+  console.log("All services", services);
   const totalPage = payrollData?.payrolls?.last_page;
 
   //handle pagination function

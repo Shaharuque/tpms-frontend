@@ -36,7 +36,7 @@ const Qualification = ({
   const handleDelete = (id) => {
     console.log("delete id", id);
     const payload = {
-      id: id,
+      qual_id: id,
     };
     deleteQualification({
       token,
@@ -46,16 +46,18 @@ const Qualification = ({
   useEffect(() => {
     if (qualificationDelete) {
       handleClose();
-      toast.success("Successfully Deleted", {
+      toast.success("Successfully Deleted Provider Qualification", {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (deleteError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [qualificationDelete, deleteError]);
@@ -217,19 +219,21 @@ const Qualification = ({
               transition: "all .3s ease-out",
             }}
           >
-            {display && (
-              <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
-                <p>No Credential Records</p>
-                <button
-                  onClick={() => setDisplay(false)}
-                  className="text-black"
-                >
-                  X
-                </button>
-              </div>
-            )}
-
-            <div>
+            {qualification?.qualifications?.data?.length === 0 ? (
+              <>
+                {display && (
+                  <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
+                    <p>No Credential Records</p>
+                    <button
+                      onClick={() => setDisplay(false)}
+                      className="text-black"
+                    >
+                      X
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
               <div className=" overflow-scroll">
                 <Table
                   pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
@@ -238,11 +242,12 @@ const Qualification = ({
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                  dataSource={qualification?.qualification_list?.data}
+                  dataSource={qualification?.qualifications?.data}
                   onChange={handleChange}
                 />
               </div>
-            </div>
+            )}
+
             <div className="my-4 ml-2">
               <button
                 className="pms-button mr-2 mt-2"

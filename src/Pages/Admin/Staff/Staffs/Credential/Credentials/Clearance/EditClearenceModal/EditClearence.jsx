@@ -30,7 +30,7 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
     clearance_date_issue,
     clearance_date_exp,
     clearance_applicable,
-  } = clearenceData?.credential_info || {}; //api tey bhul
+  } = clearenceData?.employeeClearance || {}; //api tey bhul
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
@@ -114,7 +114,7 @@ const EditClearence = ({ handleClose, open, clearenceInfo }) => {
               <div>
                 <label className="label">
                   <span className="modal-label-name">
-                    Credential<span className="text-red-500">*</span>
+                    Clearance<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
