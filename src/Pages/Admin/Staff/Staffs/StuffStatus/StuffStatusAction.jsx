@@ -44,25 +44,25 @@ const StuffStatusAction = ({ status, id, setStaffData }) => {
           fontSize: "12px",
         },
       });
-      axios({
-        method: "post",
-        url: `${baseIp}/provider/list`,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "x-auth-token": token,
-        },
-        data: {
-          page: 1,
-        },
-      })
-        .then((res) => {
-          console.log("res", res);
-          setStaffData(res?.data?.providerData?.data);
-        })
-        .catch((err) => {
-          console.log("err", err);
-        });
+      // axios({
+      //   method: "post",
+      //   url: `${baseIp}/provider/list`,
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Accept: "application/json",
+      //     "x-auth-token": token,
+      //   },
+      //   data: {
+      //     page: 1,
+      //   },
+      // })
+      //   .then((res) => {
+      //     console.log("res", res);
+      //     setStaffData(res?.data?.providerData?.data);
+      //   })
+      //   .catch((err) => {
+      //     console.log("err", err);
+      //   });
     } else if (statusError) {
       toast.error("Cann't be Updated", {
         position: "top-center",

@@ -60,8 +60,8 @@ const ServiceSubTypeExclusions = () => {
     { isSuccess: deleteSuccess, isError: deleteError },
   ] = useDeleteServiceSubtypeMutation();
 
-  const subActivityData = allSubActivity?.sub_activity || [];
-  const assignedSubactivityData = assignedActivity?.sub_activity || [];
+  const subActivityData = allSubActivity?.allSubtype || [];
+  const assignedSubactivityData = assignedActivity?.allAssignedSubtype || [];
   console.log(assignedSubactivityData);
 
   //Handle selected ids

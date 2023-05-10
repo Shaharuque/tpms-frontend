@@ -20,11 +20,11 @@ export const payrollApi = apiSlice.injectEndpoints({
     //Add staff payroll
     addPayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/payroll/save",
+        url: "/provider/payroll/save",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -46,11 +46,11 @@ export const payrollApi = apiSlice.injectEndpoints({
     //Update staff credential info
     updatePayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/payroll/update",
+        url: "/provider/payroll/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -59,11 +59,11 @@ export const payrollApi = apiSlice.injectEndpoints({
     //Delete payroll (individual)
     deletePayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/payroll/delete",
+        url: "/provider/payroll/delete",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -82,6 +82,20 @@ export const payrollApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Payroll"],
     }),
+
+    //update bulk payload
+    bulkUpdatePayroll: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "/provider/payroll/bulk/update",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["Payroll"],
+    }),
   }),
 });
 
@@ -92,4 +106,5 @@ export const {
   useUpdatePayrollMutation,
   useDeletePayrollMutation,
   useBulkDeletePayrollMutation,
+  useBulkUpdatePayrollMutation,
 } = payrollApi;
