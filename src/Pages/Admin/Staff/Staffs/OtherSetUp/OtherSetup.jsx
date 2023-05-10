@@ -164,16 +164,10 @@ const OtherSetup = () => {
   // bollian value all state
   const [paidTimeOff, setPaidTimeOff] = useState(BoolConverter(paid_time_off));
   const [exemptStaff, setExemptStaff] = useState(BoolConverter(exemt_staff));
-  const [paidHoliday, setPaidHoliday] = useState(
-    BoolConverter(gets_paid_holiday)
-  );
+  const [paidHoliday, setPaidHoliday] = useState(BoolConverter(gets_paid_holiday));
   const [isPartTime, setIsPartTime] = useState(BoolConverter(is_parttime));
-  const [isContractor, setIsContractor] = useState(
-    BoolConverter(is_contractor)
-  );
-  const [providerWithoutNote, setProviderWithoutNote] = useState(
-    BoolConverter(1)
-  );
+  const [isContractor, setIsContractor] = useState(BoolConverter(is_contractor));
+  const [providerWithoutNote, setProviderWithoutNote] = useState(BoolConverter(1));
 
   // boolian value data control
   useEffect(() => {
@@ -182,21 +176,12 @@ const OtherSetup = () => {
     setPaidHoliday(BoolConverter(gets_paid_holiday));
     setIsPartTime(BoolConverter(is_parttime));
     setIsContractor(BoolConverter(is_contractor));
-  }, [
-    exemt_staff,
-    gets_paid_holiday,
-    is_contractor,
-    is_parttime,
-    paid_time_off,
-  ]);
+  }, [exemt_staff, gets_paid_holiday, is_contractor, is_parttime, paid_time_off]);
 
   console.log("single input", singleInput);
 
   const txTypeStore =
-    (txTypedata &&
-      txTypedata.length > 0 &&
-      txTypedata.map((item) => store.push(item.id))) ||
-    [];
+    (txTypedata && txTypedata.length > 0 && txTypedata.map((item) => store.push(item.id))) || [];
 
   console.log("store", store);
 
@@ -216,9 +201,9 @@ const OtherSetup = () => {
     console.log("payload", payload);
     addOtherSetup({ token, payload });
   };
-  if (otherSetupLoading || loading) {
-    return <Loading />;
-  }
+  // if (otherSetupLoading || loading) {
+  //   return <Loading />;
+  // }
 
   // console.log("dm", dm);
   // console.log("loading..", loading);
@@ -398,11 +383,7 @@ const OtherSetup = () => {
             <label className="label">
               <span className=" label-font">Upload File</span>
             </label>
-            <input
-              type="file"
-              className=" px-2 text-xs w-full"
-              {...register("signature_image")}
-            />
+            <input type="file" className=" px-2 text-xs w-full" {...register("signature_image")} />
           </div>
         </div>
 
@@ -424,9 +405,7 @@ const OtherSetup = () => {
               checked={exemptStaff ? true : false}
               onClick={() => setExemptStaff(!exemptStaff)}
             />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Exempt Staff
-            </span>
+            <span className="text-sm ml-2  text-gray-600 font-medium">Exempt Staff</span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
             <Switch
@@ -434,19 +413,11 @@ const OtherSetup = () => {
               checked={paidHoliday}
               onClick={() => setPaidHoliday(!paidHoliday)}
             />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Gets paid holidays
-            </span>
+            <span className="text-sm ml-2  text-gray-600 font-medium">Gets paid holidays</span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
-            <Switch
-              size="small"
-              checked={isPartTime}
-              onClick={() => setIsPartTime(!isPartTime)}
-            />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Is Parttime
-            </span>
+            <Switch size="small" checked={isPartTime} onClick={() => setIsPartTime(!isPartTime)} />
+            <span className="text-sm ml-2  text-gray-600 font-medium">Is Parttime</span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
             <Switch
@@ -454,9 +425,7 @@ const OtherSetup = () => {
               checked={isContractor}
               onClick={() => setIsContractor(!isContractor)}
             />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Is Contractor
-            </span>
+            <span className="text-sm ml-2  text-gray-600 font-medium">Is Contractor</span>
           </div>
           <div className="flex ml-1 mt-1 items-center">
             <Switch
@@ -473,9 +442,7 @@ const OtherSetup = () => {
           <div className="flex items-center justify-around gap-2 mb-4 ">
             <h3 className="text-sm font-medium w-80">Tax Type</h3>
             <h3 className="text-sm font-medium w-80 text-center">Box 24J</h3>
-            <h3 className="text-sm font-medium w-80 text-center">
-              ID Qualifier
-            </h3>
+            <h3 className="text-sm font-medium w-80 text-center">ID Qualifier</h3>
           </div>
 
           {/* {!otherSetupLoading ? (
