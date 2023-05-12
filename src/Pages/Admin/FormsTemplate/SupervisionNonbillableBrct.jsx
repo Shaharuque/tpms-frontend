@@ -319,7 +319,7 @@ const SupervisionNonbillableBrct = () => {
 
             <div className="mt-5">
               <span className="form-inner-head">FEEDBACK FROM SUPERVISOR:</span>
-              <div className="mt-3 mb-3   border-blue-600 border-2">
+              <div className="mt-3 mb-3 border-blue-600 border-2">
                 <TextArea
                   onChange={(e) => setNotes(e.target.value)}
                   maxLength={300}

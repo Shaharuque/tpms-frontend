@@ -19,22 +19,17 @@ const LeaveTracking = () => {
   const { token } = useToken();
 
   // get Leaves-Tracking api
-  const { data: leaveTrackData, isLoading: getleaveTrackLoading } =
-    useGetLeaveTrackingQuery({
-      token,
-      payload: {
-        employee_id: id,
-      },
-    });
+  const { data: leaveTrackData, isLoading: getleaveTrackLoading } = useGetLeaveTrackingQuery({
+    token,
+    payload: {
+      employee_id: id,
+    },
+  });
 
   // Add new leave api
   const [
     addLeaveTracking,
-    {
-      data: addleaveTrackdata,
-      isSuccess: addleaveTrackSuccess,
-      isError: addleaveTrackError,
-    },
+    { data: addleaveTrackdata, isSuccess: addleaveTrackSuccess, isError: addleaveTrackError },
   ] = useAddLeaveTrackingMutation();
 
   const column = [
@@ -49,8 +44,7 @@ const LeaveTracking = () => {
       sorter: (a, b) => {
         return a.history_date > b.history_date ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "history_date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "history_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -66,8 +60,7 @@ const LeaveTracking = () => {
       sorter: (a, b) => {
         return a.description > b.description ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "description" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "description" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -170,12 +163,7 @@ const LeaveTracking = () => {
         theme: "dark",
       });
     }
-  }, [
-    addleaveTrackError,
-    addleaveTrackSuccess,
-    addleaveTrackdata?.message,
-    reset,
-  ]);
+  }, [addleaveTrackError, addleaveTrackSuccess, addleaveTrackdata?.message, reset]);
 
   const handleChange = (pagination, filters, sorter) => {
     // console.log("Various parameters", pagination, filters, sorter);
@@ -193,9 +181,7 @@ const LeaveTracking = () => {
   return (
     <div className="h-[100vh]">
       <div className="flex items-center justify-between gap-2 my-2">
-        <h1 className="text-lg text-orange-500 text-left font-semibold ">
-          Leaves
-        </h1>
+        <h1 className="text-lg text-orange-500 text-left font-semibold ">Leaves</h1>
         <button onClick={clearFilters} className="pms-clear-button">
           Clear filters
         </button>
@@ -209,7 +195,7 @@ const LeaveTracking = () => {
           columns={column}
           bordered
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-          dataSource={leaveTrackData?.leave_list?.data}
+          dataSource={leaveTrackData?.leave_list}
           onChange={handleChange}
         />
       </div>
@@ -262,11 +248,7 @@ const LeaveTracking = () => {
                   <button className="mr-2 pms-button" type="submit">
                     Apply Leave
                   </button>
-                  <button
-                    className="pms-close-button"
-                    autoFocus
-                    onClick={() => setTimeOpen(false)}
-                  >
+                  <button className="pms-close-button" autoFocus onClick={() => setTimeOpen(false)}>
                     CANCEL
                   </button>
                 </div>
