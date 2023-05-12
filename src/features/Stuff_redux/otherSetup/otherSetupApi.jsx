@@ -6,11 +6,11 @@ export const otherSetupApi = apiSlice.injectEndpoints({
     //Get staff Other Setup
     getOtherSetup: builder.query({
       query: ({ token, id }) => ({
-        url: `/admin/ac/staff/other/setup/${id}`,
+        url: `/provider/other/setup/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
       providesTags: ["OtherSetup"],
@@ -18,11 +18,11 @@ export const otherSetupApi = apiSlice.injectEndpoints({
 
     addOtherSetup: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/other/setup/update",
+        url: "/provider/other/setup/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -31,5 +31,4 @@ export const otherSetupApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetOtherSetupQuery, useAddOtherSetupMutation } =
-  otherSetupApi;
+export const { useGetOtherSetupQuery, useAddOtherSetupMutation } = otherSetupApi;

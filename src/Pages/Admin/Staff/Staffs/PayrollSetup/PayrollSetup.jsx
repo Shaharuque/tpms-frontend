@@ -46,18 +46,13 @@ const PayrollSetup = () => {
   });
 
   //Delete payroll api
-  const [deletePayroll, { isSuccess: deleteSuccess, isError: deleteError }] =
-    useDeletePayrollMutation();
+  const [deletePayroll, { isSuccess: deleteSuccess, isError: deleteError }] = useDeletePayrollMutation();
 
   //Bulk-Delete payroll api
-  const [
-    bulkDeletePayroll,
-    { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError },
-  ] = useBulkDeletePayrollMutation();
+  const [bulkDeletePayroll, { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError }] = useBulkDeletePayrollMutation();
 
   //Bulk update payroll api
-  const [bulkUpdatePayroll, { isSuccess: bulkUpdateSuccess }] =
-    useBulkUpdatePayrollMutation();
+  const [bulkUpdatePayroll, { isSuccess: bulkUpdateSuccess }] = useBulkUpdatePayrollMutation();
 
   // console.log("payroll data", payrollData);
   const { services } = payrollData || [];
@@ -116,17 +111,8 @@ const PayrollSetup = () => {
   }, [deleteSuccess, deleteError]);
 
   const handleBulkDelete = () => {
-    if (
-      select === "1" &&
-      hourlyRate !== null &&
-      milageRate !== null &&
-      selectedRowKeys.length > 0
-    ) {
-      console.log(
-        "from bulk delete hourlyRate, milageRate",
-        hourlyRate,
-        milageRate
-      );
+    if (select === "1" && hourlyRate !== null && milageRate !== null && selectedRowKeys.length > 0) {
+      console.log("from bulk delete hourlyRate, milageRate", hourlyRate, milageRate);
       const payload = {
         hourly_rate: hourlyRate,
         milage_rate: milageRate,
@@ -137,11 +123,7 @@ const PayrollSetup = () => {
         token,
         payload,
       });
-    } else if (
-      select === "2" &&
-      hourlyRate !== null &&
-      selectedRowKeys.length > 0
-    ) {
+    } else if (select === "2" && hourlyRate !== null && selectedRowKeys.length > 0) {
       console.log("from bulk delete hourlyRate", hourlyRate);
       const payload = {
         hourly_rate: hourlyRate,
@@ -152,11 +134,7 @@ const PayrollSetup = () => {
         token,
         payload,
       });
-    } else if (
-      select === "3" &&
-      milageRate !== null &&
-      selectedRowKeys.length > 0
-    ) {
+    } else if (select === "3" && milageRate !== null && selectedRowKeys.length > 0) {
       console.log("from bulk delete milageRate", milageRate);
       const payload = {
         milage_rate: milageRate,
@@ -183,12 +161,8 @@ const PayrollSetup = () => {
       key: "service",
       width: 120,
       render: (_, record) => {
-        let ser = payrollData?.services?.find(
-          (s) => parseInt(s?.id) === parseInt(record?.service_id)
-        );
-        return (
-          <h1>{`${ser?.service} (${ser?.service_treatment?.treatment_name})`}</h1>
-        );
+        let ser = payrollData?.services?.find((s) => parseInt(s?.id) === parseInt(record?.service_id));
+        return <h1>{`${ser?.service} (${ser?.service_treatment?.treatment_name})`}</h1>;
       },
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1;
@@ -209,8 +183,7 @@ const PayrollSetup = () => {
       sorter: (a, b) => {
         return a.hourly_rate > b.hourly_rate ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "hourly_rate" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "hourly_rate" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -226,8 +199,7 @@ const PayrollSetup = () => {
       sorter: (a, b) => {
         return a.milage_rate > b.milage_rate ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "milage_rate" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "milage_rate" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -252,19 +224,11 @@ const PayrollSetup = () => {
       width: 150,
       render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
-          <FiEdit
-            onClick={() => handleEditModal(record)}
-            className="text-xs mx-2  text-lime-700"
-            title="Edit"
-          />
+          <FiEdit onClick={() => handleEditModal(record)} className="text-xs mx-2  text-lime-700" title="Edit" />
 
           <span>|</span>
 
-          <AiOutlineDelete
-            onClick={() => deletePayrollHandler(record)}
-            className="text-xs text-red-500 mx-2"
-            title="Delete"
-          />
+          <AiOutlineDelete onClick={() => deletePayrollHandler(record)} className="text-xs text-red-500 mx-2" title="Delete" />
         </div>
       ),
     },
@@ -297,13 +261,6 @@ const PayrollSetup = () => {
       });
       setSelectedRowKeys([]);
       handleClose();
-    } else if (!bulkUpdateSuccess) {
-      toast.error("some unexpected error occured", {
-        position: "top-center",
-        autoClose: 5000,
-        theme: "dark",
-        style: { fontSize: "12px" },
-      });
     }
   }, [bulkUpdateSuccess]);
   const clearFilters = () => {
@@ -313,19 +270,13 @@ const PayrollSetup = () => {
   return (
     <div className="">
       <div className="flex flex-wrap items-center justify-between gap-2 my-2">
-        <h1 className="text-lg text-orange-500 text-left font-semibold ">
-          Payroll Setup
-        </h1>
+        <h1 className="text-lg text-orange-500 text-left font-semibold ">Payroll Setup</h1>
 
         <div className="flex items-center gap-2">
           <button onClick={clearFilters} className="pms-clear-button border">
             Clear filters
           </button>
-          <button
-            onClick={handleClickOpen}
-            className="pms-button"
-            type="submit"
-          >
+          <button onClick={handleClickOpen} className="pms-button" type="submit">
             + Add Payroll
           </button>
         </div>
@@ -431,21 +382,8 @@ const PayrollSetup = () => {
         </button>
       </div>
 
-      {openModal && (
-        <PayrollSetupModal
-          handleClose={handleClose}
-          open={openModal}
-          services={services}
-        ></PayrollSetupModal>
-      )}
-      {editModal && (
-        <PayrollEditModal
-          payroll={payrollId}
-          services={services}
-          handleClose={handleClose}
-          open={editModal}
-        ></PayrollEditModal>
-      )}
+      {openModal && <PayrollSetupModal handleClose={handleClose} open={openModal} services={services}></PayrollSetupModal>}
+      {editModal && <PayrollEditModal payroll={payrollId} services={services} handleClose={handleClose} open={editModal}></PayrollEditModal>}
     </div>
   );
 };

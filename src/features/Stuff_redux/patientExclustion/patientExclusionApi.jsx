@@ -7,11 +7,11 @@ const patientExclusionApi = apiSlice.injectEndpoints({
     //staff patient exclusion get all
     getAllPatientExclusion: builder.query({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/patient/exclusion/get/all`,
+        url: `/provider/patient/exclusion/get/all`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -20,11 +20,11 @@ const patientExclusionApi = apiSlice.injectEndpoints({
     //  staff patient exclusion assign
     getAssignedPatientExclusion: builder.query({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/patient/exclusion/assign`,
+        url: `/provider/patient/assigned/get/all`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -34,11 +34,11 @@ const patientExclusionApi = apiSlice.injectEndpoints({
     //staff patient exclusion save
     addPatientExclusion: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/patient/exclusion/save`,
+        url: `/provider/add/patient/to/assigned`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -48,11 +48,11 @@ const patientExclusionApi = apiSlice.injectEndpoints({
     // staff patient exclusion delete
     deletePatientExclusion: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/patient/exclusion/delete`,
+        url: `/provider/delete/assigned/patient`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -61,9 +61,5 @@ const patientExclusionApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useAddPatientExclusionMutation,
-  useDeletePatientExclusionMutation,
-  useGetAllPatientExclusionQuery,
-  useGetAssignedPatientExclusionQuery,
-} = patientExclusionApi;
+export const { useAddPatientExclusionMutation, useDeletePatientExclusionMutation, useGetAllPatientExclusionQuery, useGetAssignedPatientExclusionQuery } =
+  patientExclusionApi;
