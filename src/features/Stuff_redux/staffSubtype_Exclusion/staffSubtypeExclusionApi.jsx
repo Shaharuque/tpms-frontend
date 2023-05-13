@@ -6,63 +6,59 @@ const staffSubActivityExclusionApi = apiSlice.injectEndpoints({
     //  get all staff subtypes
     getAllSubActivity: builder.query({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/sub/activity/get/all`,
+        url: `/provider/all/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
-      providesTags: ["Staff_SubActivity"],
+      providesTags: ["serviceSubtype"],
     }),
     //  get all assigned sub-activity
     getAssignedSubtype: builder.query({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/sub/activity/exclusion/assign`,
+        url: `/provider/assigned/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
-      providesTags: ["Staff_SubActivity"],
+      providesTags: ["serviceSubtype"],
     }),
 
     // add staff sub-activity
     addServiceSubtype: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/sub/activity/exclusion/save`,
+        url: `/provider/add/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
-      invalidatesTags: ["Staff_SubActivity"],
+      invalidatesTags: ["serviceSubtype"],
     }),
 
     // Delete staff sub-activity type
     deleteServiceSubtype: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/sub/activity/exclusion/delete`,
+        url: `/provider/remove/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
-      invalidatesTags: ["Staff_SubActivity"],
+      invalidatesTags: ["serviceSubtype"],
     }),
   }),
 });
 
-export const {
-  useGetAllSubActivityQuery,
-  useGetAssignedSubtypeQuery,
-  useAddServiceSubtypeMutation,
-  useDeleteServiceSubtypeMutation,
-} = staffSubActivityExclusionApi;
+export const { useGetAllSubActivityQuery, useGetAssignedSubtypeQuery, useAddServiceSubtypeMutation, useDeleteServiceSubtypeMutation } =
+  staffSubActivityExclusionApi;

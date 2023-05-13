@@ -14,35 +14,24 @@ import {
 import Loading from "../../../../../Loading/Loading";
 import { useSelector } from "react-redux";
 const PatientExclusion = () => {
-  const [selectedKeys, setSelectedKeys] = useState("");
-  const [TransferData, setTransferData] = useState([]);
   const [sortedInfo, setSortedInfo] = useState({});
-  const [display, setDisplay] = useState(true);
   const [targettedData, setTargettedData] = useState([]);
   const { token } = useToken();
   const { id } = useParams();
 
   // is fixed toggle
   const isToggled = useSelector((state) => state.sideBarInfo);
-  console.log("isToggled", isToggled);
+  //console.log("isToggled", isToggled);
 
   //staff patient exclusion get all api
-  const {
-    data: allPatientExclusion,
-    isLoading: patientExclusionLoading,
-    isSuccess: patientExclusionSuccess,
-  } = useGetAllPatientExclusionQuery({
+  const { data: allPatientExclusion, isLoading: patientExclusionLoading } = useGetAllPatientExclusionQuery({
     token,
     payload: {
       employee_id: id,
     },
   });
   //staff patient exclusion assign api
-  const {
-    data: assignedPatients,
-    isLoading: assignedPatientsLoading,
-    isError: assignedPatientsError,
-  } = useGetAssignedPatientExclusionQuery({
+  const { data: assignedPatients, isLoading: assignedPatientsLoading } = useGetAssignedPatientExclusionQuery({
     token,
     payload: {
       employee_id: id,
@@ -50,25 +39,19 @@ const PatientExclusion = () => {
   });
 
   //add staff service sub-type api
-  const [addPatientExclusion, { isSuccess: addSuccess, isError: addError }] =
-    useAddPatientExclusionMutation();
+  const [addPatientExclusion, { data: patientExclusion, isError: addError }] = useAddPatientExclusionMutation();
+  console.log("addPatientExclusion", patientExclusion);
 
   //delete satff service sub-type api
-  const [
-    deletePatientExclusion,
-    { isSuccess: deleteSuccess, isError: deleteError },
-  ] = useDeletePatientExclusionMutation();
+  const [deletePatientExclusion, { data: removeAssignedPatient, isError: deleteError }] = useDeletePatientExclusionMutation();
 
-  const patientExclusionData = allPatientExclusion?.patients || [];
-  const assignedPatientsData = assignedPatients?.patients || [];
+  const patientExclusionData = allPatientExclusion?.allPatients || [];
+  const assignedPatientsData = assignedPatients?.assignedPatients || [];
   // console.log(assignedSubactivityData);
 
   //Handle selected ids
   const handleAdding = (e) => {
-    let value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(e.target.selectedOptions, (option) => option.value * 1);
     // console.log( value);
     setTargettedData(value);
   };
@@ -100,46 +83,62 @@ const PatientExclusion = () => {
 
   //To show Toast
   useEffect(() => {
-    if (addSuccess || deleteSuccess) {
-      toast.success("Successfully Action Done", {
+    if (patientExclusion?.status === "success") {
+      toast.success(patientExclusion?.message, {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
+        style: { backgroundColor: "#454545 ", fontSize: "12px", textAlign: "center" },
       });
-    } else if (addError || deleteError) {
+    } else if (addError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
+        style: { backgroundColor: "red", fontSize: "12px" },
       });
     }
-  }, [deleteSuccess, addSuccess, addError, deleteError]);
+  }, [patientExclusion, addError]);
+
+  useEffect(() => {
+    if (removeAssignedPatient?.status === "success") {
+      toast.success(removeAssignedPatient?.message, {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+        style: { backgroundColor: "#454545 ", fontSize: "12px", textAlign: "center" },
+      });
+    } else if (deleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+        style: { backgroundColor: "red", fontSize: "12px" },
+      });
+    }
+  }, [removeAssignedPatient, deleteError]);
+
+  if (assignedPatientsLoading || patientExclusionLoading) {
+    return <Loading></Loading>;
+  }
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
     setSortedInfo(sorter);
   };
-
-  if (assignedPatientsLoading) {
-    return <Loading></Loading>;
-  }
-
   const column = [
     {
       title: "Patient Name",
       dataIndex: "patient_name",
       key: "patient_name",
       width: 120,
-      render: (_, { patient_name }) => {
-        return (
-          <h1 className="text-center">{patient_name?.client_full_name}</h1>
-        );
+      render: (_, { clientInfo }) => {
+        return <h1 className="text-center">{clientInfo?.client_full_name}</h1>;
       },
       sorter: (a, b) => {
         return a.patient_name > b.patient_name ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "patient_name" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "patient_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -149,10 +148,7 @@ const PatientExclusion = () => {
       width: 100,
       render: (_, { id, File_name }) => {
         return (
-          <button
-            onClick={() => handleDelete(id)}
-            className="mx-auto font-bold text-red-500"
-          >
+          <button onClick={() => handleDelete(id)} className="mx-auto font-bold text-red-500">
             X
           </button>
         );
@@ -162,20 +158,14 @@ const PatientExclusion = () => {
 
   return (
     <div className="h-[100vh]">
-      <h1 className="text-lg text-orange-500 text-left font-semibold ">
-        Service Sub-Type Exclusion
-      </h1>
+      <h1 className="text-md text-orange-500 text-left font-semibold my-4">Patient Exclusion</h1>
       <div
         className={
-          isToggled
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1"
-            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2 gap-x-2 gap-y-1"
+          isToggled ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1" : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2 gap-x-2 gap-y-1"
         }
       >
         <div className="w-full">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
-            Insurance
-          </label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">Insurance</label>
           <select
             multiple={true}
             onChange={(e) => {
@@ -192,12 +182,7 @@ const PatientExclusion = () => {
           </select>
         </div>
         <div className="flex justify-center items-center">
-          <button
-            onClick={handleExcluded}
-            disabled={targettedData.length === 0}
-            className="pms-button my-2"
-            type="submit"
-          >
+          <button onClick={handleExcluded} disabled={targettedData.length === 0} className="pms-button my-2" type="submit">
             Exclude Selected Service Sub-Type
           </button>
         </div>

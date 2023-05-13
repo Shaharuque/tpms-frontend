@@ -51,25 +51,18 @@ const ServiceSubTypeExclusions = () => {
   });
 
   //add staff service sub-type api
-  const [addServiceSubtype, { isSuccess: addSuccess, isError: addError }] =
-    useAddServiceSubtypeMutation();
+  const [addServiceSubtype, { isSuccess: addSuccess, isError: addError }] = useAddServiceSubtypeMutation();
 
   //delete satff service sub-type api
-  const [
-    deleteServiceSubtype,
-    { isSuccess: deleteSuccess, isError: deleteError },
-  ] = useDeleteServiceSubtypeMutation();
+  const [deleteServiceSubtype, { isSuccess: deleteSuccess, isError: deleteError }] = useDeleteServiceSubtypeMutation();
 
-  const subActivityData = allSubActivity?.sub_activity || [];
-  const assignedSubactivityData = assignedActivity?.sub_activity || [];
+  const subActivityData = allSubActivity?.allSubtype || [];
+  const assignedSubactivityData = assignedActivity?.allAssignedSubtype || [];
   console.log(assignedSubactivityData);
 
   //Handle selected ids
   const handleAdding = (e) => {
-    let value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(e.target.selectedOptions, (option) => option.value * 1);
     // console.log( value);
     setTargettedData(value);
   };
@@ -102,20 +95,40 @@ const ServiceSubTypeExclusions = () => {
 
   //To show Toast
   useEffect(() => {
-    if (addSuccess || deleteSuccess) {
-      toast.success("Successfully Action Done", {
+    if (addSuccess) {
+      toast.success("successfully assigned to the exclusion", {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
-    } else if (addError || deleteError) {
+    } else if (addError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 2000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
-  }, [deleteSuccess, addSuccess, addError, deleteError]);
+  }, [addSuccess, addError]);
+
+  useEffect(() => {
+    if (deleteSuccess) {
+      toast.success("successfully removed from assigned", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    } else if (deleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 2000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
+  }, [deleteError, deleteSuccess]);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -128,21 +141,18 @@ const ServiceSubTypeExclusions = () => {
 
   const column = [
     {
-      title: "Patient Name",
+      title: "Service Sub-Type",
       dataIndex: "sub_activity_name",
       key: "sub_activity_name",
       width: 120,
-      render: (_, { sub_activity_name }) => {
-        return (
-          <h1 className="text-center">{sub_activity_name?.sub_activity}</h1>
-        );
+      render: (_, { subactivity }) => {
+        return <h1 className="text-center">{subactivity?.sub_activity}</h1>;
       },
       sorter: (a, b) => {
         return a.sub_activity_name > b.sub_activity_name ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "sub_activity_name" ? sortedInfo.order : null,
-      ellipsis: true,
+      sortOrder: sortedInfo.columnKey === "sub_activity_name" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
       title: "Actions",
@@ -151,10 +161,7 @@ const ServiceSubTypeExclusions = () => {
       width: 100,
       render: (_, { id, File_name }) => {
         return (
-          <button
-            onClick={() => handleDelete(id)}
-            className="mx-auto font-bold text-red-500"
-          >
+          <button onClick={() => handleDelete(id)} className="mx-auto font-bold text-red-500">
             X
           </button>
         );
@@ -164,21 +171,15 @@ const ServiceSubTypeExclusions = () => {
 
   return (
     <div className="h-[100vh]">
-      <h1 className="text-lg text-orange-500 text-left font-semibold ">
-        Service Sub-Type Exclusion
-      </h1>
+      <h1 className="text-lg text-orange-500 text-left font-semibold ">Service Sub-Type Exclusion</h1>
       <div
         className={
-          isToggled
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1"
-            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2 gap-x-2  gap-y-1"
+          isToggled ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1" : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2 gap-x-2  gap-y-1"
         }
       >
         {/* <div className="flex flex-wrap gap-y-1"> */}
         <div className="w-full">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
-            Insurance
-          </label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">Insurance</label>
           <select
             multiple={true}
             onChange={(e) => {
@@ -195,12 +196,7 @@ const ServiceSubTypeExclusions = () => {
           </select>
         </div>
         <div className="flex justify-center items-center">
-          <button
-            onClick={handleExcluded}
-            disabled={targettedData.length === 0}
-            className="pms-button my-2"
-            type="submit"
-          >
+          <button onClick={handleExcluded} disabled={targettedData.length === 0} className="pms-button my-2" type="submit">
             Exclude Selected Service Sub-Type
           </button>
         </div>

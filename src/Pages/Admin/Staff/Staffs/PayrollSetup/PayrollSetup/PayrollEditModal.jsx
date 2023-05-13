@@ -11,8 +11,8 @@ import {
 } from "../../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
 import PyarollMultiSelect from "../PayrollMultiSelect/PyarollMultiSelect";
 
-const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
-  console.log("from edit modal", open, payroll_id, services);
+const PayrollEditModal = ({ handleClose, open, payroll, services }) => {
+  console.log("from edit modal", open, payroll, services);
   const [active, setActive] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = useState(false);
@@ -22,16 +22,16 @@ const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
 
   //record service id wise service description
   const existingService = services?.find(
-    (each) => each.id === payroll_id?.service_id
+    (each) => parseInt(each?.id) === payroll?.service_id
   );
   console.log("Clicked existing service", existingService);
 
   //Individual payroll data id wise
   //   const { data: payrollInfo, isLoading } = useGetpayrollinfoQuery({
   //     token,
-  //     id: payroll_id,
+  //     id: payroll,
   //     payload: {
-  //       id: payroll_id,
+  //       id: payroll,
   //     },
   //   });
   //   console.log(isLoading, payrollInfo);
@@ -44,20 +44,20 @@ const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
   useEffect(() => {
     setTimeout(() => {
       reset({
-        milage_rate: payroll_id?.milage_rate,
-        hourly_rate: payroll_id?.hourly_rate,
+        milage_rate: payroll?.milage_rate,
+        hourly_rate: payroll?.hourly_rate,
       });
     }, 500);
-  }, [reset, payroll_id?.milage_rate, payroll_id?.hourly_rate]);
+  }, [reset, payroll?.milage_rate, payroll?.hourly_rate]);
 
   const onSubmit = (data) => {
     const payload = {
-      edit_id: payroll_id?.id,
+      edit_id: payroll?.id,
       employee_id: id,
       service_id: data?.service,
       hourly: data?.hourly_rate,
       milage: data?.milage_rate,
-      apply_all: 1, //1=true,2=false
+      //apply_all: 1, //1=true,2=false
     };
     if (payload) {
       updatePayroll({
@@ -70,10 +70,11 @@ const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
 
   useEffect(() => {
     if (updateSuccess) {
-      toast.success("Successfully Staff Created", {
+      toast.success("successfully payroll updated", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
       handleClose();
     } else if (updateError) {
@@ -81,6 +82,7 @@ const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [updateSuccess, updateError]);
@@ -124,7 +126,7 @@ const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
                   >
                     {existingService ? (
                       <option value={existingService?.id}>
-                        {existingService?.description}
+                        {existingService?.service}
                       </option>
                     ) : (
                       <option>Select Treatment</option>
@@ -134,7 +136,7 @@ const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
                       ?.map((service) => {
                         return (
                           <option key={service?.id} value={service?.id}>
-                            {service?.description}
+                            {service?.service}
                           </option>
                         );
                       })}
@@ -166,7 +168,7 @@ const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
                   />
                 </div>
 
-                <div className="flex ml-1 mt-8 gap-2 items-center">
+                {/* <div className="flex ml-1 mt-8 gap-2 items-center">
                   <input
                     type="checkbox"
                     name="service"
@@ -175,7 +177,7 @@ const PayrollEditModal = ({ handleClose, open, payroll_id, services }) => {
                     }}
                   />
                   <span className="modal-label-name">Apply to All Service</span>
-                </div>
+                </div> */}
               </div>
               <div className="bg-gray-200 py-[1px] mt-3"></div>
               <div className=" flex items-end justify-end mt-2">

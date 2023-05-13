@@ -6,6 +6,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import {
   useBulkDeletePayrollMutation,
+  useBulkUpdatePayrollMutation,
   useDeletePayrollMutation,
   useGetPayrollsQuery,
 } from "../../../../../features/Stuff_redux/payroleSetup/payrollSetupApi";
@@ -24,11 +25,14 @@ const PayrollSetup = () => {
   const [editModal, setEditModal] = useState(false);
   const [page, setPage] = useState(1);
   const [payrollId, setPayRollId] = useState();
-  const [selectedPayrolls, setSelectedPayrolls] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [hourlyRate, setHourlyRate] = useState(null);
+  const [milageRate, setMilageRate] = useState(null);
   const { token } = useToken();
   const { id } = useParams();
 
-  console.log("to update bulk", select);
+  console.log("to update bulk selected", select);
+  console.log("horly rate ,mil", hourlyRate, milageRate);
 
   //Get Payroll api
   const {
@@ -42,25 +46,26 @@ const PayrollSetup = () => {
   });
 
   //Delete payroll api
-  const [deletePayroll, { isSuccess: deleteSuccess, isError: deleteError }] =
-    useDeletePayrollMutation();
+  const [deletePayroll, { isSuccess: deleteSuccess, isError: deleteError }] = useDeletePayrollMutation();
 
   //Bulk-Delete payroll api
-  const [
-    bulkDeletePayroll,
-    { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError },
-  ] = useBulkDeletePayrollMutation();
+  const [bulkDeletePayroll, { isSuccess: bulkDeleteSuccess, isError: bulkDeleteError }] = useBulkDeletePayrollMutation();
+
+  //Bulk update payroll api
+  const [bulkUpdatePayroll, { isSuccess: bulkUpdateSuccess }] = useBulkUpdatePayrollMutation();
 
   // console.log("payroll data", payrollData);
   const { services } = payrollData || [];
   console.log("All services", services);
-  const totalPage = payrollData?.payrolls?.last_page;
+  const totalPage = payrollData?.payrolls?.lastPage;
 
   //handle pagination function
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
   };
+
+  console.log("clicked page", page);
   //Edit Modal
   const handleEditModal = (id) => {
     setPayRollId(id);
@@ -92,6 +97,7 @@ const PayrollSetup = () => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
       handleClose();
     } else if (deleteError) {
@@ -99,17 +105,45 @@ const PayrollSetup = () => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [deleteSuccess, deleteError]);
 
   const handleBulkDelete = () => {
-    if (selectedPayrolls?.length !== 0 && select === "Bulk Delete") {
-      bulkDeletePayroll({
+    if (select === "1" && hourlyRate !== null && milageRate !== null && selectedRowKeys.length > 0) {
+      console.log("from bulk delete hourlyRate, milageRate", hourlyRate, milageRate);
+      const payload = {
+        hourly_rate: hourlyRate,
+        milage_rate: milageRate,
+        edit_ids: selectedRowKeys,
+        check: 1,
+      };
+      bulkUpdatePayroll({
         token,
-        payload: {
-          ids: selectedPayrolls,
-        },
+        payload,
+      });
+    } else if (select === "2" && hourlyRate !== null && selectedRowKeys.length > 0) {
+      console.log("from bulk delete hourlyRate", hourlyRate);
+      const payload = {
+        hourly_rate: hourlyRate,
+        edit_ids: selectedRowKeys,
+        check: 2,
+      };
+      bulkUpdatePayroll({
+        token,
+        payload,
+      });
+    } else if (select === "3" && milageRate !== null && selectedRowKeys.length > 0) {
+      console.log("from bulk delete milageRate", milageRate);
+      const payload = {
+        milage_rate: milageRate,
+        edit_ids: selectedRowKeys,
+        check: 3,
+      };
+      bulkUpdatePayroll({
+        token,
+        payload,
       });
     } else {
       toast.error("Please Select Valid Option", {
@@ -119,22 +153,6 @@ const PayrollSetup = () => {
       });
     }
   };
-  useEffect(() => {
-    if (bulkDeleteSuccess) {
-      toast.success("Successfully Payrolls Deleted", {
-        position: "top-center",
-        autoClose: 5000,
-        theme: "dark",
-      });
-      handleClose();
-    } else if (bulkDeleteError) {
-      toast.error("Some Error Occured", {
-        position: "top-center",
-        autoClose: 5000,
-        theme: "dark",
-      });
-    }
-  }, [bulkDeleteSuccess, bulkDeleteError]);
 
   const column = [
     {
@@ -143,16 +161,14 @@ const PayrollSetup = () => {
       key: "service",
       width: 120,
       render: (_, record) => {
-        let service = payrollData?.services?.find(
-          (s) => s?.id === record?.service_id
-        );
-        return <h1>{service?.description}</h1>;
+        let ser = payrollData?.services?.find((s) => parseInt(s?.id) === parseInt(record?.service_id));
+        return <h1>{`${ser?.service} (${ser?.service_treatment?.treatment_name})`}</h1>;
       },
       sorter: (a, b) => {
         return a.service > b.service ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "service" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
 
     {
@@ -167,8 +183,7 @@ const PayrollSetup = () => {
       sorter: (a, b) => {
         return a.hourly_rate > b.hourly_rate ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "hourly_rate" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "hourly_rate" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -184,8 +199,7 @@ const PayrollSetup = () => {
       sorter: (a, b) => {
         return a.milage_rate > b.milage_rate ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "milage_rate" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "milage_rate" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -210,31 +224,26 @@ const PayrollSetup = () => {
       width: 150,
       render: (_, record) => (
         <div className="flex justify-center gap-1 text-primary">
-          <FiEdit
-            onClick={() => handleEditModal(record)}
-            className="text-xs mx-2  text-lime-700"
-            title="Edit"
-          />
+          <FiEdit onClick={() => handleEditModal(record)} className="text-xs mx-2  text-lime-700" title="Edit" />
 
           <span>|</span>
 
-          <AiOutlineDelete
-            onClick={() => deletePayrollHandler(record)}
-            className="text-xs text-red-500 mx-2"
-            title="Delete"
-          />
+          <AiOutlineDelete onClick={() => deletePayrollHandler(record)} className="text-xs text-red-500 mx-2" title="Delete" />
         </div>
       ),
     },
   ];
 
-  //get rows to be deleted
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedPayrolls(selectedRowKeys);
-    },
+  //get rows id to do some action on them
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selected row-keys: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
   };
-  console.log(selectedPayrolls);
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+  console.log(selectedRowKeys);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -242,26 +251,32 @@ const PayrollSetup = () => {
     setSortedInfo(sorter);
   };
 
+  useEffect(() => {
+    if (bulkUpdateSuccess) {
+      toast.success("successfully updated selected payrolls", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+      setSelectedRowKeys([]);
+      handleClose();
+    }
+  }, [bulkUpdateSuccess]);
   const clearFilters = () => {
     setFilteredInfo({});
   };
 
   return (
-    <div className="h-[100vh]">
+    <div className="">
       <div className="flex flex-wrap items-center justify-between gap-2 my-2">
-        <h1 className="text-lg text-orange-500 text-left font-semibold ">
-          Payroll Setup
-        </h1>
+        <h1 className="text-lg text-orange-500 text-left font-semibold ">Payroll Setup</h1>
 
         <div className="flex items-center gap-2">
           <button onClick={clearFilters} className="pms-clear-button border">
             Clear filters
           </button>
-          <button
-            onClick={handleClickOpen}
-            className="pms-button"
-            type="submit"
-          >
+          <button onClick={handleClickOpen} className="pms-button" type="submit">
             + Add Payroll
           </button>
         </div>
@@ -278,15 +293,16 @@ const PayrollSetup = () => {
             rowKey={(record) => record.id} //record is kind of whole one data object and here we are
             dataSource={payrollData?.payrolls?.data}
             onChange={handleChange}
-            rowSelection={{
-              ...rowSelection,
-            }}
+            // rowSelection={{
+            //   ...rowSelection,
+            // }}
+            rowSelection={rowSelection}
           />
         ) : (
           <ShimmerTableTet></ShimmerTableTet>
         )}
       </div>
-      {totalPage > 1 && (
+      {totalPage > 0 && (
         <div className="flex flex-row-reverse justify-between">
           <div className="flex items-center justify-start">
             <ReactPaginate
@@ -312,39 +328,62 @@ const PayrollSetup = () => {
           className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
         >
           <option value="select" className="text-black"></option>
-          <option value="hourly_and__mileage_Rate" className="text-black">
+          <option value={1} className="text-black">
             Update Hourly and Mileage Rate
           </option>
-          <option value="update_hourly_rate" className="text-black">
+          <option value={2} className="text-black">
             Update Hourly Rate
           </option>
-          <option value="update_mileage_rate" className="text-black">
+          <option value={3} className="text-black">
             Update Milage Rate
           </option>
           <option value="Bulk Delete" className="text-black">
             Bulk Delete
           </option>
         </select>
+        {select === "1" && (
+          <div className="flex gap-2">
+            <input
+              onChange={(e) => setHourlyRate(e.target.value)}
+              className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+              defaultValue={hourlyRate}
+              type="text"
+              placeholder="Hourly Rate"
+            />
+            <input
+              onChange={(e) => setMilageRate(e.target.value)}
+              className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+              type="text"
+              defaultValue={milageRate}
+              placeholder="Milage Rate"
+            />
+          </div>
+        )}
+        {select === "2" && (
+          <input
+            onChange={(e) => setHourlyRate(e.target.value)}
+            className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+            type="text"
+            defaultValue={hourlyRate}
+            placeholder="Hourly Rate"
+          />
+        )}
+        {select === "3" && (
+          <input
+            onChange={(e) => setMilageRate(e.target.value)}
+            className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+            type="text"
+            defaultValue={milageRate}
+            placeholder="Milage Rate"
+          />
+        )}
         <button onClick={handleBulkDelete} className="pms-input-button">
           Update
         </button>
       </div>
 
-      {openModal && (
-        <PayrollSetupModal
-          handleClose={handleClose}
-          open={openModal}
-          services={services}
-        ></PayrollSetupModal>
-      )}
-      {editModal && (
-        <PayrollEditModal
-          payroll_id={payrollId}
-          services={services}
-          handleClose={handleClose}
-          open={editModal}
-        ></PayrollEditModal>
-      )}
+      {openModal && <PayrollSetupModal handleClose={handleClose} open={openModal} services={services}></PayrollSetupModal>}
+      {editModal && <PayrollEditModal payroll={payrollId} services={services} handleClose={handleClose} open={editModal}></PayrollEditModal>}
     </div>
   );
 };

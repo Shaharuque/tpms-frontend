@@ -10,9 +10,8 @@ const PyarollMultiSelect = ({ Alldata, setServiceId }) => {
     if (Alldata) {
       for (let x of Alldata) {
         processedData.push({
-          label: `${x?.service}(Test)`,
+          label: `${x?.service} (${x?.service_treatment?.treatment_name})`,
           value: x?.id,
-          //id: x?.id,
         });
       }
     }
