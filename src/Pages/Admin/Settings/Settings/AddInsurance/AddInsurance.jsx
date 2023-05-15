@@ -82,15 +82,12 @@ const AddInsurance = () => {
 
   useEffect(() => {
     if (addInsuranceData?.status === "success") {
-      toast.success(
-        <h1 className="text-[12px]">{addInsuranceData?.message}</h1>,
-        {
-          position: "top-center",
-          autoClose: 5000,
-          closeOnClick: true,
-          theme: "dark",
-        }
-      );
+      toast.success(<h1 className="text-[12px]">{addInsuranceData?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        theme: "dark",
+      });
     }
     if (addInsuranceData?.error) {
       toast.error(<h1 className="text-[12px]">{addInsuranceData?.error}</h1>, {
@@ -100,11 +97,7 @@ const AddInsurance = () => {
         theme: "dark",
       });
     }
-  }, [
-    addInsuranceData?.error,
-    addInsuranceData?.message,
-    addInsuranceData?.status,
-  ]);
+  }, [addInsuranceData?.error, addInsuranceData?.message, addInsuranceData?.status]);
 
   const [
     deleteInsurance,
@@ -117,42 +110,28 @@ const AddInsurance = () => {
 
   useEffect(() => {
     if (removeInsuranceData?.status === "success") {
-      toast.success(
-        <h1 className="text-[12px]">{removeInsuranceData?.message}</h1>,
-        {
-          position: "top-center",
-          autoClose: 5000,
-          closeOnClick: true,
-          theme: "dark",
-        }
-      );
+      toast.success(<h1 className="text-[12px]">{removeInsuranceData?.message}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        theme: "dark",
+      });
     }
     if (removeInsuranceData?.error) {
-      toast.error(
-        <h1 className="text-[12px]">{removeInsuranceData?.error}</h1>,
-        {
-          position: "top-center",
-          autoClose: 5000,
-          closeOnClick: true,
-          theme: "dark",
-        }
-      );
+      toast.error(<h1 className="text-[12px]">{removeInsuranceData?.error}</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        closeOnClick: true,
+        theme: "dark",
+      });
     }
-  }, [
-    removeInsuranceData?.error,
-    removeInsuranceData?.message,
-    removeInsuranceData?.status,
-  ]);
+  }, [removeInsuranceData?.error, removeInsuranceData?.message, removeInsuranceData?.status]);
 
   // insurance details
 
   const [
     insuranceDetail,
-    {
-      data: insuranceDetailData,
-      isLoading: insuranceDetailLoading,
-      isError: insuranceDetailError,
-    },
+    { data: insuranceDetailData, isLoading: insuranceDetailLoading, isError: insuranceDetailError },
   ] = useInsuranceDetailMutation();
 
   console.log("details data ", passAllInsurance);
@@ -216,19 +195,13 @@ const AddInsurance = () => {
   const handleAdding = (e) => {
     let target = e.target;
     // let name = target.name;
-    let value = Array.from(
-      target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(target.selectedOptions, (option) => option.value * 1);
     setSelectedKeys(value);
     setfacilityselectedkeys();
   };
 
   const handleRemoving = (e) => {
-    let value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(e.target.selectedOptions, (option) => option.value * 1);
     setfacilityselectedkeys(value);
     setSelectedKeys();
   };
@@ -390,9 +363,7 @@ const AddInsurance = () => {
             onClick={() => {
               InsuranceView();
             }}
-            disabled={
-              selectedKeys === undefined && facilityselectedkeys?.length > 0
-            }
+            disabled={selectedKeys === undefined && facilityselectedkeys?.length > 0}
             className="pms-button"
           >
             View Details
@@ -401,9 +372,7 @@ const AddInsurance = () => {
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
           <button
             onClick={() => handleSelectedValue()}
-            disabled={
-              selectedKeys === undefined && facilityselectedkeys?.length > 0
-            }
+            disabled={selectedKeys === undefined && facilityselectedkeys?.length > 0}
             className="pms-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -415,9 +384,7 @@ const AddInsurance = () => {
             onClick={(e) => {
               handleRemoveValue(e);
             }}
-            disabled={
-              selectedKeys?.length > 0 && facilityselectedkeys === undefined
-            }
+            disabled={selectedKeys?.length > 0 && facilityselectedkeys === undefined}
             className="pms-close-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -428,9 +395,7 @@ const AddInsurance = () => {
         </div>
 
         <div>
-          <h1 className="text-sm text-gray-700 my-2">
-            Facility Selected Insurance
-          </h1>
+          <h1 className="text-sm text-gray-700 my-2">Facility Selected Insurance</h1>
           <div>
             <input
               onChange={(e) => setselectedSearchData(e.target.value)}
@@ -450,34 +415,25 @@ const AddInsurance = () => {
           >
             {/* calling same api  */}
             {selectedInsuranceData?.facility_selected_insurance.length > 0 &&
-              selectedInsuranceData?.facility_selected_insurance.map(
-                (item, index) => (
-                  <option
-                    key={item.id}
-                    className="px-2 text-sm"
-                    value={item.id}
-                  >
-                    {item.payor_name}{" "}
-                  </option>
-                )
-              )}{" "}
+              selectedInsuranceData?.facility_selected_insurance.map((item, index) => (
+                <option key={item.id} className="px-2 text-sm" value={item.id}>
+                  {item.payor_name}{" "}
+                </option>
+              ))}{" "}
           </select>
           <br />
           <button
             onClick={() => {
               FacilityInsurance();
             }}
-            disabled={
-              selectedKeys?.length > 0 && facilityselectedkeys === undefined
-            }
+            disabled={selectedKeys?.length > 0 && facilityselectedkeys === undefined}
             className="pms-button"
           >
             View Details
           </button>
         </div>
       </div>
-      {(passAllInsurance?.status === "success" ||
-        passSelectedInsurance?.status === "success") && (
+      {(passAllInsurance?.status === "success" || passSelectedInsurance?.status === "success") && (
         <div className="m-2">
           <InsuranceDetails
             AllInsurance={passAllInsurance}

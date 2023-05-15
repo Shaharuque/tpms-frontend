@@ -38,21 +38,10 @@ const InsuranceExclusionMultiSelection = () => {
   });
 
   // get all assign payor by id
-  const {
-    data: assignPayorData,
-    isLoading: assignLoading,
-    isError: assignPayorError,
-  } = useGetAssignedQuery({ token, payload: { employee_id: id } });
+  const { data: assignPayorData, isLoading: assignLoading, isError: assignPayorError } = useGetAssignedQuery({ token, payload: { employee_id: id } });
 
   // exclusion  Selected api
-  const [
-    excludeSelected,
-    {
-      data: excludedData,
-      isSuccess: excludeSelectedSuccess,
-      isError: excludeSelectedError,
-    },
-  ] = useExcludeSelectedMutation();
+  const [excludeSelected, { data: excludedData, isSuccess: excludeSelectedSuccess, isError: excludeSelectedError }] = useExcludeSelectedMutation();
   //Success/Error message show added api
   useEffect(() => {
     if (excludeSelectedSuccess) {
@@ -70,14 +59,7 @@ const InsuranceExclusionMultiSelection = () => {
     }
   }, [excludeSelectedError, excludeSelectedSuccess, excludedData?.message]);
   // delete api
-  const [
-    excludeDelete,
-    {
-      data: excludeDeleteData,
-      isSuccess: excludeDeleteDataSuccess,
-      isError: excludeDeleteDataError,
-    },
-  ] = useExcludeDeleteMutation();
+  const [excludeDelete, { data: excludeDeleteData, isSuccess: excludeDeleteDataSuccess, isError: excludeDeleteDataError }] = useExcludeDeleteMutation();
   //Success/Error message show delete api
   useEffect(() => {
     if (excludeDeleteDataSuccess) {
@@ -93,11 +75,7 @@ const InsuranceExclusionMultiSelection = () => {
         theme: "dark",
       });
     }
-  }, [
-    excludeDeleteData?.message,
-    excludeDeleteDataError,
-    excludeDeleteDataSuccess,
-  ]);
+  }, [excludeDeleteData?.message, excludeDeleteDataError, excludeDeleteDataSuccess]);
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -105,10 +83,7 @@ const InsuranceExclusionMultiSelection = () => {
   };
 
   const handleAdding = (e) => {
-    let value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(e.target.selectedOptions, (option) => option.value * 1);
     console.log("data is vlaue", value);
     setTargatedData(value);
   };
@@ -150,8 +125,7 @@ const InsuranceExclusionMultiSelection = () => {
       sorter: (a, b) => {
         return a.all_payor_name > b.all_payor_name ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "all_payor_name" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "all_payor_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -161,10 +135,7 @@ const InsuranceExclusionMultiSelection = () => {
       width: 100,
       render: (_, { id, File_name }) => {
         return (
-          <button
-            onClick={() => handleDelete(id)}
-            className="mx-auto font-bold text-red-500"
-          >
+          <button onClick={() => handleDelete(id)} className="mx-auto font-bold text-red-500">
             X
           </button>
         );
@@ -176,27 +147,21 @@ const InsuranceExclusionMultiSelection = () => {
     return <Loading />;
   }
 
-  if (PayorError && assignPayorError) {
-    // Error template show
-    return <p>Error</p>;
-  }
+  // if (PayorError && assignPayorError) {
+  //   // Error template show
+  //   return <p>Error</p>;
+  // }
 
   return (
     <div className="h-[100vh]">
-      <h1 className="text-lg text-orange-500 text-left font-semibold ">
-        Insurance Exclusion
-      </h1>
+      <h1 className="text-lg text-orange-500 text-left font-semibold ">Insurance Exclusion</h1>
       <div
         className={
-          isToggled
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1"
-            : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2 gap-x-2 gap-y-1"
+          isToggled ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-2  gap-y-1" : "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-2 gap-x-2 gap-y-1"
         }
       >
         <div className="w-full">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">
-            Insurance
-          </label>
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600">Insurance</label>
           <select
             multiple={true}
             onChange={(e) => {
@@ -214,12 +179,7 @@ const InsuranceExclusionMultiSelection = () => {
         </div>
 
         <div className="flex justify-center items-center">
-          <button
-            onClick={handleExcluded}
-            disabled={targatedData.length === 0}
-            className="pms-button my-2"
-            type="submit"
-          >
+          <button onClick={handleExcluded} disabled={targatedData.length === 0} className="pms-button my-2" type="submit">
             Exclude Selected Service Sub-Type
           </button>
         </div>

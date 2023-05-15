@@ -1,4 +1,5 @@
-import { Table } from "antd";
+import { Button, Popover, Table } from "antd";
+// import html2canvas from "html2canvas";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TiArrowSortedDown } from "react-icons/ti";
@@ -12,6 +13,9 @@ import axios from "axios";
 import { baseIp } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../Pages/Settings/SettingComponents/ShimmerTableTet";
+
+import "jspdf-autotable";
+import jsPDF from "jspdf";
 const Staffs = () => {
   const [openStaff, setOpenStaff] = useState(false);
   const [staffData, setStaffData] = useState([]);
@@ -120,10 +124,7 @@ const Staffs = () => {
       render: (_, { full_name, id }) => {
         // console.log("tags : ", Name, id);
         return (
-          <Link
-            to={`/admin/staff/staffs-biographic/${id}`}
-            className="text-secondary"
-          >
+          <Link to={`/admin/staff/staffs-biographic/${id}`} className="text-secondary">
             {full_name}
           </Link>
         );
@@ -144,19 +145,12 @@ const Staffs = () => {
       //   sorter is for sorting asc or dsc purpose
       render: (_, record) => {
         // console.log("tags : ", Name, id);
-        return (
-          <div>
-            {record?.employeeTypeAssign?.type_name || (
-              <h1 className="text-red-500">Not Assigned Yet</h1>
-            )}
-          </div>
-        );
+        return <div>{record?.employeeTypeAssign?.type_name || <h1 className="text-red-500">Not Assigned Yet</h1>}</div>;
       },
       sorter: (a, b) => {
         return a.credential_type > b.credential_type ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
       ellipsis: false,
     },
     {
@@ -167,8 +161,7 @@ const Staffs = () => {
       sorter: (a, b) => {
         return a.Phone > b.Phone ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "office_phone" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "office_phone" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
       render: (_, { office_phone }) => {
@@ -258,13 +251,7 @@ const Staffs = () => {
       width: 120,
       render: (_, { is_active, id }) => {
         //console.log("Status : ", Status);
-        return (
-          <StuffStatusAction
-            id={id}
-            status={is_active}
-            setStaffData={setStaffData}
-          ></StuffStatusAction>
-        );
+        return <StuffStatusAction id={id} status={is_active} setStaffData={setStaffData}></StuffStatusAction>;
       },
     },
   ];
@@ -277,12 +264,93 @@ const Staffs = () => {
     setSortedInfo(sorter);
   };
 
+  const exportPDF = async () => {
+    // const input = document.getElementById("address");
+    // const input2 = document.getElementById("signature");
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const name = "My Awesome Report";
+    const headers = [["id", "credtype", "phone", "email"]];
+
+    const data = staffData?.map((elt) => [elt.id, elt.first_name, elt.office_email]);
+
+    console.log("pdf export data", data);
+
+    let content = {
+      // startY: 210,
+      // upper gap
+      // startY: 350,
+      head: headers,
+      body: data,
+    };
+
+    doc.text(name, marginLeft, 200);
+    doc.autoTable(content);
+    var finalY = doc.lastAutoTable.finalY;
+    doc.save("jahid_repoty.pdf");
+  };
+
+  const exportCSV = async () => {
+    // const input = document.getElementById("address");
+    // const input2 = document.getElementById("signature");
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const name = "My Awesome Report";
+    const headers = [["id", "credtype", "phone", "email"]];
+
+    const data = staffData?.map((elt) => [elt.id, elt.first_name, elt.office_email]);
+
+    console.log("pdf export data", data);
+
+    let content = {
+      // startY: 210,
+      // upper gap
+      // startY: 350,
+      head: headers,
+      body: data,
+    };
+
+    doc.text(name, marginLeft, 200);
+    doc.autoTable(content);
+    var finalY = doc.lastAutoTable.finalY;
+    doc.save("jahid_repoty.csv");
+  };
+
+  const text = <span>Title</span>;
+
+  const content = (
+    <div>
+      <Button onClick={exportPDF} color="primary">
+        pdf
+      </Button>
+
+      <Button onClick={exportCSV} color="primary">
+        CSV
+      </Button>
+    </div>
+  );
+
+  const buttonWidth = 70;
+
   return (
     <div className={""}>
       <div className="flex items-center flex-wrap justify-between gap-2 my-2">
-        <h1 className="text-lg text-orange-500 text-left font-semibold ">
-          Staffs
-        </h1>
+        <h1 className="text-lg text-orange-500 text-left font-semibold ">Staffs</h1>
+
         <div className="flex items-center gap-2">
           <button onClick={clearFilters} className="pms-clear-button border">
             Clear filters
@@ -292,10 +360,8 @@ const Staffs = () => {
             <label tabIndex={0}>
               <h1 className="pms-button">Add Staff</h1>
             </label>
-            <div
-              tabIndex={0}
-              className="dropdown-content menu py-5 shadow-md ml-[-116px] drop-box rounded-sm bg-white w-52"
-            >
+
+            <div tabIndex={0} className="dropdown-content menu py-5 shadow-md ml-[-116px] drop-box rounded-sm bg-white w-52">
               <div>
                 <TiArrowSortedDown className=" text-3xl absolute top-[-12px] right-[-6px] text-primary" />
               </div>
@@ -320,13 +386,20 @@ const Staffs = () => {
           </div>
         </div>
       </div>
+      <div className="pdfcsv d-flex justify-items-end ">
+        <Popover placement="bottom" title={text} content={content} trigger="click">
+          <Button>Bottom</Button>
+        </Popover>
+        {/* <Button onClick={exportPDF} color="primary">
+          pdf
+        </Button>
 
-      <InfiniteScroll
-        dataLength={staffData?.length}
-        next={staffData?.length > 0 && fetchData}
-        hasMore={hasMore}
-        loader={<ShimmerTableTet></ShimmerTableTet>}
-      >
+        <Button onClick={exportCSV} color="primary">
+          CSV
+        </Button> */}
+      </div>
+
+      <InfiniteScroll dataLength={staffData?.length} next={staffData?.length > 0 && fetchData} hasMore={hasMore} loader={<ShimmerTableTet></ShimmerTableTet>}>
         <Table
           rowKey={(record) => record.id}
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey

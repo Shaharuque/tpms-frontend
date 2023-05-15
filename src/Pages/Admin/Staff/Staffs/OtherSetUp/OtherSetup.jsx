@@ -205,9 +205,9 @@ const OtherSetup = () => {
     console.log("payload", payload);
     addOtherSetup({ token, payload });
   };
-  if (otherSetupLoading || loading) {
-    return <Loading />;
-  }
+  // if (otherSetupLoading || loading) {
+  //   return <Loading />;
+  // }
 
   // console.log("dm", dm);
   // console.log("loading..", loading);

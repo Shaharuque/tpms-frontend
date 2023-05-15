@@ -71,8 +71,5 @@ export const addStaffTypeApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useAddStaffTypeMutation,
-  useGetAllStaffQuery,
-  useGetSelectedStaffQuery,
-} = addStaffTypeApi;
+export const { useAddStaffTypeMutation, useGetAllStaffQuery, useGetSelectedStaffQuery } =
+  addStaffTypeApi;

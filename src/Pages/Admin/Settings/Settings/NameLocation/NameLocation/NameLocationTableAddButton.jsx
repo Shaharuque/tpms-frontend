@@ -1,11 +1,11 @@
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
-  console.log("comming fields", fields);
+const NameLocationTableAddButton = ({ fieldD, register, errors, remove }) => {
+  console.log("comming fields", fieldD);
   return (
     <div>
-      {fields.map((field, index) => {
+      {fieldD.map((field, index) => {
         return (
           <div key={field.id}>
             <div>
@@ -18,6 +18,7 @@ const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
                   <input
                     type="text"
                     placeholder="Main Zone"
+                    defaultValue={field?.zone_name}
                     name="zone_name"
                     className="input-border input-font w-full focus:outline-none"
                     {...register(`box32.${index}.zone_name`)}
@@ -29,6 +30,7 @@ const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
                     <span className="label-font">Facility Name</span>
                   </label>
                   <input
+                    defaultValue={field?.facility_name_two}
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="facility_name_three"
@@ -42,6 +44,7 @@ const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
                     <span className="label-font">Address</span>
                   </label>
                   <input
+                    defaultValue={field?.address}
                     type="text"
                     placeholder="ABC Behavioral Therapy Center"
                     name="address"
@@ -55,6 +58,7 @@ const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
                     <span className="label-font">City</span>
                   </label>
                   <input
+                    defaultValue={field?.city}
                     type="text"
                     placeholder="New Jersy"
                     name="city"
@@ -69,6 +73,7 @@ const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
                     <span className="label-font">State</span>
                   </label>
                   <select
+                    defaultValue={field?.state}
                     className="input-border input-font w-full focus:outline-none"
                     {...register(`box32.${index}.state`)}
                   >
@@ -84,8 +89,9 @@ const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
                     <span className="label-font">Zip</span>
                   </label>
                   <input
+                    defaultValue={field?.zip}
                     type="number"
-                    placeholder="ABC Behavioral Therapy Center"
+                    placeholder="zip"
                     name="zip"
                     className="input-border input-font w-full focus:outline-none"
                     {...register(`box32.${index}.zip`)}
@@ -97,8 +103,9 @@ const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
                     <span className="label-font">Phone</span>
                   </label>
                   <input
+                    defaultValue={field?.phone_one}
                     type="number"
-                    placeholder="ABC Behavioral Therapy Center"
+                    placeholder="Phone"
                     name="phone"
                     className="input-border input-font w-full focus:outline-none"
                     {...register(`box32.${index}.phone`)}
@@ -113,6 +120,7 @@ const NameLocationTableAddButton = ({ fields, register, errors, remove }) => {
                         <span className="label-font">NPI</span>
                       </label>
                       <input
+                        defaultValue={field?.npi}
                         type="text"
                         placeholder="1234"
                         name="npi"

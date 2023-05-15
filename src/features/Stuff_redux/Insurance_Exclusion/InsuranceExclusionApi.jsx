@@ -6,11 +6,11 @@ const InsuranceExclusionApi = apiSlice.injectEndpoints({
     //  get all payor by id
     getAllPayor: builder.query({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/get/all/payor`,
+        url: `provider/ac/staffs/get/all/payor`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -19,11 +19,11 @@ const InsuranceExclusionApi = apiSlice.injectEndpoints({
     //  get all assign payor by id
     getAssigned: builder.query({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/get/assign/payor`,
+        url: `provider/ac/staffs/get/assign/payor`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -33,11 +33,11 @@ const InsuranceExclusionApi = apiSlice.injectEndpoints({
     // exclusion  Selected
     excludeSelected: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/payor/exclusion/add`,
+        url: `provider/ac/staffs/payor/exclusion/add`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -47,11 +47,11 @@ const InsuranceExclusionApi = apiSlice.injectEndpoints({
     // exclusion  Delete
     excludeDelete: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staffs/payor/exclusion/delete`,
+        url: `provider/ac/staffs/payor/exclusion/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -60,9 +60,4 @@ const InsuranceExclusionApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetAllPayorQuery,
-  useGetAssignedQuery,
-  useExcludeSelectedMutation,
-  useExcludeDeleteMutation,
-} = InsuranceExclusionApi;
+export const { useGetAllPayorQuery, useGetAssignedQuery, useExcludeSelectedMutation, useExcludeDeleteMutation } = InsuranceExclusionApi;

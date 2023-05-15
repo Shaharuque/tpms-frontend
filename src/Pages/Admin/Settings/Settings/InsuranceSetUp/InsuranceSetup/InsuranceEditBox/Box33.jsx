@@ -20,10 +20,8 @@ const Box33 = ({ box33, handleBox33, insuranceBox }) => {
   console.log("from box33", insuranceBox);
   const { token } = useToken();
 
-  const [
-    updateBox33InsuranceSetup,
-    { isSuccess: box33UpdateSuccess, isError: box33UpdateError },
-  ] = useUpdateBox33InsuranceSetupMutation();
+  const [updateBox33InsuranceSetup, { isSuccess: box33UpdateSuccess, isError: box33UpdateError }] =
+    useUpdateBox33InsuranceSetupMutation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -199,9 +197,7 @@ const Box33 = ({ box33, handleBox33, insuranceBox }) => {
                     <option value="WI">Wisconsin</option>
                     <option value="WY">Wyoming</option>
                     <option value="AE">Armed Forces Africa</option>
-                    <option value="AA">
-                      Armed Forces Americas (except Canada)
-                    </option>
+                    <option value="AA">Armed Forces Americas (except Canada)</option>
                     <option value="AE">Armed Forces Canada</option>
                     <option value="AE">Armed Forces Europe</option>
                     <option value="AE">Armed Forces Middle East</option>

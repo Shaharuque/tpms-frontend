@@ -5,3 +5,4 @@ export const headers = {
   Accept: "application/json",
   Authorization: localStorage.getItem("adminToken") || null,
 };
+

@@ -164,6 +164,8 @@ const EditInsuranceSelect = ({ insuranceBox, payordetail }) => {
           </select>
         </div>
 
+        {/* <p onClick={() => append()}>+</p> */}
+
         {/* starting txtype */}
 
         <div className="w-[100%] px-2 sm:w-[75%]">

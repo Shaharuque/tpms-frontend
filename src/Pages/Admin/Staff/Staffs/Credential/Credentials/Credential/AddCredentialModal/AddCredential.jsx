@@ -13,10 +13,7 @@ const AddCredential = ({ handleClose, open }) => {
   const { id } = useParams();
 
   // Add credential Api
-  const [
-    addCredential,
-    { isSuccess: addCredentialSuccess, isError: addCredentialError },
-  ] = useAddCredentialMutation();
+  const [addCredential, { isSuccess: addCredentialSuccess, isError: addCredentialError }] = useAddCredentialMutation();
 
   const onSubmit = (data) => {
     const payload = {
@@ -70,10 +67,7 @@ const AddCredential = ({ handleClose, open }) => {
         <div className="px-5 py-2">
           <div className="flex items-center justify-between">
             <h1 className="text-lg text-left text-orange-400 ">Credential</h1>
-            <IoCloseCircleOutline
-              onClick={handleClose}
-              className="text-gray-600 text-2xl hover:text-primary"
-            />
+            <IoCloseCircleOutline onClick={handleClose} className="text-gray-600 text-2xl hover:text-primary" />
           </div>
 
           <div className="bg-gray-200 py-[1px] mt-3"></div>
@@ -85,54 +79,31 @@ const AddCredential = ({ handleClose, open }) => {
                     Credential <span className="text-red-500">*</span>
                   </span>
                 </label>
-                <input
-                  type="text"
-                  name="cred_type"
-                  className="modal-input-field ml-1 w-full"
-                  {...register("cred_type")}
-                />
+                <input type="text" name="cred_type" className="modal-input-field ml-1 w-full" {...register("cred_type")} />
               </div>
 
               <div>
                 <label className="label">
                   <span className="modal-label-name">Date Issued</span>
                 </label>
-                <input
-                  type="date"
-                  className="modal-input-field ml-1 w-full"
-                  {...register("date_issue")}
-                />
+                <input type="date" className="modal-input-field ml-1 w-full" {...register("date_issue")} />
               </div>
               <div>
                 {" "}
                 <label className="label">
                   <span className="modal-label-name">Expiry Date</span>
                 </label>
-                <input
-                  type="date"
-                  className="modal-input-field ml-1 w-full"
-                  {...register("expiry_Date")}
-                />
+                <input type="date" className="modal-input-field ml-1 w-full" {...register("expiry_Date")} />
               </div>
               <div>
                 <label className="label">
                   <span className="modal-label-name">Upload File</span>
                 </label>
-                <input
-                  type="file"
-                  className=" px-2 py-[5px]  text-xs w-full"
-                  {...register("fileName")}
-                />
+                <input type="file" className=" px-2 py-[5px]  text-xs w-full" {...register("fileName")} />
               </div>
               <div className="flex  ml-1 mt-4 gap-2 items-center">
-                <input
-                  type="checkbox"
-                  name="cred_apply"
-                  {...register("cred_apply")}
-                />
-                <span className="modal-label-name">
-                  Credential Not Applicable
-                </span>
+                <input type="checkbox" name="cred_apply" {...register("cred_apply")} />
+                <span className="modal-label-name">Credential Not Applicable</span>
               </div>
             </div>
             <div className="bg-gray-200 py-[1px] mt-3"></div>
@@ -152,3 +123,46 @@ const AddCredential = ({ handleClose, open }) => {
   );
 };
 export default AddCredential;
+
+// <div className="divider"></div>
+// <h1 className="text-sm  font-medium mb-3">Add Time Off</h1>
+// <form onSubmit={handleSubmit(onSubmit)}>
+//   <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
+//     <div>
+//       <label className="label">
+//         <span className="modal-label-name">Description</span>
+//       </label>
+//       {/* <TextArea
+//         rows={4}
+//         placeholder="description"
+//         size="middle"
+//         onChange={(e) => setNote(e.target.value)}
+//       /> */}
+
+//       <textarea
+//         rows={4}
+//         placeholder="maxLength is 6"
+//         size="middle"
+//         className="w-full border bottom-2 ml-1 p-1"
+//         {...register("desc")}
+//         // onChange={(e) => setNote(e.target.value)}
+//       />
+//     </div>
+//     <div className=" flex item-center gap-4 flex-wrap">
+//       <div>
+//         <label className="label">
+//           <span className="modal-label-name">Date</span>
+//         </label>
+//         <input type="date" name="date" className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("date")} />
+//       </div>
+//       <div className="mt-8">
+//         <button className="mr-2 pms-button" type="submit">
+//           Apply Leave
+//         </button>
+//         <button className="pms-close-button" autoFocus onClick={() => setTimeOpen(false)}>
+//           CANCEL
+//         </button>
+//       </div>
+//     </div>
+//   </div>
+// </form>

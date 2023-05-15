@@ -6,11 +6,11 @@ const leaveTrackApi = apiSlice.injectEndpoints({
     // leave tracking get All data
     getLeaveTracking: builder.query({
       query: ({ payload, token }) => ({
-        url: `admin/ac/staff/leave/tracking`,
+        url: `provider/ac/staff/leave/tracking`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -19,11 +19,25 @@ const leaveTrackApi = apiSlice.injectEndpoints({
     //Staff leave Tracking Update
     addLeaveTracking: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/leave/tracking/save",
+        url: "provider/ac/staff/leave/tracking/save",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["LeaveTrack"],
+    }),
+
+    // delete leave tracking
+    DeleteLeaveTracking: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "provider/ac/staffs/leave/delete",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -32,5 +46,4 @@ const leaveTrackApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetLeaveTrackingQuery, useAddLeaveTrackingMutation } =
-  leaveTrackApi;
+export const { useGetLeaveTrackingQuery, useAddLeaveTrackingMutation, useDeleteLeaveTrackingMutation } = leaveTrackApi;
