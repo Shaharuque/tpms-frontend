@@ -49,12 +49,14 @@ const InsuranceExclusionMultiSelection = () => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (excludeSelectedError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [excludeSelectedError, excludeSelectedSuccess, excludedData?.message]);
@@ -67,12 +69,14 @@ const InsuranceExclusionMultiSelection = () => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (excludeDeleteDataError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [excludeDeleteData?.message, excludeDeleteDataError, excludeDeleteDataSuccess]);

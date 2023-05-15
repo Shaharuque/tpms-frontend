@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FiCopy } from "react-icons/fi";
 import { useGetWorkingScheduleQuery, useUpdateWorkingScheduleMutation } from "../../../../../features/Stuff_redux/workingSchedule/workingScheduleApi";
 import useToken from "../../../../../CustomHooks/useToken";
 import { useParams } from "react-router-dom";
 import BlockOffTime from "./BlockOffTime";
+import { toast } from "react-toastify";
 
 const WorkSchedule = () => {
   const { handleSubmit, register, reset } = useForm({
@@ -19,7 +20,7 @@ const WorkSchedule = () => {
   const { data: workingSchedule, isLoading, isSuccess } = useGetWorkingScheduleQuery({ id: staffId, token: token });
 
   //for craeting working schedule
-  const [updateWorkingSchedule, { isSuccess: createSuccess }] = useUpdateWorkingScheduleMutation();
+  const [updateWorkingSchedule, { isSuccess: createSuccess, isError: createError }] = useUpdateWorkingScheduleMutation();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -35,6 +36,23 @@ const WorkSchedule = () => {
     }
     // reset();
   };
+  useEffect(() => {
+    if (createSuccess) {
+      toast.success("successfully updated the working schedule", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    } else if (createError) {
+      toast.error("server error occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
+  }, [createSuccess, createError]);
   return (
     <div className="sm:h-[100vh]">
       <h1 className="text-lg mt-2 text-left text-orange-400">Work Schedule</h1>

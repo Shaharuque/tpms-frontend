@@ -67,7 +67,13 @@ const LeaveTrackingAdd = ({ handleClose, open }) => {
 
           <div className="bg-gray-200 py-[1px] mt-3"></div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
+            <div className="">
+              <div>
+                <label className="label">
+                  <span className="modal-label-name">Date</span>
+                </label>
+                <input type="date" name="date" className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("date")} />
+              </div>
               <div>
                 <label className="label">
                   <span className="modal-label-name">Description</span>
@@ -75,14 +81,9 @@ const LeaveTrackingAdd = ({ handleClose, open }) => {
 
                 <textarea rows={4} placeholder="maxLength is 6" size="middle" className="w-full border bottom-2 ml-1 p-1" {...register("desc")} />
               </div>
-              <div className=" flex item-center gap-4 flex-wrap">
-                <div>
-                  <label className="label">
-                    <span className="modal-label-name">Date</span>
-                  </label>
-                  <input type="date" name="date" className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full" {...register("date")} />
-                </div>
-                <div className="mt-8">
+              <div className="bg-gray-200 py-[1px] mt-3"></div>
+              <div className=" flex item-center justify-end gap-4 flex-wrap">
+                <div className="mt-4">
                   <button className="mr-2 pms-button" type="submit">
                     Apply Leave
                   </button>
