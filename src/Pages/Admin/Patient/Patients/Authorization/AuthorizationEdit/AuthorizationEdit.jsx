@@ -46,7 +46,7 @@ const AuthorizationEdit = () => {
     token,
     id,
   });
-  //console.log("authorization info data", authorizationInfo);
+  console.log("authorization info data", authorizationInfo);
 
   //Patient Authorization Activity nested table data api
   const {
@@ -61,21 +61,16 @@ const AuthorizationEdit = () => {
   });
 
   //Patient Authorization update api
-  const [
-    patientAuthorizationUpdate,
-    { isSuccess: updateSuccess, isError: updateError },
-  ] = usePatientAuthorizationUpdateMutation();
+  const [patientAuthorizationUpdate, { isSuccess: updateSuccess, isError: updateError }] = usePatientAuthorizationUpdateMutation();
 
   // console.log(
   //   "authorization Activity data",
   //   allActivityData?.client_authorization_activity?.data
   // );
-  const allAuthorizationActivity =
-    allActivityData?.client_authorization_activity?.data || [];
+  const allAuthorizationActivity = allActivityData?.client_authorization_activity?.data || [];
 
   // API date Data Destructring
-  let selectedDate =
-    authorizationInfo?.client_authorization_info?.selected_date || null;
+  let selectedDate = authorizationInfo?.client_authorization_info?.selected_date || null;
   // API Destructuring
   const {
     description,
@@ -116,9 +111,7 @@ const AuthorizationEdit = () => {
   //Toggle handler code
   const [network, setNetwork] = useState(BoolConverter(in_network));
   const [valid, setValid] = useState(BoolConverter(is_valid));
-  const [place_holder, setPlace_holder] = useState(
-    BoolConverter(is_placeholder)
-  );
+  const [place_holder, setPlace_holder] = useState(BoolConverter(is_placeholder));
 
   useEffect(() => {
     setNetwork(BoolConverter(in_network));
@@ -164,17 +157,11 @@ const AuthorizationEdit = () => {
   const startDate = range ? range[0]?.startDate : null;
   const endDate = range ? range[0]?.endDate : null;
   console.log("calender date", startDate, endDate);
-  const startMonth = startDate
-    ? startDate.toLocaleString("en-us", { month: "short" })
-    : null;
-  const endMonth = endDate
-    ? endDate.toLocaleString("en-us", { month: "short" })
-    : null;
+  const startMonth = startDate ? startDate.toLocaleString("en-us", { month: "short" }) : null;
+  const endMonth = endDate ? endDate.toLocaleString("en-us", { month: "short" }) : null;
   const startDay = startDate ? startDate.getDate() : null;
   const endDay = endDate ? endDate.getDate() : null;
-  const startYear = startDate
-    ? startDate.getFullYear().toString().slice(2, 4)
-    : null;
+  const startYear = startDate ? startDate.getFullYear().toString().slice(2, 4) : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
 
   //Date spliter function
@@ -235,9 +222,7 @@ const AuthorizationEdit = () => {
         description: description || null,
         authorization_number: authorization_number || null,
         uci_id: uci_id || null,
-        start_date: startDate
-          ? `${startMonth} ${startDay}, ${startYear}`
-          : startD,
+        start_date: startDate ? `${startMonth} ${startDay}, ${startYear}` : startD,
         end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : endD,
         is_primary,
         diagnosis_one,
@@ -319,19 +304,14 @@ const AuthorizationEdit = () => {
     <div className="">
       <div className="flex flex-wrap items-center gap-2 mb-2">
         {/* Changes needed */}
-        <Link
-          to={`/admin/patient/patient-authorization/${patientId}`}
-          className="text-primary text-lg"
-        >
+        <Link to={`/admin/patient/patient-authorization/${patientId}`} className="text-primary text-lg">
           <IoCaretBackCircleOutline />
         </Link>
         <div className="text-xs font-medium">
           <span className="text-sm font-semibold text-primary">Amro LLC |</span>
           <span className="text-orange-400 font-semibold"> DOB :</span>
-          09/28/2021 |
-          <span className="text-orange-400 font-semibold"> Phone : </span>
-          (894)-023-8043 |
-          <span className="text-orange-400 font-semibold"> Address : </span>
+          09/28/2021 |<span className="text-orange-400 font-semibold"> Phone : </span>
+          (894)-023-8043 |<span className="text-orange-400 font-semibold"> Address : </span>
           1222, OTtn, With Jersey City NJ 32809
         </div>
       </div>
@@ -344,11 +324,7 @@ const AuthorizationEdit = () => {
           </button>
         </Link>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
+      <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <>
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-6 gap-y-3">
@@ -372,10 +348,7 @@ const AuthorizationEdit = () => {
                     <span className="text-red-500">*</span>
                   </span>
                 </label>
-                <select
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                  {...register("payor_id")}
-                >
+                <select className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none" {...register("payor_id")}>
                   {payor_id ? (
                     <option value={payor_id}>
                       {insurance
@@ -410,19 +383,12 @@ const AuthorizationEdit = () => {
                   {...register("treatment_type")}
                   onChange={(e) => setTreatmentType(e.target.value)}
                 >
-                  {treatment_type ? (
-                    <option value={treatment_type}>{treatment_type}</option>
-                  ) : (
-                    <option>Select Treatment</option>
-                  )}
+                  {treatment_type ? <option value={treatment_type}>{treatment_type}</option> : <option>Select Treatment</option>}
                   {txType
                     ?.filter((item) => item.id !== treatment_type_id)
                     ?.map((treatment) => {
                       return (
-                        <option
-                          key={treatment?.id}
-                          value={treatment?.treatment_name}
-                        >
+                        <option key={treatment?.id} value={treatment?.treatment_name}>
                           {treatment?.treatment_name}
                         </option>
                       );
@@ -456,7 +422,7 @@ const AuthorizationEdit = () => {
                     ?.map((supv) => {
                       return (
                         <option key={supv?.id} value={supv?.employee?.id}>
-                          {supv?.employee?.full_name}
+                          {supv?.id}
                         </option>
                       );
                     })}
@@ -464,18 +430,12 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    Selected date
-                  </span>
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Selected date</span>
                 </label>
                 <div className="ml-1">
                   <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                     <input
-                      value={
-                        startDate
-                          ? `${startMonth} ${startDay}, ${startYear}`
-                          : `${startD}`
-                      }
+                      value={startDate ? `${startMonth} ${startDay}, ${startYear}` : `${startD}`}
                       readOnly
                       onClick={() => setOpenCalendar(true)}
                       {...register("start_date")}
@@ -487,11 +447,7 @@ const AuthorizationEdit = () => {
                     ></RiArrowLeftRightLine>
                     <input
                       // defaultValue={"5-10-2034"}
-                      value={
-                        endDate
-                          ? `${endMonth} ${endDay}, ${endYear}`
-                          : `${endD}`
-                      }
+                      value={endDate ? `${endMonth} ${endDay}, ${endYear}` : `${endD}`}
                       readOnly
                       onClick={() => setOpenCalendar(true)}
                       {...register("end_date")}
@@ -500,17 +456,9 @@ const AuthorizationEdit = () => {
                   </div>
 
                   {/* Multi date picker component called */}
-                  <div
-                    ref={refClose}
-                    className="absolute z-10 md:ml-[-9%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s "
-                  >
+                  <div ref={refClose} className="absolute z-10 md:ml-[-9%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s ">
                     {openCalendar && (
-                      <CustomDateRange
-                        range={range}
-                        setRange={setRange}
-                        handleCancelDate={handleCancelDate}
-                        setOpen={setOpenCalendar}
-                      ></CustomDateRange>
+                      <CustomDateRange range={range} setRange={setRange} handleCancelDate={handleCancelDate} setOpen={setOpenCalendar}></CustomDateRange>
                     )}
                   </div>
                 </div>
@@ -551,10 +499,7 @@ const AuthorizationEdit = () => {
                     <span className="text-red-500">*</span>
                   </span>
                 </label>
-                <select
-                  className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none"
-                  {...register("is_primary")}
-                >
+                <select className="input-border text-gray-600 rounded-sm  text-[14px] font-medium ml-1  w-full focus:outline-none" {...register("is_primary")}>
                   <option value="">Select Any</option>
                   <option value="1">Primary</option>
                   <option value="2">Secondary</option>
@@ -564,15 +509,9 @@ const AuthorizationEdit = () => {
 
               <div className="">
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    Upload Authorization
-                  </span>
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Upload Authorization</span>
                 </label>
-                <input
-                  type="file"
-                  className=" ml-1 py-[5px]  text-xs w-full"
-                  {...register("fileName")}
-                />
+                <input type="file" className=" ml-1 py-[5px]  text-xs w-full" {...register("fileName")} />
               </div>
 
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
@@ -591,9 +530,7 @@ const AuthorizationEdit = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                      Diagnosis2
-                    </span>
+                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Diagnosis2</span>
                   </label>
                   <input
                     type="text"
@@ -621,9 +558,7 @@ const AuthorizationEdit = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                      Diagnosis4
-                    </span>
+                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Diagnosis4</span>
                   </label>
                   <input
                     type="text"
@@ -637,9 +572,7 @@ const AuthorizationEdit = () => {
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                      Deductible
-                    </span>
+                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Deductible</span>
                   </label>
                   <input
                     type="text"
@@ -650,23 +583,15 @@ const AuthorizationEdit = () => {
                 </div>
                 <div className="mt-[30px]">
                   <div className="flex ml-1 mt-1 items-center">
-                    <Switch
-                      checked={network}
-                      onChange={() => setNetwork(!network)}
-                      size="small"
-                    />
-                    <span className="text-[14px] ml-1 text-gray-600 font-medium">
-                      In Network
-                    </span>
+                    <Switch checked={network} onChange={() => setNetwork(!network)} size="small" />
+                    <span className="text-[14px] ml-1 text-gray-600 font-medium">In Network</span>
                   </div>
                 </div>
               </div>
 
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    CoPay
-                  </span>
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">CoPay</span>
                 </label>
                 <input
                   type="text"
@@ -677,9 +602,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    CMS 4 (Insured Name)
-                  </span>
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">CMS 4 (Insured Name)</span>
                 </label>
                 <input
                   type="text"
@@ -690,9 +613,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    CMS 11 (Group No)
-                  </span>
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">CMS 11 (Group No)</span>
                 </label>
                 <input
                   type="text"
@@ -703,31 +624,17 @@ const AuthorizationEdit = () => {
               </div>
               <div className="ml-2 mt-5 flex gap-3 items-center">
                 <div className="flex items-center">
-                  <Switch
-                    checked={valid}
-                    onChange={() => setValid(!valid)}
-                    size="small"
-                  />
-                  <span className="text-[14px] ml-2 font-medium text-gray-500">
-                    Active
-                  </span>
+                  <Switch checked={valid} onChange={() => setValid(!valid)} size="small" />
+                  <span className="text-[14px] ml-2 font-medium text-gray-500">Active</span>
                 </div>
                 <div className="flex items-center">
-                  <Switch
-                    checked={place_holder}
-                    onChange={() => setPlace_holder(!place_holder)}
-                    size="small"
-                  />
-                  <span className="text-[14px] ml-2 font-medium text-gray-500">
-                    Placeholder
-                  </span>
+                  <Switch checked={place_holder} onChange={() => setPlace_holder(!place_holder)} size="small" />
+                  <span className="text-[14px] ml-2 font-medium text-gray-500">Placeholder</span>
                 </div>
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                    Notes
-                  </span>
+                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Notes</span>
                 </label>
                 <textarea
                   {...register("notes")}
@@ -751,11 +658,7 @@ const AuthorizationEdit = () => {
         </form>
       </motion.div>
       {id && (
-        <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
+        <motion.div initial={{ opacity: 0, y: -15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
           <div className="divider"></div>
 
           <div className="flex justify-end">
@@ -779,11 +682,7 @@ const AuthorizationEdit = () => {
         </motion.div>
       )}
       {addServiceModal && (
-        <AuthorizationActivityAddModal
-          treatment_name={treatmentType}
-          handleClose={handleClose}
-          open={addServiceModal}
-        ></AuthorizationActivityAddModal>
+        <AuthorizationActivityAddModal treatment_name={treatmentType} handleClose={handleClose} open={addServiceModal}></AuthorizationActivityAddModal>
       )}
     </div>
   );

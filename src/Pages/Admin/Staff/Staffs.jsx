@@ -135,7 +135,7 @@ const Staffs = () => {
         return a.full_name > b.full_name ? -1 : 1;
       },
       sortOrder: sortedInfo.columnKey === "full_name" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Credential Type",

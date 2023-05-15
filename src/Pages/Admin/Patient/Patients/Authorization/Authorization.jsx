@@ -24,19 +24,17 @@ const Authorization = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   //get patient authorization api
-  const { data: authorizationData, isLoading: authorizationloading } =
-    useGetPatientAuthorizationQuery({
-      token,
-      payload: {
-        client_id: id,
-      },
-    });
+  const { data: authorizationData, isLoading: authorizationloading } = useGetPatientAuthorizationQuery({
+    token,
+    payload: {
+      client_id: id,
+    },
+  });
   // console.log(
   //   "All patient Authorization",
   //   authorizationData?.client_authorization?.data
   // );
-  const clientAuthorizationData =
-    authorizationData?.client_authorization?.data || [];
+  const clientAuthorizationData = authorizationData?.allAuthorization || [];
 
   const editAuth = (record) => {
     //console.log("editdata edit", record);
@@ -64,35 +62,34 @@ const Authorization = () => {
       dataIndex: "description",
       key: "description",
       width: 120,
-      filters: [
-        {
-          text: "Realcube",
-          value: "Realcube",
-        },
-        {
-          text: "Mycat",
-          value: "Mycat",
-        },
-        {
-          text: "Donovan",
-          value: "Donovan",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-      ],
-      filteredValue: filteredInfo.description || null,
-      onFilter: (value, record) => record.description.includes(value),
+      // filters: [
+      //   {
+      //     text: "Realcube",
+      //     value: "Realcube",
+      //   },
+      //   {
+      //     text: "Mycat",
+      //     value: "Mycat",
+      //   },
+      //   {
+      //     text: "Donovan",
+      //     value: "Donovan",
+      //   },
+      //   {
+      //     text: "Burke Beard",
+      //     value: "Burke Beard",
+      //   },
+      //   {
+      //     text: "Hector Moses",
+      //     value: "Hector Moses",
+      //   },
+      // ],
+      // filteredValue: filteredInfo.description || null,
+      // onFilter: (value, record) => record.description.includes(value),
       sorter: (a, b) => {
         return a.description > b.description ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "description" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "description" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -100,72 +97,35 @@ const Authorization = () => {
       dataIndex: "onset_date",
       key: "onset_date",
       width: 100,
-      filters: [
-        {
-          text: `Amet`,
-          value: "Amet",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.onset_date || null,
-      onFilter: (value, record) => record.onset_date.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.onset_date > b.onset_date ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
-      ellipsis: true,
+      sortOrder: sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
       title: "End Date",
       dataIndex: "end_date",
       key: "end_date",
       width: 100,
-      filters: [
-        {
-          text: `Amet`,
-          value: "Amet",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.end_date || null,
-      onFilter: (value, record) => record.end_date.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.end_date > b.end_date ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "end_date" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Insurance",
       dataIndex: "insurance",
       key: "insurance",
       width: 150,
-      filters: [
-        {
-          text: `Amet`,
-          value: "Amet",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
       render: (_, { authorization_name }) => {
         if (authorization_name) {
           return <h1>{authorization_name.split(" ")[0]}</h1>;
         }
       },
-      filteredValue: filteredInfo.insurance || null,
-      onFilter: (value, record) => record.insurance.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.insurance > b.insurance ? -1 : 1; //sorting problem solved using this logic
@@ -178,18 +138,6 @@ const Authorization = () => {
       dataIndex: "uci_id",
       key: "uci_id",
       width: 150,
-      filters: [
-        {
-          text: `Amet`,
-          value: "Amet",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.uci_id || null,
-      onFilter: (value, record) => record.uci_id.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.uci_id > b.uci_id ? -1 : 1; //sorting problem solved using this logic
@@ -202,26 +150,11 @@ const Authorization = () => {
       dataIndex: "authorization_number",
       key: "authorization_number",
       width: 150,
-      filters: [
-        {
-          text: `Amet`,
-          value: "Amet",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.authorization_number || null,
-      onFilter: (value, record) => record.authorization_number.includes(value),
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.authorization_number > b.authorization_number ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "authorization_number"
-          ? sortedInfo.order
-          : null,
+      sortOrder: sortedInfo.columnKey === "authorization_number" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -242,8 +175,7 @@ const Authorization = () => {
       sorter: (a, b) => {
         return a.is_primary > b.is_primary ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "is_primary" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "is_primary" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -280,10 +212,7 @@ const Authorization = () => {
 
               <span>|</span>
               <Link to={"/"}>
-                <AiOutlineDelete
-                  className="text-sm mt-[3px] text-red-500 mx-2"
-                  title="Delete"
-                />
+                <AiOutlineDelete className="text-sm mt-[3px] text-red-500 mx-2" title="Delete" />
               </Link>
             </div>
           </div>
