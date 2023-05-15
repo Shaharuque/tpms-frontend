@@ -8,11 +8,11 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //get patient authorization api
     getPatientAuthorization: builder.query({
       query: ({ token, payload }) => ({
-        url: `admin/ac/patient/authorization`,
+        url: `/patient/authorization/list`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -22,11 +22,11 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //get patient authorization info
     getPatientAuthorizationInfo: builder.query({
       query: ({ token, id }) => ({
-        url: `admin/ac/patient/authorization/info/${id}`,
+        url: `/patient/authorization/single/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
       providesTags: ["PatientAuthorization"],

@@ -296,8 +296,10 @@ select:focus {
 }
 
 .label-font {
-  font-size: 15px;
-  color: #9b9b9b;
+  /* font-size: 15px;
+  color: #9b9b9b; */
+  font-size: 13px;
+  color: #00a1b1;
   font-weight: 500;
   text-align: left;
 }
