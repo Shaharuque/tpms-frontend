@@ -33,6 +33,7 @@ const LeaveTrackingAdd = ({ handleClose, open }) => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
       reset();
       handleClose();
@@ -41,6 +42,7 @@ const LeaveTrackingAdd = ({ handleClose, open }) => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [addleaveTrackError, addleaveTrackSuccess, addleaveTrackdata?.message, handleClose, reset]);

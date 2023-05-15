@@ -29,7 +29,21 @@ const leaveTrackApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["LeaveTrack"],
     }),
+
+    // delete leave tracking
+    DeleteLeaveTracking: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "provider/ac/staffs/leave/delete",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["LeaveTrack"],
+    }),
   }),
 });
 
-export const { useGetLeaveTrackingQuery, useAddLeaveTrackingMutation } = leaveTrackApi;
+export const { useGetLeaveTrackingQuery, useAddLeaveTrackingMutation, useDeleteLeaveTrackingMutation } = leaveTrackApi;

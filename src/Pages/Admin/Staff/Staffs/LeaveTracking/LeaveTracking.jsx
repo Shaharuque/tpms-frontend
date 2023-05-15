@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
 import Loading from "../../../../../Loading/Loading";
 import LeaveTrackingAdd from "./LeaveTrackingAdd";
-import { useGetLeaveTrackingQuery } from "../../../../../features/Stuff_redux/leaveTracking/leaveTrackingApi";
+import { useDeleteLeaveTrackingMutation, useGetLeaveTrackingQuery } from "../../../../../features/Stuff_redux/leaveTracking/leaveTrackingApi";
 import { Table } from "antd";
+import { toast } from "react-toastify";
 
 const LeaveTracking = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -22,6 +23,41 @@ const LeaveTracking = () => {
       employee_id: id,
     },
   });
+
+  // delete leave tracking api
+  const [DeleteLeaveTracking, { data: deleteleaveTrackdata, isSuccess: deleteleaveTrackSuccess, isError: deleteleaveTrackError }] =
+    useDeleteLeaveTrackingMutation();
+
+  //Success/Error message show
+  useEffect(() => {
+    if (deleteleaveTrackSuccess) {
+      toast.success(deleteleaveTrackdata?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    } else if (deleteleaveTrackError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
+  }, [deleteleaveTrackError, deleteleaveTrackSuccess, deleteleaveTrackdata?.message]);
+  // useDeleteLeaveTrackingMutation
+
+  const handleDelete = (dltid) => {
+    const deleteTrackPayload = {
+      employee_id: id,
+      del_id: dltid,
+    };
+    DeleteLeaveTracking({
+      token,
+      payload: deleteTrackPayload,
+    });
+  };
 
   const column = [
     {
@@ -102,7 +138,7 @@ const LeaveTracking = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div className="flex justify-center">
-            <button onClick={() => console.log("dlt id ", id)} className="text-red-500">
+            <button onClick={() => handleDelete(id)} className="text-red-500">
               <AiOutlineDelete />
             </button>
           </div>
@@ -135,9 +171,9 @@ const LeaveTracking = () => {
     setEditModal(false);
   };
 
-  if (getleaveTrackLoading) {
-    return <Loading />;
-  }
+  // if (getleaveTrackLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <div className="h-[100vh]">
