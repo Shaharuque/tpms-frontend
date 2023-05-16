@@ -7,6 +7,25 @@ import { useParams } from "react-router-dom";
 import BlockOffTime from "./BlockOffTime";
 import { toast } from "react-toastify";
 
+const timeConvertForInput = (receivedTime) => {
+  if (receivedTime === null) return null;
+  const timeString = new Date(receivedTime)?.toLocaleTimeString();
+  const [time, period] = timeString.split(" "); // Split the string into time and period (AM/PM)
+  let [hours, minutes, seconds] = time.split(":").map(Number); // Split the time into hours, minutes, and seconds
+
+  if (period === "PM" && hours !== 12) {
+    // If the period is PM and the hours are not already in 24-hour format
+    hours += 12; // Add 12 hours to convert to 24-hour format
+  } else if (period === "AM" && hours === 12) {
+    // If the period is AM and the hours are 12 (midnight)
+    hours = 0; // Set the hours to 0 (since 12:00 AM is the start of the day)
+  }
+
+  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`; // Format the time as HH:mm:ss
+
+  return formattedTime;
+};
+
 const WorkSchedule = () => {
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {
@@ -21,6 +40,44 @@ const WorkSchedule = () => {
 
   //for craeting working schedule
   const [updateWorkingSchedule, { isSuccess: createSuccess, isError: createError }] = useUpdateWorkingScheduleMutation();
+
+  const { mon_start, mon_end, tue_start, tue_end, wed_start, wed_end, thu_start, thu_end, sun_start, sun_end, sat_start, sat_end, fri_start, fri_end } =
+    workingSchedule || {};
+
+  //For testing purpose it basically convert the UTC time format to local timeformat As, we are getting data from DB as UTC time format
+  // const monStartTime = new Date(mon_start)?.toLocaleString();
+  // const monEndTime = new Date(mon_end)?.toLocaleString();
+
+  // const utcTimestamp = new Date("2023-05-15T16:39:00.000Z");
+  // // Define the options object with the time zone
+  // const options = { timeZone: "America/New_York" };
+  // // Convert the UTC timestamp to the local time format
+  // const localTimestamp = utcTimestamp.toLocaleString("en-US", options);
+  // // Print the local timestamp
+  // console.log(localTimestamp);
+
+  //Initial value render
+  useEffect(() => {
+    // you can do async server request and fill up form
+    setTimeout(() => {
+      reset({
+        mon_start: timeConvertForInput(mon_start),
+        mon_end: timeConvertForInput(mon_end),
+        tue_start: timeConvertForInput(tue_start),
+        tue_end: timeConvertForInput(tue_end),
+        wed_start: timeConvertForInput(wed_start),
+        wed_end: timeConvertForInput(wed_end),
+        thu_start: timeConvertForInput(thu_start),
+        thu_end: timeConvertForInput(thu_end),
+        sun_start: timeConvertForInput(sun_start),
+        sun_end: timeConvertForInput(sun_end),
+        sat_start: timeConvertForInput(sat_start),
+        sat_end: timeConvertForInput(sat_end),
+        fri_start: timeConvertForInput(fri_start),
+        fri_end: timeConvertForInput(fri_end),
+      });
+    }, 0);
+  }, [reset, mon_start, mon_end, tue_start, tue_end, wed_start, wed_end, thu_start, thu_end, sun_start, sun_end, sat_start, sat_end, fri_start, fri_end]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -53,8 +110,9 @@ const WorkSchedule = () => {
       });
     }
   }, [createSuccess, createError]);
+
   return (
-    <div className="sm:h-[100vh]">
+    <div className="">
       <h1 className="text-lg mt-2 text-left text-orange-400">Work Schedule</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* working hours  */}

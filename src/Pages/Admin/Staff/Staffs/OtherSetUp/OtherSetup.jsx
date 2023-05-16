@@ -367,7 +367,7 @@ const OtherSetup = () => {
             <span className="text-sm ml-2  text-gray-600">Prevent Provider Render Without Notes(for catalyst users)</span>
           </div>
         </div>
-        <div className="other-box ml-2 my-10">
+        <div className="other-box ml-2">
           <div className="flex items-center justify-around gap-2 mb-4 ">
             <h3 className="text-sm font-medium w-80">Tax Type</h3>
             <h3 className="text-sm font-medium w-80 text-center">Box 24J</h3>
@@ -387,7 +387,7 @@ const OtherSetup = () => {
           )}
           {/* )} */}
         </div>
-        <div className="mt-20 ml-2">
+        <div className="mt-2 ml-2">
           <button className=" pms-button" type="submit">
             Save
           </button>
