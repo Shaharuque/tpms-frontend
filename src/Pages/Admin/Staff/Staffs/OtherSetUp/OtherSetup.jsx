@@ -40,26 +40,26 @@ const OtherSetup = () => {
     }
   }, [otherSetupSuccess, otherSetup?.getAllTxType]);
   //Clients multi select data from server
-  useEffect(() => {
-    const othersetupApicall = async () => {
-      setLoading(true);
-      const res = await axios({
-        method: "GET",
-        url: `${baseIp}/provider/other/setup/${id}`,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "x-auth-token": token || null,
-        },
-      });
-      console.log("other setup data", res);
-      settxTypedata(res.data?.getAllTxType);
-      reset();
-      setLoading(false);
-      // setsingleInput(res.data?.info);
-    };
-    othersetupApicall();
-  }, [id, token, isSuccess]);
+  // useEffect(() => {
+  //   const othersetupApicall = async () => {
+  //     setLoading(true);
+  //     const res = await axios({
+  //       method: "GET",
+  //       url: `${baseIp}/provider/other/setup/${id}`,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         "x-auth-token": token || null,
+  //       },
+  //     });
+  //     console.log("other setup data", res);
+  //     settxTypedata(res.data?.getAllTxType);
+  //     reset();
+  //     setLoading(false);
+  //     // setsingleInput(res.data?.info);
+  //   };
+  //   othersetupApicall();
+  // }, [id, token, isSuccess]);
 
   //Success/Error message show added api
   useEffect(() => {
