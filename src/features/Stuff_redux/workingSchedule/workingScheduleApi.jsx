@@ -28,6 +28,7 @@ export const workingScheduleApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
+      invalidatesTags: ["workingSchedule"],
     }),
 
     //list block-off time
