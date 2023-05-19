@@ -73,6 +73,20 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       invalidatesTags: ["PatientAuthorization", "PatientAuthorizationTable"],
     }),
 
+    //delete Authorization
+    patientAuthorizationDelete: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `/patient/authorization/delete`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["PatientAuthorizationTable"],
+    }),
+
     //Get Patient Authorization Activity api
     getPatientAuthorizationActivity: builder.query({
       query: ({ token, payload }) => ({
@@ -203,6 +217,7 @@ export const {
   useGetAuthorizationCreateInfoQuery,
   usePatientAuthorizationCreateMutation,
   usePatientAuthorizationUpdateMutation,
+  usePatientAuthorizationDeleteMutation,
   useGetPatientAuthorizationActivityQuery,
   usePatientAuthorizationActivityInfoQuery,
   usePatientAuthorizationActivityCreateMutation,
