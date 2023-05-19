@@ -38,14 +38,11 @@ const AddAuthorization = () => {
     id: patientId,
   });
   //Patient Authorization Save API(create authorization)
-  const [
-    patientAuthorizationCreate,
-    { isSuccess: createSuccess, isError: createError },
-  ] = usePatientAuthorizationCreateMutation();
+  const [patientAuthorizationCreate, { isSuccess: createSuccess, isError: createError }] = usePatientAuthorizationCreateMutation();
 
-  const allPayors = createInfo?.all_payors;
-  const allSupervisor = createInfo?.supervisor;
-  const allTreatmentTypes = createInfo?.treatment_types;
+  const allPayors = createInfo?.allPayors;
+  const allSupervisor = createInfo?.supervisors;
+  const allTreatmentTypes = createInfo?.treatmentTypes;
   console.log("dropdown data", allPayors);
 
   //String Date to [mm/dd/yy] converter function
@@ -81,17 +78,11 @@ const AddAuthorization = () => {
   // date range picker calendar
   const startDate = range ? range[0]?.startDate : null;
   const endDate = range ? range[0]?.endDate : null;
-  const startMonth = startDate
-    ? startDate.toLocaleString("en-us", { month: "short" })
-    : null;
-  const endMonth = endDate
-    ? endDate.toLocaleString("en-us", { month: "short" })
-    : null;
+  const startMonth = startDate ? startDate.toLocaleString("en-us", { month: "short" }) : null;
+  const endMonth = endDate ? endDate.toLocaleString("en-us", { month: "short" }) : null;
   const startDay = startDate ? startDate.getDate() : null;
   const endDay = endDate ? endDate.getDate() : null;
-  const startYear = startDate
-    ? startDate.getFullYear().toString().slice(2, 4)
-    : null;
+  const startYear = startDate ? startDate.getFullYear().toString().slice(2, 4) : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
 
   //test design
@@ -168,19 +159,14 @@ const AddAuthorization = () => {
     <div className="md:h-[100vh]">
       <div className="flex flex-wrap items-center gap-2 mb-2">
         {/* Changes needed */}
-        <Link
-          to={`/admin/patient/patient-authorization/${patientId}`}
-          className="text-primary text-lg"
-        >
+        <Link to={`/admin/patient/patient-authorization/${patientId}`} className="text-primary text-lg">
           <IoCaretBackCircleOutline />
         </Link>
         <div className="text-xs font-medium">
           <span className="text-sm font-semibold text-primary">Amro LLC |</span>
           <span className="text-orange-400 font-semibold"> DOB :</span>
-          09/28/2021 |
-          <span className="text-orange-400 font-semibold"> Phone : </span>
-          (894)-023-8043 |
-          <span className="text-orange-400 font-semibold"> Address : </span>
+          09/28/2021 |<span className="text-orange-400 font-semibold"> Phone : </span>
+          (894)-023-8043 |<span className="text-orange-400 font-semibold"> Address : </span>
           1222, OTtn, With Jersey City NJ 32809
         </div>
       </div>
@@ -188,14 +174,8 @@ const AddAuthorization = () => {
         <h1 className="text-lg font-medium mx-1">Add Auth</h1>
         <div className="flex items-center gap-2">
           <div className="flex items-center ">
-            <Switch
-              size="small"
-              checked={auth ? true : false}
-              onClick={() => setAuth(!auth)}
-            />
-            <span className="text-[14px] font-medium text-gray-500 mx-3">
-              Auth Not Required
-            </span>
+            <Switch size="small" checked={auth ? true : false} onClick={() => setAuth(!auth)} />
+            <span className="text-[14px] font-medium text-gray-500 mx-3">Auth Not Required</span>
           </div>
           <Link to={`/admin/patient/patient-authorization/${patientId}`}>
             <button className="px-2 flex items-center py-2 bg-gradient-to-r from-secondary to-primary text-xs font-medium  hover:to-secondary text-white rounded-md">
@@ -205,11 +185,7 @@ const AddAuthorization = () => {
           </Link>
         </div>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
+      <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-6 gap-y-3">
             <div>
@@ -218,12 +194,7 @@ const AddAuthorization = () => {
                   Description<span className="text-red-500">*</span>
                 </span>
               </label>
-              <input
-                type="text"
-                name="description"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("description")}
-              />
+              <input type="text" name="description" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("description")} />
             </div>
             <div>
               <label className="label">
@@ -232,10 +203,7 @@ const AddAuthorization = () => {
                   <span className="text-red-500">*</span>
                 </span>
               </label>
-              <select
-                className="input-border input-font  w-full focus:outline-none"
-                {...register("payor_id")}
-              >
+              <select className="input-border input-font  w-full focus:outline-none" {...register("payor_id")}>
                 {allPayors?.map((payors) => {
                   return (
                     <option key={payors?.id} value={payors?.payor_id}>
@@ -252,16 +220,10 @@ const AddAuthorization = () => {
                   <span className="text-red-500">*</span>
                 </span>
               </label>
-              <select
-                className="input-border input-font  w-full focus:outline-none"
-                {...register("treatment_type")}
-              >
+              <select className="input-border input-font  w-full focus:outline-none" {...register("treatment_type")}>
                 {allTreatmentTypes?.map((treatment) => {
                   return (
-                    <option
-                      key={treatment?.id}
-                      value={treatment?.treatment_name}
-                    >
+                    <option key={treatment?.id} value={treatment?.treatment_name}>
                       {treatment?.treatment_name}
                     </option>
                   );
@@ -275,14 +237,11 @@ const AddAuthorization = () => {
                   <span className="text-red-500">*</span>
                 </span>
               </label>
-              <select
-                className="input-border input-font  w-full focus:outline-none"
-                {...register("supervisor_id")}
-              >
+              <select className="input-border input-font  w-full focus:outline-none" {...register("supervisor_id")}>
                 {allSupervisor?.map((supv) => {
                   return (
-                    <option key={supv?.id} value={supv?.employee?.id}>
-                      {supv?.employee?.full_name}
+                    <option key={supv?.id} value={supv?.employee_id}>
+                      {supv?.providerName?.full_name}
                     </option>
                   );
                 })}
@@ -296,24 +255,15 @@ const AddAuthorization = () => {
               <div className="ml-1">
                 <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                   <input
-                    value={
-                      startDate
-                        ? `${startMonth} ${startDay}, ${startYear}`
-                        : "Start Date"
-                    }
+                    value={startDate ? `${startMonth} ${startDay}, ${startYear}` : "Start Date"}
                     readOnly
                     onClick={() => setOpenCalendar(true)}
                     className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                     {...register("start_date")}
                   />
-                  <BsArrowRight
-                    onClick={() => setOpenCalendar(true)}
-                    className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"
-                  ></BsArrowRight>
+                  <BsArrowRight onClick={() => setOpenCalendar(true)} className="w-1/3 cursor-pointer text-gray-600 text-[14px] font-medium"></BsArrowRight>
                   <input
-                    value={
-                      endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"
-                    }
+                    value={endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"}
                     readOnly
                     onClick={() => setOpenCalendar(true)}
                     className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
@@ -322,17 +272,9 @@ const AddAuthorization = () => {
                 </div>
 
                 {/* Multi date picker component called */}
-                <div
-                  ref={refClose}
-                  className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s"
-                >
+                <div ref={refClose} className="absolute z-10 md:ml-[-15%] lg:ml-0 xl:ml-0 2xl:ml-[35%]s">
                   {openCalendar && (
-                    <CustomDateRange
-                      range={range}
-                      setRange={setRange}
-                      handleCancelDate={handleCancelDate}
-                      setOpen={setOpenCalendar}
-                    ></CustomDateRange>
+                    <CustomDateRange range={range} setRange={setRange} handleCancelDate={handleCancelDate} setOpen={setOpenCalendar}></CustomDateRange>
                   )}
                 </div>
               </div>
@@ -369,12 +311,7 @@ const AddAuthorization = () => {
                   UCI / Insurance ID<span className="text-red-500">*</span>
                 </span>
               </label>
-              <input
-                type="text"
-                name="uci_id"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("uci_id")}
-              />
+              <input type="text" name="uci_id" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("uci_id")} />
             </div>
 
             <div>
@@ -384,10 +321,7 @@ const AddAuthorization = () => {
                   <span className="text-red-500">*</span>
                 </span>
               </label>
-              <select
-                className="input-border input-font  w-full focus:outline-none"
-                {...register("is_primary")}
-              >
+              <select className="input-border input-font  w-full focus:outline-none" {...register("is_primary")}>
                 <option value="1">Primary</option>
                 <option value="2">Secondary</option>
                 <option value="3">Tertiary</option>
@@ -398,11 +332,7 @@ const AddAuthorization = () => {
               <label className="label">
                 <span className=" label-font">Upload Authorization</span>
               </label>
-              <input
-                type="file"
-                className=" ml-1 py-[5px]  text-xs w-full"
-                {...register("upload_authorization")}
-              />
+              <input type="file" className=" ml-1 py-[5px]  text-xs w-full" {...register("upload_authorization")} />
             </div>
 
             <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
@@ -412,12 +342,7 @@ const AddAuthorization = () => {
                     Diagnosis1<span className="text-red-500">*</span>
                   </span>
                 </label>
-                <input
-                  type="text"
-                  name="diagnosis1"
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("diagnosis_one")}
-                />
+                <input type="text" name="diagnosis1" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("diagnosis_one")} />
               </div>
               <div>
                 <label className="label">
@@ -440,23 +365,13 @@ const AddAuthorization = () => {
                     Diagnosis3<span className="text-red-500">*</span>
                   </span>
                 </label>
-                <input
-                  type="text"
-                  name="diagnosis3"
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("diagnosis_three")}
-                />
+                <input type="text" name="diagnosis3" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("diagnosis_three")} />
               </div>
               <div>
                 <label className="label">
                   <span className=" label-font">Diagnosis4</span>
                 </label>
-                <input
-                  type="text"
-                  name="diagnosis4"
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("diagnosis_four")}
-                />
+                <input type="text" name="diagnosis4" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("diagnosis_four")} />
               </div>
             </div>
 
@@ -465,23 +380,12 @@ const AddAuthorization = () => {
                 <label className="label">
                   <span className=" label-font">Deductible</span>
                 </label>
-                <input
-                  type="text"
-                  name="diagnosis1"
-                  className="input-border input-font py-[1px] w-full focus:outline-none"
-                  {...register("deductible")}
-                />
+                <input type="text" name="diagnosis1" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("deductible")} />
               </div>
               <div className="mt-[30px]">
                 <div className="flex ml-1 mt-1 items-center">
-                  <Switch
-                    checked={network}
-                    onChange={() => setNetwork(!network)}
-                    size="small"
-                  />
-                  <span className="text-[14px] ml-1 text-gray-600 font-medium">
-                    In Network
-                  </span>
+                  <Switch checked={network} onChange={() => setNetwork(!network)} size="small" />
+                  <span className="text-[14px] ml-1 text-gray-600 font-medium">In Network</span>
                 </div>
               </div>
             </div>
@@ -490,66 +394,35 @@ const AddAuthorization = () => {
               <label className="label">
                 <span className=" label-font">CoPay</span>
               </label>
-              <input
-                type="text"
-                name="copay"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("copay")}
-              />
+              <input type="text" name="copay" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("copay")} />
             </div>
             <div>
               <label className="label">
                 <span className=" label-font">CMS 4 (Insured Name)</span>
               </label>
-              <input
-                type="text"
-                name="cms4"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("cms_four")}
-              />
+              <input type="text" name="cms4" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("cms_four")} />
             </div>
             <div>
               <label className="label">
                 <span className=" label-font">CMS 11 (Group No)</span>
               </label>
-              <input
-                type="text"
-                name="cms11"
-                className="input-border input-font py-[1px] w-full focus:outline-none"
-                {...register("cms_eleven")}
-              />
+              <input type="text" name="cms11" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("cms_eleven")} />
             </div>
             <div className="ml-2 mt-5">
               <div className="my-1">
-                <Switch
-                  checked={valid}
-                  onChange={() => setValid(!valid)}
-                  size="small"
-                />
-                <span className="text-[14px] font-medium text-gray-500 mx-3">
-                  Active
-                </span>
+                <Switch checked={valid} onChange={() => setValid(!valid)} size="small" />
+                <span className="text-[14px] font-medium text-gray-500 mx-3">Active</span>
               </div>
               <div>
-                <Switch
-                  checked={placeHolder}
-                  onChange={() => setPlaceHolder(!placeHolder)}
-                  size="small"
-                />
-                <span className="text-[14px] font-medium text-gray-500 mx-3">
-                  Placeholder
-                </span>
+                <Switch checked={placeHolder} onChange={() => setPlaceHolder(!placeHolder)} size="small" />
+                <span className="text-[14px] font-medium text-gray-500 mx-3">Placeholder</span>
               </div>
             </div>
             <div>
               <label className="label">
                 <span className=" label-font">Notes</span>
               </label>
-              <textarea
-                onChange={(e) => setNotes(e.target.value)}
-                name="comment"
-                className="border border-gray-300 text-xs p-2  ml-1 h-24 w-full"
-              ></textarea>
+              <textarea onChange={(e) => setNotes(e.target.value)} name="comment" className="border border-gray-300 text-xs p-2  ml-1 h-24 w-full"></textarea>
             </div>
           </div>
           <div className=" flex items-end justify-start mt-2">

@@ -12,6 +12,7 @@ import useToken from "../../../../../CustomHooks/useToken";
 import InsuranceMultiSelect from "./InsuranceMultiSelect/InsuranceMultiSelect";
 import {
   useGetActivityProcessClaimMutation,
+  useGetAllProcessClaimsMutation,
   useGetCMSProviderProcessClaimMutation,
   useGetCPTProcessClaimMutation,
   useGetDegreeLevelProcessClaimMutation,
@@ -42,78 +43,37 @@ const ProcessingClaim = () => {
   console.log("sortBy1", sortBy1);
 
   //Process Claim Get Payor api
-  const [
-    PayorByDate,
-    {
-      data: responsePayorData,
-      isLoading: payorLoading,
-      isSuccess: payorSuccess,
-    },
-  ] = usePayorByDateMutation();
+  const [PayorByDate, { data: responsePayorData, isLoading: payorLoading, isSuccess: payorSuccess }] = usePayorByDateMutation();
 
   //Process Claim Get Patient
-  const [
-    getPatientProcessClaim,
-    {
-      data: patientData,
-      isLoading: patientDataLoading,
-      isSuccess: patientDataSuccess,
-    },
-  ] = useGetPatientProcessClaimMutation();
+  const [getPatientProcessClaim, { data: patientData, isLoading: patientDataLoading, isSuccess: patientDataSuccess }] = useGetPatientProcessClaimMutation();
 
   //Process Claim Get Therapist Name API
-  const [
-    getTherapistProcessClaim,
-    {
-      data: therapistData,
-      isLoading: therapistLoading,
-      isError: therapistError,
-    },
-  ] = useGetTherapistProcessClaimMutation();
+  const [getTherapistProcessClaim, { data: therapistData, isLoading: therapistLoading, isError: therapistError }] = useGetTherapistProcessClaimMutation();
 
   //Process Claim Get CPT CODE API
-  const [
-    getCPTProcessClaim,
-    { data: cptCodesData, isLoading: cptLoading, isError: cptError },
-  ] = useGetCPTProcessClaimMutation();
+  const [getCPTProcessClaim, { data: cptCodesData, isLoading: cptLoading, isError: cptError }] = useGetCPTProcessClaimMutation();
 
   //Process Claim Get Activity Type
-  const [
-    getActivityProcessClaim,
-    { data: activityData, isLoading: activityLoading, isError: activityError },
-  ] = useGetActivityProcessClaimMutation();
+  const [getActivityProcessClaim, { data: activityData, isLoading: activityLoading, isError: activityError }] = useGetActivityProcessClaimMutation();
 
   //Process Claim Get Degree Level
-  const [
-    getDegreeLevelProcessClaim,
-    {
-      data: degreeLevelData,
-      isLoading: degreeLevelLoading,
-      isError: degreeLevelError,
-    },
-  ] = useGetDegreeLevelProcessClaimMutation();
+  const [getDegreeLevelProcessClaim, { data: degreeLevelData, isLoading: degreeLevelLoading, isError: degreeLevelError }] =
+    useGetDegreeLevelProcessClaimMutation();
 
   //Process Claim Get ZONE
-  const [
-    getZoneProcessClaim,
-    { data: zoneData, isLoading: zoneLoading, isError: zoneError },
-  ] = useGetZoneProcessClaimMutation();
+  const [getZoneProcessClaim, { data: zoneData, isLoading: zoneLoading, isError: zoneError }] = useGetZoneProcessClaimMutation();
 
   //Process Claim Get Modifire
-  const [
-    getModifireProcessClaim,
-    { data: modifierData, isLoading: modifireLoading, isError: modifireError },
-  ] = useGetModifireProcessClaimMutation();
+  const [getModifireProcessClaim, { data: modifierData, isLoading: modifireLoading, isError: modifireError }] = useGetModifireProcessClaimMutation();
 
   //Process Claim Get CMS Provider
-  const [
-    getCMSProviderProcessClaim,
-    {
-      data: cmsProviderData,
-      isLoading: cmsProviderLoading,
-      isError: cmsProviderError,
-    },
-  ] = useGetCMSProviderProcessClaimMutation();
+  const [getCMSProviderProcessClaim, { data: cmsProviderData, isLoading: cmsProviderLoading, isError: cmsProviderError }] =
+    useGetCMSProviderProcessClaimMutation();
+
+  //Get all process claim data
+  const [getAllProcessClaims, { data: allProcessClaimData, isLoading: allProcessClaimLoading, isError: allProcessClaimError }] =
+    useGetAllProcessClaimsMutation();
 
   useEffect(() => {
     if (sortBy1 === "Patient" && insuranceSelect?.length > 0) {
@@ -121,7 +81,7 @@ const ProcessingClaim = () => {
         token,
         payload: {
           to_date: toDate,
-          payor_id: insuranceSelect,
+          insurance_ids: insuranceSelect,
         },
       });
     }
@@ -130,7 +90,7 @@ const ProcessingClaim = () => {
         token,
         payload: {
           to_date: toDate,
-          payor_id: insuranceSelect,
+          insurance_ids: insuranceSelect,
         },
       });
     }
@@ -139,7 +99,7 @@ const ProcessingClaim = () => {
         token,
         payload: {
           to_date: toDate,
-          payor_id: insuranceSelect,
+          insurance_ids: insuranceSelect,
         },
       });
     }
@@ -148,7 +108,7 @@ const ProcessingClaim = () => {
         token,
         payload: {
           to_date: toDate,
-          payor_id: insuranceSelect,
+          insurance_ids: insuranceSelect,
         },
       });
     }
@@ -157,7 +117,7 @@ const ProcessingClaim = () => {
         token,
         payload: {
           to_date: toDate,
-          payor_id: insuranceSelect,
+          insurance_ids: insuranceSelect,
         },
       });
     }
@@ -166,7 +126,7 @@ const ProcessingClaim = () => {
         token,
         payload: {
           to_date: toDate,
-          payor_id: insuranceSelect,
+          insurance_ids: insuranceSelect,
         },
       });
     }
@@ -175,7 +135,7 @@ const ProcessingClaim = () => {
         token,
         payload: {
           to_date: toDate,
-          payor_id: insuranceSelect,
+          insurance_ids: insuranceSelect,
         },
       });
     }
@@ -184,7 +144,7 @@ const ProcessingClaim = () => {
         token,
         payload: {
           to_date: toDate,
-          payor_id: insuranceSelect,
+          insurance_ids: insuranceSelect,
         },
       });
     }
@@ -202,14 +162,14 @@ const ProcessingClaim = () => {
     token,
   ]);
 
-  let allPatients = patientData?.patient || [];
-  const allProviders = therapistData?.therapist || [];
+  let allPatients = patientData?.data || [];
+  const allProviders = therapistData?.data || [];
   const allCptCodes = cptCodesData?.cpt_code || [];
   const allActivities = activityData?.activity_type || [];
   const allDegreeLevel = degreeLevelData?.degree_level || [];
   const allRegions = zoneData?.zone || [];
   const allModifire = modifierData?.modifire || [];
-  const allCMSProviders = cmsProviderData?.cms_provider || [];
+  const allCMSProviders = cmsProviderData?.data || [];
   console.log("allPatients", allPatients);
   console.log("allProviders", allProviders);
   console.log("allCPTCodes", allCptCodes);
@@ -288,21 +248,6 @@ const ProcessingClaim = () => {
       sortOrder: sortedInfo.columnKey === "Dos" ? sortedInfo.order : null,
       ellipsis: true,
     },
-
-    {
-      title: "Service & Hrs",
-      dataIndex: "ServiceHrs",
-      key: "ServiceHrs",
-      width: 100,
-      //   sorter is for sorting asc or dsc purpose
-      sorter: (a, b) => {
-        return a.ServiceHrs > b.ServiceHrs ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder:
-        sortedInfo.columnKey === "ServiceHrs" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-
     {
       title: "Tx Provider",
       key: "TxProvider",
@@ -312,10 +257,25 @@ const ProcessingClaim = () => {
       sorter: (a, b) => {
         return a.TxProvider > b.TxProvider ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "TxProvider" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "TxProvider" ? sortedInfo.order : null,
       ellipsis: true,
     },
+    {
+      title: "Service & Hrs",
+      dataIndex: "ServiceHrs",
+      key: "ServiceHrs",
+      width: 100,
+      //   sorter is for sorting asc or dsc purpose
+      render: (_, record) => {
+        return <h1>{record?.activity_type + record?.degree_level}</h1>;
+      },
+      sorter: (a, b) => {
+        return a.ServiceHrs > b.ServiceHrs ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "ServiceHrs" ? sortedInfo.order : null,
+      ellipsis: false,
+    },
+
     {
       title: "Cpt",
       dataIndex: "Cpt",
@@ -428,8 +388,7 @@ const ProcessingClaim = () => {
         return a.Rendering24 > b.Rendering24 ? -1 : 1;
         // a.Pos - b.Pos,
       },
-      sortOrder:
-        sortedInfo.columnKey === "Rendering24" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "Rendering24" ? sortedInfo.order : null,
       ellipsis: true,
     },
   ];
@@ -442,11 +401,7 @@ const ProcessingClaim = () => {
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, "selectedRows: ", selectedRows);
     },
     onSelect: (record, selected, selectedRows) => {
       console.log(record, selected, selectedRows);
@@ -464,14 +419,27 @@ const ProcessingClaim = () => {
       to_date: toDate,
     };
     PayorByDate({ token, payload });
+    setInsuranceSelect([]);
     console.log("hello go button", toDate);
   };
 
   const { handleSubmit, register, reset } = useForm();
   const onSubmit = (data) => {
-    reset();
+    const payload = {
+      to_date: toDate,
+      insurance_ids: insuranceSelect,
+      page: 1,
+    };
+    // console.log("hello go button", payload);
+    if (insuranceSelect.length > 0) {
+      getAllProcessClaims({ token, payload });
+      setTableOpen(true);
+    }
+
+    //reset();
   };
 
+  console.log(allProcessClaimData?.processClaims?.data);
   //Date converter function [yy-mm-dd]
   function convert(str) {
     let date = new Date(str),
@@ -504,17 +472,11 @@ const ProcessingClaim = () => {
   // date range picker calendar
   const startDate = range ? range[0]?.startDate : null;
   const endDate = range ? range[0]?.endDate : null;
-  const startMonth = startDate
-    ? startDate.toLocaleString("en-us", { month: "short" })
-    : null;
-  const endMonth = endDate
-    ? endDate.toLocaleString("en-us", { month: "short" })
-    : null;
+  const startMonth = startDate ? startDate.toLocaleString("en-us", { month: "short" }) : null;
+  const endMonth = endDate ? endDate.toLocaleString("en-us", { month: "short" }) : null;
   const startDay = startDate ? startDate.getDate() : null;
   const endDay = endDate ? endDate.getDate() : null;
-  const startYear = startDate
-    ? startDate.getFullYear().toString().slice(2, 4)
-    : null;
+  const startYear = startDate ? startDate.getFullYear().toString().slice(2, 4) : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
 
   //test design
@@ -574,7 +536,7 @@ const ProcessingClaim = () => {
               </div>
 
               <div className="flex items-end">
-                <button onClick={handleGO} className="pms-button mb-[1px]">
+                <button readOnly onClick={handleGO} className="pms-button mb-[1px]">
                   Go
                 </button>
               </div>
@@ -594,7 +556,7 @@ const ProcessingClaim = () => {
                     <InsuranceMultiSelect
                       selected={selected}
                       setSelected={setSelected}
-                      payorData={responsePayorData?.all_payor || []}
+                      payorData={responsePayorData?.data || []}
                       payorLoading={payorLoading}
                       setInsuranceSelect={setInsuranceSelect}
                       setSortBy1={setSortBy1}
@@ -608,11 +570,7 @@ const ProcessingClaim = () => {
                       Sort By<span className="text-red-500">*</span>
                     </span>
                   </label>
-                  <select
-                    onChange={(e) => setSortBy1(e.target.value)}
-                    name="type"
-                    className="input-border input-font  focus:outline-none w-[200px]"
-                  >
+                  <select onChange={(e) => setSortBy1(e.target.value)} name="type" className="input-border input-font  focus:outline-none w-[200px]">
                     <option value={0}>Select</option>
                     <option value="Patient">Patient(s)</option>
                     <option value="Tx Providers">Tx Providers</option>
@@ -639,22 +597,14 @@ const ProcessingClaim = () => {
                         <div className="ml-1">
                           <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                             <input
-                              value={
-                                startDate
-                                  ? `${startMonth} ${startDay}, ${startYear}`
-                                  : "Start Date"
-                              }
+                              value={startDate ? `${startMonth} ${startDay}, ${startYear}` : "Start Date"}
                               readOnly
                               onClick={() => setOpenCalendar(true)}
                               className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                             />
                             <RiArrowLeftRightLine className="w-1/3 text-gray-600"></RiArrowLeftRightLine>
                             <input
-                              value={
-                                endDate
-                                  ? `${endMonth} ${endDay}, ${endYear}`
-                                  : "End Date"
-                              }
+                              value={endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"}
                               readOnly
                               onClick={() => setOpenCalendar(true)}
                               className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
@@ -688,9 +638,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={patientDataLoading && true}
-                          onChange={(e) =>
-                            setSelectedSortOptionOne(e.target.value)
-                          }
+                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -699,11 +647,8 @@ const ProcessingClaim = () => {
                             <>
                               {allPatients?.map((p) => {
                                 return (
-                                  <option
-                                    value={p?.client_name?.id}
-                                    key={p?.client_name?.id}
-                                  >
-                                    {p?.client_name?.client_full_name}
+                                  <option value={p?.id} key={p?.id}>
+                                    {p?.client_full_name}
                                   </option>
                                 );
                               })}
@@ -719,9 +664,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={therapistLoading && true}
-                          onChange={(e) =>
-                            setSelectedSortOptionOne(e.target.value)
-                          }
+                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -730,11 +673,8 @@ const ProcessingClaim = () => {
                             <>
                               {allProviders?.map((provider) => {
                                 return (
-                                  <option
-                                    value={provider?.therapist_name?.id}
-                                    key={provider?.therapist_name?.id}
-                                  >
-                                    {provider?.therapist_name?.full_name}
+                                  <option value={provider?.id} key={provider?.id}>
+                                    {provider?.full_name}
                                   </option>
                                 );
                               })}
@@ -750,9 +690,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={cptLoading && true}
-                          onChange={(e) =>
-                            setSelectedSortOptionOne(e.target.value)
-                          }
+                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -778,9 +716,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={activityLoading && true}
-                          onChange={(e) =>
-                            setSelectedSortOptionOne(e.target.value)
-                          }
+                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -789,10 +725,7 @@ const ProcessingClaim = () => {
                             <>
                               {allActivities?.map((activity, index) => {
                                 return (
-                                  <option
-                                    value={activity?.activity_id}
-                                    key={index}
-                                  >
+                                  <option value={activity?.activity_id} key={index}>
                                     {activity?.pclm_activity_type?.activity_one}
                                   </option>
                                 );
@@ -809,9 +742,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={degreeLevelLoading && true}
-                          onChange={(e) =>
-                            setSelectedSortOptionOne(e.target.value)
-                          }
+                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -837,9 +768,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={zoneLoading && true}
-                          onChange={(e) =>
-                            setSelectedSortOptionOne(e.target.value)
-                          }
+                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -865,9 +794,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={modifireLoading && true}
-                          onChange={(e) =>
-                            setSelectedSortOptionOne(e.target.value)
-                          }
+                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -893,9 +820,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={cmsProviderLoading && true}
-                          onChange={(e) =>
-                            setSelectedSortOptionOne(e.target.value)
-                          }
+                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -922,11 +847,7 @@ const ProcessingClaim = () => {
                           Sort By<span className="text-red-500">*</span>
                         </span>
                       </label>
-                      <select
-                        onChange={(e) => setSortBy2(e.target.value)}
-                        name="type"
-                        className="input-border input-font focus:outline-none w-[200px] "
-                      >
+                      <select onChange={(e) => setSortBy2(e.target.value)} name="type" className="input-border input-font focus:outline-none w-[200px] ">
                         <option value="0">Select</option>
                         <option value="Patient">Patient(s)</option>
                         <option value="Tx Providers">Tx Providers</option>
@@ -938,9 +859,7 @@ const ProcessingClaim = () => {
                         <option value="Region">Region</option>
                         <option value="CPT Code">CPT Code</option>
                         <option value="Zero Units">Zero Units</option>
-                        <option value="Place Of Service">
-                          Place Of Service
-                        </option>
+                        <option value="Place Of Service">Place Of Service</option>
                         <option value="Modifier">Modifier</option>
                       </select>
                     </div>
@@ -954,22 +873,14 @@ const ProcessingClaim = () => {
                             <div className="ml-1">
                               <div className="flex flex-wrap justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                                 <input
-                                  value={
-                                    startDate
-                                      ? `${startMonth} ${startDay}, ${startYear}`
-                                      : "Start Date"
-                                  }
+                                  value={startDate ? `${startMonth} ${startDay}, ${startYear}` : "Start Date"}
                                   readOnly
                                   onClick={() => setOpenCalendar(true)}
                                   className="focus:outline-none font-medium text-center pb-[1.8px] text-[14px] text-gray-600 bg-transparent w-1/3 cursor-pointer"
                                 />
                                 <RiArrowLeftRightLine className="w-1/3 text-gray-600"></RiArrowLeftRightLine>
                                 <input
-                                  value={
-                                    endDate
-                                      ? `${endMonth} ${endDay}, ${endYear}`
-                                      : "End Date"
-                                  }
+                                  value={endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"}
                                   readOnly
                                   onClick={() => setOpenCalendar(true)}
                                   className="focus:outline-none font-medium text-center bg-transparent text-[14px] text-gray-600 w-1/3 cursor-pointer"
@@ -977,10 +888,7 @@ const ProcessingClaim = () => {
                               </div>
 
                               {/* Multi date picker component called */}
-                              <div
-                                ref={refClose}
-                                className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[-30%]  md:mr-[10%] sm:mr-[14%] mt-1 "
-                              >
+                              <div ref={refClose} className="absolute z-10 2xl:ml-[0%] xl:ml-[0%] lg:ml-[0%] md:ml-[-30%]  md:mr-[10%] sm:mr-[14%] mt-1 ">
                                 {openCalendar && (
                                   <CustomDateRange
                                     range={range}
@@ -1038,7 +946,7 @@ const ProcessingClaim = () => {
                 bordered
                 className=" text-xs font-normal mt-5"
                 columns={columns}
-                dataSource={TData}
+                dataSource={allProcessClaimData?.processClaims?.data}
                 rowSelection={{
                   ...rowSelection,
                 }}
@@ -1051,6 +959,67 @@ const ProcessingClaim = () => {
           </div>
         </div>
       )}
+      <>
+        <div className="flex my-5">
+          <select
+            // onChange={(e) => setSelect(e.target.value)}
+            className=" bg-transparent border-[2px] border-[#8cd9e4]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0"
+          >
+            <option value="">Select Action</option>
+            <option value="1">Ready to Bill</option>
+            <option value="2">Clarification Pending</option>
+            <option value="3">Retract</option>
+            <option value="4">Non-billable Serv.</option>
+            <option value="5">24J Provider Update</option>
+            <option value="6">Update ID Qual</option>
+            <option value="7">Modifier Update</option>
+            <option value="9">Update Charge Amount</option>
+            <option value="11">Add CPT Codes</option>
+            <option value="12">Update Tx. Provider as 24J</option>
+            <option value="13">Update 24J to Practice NPI</option>
+            <option value="14">Update POS</option>
+            <option value="15">Update Tele MOD</option>
+            <option value="16">Gnerate Batch</option>
+          </select>
+          {/* {select === "1" && (
+            <div className="flex gap-2">
+              <input
+                onChange={(e) => setHourlyRate(e.target.value)}
+                className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                defaultValue={hourlyRate}
+                type="text"
+                placeholder="Hourly Rate"
+              />
+              <input
+                onChange={(e) => setMilageRate(e.target.value)}
+                className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                type="text"
+                defaultValue={milageRate}
+                placeholder="Milage Rate"
+              />
+            </div>
+          )}
+          {select === "2" && (
+            <input
+              onChange={(e) => setHourlyRate(e.target.value)}
+              className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+              type="text"
+              defaultValue={hourlyRate}
+              placeholder="Hourly Rate"
+            />
+          )}
+          {select === "3" && (
+            <input
+              onChange={(e) => setMilageRate(e.target.value)}
+              className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+              type="text"
+              defaultValue={milageRate}
+              placeholder="Milage Rate"
+            />
+          )} */}
+          <button className="pms-input-button">save</button>
+        </div>
+      </>
     </div>
   );
 };

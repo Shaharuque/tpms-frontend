@@ -19,7 +19,19 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       providesTags: ["PatientAuthorizationTable"],
     }),
 
-    //get patient authorization info
+    //Patient Authorization Create Info
+    getAuthorizationCreateInfo: builder.query({
+      query: ({ token, id }) => ({
+        url: `/patient/authorization/create/info/${id}`,
+        method: "GET",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+      }),
+    }),
+
+    //get patient single authorization info
     getPatientAuthorizationInfo: builder.query({
       query: ({ token, id }) => ({
         url: `/patient/authorization/single/${id}`,
@@ -32,14 +44,29 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       providesTags: ["PatientAuthorization"],
     }),
 
-    //update Authorization Info
-    patientAuthorizationUpdate: builder.mutation({
+    //Patient Authorization create=>patient id wise
+    //Patient Authorization Save
+    patientAuthorizationCreate: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/patient/authorization/update`,
+        url: `/patient/authorization/create`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["PatientAuthorizationTable"],
+    }),
+
+    //update Authorization Info
+    patientAuthorizationUpdate: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `/patient/authorization/update`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -166,33 +193,6 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         body: JSON.stringify(payload),
       }),
       invalidatesTags: ["PatientAuthorizationActivity"],
-    }),
-
-    //Patient Authorization Create Info
-    getAuthorizationCreateInfo: builder.query({
-      query: ({ token, id }) => ({
-        url: `admin/ac/patient/authorization/create/info/${id}`,
-        method: "GET",
-        headers: {
-          "content-type": "Application/json",
-          Authorization: token,
-        },
-      }),
-    }),
-
-    //Patient Authorization create=>patient id wise
-    //Patient Authorization Save
-    patientAuthorizationCreate: builder.mutation({
-      query: ({ token, payload }) => ({
-        url: `admin/ac/patient/authorization/save`,
-        method: "POST",
-        headers: {
-          "content-type": "Application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify(payload),
-      }),
-      invalidatesTags: ["PatientAuthorizationTable"],
     }),
   }),
 });

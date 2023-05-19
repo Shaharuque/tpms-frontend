@@ -265,12 +265,12 @@ const AuthorizationEdit = () => {
 
   const onSubmit = (data) => {
     const payload = {
-      authorization_id: id,
+      edit_authorization_id: id,
       ...data,
       select_date: `${convert(data?.start_date)} - ${convert(data?.end_date)}`,
-      in_network: network,
-      is_valid: valid,
-      is_placeholder: place_holder,
+      in_network: BoolConverter(network),
+      is_valid: BoolConverter(valid),
+      is_placeholder: BoolConverter(place_holder),
       notes: textNotes,
     };
     patientAuthorizationUpdate({
@@ -282,16 +282,18 @@ const AuthorizationEdit = () => {
 
   useEffect(() => {
     if (updateSuccess) {
-      toast.success("Successfully Authorization Update", {
+      toast.success("Successfully Authorization Updated", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (updateError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [updateSuccess, updateError]);
@@ -330,7 +332,7 @@ const AuthorizationEdit = () => {
             <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mb-3 mr-2 gap-x-6 gap-y-3">
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                     Description<span className="text-red-500">*</span>
                   </span>
                 </label>
@@ -343,7 +345,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                     Insurance
                     <span className="text-red-500">*</span>
                   </span>
@@ -373,7 +375,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                     Tx Type
                     <span className="text-red-500">*</span>
                   </span>
@@ -397,7 +399,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                     SUPV. Provider
                     <span className="text-red-500">*</span>
                   </span>
@@ -411,7 +413,7 @@ const AuthorizationEdit = () => {
                       {supvProvider
                         ?.filter((item) => item.employee_id === supervisor_id)
                         ?.map((supv) => {
-                          return supv?.employee?.full_name;
+                          return supv?.providerName?.full_name;
                         })}
                     </option>
                   ) : (
@@ -421,8 +423,8 @@ const AuthorizationEdit = () => {
                     ?.filter((item) => item.employee_id !== supervisor_id)
                     ?.map((supv) => {
                       return (
-                        <option key={supv?.id} value={supv?.employee?.id}>
-                          {supv?.id}
+                        <option key={supv?.id} value={supv?.employee_id}>
+                          {supv?.providerName?.full_name}
                         </option>
                       );
                     })}
@@ -430,7 +432,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Selected date</span>
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Selected date</span>
                 </label>
                 <div className="ml-1">
                   <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
@@ -466,7 +468,7 @@ const AuthorizationEdit = () => {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                     Authorization Number
                     <span className="text-red-500">*</span>
                   </span>
@@ -480,7 +482,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                     UCI / Insurance ID<span className="text-red-500">*</span>
                   </span>
                 </label>
@@ -494,7 +496,7 @@ const AuthorizationEdit = () => {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                     COB
                     <span className="text-red-500">*</span>
                   </span>
@@ -509,7 +511,7 @@ const AuthorizationEdit = () => {
 
               <div className="">
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Upload Authorization</span>
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Upload Authorization</span>
                 </label>
                 <input type="file" className=" ml-1 py-[5px]  text-xs w-full" {...register("fileName")} />
               </div>
@@ -517,7 +519,7 @@ const AuthorizationEdit = () => {
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                       Diagnosis1<span className="text-red-500">*</span>
                     </span>
                   </label>
@@ -530,7 +532,7 @@ const AuthorizationEdit = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Diagnosis2</span>
+                    <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Diagnosis2</span>
                   </label>
                   <input
                     type="text"
@@ -545,7 +547,7 @@ const AuthorizationEdit = () => {
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mr-2 gap-x-4 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
+                    <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                       Diagnosis3<span className="text-red-500">*</span>
                     </span>
                   </label>
@@ -558,7 +560,7 @@ const AuthorizationEdit = () => {
                 </div>
                 <div>
                   <label className="label">
-                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Diagnosis4</span>
+                    <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Diagnosis4</span>
                   </label>
                   <input
                     type="text"
@@ -572,7 +574,7 @@ const AuthorizationEdit = () => {
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-4 gap-y-1">
                 <div>
                   <label className="label">
-                    <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Deductible</span>
+                    <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Deductible</span>
                   </label>
                   <input
                     type="text"
@@ -591,7 +593,7 @@ const AuthorizationEdit = () => {
 
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">CoPay</span>
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">CoPay</span>
                 </label>
                 <input
                   type="text"
@@ -602,7 +604,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">CMS 4 (Insured Name)</span>
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">CMS 4 (Insured Name)</span>
                 </label>
                 <input
                   type="text"
@@ -613,7 +615,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">CMS 11 (Group No)</span>
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">CMS 11 (Group No)</span>
                 </label>
                 <input
                   type="text"
@@ -634,7 +636,7 @@ const AuthorizationEdit = () => {
               </div>
               <div>
                 <label className="label">
-                  <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Notes</span>
+                  <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Notes</span>
                 </label>
                 <textarea
                   {...register("notes")}
