@@ -131,6 +131,21 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
         body: JSON.stringify(payload),
       }),
     }),
+
+    //infinite scroll
+    //Process Claim Data Get
+    getClaims: builder.query({
+      query: ({ token, data }) => ({
+        url: `/pri/process/claim/get/billing/data`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      providesTags: ["allHoliday"],
+    }),
   }),
 });
 
@@ -145,4 +160,5 @@ export const {
   useGetModifireProcessClaimMutation,
   useGetCMSProviderProcessClaimMutation,
   useGetAllProcessClaimsMutation,
+  useGetClaimsQuery,
 } = ProcessingClaimApi;

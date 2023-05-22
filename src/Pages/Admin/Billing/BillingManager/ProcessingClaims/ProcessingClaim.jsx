@@ -1,10 +1,7 @@
 import { DatePicker, Space, Table } from "antd";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { DateRangePicker } from "react-date-range";
 import { useForm } from "react-hook-form";
-import { BsArrowRight } from "react-icons/bs";
-import { Calendar } from "react-calendar";
 import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { RiArrowLeftRightLine } from "react-icons/ri";
@@ -24,6 +21,10 @@ import {
 } from "../../../../../features/Billing_redux/Primary_Billing_redux/processingClaimApi";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import { baseIp } from "../../../../../Misc/BaseClient";
+import { DatabaseDateConverter } from "../../../../Shared/Dateconverter/DateConverter";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
@@ -38,6 +39,12 @@ const ProcessingClaim = () => {
   const [selectedSortOptionOne, setSelectedSortOptionOne] = useState(null);
   // For Multi Select Insurance
   const [selected, setSelected] = useState([]);
+  const [staffData, setStaffData] = useState([]);
+  const [page, setPage] = useState(2);
+  const [hasMore, setHasMore] = useState(true);
+  const [runClick, setRunClick] = useState(false);
+  const [call, setCall] = useState(false);
+
   console.log("selected option from sortby1", selectedSortOptionOne);
 
   console.log("sortBy1", sortBy1);
@@ -185,6 +192,8 @@ const ProcessingClaim = () => {
   const onChange = (date, dateString) => {
     setSelected([]);
     setInsurance(false);
+    setInsuranceSelect([]);
+    setRunClick(false);
     console.log(date, dateString);
     settoDate(dateString);
   };
@@ -205,16 +214,62 @@ const ProcessingClaim = () => {
   const [tableOpen, setTableOpen] = useState(false);
   console.log(sortBy2);
 
-  // calling fake db
+  //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
-    axios("../../All_Fake_Api/ProcessingClaims.json")
-      .then((response) => {
-        setTData(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
+    const getProcessClaims = async () => {
+      let res = await axios({
+        method: "post",
+        url: `${baseIp}/pri/process/claim/get/billing/data`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-auth-token": token,
+        },
+        data: {
+          payor_ids: insuranceSelect,
+          page: 1,
+          to_date: toDate,
+        },
       });
-  }, []);
+      const data = res?.data?.processClaims?.data;
+      setStaffData(data);
+    };
+    if (insuranceSelect?.length > 0 && toDate && runClick) {
+      getProcessClaims();
+    }
+  }, [token, call, runClick]);
+  console.log("This is satff data of first page", staffData);
+
+  const fetchProviders = async () => {
+    let res = await axios({
+      method: "post",
+      url: `${baseIp}/pri/process/claim/get/billing/data`,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "x-auth-token": token,
+      },
+      data: {
+        payor_id: insuranceSelect,
+        page: page,
+        to_date: toDate,
+      },
+    });
+    const data = res?.data?.processClaims?.data;
+    // console.log(data);
+    return data;
+  };
+
+  const fetchData = async () => {
+    const providersFromServer = await fetchProviders();
+    //console.log(providersFromServer);
+    setStaffData([...staffData, ...providersFromServer]);
+    if (providersFromServer.length === 0) {
+      setHasMore(false);
+    }
+    setPage(page + 1);
+  };
+  console.log("final total staffs", staffData);
 
   const columns = [
     {
@@ -235,17 +290,17 @@ const ProcessingClaim = () => {
 
     {
       title: "Dos",
-      dataIndex: "Dos",
-      key: "Dos",
+      dataIndex: "from_time",
+      key: "from_time",
       width: 90,
-      render: (_, { Dos }) => {
+      render: (_, { from_time }) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{Dos}</div>;
+        return <div className=" text-secondary">{DatabaseDateConverter(from_time)}</div>;
       },
       sorter: (a, b) => {
-        return a.Dos > b.Dos ? -1 : 1;
+        return a.from_time > b.from_time ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "Dos" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "from_time" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -264,7 +319,7 @@ const ProcessingClaim = () => {
       title: "Service & Hrs",
       dataIndex: "ServiceHrs",
       key: "ServiceHrs",
-      width: 100,
+      width: 200,
       //   sorter is for sorting asc or dsc purpose
       render: (_, record) => {
         return <h1>{record?.activity_type + record?.degree_level}</h1>;
@@ -277,119 +332,246 @@ const ProcessingClaim = () => {
     },
 
     {
-      title: "Cpt",
-      dataIndex: "Cpt",
-      key: "Cpt",
-      width: 70,
-      sorter: (a, b) => {
-        return a.Cpt > b.Cpt ? -1 : 1;
-        // a.Scheduled_Date - b.Scheduled_Date
+      title: "CPT",
+      dataIndex: "cpt",
+      key: "cpt",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.id}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "Cpt" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.cpt > b.cpt ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "cpt" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
-      title: "Pos",
-      dataIndex: "Pos",
-      key: "Pos",
-      width: 70,
-      sorter: (a, b) => {
-        return a.Pos > b.Pos ? -1 : 1;
-        // a.Pos - b.Pos,
+      title: "POS",
+      dataIndex: "pos",
+      key: "pos",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.pos}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "Pos" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.pos > b.pos ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "pos" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
       title: "M1",
-      key: "M1",
-      dataIndex: "M1",
-      width: 50,
-      sorter: (a, b) => {
-        return a.M1 > b.M1 ? -1 : 1;
-        // a.Pos - b.Pos,
+      dataIndex: "m1",
+      key: "m1",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.m1}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "M1" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.m1 > b.m1 ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "m1" ? sortedInfo.order : null,
+      ellipsis: false,
     },
 
     {
       title: "M2",
-      key: "M2",
-      dataIndex: "M2",
-      width: 50,
-      sorter: (a, b) => {
-        return a.M2 > b.M2 ? -1 : 1;
-        // a.Pos - b.Pos,
+      dataIndex: "m2",
+      key: "m2",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.m2}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "M2" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.m2 > b.m2 ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "m2" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
       title: "M3",
-      key: "M3",
-      dataIndex: "M3",
-      width: 50,
-      sorter: (a, b) => {
-        return a.M3 > b.M3 ? -1 : 1;
-        // a.Pos - b.Pos,
+      dataIndex: "m3",
+      key: "m3",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.m3}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "M3" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.m3 > b.m3 ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "m3" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
       title: "M4",
-      key: "M4",
-      dataIndex: "M4",
-      width: 50,
-      sorter: (a, b) => {
-        return a.M4 > b.M4 ? -1 : 1;
-        // a.Pos - b.Pos,
+      dataIndex: "m4",
+      key: "m4",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.m4}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "M4" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.m4 > b.m4 ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "m4" ? sortedInfo.order : null,
+      ellipsis: false,
     },
-
     {
       title: "Units",
-      key: "Units",
-      dataIndex: "Units",
-      width: 60,
-      sorter: (a, b) => {
-        return a.Units > b.Units ? -1 : 1;
-        // a.Pos - b.Pos,
+      dataIndex: "units",
+      key: "units",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.units}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "Units" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.units > b.units ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "units" ? sortedInfo.order : null,
+      ellipsis: false,
     },
 
     {
       title: "Rate",
-      key: "Rate",
-      dataIndex: "Rate",
-      width: 50,
+      dataIndex: "rate",
+      key: "rate",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.rate}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
+      },
       sorter: (a, b) => {
-        return a.Rate > b.Rate ? -1 : 1;
-        // a.Pos - b.Pos,
+        return a.rate > b.rate ? -1 : 1;
       },
-      render: (_, { Rate }) => {
-        //console.log("tags : ", lock);
-        return <div className="flex justify-end">{Rate}</div>;
-      },
-      sortOrder: sortedInfo.columnKey === "Rate" ? sortedInfo.order : null,
-      ellipsis: true,
+      sortOrder: sortedInfo.columnKey === "rate" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
-      title: "Rendering24-j",
-      key: "Rendering24",
-      dataIndex: "Rendering24",
-      width: 100,
-      sorter: (a, b) => {
-        return a.Rendering24 > b.Rendering24 ? -1 : 1;
-        // a.Pos - b.Pos,
+      title: "Rendering 24-j",
+      dataIndex: "rate",
+      key: "rate",
+      width: 80,
+      render: (_, record) => {
+        return (
+          <input
+            className="page py-[3px]  focus:outline-none"
+            type="text"
+            defaultValue={record?.rate}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          ></input>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "Rendering24" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.rate > b.rate ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "rate" ? sortedInfo.order : null,
+      ellipsis: false,
+    },
+    {
+      title: "ID Qualifier",
+      dataIndex: "rate",
+      key: "rate",
+      width: 80,
+      render: (_, record) => {
+        return (
+          // <input
+          //   className="page py-[3px]  focus:outline-none"
+          //   type="text"
+          //   defaultValue={record?.rate}
+          //   // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+          // ></input>
+          <select className="page p-[3px]  focus:outline-none" defaultValue={record?.id_qualifier}>
+            <option value=""></option>
+            <option value="0B">0B</option>
+            <option value="1B">1B</option>
+            <option value="1C">1C</option>
+            <option value="1D">1D</option>
+            <option value="1G">1G</option>
+            <option value="1H">1H</option>
+            <option value="EI">EI</option>
+            <option value="G2">G2</option>
+            <option value="LU">LU</option>
+            <option value="N5">N5</option>
+            <option value="SY">SY</option>
+            <option value="X5">X5</option>
+            <option value="ZZ">ZZ</option>
+          </select>
+        );
+      },
+      sorter: (a, b) => {
+        return a.rate > b.rate ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "rate" ? sortedInfo.order : null,
+      ellipsis: false,
+    },
+    {
+      title: "Status",
+      dataIndex: "rate",
+      key: "rate",
+      width: 80,
+      render: (_, record) => {
+        return <h1>Status</h1>;
+      },
+      sorter: (a, b) => {
+        return a.rate > b.rate ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "rate" ? sortedInfo.order : null,
+      ellipsis: false,
     },
   ];
 
@@ -425,18 +607,23 @@ const ProcessingClaim = () => {
 
   const { handleSubmit, register, reset } = useForm();
   const onSubmit = (data) => {
-    const payload = {
-      to_date: toDate,
-      insurance_ids: insuranceSelect,
-      page: 1,
-    };
-    // console.log("hello go button", payload);
-    if (insuranceSelect.length > 0) {
-      getAllProcessClaims({ token, payload });
-      setTableOpen(true);
-    }
-
+    setHasMore(true);
+    setPage(2);
+    // const payload = {
+    //   to_date: toDate,
+    //   insurance_ids: insuranceSelect,
+    //   page: 1,
+    // };
+    // // console.log("hello go button", payload);
+    // if (insuranceSelect.length > 0) {
+    //   getAllProcessClaims({ token, payload });
+    //   setTableOpen(true);
+    // }
     //reset();
+    if (insuranceSelect.length > 0) {
+      setTableOpen(true);
+      setRunClick(true);
+    }
   };
 
   console.log(allProcessClaimData?.processClaims?.data);
@@ -536,7 +723,7 @@ const ProcessingClaim = () => {
               </div>
 
               <div className="flex items-end">
-                <button readOnly onClick={handleGO} className="pms-button mb-[1px]">
+                <button type="button" onClick={handleGO} className="pms-button mb-[1px]">
                   Go
                 </button>
               </div>
@@ -560,6 +747,9 @@ const ProcessingClaim = () => {
                       payorLoading={payorLoading}
                       setInsuranceSelect={setInsuranceSelect}
                       setSortBy1={setSortBy1}
+                      setRunClick={setRunClick}
+                      setHasMore={setHasMore}
+                      setPage={setPage}
                     />
                   </div>
                 </div>
@@ -938,7 +1128,12 @@ const ProcessingClaim = () => {
       {tableOpen && (
         <div className="my-5">
           <div className="overflow-scroll">
-            <>
+            <InfiniteScroll
+              dataLength={staffData?.length}
+              next={staffData?.length > 0 && fetchData}
+              hasMore={hasMore}
+              loader={<ShimmerTableTet></ShimmerTableTet>}
+            >
               <Table
                 pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
                 rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
@@ -946,42 +1141,43 @@ const ProcessingClaim = () => {
                 bordered
                 className=" text-xs font-normal mt-5"
                 columns={columns}
-                dataSource={allProcessClaimData?.processClaims?.data}
+                dataSource={staffData}
                 rowSelection={{
                   ...rowSelection,
                 }}
-                scroll={{
-                  y: 750,
-                }}
+                // scroll={{
+                //   y: 750,
+                // }}
                 onChange={handleChange}
               />
-            </>
+            </InfiniteScroll>
           </div>
         </div>
       )}
       <>
-        <div className="flex my-5">
-          <select
-            // onChange={(e) => setSelect(e.target.value)}
-            className=" bg-transparent border-[2px] border-[#8cd9e4]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0"
-          >
-            <option value="">Select Action</option>
-            <option value="1">Ready to Bill</option>
-            <option value="2">Clarification Pending</option>
-            <option value="3">Retract</option>
-            <option value="4">Non-billable Serv.</option>
-            <option value="5">24J Provider Update</option>
-            <option value="6">Update ID Qual</option>
-            <option value="7">Modifier Update</option>
-            <option value="9">Update Charge Amount</option>
-            <option value="11">Add CPT Codes</option>
-            <option value="12">Update Tx. Provider as 24J</option>
-            <option value="13">Update 24J to Practice NPI</option>
-            <option value="14">Update POS</option>
-            <option value="15">Update Tele MOD</option>
-            <option value="16">Gnerate Batch</option>
-          </select>
-          {/* {select === "1" && (
+        {tableOpen && (
+          <div className="flex my-5">
+            <select
+              // onChange={(e) => setSelect(e.target.value)}
+              className=" bg-transparent border-[1px] border-[#8cd9e4]  rounded-[4px] px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0"
+            >
+              <option value="">Select Action</option>
+              <option value="1">Ready to Bill</option>
+              <option value="2">Clarification Pending</option>
+              <option value="3">Retract</option>
+              <option value="4">Non-billable Serv.</option>
+              <option value="5">24J Provider Update</option>
+              <option value="6">Update ID Qual</option>
+              <option value="7">Modifier Update</option>
+              <option value="9">Update Charge Amount</option>
+              <option value="11">Add CPT Codes</option>
+              <option value="12">Update Tx. Provider as 24J</option>
+              <option value="13">Update 24J to Practice NPI</option>
+              <option value="14">Update POS</option>
+              <option value="15">Update Tele MOD</option>
+              <option value="16">Gnerate Batch</option>
+            </select>
+            {/* {select === "1" && (
             <div className="flex gap-2">
               <input
                 onChange={(e) => setHourlyRate(e.target.value)}
@@ -1017,8 +1213,9 @@ const ProcessingClaim = () => {
               placeholder="Milage Rate"
             />
           )} */}
-          <button className="pms-input-button">save</button>
-        </div>
+            <button className="pms-input-button">save</button>
+          </div>
+        )}
       </>
     </div>
   );
