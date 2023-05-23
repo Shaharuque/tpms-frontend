@@ -394,7 +394,6 @@ const CalenderView = () => {
 
     console.log("View Start Date:", viewStartDate);
     console.log("View End Date:", viewEndDate);
-
     //calculated in milli second format
     console.log("View Start Date:", start);
     console.log("View End Date:", end);
