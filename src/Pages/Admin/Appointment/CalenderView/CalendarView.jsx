@@ -13,7 +13,6 @@ import Loading from "../../../../Loading/Loading";
 import { Link } from "react-router-dom";
 import EventDetails from "./EventDetails";
 import $ from "jquery";
-
 const Events = [
   {
     _id: "6354484605294b189f07d93a",
@@ -122,6 +121,31 @@ const CalenderView = () => {
   const [selectedDate, setSelectedDate] = useState();
   const [open, setOpen] = useState(false);
   const [eventId, setEventId] = useState();
+
+  // useEffect(() => {
+  //   const calendarApi = calendarRef.current?.getApi();
+
+  //   if (calendarApi) {
+  //     const handleDateRender = () => {
+  //       const view = calendarApi.view;
+  //       const start = view.activeStart;
+  //       const end = view.activeEnd;
+
+  //       const startTime = Math.floor(start.getTime() / 1000);
+  //       const endTime = Math.floor(end.getTime() / 1000);
+
+  //       console.log("Start time:", startTime);
+  //       console.log("End time:", endTime);
+  //     };
+
+  //     calendarApi.on("datesRender", handleDateRender);
+
+  //     return () => {
+  //       calendarApi.off("datesRender", handleDateRender);
+  //     };
+  //   }
+  // }, []);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -137,6 +161,10 @@ const CalenderView = () => {
     }).then((res) => res.json())
   );
   console.log(calenderEvents?.events);
+
+  //  curren time datae
+
+  //current
 
   // workable code
   useEffect(() => {
