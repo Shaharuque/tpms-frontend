@@ -18,6 +18,7 @@ import {
   useGetTherapistProcessClaimMutation,
   useGetZoneProcessClaimMutation,
   usePayorByDateMutation,
+  useUpdateProcessClaimMutation,
 } from "../../../../../features/Billing_redux/Primary_Billing_redux/processingClaimApi";
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -25,6 +26,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import { baseIp } from "../../../../../Misc/BaseClient";
 import { DatabaseDateConverter } from "../../../../Shared/Dateconverter/DateConverter";
+import { toast } from "react-toastify";
 
 const ProcessingClaim = () => {
   const [insurance, setInsurance] = useState(false);
@@ -32,7 +34,6 @@ const ProcessingClaim = () => {
   const [toDate, settoDate] = useState(null);
   const [sortBy1, setSortBy1] = useState("");
   const [sortBy2, setSortBy2] = useState("");
-  const [TData, setTData] = useState([]);
   const [date, setDate] = useState(new Date());
   const [openSingleCalendar, setOpenSingleCalendar] = useState(false);
   const { token } = useToken();
@@ -44,6 +45,15 @@ const ProcessingClaim = () => {
   const [hasMore, setHasMore] = useState(true);
   const [runClick, setRunClick] = useState(false);
   const [call, setCall] = useState(false);
+  //For Handling Bottom actions
+  const [bottomSelect, setBottomSelect] = useState("");
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [m1, setM1] = useState("");
+  const [m2, setM2] = useState("");
+  const [m3, setM3] = useState("");
+  const [m4, setM4] = useState("");
+  const [cptValue, setCptValue] = useState("");
+  const [unitValue, setUnitValue] = useState("");
 
   console.log("selected option from sortby1", selectedSortOptionOne);
 
@@ -81,6 +91,10 @@ const ProcessingClaim = () => {
   //Get all process claim data
   const [getAllProcessClaims, { data: allProcessClaimData, isLoading: allProcessClaimLoading, isError: allProcessClaimError }] =
     useGetAllProcessClaimsMutation();
+
+  //Update process claim api
+  const [updateProcessClaim, { isSuccess: updateSuccess, isLoading: updateProcessClaimLoading, isError: updateProcessClaimError }] =
+    useUpdateProcessClaimMutation();
 
   useEffect(() => {
     if (sortBy1 === "Patient" && insuranceSelect?.length > 0) {
@@ -237,7 +251,7 @@ const ProcessingClaim = () => {
     if (insuranceSelect?.length > 0 && toDate && runClick) {
       getProcessClaims();
     }
-  }, [token, call, runClick]);
+  }, [token, call, runClick, updateSuccess]);
   console.log("This is satff data of first page", staffData);
 
   const fetchProviders = async () => {
@@ -564,11 +578,11 @@ const ProcessingClaim = () => {
     },
     {
       title: "Status",
-      dataIndex: "rate",
-      key: "rate",
+      dataIndex: "status",
+      key: "status",
       width: 80,
       render: (_, record) => {
-        return <h1>Status</h1>;
+        return <h1>{record?.status}</h1>;
       },
       sorter: (a, b) => {
         return a.rate > b.rate ? -1 : 1;
@@ -584,17 +598,69 @@ const ProcessingClaim = () => {
     setSortedInfo(sorter);
   };
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, "selectedRows: ", selectedRows);
-    },
-    onSelect: (record, selected, selectedRows) => {
-      console.log(record, selected, selectedRows);
-    },
-    onSelectAll: (selected, selectedRows, changeRows) => {
-      console.log(selected, selectedRows, changeRows);
-    },
+  //get rows id to do some action on them
+  const onSelectChange = (newSelectedRowKeys) => {
+    setSelectedRowKeys(newSelectedRowKeys);
   };
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+  console.log("selected Insurance Setup : ", selectedRowKeys);
+
+  const handleSaveFunc = () => {
+    if (selectedRowKeys?.length > 0) {
+      updateProcessClaim({
+        token,
+        payload: {
+          action_type: bottomSelect,
+          prc_claim_ids: selectedRowKeys,
+          m1_val: m1,
+          m2_val: m2,
+          m3_val: m3,
+          m4_val: m4,
+          cpt_val: cptValue,
+          unit_val: unitValue,
+        },
+      });
+    }
+    // if (bottomSelect === "2" && selectedRowKeys?.length > 0) {
+    //   updateProcessClaim({
+    //     token,
+    //     payload: {
+    //       action_type: bottomSelect,
+    //       prc_claim_ids: selectedRowKeys,
+    //     },
+    //   });
+    // }
+
+    // if (bottomSelect === "7" && selectedRowKeys?.length > 0) {
+    //   updateProcessClaim({
+    //     token,
+    //     payload: {
+    //       action_type: bottomSelect,
+    //       prc_claim_ids: selectedRowKeys,
+    //       m1_val: m1,
+    //       m2_val: m2,
+    //       m3_val: m3,
+    //       m4_val: m4,
+    //     },
+    //   });
+    // }
+    console.log(selectedRowKeys);
+  };
+
+  useEffect(() => {
+    if (updateSuccess) {
+      setSelectedRowKeys([]);
+      toast.success("successfully updated", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+      });
+    }
+  }, [updateSuccess]);
+  // -------------------  handle save button(On the bottom action) -------------------
 
   // -------------------
 
@@ -1145,9 +1211,7 @@ const ProcessingClaim = () => {
                 className=" text-xs font-normal mt-5"
                 columns={columns}
                 dataSource={staffData}
-                rowSelection={{
-                  ...rowSelection,
-                }}
+                rowSelection={rowSelection}
                 // scroll={{
                 //   y: 750,
                 // }}
@@ -1161,7 +1225,7 @@ const ProcessingClaim = () => {
         {tableOpen && (
           <div className="flex my-5">
             <select
-              // onChange={(e) => setSelect(e.target.value)}
+              onChange={(e) => setBottomSelect(e.target.value)}
               className=" bg-transparent border-[1px] border-[#8cd9e4]  rounded-[4px] px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0"
             >
               <option value="">Select Action</option>
@@ -1180,43 +1244,66 @@ const ProcessingClaim = () => {
               <option value="15">Update Tele MOD</option>
               <option value="16">Gnerate Batch</option>
             </select>
-            {/* {select === "1" && (
-            <div className="flex gap-2">
-              <input
-                onChange={(e) => setHourlyRate(e.target.value)}
-                className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
-                defaultValue={hourlyRate}
-                type="text"
-                placeholder="Hourly Rate"
-              />
-              <input
-                onChange={(e) => setMilageRate(e.target.value)}
-                className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
-                type="text"
-                defaultValue={milageRate}
-                placeholder="Milage Rate"
-              />
-            </div>
-          )}
-          {select === "2" && (
-            <input
-              onChange={(e) => setHourlyRate(e.target.value)}
-              className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
-              type="text"
-              defaultValue={hourlyRate}
-              placeholder="Hourly Rate"
-            />
-          )}
-          {select === "3" && (
-            <input
-              onChange={(e) => setMilageRate(e.target.value)}
-              className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
-              type="text"
-              defaultValue={milageRate}
-              placeholder="Milage Rate"
-            />
-          )} */}
-            <button className="pms-input-button">save</button>
+
+            {/* {bottomSelect === "1" && (
+              <div className="flex gap-2">
+                <input
+                  // onChange={(e) => setHourlyRate(e.target.value)}
+                  className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  // defaultValue={hourlyRate}
+                  type="text"
+                  placeholder="Hourly Rate"
+                />
+              </div>
+            )} */}
+            {bottomSelect === "7" && (
+              <div className="flex gap-2">
+                <input
+                  onChange={(e) => setM1(e.target.value)}
+                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  type="text"
+                  placeholder="M1"
+                />
+                <input
+                  onChange={(e) => setM2(e.target.value)}
+                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  type="text"
+                  placeholder="M2"
+                />
+                <input
+                  onChange={(e) => setM3(e.target.value)}
+                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  type="text"
+                  placeholder="M3"
+                />
+                <input
+                  onChange={(e) => setM4(e.target.value)}
+                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  type="text"
+                  placeholder="M4"
+                />
+              </div>
+            )}
+            {bottomSelect === "11" && (
+              <div className="flex gap-2">
+                <input
+                  onChange={(e) => setCptValue(e.target.value)}
+                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  type="text"
+                  placeholder="M1"
+                />
+                <input
+                  onChange={(e) => setUnitValue(e.target.value)}
+                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  type="text"
+                  placeholder="M2"
+                />
+              </div>
+            )}
+
+            <button onClick={() => handleSaveFunc()} className="pms-input-button">
+              save
+            </button>
           </div>
         )}
       </>

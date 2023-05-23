@@ -144,7 +144,21 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(data),
       }),
-      providesTags: ["allHoliday"],
+      providesTags: ["processClaim"],
+    }),
+
+    //update process claim
+    //Process Claim Get CMS Provider
+    updateProcessClaim: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "/pri/process/claim/billing/data/update",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
     }),
   }),
 });
@@ -161,4 +175,5 @@ export const {
   useGetCMSProviderProcessClaimMutation,
   useGetAllProcessClaimsMutation,
   useGetClaimsQuery,
+  useUpdateProcessClaimMutation,
 } = ProcessingClaimApi;
