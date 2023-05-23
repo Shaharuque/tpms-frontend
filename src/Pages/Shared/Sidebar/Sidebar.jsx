@@ -21,12 +21,7 @@ import { GoGraph } from "react-icons/go";
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { AiOutlineFileDone } from "react-icons/ai";
 import { MdOutlineMonetizationOn } from "react-icons/md";
-import {
-  BsFileEarmarkRuled,
-  BsBookmarkStar,
-  BsFileText,
-  BsThreeDotsVertical,
-} from "react-icons//bs";
+import { BsFileEarmarkRuled, BsBookmarkStar, BsFileText, BsThreeDotsVertical } from "react-icons//bs";
 import { VscDebugDisconnect } from "react-icons/vsc";
 import { RiFundsBoxLine } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
@@ -235,14 +230,14 @@ const initialDropState = {};
 
 const Sidebar = ({ handle }) => {
   const isToggled = useSelector((state) => state.sideBarInfo);
-  console.log("isToggled", isToggled);
+  //console.log("isToggled", isToggled);
   const dispatch = useDispatch();
   const [isHovering, setIsHovering] = useState(false);
   const [dropState, setDropState] = useState(initialDropState);
 
   const { height, width } = useWindowDimensions();
-  console.log("height", height);
-  console.log("width", width);
+  //console.log("height", height);
+  //console.log("width", width);
 
   const handleDropState = (dropName) => {
     if (dropName === "other") setDropState(initialDropState);
@@ -283,10 +278,7 @@ const Sidebar = ({ handle }) => {
           {isToggled ? (
             <>
               <div className="">
-                <div
-                  className="sidebar-box-fixed w-[290px]  bg-secondary scrollbar"
-                  id="style-1"
-                >
+                <div className="sidebar-box-fixed w-[290px]  bg-secondary scrollbar" id="style-1">
                   <div className="top-section">
                     {isHovering ? (
                       <>
@@ -299,11 +291,7 @@ const Sidebar = ({ handle }) => {
                       </>
                     ) : (
                       <div>
-                        <img
-                          className="h-10  transition-all"
-                          src={logo1}
-                          alt=""
-                        />{" "}
+                        <img className="h-10  transition-all" src={logo1} alt="" />{" "}
                       </div>
                     )}
                   </div>
@@ -315,12 +303,7 @@ const Sidebar = ({ handle }) => {
                       .map((items, index) => (
                         <div key={index}>
                           {items.subRoute ? (
-                            <NavLink
-                              to={"#"}
-                              key={index}
-                              className=""
-                              activeclassname="active_sidebar"
-                            >
+                            <NavLink to={"#"} key={index} className="" activeclassname="active_sidebar">
                               <SidebarMenu
                                 setSideBar={setSideBar}
                                 items={items}
@@ -341,9 +324,7 @@ const Sidebar = ({ handle }) => {
                               }}
                             >
                               <div className="flex items-center">
-                                <div className=" text-xl px-2 py-1">
-                                  {items.icon}
-                                </div>
+                                <div className=" text-xl px-2 py-1">{items.icon}</div>
 
                                 <div
                                   className={
@@ -369,19 +350,9 @@ const Sidebar = ({ handle }) => {
               <div
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}
-                className={
-                  sideBar && width < 1024
-                    ? "Side_container"
-                    : " fixed bg-secondary left-0 top-0 z-30 "
-                }
+                className={sideBar && width < 1024 ? "Side_container" : " fixed bg-secondary left-0 top-0 z-30 "}
               >
-                <div
-                  className={
-                    isHovering
-                      ? " w-[290px] sidebar-box h-[100vh] sidebar-transition"
-                      : " w-[70px] sidebar-box h-[100vh] sidebar-transition"
-                  }
-                >
+                <div className={isHovering ? " w-[290px] sidebar-box h-[100vh] sidebar-transition" : " w-[70px] sidebar-box h-[100vh] sidebar-transition"}>
                   <div className="top-section">
                     {isHovering ? (
                       <>
@@ -394,20 +365,12 @@ const Sidebar = ({ handle }) => {
                       </>
                     ) : (
                       <>
-                        <img
-                          className="h-10  transition-all"
-                          src={logo1}
-                          alt=""
-                        />{" "}
+                        <img className="h-10  transition-all" src={logo1} alt="" />{" "}
                       </>
                     )}
                   </div>
                   {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
-                  <div
-                    className={
-                      height <= 720 ? "sidebar-scrolling pb-10" : "pb-10"
-                    }
-                  >
+                  <div className={height <= 720 ? "sidebar-scrolling pb-10" : "pb-10"}>
                     {menuItem
                       .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
                       .map((items, index) => (
@@ -439,9 +402,7 @@ const Sidebar = ({ handle }) => {
                               }}
                             >
                               <div className="flex items-center">
-                                <div className=" text-xl px-2 py-1">
-                                  {items.icon}
-                                </div>
+                                <div className=" text-xl px-2 py-1">{items.icon}</div>
                                 <div
                                   onClick={handleSidebar}
                                   className={
@@ -469,15 +430,8 @@ const Sidebar = ({ handle }) => {
             transition={{ delay: 0.2 }}
             className={isToggled ? "slide mx-5 mt-2 transition-all" : "slide"}
           >
-            <div
-              className={
-                !isToggled ? "lg:ml-[98px] lg:mr-[22px] mx-2" : "ml-[280px]"
-              }
-            >
-              <NavigationBar
-                handleSidebar={handleSidebar}
-                handle={handle}
-              ></NavigationBar>
+            <div className={!isToggled ? "lg:ml-[98px] lg:mr-[22px] mx-2" : "ml-[280px]"}>
+              <NavigationBar handleSidebar={handleSidebar} handle={handle}></NavigationBar>
             </div>
             <main
               className={

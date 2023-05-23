@@ -345,7 +345,63 @@ const CalenderView = () => {
   const handleEventLeave = () => {
     setHoveredEvent(null);
   };
+  //-------------------------------Showing month date(auto) -------------------
 
+  useEffect(() => {
+    const calendarApi = calendarRef?.current?.getApi();
+    const view = calendarApi?.view;
+
+    // const viewStartDate = view?.currentStart;
+    // const viewEndDate = view?.currentEnd;
+
+    var start = new Date(view?.activeStart);
+    //start = Math.floor(start.getTime() / 1000);
+    var end = new Date(view?.activeEnd);
+    //end = Math.floor(end.getTime() / 1000);
+
+    console.log("View Start Date:", start);
+    console.log("View End Date:", end);
+
+    // You can perform additional actions or render the view start and end dates as needed
+  }, []);
+
+  // useEffect(() => {
+  //   const calendarApi = calendarRef?.current?.getApi();
+
+  //   const handleDatesSet = () => {
+  //     const view = calendarApi?.view;
+  //     const start = new Date(view?.activeStart);
+  //     const end = new Date(view?.activeEnd);
+
+  //     console.log("View Start Date:", start);
+  //     console.log("View End Date:", end);
+
+  //     // You can perform additional actions or render the view start and end dates as needed
+  //   };
+
+  //   calendarApi?.on("datesSet", handleDatesSet);
+
+  //   return () => {
+  //     calendarApi?.off("datesSet", handleDatesSet);
+  //   };
+  // }, []);
+  const handleDatesSet = (arg) => {
+    const viewStartDate = new Date(arg.view.currentStart);
+    const viewEndDate = new Date(arg.view.currentEnd);
+
+    const start = Math.floor(viewStartDate?.getTime() / 1000);
+    const end = Math.floor(viewEndDate?.getTime() / 1000);
+
+    console.log("View Start Date:", viewStartDate);
+    console.log("View End Date:", viewEndDate);
+
+    //calculated in milli second format
+    console.log("View Start Date:", start);
+    console.log("View End Date:", end);
+
+    // You can perform additional actions or render the view start and end dates as needed
+  };
+  //-------------------------------------end--------------------
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -409,6 +465,8 @@ const CalenderView = () => {
             minute: "2-digit",
             meridiem: "short",
           }}
+          // For showing the calender month and date (autometically)(format 30 days(1-01-2023 to 31-01-2023))
+          datesSet={handleDatesSet}
           // for hovering
           // eventContent={(info) => {
           //   return (
