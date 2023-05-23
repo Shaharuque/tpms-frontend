@@ -12,6 +12,7 @@ import googleCalendar from "../../../Assets/google-calendar.png";
 import Loading from "../../../../Loading/Loading";
 import { Link } from "react-router-dom";
 import EventDetails from "./EventDetails";
+import $ from "jquery";
 
 const Events = [
   {
@@ -114,6 +115,8 @@ const Events = [
   },
 ];
 const CalenderView = () => {
+  const tooltipRef = useRef(null);
+
   const calendarRef = useRef(null);
   const events = [];
   const [selectedDate, setSelectedDate] = useState();
@@ -122,6 +125,138 @@ const CalenderView = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const {
+    isLoading,
+    data: calenderEvents,
+    refetch,
+  } = useQuery(["availbleEvents"], () =>
+    // heruko site boshbey
+    fetch("http://localhost:8800/api/scheduler/", {
+      method: "GET",
+    }).then((res) => res.json())
+  );
+  console.log(calenderEvents?.events);
+
+  // workable code
+  useEffect(() => {
+    function handleEventMouseEnter(info) {
+      //
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltipevent ";
+
+      // const tooltipContent = `
+      //   <div class="tooltip-container">
+      //     <div class="tooltip-content">
+      //       ${info.el.innerText}
+      //     </div>
+      //   </div>
+      // `;
+      const x = info?.el?.fcSeg?.eventRange?.def?.extendedProps?._id;
+      const datamodifyed = calenderEvents?.events.find((item) => item._id === x);
+      console.log("datamodifyed------", datamodifyed);
+
+      console.log("elid------", info?.el?.fcSeg?.eventRange?.def?.extendedProps?._id);
+      const tooltipContent = `
+      <div class="calendar-tooltip-container tooltipevent bg-white shadow-md rounded p-5">
+      <div class="grid grid-cols-2 gap-4 mb-2">
+        <div>
+          <label class="text-primary text-sm font-bold">Client Name</label>
+          <h5 class=" font-normal">${datamodifyed?.patient}</h5>
+        </div>
+        <div>
+          <label class="text-primary text-sm font-bold">DOB</label>
+          <h5 className=" font-normal">${datamodifyed?.provider}</h5>
+        </div>
+        
+        
+        
+      </div>
+
+      
+      
+      <div class="mb-2">
+        <label class="text-primary text-sm font-bold	">Email</label>
+        <h5 class=" font-normal">${"Jakir@gmail.com"}</h5>
+      </div>
+      <div class="mb-2">
+        <label class="text-primary text-sm font-bold">Service</label>
+        <h5 class=" font-normal">${datamodifyed?.treatment}</h5>
+      </div>
+      <div class="mb-2">
+        <label class="text-primary text-sm font-bold">Session Time</label>
+        <h5 class=" font-normal">${"serssion time"}</h5>
+      </div>
+      <div class="mb-2">
+      <label class="text-primary text-sm font-bold">Status</label>
+      <h5 class=" font-normal">${"Status"}</h5>
+    </div>
+    
+      <div class="mb-2">
+      <span class="bg-[#089bab] text-white text-[9px] font-medium mr-2 px-2.5 py-0.5 rounded ">Canceled By Provider</span>
+
+
+      </div>
+      </div>
+    `;
+
+      console.log("info ", info);
+
+      tooltip.innerHTML = tooltipContent;
+
+      //----------------------
+      // tooltip.className = "tooltipevent";
+      // tooltip.style.width = "300px";
+      // tooltip.style.height = "250px";
+      // tooltip.style.background = "#ccc";
+      // tooltip.style.position = "absolute";
+      // tooltip.style.zIndex = 10001;
+
+      // tooltip.innerText = info.el.innerText;
+      // tooltip.innerText = "helo";
+
+      document.body.appendChild(tooltip);
+
+      info.el.style.zIndex = 10000;
+      $(tooltip).fadeIn(500);
+      $(tooltip).fadeTo(10, 1.9);
+
+      const handleMouseMove = (e) => {
+        tooltip.style.top = e.pageY + 10 + "px";
+        tooltip.style.left = e.pageX + 20 + "px";
+      };
+
+      document.addEventListener("mousemove", handleMouseMove);
+
+      info.el.addEventListener("mouseleave", () => {
+        info.el.style.zIndex = 8;
+        tooltip.remove();
+        document.removeEventListener("mousemove", handleMouseMove);
+      });
+
+      tooltipRef.current = tooltip;
+    }
+
+    function handleEventMouseLeave() {
+      if (tooltipRef.current) {
+        tooltipRef.current.remove();
+        tooltipRef.current = null;
+      }
+    }
+
+    $(document).on("mouseenter", ".fc-event", function () {
+      handleEventMouseEnter({ el: this });
+    });
+
+    $(document).on("mouseleave", ".fc-event", handleEventMouseLeave);
+
+    return () => {
+      $(document).off("mouseenter", ".fc-event");
+      $(document).off("mouseleave", ".fc-event");
+      handleEventMouseLeave();
+    };
+  }, [calenderEvents?.events]);
+  // workable code-------------
 
   // For creating new event
   const createEvent = (selectInfo) => {
@@ -171,18 +306,6 @@ const CalenderView = () => {
     setOpen(!open);
   };
 
-  const {
-    isLoading,
-    data: calenderEvents,
-    refetch,
-  } = useQuery(["availbleEvents"], () =>
-    // heruko site boshbey
-    fetch("http://localhost:8800/api/scheduler/", {
-      method: "GET",
-    }).then((res) => res.json())
-  );
-  console.log(calenderEvents?.events);
-
   // FOr hovering
   const [hoveredEvent, setHoveredEvent] = useState(null);
 
@@ -198,6 +321,7 @@ const CalenderView = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
+
   return (
     <div>
       <div className="flex items-center flex-wrap md:justify-between pb-4">
@@ -207,11 +331,7 @@ const CalenderView = () => {
             Filter
           </button>
           <Link to="/admin">
-            <img
-              src={googleCalendar}
-              alt="Google Calendar"
-              style={{ width: "32px" }}
-            />
+            <img src={googleCalendar} alt="Google Calendar" style={{ width: "32px" }} />
           </Link>
           <button className=" py-[5px] font-normal px-3 mr-1 text-[12px]  bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-sm">
             Print
@@ -219,6 +339,22 @@ const CalenderView = () => {
         </div>
       </div>
       <div className="border border-[#089bab] rounded-2xl p-2">
+        {/* {hoveredEvent && (
+          <EventDetails className="event-wrapper" event={hoveredEvent} />
+        )} */}
+
+        {hoveredEvent && <EventDetails event={hoveredEvent} />}
+        {open ? (
+          <CustomModal
+            selectedDate={selectedDate}
+            handleClose={handleClose}
+            clicked={open}
+            eventId={eventId ? eventId : null}
+            refetch={refetch}
+            event={hoveredEvent}
+          ></CustomModal>
+        ) : null}
+
         <FullCalendar
           ref={calendarRef}
           initialView="dayGridMonth"
@@ -256,24 +392,12 @@ const CalenderView = () => {
           //     </div>
           //   );
           // }}
-          eventMouseEnter={handleEventHover}
-          eventMouseLeave={handleEventLeave}
+          // eventMouseEnter={handleEventHover}
+          // eventMouseLeave={handleEventLeave}
+          //
+          // eventMouseEnter={handleEventMouseEnter}
+          // eventMouseLeave={handleEventMouseLeave}
         />
-        {/* {hoveredEvent && (
-          <EventDetails className="event-wrapper" event={hoveredEvent} />
-        )} */}
-
-        {hoveredEvent && <EventDetails event={hoveredEvent} />}
-        {open ? (
-          <CustomModal
-            selectedDate={selectedDate}
-            handleClose={handleClose}
-            clicked={open}
-            eventId={eventId ? eventId : null}
-            refetch={refetch}
-            event={hoveredEvent}
-          ></CustomModal>
-        ) : null}
       </div>
     </div>
   );

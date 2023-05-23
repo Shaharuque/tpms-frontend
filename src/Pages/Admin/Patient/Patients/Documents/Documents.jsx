@@ -24,12 +24,7 @@ const Documents = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
 
-  const {
-    data,
-    isSuccess,
-    isLoading: documentLoading,
-    isError,
-  } = useGetdocumentsQuery({ token, id });
+  const { data, isSuccess, isLoading: documentLoading, isError } = useGetdocumentsQuery({ token, id });
   console.log("api data come", data?.documents?.data);
 
   if (documentLoading) {
@@ -100,8 +95,7 @@ const Documents = () => {
       sorter: (a, b) => {
         return a.created_at > b.created_at ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "created_by" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "created_by" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -116,8 +110,7 @@ const Documents = () => {
       sorter: (a, b) => {
         return a.created_at > b.created_at ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "created_at" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "created_at" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -132,8 +125,7 @@ const Documents = () => {
       sorter: (a, b) => {
         return a.expired_date > b.expired_date ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "expired_date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "expired_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -162,16 +154,12 @@ const Documents = () => {
       {!isSuccess && (
         <div className="mt-10">
           <img className="mx-auto" src={check} alt="" />
-          <p className="text-xs font-light text-gray-600 flex items-center justify-center my-2">
-            admin admin has no document
-          </p>
+          <p className="text-xs font-light text-gray-600 flex items-center justify-center my-2">admin admin has no document</p>
         </div>
       )}
 
       <div className="flex items-center justify-between gap-2 my-2">
-        <h1 className="text-lg text-orange-500 text-left font-semibold ">
-          Documents
-        </h1>
+        <h1 className="text-lg text-orange-500 text-left font-semibold ">Documents</h1>
         <button
           onClick={clearFilters}
           className="px-2  py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm"
@@ -193,18 +181,10 @@ const Documents = () => {
         />
       </div>
       <div className="my-10">
-        <button
-          onClick={handleClickOpen}
-          className="pms-button flex item-center gap-2"
-        >
+        <button onClick={handleClickOpen} className="pms-button flex item-center gap-2">
           <HiPlus /> Add New Data
         </button>
-        {openEditModal && (
-          <AddDocuments
-            handleClose={handleClose}
-            open={openEditModal}
-          ></AddDocuments>
-        )}
+        {openEditModal && <AddDocuments handleClose={handleClose} open={openEditModal}></AddDocuments>}
       </div>
     </div>
   );
