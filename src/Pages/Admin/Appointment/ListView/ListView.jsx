@@ -5,13 +5,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import CardsView from "./CardView/CardsView";
 import { Dropdown, Space, Table } from "antd";
-import {
-  AiFillLock,
-  AiFillUnlock,
-  AiOutlineDown,
-  AiOutlineEye,
-  AiOutlineMessage,
-} from "react-icons/ai";
+import { AiFillLock, AiFillUnlock, AiOutlineDown, AiOutlineEye, AiOutlineMessage } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableAction from "./ListView/ManageTableAction";
 import "react-date-range/dist/styles.css";
@@ -34,6 +28,7 @@ import { timeConverter } from "../../../Shared/TimeConverter/TimeConverter";
 import NonBillableSession from "./NonBillableSession/NonBillableSession";
 import NonBillableCardsView from "./NonBillableSession/NonBillableCardView/NonBillableCardsView";
 import AddSessionHintAdd from "./ListView/AddSessionHintAdd";
+import { baseIp } from "../../../../Misc/BaseClient";
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
@@ -162,10 +157,7 @@ const ListView = () => {
   console.log("Non-Billable ManageSession List", nonBillableData, procceed);
 
   //Manage Session Appointment Status Change API
-  const [
-    manageSessionStatusChange,
-    { data: statusChangeData, isSuccess: actionSuccess },
-  ] = useManageSessionStatusChangeMutation();
+  const [manageSessionStatusChange, { data: statusChangeData, isSuccess: actionSuccess }] = useManageSessionStatusChangeMutation();
   console.log("after status change", actionSuccess);
 
   useEffect(() => {
@@ -220,8 +212,7 @@ const ListView = () => {
   }, [statusChangeData?.status]);
 
   //Appointment Pos get API
-  const { data: posData, isLoading: posDataLoading } =
-    useGetAppointmentPOSQuery(token);
+  const { data: posData, isLoading: posDataLoading } = useGetAppointmentPOSQuery(token);
   console.log("pos data", posData?.pos);
 
   //Clients multi select data from server(Client=>Patient)
@@ -229,15 +220,15 @@ const ListView = () => {
     const getPatientsData = async () => {
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/client`,
+        url: `${baseIp}/manage/session/get/all/client`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token || null,
+          "x-auth-token": token || null,
         },
       });
-      const data = res?.data?.claims;
-      // console.log(data);
+      const data = res?.data;
+      console.log(data);
       setPatients(data);
     };
     getPatientsData();
@@ -322,17 +313,11 @@ const ListView = () => {
   // date range picker calendar
   const startDate = range ? range[0]?.startDate : null;
   const endDate = range ? range[0]?.endDate : null;
-  const startMonth = startDate
-    ? startDate.toLocaleString("en-us", { month: "short" })
-    : null;
-  const endMonth = endDate
-    ? endDate.toLocaleString("en-us", { month: "short" })
-    : null;
+  const startMonth = startDate ? startDate.toLocaleString("en-us", { month: "short" }) : null;
+  const endMonth = endDate ? endDate.toLocaleString("en-us", { month: "short" }) : null;
   const startDay = startDate ? startDate.getDate() : null;
   const endDay = endDate ? endDate.getDate() : null;
-  const startYear = startDate
-    ? startDate.getFullYear().toString().slice(2, 4)
-    : null;
+  const startYear = startDate ? startDate.getFullYear().toString().slice(2, 4) : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
 
   //End Date Range Picker
@@ -441,22 +426,15 @@ const ListView = () => {
       // filters: items?.length > 0 && patientSearch(),
       render: (_, record) => {
         //console.log("tags : ", lock);
-        return (
-          <div className=" text-secondary">
-            {record?.app_client?.client_full_name}
-          </div>
-        );
+        return <div className=" text-secondary">{record?.app_client?.client_full_name}</div>;
       },
       // filteredValue: filteredInfo.client_full_name || null,
       // onFilter: (value, record) =>
       //   record?.app_client?.client_full_name?.includes(value),
       sorter: (a, b) => {
-        return a.app_client?.client_full_name > b.app_client?.client_full_name
-          ? -1
-          : 1;
+        return a.app_client?.client_full_name > b.app_client?.client_full_name ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "client_full_name" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "client_full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -480,24 +458,16 @@ const ListView = () => {
       ],
       render: (_, record) => {
         //console.log("tags : ", lock);
-        return (
-          <div className=" text-secondary">
-            {record?.app_client_auth_act?.activity_name}
-          </div>
-        );
+        return <div className=" text-secondary">{record?.app_client_auth_act?.activity_name}</div>;
       },
       // filteredValue: filteredInfo.activity_name || null,
       // onFilter: (value, record) =>
       //   record?.app_client_auth_act?.activity_name?.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.app_client_auth_act?.activity_name >
-          b.app_client_auth_act?.activity_name
-          ? -1
-          : 1; //sorting problem solved using this logic
+        return a.app_client_auth_act?.activity_name > b.app_client_auth_act?.activity_name ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -529,11 +499,7 @@ const ListView = () => {
       ],
       render: (_, record) => {
         //console.log("tags : ", lock);
-        return (
-          <div className=" text-secondary">
-            {record?.app_provider?.full_name}
-          </div>
-        );
+        return <div className=" text-secondary">{record?.app_provider?.full_name}</div>;
       },
       // filteredValue: filteredInfo.provider_full_name || null,
       // onFilter: (value, record) =>
@@ -541,8 +507,7 @@ const ListView = () => {
       sorter: (a, b) => {
         return a.app_provider?.full_name > b.app_provider?.full_name ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "provider_full_name" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "provider_full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -574,12 +539,7 @@ const ListView = () => {
                 <BsFillCameraVideoFill className="text-green-500" />
               </div>
             ) : (
-              <div>
-                {
-                  posData?.pos?.find((each) => each?.pos_code === location)
-                    ?.pos_name
-                }
-              </div>
+              <div>{posData?.pos?.find((each) => each?.pos_code === location)?.pos_name}</div>
             )}
           </>
         );
@@ -609,11 +569,7 @@ const ListView = () => {
       // ],
       render: (_, record) => {
         //console.log("tags : ", lock);
-        return (
-          <div className=" text-black text-center">
-            {dateConverter(record?.schedule_date)}
-          </div>
-        );
+        return <div className=" text-black text-center">{dateConverter(record?.schedule_date)}</div>;
       },
       // filteredValue: filteredInfo.schedule_date || null,
       // onFilter: (value, record) => record.schedule_date.includes(value),
@@ -621,8 +577,7 @@ const ListView = () => {
         return a.schedule_date > b.schedule_date ? -1 : 1;
         // a.schedule_date - b.schedule_date
       },
-      sortOrder:
-        sortedInfo.columnKey === "schedule_date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "schedule_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -644,8 +599,7 @@ const ListView = () => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-gray-600 text-center ">
-            {timeConverter(record?.from_time?.split(" ")[1])} to{" "}
-            {timeConverter(record?.to_time?.split(" ")[1])}
+            {timeConverter(record?.from_time?.split(" ")[1])} to {timeConverter(record?.to_time?.split(" ")[1])}
           </div>
         );
       },
@@ -675,36 +629,12 @@ const ListView = () => {
         //console.log("status : ", status);
         return (
           <div className="flex justify-center">
-            {status === "Scheduled" && (
-              <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "Rendered" && (
-              <button className="bg-green-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "Hold" && (
-              <button className="bg-gray-100 text-black text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "No Show" && (
-              <button className="bg-rose-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "Cancelled by Client" && (
-              <button className="bg-secondary text-white text-[10px] py-[2px]  rounded w-24">
-                {status}
-              </button>
-            )}
-            {status === "Cancelled by Provider" && (
-              <button className="bg-[#39B4C7] text-white text-[10px] p-[2px]  rounded w-28">
-                {status}
-              </button>
-            )}
+            {status === "Scheduled" && <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "Rendered" && <button className="bg-green-700 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "Hold" && <button className="bg-gray-100 text-black text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "No Show" && <button className="bg-rose-700 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "Cancelled by Client" && <button className="bg-secondary text-white text-[10px] py-[2px]  rounded w-24">{status}</button>}
+            {status === "Cancelled by Provider" && <button className="bg-[#39B4C7] text-white text-[10px] p-[2px]  rounded w-28">{status}</button>}
           </div>
         );
       },
@@ -732,10 +662,7 @@ const ListView = () => {
       width: 60,
       render: (_, record) => (
         <div className="flex justify-center">
-          <button
-            className="flex items-center justify-center "
-            onClick={addNoteHandler}
-          >
+          <button className="flex items-center justify-center " onClick={addNoteHandler}>
             <AiOutlineMessage className="text-base text-secondary" />
           </button>
         </div>
@@ -749,12 +676,7 @@ const ListView = () => {
       render: (_, record) => (
         <div className="flex justify-center">
           <Dropdown
-            overlay={
-              <ManageTableAction
-                isLocked={record?.is_locked}
-                appointmentId={record?.id}
-              ></ManageTableAction>
-            }
+            overlay={<ManageTableAction isLocked={record?.is_locked} appointmentId={record?.id}></ManageTableAction>}
             trigger={["click"]}
             overlayStyle={{ zIndex: "100" }}
           >
@@ -784,9 +706,7 @@ const ListView = () => {
   //Individual filtering [tagging feature]
   const deletePatientsName = (tag) => {
     console.log(tag);
-    const client_full_name_array = filteredInfo?.client_full_name?.filter(
-      (item) => item !== tag
-    );
+    const client_full_name_array = filteredInfo?.client_full_name?.filter((item) => item !== tag);
     setFilteredInfo({
       client_full_name: client_full_name_array,
       Service_hrs: filteredInfo?.Service_hrs,
@@ -798,9 +718,7 @@ const ListView = () => {
 
   const deleteServiceTag = (tag) => {
     console.log(tag);
-    const Service_hrs_array = filteredInfo?.Service_hrs?.filter(
-      (item) => item !== tag
-    );
+    const Service_hrs_array = filteredInfo?.Service_hrs?.filter((item) => item !== tag);
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: Service_hrs_array,
@@ -836,9 +754,7 @@ const ListView = () => {
 
   const deleteScheduleTag = (tag) => {
     console.log(tag);
-    const schedule_array = filteredInfo?.schedule_date?.filter(
-      (item) => item !== tag
-    );
+    const schedule_array = filteredInfo?.schedule_date?.filter((item) => item !== tag);
     setFilteredInfo({
       Patients: filteredInfo?.Patients,
       Service_hrs: filteredInfo?.Service_hrs,
@@ -891,17 +807,7 @@ const ListView = () => {
         end_date: endDate ? `${endMonth} ${endDay}, ${endYear}` : "",
       });
     }, 0);
-  }, [
-    startDate,
-    startMonth,
-    startDay,
-    startYear,
-    endDate,
-    endMonth,
-    endDay,
-    endYear,
-    reset,
-  ]);
+  }, [startDate, startMonth, startDay, startYear, endDate, endMonth, endDay, endYear, reset]);
 
   //get rows id to do some action on them
   const onSelectChange = (newSelectedRowKeys) => {
@@ -972,11 +878,7 @@ const ListView = () => {
   return (
     // For responsive view point
     <div
-      className={
-        !table || items?.length < 18 || nonBillableData?.length < 0
-          ? "h-[170vh]"
-          : ""
-      }
+      className={!table || items?.length < 18 || nonBillableData?.length < 0 ? "h-[170vh]" : ""}
       // class={
       //   nonBillableData &&
       //   table &&
@@ -989,15 +891,10 @@ const ListView = () => {
       <div>
         <div className="cursor-pointer">
           <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
-            <div
-              onClick={clickHandler}
-              className="flex items-center justify-between "
-            >
+            <div onClick={clickHandler} className="flex items-center justify-between ">
               {!clicked && (
                 <>
-                  <div className="text-[16px]  text-white font-semibold ">
-                    Manage Sessions
-                  </div>
+                  <div className="text-[16px]  text-white font-semibold ">Manage Sessions</div>
                   <lord-icon
                     src="https://cdn.lordicon.com/rxufjlal.json"
                     trigger="loop"
@@ -1013,58 +910,29 @@ const ListView = () => {
             {clicked && (
               <div>
                 <div className="flex justify-between items-center flex-wrap">
-                  <h1 className="text-[20px] text-white font-semibold ">
-                    Manage Sessions
-                  </h1>
+                  <h1 className="text-[20px] text-white font-semibold ">Manage Sessions</h1>
                   <div>
-                    <button
-                      onClick={handleClose}
-                      className="text-white text-2xl font-light"
-                    >
+                    <button onClick={handleClose} className="text-white text-2xl font-light">
                       <MdOutlineCancel />
                     </button>
                   </div>
                 </div>
                 <div className="flex items-center sm:justify-end sm:my-0 my-2 flex-wrap gap-2">
                   <div>
-                    <Switch
-                      color="default"
-                      defaultChecked
-                      size="small"
-                      onClick={handleBillable}
-                    />
+                    <Switch color="default" defaultChecked size="small" onClick={handleBillable} />
 
-                    <label
-                      className="form-check-label inline-block ml-2 text-base text-gray-100"
-                      htmlFor="flexSwitchCheckDefault"
-                    >
+                    <label className="form-check-label inline-block ml-2 text-base text-gray-100" htmlFor="flexSwitchCheckDefault">
                       {billable ? "Billable" : "Non-Billable"}
                     </label>
                   </div>
                   {/* List view or table view  */}
 
-                  <div
-                    className={
-                      listView ? "flex justify-end " : "flex justify-end "
-                    }
-                  >
+                  <div className={listView ? "flex justify-end " : "flex justify-end "}>
                     <div>
-                      <Switch
-                        color="default"
-                        defaultChecked
-                        size="small"
-                        onClick={handleListView}
-                      />
+                      <Switch color="default" defaultChecked size="small" onClick={handleListView} />
 
-                      <label
-                        className="form-check-label inline-block ml-2 text-base text-gray-100"
-                        htmlFor="flexSwitchCheckDefault"
-                      >
-                        {listView ? (
-                          <span className="">List View</span>
-                        ) : (
-                          "Card View"
-                        )}
+                      <label className="form-check-label inline-block ml-2 text-base text-gray-100" htmlFor="flexSwitchCheckDefault">
+                        {listView ? <span className="">List View</span> : "Card View"}
                       </label>
                     </div>
                   </div>
@@ -1077,33 +945,21 @@ const ListView = () => {
                       <>
                         <div>
                           <label className="label">
-                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
-                              Clients
-                            </span>
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">Clients</span>
                           </label>
 
-                          <Clients
-                            patients={patients}
-                            setPatientId={setPatientId}
-                          ></Clients>
+                          <Clients patients={patients} setPatientId={setPatientId}></Clients>
                         </div>
                         <div className="">
                           <label className="label">
-                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
-                              Provider
-                            </span>
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">Provider</span>
                           </label>
 
-                          <Providers
-                            stuffs={stuffs}
-                            setStuffsId={setStuffsId}
-                          ></Providers>
+                          <Providers stuffs={stuffs} setStuffsId={setStuffsId}></Providers>
                         </div>
                         <div className="sm:w-[240px] w-[200px]">
                           <label className="label">
-                            <span className="label-text text-[16px] text-gray-100 text-left">
-                              Place of Services
-                            </span>
+                            <span className="label-text text-[16px] text-gray-100 text-left">Place of Services</span>
                           </label>
                           <div>
                             <select
@@ -1116,11 +972,7 @@ const ListView = () => {
                               </option>
                               {posData?.pos?.map((p) => {
                                 return (
-                                  <option
-                                    className="text-black"
-                                    key={p?.id}
-                                    value={p?.pos_code}
-                                  >
+                                  <option className="text-black" key={p?.id} value={p?.pos_code}>
                                     {p?.pos_name}
                                   </option>
                                 );
@@ -1130,9 +982,7 @@ const ListView = () => {
                         </div>
                         <div className="w-[200px]">
                           <label className="label">
-                            <span className="label-text  text-[16px] text-gray-100 text-left">
-                              Selected date
-                            </span>
+                            <span className="label-text  text-[16px] text-gray-100 text-left">Selected date</span>
                           </label>
                           {/* Date Range calender will be set here */}
                           <div className="">
@@ -1141,22 +991,14 @@ const ListView = () => {
                               className="flex  justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text-[14px] w-full"
                             >
                               <input
-                                value={
-                                  startDate
-                                    ? `${startMonth} ${startDay}, ${startYear}`
-                                    : "Start Date"
-                                }
+                                value={startDate ? `${startMonth} ${startDay}, ${startYear}` : "Start Date"}
                                 readOnly
                                 className="focus:outline-none py-[1px] font-medium text-center bg-transparent text-white w-2/5 cursor-pointer"
                                 {...register("start_date")}
                               />
                               <RiArrowLeftRightLine className="w-1/5 text-white"></RiArrowLeftRightLine>
                               <input
-                                value={
-                                  endDate
-                                    ? `${endMonth} ${endDay}, ${endYear}`
-                                    : "End Date"
-                                }
+                                value={endDate ? `${endMonth} ${endDay}, ${endYear}` : "End Date"}
                                 readOnly
                                 className="focus:outline-none font-medium text-center bg-transparent text-white w-2/5 cursor-pointer"
                                 {...register("end_date")}
@@ -1188,9 +1030,7 @@ const ListView = () => {
                         <div className="flex gap-5 w-[200px]">
                           <div>
                             <label className="label">
-                              <span className="label-text text-[16px] text-gray-100 text-left">
-                                status
-                              </span>
+                              <span className="label-text text-[16px] text-gray-100 text-left">status</span>
                             </label>
                             <div>
                               <select
@@ -1200,10 +1040,7 @@ const ListView = () => {
                                 <option value="" className="text-black">
                                   Select
                                 </option>
-                                <option
-                                  value="Scheduled"
-                                  className="text-black"
-                                >
+                                <option value="Scheduled" className="text-black">
                                   Scheduled
                                 </option>
                                 <option className="text-black" value="No Show">
@@ -1212,28 +1049,16 @@ const ListView = () => {
                                 <option className="text-black" value="Hold">
                                   Hold
                                 </option>
-                                <option
-                                  className="text-black"
-                                  value="Cancelled by Client"
-                                >
+                                <option className="text-black" value="Cancelled by Client">
                                   Cancelled by Client
                                 </option>
-                                <option
-                                  className="text-black"
-                                  value="CC more than 24 hrs"
-                                >
+                                <option className="text-black" value="CC more than 24 hrs">
                                   CC more than 24 hrs
                                 </option>
-                                <option
-                                  className="text-black"
-                                  value="CC less than 24 hrs"
-                                >
+                                <option className="text-black" value="CC less than 24 hrs">
                                   CC less than 24 hrs
                                 </option>
-                                <option
-                                  className="text-black"
-                                  value="Cancelled by Provider"
-                                >
+                                <option className="text-black" value="Cancelled by Provider">
                                   Cancelled by Provider
                                 </option>
                                 <option className="text-black" value="Rendered">
@@ -1242,10 +1067,7 @@ const ListView = () => {
                               </select>
                             </div>
                           </div>
-                          <button
-                            className=" mb-3 mt-[35px] sm:w-1/4 pms-white-button"
-                            type="submit"
-                          >
+                          <button className=" mb-3 mt-[35px] sm:w-1/4 pms-white-button" type="submit">
                             Go
                           </button>
                         </div>
@@ -1260,20 +1082,12 @@ const ListView = () => {
                       <div className="flex flex-wrap">
                         <div className="mr-2">
                           <label className="label">
-                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">
-                              Provider
-                            </span>
+                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">Provider</span>
                           </label>
 
-                          <Providers
-                            stuffs={stuffs}
-                            setStuffsId={setStuffsId}
-                          ></Providers>
+                          <Providers stuffs={stuffs} setStuffsId={setStuffsId}></Providers>
                         </div>
-                        <button
-                          className=" mb-3 mt-[35px] pms-white-button"
-                          onClick={nonBillableSessionHandler}
-                        >
+                        <button className=" mb-3 mt-[35px] pms-white-button" onClick={nonBillableSessionHandler}>
                           Go
                         </button>
                       </div>
@@ -1336,9 +1150,7 @@ const ListView = () => {
                                     previousLinkClassName={"pagination_Link"}
                                     nextLinkClassName={"pagination_Link"}
                                     activeClassName={"pagination_Link-active"}
-                                    disabledClassName={
-                                      "pagination_Link-disabled"
-                                    }
+                                    disabledClassName={"pagination_Link-disabled"}
                                   ></ReactPaginate>
                                 )}
                               </div>
@@ -1350,30 +1162,20 @@ const ListView = () => {
                       </div>
                     ) : (
                       // CSS Design Need To Applied Here
-                      <h1 className="w-full text-center p-2 bg-red-400 text-white rounded-sm">
-                        No Data Found
-                      </h1>
+                      <h1 className="w-full text-center p-2 bg-red-400 text-white rounded-sm">No Data Found</h1>
                     )}
                   </div>
                 )}
                 {/* Billable Session Data in Card-View */}
                 {!listView && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="my-5"
-                  >
+                  <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="my-5">
                     <CardsView schedules={items} posData={posData}></CardsView>
                   </motion.div>
                 )}
                 {
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <select
-                        className="modal-input-field ml-1"
-                        onChange={(e) => statusChange(e)}
-                      >
+                      <select className="modal-input-field ml-1" onChange={(e) => statusChange(e)}>
                         <option value="" className="text-black">
                           Select
                         </option>
@@ -1428,27 +1230,13 @@ const ListView = () => {
           </>
           {/* Non-Billable Session Data in Card-View */}
           {!listView && hide && (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="my-5"
-            >
-              <NonBillableCardsView
-                schedules={nonBillableData}
-                stuffs={stuffs}
-                posData={posData}
-              ></NonBillableCardsView>
+            <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="my-5">
+              <NonBillableCardsView schedules={nonBillableData} stuffs={stuffs} posData={posData}></NonBillableCardsView>
             </motion.div>
           )}
         </div>
       </div>
-      {noteModal && (
-        <AddSessionHintAdd
-          handleClose={handleNoteClose}
-          open={noteModal}
-        ></AddSessionHintAdd>
-      )}
+      {noteModal && <AddSessionHintAdd handleClose={handleNoteClose} open={noteModal}></AddSessionHintAdd>}
     </div>
   );
 };
