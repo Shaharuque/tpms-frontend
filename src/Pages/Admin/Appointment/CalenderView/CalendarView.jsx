@@ -196,24 +196,6 @@ const CalenderView = () => {
   };
   //-------------------------------Showing month date(auto) -------------------
 
-  useEffect(() => {
-    const calendarApi = calendarRef?.current?.getApi();
-    const view = calendarApi?.view;
-
-    // const viewStartDate = view?.currentStart;
-    // const viewEndDate = view?.currentEnd;
-
-    var start = new Date(view?.activeStart);
-    //start = Math.floor(start.getTime() / 1000);
-    var end = new Date(view?.activeEnd);
-    //end = Math.floor(end.getTime() / 1000);
-
-    console.log("View Start Date:", start);
-    console.log("View End Date:", end);
-
-    // You can perform additional actions or render the view start and end dates as needed
-  }, []);
-
   // useEffect(() => {
   //   const calendarApi = calendarRef?.current?.getApi();
 
@@ -235,14 +217,23 @@ const CalenderView = () => {
   //   };
   // }, []);
   const handleDatesSet = (arg) => {
-    const viewStartDate = new Date(arg.view.currentStart);
-    const viewEndDate = new Date(arg.view.currentEnd);
+    // console.log("data of hovered event", arg.view);
+    // const viewStartDate = new Date(arg.view.currentStart);
+    // const viewEndDate = new Date(arg.view.currentEnd);
 
-    const start = Math.floor(viewStartDate?.getTime() / 1000);
-    const end = Math.floor(viewEndDate?.getTime() / 1000);
+    // const start = Math.floor(viewStartDate?.getTime() / 1000);
+    // const end = Math.floor(viewEndDate?.getTime() / 1000);
 
-    console.log("View Start Date:", viewStartDate);
-    console.log("View End Date:", viewEndDate);
+    // console.log("View Start Date:", viewStartDate);
+    // console.log("View End Date:", viewEndDate);
+
+    const calendarApi = arg?.view?.calendar;
+    const view = calendarApi?.view;
+
+    let start = new Date(view?.activeStart);
+    //start = Math.floor(start.getTime() / 1000);
+    let end = new Date(view?.activeEnd);
+    //end = Math.floor(end.getTime() / 1000);
 
     //calculated in milli second format
     console.log("View Start Date:", start);
