@@ -2,24 +2,21 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //async action(getAdmins) to fetch admins data list depending on page_ad
-export const getsettings = createAsyncThunk(
-  "settings/getsettings",
-  async (token) => {
-    //onno api thik e kaj kortesey
-    const response = await axios.get(
-      // `https://stagapi.therapypms.com/api/internaladmin/setting/get/name/location`,
-      `http://localhost:8080/api/v1/internaladmin/setting/get/name/location`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "x-auth-token": token || null,
-        },
-      }
-    );
-    return response.data;
-  }
-);
+export const getsettings = createAsyncThunk("settings/getsettings", async (token) => {
+  //onno api thik e kaj kortesey
+  const response = await axios.get(
+    // `https://stagapi.therapypms.com/api/internaladmin/setting/get/name/location`,
+    `http://localhost:8080/api/v1/inadmin/setting/get/name/location`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "x-auth-token": token || null,
+      },
+    }
+  );
+  return response.data;
+});
 
 const initialState = {
   loading: false,

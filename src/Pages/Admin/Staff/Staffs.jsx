@@ -24,6 +24,7 @@ const Staffs = () => {
   const { token } = useToken();
   const [page, setPage] = useState(2);
   const [hasMore, setHasMore] = useState(true);
+  const [call, setCall] = useState(false);
 
   //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
@@ -44,7 +45,7 @@ const Staffs = () => {
       setStaffData(data);
     };
     getStaffData();
-  }, [token]);
+  }, [token, call]);
   console.log("This is satff data of first page", staffData);
 
   const fetchProviders = async () => {
@@ -251,7 +252,16 @@ const Staffs = () => {
       width: 120,
       render: (_, { is_active, id }) => {
         //console.log("Status : ", Status);
-        return <StuffStatusAction id={id} status={is_active} setStaffData={setStaffData}></StuffStatusAction>;
+        return (
+          <StuffStatusAction
+            id={id}
+            status={is_active}
+            setStaffData={setStaffData}
+            setCall={setCall}
+            setHasMore={setHasMore}
+            setPage={setPage}
+          ></StuffStatusAction>
+        );
       },
     },
   ];

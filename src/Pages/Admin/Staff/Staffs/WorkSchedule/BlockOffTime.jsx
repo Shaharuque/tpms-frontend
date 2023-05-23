@@ -8,6 +8,7 @@ import AddBlockOffTime from "./AddBlockOffTime";
 import { useParams } from "react-router-dom";
 import { useDeleteBlockOffTimeMutation, useGetBlockOffTimeQuery } from "../../../../../features/Stuff_redux/workingSchedule/workingScheduleApi";
 import useToken from "../../../../../CustomHooks/useToken";
+import { DatabaseDateConverter } from "../../../../Shared/Dateconverter/DateConverter";
 
 function convertTimeTo12HourFormat(time24) {
   const date = new Date(`1/1/2021 ${time24}`);
@@ -97,12 +98,22 @@ const BlockOffTime = ({ handleCredential, credentialOpen, credentials }) => {
       key: "type",
       dataIndex: "type",
       width: 100,
-
+      render: (_, record) => {
+        return (
+          <h1>
+            {record?.type === "Week Day"
+              ? JSON.parse(record?.days)?.join(", ")
+              : record?.type === "Specific Date"
+              ? DatabaseDateConverter(record?.date)
+              : record?.type}
+          </h1>
+        );
+      },
       sorter: (a, b) => {
         return a.type > b.type ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "type" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Start Time",

@@ -121,7 +121,8 @@
     justify-content: space-between;
     max-height: var(--toastify-toast-max-height);
     overflow: hidden;
-    font-family: var(--toastify-font-family);
+    font-family: poppins, sans-serif;
+    font-size: 12px;
     cursor: default;
     direction: ltr;
     /* webkit only issue #791 */

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { GiPlainCircle } from "react-icons/gi";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -6,11 +6,12 @@ import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { MdContentCopy } from "react-icons/md";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useGetPatientAuthorizationQuery } from "../../../../../features/Patient_redux/authorization/authorizationApi";
+import { useGetPatientAuthorizationQuery, usePatientAuthorizationDeleteMutation } from "../../../../../features/Patient_redux/authorization/authorizationApi";
 import AuthorizationActivityTable from "./AuthorizationActivityTable/AuthorizationActivityTable";
 import Loading from "../../../../../Loading/Loading";
 import SelectContactRate from "./AuthorizationActivityModal/SelectContactRate";
 import AuthorizationEditModal from "./AuthorizationActivityModal/AuthorizationEditModal";
+import { toast } from "react-toastify";
 
 const Authorization = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -35,6 +36,9 @@ const Authorization = () => {
   //   authorizationData?.client_authorization?.data
   // );
   const clientAuthorizationData = authorizationData?.allAuthorization || [];
+  const clientSelectedPayors = authorizationData?.selectedPayors || [];
+
+  const [patientAuthorizationDelete, { isSuccess: deleteSuccess, isError: deleteError }] = usePatientAuthorizationDeleteMutation();
 
   const editAuth = (record) => {
     //console.log("editdata edit", record);
@@ -56,36 +60,42 @@ const Authorization = () => {
     setSelectContact(false);
   };
 
+  const handleDelete = (record) => {
+    console.log("delete record", record?.id);
+    if (record?.id) {
+      patientAuthorizationDelete({
+        token,
+        payload: {
+          id: record?.id,
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (deleteSuccess) {
+      toast.success("Successfully Authorization Deleted", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    } else if (deleteError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
+  }, [deleteSuccess, deleteError]);
+
   const columns = [
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
       width: 120,
-      // filters: [
-      //   {
-      //     text: "Realcube",
-      //     value: "Realcube",
-      //   },
-      //   {
-      //     text: "Mycat",
-      //     value: "Mycat",
-      //   },
-      //   {
-      //     text: "Donovan",
-      //     value: "Donovan",
-      //   },
-      //   {
-      //     text: "Burke Beard",
-      //     value: "Burke Beard",
-      //   },
-      //   {
-      //     text: "Hector Moses",
-      //     value: "Hector Moses",
-      //   },
-      // ],
-      // filteredValue: filteredInfo.description || null,
-      // onFilter: (value, record) => record.description.includes(value),
       sorter: (a, b) => {
         return a.description > b.description ? -1 : 1;
       },
@@ -121,10 +131,8 @@ const Authorization = () => {
       dataIndex: "insurance",
       key: "insurance",
       width: 150,
-      render: (_, { authorization_name }) => {
-        if (authorization_name) {
-          return <h1>{authorization_name.split(" ")[0]}</h1>;
-        }
+      render: (_, record) => {
+        return <h1>{clientSelectedPayors?.find((payor) => payor?.payor_id === record?.payor_id)?.payor_name}</h1>;
       },
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
@@ -211,9 +219,9 @@ const Authorization = () => {
               </button>
 
               <span>|</span>
-              <Link to={"/"}>
-                <AiOutlineDelete className="text-sm mt-[3px] text-red-500 mx-2" title="Delete" />
-              </Link>
+              <button>
+                <AiOutlineDelete onClick={() => handleDelete(record)} className="text-sm mt-[3px] text-red-500 mx-2" title="Delete" />
+              </button>
             </div>
           </div>
         );
@@ -270,7 +278,7 @@ const Authorization = () => {
 
   return (
     <div className="h-[100vh]">
-      <>
+      <div className="h-[100%]">
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
           <h1 className="text-[14px] font-semibold">Authorization</h1>
           <div className="flex items-center gap-2 flex-wrap">
@@ -286,6 +294,7 @@ const Authorization = () => {
         <div className=" overflow-scroll ">
           {!authorizationloading ? (
             <Table
+              bordered
               pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
               rowKey={(record) => record.id} //record is kind of whole one data object and here we are
               size="small"
@@ -306,7 +315,7 @@ const Authorization = () => {
             <Loading />
           )}
         </div>
-      </>
+      </div>
       {selectContact && (
         <SelectContactRate
           handleClose={handleClose}

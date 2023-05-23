@@ -1,43 +1,45 @@
-import React, { useMemo } from 'react';
-import { useFilters, usePagination, useSortBy,useTable } from 'react-table';
-import TableLayout from './TableLayout';
+import React, { useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useGetClaimsQuery } from "../features/Billing_redux/Primary_Billing_redux/processingClaimApi";
+import useToken from "../CustomHooks/useToken";
 
-const TableInstance = ({ tableData }) => {
-    console.log(tableData)
+const TableInstance = () => {
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const { token } = useToken();
+  const { data: items, fetchNextPage } = useGetClaimsQuery({
+    token,
+    data: {
+      insurance_ids: [1, 207, 300],
+      page: 1,
+      to_date: "2023-05-21",
+    },
+  });
 
-    const [columns, data] = useMemo(
-        () => {
-          const columns = [
-            {
-              Header: 'ID',
-              accessor: 'id'
-            },
-            {
-              Header: 'Patient',
-              accessor: 'client_full_name'
-            },
- 
-            {
-              Header: 'DOB',
-              accessor: 'client_dob'
-            },
-            {
-              Header: 'Upvotes',
-              accessor: 'upvotes'
-            }
-          ];
-          return [columns, tableData];
-        },
-        [tableData]
-      );
-    
-      const tableInstance = useTable({ columns, data },useFilters, useSortBy, usePagination);
-      console.log(tableInstance)
-    return (
-        <div>
-            <TableLayout {...tableInstance}></TableLayout>
-        </div>
-    );
+  const fetchMoreItems = () => {
+    fetchNextPage({
+      token,
+      data: {
+        insurance_ids: [1, 207, 300],
+        page: page,
+        to_date: "2023-05-21",
+      },
+    });
+  };
+
+  return (
+    <InfiniteScroll
+      dataLength={items?.processClaims.data?.length || 0}
+      next={fetchMoreItems}
+      hasMore={hasMore}
+      loader={<div>Loading more...</div>}
+      endMessage={<div>No more items to load.</div>}
+    >
+      {items?.processClaims?.data?.map((item) => (
+        <div key={item.id}>{item.id}</div>
+      ))}
+    </InfiniteScroll>
+  );
 };
 
 export default TableInstance;

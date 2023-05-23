@@ -6,11 +6,15 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCreateBlockOfftimeMutation } from "../../../../../features/Stuff_redux/workingSchedule/workingScheduleApi";
 import useToken from "../../../../../CustomHooks/useToken";
+import WeekDaySelect from "./WeekDayMultiSelect/WeekDaySelect";
 
 const AddBlockOffTime = ({ handleClose, open, staff_id }) => {
   const { register, handleSubmit, reset } = useForm();
   const [selectType, setSelectType] = useState("1");
   const { token } = useToken();
+  //For Selecting Week Days
+  const [selectedId, setServiceId] = useState();
+  console.log("seleted data", selectedId);
   console.log(selectType);
 
   const [createBlockOfftime, { isSuccess: createdSuccess }] = useCreateBlockOfftimeMutation();
@@ -20,6 +24,8 @@ const AddBlockOffTime = ({ handleClose, open, staff_id }) => {
       ...data,
       staff_id: staff_id,
       type: selectType === "1" ? "Daily" : selectType === "2" ? "Week Day" : "Specific Date",
+      week_days: selectedId?.length > 0 && selectType === "2" ? selectedId : null,
+      date: selectType === "3" ? data?.specific_date : null,
     };
     console.log(payload);
     if (payload) {
@@ -80,7 +86,8 @@ const AddBlockOffTime = ({ handleClose, open, staff_id }) => {
                   <label className="label">
                     <span className="modal-label-name">Week Day</span>
                   </label>
-                  <input type="date" className="modal-input-field ml-1 w-full" {...register("week_day")} />
+                  {/* <input type="date" className="modal-input-field ml-1 w-full" {...register("week_day")} /> */}
+                  <WeekDaySelect setServiceId={setServiceId} />
                 </div>
               )}
               {selectType === "3" && (

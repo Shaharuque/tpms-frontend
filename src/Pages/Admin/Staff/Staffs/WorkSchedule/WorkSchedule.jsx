@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiCopy } from "react-icons/fi";
 import { useGetWorkingScheduleQuery, useUpdateWorkingScheduleMutation } from "../../../../../features/Stuff_redux/workingSchedule/workingScheduleApi";
@@ -6,6 +6,7 @@ import useToken from "../../../../../CustomHooks/useToken";
 import { useParams } from "react-router-dom";
 import BlockOffTime from "./BlockOffTime";
 import { toast } from "react-toastify";
+import { Switch } from "antd";
 
 const timeConvertForInput = (receivedTime) => {
   if (receivedTime === null) return null;
@@ -34,6 +35,7 @@ const WorkSchedule = () => {
   });
   const { token } = useToken();
   const { id: staffId } = useParams();
+  const [check, setCheck] = useState(false);
 
   //get working schedule
   const { data: workingSchedule, isLoading, isSuccess } = useGetWorkingScheduleQuery({ id: staffId, token: token });
@@ -111,9 +113,26 @@ const WorkSchedule = () => {
     }
   }, [createSuccess, createError]);
 
+  //Bypass work schedule validation
+  useEffect(() => {
+    if (check) {
+      toast.success("successfully bypassed working schedule", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
+  }, [check]);
   return (
     <div className="">
-      <h1 className="text-lg mt-2 text-left text-orange-400">Work Schedule</h1>
+      <div className="flex items-center">
+        <h1 className="text-lg mt-2 text-left text-orange-400">Work Schedule</h1>
+        <div className="flex items-center gap-2 ml-4 mt-1">
+          <Switch checked={check} onChange={() => setCheck(!check)} size="small" />
+          <span className="text-sm text-gray-400">Bypass Work Schedule Validation</span>
+        </div>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* working hours  */}
 

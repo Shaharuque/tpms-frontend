@@ -65,7 +65,7 @@ const InsuranceExclusionMultiSelection = () => {
   //Success/Error message show delete api
   useEffect(() => {
     if (excludeDeleteDataSuccess) {
-      toast.success(excludeDeleteData?.message, {
+      toast.success("insurance excluded sucessfully", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",

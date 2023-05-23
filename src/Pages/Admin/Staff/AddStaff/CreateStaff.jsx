@@ -15,18 +15,15 @@ const CreateStaff = () => {
   const navigate = useNavigate();
 
   //selected treatments data get api
-  const { data: selectedTreatmentData, isLoading: selectedTreatmentLoading } =
-    useGetAllSelectedTreatmentsQuery({ token: token });
+  const { data: selectedTreatmentData, isLoading: selectedTreatmentLoading } = useGetAllSelectedTreatmentsQuery({ token: token });
   console.log("Selected Treatements", selectedTreatmentData?.data);
 
   //selected employee type data get api
-  const { data: credentialType, isLoading: typeLoading } =
-    useGetSelectedStaffQuery({ token: token });
+  const { data: credentialType, isLoading: typeLoading } = useGetSelectedStaffQuery({ token: token });
   console.log("Selected Treatements", credentialType?.data);
 
   //create staff api
-  const [createStuff, { isSuccess: createSuccess, isError: createError }] =
-    useCreateStuffMutation();
+  const [createStuff, { isSuccess: createSuccess, isError: createError }] = useCreateStuffMutation();
 
   //select treatment boiler plate
   let treatmentSelect = null;
@@ -48,9 +45,7 @@ const CreateStaff = () => {
   //select Credential type boiler plate
   let credentialSelect = null;
   if (credentialType?.data?.length === 0) {
-    credentialSelect = (
-      <div className="text-red-700">Select Credential Type</div>
-    );
+    credentialSelect = <div className="text-red-700">Select Credential Type</div>;
   } else if (credentialType?.data?.length > 0) {
     credentialSelect = (
       <>
@@ -117,7 +112,7 @@ const CreateStaff = () => {
         <div className="flex items-center gap-3">
           <Link
             to={"/admin/staffs"}
-            className=" py-[6px] flex items-center  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+            className=" py-[6px] flex items-center  px-4  text-[13px] font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
           >
             <IoCaretBackCircleOutline className="mr-1 text-sm" /> Back
           </Link>
@@ -128,7 +123,7 @@ const CreateStaff = () => {
           {/* name  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                 First Name<span className="text-red-500">*</span>
               </span>
             </label>
@@ -141,9 +136,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Middle Name
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Middle Name</span>
             </label>
             <input
               type="text"
@@ -154,7 +147,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                 Last Name<span className="text-red-500">*</span>
               </span>
             </label>
@@ -167,9 +160,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Nick Name
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Nick Name</span>
             </label>
             <input
               type="text"
@@ -182,7 +173,7 @@ const CreateStaff = () => {
           <div>
             {" "}
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                 Staff Birthday<span className="text-red-500">*</span>
               </span>
             </label>
@@ -194,9 +185,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                SSN
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">SSN</span>
             </label>
             <input
               type="text"
@@ -209,7 +198,7 @@ const CreateStaff = () => {
           {/* phone & email  */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                 Office Phone <span className="text-red-500">*</span>
               </span>
             </label>
@@ -222,9 +211,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Office Fax
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Office Fax</span>
             </label>
             <input
               type="text"
@@ -235,7 +222,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                 Office Email<span className="text-red-500">*</span>
               </span>
             </label>
@@ -249,9 +236,7 @@ const CreateStaff = () => {
           {/* driving license */}
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Drivers License & Expiration Date
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Drivers License & Expiration Date</span>
             </label>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2  mr-2 gap-x-2 gap-y-1">
               <div>
@@ -274,9 +259,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Title
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Title</span>
             </label>
             <input
               type="text"
@@ -287,9 +270,7 @@ const CreateStaff = () => {
           </div>
           <div className="">
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Hiring Date with Company
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Hiring Date with Company</span>
             </label>
             <input
               className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
@@ -299,9 +280,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Credential Type
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Credential Type</span>
             </label>
             <select
               disabled={typeLoading ? true : false}
@@ -314,9 +293,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Treatment Type
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Treatment Type</span>
             </label>
             <select
               disabled={selectedTreatmentLoading ? true : false}
@@ -329,9 +306,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Individual NPI
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Individual NPI</span>
             </label>
             <input
               type="text"
@@ -342,9 +317,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                CAQH Id
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">CAQH Id</span>
             </label>
             <input
               type="text"
@@ -355,9 +328,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Service Area Zip
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Service Area Zip</span>
             </label>
             <input
               type="text"
@@ -368,9 +339,7 @@ const CreateStaff = () => {
           </div>
           <div className="">
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Termination Date
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Termination Date</span>
             </label>
             <input
               className="input-border text-gray-600 rounded-sm  text-[14px]  font-medium w-full focus:outline-none"
@@ -380,9 +349,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Language(s)
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Language(s)</span>
             </label>
             <input
               type="text"
@@ -393,9 +360,7 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
-                Taxonomy Code
-              </span>
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">Taxonomy Code</span>
             </label>
             <input
               type="text"
@@ -406,38 +371,24 @@ const CreateStaff = () => {
           </div>
           <div>
             <label className="label">
-              <span className="label-text text-xs font-medium text-[#9b9b9b] text-left">
+              <span className="label-text text-[13px] font-medium text-[#00a1b1] text-left">
                 Gender <span className="text-red-500">*</span>
               </span>
             </label>
             <div className="flex items-center">
               <div className="flex ml-1 mt-1 items-center">
-                <input
-                  type="radio"
-                  name="patient"
-                  value={2}
-                  onChange={handlegender}
-                />
-                <span className="text-xs ml-1 text-gray-600 font-normal">
-                  female
-                </span>
+                <input type="radio" name="patient" value={2} onChange={handlegender} />
+                <span className="text-[13px] ml-1 text-gray-600 font-normal">female</span>
               </div>
               <div className="flex ml-1 mt-1 items-center">
-                <input
-                  type="radio"
-                  name="patient"
-                  value={1}
-                  onChange={handlegender}
-                />
-                <span className="text-xs ml-1 text-gray-600 font-normal">
-                  male
-                </span>
+                <input type="radio" name="patient" value={1} onChange={handlegender} />
+                <span className="text-[13px] ml-1 text-gray-600 font-normal">male</span>
               </div>
             </div>
           </div>
           <div className="mt-10">
             <button
-              className=" py-[5px]  px-4  text-xs font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
+              className=" py-[5px]  px-4  text-[13px] font-normal bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
               type="submit"
             >
               Save

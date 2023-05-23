@@ -7,7 +7,7 @@ import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import axios from "axios";
 import { baseIp } from "../../../../../Misc/BaseClient";
 
-const StuffStatusAction = ({ status, id, setStaffData }) => {
+const StuffStatusAction = ({ status, id, setStaffData, setCall, setHasMore, setPage }) => {
   const { token } = useToken();
   console.log("status", id, status);
   let convertedStatus = status ? 1 : 0;
@@ -15,10 +15,7 @@ const StuffStatusAction = ({ status, id, setStaffData }) => {
   let BoleanToNumber = value ? 1 : 2;
 
   // update status api call
-  const [
-    updateStatus,
-    { data, isError: statusError, isSuccess: statusSucces },
-  ] = useUpdateStatusMutation();
+  const [updateStatus, { data, isError: statusError, isSuccess: statusSucces }] = useUpdateStatusMutation();
 
   const handleStatusChange = () => {
     setValue(!value);
@@ -63,6 +60,9 @@ const StuffStatusAction = ({ status, id, setStaffData }) => {
       //   .catch((err) => {
       //     console.log("err", err);
       //   });
+      setCall((prev) => !prev);
+      setHasMore(true);
+      setPage(2);
     } else if (statusError) {
       toast.error("Cann't be Updated", {
         position: "top-center",
@@ -77,17 +77,9 @@ const StuffStatusAction = ({ status, id, setStaffData }) => {
 
   return (
     <div className="flex items-center justify-center">
-      <Switch
-        size="small"
-        defaultChecked={value}
-        onClick={() => handleStatusChange()}
-      />
+      <Switch size="small" defaultChecked={value} onClick={() => handleStatusChange()} />
 
-      {!value ? (
-        <h1 className="ml-1">In-Active</h1>
-      ) : (
-        <h1 className="ml-1">Active</h1>
-      )}
+      {!value ? <h1 className="ml-1">In-Active</h1> : <h1 className="ml-1">Active</h1>}
     </div>
   );
 };

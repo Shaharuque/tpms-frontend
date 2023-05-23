@@ -5,11 +5,11 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get Payor
     PayorByDate: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/pclm/payor/bydate`,
+        url: `/pri/process/claim/get/data/by/date`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -18,11 +18,11 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get Patient
     getPatientProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/pclm/client/name",
+        url: "/pri/process/claim/short/by/patient",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -31,11 +31,11 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     // Process Claim Get Therapist Name
     getTherapistProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/pclm/treating/therapist/name",
+        url: "/pri/process/claim/short/by/treating/therapist",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -109,11 +109,53 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get CMS Provider
     getCMSProviderProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/pclm/cms/provider",
+        url: "/pri/process/claim/short/by/cms/therapist",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
+
+    //Process Claim Data Get
+    getAllProcessClaims: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "/pri/process/claim/get/billing/data",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
+
+    //infinite scroll
+    //Process Claim Data Get
+    getClaims: builder.query({
+      query: ({ token, data }) => ({
+        url: `/pri/process/claim/get/billing/data`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(data),
+      }),
+      providesTags: ["processClaim"],
+    }),
+
+    //update process claim
+    //Process Claim Get CMS Provider
+    updateProcessClaim: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "/pri/process/claim/billing/data/update",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -131,4 +173,7 @@ export const {
   useGetZoneProcessClaimMutation,
   useGetModifireProcessClaimMutation,
   useGetCMSProviderProcessClaimMutation,
+  useGetAllProcessClaimsMutation,
+  useGetClaimsQuery,
+  useUpdateProcessClaimMutation,
 } = ProcessingClaimApi;
