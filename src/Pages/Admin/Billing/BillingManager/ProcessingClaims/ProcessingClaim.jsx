@@ -277,9 +277,9 @@ const ProcessingClaim = () => {
       dataIndex: "Patients",
       key: "Patients",
       width: 100,
-      render: (_, { Patients }) => {
+      render: (_, { procc_patient }) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{Patients}</div>;
+        return <div className=" text-secondary">{procc_patient?.client_full_name}</div>;
       },
       sorter: (a, b) => {
         return a.Patients > b.Patients ? -1 : 1;
@@ -307,13 +307,16 @@ const ProcessingClaim = () => {
       title: "Tx Provider",
       key: "TxProvider",
       dataIndex: "TxProvider",
-      width: 80,
+      width: 100,
+      render: (_, { procc_provider }) => {
+        return <div className=" text-secondary">{procc_provider?.full_name}</div>;
+      },
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
         return a.TxProvider > b.TxProvider ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "TxProvider" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Service & Hrs",
