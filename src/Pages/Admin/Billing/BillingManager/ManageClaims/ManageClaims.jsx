@@ -7,6 +7,7 @@ import ManageTableAction from "../../../Appointment/ListView/ListView/ManageTabl
 import ManageClaimsTableAction from "./ManageClaimAction/ManageClaimsTableAction";
 import {
   useGet24jProviderManageClaimMutation,
+  useGetBatchMutation,
   useGetManageClaimActivityMutation,
   useGetPayorManageClaimMutation,
   useGetTxProviderManageClaimMutation,
@@ -29,32 +30,29 @@ const ManageClaims = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const { token } = useToken();
 
+  console.log("selected sort by", sortBy);
   console.log("selected sorted option one", selectedSortOptionOne);
 
+  //Manage Claim Get Batch
+  const [getBatch, { data: batchData, isLoading: batchLoading }] = useGetBatchMutation();
+
   //Manage Claim Get Payor
-  const [getPayorManageClaim, { data: payorData, isLoading: payorLoading }] =
-    useGetPayorManageClaimMutation();
+  const [getPayorManageClaim, { data: payorData, isLoading: payorLoading }] = useGetPayorManageClaimMutation();
 
   //Manage Claim Get TX Provider
-  const [
-    getTxProviderManageClaim,
-    { data: txProviderData, isLoading: txProviderLoading },
-  ] = useGetTxProviderManageClaimMutation();
+  const [getTxProviderManageClaim, { data: txProviderData, isLoading: txProviderLoading }] = useGetTxProviderManageClaimMutation();
 
   //Manage Claim Get CMS Provider(24J)
-  const [
-    get24jProviderManageClaim,
-    { data: CMSProviderData, isLoading: CMSProviderLoading },
-  ] = useGet24jProviderManageClaimMutation();
+  const [get24jProviderManageClaim, { data: CMSProviderData, isLoading: CMSProviderLoading }] = useGet24jProviderManageClaimMutation();
 
   //Manage Claim Get Activity Type
-  const [
-    getManageClaimActivity,
-    { data: activityData, isLoading: activityLoading },
-  ] = useGetManageClaimActivityMutation();
+  const [getManageClaimActivity, { data: activityData, isLoading: activityLoading }] = useGetManageClaimActivityMutation();
 
   // API calling Based on the selected option by SortBy
   useEffect(() => {
+    if (sortBy === "Batch") {
+      getBatch(token);
+    }
     if (sortBy === "Insurance") {
       getPayorManageClaim(token);
     }
@@ -69,6 +67,7 @@ const ManageClaims = () => {
     }
   }, [sortBy, token]);
 
+  const allBatch = batchData?.data || [];
   const allInsurance = payorData?.payors || [];
   const allCMSProvider = CMSProviderData?.cms_provider || [];
   const allActivity = activityData?.activity_type || [];
@@ -154,8 +153,7 @@ const ManageClaims = () => {
       sorter: (a, b) => {
         return a.date_range > b.date_range ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "date_range" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "date_range" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -209,11 +207,7 @@ const ManageClaims = () => {
 
       render: (_, { id }) => (
         <div className="flex justify-center">
-          <Dropdown
-            overlay={<ManageClaimsTableAction></ManageClaimsTableAction>}
-            trigger={["click"]}
-            overlayStyle={{ zIndex: "100" }}
-          >
+          <Dropdown overlay={<ManageClaimsTableAction></ManageClaimsTableAction>} trigger={["click"]} overlayStyle={{ zIndex: "100" }}>
             <button onClick={(e) => e.preventDefault()}>
               <Space>
                 <BsThreeDots />
@@ -235,11 +229,7 @@ const ManageClaims = () => {
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, "selectedRows: ", selectedRows);
     },
     onSelect: (record, selected, selectedRows) => {
       console.log(record, selected, selectedRows);
@@ -262,11 +252,7 @@ const ManageClaims = () => {
                 <label className="label">
                   <span className=" label-font">Sort By</span>
                 </label>
-                <select
-                  onChange={handleSortBy}
-                  name="type"
-                  className="input-border input-font md:w-full w-[200px] focus:outline-none"
-                >
+                <select onChange={handleSortBy} name="type" className="input-border input-font md:w-full w-[200px] focus:outline-none">
                   <option value=""></option>
                   <option value="Batch">Batch</option>
                   <option value="Claim">Claim</option>
@@ -288,18 +274,27 @@ const ManageClaims = () => {
                       <span className=" label-font">{sortBy}</span>
                     </label>
                     <select
-                      disabled={
-                        payorLoading ||
-                        txProviderLoading ||
-                        CMSProviderLoading ||
-                        activityLoading
-                          ? true
-                          : false
-                      }
+                      disabled={payorLoading || txProviderLoading || CMSProviderLoading || activityLoading ? true : false}
                       onChange={(e) => setSelectedSortOptionOne(e.target.value)}
                       name="type"
                       className="input-border input-font md:w-full w-[200px] focus:outline-none"
                     >
+                      {sortBy === "Batch" && (
+                        <>
+                          <option value="0">Select</option>
+                          {allBatch?.length > 0 && (
+                            <>
+                              {allBatch?.map((b) => {
+                                return (
+                                  <option value={b?.payor_id} key={b?.id}>
+                                    {b?.payor_name}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          )}
+                        </>
+                      )}
                       {sortBy === "Insurance" && (
                         <>
                           <option value="0">Select</option>
@@ -355,10 +350,7 @@ const ManageClaims = () => {
                             <>
                               {allActivity?.map((activity) => {
                                 return (
-                                  <option
-                                    value={activity?.id}
-                                    key={activity?.id}
-                                  >
+                                  <option value={activity?.id} key={activity?.id}>
                                     {activity?.activity_one}
                                   </option>
                                 );
@@ -374,11 +366,7 @@ const ManageClaims = () => {
                     <label className="label">
                       <span className=" label-font">Sort By</span>
                     </label>
-                    <select
-                      onChange={handleSort_By}
-                      name="type"
-                      className="input-border input-font w-full focus:outline-none"
-                    >
+                    <select onChange={handleSort_By} name="type" className="input-border input-font w-full focus:outline-none">
                       <option value="all">All</option>
                       <option value="patient">Patient</option>
                       <option value="provider">Provider</option>
@@ -390,10 +378,7 @@ const ManageClaims = () => {
                       <label className="label">
                         <span className=" label-font">{sort_By}</span>
                       </label>
-                      <select
-                        name="type"
-                        className="input-border input-font w-full focus:outline-none"
-                      >
+                      <select name="type" className="input-border input-font w-full focus:outline-none">
                         <option value="all">All</option>
                         <option value="patient">Patient</option>
                         <option value="provider">Provider</option>
@@ -449,11 +434,7 @@ const ManageClaims = () => {
           </div>
           <div className=" flex flex-wrap items-center gap-2">
             <div>
-              <select
-                onChange={(e) => setSelect(e.target.value)}
-                name="type"
-                className="border rounded-sm px-2 w-36 py-1 text-xs "
-              >
+              <select onChange={(e) => setSelect(e.target.value)} name="type" className="border rounded-sm px-2 w-36 py-1 text-xs ">
                 <option value="all">All</option>
                 <option value="patient">Patient</option>
                 <option value="provider">Provider</option>

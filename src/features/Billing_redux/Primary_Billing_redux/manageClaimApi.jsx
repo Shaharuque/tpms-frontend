@@ -2,6 +2,17 @@ import { apiSlice } from "../../api/apiSlice";
 
 export const manageClaimApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    //Manage Claim Get Batch
+    getBatch: builder.mutation({
+      query: (token) => ({
+        url: "/pri/manage/claim/get/batchid/list",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+      }),
+    }),
     //Manage Claim Get Payor/Insurance
     getPayorManageClaim: builder.mutation({
       query: (token) => ({
@@ -53,6 +64,7 @@ export const manageClaimApi = apiSlice.injectEndpoints({
 });
 
 export const {
+  useGetBatchMutation,
   useGetPayorManageClaimMutation,
   useGetTxProviderManageClaimMutation,
   useGet24jProviderManageClaimMutation,

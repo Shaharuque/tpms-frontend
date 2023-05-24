@@ -54,6 +54,8 @@ const ProcessingClaim = () => {
   const [m4, setM4] = useState("");
   const [cptValue, setCptValue] = useState("");
   const [unitValue, setUnitValue] = useState("");
+  const [rate, setRate] = useState("");
+  const [idQualifier, setIdQualifier] = useState("");
 
   console.log("selected option from sortby1", selectedSortOptionOne);
 
@@ -180,6 +182,7 @@ const ProcessingClaim = () => {
     getPatientProcessClaim,
     getTherapistProcessClaim,
     getZoneProcessClaim,
+    getCMSProviderProcessClaim,
     token,
   ]);
 
@@ -285,6 +288,11 @@ const ProcessingClaim = () => {
   };
   console.log("final total staffs", staffData);
 
+  //Table input fields handler
+  const handleM1 = (val, id) => {
+    console.log("typing in input field", val, id);
+  };
+
   const columns = [
     {
       title: "Patients",
@@ -358,7 +366,8 @@ const ProcessingClaim = () => {
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            defaultValue={record?.id}
+            // defaultValue={record?.id}
+            value={record?.cpt}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -379,7 +388,7 @@ const ProcessingClaim = () => {
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            defaultValue={record?.pos}
+            value={record?.pos}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -400,8 +409,10 @@ const ProcessingClaim = () => {
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            defaultValue={record?.m1}
-            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
+            //default value gives me the option to change in input field but value doesn't
+            //defaultValue={record?.m1}
+            value={record?.m1}
+            onChange={(e) => handleM1(e.target.value, record?.id)}
           ></input>
         );
       },
@@ -422,7 +433,8 @@ const ProcessingClaim = () => {
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            defaultValue={record?.m2}
+            // defaultValue={record?.m2}
+            value={record?.m2}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -443,7 +455,7 @@ const ProcessingClaim = () => {
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            defaultValue={record?.m3}
+            value={record?.m3}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -464,7 +476,7 @@ const ProcessingClaim = () => {
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            defaultValue={record?.m4}
+            value={record?.m4}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -485,7 +497,7 @@ const ProcessingClaim = () => {
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            defaultValue={record?.units}
+            value={record?.units}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -507,7 +519,7 @@ const ProcessingClaim = () => {
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            defaultValue={record?.rate}
+            value={record?.rate}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -546,13 +558,7 @@ const ProcessingClaim = () => {
       width: 80,
       render: (_, record) => {
         return (
-          // <input
-          //   className="page py-[3px]  focus:outline-none"
-          //   type="text"
-          //   defaultValue={record?.rate}
-          //   // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
-          // ></input>
-          <select className="page p-[3px]  focus:outline-none" defaultValue={record?.id_qualifier}>
+          <select className="page p-[3px]  focus:outline-none" value={record?.id_qualifier}>
             <option value=""></option>
             <option value="0B">0B</option>
             <option value="1B">1B</option>
@@ -619,6 +625,8 @@ const ProcessingClaim = () => {
           m2_val: m2,
           m3_val: m3,
           m4_val: m4,
+          id_qualifiers_val: idQualifier,
+          rate_val: rate,
           cpt_val: cptValue,
           unit_val: unitValue,
         },
@@ -653,6 +661,14 @@ const ProcessingClaim = () => {
   useEffect(() => {
     if (updateSuccess) {
       setSelectedRowKeys([]);
+      setM1("");
+      setM2("");
+      setM3("");
+      setM4("");
+      setRate("");
+      setUnitValue("");
+      setCptValue("");
+      setBottomSelect("");
       toast.success("successfully updated", {
         position: "top-center",
         autoClose: 5000,
@@ -1225,6 +1241,7 @@ const ProcessingClaim = () => {
         {tableOpen && (
           <div className="flex my-5">
             <select
+              value={bottomSelect}
               onChange={(e) => setBottomSelect(e.target.value)}
               className=" bg-transparent border-[1px] border-[#8cd9e4]  rounded-[4px] px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0"
             >
@@ -1245,17 +1262,30 @@ const ProcessingClaim = () => {
               <option value="16">Gnerate Batch</option>
             </select>
 
-            {/* {bottomSelect === "1" && (
+            {bottomSelect === "6" && (
               <div className="flex gap-2">
-                <input
-                  // onChange={(e) => setHourlyRate(e.target.value)}
-                  className="ml-4 bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
-                  // defaultValue={hourlyRate}
+                <select
+                  onChange={(e) => setIdQualifier(e.target.value)}
+                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
                   type="text"
                   placeholder="Hourly Rate"
-                />
+                >
+                  <option value="0B">0B</option>
+                  <option value="1B">1B</option>
+                  <option value="1C">1C</option>
+                  <option value="1D">1D</option>
+                  <option value="1G">1G</option>
+                  <option value="1H">1H</option>
+                  <option value="EI">EI</option>
+                  <option value="G2">G2</option>
+                  <option value="LU">LU</option>
+                  <option value="N5">N5</option>
+                  <option value="SY">SY</option>
+                  <option value="X5">X5</option>
+                  <option value="ZZ">ZZ</option>
+                </select>
               </div>
-            )} */}
+            )}
             {bottomSelect === "7" && (
               <div className="flex gap-2">
                 <input
@@ -1288,15 +1318,24 @@ const ProcessingClaim = () => {
               <div className="flex gap-2">
                 <input
                   onChange={(e) => setCptValue(e.target.value)}
-                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  className="ml-2 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
                   type="text"
-                  placeholder="M1"
+                  placeholder="CPT & Units"
                 />
                 <input
                   onChange={(e) => setUnitValue(e.target.value)}
-                  className="ml-4 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  className=" bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px] w-12 focus:outline-none z-0 font-bold"
                   type="text"
-                  placeholder="M2"
+                />
+              </div>
+            )}
+            {bottomSelect === "9" && (
+              <div className="flex gap-2">
+                <input
+                  onChange={(e) => setRate(e.target.value)}
+                  className="ml-2 bg-transparent border-[1px] border-[#8cd9e4]  rounded-md px-[2px] py-[3px] mx-1 text-[14px]  focus:outline-none z-0 font-bold"
+                  type="text"
+                  placeholder="Contact Amount"
                 />
               </div>
             )}

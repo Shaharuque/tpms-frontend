@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { useGetAppointmentPOSQuery } from "../../../../features/Appointment_redux/appointmentApi";
 import { toast } from "react-toastify";
-import { timeConverter } from "../../../Shared/TimeConverter/TimeConverter";
+import { timeConverter2 } from "../../../Shared/TimeConverter/TimeConverter";
 import NonBillableSession from "./NonBillableSession/NonBillableSession";
 import NonBillableCardsView from "./NonBillableSession/NonBillableCardView/NonBillableCardsView";
 import AddSessionHintAdd from "./ListView/AddSessionHintAdd";
@@ -80,7 +80,8 @@ const ListView = () => {
 
   // is fixed toggle
   const isToggled = useSelector((state) => state.sideBarInfo);
-  console.log("isToggled", isToggled);
+  // console.log("isToggled", isToggled);
+  console.log("present page number", page);
 
   //Manage Session Get Session List From API
   useEffect(() => {
@@ -88,24 +89,28 @@ const ListView = () => {
       setListLoading(true);
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/appointments?page=${page}`,
+        url: `${baseIp}/manage/session/appointment/list/billable`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token || null,
+          "x-auth-token": token || null,
         },
-        data: formData,
+        data: {
+          ...formData,
+          page,
+        },
       });
-      const data = res?.data?.appointments;
+      console.log("Manage Session List", res?.data?.billableAppointments);
+      const data = res?.data?.billableAppointments;
       setItems(data?.data);
-      setTotalPage(data?.last_page);
+      setTotalPage(data?.lastPage);
       setListLoading(false);
       setTable(true);
     };
-    if (formData?.client_id?.length > 0) {
+    if (formData?.patient_ids?.length > 0) {
       getManageSession();
     }
-    if (formData?.client_id?.length === 0) {
+    if (formData?.patient_ids?.length === 0) {
       toast.error(<h1 className="font-bold">Please select patient</h1>, {
         position: "top-center",
         autoClose: 5000,
@@ -228,7 +233,7 @@ const ListView = () => {
         },
       });
       const data = res?.data;
-      console.log(data);
+      //console.log(data);
       setPatients(data);
     };
     getPatientsData();
@@ -240,14 +245,14 @@ const ListView = () => {
     const getProviderData = async () => {
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/provider`,
+        url: `${baseIp}/manage/session/get/all/provider`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token || null,
+          "x-auth-token": token || null,
         },
       });
-      const data = res?.data?.claims;
+      const data = res?.data;
       setStuffs(data);
     };
     getProviderData();
@@ -426,7 +431,7 @@ const ListView = () => {
       // filters: items?.length > 0 && patientSearch(),
       render: (_, record) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{record?.app_client?.client_full_name}</div>;
+        return <div className=" text-secondary">{record?.app_patient?.client_full_name}</div>;
       },
       // filteredValue: filteredInfo.client_full_name || null,
       // onFilter: (value, record) =>
@@ -442,32 +447,15 @@ const ListView = () => {
       dataIndex: "activity_name",
       key: "activity_name",
       width: 190,
-      filters: [
-        {
-          text: `assisment BCaBA`,
-          value: "assisment BCaBA",
-        },
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-        {
-          text: "Nunc Ut LLC",
-          value: "Nunc Ut LLC",
-        },
-      ],
       render: (_, record) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{record?.app_client_auth_act?.activity_name}</div>;
+        return <div className=" text-secondary">{record?.app_activity?.activity_name}</div>;
       },
-      // filteredValue: filteredInfo.activity_name || null,
-      // onFilter: (value, record) =>
-      //   record?.app_client_auth_act?.activity_name?.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.app_client_auth_act?.activity_name > b.app_client_auth_act?.activity_name ? -1 : 1; //sorting problem solved using this logic
+        return a?.app_activity?.activity_name > b?.app_activity?.activity_name ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "activity_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -475,35 +463,9 @@ const ListView = () => {
       dataIndex: "provider_full_name",
       key: "provider_full_name",
       width: 160,
-      filters: [
-        {
-          text: `Andrew  Flintoff`,
-          value: "Andrew  Flintoff",
-        },
-        {
-          text: `Aileen Newman`,
-          value: "Aasiya  Farha",
-        },
-        {
-          text: "Donovan",
-          value: "Donovan",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-      ],
       render: (_, record) => {
-        //console.log("tags : ", lock);
         return <div className=" text-secondary">{record?.app_provider?.full_name}</div>;
       },
-      // filteredValue: filteredInfo.provider_full_name || null,
-      // onFilter: (value, record) =>
-      //   record?.app_provider?.full_name?.includes(value),
       sorter: (a, b) => {
         return a.app_provider?.full_name > b.app_provider?.full_name ? -1 : 1;
       },
@@ -515,20 +477,6 @@ const ListView = () => {
       key: "location",
       dataIndex: "location",
       width: 150,
-      filters: [
-        {
-          text: "telehealth",
-          value: "telehealth",
-        },
-        {
-          text: "School",
-          value: "School",
-        },
-        {
-          text: "Office",
-          value: "office",
-        },
-      ],
       render: (_, { location }) => {
         //console.log("pos : ", pos);
         return (
@@ -599,7 +547,7 @@ const ListView = () => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-gray-600 text-center ">
-            {timeConverter(record?.from_time?.split(" ")[1])} to {timeConverter(record?.to_time?.split(" ")[1])}
+            {timeConverter2(record?.from_time)} to {timeConverter2(record?.to_time)}
           </div>
         );
       },
@@ -771,6 +719,7 @@ const ListView = () => {
     },
   });
 
+  console.log("selected patient ids", patientId);
   const onSubmit = async (data) => {
     setCheck(true);
     setFilteredInfo({}); //When Go btn is pressed
@@ -778,9 +727,9 @@ const ListView = () => {
     const from_date = convert(data?.start_date);
     const to_date = convert(data?.end_date);
     const payLoad = {
-      client_id: patientId,
+      patient_ids: patientId,
       provider_id: stuffsId?.length > 0 ? stuffsId : "",
-      ses_status: data?.status,
+      status: data?.status,
       ses_pos: location,
       ses_app_type: 1,
       from_date: from_date,
