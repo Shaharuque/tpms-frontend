@@ -28,15 +28,26 @@ export const manageClaimApi = apiSlice.injectEndpoints({
     //Manage Claim Get TX Provider
     getTxProviderManageClaim: builder.mutation({
       query: (token) => ({
-        url: "admin/ac/manage/claim/get/tx/provider",
+        url: "/pri/manage/claim/get/tx/provider",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
     }),
 
+    //Manage Claim Get Patient
+    getPatient: builder.mutation({
+      query: (token) => ({
+        url: "/pri/manage/claim/get/patient/list",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+      }),
+    }),
     //Manage Claim Get CMS Provider(24j Provider)
     get24jProviderManageClaim: builder.mutation({
       query: (token) => ({
@@ -60,6 +71,32 @@ export const manageClaimApi = apiSlice.injectEndpoints({
         },
       }),
     }),
+
+    //Manage Claim List Data
+    getManageClaimData: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "/pri/manage/claim/list",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
+
+    //Manage Claim List Data
+    getManageClaimTransactions: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "/pri/manage/claim/list/transaction",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
   }),
 });
 
@@ -69,4 +106,7 @@ export const {
   useGetTxProviderManageClaimMutation,
   useGet24jProviderManageClaimMutation,
   useGetManageClaimActivityMutation,
+  useGetPatientMutation,
+  useGetManageClaimDataMutation,
+  useGetManageClaimTransactionsMutation,
 } = manageClaimApi;

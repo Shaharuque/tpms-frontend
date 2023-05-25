@@ -16,3 +16,13 @@ export const dbtimeconverter = (s) => {
   return `${clone[0]}:${clone[1]}}`;
   // return clone;
 };
+
+// To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
+export const dateConverter = (date) => {
+  console.log(date);
+  const afterSplit = date?.split("-");
+  //console.log(afterSplit);
+  if (afterSplit?.length > 0) {
+    return `${afterSplit[1]}/${afterSplit[2]}/${afterSplit[0]}`;
+  }
+};
