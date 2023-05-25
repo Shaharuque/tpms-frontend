@@ -395,7 +395,7 @@ const CalenderView = () => {
 
   console.log("api data rtk", calenderEvents);
   const modifyDatamap = calenderEvents?.data?.data.map((item) => {
-    const title = item?.app_provider?.last_name + item?.app_provider?.first_name;
+    const title = `${item?.app_patient?.client_first_name} : ${item?.app_provider?.first_name}`;
     const start = item?.from_time;
     const end = item?.to_time;
     const id = item?.id;
@@ -406,6 +406,7 @@ const CalenderView = () => {
       end,
       start,
       id,
+      textColor: "white",
     };
   });
 

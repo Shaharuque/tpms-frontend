@@ -843,7 +843,7 @@ const ListView = () => {
             <div onClick={clickHandler} className="flex items-center justify-between ">
               {!clicked && (
                 <>
-                  <div className="text-[16px]  text-white font-semibold ">Manage Sessions</div>
+                  <div className="text-[14px]  text-white font-semibold ">Manage Sessions</div>
                   <lord-icon
                     src="https://cdn.lordicon.com/rxufjlal.json"
                     trigger="loop"
@@ -859,7 +859,7 @@ const ListView = () => {
             {clicked && (
               <div>
                 <div className="flex justify-between items-center flex-wrap">
-                  <h1 className="text-[20px] text-white font-semibold ">Manage Sessions</h1>
+                  <h1 className="text-[16px] text-white font-semibold ">Manage Sessions</h1>
                   <div>
                     <button onClick={handleClose} className="text-white text-2xl font-light">
                       <MdOutlineCancel />
@@ -870,7 +870,7 @@ const ListView = () => {
                   <div>
                     <Switch color="default" defaultChecked size="small" onClick={handleBillable} />
 
-                    <label className="form-check-label inline-block ml-2 text-base text-gray-100" htmlFor="flexSwitchCheckDefault">
+                    <label className="form-check-label inline-block ml-2 text-[14px] text-gray-100" htmlFor="flexSwitchCheckDefault">
                       {billable ? "Billable" : "Non-Billable"}
                     </label>
                   </div>
@@ -894,25 +894,25 @@ const ListView = () => {
                       <>
                         <div>
                           <label className="label">
-                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">Clients</span>
+                            <span className="label-text mb-[2px] text-[14px] text-gray-100 text-left">Clients</span>
                           </label>
 
                           <Clients patients={patients} setPatientId={setPatientId}></Clients>
                         </div>
                         <div className="">
                           <label className="label">
-                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">Provider</span>
+                            <span className="label-text mb-[2px] text-[14px] text-gray-100 text-left">Provider</span>
                           </label>
 
                           <Providers stuffs={stuffs} setStuffsId={setStuffsId}></Providers>
                         </div>
                         <div className="sm:w-[240px] w-[200px]">
                           <label className="label">
-                            <span className="label-text text-[16px] text-gray-100 text-left">Place of Services</span>
+                            <span className="label-text text-[14px] text-gray-100 text-left">Place of Services</span>
                           </label>
                           <div>
                             <select
-                              className=" bg-transparent border-b-[3px] border-[#ffffff] text-white py-[4px]  px-1  font-medium  text-[14px] w-full focus:outline-none"
+                              className=" bg-transparent border-b-[2px] border-[#ffffff] text-white py-[4px]  px-1  font-medium  text-[14px] w-full focus:outline-none"
                               {...register("pos")}
                               onChange={(e) => setLocation(e.target.value)}
                             >
@@ -931,13 +931,13 @@ const ListView = () => {
                         </div>
                         <div className="w-[200px]">
                           <label className="label">
-                            <span className="label-text  text-[16px] text-gray-100 text-left">Selected date</span>
+                            <span className="label-text  text-[14px] text-gray-100 text-left">Selected date</span>
                           </label>
                           {/* Date Range calender will be set here */}
                           <div className="">
                             <div
                               onClick={() => setOpenCalendar(true)}
-                              className="flex  justify-center items-center border-b-[3px] border-[#ffffff] px-1 py-[4px] text-[14px] w-full"
+                              className="flex  justify-center items-center border-b-[2px] border-[#ffffff] px-1 py-[4px] text-[14px] w-full"
                             >
                               <input
                                 value={startDate ? `${startMonth} ${startDay}, ${startYear}` : "Start Date"}
@@ -979,11 +979,11 @@ const ListView = () => {
                         <div className="flex gap-5 w-[200px]">
                           <div>
                             <label className="label">
-                              <span className="label-text text-[16px] text-gray-100 text-left">status</span>
+                              <span className="label-text text-[14px] text-gray-100 text-left">status</span>
                             </label>
                             <div>
                               <select
-                                className="bg-transparent border-b-[3px] border-[#ffffff] px-1 py-[4px] font-medium text-white  text-[14px] w-full focus:outline-none"
+                                className="bg-transparent border-b-[2px] border-[#ffffff] px-1 py-[4px] font-medium text-white  text-[14px] w-full focus:outline-none"
                                 {...register("status")}
                               >
                                 <option value="" className="text-black">
@@ -1031,7 +1031,7 @@ const ListView = () => {
                       <div className="flex flex-wrap">
                         <div className="mr-2">
                           <label className="label">
-                            <span className="label-text mb-[2px] text-[16px] text-gray-100 text-left">Provider</span>
+                            <span className="label-text mb-[2px] text-[14px] text-gray-100 text-left">Provider</span>
                           </label>
 
                           <Providers stuffs={stuffs} setStuffsId={setStuffsId}></Providers>

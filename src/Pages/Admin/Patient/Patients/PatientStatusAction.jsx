@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { memo } from "react";
 import { baseIp } from "../../../../Misc/BaseClient";
 import useToken from "../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
 
 const PatientStatusAction = ({ id, is_active_client }) => {
   const [status, setStatus] = useState(is_active_client);
@@ -28,6 +29,13 @@ const PatientStatusAction = ({ id, is_active_client }) => {
         .post(`${baseIp}/patient/active/status/change`, payload, options)
         .then((response) => {
           console.log(response.data);
+          if (response.data?.status === "success") {
+            toast.success("successfully updated the status", {
+              position: "top-center",
+              autoClose: 5000,
+              theme: "dark",
+            });
+          }
         })
         .catch((error) => {
           console.error(error);
@@ -38,11 +46,7 @@ const PatientStatusAction = ({ id, is_active_client }) => {
 
   return (
     <div className="">
-      <select
-        value={status}
-        onChange={(e) => handleStatus(e)}
-        className="border w-full rounded-md lg:px-5 py-[4px]"
-      >
+      <select value={status} onChange={(e) => handleStatus(e)} className="border w-full rounded-md lg:px-5 py-[4px]">
         <option value="0">In-Active</option>
         <option value="1">Active</option>
         <option value="2">Wait-List</option>

@@ -465,7 +465,7 @@ const ClaimWise = () => {
       setLedgerData(data);
       setLastPageNo(res.data?.ledger_list?.last_page);
     };
-    if (formData?.client_id?.length > 0 || formData?.all_insurance?.length > 0 || formData?.claim_no) {
+    if (formData?.patient_ids?.length > 0 || formData?.all_insurance?.length > 0 || formData?.claim_no) {
       getLedgerData();
     }
   }, [token, formData, singleNoteSucceed]);
@@ -510,7 +510,7 @@ const ClaimWise = () => {
     const payLoad = {
       sort_by: selected === "patient" ? 2 : selected === "insurance" ? 3 : 1,
       claim_no: data?.claim_no,
-      client_id: clientIds,
+      patient_ids: clientIds,
       all_insurance: insuranceIds,
       // payor_id,
       // cpt,
@@ -532,7 +532,7 @@ const ClaimWise = () => {
         autoClose: 5000,
         theme: "dark",
       });
-    } else if (payLoad?.client_id?.length === 0 && selected === "patient") {
+    } else if (payLoad?.patient_ids?.length === 0 && selected === "patient") {
       toast.error(<h1>Please Select Valid Client</h1>, {
         position: "top-center",
         autoClose: 5000,

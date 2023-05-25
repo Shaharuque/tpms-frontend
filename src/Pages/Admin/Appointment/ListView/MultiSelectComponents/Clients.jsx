@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./MultiSelectCSS/multiSelect.css";
 
-const Clients = ({ patients, setPatientId }) => {
+const Clients = ({ patients, setPatientId, setFetchQuery }) => {
   const [selected, setSelected] = useState([]);
 
   const patientDataProcess = () => {
@@ -36,6 +36,7 @@ const Clients = ({ patients, setPatientId }) => {
     const getClientsId = async () => {
       const getId = selected.map((item) => item.id);
       setPatientId(getId);
+      setFetchQuery(false);
     };
     getClientsId();
   }, [selected, setPatientId]);
@@ -53,14 +54,7 @@ const Clients = ({ patients, setPatientId }) => {
   // }, [selected, receivedData]);
 
   return (
-    <MultiSelect
-      className="listview"
-      options={dataoptions}
-      value={selected}
-      onChange={setSelected}
-      labelledBy="Select"
-      valueRenderer={customValueRenderer}
-    />
+    <MultiSelect className="listview" options={dataoptions} value={selected} onChange={setSelected} labelledBy="Select" valueRenderer={customValueRenderer} />
   );
 };
 

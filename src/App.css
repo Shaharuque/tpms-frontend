@@ -213,10 +213,10 @@ input[type='checkbox'] {
 }
 
 .pms-white-button {
-  padding: 7px 5px 4px;
-  font-family: 'Roboto',
+  padding: 5px 5px 4px;
+  font-family: poppins,
     sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 17.6px !important;
   text-transform: capitalize;
   letter-spacing: 1px;
@@ -224,7 +224,7 @@ input[type='checkbox'] {
   color: #0aa7b8;
   background-clip: border-box;
   background-color: rgb(255, 255, 255);
-  border-radius: 5px;
+  border-radius: 2px;
   /* box-shadow: 2px 2px 2px 0px #626d6e; */
   display: inline-block;
   transition: ease-in-out 0.3s;
