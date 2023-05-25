@@ -33,16 +33,12 @@ const VOB = () => {
       sorter: (a, b) => {
         return a.facility_name > b.facility_name ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "Facility Name" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "Facility Name" ? sortedInfo.order : null,
       ellipsis: true,
       render: (_, { facility_name }) => {
         return (
           <div>
-            <Link
-              className="font-normal text-secondary"
-              to={"/admin/facility_name-List"}
-            >
+            <Link className="font-normal text-secondary" to={"/admin/facility_name-List"}>
               hi
             </Link>
           </div>
@@ -97,8 +93,22 @@ const VOB = () => {
       sorter: (a, b) => {
         return a.requested_date > b.requested_date ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "requested_date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "requested_date" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "Requested by",
+      key: "requested_by",
+      dataIndex: "requested_by",
+      width: 100,
+      filters: [{}],
+      filteredValue: filteredInfo.requested_date || null,
+      onFilter: (value, record) => record.requested_date.includes(value),
+      //   sorter is for sorting asc or dsc purrequested_datee
+      sorter: (a, b) => {
+        return a.requested_date > b.requested_date ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "requested_by" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -113,8 +123,7 @@ const VOB = () => {
       sorter: (a, b) => {
         return a.reviewed_By > b.reviewed_By ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "reviewed_By" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "reviewed_By" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {

@@ -289,7 +289,7 @@ const Staffs = () => {
     const name = "My Awesome Report";
     const headers = [["id", "credtype", "phone", "email", "employee_type", "language", "treatment_type"]];
 
-    const data = staffData?.map((elt) => [elt.id, elt.first_name, elt.office_email, elt.employee_type, elt.language, elt.treatment_type]);
+    const data = staffData?.map((elt) => [elt.id, elt.first_name, elt.office_phone, elt.office_email, elt.employee_type, elt.language, elt.treatment_type]);
 
     console.log("pdf export data", data);
 
