@@ -466,7 +466,7 @@ const CalenderView = () => {
           events={modifyDatamap}
           // initialEvents={allData}
           // initialEvents={modifyDatamap}
-          editable={true}
+          editable={false}
           selectable={true}
           select={createEvent}
           eventClick={(arg) => {
@@ -482,6 +482,8 @@ const CalenderView = () => {
           }}
           // For showing the calender month and date (autometically)(format 30 days(1-01-2023 to 31-01-2023))
           datesSet={handleDatesSet}
+          // editable={false}
+          // droppable={false}
           // for hovering
           // eventContent={(info) => {
           //   return (
