@@ -171,7 +171,11 @@ const ManageClaims = () => {
       dataIndex: "date_range",
       width: 50,
       render: (_, record) => {
-        return <h1>{dateConverter(record?.mngclam_tran_asc[0]?.schedule_date) - dateConverter(record?.mngclam_tran_desc[0]?.schedule_date)}</h1>;
+        return (
+          <h1>
+            {dateConverter(record?.mngclam_tran_asc[0]?.schedule_date)}-{dateConverter(record?.mngclam_tran_desc[0]?.schedule_date)}
+          </h1>
+        );
       },
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {

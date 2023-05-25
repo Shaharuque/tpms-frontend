@@ -5,33 +5,33 @@ export const ledgerApi = apiSlice.injectEndpoints({
     //Ledger Get Patients
     getLedgerPatients: builder.mutation({
       query: (token) => ({
-        url: "admin/ac/ledger/get/client",
+        url: "/ledger/list/patient",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
     }),
     //Ledger Get Payor/Insurance
     getLedgerPayor: builder.mutation({
       query: (token) => ({
-        url: "admin/ac/ledger/get/payor",
+        url: "/ledger/list/insurance",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
     }),
     //Ledger Get CPT Code
     getLedgerCPT: builder.mutation({
       query: (token) => ({
-        url: "admin/ac/ledger/get/cpt/code",
+        url: "/ledger/list/cpt",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
     }),
@@ -62,10 +62,5 @@ export const ledgerApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetLedgerPatientsMutation,
-  useGetLedgerPayorMutation,
-  useGetLedgerCPTMutation,
-  useBulkNoteSaveMutation,
-  useGetLedgerTransactionsMutation,
-} = ledgerApi;
+export const { useGetLedgerPatientsMutation, useGetLedgerPayorMutation, useGetLedgerCPTMutation, useBulkNoteSaveMutation, useGetLedgerTransactionsMutation } =
+  ledgerApi;

@@ -189,7 +189,7 @@ const ProcessingClaim = () => {
   let allPatients = patientData?.data || [];
   const allProviders = therapistData?.data || [];
   const allCptCodes = cptCodesData?.cpt_code || [];
-  const allActivities = activityData?.activity_type || [];
+  const allActivities = activityData?.data || [];
   const allDegreeLevel = degreeLevelData?.degree_level || [];
   const allRegions = zoneData?.zone || [];
   const allModifire = modifierData?.modifire || [];
@@ -231,6 +231,11 @@ const ProcessingClaim = () => {
   const [tableOpen, setTableOpen] = useState(false);
   console.log(sortBy2);
 
+  const handleActivitySelect = (val) => {
+    setSelectedSortOptionOne(val);
+    setRunClick(false);
+  };
+
   //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
     const getProcessClaims = async () => {
@@ -243,6 +248,7 @@ const ProcessingClaim = () => {
           "x-auth-token": token,
         },
         data: {
+          activitytype: selectedSortOptionOne,
           payor_ids: insuranceSelect,
           page: 1,
           to_date: toDate,
@@ -254,7 +260,7 @@ const ProcessingClaim = () => {
     if (insuranceSelect?.length > 0 && toDate && runClick) {
       getProcessClaims();
     }
-  }, [token, call, runClick, updateSuccess]);
+  }, [token, call, runClick, updateSuccess, selectedSortOptionOne, insuranceSelect, toDate]);
   console.log("This is satff data of first page", staffData);
 
   const fetchProviders = async () => {
@@ -267,6 +273,7 @@ const ProcessingClaim = () => {
         "x-auth-token": token,
       },
       data: {
+        activitytype: selectedSortOptionOne,
         payor_id: insuranceSelect,
         page: page,
         to_date: toDate,
@@ -835,6 +842,7 @@ const ProcessingClaim = () => {
                       setRunClick={setRunClick}
                       setHasMore={setHasMore}
                       setPage={setPage}
+                      setSelectedSortOptionOne={setSelectedSortOptionOne}
                     />
                   </div>
                 </div>
@@ -991,7 +999,7 @@ const ProcessingClaim = () => {
                         </label>
                         <select
                           disabled={activityLoading && true}
-                          onChange={(e) => setSelectedSortOptionOne(e.target.value)}
+                          onChange={(e) => handleActivitySelect(e.target.value)}
                           name="type"
                           className="input-border input-font w-[200px] focus:outline-none"
                         >
@@ -1000,8 +1008,8 @@ const ProcessingClaim = () => {
                             <>
                               {allActivities?.map((activity, index) => {
                                 return (
-                                  <option value={activity?.activity_id} key={index}>
-                                    {activity?.pclm_activity_type?.activity_one}
+                                  <option value={activity?.id} key={index}>
+                                    {activity?.activity_one}
                                   </option>
                                 );
                               })}

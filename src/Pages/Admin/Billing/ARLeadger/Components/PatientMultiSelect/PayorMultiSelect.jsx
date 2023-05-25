@@ -2,21 +2,17 @@ import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./PatientMultiSelectCSS/PatientMultiSelect.css";
 
-const PayorMultiSelect = ({
-  allInsurance,
-  setInsuranceIds,
-  insuranceLoading,
-}) => {
+const PayorMultiSelect = ({ allInsurance, setInsuranceIds, insuranceLoading }) => {
   const [selected, setSelected] = useState([]);
   const insuranceDataProcess = () => {
     let processedData = [];
     if (allInsurance) {
       for (let x of allInsurance) {
-        if (x?.payor_id !== null) {
+        if (x?.ledger_payor?.payor_id !== null) {
           processedData.push({
-            label: x?.payor_name,
-            value: x?.payor_name,
-            id: x?.payor_id,
+            label: x?.ledger_payor?.payor_name,
+            value: x?.ledger_payor?.payor_name,
+            id: x?.ledger_payor?.payor_id,
           });
         }
       }

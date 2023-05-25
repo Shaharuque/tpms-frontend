@@ -44,11 +44,11 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get CPT CODE
     getCPTProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/pclm/cpt/code",
+        url: "/pri/process/claim/short/by/cpt",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -57,11 +57,11 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get Activity Type
     getActivityProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/pclm/activity/type",
+        url: "/pri/process/claim/short/by/activity/type",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),

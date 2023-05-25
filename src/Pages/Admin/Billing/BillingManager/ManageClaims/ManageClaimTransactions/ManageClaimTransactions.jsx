@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table, Typography } from "antd";
-import { DatabaseDateConverter } from "../../../../../Shared/Dateconverter/DateConverter";
+import { DatabaseDateConverter, dateConverter } from "../../../../../Shared/Dateconverter/DateConverter";
 
 const ManageClaimTransactions = ({ allTransactions }) => {
   const [sortedInfo, setSortedInfo] = useState({});
@@ -67,7 +67,7 @@ const ManageClaimTransactions = ({ allTransactions }) => {
       dataIndex: "schedule_date",
       width: 50,
       render: (_, record) => {
-        return <h1>{record?.schedule_date}</h1>;
+        return <h1>{dateConverter(record?.schedule_date)}</h1>;
       },
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {

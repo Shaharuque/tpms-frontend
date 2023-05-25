@@ -8,10 +8,10 @@ const PatientMultiSelect = ({ allPatients, setClientIds, patientsLoading }) => {
     let processedData = [];
     if (allPatients) {
       for (let x of allPatients) {
-        if (x?.client_full_name !== null) {
+        if (x?.ledger_patient?.client_full_name !== null) {
           processedData.push({
-            label: x?.client_first_name + " " + x?.client_last_name,
-            value: x?.client_first_name + " " + x?.client_last_name,
+            label: x?.ledger_patient?.client_full_name,
+            value: x?.ledger_patient?.client_full_name,
             id: x?.id,
           });
         }

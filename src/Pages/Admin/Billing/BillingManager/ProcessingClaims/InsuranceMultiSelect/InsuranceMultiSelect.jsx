@@ -2,7 +2,18 @@ import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./InsuranceMultiSelectCSS/InsuranceMultiSelect.css";
 
-const ProcessClaimsMultiSelect = ({ selected, setSelected, payorData, setInsuranceSelect, setSortBy1, payorLoading, setRunClick, setHasMore, setPage }) => {
+const ProcessClaimsMultiSelect = ({
+  selected,
+  setSelected,
+  payorData,
+  setInsuranceSelect,
+  setSortBy1,
+  payorLoading,
+  setRunClick,
+  setHasMore,
+  setPage,
+  setSelectedSortOptionOne,
+}) => {
   console.log("payorData", payorData);
   const insuranceDataProcess = () => {
     let processedData = [];
@@ -35,6 +46,7 @@ const ProcessClaimsMultiSelect = ({ selected, setSelected, payorData, setInsuran
       const getId = selected.map((item) => item?.id);
       setInsuranceSelect(getId);
       setRunClick(false);
+      setSelectedSortOptionOne("");
     };
     getSelectedInsurance();
   }, [selected, setInsuranceSelect]);
