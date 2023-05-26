@@ -1,35 +1,12 @@
-import {
-  FaUser,
-  FaUserFriends,
-  FaBoxOpen,
-  FaWpforms,
-  FaRegAddressCard,
-} from "react-icons/fa";
+import { FaUser, FaUserFriends, FaBoxOpen, FaWpforms, FaRegAddressCard } from "react-icons/fa";
 import { TbBuildingHospital, TbFileTime } from "react-icons/tb";
 import { BiRename, BiLinkAlt, BiFolderOpen } from "react-icons/bi";
-import {
-  BsHouseDoor,
-  BsFileEarmarkMedical,
-  BsFileEarmark,
-  BsFolder2Open,
-  BsBox,
-} from "react-icons/bs";
+import { BsHouseDoor, BsFileEarmarkMedical, BsFileEarmark, BsFolder2Open, BsBox } from "react-icons/bs";
 import { MdOutlinePayment, MdTrackChanges } from "react-icons/md";
 import { ImUsers } from "react-icons/im";
 import { TbArrowsRightLeft } from "react-icons/tb";
-import {
-  AiOutlineUserAdd,
-  AiOutlineUser,
-  AiOutlineFile,
-  AiOutlineMail,
-  AiOutlineCloud,
-} from "react-icons/ai";
-import {
-  RiSettingsFill,
-  RiHospitalLine,
-  RiSendPlaneLine,
-  RiFolderUserLine,
-} from "react-icons/ri";
+import { AiOutlineUserAdd, AiOutlineUser, AiOutlineFile, AiOutlineMail, AiOutlineCloud } from "react-icons/ai";
+import { RiSettingsFill, RiHospitalLine, RiSendPlaneLine, RiFolderUserLine } from "react-icons/ri";
 import { FiLayers, FiAnchor } from "react-icons/fi";
 import { VscServerProcess } from "react-icons/vsc";
 

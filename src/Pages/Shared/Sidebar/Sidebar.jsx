@@ -18,15 +18,15 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
-import { MdPersonAddAlt1 } from "react-icons/md";
-import { AiOutlineFileDone } from "react-icons/ai";
+import { RiUserAddFill } from "react-icons/ri";
+import { HiUserPlus } from "react-icons/hi2";
+import { AiOutlineCalendar, AiOutlineFileDone, AiOutlineHome, AiOutlineSchedule } from "react-icons/ai";
 import { MdOutlineMonetizationOn } from "react-icons/md";
 import { BsFileEarmarkRuled, BsBookmarkStar, BsFileText, BsThreeDotsVertical } from "react-icons//bs";
 import { VscDebugDisconnect } from "react-icons/vsc";
 import { RiFundsBoxLine } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
 import { TbWebhook } from "react-icons/tb";
-import { GrFormSchedule } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
@@ -168,45 +168,63 @@ const menuItem = [
     roll: "admin",
   },
 
-  // user part
+  // Provider Portal
+  {
+    path: "/user",
+    name: "Dashboard",
+    icon: <AiOutlineHome />,
+    roll: "provider",
+  },
   {
     path: "/user",
     name: "My Schedule",
-    icon: <FaHouseUser />,
+    icon: <AiOutlineHome />,
     roll: "provider",
   },
 
   {
+    path: "/user",
+    name: "Calender",
+    icon: <AiOutlineHome />,
+    roll: "provider",
+  },
+  {
     path: "/user/biographic",
-    name: "biographic",
+    name: "Biographic",
     icon: <BsFileText />,
     roll: "provider",
   },
 
   {
     path: "/user/Pataients",
-    name: "Pataients",
+    name: "Patient(s)",
     icon: <BsFileText />,
     roll: "provider",
   },
 
   {
     path: "/user/user-timesheet",
-    name: "Timesheet",
+    name: "Timesheet(s)",
     icon: <BsFileText />,
     roll: "provider",
   },
-  //Patient portal
+  //Patient Portal
   {
     path: "/patient",
-    name: "My Schedule",
-    icon: <GrFormSchedule />,
+    name: <div className="">My Schedule</div>,
+    icon: <AiOutlineSchedule className="text-white" />,
+    roll: "patient",
+  },
+  {
+    path: "/patient/calender",
+    name: <h1>My Calender</h1>,
+    icon: <AiOutlineCalendar className="text-white" />,
     roll: "patient",
   },
   {
     path: "/patient/my-info",
     name: "My Info",
-    icon: <MdPersonAddAlt1 />,
+    icon: <RiUserAddFill />,
     roll: "patient",
   },
   {
@@ -299,7 +317,7 @@ const Sidebar = ({ handle }) => {
                   <div className={height <= 720 ? "sidebar-scrolling" : ""}>
                     {/* <div className="force-overflow"> */}
                     {menuItem
-                      .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
+                      .filter((item) => item?.roll === "provider") //dynamic bhabey now route render hobey
                       .map((items, index) => (
                         <div key={index}>
                           {items.subRoute ? (
@@ -329,8 +347,8 @@ const Sidebar = ({ handle }) => {
                                 <div
                                   className={
                                     isHovering
-                                      ? "opacity-1 duration-600 ease-in text-[18px]  font-semibold"
-                                      : "opacity-0 duration-200 ease-out text-[18px] font-semibold hidden"
+                                      ? "opacity-1 duration-600 ease-in text-[15px]  font-semibold"
+                                      : "opacity-0 duration-200 ease-out text-[15px] font-semibold hidden"
                                   }
                                 >
                                   {items.name}
@@ -372,7 +390,7 @@ const Sidebar = ({ handle }) => {
                   {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
                   <div className={height <= 720 ? "sidebar-scrolling pb-10" : "pb-10"}>
                     {menuItem
-                      .filter((item) => item.roll === "admin") //dynamic bhabey now route render hobey
+                      .filter((item) => item?.roll === "provider") //dynamic bhabey now route render hobey
                       .map((items, index) => (
                         <div key={index}>
                           {items.subRoute ? (
@@ -407,8 +425,8 @@ const Sidebar = ({ handle }) => {
                                   onClick={handleSidebar}
                                   className={
                                     isHovering
-                                      ? " transition duration-500 ease-in-out text-[18px]  font-semibold"
-                                      : " transition duration-500 ease-in-out text-[18px] font-semibold hidden"
+                                      ? " transition duration-500 ease-in-out text-[15px]  font-semibold truncate"
+                                      : " transition duration-500 ease-in-out text-[15px] font-semibold hidden"
                                   }
                                 >
                                   {items.name}
