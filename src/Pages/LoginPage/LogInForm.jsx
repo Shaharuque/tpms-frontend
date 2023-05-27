@@ -40,8 +40,7 @@ const LogInForm = ({ from }) => {
 
     // axios POST request
     const options = {
-      url: "https://stagapi.therapypms.com/api/v1/inadmin/auth/",
-      //url: "http://localhost:8080/api/v1/inadmin/auth/",
+      url: "https://stagapi.therapypms.com/api/v1/inadmin/auth",
       method: "POST",
       headers: {
         Accept: "application/json",
