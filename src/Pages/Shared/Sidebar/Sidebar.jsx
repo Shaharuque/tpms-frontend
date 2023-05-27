@@ -317,7 +317,7 @@ const Sidebar = ({ handle }) => {
                   <div className={height <= 720 ? "sidebar-scrolling" : ""}>
                     {/* <div className="force-overflow"> */}
                     {menuItem
-                      .filter((item) => item?.roll === "provider") //dynamic bhabey now route render hobey
+                      .filter((item) => item?.roll === logged_type) //dynamic bhabey now route render hobey
                       .map((items, index) => (
                         <div key={index}>
                           {items.subRoute ? (
@@ -390,7 +390,7 @@ const Sidebar = ({ handle }) => {
                   {/* item.roll admin diley admin route a niye jabey and provider diley user route jabey */}
                   <div className={height <= 720 ? "sidebar-scrolling pb-10" : "pb-10"}>
                     {menuItem
-                      .filter((item) => item?.roll === "provider") //dynamic bhabey now route render hobey
+                      .filter((item) => item?.roll === logged_type) //dynamic bhabey now route render hobey
                       .map((items, index) => (
                         <div key={index}>
                           {items.subRoute ? (

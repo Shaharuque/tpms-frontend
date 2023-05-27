@@ -96,11 +96,11 @@ input[type='checkbox'] {
   padding-right: 8px;
   padding-top: 7px;
   padding-bottom: 4px;
-  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'poppins', sans-serif;
   font-size: 12px;
   line-height: 17.6px !important;
-  /* text-transform: capitalize; */
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   word-spacing: 0.2px;
   background-color: #0aa7b8;
   background-clip: border-box;
@@ -150,12 +150,12 @@ input[type='checkbox'] {
   padding-right: 8px;
   padding-top: 6px;
   padding-bottom: 4px; */
-  font-family: 'Roboto',
+  font-family: 'poppins',
     sans-serif;
   font-size: 12px;
   line-height: 17.6px !important;
   text-transform: capitalize;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   word-spacing: 0.2px;
   background-clip: border-box;
   color: #0aa7b8;

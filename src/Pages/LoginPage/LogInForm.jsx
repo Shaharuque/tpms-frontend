@@ -40,8 +40,8 @@ const LogInForm = ({ from }) => {
 
     // axios POST request
     const options = {
-      //url: "https://stagapi.therapypms.com/api/v1/inadmin/auth/",
-      url: "http://localhost:8080/api/v1/inadmin/auth/",
+      url: "https://stagapi.therapypms.com/api/v1/inadmin/auth/",
+      //url: "http://localhost:8080/api/v1/inadmin/auth/",
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -51,13 +51,14 @@ const LogInForm = ({ from }) => {
     };
     axios(options).then((response) => {
       console.log(response.data);
-      if (response?.data?.status === "success") {
+      if (response?.data?.status === "success" && response?.data?.message === "InternalAdmin Successfully logged In") {
         dispatch(
           userLoggedIn({
             accessToken: response?.data?.access_token,
           })
         );
         localStorage.setItem("adminToken", response?.data?.access_token);
+        localStorage.setItem("type", "admin");
         // localStorage.setItem("type", response?.data?.account_type);
         // localStorage.setItem("user", JSON.stringify(response?.data?.user))
 
@@ -68,8 +69,9 @@ const LogInForm = ({ from }) => {
           console.log("login from navigation to default");
           navigate("/admin"); //admin panel a redirect
         }
-      } else if (response?.data?.account_type === "patient") {
+      } else if (response?.data?.status === "success" && response?.data?.message === "InternalPatient Successfully logged In") {
         navigate("/patient"); //patient panel a redirect
+        localStorage.setItem("adminToken", response?.data?.access_token);
         localStorage.setItem("type", "patient");
       } else {
         // setMessage(response.data.message);
