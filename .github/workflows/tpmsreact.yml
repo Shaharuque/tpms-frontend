@@ -33,6 +33,7 @@ jobs:
           script: |
             cd /var/www/therapypms_web/Therapy-pms-react 
             git checkout amin
+            git stash
             git pull origin amin
             yarn install --force
             yarn run build
