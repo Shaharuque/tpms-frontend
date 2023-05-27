@@ -40,7 +40,7 @@ const LogInForm = ({ from }) => {
 
     // axios POST request
     const options = {
-      url: "https://stagapi.therapypms.com/api/v1/inadmin/auth",
+      url: "https://jsonplaceholder.typicode.com/todos/1",
       method: "POST",
       headers: {
         Accept: "application/json",
