@@ -6,7 +6,7 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //handle auth endpoint here
     payperiods: builder.query({
       query: ({ token, page }) => ({
-        url: `/setting/list/pay/period`,
+        url: `inadmin/setting/list/pay/period`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -19,7 +19,7 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //add payperiod api
     addPayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/setting/pay/period/add`,
+        url: `inadmin/setting/pay/period/add`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -32,7 +32,7 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //update payperiod
     updatePayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/setting/pay/period/update`,
+        url: `inadmin/setting/pay/period/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -45,7 +45,7 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //bulkdelete payperiod
     bulkDeletePayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/setting/pay/period/bulk/delete`,
+        url: `inadmin/setting/pay/period/bulk/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -58,7 +58,7 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //single payperiod delete
     deletePayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/setting/pay/period/delete`,
+        url: `inadmin/setting/pay/period/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -71,10 +71,5 @@ export const payPeriodApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  usePayperiodsQuery,
-  useAddPayperiodMutation,
-  useUpdatePayperiodMutation,
-  useBulkDeletePayperiodMutation,
-  useDeletePayperiodMutation,
-} = payPeriodApi;
+export const { usePayperiodsQuery, useAddPayperiodMutation, useUpdatePayperiodMutation, useBulkDeletePayperiodMutation, useDeletePayperiodMutation } =
+  payPeriodApi;

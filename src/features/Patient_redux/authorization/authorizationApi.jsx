@@ -8,7 +8,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //get patient authorization api
     getPatientAuthorization: builder.query({
       query: ({ token, payload }) => ({
-        url: `/patient/authorization/list`,
+        url: `inadmin/patient/authorization/list`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -22,7 +22,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //Patient Authorization Create Info
     getAuthorizationCreateInfo: builder.query({
       query: ({ token, id }) => ({
-        url: `/patient/authorization/create/info/${id}`,
+        url: `inadmin/patient/authorization/create/info/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -34,7 +34,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //get patient single authorization info
     getPatientAuthorizationInfo: builder.query({
       query: ({ token, id }) => ({
-        url: `/patient/authorization/single/${id}`,
+        url: `inadmin/patient/authorization/single/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -48,7 +48,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //Patient Authorization Save
     patientAuthorizationCreate: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/patient/authorization/create`,
+        url: `inadmin/patient/authorization/create`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -62,7 +62,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //update Authorization Info
     patientAuthorizationUpdate: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/patient/authorization/update`,
+        url: `inadmin/patient/authorization/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -76,7 +76,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //delete Authorization
     patientAuthorizationDelete: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/patient/authorization/delete`,
+        url: `inadmin/patient/authorization/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",

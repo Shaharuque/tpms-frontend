@@ -6,7 +6,7 @@ const staffSubActivityExclusionApi = apiSlice.injectEndpoints({
     //  get all staff subtypes
     getAllSubActivity: builder.query({
       query: ({ token, payload }) => ({
-        url: `/provider/all/service/subtype`,
+        url: `inadmin/provider/all/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -19,7 +19,7 @@ const staffSubActivityExclusionApi = apiSlice.injectEndpoints({
     //  get all assigned sub-activity
     getAssignedSubtype: builder.query({
       query: ({ token, payload }) => ({
-        url: `/provider/assigned/service/subtype`,
+        url: `inadmin/provider/assigned/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -33,7 +33,7 @@ const staffSubActivityExclusionApi = apiSlice.injectEndpoints({
     // add staff sub-activity
     addServiceSubtype: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/provider/add/service/subtype`,
+        url: `inadmin/provider/add/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -47,7 +47,7 @@ const staffSubActivityExclusionApi = apiSlice.injectEndpoints({
     // Delete staff sub-activity type
     deleteServiceSubtype: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/provider/remove/service/subtype`,
+        url: `inadmin/provider/remove/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",

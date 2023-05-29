@@ -1,304 +1,165 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Table, Typography } from "antd";
 import { BsFileEarmarkPlusFill } from "react-icons/bs";
-import { SlCalender } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
+import { patientIp } from "../../../Misc/BaseClient";
+import axios from "axios";
+import useToken from "../../../CustomHooks/useToken";
+import {
+  useMyPaidStatementMutation,
+  useMyStatementGetDataMutation,
+  useMyUnpaidStatementMutation,
+} from "../../../features/PatientPortal/MyStatement_redux/myStatementApi";
+import ShimmerTableTet from "../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import { dateConverter } from "../../Shared/Dateconverter/DateConverter";
 
 const MyStatement = () => {
   const [table, setTable] = useState(false);
-  const [value, setValue] = useState(false);
-  const [sortBy, setSortBy] = useState("");
-  const handleSortBy = (e) => {
-    setSortBy(e.target.value);
-  };
+  const [value, setValue] = useState("1");
+  const [info, setInfo] = useState(null);
   const [allData, setAllData] = useState([]);
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const { Text } = Typography;
-  //   fetch data
-  React.useEffect(() => {
-    fetch("../../../All_Fake_Api/patientLeadger.json")
-      .then((res) => res.json())
-      .then((d) => {
-        setAllData(d);
-        // setLoading2(false);
-      });
-  }, []);
+  const { token } = useToken();
+  const [statement, setStatement] = useState([]);
 
-  console.log(allData);
+  //paid statement api
+  const [myPaidStatement, { data: paidData, isLoading: paidDataLoading }] = useMyPaidStatementMutation(token);
+  //unpaid statement api
+  const [myUnpaidStatement, { data: unPaidData, isLoading: unPaidDataLoading }] = useMyUnpaidStatementMutation(token);
+
+  const [myStatementGetData, { data: getData, isLoading: getDataLoading }] = useMyStatementGetDataMutation(token);
+
+  //Paid Amount Api
+  useEffect(() => {
+    const getPaid = async () => {
+      const res = await axios({
+        method: "POST",
+        url: `${patientIp}/my/statement/due`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-auth-token": token || null,
+        },
+      });
+      console.log("paid amount", res?.data);
+      const data = res?.data;
+      setInfo(data);
+    };
+    getPaid();
+  }, [token]);
+
+  useEffect(() => {
+    if (value === "1") {
+      myPaidStatement(token);
+    }
+    if (value === "2") {
+      myUnpaidStatement(token);
+    }
+    if (value === "3") {
+      myStatementGetData(token);
+    }
+  }, [value, myPaidStatement, myUnpaidStatement, myStatementGetData, token]);
+
+  useEffect(() => {
+    if (!paidDataLoading) {
+      setStatement(paidData?.paidData);
+    }
+  }, [paidDataLoading, paidData?.paidData]);
+
+  useEffect(() => {
+    if (!unPaidDataLoading) {
+      setStatement(unPaidData?.unpaidData);
+    }
+  }, [unPaidDataLoading, unPaidData?.unpaidData]);
+
+  useEffect(() => {
+    if (!getDataLoading) {
+      setStatement(getData?.clientStatements);
+    }
+  }, [getDataLoading, getData?.clientStatements]);
 
   const column = [
     {
-      title: "Patient",
-      dataIndex: "patient",
-      key: "patient",
+      title: "Service Date",
+      dataIndex: "service_date",
+      key: "service_date",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.patient || null,
-      onFilter: (value, record) => record.patient.includes(value),
       sorter: (a, b) => {
-        return a.patient > b.patient ? -1 : 1;
+        return a.service_date > b.service_date ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "patient" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "patieservice_datent" ? sortedInfo.order : null,
       ellipsis: true,
-      render: (_, { patient }) => {
+      render: (_, { service_date }) => {
         return (
           <div>
-            <Link className="font-normal text-secondary" to={"/admin/patient-List"}>
-              {patient}
-            </Link>
+            <Link className="font-normal text-secondary">{dateConverter(service_date)}</Link>
           </div>
         );
       },
     },
     {
-      index: 2,
-      title: "Provider",
-      dataIndex: "provider",
-      key: "provider",
+      title: "Description",
+      dataIndex: "activity",
+      key: "activity",
       width: 100,
-      filters: [
-        {
-          text: "Malesuada",
-          value: "Malesuada",
-        },
-      ],
-      filteredValue: filteredInfo.provider || null,
-      onFilter: (value, record) => record.provider.includes(value),
+      render: (_, { activity_id }) => {
+        return <div>{activity_id}</div>;
+      },
       //   sorter is for sorting asc or dsc purcpte
       sorter: (a, b) => {
-        return a.provider > b.provider ? -1 : 1; //sorting problem solved using this logic
+        return a.activity > b.activity ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "provider" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "activity" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: "DOS",
-      key: "dos",
-      dataIndex: "dos",
+      title: "Copay",
+      key: "co_pay",
+      dataIndex: "co_pay",
       width: 80,
-      filters: [{}],
-      filteredValue: filteredInfo.dos || null,
-      onFilter: (value, record) => record.dos.includes(value),
+      render: (_, { co_pay }) => {
+        return <h1>{co_pay?.toFixed(2)}</h1>;
+      },
       //   sorter is for sorting asc or dsc purcpte
       sorter: (a, b) => {
-        return a.dos > b.dos ? -1 : 1; //sorting problem solved using this logic
+        return a.co_pay > b.co_pay ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "dos" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "co_pay" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
-      title: "CPT",
-      key: "cpt",
-      dataIndex: "cpt",
+      title: "Coins",
+      key: "coins",
+      dataIndex: "coins",
       width: 80,
-      filters: [{}],
-      filteredValue: filteredInfo.cpt || null,
-      onFilter: (value, record) => record.cpt.includes(value),
+      render: (_, { coins }) => {
+        return <h1>{coins?.toFixed(2)}</h1>;
+      },
       //   sorter is for sorting asc or dsc purcpte
       sorter: (a, b) => {
-        return a.cpt > b.cpt ? -1 : 1; //sorting problem solved using this logic
+        return a.coins > b.coins ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "cpt" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "coins" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
     {
-      title: "Unit",
-      key: "unit",
-      dataIndex: "unit",
+      title: "Deductible",
+      key: "ded",
+      dataIndex: "ded",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.unit || null,
-      onFilter: (value, record) => record.unit.includes(value),
+      render: (_, { ded }) => {
+        return <h1>{ded?.toFixed(2)}</h1>;
+      },
       //   sorter is for sorting asc or dsc purcpte
       sorter: (a, b) => {
-        return a.unit > b.unit ? -1 : 1; //sorting problem solved using this logic
+        return a.ded > b.ded ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "unit" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "ded" ? sortedInfo.order : null,
       ellipsis: true,
-    },
-    {
-      title: "Date Billed",
-      key: "date_billed",
-      dataIndex: "date_billed",
-      width: 120,
-      filters: [{}],
-      filteredValue: filteredInfo.date_billed || null,
-      onFilter: (value, record) => record.date_billed.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.date_billed > b.date_billed ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "date_billed" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Billed Amount",
-      key: "billed_amount",
-      dataIndex: "billed_amount",
-      width: 70,
-      filters: [{}],
-      filteredValue: filteredInfo.billed_amount || null,
-      onFilter: (value, record) => record.billed_amount.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.billed_amount > b.billed_amount ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "billed_amount" ? sortedInfo.order : null,
-      ellipsis: true,
-      render: (_, { billed_amount }) => {
-        //console.log("Status : ", Status);
-        return <div className="flex justify-end">{billed_amount}</div>;
-      },
-    },
-    {
-      title: "Allowed Amount",
-      key: "allowed_amount",
-      dataIndex: "allowed_amount",
-      width: 70,
-      filters: [{}],
-      filteredValue: filteredInfo.allowed_amount || null,
-      onFilter: (value, record) => record.allowed_amount.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.allowed_amount > b.allowed_amount ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "allowed_amount" ? sortedInfo.order : null,
-      ellipsis: true,
-      render: (_, { allowed_amount }) => {
-        //console.log("Status : ", Status);
-        return <div className="flex justify-end">{allowed_amount}</div>;
-      },
-    },
-
-    {
-      title: "Paid",
-      key: "paid",
-      dataIndex: "paid",
-      width: 70,
-      filters: [{}],
-      filteredValue: filteredInfo.paid || null,
-      onFilter: (value, record) => record.paid.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.paid > b.paid ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "paid" ? sortedInfo.order : null,
-      ellipsis: true,
-      render: (_, { paid }) => {
-        //console.log("Status : ", Status);
-        return <div className="flex justify-end">{paid}</div>;
-      },
-    },
-    {
-      title: "Adj",
-      key: "adj",
-      dataIndex: "adj",
-      width: 70,
-      filters: [{}],
-      filteredValue: filteredInfo.adj || null,
-      onFilter: (value, record) => record.adj.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.adj > b.adj ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "adj" ? sortedInfo.order : null,
-      ellipsis: true,
-      render: (_, { adj }) => {
-        //console.log("Status : ", Status);
-        return <div className="flex justify-end">{adj}</div>;
-      },
-    },
-    {
-      title: "Balance",
-      key: "balance",
-      dataIndex: "balance",
-      width: 70,
-      filters: [{}],
-      filteredValue: filteredInfo.balance || null,
-      onFilter: (value, record) => record.balance.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.balance > b.balance ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "balance" ? sortedInfo.order : null,
-      ellipsis: true,
-      render: (_, { balance }) => {
-        //console.log("Status : ", Status);
-        return <div className="flex justify-end">{balance}</div>;
-      },
-    },
-    {
-      title: "Insurance Name",
-      key: "insurance_name",
-      dataIndex: "insurance_name",
-      width: 110,
-      filters: [{}],
-      filteredValue: filteredInfo.insurance_name || null,
-      onFilter: (value, record) => record.insurance_name.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.insurance_name > b.insurance_name ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "insurance_name" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Claim No",
-      key: "claim_no",
-      dataIndex: "claim_no",
-      width: 120,
-      filters: [{}],
-      filteredValue: filteredInfo.claim_no || null,
-      onFilter: (value, record) => record.claim_no.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.claim_no > b.claim_no ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "claim_no" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "NT",
-      key: "nt",
-      dataIndex: "nt",
-      width: 60,
-      filters: [{}],
-      filteredValue: filteredInfo.nt || null,
-      onFilter: (value, record) => record.nt.includes(value),
-      //   sorter is for sorting asc or dsc purcpte
-      sorter: (a, b) => {
-        return a.nt > b.nt ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "nt" ? sortedInfo.order : null,
-      ellipsis: true,
-      render: (_, { nt }) => {
-        return (
-          <div className="mx-auto">
-            {nt === true ? (
-              <span className="font-normal flex justify-center items-center text-green-600">
-                <BsFileEarmarkPlusFill />
-              </span>
-            ) : (
-              <span className="font-normal flex justify-center items-center text-gray-500">
-                <BsFileEarmarkPlusFill />
-              </span>
-            )}
-          </div>
-        );
-      },
-    },
-    {
-      title: "Action",
-      dataIndex: "operation",
-      key: "operation",
-      width: 90,
-      render: (_, { nt }) => {
-        return <h1>Test</h1>;
-      },
     },
   ];
 
@@ -324,12 +185,14 @@ const MyStatement = () => {
     setFilteredInfo({});
   };
 
-  const handleOptionChange = (target) => {
-    setTable(true);
+  const handleOptionChange = (optionVal) => {
+    setValue(optionVal);
+    // setTable(true);
   };
+  console.log("Value : ", value);
 
   return (
-    <div>
+    <div className={statement?.length === 0 ? "h-[100vh]" : "h-[150vh]"}>
       <h1 className="text-lg my-2 text-orange-500">Statement</h1>
       <div>
         <div className="flex justify-between bg-[#36ADBF] rounded-md px-4 py-6">
@@ -341,20 +204,11 @@ const MyStatement = () => {
               <option value="3">Paid/Pending Posting Statement</option>
             </select>
           </div>
-          <h1 className="text-[14px] text-white">Total Due Amount = 76.00$</h1>
+          <h1 className="text-[14px] text-white">Total Due Amount = {info?.totalSum}</h1>
         </div>
       </div>
-      {table && (
+      {!paidDataLoading ? (
         <div className="my-2">
-          <div className="flex justify-end items-center mr-2">
-            <button
-              onClick={clearFilters}
-              className="px-2  py-[7px] bg-white from-bg-primary text-xs  hover:bg-secondary text-secondary hover:text-white border border-secondary rounded-sm"
-            >
-              Clear filters
-            </button>
-          </div>
-
           <div className=" overflow-scroll py-3">
             <Table
               pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
@@ -362,7 +216,7 @@ const MyStatement = () => {
               bordered
               className=" text-xs font-normal "
               columns={column}
-              dataSource={allData}
+              dataSource={statement}
               rowSelection={{
                 ...rowSelection,
               }}
@@ -370,47 +224,16 @@ const MyStatement = () => {
                 y: 700,
               }}
               onChange={handleChange}
-              summary={(pageData) => {
-                let totalBill = 0;
-                let totalAllowed = 0;
-                let totalPaid = 0;
-                let totalBalance = 0;
-                let totalAdj = 0;
-                pageData.forEach(({ billed_amount, allowed_amount, paid, adj, balance }) => {
-                  totalBill += billed_amount;
-                  totalAllowed += allowed_amount;
-                  totalPaid += paid;
-                  totalBalance += balance;
-                  totalAdj += adj;
-                });
-                return (
-                  <>
-                    <Table.Summary.Row>
-                      <Table.Summary.Cell index={2} colSpan={7}>
-                        <span className="text-black font-bold flex justify-end mx-5 "> Total</span>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={8}>
-                        <Text className="text-black font-bold flex justify-end">{totalBill}</Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold flex justify-end">{totalAllowed}</Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold flex justify-end">{totalPaid}</Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold flex justify-end">{totalAdj}</Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={6}>
-                        <Text className="text-black font-bold flex justify-end">{totalBalance}</Text>
-                      </Table.Summary.Cell>
-                      <Table.Summary.Cell index={2} colSpan={4}></Table.Summary.Cell>
-                    </Table.Summary.Row>
-                  </>
-                );
-              }}
             />
           </div>
+        </div>
+      ) : (
+        <ShimmerTableTet></ShimmerTableTet>
+      )}
+
+      {value === "2" && (
+        <div>
+          <button className="bg-teal-500 rounded-md p-2 text-white text-[13px]">Pay {info?.totalSum?.toFixed(2)}$</button>
         </div>
       )}
     </div>

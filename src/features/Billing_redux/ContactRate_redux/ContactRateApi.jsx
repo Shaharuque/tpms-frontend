@@ -5,7 +5,7 @@ export const contactRateApi = apiSlice.injectEndpoints({
     //All Selected Insurance/Payor
     getAllPayors: builder.mutation({
       query: (token) => ({
-        url: "/contract/rate/list/payor/facility",
+        url: "inadmin/contract/rate/list/payor/facility",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -17,7 +17,7 @@ export const contactRateApi = apiSlice.injectEndpoints({
     //All setting services get
     getAllServices: builder.mutation({
       query: (token) => ({
-        url: "/contract/rate/list/setting/service",
+        url: "inadmin/contract/rate/list/setting/service",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -28,7 +28,7 @@ export const contactRateApi = apiSlice.injectEndpoints({
     //Get all setting sub-activity
     getAllSettingSubActivity: builder.mutation({
       query: (token) => ({
-        url: "/contract/rate/list/all/suc/activity",
+        url: "inadmin/contract/rate/list/all/suc/activity",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -39,7 +39,7 @@ export const contactRateApi = apiSlice.injectEndpoints({
     //Get all setting selected treatment
     getAllSelectedTreatment: builder.mutation({
       query: (token) => ({
-        url: "/contract/rate/list/treatment/facility",
+        url: "inadmin/contract/rate/list/treatment/facility",
         method: "POST",
         headers: {
           "content-type": "Application/json",

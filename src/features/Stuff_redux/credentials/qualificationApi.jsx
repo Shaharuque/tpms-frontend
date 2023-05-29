@@ -5,7 +5,7 @@ export const qualificationApi = apiSlice.injectEndpoints({
     //Get qualification
     getQualification: builder.query({
       query: ({ token, page, id }) => ({
-        url: `/provider/qualification/list`,
+        url: `inadmin/provider/qualification/list`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -18,7 +18,7 @@ export const qualificationApi = apiSlice.injectEndpoints({
     //Add qualification
     addQualification: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/qualification/save",
+        url: "inadmin/provider/qualification/save",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -31,7 +31,7 @@ export const qualificationApi = apiSlice.injectEndpoints({
     //get qualification table individual data
     getQualificationInfo: builder.query({
       query: ({ token, id }) => ({
-        url: `/provider/single/qualification/${id}`,
+        url: `inadmin/provider/single/qualification/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -43,7 +43,7 @@ export const qualificationApi = apiSlice.injectEndpoints({
     //Update qualification info
     updateQualification: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/qualification/update",
+        url: "inadmin/provider/qualification/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -56,7 +56,7 @@ export const qualificationApi = apiSlice.injectEndpoints({
     //Delete qualification by id
     deleteQualification: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/provider/qualification/delete`,
+        url: `inadmin/provider/qualification/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",

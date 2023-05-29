@@ -5,7 +5,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get Payor
     PayorByDate: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/pri/process/claim/get/data/by/date`,
+        url: `/inadmin/pri/process/claim/get/data/by/date`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -18,7 +18,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get Patient
     getPatientProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/process/claim/short/by/patient",
+        url: "/inadmin/pri/process/claim/short/by/patient",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -31,7 +31,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     // Process Claim Get Therapist Name
     getTherapistProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/process/claim/short/by/treating/therapist",
+        url: "/inadmin/pri/process/claim/short/by/treating/therapist",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -44,7 +44,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get CPT CODE
     getCPTProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/process/claim/short/by/cpt",
+        url: "/inadmin/pri/process/claim/short/by/cpt",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -57,7 +57,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get Activity Type
     getActivityProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/process/claim/short/by/activity/type",
+        url: "/inadmin/pri/process/claim/short/by/activity/type",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -109,7 +109,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get CMS Provider
     getCMSProviderProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/process/claim/short/by/cms/therapist",
+        url: "/inadmin/pri/process/claim/short/by/cms/therapist",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -122,7 +122,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Data Get
     getAllProcessClaims: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/process/claim/get/billing/data",
+        url: "/inadmin/pri/process/claim/get/billing/data",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -136,7 +136,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Data Get
     getClaims: builder.query({
       query: ({ token, data }) => ({
-        url: `/pri/process/claim/get/billing/data`,
+        url: `/inadmin/pri/process/claim/get/billing/data`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -151,7 +151,7 @@ export const ProcessingClaimApi = apiSlice.injectEndpoints({
     //Process Claim Get CMS Provider
     updateProcessClaim: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/process/claim/billing/data/update",
+        url: "/inadmin/pri/process/claim/billing/data/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",

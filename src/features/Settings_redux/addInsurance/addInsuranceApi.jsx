@@ -7,7 +7,7 @@ export const addInsurancApi = apiSlice.injectEndpoints({
     // search treatment
     AllInsurance: builder.query({
       query: ({ token, data }) => ({
-        url: `setting/get/all/insurance/search`,
+        url: `inadmin/setting/get/all/insurance/search`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -21,7 +21,7 @@ export const addInsurancApi = apiSlice.injectEndpoints({
     //All Treatment Api
     facilityselectedInsurance: builder.query({
       query: ({ token, data }) => ({
-        url: `setting/get/facility/selected/insurance`,
+        url: `inadmin/setting/get/facility/selected/insurance`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -48,7 +48,7 @@ export const addInsurancApi = apiSlice.injectEndpoints({
     // add
     addInsurance: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/add/insurance/facility`,
+        url: `inadmin/setting/add/insurance/facility`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -62,7 +62,7 @@ export const addInsurancApi = apiSlice.injectEndpoints({
     //  delete
     deleteInsurance: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/delete/insurance/facility`,
+        url: `inadmin/setting/delete/insurance/facility`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -76,7 +76,7 @@ export const addInsurancApi = apiSlice.injectEndpoints({
     //  insurance Details
     insuranceDetail: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/all/insurance/details`,
+        url: `inadmin/setting/all/insurance/details`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -90,7 +90,7 @@ export const addInsurancApi = apiSlice.injectEndpoints({
 
     facilityInsuranceDetails: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/get/payor/selected/facility/details`,
+        url: `inadmin/setting/get/payor/selected/facility/details`,
         method: "POST",
         headers: {
           "content-type": "Application/json",

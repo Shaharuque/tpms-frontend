@@ -6,7 +6,7 @@ export const otherSetupApi = apiSlice.injectEndpoints({
     //Get staff Other Setup
     getOtherSetup: builder.query({
       query: ({ token, id }) => ({
-        url: `/provider/other/setup/${id}`,
+        url: `inadmin/provider/other/setup/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -18,7 +18,7 @@ export const otherSetupApi = apiSlice.injectEndpoints({
 
     addOtherSetup: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/other/setup/update",
+        url: "inadmin/provider/other/setup/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",

@@ -19,7 +19,7 @@ export const dbtimeconverter = (s) => {
 
 // To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 export const dateConverter = (date) => {
-  console.log(date);
+  //console.log(date);
   const afterSplit = date?.split("-");
   //console.log(afterSplit);
   if (afterSplit?.length > 0) {

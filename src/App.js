@@ -310,6 +310,8 @@ function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
   const auth = usePersistStore();
+  console.log("auth", auth);
+  const loggedInInfo = localStorage?.getItem("type");
   return (
     <div className="app-body">
       <FullScreen handle={handle}>
@@ -734,6 +736,9 @@ function App() {
           </Route>
 
           {/* Patient-Portal Pannel */}
+          {/* {loggedInInfo === "patient" && (
+           
+          )} */}
           <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<MySchedule />}></Route>
             <Route path="calender" element={<MyCalender></MyCalender>}></Route>
@@ -745,6 +750,7 @@ function App() {
             </Route>
             <Route path="my-statement" element={<MyStatement></MyStatement>}></Route>
           </Route>
+
           {/* No Page Found */}
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>

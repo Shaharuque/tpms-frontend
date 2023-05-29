@@ -7,7 +7,7 @@ export const credentialApi = apiSlice.injectEndpoints({
     //Get staff credentials
     getCredentials: builder.query({
       query: ({ token, page, id }) => ({
-        url: `/provider/credential/list`,
+        url: `inadmin/provider/credential/list`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -21,7 +21,7 @@ export const credentialApi = apiSlice.injectEndpoints({
     //Add staff credential
     addCredential: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/credential/save",
+        url: "inadmin/provider/credential/save",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -34,7 +34,7 @@ export const credentialApi = apiSlice.injectEndpoints({
     //get staff credential table individual data
     getcredentialinfo: builder.query({
       query: ({ token, id }) => ({
-        url: `/provider/single/credential/${id}`,
+        url: `inadmin/provider/single/credential/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -46,7 +46,7 @@ export const credentialApi = apiSlice.injectEndpoints({
     //Update staff credential info
     updateCredential: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/credential/update",
+        url: "inadmin/provider/credential/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -59,7 +59,7 @@ export const credentialApi = apiSlice.injectEndpoints({
     //Delete staff credential info
     deleteCredential: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/credential/delete",
+        url: "inadmin/provider/credential/delete",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -72,10 +72,5 @@ export const credentialApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetCredentialsQuery,
-  useAddCredentialMutation,
-  useUpdateCredentialMutation,
-  useGetcredentialinfoQuery,
-  useDeleteCredentialMutation,
-} = credentialApi;
+export const { useGetCredentialsQuery, useAddCredentialMutation, useUpdateCredentialMutation, useGetcredentialinfoQuery, useDeleteCredentialMutation } =
+  credentialApi;

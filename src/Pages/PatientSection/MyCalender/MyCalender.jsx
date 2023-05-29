@@ -3,15 +3,13 @@ import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-// import "./custom.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
-import { Link } from "react-router-dom";
 import $ from "jquery";
 import moment from "moment";
-import { useGetCalendarEventApiQuery } from "../../../features/Appointment_redux/Calendar/CalendarApi";
 import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
+import { useGetMyCalenderEventsQuery } from "../../../features/PatientPortal/MyCalender_redux/myCalenderApi";
 
 const MyCalendar = () => {
   const tooltipRef = useRef(null);
@@ -49,26 +47,28 @@ const MyCalendar = () => {
   const {
     isLoading,
     data: calenderEvents,
-    isSuccess,
+    isSuccess: eventGetSuccess,
     refetch,
-  } = useGetCalendarEventApiQuery({
-    token,
-    payload: {
-      page: 1,
-      // start_data: "2023-05-01",
-      // end_date: "2023-05-31",
-      start_data: startdate,
-      end_date: enddate,
+  } = useGetMyCalenderEventsQuery(
+    {
+      token,
+      payload: {
+        start_date: startdate,
+        end_date: enddate,
+      },
     },
-  });
+    {
+      skip: !startdate && true,
+    }
+  );
 
+  // Mouse Hovering Data Get
   useEffect(() => {
     function handleEventMouseEnter(info) {
-      //
       const tooltip = document.createElement("div");
       tooltip.className = "tooltipevent ";
       const x = info?.el?.fcSeg?.eventRange?.def?.publicId;
-      const datamodifyed = calenderEvents?.data?.data.find((item) => item.id === x);
+      const datamodifyed = calenderEvents?.data.find((item) => item.id === x);
       console.log("datamodifyed------", datamodifyed, "id", x);
 
       console.log("elid------", info?.el?.fcSeg?.eventRange?.def?.publicId);
@@ -83,13 +83,8 @@ const MyCalendar = () => {
             <label class="text-primary text-sm font-bold">DOB</label>
             <h5 className=" font-normal">${datamodifyed?.app_provider?.full_name}</h5>
           </div>
-          
-          
-          
         </div>
-  
-        
-        
+
         <div class="mb-2">
           <label class="text-primary text-sm font-bold	">Email</label>
           <h5 class=" font-normal">${"Jakir@gmail.com"}</h5>
@@ -168,9 +163,9 @@ const MyCalendar = () => {
       $(document).off("mouseleave", ".fc-event");
       handleEventMouseLeave();
     };
-  }, [calenderEvents?.data?.data]);
+  }, [calenderEvents?.data]);
+  console.log("--------", calenderEvents?.data);
 
-  console.log("--------", calenderEvents?.data?.data);
   // For creating new event
   const createEvent = (selectInfo) => {
     console.log(selectInfo);
@@ -182,45 +177,45 @@ const MyCalendar = () => {
   };
 
   // for showing clicked event details basedon id using same CustomModal.jsx
-  const showEventDetails = (id) => {
-    console.log("Clicked event id", id);
-    setEventId(id);
-    setSelectedDate();
-    setOpen(!open);
+  const showEventDetails = (info) => {
+    console.log("Clicked event id", info?.event?.id);
+    // setEventId(id);
+    // setSelectedDate();
+    // setOpen(!open);
   };
 
-  // FOr hovering
+  // For hovering
   const [hoveredEvent, setHoveredEvent] = useState(null);
-
   const handleEventHover = (event) => {
     console.log("data of hovered event", event.event.title);
     setHoveredEvent(event.event);
   };
-
   const handleEventLeave = () => {
     setHoveredEvent(null);
   };
-  //-------------------------------Showing month date(auto) -------------------
 
-  console.log("api data rtk", calenderEvents);
-  const modifyDatamap = calenderEvents?.data?.data.map((item) => {
-    const title = `${item?.app_patient?.client_first_name} : ${item?.app_provider?.first_name}`;
+  //Event data modify
+  const eventData = calenderEvents?.data?.map((item) => {
     const start = item?.from_time;
     const end = item?.to_time;
     const id = item?.id;
+    const title = item?.title;
+    const color = item?.eventBackgroundColor;
+    const textColor = item?.eventTextColor;
+    const display = item?.display;
     return {
       title,
-      color: "#5ba7b0",
-      display: "background-inverse",
+      color,
+      display,
       end,
       start,
       id,
-      textColor: "white",
+      textColor,
     };
   });
 
-  // setdynamicEvent(modifyDatamap);
-  console.log("event data modify-----", modifyDatamap);
+  // setdynamicEvent(eventData);
+  console.log("event data modify", eventData);
 
   //-------------------------------------end--------------------
 
@@ -260,19 +255,20 @@ const MyCalendar = () => {
             right: "timeGridDay,timeGridWeek,dayGridMonth",
           }}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          timeZone="UTC" //global tinme zone
           // events={calenderEvents?.events}
           // events={Events}
-          events={modifyDatamap}
+          events={eventData}
           // initialEvents={allData}
-          // initialEvents={modifyDatamap}
+          // initialEvents={eventData}
           editable={false}
           selectable={true}
           select={createEvent}
-          eventClick={(arg) => {
-            console.log(arg.event.extendedProps._id);
-            showEventDetails(arg.event.extendedProps._id); //jei event a click korbo tar id showEvent func a pass[callback method]
-          }}
-          // eventClick={()=>showEvent(arg)}
+          // eventClick={(arg) => {
+          //   console.log(arg.event.extendedProps._id);
+          //   showEventDetails(arg.event.extendedProps._id); //jei event a click korbo tar id showEvent func a pass[callback method]
+          // }}
+          eventClick={showEventDetails}
           displayEventTime={true}
           eventTimeFormat={{
             hour: "numeric",

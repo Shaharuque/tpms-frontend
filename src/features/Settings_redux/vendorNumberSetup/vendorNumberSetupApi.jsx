@@ -5,7 +5,7 @@ export const vendorNumberApi = apiSlice.injectEndpoints({
     //handle auth endpoint here
     vendorNumberEssentials: builder.query({
       query: ({ token }) => ({
-        url: `setting/vendor/number`,
+        url: `inadmin/setting/vendor/number`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -16,7 +16,7 @@ export const vendorNumberApi = apiSlice.injectEndpoints({
     //get regional center api
     vendorNumberReginalCenter: builder.query({
       query: ({ token }) => ({
-        url: `setting/vendor/number/regional/center`,
+        url: `inadmin/setting/vendor/number/regional/center`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -27,7 +27,4 @@ export const vendorNumberApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useVendorNumberEssentialsQuery,
-  useVendorNumberReginalCenterQuery,
-} = vendorNumberApi;
+export const { useVendorNumberEssentialsQuery, useVendorNumberReginalCenterQuery } = vendorNumberApi;
