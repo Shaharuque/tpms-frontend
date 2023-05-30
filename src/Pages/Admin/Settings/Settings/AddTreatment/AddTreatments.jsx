@@ -35,6 +35,7 @@ const AddTreatments = () => {
       searchItem: getSearchData,
     },
   });
+  console.log("search in all treatment", searchTretmentdata);
   // search selected tretment
   const { data: searchTreatment } = useSearchSelectedTreatmentQuery({
     token,
@@ -42,20 +43,13 @@ const AddTreatments = () => {
       searchItem: searchSelectedTreatment,
     },
   });
-  console.log("searchtmdata", searchTreatment);
+  console.log("search on selected treatments", searchTreatment);
 
-  const {
-    data: getallTreatmentData,
-    isSuccess,
-    isLoading: getallTreatmentLoading,
-  } = useGetAllTreatmentsQuery({ token: token });
-  console.log(isSuccess, getallTreatmentData);
+  const { data: getallTreatmentData, isSuccess, isLoading: getallTreatmentLoading } = useGetAllTreatmentsQuery({ token: token });
+  console.log("get all treatments", getallTreatmentData);
 
-  const {
-    data: getallFacilityTreatments,
-    isLoading: getallFacilityTreatmentsLoading,
-  } = useGetAllSelectedTreatmentsQuery({ token: token });
-  console.log(isSuccess, getallFacilityTreatments);
+  const { data: getallFacilityTreatments, isLoading: getallFacilityTreatmentsLoading } = useGetAllSelectedTreatmentsQuery({ token: token });
+  console.log("selected treatments", getallFacilityTreatments);
 
   // add
   const [addTreatment, { data: addResponse }] = useAddTreatmentMutation();
@@ -76,8 +70,7 @@ const AddTreatments = () => {
   }, [addResponse?.message, addResponse?.status]);
 
   // delete
-  const [deleteTreatment, { data: deleteResponse }] =
-    useDeleteTreatmentMutation();
+  const [deleteTreatment, { data: deleteResponse }] = useDeleteTreatmentMutation();
   console.log(addResponse, deleteResponse);
 
   useEffect(() => {
@@ -104,19 +97,13 @@ const AddTreatments = () => {
   const handleAdding = (e) => {
     let target = e.target;
     // let name = target.name;
-    let value = Array.from(
-      target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(target.selectedOptions, (option) => option.value * 1);
     setSelectedKeys(value);
     setfacilityselectedkeys();
   };
 
   const handleRemoving = (e) => {
-    let value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value * 1
-    );
+    let value = Array.from(e.target.selectedOptions, (option) => option.value * 1);
     setfacilityselectedkeys(value);
     setSelectedKeys();
   };
@@ -206,9 +193,7 @@ const AddTreatments = () => {
         <div className=" flex flex-col items-center justify-center my-4 gap-2">
           <button // onClick={handleAddItems}
             onClick={() => handleSelectedValue()}
-            disabled={
-              selectedKeys === undefined && facilityselectedkeys?.length > 0
-            }
+            disabled={selectedKeys === undefined && facilityselectedkeys?.length > 0}
             className="pms-button w-24"
           >
             <div className="flex item-center justify-center">
@@ -221,9 +206,7 @@ const AddTreatments = () => {
               handleRemoveValue(e);
             }}
             className="pms-close-button w-24"
-            disabled={
-              selectedKeys?.length > 0 && facilityselectedkeys === undefined
-            }
+            disabled={selectedKeys?.length > 0 && facilityselectedkeys === undefined}
           >
             <div className="flex item-center justify-center">
               <HiOutlineArrowLeft className="mr-[2px]" />
@@ -233,9 +216,7 @@ const AddTreatments = () => {
         </div>
 
         <div>
-          <h1 className="text-sm text-gray-700 my-2">
-            Facility Selected Treatments
-          </h1>
+          <h1 className="text-sm text-gray-700 my-2">Facility Selected Treatments</h1>
           <div>
             <input
               onChange={handleSelectedSearch}
@@ -253,20 +234,20 @@ const AddTreatments = () => {
             }}
             className="text-black border h-48 border-gray-300  rounded-sm focus:focus:ring-[#02818F] focus:border-[#0AA7B8] block w-full py-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-[#02818F] dark:focus:[#02818F]"
           >
-            {/* {getallFacilityTreatments?.data?.length > 0 &&
+            {getallFacilityTreatments?.data?.length > 0 &&
               getallFacilityTreatments?.data.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.treatment_name}
                 </option>
-              ))} */}
+              ))}
             {/* calling same api  */}
 
-            {searchTreatment?.all_Tretmanet?.length > 0 &&
+            {/* {searchTreatment?.all_Tretmanet?.length > 0 &&
               searchTreatment?.all_Tretmanet.map((item, index) => (
                 <option key={item.id} className="px-2 text-sm" value={item.id}>
                   {item.treatment_name}
                 </option>
-              ))}
+              ))} */}
           </select>
         </div>
       </div>

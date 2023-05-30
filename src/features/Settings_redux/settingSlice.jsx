@@ -5,8 +5,8 @@ import axios from "axios";
 export const getsettings = createAsyncThunk("settings/getsettings", async (token) => {
   //onno api thik e kaj kortesey
   const response = await axios.get(
-    `https://stagapi.therapypms.com/api/v1/inadmin/setting/get/name/location`,
-    //`http://localhost:8080/api/v1/inadmin/setting/get/name/location`,
+    //`https://stagapi.therapypms.com/api/v1/inadmin/setting/get/name/location`,
+    `http://localhost:8080/api/v1/inadmin/setting/get/name/location`,
     {
       headers: {
         "Content-Type": "application/json",

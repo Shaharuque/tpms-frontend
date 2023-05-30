@@ -40,8 +40,8 @@ const LogInForm = ({ from }) => {
 
     // axios POST request
     const options = {
-      url: "https://stagapi.therapypms.com/api/v1/inadmin/auth",
-      //url: "http://localhost:8080/api/v1/inadmin/auth/",
+      //url: "https://stagapi.therapypms.com/api/v1/inadmin/auth",
+      url: "http://localhost:8080/api/v1/inadmin/auth/",
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -70,7 +70,7 @@ const LogInForm = ({ from }) => {
           navigate("/admin"); //admin panel a redirect
         }
       } else if (response?.data?.status === "success" && response?.data?.message === "InternalPatient Successfully logged In") {
-        navigate("/patient"); //patient panel a redirect
+        navigate("/patient/calender"); //patient panel a redirect
         localStorage.setItem("adminToken", response?.data?.access_token);
         localStorage.setItem("type", "patient");
       } else {

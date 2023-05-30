@@ -740,8 +740,8 @@ function App() {
            
           )} */}
           <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
-            <Route index element={<MySchedule />}></Route>
             <Route path="calender" element={<MyCalender></MyCalender>}></Route>
+            <Route path="schedule" element={<MySchedule />}></Route>
             {/* <Route path="my-info" element={<MyInfo></MyInfo>}></Route> */}
             <Route path="my-info" element={<MyInfo></MyInfo>}>
               <Route index element={<PatientInformation></PatientInformation>}></Route>

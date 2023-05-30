@@ -210,7 +210,7 @@ const menuItem = [
   },
   //Patient Portal
   {
-    path: "/patient",
+    path: "/patient/schedule",
     name: <div className="">My Schedule</div>,
     icon: <AiOutlineSchedule className="text-white" />,
     roll: "patient",

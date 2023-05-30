@@ -90,7 +90,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //Get Patient Authorization Activity api
     getPatientAuthorizationActivity: builder.query({
       query: ({ token, payload }) => ({
-        url: `admin/ac/patient/authorization/activity`,
+        url: `inadmin/patient/authorization/activity/list`,
         method: "POST",
         headers: {
           "content-type": "Application/json",

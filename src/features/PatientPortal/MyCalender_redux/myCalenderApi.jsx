@@ -12,23 +12,21 @@ export const myCalenderApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(payload),
       }),
-      //  providesTags: ["PatientAuthorizationTable"],
     }),
 
-    // get single session
-    // singleAppointmentApi: builder.query({
-    //   query: ({ token, payload }) => ({
-    //     url: `/inadmin/calender/single/appointment`,
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "Application/json",
-    //       "x-auth-token": token,
-    //     },
-    //     body: JSON.stringify(payload),
-    //   }),
-    //   //   providesTags: ["PatientAuthorizationTable"],
-    // }),
+    //get single session data
+    singleEventData: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `/patient/my/calender/get/single/data`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
   }),
 });
 
-export const { useGetMyCalenderEventsQuery } = myCalenderApi;
+export const { useGetMyCalenderEventsQuery, useSingleEventDataMutation } = myCalenderApi;
