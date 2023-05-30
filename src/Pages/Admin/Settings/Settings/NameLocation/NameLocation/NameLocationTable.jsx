@@ -178,7 +178,7 @@ const NameLocationTable = ({ time, box33Open, handleTableOpen, box_no_33 }) => {
         // mon_end_time: time[0]?.mon_end_time,
       });
     }, 0);
-  }, [box_no_33, time?.mon_end_time, reset]);
+  }, [box_no_33, reset]);
 
   // prefilled time
   useEffect(() => {
