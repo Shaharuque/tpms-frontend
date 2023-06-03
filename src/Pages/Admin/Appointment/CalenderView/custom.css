@@ -133,3 +133,9 @@
 .fc-daygrid-block-event .fc-event-title {
   color: white;
 }
+
+.fc-event {
+  /* padding: 5px; */
+  cursor: pointer;
+  /* Adjust the height as needed */
+}

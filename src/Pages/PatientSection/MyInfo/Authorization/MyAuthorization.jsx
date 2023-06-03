@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { GiPlainCircle } from "react-icons/gi";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { AiOutlineDelete, AiOutlinePlus } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
-import { MdContentCopy } from "react-icons/md";
-import { toast } from "react-toastify";
 import useToken from "../../../../CustomHooks/useToken";
 import axios from "axios";
 import { patientIp } from "../../../../Misc/BaseClient";
 import AuthorizationActivityTable from "./AuthorizationActivityTable/AuthorizationActivityTable";
+import { dateConverter } from "../../../Shared/Dateconverter/DateConverter";
+import ShimmerLoader from "../../../../Loading/ShimmerLoader";
+
+const removeWord = (sentence, word) => {
+  // Create a regular expression with the word surrounded by word boundaries (\b)
+  const regex = new RegExp("\\b" + word + "\\b", "gi");
+
+  // Use the replace() function to remove the word from the sentence
+  const result = sentence.replace(regex, "");
+
+  return result;
+};
 
 const MyAuthorization = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
-  const [selectContact, setSelectContact] = useState(false);
-  const [openEditModal, setOpenEditModal] = useState(false);
   const [listLoading, setListLoading] = useState(false);
   const [authData, setAuthData] = useState([]);
   //row expand code related
   const [expandedRowKeys, setExpandedRowKeys] = React.useState([]);
   //const [open, setOpen] = useState(false);
   const { token } = useToken();
-  const navigate = useNavigate();
-  const { id } = useParams();
 
   //Get All Authorizations
   useEffect(() => {
@@ -52,7 +55,7 @@ const MyAuthorization = () => {
     // console.log("record", record);
     return (
       <div className="ml-[-40px] my-2">
-        <AuthorizationActivityTable id={record?.id} />
+        <AuthorizationActivityTable authId={record?.id} />
       </div>
     );
   };
@@ -74,6 +77,9 @@ const MyAuthorization = () => {
       dataIndex: "onset_date",
       key: "onset_date",
       width: 100,
+      render: (_, record) => {
+        return <h1>{dateConverter(record?.onset_date)}</h1>;
+      },
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.onset_date > b.onset_date ? -1 : 1; //sorting problem solved using this logic
@@ -86,6 +92,9 @@ const MyAuthorization = () => {
       dataIndex: "end_date",
       key: "end_date",
       width: 100,
+      render: (_, record) => {
+        return <h1>{dateConverter(record?.end_date)}</h1>;
+      },
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.end_date > b.end_date ? -1 : 1; //sorting problem solved using this logic
@@ -98,9 +107,9 @@ const MyAuthorization = () => {
       dataIndex: "insurance",
       key: "insurance",
       width: 150,
-      //   render: (_, record) => {
-      //     return <h1>{clientSelectedPayors?.find((payor) => payor?.payor_id === record?.payor_id)?.payor_name}</h1>;
-      //   },
+      render: (_, record) => {
+        return <h1>{removeWord(record?.authorization_name, record?.treatment_type)}</h1>;
+      },
       //   sorter is for sorting asc or dsc purstatuse
       sorter: (a, b) => {
         return a.insurance > b.insurance ? -1 : 1; //sorting problem solved using this logic
@@ -188,10 +197,6 @@ const MyAuthorization = () => {
     setSortedInfo(sorter);
   };
 
-  const clearFilters = () => {
-    setFilteredInfo({});
-  };
-
   //If one new row is expanded then row expendation will be hidden
   const onTableRowExpand = (expanded, record) => {
     const keys = [];
@@ -208,27 +213,30 @@ const MyAuthorization = () => {
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3 mt-3">
           <h1 className="text-[16px] font-semibold">Authorization List</h1>
         </div>
-
-        <div className=" overflow-scroll ">
-          <Table
-            bordered
-            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-            rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-            size="small"
-            className=" text-xs font-normal table-striped-rows"
-            columns={columns}
-            dataSource={authData}
-            expandable={{
-              expandedRowRender,
-            }}
-            scroll={{
-              y: 850,
-            }}
-            expandedRowKeys={expandedRowKeys}
-            onExpand={onTableRowExpand}
-            onChange={handleChange}
-          />
-        </div>
+        {listLoading ? (
+          <ShimmerLoader />
+        ) : (
+          <div className=" overflow-scroll ">
+            <Table
+              bordered
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              rowKey={(record) => record.id} //record is kind of whole one data object and here we are
+              size="small"
+              className=" text-xs font-normal table-striped-rows"
+              columns={columns}
+              dataSource={authData}
+              expandable={{
+                expandedRowRender,
+              }}
+              scroll={{
+                y: 850,
+              }}
+              expandedRowKeys={expandedRowKeys}
+              onExpand={onTableRowExpand}
+              onChange={handleChange}
+            />
+          </div>
+        )}
       </div>
       {/* {selectContact && (
         <SelectContactRate

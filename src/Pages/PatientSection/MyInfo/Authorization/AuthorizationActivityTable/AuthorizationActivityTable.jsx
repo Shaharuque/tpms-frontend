@@ -1,29 +1,40 @@
 //each authorization data has nested data and we will get that from Patient Authorization Activity api
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import useToken from "../../../../../CustomHooks/useToken";
+import axios from "axios";
+import { patientIp } from "../../../../../Misc/BaseClient";
 
-const AuthorizationActivityTable = ({ id }) => {
+const AuthorizationActivityTable = ({ authId }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
+  const [authActData, setAuthActData] = useState([]);
   const { token } = useToken();
+  console.log("auth id", authId);
 
-  //Patient Authorization Activity nested table data api
-  // const {
-  //   data: allActivityData,
-  //   isLoading: activityLoading,
-  //   isError: activityError,
-  // } = useGetPatientAuthorizationActivityQuery({
-  //   token,
-  //   payload: {
-  //     authorization_id: id,
-  //   },
-  // });
-  // console.log("authorization Activity data", allActivityData?.patientActivities);
-  // const allAuthorizationActivity = allActivityData?.patientActivities || [];
+  //Get All Authorizations
+  useEffect(() => {
+    const getAuthorizations = async () => {
+      const res = await axios({
+        method: "POST",
+        url: `${patientIp}/my/all/authorization/activity`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-auth-token": token || null,
+        },
+        data: {
+          authId,
+        },
+      });
+      console.log("Manage Session List", res?.data);
+      setAuthActData(res?.data?.act);
+    };
+    getAuthorizations();
+  }, [token, authId]);
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -55,17 +66,16 @@ const AuthorizationActivityTable = ({ id }) => {
     },
     {
       title: "Cpt. Code",
-      dataIndex: "cptcode",
-      key: "cptcode",
+      dataIndex: "cpt_code",
+      key: "cpt_code",
       width: 80,
-      render: (_, { cptcode }) => {
-        console.log("render data", cptcode);
-        return <h1>{cptcode?.cpt_code}</h1>;
+      render: (_, { cpt_code }) => {
+        return <h1>{cpt_code}</h1>;
       },
       sorter: (a, b) => {
-        return a.id > b.id ? -1 : 1; //sorting problem solved using this logic
+        return a.cpt_code > b.cpt_code ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "cpt_code" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -100,13 +110,13 @@ const AuthorizationActivityTable = ({ id }) => {
         return a.hours_max_is_one > b.hours_max_is_one ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "hours_max_is_one" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Scheduled",
       dataIndex: "scheduled",
       key: "scheduled",
-      width: 60,
+      width: 100,
       sorter: (a, b) => {
         return a.scheduled > b.scheduled ? -1 : 1; //sorting problem solved using this logic
       },
@@ -117,82 +127,23 @@ const AuthorizationActivityTable = ({ id }) => {
       title: "Rendered",
       dataIndex: "Rendered",
       key: "Rendered",
-      width: 50,
+      width: 100,
       sorter: (a, b) => {
         return a.Rendered > b.Rendered ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "Rendered" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Remaining",
       dataIndex: "remaining",
       key: "remaining",
-      width: 50,
+      width: 100,
       sorter: (a, b) => {
         return a.remaining > b.remaining ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "remaining" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Start Date",
-      dataIndex: "onset_date",
-      key: "onset_date",
-      width: 100,
-      sorter: (a, b) => {
-        return a.onset_date > b.onset_date ? -1 : 1; //sorting problem solved using this logic
-      },
-      render: (_, { onset_date }) => {
-        return <h1 className="font-bold">{onset_date}</h1>;
-      },
-      sortOrder: sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "End Date",
-      dataIndex: "end_date",
-      key: "end_date",
-      width: 100,
-      sorter: (a, b) => {
-        return a.end_date > b.end_date ? -1 : 1; //sorting problem solved using this logic
-      },
-      render: (_, { end_date }) => {
-        return <h1 className="font-bold">{end_date}</h1>;
-      },
-      sortOrder: sortedInfo.columnKey === "end_date" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Action",
-      dataIndex: "operation",
-      key: "operation",
-      width: 50,
-      render: () => (
-        <div>
-          {" "}
-          <div>
-            <div className="flex justify-center gap-1 text-primary">
-              {/* <Link to={`/billing/deposit-apply/${row.original.id}`}>
-                    <MdOutlineDashboard title="Deposit" />
-                  </Link> */}
-
-              <button
-                onClick={() => {
-                  setOpenEditModal(true);
-                }}
-              >
-                <FiEdit className="text-xs mx-2 " />
-              </button>
-
-              <span>|</span>
-              <Link to={"/"}>
-                <AiOutlineDelete className="text-xs text-red-500 mx-2" title="Delete" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      ),
+      ellipsis: false,
     },
   ];
 
@@ -203,11 +154,11 @@ const AuthorizationActivityTable = ({ id }) => {
           <Table
             bordered
             rowKey={(record) => record.id}
-            pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+            pagination={false}
             size="small"
             className=" text-xs font-normal "
             columns={columns}
-            // dataSource={allAuthorizationActivity}
+            dataSource={authActData}
             onChange={handleChange}
             scroll={{
               y: 650,
