@@ -305,6 +305,8 @@ import ABAChildIntake from "./Pages/Admin/FormsTemplate/TpmsForm/ABAChildIntake"
 import Evaluation_intake_form from "./Pages/Admin/FormsTemplate/TpmsForm/Evaluation_intake_form";
 import TableInstance from "./Testing/TableInstance";
 import MySchedule from "./Pages/PatientSection/MySchedule/MySchedule";
+import MainInfo from "./Pages/PatientSection/MyInfo/PatientInfo/MainInfo";
+import MyAuthorization from "./Pages/PatientSection/MyInfo/Authorization/MyAuthorization";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -744,8 +746,8 @@ function App() {
             <Route path="schedule" element={<MySchedule />}></Route>
             {/* <Route path="my-info" element={<MyInfo></MyInfo>}></Route> */}
             <Route path="my-info" element={<MyInfo></MyInfo>}>
-              <Route index element={<PatientInformation></PatientInformation>}></Route>
-              <Route path="patient-authorization" element={<Authorization></Authorization>}></Route>
+              <Route index element={<MainInfo></MainInfo>}></Route>
+              <Route path="patient-authorization" element={<MyAuthorization></MyAuthorization>}></Route>
               <Route path="patient-document" element={<Documents></Documents>}></Route>
             </Route>
             <Route path="my-statement" element={<MyStatement></MyStatement>}></Route>

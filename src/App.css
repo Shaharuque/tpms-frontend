@@ -302,7 +302,18 @@ select:focus {
   color: #00a1b1;
   font-weight: 500;
   text-align: left;
+  font-family: poppins,
+    sans-serif;
 }
+
+.label-font-tabbing {
+  font-size: 15px;
+  color: #00a1b1;
+  font-weight: 500;
+  text-align: left;
+  font-family: poppins, sans-serif;
+}
+
 
 /* ---------------------------- email setting --------------- */
 

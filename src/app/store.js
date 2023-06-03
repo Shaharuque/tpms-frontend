@@ -11,6 +11,7 @@ import { serviceSubTypeReducer } from "../features/Settings_redux/selectedServic
 import { sideBarReducer } from "../features/Sidebar_redux/SidebarSlice";
 import { vendorNumberReducer } from "../features/Settings_redux/vendorNumberSlice";
 import { referringProviderReducer } from "../features/Settings_redux/referringProviderApi";
+import { infoDetailsReducer } from "../features/PatientPortal/MyInfo_redux/myInfoSlice";
 
 export const store = configureStore({
   reducer: {
@@ -26,12 +27,13 @@ export const store = configureStore({
     referringProviderInfo: referringProviderReducer,
     vendorNumberInfo: vendorNumberReducer,
     loginInfo: loginReducer,
+    //Patient Portal async thunk reducers
+    myInfo: infoDetailsReducer,
     //normal reducers
     authInfo: authReducer,
     sideBarInfo: sideBarReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
 });
