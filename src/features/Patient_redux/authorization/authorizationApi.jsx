@@ -87,6 +87,7 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
       invalidatesTags: ["PatientAuthorizationTable"],
     }),
 
+    //---------Patient Authorization Activity---------------
     //Get Patient Authorization Activity api
     getPatientAuthorizationActivity: builder.query({
       query: ({ token, payload }) => ({
@@ -94,21 +95,46 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
       providesTags: ["PatientAuthorizationActivity"],
     }),
 
-    //Get Patient Authorization Activity Services api
-    getActivityServices: builder.query({
+    //Get Patient Authorization setting Services api
+    getSettingService: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/patient/auth/act/get/service`,
+        url: `inadmin/patient/authorization/get/service/bytxtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
+    //Get Patient Authorization Activity SubType api
+    getActivitySubtypes: builder.query({
+      query: ({ token, payload }) => ({
+        url: `inadmin/patient/authorization/get/subtype/bytxtype`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+    }),
+
+    //Get Patient Authorization Activity Cptcode api
+    getActivityCptcode: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: `inadmin/patient/authorization/get/cpt/bytxtype`,
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -116,79 +142,53 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
 
     //Patient Authorization Activity SubActivity(needed when to update activity)
     //result will be shown in the Service Sub-Type field
-    getActivitySubActivity: builder.query({
+    getServiceSubType: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/patient/auth/act/get/subactivity`,
+        url: `inadmin/patient/authorization/get/service/subtype`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
     }),
 
-    //Get Patient Authorization Activity SubType api
-    getActivitySubtypes: builder.query({
-      query: ({ token, payload }) => ({
-        url: `admin/ac/patient/auth/act/get/subtype`,
-        method: "POST",
-        headers: {
-          "content-type": "Application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify(payload),
-      }),
-    }),
-
-    //Get Patient Authorization Activity Cptcode api
-    getActivityCptcode: builder.query({
-      query: ({ token, payload }) => ({
-        url: `admin/ac/patient/auth/act/get/cptcode`,
-        method: "POST",
-        headers: {
-          "content-type": "Application/json",
-          Authorization: token,
-        },
-        body: JSON.stringify(payload),
-      }),
-    }),
-
-    //Patient Authorization Activity Info(Activity Id wise)
-    patientAuthorizationActivityInfo: builder.query({
-      query: ({ token, id }) => ({
-        url: `admin/ac/patient/auth/act/${id}`,
-        method: "GET",
-        headers: {
-          "content-type": "Application/json",
-          Authorization: token,
-        },
-      }),
-      providesTags: ["IndividualActivity"],
-    }),
-
+    // ----------------Patient Authorization Activity------------------
     //Patient Authorization activity create/add
     patientAuthorizationActivityCreate: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/patient/auth/act/save`,
+        url: `inadmin/patient/authorization/activity/create`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
       invalidatesTags: ["PatientAuthorizationActivity"],
     }),
+    //Patient Authorization Activity Info(Activity Id wise)
+    patientAuthorizationActivityInfo: builder.query({
+      query: ({ token, id }) => ({
+        url: `inadmin/patient/authorization/activity/get/single/${id}`,
+        method: "GET",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+      }),
+      providesTags: ["IndividualActivity"],
+    }),
 
     //Patient Authorization Activity Update
     patientAuthorizationActivityUpdate: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/patient/auth/act/update`,
+        url: `inadmin/patient/authorization/activity/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -198,11 +198,11 @@ export const patientAuthorizationApi = apiSlice.injectEndpoints({
     //Patient Authorization Activity delete
     patientAuthorizationActivityDelete: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/patient/auth/act/delete`,
+        url: `inadmin/patient/authorization/activity/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -223,8 +223,8 @@ export const {
   usePatientAuthorizationActivityCreateMutation,
   usePatientAuthorizationActivityUpdateMutation,
   usePatientAuthorizationActivityDeleteMutation,
-  useGetActivityServicesQuery,
-  useGetActivitySubActivityQuery,
+  useGetSettingServiceMutation,
   useGetActivitySubtypesQuery,
-  useGetActivityCptcodeQuery,
+  useGetActivityCptcodeMutation,
+  useGetServiceSubTypeMutation,
 } = patientAuthorizationApi;

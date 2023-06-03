@@ -24,12 +24,8 @@ const AuthorizationActivityTable = ({ id }) => {
       authorization_id: id,
     },
   });
-  console.log(
-    "authorization Activity data",
-    allActivityData?.client_authorization_activity?.data
-  );
-  const allAuthorizationActivity =
-    allActivityData?.client_authorization_activity?.data || [];
+  console.log("authorization Activity data", allActivityData?.patientActivities);
+  const allAuthorizationActivity = allActivityData?.patientActivities || [];
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -94,8 +90,7 @@ const AuthorizationActivityTable = ({ id }) => {
       sorter: (a, b) => {
         return a.hours_max_per_one > b.hours_max_per_one ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "hours_max_per_one" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "hours_max_per_one" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -106,8 +101,7 @@ const AuthorizationActivityTable = ({ id }) => {
       sorter: (a, b) => {
         return a.hours_max_is_one > b.hours_max_is_one ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "hours_max_is_one" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "hours_max_is_one" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -154,8 +148,7 @@ const AuthorizationActivityTable = ({ id }) => {
       render: (_, { onset_date }) => {
         return <h1 className="font-bold">{onset_date}</h1>;
       },
-      sortOrder:
-        sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -196,10 +189,7 @@ const AuthorizationActivityTable = ({ id }) => {
 
               <span>|</span>
               <Link to={"/"}>
-                <AiOutlineDelete
-                  className="text-xs text-red-500 mx-2"
-                  title="Delete"
-                />
+                <AiOutlineDelete className="text-xs text-red-500 mx-2" title="Delete" />
               </Link>
             </div>
           </div>
@@ -213,6 +203,7 @@ const AuthorizationActivityTable = ({ id }) => {
       <>
         <div className=" overflow-scroll py-2 px-2">
           <Table
+            bordered
             rowKey={(record) => record.id}
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
@@ -226,12 +217,7 @@ const AuthorizationActivityTable = ({ id }) => {
           />
         </div>
       </>
-      {openEditModal && (
-        <AuthorizationEditModal
-          handleClose={handleClose}
-          open={openEditModal}
-        ></AuthorizationEditModal>
-      )}
+      {openEditModal && <AuthorizationEditModal handleClose={handleClose} open={openEditModal}></AuthorizationEditModal>}
     </div>
   );
 };

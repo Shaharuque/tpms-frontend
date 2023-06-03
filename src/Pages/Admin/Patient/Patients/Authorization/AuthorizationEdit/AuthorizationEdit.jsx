@@ -67,7 +67,7 @@ const AuthorizationEdit = () => {
   //   "authorization Activity data",
   //   allActivityData?.client_authorization_activity?.data
   // );
-  const allAuthorizationActivity = allActivityData?.client_authorization_activity?.data || [];
+  const allAuthorizationActivity = allActivityData?.patientActivities || [];
 
   // API date Data Destructring
   let selectedDate = authorizationInfo?.client_authorization_info?.selected_date || null;
@@ -98,6 +98,7 @@ const AuthorizationEdit = () => {
   console.log("Notes", notes);
   //All payors array
   const txType = authorizationInfo?.treatment_types;
+  console.log("all tx types", txType);
   //All supervisor array
   const insurance = authorizationInfo?.all_payors;
   //All treatment types
@@ -387,7 +388,7 @@ const AuthorizationEdit = () => {
                 >
                   {treatment_type ? <option value={treatment_type}>{treatment_type}</option> : <option>Select Treatment</option>}
                   {txType
-                    ?.filter((item) => item.id !== treatment_type_id)
+                    ?.filter((item) => parseInt(item.id) !== treatment_type_id)
                     ?.map((treatment) => {
                       return (
                         <option key={treatment?.id} value={treatment?.treatment_name}>
@@ -680,6 +681,7 @@ const AuthorizationEdit = () => {
             allAuthorizationActivity={allAuthorizationActivity}
             treatment_name={treatmentType}
             defaultTreatment={treatment_type}
+            allTreatment={txType}
           ></AuthorizationActivityNestedTable>
         </motion.div>
       )}

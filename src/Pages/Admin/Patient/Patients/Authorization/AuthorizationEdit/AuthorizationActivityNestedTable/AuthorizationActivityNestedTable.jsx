@@ -9,25 +9,15 @@ import { usePatientAuthorizationActivityDeleteMutation } from "../../../../../..
 import { toast } from "react-toastify";
 import AuthorizationActivityEditModal from "../../AuthorizationActivityModal/AuthorizationActivityEditModal";
 
-const AuthorizationActivityNestedTable = ({
-  allAuthorizationActivity,
-  treatment_name,
-  defaultTreatment,
-}) => {
+const AuthorizationActivityNestedTable = ({ allAuthorizationActivity, treatment_name, defaultTreatment, allTreatment }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [sortedInfo, setSortedInfo] = useState({});
   const [authorizationActivityId, setAuthorizationActivityId] = useState();
   const { token } = useToken();
 
   //Delete Patient Authorization activity API
-  const [
-    patientAuthorizationActivityDelete,
-    {
-      data: AuthorizationActivityDeleted,
-      isSuccess: deleteSuccess,
-      isError: deleteError,
-    },
-  ] = usePatientAuthorizationActivityDeleteMutation();
+  const [patientAuthorizationActivityDelete, { data: AuthorizationActivityDeleted, isSuccess: deleteSuccess, isError: deleteError }] =
+    usePatientAuthorizationActivityDeleteMutation();
 
   //String Date to [mm/dd/yy] converter function
   function convert(str) {
@@ -70,22 +60,7 @@ const AuthorizationActivityNestedTable = ({
         return a.service > b.service ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "service" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-    {
-      title: "Cpt. Code",
-      dataIndex: "cptcode",
-      key: "cptcode",
-      width: 120,
-      render: (_, { cptcode }) => {
-        console.log("render data", cptcode);
-        return <h1>{cptcode?.cpt_code}</h1>;
-      },
-      sorter: (a, b) => {
-        return a.id > b.id ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "id" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Max By",
@@ -107,8 +82,7 @@ const AuthorizationActivityNestedTable = ({
       sorter: (a, b) => {
         return a.hours_max_per_one > b.hours_max_per_one ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "hours_max_per_one" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "hours_max_per_one" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -119,8 +93,7 @@ const AuthorizationActivityNestedTable = ({
       sorter: (a, b) => {
         return a.hours_max_is_one > b.hours_max_is_one ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "hours_max_is_one" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "hours_max_is_one" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -167,8 +140,7 @@ const AuthorizationActivityNestedTable = ({
       render: (_, { onset_date }) => {
         return <h1 className="font-bold">{onset_date}</h1>;
       },
-      sortOrder:
-        sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "onset_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -210,10 +182,7 @@ const AuthorizationActivityNestedTable = ({
 
               <span>|</span>
               <button onClick={() => deleteAuthorizationActivity(record?.id)}>
-                <AiOutlineDelete
-                  className="text-xs text-red-500 mx-2"
-                  title="Delete"
-                />
+                <AiOutlineDelete className="text-xs text-red-500 mx-2" title="Delete" />
               </button>
             </div>
           </div>
@@ -243,6 +212,7 @@ const AuthorizationActivityNestedTable = ({
       <div className={allAuthorizationActivity ? "h-[40vh]" : ""}>
         <div className="overflow-scroll py-2">
           <Table
+            bordered
             rowKey={(record) => record.id}
             pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
             size="small"
@@ -263,6 +233,7 @@ const AuthorizationActivityNestedTable = ({
           open={openEditModal}
           treatment_name={treatment_name}
           defaultTreatment={defaultTreatment}
+          allTreatment={allTreatment}
         ></AuthorizationActivityEditModal>
       )}
     </>

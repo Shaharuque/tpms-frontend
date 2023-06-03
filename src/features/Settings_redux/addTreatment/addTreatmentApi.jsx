@@ -69,7 +69,7 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(data),
       }),
-      invalidatesTags: ["AllTreatments", "SearchSelectedTretment", "selectedTreatments", "SearchTretment"],
+      invalidatesTags: ["AllTreatments", "SearchSelectedTretment", "selectedTreatments", "SearchTretment", "PatientAuthorization"],
     }),
 
     //  delete

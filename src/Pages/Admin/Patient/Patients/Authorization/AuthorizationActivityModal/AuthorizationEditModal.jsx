@@ -5,8 +5,8 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { Modal } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import {
-  useGetActivityCptcodeQuery,
-  useGetActivityServicesQuery,
+  useGetActivityCptcodeMutation,
+  useGetSettingServiceMutation,
   useGetActivitySubtypesQuery,
   usePatientAuthorizationActivityCreateMutation,
 } from "../../../../../../features/Patient_redux/authorization/authorizationApi";
@@ -27,34 +27,36 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
   console.log("billed", billed);
 
   //Patient authorization activity create/save api
-  const [
-    patientAuthorizationActivityCreate,
-    { isSuccess: activityCreateSuccess, isError: activityCreateError },
-  ] = usePatientAuthorizationActivityCreateMutation();
+  const [patientAuthorizationActivityCreate, { isSuccess: activityCreateSuccess, isError: activityCreateError }] =
+    usePatientAuthorizationActivityCreateMutation();
 
   //Patient Authorization Activity Services api
-  const { data: activityServices, isLoading: activityServicesLoading } =
-    useGetActivityServicesQuery({
+  const [getSettingService, { data: activityServices, isLoading: activityServicesLoading }] = useGetSettingServiceMutation();
+  useEffect(() => {
+    getSettingService({
       token,
       payload: {
         treatment_name,
       },
     });
-  const { data: activitySubtypes, isLoading: activitySubtypesLoading } =
-    useGetActivitySubtypesQuery({
-      token,
-      payload: {
-        treatment_name,
-      },
-    });
-  const { data: activityCptCode, isLoading: activityCptLoading } =
-    useGetActivityCptcodeQuery({
-      token,
-      payload: {
-        treatment_name,
-      },
-    });
+  }, [getSettingService, token, treatment_name]);
+
+  const { data: activitySubtypes, isLoading: activitySubtypesLoading } = useGetActivitySubtypesQuery({
+    token,
+    payload: {
+      treatment_name,
+    },
+  });
+  const [getActivityCptcode, { data: activityCptCode, isLoading: activityCptLoading }] = useGetActivityCptcodeMutation();
   // console.log(activityServices, activitySubtypes, activityCptCode);
+  useEffect(() => {
+    getActivityCptcode({
+      token,
+      payload: {
+        treatment_name,
+      },
+    });
+  }, [getActivityCptcode, token, treatment_name]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -135,13 +137,8 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
             ) : (
               <div className="px-5 py-2 ">
                 <div className="flex items-center justify-between">
-                  <h1 className="text-lg text-left text-orange-400 ">
-                    Add/Edit Service
-                  </h1>
-                  <IoCloseCircleOutline
-                    onClick={handleClose}
-                    className="text-gray-600 font-semibold  text-2xl hover:text-primary"
-                  />
+                  <h1 className="text-lg text-left text-orange-400 ">Add/Edit Service</h1>
+                  <IoCloseCircleOutline onClick={handleClose} className="text-gray-600 font-semibold  text-2xl hover:text-primary" />
                 </div>
                 <div className="bg-gray-200 py-[1px] mt-3"></div>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -153,16 +150,10 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                           <span className="text-red-500">*</span>
                         </span>
                       </label>
-                      <select
-                        className="modal-input-field ml-1 w-full"
-                        {...register("activity_one")}
-                      >
+                      <select className="modal-input-field ml-1 w-full" {...register("activity_one")}>
                         {activityServices?.services?.map((service) => {
                           return (
-                            <option
-                              key={service?.id}
-                              value={service?.description}
-                            >
+                            <option key={service?.id} value={service?.description}>
                               {service?.description}
                             </option>
                           );
@@ -176,16 +167,10 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                           <span className="text-red-500">*</span>
                         </span>
                       </label>
-                      <select
-                        className="modal-input-field ml-1 w-full"
-                        {...register("activity_two")}
-                      >
+                      <select className="modal-input-field ml-1 w-full" {...register("activity_two")}>
                         {activitySubtypes?.subtypes?.map((subtype) => {
                           return (
-                            <option
-                              key={subtype?.id}
-                              value={subtype?.sub_activity}
-                            >
+                            <option key={subtype?.id} value={subtype?.sub_activity}>
                               {subtype?.sub_activity}
                             </option>
                           );
@@ -199,10 +184,7 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                           <span className="text-red-500">*</span>
                         </span>
                       </label>
-                      <select
-                        className="modal-input-field ml-1 w-full"
-                        {...register("cpt_code")}
-                      >
+                      <select className="modal-input-field ml-1 w-full" {...register("cpt_code")}>
                         {activityCptCode?.cptcodes?.map((cptCode) => {
                           return (
                             <option key={cptCode?.id} value={cptCode?.cpt_id}>
@@ -217,45 +199,25 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                         <label className="label">
                           <span className="modal-label-name">M1</span>
                         </label>
-                        <input
-                          type="text"
-                          name="m1"
-                          className="modal-input-field ml-1 w-full"
-                          {...register("m1")}
-                        />
+                        <input type="text" name="m1" className="modal-input-field ml-1 w-full" {...register("m1")} />
                       </div>
                       <div>
                         <label className="label">
                           <span className="modal-label-name">M2</span>
                         </label>
-                        <input
-                          type="text"
-                          name="m2"
-                          className="modal-input-field ml-1 w-full"
-                          {...register("m2")}
-                        />
+                        <input type="text" name="m2" className="modal-input-field ml-1 w-full" {...register("m2")} />
                       </div>
                       <div>
                         <label className="label">
                           <span className="modal-label-name">M3</span>
                         </label>
-                        <input
-                          type="text"
-                          name="m3"
-                          className="modal-input-field ml-1 w-full"
-                          {...register("m3")}
-                        />
+                        <input type="text" name="m3" className="modal-input-field ml-1 w-full" {...register("m3")} />
                       </div>
                       <div>
                         <label className="label">
                           <span className="modal-label-name">M4</span>
                         </label>
-                        <input
-                          type="text"
-                          name="m4"
-                          className="modal-input-field ml-1 w-full"
-                          {...register("m4")}
-                        />
+                        <input type="text" name="m4" className="modal-input-field ml-1 w-full" {...register("m4")} />
                       </div>
                     </div>
                     <div className="flex gap-2">
@@ -281,10 +243,7 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                       </div>
                       {billed === "Per Unit" && (
                         <div className="mt-[32px]">
-                          <select
-                            className="modal-input-field ml-1 w-full"
-                            {...register("billed_time")}
-                          >
+                          <select className="modal-input-field ml-1 w-full" {...register("billed_time")}>
                             <option value="15 min">15 min</option>
                             <option value="30 min">30 min</option>
                             <option value="45 min">45 min</option>
@@ -299,12 +258,7 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                       <label className="label">
                         <span className="modal-label-name">Rate</span>
                       </label>
-                      <input
-                        type="text"
-                        name="rate"
-                        className="modal-input-field ml-1 w-full"
-                        {...register("rate")}
-                      />
+                      <input type="text" name="rate" className="modal-input-field ml-1 w-full" {...register("rate")} />
                     </div>
                   </div>
                   <div>
@@ -316,26 +270,16 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                     </label>
                     {/* 1 */}
                     <div className="flex flex-wrap  border gap-y-[1px] border-gray-300 p-1">
-                      <div className="  text-xs font-semibold my-auto px-3">
-                        Maximum
-                      </div>
+                      <div className="  text-xs font-semibold my-auto px-3">Maximum</div>
                       <div className="">
-                        <select
-                          className="border border-gray-300 rounded-sm px-2 py-[1px] font-medium text-xs w-full"
-                          {...register("hours_max_one")}
-                        >
+                        <select className="border border-gray-300 rounded-sm px-2 py-[1px] font-medium text-xs w-full" {...register("hours_max_one")}>
                           <option value="Hours">Hours</option>
                           <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className=" text-xs font-medium my-auto px-3 mx-1">
-                        Per
-                      </div>
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">Per</div>
                       <div className="">
-                        <select
-                          className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full"
-                          {...register("hours_max_per_one")}
-                        >
+                        <select className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full" {...register("hours_max_per_one")}>
                           <option value="0"></option>
                           <option value="Day">Day</option>
                           <option value="Week">Week</option>
@@ -343,9 +287,7 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className=" text-xs font-medium my-auto px-3 mx-1">
-                        Is
-                      </div>
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">Is</div>
                       <div className="">
                         <input
                           className="border border-gray-300 rounded-sm px-2 py-[2.5px] font-medium  text-xs w-full"
@@ -355,26 +297,16 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                     </div>
                     {/* 2 */}
                     <div className="flex flex-wrap  border gap-y-[1px] border-gray-300 p-1">
-                      <div className="  text-xs font-semibold my-auto px-3">
-                        Maximum
-                      </div>
+                      <div className="  text-xs font-semibold my-auto px-3">Maximum</div>
                       <div className="">
-                        <select
-                          className="border border-gray-300 rounded-sm  py-[1px]  px-2 font-medium text-xs w-full"
-                          {...register("hours_max_two")}
-                        >
+                        <select className="border border-gray-300 rounded-sm  py-[1px]  px-2 font-medium text-xs w-full" {...register("hours_max_two")}>
                           <option value="Hours">Hours</option>
                           <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className=" text-xs font-medium my-auto px-3 mx-1">
-                        Per
-                      </div>
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">Per</div>
                       <div className="">
-                        <select
-                          className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full"
-                          {...register("hours_max_per_two")}
-                        >
+                        <select className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full" {...register("hours_max_per_two")}>
                           <option value="0"></option>
                           <option value="Day">Day</option>
                           <option value="Week">Week</option>
@@ -382,9 +314,7 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className=" text-xs font-medium my-auto px-3 mx-1">
-                        Is
-                      </div>
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">Is</div>
                       <div className="">
                         <input
                           className="border border-gray-300 rounded-sm px-2 py-[2.5px]  font-medium  text-xs w-full"
@@ -394,26 +324,16 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                     </div>
                     {/* 3 */}
                     <div className="flex flex-wrap border gap-y-[1px] border-gray-300 p-1">
-                      <div className="  text-xs font-semibold my-auto px-3">
-                        Maximum
-                      </div>
+                      <div className="  text-xs font-semibold my-auto px-3">Maximum</div>
                       <div className="">
-                        <select
-                          className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full"
-                          {...register("hours_max_three")}
-                        >
+                        <select className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full" {...register("hours_max_three")}>
                           <option value="Hours">Hours</option>
                           <option value="Unit">Unit</option>
                         </select>
                       </div>
-                      <div className=" text-xs font-medium my-auto px-3 mx-1">
-                        Per
-                      </div>
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">Per</div>
                       <div className="">
-                        <select
-                          className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full"
-                          {...register("hours_max_per_three")}
-                        >
+                        <select className="border border-gray-300 rounded-sm px-2 py-[1px]  font-medium text-xs w-full" {...register("hours_max_per_three")}>
                           <option value="0"></option>
                           <option value="Day">Day</option>
                           <option value="Week">Week</option>
@@ -421,9 +341,7 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                           <option value="Total Auth">Total Auth</option>
                         </select>
                       </div>
-                      <div className=" text-xs font-medium my-auto px-3 mx-1">
-                        Is
-                      </div>
+                      <div className=" text-xs font-medium my-auto px-3 mx-1">Is</div>
                       <div className="">
                         <input
                           className="border border-gray-300 rounded-sm px-2 py-[2px] font-medium  text-xs w-full"
@@ -438,13 +356,7 @@ const AuthorizationEditModal = ({ handleClose, open, treatment_name }) => {
                     </label>
 
                     <div>
-                      <TextArea
-                        onChange={(e) => setNotes(e.target.value)}
-                        maxLength={1002}
-                        rows={5}
-                        placeholder=" Notes"
-                        size="large"
-                      />
+                      <TextArea onChange={(e) => setNotes(e.target.value)} maxLength={1002} rows={5} placeholder=" Notes" size="large" />
                     </div>
                   </div>
                   <div className="bg-gray-200 py-[1px] mt-3"></div>
