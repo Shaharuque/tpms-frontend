@@ -12,6 +12,7 @@ import {
 } from "../../../../features/Billing_redux/ContactRate_redux/ContactRateApi";
 import useToken from "../../../../CustomHooks/useToken";
 import { baseIp } from "../../../../Misc/BaseClient";
+import ShimmerLoader from "../../../../Loading/ShimmerLoader";
 
 const CoactiveractRate = () => {
   const [select, setSelect] = useState("");
@@ -21,6 +22,7 @@ const CoactiveractRate = () => {
   const { token } = useToken();
   const [loading, setLoading] = useState(false);
   const [selectedPayorName, setSelectedPayorName] = useState("");
+
   console.log("select", select);
 
   const [getAllPayors, { data: allPayors, isLoading: dataLoading }] = useGetAllPayorsMutation();
@@ -35,7 +37,7 @@ const CoactiveractRate = () => {
   useEffect(() => {
     getAllServices(token);
   }, [token, getAllServices]);
-  //Getting all setting sub-activity list
+  //Getting all setting service sub-type list
   useEffect(() => {
     getAllSettingSubActivity(token);
   }, [token, getAllSettingSubActivity]);
@@ -228,6 +230,9 @@ const CoactiveractRate = () => {
       key: "contracted_rate",
       dataIndex: "contracted_rate",
       width: 120,
+      render: (_, { contracted_rate }) => {
+        return <div className="flex justify-end">{contracted_rate.toFixed(2)}</div>;
+      },
       //   sorter is for sorting asc or dsc purCPT_codee
       sorter: (a, b) => {
         return a.contracted_rate > b.contracted_rate ? -1 : 1; //sorting problem solved using this logic
@@ -248,7 +253,7 @@ const CoactiveractRate = () => {
       ellipsis: true,
       render: (_, { billed_rate }) => {
         //console.log("Status : ", Status);
-        return <div className="flex justify-end">{billed_rate}</div>;
+        return <div className="flex justify-end">{billed_rate.toFixed(2)}</div>;
       },
     },
     {
@@ -339,10 +344,10 @@ const CoactiveractRate = () => {
         <div className="flex items-center gap-3">
           <div className="mb-3 ml-[-2px ]">
             <label className="label">
-              <span className="label-font text-left">Select Insurance</span>
+              <span className="label-font-tabbing text-left">Select Insurance</span>
             </label>
             <select
-              className="input-border text-gray-600 rounded-sm  text-[14px] foactive-medium ml-1 w-full  lg:w-[250px] focus:outline-none"
+              className="input-border text-gray-600 rounded-sm  text-[14px] foactive-medium ml-1  lg:w-[200px] focus:outline-none"
               disabled={dataLoading ? true : false}
               onChange={(e) => handleInsuranceChange(e)}
               name="post"
@@ -368,19 +373,23 @@ const CoactiveractRate = () => {
           <h1 className="text-lg text-orange-400 my-2">Rate List</h1>
           <div className="overflow-scroll">
             <>
-              <Table
-                pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-                rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-                size="small"
-                bordered
-                className=" text-xs font-normal"
-                columns={column}
-                dataSource={contactRateList}
-                scroll={{
-                  y: 650,
-                }}
-                onChange={handleChange}
-              />
+              {loading ? (
+                <ShimmerLoader></ShimmerLoader>
+              ) : (
+                <Table
+                  pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+                  rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+                  size="small"
+                  bordered
+                  className=" text-xs font-normal"
+                  columns={column}
+                  dataSource={contactRateList}
+                  scroll={{
+                    y: 650,
+                  }}
+                  onChange={handleChange}
+                />
+              )}
             </>
           </div>
         </div>

@@ -620,7 +620,7 @@ const ClaimWise = () => {
                   <div className="w-[200px]">
                     <div>
                       <label className="label">
-                        <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Selected date</span>
+                        <span className="label-font">Selected date</span>
                       </label>
                       <div className="">
                         <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">

@@ -34,13 +34,10 @@ const AddServiceSubTypeTab = () => {
   const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
-  const { serviceSubTypes, loading } =
-    useSelector((state) => state.getServiceSubTypes) || {};
+  const { serviceSubTypes, loading } = useSelector((state) => state.getServiceSubTypes) || {};
   const tableData = serviceSubTypes?.sub_activity_data || [];
   console.log("service sub types:", tableData);
-  const totalPage = serviceSubTypes?.sub_activity?.last_page
-    ? serviceSubTypes?.sub_activity?.last_page
-    : 0;
+  const totalPage = serviceSubTypes?.sub_activity?.last_page ? serviceSubTypes?.sub_activity?.last_page : 0;
 
   //Getting all treatment
   const {
@@ -178,7 +175,7 @@ const AddServiceSubTypeTab = () => {
         {services?.map((service) => {
           return (
             <option key={service?.id} value={service?.id}>
-              {service?.description}
+              {service?.service}
             </option>
           );
         })}
@@ -259,8 +256,7 @@ const AddServiceSubTypeTab = () => {
       sorter: (a, b) => {
         return a.sub_activity > b.sub_activity ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "sub_activity" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "sub_activity" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -301,17 +297,11 @@ const AddServiceSubTypeTab = () => {
         return (
           <div className=" flex justify-center items-center">
             <div className="flex justify-center">
-              <button
-                onClick={() => handleClickOpen(record)}
-                className="text-secondary"
-              >
+              <button onClick={() => handleClickOpen(record)} className="text-secondary">
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
-              <button
-                onClick={() => handleDelete(record?.id)}
-                className="text-sm mx-1  text-red-500"
-              >
+              <button onClick={() => handleDelete(record?.id)} className="text-sm mx-1  text-red-500">
                 <AiOutlineDelete />
               </button>
             </div>
@@ -338,15 +328,10 @@ const AddServiceSubTypeTab = () => {
       <div className="flex flex-wrap items-center gap-2">
         <div>
           <label className="label">
-            <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-              Tx Type
-            </span>
+            <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Tx Type</span>
           </label>
 
-          <select
-            onChange={(e) => handleTxType(e)}
-            className="input-border text-gray-600 rounded-sm  text-[14px]  ml-1  w-[160px] focus:outline-none"
-          >
+          <select onChange={(e) => handleTxType(e)} className="input-border text-gray-600 rounded-sm  text-[14px]  ml-1  w-[160px] focus:outline-none">
             <option>Select</option>
             {treatmentSelect}
           </select>
@@ -354,9 +339,7 @@ const AddServiceSubTypeTab = () => {
         {/* type */}
         <div>
           <label className="label">
-            <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-              Type
-            </span>
+            <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Type</span>
           </label>
           <select
             value={type}
@@ -377,15 +360,10 @@ const AddServiceSubTypeTab = () => {
         {type && (
           <div>
             <label className="label">
-              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                Service
-              </span>
+              <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Service</span>
             </label>
-            <select
-              onChange={(e) => serviceOnchange(e)}
-              className="input-border text-gray-600 rounded-sm  text-[14px]  ml-1  w-[180px] focus:outline-none"
-            >
-              <option value="Select Tx type">Select Tx type</option>
+            <select onChange={(e) => serviceOnchange(e)} className="input-border text-gray-600 rounded-sm  text-[14px]  ml-1  w-[180px] focus:outline-none">
+              <option value="Select Tx type">Select Service</option>
               {serviceSelect}
             </select>
           </div>
