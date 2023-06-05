@@ -6,7 +6,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
     staffContactInfo: builder.query({
       //staffContactInfo
       query: ({ token, id }) => ({
-        url: `/provider/contact/info/${id}`,
+        url: `inadmin/provider/contact/info/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -19,7 +19,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
     //   addContactInfo  staff contact info
     addContactInfo: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/provider/contact/info/update`,
+        url: `inadmin/provider/contact/info/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -33,7 +33,7 @@ export const staffInfoApi = apiSlice.injectEndpoints({
     //   add Emergency contact info
     addEmergencyContactInfo: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/provider/emergency/contact/info/update`,
+        url: `inadmin/provider/emergency/contact/info/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -46,8 +46,4 @@ export const staffInfoApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useStaffContactInfoQuery,
-  useAddContactInfoMutation,
-  useAddEmergencyContactInfoMutation,
-} = staffInfoApi;
+export const { useStaffContactInfoQuery, useAddContactInfoMutation, useAddEmergencyContactInfoMutation } = staffInfoApi;

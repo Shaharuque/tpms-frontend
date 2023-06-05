@@ -35,7 +35,7 @@ export const cptcodeExclusionApi = apiSlice.injectEndpoints({
     //All Treatment Api
     availableCptCodes: builder.query({
       query: ({ token }) => ({
-        url: `setting/available/cpt/codes`,
+        url: `inadmin/setting/available/cpt/codes`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -49,7 +49,7 @@ export const cptcodeExclusionApi = apiSlice.injectEndpoints({
     //Facility Selected Treatment Api
     excludedCptCodes: builder.query({
       query: ({ token }) => ({
-        url: `setting/excluded/cpt/codes`,
+        url: `inadmin/setting/excluded/cpt/codes`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -63,7 +63,7 @@ export const cptcodeExclusionApi = apiSlice.injectEndpoints({
     // add
     addCptExclusion: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/add/cpt/exclusion`,
+        url: `inadmin/setting/add/cpt/exclusion`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -83,7 +83,7 @@ export const cptcodeExclusionApi = apiSlice.injectEndpoints({
     //  delete
     removeCptExclusion: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/remove/cpt/exclusion`,
+        url: `inadmin/setting/remove/cpt/exclusion`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -101,9 +101,4 @@ export const cptcodeExclusionApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useAddCptExclusionMutation,
-  useExcludedCptCodesQuery,
-  useRemoveCptExclusionMutation,
-  useAvailableCptCodesQuery,
-} = cptcodeExclusionApi;
+export const { useAddCptExclusionMutation, useExcludedCptCodesQuery, useRemoveCptExclusionMutation, useAvailableCptCodesQuery } = cptcodeExclusionApi;

@@ -7,7 +7,7 @@ export const payrollApi = apiSlice.injectEndpoints({
     //staff payroll get
     getPayrolls: builder.query({
       query: ({ token, page, id }) => ({
-        url: `/provider/payroll/list/get`,
+        url: `inadmin/provider/payroll/list/get`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -20,7 +20,7 @@ export const payrollApi = apiSlice.injectEndpoints({
     //Add staff payroll
     addPayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/payroll/save",
+        url: "inadmin/provider/payroll/save",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -46,7 +46,7 @@ export const payrollApi = apiSlice.injectEndpoints({
     //Update staff credential info
     updatePayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/payroll/update",
+        url: "inadmin/provider/payroll/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -59,7 +59,7 @@ export const payrollApi = apiSlice.injectEndpoints({
     //Delete payroll (individual)
     deletePayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/payroll/delete",
+        url: "inadmin/provider/payroll/delete",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -86,7 +86,7 @@ export const payrollApi = apiSlice.injectEndpoints({
     //update bulk payload
     bulkUpdatePayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/payroll/bulk/update",
+        url: "inadmin/provider/payroll/bulk/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",

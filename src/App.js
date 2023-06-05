@@ -12,12 +12,11 @@ import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
 import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
 import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/SchedulerCalender";
-import MySchedule from "./Pages/Pages/PatientPortal/MySchedule/MySchedule";
-import MyInfo from "./Pages/Pages/PatientPortal/MyInfo/MyInfo";
+import MyInfo from "./Pages/PatientSection/MyInfo/MyInfo";
 import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
 import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
-import MyCalender from "./Pages/Pages/PatientPortal/MySchedule/MyCalender/MyCalender";
-import MyStatement from "./Pages/Pages/PatientPortal/MyStatement/MyStatement";
+import MyCalender from "./Pages/PatientSection/MyCalender/MyCalender";
+import MyStatement from "./Pages/PatientSection/MyStatement/MyStatement";
 import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
 import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
 import NewPassSet from "./Pages/LoginPage/NewPassSet";
@@ -305,11 +304,14 @@ import EvaluationServicesConsent from "./Pages/Admin/FormsTemplate/TpmsForm/Eval
 import ABAChildIntake from "./Pages/Admin/FormsTemplate/TpmsForm/ABAChildIntake";
 import Evaluation_intake_form from "./Pages/Admin/FormsTemplate/TpmsForm/Evaluation_intake_form";
 import TableInstance from "./Testing/TableInstance";
+import MySchedule from "./Pages/PatientSection/MySchedule/MySchedule";
 
 function App() {
   const handle = useFullScreenHandle();
   //redux store persistency, If user reload the page redux store will not lost the accessToken and userInfo
   const auth = usePersistStore();
+  console.log("auth", auth);
+  const loggedInInfo = localStorage?.getItem("type");
   return (
     <div className="app-body">
       <FullScreen handle={handle}>
@@ -734,12 +736,21 @@ function App() {
           </Route>
 
           {/* Patient-Portal Pannel */}
+          {/* {loggedInInfo === "patient" && (
+           
+          )} */}
           <Route path="/patient" element={<Sidebar handle={handle}></Sidebar>}>
-            <Route index element={<MySchedule />}></Route>
             <Route path="calender" element={<MyCalender></MyCalender>}></Route>
-            <Route path="my-info" element={<MyInfo></MyInfo>}></Route>
+            <Route path="schedule" element={<MySchedule />}></Route>
+            {/* <Route path="my-info" element={<MyInfo></MyInfo>}></Route> */}
+            <Route path="my-info" element={<MyInfo></MyInfo>}>
+              <Route index element={<PatientInformation></PatientInformation>}></Route>
+              <Route path="patient-authorization" element={<Authorization></Authorization>}></Route>
+              <Route path="patient-document" element={<Documents></Documents>}></Route>
+            </Route>
             <Route path="my-statement" element={<MyStatement></MyStatement>}></Route>
           </Route>
+
           {/* No Page Found */}
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>

@@ -7,7 +7,7 @@ export const clearenceApi = apiSlice.injectEndpoints({
     //Get clearence api
     getClearence: builder.query({
       query: ({ token, page, id }) => ({
-        url: `/provider/clearance/list`,
+        url: `inadmin/provider/clearance/list`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -20,7 +20,7 @@ export const clearenceApi = apiSlice.injectEndpoints({
     //get staff clearence table individual data
     clearenceInfo: builder.query({
       query: ({ token, id }) => ({
-        url: `/provider/single/clearance/${id}`,
+        url: `inadmin/provider/single/clearance/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -32,7 +32,7 @@ export const clearenceApi = apiSlice.injectEndpoints({
     //Add staff clearence
     addClearence: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/clearance/save",
+        url: "inadmin/provider/clearance/save",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -46,7 +46,7 @@ export const clearenceApi = apiSlice.injectEndpoints({
     //Update staff clearence info
     updateClearence: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/clearance/update",
+        url: "inadmin/provider/clearance/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -59,7 +59,7 @@ export const clearenceApi = apiSlice.injectEndpoints({
     //delete staff clearence
     deleteClearance: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/clearance/delete",
+        url: "inadmin/provider/clearance/delete",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -72,10 +72,4 @@ export const clearenceApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useAddClearenceMutation,
-  useUpdateClearenceMutation,
-  useGetClearenceQuery,
-  useClearenceInfoQuery,
-  useDeleteClearanceMutation,
-} = clearenceApi;
+export const { useAddClearenceMutation, useUpdateClearenceMutation, useGetClearenceQuery, useClearenceInfoQuery, useDeleteClearanceMutation } = clearenceApi;

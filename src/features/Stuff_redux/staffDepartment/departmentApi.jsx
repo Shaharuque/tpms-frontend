@@ -7,7 +7,7 @@ export const staffDepartmentApi = apiSlice.injectEndpoints({
     //dept. supervisor list
     getSupervisorList: builder.query({
       query: ({ id, token }) => ({
-        url: `/provider/department/supervisor/${id}`,
+        url: `inadmin/provider/department/supervisor/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -20,7 +20,7 @@ export const staffDepartmentApi = apiSlice.injectEndpoints({
     //update staff supervisor
     updateDepartment: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/department/supervisor/update",
+        url: "inadmin/provider/department/supervisor/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -32,5 +32,4 @@ export const staffDepartmentApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useUpdateDepartmentMutation, useGetSupervisorListQuery } =
-  staffDepartmentApi;
+export const { useUpdateDepartmentMutation, useGetSupervisorListQuery } = staffDepartmentApi;

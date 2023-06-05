@@ -7,7 +7,7 @@ export const FullCalendarApi = apiSlice.injectEndpoints({
     // get all event calendar
     getCalendarEventApi: builder.query({
       query: ({ token, payload }) => ({
-        url: `/calender/list`,
+        url: `/inadmin/calender/list`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -21,7 +21,7 @@ export const FullCalendarApi = apiSlice.injectEndpoints({
     // get single session
     singleAppointmentApi: builder.query({
       query: ({ token, payload }) => ({
-        url: `/calender/single/appointment`,
+        url: `/inadmin/calender/single/appointment`,
         method: "POST",
         headers: {
           "content-type": "Application/json",

@@ -7,7 +7,7 @@ export const insuranceSetupApi = apiSlice.injectEndpoints({
     //All Treatment Api
     getAllInsuranceSetup: builder.query({
       query: ({ token, data }) => ({
-        url: `setting/get/all/insurance/details`,
+        url: `inadmin/setting/get/all/insurance/details`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -21,7 +21,7 @@ export const insuranceSetupApi = apiSlice.injectEndpoints({
     //get selected individual insurance details
     getPayorSetupDetails: builder.query({
       query: ({ token, data }) => ({
-        url: `/setting/get/insurance/setup/details`,
+        url: `inadmin/setting/get/insurance/setup/details`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -35,7 +35,7 @@ export const insuranceSetupApi = apiSlice.injectEndpoints({
 
     updateBox33InsuranceSetup: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/setting/payorsetup/box33/update`,
+        url: `inadmin/setting/payorsetup/box33/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -48,7 +48,7 @@ export const insuranceSetupApi = apiSlice.injectEndpoints({
 
     updateBox32InsuranceSetup: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/setting/payorsetup/box32/update`,
+        url: `inadmin/setting/payorsetup/box32/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -61,7 +61,7 @@ export const insuranceSetupApi = apiSlice.injectEndpoints({
 
     updateInsuranceTable: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/setting/update/insurance/table/data`,
+        url: `inadmin/setting/update/insurance/table/data`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -76,7 +76,7 @@ export const insuranceSetupApi = apiSlice.injectEndpoints({
 
     payorSetupDetailsUpdate: builder.mutation({
       query: ({ token, data }) => ({
-        url: `/setting/payor/setup/details/update`,
+        url: `inadmin/setting/payor/setup/details/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",

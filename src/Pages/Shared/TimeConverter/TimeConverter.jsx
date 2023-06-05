@@ -22,3 +22,9 @@ export const timeConverter2 = (utcTimestamp) => {
   });
   return localTime;
 };
+
+export const utcToConvert = (utcTimestamp) => {
+  const date = new Date(utcTimestamp);
+  const time = date.toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true });
+  return time;
+};

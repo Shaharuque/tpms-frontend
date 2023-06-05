@@ -30,7 +30,7 @@ export const usePersistStore = () => {
       }
       setChecked(true);
     }
-  }, [dispatch, setChecked]);
+  }, [dispatch, setChecked, token]);
 
   return checked;
 };

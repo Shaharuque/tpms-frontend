@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { MdOutlineCancel } from "react-icons/md";
 import { motion } from "framer-motion";
 import CardsView from "./CardView/CardsView";
-import { Dropdown, Space, Table } from "antd";
+import { Dropdown, Space, Table, Menu } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineDown, AiOutlineEye, AiOutlineMessage } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import ManageTableAction from "./ListView/ManageTableAction";

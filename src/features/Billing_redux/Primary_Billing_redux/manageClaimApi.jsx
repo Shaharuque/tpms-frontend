@@ -5,7 +5,7 @@ export const manageClaimApi = apiSlice.injectEndpoints({
     //Manage Claim Get Batch
     getBatch: builder.mutation({
       query: (token) => ({
-        url: "/pri/manage/claim/get/batchid/list",
+        url: "/inadmin/pri/manage/claim/get/batchid/list",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -28,7 +28,7 @@ export const manageClaimApi = apiSlice.injectEndpoints({
     //Manage Claim Get TX Provider
     getTxProviderManageClaim: builder.mutation({
       query: (token) => ({
-        url: "/pri/manage/claim/get/tx/provider",
+        url: "/inadmin/pri/manage/claim/get/tx/provider",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -40,7 +40,7 @@ export const manageClaimApi = apiSlice.injectEndpoints({
     //Manage Claim Get Patient
     getPatient: builder.mutation({
       query: (token) => ({
-        url: "/pri/manage/claim/get/patient/list",
+        url: "/inadmin/pri/manage/claim/get/patient/list",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -75,7 +75,7 @@ export const manageClaimApi = apiSlice.injectEndpoints({
     //Manage Claim List Data
     getManageClaimData: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/manage/claim/list",
+        url: "/inadmin/pri/manage/claim/list",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -88,7 +88,7 @@ export const manageClaimApi = apiSlice.injectEndpoints({
     //Manage Claim List Data
     getManageClaimTransactions: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/pri/manage/claim/list/transaction",
+        url: "/inadmin/pri/manage/claim/list/transaction",
         method: "POST",
         headers: {
           "content-type": "Application/json",

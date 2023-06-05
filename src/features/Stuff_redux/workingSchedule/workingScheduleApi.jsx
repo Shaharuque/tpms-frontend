@@ -7,7 +7,7 @@ export const workingScheduleApi = apiSlice.injectEndpoints({
     //dept. supervisor list
     getWorkingSchedule: builder.query({
       query: ({ id, token }) => ({
-        url: `/provider/get/working/schedule/${id}`,
+        url: `inadmin/provider/get/working/schedule/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -20,7 +20,7 @@ export const workingScheduleApi = apiSlice.injectEndpoints({
     //update staff supervisor
     updateWorkingSchedule: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/create/working/schedule",
+        url: "inadmin/provider/create/working/schedule",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -34,7 +34,7 @@ export const workingScheduleApi = apiSlice.injectEndpoints({
     //list block-off time
     getBlockOffTime: builder.query({
       query: ({ id, token }) => ({
-        url: "/provider/list/block/off/time",
+        url: "inadmin/provider/list/block/off/time",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -48,7 +48,7 @@ export const workingScheduleApi = apiSlice.injectEndpoints({
     //add block-off time
     createBlockOfftime: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/create/block/off/time",
+        url: "inadmin/provider/create/block/off/time",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -62,7 +62,7 @@ export const workingScheduleApi = apiSlice.injectEndpoints({
     //delete block-off time
     deleteBlockOffTime: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/delete/block/off/time",
+        url: "inadmin/provider/delete/block/off/time",
         method: "POST",
         headers: {
           "content-type": "Application/json",

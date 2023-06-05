@@ -7,7 +7,7 @@ export const addStaffTypeApi = apiSlice.injectEndpoints({
     //All getAllStaff Api
     getAllStaff: builder.query({
       query: ({ token }) => ({
-        url: `setting/all/staff/types`,
+        url: `inadmin/setting/all/staff/types`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -20,7 +20,7 @@ export const addStaffTypeApi = apiSlice.injectEndpoints({
     //Facility getSelectedStaff Api
     getSelectedStaff: builder.query({
       query: ({ token }) => ({
-        url: `setting/selected/staff/types`,
+        url: `inadmin/setting/selected/staff/types`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -33,7 +33,7 @@ export const addStaffTypeApi = apiSlice.injectEndpoints({
     // add
     addStaffType: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/add/staff/type/to/selected`,
+        url: `inadmin/setting/add/staff/type/to/selected`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -71,5 +71,4 @@ export const addStaffTypeApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useAddStaffTypeMutation, useGetAllStaffQuery, useGetSelectedStaffQuery } =
-  addStaffTypeApi;
+export const { useAddStaffTypeMutation, useGetAllStaffQuery, useGetSelectedStaffQuery } = addStaffTypeApi;

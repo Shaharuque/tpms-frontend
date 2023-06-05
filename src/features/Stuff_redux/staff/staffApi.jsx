@@ -7,7 +7,7 @@ export const staffApi = apiSlice.injectEndpoints({
     // Get staff info id wise
     getInfo: builder.query({
       query: ({ token, id }) => ({
-        url: `/provider/biographic/${id}`,
+        url: `inadmin/provider/biographic/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
@@ -24,7 +24,7 @@ export const staffApi = apiSlice.injectEndpoints({
     //Create Stuff
     createStuff: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/create",
+        url: "inadmin/provider/create",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -37,7 +37,7 @@ export const staffApi = apiSlice.injectEndpoints({
     // Update Staff Info
     updateStaff: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "/provider/biographic/update",
+        url: "inadmin/provider/biographic/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -53,8 +53,4 @@ export const staffApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useCreateStuffMutation,
-  useGetInfoQuery,
-  useUpdateStaffMutation,
-} = staffApi;
+export const { useCreateStuffMutation, useGetInfoQuery, useUpdateStaffMutation } = staffApi;

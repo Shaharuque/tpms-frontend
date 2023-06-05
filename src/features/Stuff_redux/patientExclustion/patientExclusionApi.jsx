@@ -7,7 +7,7 @@ const patientExclusionApi = apiSlice.injectEndpoints({
     //staff patient exclusion get all
     getAllPatientExclusion: builder.query({
       query: ({ token, payload }) => ({
-        url: `/provider/patient/exclusion/get/all`,
+        url: `inadmin/provider/patient/exclusion/get/all`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -20,7 +20,7 @@ const patientExclusionApi = apiSlice.injectEndpoints({
     //  staff patient exclusion assign
     getAssignedPatientExclusion: builder.query({
       query: ({ token, payload }) => ({
-        url: `/provider/patient/assigned/get/all`,
+        url: `inadmin/provider/patient/assigned/get/all`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -34,7 +34,7 @@ const patientExclusionApi = apiSlice.injectEndpoints({
     //staff patient exclusion save
     addPatientExclusion: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/provider/add/patient/to/assigned`,
+        url: `inadmin/provider/add/patient/to/assigned`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -48,7 +48,7 @@ const patientExclusionApi = apiSlice.injectEndpoints({
     // staff patient exclusion delete
     deletePatientExclusion: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/provider/delete/assigned/patient`,
+        url: `inadmin/provider/delete/assigned/patient`,
         method: "POST",
         headers: {
           "content-type": "Application/json",

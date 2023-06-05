@@ -7,7 +7,7 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
     // search treatment
     TreatmentSearch: builder.query({
       query: ({ token, data }) => ({
-        url: `setting/get/all/treatment/search`,
+        url: `inadmin/setting/get/all/treatment/search`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -21,7 +21,7 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
     // search treatment search
     SearchSelectedTreatment: builder.query({
       query: ({ token, data }) => ({
-        url: `setting/get/all/Selectedtreatment/search`,
+        url: `inadmin/setting/get/all/Selectedtreatment/search`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -35,7 +35,7 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
     //All Treatment Api
     getAllTreatments: builder.query({
       query: ({ token }) => ({
-        url: `setting/get/all/treatment`,
+        url: `inadmin/setting/get/all/treatment`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -48,7 +48,7 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
     //Facility Selected Treatment Api
     getAllSelectedTreatments: builder.query({
       query: ({ token }) => ({
-        url: `setting/get/all/facility/treatment`,
+        url: `inadmin/setting/get/all/facility/treatment`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -61,7 +61,7 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
     // add
     addTreatment: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/add/treatment/facility`,
+        url: `inadmin/setting/add/treatment/facility`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -69,18 +69,13 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(data),
       }),
-      invalidatesTags: [
-        "AllTreatments",
-        "SearchSelectedTretment",
-        "selectedTreatments",
-        "SearchTretment",
-      ],
+      invalidatesTags: ["AllTreatments", "SearchSelectedTretment", "selectedTreatments", "SearchTretment"],
     }),
 
     //  delete
     deleteTreatment: builder.mutation({
       query: ({ token, data }) => ({
-        url: `setting/remove/treatment/facility/`,
+        url: `inadmin/setting/remove/treatment/facility/`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
@@ -88,12 +83,7 @@ export const addTreatmentApi = apiSlice.injectEndpoints({
         },
         body: JSON.stringify(data),
       }),
-      invalidatesTags: [
-        "AllTreatments",
-        "selectedTreatments",
-        "SearchTretment",
-        "SearchSelectedTretment",
-      ],
+      invalidatesTags: ["AllTreatments", "selectedTreatments", "SearchTretment", "SearchSelectedTretment"],
     }),
   }),
 });

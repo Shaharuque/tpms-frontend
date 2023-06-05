@@ -7,7 +7,7 @@ export const recurringSessionApi = apiSlice.injectEndpoints({
     //Recurring Session Get Patient
     recurringGetAllInfos: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/recurring/session/get/all/info`,
+        url: `inadmin/recurring/session/get/all/info`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
