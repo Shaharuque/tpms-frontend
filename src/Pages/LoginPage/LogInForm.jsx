@@ -73,6 +73,10 @@ const LogInForm = ({ from }) => {
         navigate("/patient/calender"); //patient panel a redirect
         localStorage.setItem("adminToken", response?.data?.access_token);
         localStorage.setItem("type", "patient");
+      } else if (response?.data?.status === "success" && response?.data?.message === "InternalProvider Successfully logged In") {
+        navigate("/provider"); //patient panel a redirect
+        localStorage.setItem("adminToken", response?.data?.access_token);
+        localStorage.setItem("type", "provider");
       } else {
         // setMessage(response.data.message);
         navigate("/super-admin");

@@ -300,7 +300,7 @@ const ManageClaims = () => {
   };
 
   return (
-    <div className={!tActive ? "h-[100vh]" : ""}>
+    <div className={!tActive ? "h-[100vh]" : "h-[150vh]"}>
       {/* <h1 className="text-lg text-orange-400">Manage Claim(s)</h1> */}
 
       <div>

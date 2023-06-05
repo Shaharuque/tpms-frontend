@@ -4,9 +4,9 @@ import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Outlet, useParams } from "react-router-dom";
-import CustomLink from "../../Shared/CustomLink";
+import CustomLink from "../../Shared/CustomLink/CustomLink";
 
-const Biographic = () => {
+const ProviderBiographic = () => {
   return (
     <div>
       <div>
@@ -75,4 +75,4 @@ const Biographic = () => {
   );
 };
 
-export default Biographic;
+export default ProviderBiographic;
