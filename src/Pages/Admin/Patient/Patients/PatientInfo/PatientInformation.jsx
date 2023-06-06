@@ -19,6 +19,8 @@ import DynamicPhone from "./PhoneAddress/DynamicPhone";
 import PrimaryPhone from "./PhoneAddress/PrimaryPhone";
 import BasicInfo from "./BasicInfo";
 
+// http://localhost:3000/admin/patient/patient-info/107
+
 const PatientInformation = () => {
   const { token } = useToken();
   const [active, setActive] = useState(false);
@@ -54,28 +56,34 @@ const PatientInformation = () => {
     }, 1000);
   }, [patient_details]);
 
-  const { register, control, handleSubmit, reset, setValue, getValues } =
-    useForm({
-      defaultValues: {
-        address: patient_details?.client_address,
-        number: patient_details?.client_phone,
-        Email: patient_details?.client_email,
-      },
-    });
+  console.log("data?.patientDetails?.data?.address-", data?.patientDetails?.data?.address);
+
+  const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
+    defaultValues: {
+      // address: patient_details?.client_address,
+      // number: patient_details?.client_phone,
+      // Email: patient_details?.client_email,
+      // new code added
+      address: data?.patientDetails?.data?.address,
+      number: data?.patientDetails?.data?.phones,
+      // number: patient_details?.client_phone,
+      Email: data?.patientDetails?.data?.emails,
+    },
+  });
 
   // this code very important
   useEffect(() => {
     reset({
-      address: patient_details?.client_address,
-      number: patient_details?.client_phone,
-      Email: patient_details?.client_email,
+      number: data?.patientDetails?.data?.phones,
+      address: data?.patientDetails?.data?.address,
+      Email: data?.patientDetails?.data?.emails,
+
+      // address: patient_details?.client_address,
+      // number: patient_details?.client_phone,
+      // Email: patient_details?.client_email,
     });
-  }, [
-    patient_details?.client_address,
-    patient_details?.client_email,
-    patient_details?.client_phone,
-    reset,
-  ]);
+  }, [data?.patientDetails?.data?.address, data?.patientDetails?.data?.emails, data?.patientDetails?.data?.phones, reset]);
+  // patient_details?.client_address, patient_details?.client_email, patient_details?.client_phone, reset
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -121,9 +129,7 @@ const PatientInformation = () => {
     setTimeout(() => {
       reset({
         first_name: patient_details?.client_first_name,
-        middle_name: patient_details?.client_middle
-          ? patient_details?.client_middle
-          : null,
+        middle_name: patient_details?.client_middle ? patient_details?.client_middle : null,
         last_name: patient_details?.client_last_name,
         login_email: patient_details?.login_email,
         zone: patient_details?.zone,
@@ -136,10 +142,8 @@ const PatientInformation = () => {
         client_state: patient_details?.client_state,
         client_zip: patient_details?.client_zip,
         // all gurantor
-        guarantor_first_name:
-          patient_details?.client_granter?.guarantor_first_name,
-        guarantor_last_name:
-          patient_details?.client_granter?.guarantor_last_name,
+        guarantor_first_name: patient_details?.client_granter?.guarantor_first_name,
+        guarantor_last_name: patient_details?.client_granter?.guarantor_last_name,
         guarantor_check_Date: patient_details?.client_granter?.guarantor_dob,
         GuaratorStreet: patient_details?.client_granter?.g_street,
         GuaratorCity: patient_details?.client_granter?.g_city,
@@ -164,6 +168,8 @@ const PatientInformation = () => {
     if (e.target.value === "Self") {
       setGuarantor(false);
       document.getElementById("checkbox").checked = false;
+    } else if (e.target.value !== "Self") {
+      setGuarantor(true);
     }
 
     //setRelation(relation);
@@ -172,6 +178,7 @@ const PatientInformation = () => {
 
   //Guarentor handler code
   const handleChange = (event) => {
+    console.log("check event", event.target);
     if (event.target.checked) {
       //console.log("✅ Checkbox is checked");
       setGuarantor(true);
@@ -199,7 +206,7 @@ const PatientInformation = () => {
 
   console.log("patientAdd");
 
-  console.log("fields", fields);
+  console.log("fields", phoneFields);
   return (
     <div className={data?.patient_details?.data?.address?.length < 1 ? "" : ""}>
       <div>
@@ -241,10 +248,7 @@ const PatientInformation = () => {
                       POS<span className="text-red-500">*</span>
                     </span>
                   </label>
-                  <select
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("pos")}
-                  >
+                  <select className="input-border input-font py-[1px] w-full focus:outline-none" {...register("pos")}>
                     <option value="Main Office">Main Office</option>
                     <option value="Telehealth">Telehealth</option>
                     <option value="Home">Home</option>
@@ -256,10 +260,7 @@ const PatientInformation = () => {
                       Region<span className="text-red-500">*</span>
                     </span>
                   </label>
-                  <select
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("zone")}
-                  >
+                  <select className="input-border input-font py-[1px] w-full focus:outline-none" {...register("zone")}>
                     <option value="2"></option>
                     <option value="6">Main Zone</option>
                     <option value="27">ABC Behavioral Therapy Center</option>
@@ -307,11 +308,7 @@ const PatientInformation = () => {
                 }}
               />
               <br></br>
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
+              <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
                 <DynamicEmail
                   adData={{
                     register,
@@ -327,15 +324,13 @@ const PatientInformation = () => {
           <div className="divider"></div>
           <div className="flex ml-1 mt-1 items-center">
             <input
-              disabled={relation === "Self"}
+              disabled={relation === "Self" ? true : false}
               type="checkbox"
               // checked={relation !== "Self"}
               onChange={handleChange}
               id="checkbox"
             />
-            <span className="text-sm ml-1 text-gray-700 font-medium">
-              Is Guarantor Available?
-            </span>
+            <span className="text-sm ml-1 text-gray-700 font-medium">Is Guarantor Available?</span>
           </div>
 
           {Guarantor && (
@@ -350,12 +345,7 @@ const PatientInformation = () => {
               }}
               transition={{ delay: 0.2 }}
             >
-              <GuarantorInfo
-                register={register}
-                checkLocation={checkLocation}
-                SameasPatientBtn={SameasPatientBtn}
-                hook={hook}
-              ></GuarantorInfo>
+              <GuarantorInfo register={register} checkLocation={checkLocation} SameasPatientBtn={SameasPatientBtn} hook={hook}></GuarantorInfo>
             </motion.div>
           )}
 
@@ -365,10 +355,7 @@ const PatientInformation = () => {
             </div>
 
             <div className="ml-2 mt-[12px] ">
-              <CustomFileUploader
-                signatureUpload={signatureUpload}
-                setSignatureUpload={setSignatureUpload}
-              ></CustomFileUploader>
+              <CustomFileUploader signatureUpload={signatureUpload} setSignatureUpload={setSignatureUpload}></CustomFileUploader>
               <p className="mt-3 text-sm ">Upload Signature</p>
             </div>
           </div>

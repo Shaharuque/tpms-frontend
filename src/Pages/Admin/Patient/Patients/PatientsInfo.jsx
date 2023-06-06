@@ -22,9 +22,7 @@ const PatientsInfo = () => {
   const { token } = useToken();
   const dispatch = useDispatch();
 
-  const data = useSelector(
-    (state) => state?.patientInfo?.patientDetails?.data?.client_info || {}
-  );
+  const data = useSelector((state) => state?.patientInfo?.patientDetails?.data?.client_info || {});
   console.log("patient_details===", data);
   useEffect(() => {
     // action dispatched
@@ -45,16 +43,11 @@ const PatientsInfo = () => {
           <IoCaretBackCircleOutline />
         </Link>
         <div className="text-xs font-normal">
-          <span className="text-sm font-semibold text-primary">
-            {data?.client_full_name} |
-          </span>
+          <span className="text-sm font-semibold text-primary">{data?.client_full_name} |</span>
           <span className="text-orange-400 font-semibold">DOB :</span>
-          {data?.client_dob} |
-          <span className="text-orange-400 font-semibold">Phone : </span>
-          {data?.phone_number} |
-          <span className="text-orange-400 font-semibold">Address : </span>
-          {data?.client_street}, {data?.client_city}, {data?.client_state}{" "}
-          {data?.client_zip}
+          {data?.client_dob} |<span className="text-orange-400 font-semibold">Phone : </span>
+          {data?.phone_number} |<span className="text-orange-400 font-semibold">Address : </span>
+          {data?.client_street}, {data?.client_city}, {data?.client_state} {data?.client_zip}
         </div>
       </div>
       <div className="flex lg:flex-nowrap md:flex-wrap flex-wrap justify-between gap-2 my-2">
@@ -66,38 +59,25 @@ const PatientsInfo = () => {
         >
           <div className="">
             <div className="">
-              <img
-                src={doctor}
-                className="h-24 w-24 m-auto rounded-full border border-gray-100"
-                alt=""
-              />
+              <img src={doctor} className="h-24 w-24 m-auto rounded-full border border-gray-100" alt="" />
             </div>
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mt-2 mb-1">
-            <CustomLink
-              className="flex gap-1 pb-1 clink items-center"
-              to={`patient-info/${id}`}
-            >
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-info/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <MdPersonSearch className=" text-2xl" /> Patient Info
               </h1>
             </CustomLink>
           </div>
           <div className="text-xs  text-secondary font-normal patient-nav mb-1">
-            <CustomLink
-              className="flex gap-1 pb-1 clink items-center"
-              to={`patient-vob/${id}`}
-            >
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-vob/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <TiDocumentAdd className=" text-2xl" /> VOB
               </h1>
             </CustomLink>
           </div>
           <div className="text-xs  text-secondary font-normal patient-nav mb-1">
-            <CustomLink
-              className="flex gap-1 pb-1 clink items-center"
-              to={`patient-authorization/${id}`}
-            >
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-authorization/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <BsFillFileEarmarkLock2Fill className=" text-2xl" />
                 Ins/Authorization
@@ -105,52 +85,60 @@ const PatientsInfo = () => {
             </CustomLink>
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
-            <CustomLink
-              className="flex gap-1 pb-1 clink items-center"
-              to={`patient-document/${id}`}
-            >
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-document/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <IoDocumentsOutline className=" text-2xl" /> Documents
               </h1>
             </CustomLink>
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
-            <CustomLink
-              className="flex gap-1 pb-1 clink items-center"
-              to={`patient-ledger/${id}`}
-            >
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-ledger/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <TbReport className=" text-2xl" /> Patient Ledger
               </h1>
             </CustomLink>
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
-            <CustomLink
-              className="flex gap-1 pb-1 clink items-center"
-              to={`patient-portal/${id}`}
-            >
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-portal/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <TbReport className=" text-2xl" /> Patient Portal
               </h1>
             </CustomLink>
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
-            <CustomLink
-              className="flex gap-1 pb-1 clink items-center"
-              to={`patient-intake/${id}`}
-            >
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-intake/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <AiOutlineCloudUpload className=" text-2xl" /> Intake
               </h1>
             </CustomLink>
           </div>
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
-            <CustomLink
-              className="flex gap-1 pb-1 clink items-center"
-              to={`patient-call-log/${id}`}
-            >
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-call-log/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
                 <AiOutlinePhone className=" text-2xl" /> Call Log
+              </h1>
+            </CustomLink>
+          </div>
+          <div className="text-xs text-secondary font-normal patient-nav mb-1">
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-payment-info/${id}`}>
+              <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <AiOutlinePhone className=" text-2xl" /> Payment Info
+              </h1>
+            </CustomLink>
+          </div>
+
+          <div className="text-xs text-secondary font-normal patient-nav mb-1">
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-sibling/${id}`}>
+              <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <AiOutlinePhone className=" text-2xl" /> Sibling
+              </h1>
+            </CustomLink>
+          </div>
+
+          <div className="text-xs text-secondary font-normal patient-nav mb-1">
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-all-notes/${id}`}>
+              <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <AiOutlinePhone className=" text-2xl" /> Session Notes
               </h1>
             </CustomLink>
           </div>

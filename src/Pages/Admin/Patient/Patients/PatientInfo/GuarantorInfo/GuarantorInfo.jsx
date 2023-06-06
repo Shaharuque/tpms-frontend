@@ -37,11 +37,7 @@ const GuarantorInfo = ({ register, checkLocation, SameasPatientBtn, hook }) => {
           <label className="label">
             <span className=" label-font">Check Date</span>
           </label>
-          <input
-            className="input-border input-font  w-full focus:outline-none"
-            type="date"
-            {...register("guarantor_check_Date")}
-          />
+          <input className="input-border input-font  w-full focus:outline-none" type="date" {...register("guarantor_check_Date")} />
         </div>
 
         {/* </div> */}
