@@ -170,40 +170,40 @@ const menuItem = [
 
   // Provider Portal
   {
-    path: "/user",
+    path: "/provider",
     name: "Dashboard",
     icon: <AiOutlineHome />,
     roll: "provider",
   },
   {
-    path: "/user",
+    path: "/provider/scheduler",
     name: "My Schedule",
     icon: <AiOutlineHome />,
     roll: "provider",
   },
 
   {
-    path: "/user",
+    path: "/provider/calender",
     name: "Calender",
     icon: <AiOutlineHome />,
     roll: "provider",
   },
   {
-    path: "/user/biographic",
+    path: "/provider/biographic",
     name: "Biographic",
     icon: <BsFileText />,
     roll: "provider",
   },
 
   {
-    path: "/user/Pataients",
+    path: "/provider/Pataients",
     name: "Patient(s)",
     icon: <BsFileText />,
     roll: "provider",
   },
 
   {
-    path: "/user/user-timesheet",
+    path: "/provider/user-timesheet",
     name: "Timesheet(s)",
     icon: <BsFileText />,
     roll: "provider",

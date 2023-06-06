@@ -9,11 +9,8 @@ import ProcessingClaim from "./Pages/Admin/Billing/BillingManager/ProcessingClai
 import CreateStaff from "./Pages/Admin/Staff/AddStaff/CreateStaff";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
-import Biographic from "./Pages/Pages/User/Biographic/Biographic";
 import Pataients from "./Pages/Pages/User/Patient/Pataients";
-import SchedulerCalender from "./Pages/Pages/User/My-Schedule/SchedulerCalender/SchedulerCalender";
 import MyInfo from "./Pages/PatientSection/MyInfo/MyInfo";
-import { Bios } from "./Pages/Pages/User/Biographic/Bios/Bios";
 import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
 import MyCalender from "./Pages/PatientSection/MyCalender/MyCalender";
 import MyStatement from "./Pages/PatientSection/MyStatement/MyStatement";
@@ -180,7 +177,6 @@ import InfiniteScrollTest from "./Testing/ApiTesting/InfiniteScrollTest";
 import ProfileInformation from "./Pages/Shared/Profile/ProfileInformation";
 import PasswordChange from "./Pages/Shared/Profile/PasswordChange";
 import Profile from "./Pages/Shared/Profile/Profile";
-import QueryTesting from "./Testing/ApiTesting/QueryTesting";
 import EmailAndSms from "./Pages/Admin/Settings/Settings/EmailAndSMS/EmailAndSms";
 import EmailSetting from "./Pages/Admin/Settings/Settings/EmailAndSMS/EmailSetting/EmailSetting";
 import SmsSetting from "./Pages/Admin/Settings/Settings/EmailAndSMS/SmsSetting/SmsSetting";
@@ -192,7 +188,6 @@ import ERAFiles from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/ERAFiles";
 import Files277 from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/Files277";
 import Files999 from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/Files999";
 import EDIStatusFiles from "./Pages/Admin/Settings/Settings/QAFiles/QAFile/EDIStatusFiles";
-import Test from "./Pages/Shared/Test";
 import IntakeForm from "./Pages/Admin/Settings/Settings/IntakeForm/IntakeForm";
 import StructureOfProcess from "./Pages/Admin/Settings/Settings/StructureOfProcess/StructureOfProcess";
 import AppIdTracking from "./Pages/Admin/Settings/Settings/AppIdTracking/AppIdTracking";
@@ -307,6 +302,11 @@ import TableInstance from "./Testing/TableInstance";
 import MySchedule from "./Pages/PatientSection/MySchedule/MySchedule";
 import MainInfo from "./Pages/PatientSection/MyInfo/PatientInfo/MainInfo";
 import MyAuthorization from "./Pages/PatientSection/MyInfo/Authorization/MyAuthorization";
+import ProviderDashboard from "./Pages/ProviderSection/Dashboard/ProviderDashboard";
+import Schedule from "./Pages/ProviderSection/Schedule/Schedule";
+import Calender from "./Pages/ProviderSection/Calender/Calender";
+import ProviderBiographic from "./Pages/ProviderSection/Biographic/ProviderBiographic";
+import { ProviderBios } from "./Pages/ProviderSection/Biographic/Bios/ProviderBios";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -314,6 +314,14 @@ function App() {
   const auth = usePersistStore();
   console.log("auth", auth);
   const loggedInInfo = localStorage?.getItem("type");
+
+  // disable right click(production mode a use korbo)
+  // window.addEventListener("contextmenu", (e) => e.preventDefault());
+  // window.addEventListener("keydown", (e) => {
+  //   if (e.keyCode === 123) e.preventDefault();
+  //   if (e.ctrlKey && e.shiftKey && e.keyCode === 73) e.preventDefault();
+  //   if (e.ctrlKey && e.shiftKey && e.keyCode === 74) e.preventDefault();
+  // });
   return (
     <div className="app-body">
       <FullScreen handle={handle}>
@@ -724,11 +732,12 @@ function App() {
           </Route>
 
           {/* User Pannel */}
-          <Route path="/user" element={<Sidebar handle={handle}></Sidebar>}>
-            <Route index element={<ManageSessions />}></Route>
-            <Route path="calender" element={<SchedulerCalender />}></Route>
-            <Route path="biographic" element={<Biographic />}>
-              <Route index element={<Bios></Bios>}></Route>
+          <Route path="/provider" element={<Sidebar handle={handle}></Sidebar>}>
+            <Route index element={<ProviderDashboard />}></Route>
+            <Route path="scheduler" element={<Schedule />}></Route>
+            <Route path="calender" element={<Calender />}></Route>
+            <Route path="biographic" element={<ProviderBiographic />}>
+              <Route index element={<ProviderBios></ProviderBios>}></Route>
               <Route path="bio-contactinfo" element={<ContractContainer></ContractContainer>}></Route>
               <Route path="bio-credential" element={<CredentialsContainer></CredentialsContainer>}></Route>
             </Route>
