@@ -1,6 +1,6 @@
 import { DatePicker, Space, Table } from "antd";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import CustomDateRange from "../../../../Shared/CustomDateRange/CustomDateRange";
 import { AiOutlineCalendar } from "react-icons/ai";
@@ -56,10 +56,32 @@ const ProcessingClaim = () => {
   const [unitValue, setUnitValue] = useState("");
   const [rate, setRate] = useState("");
   const [idQualifier, setIdQualifier] = useState("");
+  const [records, setRecords] = useState([]);
 
   console.log("selected option from sortby1", selectedSortOptionOne);
 
   console.log("sortBy1", sortBy1);
+  console.log("staffdata", staffData);
+
+  const handleInputChange = (recordId, field, newValue) => {
+    setStaffData((prevData) => {
+      const updatedData = prevData.map((record) => {
+        if (record.id === recordId) {
+          const updatedRecord = {
+            ...record,
+            [field]: newValue,
+          };
+          console.log("Updated Record", updatedRecord.m2);
+          return updatedRecord;
+        }
+        return record;
+      });
+      return updatedData;
+    });
+    if (!selectedRowKeys.includes(recordId)) {
+      setSelectedRowKeys((prevKeys) => [...prevKeys, recordId]);
+    }
+  };
 
   //Process Claim Get Payor api
   const [PayorByDate, { data: responsePayorData, isLoading: payorLoading, isSuccess: payorSuccess }] = usePayorByDateMutation();
@@ -375,6 +397,8 @@ const ProcessingClaim = () => {
             type="text"
             // defaultValue={record?.id}
             value={record?.cpt}
+            onChange={(e) => handleInputChange(record.id, "cpt", e.target.value)}
+            // onBlur={(e) => handleInputChange(record.key, e.target.value)}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -396,6 +420,7 @@ const ProcessingClaim = () => {
             className="page py-[3px]  focus:outline-none"
             type="text"
             value={record?.pos}
+            onChange={(e) => handleInputChange(record.id, "pos", e.target.value)}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -413,13 +438,21 @@ const ProcessingClaim = () => {
       width: 80,
       render: (_, record) => {
         return (
+          // <input
+          //   className="page py-[3px]  focus:outline-none"
+          //   type="text"
+          //   value={record?.m1 || ""}
+          //   onChange={(e) => handleInputChange(e.target.value, "m1", record?.id)}
+          // ></input>
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
-            //default value gives me the option to change in input field but value doesn't
-            //defaultValue={record?.m1}
+            // defaultValue={record?.m2}
+            // value={record?.m2}
             value={record?.m1}
-            onChange={(e) => handleM1(e.target.value, record?.id)}
+            onChange={(e) => handleInputChange(record.id, "m1", e.target.value)}
+            onBlur={(e) => handleInputChange(record.key, "m1", e.target.value)}
+            // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
       },
@@ -436,12 +469,19 @@ const ProcessingClaim = () => {
       key: "m2",
       width: 80,
       render: (_, record) => {
+        // const handleInputChange = (recordId, newValue) => {
+        //   const updatedRecords = staffData.map((r) => (r.key === recordId ? { ...r, m2: newValue } : r));
+        //   setStaffData(updatedRecords);
+        // };
         return (
           <input
             className="page py-[3px]  focus:outline-none"
             type="text"
             // defaultValue={record?.m2}
+            // value={record?.m2}
             value={record?.m2}
+            onChange={(e) => handleInputChange(record.id, "m2", e.target.value)}
+            onBlur={(e) => handleInputChange(record.key, e.target.value)}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -463,6 +503,7 @@ const ProcessingClaim = () => {
             className="page py-[3px]  focus:outline-none"
             type="text"
             value={record?.m3}
+            onChange={(e) => handleInputChange(record.id, "m3", e.target.value)}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -484,6 +525,7 @@ const ProcessingClaim = () => {
             className="page py-[3px]  focus:outline-none"
             type="text"
             value={record?.m4}
+            onChange={(e) => handleInputChange(record.id, "m4", e.target.value)}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -505,6 +547,7 @@ const ProcessingClaim = () => {
             className="page py-[3px]  focus:outline-none"
             type="text"
             value={record?.units}
+            onChange={(e) => handleInputChange(record.id, "units", e.target.value)}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -527,6 +570,7 @@ const ProcessingClaim = () => {
             className="page py-[3px]  focus:outline-none"
             type="text"
             value={record?.rate}
+            onChange={(e) => handleInputChange(record.id, "rate", e.target.value)}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -548,6 +592,7 @@ const ProcessingClaim = () => {
             className="page py-[3px]  focus:outline-none"
             type="text"
             defaultValue={record?.rate}
+            onChange={(e) => handleInputChange(record.id, "rate", e.target.value)}
             // onChange={(e) => handleCms1500_31(e.target.value, record?.id)}
           ></input>
         );
@@ -610,15 +655,23 @@ const ProcessingClaim = () => {
     setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
+  // get rowid
 
-  //get rows id to do some action on them
   const onSelectChange = (newSelectedRowKeys) => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
+
+  useEffect(() => {
+    const selectedRows = staffData.filter((row) => selectedRowKeys.includes(row.id));
+    const selectedM2Values = selectedRows.map((row) => row);
+    console.log("Selected M2 Values:", selectedM2Values);
+  }, [selectedRowKeys, staffData]);
+
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
   };
+
   console.log("selected Insurance Setup : ", selectedRowKeys);
 
   const handleSaveFunc = () => {
