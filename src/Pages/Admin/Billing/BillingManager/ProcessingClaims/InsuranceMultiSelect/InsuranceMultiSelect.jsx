@@ -9,16 +9,21 @@ const ProcessClaimsMultiSelect = ({
   setInsuranceSelect,
   setSortBy1,
   payorLoading,
+  setRunClick,
+  setHasMore,
+  setPage,
+  setSelectedSortOptionOne,
 }) => {
+  console.log("payorData", payorData);
   const insuranceDataProcess = () => {
     let processedData = [];
     if (payorData) {
       for (let x of payorData) {
-        if (x?.payor_facility?.payor_name !== null) {
+        if (x?.payor_name !== null) {
           processedData.push({
-            label: x?.payor_facility?.payor_name,
-            value: x?.payor_facility?.payor_name,
-            id: x?.payor_facility?.payor_id,
+            label: x?.payor_name,
+            value: x?.payor_name,
+            id: x?.payor_id,
           });
         }
       }
@@ -38,13 +43,15 @@ const ProcessClaimsMultiSelect = ({
 
   useEffect(() => {
     const getSelectedInsurance = async () => {
-      const getId = selected.map((item) => item.id);
+      const getId = selected.map((item) => item?.id);
       setInsuranceSelect(getId);
-      // setSortBy1("");
+      setRunClick(false);
+      setSelectedSortOptionOne("");
     };
     getSelectedInsurance();
   }, [selected, setInsuranceSelect]);
 
+  console.log("selected", selected);
   return (
     <MultiSelect
       disabled={payorLoading && true}

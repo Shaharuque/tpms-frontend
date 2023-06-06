@@ -6,14 +6,7 @@ import { NavLink } from "react-router-dom";
 // import StateOpen from "../Hooks/StateUse";
 import { motion } from "framer-motion";
 
-const SidebarMenu = ({
-  items,
-  isHovering,
-  dropState,
-  handleDropState,
-  setSideBar,
-  handleSidebar,
-}) => {
+const SidebarMenu = ({ items, isHovering, dropState, handleDropState, setSideBar, handleSidebar }) => {
   return (
     <div className="pl-4 py-3 hover:bg-primary text-white">
       <div
@@ -30,21 +23,15 @@ const SidebarMenu = ({
           <div
             className={
               isHovering
-                ? "mr-2 opacity-1 duration-600 ease-in text-[18px] font-semibold "
-                : "mr-2 opacity-0 duration-200 ease-out text-[18px] font-semibold hidden"
+                ? "mr-2 opacity-1 duration-600 ease-in text-[15px] font-semibold "
+                : "mr-2 opacity-0 duration-200 ease-out text-[15px] font-semibold hidden"
             }
           >
             {items.name}
           </div>
         </div>
 
-        <div
-          className={
-            isHovering
-              ? "mr-3 opacity-1 duration-600 ease-in text-[16px]"
-              : "mr-3 opacity-0 duration-200 ease-out text-[16px]"
-          }
-        >
+        <div className={isHovering ? "mr-3 opacity-1 duration-600 ease-in text-[14px]" : "mr-3 opacity-0 duration-200 ease-out text-[14px]"}>
           <IoIosArrowUp
             style={{
               transition: "all .3s ease-out",
@@ -74,18 +61,12 @@ const SidebarMenu = ({
               <div className="flex items-center h-8">
                 <div className="text-lg  px-3 py-1">{s.icon}</div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
+                <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
                   {/* Ai particular part a change kora lagbey */}
                   <div
                     onClick={handleSidebar}
                     className={
-                      isHovering
-                        ? "mr-2 opacity-0.5 ease-in text-[16px] w-[187px] font-medium py-1"
-                        : "mr-2 opacity-0 ease-out text-[16px] font-medium hidden"
+                      isHovering ? "mr-2 opacity-0.5 ease-in text-[14px] w-[187px] font-medium py-1" : "mr-2 opacity-0 ease-out text-[14px] font-medium hidden"
                     }
                   >
                     {s.name}

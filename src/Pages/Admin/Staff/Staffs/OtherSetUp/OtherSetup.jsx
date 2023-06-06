@@ -5,13 +5,11 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
-import {
-  useAddOtherSetupMutation,
-  useGetOtherSetupQuery,
-} from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
+import { useAddOtherSetupMutation, useGetOtherSetupQuery } from "../../../../../features/Stuff_redux/otherSetup/otherSetupApi";
 import Loading from "../../../../../Loading/Loading";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import OtherSetUpBottom from "./OtherSetUpBottom/OtherSetUpBottom";
+import { baseIp } from "../../../../../Misc/BaseClient";
 
 const OtherSetup = () => {
   const [loading, setLoading] = useState(false);
@@ -34,30 +32,34 @@ const OtherSetup = () => {
   });
 
   // ADD OTHER SETUP API
-  const [addOtherSetup, { isSuccess, data, isError: addotherSetupError }] =
-    useAddOtherSetupMutation();
+  const [addOtherSetup, { isSuccess, data, isError: addotherSetupError }] = useAddOtherSetupMutation();
 
-  //Clients multi select data from server
   useEffect(() => {
-    const othersetupApicall = async () => {
-      setLoading(true);
-      const res = await axios({
-        method: "GET",
-        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/staff/other/setup/${id}`,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: token || null,
-        },
-      });
-
-      settxTypedata(res.data?.tx_type_data);
-      reset();
-      setLoading(false);
-      // setsingleInput(res.data?.info);
-    };
-    othersetupApicall();
-  }, [id, token, isSuccess]);
+    if (otherSetupSuccess) {
+      settxTypedata(otherSetup?.getAllTxType);
+    }
+  }, [otherSetupSuccess, otherSetup?.getAllTxType]);
+  //Clients multi select data from server
+  // useEffect(() => {
+  //   const othersetupApicall = async () => {
+  //     setLoading(true);
+  //     const res = await axios({
+  //       method: "GET",
+  //       url: `${baseIp}/provider/other/setup/${id}`,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         "x-auth-token": token || null,
+  //       },
+  //     });
+  //     console.log("other setup data", res);
+  //     settxTypedata(res.data?.getAllTxType);
+  //     reset();
+  //     setLoading(false);
+  //     // setsingleInput(res.data?.info);
+  //   };
+  //   othersetupApicall();
+  // }, [id, token, isSuccess]);
 
   //Success/Error message show added api
   useEffect(() => {
@@ -66,12 +68,14 @@ const OtherSetup = () => {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (addotherSetupError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [addotherSetupError, data?.message, isSuccess]);
@@ -101,7 +105,8 @@ const OtherSetup = () => {
     signature_valid_form,
     signature_valid_to,
     updated_at,
-  } = otherSetup?.info || {};
+  } = otherSetup?.providerOtherSetup || {};
+  console.log("other setup data", otherSetup);
 
   useEffect(() => {
     // you can do async server request and fill up form
@@ -164,16 +169,10 @@ const OtherSetup = () => {
   // bollian value all state
   const [paidTimeOff, setPaidTimeOff] = useState(BoolConverter(paid_time_off));
   const [exemptStaff, setExemptStaff] = useState(BoolConverter(exemt_staff));
-  const [paidHoliday, setPaidHoliday] = useState(
-    BoolConverter(gets_paid_holiday)
-  );
+  const [paidHoliday, setPaidHoliday] = useState(BoolConverter(gets_paid_holiday));
   const [isPartTime, setIsPartTime] = useState(BoolConverter(is_parttime));
-  const [isContractor, setIsContractor] = useState(
-    BoolConverter(is_contractor)
-  );
-  const [providerWithoutNote, setProviderWithoutNote] = useState(
-    BoolConverter(1)
-  );
+  const [isContractor, setIsContractor] = useState(BoolConverter(is_contractor));
+  const [providerWithoutNote, setProviderWithoutNote] = useState(BoolConverter(provider_render_without));
 
   // boolian value data control
   useEffect(() => {
@@ -182,21 +181,11 @@ const OtherSetup = () => {
     setPaidHoliday(BoolConverter(gets_paid_holiday));
     setIsPartTime(BoolConverter(is_parttime));
     setIsContractor(BoolConverter(is_contractor));
-  }, [
-    exemt_staff,
-    gets_paid_holiday,
-    is_contractor,
-    is_parttime,
-    paid_time_off,
-  ]);
+  }, [exemt_staff, gets_paid_holiday, is_contractor, is_parttime, paid_time_off]);
 
   console.log("single input", singleInput);
 
-  const txTypeStore =
-    (txTypedata &&
-      txTypedata.length > 0 &&
-      txTypedata.map((item) => store.push(item.id))) ||
-    [];
+  const txTypeStore = (txTypedata && txTypedata.length > 0 && txTypedata.map((item) => store.push(item.id))) || [];
 
   console.log("store", store);
 
@@ -216,14 +205,14 @@ const OtherSetup = () => {
     console.log("payload", payload);
     addOtherSetup({ token, payload });
   };
-  if (otherSetupLoading || loading) {
-    return <Loading />;
-  }
+  // if (otherSetupLoading || loading) {
+  //   return <Loading />;
+  // }
 
   // console.log("dm", dm);
   // console.log("loading..", loading);
   return (
-    <div className="md:h-[100vh]">
+    <div className="">
       <h1 className="text-lg mt-2 text-left text-orange-400">Other Setup</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 my-3 mr-2 gap-x-4 gap-y-2">
@@ -254,98 +243,55 @@ const OtherSetup = () => {
             <label className="label">
               <span className=" label-font">ADP Employee Id</span>
             </label>
-            <input
-              type="text"
-              name="adp_employee_id"
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("adp_employee_id")}
-            />
+            <input type="text" name="adp_employee_id" className="input-border input-font w-full focus:outline-none py-[1px]" {...register("adp_employee_id")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Provider Level</span>
             </label>
-            <input
-              type="text"
-              name="provider_level"
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("provider_level")}
-            />
+            <input type="text" name="provider_level" className="input-border input-font w-full focus:outline-none py-[1px]" {...register("provider_level")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">custom2</span>
             </label>
-            <input
-              type="text"
-              name="custom_two"
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("custom_two")}
-            />
+            <input type="text" name="custom_two" className="input-border input-font w-full focus:outline-none py-[1px]" {...register("custom_two")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Custom3</span>
             </label>
-            <input
-              type="text"
-              name="custom_three"
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("custom_three")}
-            />
+            <input type="text" name="custom_three" className="input-border input-font w-full focus:outline-none py-[1px]" {...register("custom_three")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Custom4</span>
             </label>
-            <input
-              type="text"
-              name="custom_four"
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("custom_four")}
-            />
+            <input type="text" name="custom_four" className="input-border input-font w-full focus:outline-none py-[1px]" {...register("custom_four")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Custom5</span>
             </label>
-            <input
-              type="text"
-              name="custom_five"
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("custom_five")}
-            />
+            <input type="text" name="custom_five" className="input-border input-font w-full focus:outline-none py-[1px]" {...register("custom_five")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Custom6</span>
             </label>
-            <input
-              type="text"
-              name="custom_six "
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("custom_six")}
-            />
+            <input type="text" name="custom_six " className="input-border input-font w-full focus:outline-none py-[1px]" {...register("custom_six")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Highest Degree</span>
             </label>
-            <input
-              type="text"
-              name="heigh_degree"
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              {...register("heigh_degree")}
-            />
+            <input type="text" name="heigh_degree" className="input-border input-font w-full focus:outline-none py-[1px]" {...register("heigh_degree")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Degree Level</span>
             </label>
-            <select
-              className="input-border input-font w-full focus:outline-none "
-              {...register("degree_level")}
-            >
+            <select className="input-border input-font w-full focus:outline-none " {...register("degree_level")}>
               <option value=""></option>
               <option value="1">Associate degree</option>
               <option value="2">Bachelor’s Degree</option>
@@ -378,104 +324,54 @@ const OtherSetup = () => {
             <label className="label">
               <span className=" label-font">Signature Valid From</span>
             </label>
-            <input
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              type="date"
-              {...register("signature_valid_form")}
-            />
+            <input className="input-border input-font w-full focus:outline-none py-[1px]" type="date" {...register("signature_valid_form")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Signature Valid To</span>
             </label>
-            <input
-              className="input-border input-font w-full focus:outline-none py-[1px]"
-              type="date"
-              {...register("signature_valid_to")}
-            />
+            <input className="input-border input-font w-full focus:outline-none py-[1px]" type="date" {...register("signature_valid_to")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Upload File</span>
             </label>
-            <input
-              type="file"
-              className=" px-2 text-xs w-full"
-              {...register("signature_image")}
-            />
+            <input type="file" className=" px-2 text-xs w-full" {...register("signature_image")} />
           </div>
         </div>
 
         {/* --------------------------------- */}
-        <div className="my-5">
-          <div className="flex ml-1 mt-1 items-center">
-            <Switch
-              size="small"
-              checked={paidTimeOff}
-              onClick={() => setPaidTimeOff(!paidTimeOff)}
-            />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Is eligible for paid time off
-            </span>
+        <div className="my-8">
+          <div className="flex ml-1 mt-2 items-center">
+            <Switch size="small" checked={paidTimeOff} onClick={() => setPaidTimeOff(!paidTimeOff)} />
+            <span className="text-sm ml-2  text-gray-600">Is eligible for paid time off</span>
           </div>
-          <div className="flex ml-1 mt-1 items-center">
-            <Switch
-              size="small"
-              checked={exemptStaff ? true : false}
-              onClick={() => setExemptStaff(!exemptStaff)}
-            />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Exempt Staff
-            </span>
+          <div className="flex ml-1 mt-2 items-center">
+            <Switch size="small" checked={exemptStaff ? true : false} onClick={() => setExemptStaff(!exemptStaff)} />
+            <span className="text-sm ml-2  text-gray-600">Exempt Staff</span>
           </div>
-          <div className="flex ml-1 mt-1 items-center">
-            <Switch
-              size="small"
-              checked={paidHoliday}
-              onClick={() => setPaidHoliday(!paidHoliday)}
-            />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Gets paid holidays
-            </span>
+          <div className="flex ml-1 mt-2 items-center">
+            <Switch size="small" checked={paidHoliday} onClick={() => setPaidHoliday(!paidHoliday)} />
+            <span className="text-sm ml-2  text-gray-600">Gets paid holidays</span>
           </div>
-          <div className="flex ml-1 mt-1 items-center">
-            <Switch
-              size="small"
-              checked={isPartTime}
-              onClick={() => setIsPartTime(!isPartTime)}
-            />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Is Parttime
-            </span>
+          <div className="flex ml-1 mt-2 items-center">
+            <Switch size="small" checked={isPartTime} onClick={() => setIsPartTime(!isPartTime)} />
+            <span className="text-sm ml-2  text-gray-600">Is Parttime</span>
           </div>
-          <div className="flex ml-1 mt-1 items-center">
-            <Switch
-              size="small"
-              checked={isContractor}
-              onClick={() => setIsContractor(!isContractor)}
-            />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Is Contractor
-            </span>
+          <div className="flex ml-1 mt-2 items-center">
+            <Switch size="small" checked={isContractor} onClick={() => setIsContractor(!isContractor)} />
+            <span className="text-sm ml-2  text-gray-600">Is Contractor</span>
           </div>
-          <div className="flex ml-1 mt-1 items-center">
-            <Switch
-              size="small"
-              checked={providerWithoutNote}
-              onClick={() => setProviderWithoutNote(!providerWithoutNote)}
-            />
-            <span className="text-sm ml-2  text-gray-600 font-medium">
-              Prevent Provider Render Without Notes(for catalyst users)
-            </span>
+          <div className="flex ml-1 mt-2 items-center">
+            <Switch size="small" checked={providerWithoutNote} onClick={() => setProviderWithoutNote(!providerWithoutNote)} />
+            <span className="text-sm ml-2  text-gray-600">Prevent Provider Render Without Notes(for catalyst users)</span>
           </div>
         </div>
-        <div className="other-box ml-2 my-10">
+        <div className="other-box ml-2">
           <div className="flex items-center justify-around gap-2 mb-4 ">
             <h3 className="text-sm font-medium w-80">Tax Type</h3>
             <h3 className="text-sm font-medium w-80 text-center">Box 24J</h3>
-            <h3 className="text-sm font-medium w-80 text-center">
-              ID Qualifier
-            </h3>
+            <h3 className="text-sm font-medium w-80 text-center">ID Qualifier</h3>
           </div>
 
           {/* {!otherSetupLoading ? (
@@ -491,7 +387,7 @@ const OtherSetup = () => {
           )}
           {/* )} */}
         </div>
-        <div className="mt-10 ml-2">
+        <div className="mt-2 ml-2">
           <button className=" pms-button" type="submit">
             Save
           </button>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { headers } from "../../../Misc/BaseClient";
+import { baseIp, headers } from "../../../Misc/BaseClient";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
 import { FaRegAddressCard } from "react-icons/fa";
@@ -138,18 +138,20 @@ const TableApi = () => {
   //get data from API + data fetch from api while scrolling[Important]
   useEffect(() => {
     const getPatientsData = async () => {
-      const res = await axios({
-        method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/patient/get/all?page=1`,
+      let res = await axios({
+        method: "post",
+        url: `${baseIp}/patient/list`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token ? token : null, //directly access token from custom hook useToken
+          "x-auth-token": token,
+        },
+        data: {
+          page: 1,
         },
       });
-      // const result = await res.json();
-      const data = res.data?.patients?.data;
-      //console.log(data)
+      const data = res?.data?.data?.data;
+      console.log(data);
       setItems(data);
     };
     getPatientsData();
@@ -157,16 +159,19 @@ const TableApi = () => {
   console.log("headers from patients", headers);
 
   const fetchPatients = async () => {
-    const res = await axios({
-      method: "POST",
-      url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/patient/get/all?page=${page}`,
+    let res = await axios({
+      method: "post",
+      url: `${baseIp}/patient/list`,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token ? token : null,
+        "x-auth-token": token,
+      },
+      data: {
+        page,
       },
     });
-    const data = res.data?.patients?.data;
+    const data = res?.data?.data?.data;
     console.log(data);
     return data;
   };
@@ -191,9 +196,7 @@ const TableApi = () => {
   //Individual filtering [tagging feature]
   const deleteFirstNameTag = (tag) => {
     console.log(tag);
-    const client_full_name_array = filteredInfo?.client_full_name?.filter(
-      (item) => item !== tag
-    );
+    const client_full_name_array = filteredInfo?.client_full_name?.filter((item) => item !== tag);
     setFilteredInfo({
       client_full_name: client_full_name_array,
       client_gender: filteredInfo?.client_gender,
@@ -204,9 +207,7 @@ const TableApi = () => {
   };
   const deleteDobTag = (tag) => {
     console.log(tag);
-    const client_dob_array = filteredInfo?.client_dob?.filter(
-      (item) => item !== tag
-    );
+    const client_dob_array = filteredInfo?.client_dob?.filter((item) => item !== tag);
     setFilteredInfo({
       client_full_name: filteredInfo?.client_full_name,
       client_gender: filteredInfo?.client_gender,
@@ -217,9 +218,7 @@ const TableApi = () => {
   };
   const deleteGenderTag = (tag) => {
     console.log(tag);
-    const client_gender_array = filteredInfo?.client_gender?.filter(
-      (item) => item !== tag
-    );
+    const client_gender_array = filteredInfo?.client_gender?.filter((item) => item !== tag);
     setFilteredInfo({
       client_full_name: filteredInfo?.client_full_name,
       client_gender: client_gender_array,
@@ -230,9 +229,7 @@ const TableApi = () => {
   };
   const deletelocationTag = (tag) => {
     console.log(tag);
-    const location_array = filteredInfo?.location?.filter(
-      (item) => item !== tag
-    );
+    const location_array = filteredInfo?.location?.filter((item) => item !== tag);
     setFilteredInfo({
       client_full_name: filteredInfo?.client_full_name,
       client_gender: filteredInfo?.client_gender,
@@ -243,9 +240,7 @@ const TableApi = () => {
   };
   const deleteInsuranceTag = (tag) => {
     console.log(tag);
-    const insurance_array = filteredInfo?.insurance?.filter(
-      (item) => item !== tag
-    );
+    const insurance_array = filteredInfo?.insurance?.filter((item) => item !== tag);
     setFilteredInfo({
       client_full_name: filteredInfo?.client_full_name,
       client_gender: filteredInfo?.client_gender,
@@ -278,8 +273,7 @@ const TableApi = () => {
       sorter: (a, b) => {
         return a.client_full_name > b.client_full_name ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "client_full_name" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "client_full_name" ? sortedInfo.order : null,
 
       // render contains what we want to reflect as our data
       // client_full_name, id, key=>each row data(object) property value can be accessed.
@@ -287,10 +281,7 @@ const TableApi = () => {
         //console.log("tags : ", client_full_name, id, key);
         return (
           <div className="">
-            <button
-              onClick={() => patientDetails(id)}
-              className="text-secondary font-medium"
-            >
+            <button onClick={() => patientDetails(id)} className="text-secondary font-medium">
               {client_full_name}
             </button>
           </div>
@@ -309,13 +300,7 @@ const TableApi = () => {
       render: (_, { phone_number }) => {
         return (
           <div>
-            <h1>
-              {phone_number ? (
-                phone_number
-              ) : (
-                <h1 className="text-red-600">No Data</h1>
-              )}
-            </h1>
+            <h1>{phone_number ? phone_number : <h1 className="text-red-600">No Data</h1>}</h1>
           </div>
         );
       },
@@ -328,8 +313,7 @@ const TableApi = () => {
       sorter: (a, b) => {
         return a.phone_number > b.phone_number ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "phone_number" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "phone_number" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -343,13 +327,7 @@ const TableApi = () => {
       render: (_, { client_dob }) => {
         return (
           <div>
-            <h1>
-              {client_dob ? (
-                client_dob
-              ) : (
-                <h1 className="text-red-600">No Data</h1>
-              )}
-            </h1>
+            <h1>{client_dob ? client_dob : <h1 className="text-red-600">No Data</h1>}</h1>
           </div>
         );
       },
@@ -363,8 +341,7 @@ const TableApi = () => {
       sorter: (a, b) => {
         return a.client_dob > b.client_dob ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "client_dob" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "client_dob" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -380,8 +357,7 @@ const TableApi = () => {
       sorter: (a, b) => {
         return a.client_gender > b.client_gender ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "client_gender" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "client_gender" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -394,9 +370,7 @@ const TableApi = () => {
       render: (_, { location }) => {
         return (
           <div>
-            <h1>
-              {location ? location : <h1 className="text-red-600">No Data</h1>}
-            </h1>
+            <h1>{location ? location : <h1 className="text-red-600">No Data</h1>}</h1>
           </div>
         );
       },
@@ -463,13 +437,11 @@ const TableApi = () => {
       key: "is_active_client",
       dataIndex: "is_active_client",
       width: 100,
-      render: (_, { is_active_client }) => {
+      render: (_, { id, is_active_client }) => {
         //console.log("Status : ", Status);
         return (
           <div className="flex justify-center">
-            <PatientStatusAction
-              status={is_active_client}
-            ></PatientStatusAction>
+            <PatientStatusAction id={id} is_active_client={is_active_client}></PatientStatusAction>
           </div>
         );
       },
@@ -489,9 +461,7 @@ const TableApi = () => {
     >
       <>
         <div className="flex items-center flex-wrap justify-between gap-2 my-2">
-          <h1 className="text-lg text-orange-500 text-left font-semibold ">
-            Patient
-          </h1>
+          <h1 className="text-lg text-orange-500 text-left font-semibold ">Patient</h1>
           <div>
             <input
               placeholder="Search here..."
@@ -520,21 +490,13 @@ const TableApi = () => {
               <div className="">
                 <div className="flex flex-wrap mb-2 gap-1">
                   {filteredInfo?.client_full_name?.map((tag, index) => (
-                    <div
-                      className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                      key={index}
-                    >
+                    <div className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center" key={index}>
                       <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                        <span className="text-secondary text-[15px] font-medium mr-1  ">
-                          Patient:
-                        </span>
+                        <span className="text-secondary text-[15px] font-medium mr-1  ">Patient:</span>
                         {tag}
                       </div>
                       <div>
-                        <div
-                          className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2"
-                          onClick={() => deleteFirstNameTag(tag)}
-                        >
+                        <div className="cursor-pointer text-sm text-white bg-primary py-[3px] px-2" onClick={() => deleteFirstNameTag(tag)}>
                           X
                         </div>
                       </div>
@@ -546,21 +508,13 @@ const TableApi = () => {
             {filteredInfo?.client_dob?.length > 0 && (
               <div className="flex flex-wrap mb-2 gap-1">
                 {filteredInfo?.client_dob?.map((tag, index) => (
-                  <div
-                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                    key={index}
-                  >
+                  <div className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center" key={index}>
                     <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                      <span className="text-secondary text-[15px] font-medium mr-1  ">
-                        DOB:
-                      </span>
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">DOB:</span>
                       {tag}
                     </div>
                     <div>
-                      <div
-                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
-                        onClick={() => deleteDobTag(tag)}
-                      >
+                      <div className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2" onClick={() => deleteDobTag(tag)}>
                         X
                       </div>
                     </div>
@@ -571,21 +525,13 @@ const TableApi = () => {
             {filteredInfo?.client_gender?.length > 0 && (
               <div className="flex flex-wrap mb-2 gap-1">
                 {filteredInfo?.client_gender?.map((tag, index) => (
-                  <div
-                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                    key={index}
-                  >
+                  <div className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center" key={index}>
                     <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                      <span className="text-secondary text-[15px] font-medium mr-1  ">
-                        Gender:
-                      </span>
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">Gender:</span>
                       {tag}
                     </div>
                     <div>
-                      <div
-                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
-                        onClick={() => deleteGenderTag(tag)}
-                      >
+                      <div className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2" onClick={() => deleteGenderTag(tag)}>
                         X
                       </div>
                     </div>
@@ -596,21 +542,13 @@ const TableApi = () => {
             {filteredInfo?.location?.length > 0 && (
               <div className="flex flex-wrap mb-2 gap-1">
                 {filteredInfo?.location?.map((tag, index) => (
-                  <div
-                    className="text-gray-700  shadow-sm font-medium  rounded-sm pl-1 bg-white flex items-center"
-                    key={index}
-                  >
+                  <div className="text-gray-700  shadow-sm font-medium  rounded-sm pl-1 bg-white flex items-center" key={index}>
                     <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                      <span className="text-secondary text-[15px] font-medium mr-1  ">
-                        Pos:
-                      </span>
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">Pos:</span>
                       {tag}
                     </div>
                     <div>
-                      <div
-                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
-                        onClick={() => deletelocationTag(tag)}
-                      >
+                      <div className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2" onClick={() => deletelocationTag(tag)}>
                         X
                       </div>
                     </div>
@@ -621,21 +559,13 @@ const TableApi = () => {
             {filteredInfo?.insurance?.length > 0 && (
               <div className="flex flex-wrap mb-2 gap-1">
                 {filteredInfo?.insurance?.map((tag, index) => (
-                  <div
-                    className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center"
-                    key={index}
-                  >
+                  <div className="text-gray-700  shadow-sm font-medium   rounded-sm pl-1 bg-white flex items-center" key={index}>
                     <div className="border border-primary text-sm pt-[1px] pb-[2.3px] px-2">
-                      <span className="text-secondary text-[15px] font-medium mr-1  ">
-                        Insurance :
-                      </span>
+                      <span className="text-secondary text-[15px] font-medium mr-1  ">Insurance :</span>
                       {tag}
                     </div>
                     <div>
-                      <div
-                        className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2"
-                        onClick={() => deleteInsuranceTag(tag)}
-                      >
+                      <div className="cursor-pointer text-sm text-white bg-primary py-[3.2px] px-2" onClick={() => deleteInsuranceTag(tag)}>
                         X
                       </div>
                     </div>
@@ -669,11 +599,7 @@ const TableApi = () => {
         </InfiniteScroll>
 
         {modalOpen && (
-          <PatientAuthorizationsTableModal
-            patient_id={patientId}
-            modalOpen={modalOpen}
-            setModalOpen={setModalOpen}
-          ></PatientAuthorizationsTableModal>
+          <PatientAuthorizationsTableModal patient_id={patientId} modalOpen={modalOpen} setModalOpen={setModalOpen}></PatientAuthorizationsTableModal>
         )}
       </>
     </div>

@@ -5,12 +5,25 @@ import React, { useEffect, useState } from "react";
 import { FiDelete } from "react-icons/fi";
 import AddFederal from "./HoildaySetUp/AddFederal";
 import AddTImeOff from "./HoildaySetUp/AddTImeOff";
+import {
+  useGetAllHolidayQuery,
+  useHolidayDeleteMutation,
+} from "../../../../../features/Settings_redux/holidaySetup/holidaySetupApi";
+import useToken from "../../../../../CustomHooks/useToken";
 
 const HolidaySetup = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [addTimeOff, setAddTimeOff] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
+  const { token } = useToken();
+
+  const { data: allHoliday, isLoading: holidayLoading } = useGetAllHolidayQuery(
+    { token }
+  );
+
+  const [holidayDelete, { isSuccess: holidayDeleteSuccess }] =
+    useHolidayDeleteMutation();
 
   const handleClickOpen = () => {
     setAddTimeOff(true);
@@ -33,50 +46,28 @@ const HolidaySetup = () => {
     setSortedInfo(sorter);
   };
 
-  const [table, setTable] = useState(false);
-  useEffect(() => {
-    axios("../../../All_Fake_Api/Holiday.json")
-      .then((response) => {
-        console.log("calling");
-        setTable(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  console.log(table);
-
+  const handleHolidayDelete = (holiday_id) => {
+    console.log("holiday_id : ", holiday_id);
+    if (holiday_id) {
+      holidayDelete({ token, data: { holiday_id } });
+    }
+  };
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
     {
       title: "Date of Holiday",
-      dataIndex: "date",
-      key: "date",
+      dataIndex: "holiday_date",
+      key: "holiday_date",
       width: 100,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      render: (_, { date }) => {
+      render: (_, { holiday_date }) => {
         //console.log("tags : ", lock);
-        return <div className=" text-secondary">{date}</div>;
+        return <div className=" text-secondary">{holiday_date}</div>;
       },
-      filteredValue: filteredInfo.date || null,
-      onFilter: (value, record) => record.date.includes(value),
       sorter: (a, b) => {
-        return a.date > b.date ? -1 : 1;
+        return a.holiday_date > b.holiday_date ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "date" ? sortedInfo.order : null,
+      sortOrder:
+        sortedInfo.columnKey === "holiday_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -84,22 +75,6 @@ const HolidaySetup = () => {
       dataIndex: "description",
       key: "description",
       width: 150,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      filteredValue: filteredInfo.description || null,
-      onFilter: (value, record) => record.description.includes(value),
       sorter: (a, b) => {
         return a.description > b.description ? -1 : 1;
       },
@@ -113,11 +88,14 @@ const HolidaySetup = () => {
       dataIndex: "action",
       key: "action",
       width: 70,
-      render: () => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" flex justify-center items-center">
-            <button className="text-rose-500 ">
+            <button
+              onClick={() => handleHolidayDelete(record?.id)}
+              className="text-rose-500 "
+            >
               <DeleteOutlined />
             </button>
           </div>
@@ -157,7 +135,7 @@ const HolidaySetup = () => {
           bordered
           className=" text-xs font-normal"
           columns={columns}
-          dataSource={table}
+          dataSource={allHoliday?.holidaySetups}
           scroll={{
             y: 650,
           }}
@@ -189,7 +167,12 @@ const HolidaySetup = () => {
         <AddTImeOff handleClose={handleClose} open={addTimeOff}></AddTImeOff>
       )}
       {openAddModal && (
-        <AddFederal handleClose={handleClose2} open={openAddModal}></AddFederal>
+        <AddFederal
+          allHoliday={allHoliday}
+          holidayLoading={holidayLoading}
+          handleClose={handleClose2}
+          open={openAddModal}
+        ></AddFederal>
       )}
     </div>
   );

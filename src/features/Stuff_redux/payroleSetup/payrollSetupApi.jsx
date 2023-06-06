@@ -7,23 +7,24 @@ export const payrollApi = apiSlice.injectEndpoints({
     //staff payroll get
     getPayrolls: builder.query({
       query: ({ token, page, id }) => ({
-        url: `admin/ac/staff/payroll/get/${id}?page=${page}`,
-        method: "GET",
+        url: `inadmin/provider/payroll/list/get`,
+        method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
+        body: JSON.stringify({ page, id }),
       }),
       providesTags: ["Payroll"],
     }),
     //Add staff payroll
     addPayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/payroll/save",
+        url: "inadmin/provider/payroll/save",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -45,11 +46,11 @@ export const payrollApi = apiSlice.injectEndpoints({
     //Update staff credential info
     updatePayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/payroll/update",
+        url: "inadmin/provider/payroll/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -58,11 +59,11 @@ export const payrollApi = apiSlice.injectEndpoints({
     //Delete payroll (individual)
     deletePayroll: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/payroll/delete",
+        url: "inadmin/provider/payroll/delete",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -81,6 +82,20 @@ export const payrollApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Payroll"],
     }),
+
+    //update bulk payload
+    bulkUpdatePayroll: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "inadmin/provider/payroll/bulk/update",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["Payroll"],
+    }),
   }),
 });
 
@@ -91,4 +106,5 @@ export const {
   useUpdatePayrollMutation,
   useDeletePayrollMutation,
   useBulkDeletePayrollMutation,
+  useBulkUpdatePayrollMutation,
 } = payrollApi;

@@ -3,49 +3,12 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import Form from "./Form";
 
-const NameLocationTable32 = ({
-  data,
-  table32Open,
-  handleTableOpen32,
-  loading,
-}) => {
-  const [add, setAdd] = useState(0);
-  const [test, setTest] = useState({});
-  //console.log(loading);
-  //const {id,facility_name_two,address}=data
-  console.log(data);
-
-  const handleAdd = () => {
-    setAdd(add + 1);
-  };
-
-  // Editable value
-  useEffect(() => {
-    setTimeout(() => {
-      reset({
-        address: "",
-      });
-    }, 0);
-  }, []);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    reset();
-  };
-
+const NameLocationTable32 = ({ primaryData, data, table32Open, handleTableOpen32, loading }) => {
+  console.log("form data", primaryData);
   return (
     <div>
       {/* Child 32  */}
-      <h2
-        onClick={handleTableOpen32}
-        className=" mt-4 text-xs p-2 text-white bg-secondary"
-      >
+      <h2 onClick={handleTableOpen32} className=" mt-4 text-xs p-2 text-white bg-secondary">
         Box No 32
       </h2>
       {table32Open && (
@@ -59,7 +22,7 @@ const NameLocationTable32 = ({
               transition: "all .3s ease-out",
             }}
           >
-            <Form item={data}></Form>
+            <Form item={data} primarydata={primaryData}></Form>
           </motion.div>
         </div>
       )}
@@ -68,3 +31,16 @@ const NameLocationTable32 = ({
 };
 
 export default NameLocationTable32;
+
+// import React from "react";
+// import Form from "./Form";
+
+// const NameLocationTable32 = ({ data }) => {
+//   return (
+//     <div>
+//       <Form item={data}></Form>
+//     </div>
+//   );
+// };
+
+// export default NameLocationTable32;

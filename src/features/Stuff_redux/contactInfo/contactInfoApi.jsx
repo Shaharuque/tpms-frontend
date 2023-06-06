@@ -6,11 +6,11 @@ export const staffInfoApi = apiSlice.injectEndpoints({
     staffContactInfo: builder.query({
       //staffContactInfo
       query: ({ token, id }) => ({
-        url: `admin/ac/staff/contact/info/${id}`,
+        url: `inadmin/provider/contact/info/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
       providesTags: ["ContactInfo"],
@@ -19,11 +19,11 @@ export const staffInfoApi = apiSlice.injectEndpoints({
     //   addContactInfo  staff contact info
     addContactInfo: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staff/contact/details/update`,
+        url: `inadmin/provider/contact/info/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -33,11 +33,11 @@ export const staffInfoApi = apiSlice.injectEndpoints({
     //   add Emergency contact info
     addEmergencyContactInfo: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `/admin/ac/staff/emergency/contact/details/update`,
+        url: `inadmin/provider/emergency/contact/info/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -46,8 +46,4 @@ export const staffInfoApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useStaffContactInfoQuery,
-  useAddContactInfoMutation,
-  useAddEmergencyContactInfoMutation,
-} = staffInfoApi;
+export const { useStaffContactInfoQuery, useAddContactInfoMutation, useAddEmergencyContactInfoMutation } = staffInfoApi;

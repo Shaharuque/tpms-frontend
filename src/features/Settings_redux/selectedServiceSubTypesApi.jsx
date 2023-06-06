@@ -5,16 +5,15 @@ import { baseIp } from "../../Misc/BaseClient";
 //async thunk(fetchServiceSubType) to fetch pos data list depending on page_ad
 export const fetchServiceSubType = createAsyncThunk(
   "settings/fetchServiceSubType",
-  async ({ endPoint, page, token, data }) => {
+  async ({ token, payload }) => {
     const response = await axios({
-      url: `${baseIp}/${endPoint}?page=${page}`,
+      url: `${baseIp}/setting/subactivity/get`,
       method: "POST",
       headers: {
         Accept: "application/json",
-        "treatmentSelect-Type": "application/json;charset=UTF-8",
-        Authorization: token,
+        "x-auth-token": token || null,
       },
-      data: data,
+      data: payload,
     });
     return response.data;
   }

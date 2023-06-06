@@ -10,23 +10,41 @@ export const fetchData = async (endPoint, token) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: token || null,
+      "x-auth-token": token || null,
     },
   });
   return response;
 };
 
-export const PostfetchData = async ({ endPoint, payload, token }) => {
-  console.log(endPoint, payload);
-  const response = await axios.post(`${baseIp}/${endPoint}`, payload, {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      Authorization: token || null,
-    },
-  });
-  return response.data;
+// export const PostfetchData = async ({ endPoint, payload = null, token }) => {
+//   console.log(endPoint, payload);
+//   const response = await axios.post(`${baseIp}/${endPoint}`, payload, {
+//     headers: {
+//       "Content-Type": "application/json",
+//       Accept: "application/json",
+//       "x-auth-token": token || null,
+//     },
+//   });
+//   return response.data;
+// };
+
+export const PostfetchData = async ({ endPoint, payload = null, token }) => {
+  try {
+    console.log(endPoint, payload);
+    const response = await axios.post(`${baseIp}/${endPoint}`, payload, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "x-auth-token": token || null,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error in POST request:", error);
+    throw error; // Re-throw the error to be caught and handled by the caller
+  }
 };
+
 
 // react query  implementatio
 

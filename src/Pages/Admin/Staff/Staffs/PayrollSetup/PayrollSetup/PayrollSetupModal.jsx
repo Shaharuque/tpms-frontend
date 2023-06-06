@@ -38,17 +38,19 @@ const PayrollSetupModal = ({ handleClose, open, services }) => {
 
   useEffect(() => {
     if (addSuccess) {
-      toast.success("Successfully Staff Created", {
+      toast.success("successfully payroll created", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
       handleClose();
     } else if (addError) {
-      toast.error("Some Error Occured", {
+      toast.error("service already exist", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px", width: "70%" },
       });
     }
   }, [addSuccess, addError]);
@@ -116,7 +118,7 @@ const PayrollSetupModal = ({ handleClose, open, services }) => {
                   />
                 </div>
 
-                <div className="flex ml-1 mt-8 gap-2 items-center">
+                {/* <div className="flex ml-1 mt-8 gap-2 items-center">
                   <input
                     type="checkbox"
                     name="service"
@@ -125,7 +127,7 @@ const PayrollSetupModal = ({ handleClose, open, services }) => {
                     }}
                   />
                   <span className="modal-label-name">Apply to All Service</span>
-                </div>
+                </div> */}
               </div>
               <div className="bg-gray-200 py-[1px] mt-3"></div>
               <div className=" flex items-end justify-end mt-2">

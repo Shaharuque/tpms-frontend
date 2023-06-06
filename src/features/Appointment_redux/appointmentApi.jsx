@@ -54,11 +54,11 @@ export const apointmentApi = apiSlice.injectEndpoints({
     //Appointment Get POS
     getAppointmentPOS: builder.query({
       query: (token) => ({
-        url: `admin/ac/appointment/get/pos`,
+        url: `/setting/list/all/pos/code`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
     }),

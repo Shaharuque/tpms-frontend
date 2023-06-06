@@ -1,29 +1,51 @@
 import { Modal } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import EditInsuranceSelect from "./EditInsuranceSelect";
 import EditInsuranceTable from "./EditInsuranceTable";
 import InsuranceBox from "./InsuranceEditBox/InsuranceBox";
+import { useGetPayorSetupDetailsQuery } from "../../../../../../features/Settings_redux/insuranceSetup/insuranceSetupApi";
+import useToken from "../../../../../../CustomHooks/useToken";
 
-const InsuranceModal = ({ handleClose, open }) => {
+const InsuranceModal = ({ id, handleClose, open }) => {
+  const [insuranceBox, setInsuranceBox] = useState(null);
+  const { token } = useToken();
+  console.log("clicked insurance", id);
+
+  const { data: payorSetupDetails, isLoading: payorSetupLoading } = useGetPayorSetupDetailsQuery({
+    token,
+    data: {
+      edit_id: id,
+    },
+  });
+  console.log("payorSetupDetails", payorSetupDetails);
+
+  useEffect(() => {
+    if (!payorSetupLoading) {
+      setInsuranceBox(payorSetupDetails?.payor_details);
+    }
+  }, [payorSetupDetails?.payor_details, payorSetupLoading]);
+
   return (
     <div>
       <Modal
         open={open} //aikhaney true na likey ekta state ana lagbey tar value 'true'
         centered
         footer={null}
-        bodyStyle={{ padding: "0" }}
-        width={1000}
+        style={{
+          top: 10,
+          bottom: 20,
+        }}
+        width={700}
         closable={false}
         className="box rounded-xl"
         // onClose={handleClose}
-        // aria-labelledby="responsive-dialog-title"
       >
         <div className=" py-3">
           <div className="flex px-5 pb-3 items-center justify-between shadow-md border-b">
             <h1 className=" font-medium text-base">
               Edit Insurance -{" "}
-              <span className="text-red-600">Magellan Health Services</span>{" "}
+              <span className="text-red-600">{payorSetupDetails?.payor_details?.payor_name}</span>{" "}
             </h1>
             <IoCloseCircleOutline
               onClick={handleClose}
@@ -32,8 +54,11 @@ const InsuranceModal = ({ handleClose, open }) => {
           </div>
 
           <div className="px-5 overflow-scroll h-[700px]">
-            <InsuranceBox></InsuranceBox>
-            <EditInsuranceSelect></EditInsuranceSelect>
+            {insuranceBox && <InsuranceBox insuranceBox={insuranceBox}></InsuranceBox>}
+            <EditInsuranceSelect
+              insuranceBox={payorSetupDetails}
+              payordetail={payorSetupDetails?.payor_details}
+            ></EditInsuranceSelect>
             <EditInsuranceTable></EditInsuranceTable>
           </div>
           <div className="pt-3 flex justify-end items-end px-5 border-t shadow-t-md">

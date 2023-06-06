@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./MultiSelectCSS/multiSelect.css";
 
-const Providers = ({ stuffs, setStuffsId }) => {
+const Providers = ({ stuffs, setStuffsId, setFetchQuery }) => {
   const [selected, setSelected] = useState([]);
 
   const stuffDataProcess = () => {
@@ -37,6 +37,7 @@ const Providers = ({ stuffs, setStuffsId }) => {
     const getProvidersId = async () => {
       const getId = selected.map((item) => item.id);
       setStuffsId(getId);
+      setFetchQuery(false); //for recurring session purpose only
     };
     getProvidersId();
   }, [selected, setStuffsId]);

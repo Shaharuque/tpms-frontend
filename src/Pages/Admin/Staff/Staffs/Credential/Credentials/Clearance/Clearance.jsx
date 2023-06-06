@@ -6,6 +6,9 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import AddClearence from "./AddClearenceModal/AddClearence";
 import EditClearence from "./EditClearenceModal/EditClearence";
+import { useDeleteClearanceMutation } from "../../../../../../../features/Stuff_redux/credentials/clearenceApi";
+import useToken from "../../../../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
 
 const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
   console.log("clearences data", clearences);
@@ -15,6 +18,10 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
   const [editModal, setEditModal] = useState(false);
   const [clearenceRecord, setClearenceRecord] = useState();
   const [openEditModal, setOpenEditModal] = useState(false);
+  const { token } = useToken();
+
+  const [deleteClearance, { isSuccess: deleteSuccess }] =
+    useDeleteClearanceMutation();
 
   //Handle clearence Modal
   const handleClearenceEdit = (record) => {
@@ -27,6 +34,27 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
   const handleClickOpen = () => {
     setOpenEditModal(true);
   };
+
+  const handleDelete = (record) => {
+    const payload = {
+      clear_id: record?.id,
+    };
+    if (record?.id) {
+      deleteClearance({ token, payload });
+    }
+  };
+  useEffect(() => {
+    if (deleteSuccess) {
+      if (deleteSuccess) {
+        toast.success("Successfully Deleted Credential", {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "dark",
+          style: { fontSize: "12px" },
+        });
+      }
+    }
+  }, []);
   const column = [
     {
       title: "Name",
@@ -40,13 +68,13 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
       ellipsis: true,
     },
     {
-      title: "Clearence Name",
+      title: "Clearence Type",
       dataIndex: "clearance_name",
       key: "clearance_name",
       width: 120,
-      filters: [{}],
-      filteredValue: filteredInfo.clearance_name || null,
-      onFilter: (value, record) => record.clearance_name.includes(value),
+      // filters: [{}],
+      // filteredValue: filteredInfo.clearance_name || null,
+      // onFilter: (value, record) => record.clearance_name.includes(value),
       sorter: (a, b) => {
         return a.clearance_name > b.clearance_name ? -1 : 1;
       },
@@ -56,30 +84,13 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
     },
 
     {
-      title: "Credential Type",
-      key: "credential_type",
-      dataIndex: "credential_type",
-      width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.credential_type || null,
-      onFilter: (value, record) => record.credential_type.includes(value),
-      //   sorter is for sorting asc or dsc purcredential_type
-      sorter: (a, b) => {
-        return a.credential_type > b.credential_type ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder:
-        sortedInfo.columnKey === "credential_type" ? sortedInfo.order : null,
-      ellipsis: true,
-    },
-
-    {
       title: "Date issue",
       key: "clearance_date_issue",
       dataIndex: "clearance_date_issue",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.clearance_date_issue || null,
-      onFilter: (value, record) => record.clearance_date_issue.includes(value),
+      // filters: [{}],
+      // filteredValue: filteredInfo.clearance_date_issue || null,
+      // onFilter: (value, record) => record.clearance_date_issue.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
         return a.clearance_date_issue > b.clearance_date_issue ? -1 : 1; //sorting problem solved using this logic
@@ -95,9 +106,9 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
       key: "clearance_date_exp",
       dataIndex: "clearance_date_exp",
       width: 100,
-      filters: [{}],
-      filteredValue: filteredInfo.clearance_date_exp || null,
-      onFilter: (value, record) => record.clearance_date_exp.includes(value),
+      // filters: [{}],
+      // filteredValue: filteredInfo.clearance_date_exp || null,
+      // onFilter: (value, record) => record.clearance_date_exp.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
         return a.clearance_date_exp > b.clearance_date_exp ? -1 : 1; //sorting problem solved using this logic
@@ -122,6 +133,7 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
           <span>|</span>
 
           <AiOutlineDelete
+            onClick={() => handleDelete(record)}
             className="text-xs text-red-500 mx-2"
             title="Delete"
           />
@@ -159,19 +171,21 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
               transition: "all .3s ease-out",
             }}
           >
-            {display && (
-              <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
-                <p>No Clearance Records</p>
-                <button
-                  onClick={() => setDisplay(false)}
-                  className="text-black"
-                >
-                  X
-                </button>
-              </div>
-            )}
-
-            <div>
+            {clearences?.clearences?.data === 0 ? (
+              <>
+                {display && (
+                  <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">
+                    <p>No Credential Records</p>
+                    <button
+                      onClick={() => setDisplay(false)}
+                      className="text-black"
+                    >
+                      X
+                    </button>
+                  </div>
+                )}
+              </>
+            ) : (
               <div className=" overflow-scroll">
                 <Table
                   pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
@@ -180,11 +194,12 @@ const Clearance = ({ handleClearence, clearenceOpen, clearences }) => {
                   columns={column}
                   bordered
                   rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-                  dataSource={clearences?.clearance_list?.data}
+                  dataSource={clearences?.clearences?.data}
                   onChange={handleChange}
                 />
               </div>
-            </div>
+            )}
+
             <div className="my-4 ml-2">
               <button
                 className="pms-button mr-2 mt-2"

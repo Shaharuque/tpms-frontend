@@ -12,14 +12,13 @@ const OtherSetUpBottom = ({ propdata }) => {
         txTypedata.length > 0 &&
         txTypedata.map((field, index) => {
           return (
-            <div key={field.id} className="flex items-center gap-2 mb-2">
-              <h3 className="text-[14px] ml-5 font-medium w-[440px]">
-                {field?.treatment_name}
-              </h3>
+            <div key={field.id} className="flex items-center gap-4 mb-2">
+              <h3 className="text-[14px] ml-5 font-medium w-[440px]">{field?.treatment_name}</h3>
 
               <input
                 type="text"
                 defaultValue={field.box_24j == null ? "" : field.box_24j}
+                placeholder="Box 24J(BT)"
                 // name={`${tx_type}.${box_24j}`}
                 className="input-border input-font w-full focus:outline-none py-[1px]"
                 {...register(`box_24j.${index}`)}
@@ -30,9 +29,7 @@ const OtherSetUpBottom = ({ propdata }) => {
                 // defaultValue={}
                 {...register(`id_qualifire.${index}`)}
               >
-                <option value={field.id_qualifire}>
-                  {field.id_qualifire || "ID Qualifier(BT)"}
-                </option>
+                <option value={field.id_qualifire}>{field.id_qualifire || "ID Qualifier(BT)"}</option>
                 <option value="0B">0B</option>
                 <option value="1B">1B</option>
                 <option value="1C">1C</option>

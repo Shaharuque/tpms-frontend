@@ -4,24 +4,25 @@ export const qualificationApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //Get qualification
     getQualification: builder.query({
-      query: ({ token, page = 3, id }) => ({
-        url: `admin/ac/staff/qualification/all/${id}?page=1`,
-        method: "GET",
+      query: ({ token, page, id }) => ({
+        url: `inadmin/provider/qualification/list`,
+        method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
+        body: JSON.stringify({ page, id }),
       }),
       providesTags: ["Qualification"],
     }),
     //Add qualification
     addQualification: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/qualification/save",
+        url: "inadmin/provider/qualification/save",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -30,11 +31,11 @@ export const qualificationApi = apiSlice.injectEndpoints({
     //get qualification table individual data
     getQualificationInfo: builder.query({
       query: ({ token, id }) => ({
-        url: `admin/ac/staff/qualification/info/${id}`,
+        url: `inadmin/provider/single/qualification/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
       providesTags: ["Qualification"],
@@ -42,11 +43,11 @@ export const qualificationApi = apiSlice.injectEndpoints({
     //Update qualification info
     updateQualification: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/qualification/update",
+        url: "inadmin/provider/qualification/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -55,11 +56,11 @@ export const qualificationApi = apiSlice.injectEndpoints({
     //Delete qualification by id
     deleteQualification: builder.mutation({
       query: ({ token, payload }) => ({
-        url: `admin/ac/staff/qualification/delete`,
+        url: `inadmin/provider/qualification/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),

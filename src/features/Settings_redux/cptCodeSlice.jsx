@@ -5,14 +5,18 @@ import { baseIp } from "../../Misc/BaseClient";
 //async action(getAdmins) creator to fetch admins data list depending on page_ad
 export const fetchCpt = createAsyncThunk(
   "settings/fetchCpt",
-  async ({ endPoint, page, token }) => {
+  async ({ page, token }) => {
     console.log(token);
 
-    const response = await axios.get(`${baseIp}/${endPoint}?page=${page}`, {
+    const response = await axios({
+      method: "post",
+      url: `${baseIp}/setting/list/cpt/code`,
       headers: {
-        "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: token || null,
+        "x-auth-token": token || null,
+      },
+      data: {
+        page: page,
       },
     });
     return response.data;

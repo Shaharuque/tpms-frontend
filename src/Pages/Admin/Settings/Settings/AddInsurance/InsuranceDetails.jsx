@@ -4,8 +4,12 @@ import { Switch } from "antd";
 import { useEffect } from "react";
 import { PostfetchData } from "../../../../../Misc/Helper";
 import useToken from "../../../../../CustomHooks/useToken";
+import { toast } from "react-toastify";
 
 const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
+  console.log("all insurance detials", AllInsurance);
+  console.log(" selec insurance  detials", SelectedInsurance);
+
   const [active, setActive] = useState(false);
   const [loading, setloading] = useState(true);
   const { token } = useToken();
@@ -16,14 +20,27 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
     console.log("formsubmit data check", data);
     const body = data;
     const SelelctedInsuranceUpdate = await PostfetchData({
-      endPoint: "admin/ac/setting/selected/insurance/details/update",
+      // endPoint: "admin/ac/setting/selected/insurance/details/update",
+      endPoint: "setting/update/insurance/facility",
       payload: body,
       token,
     });
     console.log("selected insurance update", SelelctedInsuranceUpdate);
 
-    if (SelelctedInsuranceUpdate.status === "success") {
-      alert("insurance details updated");
+    if (SelelctedInsuranceUpdate?.status === "success") {
+      toast.success(
+        <h1 className="text-[12px]">{SelelctedInsuranceUpdate?.message}</h1>,
+        {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
     }
   };
 
@@ -46,7 +63,7 @@ const InsuranceDetails = ({ AllInsurance, SelectedInsurance }) => {
         contact_one: Ass ? Aa?.contact_one : Sstatus && Ss?.contact_one,
         contact_two: Ass ? Aa?.contact_two : Sstatus && Ss?.contact_two,
         phone_one: Ass ? Aa?.phone_one : Sstatus && Ss?.phone_one,
-        phone_two: Ass ? Aa?.phone_two : Sstatus && Ss?.phone_two,
+        // phone_two: Ass ? Aa?.phone_two : Sstatus && Ss?.phone_two,
         billing_aber: Ass ? Aa?.billing_aber : Sstatus && Ss?.billing_aber,
         ele_payor_id: Ass ? Aa?.ele_payor_id : Sstatus && Ss?.ele_payor_id,
         f_edit_id: Ass ? Aa?.id : Sstatus && Ss?.id,

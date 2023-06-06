@@ -32,7 +32,7 @@ const PayPeriod = () => {
     isSuccess,
     isLoading,
   } = usePayperiodsQuery({ token: token, page: page });
-  console.log(isSuccess, payperiods);
+  console.log(isSuccess, payperiods?.listPayPeriods?.data);
 
   //bulk delete api
   const [
@@ -46,9 +46,7 @@ const PayPeriod = () => {
     { data: deleteResponse, isSuccess: deleteSuccess, isError: deleteError },
   ] = useDeletePayperiodMutation();
 
-  let totalPage = payperiods?.pos_data?.last_page
-    ? payperiods?.pos_data?.last_page
-    : 0;
+  let totalPage = payperiods?.listPayPeriods?.lastPage || 0;
 
   console.log(totalPage);
 
@@ -91,6 +89,7 @@ const PayPeriod = () => {
   //get rows to be deleted
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
+      console.log("selected rows", selectedRows);
       setPayPeriodsId(selectedRowKeys);
     },
   };
@@ -108,16 +107,18 @@ const PayPeriod = () => {
   console.log(deleteResponse, deleteSuccess);
   useEffect(() => {
     if (deleteSuccess) {
-      toast.success("Deleted Successfully", {
+      toast.success("successfully deleted pay period", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (deleteError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [deleteSuccess, deleteError]);
@@ -141,16 +142,19 @@ const PayPeriod = () => {
 
   useEffect(() => {
     if (bulkDeleteSuccess) {
-      toast.success("Deleted Successfully", {
+      setPayPeriodsId([]);
+      toast.success("successfully deleted pay periods in bulk", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (bulkDeleteError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [bulkDeleteSuccess, bulkDeleteError]);
@@ -162,27 +166,11 @@ const PayPeriod = () => {
       dataIndex: "start_date",
       key: "start_date",
       width: 80,
-      filters: [
-        {
-          text: "01/03/2022",
-          value: "2022-01-03",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
       render: (_, { start_date }) => {
         //console.log("tags : ", lock);
         let convertedDate = sampleFunction(start_date);
         return <div className=" text-secondary">{convertedDate}</div>;
       },
-      filteredValue: filteredInfo.start_date || null,
-      onFilter: (value, record) => record.start_date.includes(value),
       sorter: (a, b) => {
         return a.start_date > b.start_date ? -1 : 1;
       },
@@ -192,30 +180,18 @@ const PayPeriod = () => {
     },
     {
       title: "To Data",
-      dataIndex: "show_end_date",
-      key: "show_end_date",
+      dataIndex: "end_date",
+      key: "end_date",
       width: 100,
-      filters: [
-        {
-          text: `01/31/2022`,
-          value: "01/31/2022",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      filteredValue: filteredInfo.show_end_date || null,
-      onFilter: (value, record) => record.show_end_date.includes(value),
-      sorter: (a, b) => {
-        return a.show_end_date > b.show_end_date ? -1 : 1;
+      render: (_, { end_date }) => {
+        //console.log("tags : ", lock);
+        let convertedDate = sampleFunction(end_date);
+        return <div className=" text-secondary">{convertedDate}</div>;
       },
-      sortOrder:
-        sortedInfo.columnKey === "show_end_date" ? sortedInfo.order : null,
+      sorter: (a, b) => {
+        return a.end_date > b.end_date ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "end_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -223,27 +199,11 @@ const PayPeriod = () => {
       dataIndex: "time_sheet_date",
       key: "time_sheet_date",
       width: 100,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
       render: (_, { time_sheet_date }) => {
         //console.log("tags : ", lock);
         let convertedDate = sampleFunction(time_sheet_date);
         return <div className=" text-black">{convertedDate}</div>;
       },
-      filteredValue: filteredInfo.time_sheet_date || null,
-      onFilter: (value, record) => record.time_sheet_date.includes(value),
       sorter: (a, b) => {
         return a.time_sheet_date > b.time_sheet_date ? -1 : 1;
       },
@@ -363,7 +323,7 @@ const PayPeriod = () => {
               bordered
               className="table-striped-rows text-xs font-normal"
               columns={columns}
-              dataSource={payperiods?.pos_data?.data}
+              dataSource={payperiods?.listPayPeriods?.data}
               rowSelection={{
                 ...rowSelection,
               }}
@@ -398,7 +358,7 @@ const PayPeriod = () => {
             <div className="flex my-5">
               <select
                 onChange={(e) => setBulkChecking(e.target.value)}
-                className=" bg-transparent border-b-[2px] border-[#34A7B8]  rounded-sm px-1 py-[3px] mx-1 text-[14px] w-32 focus:outline-none z-0 font-bold"
+                className=" bg-transparent border border-[#34A7B8]  rounded-sm px-1 py-[3px] mx-1 text-[14px] w-32 focus:outline-none z-0"
               >
                 <option value="select" className="text-black">
                   Select

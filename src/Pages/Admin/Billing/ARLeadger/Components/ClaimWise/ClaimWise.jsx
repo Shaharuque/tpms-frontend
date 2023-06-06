@@ -68,16 +68,13 @@ const ClaimWise = () => {
   console.log("selected Insurance ids", insuranceIds);
 
   // Ledger Get Patients API
-  const [getLedgerPatients, { data: patients, isLoading: patientsLoading }] =
-    useGetLedgerPatientsMutation();
+  const [getLedgerPatients, { data: patients, isLoading: patientsLoading }] = useGetLedgerPatientsMutation();
 
   //Ledger Get Payor API
-  const [getLedgerPayor, { data: payors, isLoading: payorLoading }] =
-    useGetLedgerPayorMutation();
+  const [getLedgerPayor, { data: payors, isLoading: payorLoading }] = useGetLedgerPayorMutation();
 
   //Ledger Get CPT Code API
-  const [getLedgerCPT, { data: cptCodes, isLoading: cptLoading }] =
-    useGetLedgerCPTMutation();
+  const [getLedgerCPT, { data: cptCodes, isLoading: cptLoading }] = useGetLedgerCPTMutation();
 
   useEffect(() => {
     if (selected === "patient") {
@@ -87,9 +84,9 @@ const ClaimWise = () => {
     }
   }, [selected, token, getLedgerPatients, getLedgerPayor, getLedgerCPT]);
 
-  const allPatients = patients?.clients || [];
-  const allPayor = payors?.clients || [];
-  const allCPT = cptCodes?.cpt_code || [];
+  const allPatients = patients?.data || [];
+  const allPayor = payors?.data || [];
+  const allCPT = cptCodes?.data || [];
 
   const handleClickOpen = () => {
     setOpenEditModal(true);
@@ -107,10 +104,7 @@ const ClaimWise = () => {
       render: (_, record) => {
         return (
           <div>
-            <Link
-              className="font-normal text-secondary"
-              to={"/admin/patient-List"}
-            >
+            <Link className="font-normal text-secondary" to={"/admin/patient-List"}>
               {record?.ledger_client?.client_full_name}
             </Link>
           </div>
@@ -132,10 +126,7 @@ const ClaimWise = () => {
       render: (_, record) => {
         return (
           <div>
-            <h1>
-              {allPayor?.find((p) => p?.payor_id === record?.payor_id)
-                ?.payor_name || "-"}
-            </h1>
+            <h1>{allPayor?.find((p) => p?.payor_id === record?.payor_id)?.payor_name || "-"}</h1>
           </div>
         );
       },
@@ -213,8 +204,7 @@ const ClaimWise = () => {
       sorter: (a, b) => {
         return a.date_billed > b.date_billed ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "date_billed" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "date_billed" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -228,10 +218,7 @@ const ClaimWise = () => {
             <h1>
               {record?.lreport_dep_payment?.length > 0
                 ? parseFloat(record?.lreport_dep_payment[0]?.amount)?.toFixed(2)
-                : (
-                    parseFloat(record?.ledger_process_clm?.rate) *
-                    parseFloat(record?.ledger_process_clm?.units)
-                  )?.toFixed(2)}
+                : (parseFloat(record?.ledger_process_clm?.rate) * parseFloat(record?.ledger_process_clm?.units))?.toFixed(2)}
             </h1>
           </div>
         );
@@ -240,8 +227,7 @@ const ClaimWise = () => {
       sorter: (a, b) => {
         return a.allowed_amount > b.allowed_amount ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "allowed_amount" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "allowed_amount" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -256,13 +242,7 @@ const ClaimWise = () => {
         for (let i = 0; i < result?.length; i++) {
           sum += parseFloat(result[i]);
         }
-        return (
-          <div className="text-center">
-            {record?.lreport_dep_payment?.length > 0
-              ? sum?.toFixed(2)
-              : 0?.toFixed(2)}
-          </div>
-        );
+        return <div className="text-center">{record?.lreport_dep_payment?.length > 0 ? sum?.toFixed(2) : 0?.toFixed(2)}</div>;
       },
       //   sorter is for sorting asc or dsc purcpte
       sorter: (a, b) => {
@@ -279,11 +259,7 @@ const ClaimWise = () => {
       render: (_, record) => {
         return (
           <div className="text-center">
-            {record?.lreport_dep_payment?.length > 0
-              ? parseFloat(record?.lreport_dep_payment[0]?.adjustment)?.toFixed(
-                  2
-                )
-              : 0?.toFixed(2)}
+            {record?.lreport_dep_payment?.length > 0 ? parseFloat(record?.lreport_dep_payment[0]?.adjustment)?.toFixed(2) : 0?.toFixed(2)}
           </div>
         );
       },
@@ -304,10 +280,7 @@ const ClaimWise = () => {
           <div className="text-center">
             {record?.lreport_dep_payment?.length > 0
               ? parseFloat(record?.lreport_dep_payment[0]?.balance)?.toFixed(2)
-              : (
-                  parseFloat(record?.ledger_process_clm?.rate) *
-                  parseFloat(record?.ledger_process_clm?.units)
-                )?.toFixed(2)}
+              : (parseFloat(record?.ledger_process_clm?.rate) * parseFloat(record?.ledger_process_clm?.units))?.toFixed(2)}
           </div>
         );
       },
@@ -327,9 +300,7 @@ const ClaimWise = () => {
       render: (_, record) => {
         return (
           <div>
-            <h1 className="text-secondary">
-              {record?.lreport_mclam?.claim_id}
-            </h1>
+            <h1 className="text-secondary">{record?.lreport_mclam?.claim_id}</h1>
           </div>
         );
       },
@@ -443,17 +414,11 @@ const ClaimWise = () => {
   // date range picker calendar
   const startDate = range ? range[0]?.startDate : null;
   const endDate = range ? range[0]?.endDate : null;
-  const startMonth = startDate
-    ? startDate.toLocaleString("en-us", { month: "short" })
-    : null;
-  const endMonth = endDate
-    ? endDate.toLocaleString("en-us", { month: "short" })
-    : null;
+  const startMonth = startDate ? startDate.toLocaleString("en-us", { month: "short" }) : null;
+  const endMonth = endDate ? endDate.toLocaleString("en-us", { month: "short" }) : null;
   const startDay = startDate ? startDate.getDate() : null;
   const endDay = endDate ? endDate.getDate() : null;
-  const startYear = startDate
-    ? startDate.getFullYear().toString().slice(2, 4)
-    : null;
+  const startYear = startDate ? startDate.getFullYear().toString().slice(2, 4) : null;
   const endYear = endDate ? endDate.getFullYear().toString().slice(2, 4) : null;
 
   const refClose = useRef(null);
@@ -472,8 +437,7 @@ const ClaimWise = () => {
   //----------Date Range Picker Code End------------------
 
   // Ledger Bulk Note Save
-  const [bulkNoteSave, { data: bulkNoteData, isSuccess: singleNoteSucceed }] =
-    useBulkNoteSaveMutation();
+  const [bulkNoteSave, { data: bulkNoteData, isSuccess: singleNoteSucceed }] = useBulkNoteSaveMutation();
   console.log(bulkNoteData);
   useEffect(() => {
     if (singleNoteSucceed === true) {
@@ -501,11 +465,7 @@ const ClaimWise = () => {
       setLedgerData(data);
       setLastPageNo(res.data?.ledger_list?.last_page);
     };
-    if (
-      formData?.client_id?.length > 0 ||
-      formData?.all_insurance?.length > 0 ||
-      formData?.claim_no
-    ) {
+    if (formData?.patient_ids?.length > 0 || formData?.all_insurance?.length > 0 || formData?.claim_no) {
       getLedgerData();
     }
   }, [token, formData, singleNoteSucceed]);
@@ -550,7 +510,7 @@ const ClaimWise = () => {
     const payLoad = {
       sort_by: selected === "patient" ? 2 : selected === "insurance" ? 3 : 1,
       claim_no: data?.claim_no,
-      client_id: clientIds,
+      patient_ids: clientIds,
       all_insurance: insuranceIds,
       // payor_id,
       // cpt,
@@ -572,7 +532,7 @@ const ClaimWise = () => {
         autoClose: 5000,
         theme: "dark",
       });
-    } else if (payLoad?.client_id?.length === 0 && selected === "patient") {
+    } else if (payLoad?.patient_ids?.length === 0 && selected === "patient") {
       toast.error(<h1>Please Select Valid Client</h1>, {
         position: "top-center",
         autoClose: 5000,
@@ -595,17 +555,7 @@ const ClaimWise = () => {
         claim_no: "",
       });
     }, 0);
-  }, [
-    startDate,
-    startMonth,
-    startDay,
-    startYear,
-    endDate,
-    endMonth,
-    endDay,
-    endYear,
-    reset,
-  ]);
+  }, [startDate, startMonth, startDay, startYear, endDate, endMonth, endDay, endYear, reset]);
 
   const [select, setSelect] = useState(false);
   const [optionSelect, setOptionSelect] = useState("");
@@ -636,11 +586,7 @@ const ClaimWise = () => {
                 <label className="label">
                   <span className=" label-font">Sort by</span>
                 </label>
-                <select
-                  onChange={(e) => setSelected(e.target.value)}
-                  name="post"
-                  className="input-border input-font md:w-full w-[200px] focus:outline-none"
-                >
+                <select onChange={(e) => setSelected(e.target.value)} name="post" className="input-border input-font md:w-full w-[200px] focus:outline-none">
                   <option value="patient">Patient</option>
                   <option value="claim_no">Claim No</option>
                   <option value="insurance">Insurance</option>
@@ -668,28 +614,18 @@ const ClaimWise = () => {
                       <span className=" label-font">Patients</span>
                     </label>
                     <div className="py-[2px] mx-1">
-                      <PatientMultiSelect
-                        allPatients={allPatients}
-                        setClientIds={setClientIds}
-                        patientsLoading={patientsLoading}
-                      />
+                      <PatientMultiSelect allPatients={allPatients} setClientIds={setClientIds} patientsLoading={patientsLoading} />
                     </div>
                   </div>
                   <div className="w-[200px]">
                     <div>
                       <label className="label">
-                        <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                          Selected date
-                        </span>
+                        <span className="label-font">Selected date</span>
                       </label>
                       <div className="">
                         <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                           <input
-                            value={
-                              startDate
-                                ? `${startMonth} ${startDay}, ${startYear}`
-                                : `Start Date`
-                            }
+                            value={startDate ? `${startMonth} ${startDay}, ${startYear}` : `Start Date`}
                             readOnly
                             onClick={() => setOpenCalendar(true)}
                             {...register("start_date")}
@@ -701,11 +637,7 @@ const ClaimWise = () => {
                           ></RiArrowLeftRightLine>
                           <input
                             // defaultValue={"5-10-2034"}
-                            value={
-                              endDate
-                                ? `${endMonth} ${endDay}, ${endYear}`
-                                : `End Date`
-                            }
+                            value={endDate ? `${endMonth} ${endDay}, ${endYear}` : `End Date`}
                             readOnly
                             onClick={() => setOpenCalendar(true)}
                             {...register("end_date")}
@@ -720,12 +652,7 @@ const ClaimWise = () => {
                           className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
                         >
                           {openCalendar && (
-                            <CustomDateRange
-                              range={range}
-                              setRange={setRange}
-                              handleCancelDate={handleCancelDate}
-                              setOpen={setOpenCalendar}
-                            ></CustomDateRange>
+                            <CustomDateRange range={range} setRange={setRange} handleCancelDate={handleCancelDate} setOpen={setOpenCalendar}></CustomDateRange>
                           )}
                         </div>
                       </div>
@@ -738,18 +665,12 @@ const ClaimWise = () => {
                       <label className="label">
                         <span className=" label-font">CPT Code</span>
                       </label>
-                      <select
-                        disabled={cptLoading && true}
-                        className="input-border input-font w-full focus:outline-none"
-                        {...register("CPT_Code")}
-                      >
+                      <select disabled={cptLoading && true} className="input-border input-font w-full focus:outline-none" {...register("CPT_Code")}>
                         <option value="0">Select</option>
                         {allCPT?.map((cpt) => {
                           return (
                             <>
-                              <option value={cpt?.cpt_code}>
-                                {cpt?.cpt_code}
-                              </option>
+                              <option value={cpt?.cpt_code}>{cpt?.cpt_code}</option>
                             </>
                           );
                         })}
@@ -760,10 +681,7 @@ const ClaimWise = () => {
                       <label className="label">
                         <span className=" label-font">Aging Status</span>
                       </label>
-                      <select
-                        className="input-border input-font w-full focus:outline-none"
-                        {...register("aging_status")}
-                      >
+                      <select className="input-border input-font w-full focus:outline-none" {...register("aging_status")}>
                         <option value="name">EFT</option>
                       </select>
                     </div>
@@ -777,28 +695,18 @@ const ClaimWise = () => {
                       <span className=" label-font">Insurance</span>
                     </label>
                     <div className="py-[2px]">
-                      <PayorMultiSelect
-                        allInsurance={allPayor}
-                        setInsuranceIds={setInsuranceIds}
-                        insuranceLoading={payorLoading}
-                      />
+                      <PayorMultiSelect allInsurance={allPayor} setInsuranceIds={setInsuranceIds} insuranceLoading={payorLoading} />
                     </div>
                   </div>
                   <div className="w-[220px]">
                     <div>
                       <label className="label">
-                        <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">
-                          Selected date
-                        </span>
+                        <span className="label-text text-[15px] font-medium text-[#9b9b9b] text-left">Selected date</span>
                       </label>
                       <div className="ml-1">
                         <div className="flex  justify-between items-center text-gray-600 input-border rounded-sm px-1 mx-1 w-full">
                           <input
-                            value={
-                              startDate
-                                ? `${startMonth} ${startDay}, ${startYear}`
-                                : `Start Date`
-                            }
+                            value={startDate ? `${startMonth} ${startDay}, ${startYear}` : `Start Date`}
                             readOnly
                             onClick={() => setOpenCalendar(true)}
                             // {...register("start_date")}
@@ -810,11 +718,7 @@ const ClaimWise = () => {
                           ></RiArrowLeftRightLine>
                           <input
                             // defaultValue={"5-10-2034"}
-                            value={
-                              endDate
-                                ? `${endMonth} ${endDay}, ${endYear}`
-                                : `End Date`
-                            }
+                            value={endDate ? `${endMonth} ${endDay}, ${endYear}` : `End Date`}
                             readOnly
                             onClick={() => setOpenCalendar(true)}
                             // {...register("end_date")}
@@ -829,12 +733,7 @@ const ClaimWise = () => {
                           className="absolute z-10 lg:ml-[0%] md:ml-[-30%] mt-1"
                         >
                           {openCalendar && (
-                            <CustomDateRange
-                              range={range}
-                              setRange={setRange}
-                              handleCancelDate={handleCancelDate}
-                              setOpen={setOpenCalendar}
-                            ></CustomDateRange>
+                            <CustomDateRange range={range} setRange={setRange} handleCancelDate={handleCancelDate} setOpen={setOpenCalendar}></CustomDateRange>
                           )}
                         </div>
                       </div>
@@ -845,14 +744,8 @@ const ClaimWise = () => {
               )}
               <div className="flex items-center gap-2">
                 <div className="flex mt-8 items-center ">
-                  <Switch
-                    size="small"
-                    checked={value ? true : false}
-                    onClick={() => setValue(!value)}
-                  />
-                  <span className="text-[14px] font-medium text-gray-500 mx-1">
-                    Zero Paid
-                  </span>
+                  <Switch size="small" checked={value ? true : false} onClick={() => setValue(!value)} />
+                  <span className="text-[14px] font-medium text-gray-500 mx-1">Zero Paid</span>
                 </div>
                 {/* submit  */}
                 <button className="pms-input-button mt-6" type="submit">
@@ -899,86 +792,58 @@ const ClaimWise = () => {
                   let totalPaid = 0;
                   let totalBalance = 0;
                   let totalAdj = 0;
-                  pageData.forEach(
-                    ({ lreport_dep_payment, ledger_process_clm }) => {
-                      let presentBalance;
-                      if (lreport_dep_payment?.length > 0) {
-                        presentBalance = parseFloat(
-                          lreport_dep_payment[0]?.balance
-                        );
-                      } else {
-                        presentBalance =
-                          parseFloat(ledger_process_clm?.rate) *
-                          parseFloat(ledger_process_clm?.units);
-                      }
-
-                      let presentAdj;
-                      if (lreport_dep_payment?.length > 0) {
-                        presentAdj = parseFloat(
-                          lreport_dep_payment[0]?.adjustment
-                        );
-                      } else {
-                        presentAdj = 0;
-                      }
-
-                      let presentPaid;
-                      if (lreport_dep_payment?.length > 0) {
-                        presentPaid = parseFloat(
-                          lreport_dep_payment[0]?.payment
-                        );
-                      } else {
-                        presentPaid = 0;
-                      }
-
-                      let presentAllwd;
-                      if (lreport_dep_payment > 0) {
-                        presentAllwd = parseFloat(
-                          lreport_dep_payment[0]?.amount
-                        );
-                      } else {
-                        presentAllwd =
-                          parseFloat(ledger_process_clm?.rate) *
-                          parseFloat(ledger_process_clm?.units);
-                      }
-                      totalAllowed += parseFloat(presentAllwd);
-                      totalPaid += parseFloat(presentPaid);
-                      totalAdj = parseFloat(totalAdj) + parseFloat(presentAdj);
-                      totalBalance = parseFloat(totalBalance) + presentBalance;
+                  pageData.forEach(({ lreport_dep_payment, ledger_process_clm }) => {
+                    let presentBalance;
+                    if (lreport_dep_payment?.length > 0) {
+                      presentBalance = parseFloat(lreport_dep_payment[0]?.balance);
+                    } else {
+                      presentBalance = parseFloat(ledger_process_clm?.rate) * parseFloat(ledger_process_clm?.units);
                     }
-                  );
+
+                    let presentAdj;
+                    if (lreport_dep_payment?.length > 0) {
+                      presentAdj = parseFloat(lreport_dep_payment[0]?.adjustment);
+                    } else {
+                      presentAdj = 0;
+                    }
+
+                    let presentPaid;
+                    if (lreport_dep_payment?.length > 0) {
+                      presentPaid = parseFloat(lreport_dep_payment[0]?.payment);
+                    } else {
+                      presentPaid = 0;
+                    }
+
+                    let presentAllwd;
+                    if (lreport_dep_payment > 0) {
+                      presentAllwd = parseFloat(lreport_dep_payment[0]?.amount);
+                    } else {
+                      presentAllwd = parseFloat(ledger_process_clm?.rate) * parseFloat(ledger_process_clm?.units);
+                    }
+                    totalAllowed += parseFloat(presentAllwd);
+                    totalPaid += parseFloat(presentPaid);
+                    totalAdj = parseFloat(totalAdj) + parseFloat(presentAdj);
+                    totalBalance = parseFloat(totalBalance) + presentBalance;
+                  });
                   return (
                     <>
                       <Table.Summary.Row>
                         <Table.Summary.Cell index={2} colSpan={7}>
-                          <span className="text-black font-bold flex justify-end mx-5 ">
-                            {" "}
-                            Total
-                          </span>
+                          <span className="text-black font-bold flex justify-end mx-5 "> Total</span>
                         </Table.Summary.Cell>
                         <Table.Summary.Cell index={8}>
-                          <Text className="text-black font-bold flex justify-center">
-                            {totalAllowed?.toFixed(2)}
-                          </Text>
+                          <Text className="text-black font-bold flex justify-center">{totalAllowed?.toFixed(2)}</Text>
                         </Table.Summary.Cell>
                         <Table.Summary.Cell index={6}>
-                          <Text className="text-black font-bold flex justify-center">
-                            {totalPaid?.toFixed(2)}
-                          </Text>
+                          <Text className="text-black font-bold flex justify-center">{totalPaid?.toFixed(2)}</Text>
                         </Table.Summary.Cell>
                         <Table.Summary.Cell index={6}>
-                          <Text className="text-black font-bold flex justify-center">
-                            {totalAdj?.toFixed(2)}
-                          </Text>
+                          <Text className="text-black font-bold flex justify-center">{totalAdj?.toFixed(2)}</Text>
                         </Table.Summary.Cell>
                         <Table.Summary.Cell index={6}>
-                          <Text className="text-black font-bold flex justify-center">
-                            {totalBalance?.toFixed(2)}
-                          </Text>
+                          <Text className="text-black font-bold flex justify-center">{totalBalance?.toFixed(2)}</Text>
                         </Table.Summary.Cell>
-                        <Table.Summary.Cell
-                          index={2}
-                          colSpan={3}
-                        ></Table.Summary.Cell>
+                        <Table.Summary.Cell index={2} colSpan={3}></Table.Summary.Cell>
                       </Table.Summary.Row>
                     </>
                   );
@@ -989,11 +854,7 @@ const ClaimWise = () => {
 
           <div className="flex item-center flex-wrap my-5">
             <div>
-              <select
-                onChange={(e) => setOptionSelect(e.target.value)}
-                name="Option"
-                className="modal-input-field ml-1"
-              >
+              <select onChange={(e) => setOptionSelect(e.target.value)} name="Option" className="modal-input-field ml-1">
                 <option value="" className="text-black">
                   Select
                 </option>
@@ -1006,25 +867,10 @@ const ClaimWise = () => {
               Go
             </button>
           </div>
-          {select && (
-            <>
-              {optionSelect === "add-note" && (
-                <AddNote
-                  bulkNoteSave={bulkNoteSave}
-                  selectedRowId={selectedRowKeys}
-                ></AddNote>
-              )}
-            </>
-          )}
+          {select && <>{optionSelect === "add-note" && <AddNote bulkNoteSave={bulkNoteSave} selectedRowId={selectedRowKeys}></AddNote>}</>}
         </div>
       )}
-      {openEditModal && (
-        <ClaimWiseActionModal
-          record={record}
-          handleClose={handleClose}
-          open={openEditModal}
-        ></ClaimWiseActionModal>
-      )}
+      {openEditModal && <ClaimWiseActionModal record={record} handleClose={handleClose} open={openEditModal}></ClaimWiseActionModal>}
     </div>
   );
 };

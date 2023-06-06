@@ -43,11 +43,7 @@ const Test = () => {
             <tr class="border-b border-2 border-blue-600 ">
               <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                 <div class="flex gap-3">
-                  <input
-                    type="checkbox"
-                    name="checkedActive"
-                    {...register("checkedActive")}
-                  />
+                  <input type="checkbox" name="checkedActive" {...register("checkedActive")} />
                   <span>
                     <label for="rec_name" className=" font-bold text-base">
                       Mental Health (MH)
@@ -57,11 +53,7 @@ const Test = () => {
               </td>
               <td class="text-sm text-gray-900 font-light px-2 py-3 whitespace-nowrap border-r border-2 border-blue-600 ">
                 <div class="flex gap-3">
-                  <input
-                    type="checkbox"
-                    name="checkedActive"
-                    {...register("checkedActive")}
-                  />
+                  <input type="checkbox" name="checkedActive" {...register("checkedActive")} />
                   <span>
                     <label for="rec_name" className=" font-bold text-base">
                       Psychiatric Services
@@ -474,8 +466,7 @@ const Test = () => {
                 <div>
                   <span>
                     <label for="rec_name" className=" font-bold text-base">
-                      Service/Assessment Type (Check one only): <br />{" "}
-                      Translator
+                      Service/Assessment Type (Check one only): <br /> Translator
                     </label>
                   </span>
                   <br />
@@ -844,8 +835,7 @@ const Test = () => {
                   <div class="flex gap-3">
                     <span>
                       <label for="rec_name" className=" font-bold text-base">
-                        A. Client’s perception of
-                        problems/needs/symptoms/behaviors:
+                        A. Client’s perception of problems/needs/symptoms/behaviors:
                       </label>
                     </span>
                     <input
@@ -890,9 +880,8 @@ const Test = () => {
                   <div class="flex gap-3">
                     <span>
                       <label for="rec_name" className=" font-bold text-base">
-                        Description of current symptoms/behaviors/level of
-                        functioning, (description of all/length of time
-                        present/impact of above on quality of life).
+                        Description of current symptoms/behaviors/level of functioning, (description
+                        of all/length of time present/impact of above on quality of life).
                       </label>
                     </span>
                     <input
@@ -999,8 +988,7 @@ const Test = () => {
                   <div class="flex gap-3">
                     <span>
                       <label for="rec_name" className=" font-bold text-base">
-                        F. Community resources accessed by the individual
-                        served:
+                        F. Community resources accessed by the individual served:
                       </label>
                     </span>
                     <input
@@ -1069,8 +1057,7 @@ const Test = () => {
                   <div>
                     <span>
                       <label for="rec_name" className=" font-bold text-base">
-                        B. Currently on Medication for Behavioral Health (i.e.
-                        ADHD
+                        B. Currently on Medication for Behavioral Health (i.e. ADHD
                       </label>
                     </span>
                     <br />
@@ -1116,8 +1103,8 @@ const Test = () => {
                   <div>
                     <span>
                       <label for="rec_name" className=" font-bold text-base">
-                        C. Previously in Behavioral Health Services/on
-                        Behavioral Health medications:
+                        C. Previously in Behavioral Health Services/on Behavioral Health
+                        medications:
                       </label>
                     </span>
                     <br />
@@ -2134,5 +2121,3 @@ const Test = () => {
     </div>
   );
 };
-
-export default Test;

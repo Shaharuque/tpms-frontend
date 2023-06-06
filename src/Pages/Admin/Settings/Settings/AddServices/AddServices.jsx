@@ -5,10 +5,14 @@ import { FiEdit } from "react-icons/fi";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
 import useToken from "../../../../../CustomHooks/useToken";
-import { fetchServices } from "../../../../../features/Settings_redux/settingFeaturesSlice";
+import { fetchServices } from "../../../../../features/Settings_redux/settingServicesList";
 import { getUnique } from "../../../../../Utilities/getUniqueElement";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddServicesActionModal from "./AddServices/AddServicesActionModal";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import { baseIp } from "../../../../../Misc/BaseClient";
 
 const AddServices = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -18,31 +22,88 @@ const AddServices = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const { token } = useToken();
-  const endPoint = "admin/ac/setting/service/all";
 
   const allService = useSelector((state) => state?.serviceInfo);
   console.log(allService);
-  const data = allService?.result?.services?.data
-    ? allService?.result?.services?.data
-    : [];
-  const totalPage = allService?.result?.services?.last_page
-    ? allService?.result?.services?.last_page
-    : 0;
+  const data = allService?.result?.data?.data || [];
+  const totalPage = allService?.result?.data?.lastPage || 0;
   console.log(data);
 
   useEffect(() => {
     // For sending multiple parameter to createAsync Thunk we need to pass it as object
-    dispatch(fetchServices({ endPoint, page, token }));
+    dispatch(fetchServices({ page, token }));
   }, [page, dispatch, token]);
+
+  //Getting All Selected Treatment Data
+  const {
+    data: selectedTreatmentData,
+    isSuccess: selectedTreatmentSuccess,
+    isLoading: selectedTreatmentLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
 
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page", selectedPage);
     setPage(selectedPage + 1);
   };
 
+  // Handle open modal to Add or Edit
   const handleClickOpen = (record) => {
     setRecordData(record);
     setOpenAddModal(true);
+  };
+  // Handle Delete
+  const handleDelete = async (service_id) => {
+    console.log(service_id);
+
+    if (service_id) {
+      const payload = { service_id };
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/delete/setting/service`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token,
+          },
+          data: payload,
+        });
+        if (res?.data?.status === "success") {
+          toast.success("Successfully Deleted", {
+            position: "top-center",
+            autoClose: 5000,
+            closeOnClick: true,
+            theme: "dark",
+            style: { fontSize: "15px" },
+          });
+          dispatch(fetchServices({ page, token }));
+          handleClose();
+        }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            closeOnClick: true,
+            theme: "dark",
+            style: { fontSize: "15px" },
+          });
+        }
+      } catch (error) {
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          style: { fontSize: "15px" },
+        });
+        console.log(error?.message); // this is the main part. Use the response property from the error object
+      }
+    }
   };
 
   const handleClose = () => {
@@ -80,14 +141,9 @@ const AddServices = () => {
       width: 100,
       filters: tx_type_search(),
       render: (_, record) => {
-        //console.log("tags : ", lock);
         return (
           <div className="text-secondary flex justify-start">
-            {record?.treatment_type?.treatment_name ? (
-              record?.treatment_type?.treatment_name
-            ) : (
-              <h1 className="text-red-600">Not found</h1>
-            )}
+            {record?.service_treatment?.treatment_name || "None"}
           </div>
         );
       },
@@ -105,26 +161,15 @@ const AddServices = () => {
       dataIndex: "type",
       key: "type",
       width: 100,
-      filters: [
-        {
-          text: "Billable",
-          value: 1,
-        },
-        {
-          text: "Unblillabe",
-          value: 0,
-        },
-      ],
+
       render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-secondary flex justify-start">
-            <h1>{record?.type ? "Billable" : "UnBillable"}</h1>
+            <h1>{record?.type === 1 ? "Billable" : "UnBillable"}</h1>
           </div>
         );
       },
-      filteredValue: filteredInfo.type || null,
-      onFilter: (value, record) => String(record.type).includes(value),
       sorter: (a, b) => {
         return a.type > b.type ? -1 : 1;
       },
@@ -146,7 +191,7 @@ const AddServices = () => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-secondary flex justify-start">
-            <h1>{record?.description}</h1>
+            <h1>{record?.service}</h1>
           </div>
         );
       },
@@ -234,7 +279,10 @@ const AddServices = () => {
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
-              <button className="text-sm mx-1  text-red-500">
+              <button
+                onClick={() => handleDelete(record?.id)}
+                className="text-sm mx-1  text-red-500"
+              >
                 <AiOutlineDelete />
               </button>
             </div>

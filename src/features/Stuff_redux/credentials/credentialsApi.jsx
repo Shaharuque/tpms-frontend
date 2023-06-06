@@ -5,25 +5,27 @@ import { apiSlice } from "../../api/apiSlice";
 export const credentialApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //Get staff credentials
-    getcredentials: builder.query({
-      query: ({ token, page = 3, id }) => ({
-        url: `admin/ac/staff/credentials/all/${id}?page=1`,
-        method: "GET",
-        headers: {
-          "content-type": "Application/json",
-          Authorization: token,
-        },
-      }),
-      providesTags: ["Credentials"],
-    }),
-    //Add staff credential
-    addCredential: builder.mutation({
-      query: ({ token, payload }) => ({
-        url: "admin/ac/staff/credential/save",
+    getCredentials: builder.query({
+      query: ({ token, page, id }) => ({
+        url: `inadmin/provider/credential/list`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
+        },
+        body: JSON.stringify({ page, id }),
+      }),
+      providesTags: ["Credentials"],
+    }),
+
+    //Add staff credential
+    addCredential: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "inadmin/provider/credential/save",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -32,11 +34,11 @@ export const credentialApi = apiSlice.injectEndpoints({
     //get staff credential table individual data
     getcredentialinfo: builder.query({
       query: ({ token, id }) => ({
-        url: `admin/ac/staff/credential/info/${id}`,
+        url: `inadmin/provider/single/credential/${id}`,
         method: "GET",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
       }),
       providesTags: ["Credentials"],
@@ -44,11 +46,24 @@ export const credentialApi = apiSlice.injectEndpoints({
     //Update staff credential info
     updateCredential: builder.mutation({
       query: ({ token, payload }) => ({
-        url: "admin/ac/staff/credential/update",
+        url: "inadmin/provider/credential/update",
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
+        },
+        body: JSON.stringify(payload),
+      }),
+      invalidatesTags: ["Credentials"],
+    }),
+    //Delete staff credential info
+    deleteCredential: builder.mutation({
+      query: ({ token, payload }) => ({
+        url: "inadmin/provider/credential/delete",
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+          "x-auth-token": token,
         },
         body: JSON.stringify(payload),
       }),
@@ -57,9 +72,5 @@ export const credentialApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetcredentialsQuery,
-  useAddCredentialMutation,
-  useUpdateCredentialMutation,
-  useGetcredentialinfoQuery,
-} = credentialApi;
+export const { useGetCredentialsQuery, useAddCredentialMutation, useUpdateCredentialMutation, useGetcredentialinfoQuery, useDeleteCredentialMutation } =
+  credentialApi;

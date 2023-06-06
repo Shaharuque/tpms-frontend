@@ -40,33 +40,27 @@ const LogInForm = ({ from }) => {
 
     // axios POST request
     const options = {
-      url: "https://test-prod.therapypms.com/api/v1/internal/admin/login",
+      //url: "https://stagapi.therapypms.com/api/v1/inadmin/auth",
+      url: "http://localhost:8080/api/v1/inadmin/auth/",
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json;charset=UTF-8",
       },
-      data: JSON.stringify(formdata), //object k stringify korey server side a send kore lagey tai JSON.stringify korey
+      data: JSON.stringify(formdata),
     };
     axios(options).then((response) => {
       console.log(response.data);
-      // Encrypt the token
-      let ciphertextToken = CryptoJS.AES.encrypt(
-        JSON.stringify(response?.data?.access_token),
-        "tpm422"
-      ).toString();
-
-      if (response?.data?.account_type === "admin") {
+      if (response?.data?.status === "success" && response?.data?.message === "InternalAdmin Successfully logged In") {
         dispatch(
           userLoggedIn({
             accessToken: response?.data?.access_token,
-            user: response?.data?.user,
           })
         );
-        localStorage.setItem("adminToken", ciphertextToken);
-        localStorage.setItem("type", response?.data?.account_type);
-        localStorage.setItem("user", JSON.stringify(response?.data?.user));
-        // navigate("/admin"); //admin panel a redirect
+        localStorage.setItem("adminToken", response?.data?.access_token);
+        localStorage.setItem("type", "admin");
+        // localStorage.setItem("type", response?.data?.account_type);
+        // localStorage.setItem("user", JSON.stringify(response?.data?.user))
 
         if (from !== null) {
           console.log("loging from navigation to", from?.from?.pathname);
@@ -75,9 +69,14 @@ const LogInForm = ({ from }) => {
           console.log("login from navigation to default");
           navigate("/admin"); //admin panel a redirect
         }
-      } else if (response?.data?.account_type === "patient") {
-        navigate("/patient"); //patient panel a redirect
+      } else if (response?.data?.status === "success" && response?.data?.message === "InternalPatient Successfully logged In") {
+        navigate("/patient/calender"); //patient panel a redirect
+        localStorage.setItem("adminToken", response?.data?.access_token);
         localStorage.setItem("type", "patient");
+      } else if (response?.data?.status === "success" && response?.data?.message === "InternalProvider Successfully logged In") {
+        navigate("/provider"); //patient panel a redirect
+        localStorage.setItem("adminToken", response?.data?.access_token);
+        localStorage.setItem("type", "provider");
       } else {
         // setMessage(response.data.message);
         navigate("/super-admin");
@@ -121,9 +120,7 @@ const LogInForm = ({ from }) => {
                   </div>
                 ) : null}
                 <label className="label">
-                  <span className="label-text font-medium text-xs text-gray-600 text-left">
-                    Email Address
-                  </span>
+                  <span className="label-text font-medium text-xs text-gray-600 text-left">Email Address</span>
                 </label>
                 <input
                   type="email"
@@ -145,29 +142,16 @@ const LogInForm = ({ from }) => {
 
               <label>
                 <span className="label-text-alt">
-                  {errors.email?.type === "required" && (
-                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
-                      {errors.email.message}
-                    </p>
-                  )}
-                  {errors.email?.type === "pattern" && (
-                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
-                      {errors.email.message}
-                    </p>
-                  )}
+                  {errors.email?.type === "required" && <p className=" text-xs text-red-500 pl-1 pt-[1px]">{errors.email.message}</p>}
+                  {errors.email?.type === "pattern" && <p className=" text-xs text-red-500 pl-1 pt-[1px]">{errors.email.message}</p>}
                 </span>
               </label>
               {/* password  */}
               {/* Password */}
               <div>
                 <label className="label flex justify-between items-end">
-                  <span className="label-text text-xs font-medium text-gray-600 text-left">
-                    Password
-                  </span>
-                  <span
-                    onClick={forgetPass}
-                    className="label-text text-xs text-secondary font-medium cursor-pointer"
-                  >
+                  <span className="label-text text-xs font-medium text-gray-600 text-left">Password</span>
+                  <span onClick={forgetPass} className="label-text text-xs text-secondary font-medium cursor-pointer">
                     Forget Password ?
                   </span>
                 </label>
@@ -192,16 +176,8 @@ const LogInForm = ({ from }) => {
 
               <label>
                 <span className="label-text-alt">
-                  {errors.password?.type === "required" && (
-                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
-                      {errors.password.message}
-                    </p>
-                  )}
-                  {errors.password?.type === "minLength" && (
-                    <p className=" text-xs text-red-500 pl-1 pt-[1px]">
-                      {errors.password.message}
-                    </p>
-                  )}
+                  {errors.password?.type === "required" && <p className=" text-xs text-red-500 pl-1 pt-[1px]">{errors.password.message}</p>}
+                  {errors.password?.type === "minLength" && <p className=" text-xs text-red-500 pl-1 pt-[1px]">{errors.password.message}</p>}
                 </span>
               </label>
 
@@ -215,9 +191,7 @@ const LogInForm = ({ from }) => {
                       setValue(!value);
                     }}
                   />
-                  <span className="text-xs ml-1 font-medium text-gray-600 ">
-                    Remember Me
-                  </span>
+                  <span className="text-xs ml-1 font-medium text-gray-600 ">Remember Me</span>
                 </div>
                 {!loading ? (
                   <button
@@ -234,11 +208,8 @@ const LogInForm = ({ from }) => {
               </div>
             </form>
             <p className="text-xs my-2 font-normal text-gray-400">
-              Therapy PMS respects the privacy of our users and values their
-              trust. Please read our{" "}
-              <span className=" text-primary">privacy policy</span> carefully.
-              If you do not agree with the terms of our privacy policy, then
-              please do not access the site.
+              Therapy PMS respects the privacy of our users and values their trust. Please read our <span className=" text-primary">privacy policy</span>{" "}
+              carefully. If you do not agree with the terms of our privacy policy, then please do not access the site.
             </p>
           </div>
         </div>

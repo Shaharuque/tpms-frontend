@@ -4,12 +4,44 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import ReferringProviderActionModal from "./ReferringProvider/ReferringProviderActionModal";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchReferringProvider } from "../../../../../features/Settings_redux/referringProviderApi";
+import useToken from "../../../../../CustomHooks/useToken";
+import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
+import ReactPaginate from "react-paginate";
+import { baseIp } from "../../../../../Misc/BaseClient";
+import { toast } from "react-toastify";
 
 const ReferringProvider = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [openAddModal, setOpenAddModal] = useState(false);
   const [recordData, setRecordData] = useState();
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const { token } = useToken();
+
+  //List of all referring provider
+  const allReferrringProviderData = useSelector(
+    (state) => state?.referringProviderInfo
+  );
+  const data =
+    allReferrringProviderData?.referringProviderData?.referringProvider?.data ||
+    [];
+  console.log("All data", data);
+  const totalPage =
+    allReferrringProviderData?.referringProviderData?.referringProvider
+      ?.lastPage || 0;
+  //console.log(totalPage);
+
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page", selectedPage);
+    setPage(selectedPage + 1);
+  };
+
+  useEffect(() => {
+    dispatch(fetchReferringProvider({ page, token }));
+  }, [page, dispatch, token]);
 
   const handleClickOpen2 = (record) => {
     setOpenAddModal(true);
@@ -26,101 +58,109 @@ const ReferringProvider = () => {
     setSortedInfo(sorter);
   };
 
-  const [table, setTable] = useState(false);
-  useEffect(() => {
-    axios("../../../All_Fake_Api/Reffering.json")
-      .then((response) => {
-        console.log("calling");
-        setTable(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  console.log(table);
+  //Delete The Referring Provider from the list
+  const handleDeleteReferringProvider = async (del_id) => {
+    if (del_id) {
+      const payload = { referring_id: del_id };
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/delete/referring/provider`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token,
+          },
+          data: payload,
+        });
+        if (res?.data?.status === "success") {
+          toast.success("Successfully Deleted", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+          dispatch(fetchReferringProvider({ page, token }));
+        }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      } catch (error) {
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log(error?.message);
+      }
+    }
+  };
 
   // -------------------------------------------Table Data-----------------------------------
   const columns = [
     {
       title: "Provider First Name",
-      dataIndex: "first_name",
-      key: "first_name",
+      dataIndex: "provider_name",
+      key: "provider_name",
       width: 100,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      render: (_, { first_name }) => {
-        //console.log("tags : ", lock);
-        return <div className=" text-secondary">{first_name}</div>;
+      render: (_, record) => {
+        return (
+          <div className=" flex justify-center items-center">
+            <h1>{record?.provider_name}</h1>
+          </div>
+        );
       },
-      filteredValue: filteredInfo.first_name || null,
-      onFilter: (value, record) => record.first_name.includes(value),
       sorter: (a, b) => {
-        return a.first_name > b.first_name ? -1 : 1;
+        return a.provider_name > b.provider_name ? -1 : 1;
       },
       sortOrder:
-        sortedInfo.columnKey === "first_name" ? sortedInfo.order : null,
-      ellipsis: true,
+        sortedInfo.columnKey === "provider_name" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
       title: "Provider Last Name",
-      dataIndex: "last_name",
-      key: "last_name",
+      dataIndex: "provider_last_name",
+      key: "provider_last_name",
       width: 100,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      filteredValue: filteredInfo.last_name || null,
-      onFilter: (value, record) => record.last_name.includes(value),
-      sorter: (a, b) => {
-        return a.last_name > b.last_name ? -1 : 1;
+      render: (_, record) => {
+        return (
+          <div className=" flex justify-center items-center">
+            <h1>{record?.provider_last_name}</h1>
+          </div>
+        );
       },
-      sortOrder: sortedInfo.columnKey === "last_name" ? sortedInfo.order : null,
-      ellipsis: true,
+      sorter: (a, b) => {
+        return a.provider_last_name > b.provider_last_name ? -1 : 1;
+      },
+      sortOrder:
+        sortedInfo.columnKey === "provider_last_name" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
-      title: "ID Qualifier",
+      title: "NPI",
       dataIndex: "npi",
       key: "npi",
       width: 80,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      filteredValue: filteredInfo.npi || null,
-      onFilter: (value, record) => record.npi.includes(value),
       sorter: (a, b) => {
         return a.npi > b.npi ? -1 : 1;
       },
@@ -128,26 +168,21 @@ const ReferringProvider = () => {
       ellipsis: true,
     },
     {
-      title: "Id",
+      title: "ID Qualifier",
+      dataIndex: "id_qual",
+      key: "id_qual",
+      width: 80,
+      sorter: (a, b) => {
+        return a.id_qual > b.id_qual ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "id_qual" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "ID",
       dataIndex: "upin",
       key: "upin",
       width: 80,
-      filters: [
-        {
-          text: `10/31/2021`,
-          value: "10/31/2021",
-        },
-        {
-          text: `11/31/2023`,
-          value: "11/31/2023",
-        },
-        {
-          text: "10/31/2025",
-          value: "10/31/2025",
-        },
-      ],
-      filteredValue: filteredInfo.upin || null,
-      onFilter: (value, record) => record.upin.includes(value),
       sorter: (a, b) => {
         return a.upin > b.upin ? -1 : 1;
       },
@@ -172,7 +207,10 @@ const ReferringProvider = () => {
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
-              <button className="text-sm mx-1  text-red-500">
+              <button
+                onClick={() => handleDeleteReferringProvider(record?.id)}
+                className="text-sm mx-1  text-red-500"
+              >
                 <AiOutlineDelete />
               </button>
             </div>
@@ -204,7 +242,7 @@ const ReferringProvider = () => {
               </button>
             </label>
           </div>
-          <div className="md:flex justify-end items-end my-2 border">
+          <div className="md:flex justify-end items-end my-2">
             <button onClick={clearFilters} className="pms-clear-button">
               Clear filters
             </button>
@@ -212,19 +250,41 @@ const ReferringProvider = () => {
         </div>
       </div>
       <div>
-        <Table
-          pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
-          rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
-          size="small"
-          bordered
-          className="table-striped-rows text-xs font-normal"
-          columns={columns}
-          dataSource={table}
-          scroll={{
-            y: 650,
-          }}
-          onChange={handleChange}
-        />
+        <>
+          {allReferrringProviderData.loading ? (
+            <ShimmerTableTet></ShimmerTableTet>
+          ) : (
+            <Table
+              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              rowKey={(record) => record.id} //record is kind of whole one data object and here we are assigning id as key
+              size="small"
+              bordered
+              className="table-striped-rows text-xs font-normal"
+              columns={columns}
+              dataSource={data}
+              scroll={{
+                y: 650,
+              }}
+              onChange={handleChange}
+            />
+          )}
+        </>
+        {totalPage > 0 && (
+          <div className="flex justify-end">
+            <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              pageCount={Number(totalPage)}
+              marginPagesDisplayed={1}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              previousLinkClassName={"pagination_Link"}
+              nextLinkClassName={"pagination_Link"}
+              activeClassName={"pagination_Link-active"}
+              disabledClassName={"pagination_Link-disabled"}
+            ></ReactPaginate>
+          </div>
+        )}
       </div>
 
       {openAddModal && (
@@ -232,6 +292,7 @@ const ReferringProvider = () => {
           handleClose={handleClose2}
           open={openAddModal}
           recordData={recordData}
+          page={page}
         ></ReferringProviderActionModal>
       )}
     </div>

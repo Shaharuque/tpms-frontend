@@ -2,36 +2,115 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import CustomMultiSelection from "../../../Shared/CustomComponents/CustomMultiSelection";
-import { Fade } from "react-reveal";
-import { MdOutlineCancel } from "react-icons/md";
-import { Dropdown, Space, Table } from "antd";
-import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
+import { Table } from "antd";
+import { BsFillCameraVideoFill } from "react-icons/bs";
 import RecurringSessionEdit from "./RecurringSession/RecurringSessionEdit";
 import { Link } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
-import { AiOutlineDown } from "react-icons/ai";
-import GlobalMultiSelect from "../../../Shared/CustomComponents/GlobalMultiSelect";
+import Clients from "../ListView/MultiSelectComponents/Clients";
+import { useRecurringGetAllInfosMutation } from "../../../../features/Appointment_redux/RecurringSession/RecurringSessionApi";
+import useToken from "../../../../CustomHooks/useToken";
+import { MdOutlineCancel } from "react-icons/md";
+import Providers from "../ListView/MultiSelectComponents/Providers";
+import { baseIp } from "../../../../Misc/BaseClient";
+import { dateConverter } from "../../../Shared/Dateconverter/DateConverter";
 
 const RecurringSession = () => {
   const [table, setTable] = useState(false);
   const [select, setSelect] = useState("");
-  const [SessionData, SetSessionData] = useState([]);
+  const [sessionData, setSessionData] = useState([]);
   // For Antd table
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [fetchQuery, setFetchQuery] = useState(false);
+  const [patientId, setPatientId] = useState([]);
+  const [providerId, setProviderId] = useState([]);
+  const { token } = useToken();
 
-  // ------------------------------------------Table-------------------------------
-  // calling recurring session fakedb
+  console.log(patientId, providerId);
+  //Patient Data get api
+  const [recurringGetAllInfos, { data: allData, isLoading: dataLoading }] = useRecurringGetAllInfosMutation();
+
   useEffect(() => {
-    axios("../All_Fake_Api/Fakedb.json")
-      .then((response) => {
-        SetSessionData(response?.data);
-      })
-      .catch((error) => {
-        console.log(error);
+    if (select === "Patients") {
+      recurringGetAllInfos({
+        token,
+        payload: { sortBy: 2 },
       });
-  }, []);
-  console.log(SessionData);
+    }
+    if (select === "Provider") {
+      recurringGetAllInfos({
+        token,
+        payload: { sortBy: 3 },
+      });
+    }
+  }, [select, token, recurringGetAllInfos]);
+
+  //Get Recurring Session Data
+  //get data from API + data fetch from api while scrolling[Important]
+  useEffect(() => {
+    const getRecurringSessionData = async () => {
+      let res = await axios({
+        method: "post",
+        url: `${baseIp}/recurring/session/get/all/data`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-auth-token": token,
+        },
+        data: {
+          sort_by: select === "Patients" ? 2 : select === "Provider" ? 3 : 1,
+          patient_ids: patientId,
+          provider_ids: providerId,
+        },
+      });
+      const data = res?.data?.recurring_sessions;
+      setSessionData(data);
+    };
+    if (fetchQuery) {
+      getRecurringSessionData();
+    }
+  }, [token, fetchQuery, select, patientId, providerId]);
+  // console.log("This is satff data of first page", staffData);
+
+  // const fetchProviders = async () => {
+  //   let res = await axios({
+  //     method: "post",
+  //     url: `${baseIp}/pri/process/claim/get/billing/data`,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //       "x-auth-token": token,
+  //     },
+  //     data: {
+  //       activitytype: selectedSortOptionOne,
+  //       payor_id: insuranceSelect,
+  //       page: page,
+  //       to_date: toDate,
+  //     },
+  //   });
+  //   const data = res?.data?.processClaims?.data;
+  //   // console.log(data);
+  //   return data;
+  // };
+
+  // const fetchData = async () => {
+  //   const providersFromServer = await fetchProviders();
+  //   //console.log(providersFromServer);
+  //   setStaffData([...staffData, ...providersFromServer]);
+  //   if (providersFromServer.length === 0) {
+  //     setHasMore(false);
+  //   }
+  //   setPage(page + 1);
+  // };
+  // console.log("final total staffs", staffData);
+
+  const handleOptionChange = (val) => {
+    setSelect(val);
+    setFetchQuery(false);
+    setPatientId([]);
+    setProviderId([]);
+  };
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
@@ -42,110 +121,66 @@ const RecurringSession = () => {
   const columns = [
     {
       title: "Patients",
-      dataIndex: "Patients",
-      key: "Patients",
-      width: 100,
-      filters: [
-        {
-          text: `Vernon`,
-          value: "Vernon",
-        },
-        {
-          text: `Aileen Newman`,
-          value: "Aileen Newman",
-        },
-        {
-          text: "Donovan",
-          value: "Donovan",
-        },
-        {
-          text: "Burke Beard",
-          value: "Burke Beard",
-        },
-        {
-          text: "Hector Moses",
-          value: "Hector Moses",
-        },
-      ],
-      filteredValue: filteredInfo.Patients || null,
-      onFilter: (value, record) => record.Patients.includes(value),
+      dataIndex: "client_name",
+      key: "client_name",
+      width: 120,
       sorter: (a, b) => {
-        return a.Patients > b.Patients ? -1 : 1;
+        return a.client_name > b.client_name ? -1 : 1;
       },
-      sortOrder: sortedInfo.columnKey === "Patients" ? sortedInfo.order : null,
-
-      // render contains what we want to reflect as our data
-      // client_first_name, id, key=>each row data(object) property value can be accessed.
-      render: (_, { Patients, id, key }) => {
-        //console.log("tags : ", client_first_name, id, key);
+      sortOrder: sortedInfo.columnKey === "client_name" ? sortedInfo.order : null,
+      render: (_, { client_name }) => {
         return (
           <div className="flex justify-start px-2">
-            <button className="text-secondary">{Patients}</button>
+            <button className="text-secondary">{client_name}</button>
           </div>
         );
       },
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Service & Hrs.",
-      dataIndex: "Service_hrs",
-      key: "Service_hrs",
-      width: 100,
-      filters: [
-        { text: "Milissent", value: "Milissent" },
-        { text: "Timmy", value: "Timmy" },
-        {
-          text: `Jamey`,
-          value: "Jamey",
-        },
-        {
-          text: `Minnie`,
-          value: "Minnie",
-        },
-      ],
-      filteredValue: filteredInfo.Service_hrs || null,
-      onFilter: (value, record) => record.Service_hrs.includes(value),
-      sorter: (a, b) => {
-        return a.Service_hrs > b.Service_hrs ? -1 : 1;
-      },
-      sortOrder:
-        sortedInfo.columnKey === "Service_hrs" ? sortedInfo.order : null,
-
+      dataIndex: "activity_name",
+      key: "activity_name",
+      width: 120,
       // render contains what we want to reflect as our data
-      render: (_, { Service_hrs }) => {
+      render: (_, { activity_name }) => {
         return (
           <div className="flex justify-start px-2">
-            <h1 className="text-orange-700">
-              {Service_hrs ? Service_hrs : "No Data"}
-            </h1>
+            <h1 className="text-center">{activity_name ? activity_name : "No Data"}</h1>
           </div>
         );
       },
-      ellipsis: true,
+      // filters: [
+      //   { text: "Milissent", value: "Milissent" },
+      //   { text: "Timmy", value: "Timmy" },
+      //   {
+      //     text: `Jamey`,
+      //     value: "Jamey",
+      //   },
+      //   {
+      //     text: `Minnie`,
+      //     value: "Minnie",
+      //   },
+      // ],
+      // filteredValue: filteredInfo.Service_hrs || null,
+      // onFilter: (value, record) => record.Service_hrs.includes(value),
+      sorter: (a, b) => {
+        return a.activity_name > b.activity_name ? -1 : 1;
+      },
+      sortOrder: sortedInfo.columnKey === "activity_name" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
       title: "Provider",
-      dataIndex: "Provider",
-      key: "Provider",
+      dataIndex: "provider_name",
+      key: "provider_name",
       width: 100,
-      filters: [
-        {
-          text: `1986-08-28`,
-          value: "1986-08-28",
-        },
-        {
-          text: "2021-04-06",
-          value: "2021-04-06",
-        },
-      ],
-      filteredValue: filteredInfo.Provider || null,
-      onFilter: (value, record) => record.Provider.includes(value),
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.Provider > b.Provider ? -1 : 1; //sorting problem solved using this logic
+        return a.provider_name > b.provider_name ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "Provider" ? sortedInfo.order : null,
-      ellipsis: true,
+      sortOrder: sortedInfo.columnKey === "provider_name" ? sortedInfo.order : null,
+      ellipsis: false,
     },
     {
       title: "Pos",
@@ -194,27 +229,40 @@ const RecurringSession = () => {
     },
     {
       title: "Start Date",
-      dataIndex: "Scheduled_Date",
-      key: "Scheduled_Date",
+      dataIndex: "schedule_date_start",
+      key: "schedule_date_start",
       width: 80,
-      filters: [
-        {
-          text: "Jan 15, 2022",
-          value: "Jan 15, 2022",
-        },
-        {
-          text: "May 9, 2023",
-          value: "May 9, 2023",
-        },
-      ],
-      filteredValue: filteredInfo.Scheduled_Date || null,
-      onFilter: (value, record) => record.Scheduled_Date.includes(value),
+      render: (_, { schedule_date_start }) => {
+        return (
+          <div className="flex justify-start px-2">
+            <h1>{schedule_date_start ? dateConverter(schedule_date_start) : "No Data"}</h1>
+          </div>
+        );
+      },
       //   sorter is for sorting asc or dsc purpose
       sorter: (a, b) => {
-        return a.Scheduled_Date > b.Scheduled_Date ? -1 : 1; //sorting problem solved using this logic
+        return a.schedule_date_start > b.schedule_date_start ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "Scheduled_Date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "schedule_date_start" ? sortedInfo.order : null,
+      ellipsis: true,
+    },
+    {
+      title: "End Date",
+      dataIndex: "schedule_date_end",
+      key: "schedule_date_end",
+      width: 80,
+      render: (_, { schedule_date_end }) => {
+        return (
+          <div className="flex justify-start px-2">
+            <h1>{schedule_date_end ? dateConverter(schedule_date_end) : "No Data"}</h1>
+          </div>
+        );
+      },
+      //   sorter is for sorting asc or dsc purpose
+      sorter: (a, b) => {
+        return a.schedule_date_end > b.schedule_date_end ? -1 : 1; //sorting problem solved using this logic
+      },
+      sortOrder: sortedInfo.columnKey === "schedule_date_end" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -244,57 +292,6 @@ const RecurringSession = () => {
       ellipsis: true,
     },
     {
-      title: "Status",
-      dataIndex: "Status",
-      key: "Status",
-      width: 80,
-      filters: [
-        {
-          text: "hold",
-          value: "hold",
-        },
-        {
-          text: "Rendered",
-          value: "Rendered",
-        },
-        {
-          text: "Scheduled",
-          value: "Scheduled",
-        },
-      ],
-      filteredValue: filteredInfo.Status || null,
-      onFilter: (value, record) => record.Status.includes(value),
-      //   sorter is for sorting asc or dsc purpose
-      sorter: (a, b) => {
-        return a.Status > b.Status ? -1 : 1; //sorting problem solved using this logic
-      },
-      sortOrder: sortedInfo.columnKey === "Status" ? sortedInfo.order : null,
-      // render contains what we want to reflect as our data
-      render: (_, { Status }) => {
-        //console.log("Status : ", Status);
-        return (
-          <div>
-            {Status === "Scheduled" && (
-              <button className="bg-gray-500 text-white text-[9px] py-[2px] px-2 rounded w-14">
-                {Status}
-              </button>
-            )}
-            {Status === "Rendered" && (
-              <button className="bg-teal-700 text-white text-[9px] py-[2px] px-2 rounded w-14">
-                {Status}
-              </button>
-            )}
-            {Status === "hold" && (
-              <button className="bg-red-700 text-white text-[9px] py-[2px] px-2 rounded w-14">
-                {Status}
-              </button>
-            )}
-          </div>
-        );
-      },
-      ellipsis: true,
-    },
-    {
       title: "Action",
       dataIndex: "id",
       key: "id",
@@ -318,9 +315,8 @@ const RecurringSession = () => {
       filters: [],
     },
   });
-  const onSubmit = (data) => {
-    // setSubmitted(data);
-    // console.log(data);
+  const onSubmit = () => {
+    setFetchQuery(true);
     setTable(true);
   };
 
@@ -335,28 +331,14 @@ const RecurringSession = () => {
 
   // console.log(selectedFlatRows);
 
-  // -----------------------------------------------Multi-Select-------------------------------
-  const rc = [
-    { label: "tofayel ", value: "grapes" },
-    { label: "jakir", value: "mafgngo" },
-    { label: "amin", value: "grfgapes" },
-    { label: "yakub ", value: "mango" },
-    { label: "maria", value: "strawberry" },
-  ];
-
   return (
     <div className={!table ? "h-[100vh]" : ""}>
       <div className="cursor-pointer">
         <div className="bg-gradient-to-r from-secondary to-cyan-600 rounded-lg px-4 py-2">
-          <div
-            onClick={clickHandler}
-            className="  flex items-center justify-between"
-          >
+          <div onClick={clickHandler} className="  flex items-center justify-between">
             {!clicked && (
               <>
-                <div className="text-[16px]  text-white font-semibold ">
-                  Recurring Session
-                </div>
+                <div className="text-[14px]  text-white font-semibold ">Recurring Session</div>
                 <lord-icon
                   src="https://cdn.lordicon.com/rxufjlal.json"
                   trigger="loop"
@@ -371,16 +353,11 @@ const RecurringSession = () => {
           {/* Upper div */}
           {clicked && (
             <div>
-              <div className="flex justify-between items-center">
-                <h1 className="text-[20px]  text-white font-semibold ">
-                  Recurring Session
-                </h1>
+              <div className="flex justify-between items-center mb-4">
+                <h1 className="text-[16px]  text-white font-semibold ">Recurring Session</h1>
                 <div className="  flex justify-end gap-3">
                   <div>
-                    <button
-                      onClick={handleClose}
-                      className="text-white text-2xl font-light"
-                    >
+                    <button onClick={handleClose} className="text-white text-2xl font-light">
                       <MdOutlineCancel />
                     </button>
                   </div>
@@ -388,51 +365,47 @@ const RecurringSession = () => {
               </div>
 
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex gap-4">
+                <div className="flex sm:flex-wrap gap-4">
                   {/* <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 my-5 mr-2 gap-x-3"> */}
-                  <div>
+                  <div className="sm:w-[140px] w-[100px]">
                     <label className="label">
-                      <span className="text-[16px] mb-2 ml-1 text-gray-100">
-                        Select Any
-                      </span>
+                      <span className="label-text text-[14px] text-gray-100 text-left">Select Any</span>
                     </label>
-                    <select
-                      className=" bg-transparent border-b-[3px] border-[#e5e5e5] text-white  rounded-sm font-normal mx-1 text-[14px] w-full focus:outline-none"
-                      onChange={(e) => setSelect(e.target.value)}
-                      name="type"
-                    >
-                      <option value="all" className="text-black">
-                        All
-                      </option>
-                      <option value="Patients" className="text-black">
-                        Patients
-                      </option>
-                      <option value="Provider" className="text-black">
-                        Provider
-                      </option>
-                    </select>
+                    <div>
+                      <select
+                        className=" bg-transparent border-b-[2px] border-[#ffffff] text-white py-[4px]  font-medium  text-[14px] w-full focus:outline-none"
+                        onChange={(e) => handleOptionChange(e.target.value)}
+                      >
+                        <option value="all" className="text-black">
+                          All
+                        </option>
+                        <option value="Patients" className="text-black">
+                          Patients
+                        </option>
+                        <option value="Provider" className="text-black">
+                          Provider
+                        </option>
+                      </select>
+                    </div>
                   </div>
                   {select === "Patients" ? (
-                    <div className="">
-                      <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
-                        Patients
-                      </h1>
-                      <CustomMultiSelection></CustomMultiSelection>
+                    <div>
+                      <label className="label">
+                        <span className="label-text mb-[2px] text-[14px] text-gray-100 text-left">Patient</span>
+                      </label>
+                      <Clients patients={allData?.allClients} setPatientId={setPatientId} setFetchQuery={setFetchQuery}></Clients>
                     </div>
                   ) : select === "Provider" ? (
                     <div className="">
-                      <h1 className="text-[16px] mb-[10px] ml-1 mt-2 text-gray-100">
-                        Provider
-                      </h1>
-                      <CustomMultiSelection></CustomMultiSelection>
+                      <label className="label">
+                        <span className="label-text mb-[2px] text-[14px] text-gray-100 text-left">Provider</span>
+                      </label>
+                      <Providers stuffs={allData?.allEmployees} setStuffsId={setProviderId} setFetchQuery={setFetchQuery}></Providers>
                     </div>
                   ) : (
                     <></>
                   )}
-                  <button
-                    className=" mb-3 mt-[35px]  pms-white-button"
-                    type="submit"
-                  >
+                  <button className=" mb-3 mt-[35px]  pms-white-button" type="submit">
                     Go
                   </button>
                 </div>
@@ -446,9 +419,7 @@ const RecurringSession = () => {
       {table && (
         <div className="my-3">
           <div className="flex items-center justify-between gap-2 my-2">
-            <h1 className="text-lg text-orange-500 text-left font-semibold ">
-              Recurring Session
-            </h1>
+            <h1 className="text-lg text-orange-500 text-left font-semibold ">Recurring Session</h1>
             <button
               onClick={clearFilters}
               className="px-2 py-2 bg-white from-primary text-xs  hover:to-secondary text-secondary border border-secondary rounded-sm flex items-center"
@@ -458,12 +429,13 @@ const RecurringSession = () => {
           </div>
           <div className="overflow-scroll">
             <Table
-              rowKey="id" //warning issue solve ar jnno unique id rowKey hisabey use hobey
-              pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
+              rowKey="id"
+              pagination={false}
+              bordered
               size="small"
               className=" text-xs font-normal"
               columns={columns}
-              dataSource={SessionData} //Which data chunk you want to show in table
+              dataSource={sessionData}
               onChange={handleChange}
             />
           </div>

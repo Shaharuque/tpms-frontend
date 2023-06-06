@@ -116,13 +116,13 @@ const EditQualification = ({ handleClose, open, qualificationInfo }) => {
               <div>
                 <label className="label">
                   <span className=" label-font">
-                    Credential<span className="text-red-500">*</span>
+                    Qualification<span className="text-red-500">*</span>
                   </span>
                 </label>
                 <input
                   type="text"
                   name="clear_type"
-                  className="input-border input-font w-full focus:outline-none"
+                  className="modal-input-field ml-1 w-full"
                   {...register("clear_type")}
                 />
               </div>

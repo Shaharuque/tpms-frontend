@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { fetchData } from "../../../../../../Misc/Helper";
 import axios from "axios";
-import { headers } from "../../../../../../Misc/BaseClient";
+import { baseIp, headers } from "../../../../../../Misc/BaseClient";
 import { useDispatch } from "react-redux";
 import { fetchCpt } from "../../../../../../features/Settings_redux/cptCodeSlice";
 import { toast } from "react-toastify";
@@ -16,23 +16,12 @@ export default function AddCptCodeActionModal({
   record,
   page,
   token,
-  endPoint,
+  selectedTreatmentData,
 }) {
-  const [selectedTreatments, setSelectedTreatments] = useState([]);
-  const { id, cpt_code, treatment, facility_treatment_id } = record;
+  const { id, cpt_code, cpt_id, facility_treatment_id, treatment_details } =
+    record || {};
   console.log("record", record);
   const dispatch = useDispatch();
-
-  //getting all the selected treatment data for Tx type selection purpose
-  useEffect(() => {
-    fetchData("admin/ac/setting/get/selected/treatment", token).then((res) => {
-      const result = res?.data?.selected_treatment;
-      if (result?.length !== 0) {
-        setSelectedTreatments(result);
-      }
-    });
-  }, []);
-  console.log(selectedTreatments);
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -42,11 +31,11 @@ export default function AddCptCodeActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/cpt/code/create",
+          url: `${baseIp}/setting/add/cpt/code`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: token || null,
+            "x-auth-token": token || null,
           },
           data: FormData,
         });
@@ -58,14 +47,55 @@ export default function AddCptCodeActionModal({
             position: "top-center",
             autoClose: 5000,
             theme: "dark",
+            style: { fontSize: "12px" },
           });
-          dispatch(fetchCpt({ endPoint, page, token }));
+          dispatch(fetchCpt({ page, token }));
           handleClose();
         } else {
           toast.error("Cpt Code Already Exist", {
             position: "top-center",
             autoClose: 5000,
             theme: "dark",
+            style: { fontSize: "12px" },
+          });
+        }
+      } catch (error) {
+        console.log(error?.res?.data?.message); // this is the main part. Use the response property from the error object
+      }
+    } else {
+      console.log("update part is hitted");
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/update/cpt/code`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token || null,
+          },
+          data: {
+            treatment_id: FormData?.treatment_id,
+            cpt_code: FormData?.cptcode,
+            cptid: id,
+          },
+        });
+
+        // console.log(res.data);
+        if (res.data.status === "success") {
+          toast.success("Successfully Updated", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+          dispatch(fetchCpt({ page, token }));
+          handleClose();
+        } else {
+          toast.error("Cpt Code Already Exist", {
+            position: "top-center",
+            autoClose: 5000,
+            theme: "dark",
+            style: { fontSize: "12px" },
           });
         }
       } catch (error) {
@@ -80,11 +110,11 @@ export default function AddCptCodeActionModal({
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        cpt_code: cpt_code,
-        facility_treatment_id: facility_treatment_id,
+        cptcode: cpt_code,
+        treatment_id: treatment_details?.id,
       });
     }, 100);
-  }, [reset, cpt_code]);
+  }, [reset, cpt_code, treatment_details?.id]);
 
   return (
     <div>
@@ -119,23 +149,26 @@ export default function AddCptCodeActionModal({
                 <select
                   className="modal-input-field ml-1 w-full"
                   name="facility_treatment_id"
-                  {...register("facility_treatment_id")}
+                  {...register("treatment_id")}
                 >
-                  {record.treatment?.treatment_name ? (
-                    <option value={facility_treatment_id}>
-                      {record.treatment?.treatment_name}
+                  {record?.treatment_details ? (
+                    <option value={record?.treatment_details?.id}>
+                      {record?.treatment_details?.treatment_name}
                     </option>
                   ) : (
                     <option>Select Treatment</option>
                   )}
-                  {selectedTreatments
+                  {selectedTreatmentData
                     ?.filter(
                       (item) =>
-                        item.treatment_name !== record.treatment?.treatment_name
+                        parseInt(item.id) !== record?.facility_treatment_id
                     )
-                    ?.map((treatment) => {
+                    .map((treatment) => {
                       return (
-                        <option key={treatment?.id} value={treatment?.id}>
+                        <option
+                          key={treatment?.treatment_id}
+                          value={parseInt(treatment?.id)}
+                        >
                           {treatment?.treatment_name}
                         </option>
                       );
@@ -150,9 +183,9 @@ export default function AddCptCodeActionModal({
                 <input
                   type="number"
                   placeholder="Cpt Code"
-                  name="cpt_code"
+                  name="cptcode"
                   className="modal-input-field ml-1 w-full"
-                  {...register("cpt_code")}
+                  {...register("cptcode")}
                 />
               </div>
             </div>

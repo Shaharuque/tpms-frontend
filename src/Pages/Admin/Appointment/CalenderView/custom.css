@@ -70,14 +70,72 @@
   color: black;
   font-weight: 700;
 }
-@media only screen and (max-width: 500px){
-    .fc .fc-toolbar{
-        display: inline-block;
-        float: none !important;
-        
-    }
-    .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+
+@media only screen and (max-width: 500px) {
+  .fc .fc-toolbar {
+    display: inline-block;
+    float: none !important;
+
+  }
+
+  .fc-direction-ltr .fc-toolbar>*> :not(:first-child) {
     margin-left: 0px;
-}
+  }
 }
 
+/* for hovering */
+.event-wrapper {
+  padding: 10px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: black;
+  color: red;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.event:hover .tooltip {
+  display: block;
+}
+
+.card {
+  top: calc(var(--fc-event-top) - 20px);
+  left: var(--fc-event-left);
+}
+
+.tooltip-custom {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 1.5em;
+  font-size: 13px;
+  font-family: poppins, sans-serif;
+}
+
+/* event text color */
+.fc-daygrid-block-event .fc-event-time {
+  color: black;
+}
+
+.fc-daygrid-block-event .fc-event-title {
+  color: white;
+}
+
+.fc-event {
+  /* padding: 5px; */
+  cursor: pointer;
+  /* Adjust the height as needed */
+}

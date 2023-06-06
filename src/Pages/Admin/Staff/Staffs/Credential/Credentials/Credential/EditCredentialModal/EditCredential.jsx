@@ -30,7 +30,7 @@ const EditCredential = ({ handleClose, open, credentialInfo }) => {
     credential_applicable,
     credential_date_expired,
     credential_date_issue,
-  } = credentialData?.credential_info || {};
+  } = credentialData?.employeeCredential || {};
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {

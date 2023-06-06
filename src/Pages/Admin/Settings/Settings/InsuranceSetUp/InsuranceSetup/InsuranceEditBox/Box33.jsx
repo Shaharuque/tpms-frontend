@@ -1,13 +1,75 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
+import { useUpdateBox33InsuranceSetupMutation } from "../../../../../../../features/Settings_redux/insuranceSetup/insuranceSetupApi";
+import { toast } from "react-toastify";
+import useToken from "../../../../../../../CustomHooks/useToken";
 
-const Box33 = ({ box33, handleBox33 }) => {
+const Box33 = ({ box33, handleBox33, insuranceBox }) => {
   const { register, handleSubmit, reset } = useForm();
+  const {
+    id,
+    facility_33,
+    cms_1500_33a,
+    cms_1500_33b,
+    cms1500_33address,
+    cms1500_33city,
+    cms1500_33state,
+    cms1500_33zip,
+  } = insuranceBox || {};
+  console.log("from box33", insuranceBox);
+  const { token } = useToken();
+
+  const [updateBox33InsuranceSetup, { isSuccess: box33UpdateSuccess, isError: box33UpdateError }] =
+    useUpdateBox33InsuranceSetupMutation();
+
+  useEffect(() => {
+    setTimeout(() => {
+      reset({
+        facility_33,
+        cms_1500_33a,
+        cms_1500_33b,
+        cms1500_33address,
+        cms1500_33city,
+        cms1500_33state,
+        cms1500_33zip,
+      });
+    }, 500);
+  }, [
+    facility_33,
+    cms_1500_33a,
+    cms_1500_33b,
+    cms1500_33address,
+    cms1500_33city,
+    cms1500_33state,
+    cms1500_33zip,
+    reset,
+  ]);
+
   const onSubmit = (data) => {
-    console.log(data);
-    reset();
+    const payload = {
+      ...data,
+      payor_up_id: id,
+    };
+    if (payload && id) {
+      updateBox33InsuranceSetup({
+        token,
+        data: payload,
+      });
+    }
   };
+
+  useEffect(() => {
+    if (box33UpdateSuccess) {
+      toast.success("successfully update the box33", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
+  }, [box33UpdateSuccess]);
+
   return (
     <div>
       <h2
@@ -39,9 +101,9 @@ const Box33 = ({ box33, handleBox33 }) => {
                   </label>
                   <input
                     type="text"
-                    name="address1"
+                    name="facility_33"
                     className="input-border bg-teal-50 input-font w-full focus:outline-none"
-                    {...register("address1")}
+                    {...register("facility_33")}
                   />
                 </div>
                 <div>
@@ -50,9 +112,9 @@ const Box33 = ({ box33, handleBox33 }) => {
                   </label>
                   <input
                     type="text"
-                    name="address2"
+                    name="cms1500_33address"
                     className="input-border input-font w-full focus:outline-none bg-teal-50"
-                    {...register("address2")}
+                    {...register("cms1500_33address")}
                   />
                 </div>
                 <div>
@@ -61,9 +123,9 @@ const Box33 = ({ box33, handleBox33 }) => {
                   </label>
                   <input
                     type="text"
-                    name="city"
+                    name="cms1500_33city"
                     className="input-border input-font w-full focus:outline-none bg-teal-50"
-                    {...register("city")}
+                    {...register("cms1500_33city")}
                   />
                 </div>
 
@@ -73,10 +135,73 @@ const Box33 = ({ box33, handleBox33 }) => {
                   </label>
                   <select
                     className="input-border input-font w-full focus:outline-none bg-teal-50"
-                    {...register("state")}
+                    {...register("cms1500_33state")}
                   >
-                    <option value="Speech Therapist">Speech Therapist</option>
-                    <option value="female">Female</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AS">American Samoa</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District of Columbia</option>
+                    <option value="FM">Federated States of Micronesia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="GU">Guam</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MH">Marshall Islands</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="MP">Northern Mariana Islands</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PW">Palau</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="PR">Puerto Rico</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VI">Virgin Islands</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                    <option value="AE">Armed Forces Africa</option>
+                    <option value="AA">Armed Forces Americas (except Canada)</option>
+                    <option value="AE">Armed Forces Canada</option>
+                    <option value="AE">Armed Forces Europe</option>
+                    <option value="AE">Armed Forces Middle East</option>
+                    <option value="AP">Armed Forces Pacific</option>
                   </select>
                 </div>
 
@@ -86,9 +211,9 @@ const Box33 = ({ box33, handleBox33 }) => {
                   </label>
                   <input
                     type="text"
-                    name="zip"
+                    name="cms1500_33zip"
                     className="input-border input-font w-full focus:outline-none bg-teal-50"
-                    {...register("zip")}
+                    {...register("cms1500_33zip")}
                   />
                 </div>
                 <div>
@@ -97,9 +222,9 @@ const Box33 = ({ box33, handleBox33 }) => {
                   </label>
                   <input
                     type="text"
-                    name="mobile"
+                    name="cms_1500_33a"
                     className="input-border input-font w-full focus:outline-none bg-teal-50"
-                    {...register("mobile")}
+                    {...register("cms_1500_33a")}
                   />
                 </div>
                 <div>
@@ -108,9 +233,9 @@ const Box33 = ({ box33, handleBox33 }) => {
                   </label>
                   <input
                     type="text"
-                    name="fax"
+                    name="cms_1500_33b"
                     className="input-border input-font w-full focus:outline-none bg-teal-50"
-                    {...register("fax")}
+                    {...register("cms_1500_33b")}
                   />
                 </div>
               </div>

@@ -7,41 +7,55 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { fetchServices } from "../../../../../../features/Settings_redux/settingFeaturesSlice";
-import { fetchData } from "../../../../../../Misc/Helper";
+import { fetchServices } from "../../../../../../features/Settings_redux/settingServicesList";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import useToken from "../../../../../../CustomHooks/useToken";
+import { baseIp } from "../../../../../../Misc/BaseClient";
 
 export default function AddServicesActionModal({
   record,
   handleClose,
   open,
   page,
-  token,
 }) {
   console.log(record);
-  const { id, type, treatment_type, duration, mileage, service, description } =
-    record;
+  const {
+    id,
+    type,
+    facility_treatment_id,
+    service_treatment,
+    duration,
+    mileage,
+    service,
+    description,
+  } = record;
+
   const dispatch = useDispatch();
-  const endPoint = "admin/ac/setting/service/all";
   const { register, handleSubmit, reset } = useForm();
   const [selectedTreatments, setSelectedTreatments] = useState([]);
+  const { token } = useToken();
 
-  //getting all the selected treatment data for Tx type selection purpose
+  //Getting All Selected Treatment Data
+  const {
+    data: selectedTreatmentData,
+    isSuccess: selectedTreatmentSuccess,
+    isLoading: selectedTreatmentLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
+
+  console.log("selected treatments", selectedTreatmentData?.data);
+
   useEffect(() => {
-    fetchData("admin/ac/setting/get/selected/treatment", token).then((res) => {
-      const result = res?.data?.selected_treatment;
-      if (result?.length !== 0) {
-        setSelectedTreatments(result);
-      }
-    });
-  }, [token]);
-  console.log(selectedTreatments);
+    if (selectedTreatmentSuccess && selectedTreatmentData?.data?.length > 0) {
+      setSelectedTreatments(selectedTreatmentData?.data);
+    }
+  }, [selectedTreatmentData?.data, selectedTreatmentSuccess]);
 
   // Editable value
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        facility_treatment_id: treatment_type?.id,
+        treatment_id: service_treatment?.id,
         service: service,
         description: description,
         mileage: mileage,
@@ -51,12 +65,12 @@ export default function AddServicesActionModal({
     }, 0);
   }, [
     reset,
+    service_treatment?.id,
     service,
     description,
     mileage,
     duration,
     type,
-    treatment_type?.treatment_name,
   ]);
 
   const onSubmit = async (FormData) => {
@@ -65,11 +79,11 @@ export default function AddServicesActionModal({
       try {
         let res = await axios({
           method: "post",
-          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/service/create",
+          url: `${baseIp}/setting/add/setting/service`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: token,
+            "x-auth-token": token,
           },
           data: FormData,
         });
@@ -85,8 +99,9 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
-          dispatch(fetchServices({ endPoint, page, token }));
+          dispatch(fetchServices({ page, token }));
           handleClose();
         }
         //else res?.data?.status === "error" holey
@@ -100,6 +115,7 @@ export default function AddServicesActionModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "15px" },
           });
         }
       } catch (error) {
@@ -112,11 +128,70 @@ export default function AddServicesActionModal({
           draggable: true,
           progress: undefined,
           theme: "dark",
+          style: { fontSize: "15px" },
         });
         console.log(error?.message); // this is the main part. Use the response property from the error object
       }
     } else {
-      console.log("else part is hitted");
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/update/setting/service`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token,
+          },
+          data: {
+            ...FormData,
+            service_id: parseInt(id),
+          },
+        });
+
+        // console.log(res.data);
+        if (res?.data?.status === "success") {
+          toast.success(<h1 className="text-[12px]">{res?.data?.message}</h1>, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            style: { fontSize: "15px" },
+          });
+          dispatch(fetchServices({ page, token }));
+          handleClose();
+        }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(<h1 className="text-[12px]">{res?.data?.message}</h1>, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            style: { fontSize: "15px" },
+          });
+        }
+      } catch (error) {
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          style: { fontSize: "15px" },
+        });
+        console.log(error?.message); // this is the main part. Use the response property from the error object
+      }
     }
     // reset();
   };
@@ -153,12 +228,12 @@ export default function AddServicesActionModal({
                 {/* Dynamic option showed and select new option feature */}
                 <select
                   className="modal-input-field ml-1 w-full"
-                  defaultValue={treatment_type?.treatment_name}
-                  {...register("facility_treatment_id")}
+                  // defaultValue={service_treatment?.treatment_name}
+                  {...register("treatment_id")}
                 >
-                  {record.treatment_type?.treatment_name ? (
-                    <option value={record.treatment_type?.id}>
-                      {record.treatment_type?.treatment_name}
+                  {record?.service_treatment ? (
+                    <option value={record?.service_treatment?.id}>
+                      {record?.service_treatment?.treatment_name}
                     </option>
                   ) : (
                     <option>Select Treatment</option>
@@ -166,14 +241,13 @@ export default function AddServicesActionModal({
                   {selectedTreatments
                     ?.filter(
                       (item) =>
-                        item.treatment_name !==
-                        record.treatment_type?.treatment_name
+                        parseInt(item.id) !== record?.facility_treatment_id
                     )
                     .map((treatment) => {
                       return (
                         <option
                           key={treatment?.treatment_id}
-                          value={treatment?.id}
+                          value={parseInt(treatment?.id)}
                         >
                           {treatment?.treatment_name}
                         </option>
@@ -189,8 +263,8 @@ export default function AddServicesActionModal({
                   className="modal-input-field ml-1 w-full"
                   {...register("type")}
                 >
-                  <option value={0}>UnBillable</option>
-                  <option value={1}>Billable</option>
+                  <option value={"2"}>UnBillable</option>
+                  <option value={"1"}>Billable</option>
                 </select>
               </div>
 
@@ -219,10 +293,113 @@ export default function AddServicesActionModal({
                 <label className="label">
                   <span className="modal-label-name">Duration</span>
                 </label>
-                <input
+                <select
                   className="modal-input-field ml-1 w-full"
                   {...register("duration")}
-                ></input>
+                >
+                  <option value="5">5 min</option>
+                  <option value="10">10 min</option>
+                  <option value="15" selected="">
+                    15 min
+                  </option>
+                  <option value="20">20 min</option>
+                  <option value="25">25 min</option>
+                  <option value="30">30 min</option>
+                  <option value="35">35 min</option>
+                  <option value="40">40 min</option>
+                  <option value="45">45 min</option>
+                  <option value="50">50 min</option>
+                  <option value="55">55 min</option>
+                  <option value="60">60 min</option>
+                  <option value="65">1:05 hrs</option>
+                  <option value="70">1:10 hrs</option>
+                  <option value="75">1:15 hrs</option>
+                  <option value="80">1:20 hrs</option>
+                  <option value="85">1:25 hrs</option>
+                  <option value="90">1:30 hrs</option>
+                  <option value="95">1:35 hrs</option>
+                  <option value="100">1:40 hrs</option>
+                  <option value="105">1:45 hrs</option>
+                  <option value="110">1:50 hrs</option>
+                  <option value="115">1:55 hrs</option>
+                  <option value="120">2:00 hrs</option>
+                  <option value="125">2:05 hrs</option>
+                  <option value="130">2:10 hrs</option>
+                  <option value="135">2:15 hrs</option>
+                  <option value="140">2:20 hrs</option>
+                  <option value="145">2:25 hrs</option>
+                  <option value="150">2:30 hrs</option>
+                  <option value="155">2:35 hrs</option>
+                  <option value="160">2:40 hrs</option>
+                  <option value="165">2:45 hrs</option>
+                  <option value="170">2:50 hrs</option>
+                  <option value="175">2:55 hrs</option>
+                  <option value="180">3:00 hrs</option>
+                  <option value="185">3:05 hrs</option>
+                  <option value="190">3:10 hrs</option>
+                  <option value="195">3:15 hrs</option>
+                  <option value="200">3:20 hrs</option>
+                  <option value="205">3:25 hrs</option>
+                  <option value="210">3:30 hrs</option>
+                  <option value="215">3:35 hrs</option>
+                  <option value="220">3:40 hrs</option>
+                  <option value="225">3:45 hrs</option>
+                  <option value="230">3:50 hrs</option>
+                  <option value="235">3:55 hrs</option>
+                  <option value="240">4:00 hrs</option>
+                  <option value="245">4:05 hrs</option>
+                  <option value="250">4:10 hrs</option>
+                  <option value="255">4:15 hrs</option>
+                  <option value="260">4:20 hrs</option>
+                  <option value="265">4:25 hrs</option>
+                  <option value="270">4:30 hrs</option>
+                  <option value="275">4:35 hrs</option>
+                  <option value="280">4:40 hrs</option>
+                  <option value="285">4:45 hrs</option>
+                  <option value="290">4:50 hrs</option>
+                  <option value="295">4:55 hrs</option>
+                  <option value="300">5:00 hrs</option>
+                  <option value="305">5:05 hrs</option>
+                  <option value="310">5:10 hrs</option>
+                  <option value="315">5:15 hrs</option>
+                  <option value="320">5:20 hrs</option>
+                  <option value="325">5:25 hrs</option>
+                  <option value="330">5:30 hrs</option>
+                  <option value="335">5:35 hrs</option>
+                  <option value="340">5:40 hrs</option>
+                  <option value="345">5:45 hrs</option>
+                  <option value="350">5:50 hrs</option>
+                  <option value="355">5:55 hrs</option>
+                  <option value="360">6:00 hrs</option>
+                  <option value="365">6:05 hrs</option>
+                  <option value="370">6:10 hrs</option>
+                  <option value="375">6:15 hrs</option>
+                  <option value="380">6:20 hrs</option>
+                  <option value="385">6:25 hrs</option>
+                  <option value="390">6:30 hrs</option>
+                  <option value="395">6:35 hrs</option>
+                  <option value="400">6:40 hrs</option>
+                  <option value="405">6:45 hrs</option>
+                  <option value="410">6:50 hrs</option>
+                  <option value="415">6:55 hrs</option>
+                  <option value="420">7:00 hrs</option>
+                  <option value="425">7:05 hrs</option>
+                  <option value="430">7:10 hrs</option>
+                  <option value="435">7:15 hrs</option>
+                  <option value="440">7:20 hrs</option>
+                  <option value="445">7:25 hrs</option>
+                  <option value="450">7:30 hrs</option>
+                  <option value="455">7:35 hrs</option>
+                  <option value="460">7:40 hrs</option>
+                  <option value="465">7:45 hrs</option>
+                  <option value="470">7:50 hrs</option>
+                  <option value="475">7:55 hrs</option>
+                  <option value="480">8 hrs</option>
+                  <option value="540">9 hrs</option>
+                  <option value="600">10 hrs</option>
+                  <option value="660">11 hrs</option>
+                  <option value="720">12 hrs</option>
+                </select>
               </div>
 
               <div>
@@ -231,7 +408,7 @@ export default function AddServicesActionModal({
                 </label>
                 <input
                   type="number"
-                  placeholder="Cpt Code"
+                  placeholder="Milage"
                   name="Mileage"
                   className="modal-input-field ml-1 w-full"
                   {...register("mileage")}

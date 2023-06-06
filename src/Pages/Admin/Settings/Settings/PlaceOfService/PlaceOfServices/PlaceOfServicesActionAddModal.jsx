@@ -3,12 +3,11 @@ import { useForm } from "react-hook-form";
 import { Modal } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import axios from "axios";
-import { headers } from "../../../../../../Misc/BaseClient";
 import "../../../../../Style/Pagination.css";
-import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPOS } from "../../../../../../features/Settings_redux/placeOfServiceSlice";
+import { baseIp } from "../../../../../../Misc/BaseClient";
 
 export default function PlaceOfServicesActionAddModal({
   handleClose,
@@ -20,12 +19,8 @@ export default function PlaceOfServicesActionAddModal({
 }) {
   const { id, pos_code, pos_name } = recordData;
   console.log(id);
-
   const dispatch = useDispatch();
-  const createEndpoint = "admin/ac/setting/create/pos";
 
-  const posCreated = useSelector((state) => state?.posCreated);
-  console.log(posCreated);
   const {
     register,
     handleSubmit,
@@ -35,23 +30,20 @@ export default function PlaceOfServicesActionAddModal({
 
   const onSubmit = async (formData) => {
     console.log(formData);
-    //create new pos [post req]
     if (formData && !id) {
       try {
         let res = await axios({
           method: "post",
-          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/create/pos",
+          url: `${baseIp}/setting/add/pos/code`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: token || null,
+            "x-auth-token": token || null,
           },
           data: formData,
         });
-
-        // console.log(res.data);
         if (res?.data?.status === "success") {
-          toast.success("Successfully Inserted", {
+          toast.success("successfully added new pos code", {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -60,8 +52,9 @@ export default function PlaceOfServicesActionAddModal({
             draggable: true,
             progress: undefined,
             theme: "dark",
+            style: { fontSize: "12px" },
           });
-          dispatch(fetchPOS({ endPoint, page, token }));
+          dispatch(fetchPOS({ page, token }));
           handleClose();
         }
         //else res?.data?.status === "error" holey
@@ -96,41 +89,44 @@ export default function PlaceOfServicesActionAddModal({
     else {
       const payload = {
         pos_id: id,
-        pos_name: formData?.pos_name,
-        pos_code: formData?.pos_code,
+        ...formData,
       };
       try {
         let res = await axios({
           method: "post",
-          url: "https://test-prod.therapypms.com/api/v1/internal/admin/ac/setting/update/pos",
+          url: `${baseIp}/setting/update/pos/code`,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-            Authorization: token || null,
+            "x-auth-token": token || null,
           },
           data: payload,
         });
 
         console.log(res);
         if (res.data.status === "success") {
-          console.log("Successfully Updated");
-          toast.success("Successfully Updated", {
+          toast.success("successfully updated pos code", {
             position: "top-center",
             autoClose: 5000,
             theme: "dark",
+            style: { fontSize: "12px" },
           });
           //for showing updated data in real time
-          dispatch(fetchPOS({ page, endPoint, token }));
+          dispatch(fetchPOS({ page, token }));
           handleClose();
         } else {
-          toast.error("Having issue to update", {
+          toast.error("having issue to update for now", {
             position: "top-center",
             autoClose: 5000,
             theme: "dark",
           });
         }
       } catch (error) {
-        console.log(error.response.data.message); // this is the main part. Use the response property from the error object
+        toast.error(error.response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          theme: "dark",
+        });
       }
     }
   };

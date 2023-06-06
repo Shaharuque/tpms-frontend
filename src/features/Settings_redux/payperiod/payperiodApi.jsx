@@ -1,5 +1,4 @@
 //payperiod related apis will be handled here
-
 import { apiSlice } from "../../api/apiSlice";
 
 export const payPeriodApi = apiSlice.injectEndpoints({
@@ -7,23 +6,24 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //handle auth endpoint here
     payperiods: builder.query({
       query: ({ token, page }) => ({
-        url: `admin/ac/setting/pay/period/get?page=${page}`,
+        url: `inadmin/setting/list/pay/period`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
+        body: JSON.stringify({ page }),
       }),
       providesTags: ["Payperiods"],
     }),
     //add payperiod api
     addPayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `admin/ac/setting/pay/period/save`,
+        url: `inadmin/setting/pay/period/add`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(data),
       }),
@@ -32,11 +32,11 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //update payperiod
     updatePayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `admin/ac/setting/pay/period/update`,
+        url: `inadmin/setting/pay/period/update`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(data),
       }),
@@ -45,11 +45,11 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //bulkdelete payperiod
     bulkDeletePayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `admin/ac/setting/pay/period/delete/bulk`,
+        url: `inadmin/setting/pay/period/bulk/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(data),
       }),
@@ -58,11 +58,11 @@ export const payPeriodApi = apiSlice.injectEndpoints({
     //single payperiod delete
     deletePayperiod: builder.mutation({
       query: ({ token, data }) => ({
-        url: `admin/ac/setting/pay/period/delete`,
+        url: `inadmin/setting/pay/period/delete`,
         method: "POST",
         headers: {
           "content-type": "Application/json",
-          Authorization: token,
+          "x-auth-token": token,
         },
         body: JSON.stringify(data),
       }),
@@ -71,10 +71,5 @@ export const payPeriodApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  usePayperiodsQuery,
-  useAddPayperiodMutation,
-  useUpdatePayperiodMutation,
-  useBulkDeletePayperiodMutation,
-  useDeletePayperiodMutation,
-} = payPeriodApi;
+export const { usePayperiodsQuery, useAddPayperiodMutation, useUpdatePayperiodMutation, useBulkDeletePayperiodMutation, useDeletePayperiodMutation } =
+  payPeriodApi;

@@ -5,7 +5,7 @@ name: TPMS CI/CD
 
 on:
   push:
-    branches: ["maria"]
+    branches: ["main"]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -23,13 +23,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm i --force
-      - run: CI=false npm run build
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
-        with:
-          server: ${{ secrets.ftp_server }}
-          username: ${{ secrets.ftp_name }}
-          password: ${{ secrets.ftp_password }}
-          dangerous-clean-slate: true
-          local-dir: ./build/
+      - name: Deploying to Ubuntu Server
+        uses: appleboy/ssh-action@master # An action made to control Linux servers
+        with: # We set all our secrets here for the action, these won't be shown in the action logs
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_SERVER_SECRET_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/therapypms_web/Therapy-pms-react 
+            git checkout amin
+            git stash
+            git pull origin amin
+            yarn install --force
+            yarn run build

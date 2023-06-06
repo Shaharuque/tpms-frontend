@@ -20,7 +20,7 @@ const ContactDetailsOne = ({
   const onSubmit = (data) => {
     console.log(data);
     const payload = {
-      employee_id: contactApiData?.employee_id,
+      employee_contact_edit: contactApiData?.employee_id,
       address_one: data?.address_one,
       address_two: data?.address_two,
       city: data?.city,
@@ -42,12 +42,14 @@ const ContactDetailsOne = ({
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     } else if (isError) {
       toast.error("Some Error Occured", {
         position: "top-center",
         autoClose: 5000,
         theme: "dark",
+        style: { fontSize: "12px" },
       });
     }
   }, [isError, isSuccess]);

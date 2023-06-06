@@ -25,14 +25,21 @@ const PatientInformation = () => {
   const [Guarantor, setGuarantor] = useState(false);
   const [relation, setRelation] = useState("Self");
   const [checkLocation, setLocation] = useState(false);
-
   //file uploaded issue
   const [signatureUpload, setSignatureUpload] = useState("");
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
   const data = useSelector((state) => state.patientInfo);
-  const patient_details = data?.patientDetails?.clients;
+  console.log("Initial Data Coming from database", data);
+  const patient_details = data?.patientDetails?.data?.client_info;
+  const patientOtherDetails = data?.patientDetails?.data?.client_other_info;
   const loading = data?.loading;
   const primaryPhone = patient_details?.phone_number;
   const primaryEmail = patient_details?.email;
+
+  console.log("patient details", patient_details);
+  console.log("patient other details", patientOtherDetails);
 
   const [dob, setDob] = useState();
   console.log("dob", dob);
@@ -97,15 +104,16 @@ const PatientInformation = () => {
 
   const [hook, setHook] = useState("");
 
-  // Patient Information
-  const { id } = useParams();
-  //console.log("patient Info", id);
-  const dispatch = useDispatch();
-
-  console.log("patient_details===", patient_details);
   useEffect(() => {
     // action dispatched
-    dispatch(getpatientsDetails({ id, token }));
+    dispatch(
+      getpatientsDetails({
+        payload: {
+          patient_id: id,
+        },
+        token,
+      })
+    );
   }, [id, dispatch, token]);
 
   useEffect(() => {
@@ -117,6 +125,7 @@ const PatientInformation = () => {
           ? patient_details?.client_middle
           : null,
         last_name: patient_details?.client_last_name,
+        login_email: patient_details?.login_email,
         zone: patient_details?.zone,
         gender: patient_details?.client_gender,
         fruit: patient_details?.client_gender,
@@ -164,10 +173,10 @@ const PatientInformation = () => {
   //Guarentor handler code
   const handleChange = (event) => {
     if (event.target.checked) {
-      // //console.log("✅ Checkbox is checked");
+      //console.log("✅ Checkbox is checked");
       setGuarantor(true);
     } else {
-      // //console.log("⛔️ Checkbox is NOT checked");
+      //console.log("⛔️ Checkbox is NOT checked");
       setGuarantor(false);
     }
   };
@@ -192,7 +201,7 @@ const PatientInformation = () => {
 
   console.log("fields", fields);
   return (
-    <div className={patient_details?.client_address.length < 1 ? "" : ""}>
+    <div className={data?.patient_details?.data?.address?.length < 1 ? "" : ""}>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <BasicInfo
@@ -208,10 +217,10 @@ const PatientInformation = () => {
             }}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-2 gap-y-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 my-1 mr-2 gap-x-6 gap-y-1">
             {/* <div className="flex flex-wrap my-1 mr-2 md:gap-x-2 gap-y-5"> */}
             {/* address  */}
-            <div className="pr-24">
+            <div className="pr-6">
               <PrimaryAddress append={append} rg={register} />
               <br></br>
               {patient_details?.admin_id && (

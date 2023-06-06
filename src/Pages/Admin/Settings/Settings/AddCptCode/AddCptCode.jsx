@@ -9,6 +9,9 @@ import useToken from "../../../../../CustomHooks/useToken";
 import { fetchCpt } from "../../../../../features/Settings_redux/cptCodeSlice";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import AddCptCodeActionModal from "./AddCptCode/AddCptCodeActionModal";
+import { useGetAllSelectedTreatmentsQuery } from "../../../../../features/Settings_redux/addTreatment/addTreatmentApi";
+import axios from "axios";
+import { baseIp } from "../../../../../Misc/BaseClient";
 
 const AddCptCode = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
@@ -17,20 +20,24 @@ const AddCptCode = () => {
   const [recordData, setRecordData] = useState();
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const endPoint = "admin/ac/setting/get/cpt/code";
-
   const { token } = useToken();
+
+  //List of all CPT Codes
   const allCpt = useSelector((state) => state?.cptInfo);
-  const data = allCpt?.cptData?.cpt_codes?.data
-    ? allCpt?.cptData?.cpt_codes?.data
-    : [];
-  const totalPage = allCpt?.cptData?.cpt_codes?.last_page
-    ? allCpt?.cptData?.cpt_codes?.last_page
-    : 0;
-  console.log("server response", allCpt);
+  const data = allCpt?.cptData?.data?.data || [];
+  console.log("All CPT Codes", data);
+  const totalPage = allCpt?.cptData?.data?.lastPage || 0;
+  console.log(totalPage);
+  //Getting All Selected Treatment Data
+  const {
+    data: selectedTreatmentData,
+    isSuccess: selectedTreatmentSuccess,
+    isLoading: selectedTreatmentLoading,
+  } = useGetAllSelectedTreatmentsQuery({ token: token });
+  console.log("Selected Treatements", selectedTreatmentData?.data);
 
   useEffect(() => {
-    dispatch(fetchCpt({ endPoint, page, token }));
+    dispatch(fetchCpt({ page, token }));
   }, [page, dispatch, token]);
 
   console.log(totalPage);
@@ -44,6 +51,67 @@ const AddCptCode = () => {
     console.log(record);
     setRecordData(record);
     setOpenAddModal(true);
+  };
+
+  //Delete The CPT code from the list
+  const handleDeleteCPT = async (cptid) => {
+    console.log(cptid);
+
+    if (cptid) {
+      const payload = { cptid };
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${baseIp}/setting/delete/cpt/code`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "x-auth-token": token,
+          },
+          data: payload,
+        });
+        if (res?.data?.status === "success") {
+          toast.success("Successfully Deleted", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            style: { fontSize: "12px" },
+          });
+          dispatch(fetchCpt({ page, token }));
+          handleClose();
+        }
+        //else res?.data?.status === "error" holey
+        else {
+          toast.error(res?.data?.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      } catch (error) {
+        toast.warning(error?.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log(error?.message); // this is the main part. Use the response property from the error object
+      }
+    }
   };
 
   const handleClose = () => {
@@ -81,11 +149,11 @@ const AddCptCode = () => {
           value: "Speech Therapy",
         },
       ],
-      render: (_, { treatment }) => {
+      render: (_, record) => {
         //console.log("tags : ", lock);
         return (
           <div className=" text-secondary">
-            {treatment?.treatment_name ? treatment?.treatment_name : "Not Set"}
+            {record?.treatment_details?.treatment_name || "Not Set"}
           </div>
         );
       },
@@ -142,7 +210,10 @@ const AddCptCode = () => {
                 <FiEdit />
               </button>
               <div className="mx-2">|</div>
-              <button className="text-sm mx-1  text-red-500">
+              <button
+                onClick={() => handleDeleteCPT(record?.id)}
+                className="text-sm mx-1  text-red-500"
+              >
                 <AiOutlineDelete />
               </button>
             </div>
@@ -235,7 +306,7 @@ const AddCptCode = () => {
           record={recordData}
           page={page}
           token={token}
-          endPoint={endPoint}
+          selectedTreatmentData={selectedTreatmentData?.data}
         ></AddCptCodeActionModal>
       )}
     </div>

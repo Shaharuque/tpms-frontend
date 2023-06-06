@@ -1,41 +1,63 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
-import { Table } from "antd";
-import {
-  useAddLeaveTrackingMutation,
-  useGetLeaveTrackingQuery,
-} from "../../../../../features/Stuff_redux/leaveTracking/leaveTrackingApi";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
-import { toast } from "react-toastify";
 import Loading from "../../../../../Loading/Loading";
+import LeaveTrackingAdd from "./LeaveTrackingAdd";
+import { useDeleteLeaveTrackingMutation, useGetLeaveTrackingQuery } from "../../../../../features/Stuff_redux/leaveTracking/leaveTrackingApi";
+import { Table } from "antd";
+import { toast } from "react-toastify";
 
 const LeaveTracking = () => {
   const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
+  const [editModal, setEditModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const { id } = useParams();
   const { token } = useToken();
 
   // get Leaves-Tracking api
-  const { data: leaveTrackData, isLoading: getleaveTrackLoading } =
-    useGetLeaveTrackingQuery({
-      token,
-      payload: {
-        employee_id: id,
-      },
-    });
-
-  // Add new leave api
-  const [
-    addLeaveTracking,
-    {
-      data: addleaveTrackdata,
-      isSuccess: addleaveTrackSuccess,
-      isError: addleaveTrackError,
+  const { data: leaveTrackData, isLoading: getleaveTrackLoading } = useGetLeaveTrackingQuery({
+    token,
+    payload: {
+      employee_id: id,
     },
-  ] = useAddLeaveTrackingMutation();
+  });
+
+  // delete leave tracking api
+  const [DeleteLeaveTracking, { data: deleteleaveTrackdata, isSuccess: deleteleaveTrackSuccess, isError: deleteleaveTrackError }] =
+    useDeleteLeaveTrackingMutation();
+
+  //Success/Error message show
+  useEffect(() => {
+    if (deleteleaveTrackSuccess) {
+      toast.success(deleteleaveTrackdata?.message, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    } else if (deleteleaveTrackError) {
+      toast.error("Some Error Occured", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { fontSize: "12px" },
+      });
+    }
+  }, [deleteleaveTrackError, deleteleaveTrackSuccess, deleteleaveTrackdata?.message]);
+  // useDeleteLeaveTrackingMutation
+
+  const handleDelete = (dltid) => {
+    const deleteTrackPayload = {
+      employee_id: id,
+      del_id: dltid,
+    };
+    DeleteLeaveTracking({
+      token,
+      payload: deleteTrackPayload,
+    });
+  };
 
   const column = [
     {
@@ -49,8 +71,7 @@ const LeaveTracking = () => {
       sorter: (a, b) => {
         return a.history_date > b.history_date ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "history_date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "history_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
 
@@ -66,8 +87,7 @@ const LeaveTracking = () => {
       sorter: (a, b) => {
         return a.description > b.description ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder:
-        sortedInfo.columnKey === "description" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "description" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -89,22 +109,14 @@ const LeaveTracking = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div className="flex justify-center items-center">
-            {status === "approved" && (
-              <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
+            {status === "approved" && <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
             {status !== "approved" && (
               <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
                 {/* {status} */}
                 pending
               </button>
             )}
-            {status === "Scheduled" && (
-              <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
+            {status === "Scheduled" && <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
           </div>
         );
       },
@@ -126,7 +138,7 @@ const LeaveTracking = () => {
         //console.log("tags : ", client_first_name, id, key);
         return (
           <div className="flex justify-center">
-            <button className="text-red-500">
+            <button onClick={() => handleDelete(id)} className="text-red-500">
               <AiOutlineDelete />
             </button>
           </div>
@@ -140,43 +152,6 @@ const LeaveTracking = () => {
     },
   ];
 
-  const { register, handleSubmit, reset } = useForm();
-  const [timeOpen, setTimeOpen] = useState(false);
-
-  const onSubmit = (data) => {
-    const addTrackPaylod = {
-      employee_id: id,
-      leave_date: data.date,
-      desc: data.desc,
-    };
-    addLeaveTracking({
-      token,
-      payload: addTrackPaylod,
-    });
-  };
-  //Success/Error message show
-  useEffect(() => {
-    if (addleaveTrackSuccess) {
-      toast.success(addleaveTrackdata?.message, {
-        position: "top-center",
-        autoClose: 5000,
-        theme: "dark",
-      });
-      reset();
-    } else if (addleaveTrackError) {
-      toast.error("Some Error Occured", {
-        position: "top-center",
-        autoClose: 5000,
-        theme: "dark",
-      });
-    }
-  }, [
-    addleaveTrackError,
-    addleaveTrackSuccess,
-    addleaveTrackdata?.message,
-    reset,
-  ]);
-
   const handleChange = (pagination, filters, sorter) => {
     // console.log("Various parameters", pagination, filters, sorter);
     setFilteredInfo(filters);
@@ -187,20 +162,27 @@ const LeaveTracking = () => {
     setFilteredInfo({});
   };
 
-  if (getleaveTrackLoading) {
-    return <Loading />;
-  }
+  const handleClickOpen = () => {
+    setOpenEditModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenEditModal(false);
+    setEditModal(false);
+  };
+
+  // if (getleaveTrackLoading) {
+  //   return <Loading />;
+  // }
+
   return (
     <div className="h-[100vh]">
       <div className="flex items-center justify-between gap-2 my-2">
-        <h1 className="text-lg text-orange-500 text-left font-semibold ">
-          Leaves
-        </h1>
+        <h1 className="text-lg text-orange-500 text-left font-semibold ">Leaves</h1>
         <button onClick={clearFilters} className="pms-clear-button">
           Clear filters
         </button>
       </div>
-
       <div className=" overflow-scroll">
         <Table
           pagination={false} //pagination dekhatey chailey just 'true' korey dilei hobey
@@ -209,72 +191,14 @@ const LeaveTracking = () => {
           columns={column}
           bordered
           rowKey={(record) => record.id} //record is kind of whole one data object and here we are
-          dataSource={leaveTrackData?.leave_list?.data}
+          dataSource={leaveTrackData?.leave_list}
           onChange={handleChange}
         />
       </div>
-      <button onClick={() => setTimeOpen(true)} className="pms-button">
+      <button onClick={handleClickOpen} className="pms-button">
         Add Time Off
       </button>
-
-      {timeOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="divider"></div>
-          <h1 className="text-sm  font-medium mb-3">Add Time Off</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-3 mr-2 gap-x-2 gap-y-1">
-              <div>
-                <label className="label">
-                  <span className="modal-label-name">Description</span>
-                </label>
-                {/* <TextArea
-                  rows={4}
-                  placeholder="description"
-                  size="middle"
-                  onChange={(e) => setNote(e.target.value)}
-                /> */}
-                <textarea
-                  rows={4}
-                  placeholder="maxLength is 6"
-                  size="middle"
-                  className="w-full border bottom-2 ml-1 p-1"
-                  {...register("desc")}
-                  // onChange={(e) => setNote(e.target.value)}
-                />
-              </div>
-              <div className=" flex item-center gap-4 flex-wrap">
-                <div>
-                  <label className="label">
-                    <span className="modal-label-name">Date</span>
-                  </label>
-                  <input
-                    type="date"
-                    name="date"
-                    className="border rounded-sm px-2 py-[5px] mx-1 text-xs w-full"
-                    {...register("date")}
-                  />
-                </div>
-                <div className="mt-8">
-                  <button className="mr-2 pms-button" type="submit">
-                    Apply Leave
-                  </button>
-                  <button
-                    className="pms-close-button"
-                    autoFocus
-                    onClick={() => setTimeOpen(false)}
-                  >
-                    CANCEL
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </motion.div>
-      )}
+      {openEditModal && <LeaveTrackingAdd handleClose={handleClose} open={openEditModal}></LeaveTrackingAdd>}
     </div>
   );
 };

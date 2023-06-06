@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useToken from "../../../../../CustomHooks/useToken";
 import { useGetClearenceQuery } from "../../../../../features/Stuff_redux/credentials/clearenceApi";
-import { useGetcredentialsQuery } from "../../../../../features/Stuff_redux/credentials/credentialsApi";
+import { useGetCredentialsQuery } from "../../../../../features/Stuff_redux/credentials/credentialsApi";
 import { useGetQualificationQuery } from "../../../../../features/Stuff_redux/credentials/qualificationApi";
 import Loading from "../../../../../Loading/Loading";
 import Clearance from "./Credentials/Clearance/Clearance";
@@ -15,12 +15,14 @@ const Credentials = () => {
   const [qualificationOpen, setQualificationOpen] = useState(false);
   const { token } = useToken();
   const { id } = useParams();
+  const [page, setPage] = useState(1);
+  const [page2, setPage2] = useState(1);
 
   //get all credential data api
   const { data: credentials, isLoading: credentialsLoading } =
-    useGetcredentialsQuery({
+    useGetCredentialsQuery({
       token,
-      page: 1,
+      page,
       id: id,
     });
 
@@ -28,7 +30,7 @@ const Credentials = () => {
   const { data: clearences, isLoading: clearenceLoading } =
     useGetClearenceQuery({
       token,
-      page: 1,
+      page: page2,
       id: id,
     });
 
