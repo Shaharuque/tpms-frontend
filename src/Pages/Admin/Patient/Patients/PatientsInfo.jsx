@@ -2,15 +2,15 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Outlet, useParams } from "react-router-dom";
 import doctor from "../../../Assets/doctor.png";
-import { IoCaretBackCircleOutline, IoDocumentsOutline } from "react-icons/io5";
+import { IoCaretBackCircleOutline, IoDocumentsOutline,IoPeopleSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import CustomLink from "../../../Pages/Shared/CustomLink";
 import "../../../Style/Patient.css";
 import { MdPersonSearch } from "react-icons/md";
-import { BsFillFileEarmarkLock2Fill } from "react-icons/bs";
+import { BsFillFileEarmarkLock2Fill,BsFileEarmarkText,BsFillFileEarmarkLockFill } from "react-icons/bs";
 import { TbReport } from "react-icons/tb";
 import { TiDocumentAdd } from "react-icons/ti";
-import { AiOutlineCloudUpload, AiOutlinePhone } from "react-icons/ai";
+import { AiOutlineCloudUpload, AiOutlinePhone,AiOutlineDollar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getpatientsDetails } from "../../../../features/Patient_redux/patientSlice";
 import useToken from "../../../../CustomHooks/useToken";
@@ -79,7 +79,7 @@ const PatientsInfo = () => {
           <div className="text-xs  text-secondary font-normal patient-nav mb-1">
             <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-authorization/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <BsFillFileEarmarkLock2Fill className=" text-2xl" />
+                <BsFillFileEarmarkLockFill className=" text-2xl" />
                 Ins/Authorization
               </h1>
             </CustomLink>
@@ -122,7 +122,7 @@ const PatientsInfo = () => {
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-payment-info/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <AiOutlinePhone className=" text-2xl" /> Payment Info
+                <AiOutlineDollar className=" text-2xl" /> Payment Info
               </h1>
             </CustomLink>
           </div>
@@ -130,7 +130,7 @@ const PatientsInfo = () => {
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-sibling/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <AiOutlinePhone className=" text-2xl" /> Sibling
+                <IoPeopleSharp className=" text-xl" /> Sibling
               </h1>
             </CustomLink>
           </div>
@@ -138,7 +138,14 @@ const PatientsInfo = () => {
           <div className="text-xs text-secondary font-normal patient-nav mb-1">
             <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-all-notes/${id}`}>
               <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
-                <AiOutlinePhone className=" text-2xl" /> Session Notes
+                <BsFileEarmarkText className=" text-2xl" /> Session Notes
+              </h1>
+            </CustomLink>
+          </div>
+          <div className="text-xs text-secondary font-normal patient-nav mb-1">
+            <CustomLink className="flex gap-1 pb-1 clink items-center" to={`patient-clinicianteam/${id}`}>
+              <h1 className=" font-medium ml-1 mt-1 flex items-center text-[14px] gap-1 ">
+                <BsFileEarmarkText className=" text-2xl" /> Clinician Team
               </h1>
             </CustomLink>
           </div>

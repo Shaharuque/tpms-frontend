@@ -310,6 +310,9 @@ import { ProviderBios } from "./Pages/ProviderSection/Biographic/Bios/ProviderBi
 import PaymentInfo from "./Pages/Admin/Patient/Patients/Paymentinfo/PaymentInfo";
 import Sibling from "./Pages/Admin/Patient/Patients/Sibling/Sibling";
 import SessionNotes from "./Pages/Admin/Patient/Patients/SessionNotes/SessionNotes";
+import StripeInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/StripeInformation/StripeInformation/StripeInformation";
+import PaypalInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/PaypalInformation/PaypalInformation";
+import ClinicianTeam from "./Pages/Admin/Patient/Patients/ClinicianTeam/ClinicianTeam";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -604,9 +607,19 @@ function App() {
               <Route path="patient-ledger/:id" element={<PatientLedger></PatientLedger>}></Route>
               <Route path="patient-intake/:id" element={<Intake></Intake>}></Route>
               <Route path="patient-call-log/:id" element={<CallLog></CallLog>}></Route>
-              <Route path="patient-payment-info/:id" element={<PaymentInfo></PaymentInfo>}></Route>
+
+              <Route path="patient-payment-info/:id" element={<PaymentInfo></PaymentInfo>}>
+
+              <Route index element={<Navigate to="stripe-information" />} />
+              <Route path="paypal-information" element={<PaypalInformation></PaypalInformation>}></Route>
+              <Route path="stripe-information" element={<StripeInformation></StripeInformation>}></Route>
+              
+              
+              </Route>
+
               <Route path="patient-sibling/:id" element={<Sibling></Sibling>}></Route>
               <Route path="patient-all-notes/:id" element={<SessionNotes></SessionNotes>}></Route>
+              <Route path="patient-clinicianteam/:id" element={<ClinicianTeam></ClinicianTeam>}></Route>
             </Route>
             <Route path="authorization-add" element={<AddAuthorization></AddAuthorization>}></Route>
             <Route path="authorization-Edit/:id" element={<AuthorizationEdit></AuthorizationEdit>}></Route>
