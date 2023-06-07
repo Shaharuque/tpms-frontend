@@ -6,10 +6,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
-import {
-  useGetInfoQuery,
-  useUpdateStaffMutation,
-} from "../../../../../features/Stuff_redux/staff/staffApi";
+import { useGetInfoQuery, useUpdateStaffMutation } from "../../../../../features/Stuff_redux/staff/staffApi";
 import Loading from "../../../../../Loading/Loading";
 import BoolConverter from "../../../../Shared/BoolConverter/BoolConverter";
 import { ColorPicker, useColor } from "react-color-palette";
@@ -36,17 +33,14 @@ const Bio = () => {
   });
   console.log("staff data", staffData, staffDataLoading);
   //update staff api
-  const [updateStaff, { isSuccess: updateSuccess, isError: updateError }] =
-    useUpdateStaffMutation();
+  const [updateStaff, { isSuccess: updateSuccess, isError: updateError }] = useUpdateStaffMutation();
 
   //selected treatments data get api
-  const { data: selectedTreatmentData, isLoading: selectedTreatmentLoading } =
-    useGetAllSelectedTreatmentsQuery({ token: token });
+  const { data: selectedTreatmentData, isLoading: selectedTreatmentLoading } = useGetAllSelectedTreatmentsQuery({ token: token });
   console.log("Selected Treatements", selectedTreatmentData?.data);
 
   //selected employee type data get api
-  const { data: credentialType, isLoading: typeLoading } =
-    useGetSelectedStaffQuery({ token: token });
+  const { data: credentialType, isLoading: typeLoading } = useGetSelectedStaffQuery({ token: token });
   console.log("Selected Treatements", credentialType?.data);
 
   //select treatment boiler plate
@@ -69,9 +63,7 @@ const Bio = () => {
   //select Credential type boiler plate
   let credentialSelect = null;
   if (credentialType?.data?.length === 0) {
-    credentialSelect = (
-      <div className="text-red-700">Select Credential Type</div>
-    );
+    credentialSelect = <div className="text-red-700">Select Credential Type</div>;
   } else if (credentialType?.data?.length > 0) {
     credentialSelect = (
       <>
@@ -85,6 +77,7 @@ const Bio = () => {
       </>
     );
   }
+
   const {
     caqh_id,
     first_name,
@@ -130,12 +123,8 @@ const Bio = () => {
 
   //email_remainder, session_check
   // console.log(email_remainder, session_check);
-  const [createSession, setCreateSession] = useState(
-    BoolConverter(session_check)
-  );
-  const [emailReminder, setEmailReminder] = useState(
-    BoolConverter(email_remainder)
-  );
+  const [createSession, setCreateSession] = useState(BoolConverter(session_check));
+  const [emailReminder, setEmailReminder] = useState(BoolConverter(email_remainder));
   useEffect(() => {
     setCreateSession(BoolConverter(session_check));
   }, [session_check]);
@@ -199,11 +188,7 @@ const Bio = () => {
     notes,
   ]);
 
-  console.log(
-    "after calling boolConverter",
-    BoolConverter(emailReminder),
-    BoolConverter(createSession)
-  );
+  console.log("after calling boolConverter", BoolConverter(emailReminder), BoolConverter(createSession));
 
   const onSubmit = (data) => {
     // console.log(note);
@@ -261,23 +246,13 @@ const Bio = () => {
                 First Name<span className="text-red-500">*</span>
               </span>
             </label>
-            <input
-              type="text"
-              name="first_name"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("first_name")}
-            />
+            <input type="text" name="first_name" className="input-border input-font w-full focus:outline-none" {...register("first_name")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Middle Name</span>
             </label>
-            <input
-              type="text"
-              name="middle_name"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("middle_name")}
-            />
+            <input type="text" name="middle_name" className="input-border input-font w-full focus:outline-none" {...register("middle_name")} />
           </div>
           <div>
             <label className="label">
@@ -285,23 +260,13 @@ const Bio = () => {
                 Last Name<span className="text-red-500">*</span>
               </span>
             </label>
-            <input
-              type="text"
-              name="last_name"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("last_name")}
-            />
+            <input type="text" name="last_name" className="input-border input-font w-full focus:outline-none" {...register("last_name")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Nick Name</span>
             </label>
-            <input
-              type="text"
-              name="nickname"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("nickname")}
-            />
+            <input type="text" name="nickname" className="input-border input-font w-full focus:outline-none" {...register("nickname")} />
           </div>
           {/* DOB */}
           <div>
@@ -326,12 +291,7 @@ const Bio = () => {
             <label className="label">
               <span className=" label-font">SSN</span>
             </label>
-            <input
-              type="text"
-              name="ssn"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("ssn")}
-            />
+            <input type="text" name="ssn" className="input-border input-font w-full focus:outline-none" {...register("ssn")} />
           </div>
           {/* phone & email  */}
           <div>
@@ -340,12 +300,7 @@ const Bio = () => {
                 Office Phone <span className="text-red-500">*</span>
               </span>
             </label>
-            <input
-              type="text"
-              name="office_phone"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("office_phone")}
-            />
+            <input type="text" name="office_phone" className="input-border input-font w-full focus:outline-none" {...register("office_phone")} />
           </div>
           <div>
             <label className="label">
@@ -353,12 +308,7 @@ const Bio = () => {
                 Office Email<span className="text-red-500">*</span>
               </span>
             </label>
-            <input
-              type="text"
-              name="office_email"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("office_email")}
-            />
+            <input type="text" name="office_email" className="input-border input-font w-full focus:outline-none" {...register("office_email")} />
           </div>
           <div>
             <label className="label">
@@ -366,64 +316,36 @@ const Bio = () => {
                 Office Fax<span className="text-red-500">*</span>
               </span>
             </label>
-            <input
-              type="text"
-              name="office_fax"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("office_fax")}
-            />
+            <input type="text" name="office_fax" className="input-border input-font w-full focus:outline-none" {...register("office_fax")} />
           </div>
           {/* driving license */}
           <div>
             <label className="label">
-              <span className=" label-font">
-                Drivers License & Expiration Date
-              </span>
+              <span className=" label-font">Drivers License & Expiration Date</span>
             </label>
-            <input
-              type="text"
-              name="driver_license"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("driver_license")}
-            />
+            <input type="text" name="driver_license" className="input-border input-font w-full focus:outline-none" {...register("driver_license")} />
           </div>
           <div className="mt-[33px]">
             {" "}
-            <input
-              className="input-border input-font w-full focus:outline-none"
-              type="date"
-              {...register("license_exp_date")}
-            />
+            <input className="input-border input-font w-full focus:outline-none" type="date" {...register("license_exp_date")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Title</span>
             </label>
-            <input
-              type="text"
-              name="title"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("title")}
-            />
+            <input type="text" name="title" className="input-border input-font w-full focus:outline-none" {...register("title")} />
           </div>
           <div className="">
             <label className="label">
               <span className=" label-font">Hiring Date with Company</span>
             </label>
-            <input
-              className="input-border input-font w-full focus:outline-none"
-              type="date"
-              {...register("hir_date_compnay")}
-            />
+            <input className="input-border input-font w-full focus:outline-none" type="date" {...register("hir_date_compnay")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Credential Type</span>
             </label>
-            <select
-              className="input-border input-font  w-full focus:outline-none"
-              {...register("credential_type")}
-            >
+            <select className="input-border input-font  w-full focus:outline-none" {...register("credential_type")}>
               {credentialSelect}
             </select>
           </div>
@@ -433,10 +355,7 @@ const Bio = () => {
                 Tx Type <span className="text-red-500">*</span>
               </span>
             </label>
-            <select
-              className="input-border input-font  w-full focus:outline-none"
-              {...register("treatment_type")}
-            >
+            <select className="input-border input-font  w-full focus:outline-none" {...register("treatment_type")}>
               {treatmentSelect}
             </select>
           </div>
@@ -444,66 +363,37 @@ const Bio = () => {
             <label className="label">
               <span className=" label-font">Individual NPI</span>
             </label>
-            <input
-              type="text"
-              name="individual_npi"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("individual_npi")}
-            />
+            <input type="text" name="individual_npi" className="input-border input-font w-full focus:outline-none" {...register("individual_npi")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">CAQH Id</span>
             </label>
-            <input
-              type="text"
-              name="caqh_id"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("caqh_id")}
-            />
+            <input type="text" name="caqh_id" className="input-border input-font w-full focus:outline-none" {...register("caqh_id")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Service Area Zip</span>
             </label>
-            <input
-              type="text"
-              name="service_area_zip"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("service_area_zip")}
-            />
+            <input type="text" name="service_area_zip" className="input-border input-font w-full focus:outline-none" {...register("service_area_zip")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Termination Date</span>
             </label>
-            <input
-              className="input-border input-font w-full focus:outline-none"
-              type="date"
-              {...register("terminated_date")}
-            />
+            <input className="input-border input-font w-full focus:outline-none" type="date" {...register("terminated_date")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Language(s)</span>
             </label>
-            <input
-              type="text"
-              name="language"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("language")}
-            />
+            <input type="text" name="language" className="input-border input-font w-full focus:outline-none" {...register("language")} />
           </div>
           <div>
             <label className="label">
               <span className=" label-font">Taxonomy Code</span>
             </label>
-            <input
-              type="text"
-              name="taxonomy_code"
-              className="input-border input-font w-full focus:outline-none"
-              {...register("taxonomy_code")}
-            />
+            <input type="text" name="taxonomy_code" className="input-border input-font w-full focus:outline-none" {...register("taxonomy_code")} />
           </div>
           <div>
             <div>
@@ -528,11 +418,7 @@ const Bio = () => {
             </div>
             <div>
               <div className="flex items-center gap-2 ml-1 my-5">
-                <Switch
-                  checked={createSession}
-                  onChange={() => setCreateSession(!createSession)}
-                  size="small"
-                />
+                <Switch checked={createSession} onChange={() => setCreateSession(!createSession)} size="small" />
                 <span className="text-sm">Create/Edit Session</span>
               </div>
             </div>
@@ -547,25 +433,17 @@ const Bio = () => {
               <div className="flex items-center">
                 <div className="flex ml-1 mt-1 items-center">
                   <input type="radio" value={2} {...register("gender")} />
-                  <span className="text-sm ml-1 text-gray-600 font-medium">
-                    female
-                  </span>
+                  <span className="text-sm ml-1 text-gray-600 font-medium">female</span>
                 </div>
                 <div className="flex ml-1 mt-1 items-center">
                   <input type="radio" value={1} {...register("gender")} />
-                  <span className="text-sm ml-1 text-gray-600 font-medium">
-                    male
-                  </span>
+                  <span className="text-sm ml-1 text-gray-600 font-medium">male</span>
                 </div>
               </div>
             </div>
             <div>
               <div className="flex items-center gap-2 ml-1 my-5">
-                <Switch
-                  checked={emailReminder}
-                  onChange={() => setEmailReminder(!emailReminder)}
-                  size="small"
-                />
+                <Switch checked={emailReminder} onChange={() => setEmailReminder(!emailReminder)} size="small" />
                 <span className="text-sm">Email Reminder</span>
               </div>
             </div>
@@ -587,10 +465,7 @@ const Bio = () => {
           </div>
 
           <div className="ml-2 mt-[12px] ">
-            <CustomFileUploader
-              signatureUpload={signatureUpload}
-              setSignatureUpload={setSignatureUpload}
-            ></CustomFileUploader>
+            <CustomFileUploader signatureUpload={signatureUpload} setSignatureUpload={setSignatureUpload}></CustomFileUploader>
             <p className="mt-3 text-sm ">Upload Signature</p>
           </div>
           <div className="my-5">

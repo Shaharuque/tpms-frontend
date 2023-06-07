@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Outlet, useParams } from "react-router-dom";
 import CustomLink from "../../Shared/CustomLink/CustomLink";
+import axios from "axios";
+import { providerIp } from "../../../Misc/BaseClient";
+import { useToken } from "antd/es/theme/internal";
 
 const ProviderBiographic = () => {
+  const { token } = useToken();
+
+  // // api call
+  // useEffect(() => {
+  //   const getProviderData = async () => {
+  //     const res = await axios({
+  //       method: "POST",
+  //       url: `${providerIp}/biographic/`,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         "x-auth-token": token || null,
+  //       },
+  //     });
+  //     const data = res?.data;
+  //     // setdata(data);
+  //     console.log("check data", data);
+  //   };
+  //   getProviderData();
+  // }, [token]);
   return (
     <div>
       <div>
