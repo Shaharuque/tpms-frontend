@@ -90,6 +90,15 @@ input[type='checkbox'] {
 }
 
 /* ----------------------------------------------re-used custom classes ----------------------------- */
+.schedule-go-btn {
+  background-color: #38B3C6;
+  padding: 0 5px;
+  border-radius: 3px;
+  margin-top: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: white;
+}
 
 .pms-button {
   padding-left: 11px;
@@ -292,7 +301,7 @@ select:focus {
   color: #4b5563;
   border-radius: 0;
   font-weight: 500;
-  margin-left: 4px;
+  /* margin-left: 4px; */
 }
 
 .label-font {
