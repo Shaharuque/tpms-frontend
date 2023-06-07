@@ -40,17 +40,6 @@ const PatientSelect = ({ patients, setPatientsId }) => {
     getClientsId();
   }, [selected, setPatientsId]);
 
-  //console.log(selected);
-
-  // useEffect(() => {
-  //   const getClientsId = async () => {
-  //     const getId = selected.map((item) => item.id);
-  //     if (getId) {
-  //       receivedData(getId);
-  //     }
-  //   };
-  //   getClientsId();
-  // }, [selected, receivedData]);
 
   return (
     <MultiSelect className="Global" options={dataoptions} value={selected} onChange={setSelected} labelledBy="Select" valueRenderer={customValueRenderer} />

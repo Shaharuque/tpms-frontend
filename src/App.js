@@ -9,7 +9,6 @@ import ProcessingClaim from "./Pages/Admin/Billing/BillingManager/ProcessingClai
 import CreateStaff from "./Pages/Admin/Staff/AddStaff/CreateStaff";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
-import Pataients from "./Pages/Pages/User/Patient/Pataients";
 import MyInfo from "./Pages/PatientSection/MyInfo/MyInfo";
 import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
 import MyCalender from "./Pages/PatientSection/MyCalender/MyCalender";
@@ -307,6 +306,7 @@ import Schedule from "./Pages/ProviderSection/Schedule/Schedule";
 import Calender from "./Pages/ProviderSection/Calender/Calender";
 import ProviderBiographic from "./Pages/ProviderSection/Biographic/ProviderBiographic";
 import { ProviderBios } from "./Pages/ProviderSection/Biographic/Bios/ProviderBios";
+import ProviderPatient from "./Pages/ProviderSection/Patient/ProviderPatient";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -731,7 +731,7 @@ function App() {
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
 
-          {/* User Pannel */}
+          {/* Provider-Portal Pannel */}
           <Route path="/provider" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ProviderDashboard />}></Route>
             <Route path="scheduler" element={<Schedule />}></Route>
@@ -742,7 +742,7 @@ function App() {
               <Route path="bio-credential" element={<CredentialsContainer></CredentialsContainer>}></Route>
             </Route>
 
-            <Route path="Pataients" element={<Pataients />}></Route>
+            <Route path="Pataients" element={<ProviderPatient />}></Route>
             <Route path="user-timesheet" element={<UserTimesheets />}></Route>
           </Route>
 
