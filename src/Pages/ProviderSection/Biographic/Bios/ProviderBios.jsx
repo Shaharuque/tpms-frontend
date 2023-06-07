@@ -2,10 +2,24 @@ import React from "react";
 import person from "../../../Assets/user.png";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { PostfetchData } from "../../../../Misc/Helper";
+import { useToken } from "antd/es/theme/internal";
+
 export const ProviderBios = () => {
   const [note, setNote] = useState("");
+  const { token } = useToken();
 
   const { register, handleSubmit, reset } = useForm();
+
+  const providrapicall = async () => {
+    const providerbio = await PostfetchData({
+      // endPoint: "admin/ac/setting/selected/insurance/details/update",
+      endPoint: "provider/biographic",
+      payload: "",
+      token,
+    });
+  };
+
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {

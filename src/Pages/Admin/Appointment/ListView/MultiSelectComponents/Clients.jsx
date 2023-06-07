@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import "./MultiSelectCSS/multiSelect.css";
+import { BiChevronDown } from "react-icons/bi";
 
+import { FaTimes } from "react-icons/fa";
 const Clients = ({ patients, setPatientId, setFetchQuery }) => {
   const [selected, setSelected] = useState([]);
 
@@ -54,7 +56,16 @@ const Clients = ({ patients, setPatientId, setFetchQuery }) => {
   // }, [selected, receivedData]);
 
   return (
-    <MultiSelect className="listview" options={dataoptions} value={selected} onChange={setSelected} labelledBy="Select" valueRenderer={customValueRenderer} />
+    <MultiSelect
+      // ClearSelectedIcon={<FaTimes />}
+      // ArrowRenderer={() => <BiChevronDown />}
+      className="listview"
+      options={dataoptions}
+      value={selected}
+      onChange={setSelected}
+      labelledBy="Select"
+      valueRenderer={customValueRenderer}
+    />
   );
 };
 

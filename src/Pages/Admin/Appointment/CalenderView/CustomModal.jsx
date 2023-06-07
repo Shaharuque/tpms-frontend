@@ -151,8 +151,6 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
       >
         <div className="px-5 py-2">
           <div className="flex items-center justify-between">
-            <h1 className="text-lg text-left text-orange-400 ">Add Appointment</h1>
-
             <h1 className="text-lg text-left text-orange-400 ">Edit Appointment</h1>
 
             <div className="flex justify-between">
