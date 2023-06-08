@@ -313,6 +313,7 @@ import SessionNotes from "./Pages/Admin/Patient/Patients/SessionNotes/SessionNot
 import StripeInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/StripeInformation/StripeInformation/StripeInformation";
 import PaypalInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/PaypalInformation/PaypalInformation";
 import ClinicianTeam from "./Pages/Admin/Patient/Patients/ClinicianTeam/ClinicianTeam";
+import FakeTable from "./Testing/FakeTable/FakeTable";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -464,6 +465,7 @@ function App() {
           <Route path="/test-date" element={<AntDate></AntDate>}></Route>
           <Route path="/test-scroll" element={<InfiniteScrollTest></InfiniteScrollTest>}></Route>
           <Route path="/queryTest" element={<TableInstance></TableInstance>}></Route>
+          <Route path="/fake-table" element={<FakeTable></FakeTable>}></Route>
           {/*--------- Testing End ------------*/}
 
           {/* Super Admin Panel */}
