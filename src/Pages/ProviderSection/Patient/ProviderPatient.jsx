@@ -7,6 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ShimmerTableTet from "../../../Pages/Pages/Settings/SettingComponents/ShimmerTableTet";
 import { FaRegAddressCard } from "react-icons/fa";
 import useToken from "../../../CustomHooks/useToken";
+import { dateConverter } from "../../Shared/Dateconverter/DateConverter";
 
 const ProviderPatient = () => {
   //get token
@@ -255,8 +256,8 @@ const ProviderPatient = () => {
   //console.log("flited-info", filteredInfo);
 
   const patientDetails = (id) => {
-    //console.log(id);
-    navigate(`/admin/patient/patient-info/${id}`);
+    console.log(id);
+    navigate(`/provider/patient/patient-info/${id}`);
   };
   const columns = [
     {
@@ -325,7 +326,7 @@ const ProviderPatient = () => {
       render: (_, { client_dob }) => {
         return (
           <div>
-            <h1>{client_dob ? client_dob : <h1 className="text-red-600">No Data</h1>}</h1>
+            <h1>{client_dob ? dateConverter(client_dob) : <h1 className="text-red-600">No Data</h1>}</h1>
           </div>
         );
       },

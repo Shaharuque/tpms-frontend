@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const UserTimesheets = () => {
-    return (
-        <div>
-            <h2>hello this is Time sheets</h2>
-        </div>
-    );
+  return (
+    <div>
+      <h2>Time Sheet</h2>
+    </div>
+  );
 };
 
 export default UserTimesheets;

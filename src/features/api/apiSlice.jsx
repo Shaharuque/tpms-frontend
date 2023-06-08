@@ -37,6 +37,7 @@ export const apiSlice = createApi({
     "OtherSetup",
     "availableCptCodes",
     "SELECTEDINSURANCE",
+    "ProviderPortalDocuments",
   ],
   endpoints: (builder) => ({}),
 });
