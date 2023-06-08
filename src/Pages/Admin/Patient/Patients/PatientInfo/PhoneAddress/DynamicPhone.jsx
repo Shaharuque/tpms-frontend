@@ -1,5 +1,9 @@
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import PhoneInput from "react-phone-number-input";
+import flags from "react-phone-number-input/flags";
+import "react-phone-number-input/style.css";
+
 
 const DynamicPhone = ({ adData }) => {
   const { phoneFields, phoneRemove, register } = adData;
@@ -13,8 +17,23 @@ const DynamicPhone = ({ adData }) => {
               <span className=" label-font">Phone</span>
             </label>
             <div className="flex  gap-1 items-center gap-x-3 gap-y-2">
-              <div className=" ml-1">
-                <input
+              <div className=" ml-1 flex items-center">
+             
+
+            
+              <PhoneInput
+              flags={flags}
+              international
+              initialValueFormat="national"
+                  placeholder="Phone"
+                  defaultCountry="US" 
+                  className="input-border input-font py-[1px] w-full focus:outline-none"
+                  {...register(`number.${index}.number`, {
+                    // required: true
+                  })}
+                  value={field.phone_number} // Use the `value` prop instead of `defaultValue`
+                />
+                {/* <input
                   type="text"
                   placeholder="Phone"
                   className="input-border input-font py-[1px] w-full focus:outline-none"
@@ -22,7 +41,7 @@ const DynamicPhone = ({ adData }) => {
                     // required: true
                   })}
                   defaultValue={field.phone_number}
-                />
+                /> */}
               </div>
               <div>
                 <select
