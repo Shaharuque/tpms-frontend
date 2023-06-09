@@ -301,7 +301,6 @@ import MainInfo from "./Pages/PatientSection/MyInfo/PatientInfo/MainInfo";
 import MyAuthorization from "./Pages/PatientSection/MyInfo/Authorization/MyAuthorization";
 import ProviderDashboard from "./Pages/ProviderSection/Dashboard/ProviderDashboard";
 import Schedule from "./Pages/ProviderSection/Schedule/Schedule";
-import Calender from "./Pages/ProviderSection/Calender/Calender";
 import ProviderBiographic from "./Pages/ProviderSection/Biographic/ProviderBiographic";
 import { ProviderBios } from "./Pages/ProviderSection/Biographic/Bios/ProviderBios";
 import ProviderPatient from "./Pages/ProviderSection/Patient/ProviderPatient";
@@ -310,7 +309,8 @@ import ProviderPatientInformation from "./Pages/ProviderSection/Patient/Patients
 import ProviderPatientAuthorization from "./Pages/ProviderSection/Patient/Patients/Authorization/ProviderPatientAuthorization";
 import ProviderPatientDocument from "./Pages/ProviderSection/Patient/Patients/Documents/ProviderPatientDocument";
 import ProviderPatientCalllog from "./Pages/ProviderSection/Patient/Patients/CallLog/ProviderPatientCalllog";
-import UserTimesheets from "./Pages/ProviderSection/Timesheet/UserTimesheets";
+import ProviderTimeSheet from "./Pages/ProviderSection/Timesheet/ProviderTimeSheet";
+import ProviderCalender from "./Pages/ProviderSection/Calender/ProviderCalender";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -739,7 +739,7 @@ function App() {
           <Route path="/provider" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ProviderDashboard />}></Route>
             <Route path="scheduler" element={<Schedule />}></Route>
-            <Route path="calender" element={<Calender />}></Route>
+            <Route path="calender" element={<ProviderCalender />}></Route>
             <Route path="biographic" element={<ProviderBiographic />}>
               <Route index element={<ProviderBios></ProviderBios>}></Route>
               <Route path="bio-contactinfo" element={<ContractContainer></ContractContainer>}></Route>
@@ -755,7 +755,7 @@ function App() {
               <Route path="patient-document/:id" element={<ProviderPatientDocument></ProviderPatientDocument>}></Route>
               <Route path="patient-call-log/:id" element={<ProviderPatientCalllog></ProviderPatientCalllog>}></Route>
             </Route>
-            <Route path="user-timesheet" element={<UserTimesheets />}></Route>
+            <Route path="user-timesheet" element={<ProviderTimeSheet />}></Route>
           </Route>
 
           {/* Patient-Portal Pannel */}
