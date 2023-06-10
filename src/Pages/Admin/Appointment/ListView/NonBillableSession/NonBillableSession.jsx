@@ -6,7 +6,7 @@ import { AiFillLock, AiFillUnlock, AiOutlineDown } from "react-icons/ai";
 import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import { defineElement } from "lord-icon-element";
 import { RiArrowLeftRightLine } from "react-icons/ri";
-import { timeConverter } from "../../../../Shared/TimeConverter/TimeConverter";
+import { timeConverter, timeConverter2 } from "../../../../Shared/TimeConverter/TimeConverter";
 import ShimmerTableTet from "../../../../Pages/Settings/SettingComponents/ShimmerTableTet";
 import ReactPaginate from "react-paginate";
 import { Dropdown, Space, Table } from "antd";
@@ -40,33 +40,20 @@ const NonBillableSession = ({
   const [statusName, setStatusName] = useState(null);
   const [actionType, setActionType] = useState(null);
   const { token } = useToken();
-  console.log(
-    "non-billable data",
-    nonBillableData,
-    nonBillableTotalPage,
-    nonBillableListLoading
-  );
+  console.log("non-billable data", nonBillableData, nonBillableTotalPage, nonBillableListLoading);
 
   //Manage Session Appointment Status Change API
-  const [
-    manageSessionStatusChange,
-    { data: statusChangeData, isSuccess: actionSuccess },
-  ] = useManageSessionStatusChangeMutation();
+  const [manageSessionStatusChange, { data: statusChangeData, isSuccess: actionSuccess }] = useManageSessionStatusChangeMutation();
   console.log("after status change", actionSuccess);
 
   useEffect(() => {
     if (statusChangeData?.status === "success" && actionType !== "delete") {
       setSelectedRowKeys([]);
-      toast.success(
-        <h1 className="font-bold">
-          Successfully Non-Billable Session Status Updated
-        </h1>,
-        {
-          position: "top-center",
-          autoClose: 5000,
-          theme: "light",
-        }
-      );
+      toast.success(<h1 className="font-bold">Successfully Non-Billable Session Status Updated</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
       //Session List refetch based on the selected page number
       const getNonbillableSessions = async () => {
         const res = await axios({
@@ -86,14 +73,11 @@ const NonBillableSession = ({
     }
     if (statusChangeData?.status === "success" && actionType === "delete") {
       setSelectedRowKeys([]);
-      toast.success(
-        <h1 className="font-bold">Selected Non-Billable Session Deleted</h1>,
-        {
-          position: "top-center",
-          autoClose: 5000,
-          theme: "light",
-        }
-      );
+      toast.success(<h1 className="font-bold">Selected Non-Billable Session Deleted</h1>, {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "light",
+      });
       //Session List refetch based on the selected page number
       const getNonbillableSessions = async () => {
         const res = await axios({
@@ -147,20 +131,12 @@ const NonBillableSession = ({
       width: 200,
       render: (_, record) => {
         //console.log("tags : ", lock);
-        return (
-          <div>
-            {
-              stuffs?.find((each) => each?.id === record?.provider_id)
-                ?.full_name
-            }
-          </div>
-        );
+        return <div>{stuffs?.find((each) => each?.id === record?.provider_id)?.full_name}</div>;
       },
       sorter: (a, b) => {
         return a.app_provider?.full_name > b.app_provider?.full_name ? -1 : 1;
       },
-      sortOrder:
-        sortedInfo.columnKey === "provider_full_name" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "provider_full_name" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -178,12 +154,7 @@ const NonBillableSession = ({
                 <BsFillCameraVideoFill className="text-green-500" />
               </div>
             ) : (
-              <div>
-                {
-                  posData?.pos?.find((each) => each?.pos_code === location)
-                    ?.pos_name
-                }
-              </div>
+              <div>{posData?.pos?.find((each) => each?.pos_code === location)?.pos_name}</div>
             )}
           </>
         );
@@ -201,18 +172,13 @@ const NonBillableSession = ({
       width: 100,
       render: (_, record) => {
         //console.log("tags : ", lock);
-        return (
-          <div className=" text-black text-center">
-            {dateConverter(record?.schedule_date)}
-          </div>
-        );
+        return <div className=" text-black text-center">{dateConverter(record?.schedule_date)}</div>;
       },
       sorter: (a, b) => {
         return a.schedule_date > b.schedule_date ? -1 : 1;
         // a.schedule_date - b.schedule_date
       },
-      sortOrder:
-        sortedInfo.columnKey === "schedule_date" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "schedule_date" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
@@ -224,8 +190,7 @@ const NonBillableSession = ({
         //console.log("tags : ", lock);
         return (
           <div className=" text-gray-600 text-center ">
-            {timeConverter(record?.from_time?.split(" ")[1])} to{" "}
-            {timeConverter(record?.to_time?.split(" ")[1])}
+            {timeConverter2(record?.from_time)} to {timeConverter2(record?.to_time)}
           </div>
         );
       },
@@ -251,36 +216,12 @@ const NonBillableSession = ({
         //console.log("status : ", status);
         return (
           <div className="flex justify-center">
-            {status === "Scheduled" && (
-              <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "Rendered" && (
-              <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "Hold" && (
-              <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "No Show" && (
-              <button className="bg-blue-700 text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "Cancelled by Client" && (
-              <button className="bg-black text-white text-[10px] py-[2px]  rounded w-14">
-                {status}
-              </button>
-            )}
-            {status === "Cancelled by Provider" && (
-              <button className="bg-yellow-700 text-white text-[10px] py-[2px]  rounded w-28">
-                {status}
-              </button>
-            )}
+            {status === "Scheduled" && <button className="bg-gray-500 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "Rendered" && <button className="bg-teal-700 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "Hold" && <button className="bg-red-700 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "No Show" && <button className="bg-blue-700 text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "Cancelled by Client" && <button className="bg-black text-white text-[10px] py-[2px]  rounded w-14">{status}</button>}
+            {status === "Cancelled by Provider" && <button className="bg-yellow-700 text-white text-[10px] py-[2px]  rounded w-28">{status}</button>}
           </div>
         );
       },
@@ -293,12 +234,7 @@ const NonBillableSession = ({
       render: (_, record) => (
         <div className="flex justify-center">
           <Dropdown
-            overlay={
-              <NonBillableAction
-                isLocked={record?.is_locked}
-                appointmentId={record?.id}
-              ></NonBillableAction>
-            }
+            overlay={<NonBillableAction isLocked={record?.is_locked} appointmentId={record?.id}></NonBillableAction>}
             trigger={["click"]}
             overlayStyle={{ zIndex: "100" }}
           >
@@ -424,10 +360,7 @@ const NonBillableSession = ({
               </div>
               {/* For Status Change */}
               <div className="flex items-center gap-2 flex-wrap mt-6">
-                <select
-                  className="modal-input-field ml-1"
-                  onChange={(e) => statusChange(e)}
-                >
+                <select className="modal-input-field ml-1" onChange={(e) => statusChange(e)}>
                   <option value="" className="text-black">
                     Select
                   </option>
