@@ -8,8 +8,6 @@ import ManageClaims from "./Pages/Admin/Billing/BillingManager/ManageClaims/Mana
 import ProcessingClaim from "./Pages/Admin/Billing/BillingManager/ProcessingClaims/ProcessingClaim";
 import CreateStaff from "./Pages/Admin/Staff/AddStaff/CreateStaff";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import UserTimesheets from "./Pages/Pages/User/Timesheet/UserTimesheets";
-import Pataients from "./Pages/Pages/User/Patient/Pataients";
 import MyInfo from "./Pages/PatientSection/MyInfo/MyInfo";
 import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
 import MyCalender from "./Pages/PatientSection/MyCalender/MyCalender";
@@ -17,7 +15,6 @@ import MyStatement from "./Pages/PatientSection/MyStatement/MyStatement";
 import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
 import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
 import NewPassSet from "./Pages/LoginPage/NewPassSet";
-import ManageSessions from "./Pages/Pages/User/ManageSessions";
 import ContractContainer from "./Pages/Pages/User/Biographic/ContactInfo/ContractContainer";
 // --------new start with folder structure ------------------------------------------------------------------------------------------------
 
@@ -304,9 +301,16 @@ import MainInfo from "./Pages/PatientSection/MyInfo/PatientInfo/MainInfo";
 import MyAuthorization from "./Pages/PatientSection/MyInfo/Authorization/MyAuthorization";
 import ProviderDashboard from "./Pages/ProviderSection/Dashboard/ProviderDashboard";
 import Schedule from "./Pages/ProviderSection/Schedule/Schedule";
-import Calender from "./Pages/ProviderSection/Calender/Calender";
 import ProviderBiographic from "./Pages/ProviderSection/Biographic/ProviderBiographic";
 import { ProviderBios } from "./Pages/ProviderSection/Biographic/Bios/ProviderBios";
+import ProviderPatient from "./Pages/ProviderSection/Patient/ProviderPatient";
+import ProviderPatientInfo from "./Pages/ProviderSection/Patient/Patients/ProviderPatientInfo";
+import ProviderPatientInformation from "./Pages/ProviderSection/Patient/Patients/PatientInfo/ProviderPatientInformation";
+import ProviderPatientAuthorization from "./Pages/ProviderSection/Patient/Patients/Authorization/ProviderPatientAuthorization";
+import ProviderPatientDocument from "./Pages/ProviderSection/Patient/Patients/Documents/ProviderPatientDocument";
+import ProviderPatientCalllog from "./Pages/ProviderSection/Patient/Patients/CallLog/ProviderPatientCalllog";
+import ProviderTimeSheet from "./Pages/ProviderSection/Timesheet/ProviderTimeSheet";
+import ProviderCalender from "./Pages/ProviderSection/Calender/ProviderCalender";
 import PaymentInfo from "./Pages/Admin/Patient/Patients/Paymentinfo/PaymentInfo";
 import Sibling from "./Pages/Admin/Patient/Patients/Sibling/Sibling";
 import SessionNotes from "./Pages/Admin/Patient/Patients/SessionNotes/SessionNotes";
@@ -752,19 +756,27 @@ function App() {
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
 
-          {/* User Pannel */}
+          {/* Provider-Portal Pannel */}
           <Route path="/provider" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ProviderDashboard />}></Route>
             <Route path="scheduler" element={<Schedule />}></Route>
-            <Route path="calender" element={<Calender />}></Route>
+            <Route path="calender" element={<ProviderCalender />}></Route>
             <Route path="biographic" element={<ProviderBiographic />}>
               <Route index element={<ProviderBios></ProviderBios>}></Route>
               <Route path="bio-contactinfo" element={<ContractContainer></ContractContainer>}></Route>
               <Route path="bio-credential" element={<CredentialsContainer></CredentialsContainer>}></Route>
             </Route>
 
-            <Route path="Pataients" element={<Pataients />}></Route>
-            <Route path="user-timesheet" element={<UserTimesheets />}></Route>
+            <Route path="Pataients" element={<ProviderPatient />}></Route>
+            <Route path="patient" element={<ProviderPatientInfo></ProviderPatientInfo>}>
+              {/* <Route index element={<PatientsInfo></PatientsInfo>}></Route> */}
+              <Route path="patient-info/:id" element={<ProviderPatientInformation></ProviderPatientInformation>}></Route>
+              <Route path="patient-authorization/:id" element={<ProviderPatientAuthorization></ProviderPatientAuthorization>}></Route>
+              <Route path="patient-authorization" element={<Authorization></Authorization>}></Route>
+              <Route path="patient-document/:id" element={<ProviderPatientDocument></ProviderPatientDocument>}></Route>
+              <Route path="patient-call-log/:id" element={<ProviderPatientCalllog></ProviderPatientCalllog>}></Route>
+            </Route>
+            <Route path="user-timesheet" element={<ProviderTimeSheet />}></Route>
           </Route>
 
           {/* Patient-Portal Pannel */}

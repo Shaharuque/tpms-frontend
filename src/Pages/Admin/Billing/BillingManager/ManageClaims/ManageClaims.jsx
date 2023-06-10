@@ -453,7 +453,7 @@ const ManageClaims = () => {
                     <label className="label">
                       <span className=" label-font">Sort By</span>
                     </label>
-                    <select onChange={handleSort_By} name="type" className="input-border input-font w-full focus:outline-none">
+                    <select onChange={handleSort_By} name="type" notes>
                       <option value="all">All</option>
                       <option value="patient">Patient</option>
                       <option value="provider">Provider</option>

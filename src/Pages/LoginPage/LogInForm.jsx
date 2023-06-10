@@ -23,7 +23,7 @@ const LogInForm = ({ from }) => {
   const dispatch = useDispatch();
 
   const { accessToken, user } = useSelector((state) => state.authInfo);
-  console.log("result from redux store:", accessToken);
+  //console.log("result from redux store:", accessToken);
 
   const {
     register,
@@ -55,6 +55,7 @@ const LogInForm = ({ from }) => {
         dispatch(
           userLoggedIn({
             accessToken: response?.data?.access_token,
+            userInfo: response?.data?.user,
           })
         );
         localStorage.setItem("adminToken", response?.data?.access_token);
@@ -77,6 +78,13 @@ const LogInForm = ({ from }) => {
         navigate("/provider"); //patient panel a redirect
         localStorage.setItem("adminToken", response?.data?.access_token);
         localStorage.setItem("type", "provider");
+        localStorage.setItem("user", JSON.stringify(response?.data?.user));
+        dispatch(
+          userLoggedIn({
+            accessToken: response?.data?.access_token,
+            userInfo: response?.data?.user,
+          })
+        );
       } else {
         // setMessage(response.data.message);
         navigate("/super-admin");

@@ -8,7 +8,6 @@ import Loading from "../../../../../Loading/Loading";
 import TextArea from "antd/lib/input/TextArea";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 import useToken from "../../../../../CustomHooks/useToken";
-import "react-phone-input-2/lib/style.css";
 import GuarantorInfo from "./GuarantorInfo/GuarantorInfo";
 import AboutPatient from "./AboutPatient/AboutPatient";
 import PrimaryAddress from "./PatientAddress/PrimaryAddress";
@@ -56,6 +55,13 @@ const PatientInformation = () => {
     }, 1000);
   }, [patient_details]);
 
+  const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
+    defaultValues: {
+      address: patient_details?.client_address,
+      number: patient_details?.client_phone,
+      Email: patient_details?.client_email,
+    },
+  });
   console.log("data?.patientDetails?.data?.address-", data?.patientDetails?.data?.address);
 
   const { register, control, handleSubmit, reset, setValue, getValues } = useForm({

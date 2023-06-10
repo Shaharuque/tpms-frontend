@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import TextArea from "antd/lib/input/TextArea";
-import "react-phone-input-2/lib/style.css";
 import GuarantorInfo from "./GuarantorInfo/GuarantorInfo";
 import AboutPatient from "./AboutPatient/AboutPatient";
 import PrimaryAddress from "./PatientAddress/PrimaryAddress";

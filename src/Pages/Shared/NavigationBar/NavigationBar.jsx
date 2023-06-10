@@ -2,17 +2,8 @@
 import React, { useState } from "react";
 import { BsDownload } from "react-icons/bs";
 import "../../Style/Navigation.css";
-import {
-  BiExitFullscreen,
-  BiMessageRounded,
-  BiDotsHorizontal,
-} from "react-icons/bi";
-import {
-  AiOutlinePlus,
-  AiOutlineClose,
-  AiOutlineFileAdd,
-  AiFillUnlock,
-} from "react-icons/ai";
+import { BiExitFullscreen, BiMessageRounded, BiDotsHorizontal } from "react-icons/bi";
+import { AiOutlinePlus, AiOutlineClose, AiOutlineFileAdd, AiFillUnlock } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
 import admin from "../../Assets/user.png";
 import company from "../../Assets/company.png";
@@ -22,28 +13,24 @@ import ScheduleExport from "./ScheduleExport/ScheduleExport";
 import { Dropdown, Space } from "antd";
 import Add from "./Add/Add";
 import { userLoggedOut } from "../../../features/login_redux/loginSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavigationBar = ({ handle, handleSidebar }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  const { accessToken, userInfo } = useSelector((state) => state.authInfo);
 
   const handleSignOut = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("type");
     localStorage.removeItem("users");
-    dispatch(userLoggedOut());
+    dispatch(userLoggedOut({}));
     navigate("/");
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4 }}
-      className=" relative shadow-md rounded-3xl"
-    >
+    <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className=" relative shadow-md rounded-3xl">
       <div className="flex items-center justify-between bg-white rounded-3xl p-2">
         <div className="flex items-center justify-between w-6/7">
           <div
@@ -55,9 +42,7 @@ const NavigationBar = ({ handle, handleSidebar }) => {
             </div>
 
             <div>
-              <p className="md:text-base font-semibold text-[12px] text-gray-800  bg-transparent ">
-                ABC Behavioral Therapy Centers
-              </p>
+              <p className="md:text-base font-semibold text-[12px] text-gray-800  bg-transparent ">ABC Behavioral Therapy Centers</p>
             </div>
           </div>
 
@@ -66,17 +51,8 @@ const NavigationBar = ({ handle, handleSidebar }) => {
           </button>
         </div>
 
-        <div
-          onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-3 top-[10px] cursor-pointer lg:hidden w-1/7"
-        >
-          <div className="mt-1">
-            {open ? (
-              <AiOutlineClose className="text-xl bg-black text-white rounded" />
-            ) : (
-              <FaBars className="text-xl " />
-            )}
-          </div>
+        <div onClick={() => setOpen(!open)} className="text-3xl absolute right-3 top-[10px] cursor-pointer lg:hidden w-1/7">
+          <div className="mt-1">{open ? <AiOutlineClose className="text-xl bg-black text-white rounded" /> : <FaBars className="text-xl " />}</div>
         </div>
 
         {/* resposive tab $ phone  */}
@@ -90,22 +66,11 @@ const NavigationBar = ({ handle, handleSidebar }) => {
             {/*Full screen showing code */}
             <div>
               {!handle.active ? (
-                <button
-                  onClick={handle.enter}
-                  className="  text-xl font-bold text-secondary"
-                >
-                  <lord-icon
-                    src="https://cdn.lordicon.com/pnwpbzow.json"
-                    trigger="hover"
-                    colors="primary:#0aa7b8"
-                    style={{ height: "25px" }}
-                  ></lord-icon>
+                <button onClick={handle.enter} className="  text-xl font-bold text-secondary">
+                  <lord-icon src="https://cdn.lordicon.com/pnwpbzow.json" trigger="hover" colors="primary:#0aa7b8" style={{ height: "25px" }}></lord-icon>
                 </button>
               ) : (
-                <button
-                  onClick={handle.exit}
-                  className=" text-xl font-bold text-secondary"
-                >
+                <button onClick={handle.exit} className=" text-xl font-bold text-secondary">
                   <BiExitFullscreen />
                 </button>
               )}
@@ -113,12 +78,7 @@ const NavigationBar = ({ handle, handleSidebar }) => {
 
             {/* adding  */}
             {/* adding  */}
-            <Dropdown
-              overlay={<Add></Add>}
-              trigger={["click"]}
-              placement="bottomLeft"
-              overlayStyle={{ zIndex: "100" }}
-            >
+            <Dropdown overlay={<Add></Add>} trigger={["click"]} placement="bottomLeft" overlayStyle={{ zIndex: "100" }}>
               <button onClick={(e) => e.preventDefault()}>
                 <Space>
                   <button className=" text-xl mt-[3px] font-bold text-secondary">
@@ -139,14 +99,11 @@ const NavigationBar = ({ handle, handleSidebar }) => {
                       <hr />
                       <span className="text-info text-xs">
                         <span className="badge badge-primary mr-2">new </span>
-                        Latest changes NewTelehealth Video Session. Video
-                        Session feature for Telehealth For Telehealth, video
-                        session feature is added. You can...
+                        Latest changes NewTelehealth Video Session. Video Session feature for Telehealth For Telehealth, video session feature is added. You
+                        can...
                       </span>
                       <div className="card-actions">
-                        <button className="btn btn-primary btn-block">
-                          View cart
-                        </button>
+                        <button className="btn btn-primary btn-block">View cart</button>
                       </div>
                     </div>
                   </div>
@@ -171,10 +128,7 @@ const NavigationBar = ({ handle, handleSidebar }) => {
             </div>
             {/* message  */}
             <div>
-              <Link
-                to={"chat"}
-                className=" my-3 text-2xl font-bold text-secondary md:mt-[2px] flex items-center"
-              >
+              <Link to={"chat"} className=" my-3 text-2xl font-bold text-secondary md:mt-[2px] flex items-center">
                 <BiMessageRounded />
               </Link>
             </div>
@@ -195,73 +149,44 @@ const NavigationBar = ({ handle, handleSidebar }) => {
               <label tabIndex={0}>
                 <label className="flex gap-2 items-center cursor-pointer">
                   <div className="w-8 mr-1 rounded-full">
-                    <img
-                      className="avatar rounded-full"
-                      src={admin}
-                      alt="pic"
-                    />
+                    <img className="avatar rounded-full" src={admin} alt="pic" />
                   </div>
                   <div>
                     <h4 className="font-medium text-lg">Admin</h4>
-                    <h5 className="text-secondary font-medium text-xs">
-                      admin@admin.com
-                    </h5>
+                    <h5 className="text-secondary font-medium text-xs">{userInfo ? userInfo?.providerEmail : "admin@admin.com"}</h5>
                   </div>
                 </label>
               </label>
-              <div
-                tabIndex={0}
-                className="dropdown-content menu mt-1  w-[15rem]  sm:w-[18rem] "
-              >
+              <div tabIndex={0} className="dropdown-content menu mt-1  w-[15rem]  sm:w-[18rem] ">
                 <div className="bg-gradient-to-r from-primary to-secondary rounded-t-xl p-4 flex justify-between">
                   <div className="w-8 mr-1 rounded-full">
-                    <img
-                      className="avatar rounded-full"
-                      src={admin}
-                      alt="pic"
-                    />
+                    <img className="avatar rounded-full" src={admin} alt="pic" />
                   </div>
                   <div>
-                    <h5 className=" text-sm text-white font-bold text-end">
-                      Hello admin
-                    </h5>
-                    <p className="text-xs text-white">admin@admin.com</p>
+                    <h5 className=" text-sm text-white font-bold text-end">Hello admin</h5>
+                    <p className="text-xs text-white">{userInfo ? userInfo?.providerEmail : "admin@admin.com"}</p>
                   </div>
                 </div>
                 <div className="shadow-lg bg-white">
                   <div>
-                    <Link
-                      to={"/admin/profile/profile-information"}
-                      className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                    >
+                    <Link to={"/admin/profile/profile-information"} className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
                       <div className=" rounded-full p-3 bg-[#CEEBEE]">
                         <AiOutlineFileAdd className="text-teal-500" />
                       </div>
                       <div>
-                        <button className="font-bold text-sm">
-                          My Profile
-                        </button>
-                        <p className="text-[#7c8186] text-xs">
-                          View personal profile details
-                        </p>
+                        <button className="font-bold text-sm">My Profile</button>
+                        <p className="text-[#7c8186] text-xs">View personal profile details</p>
                       </div>
                     </Link>
                   </div>
                   <div>
-                    <Link
-                      to={"/admin/profile/password-change"}
-                      className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                    >
+                    <Link to={"/admin/profile/password-change"} className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
                       <div className=" rounded-full p-3 bg-[#CEEBEE] ">
                         <AiFillUnlock className="text-teal-500" />
                       </div>
                       <div>
-                        <button className="font-bold text-sm ">
-                          Change Password
-                        </button>
-                        <p className="text-[#7c8186] text-xs ">
-                          Update your password
-                        </p>
+                        <button className="font-bold text-sm ">Change Password</button>
+                        <p className="text-[#7c8186] text-xs ">Update your password</p>
                       </div>
                     </Link>
                   </div>
@@ -271,12 +196,7 @@ const NavigationBar = ({ handle, handleSidebar }) => {
                     onClick={handleSignOut}
                   >
                     Sign Out{" "}
-                    <lord-icon
-                      src="https://cdn.lordicon.com/moscwhoj.json"
-                      trigger="loop"
-                      colors="primary:#ffffff,secondary:#ffffff"
-                      style={{}}
-                    ></lord-icon>
+                    <lord-icon src="https://cdn.lordicon.com/moscwhoj.json" trigger="loop" colors="primary:#ffffff,secondary:#ffffff" style={{}}></lord-icon>
                   </button>{" "}
                 </div>
               </div>
@@ -294,35 +214,18 @@ const NavigationBar = ({ handle, handleSidebar }) => {
           {/*Full screen showing code */}
           <div>
             {!handle.active ? (
-              <button
-                onClick={handle.enter}
-                className="  text-xl font-bold text-secondary flex justify-center"
-              >
-                <lord-icon
-                  src="https://cdn.lordicon.com/pnwpbzow.json"
-                  trigger="hover"
-                  colors="primary:#0aa7b8"
-                  style={{ height: "25px" }}
-                ></lord-icon>
+              <button onClick={handle.enter} className="  text-xl font-bold text-secondary flex justify-center">
+                <lord-icon src="https://cdn.lordicon.com/pnwpbzow.json" trigger="hover" colors="primary:#0aa7b8" style={{ height: "25px" }}></lord-icon>
               </button>
             ) : (
-              <button
-                onClick={handle.exit}
-                className=" text-xl font-bold text-secondary flex justify-center"
-              >
+              <button onClick={handle.exit} className=" text-xl font-bold text-secondary flex justify-center">
                 <BiExitFullscreen />
               </button>
             )}
           </div>
 
           {/* adding  */}
-          <Dropdown
-            overlayClassName=""
-            overlay={<Add></Add>}
-            trigger={["click"]}
-            placement="bottomRight"
-            overlayStyle={{ zIndex: "100", marginTop: "-50px" }}
-          >
+          <Dropdown overlayClassName="" overlay={<Add></Add>} trigger={["click"]} placement="bottomRight" overlayStyle={{ zIndex: "100", marginTop: "-50px" }}>
             <button onClick={(e) => e.preventDefault()}>
               <Space>
                 <button className=" text-xl mt-[3px] font-bold text-secondary">
@@ -350,14 +253,11 @@ const NavigationBar = ({ handle, handleSidebar }) => {
                     <hr />
                     <span className="text-info text-xs">
                       <span className="badge badge-primary mr-2">new </span>
-                      Latest changes NewTelehealth Video Session. Video Session
-                      feature for Telehealth For Telehealth, video session
-                      feature is added. You can...
+                      Latest changes NewTelehealth Video Session. Video Session feature for Telehealth For Telehealth, video session feature is added. You
+                      can...
                     </span>
                     <div className="card-actions">
-                      <button className="btn btn-primary btn-block">
-                        View cart
-                      </button>
+                      <button className="btn btn-primary btn-block">View cart</button>
                     </div>
                   </div>
                 </div>
@@ -395,16 +295,8 @@ const NavigationBar = ({ handle, handleSidebar }) => {
 
           {/* message  */}
           <div>
-            <Link
-              to={"chat"}
-              className="  text-2xl font-bold text-secondary md:mt-[2px] flex items-center"
-            >
-              <lord-icon
-                src="https://cdn.lordicon.com/hpivxauj.json"
-                trigger="hover"
-                colors="primary:#0aa7b8"
-                style={{ height: "25px" }}
-              ></lord-icon>
+            <Link to={"chat"} className="  text-2xl font-bold text-secondary md:mt-[2px] flex items-center">
+              <lord-icon src="https://cdn.lordicon.com/hpivxauj.json" trigger="hover" colors="primary:#0aa7b8" style={{ height: "25px" }}></lord-icon>
             </Link>
           </div>
           {/**download */}
@@ -415,10 +307,7 @@ const NavigationBar = ({ handle, handleSidebar }) => {
                 <BsDownload />
               </button>
             </label>
-            <div
-              tabIndex={0}
-              className="dropdown-content menu nav-box  shadow-lg shadow-red-600"
-            >
+            <div tabIndex={0} className="dropdown-content menu nav-box  shadow-lg shadow-red-600">
               <ScheduleExport></ScheduleExport>
             </div>
           </div>
@@ -431,59 +320,40 @@ const NavigationBar = ({ handle, handleSidebar }) => {
                 </div>
                 <div>
                   <h4 className="font-medium text-lg">Admin</h4>
-                  <h5 className="text-secondary font-medium text-xs">
-                    admin@admin.com
-                  </h5>
+                  <h5 className="text-secondary font-medium text-xs">{userInfo ? userInfo?.providerEmail : "admin@admin.com"}</h5>
                 </div>
               </label>
             </label>
-            <div
-              tabIndex={0}
-              className="dropdown-content menu  nav-box mt-[6px] w-auto md:w-[18rem] sm:w-56 "
-            >
+            <div tabIndex={0} className="dropdown-content menu  nav-box mt-[6px] w-auto md:w-[18rem] sm:w-56 ">
               <div className="bg-gradient-to-r  from-primary to-secondary rounded-t-xl p-4 flex justify-between">
                 <div className="w-8 mr-1 rounded-full">
                   <img className="avatar rounded-full" src={admin} alt="pic" />
                 </div>
                 <div>
-                  <h5 className=" text-sm text-white font-bold text-end">
-                    Hello admin
-                  </h5>
-                  <p className="text-xs text-white">admin@admin.com</p>
+                  <h5 className=" text-sm text-white font-bold text-end">Hello admin</h5>
+                  <p className="text-xs text-white">{userInfo ? userInfo?.providerEmail : "admin@admin.com"}</p>
                 </div>
               </div>
               <div className="shadow-md bg-white">
                 <div>
-                  <Link
-                    to={"/admin/profile/profile-information"}
-                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                  >
+                  <Link to={"/admin/profile/profile-information"} className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
                     <div className=" rounded-full p-3 bg-[#CEEBEE]">
                       <AiOutlineFileAdd className="text-teal-500" />
                     </div>
                     <div>
                       <button className="font-bold text-sm">My Profile</button>
-                      <p className="text-[#7c8186] text-xs">
-                        View personal profile details
-                      </p>
+                      <p className="text-[#7c8186] text-xs">View personal profile details</p>
                     </div>
                   </Link>
                 </div>
                 <div>
-                  <Link
-                    to={"/admin/profile/password-change"}
-                    className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3"
-                  >
+                  <Link to={"/admin/profile/password-change"} className="flex gap-4 hover:bg-slate-100 bg-opacity-10 p-3">
                     <div className=" rounded-full p-3 bg-[#CEEBEE] ">
                       <AiFillUnlock className="text-teal-500" />
                     </div>
                     <div>
-                      <button className="font-bold text-sm ">
-                        Change Password
-                      </button>
-                      <p className="text-[#7c8186] text-xs ">
-                        Update your password
-                      </p>
+                      <button className="font-bold text-sm ">Change Password</button>
+                      <p className="text-[#7c8186] text-xs ">Update your password</p>
                     </div>
                   </Link>
                 </div>
@@ -493,12 +363,7 @@ const NavigationBar = ({ handle, handleSidebar }) => {
                   onClick={handleSignOut}
                 >
                   Sign Out
-                  <lord-icon
-                    src="https://cdn.lordicon.com/moscwhoj.json"
-                    trigger="loop"
-                    colors="primary:#ffffff,secondary:#ffffff"
-                    style={{}}
-                  ></lord-icon>
+                  <lord-icon src="https://cdn.lordicon.com/moscwhoj.json" trigger="loop" colors="primary:#ffffff,secondary:#ffffff" style={{}}></lord-icon>
                   {/* <VscSignOut className="font-bold text-lg" /> */}
                 </button>
               </div>

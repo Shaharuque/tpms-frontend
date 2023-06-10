@@ -147,10 +147,10 @@ const ListView = () => {
       setNonBillableTotalPage(data?.last_page);
       setNonBillableListLoading(false);
     };
-    if (payload?.provider_id?.length > 0 && procceed === true) {
+    if (payload?.provider_ids?.length > 0 && procceed === true) {
       getNonbillableSessions();
     }
-    if (payload?.provider_id?.length === 0 && procceed === true) {
+    if (payload?.provider_ids?.length === 0 && procceed === true) {
       toast.error(<h1 className="font-bold">Please select provider</h1>, {
         position: "top-center",
         autoClose: 5000,
@@ -728,7 +728,7 @@ const ListView = () => {
     const to_date = convert(data?.end_date);
     const payLoad = {
       patient_ids: patientId,
-      provider_id: stuffsId?.length > 0 ? stuffsId : "",
+      provider_ids: stuffsId?.length > 0 ? stuffsId : "",
       status: data?.status,
       ses_pos: location,
       ses_app_type: 1,
@@ -818,7 +818,7 @@ const ListView = () => {
   const nonBillableSessionHandler = (e) => {
     e.preventDefault();
     console.log("clicked");
-    const selectedProviderIds = { provider_id: stuffsId };
+    const selectedProviderIds = { provider_ids: stuffsId };
     setPayload(selectedProviderIds);
     setprocceed(true);
     setNonBillablePage(1);
