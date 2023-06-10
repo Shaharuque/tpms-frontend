@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import TextArea from "antd/lib/input/TextArea";
 import { useForm } from "react-hook-form";
-import { Modal, Switch } from "antd";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { Modal, Switch,TimePicker } from "antd";
+import {
+  IoCloseCircleOutline,
+  IoTrashOutline,
+  IoChatboxEllipsesOutline,
+  IoFileTrayFullOutline,
+  IoCopyOutline,
+  IoEyeOutline,
+  IoAdd,
+} from "react-icons/io5";
 import axios from "axios";
 import Calendar from "react-calendar";
 import { patientIp, providerIp } from "../../../Misc/BaseClient";
 import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
 import moment from "moment";
+
+import CopyNotes from "./EditModalHelper/CopyNotes";
+import ViewNotes from "./EditModalHelper/ViewNotes";
+import MessegeShow from "./EditModalHelper/MessegeShow";
+import AddSessionNote from "./EditModalHelper/AddSessionNote";
 
 //To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -19,13 +32,45 @@ const dateConverter = (date) => {
   }
 };
 
-const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) => {
+const EditEventModal = ({
+  selectedDate,
+  handleClose,
+  clicked,
+  refetch,
+  eventId,
+}) => {
   console.log(eventId);
   const [eventDetails, setEventDetails] = useState({});
   const { register, handleSubmit, reset } = useForm();
   const [loading, setLoading] = useState(false);
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const [fromtime, setFromTime] = useState(null);
+  const [toTime, setToTime] = useState(null);
+
+  const from_Time = (time, timeString) => {
+    console.log("From-Time", timeString);
+    setFromTime(timeString);
+  };
+
+  const to_Time = (time, timeString) => {
+    console.log("To-Time", timeString);
+    setToTime(timeString);
+  };
+  console.log("after selecting time", fromtime, toTime);
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   const [open, setOpen] = useState(false);
+  const [copy, setCopy] = useState(false);
+  const [view, setView] = useState(false);
+  const [sessionopen, setSessionOpen] = useState(false);
+  const [messege, setMessege] = useState(false);
   const [opencalender, setOpencalender] = useState(false);
   const [date, setDate] = useState(new Date());
   const { token } = useToken();
@@ -37,11 +82,19 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
     setOpen(false);
     setOpencalender(false);
     setDate(null);
+    setCopy(false);
+    setView(false);
+    setMessege(false);
+    //setSessio(false);
   };
   const handleCancelDate = () => {
     setOpen(false);
     setOpencalender(false);
     setDate(new Date());
+    setCopy(false);
+    setView(false);
+    setMessege(false);
+    //setSessio(false);
   };
 
   useEffect(() => {
@@ -98,12 +151,20 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        patient: eventDetails ? eventDetails?.app_patient?.client_full_name : null,
+        patient: eventDetails
+          ? eventDetails?.app_patient?.client_full_name
+          : null,
         provider: eventDetails ? eventDetails?.app_provider?.full_name : null,
         auth: eventDetails ? eventDetails?.app_auth?.authorization_name : null,
-        activity: eventDetails ? eventDetails?.app_activity?.activity_name : null,
-        from_time: eventDetails ? moment(eventDetails.from_time).format("hh:mm") : null,
-        to_time: eventDetails ? moment(eventDetails.to_time).format("hh:mm") : null,
+        activity: eventDetails
+          ? eventDetails?.app_activity?.activity_name
+          : null,
+        from_time: eventDetails
+          ? moment(eventDetails.from_time).format("hh:mm")
+          : null,
+        to_time: eventDetails
+          ? moment(eventDetails.to_time).format("hh:mm")
+          : null,
         status: eventDetails ? eventDetails?.status : null,
       });
     }, 0);
@@ -122,6 +183,11 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
 
     // reset();
   };
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
   return (
     <div>
       <Modal
@@ -131,7 +197,7 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
         bodyStyle={{ padding: "0" }}
         width={500}
         closable={false}
-        className="box rounded-xl"
+        className="box rounded-xl overflow-auto"
         // onClose={handleClose}
         // aria-labelledby="responsive-dialog-title"
       >
@@ -141,52 +207,96 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
           <div className="px-5 py-2 font-[poppins,sans-serif]">
             <div className="flex items-center justify-between">
               {!eventId ? (
-                <h1 className="text-lg text-left text-orange-400 ">Edit Appointment</h1>
+                <h1 className="text-lg text-left text-orange-400 ">
+                  Edit Appointment
+                </h1>
               ) : (
-                <h1 className="text-lg text-left text-orange-400 ">Appoinment Details</h1>
+                <h1 className="text-lg text-left text-orange-400 ">
+                  Appoinment Details
+                </h1>
               )}
-              <IoCloseCircleOutline onClick={handleClose} className="text-gray-600 text-2xl hover:text-primary" />
+              <IoCloseCircleOutline
+                onClick={handleClose}
+                className="text-gray-600 text-2xl hover:text-primary"
+              />
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1">
                 <label className="label">
-                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Patient Name</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
+                    Patient Name
+                  </span>
                 </label>
-                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("patient")}>
+                <select
+                  className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full"
+                  {...register("patient")}
+                >
                   <option value="">Select</option>
-                  <option value={eventDetails?.app_patient?.client_full_name}>{eventDetails?.app_patient?.client_full_name}</option>
+                  <option value={eventDetails?.app_patient?.client_full_name}>
+                    {eventDetails?.app_patient?.client_full_name}
+                  </option>
                 </select>
                 <label className="label">
-                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Auth</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
+                    Auth
+                  </span>
                 </label>
-                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("auth")}>
+                <select
+                  className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full"
+                  {...register("auth")}
+                >
                   <option value="">Select</option>
-                  <option value={eventDetails?.app_auth?.authorization_name}>{eventDetails?.app_auth?.authorization_name}</option>
+                  <option value={eventDetails?.app_auth?.authorization_name}>
+                    {eventDetails?.app_auth?.authorization_name}
+                  </option>
                 </select>
                 <label className="label">
-                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Service</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
+                    Service
+                  </span>
                 </label>
-                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("activity")}>
+                <select
+                  className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full"
+                  {...register("activity")}
+                >
                   <option value="">Select</option>
-                  <option value={eventDetails?.app_activity?.activity_name}>{eventDetails?.app_activity?.activity_name}</option>
+                  <option value={eventDetails?.app_activity?.activity_name}>
+                    {eventDetails?.app_activity?.activity_name}
+                  </option>
                 </select>
                 <label className="label">
-                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Provider Name</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
+                    Provider Name
+                  </span>
                 </label>
-                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("provider")}>
+                <select
+                  className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full"
+                  {...register("provider")}
+                >
                   <option value="">Select</option>
-                  <option value={eventDetails?.app_provider?.full_name}>{eventDetails?.app_provider?.full_name}</option>
+                  <option value={eventDetails?.app_provider?.full_name}>
+                    {eventDetails?.app_provider?.full_name}
+                  </option>
                 </select>
                 <label className="label">
-                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">POS</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
+                    POS
+                  </span>
                 </label>
-                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("provider")}>
+                <select
+                  className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full"
+                  {...register("provider")}
+                >
                   <option value="">Select</option>
-                  <option value={eventDetails?.app_provider?.full_name}>{eventDetails?.app_provider?.full_name}</option>
+                  <option value={eventDetails?.app_provider?.full_name}>
+                    {eventDetails?.app_provider?.full_name}
+                  </option>
                 </select>
                 <label className="label">
-                  <span className="modal-label-name text-[12px]">From Date</span>
+                  <span className="modal-label-name text-[12px]">
+                    From Date
+                  </span>
                 </label>
                 <input
                   name="date"
@@ -210,14 +320,20 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
                       {date ? (
                         <div className="bg-[#0AA7B8] bold text-white col-span-1 rounded-l-[5px]">
                           <div className="w-full h-16 flex justify-center items-center bg-[#0AA7B8] backdrop-blur-xl rounded drop-shadow-lg">
-                            <span className="text-xl">{days[date.getDay()]}</span>
+                            <span className="text-xl">
+                              {days[date.getDay()]}
+                            </span>
                           </div>
                           <div className="flex flex-col justify-center items-center">
-                            <h1 className="text-8xl font-medium">{currentDate}</h1>
+                            <h1 className="text-8xl font-medium">
+                              {currentDate}
+                            </h1>
                             <h1 className="text-xl font-medium">{month}</h1>
                           </div>
                           <div className="flex justify-center items-end">
-                            <h1 className="text-4xl font-medium mt-4">{year}</h1>
+                            <h1 className="text-4xl font-medium mt-4">
+                              {year}
+                            </h1>
                           </div>
                         </div>
                       ) : (
@@ -232,14 +348,23 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
                       <div className="col-span-2 w-[95%] my-0 mx-auto">
                         <Calendar onChange={setDate} value={date} />
                         <div className="flex justify-between rounded-b-[5px] bg-white py-1 rounded-br-[5px]">
-                          <button onClick={() => handleClearDate()} className="text-[12px] text-red-400 hover:bg-black hover:text-white p-2 rounded">
+                          <button
+                            onClick={() => handleClearDate()}
+                            className="text-[12px] text-red-400 hover:bg-black hover:text-white p-2 rounded"
+                          >
                             CLEAR
                           </button>
                           <div>
-                            <button onClick={() => handleCancelDate()} className="text-[12px] text-[#0AA7B8] hover:bg-black hover:text-white p-2 rounded">
+                            <button
+                              onClick={() => handleCancelDate()}
+                              className="text-[12px] text-[#0AA7B8] hover:bg-black hover:text-white p-2 rounded"
+                            >
                               CANCEL
                             </button>
-                            <button onClick={() => setOpen(false)} className="text-[12px] ml-2 text-[#0AA7B8] hover:bg-teal-500 hover:text-white p-2 rounded">
+                            <button
+                              onClick={() => setOpen(false)}
+                              className="text-[12px] ml-2 text-[#0AA7B8] hover:bg-teal-500 hover:text-white p-2 rounded"
+                            >
                               OK
                             </button>
                           </div>
@@ -251,22 +376,190 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
                 {/* Custom Calender End */}
 
                 <label className="label">
-                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">From</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
+                    From
+                  </span>
                 </label>
-                <input className="border border-gray-300 col-span-2 rounded-sm p-2 py-[3px] mx-1 text-[12px] w-full" type="time" {...register("from_time")} />
+                <input
+                  className="border border-gray-300 col-span-2 rounded-sm p-2 py-[3px] mx-1 text-[12px] w-full"
+                  type="time"
+                  {...register("from_time")}
+                />
 
                 <label className="label">
-                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">To</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
+                    To
+                  </span>
                 </label>
-                <input className="border border-gray-300 col-span-2 rounded-sm p-2 py-[3px] mx-1 text-[12px] w-full" type="time" {...register("to_time")} />
+                <input
+                  className="border border-gray-300 col-span-2 rounded-sm p-2 py-[3px] mx-1 text-[12px] w-full"
+                  type="time"
+                  {...register("to_time")}
+                />
                 <label className="label">
-                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Status</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
+                    Status
+                  </span>
                 </label>
-                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("status")}>
+                <select
+                  className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full"
+                  {...register("status")}
+                >
                   <option value="">Select</option>
-                  <option value={eventDetails?.status}>{eventDetails?.status}</option>
+                  <option value={eventDetails?.status}>
+                    {eventDetails?.status}
+                  </option>
                 </select>
+
+               
               </div>
+
+              <div className=" flex items-center justify-between mt-2">
+                  <button
+                    className="px-4 py-1 bg-[#089bab] text-white text-xs rounded  mr-2"
+                    onClick={() => setSessionOpen(!sessionopen)}
+                  >
+                    <IoFileTrayFullOutline className="inline text-xl mr-1" />{" "}
+                    Add Session Notes
+                  </button>
+
+                  {sessionopen && (
+                    <AddSessionNote
+                      sessionopen={sessionopen}
+                      setSessionOpen={setSessionOpen}
+                    ></AddSessionNote>
+
+                    // <AddSessionModal
+                    //   sessionopen={sessionopen}
+                    //   setSessionOpen={setSessionOpen}
+                    // ></AddSessionModal>
+                  )}
+
+                  <button
+                    className=" px-4 py-1 bg-[#089bab] text-white text-xs rounded  mr-2"
+                    onClick={() => setCopy(!copy)}
+                  >
+                    <IoCopyOutline className="inline text-xl mr-1" />
+                    Copy Notes
+                  </button>
+                  {copy && (
+                    <CopyNotes copy={copy} setCopy={setCopy}></CopyNotes>
+                  )}
+                  <button
+                    className=" px-4 py-1 bg-[#089bab] text-white text-xs rounded  mr-2"
+                    onClick={() => setView(!view)}
+                  >
+                    <IoEyeOutline className="inline text-xl mr-1" />
+                    view notes
+                  </button>
+                  {view && (
+                    <ViewNotes view={view} setView={setView}></ViewNotes>
+                  )}
+                  <button>
+                    {" "}
+                    <IoChatboxEllipsesOutline
+                      className="text-gray-600 text-xl hover:text-primary"
+                      onClick={() => setMessege(!messege)}
+                    />
+                  </button>
+                  {messege && (
+                    <MessegeShow messege={messege} setMessege={setMessege}></MessegeShow>
+                  )}
+                </div>
+
+              <div>
+              <div>
+                <button
+                  onClick={toggleForm}
+                  className="flex items-center justify-center  text-gray-600  rounded-full w-10 h-10"
+                >
+                  {showForm ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M20 12H4"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                  )}
+                </button>
+
+                {showForm && (
+                  <div className="mt-4 p-4 border-2 rounded-md ">
+                    {/*  form content goes here */}
+                    <form>
+                      <label className="label">
+                        <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                          Replacement Provider
+                        </span>
+                      </label>
+                      <select
+                        className="border border-gray-300 col-span-2 rounded-sm px-2 py-1 mx-1 text-[12px] w-full"
+                        {...register("provider")}
+                      >
+                        <option value="">Select</option>
+                        <option value="ashni soni">ashni soni</option>
+                        <option value="Max Auto">Max Auto</option>
+                        <option value="Gomex twin">Gomex twin</option>
+                      </select>
+
+                      <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mt-2 pl-1 gap-1">
+                        <div>
+                          <label className="label">
+                            <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                              Break Form Time
+                            </span>
+                          </label>
+                          <TimePicker
+                            className="modal-input-field"
+                            use12Hours
+                            format="h:mm A"
+                            onChange={from_Time}
+                          />
+                        </div>
+
+                        <div>
+                          <label className="label">
+                            <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                              Break To Time
+                            </span>
+                          </label>
+
+                          <TimePicker
+                            className="modal-input-field"
+                            use12Hours
+                            format="h:mm A"
+                            onChange={to_Time}
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                )}
+              </div>
+            </div>
 
               <div className=" flex items-end justify-end mt-2">
                 <button className=" pms-button mr-2" type="submit">
