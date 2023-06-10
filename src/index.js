@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import ContextWrapper from "./Pages/Pages/User/My-Schedule/CalendarContext/ContextWrapper";
+// import ContextWrapper from "./Pages/Pages/User/My-Schedule/CalendarContext/ContextWrapper";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient();
@@ -20,9 +20,9 @@ root.render(
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <ContextWrapper>
-          <App />
-        </ContextWrapper>
+        {/* <ContextWrapper> */}
+        <App />
+        {/* </ContextWrapper> */}
       </BrowserRouter>
     </QueryClientProvider>
   </Provider>
