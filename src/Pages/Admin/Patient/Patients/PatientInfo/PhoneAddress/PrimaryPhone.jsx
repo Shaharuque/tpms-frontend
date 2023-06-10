@@ -1,5 +1,9 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import PhoneInput from "react-phone-number-input";
+import flags from "react-phone-number-input/flags";
+import "react-phone-number-input/style.css";
 
 const PrimaryPhone = ({ adData }) => {
   const { phoneAppend, register, primaryPhone } = adData;
@@ -11,25 +15,25 @@ const PrimaryPhone = ({ adData }) => {
       <div className="flex gap-1 items-center gap-x-3 gap-y-2">
         <div className=" ml-1">
           {/* package input field */}
-          {/* <PhoneInput
-            className="PatientinformationInput"
-            country={"us"}
-            {...register("phoneinput")}
-            value={phone}
-            onChange={(e) => {
-              // //console.log(e);
-              setPhone(e);
-            }}
-            // inputProps={{ ...register("phoneinput") }}
-          /> */}
+          <PhoneInput
+            flags={flags}
+            international
+            initialValueFormat="national"
+            className="input-border input-font py-[1px] w-full focus:outline-none "
+            defaultCountry="US"
+            value={primaryPhone}
+            {...register("phone_number")}
 
-          <input
+         
+          />
+
+          {/* <input
             type="text"
             placeholder="Phone"
             defaultValue={primaryPhone}
             className="input-border input-font py-[1px] w-full focus:outline-none"
             {...register("phone_number")}
-          />
+          /> */}
         </div>
         <div>
           <select

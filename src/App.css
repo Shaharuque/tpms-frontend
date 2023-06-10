@@ -259,7 +259,8 @@ input[type='checkbox'] {
 
 textarea:focus,
 input:focus {
-  outline-color: #0AA7B8;
+  outline: none !important;
+  /* outline-color: #0AA7B8; */
 }
 
 select:focus {
