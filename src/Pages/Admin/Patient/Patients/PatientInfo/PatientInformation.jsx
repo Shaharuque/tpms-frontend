@@ -55,14 +55,14 @@ const PatientInformation = () => {
     }, 1000);
   }, [patient_details]);
 
-  const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
-    defaultValues: {
-      address: patient_details?.client_address,
-      number: patient_details?.client_phone,
-      Email: patient_details?.client_email,
-    },
-  });
-  console.log("data?.patientDetails?.data?.address-", data?.patientDetails?.data?.address);
+  // const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
+  //   defaultValues: {
+  //     address: patient_details?.client_address,
+  //     number: patient_details?.client_phone,
+  //     Email: patient_details?.client_email,
+  //   },
+  // });
+  // console.log("data?.patientDetails?.data?.address-", data?.patientDetails?.data?.address);
 
   const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
     defaultValues: {
