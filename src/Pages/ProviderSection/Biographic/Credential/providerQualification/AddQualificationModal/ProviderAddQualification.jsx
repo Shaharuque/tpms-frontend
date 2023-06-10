@@ -5,7 +5,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useToken from "../../../../../../CustomHooks/useToken";
-import { useProvideraddQualificationMutation } from "../../../../../../features/ProviderPortal/providerCredentail/ProviderQualificationApi";
+import { useProvideraddQualificationMutation } from "../../../../../../features/ProviderPortal/providerCredentail_redux/ProviderQualificationApi";
 
 const ProviderAddQualification = ({ handleClose, open }) => {
   const { register, handleSubmit, reset } = useForm();

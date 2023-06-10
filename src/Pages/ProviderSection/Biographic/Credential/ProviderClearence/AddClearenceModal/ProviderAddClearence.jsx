@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useProvideraddClearenceMutation } from "../../../../../../features/ProviderPortal/providerCredentail/ProviderClearenceApi";
+import { useProvideraddClearenceMutation } from "../../../../../../features/ProviderPortal/providerCredentail_redux/ProviderClearenceApi";
 import useToken from "../../../../../../CustomHooks/useToken";
 
 const ProviderAddClearence = ({ handleClose, open }) => {

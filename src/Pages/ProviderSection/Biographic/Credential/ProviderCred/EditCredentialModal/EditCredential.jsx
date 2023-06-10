@@ -7,7 +7,7 @@ import useToken from "../../../../../../CustomHooks/useToken";
 import {
   useGetProvidercredentialinfoQuery,
   useUpdateProviderCredentialMutation,
-} from "../../../../../../features/ProviderPortal/providerCredentail/ProviderCredentialApi";
+} from "../../../../../../features/ProviderPortal/providerCredentail_redux/ProviderCredentialApi";
 
 const ProviderEditCredential = ({ handleClose, open, credentialInfo }) => {
   // console.log(credentialInfo);

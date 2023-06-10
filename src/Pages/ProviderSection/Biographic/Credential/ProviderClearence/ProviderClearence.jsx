@@ -32,7 +32,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 // import useToken from "../../../../../../../CustomHooks/useToken";
 import { toast } from "react-toastify";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useProviderdeleteClearanceMutation } from "../../../../../features/ProviderPortal/providerCredentail/ProviderClearenceApi";
+import { useProviderdeleteClearanceMutation } from "../../../../../features/ProviderPortal/providerCredentail_redux/ProviderClearenceApi";
 import ProviderAddClearence from "./AddClearenceModal/ProviderAddClearence";
 import ProviderEditClearence from "./EditClearenceModal/ProviderEditClearence";
 

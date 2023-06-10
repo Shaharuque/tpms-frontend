@@ -311,6 +311,7 @@ import Sibling from "./Pages/Admin/Patient/Patients/Sibling/Sibling";
 import SessionNotes from "./Pages/Admin/Patient/Patients/SessionNotes/SessionNotes";
 import ProviderContractContainer from "./Pages/ProviderSection/Biographic/ContactInfo/ProviderContractContainer";
 import ProviderCredentialsContainer from "./Pages/ProviderSection/Biographic/Credential/ProviderCredentialsContainer";
+import ProviderLeaveTracking from "./Pages/ProviderSection/Biographic/LeaveTracking/ProviderLeaveTracking";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -747,6 +748,8 @@ function App() {
               <Route index element={<ProviderBios></ProviderBios>}></Route>
               <Route path="bio-contactinfo" element={<ProviderContractContainer />}></Route>
               <Route path="bio-credential" element={<ProviderCredentialsContainer />}></Route>
+              <Route path="bio-leave-tracking" element={<ProviderLeaveTracking />}></Route>
+              <Route path="bio-work-schedule" element={<p>work sedule</p>}></Route>
             </Route>
 
             {/* <Route path="Pataients" element={<Pataients />}></Route>

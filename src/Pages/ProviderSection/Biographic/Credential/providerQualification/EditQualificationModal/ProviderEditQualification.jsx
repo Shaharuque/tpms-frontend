@@ -8,7 +8,7 @@ import useToken from "../../../../../../CustomHooks/useToken";
 import {
   useProvidergetQualificationInfoQuery,
   useProviderupdateQualificationMutation,
-} from "../../../../../../features/ProviderPortal/providerCredentail/ProviderQualificationApi";
+} from "../../../../../../features/ProviderPortal/providerCredentail_redux/ProviderQualificationApi";
 
 const ProviderEditQualification = ({ handleClose, open, qualificationInfo }) => {
   const { register, handleSubmit, reset } = useForm();

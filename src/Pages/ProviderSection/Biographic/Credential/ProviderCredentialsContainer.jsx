@@ -6,9 +6,9 @@ import ProviderQualification from "./providerQualification/ProviderQualification
 import { providerIp } from "../../../../Misc/BaseClient";
 import axios from "axios";
 import useToken from "../../../../CustomHooks/useToken";
-import { useGetProviderCredentialsQuery } from "../../../../features/ProviderPortal/providerCredentail/ProviderCredentialApi";
-import { useProvidergetClearenceQuery } from "../../../../features/ProviderPortal/providerCredentail/ProviderClearenceApi";
-import { useProvidergetQualificationQuery } from "../../../../features/ProviderPortal/providerCredentail/ProviderQualificationApi";
+import { useGetProviderCredentialsQuery } from "../../../../features/ProviderPortal/providerCredentail_redux/ProviderCredentialApi";
+import { useProvidergetClearenceQuery } from "../../../../features/ProviderPortal/providerCredentail_redux/ProviderClearenceApi";
+import { useProvidergetQualificationQuery } from "../../../../features/ProviderPortal/providerCredentail_redux/ProviderQualificationApi";
 import Loading from "../../../../Loading/Loading";
 const ProviderCredentialsContainer = () => {
   const [credentialOpen, setCredentialOpen] = useState(true);

@@ -79,7 +79,19 @@ const ProviderBiographic = () => {
               </div>
               <div className="text-xs text-secondary font-normal patient-nav mb-2">
                 <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-credential`}>
-                  <h1 className="ml-1 mt-1">Credentials</h1>
+                  <h1 className="ml-1 mt-1">Credentials / Qualifications</h1>
+                </CustomLink>
+              </div>
+
+              <div className="text-xs text-secondary font-normal patient-nav mb-2">
+                <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-leave-tracking`}>
+                  <h1 className="ml-1 mt-1">Leave Tracking</h1>
+                </CustomLink>
+              </div>
+
+              <div className="text-xs text-secondary font-normal patient-nav mb-2">
+                <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-work-schedule`}>
+                  <h1 className="ml-1 mt-1">Work Schedule</h1>
                 </CustomLink>
               </div>
             </motion.div>

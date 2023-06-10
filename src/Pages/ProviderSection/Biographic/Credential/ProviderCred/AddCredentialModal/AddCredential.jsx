@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAddProviderCredentialMutation } from "../../../../../../features/ProviderPortal/providerCredentail/ProviderCredentialApi";
+import { useAddProviderCredentialMutation } from "../../../../../../features/ProviderPortal/providerCredentail_redux/ProviderCredentialApi";
 import useToken from "../../../../../../CustomHooks/useToken";
 
 const ProviderAddCredential = ({ handleClose, open }) => {

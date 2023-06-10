@@ -7,7 +7,7 @@ import useToken from "../../../../../../CustomHooks/useToken";
 import {
   useProviderclearenceInfoQuery,
   useProviderupdateClearenceMutation,
-} from "../../../../../../features/ProviderPortal/providerCredentail/ProviderClearenceApi";
+} from "../../../../../../features/ProviderPortal/providerCredentail_redux/ProviderClearenceApi";
 
 const ProviderEditClearence = ({ handleClose, open, clearenceInfo }) => {
   console.log(clearenceInfo);

@@ -4,7 +4,7 @@ import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import useToken from "../../../../../CustomHooks/useToken";
-import { useProviderdeleteQualificationMutation } from "../../../../../features/ProviderPortal/providerCredentail/ProviderQualificationApi";
+import { useProviderdeleteQualificationMutation } from "../../../../../features/ProviderPortal/providerCredentail_redux/ProviderQualificationApi";
 import { toast } from "react-toastify";
 import ProviderAddQualification from "./AddQualificationModal/ProviderAddQualification";
 import ProviderEditQualification from "./EditQualificationModal/ProviderEditQualification";

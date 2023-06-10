@@ -5,7 +5,7 @@ import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { useDeleteProviderCredentialMutation } from "../../../../../features/ProviderPortal/providerCredentail/ProviderCredentialApi";
+import { useDeleteProviderCredentialMutation } from "../../../../../features/ProviderPortal/providerCredentail_redux/ProviderCredentialApi";
 import useToken from "../../../../../CustomHooks/useToken";
 import ProviderAddCredential from "./AddCredentialModal/AddCredential";
 import ProviderEditCredential from "./EditCredentialModal/EditCredential";
