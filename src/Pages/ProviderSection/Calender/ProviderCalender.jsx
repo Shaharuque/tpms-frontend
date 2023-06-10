@@ -11,9 +11,9 @@ import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
 import { RiUserAddLine } from "react-icons/ri";
 import { DiffOutlined } from "@ant-design/icons";
-import EventModal from "./EventModal";
 import { useGetProviderCalenderEventsQuery } from "../../../features/ProviderPortal/ProviderCalender_redux/providerCalenderApi";
 import { dateConverter } from "../../Shared/Dateconverter/DateConverter";
+import EditEventModal from "./EditEventModal";
 
 const ProviderCalender = () => {
   const tooltipRef = useRef(null);
@@ -300,18 +300,10 @@ const ProviderCalender = () => {
           }}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           timeZone="UTC" //global tinme zone
-          // events={calenderEvents?.events}
-          // events={Events}
           events={eventData}
-          // initialEvents={allData}
-          // initialEvents={eventData}
           editable={false}
           selectable={true}
           select={createEvent}
-          // eventClick={(arg) => {
-          //   console.log(arg.event.extendedProps._id);
-          //   showEventDetails(arg.event.extendedProps._id); //jei event a click korbo tar id showEvent func a pass[callback method]
-          // }}
           eventClick={showEventDetails}
           displayEventTime={true}
           eventTimeFormat={{
@@ -323,7 +315,7 @@ const ProviderCalender = () => {
           datesSet={handleDatesSet}
         />
       </div>
-      {open ? <EventModal selectedDate={selectedDate} handleClose={handleClose} clicked={open} eventId={eventId}></EventModal> : null}
+      {open ? <EditEventModal selectedDate={selectedDate} handleClose={handleClose} clicked={open} eventId={eventId}></EditEventModal> : null}
     </div>
   );
 };

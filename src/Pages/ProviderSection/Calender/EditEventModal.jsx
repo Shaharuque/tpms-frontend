@@ -5,7 +5,7 @@ import { Modal, Switch } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import axios from "axios";
 import Calendar from "react-calendar";
-import { patientIp } from "../../../Misc/BaseClient";
+import { patientIp, providerIp } from "../../../Misc/BaseClient";
 import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
 
@@ -18,7 +18,7 @@ const dateConverter = (date) => {
   }
 };
 
-const EventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) => {
+const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) => {
   console.log(eventId);
   const [eventDetails, setEventDetails] = useState({});
   const { register, handleSubmit, reset } = useForm();
@@ -64,7 +64,7 @@ const EventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =>
 
         const response = await axios({
           method: "post",
-          url: `${patientIp}/my/calender/get/single/data`,
+          url: `${providerIp}/calender/single/event/details`,
           headers: {
             "content-type": "Application/json",
             "x-auth-token": token,
@@ -140,7 +140,7 @@ const EventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =>
           <div className="px-5 py-2 font-[poppins,sans-serif]">
             <div className="flex items-center justify-between">
               {!eventId ? (
-                <h1 className="text-lg text-left text-orange-400 ">Add Appointment</h1>
+                <h1 className="text-lg text-left text-orange-400 ">Edit Appointment</h1>
               ) : (
                 <h1 className="text-lg text-left text-orange-400 ">Appoinment Details</h1>
               )}
@@ -286,4 +286,4 @@ const EventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =>
   );
 };
 
-export default EventModal;
+export default EditEventModal;

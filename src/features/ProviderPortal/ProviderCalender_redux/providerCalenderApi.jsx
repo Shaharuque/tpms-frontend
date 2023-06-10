@@ -14,19 +14,19 @@ export const providerCalenderApi = apiSlice.injectEndpoints({
       }),
     }),
 
-    //get single session data
-    singleEventData: builder.mutation({
-      query: ({ token, payload }) => ({
-        url: `/patient/my/calender/get/single/data`,
-        method: "POST",
-        headers: {
-          "content-type": "Application/json",
-          "x-auth-token": token,
-        },
-        body: JSON.stringify(payload),
-      }),
-    }),
+    // //get single session data
+    // getProviderCalenderEventDetails: builder.mutation({
+    //   query: ({ token, payload }) => ({
+    //     url: `/provider/calender/single/event/details`,
+    //     method: "POST",
+    //     headers: {
+    //       "content-type": "Application/json",
+    //       "x-auth-token": token,
+    //     },
+    //     body: JSON.stringify(payload),
+    //   }),
+    // }),
   }),
 });
 
-export const { useGetProviderCalenderEventsQuery, useSingleEventDataMutation } = providerCalenderApi;
+export const { useGetProviderCalenderEventsQuery } = providerCalenderApi;
