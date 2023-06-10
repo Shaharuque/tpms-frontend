@@ -4,17 +4,22 @@ import { useForm } from "react-hook-form";
 import { Modal, Switch } from "antd";
 import { IoCloseCircleOutline, IoTrashOutline, IoChatboxEllipsesOutline, IoFileTrayFullOutline, IoCopyOutline, IoEyeOutline } from "react-icons/io5";
 import axios from "axios";
+import useToken from "../../../../../src/CustomHooks/useToken";
 
 import Calendar from "react-calendar";
 // import "./CutomCSS/calenderDesign.css";
 import "../../../Style/SingleCalendar.css";
+import { useSingleAppointmentApiQuery } from "../../../../features/Appointment_redux/Calendar/CalendarApi";
 
 const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) => {
-  console.log(eventId);
+  console.log("modal ----dynamicID", eventId);
   const [eventDetails, setEventDetails] = useState({});
   const { register, handleSubmit, reset } = useForm();
+  const { token } = useToken();
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  //useSingleAppointmentApiQuery
 
   const [open, setOpen] = useState(false);
   const [opencalender, setOpencalender] = useState(false);
@@ -23,6 +28,19 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
   const month = date ? date.toLocaleString("en-us", { month: "long" }) : null;
   const currentDate = date ? date.getDate() : null;
   const year = date ? date.getFullYear() : null;
+
+  const {
+    data: singleData,
+    isLoading: singledataLoading,
+    isError,
+  } = useSingleAppointmentApiQuery({
+    token,
+    payload: {
+      appointment_id: eventId,
+    },
+  });
+
+  console.log("come single data fromt api--", singleData);
 
   const handleClearDate = () => {
     setOpen(false);
@@ -45,32 +63,33 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
     // }, [date.toLocaleDateString()]);
   }, [date, reset]);
   //id based event data get
-  useEffect(() => {
-    const getEventDetails = async () => {
-      try {
-        const response = await axios({
-          method: "get",
-          url: `http://localhost:8800/api/scheduler/${eventId}`,
-        });
-        // const result = await res.json();
-        const result = response;
-        console.log(result?.data);
-        setEventDetails(result?.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    // If clicked of specific event in the calender then getEventDetails function will be called
-    if (eventId) {
-      getEventDetails();
-    }
-  }, []);
+  // useEffect(() => {
+  //   const getEventDetails = async () => {
+  //     try {
+  //       const response = await axios({
+  //         method: "get",
+  //         url: `http://localhost:8800/api/scheduler/${eventId}`,
+  //       });
+  //       // const result = await res.json();
+  //       const result = response;
+  //       console.log(result?.data);
+  //       setEventDetails(result?.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   // If clicked of specific event in the calender then getEventDetails function will be called
+  //   if (eventId) {
+  //     getEventDetails();
+  //   }
+  // }, []);
 
   useEffect(() => {
     // you can do async server request and fill up form
     setTimeout(() => {
       reset({
-        patient: eventDetails ? eventDetails?.patient : null,
+        // patient: eventDetails ? eventDetails?.patient : null,
+        patient: singleData?.data?.app_patient?.client_full_name,
         provider: eventDetails ? eventDetails?.provider : null,
         auth: eventDetails ? eventDetails?.auth : "Cigna Authorization", //this is for dummy data
         // check_date: date ? date.toLocaleDateString() : null,
@@ -79,7 +98,7 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
         to_time: eventDetails ? eventDetails?.end?.split("T")[1] : null,
       });
     }, 0);
-  }, [reset, selectedDate, eventId, eventDetails, eventDetails?.patient]);
+  }, [reset, selectedDate, eventDetails, eventDetails?.patient]);
 
   const onSubmit = (data) => {
     //console.log(data);
@@ -91,30 +110,30 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
     //console.log(start, end);
     const final = { title, ...data, start, end, color, display };
     // console.log(JSON.stringify(final));
-    if (final && !eventId) {
-      //sending product to DB through API
+    // if (final && !eventId) {
+    //   //sending product to DB through API
 
-      // axios POST request
-      const options = {
-        url: "http://localhost:8800/api/scheduler/",
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-        data: final,
-      };
+    //   // axios POST request
+    //   const options = {
+    //     url: "http://localhost:8800/api/scheduler/",
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json;charset=UTF-8",
+    //     },
+    //     data: final,
+    //   };
 
-      axios(options).then((response) => {
-        console.log(response);
+    //   axios(options).then((response) => {
+    //     console.log(response);
 
-        if (response?.status === 200) {
-          console.log("SUCCESS");
-          refetch();
-          handleClose();
-        }
-      });
-    }
+    //     if (response?.status === 200) {
+    //       console.log("SUCCESS");
+    //       refetch();
+    //       handleClose();
+    //     }
+    //   });
+    // }
     // reset();
   };
   return (
@@ -132,11 +151,8 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
       >
         <div className="px-5 py-2">
           <div className="flex items-center justify-between">
-            {!eventId ? (
-              <h1 className="text-lg text-left text-orange-400 ">Add Appointment</h1>
-            ) : (
-              <h1 className="text-lg text-left text-orange-400 ">Edit Appointment</h1>
-            )}
+            <h1 className="text-lg text-left text-orange-400 ">Edit Appointment</h1>
+
             <div className="flex justify-between">
               <IoTrashOutline className="text-gray-600 text-2xl hover:text-red-600 mr-2" />
               <IoCloseCircleOutline onClick={handleClose} className="text-gray-600 text-2xl hover:text-primary" />
@@ -304,6 +320,7 @@ const CustomModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =
                           <option value="">Select</option>
                           <option value="Mr.Anik chowdhary">Mr.Anik chowdhary</option>
                           <option value="Duck duck">Duck duck</option>
+                          <option value="Haider Akbar">hairder akbar</option>
                           <option value="Ashni Soni">Ashni Soni</option>
                         </select>
                       </div>

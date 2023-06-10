@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Outlet, useParams } from "react-router-dom";
 import CustomLink from "../../Shared/CustomLink/CustomLink";
+import axios from "axios";
+import { providerIp } from "../../../Misc/BaseClient";
+import { useToken } from "antd/es/theme/internal";
 
 const ProviderBiographic = () => {
+  const { token } = useToken();
+
+  // // api call
+  // useEffect(() => {
+  //   const getProviderData = async () => {
+  //     const res = await axios({
+  //       method: "POST",
+  //       url: `${providerIp}/biographic/`,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //         "x-auth-token": token || null,
+  //       },
+  //     });
+  //     const data = res?.data;
+  //     // setdata(data);
+  //     console.log("check data", data);
+  //   };
+  //   getProviderData();
+  // }, [token]);
   return (
     <div>
       <div>
@@ -56,7 +79,19 @@ const ProviderBiographic = () => {
               </div>
               <div className="text-xs text-secondary font-normal patient-nav mb-2">
                 <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-credential`}>
-                  <h1 className="ml-1 mt-1">Credentials</h1>
+                  <h1 className="ml-1 mt-1">Credentials / Qualifications</h1>
+                </CustomLink>
+              </div>
+
+              <div className="text-xs text-secondary font-normal patient-nav mb-2">
+                <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-leave-tracking`}>
+                  <h1 className="ml-1 mt-1">Leave Tracking</h1>
+                </CustomLink>
+              </div>
+
+              <div className="text-xs text-secondary font-normal patient-nav mb-2">
+                <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-work-schedule`}>
+                  <h1 className="ml-1 mt-1">Work Schedule</h1>
                 </CustomLink>
               </div>
             </motion.div>

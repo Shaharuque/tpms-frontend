@@ -23,11 +23,26 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
   } = useForm();
   const onSubmit = async (data) => {
     // console.log(data);
+    // const payload = {
+    //   client_first_name: data?.client_first_name,
+    //   client_last_name: data?.client_last_name,
+    //   client_dob: data?.client_dob,
+    //   client_gender: data?.client_gender,
+    //   location: data?.pos,
+    //   email: data?.email,
+    //   email_type: data?.email_type,
+    //   email_reminder: Number(data?.email_reminder),
+    //   phone_number: `+${data?.phone}`,
+    //   phone_type: data?.phone_type,
+    //   is_send_sms: Number(data?.is_send_sms),
+    // };
+
+    // node js api payload
     const payload = {
-      client_first_name: data?.client_first_name,
-      client_last_name: data?.client_last_name,
-      client_dob: data?.client_dob,
-      client_gender: data?.client_gender,
+      first_name: data?.client_first_name,
+      middle_name: data?.client_last_name,
+      last_name: data?.client_dob,
+      gender: data?.client_gender,
       location: data?.pos,
       email: data?.email,
       email_type: data?.email_type,
@@ -36,8 +51,10 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
       phone_type: data?.phone_type,
       is_send_sms: Number(data?.is_send_sms),
     };
+
     const CreatePatientApi = await PostfetchData({
-      endPoint: "admin/ac/patient/create",
+      // endPoint: "admin/ac/patient/create",
+      endPoint: "patient/create",
       payload: payload,
       token,
     });

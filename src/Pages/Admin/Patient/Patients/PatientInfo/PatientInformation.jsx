@@ -18,6 +18,8 @@ import DynamicPhone from "./PhoneAddress/DynamicPhone";
 import PrimaryPhone from "./PhoneAddress/PrimaryPhone";
 import BasicInfo from "./BasicInfo";
 
+// http://localhost:3000/admin/patient/patient-info/107
+
 const PatientInformation = () => {
   const { token } = useToken();
   const [active, setActive] = useState(false);
@@ -53,22 +55,34 @@ const PatientInformation = () => {
     }, 1000);
   }, [patient_details]);
 
+  console.log("data?.patientDetails?.data?.address-", data?.patientDetails?.data?.address);
+
   const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
     defaultValues: {
-      address: patient_details?.client_address,
-      number: patient_details?.client_phone,
-      Email: patient_details?.client_email,
+      // address: patient_details?.client_address,
+      // number: patient_details?.client_phone,
+      // Email: patient_details?.client_email,
+      // new code added
+      address: data?.patientDetails?.data?.address,
+      number: data?.patientDetails?.data?.phones,
+      // number: patient_details?.client_phone,
+      Email: data?.patientDetails?.data?.emails,
     },
   });
 
   // this code very important
   useEffect(() => {
     reset({
-      address: patient_details?.client_address,
-      number: patient_details?.client_phone,
-      Email: patient_details?.client_email,
+      number: data?.patientDetails?.data?.phones,
+      address: data?.patientDetails?.data?.address,
+      Email: data?.patientDetails?.data?.emails,
+
+      // address: patient_details?.client_address,
+      // number: patient_details?.client_phone,
+      // Email: patient_details?.client_email,
     });
-  }, [patient_details?.client_address, patient_details?.client_email, patient_details?.client_phone, reset]);
+  }, [data?.patientDetails?.data?.address, data?.patientDetails?.data?.emails, data?.patientDetails?.data?.phones, reset]);
+  // patient_details?.client_address, patient_details?.client_email, patient_details?.client_phone, reset
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -129,6 +143,8 @@ const PatientInformation = () => {
         // all gurantor
         guarantor_first_name: patient_details?.client_granter?.guarantor_first_name,
         guarantor_last_name: patient_details?.client_granter?.guarantor_last_name,
+        guarantor_first_name: patient_details?.client_granter?.guarantor_first_name,
+        guarantor_last_name: patient_details?.client_granter?.guarantor_last_name,
         guarantor_check_Date: patient_details?.client_granter?.guarantor_dob,
         GuaratorStreet: patient_details?.client_granter?.g_street,
         GuaratorCity: patient_details?.client_granter?.g_city,
@@ -153,6 +169,8 @@ const PatientInformation = () => {
     if (e.target.value === "Self") {
       setGuarantor(false);
       document.getElementById("checkbox").checked = false;
+    } else if (e.target.value !== "Self") {
+      setGuarantor(true);
     }
 
     //setRelation(relation);
@@ -161,6 +179,7 @@ const PatientInformation = () => {
 
   //Guarentor handler code
   const handleChange = (event) => {
+    console.log("check event", event.target);
     if (event.target.checked) {
       //console.log("✅ Checkbox is checked");
       setGuarantor(true);
@@ -188,7 +207,7 @@ const PatientInformation = () => {
 
   console.log("patientAdd");
 
-  console.log("fields", fields);
+  console.log("fields", phoneFields);
   return (
     <div className={data?.patient_details?.data?.address?.length < 1 ? "" : ""}>
       <div>
@@ -306,7 +325,7 @@ const PatientInformation = () => {
           <div className="divider"></div>
           <div className="flex ml-1 mt-1 items-center">
             <input
-              disabled={relation === "Self"}
+              disabled={relation === "Self" ? true : false}
               type="checkbox"
               // checked={relation !== "Self"}
               onChange={handleChange}

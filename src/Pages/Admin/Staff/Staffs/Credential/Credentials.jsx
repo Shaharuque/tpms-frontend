@@ -19,28 +19,25 @@ const Credentials = () => {
   const [page2, setPage2] = useState(1);
 
   //get all credential data api
-  const { data: credentials, isLoading: credentialsLoading } =
-    useGetCredentialsQuery({
-      token,
-      page,
-      id: id,
-    });
+  const { data: credentials, isLoading: credentialsLoading } = useGetCredentialsQuery({
+    token,
+    page,
+    id: id,
+  });
 
   //get all clearence data api
-  const { data: clearences, isLoading: clearenceLoading } =
-    useGetClearenceQuery({
-      token,
-      page: page2,
-      id: id,
-    });
+  const { data: clearences, isLoading: clearenceLoading } = useGetClearenceQuery({
+    token,
+    page: 1,
+    id: id,
+  });
 
   //get all Qualification data api
-  const { data: qualification, isLoading: qualificationLoading } =
-    useGetQualificationQuery({
-      token,
-      page: 1,
-      id: id,
-    });
+  const { data: qualification, isLoading: qualificationLoading } = useGetQualificationQuery({
+    token,
+    page: 1,
+    id: id,
+  });
 
   if (credentialsLoading || clearenceLoading || qualificationLoading) {
     return <Loading></Loading>;
@@ -65,25 +62,13 @@ const Credentials = () => {
   return (
     <div className={"h-[100vh]"}>
       <div>
-        <Credential
-          credentials={credentials}
-          handleCredential={handleCredential}
-          credentialOpen={credentialOpen}
-        ></Credential>
+        <Credential credentials={credentials} handleCredential={handleCredential} credentialOpen={credentialOpen}></Credential>
       </div>
       <div>
-        <Clearance
-          clearences={clearences}
-          handleClearence={handleClearence}
-          clearenceOpen={clearenceOpen}
-        ></Clearance>
+        <Clearance clearences={clearences} handleClearence={handleClearence} clearenceOpen={clearenceOpen}></Clearance>
       </div>
       <div>
-        <Qualification
-          handleQualification={handleQualification}
-          qualificationOpen={qualificationOpen}
-          qualification={qualification}
-        ></Qualification>
+        <Qualification handleQualification={handleQualification} qualificationOpen={qualificationOpen} qualification={qualification}></Qualification>
       </div>
     </div>
   );
