@@ -8,7 +8,6 @@ import Loading from "../../../../../Loading/Loading";
 import TextArea from "antd/lib/input/TextArea";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 import useToken from "../../../../../CustomHooks/useToken";
-import "react-phone-input-2/lib/style.css";
 import GuarantorInfo from "./GuarantorInfo/GuarantorInfo";
 import AboutPatient from "./AboutPatient/AboutPatient";
 import PrimaryAddress from "./PatientAddress/PrimaryAddress";
@@ -142,6 +141,8 @@ const PatientInformation = () => {
         client_state: patient_details?.client_state,
         client_zip: patient_details?.client_zip,
         // all gurantor
+        guarantor_first_name: patient_details?.client_granter?.guarantor_first_name,
+        guarantor_last_name: patient_details?.client_granter?.guarantor_last_name,
         guarantor_first_name: patient_details?.client_granter?.guarantor_first_name,
         guarantor_last_name: patient_details?.client_granter?.guarantor_last_name,
         guarantor_check_Date: patient_details?.client_granter?.guarantor_dob,

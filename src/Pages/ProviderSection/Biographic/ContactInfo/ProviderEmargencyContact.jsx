@@ -106,8 +106,19 @@ const ProviderEmargencyContact = ({ emdata }) => {
                   <span className="label-font">State</span>
                 </label>
                 <select className="input-border input-font w-full focus:outline-none" {...register("state")}>
-                  <option value="Speech Therapist">Speech Therapist</option>
-                  <option value="female">Female</option>
+                  <option value="AK">Alaska</option>
+                  <option value="AL">Alabama</option>
+                  <option value="jm">jamaica</option>
+                  <option value="AS">American Samoa</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="DE">Delaware</option>
+                  <option value="DC">District of Columbia</option>
+                  <option value="FM">Federated States of Micronesia</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
                 </select>
               </div>
 

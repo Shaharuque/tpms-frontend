@@ -85,8 +85,8 @@ const ProviderCredenTial = ({ handleCredential, credentialOpen, credentials }) =
 
     {
       title: "Date issue",
-      key: "credential_date_expired",
-      dataIndex: "credential_date_expired",
+      key: "credential_date_issue",
+      dataIndex: "credential_date_issue",
       width: 100,
       // filters: [{}],
       // filteredValue: filteredInfo.credential_date_expired || null,
@@ -94,24 +94,24 @@ const ProviderCredenTial = ({ handleCredential, credentialOpen, credentials }) =
       //   record.credential_date_expired.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.credential_date_expired > b.credential_date_expired ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_date_issue > b.credential_date_issue ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "credential_date_expired" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "credential_date_issue" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {
       title: "Expired Date",
-      key: "credential_date_issue",
-      dataIndex: "credential_date_issue",
+      key: "credential_date_expired",
+      dataIndex: "credential_date_expired",
       width: 100,
       // filters: [{}],
       // filteredValue: filteredInfo.credential_date_issue || null,
       // onFilter: (value, record) => record.credential_date_issue.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
-        return a.credential_date_issue > b.credential_date_issue ? -1 : 1; //sorting problem solved using this logic
+        return a.credential_date_expired > b.credential_date_expired ? -1 : 1; //sorting problem solved using this logic
       },
-      sortOrder: sortedInfo.columnKey === "credential_date_issue" ? sortedInfo.order : null,
+      sortOrder: sortedInfo.columnKey === "credential_date_expired" ? sortedInfo.order : null,
       ellipsis: true,
     },
     {

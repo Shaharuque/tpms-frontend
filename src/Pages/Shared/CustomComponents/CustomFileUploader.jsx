@@ -29,13 +29,10 @@ const CustomFileUploader = ({ setSignatureUpload }) => {
     }
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
-    setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
-    );
+    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
   };
 
-  const handleFileChange = ({ fileList: newFileList }) =>
-    setFileList(newFileList);
+  const handleFileChange = ({ fileList: newFileList }) => setFileList(newFileList);
   setSignatureUpload(fileList[0]?.thumbUrl);
   const uploadButton = (
     <div className="">
@@ -46,8 +43,7 @@ const CustomFileUploader = ({ setSignatureUpload }) => {
           fontSize: "10px",
         }}
       >
-        <AiOutlineFileAdd className="text-5xl mx-auto my-1 text-primary" />{" "}
-        Upload
+        <AiOutlineFileAdd className="text-5xl mx-auto my-1 text-primary" /> Upload
       </div>
     </div>
   );
@@ -64,12 +60,7 @@ const CustomFileUploader = ({ setSignatureUpload }) => {
       >
         {fileList.length >= 1 ? null : uploadButton}
       </Upload>
-      <Modal
-        open={previewOpen}
-        title={previewTitle}
-        footer={null}
-        onCancel={handleCancel}
-      >
+      <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
         <img
           alt="example"
           style={{

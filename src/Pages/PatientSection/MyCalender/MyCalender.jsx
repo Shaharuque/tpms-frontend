@@ -150,6 +150,18 @@ const MyCalendar = () => {
             </svg>
             <h5 class=" font-bold ml-2">${datamodifyed?.schedule_date}</h5>
           </div>
+            <div class="individual-div mb-2">
+             <svg
+                viewBox="0 0 24 24"
+                fill="red"
+                height="1.5em"
+                width="1.5em"
+                {...props}
+              >
+                <path d="M12 22a10 10 0 110-20 10 10 0 010 20zm0-2a8 8 0 100-16 8 8 0 000 16zm1-8.41l2.54 2.53a1 1 0 01-1.42 1.42L11.3 12.7a1 1 0 01-.3-.7V8a1 1 0 012 0v3.59z" />
+            </svg>
+            <h5 class=" font-bold ml-2">${datamodifyed?.start_time} - ${datamodifyed?.end_time}</h5>
+          </div>
           <div class="individual-div mb-2">
             <svg
               viewBox="0 0 24 24"
@@ -247,8 +259,8 @@ const MyCalendar = () => {
 
   //Event data modify
   const eventData = calenderEvents?.data?.map((item) => {
-    const start = item?.from_time;
-    const end = item?.to_time;
+    const start = item?.start;
+    const end = item?.end;
     const id = item?.id;
     const title = item?.title;
     const color = item?.eventBackgroundColor;

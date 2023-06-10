@@ -28,3 +28,12 @@ export const utcToConvert = (utcTimestamp) => {
   const time = date.toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true });
   return time;
 };
+
+export const minsToHours = (mins) => {
+  let hours = Math.floor(mins / 60); // Get the whole number of hours
+  let remainingMinutes = mins % 60; // Get the remaining minutes
+
+  let formattedTime = hours + "." + remainingMinutes;
+  //console.log(formattedTime);
+  return formattedTime;
+};

@@ -96,10 +96,7 @@ export default function ProviderContactInfo({ emoloyeeData }) {
                   <span className="label-font">State</span>
                 </label>
                 <select className="input-border input-font w-full focus:outline-none" {...register("state")}>
-                  <option value="Speech Therapist">Speech Therapist</option>
-                  <option value="female">Female</option>
                   <option value="AK">Alaska</option>
-
                   <option value="AL">Alabama</option>
                   <option value="jm">jamaica</option>
                   <option value="AS">American Samoa</option>
