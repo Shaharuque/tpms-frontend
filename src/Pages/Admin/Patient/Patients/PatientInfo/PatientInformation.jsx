@@ -8,7 +8,6 @@ import Loading from "../../../../../Loading/Loading";
 import TextArea from "antd/lib/input/TextArea";
 import CustomFileUploader from "../../../../Shared/CustomComponents/CustomFileUploader";
 import useToken from "../../../../../CustomHooks/useToken";
-import "react-phone-input-2/lib/style.css";
 import GuarantorInfo from "./GuarantorInfo/GuarantorInfo";
 import AboutPatient from "./AboutPatient/AboutPatient";
 import PrimaryAddress from "./PatientAddress/PrimaryAddress";
@@ -54,14 +53,13 @@ const PatientInformation = () => {
     }, 1000);
   }, [patient_details]);
 
-  const { register, control, handleSubmit, reset, setValue, getValues } =
-    useForm({
-      defaultValues: {
-        address: patient_details?.client_address,
-        number: patient_details?.client_phone,
-        Email: patient_details?.client_email,
-      },
-    });
+  const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
+    defaultValues: {
+      address: patient_details?.client_address,
+      number: patient_details?.client_phone,
+      Email: patient_details?.client_email,
+    },
+  });
 
   // this code very important
   useEffect(() => {
@@ -70,12 +68,7 @@ const PatientInformation = () => {
       number: patient_details?.client_phone,
       Email: patient_details?.client_email,
     });
-  }, [
-    patient_details?.client_address,
-    patient_details?.client_email,
-    patient_details?.client_phone,
-    reset,
-  ]);
+  }, [patient_details?.client_address, patient_details?.client_email, patient_details?.client_phone, reset]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -121,9 +114,7 @@ const PatientInformation = () => {
     setTimeout(() => {
       reset({
         first_name: patient_details?.client_first_name,
-        middle_name: patient_details?.client_middle
-          ? patient_details?.client_middle
-          : null,
+        middle_name: patient_details?.client_middle ? patient_details?.client_middle : null,
         last_name: patient_details?.client_last_name,
         login_email: patient_details?.login_email,
         zone: patient_details?.zone,
@@ -136,10 +127,8 @@ const PatientInformation = () => {
         client_state: patient_details?.client_state,
         client_zip: patient_details?.client_zip,
         // all gurantor
-        guarantor_first_name:
-          patient_details?.client_granter?.guarantor_first_name,
-        guarantor_last_name:
-          patient_details?.client_granter?.guarantor_last_name,
+        guarantor_first_name: patient_details?.client_granter?.guarantor_first_name,
+        guarantor_last_name: patient_details?.client_granter?.guarantor_last_name,
         guarantor_check_Date: patient_details?.client_granter?.guarantor_dob,
         GuaratorStreet: patient_details?.client_granter?.g_street,
         GuaratorCity: patient_details?.client_granter?.g_city,
@@ -241,10 +230,7 @@ const PatientInformation = () => {
                       POS<span className="text-red-500">*</span>
                     </span>
                   </label>
-                  <select
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("pos")}
-                  >
+                  <select className="input-border input-font py-[1px] w-full focus:outline-none" {...register("pos")}>
                     <option value="Main Office">Main Office</option>
                     <option value="Telehealth">Telehealth</option>
                     <option value="Home">Home</option>
@@ -256,10 +242,7 @@ const PatientInformation = () => {
                       Region<span className="text-red-500">*</span>
                     </span>
                   </label>
-                  <select
-                    className="input-border input-font py-[1px] w-full focus:outline-none"
-                    {...register("zone")}
-                  >
+                  <select className="input-border input-font py-[1px] w-full focus:outline-none" {...register("zone")}>
                     <option value="2"></option>
                     <option value="6">Main Zone</option>
                     <option value="27">ABC Behavioral Therapy Center</option>
@@ -307,11 +290,7 @@ const PatientInformation = () => {
                 }}
               />
               <br></br>
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
+              <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
                 <DynamicEmail
                   adData={{
                     register,
@@ -333,9 +312,7 @@ const PatientInformation = () => {
               onChange={handleChange}
               id="checkbox"
             />
-            <span className="text-sm ml-1 text-gray-700 font-medium">
-              Is Guarantor Available?
-            </span>
+            <span className="text-sm ml-1 text-gray-700 font-medium">Is Guarantor Available?</span>
           </div>
 
           {Guarantor && (
@@ -350,12 +327,7 @@ const PatientInformation = () => {
               }}
               transition={{ delay: 0.2 }}
             >
-              <GuarantorInfo
-                register={register}
-                checkLocation={checkLocation}
-                SameasPatientBtn={SameasPatientBtn}
-                hook={hook}
-              ></GuarantorInfo>
+              <GuarantorInfo register={register} checkLocation={checkLocation} SameasPatientBtn={SameasPatientBtn} hook={hook}></GuarantorInfo>
             </motion.div>
           )}
 
@@ -365,10 +337,7 @@ const PatientInformation = () => {
             </div>
 
             <div className="ml-2 mt-[12px] ">
-              <CustomFileUploader
-                signatureUpload={signatureUpload}
-                setSignatureUpload={setSignatureUpload}
-              ></CustomFileUploader>
+              <CustomFileUploader signatureUpload={signatureUpload} setSignatureUpload={setSignatureUpload}></CustomFileUploader>
               <p className="mt-3 text-sm ">Upload Signature</p>
             </div>
           </div>

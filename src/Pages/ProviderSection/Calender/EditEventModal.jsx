@@ -8,6 +8,7 @@ import Calendar from "react-calendar";
 import { patientIp, providerIp } from "../../../Misc/BaseClient";
 import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
+import moment from "moment";
 
 //To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -101,8 +102,8 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
         provider: eventDetails ? eventDetails?.app_provider?.full_name : null,
         auth: eventDetails ? eventDetails?.app_auth?.authorization_name : null,
         activity: eventDetails ? eventDetails?.app_activity?.activity_name : null,
-        from_time: eventDetails ? eventDetails?.start?.split("T")[1] : null,
-        to_time: eventDetails ? eventDetails?.end?.split("T")[1] : null,
+        from_time: eventDetails ? moment(eventDetails.from_time).format("hh:mm") : null,
+        to_time: eventDetails ? moment(eventDetails.to_time).format("hh:mm") : null,
         status: eventDetails ? eventDetails?.status : null,
       });
     }, 0);
@@ -150,37 +151,37 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1">
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">Patient Name</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Patient Name</span>
                 </label>
-                <select disabled className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("patient")}>
+                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("patient")}>
                   <option value="">Select</option>
                   <option value={eventDetails?.app_patient?.client_full_name}>{eventDetails?.app_patient?.client_full_name}</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">Auth</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Auth</span>
                 </label>
-                <select disabled className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("auth")}>
+                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("auth")}>
                   <option value="">Select</option>
                   <option value={eventDetails?.app_auth?.authorization_name}>{eventDetails?.app_auth?.authorization_name}</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">Service</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Service</span>
                 </label>
-                <select disabled className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("activity")}>
+                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("activity")}>
                   <option value="">Select</option>
                   <option value={eventDetails?.app_activity?.activity_name}>{eventDetails?.app_activity?.activity_name}</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">Provider Name</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Provider Name</span>
                 </label>
-                <select disabled className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("provider")}>
+                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("provider")}>
                   <option value="">Select</option>
                   <option value={eventDetails?.app_provider?.full_name}>{eventDetails?.app_provider?.full_name}</option>
                 </select>
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">POS</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">POS</span>
                 </label>
-                <select disabled className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("provider")}>
+                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("provider")}>
                   <option value="">Select</option>
                   <option value={eventDetails?.app_provider?.full_name}>{eventDetails?.app_provider?.full_name}</option>
                 </select>
@@ -188,13 +189,11 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
                   <span className="modal-label-name text-[12px]">From Date</span>
                 </label>
                 <input
-                  disabled
-                  name="from_time"
+                  name="date"
                   readOnly
                   onClick={() => setOpen(!open)}
                   value={date ? date.toLocaleDateString() : "Select a Date"}
                   className="col-span-2 ml-1 w-full p-2 font-[poppings,sans-serif] text-[12px] border border-gray-300 rounded-sm"
-                  {...register("from_time")}
                 />
 
                 {open && (
@@ -252,27 +251,27 @@ const EditEventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }
                 {/* Custom Calender End */}
 
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">From</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">From</span>
                 </label>
                 <input className="border border-gray-300 col-span-2 rounded-sm p-2 py-[3px] mx-1 text-[12px] w-full" type="time" {...register("from_time")} />
 
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">To</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">To</span>
                 </label>
                 <input className="border border-gray-300 col-span-2 rounded-sm p-2 py-[3px] mx-1 text-[12px] w-full" type="time" {...register("to_time")} />
                 <label className="label">
-                  <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">Status</span>
+                  <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">Status</span>
                 </label>
-                <select disabled className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("status")}>
+                <select className="border border-gray-300 col-span-2 rounded-sm p-2  mx-1 text-[12px] w-full" {...register("status")}>
                   <option value="">Select</option>
                   <option value={eventDetails?.status}>{eventDetails?.status}</option>
                 </select>
               </div>
 
               <div className=" flex items-end justify-end mt-2">
-                {/* <button className=" pms-button mr-2" type="submit">
-                Add Appointment
-              </button> */}
+                <button className=" pms-button mr-2" type="submit">
+                  Save Changes
+                </button>
 
                 <button className="pms-close-button" onClick={handleClose}>
                   Close

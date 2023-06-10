@@ -70,9 +70,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
       >
         <div className="px-5 py-2">
           <div className="flex items-center justify-between">
-            <h1 className="text-lg text-left text-orange-400">
-              Create Patient
-            </h1>
+            <h1 className="text-lg text-left text-orange-400">Create Patient</h1>
             <div className="flex item-center gap-2">
               <div className="flex items-center gap-2">
                 <Switch
@@ -81,17 +79,11 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   size="small"
                   // onClick={handleBillable}
                 />
-                <label
-                  className="form-check-label inline-block mt-[2px] text-sm"
-                  htmlFor="flexSwitchCheckDefault"
-                >
+                <label className="form-check-label inline-block mt-[2px] text-sm" htmlFor="flexSwitchCheckDefault">
                   Portal invaitation
                 </label>
               </div>
-              <IoCloseCircleOutline
-                onClick={handleClose}
-                className="text-gray-500 text-2xl hover:text-primary"
-              />
+              <IoCloseCircleOutline onClick={handleClose} className="text-gray-500 text-2xl hover:text-primary" />
             </div>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -115,11 +107,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                 />
 
                 <div className="label-text-alt m-1">
-                  {errors.client_first_name?.type === "required" && (
-                    <p className=" pl-1 text-red-500">
-                      {errors.client_first_name.message}
-                    </p>
-                  )}
+                  {errors.client_first_name?.type === "required" && <p className=" pl-1 text-red-500">{errors.client_first_name.message}</p>}
                 </div>
               </div>
               {/* client_last_name */}
@@ -141,11 +129,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   })}
                 />
                 <div className="label-text-alt m-1">
-                  {errors.client_last_name?.type === "required" && (
-                    <p className=" pl-1 text-red-500">
-                      {errors.client_last_name.message}
-                    </p>
-                  )}
+                  {errors.client_last_name?.type === "required" && <p className=" pl-1 text-red-500">{errors.client_last_name.message}</p>}
                 </div>
               </div>
             </div>
@@ -169,11 +153,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   })}
                 />
                 <div className="label-text-alt m-1">
-                  {errors.client_dob?.type === "required" && (
-                    <p className=" pl-1 text-red-500">
-                      {errors.client_dob.message}
-                    </p>
-                  )}
+                  {errors.client_dob?.type === "required" && <p className=" pl-1 text-red-500">{errors.client_dob.message}</p>}
                 </div>
               </div>
               <div>
@@ -196,11 +176,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                   <option value="Female">Female</option>
                 </select>
                 <div className="label-text-alt m-1">
-                  {errors.client_gender?.type === "required" && (
-                    <p className=" pl-1 text-red-500">
-                      {errors.client_gender.message}
-                    </p>
-                  )}
+                  {errors.client_gender?.type === "required" && <p className=" pl-1 text-red-500">{errors.client_gender.message}</p>}
                 </div>
               </div>
               <div>
@@ -209,10 +185,7 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     POS<span className="text-red-500">*</span>
                   </span>
                 </label>
-                <select
-                  className="modal-input-field ml-1 w-full"
-                  {...register("pos")}
-                >
+                <select className="modal-input-field ml-1 w-full" {...register("pos")}>
                   <option value=""></option>
                   <option value="Main Office">Main Office</option>
                   <option value="Telehealth">Telehealth</option>
@@ -261,27 +234,13 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     </div>
                   </>
                 </div>
+                <div className="label-text-alt m-1">{errors.email?.type === "required" && <p className=" pl-1 text-red-500">{errors.email.message}</p>}</div>
                 <div className="label-text-alt m-1">
-                  {errors.email?.type === "required" && (
-                    <p className=" pl-1 text-red-500">{errors.email.message}</p>
-                  )}
-                </div>
-                <div className="label-text-alt m-1">
-                  {errors.email_type?.type === "required" && (
-                    <p className=" pl-1 text-red-500">
-                      {errors.email_type.message}
-                    </p>
-                  )}
+                  {errors.email_type?.type === "required" && <p className=" pl-1 text-red-500">{errors.email_type.message}</p>}
                 </div>
                 <div className="flex ml-1 mt-2 items-center">
-                  <input
-                    type="checkbox"
-                    name="patient"
-                    {...register("email_reminder")}
-                  />
-                  <span className="text-xs ml-1 text-gray-600 font-medium">
-                    Send me an email reminder
-                  </span>
+                  <input type="checkbox" name="patient" {...register("email_reminder")} />
+                  <span className="text-xs ml-1 text-gray-600 font-medium">Send me an email reminder</span>
                 </div>
               </div>
 
@@ -336,28 +295,14 @@ const CreatePatient = ({ handleClose, patientClicked }) => {
                     </select>
                   </div>
                 </div>
+                <div className="label-text-alt m-1">{phone === "" && <p className=" pl-1 text-red-500">Phone is required</p>}</div>
                 <div className="label-text-alt m-1">
-                  {phone === "" && (
-                    <p className=" pl-1 text-red-500">Phone is required</p>
-                  )}
-                </div>
-                <div className="label-text-alt m-1">
-                  {errors.phone_type?.type === "required" && (
-                    <p className=" pl-1 text-red-500">
-                      {errors.phone_type.message}
-                    </p>
-                  )}
+                  {errors.phone_type?.type === "required" && <p className=" pl-1 text-red-500">{errors.phone_type.message}</p>}
                 </div>
                 <div>
                   <div className="flex ml-1 mt-2 items-center">
-                    <input
-                      type="checkbox"
-                      name="patient"
-                      {...register("is_send_sms")}
-                    />{" "}
-                    <span className="text-xs ml-1 text-gray-600 font-medium">
-                      Send me a text message
-                    </span>
+                    <input type="checkbox" name="patient" {...register("is_send_sms")} />{" "}
+                    <span className="text-xs ml-1 text-gray-600 font-medium">Send me a text message</span>
                   </div>
                 </div>
               </div>

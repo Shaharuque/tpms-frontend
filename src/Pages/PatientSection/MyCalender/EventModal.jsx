@@ -8,6 +8,7 @@ import Calendar from "react-calendar";
 import { patientIp } from "../../../Misc/BaseClient";
 import useToken from "../../../CustomHooks/useToken";
 import Loading from "../../../Loading/Loading";
+import moment from "moment";
 
 //To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
 const dateConverter = (date) => {
@@ -101,8 +102,8 @@ const EventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =>
         provider: eventDetails ? eventDetails?.app_provider?.full_name : null,
         auth: eventDetails ? eventDetails?.app_auth?.authorization_name : null,
         activity: eventDetails ? eventDetails?.app_activity?.activity_name : null,
-        from_time: eventDetails ? eventDetails?.start?.split("T")[1] : null,
-        to_time: eventDetails ? eventDetails?.end?.split("T")[1] : null,
+        from_time: eventDetails ? moment(eventDetails.from_time).format("hh:mm") : null,
+        to_time: eventDetails ? moment(eventDetails.to_time).format("hh:mm") : null,
         status: eventDetails ? eventDetails?.status : null,
       });
     }, 0);
@@ -189,12 +190,10 @@ const EventModal = ({ selectedDate, handleClose, clicked, refetch, eventId }) =>
                 </label>
                 <input
                   disabled
-                  name="from_time"
                   readOnly
                   onClick={() => setOpen(!open)}
                   value={date ? date.toLocaleDateString() : "Select a Date"}
                   className="col-span-2 ml-1 w-full p-2 font-[poppings,sans-serif] text-[12px] border border-gray-300 rounded-sm"
-                  {...register("from_time")}
                 />
 
                 {open && (
