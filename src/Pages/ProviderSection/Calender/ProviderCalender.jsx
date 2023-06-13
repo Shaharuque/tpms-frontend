@@ -14,6 +14,7 @@ import { DiffOutlined } from "@ant-design/icons";
 import { useGetProviderCalenderEventsQuery } from "../../../features/ProviderPortal/ProviderCalender_redux/providerCalenderApi";
 import { dateConverter } from "../../Shared/Dateconverter/DateConverter";
 import EditEventModal from "./EditEventModal";
+import { FaVideo } from "react-icons/fa";
 
 const ProviderCalender = () => {
   const tooltipRef = useRef(null);
@@ -255,27 +256,57 @@ const ProviderCalender = () => {
   };
 
   //Event data modify
-  const eventData = calenderEvents?.data?.map((item) => {
-    const start = item?.start;
-    const end = item?.end;
-    const id = item?.id;
-    const title = item?.title;
-    const color = item?.eventBackgroundColor;
-    const textColor = item?.eventTextColor;
-    const display = item?.display;
-    return {
-      title,
-      color,
-      display,
-      end,
-      start,
-      id,
-      textColor,
-    };
-  });
+  // const eventData = calenderEvents?.data?.map((item) => {
+  //   const start = item?.start;
+  //   const end = item?.end;
+  //   const id = item?.id;
+  //   const title = item?.title;
+  //   const color = item?.eventBackgroundColor;
+  //   const textColor = item?.eventTextColor;
+  //   const display = item?.display;
+
+  //   return {
+  //     title,
+  //     color,
+  //     display,
+  //     end,
+  //     start,
+  //     id,
+  //     textColor,
+  //   };
+  // });
+  const eventData = calenderEvents?.data;
 
   // setdynamicEvent(eventData);
   console.log("event data modify", eventData);
+
+  const eventContent = ({ event }) => {
+    const start = event?.extendedProps?.from_time;
+    const end = event?.extendedProps?.to_time;
+    const id = event?.id;
+    const title = event?.title;
+    const color = event?.extendedProps?.eventBackgroundColor;
+    const textColor = event?.extendedProps?.eventTextColor;
+    const display = event?.extendedProps?.display;
+    const icon = event?.extendedProps?.icon;
+    console.log(event?.extendedProps?.location);
+    return (
+      <>
+        <div>
+          <div className={(color, textColor, display)}>
+            {moment(start).format("hh:mm A")}
+            {" - "}
+            {/* {end?.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} */}
+            {moment(end).format("hh:mm A")}
+          </div>
+          <div className="flex items-center">
+            <h1>{title}</h1>
+            <div>{icon === "camera" ? <FaVideo className="text-green-400 ml-2"></FaVideo> : null}</div>
+          </div>
+        </div>
+      </>
+    );
+  };
 
   //-------------------------------------end--------------------
 
@@ -313,6 +344,8 @@ const ProviderCalender = () => {
           }}
           // For showing the calender month and date (autometically)(format 30 days(1-01-2023 to 31-01-2023))
           datesSet={handleDatesSet}
+          // Modified Event Redering
+          eventContent={eventContent}
         />
       </div>
       {open ? <EditEventModal selectedDate={selectedDate} handleClose={handleClose} clicked={open} eventId={eventId}></EditEventModal> : null}
