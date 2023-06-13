@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 
-import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Outlet, useParams } from "react-router-dom";
@@ -8,7 +7,20 @@ import CustomLink from "../../Shared/CustomLink/CustomLink";
 import axios from "axios";
 import { providerIp } from "../../../Misc/BaseClient";
 import { useToken } from "antd/es/theme/internal";
-
+import { IoCaretBackCircleOutline, IoSettingsSharp } from "react-icons/io5";
+import { BiIdCard } from "react-icons/bi";
+import { IoIosContact } from "react-icons/io";
+import { GiReceiveMoney } from "react-icons/gi";
+import { FaUserTimes } from "react-icons/fa";
+import { RiUserFill, RiUserUnfollowLine } from "react-icons/ri";
+import { AiOutlineFieldTime } from "react-icons/ai";
+import {
+  MdOutlineSavings,
+  MdOutlineSupervisorAccount,
+  MdOutlineWorkOff,
+  MdPersonSearch,
+} from "react-icons/md";
+import doctor from "../../Assets/doctor.png";
 const ProviderBiographic = () => {
   const { token } = useToken();
 
@@ -61,39 +73,67 @@ const ProviderBiographic = () => {
             <motion.div initial={{ opacity: 0, x: -25 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 }} className=" p-2 setting-nav rounded-md">
               <div className="mb-4">
                 <div className="">
-                  <img src={"#"} className="h-24 rounded-full border  w-24 mx-auto " alt="" />
+                <img
+                  src={doctor}
+                  className="h-24 rounded-full border mb-8 w-24 m-auto"
+                  alt=""
+                />
                 </div>
               </div>
 
+            
+
               <CustomLink
-                className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
-                to={`/provider/biographic`}
-              >
-                <h1 className="ml-1 mt-1">Bio's</h1>
-              </CustomLink>
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
+              to={`/provider/biographic`}
+            >
+              <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
+                <MdPersonSearch className=" text-2xl" /> Bio's
+              </h1>
+            </CustomLink>
 
-              <div className="text-xs text-secondary font-normal patient-nav mb-2">
-                <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-contactinfo`}>
-                  <h1 className="ml-1 mt-1">Contact Info</h1>
-                </CustomLink>
-              </div>
-              <div className="text-xs text-secondary font-normal patient-nav mb-2">
-                <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-credential`}>
-                  <h1 className="ml-1 mt-1">Credentials / Qualifications</h1>
-                </CustomLink>
-              </div>
+            <CustomLink
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
+              to={`bio-contactinfo`}
+            >
+              <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
+              <IoIosContact className=" text-2xl" /> Contact Info
+              </h1>
+            </CustomLink>
+            <CustomLink
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
+              to={`bio-credential`}
+            >
+              <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
+              <IoIosContact className=" text-2xl" /> Credentials / Qualifications
+              </h1>
+            </CustomLink>
+            
+            <CustomLink
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
+              to={`bio-leave-tracking`}
+            >
+              <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
+              <MdOutlineWorkOff className=" text-2xl" /> Leave Tracking
+              </h1>
+            </CustomLink>
+            
+            
+            
+            
+            <CustomLink
+              className="flex gap-1 hover:text-white pb-1 hover:bg-primary text-xs text-secondary font-normal patient-nav mb-2 items-center"
+              to={`bio-work-schedule`}
+            >
+              <h1 className="ml-1 font-medium mt-1 flex items-center text-[15px] gap-1 ">
+              <AiOutlineFieldTime className=" text-2xl" /> Work Schedule
+              </h1>
+            </CustomLink>
+            
 
-              <div className="text-xs text-secondary font-normal patient-nav mb-2">
-                <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-leave-tracking`}>
-                  <h1 className="ml-1 mt-1">Leave Tracking</h1>
-                </CustomLink>
-              </div>
 
-              <div className="text-xs text-secondary font-normal patient-nav mb-2">
-                <CustomLink className="flex gap-1 hover:text-white pb-1 hover:bg-primary  items-center" to={`bio-work-schedule`}>
-                  <h1 className="ml-1 mt-1">Work Schedule</h1>
-                </CustomLink>
-              </div>
+
+             
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 25 }}

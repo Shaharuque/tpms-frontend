@@ -11,7 +11,7 @@ import ProviderEditQualification from "./EditQualificationModal/ProviderEditQual
 
 const ProviderQualification = ({ qualification, handleQualification, qualificationOpen }) => {
   const [display, setDisplay] = useState(true);
-  const [filteredInfo, setFilteredInfo] = useState({});
+  // const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [editModal, setEditModal] = useState(false);
   const [qualificationRecord, setQualificationRecord] = useState();
@@ -83,7 +83,7 @@ const ProviderQualification = ({ qualification, handleQualification, qualificati
           value: "tpms",
         },
       ],
-      filteredValue: filteredInfo.qualification_name || null,
+     // filteredValue: filteredInfo.qualification_name || null,
       onFilter: (value, record) => record.qualification_name.includes(value),
       sorter: (a, b) => {
         return a.qualification_name > b.qualification_name ? -1 : 1;
@@ -98,7 +98,7 @@ const ProviderQualification = ({ qualification, handleQualification, qualificati
       dataIndex: "qualification_applicable",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.qualification_applicable || null,
+     // filteredValue: filteredInfo.qualification_applicable || null,
       onFilter: (value, record) => record.qualification_applicable.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
@@ -113,7 +113,7 @@ const ProviderQualification = ({ qualification, handleQualification, qualificati
       dataIndex: "qualification_date_issue",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.qualification_date_issue || null,
+      //filteredValue: filteredInfo.qualification_date_issue || null,
       onFilter: (value, record) => record.qualification_date_issue.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
@@ -128,7 +128,7 @@ const ProviderQualification = ({ qualification, handleQualification, qualificati
       dataIndex: "qualification_date_exp",
       width: 100,
       filters: [{}],
-      filteredValue: filteredInfo.qualification_date_exp || null,
+      //filteredValue: filteredInfo.qualification_date_exp || null,
       onFilter: (value, record) => record.qualification_date_exp.includes(value),
       //   sorter is for sorting asc or dsc purcredential_type
       sorter: (a, b) => {
@@ -161,13 +161,13 @@ const ProviderQualification = ({ qualification, handleQualification, qualificati
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
-    setFilteredInfo(filters);
+    // setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
 
-  const clearFilters = () => {
-    setFilteredInfo({});
-  };
+  // const clearFilters = () => {
+  //   setFilteredInfo({});
+  // };
 
   const handleClose = () => {
     setOpenEditModal(false);
@@ -219,9 +219,9 @@ const ProviderQualification = ({ qualification, handleQualification, qualificati
                 Add Qualification
               </button>
 
-              <button onClick={clearFilters} className="pms-clear-button mt-2">
+              {/* <button onClick={clearFilters} className="pms-clear-button mt-2">
                 Clear filters
-              </button>
+              </button> */}
             </div>
           </motion.div>
         </div>
