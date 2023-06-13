@@ -43,7 +43,7 @@ const ProviderContractContainer = () => {
 
   console.log("hello i am root ");
   return (
-    <div>
+    <div className="h-[100vh]">
       {/*Contact details part */}
       <button
         onClick={contactDetailsHandle}

@@ -63,7 +63,7 @@ const ProviderEmargencyContact = ({ emdata }) => {
   return (
     <div>
       <div className="p-2">
-        <h4 className="text-md mt-2 text-left text-orange-400 mb-3">Contact Details</h4>
+        <h4 className="text-md mt-2 text-left text-orange-400 mb-3">Emergency Contact Details</h4>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
