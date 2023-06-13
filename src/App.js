@@ -323,6 +323,7 @@ import StripeInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/Stripe
 import PaypalInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/PaypalInformation/PaypalInformation";
 import ClinicianTeam from "./Pages/Admin/Patient/Patients/ClinicianTeam/ClinicianTeam";
 import FakeTable from "./Testing/FakeTable/FakeTable";
+import ProviderWorkSchedule from "./Pages/ProviderSection/Biographic/WorkSchedule/ProviderWorkSchedule";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -771,7 +772,7 @@ function App() {
               <Route path="bio-contactinfo" element={<ProviderContractContainer />}></Route>
               <Route path="bio-credential" element={<ProviderCredentialsContainer />}></Route>
               <Route path="bio-leave-tracking" element={<ProviderLeaveTracking />}></Route>
-              <Route path="bio-work-schedule" element={<p>work sedule</p>}></Route>
+              <Route path="bio-work-schedule" element={<ProviderWorkSchedule></ProviderWorkSchedule>}></Route>
             </Route>
 
             <Route path="Pataients" element={<ProviderPatient />}></Route>
