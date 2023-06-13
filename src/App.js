@@ -324,6 +324,7 @@ import PaypalInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/Paypal
 import ClinicianTeam from "./Pages/Admin/Patient/Patients/ClinicianTeam/ClinicianTeam";
 import FakeTable from "./Testing/FakeTable/FakeTable";
 import ProviderRecurringSession from "./Pages/ProviderSection/ProviderRecurringSession/ProviderRecurringSession";
+import ProviderRecurringSessionEdit from "./Pages/ProviderSection/ProviderRecurringSession/RecurringSessionEdit/ProviderRecurringSessionEdit";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -764,6 +765,7 @@ function App() {
             <Route index element={<ProviderDashboard />}></Route>
             <Route path="scheduler" element={<Schedule />}></Route>
             <Route path="recurring/session" element={<ProviderRecurringSession />}></Route>
+            <Route path="recurring/session/edit/:id" element={<ProviderRecurringSessionEdit></ProviderRecurringSessionEdit>}></Route>
             <Route path="calender" element={<ProviderCalender />}></Route>
             <Route path="biographic" element={<ProviderBiographic />}>
               <Route index element={<ProviderBios></ProviderBios>}></Route>

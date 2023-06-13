@@ -304,7 +304,7 @@ const ProviderRecurringSession = () => {
       width: 60,
       render: (_, { id }) => (
         <div className="flex justify-center">
-          <Link to={`/admin/recurring-session-edit/${id}`}>
+          <Link to={`/provider/recurring/session/edit/${id}`}>
             <BiEdit className="text-[#34A6B7] text-lg" />
           </Link>
         </div>
