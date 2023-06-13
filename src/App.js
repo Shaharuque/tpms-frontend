@@ -323,6 +323,7 @@ import StripeInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/Stripe
 import PaypalInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/PaypalInformation/PaypalInformation";
 import ClinicianTeam from "./Pages/Admin/Patient/Patients/ClinicianTeam/ClinicianTeam";
 import FakeTable from "./Testing/FakeTable/FakeTable";
+import ProviderRecurringSession from "./Pages/ProviderSection/ProviderRecurringSession/ProviderRecurringSession";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -620,12 +621,9 @@ function App() {
               <Route path="patient-call-log/:id" element={<CallLog></CallLog>}></Route>
 
               <Route path="patient-payment-info/:id" element={<PaymentInfo></PaymentInfo>}>
-
-              <Route index element={<Navigate to="stripe-information" />} />
-              <Route path="paypal-information" element={<PaypalInformation></PaypalInformation>}></Route>
-              <Route path="stripe-information" element={<StripeInformation></StripeInformation>}></Route>
-              
-              
+                <Route index element={<Navigate to="stripe-information" />} />
+                <Route path="paypal-information" element={<PaypalInformation></PaypalInformation>}></Route>
+                <Route path="stripe-information" element={<StripeInformation></StripeInformation>}></Route>
               </Route>
 
               <Route path="patient-sibling/:id" element={<Sibling></Sibling>}></Route>
@@ -765,6 +763,7 @@ function App() {
           <Route path="/provider" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ProviderDashboard />}></Route>
             <Route path="scheduler" element={<Schedule />}></Route>
+            <Route path="recurring/session" element={<ProviderRecurringSession />}></Route>
             <Route path="calender" element={<ProviderCalender />}></Route>
             <Route path="biographic" element={<ProviderBiographic />}>
               <Route index element={<ProviderBios></ProviderBios>}></Route>
