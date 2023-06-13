@@ -12,7 +12,7 @@ import ProviderEditCredential from "./EditCredentialModal/EditCredential";
 
 const ProviderCredenTial = ({ handleCredential, credentialOpen, credentials }) => {
   const [display, setDisplay] = useState(true);
-  const [filteredInfo, setFilteredInfo] = useState({});
+  // const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [editModal, setEditModal] = useState(false);
   const [credentialRecord, setCredentialRecord] = useState();
@@ -133,13 +133,13 @@ const ProviderCredenTial = ({ handleCredential, credentialOpen, credentials }) =
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
-    setFilteredInfo(filters);
+    // setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
 
-  const clearFilters = () => {
-    setFilteredInfo({});
-  };
+  // const clearFilters = () => {
+  //   setFilteredInfo({});
+  // };
 
   return (
     <div>
@@ -188,9 +188,9 @@ const ProviderCredenTial = ({ handleCredential, credentialOpen, credentials }) =
                 Add Credential
               </button>
 
-              <button onClick={clearFilters} className="pms-clear-button mt-2">
+              {/* <button onClick={clearFilters} className="pms-clear-button mt-2">
                 Clear filters
-              </button>
+              </button> */}
             </div>
           </motion.div>
         </div>

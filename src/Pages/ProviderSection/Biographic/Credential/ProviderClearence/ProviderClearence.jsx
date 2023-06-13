@@ -19,7 +19,7 @@ import ProviderEditClearence from "./EditClearenceModal/ProviderEditClearence";
 const ProviderClearence = ({ handleClearence, clearenceOpen, clearences }) => {
   console.log("clearences data", clearences);
   const [display, setDisplay] = useState(true);
-  const [filteredInfo, setFilteredInfo] = useState({});
+  // const [filteredInfo, setFilteredInfo] = useState({});
   const [sortedInfo, setSortedInfo] = useState({});
   const [editModal, setEditModal] = useState(false);
   const [clearenceRecord, setClearenceRecord] = useState();
@@ -137,13 +137,13 @@ const ProviderClearence = ({ handleClearence, clearenceOpen, clearences }) => {
 
   const handleChange = (pagination, filters, sorter) => {
     console.log("Various parameters", pagination, filters, sorter);
-    setFilteredInfo(filters);
+    // setFilteredInfo(filters);
     setSortedInfo(sorter);
   };
 
-  const clearFilters = () => {
-    setFilteredInfo({});
-  };
+  // const clearFilters = () => {
+  //   setFilteredInfo({});
+  // };
 
   return (
     <div>
@@ -192,9 +192,9 @@ const ProviderClearence = ({ handleClearence, clearenceOpen, clearences }) => {
                 Add Clearance
               </button>
 
-              <button onClick={clearFilters} className="pms-clear-button  mt-2">
+              {/* <button onClick={clearFilters} className="pms-clear-button  mt-2">
                 Clear filters
-              </button>
+              </button> */}
             </div>
           </motion.div>
         </div>
