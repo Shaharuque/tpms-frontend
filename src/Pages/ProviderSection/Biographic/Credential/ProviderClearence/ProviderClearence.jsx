@@ -1,24 +1,4 @@
-// import React from "react";
 
-// const ProviderClearence = () => {
-//   return (
-//     <div>
-//       <div className="block p-5  border   bg-white max-w-6xl mb-[14px]">
-//         <div className="flex flex-col">
-//           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-//             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-//               <div className="overflow-x-auto">
-//                 <h1>ProviderClearence part</h1>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ProviderClearence;
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -181,7 +161,7 @@ const ProviderClearence = ({ handleClearence, clearenceOpen, clearences }) => {
               transition: "all .3s ease-out",
             }}
           >
-            {clearences?.clearences?.data === 0 ? (
+            {clearences?.clearences?.data?.length === 0 ? (
               <>
                 {display && (
                   <div className="px-4 py-3 mt-2 mb-1 mx-2 flex items-center justify-between rounded-md text-red-600 font-normal text-xs red-box">

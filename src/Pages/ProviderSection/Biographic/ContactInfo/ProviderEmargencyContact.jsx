@@ -156,7 +156,7 @@ const ProviderEmargencyContact = ({ emdata }) => {
                 <textarea
                   rows={4}
                   size="middle"
-                  className="w-full border bottom-2 ml-1 p-1"
+                  className="w-full border bottom-2 ml-1 p-1 font-normal text-xs"
                   {...register("address_note")}
                   // onChange={(e) => setNote(e.target.value)}
                 />
