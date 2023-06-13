@@ -194,7 +194,7 @@ export const ProviderBios = () => {
     <div>
       <div>
         <h1 className="text-lg mt-2 text-left text-orange-400 p-2">Bio's</h1>
-        <div className="div-img ">
+        <div className="div-img">
           <div>
             <img src={person} className=" h-40 " alt="Dami img not taken" />
           </div>

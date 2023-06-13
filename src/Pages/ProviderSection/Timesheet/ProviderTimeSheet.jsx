@@ -17,11 +17,12 @@ const ProviderTimeSheet = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { register, handleSubmit, reset } = useForm();
+  const [staffData, setStaffData] = useState([]);
   const { token } = useToken();
 
   //Get the time periods
   const { data: timePeriods, isLoading: timePeriodsLoading, isError: timePeriodError } = usePayrollTimeGetQuery(token);
-
+  // setStaffData(timePeriods);
   //payroll time sheet appointments
   const [payrollTimeAppointmentsGet, { data: payrollAppointmentData, isLoading: payrollLoading, isError: payrollError }] =
     usePayrollTimeAppointmentsGetMutation();

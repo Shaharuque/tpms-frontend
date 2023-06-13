@@ -150,9 +150,17 @@ const PatientInformation = () => {
         GuaratorCity: patient_details?.client_granter?.g_city,
         GuratorCountry: patient_details?.client_granter?.g_state,
         GuratorZip: patient_details?.client_granter?.g_zip,
+        relationship: patientOtherDetails?.client_relationship,
       });
+      if (patientOtherDetails?.client_relationship !== "Self") {
+        setGuarantor(true);
+        setRelation(patientOtherDetails?.client_relationship);
+      } else {
+        setGuarantor(false);
+        setRelation(patientOtherDetails?.client_relationship);
+      }
     }, 0);
-  }, [patient_details, reset]);
+  }, [patientOtherDetails?.client_relationship, patient_details, reset]);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -166,6 +174,7 @@ const PatientInformation = () => {
 
   ///relation value handle
   const settingRelation = (e) => {
+    console.log("e value", e.target.value);
     if (e.target.value === "Self") {
       setGuarantor(false);
       document.getElementById("checkbox").checked = false;
@@ -177,14 +186,40 @@ const PatientInformation = () => {
     setRelation(e.target.value);
   };
 
-  //Guarentor handler code
+  // const settingRelation = (e) => {
+  //   if (e.target.value === "Self") {
+  //     setGuarantor(false);
+  //   } else {
+  //     setGuarantor(true);
+  //   }
+
+  //   setRelation(e.target.value);
+  // };
+
+  // const handleChange = () => {
+  //   if (guarantor) {
+  //     setGuarantor(false);
+  //   } else {
+  //     setGuarantor(true);
+  //   }
+  // };
+
+  // Guarentor handler code
+  // const handleChange = (event) => {
+  //   console.log("check event", event.target);
+  //   if (event.target.checked) {
+  //     //console.log("✅ Checkbox is checked");
+  //     setGuarantor(true);
+  //   } else {
+  //     //console.log("⛔️ Checkbox is NOT checked");
+  //     setGuarantor(false);
+  //   }
+  // };
+
   const handleChange = (event) => {
-    console.log("check event", event.target);
     if (event.target.checked) {
-      //console.log("✅ Checkbox is checked");
       setGuarantor(true);
     } else {
-      //console.log("⛔️ Checkbox is NOT checked");
       setGuarantor(false);
     }
   };
@@ -324,13 +359,15 @@ const PatientInformation = () => {
           <AboutPatient register={register}></AboutPatient>
           <div className="divider"></div>
           <div className="flex ml-1 mt-1 items-center">
-            <input
+            {/* <input
               disabled={relation === "Self" ? true : false}
               type="checkbox"
               // checked={relation !== "Self"}
               onChange={handleChange}
               id="checkbox"
-            />
+            /> */}
+            <input disabled={relation === "Self"} type="checkbox" checked={Guarantor} onChange={handleChange} id="checkbox" />
+
             <span className="text-sm ml-1 text-gray-700 font-medium">Is Guarantor Available?</span>
           </div>
 
