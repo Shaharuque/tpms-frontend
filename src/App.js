@@ -8,14 +8,16 @@ import ManageClaims from "./Pages/Admin/Billing/BillingManager/ManageClaims/Mana
 import ProcessingClaim from "./Pages/Admin/Billing/BillingManager/ProcessingClaims/ProcessingClaim";
 import CreateStaff from "./Pages/Admin/Staff/AddStaff/CreateStaff";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
+
 import MyInfo from "./Pages/PatientSection/MyInfo/MyInfo";
-import CredentialsContainer from "./Pages/Pages/User/Biographic/Credential/CredentialsContainer";
+
 import MyCalender from "./Pages/PatientSection/MyCalender/MyCalender";
+
 import MyStatement from "./Pages/PatientSection/MyStatement/MyStatement";
 import ForgetPassword from "./Pages/LoginPage/ForgetPassword";
 import ForgetPasswordCodeCheck from "./Pages/LoginPage/ForgetPasswordCodeCheck";
 import NewPassSet from "./Pages/LoginPage/NewPassSet";
-import ContractContainer from "./Pages/Pages/User/Biographic/ContactInfo/ContractContainer";
+
 // --------new start with folder structure ------------------------------------------------------------------------------------------------
 
 // ###### DASHBOARD
@@ -49,7 +51,7 @@ import ListView from "./Pages/Admin/Appointment/ListView/ListView";
 import CalendarView from "./Pages/Admin/Appointment/CalenderView/CalendarView";
 import RecurringSession from "./Pages/Admin/Appointment/RecurringSession/RecurringSession";
 import RecurringSessionEdit from "./Pages/Admin/Appointment/RecurringSession/RecurringSession/RecurringSessionEdit";
-import ProvideEscalation from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/ProvideEscalation";
+// import ProvideEscalation from "./Pages/Admin/Dashboard/Dashboard/TodaysTask/ProvideEscalation";
 // ###### NAVIGATION BAR
 import DownloadView from "./Pages/Shared/NavigationBar/ScheduleExport/Download/DownloadView";
 import ApplyPayment from "./Pages/Admin/Dashboard/Dashboard/TrendingReports/PaymentDeposite/ApplyPayment";
@@ -314,6 +316,9 @@ import ProviderCalender from "./Pages/ProviderSection/Calender/ProviderCalender"
 import PaymentInfo from "./Pages/Admin/Patient/Patients/Paymentinfo/PaymentInfo";
 import Sibling from "./Pages/Admin/Patient/Patients/Sibling/Sibling";
 import SessionNotes from "./Pages/Admin/Patient/Patients/SessionNotes/SessionNotes";
+import ProviderContractContainer from "./Pages/ProviderSection/Biographic/ContactInfo/ProviderContractContainer";
+import ProviderCredentialsContainer from "./Pages/ProviderSection/Biographic/Credential/ProviderCredentialsContainer";
+import ProviderLeaveTracking from "./Pages/ProviderSection/Biographic/LeaveTracking/ProviderLeaveTracking";
 import StripeInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/StripeInformation/StripeInformation/StripeInformation";
 import PaypalInformation from "./Pages/Admin/Patient/Patients/Paymentinfo/PaypalInformation/PaypalInformation";
 import ClinicianTeam from "./Pages/Admin/Patient/Patients/ClinicianTeam/ClinicianTeam";
@@ -756,15 +761,17 @@ function App() {
             {/* ----------------------------------Setting End----------------------------------------------- */}
           </Route>
 
-          {/* Provider-Portal Pannel */}
+          {/* Provider  Pannel */}
           <Route path="/provider" element={<Sidebar handle={handle}></Sidebar>}>
             <Route index element={<ProviderDashboard />}></Route>
             <Route path="scheduler" element={<Schedule />}></Route>
             <Route path="calender" element={<ProviderCalender />}></Route>
             <Route path="biographic" element={<ProviderBiographic />}>
               <Route index element={<ProviderBios></ProviderBios>}></Route>
-              <Route path="bio-contactinfo" element={<ContractContainer></ContractContainer>}></Route>
-              <Route path="bio-credential" element={<CredentialsContainer></CredentialsContainer>}></Route>
+              <Route path="bio-contactinfo" element={<ProviderContractContainer />}></Route>
+              <Route path="bio-credential" element={<ProviderCredentialsContainer />}></Route>
+              <Route path="bio-leave-tracking" element={<ProviderLeaveTracking />}></Route>
+              <Route path="bio-work-schedule" element={<p>work sedule</p>}></Route>
             </Route>
 
             <Route path="Pataients" element={<ProviderPatient />}></Route>

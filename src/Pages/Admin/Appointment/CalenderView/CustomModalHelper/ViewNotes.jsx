@@ -42,7 +42,7 @@ const ViewNotes = ({ view, setView }) => {
               </span>
             </label>
             <select
-              className="border border-gray-300  col-span-2 rounded-sm px-2 py-1 mx-1 text-[12px] text-center w-full  mb-5"
+              className="border border-gray-300  col-span-2 rounded-sm px-2 py-1 mx-1 text-[12px] text-start w-full  mb-5"
               {...register("patient")}
             >
               <option value="">Select</option>

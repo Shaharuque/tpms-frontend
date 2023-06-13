@@ -55,14 +55,7 @@ const PatientInformation = () => {
     }, 1000);
   }, [patient_details]);
 
-  // const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
-  //   defaultValues: {
-  //     address: patient_details?.client_address,
-  //     number: patient_details?.client_phone,
-  //     Email: patient_details?.client_email,
-  //   },
-  // });
-  // console.log("data?.patientDetails?.data?.address-", data?.patientDetails?.data?.address);
+  console.log("data?.patientDetails?.data?.address-", data?.patientDetails?.data?.address);
 
   const { register, control, handleSubmit, reset, setValue, getValues } = useForm({
     defaultValues: {
@@ -148,6 +141,8 @@ const PatientInformation = () => {
         client_state: patient_details?.client_state,
         client_zip: patient_details?.client_zip,
         // all gurantor
+        guarantor_first_name: patient_details?.client_granter?.guarantor_first_name,
+        guarantor_last_name: patient_details?.client_granter?.guarantor_last_name,
         guarantor_first_name: patient_details?.client_granter?.guarantor_first_name,
         guarantor_last_name: patient_details?.client_granter?.guarantor_last_name,
         guarantor_check_Date: patient_details?.client_granter?.guarantor_dob,

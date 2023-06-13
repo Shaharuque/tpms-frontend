@@ -134,15 +134,19 @@ const ListView = () => {
       setNonBillableListLoading(true);
       const res = await axios({
         method: "POST",
-        url: `https://test-prod.therapypms.com/api/v1/internal/admin/ac/manage/session/get/nonbillable/appointments?page=${nonBillablePage}`,
+        url: `${baseIp}/manage/session/appointment/list/non/billable`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: token || null,
+          "x-auth-token": token || null,
         },
-        data: payload,
+        data: {
+          ...payload,
+          page: nonBillablePage,
+        },
       });
-      const data = res?.data?.appointments;
+      const data = res?.data?.data;
+      console.log("Non-Billable Manage Session List", data?.data);
       setNonBillableData(data?.data);
       setNonBillableTotalPage(data?.last_page);
       setNonBillableListLoading(false);

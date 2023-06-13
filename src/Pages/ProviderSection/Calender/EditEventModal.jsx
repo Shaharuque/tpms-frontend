@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TextArea from "antd/lib/input/TextArea";
 import { useForm } from "react-hook-form";
-import { Modal, Switch,TimePicker } from "antd";
+import { Modal, Switch, TimePicker } from "antd";
 import {
   IoCloseCircleOutline,
   IoTrashOutline,
@@ -204,8 +204,8 @@ const EditEventModal = ({
         {loading ? (
           <Loading />
         ) : (
-          <div className="px-5 py-2 font-[poppins,sans-serif]">
-            <div className="flex items-center justify-between">
+          <div className="px-0 py-2 font-[poppins,sans-serif]">
+            <div className="flex items-center justify-between px-3 py-2">
               {!eventId ? (
                 <h1 className="text-lg text-left text-orange-400 ">
                   Edit Appointment
@@ -221,7 +221,7 @@ const EditEventModal = ({
               />
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="h-[518px] overflow-auto px-3 py-2">
               <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 my-5 mr-2 gap-1">
                 <label className="label">
                   <span className="modal-label-name font-medium flex items-center text-[12px] text-gray-600 text-left">
@@ -410,156 +410,148 @@ const EditEventModal = ({
                     {eventDetails?.status}
                   </option>
                 </select>
-
-               
               </div>
 
-              <div className=" flex items-center justify-between mt-2">
-                  <button
-                    className="px-4 py-1 bg-[#089bab] text-white text-xs rounded  mr-2"
-                    onClick={() => setSessionOpen(!sessionopen)}
-                  >
-                    <IoFileTrayFullOutline className="inline text-xl mr-1" />{" "}
-                    Add Session Notes
-                  </button>
-
-                  {sessionopen && (
-                    <AddSessionNote
-                      sessionopen={sessionopen}
-                      setSessionOpen={setSessionOpen}
-                    ></AddSessionNote>
-
-                    // <AddSessionModal
-                    //   sessionopen={sessionopen}
-                    //   setSessionOpen={setSessionOpen}
-                    // ></AddSessionModal>
-                  )}
-
-                  <button
-                    className=" px-4 py-1 bg-[#089bab] text-white text-xs rounded  mr-2"
-                    onClick={() => setCopy(!copy)}
-                  >
-                    <IoCopyOutline className="inline text-xl mr-1" />
-                    Copy Notes
-                  </button>
-                  {copy && (
-                    <CopyNotes copy={copy} setCopy={setCopy}></CopyNotes>
-                  )}
-                  <button
-                    className=" px-4 py-1 bg-[#089bab] text-white text-xs rounded  mr-2"
-                    onClick={() => setView(!view)}
-                  >
-                    <IoEyeOutline className="inline text-xl mr-1" />
-                    view notes
-                  </button>
-                  {view && (
-                    <ViewNotes view={view} setView={setView}></ViewNotes>
-                  )}
-                  <button>
-                    {" "}
-                    <IoChatboxEllipsesOutline
-                      className="text-gray-600 text-xl hover:text-primary"
-                      onClick={() => setMessege(!messege)}
-                    />
-                  </button>
-                  {messege && (
-                    <MessegeShow messege={messege} setMessege={setMessege}></MessegeShow>
-                  )}
-                </div>
-
-              <div>
-              <div>
+              <div className=" flex flex-wrap gap-1 items-center justify-between mt-2">
                 <button
-                  onClick={toggleForm}
-                  className="flex items-center justify-center  text-gray-600  rounded-full w-10 h-10"
+                  className="pms-button  mr-2"
+                  onClick={() => setSessionOpen(!sessionopen)}
                 >
-                  {showForm ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M20 12H4"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                      />
-                    </svg>
-                  )}
+                  <IoFileTrayFullOutline className="inline text-xl mr-1" /> Add
+                  Session Notes
                 </button>
 
-                {showForm && (
-                  <div className="mt-4 p-4 border-2 rounded-md ">
-                    {/*  form content goes here */}
-                    <form>
-                      <label className="label">
-                        <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                          Replacement Provider
-                        </span>
-                      </label>
-                      <select
-                        className="border border-gray-300 col-span-2 rounded-sm px-2 py-1 mx-1 text-[12px] w-full"
-                        {...register("provider")}
-                      >
-                        <option value="">Select</option>
-                        <option value="ashni soni">ashni soni</option>
-                        <option value="Max Auto">Max Auto</option>
-                        <option value="Gomex twin">Gomex twin</option>
-                      </select>
+                {sessionopen && (
+                  <AddSessionNote
+                    sessionopen={sessionopen}
+                    setSessionOpen={setSessionOpen}
+                  ></AddSessionNote>
+                )}
 
-                      <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mt-2 pl-1 gap-1">
-                        <div>
-                          <label className="label">
-                            <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                              Break Form Time
-                            </span>
-                          </label>
-                          <TimePicker
-                            className="modal-input-field"
-                            use12Hours
-                            format="h:mm A"
-                            onChange={from_Time}
-                          />
-                        </div>
-
-                        <div>
-                          <label className="label">
-                            <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
-                              Break To Time
-                            </span>
-                          </label>
-
-                          <TimePicker
-                            className="modal-input-field"
-                            use12Hours
-                            format="h:mm A"
-                            onChange={to_Time}
-                          />
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+                <button
+                  className=" pms-button  mr-2"
+                  onClick={() => setCopy(!copy)}
+                >
+                  <IoCopyOutline className="inline text-xl mr-1" />
+                  Copy Notes
+                </button>
+                {copy && <CopyNotes copy={copy} setCopy={setCopy}></CopyNotes>}
+                <button
+                  className=" pms-button  mr-2"
+                  onClick={() => setView(!view)}
+                >
+                  <IoEyeOutline className="inline text-xl mr-1" />
+                  view notes
+                </button>
+                {view && <ViewNotes view={view} setView={setView}></ViewNotes>}
+                <button>
+                  {" "}
+                  <IoChatboxEllipsesOutline
+                    className="text-gray-600 text-xl hover:text-primary"
+                    onClick={() => setMessege(!messege)}
+                  />
+                </button>
+                {messege && (
+                  <MessegeShow
+                    messege={messege}
+                    setMessege={setMessege}
+                  ></MessegeShow>
                 )}
               </div>
-            </div>
+
+              <div>
+                <div>
+                  <button
+                    onClick={toggleForm}
+                    className="flex items-center justify-center  text-gray-600  rounded-full w-10 h-10"
+                  >
+                    {showForm ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M20 12H4"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        />
+                      </svg>
+                    )}
+                  </button>
+
+                  {showForm && (
+                    <div className="mt-4 p-4 border-2 rounded-md ">
+                      {/*  form content goes here */}
+                      <form>
+                        <label className="label">
+                          <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                            Replacement Provider
+                          </span>
+                        </label>
+                        <select
+                          className="border border-gray-300 col-span-2 rounded-sm px-2 py-1 mx-1 text-[12px] w-full"
+                          {...register("provider")}
+                        >
+                          <option value="">Select</option>
+                          <option value="ashni soni">ashni soni</option>
+                          <option value="Max Auto">Max Auto</option>
+                          <option value="Gomex twin">Gomex twin</option>
+                        </select>
+
+                        <div className="grid col-span-2 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 mt-2 pl-1 gap-1">
+                          <div>
+                            <label className="label">
+                              <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                                Break Form Time
+                              </span>
+                            </label>
+                            <TimePicker
+                              className="modal-input-field"
+                              use12Hours
+                              format="h:mm A"
+                              onChange={from_Time}
+                            />
+                          </div>
+
+                          <div>
+                            <label className="label">
+                              <span className="label-text font-medium flex items-center text-[12px] text-gray-600 text-left">
+                                Break To Time
+                              </span>
+                            </label>
+
+                            <TimePicker
+                              className="modal-input-field"
+                              use12Hours
+                              format="h:mm A"
+                              onChange={to_Time}
+                            />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  )}
+                </div>
+              </div>
 
               <div className=" flex items-end justify-end mt-2">
                 <button className=" pms-button mr-2" type="submit">

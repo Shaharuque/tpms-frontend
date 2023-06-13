@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Modal } from "antd";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-const AddSessionNote = ({ sessionopen, setSessionOpen }) => {
+const AddSessionNotes = ({ sessionopen, setSessionOpen }) => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
@@ -76,4 +76,4 @@ const AddSessionNote = ({ sessionopen, setSessionOpen }) => {
   );
 };
 
-export default AddSessionNote;
+export default AddSessionNotes;

@@ -76,7 +76,7 @@ const NonBillableAction = ({ row, appointmentId, isLocked }) => {
               <FiCopy className="text-sm" /> Copy Note
             </button> */}
             <button
-              className="text-xs text-secondary px-2 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
+              className="text-xs text-secondary px-1 py-1 mb-2 rounded-sm hover:text-white hover:bg-secondary flex items-center font-bold gap-1 w-[110px] border border-secondary"
               onClick={addProgramHandler}
             >
               <AiOutlinePlus className="text-sm" /> Add Program
@@ -95,37 +95,16 @@ const NonBillableAction = ({ row, appointmentId, isLocked }) => {
           </div>
         </div>
       ) : null}
-      {openAddNote && (
-        <NonBillableAddNotes
-          handleClose={handleClose}
-          open={openAddNote}
-        ></NonBillableAddNotes>
-      )}
-      {openViewNote && (
-        <NonBillableViewNotes
-          handleClose={handleClose}
-          open={openViewNote}
-        ></NonBillableViewNotes>
-      )}
+      {openAddNote && <NonBillableAddNotes handleClose={handleClose} open={openAddNote}></NonBillableAddNotes>}
+      {openViewNote && <NonBillableViewNotes handleClose={handleClose} open={openViewNote}></NonBillableViewNotes>}
       {/* {copyNote && (
         <SessionCopyNote
           handleClose={handleClose}
           open={copyNote}
         ></SessionCopyNote>
       )} */}
-      {addProgram && (
-        <NonBillableAddProgram
-          handleClose={handleClose}
-          open={addProgram}
-        ></NonBillableAddProgram>
-      )}
-      {editSession && (
-        <NonBillableEditSession
-          handleClose={handleClose}
-          openEdit={editSession}
-          appointmentId={appointmentId}
-        ></NonBillableEditSession>
-      )}
+      {addProgram && <NonBillableAddProgram handleClose={handleClose} open={addProgram}></NonBillableAddProgram>}
+      {editSession && <NonBillableEditSession handleClose={handleClose} openEdit={editSession} appointmentId={appointmentId}></NonBillableEditSession>}
     </div>
   );
 };
