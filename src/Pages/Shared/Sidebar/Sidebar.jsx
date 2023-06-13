@@ -183,6 +183,13 @@ const menuItem = [
   },
 
   {
+    path: "/provider/recurring/session",
+    name: "Recurring Session",
+    icon: <AiOutlineHome />,
+    roll: "provider",
+  },
+
+  {
     path: "/provider/calender",
     name: "Calender",
     icon: <AiOutlineHome />,

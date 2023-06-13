@@ -3,18 +3,18 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Table } from "antd";
 import { BsFillCameraVideoFill } from "react-icons/bs";
-import RecurringSessionEdit from "./RecurringSession/RecurringSessionEdit";
 import { Link } from "react-router-dom";
 import { BiEdit } from "react-icons/bi";
-import Clients from "../ListView/MultiSelectComponents/Clients";
-import { useRecurringGetAllInfosMutation } from "../../../../features/Appointment_redux/RecurringSession/RecurringSessionApi";
-import useToken from "../../../../CustomHooks/useToken";
 import { MdOutlineCancel } from "react-icons/md";
-import Providers from "../ListView/MultiSelectComponents/Providers";
-import { baseIp } from "../../../../Misc/BaseClient";
-import { dateConverter } from "../../../Shared/Dateconverter/DateConverter";
+import { baseIp, providerIp } from "../../../Misc/BaseClient";
+import useToken from "../../../CustomHooks/useToken";
+import Clients from "./MultiSelectComponents/Clients";
+import { useRecurringGetAllInfosMutation } from "../../../features/Appointment_redux/RecurringSession/RecurringSessionApi";
+import Providers from "./MultiSelectComponents/Providers";
+import { dateConverter } from "../../Shared/Dateconverter/DateConverter";
+import { timeConverter2 } from "../../Shared/TimeConverter/TimeConverter";
 
-const RecurringSession = () => {
+const ProviderRecurringSession = () => {
   const [table, setTable] = useState(false);
   const [select, setSelect] = useState("");
   const [sessionData, setSessionData] = useState([]);
@@ -24,23 +24,44 @@ const RecurringSession = () => {
   const [fetchQuery, setFetchQuery] = useState(false);
   const [patientId, setPatientId] = useState([]);
   const [providerId, setProviderId] = useState([]);
+  const [posData, setPosData] = useState([]);
   const { token } = useToken();
 
   console.log(patientId, providerId);
-  //Patient Data get api
+
+  //Get setting pos
+  useEffect(() => {
+    const getPosData = async () => {
+      let res = await axios({
+        method: "get",
+        url: `${providerIp}/recurring-session/get/all/setting/pos`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "x-auth-token": token,
+        },
+      });
+      const data = res?.data;
+      console.log("pos data", data);
+      setPosData(data);
+    };
+    getPosData();
+  }, [token]);
+
+  //Patient,Provider Data get api
   const [recurringGetAllInfos, { data: allData, isLoading: dataLoading }] = useRecurringGetAllInfosMutation();
 
   useEffect(() => {
     if (select === "Patients") {
       recurringGetAllInfos({
-        url: "inadmin/recurring/session/get/all/info",
+        url: "provider/recurring-session/get/all/info",
         token,
         payload: { sortBy: 2 },
       });
     }
     if (select === "Provider") {
       recurringGetAllInfos({
-        url: "inadmin/recurring/session/get/all/info",
+        url: "provider/recurring-session/get/all/info",
         token,
         payload: { sortBy: 3 },
       });
@@ -53,7 +74,7 @@ const RecurringSession = () => {
     const getRecurringSessionData = async () => {
       let res = await axios({
         method: "post",
-        url: `${baseIp}/recurring/session/get/all/data`,
+        url: `${providerIp}/recurring-session/get/all/data`,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -188,22 +209,8 @@ const RecurringSession = () => {
       key: "pos",
       dataIndex: "pos",
       width: 80,
-      render: (_, { pos }) => {
-        //console.log("pos : ", pos);
-        return (
-          <>
-            {pos === "telehealth" ? (
-              <div className=" flex items-center justify-center">
-                <div className="flex mx-auto items-center gap-2 ">
-                  Telehealth
-                  <BsFillCameraVideoFill className="text-green-500" />
-                </div>
-              </div>
-            ) : (
-              <div>{pos}</div>
-            )}
-          </>
-        );
+      render: (_, { location }) => {
+        return <div>{posData?.find((p) => p?.pos_code === location)?.pos_name}</div>;
       },
       filters: [
         {
@@ -270,21 +277,19 @@ const RecurringSession = () => {
       title: "Hours",
       dataIndex: "Hours",
       key: "Hours",
-      width: 100,
-      filters: [
-        {
-          text: `9:57 PM`,
-          value: "9:57 PM",
-        },
-        {
-          text: "3:01 PM",
-          value: "3:01 PM",
-        },
-      ],
-      filteredValue: filteredInfo.Hours || null,
-      onFilter: (value, record) => {
-        return record.Hours.includes(value);
+      width: 200,
+      render: (_, record) => {
+        //console.log("tags : ", lock);
+        return (
+          <div className=" text-gray-600 text-center ">
+            {timeConverter2(record?.horus_form)} to {timeConverter2(record?.horus_form)}
+          </div>
+        );
       },
+      // filteredValue: filteredInfo.Hours || null,
+      // onFilter: (value, record) => {
+      //   return record.Hours.includes(value);
+      // },
       sorter: (a, b) => {
         return a.Hours > b.Hours ? -1 : 1;
         // a.Hours - b.Hours,
@@ -299,7 +304,7 @@ const RecurringSession = () => {
       width: 60,
       render: (_, { id }) => (
         <div className="flex justify-center">
-          <Link to={`/admin/recurring-session-edit/${id}`}>
+          <Link to={`/provider/recurring/session/edit/${id}`}>
             <BiEdit className="text-[#34A6B7] text-lg" />
           </Link>
         </div>
@@ -446,4 +451,4 @@ const RecurringSession = () => {
   );
 };
 
-export default RecurringSession;
+export default ProviderRecurringSession;
