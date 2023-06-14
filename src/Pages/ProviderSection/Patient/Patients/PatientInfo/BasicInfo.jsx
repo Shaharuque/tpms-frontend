@@ -25,23 +25,13 @@ const BasicInfo = ({ adData }) => {
               First Name<span className="text-red-500">*</span>
             </span>
           </label>
-          <input
-            type="text"
-            name="first_name"
-            className="input-border input-font py-[1px] w-full focus:outline-none"
-            {...register("first_name")}
-          />
+          <input type="text" name="first_name" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("first_name")} />
         </div>
         <div>
           <label className="label">
             <span className=" label-font">Middle Name</span>
           </label>
-          <input
-            type="text"
-            name="middle_name"
-            className="input-border input-font py-[1px] w-full focus:outline-none"
-            {...register("middle_name")}
-          />
+          <input type="text" name="middle_name" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("middle_name")} />
         </div>
         <div>
           <label className="label">
@@ -49,12 +39,7 @@ const BasicInfo = ({ adData }) => {
               Last Name<span className="text-red-500">*</span>
             </span>
           </label>
-          <input
-            type="text"
-            name="last_name"
-            className="input-border input-font py-[1px] w-full focus:outline-none"
-            {...register("last_name")}
-          />
+          <input type="text" name="last_name" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("last_name")} />
         </div>
         {/* DOB */}
         <div>
@@ -63,12 +48,7 @@ const BasicInfo = ({ adData }) => {
               Date of Birth<span className="text-red-500">*</span>
             </span>
           </label>
-          <input
-            className="input-border input-font  w-full focus:outline-none"
-            type="date"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-          />
+          <input className="input-border input-font  w-full focus:outline-none" type="date" value={dob} onChange={(e) => setDob(e.target.value)} />
 
           {/* <div ref={ref}>
                 <input
@@ -103,11 +83,7 @@ const BasicInfo = ({ adData }) => {
               Gender<span className="text-red-500">*</span>
             </span>
           </label>
-          <select
-            className="input-border input-font  w-full focus:outline-none"
-            name="gender"
-            {...register("gender")}
-          >
+          <select className="input-border input-font  w-full focus:outline-none" name="gender" {...register("gender")}>
             {/*api thekey gathered data jemon thakbey value thik same bhabey assign kortey hobey */}
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -122,20 +98,13 @@ const BasicInfo = ({ adData }) => {
               <span className="text-red-500">*</span>
             </span>
           </label>
-          <select
-            onChange={settingRelation}
-            className="input-border input-font  w-full focus:outline-none"
-          >
+          <select {...register("relationship")} onChange={settingRelation} className="input-border input-font  w-full focus:outline-none">
             <option value="Self">Self</option>
             <option value="Spouse">Spouse</option>
             <option value="Other">Other</option>
             <option value="Child">Child</option>
-            <option value="Grandfather or Grandmother">
-              Grandfather or Grandmother
-            </option>
-            <option value="Grandson or Granddaughter">
-              Grandson or Granddaughter
-            </option>
+            <option value="Grandfather or Grandmother">Grandfather or Grandmother</option>
+            <option value="Grandson or Granddaughter">Grandson or Granddaughter</option>
             <option value="Nephew or Niece">Nephew or Niece</option>
             <option value="Adopter Child">Adopter Child</option>
             <option value="Foster Child">Foster Child</option>
@@ -151,12 +120,7 @@ const BasicInfo = ({ adData }) => {
               Login Email<span className="text-red-500">*</span>
             </span>
           </label>
-          <input
-            type="text"
-            name="login_email"
-            className="input-border input-font py-[1px] w-full focus:outline-none"
-            {...register("login_email")}
-          />
+          <input type="text" name="login_email" className="input-border input-font py-[1px] w-full focus:outline-none" {...register("login_email")} />
         </div>
       </div>
     </div>
