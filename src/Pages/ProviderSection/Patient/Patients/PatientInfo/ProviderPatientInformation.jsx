@@ -138,7 +138,7 @@ const ProviderPatientInformation = () => {
         relationship: patientOtherDetails?.relationship,
       });
 
-      if (patientOtherDetails?.relationship !== "Self") {
+      if (patientOtherDetails?.relationship !== "Self" && patientOtherDetails?.relationship !== null) {
         setGuarantor(true);
         setRelation(patientOtherDetails?.relationship);
       } else {
@@ -337,7 +337,13 @@ const ProviderPatientInformation = () => {
           <AboutPatient register={register}></AboutPatient>
           <div className="divider"></div>
           <div className="flex ml-1 mt-1 items-center">
-            <input disabled={relation === "Self"} type="checkbox" checked={Guarantor} onChange={handleChange} id="checkbox" />
+            <input
+              disabled={relation === "Self" || relation === null ? true : false}
+              type="checkbox"
+              checked={Guarantor}
+              onChange={handleChange}
+              id="checkbox"
+            />
             <span className="text-sm ml-1 text-gray-700 font-medium">Is Guarantor Available?</span>
           </div>
 
