@@ -18,7 +18,7 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
-import { RiUserAddFill } from "react-icons/ri";
+import { RiUserAddFill,RiFileShredLine } from "react-icons/ri";
 import { HiUserPlus } from "react-icons/hi2";
 import { AiOutlineCalendar, AiOutlineFileDone, AiOutlineHome, AiOutlineSchedule } from "react-icons/ai";
 import { MdOutlineMonetizationOn } from "react-icons/md";
@@ -26,6 +26,8 @@ import { BsFileEarmarkRuled, BsBookmarkStar, BsFileText, BsThreeDotsVertical } f
 import { VscDebugDisconnect } from "react-icons/vsc";
 import { RiFundsBoxLine } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
+import {HiOutlineLink}from "react-icons/hi";
+
 import { TbWebhook } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
@@ -178,41 +180,41 @@ const menuItem = [
   {
     path: "/provider/scheduler",
     name: "My Schedule",
-    icon: <AiOutlineHome />,
+    icon: <AiOutlineCalendar />,
     roll: "provider",
   },
 
   {
     path: "/provider/recurring/session",
     name: "Recurring Session",
-    icon: <AiOutlineHome />,
+    icon: <HiOutlineLink />,
     roll: "provider",
   },
 
   {
     path: "/provider/calender",
     name: "Calender",
-    icon: <AiOutlineHome />,
+    icon: <FaRegCalendarAlt />,
     roll: "provider",
   },
   {
     path: "/provider/biographic",
     name: "Biographic",
-    icon: <BsFileText />,
+    icon: <FaUserMd />,
     roll: "provider",
   },
 
   {
     path: "/provider/Pataients",
     name: "Patient(s)",
-    icon: <BsFileText />,
+    icon: <FaUserPlus />,
     roll: "provider",
   },
 
   {
     path: "/provider/user-timesheet",
     name: "Timesheet(s)",
-    icon: <BsFileText />,
+    icon: <RiFileShredLine />,
     roll: "provider",
   },
   //Patient Portal
