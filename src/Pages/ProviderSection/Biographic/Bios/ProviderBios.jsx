@@ -388,7 +388,7 @@ export const ProviderBios = () => {
               </div>
             </div>
 
-            <div className="my-5">
+            <div className="my-5 col-span-4">
               <button className=" pms-button mr-2" type="submit">
                 Save
               </button>
