@@ -185,12 +185,37 @@ const MyCalendar = () => {
       $(tooltip).fadeIn(500);
       $(tooltip).fadeTo(10, 1.9);
 
-      const handleMouseMove = (e) => {
-        tooltip.style.top = e.pageY + 10 + "px";
-        tooltip.style.left = e.pageX + 20 + "px";
-      };
+    
 
-      document.addEventListener("mousemove", handleMouseMove);
+      const handleMouseMove = (e) => {
+
+         tooltip.style.top = e.pageY + 2 + "px";
+        
+
+        if (e.pageX > window.innerWidth - 300) {
+          tooltip.style.left = e.pageX - 300 + "px"; 
+        }
+        else {
+          tooltip.style.left = e.pageX + 20 + "px";
+        }
+
+        if (e.pageY > window.innerHeight - 300) {
+          tooltip.style.top = e.pageY - 240 + "px";
+        }
+        else {
+          tooltip.style.top = e.pageY + 20 + "px";
+        }
+
+
+       
+
+
+
+    
+
+      }
+
+      document.addEventListener("mousemove", handleMouseMove,);
 
       info.el.addEventListener("mouseleave", () => {
         info.el.style.zIndex = 8;
