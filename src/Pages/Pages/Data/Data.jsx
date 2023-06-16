@@ -11,7 +11,7 @@ import { FiLayers, FiAnchor } from "react-icons/fi";
 import { VscServerProcess } from "react-icons/vsc";
 
 // ***********************************************************************
-// ******************************DashBoard Data***************************
+// ******************************DashBoard Data Table Related***************************
 // ***********************************************************************
 
 export const dashboardCount = [

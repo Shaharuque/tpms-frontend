@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 
 const ProviderDashboard = () => {
   return (
-    <div className="h-[100vh]">
+    <div>
       <motion.h1 initial={{ opacity: 0, x: 15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }} className=" text-orange-500 text-sm">
         Dashboard
       </motion.h1>

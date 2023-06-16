@@ -6,10 +6,10 @@ const Table = ({ tasks }) => {
 
   return (
     <tr>
-      <td className="border text-xs font-normal text-secondary py-1 px-2">
+      <td className="border text-xs  text-secondary py-1 px-2 text-[14px]">
         <Link to={link}>{report}</Link>
       </td>
-      <td className="border text-xs py-1 px-2 text-center text-secondary">
+      <td className="border text-xs py-1 px-2 text-center text-secondary text-[14px]">
         <Link to={link}>({count})</Link>
       </td>
     </tr>

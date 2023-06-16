@@ -5,7 +5,11 @@ import { FcCancel, FcCheckmark } from "react-icons/fc";
 import { FiDownload } from "react-icons/fi";
 import { IoCaretBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { usePayrollTimeAppointmentsGetMutation, usePayrollTimeGetQuery } from "../../../features/ProviderPortal/ProviderTimesheet_redux/providerTimeSheetApi";
+import {
+  usePayrollTimeAppointmentsGetMutation,
+  usePayrollTimeGetQuery,
+  usePayrollTimesheetUpdateMutation,
+} from "../../../features/ProviderPortal/ProviderTimesheet_redux/providerTimeSheetApi";
 import useToken from "../../../CustomHooks/useToken";
 import { dateConverter } from "../../Shared/Dateconverter/DateConverter";
 import { toast } from "react-toastify";
@@ -17,7 +21,10 @@ const ProviderTimeSheet = () => {
   const [sortedInfo, setSortedInfo] = useState({});
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { register, handleSubmit, reset } = useForm();
-  const [staffData, setStaffData] = useState([]);
+  const [timeSheetData, setTimeSheetData] = useState([]);
+  const [optionVal, setOptionVal] = useState("");
+  const [payId, setPayId] = useState("");
+  console.log(optionVal);
   const { token } = useToken();
 
   //Get the time periods
@@ -27,7 +34,21 @@ const ProviderTimeSheet = () => {
   const [payrollTimeAppointmentsGet, { data: payrollAppointmentData, isLoading: payrollLoading, isError: payrollError }] =
     usePayrollTimeAppointmentsGetMutation();
 
-  const TimeSheetData = payrollAppointmentData?.payrollData;
+  useEffect(() => {
+    if (payrollAppointmentData) {
+      setTimeSheetData(payrollAppointmentData?.payrollData);
+    }
+  }, [payrollAppointmentData]);
+
+  //update the changes in timesheet
+  const [payrollTimesheetUpdate, { isSuccess: updateSuccess, isLoading: updateLoading, isError: updateError }] = usePayrollTimesheetUpdateMutation();
+
+  useEffect(() => {
+    if (updateSuccess) {
+      toast.success("Timesheet updated successfully");
+      setSelectedRowKeys([]);
+    }
+  }, [updateSuccess]);
 
   // ----------------------------------------Multi-Select---------------------------------
 
@@ -39,6 +60,7 @@ const ProviderTimeSheet = () => {
     if (!data?.status && !data?.pay_id) {
       return toast.error("Please select the status and pay period");
     }
+    setPayId(data?.pay_id);
     const payload = {
       ...data,
       status: parseInt(data?.status),
@@ -164,11 +186,27 @@ const ProviderTimeSheet = () => {
           <div className="flex justify-center">
             {" "}
             <div className="mr-1">
-              <input type="text" name="" value={record?.timein_one} className="timesheet-time-box py-[3px] text-center focus:outline-none" />
+              <input
+                type="text"
+                //value={record?.timein_one}
+                defaultValue={record?.timein_one}
+                onChange={(e) => handleTimeInHour(e.target.value, record?.id)}
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
             </div>
             <div className="flex flex-wrap items-center gap-1">
-              <input type="text" name="" value={record?.timein_two} className="timesheet-time-box py-[3px] text-center focus:outline-none" />
-              <select defaultValue={record?.timein_three} name="post" className="timesheet-time-box py-[3px] text-center focus:outline-none">
+              <input
+                type="text"
+                defaultValue={record?.timein_two}
+                onChange={(e) => handleTimeInMin(e.target.value, record?.id)}
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
+              <select
+                defaultValue={record?.timein_three}
+                onChange={(e) => handleTimeInOption(e.target.value, record?.id)}
+                name="post"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              >
                 <option value="am">AM</option>
                 <option value="pm">PM</option>
               </select>
@@ -195,11 +233,28 @@ const ProviderTimeSheet = () => {
           <div className="flex justify-center">
             {" "}
             <div className="mr-1">
-              <input type="text" name="" value={record?.timeout_one} className="timesheet-time-box py-[3px] text-center focus:outline-none" />
+              <input
+                type="text"
+                name=""
+                defaultValue={record?.timeout_one}
+                onChange={(e) => handleTimeOutHour(e.target.value, record?.id)}
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
             </div>
             <div className="flex flex-wrap items-center gap-1">
-              <input type="text" name="" value={record?.timeout_two} className="timesheet-time-box py-[3px] text-center focus:outline-none" />
-              <select defaultValue={record?.timeout_three} name="post" className="timesheet-time-box py-[3px] text-center focus:outline-none">
+              <input
+                type="text"
+                name=""
+                defaultValue={record?.timeout_two}
+                onChange={(e) => handleTimeOutMin(e.target.value, record?.id)}
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              />
+              <select
+                defaultValue={record?.timeout_three}
+                onChange={(e) => handleTimeOutOption(e.target.value, record?.id)}
+                name="post"
+                className="timesheet-time-box py-[3px] text-center focus:outline-none"
+              >
                 <option value="am">AM</option>
                 <option value="pm">PM</option>
               </select>
@@ -336,6 +391,140 @@ const ProviderTimeSheet = () => {
     onChange: onSelectChange,
   };
 
+  const handleTimeInHour = (changed, id) => {
+    console.log("chaning");
+    const indexOfRecord = timeSheetData.findIndex((item) => id === item.id);
+    const updatedDataSource = [...timeSheetData];
+    updatedDataSource.splice(indexOfRecord, 1, {
+      timein_one: changed,
+      timein_two: timeSheetData[indexOfRecord].timein_two,
+      timein_three: timeSheetData[indexOfRecord].timein_three,
+      timeout_one: timeSheetData[indexOfRecord].timeout_one,
+      timeout_two: timeSheetData[indexOfRecord].timeout_two,
+      timeout_three: timeSheetData[indexOfRecord].timeout_three,
+      miles: timeSheetData[indexOfRecord].miles,
+      id,
+    });
+    setTimeSheetData(updatedDataSource);
+  };
+  const handleTimeInMin = (changed, id) => {
+    console.log("chaning");
+    const indexOfRecord = timeSheetData.findIndex((item) => id === item.id);
+    const updatedDataSource = [...timeSheetData];
+    updatedDataSource.splice(indexOfRecord, 1, {
+      timein_one: timeSheetData[indexOfRecord].timein_one,
+      timein_two: changed,
+      timein_three: timeSheetData[indexOfRecord].timein_three,
+      timeout_one: timeSheetData[indexOfRecord].timeout_one,
+      timeout_two: timeSheetData[indexOfRecord].timeout_two,
+      timeout_three: timeSheetData[indexOfRecord].timeout_three,
+      miles: timeSheetData[indexOfRecord].miles,
+      id,
+    });
+    setTimeSheetData(updatedDataSource);
+  };
+  const handleTimeInOption = (changed, id) => {
+    console.log("chaning");
+    const indexOfRecord = timeSheetData.findIndex((item) => id === item.id);
+    const updatedDataSource = [...timeSheetData];
+    updatedDataSource.splice(indexOfRecord, 1, {
+      timein_one: timeSheetData[indexOfRecord].timein_one,
+      timein_two: timeSheetData[indexOfRecord].timein_two,
+      timein_three: changed,
+      timeout_one: timeSheetData[indexOfRecord].timeout_one,
+      timeout_two: timeSheetData[indexOfRecord].timeout_two,
+      timeout_three: timeSheetData[indexOfRecord].timeout_three,
+      miles: timeSheetData[indexOfRecord].miles,
+      id,
+    });
+    setTimeSheetData(updatedDataSource);
+  };
+  const handleTimeOutHour = (changed, id) => {
+    console.log("chaning");
+    const indexOfRecord = timeSheetData.findIndex((item) => id === item.id);
+    const updatedDataSource = [...timeSheetData];
+    updatedDataSource.splice(indexOfRecord, 1, {
+      timein_one: timeSheetData[indexOfRecord].timein_one,
+      timein_two: timeSheetData[indexOfRecord].timein_two,
+      timein_three: timeSheetData[indexOfRecord].timein_three,
+      timeout_one: changed,
+      timeout_two: timeSheetData[indexOfRecord].timeout_two,
+      timeout_three: timeSheetData[indexOfRecord].timeout_three,
+      miles: timeSheetData[indexOfRecord].miles,
+      id,
+    });
+    setTimeSheetData(updatedDataSource);
+  };
+  const handleTimeOutMin = (changed, id) => {
+    console.log("chaning");
+    const indexOfRecord = timeSheetData.findIndex((item) => id === item.id);
+    const updatedDataSource = [...timeSheetData];
+    updatedDataSource.splice(indexOfRecord, 1, {
+      timein_one: timeSheetData[indexOfRecord].timein_one,
+      timein_two: timeSheetData[indexOfRecord].timein_two,
+      timein_three: timeSheetData[indexOfRecord].timein_three,
+      timeout_one: timeSheetData[indexOfRecord].timeout_two,
+      timeout_two: changed,
+      timeout_three: timeSheetData[indexOfRecord].timeout_three,
+      miles: timeSheetData[indexOfRecord].miles,
+      id,
+    });
+    setTimeSheetData(updatedDataSource);
+  };
+  const handleTimeOutOption = (changed, id) => {
+    console.log("chaning");
+    const indexOfRecord = timeSheetData.findIndex((item) => id === item.id);
+    const updatedDataSource = [...timeSheetData];
+    updatedDataSource.splice(indexOfRecord, 1, {
+      timein_one: timeSheetData[indexOfRecord].timein_one,
+      timein_two: timeSheetData[indexOfRecord].timein_two,
+      timein_three: timeSheetData[indexOfRecord].timein_three,
+      timeout_one: timeSheetData[indexOfRecord].timeout_one,
+      timeout_two: timeSheetData[indexOfRecord].timeout_two,
+      timeout_three: changed,
+      miles: timeSheetData[indexOfRecord].miles,
+      id,
+    });
+    setTimeSheetData(updatedDataSource);
+  };
+  console.log("changed TimeSheetData : ", timeSheetData);
+
+  let finalSelected = [];
+  const extractingData = () => {
+    for (let i = 0; i < selectedRowKeys.length; i++) {
+      finalSelected.push(timeSheetData?.find((each) => each.id === selectedRowKeys[i]));
+    }
+  };
+  if (selectedRowKeys.length > 0) {
+    extractingData();
+  }
+  console.log("finalSelected : ", finalSelected);
+  const handleSave = () => {
+    const edit_id = finalSelected?.map((item) => item.id);
+    const timein_one = finalSelected?.map((item) => item.timein_one);
+    const timein_two = finalSelected?.map((item) => item.timein_two);
+    const timein_three = finalSelected?.map((item) => item.timein_three);
+    const timeout_one = finalSelected?.map((item) => item.timeout_one);
+    const timeout_two = finalSelected?.map((item) => item.timeout_two);
+    const timeout_three = finalSelected?.map((item) => item.timeout_three);
+    const miles = finalSelected?.map((item) => item?.miles);
+    if (finalSelected?.length > 0 && optionVal === "1") {
+      const payload = {
+        pay_id: payId,
+        edit_id,
+        timein_one,
+        timein_two,
+        timein_three,
+        timeout_one,
+        timeout_two,
+        timeout_three,
+        miles,
+      };
+      console.log("payload : ", payload);
+      payrollTimesheetUpdate({ token, payload });
+    }
+  };
+
   return (
     <div className={tableOpen ? "" : "h-[100vh]"}>
       <div className="flex items-center flex-wrap gap-2 justify-between">
@@ -423,7 +612,7 @@ const ProviderTimeSheet = () => {
                 className=" text-xs font-normal"
                 columns={columns}
                 bordered
-                dataSource={TimeSheetData} //Which data chunk you want to show in table
+                dataSource={payrollAppointmentData?.payrollData} //Which data chunk you want to show in table
                 // For fixed header table at top
                 rowSelection={rowSelection}
                 onChange={handleChange}
@@ -432,15 +621,19 @@ const ProviderTimeSheet = () => {
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 items-end my-5 mr-2 gap-4">
             <div>
-              <select name="type" className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none">
-                <option value="name"> Select Any Action </option>
-                <option value="Save Changes"> Save Changes </option>
-                <option value="Submit Timesheet"> Submit Timesheet </option>
+              <select
+                onChange={(e) => setOptionVal(e.target.value)}
+                name="type"
+                className="input-border text-gray-600 rounded-sm text-[14px] font-medium w-full ml-1 focus:outline-none"
+              >
+                <option value=""> Select Any Action </option>
+                <option value="1"> Save Changes </option>
+                <option value="2"> Submit Timesheet </option>
               </select>
             </div>
             <button
               className="w-1/4 py-1 px-2 md:ml-3 text-[15px] font-bold bg-gradient-to-r from-secondary to-primary  hover:to-secondary text-white rounded-md"
-              type="submit"
+              onClick={handleSave}
             >
               Ok
             </button>

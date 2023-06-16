@@ -6,8 +6,12 @@ export const DatabaseDateConverter = (s) => {
   return `${clone[1]}/${clone[2]}/${clone[0]}`;
 };
 
-// const x = DatabaseDateConverter("2023-02-06T10:34:56.000000Z");
-// console.log(x);
+// To Convert Date YY/MM/DD(2022-10-21) to MM/DD/YY
+export const defaultCalenderDate = (p) => {
+  let parts = p.split("-");
+  let convertedDate = `${parts[1]}/${parts[2]}/${parts[0]}`;
+  return convertedDate;
+};
 
 export const dbtimeconverter = (s) => {
   console.log("sb", s);
