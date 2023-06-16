@@ -303,7 +303,7 @@ const Schedule = () => {
         return a?.app_activity?.activity_name > b?.app_activity?.activity_name ? -1 : 1; //sorting problem solved using this logic
       },
       sortOrder: sortedInfo.columnKey === "activity_name" ? sortedInfo.order : null,
-      ellipsis: true,
+      ellipsis: false,
     },
     {
       title: "Provider",
