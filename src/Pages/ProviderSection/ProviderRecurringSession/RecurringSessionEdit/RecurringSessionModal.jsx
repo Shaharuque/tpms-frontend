@@ -4,7 +4,29 @@ import { useForm } from "react-hook-form";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { Nav } from "rsuite";
 import { NavLink, Outlet } from "react-router-dom";
+import SingleView from "./SingleView/SingleViewSection/SingleView";
+import DayView from "./DayView/DayViewSection/DayView";
+
+const Tab = ({ label, isActive, onClick }) => (
+  <button
+    className={`${
+      isActive
+        ? "inline-block p-2 px-6 rounded-t-lg  text-[#393C52] bg-gray-100 text-sm font-normal mb-[-2px] border border-b-0 border-t-4   border-t-[#089BAB]  "
+        : " "
+    } py-2 px-4 rounded-t-lg mr-2 `}
+    onClick={onClick}
+  >
+    {label}
+  </button>
+);
+
 const RecurringSessionModal = ({ handleClose, open }) => {
+  const [activeTab, setActiveTab] = useState(1);
+
+  const handleTabClick = (tabIndex) => {
+    setActiveTab(tabIndex);
+  };
+
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
@@ -18,7 +40,7 @@ const RecurringSessionModal = ({ handleClose, open }) => {
         <Modal
           open={true} //aikhaney true na likey ekta state ana lagbey tar value 'true'
           centered
-        width={1000}
+          width={1000}
           footer={null}
           bodyStyle={{ padding: "0" }}
           closable={false}
@@ -37,38 +59,34 @@ const RecurringSessionModal = ({ handleClose, open }) => {
             <div className="bg-gray-200 py-[1px] mt-3"></div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div>
-                <div className="container width-fix  mx-auto mb-5 mt-5">
-                  <Nav appearance="tabs" justified className="mt-5 mb-5">
-                    <NavLink
-                      className={(navinfo) =>
-                        navinfo.isActive
-                          ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
-                          : "rs-nav-item text-[14px] font-medium"
-                      }
-                      to={"Single-view"}
-                    >
-                      Single View
-                      <span className="bg-orange-400 badge text-white ml-2 rounded-full text-[10px]">
-                        view-1
-                      </span>
-                    </NavLink>
+             
 
-                    <NavLink
-                      className={(navinfo) =>
-                        navinfo.isActive
-                          ? "rs-nav-item rs-nav-item-active font-medium text-[14px]"
-                          : "rs-nav-item text-[14px] font-medium"
-                      }
-                      to={"day-view"}
-                    >
-                      Day View
-                      <span className="bg-orange-400 badge text-white ml-2 text-[10px] rounded-full">
-                        view-2
-                      </span>
-                    </NavLink>
-                  </Nav>
-                  <Outlet />
+              <div className=" mt-5">
+                <div className="flex border-b-2">
+                  <Tab
+                    label="Single View"
+                    isActive={activeTab === 1}
+                    onClick={() => handleTabClick(1)}
+                  />
+                  <Tab
+                    label="Day View"
+                    isActive={activeTab === 2}
+                    onClick={() => handleTabClick(2)}
+                  />
+                </div>
+
+                <div className="mt-5">
+                  {/* Render the content based on the active tab */}
+                  {activeTab === 1 && (
+                    <div>
+                      <SingleView></SingleView>
+                    </div>
+                  )}
+                  {activeTab === 2 && (
+                    <div>
+                      <DayView></DayView>
+                    </div>
+                  )}
                 </div>
               </div>
 
