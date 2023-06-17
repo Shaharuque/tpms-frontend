@@ -18,7 +18,7 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
-import { RiUserAddFill,RiFileShredLine } from "react-icons/ri";
+import { RiUserAddFill, RiFileShredLine } from "react-icons/ri";
 import { HiUserPlus } from "react-icons/hi2";
 import { AiOutlineCalendar, AiOutlineFileDone, AiOutlineHome, AiOutlineSchedule } from "react-icons/ai";
 import { MdOutlineMonetizationOn } from "react-icons/md";
@@ -26,7 +26,7 @@ import { BsFileEarmarkRuled, BsBookmarkStar, BsFileText, BsThreeDotsVertical } f
 import { VscDebugDisconnect } from "react-icons/vsc";
 import { RiFundsBoxLine } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
-import {HiOutlineLink}from "react-icons/hi";
+import { HiOutlineLink } from "react-icons/hi";
 
 import { TbWebhook } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
@@ -207,6 +207,13 @@ const menuItem = [
   {
     path: "/provider/Pataients",
     name: "Patient(s)",
+    icon: <FaUserPlus />,
+    roll: "provider",
+  },
+
+  {
+    path: "/provider/clockin",
+    name: "Clock In/Out",
     icon: <FaUserPlus />,
     roll: "provider",
   },

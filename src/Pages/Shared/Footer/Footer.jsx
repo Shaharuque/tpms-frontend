@@ -14,8 +14,7 @@ const Footer = ({ sideFixed }) => {
       }
     >
       <h4 className=" text-sm  p-2 font-medium lg:p-0">
-        Copyright 2022 © <span className=" text-secondary">TherapyPMS</span>.
-        All rights reserved.
+        Copyright 2022 © <span className=" text-secondary">TherapyPMS</span>. All rights reserved.
       </h4>
     </motion.div>
   );

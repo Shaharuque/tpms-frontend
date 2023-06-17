@@ -328,6 +328,7 @@ import ProviderRecurringSessionEdit from "./Pages/ProviderSection/ProviderRecurr
 import ProviderWorkSchedule from "./Pages/ProviderSection/Biographic/WorkSchedule/ProviderWorkSchedule";
 import DayView from "./Pages/ProviderSection/ProviderRecurringSession/RecurringSessionEdit/DayView/DayViewSection/DayView";
 import SingleView from "./Pages/ProviderSection/ProviderRecurringSession/RecurringSessionEdit/SingleView/SingleViewSection/SingleView";
+import ProviderClockIn from "./Pages/ProviderSection/ProviderClockIn/ProviderClockIn";
 
 function App() {
   const handle = useFullScreenHandle();
@@ -769,11 +770,9 @@ function App() {
             <Route path="scheduler" element={<Schedule />}></Route>
             <Route path="recurring/session" element={<ProviderRecurringSession />}></Route>
             <Route path="recurring/session/edit/:id" element={<ProviderRecurringSessionEdit></ProviderRecurringSessionEdit>}>
-            <Route index element={<Navigate to="Single-view" />} />
+              <Route index element={<Navigate to="Single-view" />} />
               <Route path="day-view" element={<DayView></DayView>}></Route>
               <Route path="Single-view" element={<SingleView></SingleView>}></Route>
-
-
             </Route>
             <Route path="calender" element={<ProviderCalender />}></Route>
             <Route path="biographic" element={<ProviderBiographic />}>
@@ -793,6 +792,7 @@ function App() {
               <Route path="patient-document/:id" element={<ProviderPatientDocument></ProviderPatientDocument>}></Route>
               <Route path="patient-call-log/:id" element={<ProviderPatientCalllog></ProviderPatientCalllog>}></Route>
             </Route>
+            <Route path="clockin" element={<ProviderClockIn></ProviderClockIn>}></Route>
             <Route path="user-timesheet" element={<ProviderTimeSheet />}></Route>
           </Route>
 
