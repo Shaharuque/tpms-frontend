@@ -67,6 +67,7 @@ const ProviderClockIn = () => {
       setIsPunchedIn(true);
     }
   };
+  console.log(punchTime);
   return (
     <div className="h-[100vh]">
       <div className="text-center">

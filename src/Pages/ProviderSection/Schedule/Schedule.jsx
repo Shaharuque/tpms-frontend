@@ -17,7 +17,7 @@ import { minsToHours, timeConverter2 } from "../../Shared/TimeConverter/TimeConv
 import ShimmerLoader from "../../../Loading/ShimmerLoader";
 import StatusSelect from "./AllMultiSelectComponents/StatusSelect";
 import MonthlyUtilization from "./MonthlyUtilization/MonthlyUtilization";
-import ManageTableAction from "./ListView/ManageTableAction";
+import ManageTableAction from "./ActionModals/ManageTableAction";
 
 //Date converter function [yy-mm-dd]
 function convert(str) {
