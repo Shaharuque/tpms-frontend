@@ -11,12 +11,13 @@ import ProviderSelect from "./AllMultiSelectComponents/ProviderSelect";
 import { toast } from "react-toastify";
 import { Dropdown, Space, Table, Switch, Typography } from "antd";
 import { AiFillLock, AiFillUnlock, AiOutlineMessage } from "react-icons/ai";
-import { BsFillCameraVideoFill } from "react-icons/bs";
+import { BsFillCameraVideoFill, BsThreeDots } from "react-icons/bs";
 import { dateConverter } from "../../Shared/Dateconverter/DateConverter";
 import { minsToHours, timeConverter2 } from "../../Shared/TimeConverter/TimeConverter";
 import ShimmerLoader from "../../../Loading/ShimmerLoader";
 import StatusSelect from "./AllMultiSelectComponents/StatusSelect";
 import MonthlyUtilization from "./MonthlyUtilization/MonthlyUtilization";
+import ManageTableAction from "./ListView/ManageTableAction";
 
 //Date converter function [yy-mm-dd]
 function convert(str) {
@@ -453,27 +454,27 @@ const Schedule = () => {
     //     </div>
     //   ),
     // },
-    // {
-    //   title: "Action",
-    //   dataIndex: "operation",
-    //   key: "operation",
-    //   width: 60,
-    //   render: (_, record) => (
-    //     <div className="flex justify-center">
-    //       <Dropdown
-    //         overlay={<ManageTableAction isLocked={record?.is_locked} appointmentId={record?.id}></ManageTableAction>}
-    //         trigger={["click"]}
-    //         overlayStyle={{ zIndex: "100" }}
-    //       >
-    //         <button onClick={(e) => e.preventDefault()}>
-    //           <Space>
-    //             <BsThreeDots />
-    //           </Space>
-    //         </button>
-    //       </Dropdown>
-    //     </div>
-    //   ),
-    // },
+    {
+      title: "Action",
+      dataIndex: "operation",
+      key: "operation",
+      width: 60,
+      render: (_, record) => (
+        <div className="flex justify-center">
+          <Dropdown
+            overlay={<ManageTableAction isLocked={record?.is_locked} appointmentId={record?.id}></ManageTableAction>}
+            trigger={["click"]}
+            overlayStyle={{ zIndex: "100" }}
+          >
+            <button onClick={(e) => e.preventDefault()}>
+              <Space>
+                <BsThreeDots />
+              </Space>
+            </button>
+          </Dropdown>
+        </div>
+      ),
+    },
   ];
 
   //get rows id to do some action on them
