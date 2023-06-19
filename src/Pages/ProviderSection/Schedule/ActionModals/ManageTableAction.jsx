@@ -7,6 +7,7 @@ import SessionViewNote from "./SessionViewNote";
 import SessionCopyNote from "./SessionCopyNote";
 import AddProgram from "./AddProgram";
 import { useOutsideAlerter } from "../../../../CustomHooks/useDetectOutsideClick";
+import CustomModal from "./CustomModal";
 
 const ManageTableAction = ({ row, appointmentId, isLocked }) => {
   console.log("for edit purpose", isLocked);
@@ -99,7 +100,7 @@ const ManageTableAction = ({ row, appointmentId, isLocked }) => {
       {openViewNote && <SessionViewNote handleClose={handleClose} open={openViewNote}></SessionViewNote>}
       {copyNote && <SessionCopyNote handleClose={handleClose} open={copyNote}></SessionCopyNote>}
       {addProgram && <AddProgram handleClose={handleClose} open={addProgram}></AddProgram>}
-      {/* {editSession && <EditSession handleClose={handleClose} openEdit={editSession} appointmentId={appointmentId}></EditSession>} */}
+      {editSession && <CustomModal handleClose={handleClose}  openEdit={editSession} appointmentId={appointmentId}></CustomModal>}
     </div>
   );
 };
