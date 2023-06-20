@@ -45,7 +45,7 @@ const ProviderClockIn = () => {
         if (result?.time_out === null) {
           setIsPunchedIn(true);
           setPunchTime({
-            punchIn: moment.utc(result?.time_in).format("HH:mm:ss A"),
+            punchIn: moment(result?.time_in).utcOffset(360).format("hh:mm:ss A"),
           });
         } else {
           setIsPunchedIn(false);
@@ -58,7 +58,7 @@ const ProviderClockIn = () => {
       }
     };
     isClockIn();
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -138,7 +138,7 @@ const ProviderClockIn = () => {
   return (
     <div className={clockInTable ? "" : "h-[100vh]"}>
       <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Hello Aso Soni</h1>
+        <h1 className="text-4xl font-bold mb-4">Hello Ashu Soni</h1>
 
         <h4 className="text-[17px] text-gray-400 inline-block mr-2">Current Status:</h4>
         <button className="bg-orange-300 hover:bg-orange-400 text-white text-md font-bold p-2 rounded-lg " onClick={handlePunch}>
